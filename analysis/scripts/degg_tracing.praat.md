@@ -24,10 +24,10 @@ form dEGG tracing
 endform
 
 directory$ = "../../'project$'/data/derived/egg/'speaker$'"
-directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/audio"
-result_file$ = "../../'project$'/results/'speaker$'_degg_tracing.csv"
-header$ = "file,time,maximum,minimum"
+directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/annotations"
 
+result_file$ = "../../'project$'/results/'speaker$'_degg_tracing.csv"
+header$ = "speaker,file,word,time,maximum,minimum,position"
 writeFileLine: "'result_file$'", "'header$'"
 
 Create Strings as file list: "filelist", "'directory$'/*.wav"
@@ -35,7 +35,7 @@ files = Get number of strings
 ```
 
 For each file, extract the two channels.
-Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/audio` and get the starting and end point of the `kinematics` interval.
+Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/annotations` and get the starting and end point of the `kinematics` interval.
 Now, we can extract the same interval from the channel 2 of the EGG file.
 Rename the ectracted part as `egg`, and execute the main function, which extracts the dEGG trace.
 
@@ -46,17 +46,31 @@ for file to files
     file$ = Get string: file
     filename$ = file$ - ".wav"
 
+    Read Strings from raw text file: "'directory_textgrid$'/'filename$'.txt"
+    prompt$ = Get string: 1
+    stimulus$ = extractWord$(prompt$, " ")
+
     Read separate channels from sound file: "'directory$'/'file$'"
 
     Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
-    start = Get starting point: 2, 2
-    end = Get end point: 2, 2
+    tiers = Get number of tiers
+
+if tiers == 4
+    start = Get starting point: 3, 2
+    end = Get end point: 3, 2
+    label$ = Get label of point: 4, 1
+    if label$ == "target_TD" or label$ == "target_TT"
+        target = Get time of point: 4, 1
+    else
+        target = undefined
+    endif
 
     selectObject: "Sound 'filename$'_ch2"
     Extract part: start, end, "rectangular", 1, "yes"
     Rename: "egg"
 
     <<<main function>>>
+endif
 endfor
 ```
 
@@ -104,6 +118,7 @@ Trying egg_minimum_2 instead of degg_maximum_2 for cases when there is no degg_m
 ```praat
 selectObject: "PointProcess egg_smooth"
 egg_points = Get number of points
+mean_period = Get mean period: 0, 0, 0.0001, 0.02, 1.3
 
 for point to egg_points - 2
     selectObject: "PointProcess egg_smooth"
@@ -115,20 +130,33 @@ for point to egg_points - 2
     egg_minimum_2 = Get time of minimum: point_2, point_3, "Sinc70"
     period = egg_minimum_2 - egg_minimum_1
 
-    selectObject: "PointProcess degg_smooth"
-    degg_maximum_point_1 = Get nearest index: egg_minimum_1
-    degg_maximum = Get time from index: degg_maximum_point_1
+    if period <= mean_period * 2
+        selectObject: "PointProcess degg_smooth"
+        degg_maximum_point_1 = Get nearest index: egg_minimum_1
+        degg_maximum = Get time from index: degg_maximum_point_1
 
-    selectObject: "Sound degg_smooth"
-    degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
+        selectObject: "Sound degg_smooth"
+        degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
 
-    degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
-    degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
+        degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
+        degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
 
-    result_line$ = "'filename$','egg_minimum_1','degg_maximum_rel',
-        ...'degg_minimum_rel'"
+        time = egg_minimum_1 - target
 
-    appendFileLine: "'result_file$'", "'result_line$'"
+        if time == undefined
+        elif time < 0
+            position$ = "before"
+        elif time > 0
+            position$ = "after"
+        endif
+
+        if time != undefined
+            result_line$ = "'speaker$','filename$','stimulus$','time',
+                ...'degg_maximum_rel','degg_minimum_rel','position$'"
+
+            appendFileLine: "'result_file$'", "'result_line$'"
+        endif
+    endif
 endfor
 ```
 
