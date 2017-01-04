@@ -2,7 +2,7 @@
 
 ## Ultrasound data
 
-1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID)
+1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID): name format = ID-001, ID-002, ...
 1. **Force alignment and search area**
    1. Run `alingment_input.praat`: the output is a concatenanted `.wav` file and a `.txt` file listing the stimuli
    1. Run SPPAS on concatenated `.wav` and `.txt`
