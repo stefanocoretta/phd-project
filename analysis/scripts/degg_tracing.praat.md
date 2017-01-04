@@ -24,6 +24,7 @@ form dEGG tracing
 endform
 
 directory$ = "../../'project$'/data/derived/egg/'speaker$'"
+directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/audio"
 result_file$ = "../../'project$'/results/'speaker$'_degg_tracing.csv"
 header$ = "file,time,maximum,minimum"
 
@@ -33,7 +34,10 @@ Create Strings as file list: "filelist", "'directory$'/*.wav"
 files = Get number of strings
 ```
 
-For each file, extract the two channels, rename channel 2 as `egg`, and execute the main function, which extracts the dEGG trace.
+For each file, extract the two channels.
+Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/audio` and get the starting and end point of the `kinematics` interval.
+Now, we can extract the same interval from the channel 2 of the EGG file.
+Rename the ectracted part as `egg`, and execute the main function, which extracts the dEGG trace.
 
 #### "file loop"
 ```praat
@@ -43,7 +47,13 @@ for file to files
     filename$ = file$ - ".wav"
 
     Read separate channels from sound file: "'directory$'/'file$'"
+
+    Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
+    start = Get starting point: 2, 2
+    end = Get end point: 2, 2
+
     selectObject: "Sound 'filename$'_ch2"
+    Extract part: start, end, "rectangular", 1, "yes"
     Rename: "egg"
 
     <<<main function>>>
@@ -108,8 +118,7 @@ for point to egg_points - 2
     selectObject: "PointProcess degg_smooth"
     degg_maximum_point_1 = Get nearest index: egg_minimum_1
     degg_maximum = Get time from index: degg_maximum_point_1
-#    degg_maximum_point_2 = degg_maximum_point_1 + 1
-#    degg_maximum_2 = Get time from index: degg_maximum_point_2
+
     selectObject: "Sound degg_smooth"
     degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
 
