@@ -94,6 +94,51 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     coord_fixed(ratio = 1)
 ```
 
+## SSANOVA
+```{r ssanova}
+splines.cor <- filter(splines, label == "target_TT")
+splines.cor.model <- ssanova(Y ~ c2phonation + X + c2phonation:X,
+                             data = splines.cor)
+
+splines.vel <- filter(splines, label == "target_TD")
+splines.vel.model <- ssanova(Y ~ c2phonation + X + c2phonation:X,
+                             data = splines.vel)
+
+predicted.cor <- select(splines.cor, X:Y, c2phonation)
+predicted.vel <- select(splines.vel, X:Y, c2phonation)
+
+predicted.cor$splines.fit <- predict(splines.cor.model, predicted.cor, se = T)$fit
+predicted.cor$splines.SE <- predict(splines.cor.model, predicted.cor,
+                                    se = T)$se.fit
+
+predicted.vel$splines.fit <- predict(splines.vel.model, predicted.vel,
+                                     se = T)$fit
+predicted.vel$splines.SE <- predict(splines.vel.model, predicted.vel,
+                                    se = T)$se.fit
+```
+
+```{r ssanova-plot}
+ggplot(predicted.cor, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+
+ggplot(predicted.vel, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+```
+
 ## Consonantal gestures: target, maximum, release
 
 Now we can create a separate data frame where the observasional unit is each word and the variables are the consonantal getures (target, maximum closure, release).
@@ -108,6 +153,8 @@ cons.gestures <- raw.data %>%
     mutate(word = as.factor(word(prompt, 2))) %>%
     left_join(y = stimuli)
 ```
+
+Let's plot closure duration as a function of place of articulation and voicing of C2 (our target consonant in C1VC2V words).
 
 ```{r closure-duration}
 ggplot(cons.gestures, aes(c2phonation, closure)) +
