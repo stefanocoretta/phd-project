@@ -22,8 +22,8 @@
    1. `Find...` > `Load` and `execute` `td_function_50.srh`
    1. Select TT stimuli
    1. `Find...` > `Load` and `execute` `tt_function_95.srh`
-1. **Export data** in `results` folder with `Export.xsu` (to do)
-1. **Export annotations** in `data/derived/ultrasound/[ID]/annotations` folder to the file `[ID]_export.txt`
+1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]_aaa.txt`
+1. **Export annotations** in `data/derived/ultrasound/[ID]/annotations` folder
 
 ## EGG data
 
