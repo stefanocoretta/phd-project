@@ -7,6 +7,7 @@ ggplot(grid, aes(x = time, colour = c2phonation, group = c2phonation)) +
 geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
 geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE), ymax = maximum.fit+(1.96*maximum.SE),fill = c2phonation ),alpha = 0.5,colour = "NA")
 
+### This is the one which works!
 degg <- filter(degg, position == "before")
 maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
 data = degg)
