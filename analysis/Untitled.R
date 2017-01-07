@@ -1,6 +1,16 @@
+
+library(dplyr)
+library(gss)
+library(ggplot2)
+
+degg <- left_join(degg, nonce)
+degg <- mutate(degg, word = as.factor(word))
+
 maximum.model <- ssanova(maximum ~ c2phonation + word + c2phonation:time,
 data = degg)
 grid <- select(degg, time, c2phonation, word)
+
+
 grid$maximum.fit <- predict(maximum.model, grid, se = T)$fit
 grid$maximum.SE <- predict(maximum.model, grid, se = T)$se.fit
 ggplot(grid, aes(x = time, colour = c2phonation, group = c2phonation)) +
@@ -11,18 +21,27 @@ geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE), ymax = maximum.fit+(1.96*m
 degg <- filter(degg, position == "before")
 maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
 data = degg)
-#minimum.model <- ssanova(minimum ~ c2phonation + time + c2phonation:time,
-#data = degg)
+minimum.model <- ssanova(minimum ~ c2phonation + time + c2phonation:time,
+data = degg)
+grid <- expand.grid(time = seq(min(degg$time), max(degg$time), length = 100),
+                    c2phonation = c("voiced","voiceless"))
+
 grid <- select(degg, time, c2phonation, word)
 grid$maximum.fit <- predict(maximum.model, grid, se = T)$fit
 grid$maximum.SE <- predict(maximum.model, grid, se = T)$se.fit
+grid$minimum.fit <- predict(minimum.model, grid, se = T)$fit
+grid$minimum.SE <- predict(minimum.model, grid, se = T)$se.fit
 
 ggplot(grid, aes(x = time, colour = c2phonation, group = c2phonation)) +
 geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
 geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
                 ymax = maximum.fit+(1.96*maximum.SE),
                 fill = c2phonation ),alpha = 0.5,colour = "NA") +
-    xlim(-0.1, -0.02505522) + ylim(0.15,0.5)
+geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
+    geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
+                    ymax = minimum.fit+(1.96*minimum.SE),
+                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
+    xlim(-0.1,-0.02) + ylim(0,1)
 
 degg.vls <- filter(degg, c2phonation == "vls")
 degg.voi <- filter(degg, c2phonation == "voi")
