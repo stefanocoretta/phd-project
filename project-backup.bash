@@ -8,6 +8,6 @@ rsync -avz --no-whole-file --exclude '*.DS_Store' /Volumes/Phonology/Common/ \
 
 # Copy to external hard disk
 rsync -anv --no-whole-file --exclude '*.DS_Store' ~/Documents/GitHub/phd-project/ \
-    /Volumes/Backup/phd-project/
+    /Volumes/Multimedia/phd-project/
 rsync -avz --no-whole-file --exclude '*.DS_Store' ~/Documents/GitHub/phd-project/ \
-    /Volumes/Backup/phd-project/
+    /Volumes/Multimedia/phd-project/
