@@ -108,7 +108,7 @@ for interval from 1 to intervals
     if label$ == "speech"
         start = Get starting point: 1, interval
         end = Get end point: 1, interval
-        Insert boundary: 1, start - 1.5
+        Insert boundary: 1, start - 0.2
         Insert boundary: 1, end + 1
         Remove left boundary: 1, interval + 1
         Remove right boundary: 1, interval
@@ -127,6 +127,7 @@ for interval from 1 to intervals
 
         selectObject: "Sound chain_ch1_22050"
         Extract part: start, end, "rectangular", 1, "no"
+        Formula: "-self"
 
         selectObject: "Strings filelist_us"
         file_us$ = Get string: index
@@ -144,7 +145,7 @@ for interval from 1 to intervals
             selectObject: "Sound chain"
         endif
 
-        start = start + abs(offset)
+        start = start - offset
         Extract part: start, end, "rectangular", 1, "no"
         @zeroPadding: index, 3
         Save as WAV file: "'out_directory$'/'speaker$'/'speaker$'-'zeroPadding.return$'.wav"
