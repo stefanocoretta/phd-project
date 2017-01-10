@@ -1,35 +1,30 @@
-
-
 form Generate input for force alignment with SPPAS
-    word directory /Volumes/humrss$/Common/data/pilot/ultrasound/SC01/audio
-    word speaker SC
+    word project pilot
+    word speaker SC01
 endform
 
+directory_speaker$ = "../../'project$'/data/derived/ultrasound/'speaker$'"
+directory_audio$ = "'directory_speaker$'/audio"
 createDirectory ("'directory$'/alignment")
-writeFile: "'directory$'/alignment/'speaker$'.txt", ""
+directory_alignment$ = "'directory_speaker$'/alignment"
+writeFile: "'directory_alignment$'/'speaker$'.txt", ""
 
-Create Strings as file list: "filelist", "'directory$'/*.wav"
+Create Strings as file list: "filelist", "'directory_audio$'/*.wav"
 files = Get number of strings
 
 for file from 1 to files
     select Strings filelist
     file$ = Get string: file
-    Read from file: "'directory$'/'file$'"
-    soundID = selected("Sound")
-    filebare$ = file$ - ".wav"
+    Read from file: "'directory_audio$'/'file$'"
+    sound = selected("Sound")
+    sound$ = file$ - ".wav"
 endfor
 
 select all
-minus Strings filelist
+minusObject: "Strings filelist"
 Concatenate recoverably
 
-select Sound chain
-Rename: "'speaker$'"
-select TextGrid chain
-Rename: "'speaker$'"
-
-select Sound 'speaker$'
-select TextGrid 'speaker$'
+selectObject: "TextGrid chain"
 Duplicate tier: 1, 1, "Orthography"
 
 intervals = Get number of intervals: 1
@@ -39,17 +34,17 @@ for interval from 1 to intervals
     end  = Get end point: 1, interval
     filename$ = Get label of interval: 1, interval
 
-    Read Strings from raw text file: "'directory$'/'filename$'.txt"
-    stimulus$ = Get string: 1
-    select TextGrid 'speaker$'
-    Set interval text: 1, interval, "'stimulus$'"
-    appendFileLine: "'directory$'/alignment/'speaker$'.txt", "'stimulus$'"
+    Read Strings from raw text file: "'directory_audio$'/'filename$'.txt"
+    prompt$ = Get string: 1
+    selectObject: "TextGrid chain"
+    Set interval text: 1, interval, "'prompt$'"
+    appendFileLine: "'directory_alignment$'/'speaker$'.txt", "'prompt$'"
 endfor
 
-select Sound 'speaker$'
-Save as WAV file: "'directory$'/alignment/'speaker$'.wav"
+selectObject: "Sound chain"
+Save as WAV file: "'directory_alignment$'/'speaker$'.wav"
 
-select TextGrid 'speaker$'
-Copy: "'speaker$'_filenames"
+selectObject: "TextGrid chain"
+Copy: "filenames"
 Remove tier: 1
-Save as text file: "'directory$'/alignment/'speaker$'_filenames.TextGrid"
+Save as text file: "'directory_alignment$'/filenames.TextGrid"
