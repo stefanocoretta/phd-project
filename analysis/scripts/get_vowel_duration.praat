@@ -3,7 +3,7 @@ form Select folder with files
     text speaker SC
 endform
 
-result_file$ = "'directory$'/vowel_duration.csv"
+result_file$ = "'directory$'/vowel-durations.csv"
 
 header$ = "index,word,duration"
 writeFileLine: "'result_file$'", "'header$'"
