@@ -6,7 +6,7 @@ author: Stefano Coretta
 This script extracts several durations related to voicing. The main function `merge` is a loop that reads the TextGrids from the derived ultrasound and EGG folders and merges the tier with the gestures from the ultrasound and the tier with the voiced/unvoiced intervals from the EGG.
 
 
-#### get_voicing_durations.praat
+#### get_measurements.praat
 ```praat
 
 <<<read>>>
@@ -31,7 +31,7 @@ directory_egg_vuv$ = "'directory_egg$'/'speaker$'"
 createDirectory("../../pilot/data/derived/merged/'speaker$'")
 directory_out$ = "../../pilot/data/derived/merged/'speaker$'"
 
-result_file$ = "../../pilot/results/'speaker$'_voicing_durations.csv"
+result_file$ = "../../pilot/results/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
 writeFileLine: result_file$, result_header$
 
@@ -56,10 +56,10 @@ for file from 1 to files_us
         Extract one tier: 4
 
         selectObject: "Strings filelist_egg"
-        Read from file: "'directory_egg_vuv$'/'filename$'_vuv.TextGrid"
+        Read from file: "'directory_egg_vuv$'/'filename$'-vuv.TextGrid"
 
         selectObject: "TextGrid PointTier_0"
-        plusObject: "TextGrid " + filename$ + "_vuv"
+        plusObject: "TextGrid " + filename$ + "-vuv"
 
         Merge
 
@@ -73,7 +73,7 @@ for file from 1 to files_us
         selectObject: "TextGrid merged"
         Set interval text: 3, 1, stimulus$
 
-        Save as text file: "'directory_out$'/'filename$'_merged.TextGrid"
+        Save as text file: "'directory_out$'/'filename$'-merged.TextGrid"
 
         <<<calculate>>>
     endif
