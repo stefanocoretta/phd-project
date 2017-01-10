@@ -29,7 +29,7 @@
 
 1. **Synchronise** EGG with `sync_egg.praat`: the output is written in `/data/derived/egg/[ID]`
 1. **Extract vuv** (Voiced/UnVoiced) with `extract_vuv.praat`: the output is written in the same folder as above
-1. **Calculate measurements** from ultrasound and EGG annotations with `get_voicing_durations.praat`: the resulting TextGrids are written in `/data/derived/merged/[ID]` and the measurements in `results` to the file `[ID]_measurements.csv`
+1. **Calculate measurements** from ultrasound and EGG annotations with `get_measurements.praat`: the resulting TextGrids are written in `/data/derived/merged/[ID]` and the measurements in `results` to the file `[ID]-measurements.csv`
 
 ## `AAA` files extensions
 * `.esu`: tabs in the main window
