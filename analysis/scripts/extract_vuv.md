@@ -54,7 +54,7 @@ removeObject: "Strings filelist"
 
 #### "save"
 ```praat
-    Write to text file: "'directory$'/'speaker$'/'filename$'_vuv.TextGrid"
+    Write to text file: "'directory$'/'speaker$'/'filename$'-vuv.TextGrid"
 
     removeObject: "Sound " + filename$, "Sound " + filename$ + "_ch2",
         ..."PointProcess " + filename$ + "_ch2", "TextGrid " + filename$ + "_ch2"

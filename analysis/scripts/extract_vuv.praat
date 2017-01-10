@@ -53,16 +53,16 @@ for file from 1 to files
     Read from file: "'directory$'/'speaker$'/'file$'"
     filename$ = selected$("Sound")
 
-    Extract one channel: 2
+        Extract one channel: 2
+    
+        To PointProcess (periodic, cc): 75, 600
+    
+        To TextGrid (vuv): 0.02, 0.001
 
-    To PointProcess (periodic, cc): 75, 600
-
-    To TextGrid (vuv): 0.02, 0.001
-
-    Write to text file: "'directory$'/'speaker$'/'filename$'_vuv.TextGrid"
-
-    removeObject: "Sound " + filename$, "Sound " + filename$ + "_ch2",
-        ..."PointProcess " + filename$ + "_ch2", "TextGrid " + filename$ + "_ch2"
+        Write to text file: "'directory$'/'speaker$'/'filename$'-vuv.TextGrid"
+    
+        removeObject: "Sound " + filename$, "Sound " + filename$ + "_ch2",
+            ..."PointProcess " + filename$ + "_ch2", "TextGrid " + filename$ + "_ch2"
 
 endfor
 
