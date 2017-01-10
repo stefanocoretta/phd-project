@@ -2,7 +2,7 @@
 
 ## Ultrasound data
 
-1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID): name format = ID-001, ID-002, ...
+1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID) as [ID]-00n.wav
 1. **Force alignment and search area**
    1. Run `alingment_input.praat`: the output is a concatenanted `.wav` file and a `.txt` file listing the stimuli
    1. Run SPPAS on concatenated `.wav` and `.txt`
@@ -23,7 +23,7 @@
    1. Select TT stimuli
    1. `Find...` > `Load` and `execute` `tt_function_95.srh`
 1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]_aaa.txt`
-1. **Export annotations** in `data/derived/ultrasound/[ID]/annotations` folder
+1. **Export annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/annotations` folder as `[ID]-00n.TextGrid`
 
 ## EGG data
 
