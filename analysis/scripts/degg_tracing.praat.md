@@ -135,6 +135,10 @@ for point to egg_points - 2
         degg_maximum_point_1 = Get nearest index: egg_minimum_1
         degg_maximum = Get time from index: degg_maximum_point_1
 
+        if degg_maximum <= egg_minimum_1
+            degg_maximum = Get time from index: degg_maximum_point_1 + 1
+        endif
+
         selectObject: "Sound degg_smooth"
         degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
 
