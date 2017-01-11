@@ -26,7 +26,7 @@ endform
 directory$ = "../../'project$'/data/derived/egg/'speaker$'"
 directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/annotations"
 
-result_file$ = "../../'project$'/results/'speaker$'_degg_tracing.csv"
+result_file$ = "../../'project$'/results/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,word,time,maximum,minimum,position"
 writeFileLine: "'result_file$'", "'header$'"
 
