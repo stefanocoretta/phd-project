@@ -34,9 +34,9 @@ Create Strings as file list: "filelist", "'directory$'/*.wav"
 files = Get number of strings
 ```
 
-For each file, extract the two channels.
+For each file, extract both channels.
 Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/annotations` and get the starting and end point of the `kinematics` interval.
-Now, we can extract the same interval from the channel 2 of the EGG file.
+Now, we can extract the same interval from channel 2 of the EGG file.
 Rename the ectracted part as `egg`, and execute the main function, which extracts the dEGG trace.
 
 #### "file loop"
@@ -104,7 +104,7 @@ To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 
 Loop through the EGG points and get minimum between the first two points.
 The loop needs to go to the number of points minus 2 since we are selecting three points in each cycle of the loop.
-Tis will need to be fixed if we want all cycles to be included.
+This will need to be fixed if we want all cycles to be included.
 Get dEGG maximum on the rigth of EGG minimum and get minimum of dEGG between current maximum and the next.
 Normalise max and min to unity. This is gonna be the y axis.
 The x axis needs to be time aligned: can choose between several (use minimum in EGG as arbitrary epoch, or midway between minima, or what else?)
