@@ -1,0 +1,81 @@
+---
+title: "dEGG tracing and SSANOVA"
+author: "Stefano Coretta"
+date: "11/01/2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../"))
+library(tidyr)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+theme_set(theme_bw())
+library(gss)
+library(stringr)
+```
+
+## Data import
+
+Import all `degg-tracing` files in the `results` folder in the `degg` data frame, and reads `nonce.csv` as `stimuli` which contains phonological details about the stimuli. Then join `degg` with `stimuli`. Finally, filter data points which `position == "before"` (dEGG points before consonant closure). For now, I am filtering to get data from `SC01` only because there are problems with consonantal gestures detection for `SDC02` and this screws everything up.
+
+```{r import}
+degg <- list.files(path = "pilot/results",
+                   pattern = "*-degg-tracing.csv",
+                   full.names = TRUE) %>% 
+    map_df(~read_csv(.))
+
+stimuli <- read_csv("pilot/stimuli/nonce.csv")
+
+degg <- left_join(degg, stimuli, by = c("word" = "orth"))
+degg <- degg %>% mutate_if(is.character, factor)
+degg <- filter(degg, position == "before")
+degg <- filter(degg, speaker == "SC01")
+```
+
+Let's first have a look at the tracegrams.
+
+```{r}
+ggplot(degg, aes(x = time, y = maximum, colour = c2phonation)) +
+    geom_smooth(size = 0.5, alpha = 0.2)
+```
+
+We can now calculate the SSANOVA model for dEGG maxima and minima.
+
+```{r }
+maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
+data = degg)
+
+minimum.model <- ssanova(minimum ~ c2phonation + time + c2phonation:time,
+data = degg)
+```
+
+And calculate the predicted splines based on the SSANOVA models.
+
+```{r }
+predicted.degg <- expand.grid(time = seq(min(degg$time), max(degg$time), length = 100),
+                    c2phonation = c("voiced", "voiceless"))
+
+predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
+predicted.degg$maximum.SE <- predict(maximum.model, predicted.degg, se = TRUE)$se.fit
+predicted.degg$minimum.fit <- predict(minimum.model, predicted.degg, se = TRUE)$fit
+predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$se.fit
+```
+
+Finally, we can plot the spredicted splines with 95% confidence levels for significance evaluation.
+
+```{r}
+ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
+geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
+geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
+                ymax = maximum.fit+(1.96*maximum.SE),
+                fill = c2phonation ),alpha = 0.5,colour = "NA") +
+geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
+    geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
+                    ymax = minimum.fit+(1.96*minimum.SE),
+                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
+    xlim(-0.1,-0.025) + ylim(0,1)
+```
+

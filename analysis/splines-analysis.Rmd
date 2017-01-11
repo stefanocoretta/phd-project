@@ -48,7 +48,7 @@ columns <- c(first.columns,
 We can now read in the file.
 
 ```{r read}
-raw.data <- read.delim("pilot/results/SC01_aaa.txt", header = FALSE,
+raw.data <- read.delim("pilot/results/SC01-aaa.txt", header = FALSE,
                     na.string = '*', col.names = columns
                     )
 
