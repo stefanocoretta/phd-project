@@ -1,5 +1,7 @@
 # Documentation of data processing
 
+This file contains the documentation of the scripts in the `analysis/scripts` folder. The documentation has been written in literate markdown. To produce the scripts form the documentation, use the `lmt` package (written in Go by Dave MacFarlane, at https://github.com/driusan/lmt).
+
 ## Prepare files for force alignment in SPPAS
 
 ### alignment_input.praat
