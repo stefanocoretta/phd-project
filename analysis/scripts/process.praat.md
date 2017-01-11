@@ -199,7 +199,7 @@ The following chunk calls the header of the script, which is defined at the end 
 <<<sync function>>>
 ```
 
-The following code creates a procedure called zeroPadding. The procedure allows automatic zero padding in file names with numeric indexes. For example: `Sound001.wav`, `Sound002.wav`, ..., `Sound010.wav`, ..., `Sound100.wav`.
+The following code creates a procedure called zeroPadding. The code is by Daniel Riggs and can be found at http://praatscriptingtutorial.com/procedures. The procedure allows automatic zero padding in file names with numeric indexes. For example: `Sound001.wav`, `Sound002.wav`, ..., `Sound010.wav`, ..., `Sound100.wav`.
 
 ### "padding"
 ```praat
@@ -417,6 +417,74 @@ If the debugging mode is off, all the intermediate files are removed. Otherwise 
         select TextGrid chain_ch2
     endif
 endfor
+```
+
+## Extract VUV intervals
+
+This script calculates the voiced and voiceless portions (VUV) in the synchronised EGG files based on the EGG signal.
+
+### extract_vuv.praat
+```praat
+<<<get synced egg>>>
+
+<<<vuv>>>
+```
+
+We first read ask for the project name and the speaker ID.
+
+### "get synced egg"
+```praat
+form Extract vuv
+    word project pilot
+    word speaker SC01
+    boolean debug_mode
+endform
+
+directory$ = "../../'project$'/data/derived/egg"
+
+Create Strings as file list: "filelist", "'directory$'/'speaker$'/*.wav"
+files = Get number of strings
+```
+
+Now, for each file in `derived/egg`, we can calculate the boundaries of the voiced and voiceless intervals in the file and save them to a TextGrid file.
+
+### "vuv"
+```praat
+for file from 1 to files
+    selectObject: "Strings filelist"
+    file$ = Get string: file
+    Read from file: "'directory$'/'speaker$'/'file$'"
+    filename$ = selected$("Sound")
+
+    <<<to vuv>>>
+
+    <<<save vuv>>>
+endfor
+
+removeObject: "Strings filelist"
+```
+
+To calculate voiced and voicelss intervals, we can exploit the already available function `To TextGrid (vuv)`. The channel containing the EGG signal (channel 2) is extracted, a PointProcess object is created from the signal, and finally the `vuv` function is applied.
+
+#### "to vuv"
+```praat
+Extract one channel: 2
+
+To PointProcess (periodic, cc): 75, 600
+
+To TextGrid (vuv): 0.02, 0.001
+```
+
+The resulting TextGrid is saved in the same synced EGG files folder.
+
+#### "save vuv"
+```praat
+Write to text file: "'directory$'/'speaker$'/'filename$'-vuv.TextGrid"
+
+if debug_mode == 0
+    removeObject: "Sound " + filename$, "Sound " + filename$ + "_ch2",
+    ..."PointProcess " + filename$ + "_ch2", "TextGrid " + filename$ + "_ch2"
+endif
 ```
 
 ## Headers
