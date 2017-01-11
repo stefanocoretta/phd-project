@@ -190,20 +190,18 @@ endfor
 
 The following chunk calls the header of the script, which is defined at the end of the documentation, the padding function, and the main function.
 
-#### sync_egg.praat
+### sync_egg.praat
 ```praat
 <<<sync header>>>
 
 <<<padding>>>
 
-<<<sync>>>
+<<<sync function>>>
 ```
-
-### Zero padding function
 
 The following code creates a procedure called zeroPadding. The procedure allows automatic zero padding in file names with numeric indexes. For example: `Sound001.wav`, `Sound002.wav`, ..., `Sound010.wav`, ..., `Sound100.wav`.
 
-#### "padding"
+### "padding"
 ```praat
 procedure zeroPadding: .num, .numZeros
     .highestVal = 10 ^ .numZeros
@@ -225,11 +223,20 @@ endproc
 
 ```
 
-### Main function
+The script works by selecting all the files in the Object window after loading files.
 
-The script works by selecting all the files in the Object window after loading files. Before running, the script checks if the objects list is empty. If not, the script exits and prompts the user to clean the objects list.
+### "sync function"
+```praat
+<<<check objects>>>
 
-#### "sync"
+<<<read files>>>
+
+<<<sync>>>
+```
+
+Before running, the script checks if the objects list is empty. If not, the script exits and prompts the user to clean the objects list.
+
+### "check objects"
 ```praat
 select all
 number_selected = numberOfSelected ()
@@ -237,29 +244,27 @@ if number_selected > 0
     exitScript: "Please, remove the objects in the Objects window. For this
     ... script to work, the Objects list must be empty."
 endif
-
 ```
 
-The form saves the directory with the EGG `.wav` files and the directory with the `.wav` files exported from AAA. Moreover, a boolean is stored as well for enabling the debugging mode. In the debugging mode, all intermediate files produced by the script are kept in the Objects window. They are deleted otherwise.
+The form asks for the project name and the participant ID. A boolean is stored as well for enabling the debug mode. In the debug mode, all intermediate files produced by the script are kept in the Objects window. They are deleted otherwise.
 
-#### "sync"+=
+### "read files"
 ```praat
 form Syncronise EGG data
-    word egg_directory ../../pilot/data/raw/egg
-    word us_directory ../../pilot/data/derived/ultrasound
-    word out_directory ../../pilot/data/derived/egg
+    word project pilot
     word speaker SC01
-    boolean invert_egg_signal 1
     boolean debug_mode
 endform
-
 ```
 
-The directory sync is created in the EGG directory for saving the output of the script. The file lists of the EGG and ultrasound `.wav` files are saved in `filelist_egg` and `filelist_us`.
+The file lists of the EGG and ultrasound `.wav` files are saved in `filelist_egg` and `filelist_us`.
 The number of files in the EGG folder is saved in `files`.
 
-#### "sync"+=
+### "read files"+=
 ```praat
+egg_directory$ = "../../'project$'/data/raw/egg"
+us_directory$ = "../../'project$'/data/derived/ultrasound"
+out_directory$ = "../../'project$'/data/derived/egg"
 createDirectory ("'out_directory$'/'speaker$'")
 
 Create Strings as file list: "filelist_egg", "'egg_directory$'/'speaker$'/*.wav"
@@ -268,9 +273,9 @@ Create Strings as file list: "filelist_us", "'us_directory$'/'speaker$'/audio/*.
 
 ```
 
-For every file listed in `filelist_egg`, it reads the file to a Sound.
+For every file listed in `filelist_egg`, it reads the file.
 
-#### "sync"+=
+### "read files"+=
 ```praat
 for file from 1 to files
     select Strings filelist_egg
@@ -282,7 +287,7 @@ endfor
 
 Every object is then selected, minus the two file lists. The Sounds are concatenated to `Sound chain`.
 
-#### "sync"+=
+### "read files"+=
 ```praat
 select all
 minusObject: "Strings filelist_egg"
@@ -290,33 +295,24 @@ minusObject: "Strings filelist_us"
 Concatenate
 ```
 
-While `Sound chain` is selected, the script extracts all channels (the object is a stereo sound: channel 1 is the audio, channel 2 is the EGG signal). For cross-correlation to work, the two sound files must have the same sampling frequency.
+While `Sound chain` is selected, the script inverts the signal (both the audio and the EGG signal are inverted during acquisition with the Laryngograph), and extracts all channels (the object is a stereo sound: channel 1 is the audio, channel 2 is the EGG signal). For cross-correlation to work, the two sound files must have the same sampling frequency.
 AAA records at a frequency of 22050 Hz. To ensure that the EGG audio is at the same sampling frequency, resampling is performed. `Sound chain_ch1_22050` is created from `Sound chain_ch1`.
 
-#### "sync"+=
+### "read files"+=
 ```praat
+Multiply: -1
 Extract all channels
 
 selectObject: "Sound chain_ch1"
 Resample: 22050, 50
-
 ```
 
-The extraction of each simulus from the concatenated sound is achieved through the EGG signal (which is inverted if the `invert egg sygnal` option was selected in the options window). The function `To TextGrid (silences)` efficiently recognises the voiced streaches of the audio which roughly corresponds to the spoken stimuli. (*Warning*: this assumes that the EGG files don't contain spurious material)
+The extraction of each simulus from the concatenated sound is achieved through the EGG signal. The function `To TextGrid (silences)` efficiently recognises the voiced streaches of the audio which roughly corresponds to the spoken stimuli. (*Warning*: this assumes that the EGG files don't contain spurious material)
 The minimum duration for silence is set to 1 second to avoid voiceless segments being annotated as silence. The output is `TextGrid chain_ch2`.
 The number of intervals in the TextGrid is saved in the variable `intervals`.
 
-#### "sync"+=
+### "sync"
 ```praat
-
-if invert_egg_signal == 1
-    selectObject: "Sound chain_ch2"
-    Formula: "-self"
-
-    plusObject: "Sound chain_ch1"
-    Combine to stereo
-endif
-
 selectObject: "Sound chain_ch2"
 
 To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
@@ -326,7 +322,7 @@ intervals = Get number of intervals: 1
 
 For each interval in the `TextGrid chain_ch2` wich is labelled `speech`, the start and end time of the interval are moved by -1.5 and 1 second respectively. This ensures that there is enough audio before and after the stimulus for cross-correlation. The original left and right boundaries are removed. The result is that the interval label is changed to `speechsilence`.
 
-#### "sync"+=
+### "sync"+=
 ```praat
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
@@ -344,7 +340,7 @@ endfor
 
 We can now get the number of intervals of the updated TextGrid and set the counter `index` to 1. The counter is used to read the ultrasound audio files, and in the names of the output files (it is feeded to the `zeroPadding` procedure to create sortable file names).
 
-#### "sync"+=
+### "sync"+=
 ```praat
 intervals = Get number of intervals: 1
 
@@ -354,7 +350,7 @@ index = 1
 
 For every interval in the TextGrid it is checked if the label is `speechsilence`. The intervals with this label correspond to the individual stimuli in the concatenated EGG sound files. If the label is `speechsilence`, the script gets the start and end time of that interval.
 
-#### "sync"+=
+### "sync"+=
 ```praat
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
@@ -375,7 +371,7 @@ Then the resampled `Sound chain_ch1_22050` is selected and the portion from `sta
 
 The counter `index` is now used to read the audio file from the ultrasound directory. Since the order of the stimuli is the same in both the EGG and unltrasound files, a counter that increases for every interval wth the `speechsilence` label is sufficient. The name of the file is saved after reading and the file remains selected.
 
-#### "sync"+=
+### "sync"+=
 ```praat
         selectObject: "Strings filelist_us"
         file_us$ = Get string: index
@@ -386,7 +382,7 @@ The counter `index` is now used to read the audio file from the ultrasound direc
 
 The extracted portion from the EGG audio channel is added to the selection. The cross-correlation between the EGG and ultrasound audio is performed. The time of maximum amplitude in the generated cross-correlated sound corresponds to the off-set between the two files.
 
-#### "sync"+=
+### "sync"+=
 ```praat
         plusObject: "Sound chain_ch1_22050_part"
 
@@ -395,17 +391,13 @@ The extracted portion from the EGG audio channel is added to the selection. The 
 
 ```
 
-The concatenated stereo sound (or the recombined stereo if the `invert egg signal` option is active) is selected and a portion is extracted. The portion starting point corresponds to the starting point of the TextGrid interval plus the off-set obtained from the correlation. The end point is the same as the one of the interval. (The endpoint does not matter, since timing is calculated from the beginning of the file.) The sound is finally saved in the `sync` folder.
+The concatenated stereo sound (or the recombined stereo if the `invert egg signal` option is active) is selected and a portion is extracted. The portion starting point corresponds to the starting point of the TextGrid interval minus the off-set obtained from the correlation. If the offset is positive (when the audio is longer than the EGG audio), silence is added at the beginning of the EGG sound. If the offset is negative (the EGG sound is longer than the audio), the extra part is deleted from the beginning of the EGG sound to match the beginning of the audio. The end point is the same as the one of the interval. (The endpoint does not matter, since timing is calculated from the beginning of the file.) The sound is finally saved in the `sync` folder.
 
-#### "sync"+=
+### "sync"+=
 ```praat
-        if invert_egg_signal == 1
-            selectObject: "Sound combined_2"
-        else
-            selectObject: "Sound chain"
-        endif
+        selectObject: "Sound chain"
 
-        start = start + abs(offset)
+        start = start - offset
         Extract part: start, end, "rectangular", 1, "no"
         @zeroPadding: index, 3
         Save as WAV file: "'out_directory$'/'speaker$'/'speaker$'-'zeroPadding.return$'.wav"
@@ -414,17 +406,11 @@ The concatenated stereo sound (or the recombined stereo if the `invert egg signa
 
 If the debugging mode is off, all the intermediate files are removed. Otherwise they are kept for inspection. The index is increased by one and the TextGrid is selected for the next cycle of the for loop.
 
-#### "sync"+=
+### "sync"+=
 ```praat
         if debug_mode == 0
             removeObject: "Sound chain_ch1_22050_part", "Sound " + file_us_name$,
-            ..."Sound chain_ch1_22050_part_" + file_us_name$
-
-            if invert_egg_signal == 1
-                removeObject: "Sound combined_2_part"
-            else
-                removeObject: "Sound chain_part"
-            endif
+            ..."Sound chain_ch1_22050_part_" + file_us_name$, "Sound chain_part"
         endif
 
         index += 1
@@ -435,7 +421,7 @@ endfor
 
 ## Headers
 
-#### "sync header"
+### "sync header"
 ```praat
 ######################################
 # sync_egg.praat v1.0.0
