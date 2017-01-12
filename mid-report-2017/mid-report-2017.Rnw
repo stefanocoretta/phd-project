@@ -1,0 +1,34 @@
+\documentclass[a4paper]{article}
+
+\usepackage{polyglossia}
+    \setmainlanguage{english}
+\usepackage{fontspec}
+    \setmainfont[StylisticSet=20,Numbers=Lining]{Brill}
+
+\title{Mid-year report 2017}
+\author{Stefano Coretta}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+
+\subsection{Previous research}
+
+The duration of vowels has been shown to be correlated with the presence vs. absence of voicing in the following consonant in a variety of languages.
+\citet{house1953} noticed that, in English, vowels followed by voiceless consonants are on average XXX ms shorter than vowels followed by voiced consonants.
+This phenomenon has been thus called the ``voicing effect.''
+Other languages, like French, Spanish, Swedish, Arabic and Hindi, have been later found to show the voicing effect.
+
+
+
+\subsection{Research hypothesis}
+
+
+
+
+\end{document}
