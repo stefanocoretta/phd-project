@@ -4,6 +4,8 @@
     \setmainlanguage{english}
 \usepackage{fontspec}
     \setmainfont[StylisticSet=20,Numbers=Lining]{Brill}
+    
+\usepackage{natbib}
 
 \title{Mid-year report 2017}
 \author{Stefano Coretta}
@@ -23,6 +25,13 @@ The duration of vowels has been shown to be correlated with the presence vs. abs
 \citet{house1953} noticed that, in English, vowels followed by voiceless consonants are on average XXX ms shorter than vowels followed by voiced consonants.
 This phenomenon has been thus called the ``voicing effect.''
 Other languages, like French, Spanish, Swedish, Arabic and Hindi, have been later found to show the voicing effect.
+While several languages are ...---although in different sizes and consistency---the voicing effect does not seem to be universal.
+For example, the duration of vowels in Polish is not affected by consonantal voicing.
+
+For what concerns the causes of the voicing effect, different authors proposed different explanations.
+These can be classified in two main categories \citep{soskuthy2013}: explanations that assume the source of the voicing effect to be in the realm of perception, and those that ascribe such phenomenon to articulatory properties of vowel-consonant sequences.
+Regarding the perception side of the contention, \citet{javkin1976} notes that the acoustic transition between vowels and voiced stops is gradual and does not involve a sudden boundary as with vowels followed by voiceless stops.
+He thus argues that the voiced portion of the consonant is perceived by the hearer to be part of the previous vowel.
 
 
 
@@ -30,5 +39,8 @@ Other languages, like French, Spanish, Swedish, Arabic and Hindi, have been late
 
 
 
+
+\bibliography{linguistics}
+\bibliographystyle{unified}
 
 \end{document}
