@@ -38,6 +38,37 @@ He thus argues that the voiced portion of the consonant is perceived by the hear
 \subsection{Research hypothesis}
 
 
+\section{Methodology}
+
+\subsection{Design}
+
+The objective of the experiment is the simultaneous acquisition of audio, ultrasound tongue imaging and electroglottography recordings of spoken words.
+Participants were asked to read sentences from a computer screen, while audio recordings, ultrasound videos, and electroglottography (EGG) recordings are acquired separately.
+Post-processing allows synchronisation of audio, ultrasound and EGG recordings, which enables a time-aligned account of the acoustic and articulatory components of the participants' speech.
+
+
+\subsection{Participants}
+
+A pilot study was run with three participants: a speaker of Polish, and two speakers of Italian.
+Due to technical problems, I could not record the EGG signal with the Polish speaker, so I will report results from the two Italian participants only.
+
+\subsection{Materials}
+
+The target words used in the pilot were nonce words with the shape CVCV.
+The full list is shown in ...
+The words were designed so as to control for place of articulation and voicing of C1 and C2, and height of V1.
+The consonants [p] and [b] were chosen for C1 since their labial articulation does not interact with lingual gestures of flanking segments.
+V1 was one of the vowels [a], [o] or [u]
+
+\subsection{Procedure}
+
+
+
+\subsection{Analysis}
+
+
+\section{Preliminary results and discussion}
+
 
 
 \bibliography{linguistics}
