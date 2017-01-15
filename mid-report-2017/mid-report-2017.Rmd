@@ -1,0 +1,19 @@
+---
+title: "Mapping lingual and laryngeal gestures with ultrasonography and electroglottography"
+author: "Stefano Coretta"
+date: "14/01/2017"
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+    number_sections: yes
+    toc: yes
+    citation_package: natbib
+bibliography: linguistics.bib
+biblio-style: unified.bst
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
