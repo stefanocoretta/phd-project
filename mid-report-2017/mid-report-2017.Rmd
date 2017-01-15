@@ -4,10 +4,10 @@ author: "Stefano Coretta"
 date: "14/01/2017"
 output: 
   pdf_document: 
+    citation_package: natbib
     latex_engine: xelatex
     number_sections: yes
     toc: yes
-    citation_package: natbib
 bibliography: linguistics.bib
 biblio-style: unified.bst
 ---
@@ -16,4 +16,16 @@ biblio-style: unified.bst
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Purpose
 
+
+
+# Methodology
+
+
+## Ultrasound Tongue Imaging
+
+
+## Electroglottography
+
+# References
