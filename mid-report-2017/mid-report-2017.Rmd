@@ -1,5 +1,5 @@
 ---
-title: "Mapping lingual and laryngeal gestures with ultrasonography and electroglottography"
+title: "A time-aligned account of lingual and laryngeal gestures using ultrasound tongue imaging (UTI) and electroglottography (EGG)"
 author: "Stefano Coretta"
 date: "14/01/2017"
 output: 
@@ -17,6 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Purpose
+
+The combination of techniques described in the following section allows a synchronous mapping of ligual gestures and glottal configurations during speech.
 
 
 
