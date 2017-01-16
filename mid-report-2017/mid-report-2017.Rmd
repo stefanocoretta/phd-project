@@ -47,7 +47,7 @@ Electroglottography is a technique that measures the size of contact between the
 ## Post-processing: synchronisation and dEGG extraction
 
 Since the signals from the ultrasound machine and the laryngograph are recorded simultaneously but separately, data from both machines need to be synchronised after acquisition.
-Synchronisation is achieved through the cross-correlation of the audio signals from both sources \citep{grimaldi2008}.
+Synchronisation is achieved through the cross-correlation of the audio signals from both sources [@grimaldi2008].
 The cross-correlation method creates a new sound file from two audio files.
 The created new file is a convolution of the original files.
 The time of the maximum amplitude in the convoluted sound wave is the amount of off-set between the two original files.
@@ -56,7 +56,14 @@ A measure taken at any particular time in the ultrasound source can thus be rela
 
 [TODO]: # (image of cross-correlation)
 
+Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
+The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
+The time of maximum velocity in the first derivative of the EGG signal (dEGG) roughly corresponds to the moment of glottal closure.
+The time of minimum velocity corresponds to the moment of glottal opening.
+Thus, glottal closure and opening for each glottal period can be extracted from the dEGG.
 
+
+## dEGG tracegram analysis
 
 
 
