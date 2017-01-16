@@ -2,14 +2,15 @@
 title: "A time-aligned account of lingual and laryngeal gestures using ultrasound tongue imaging (UTI) and electroglottography (EGG)"
 author: "Stefano Coretta"
 date: "14/01/2017"
-output: 
-  pdf_document: 
+output:
+  pdf_document:
     citation_package: natbib
     latex_engine: xelatex
     number_sections: yes
     toc: yes
 bibliography: linguistics.bib
 biblio-style: unified.bst
+
 ---
 
 ```{r setup, include=FALSE}
@@ -37,5 +38,26 @@ By positioning the ultrasound probe in contact with the submental triangle (the 
 
 
 ## Electroglottography
+
+Electroglottography is a technique that measures the size of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
+
+
+## Equipment setup
+
+## Post-processing: synchronisation and dEGG extraction
+
+Since the signals from the ultrasound machine and the laryngograph are recorded simultaneously but separately, data from both machines need to be synchronised after acquisition.
+Synchronisation is achieved through the cross-correlation of the audio signals from both sources \citep{grimaldi2008}.
+The cross-correlation method creates a new sound file from two audio files.
+The created new file is a convolution of the original files.
+The time of the maximum amplitude in the convoluted sound wave is the amount of off-set between the two original files.
+The off-set is trimmed from the beginning of the longer audio file, with the result that the files will be in sync.
+A measure taken at any particular time in the ultrasound source can thus be related to a measure taken at that same time in the laryngograph source.
+
+[TODO]: # (image of cross-correlation)
+
+
+
+
 
 # References
