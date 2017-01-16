@@ -54,13 +54,26 @@ The time of the maximum amplitude in the convoluted sound wave is the amount of 
 The off-set is trimmed from the beginning of the longer audio file, with the result that the files will be in sync.
 A measure taken at any particular time in the ultrasound source can thus be related to a measure taken at that same time in the laryngograph source.
 
-[TODO]: # (image of cross-correlation)
+[image of cross-correlation]: #
 
 Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
 The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
 The time of maximum velocity in the first derivative of the EGG signal (dEGG) roughly corresponds to the moment of glottal closure.
 The time of minimum velocity corresponds to the moment of glottal opening.
 Thus, glottal closure and opening for each glottal period can be extracted from the dEGG.
+
+[say that shorter closed phase correlates with glottal spread]: #
+
+@herbst2010 describe a new technique, called electroglottographic "wavegram," which displays the variations in the EGG and dEGG signals in a single graph.
+A wavegram contains temporal information on the *x* and *y* axis, while changes in the VFCA are rendered as different colour intensities on the *z* axis.
+
+The extraction of dEGG maxima and minima has been implemented in the PRAAT scripting language.
+The algorithm consists of the following stages:
+1. detection of the glottal periods
+1. calculation of the dEGG
+1. extraction of absolute dEGG maximum and minimum for each glottal period
+1. calculation of maxima and minima relative to the glottal period
+
 
 
 ## dEGG tracegram analysis
