@@ -8,9 +8,12 @@ output:
     latex_engine: xelatex
     number_sections: yes
     toc: yes
+papersize: A4
+fontsize: 11pt
+mainfont: Brill
+mainfontoptions: Numbers=Lining
 bibliography: linguistics.bib
 biblio-style: unified.bst
-
 ---
 
 ```{r setup, include=FALSE}
@@ -39,12 +42,15 @@ By positioning the ultrasound probe in contact with the submental triangle (the 
 
 ## Electroglottography
 
-Electroglottography is a technique that measures the size of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
+Electroglottography [@fabre1957] is a technique that measures the size of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
+A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of neck, one on each side of the thyroid cartilage.
+Depending on the amount of VFCA, the amplitude of the current increases (with higher VFCA) or decreases (with lower VFCA).
+
 
 
 ## Equipment setup
 
-## Post-processing: synchronisation and dEGG extraction
+## Synchronisation
 
 Since the signals from the ultrasound machine and the laryngograph are recorded simultaneously but separately, data from both machines need to be synchronised after acquisition.
 Synchronisation is achieved through the cross-correlation of the audio signals from both sources [@grimaldi2008].
@@ -55,6 +61,8 @@ The off-set is trimmed from the beginning of the longer audio file, with the res
 A measure taken at any particular time in the ultrasound source can thus be related to a measure taken at that same time in the laryngograph source.
 
 [image of cross-correlation]: #
+
+# Calculation of dEGG
 
 Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
 The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
@@ -86,7 +94,8 @@ The interval between any two consecutive minima constitutes a glottal period.
 The dEGG is calculated with the formula $x_n' =  x_{n+1} - x_n$, where $x_n$ is the value of the EGG signal at the time n.
 After calculation, the resulting dEGG is smoothed with the same method as before (triangular smooth, *m* = 11).
 The algorithm then searches for dEGG maxima and minima within each glottal period (defined as two consecutive EGG minima).
-
+Finally, relative dEGG~max~ and dEGG~min~ are calculated as proportions of the respective glottal period.
+The resulting values are between 0 (beginning of period) and 1 (end of period).
 
 ## dEGG tracegram analysis
 
