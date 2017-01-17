@@ -34,7 +34,7 @@ In medical sonography, ultrasound waves (sound waves at high frequencies, rangin
 When the surface of a material with different density is hit, the ultrasound waves are partially reflected, and such "echo" is registered by the probe.
 These echoes can then be plotted on a two-dimensional graph, where different densities are represented by different shades (higher densities are brighter, while lower densities are darker).
 The graph, or ultrasound image, will show high density surfaces as very bright lines, surrounded by darker areas.
-By positioning the ultrasound probe in contact with the submental triangle (the surface below the chin), sagittally oriented, we can infer the cross-sectional profile of the tongue, which appears as a bright line in the resulting ultrasound image.
+By positioning the ultrasound probe in contact with the submental triangle (the surface below the chin), sagittally oriented, it is possible to infer the cross-sectional profile of the tongue, which appears as a bright line in the resulting ultrasound image.
 
 
 ## Electroglottography
@@ -64,20 +64,39 @@ Thus, glottal closure and opening for each glottal period can be extracted from 
 
 [say that shorter closed phase correlates with glottal spread]: #
 
-@herbst2010 describe a new technique, called electroglottographic "wavegram," which displays the variations in the EGG and dEGG signals in a single graph.
+@herbst2010 describe a new technique, called electroglottographic wavegram, which displays the variations in the EGG and dEGG signals in a single graph.
 A wavegram contains temporal information on the *x* and *y* axis, while changes in the VFCA are rendered as different colour intensities on the *z* axis.
 
-The extraction of dEGG maxima and minima has been implemented in the PRAAT scripting language.
+The extraction of dEGG maxima and minima has been implemented in this study using the PRAAT scripting language.
 The algorithm consists of the following stages:
+
 1. detection of the glottal periods
 1. calculation of the dEGG
-1. extraction of absolute dEGG maximum and minimum for each glottal period
-1. calculation of maxima and minima relative to the glottal period
+1. extraction of absolute dEGG maximum (dEGG~max~) and minimum (dEGG~min~) for each glottal period
+1. calculation of dEGG~max~ and dEGG~min~ relative to the glottal period
 
+It is conventional to define a glottal period as the time between two consecutive moments of glottal closure, i.e. two consecutive dEGG maxima.
+However, since the maxima need to be identified in the first place, an arbitrary definition of glottal period is instead used.
+Glottal periods correspond to the intervals between two consecutive EGG minima [cf. ...].
+First, the EGG signal is band-pass filtered (40Hz-10KHz) and smoothing is applied.
+A weighted sliding-average smoothing method (triangular smooth) is used, with smooth width *m* = 11.
+EGG minima are thus extracted from the smoothed EGG signal.
+The interval between any two consecutive minima constitutes a glottal period.
+
+The dEGG is calculated with the formula $x_n' =  x_{n+1} - x_n$, where $x_n$ is the value of the EGG signal at the time n.
+After calculation, the resulting dEGG is smoothed with the same method as before (triangular smooth, *m* = 11).
+The algorithm then searches for dEGG maxima and minima within each glottal period (defined as two consecutive EGG minima).
 
 
 ## dEGG tracegram analysis
 
+As the authors note, the wavegram technique has the limitation of not being suitable for quantitative analysis.
+A new visualisation technique, based on wavegrams, is introduced here: electroglottographic tracegram.
+The tracegram method, even if it reduces the displayed dimensions, allows a statistical assessment of the varying dEGG~max~ and dEGG~min~, thus constituting a partial improvement over wavegrams.
+After the calculation of the relative dEGG~max~ and dEGG~min~, these values are  plotted in a graph on the *y* axis at each time point which corresponds to the beginning of a glottal period.
+Since the values are restricted between 0 and 1 (being proportions), changes in glottal period (which corresponds to changes in fundamental frequency and hence pitch) are controlled for.
+The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
+Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
 
 
 # References
