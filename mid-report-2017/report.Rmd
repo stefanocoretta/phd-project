@@ -1,0 +1,44 @@
+---
+title: "Mid-year panel report 2016-2017"
+author: "Stefano Coretta"
+date: "20/01/2017"
+output:
+  bookdown::pdf_document2:
+    citation_package: natbib
+    latex_engine: xelatex
+    number_sections: yes
+    toc: yes
+papersize: A4
+fontsize: 11pt
+mainfont: Brill
+mainfontoptions: Numbers=Lining
+bibliography: linguistics.bib
+biblio-style: unified.bst
+header-includes:
+- \usepackage{cleveref}
+---
+
+# Summary of achievements (Year 1 Term 1)
+
+* Definition of a broad research question
+    * This research will focus on the relative timing between lingual gestures and the configuration of the glottis during speech. Articulatory data will be acquired through ultrasound tongue imaging (UTI) and electroglottography (EGG), which allow, respectively, tracking of tongue movements and calculation of the amount of contact between the vocal folds. These two techniques together will enable a time-aligned account of oral and laryngeal gestures.
+* Training
+    * I received training on the operation of the ultrasound and EGG machines, and on the Articulate Assistant Advanced software (used for the analysis of ultrasound data)
+* Definition of a range of hypotheses to be tested
+    * Based on previous work, I have established a series of research hypothesis that are undergoing assessment through an exploratory pilot study.
+* Application of Ethics Approval for experimental research
+    * I have applied for ethics approval and obtained clearance from the School Ethics Committee.
+* Experimental design and pilot
+    * I ran a pilot study to test the methodology and explore possible variations in relative timing between oral and glottal gestures in different phonological conditions.
+    * A speaker of Polish and two speakers of Italian participated in the pilot. The subjects had to read sentences from a computer screen while being recorder. The sentences containted nonce words as target stimuli. The nonce words used in the experiment are shown in Table \@ref(tab:stimuli). The frame sentence was *Mówię ... teraz* "Say ... now" for polish, and *Dico ... lentamente* "I say ... slowly" for Italian. Audio, ultrasound (US) and electroglottographic (EGG) recordings were taken simultaneously. Synchronisation of the US and EGG recordings was achieved through cross-correlating the audio signals from those two sources.
+    * Due to technical issues, I could not collect EGG data for the Polish participant. I tested the analysis method on the data from one Italian speaker. The preliminary results show that, for the Italian speaker, the configuration of the glottis in vowels is affected by the phonation of the following consonants. This phenomenon is consistent with...
+
+
+Table: (\#tab:stimuli) Stimuli list
+
+|      |      |      |      |      |      |
+|------|------|------|------|------|------|
+| pata | bata | poto | boto | putu | butu |
+| pada | bada | podo | bodo | pudu | budu |
+| paka | baka | poko | boko | puku | buku |
+| paga | baga | pogo | bogo | pugu | bugu |
