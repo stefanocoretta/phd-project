@@ -14,6 +14,8 @@ mainfont: Brill
 mainfontoptions: Numbers=Lining
 bibliography: linguistics.bib
 biblio-style: unified.bst
+header-includes:
+- \usepackage{cleveref}
 ---
 
 ```{r setup, include=FALSE}
@@ -25,10 +27,6 @@ knitr::opts_chunk$set(echo = TRUE)
 The combination of techniques described in the following sections allows a synchronous mapping of lingual gestures and phonation during speech.
 Such methodology enables a time-aligned account of the movements of the tongue and the concomitant configuration of the glottis that characterises phonation.
 These techniques employ ultrasound tongue imaging (UTI) and electroglottography (EGG) for the simultaneous acquisition of articulatory data from, respectively, the oral cavity and the glottis.
-
-
-# Methodology
-
 
 ## Ultrasound tongue imaging
 
@@ -43,14 +41,36 @@ By positioning the ultrasound probe in contact with the submental triangle (the 
 ## Electroglottography
 
 Electroglottography [@fabre1957] is a technique that measures the size of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
-A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of neck, one on each side of the thyroid cartilage.
-Depending on the amount of VFCA, the amplitude of the current increases (with higher VFCA) or decreases (with lower VFCA).
+A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage.
+The impedance of the current is directly correlated with VFCA, while its amplitude is inversely correlated.
+Thus, impedance increases with lower VFCA and decreases with higher VFCA.
+Conversely, amplitude decreases when the VFCA increases and it increases when the VFCA decreases.
+The EGG unit registers changes in impedance and it converts it in amplitude.
+Its output is a synchronised stereo recording which contains the EGG signal from the electrodes in right channel and the audio signal from the microphone in the left channel.
 
-
+# Methodology
 
 ## Equipment setup
 
-## Synchronisation
+![Equipment set-up scheme\label{f:setup}](../graphics/setup.png){ width=80% }
+
+\Cref{f:setup} shows the equipment set-up employed.
+The left part of the figure shows the ultrasound set-up, while the EGG set-up is shown on the right.
+Two separate laptops are used for the acquisition of the ultrasound and EGG recordings.
+The ultrasound unit is plugged into one laptop.
+A P-Stretch unit (used for signal synchronisation) and the ultrasound probe are directly connected to the ultrasound unit.
+The P-Stretch unit and a microphone feed a pre-amplifier system, which is plugged into the ultrasound laptop.
+A second microphone and the electrodes are connected to the EGG unit, which is plugged into the second laptop.
+A TELEMED Echo Blaster 128 system is used for ultrasonography and a Glottal Enterprises EG2-PCX2 unit for EGG.
+The subject wears a headset (a metallic ..., not shown in \Cref{f:setup}) which holds the ultrasound probe in position (allowing free head movement by the subject) and a velcro strap with the EGG electrodes, located on each side of the thyroid cartilage, at the level of the glottis.
+The microphones are clipped to the headset on either side, at identical height.
+
+## Acquisition of ultrasound and EGG
+
+Ultrasound and EGG inputs are acquired and recorded in separate laptops.
+
+
+## Ultrasound and EGG synchronisation
 
 Since the signals from the ultrasound machine and the laryngograph are recorded simultaneously but separately, data from both machines need to be synchronised after acquisition.
 Synchronisation is achieved through the cross-correlation of the audio signals from both sources [@grimaldi2008].
@@ -62,7 +82,7 @@ A measure taken at any particular time in the ultrasound source can thus be rela
 
 [image of cross-correlation]: #
 
-# Calculation of dEGG
+## Calculation of dEGG and tracegram analysis
 
 Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
 The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
@@ -97,9 +117,7 @@ The algorithm then searches for dEGG maxima and minima within each glottal perio
 Finally, relative dEGG~max~ and dEGG~min~ are calculated as proportions of the respective glottal period.
 The resulting values are between 0 (beginning of period) and 1 (end of period).
 
-## dEGG tracegram analysis
-
-As the authors note, the wavegram technique has the limitation of not being suitable for quantitative analysis.
+As @herbst2010 note, the wavegram technique has the limitation of not being suitable for quantitative analysis.
 A new visualisation technique, based on wavegrams, is introduced here: electroglottographic tracegram.
 The tracegram method, even if it reduces the displayed dimensions, allows a statistical assessment of the varying dEGG~max~ and dEGG~min~, thus constituting a partial improvement over wavegrams.
 After the calculation of the relative dEGG~max~ and dEGG~min~, these values are  plotted in a graph on the *y* axis at each time point which corresponds to the beginning of a glottal period.
