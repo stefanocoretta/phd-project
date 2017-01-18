@@ -3,7 +3,7 @@ title: "A time-aligned account of lingual and laryngeal gestures using ultrasoun
 author: "Stefano Coretta"
 date: "14/01/2017"
 output:
-  pdf_document:
+  bookdown::pdf_document2:
     citation_package: natbib
     latex_engine: xelatex
     number_sections: yes
@@ -65,10 +65,11 @@ A TELEMED Echo Blaster 128 system is used for ultrasonography and a Glottal Ente
 The subject wears a headset (a metallic ..., not shown in \Cref{f:setup}) which holds the ultrasound probe in position (allowing free head movement by the subject) and a velcro strap with the EGG electrodes, located on each side of the thyroid cartilage, at the level of the glottis.
 The microphones are clipped to the headset on either side, at identical height.
 
-## Acquisition of ultrasound and EGG
+## Acquisition and post-processing of ultrasound and EGG
 
-Ultrasound and EGG inputs are acquired and recorded in separate laptops.
-
+Ultrasound and EGG inputs are acquired and recorded in separate laptops by means of, respectively, Articulate Assistant Advanced [AAA, ] and Praat [].
+Detection of tongue profile and calculation of velocity measures and consonantal target and release are automatically performed in AAA using built-in functions.
+EGG post-processing is described in \Cref{s:tracegram}.
 
 ## Ultrasound and EGG synchronisation
 
@@ -82,7 +83,7 @@ A measure taken at any particular time in the ultrasound source can thus be rela
 
 [image of cross-correlation]: #
 
-## Calculation of dEGG and tracegram analysis
+## Calculation of dEGG and tracegram analysis {#s:tracegram}
 
 Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
 The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
