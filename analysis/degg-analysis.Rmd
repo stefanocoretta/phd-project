@@ -24,7 +24,7 @@ Import all `degg-tracing` files in the `results` folder in the `degg` data frame
 ```{r import}
 degg <- list.files(path = "pilot/results",
                    pattern = "*-degg-tracing.csv",
-                   full.names = TRUE) %>% 
+                   full.names = TRUE) %>%
     map_df(~read_csv(.))
 
 stimuli <- read_csv("pilot/stimuli/nonce.csv")
@@ -64,7 +64,7 @@ predicted.degg$minimum.fit <- predict(minimum.model, predicted.degg, se = TRUE)$
 predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$se.fit
 ```
 
-Finally, we can plot the spredicted splines with 95% confidence levels for significance evaluation.
+Finally, we can plot the predicted splines with 95% confidence levels for significance evaluation.
 
 ```{r}
 ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
@@ -78,4 +78,3 @@ geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
                     fill = c2phonation ),alpha = 0.5,colour = "NA") +
     xlim(-0.1,-0.025) + ylim(0,1)
 ```
-

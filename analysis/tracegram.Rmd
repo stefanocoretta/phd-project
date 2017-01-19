@@ -43,7 +43,8 @@ ggplot(degg, aes(x = time, colour = sound)) +
 ```{r}
 ggplot(degg.contour, aes(x = time, colour = sound)) +
     geom_smooth(aes(y = maximum), size = 1, alpha = 0.2) +
-    geom_smooth(aes(y = minimum), size = 1, alpha = 0.2)
+    geom_smooth(aes(y = minimum), size = 1, alpha = 0.2) +
+    ylim(0, 1)
 ```
 
 We can now calculate the SSANOVA model for dEGG maxima and minima.
