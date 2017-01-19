@@ -7,6 +7,8 @@ output:
     citation_package: natbib
     latex_engine: xelatex
     number_sections: yes
+    toc: no
+    fig_caption: yes
 papersize: A4
 fontsize: 11pt
 mainfont: Brill
@@ -17,22 +19,34 @@ header-includes:
 - \usepackage{cleveref}
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_knit$set(root.dir=normalizePath("../"))
+library(readr)
+library(tidyr)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+theme_set(theme_bw())
+library(gss)
+```
+
 # Summary of achievements (Year 1 Term 1)
 
 * *Definition of a broad research question*
     * This research will focus on the relative timing between lingual gestures and the configuration of the glottis during speech. Articulatory data will be acquired through ultrasound tongue imaging (UTI) and electroglottography (EGG), which allow, respectively, tracking of tongue movements and calculation of the amount of contact between the vocal folds. These two techniques together will enable a time-aligned account of oral and laryngeal gestures.
 * *Training*
-    * I received training on the operation of the ultrasound and EGG machines, and on the Articulate Assistant Advanced software (used for the analysis of ultrasound data)
+    * I received training on the operation of the ultrasound and EGG machines, and on the Articulate Assistant Advanced software [used for the analysis of ultrasound data, @articulate2011].
 * *Definition of a range of hypotheses to be tested*
-    * I have established a series of research hypothesis that are undergoing assessment through an exploratory pilot experiment. Previous studies have shown that vowels followed by voiced consonants are usually longer than vowels followed by voiceless consonants \citep{house1953,chen1970,hussein1994,durvasula2012}. Several explanations for the voicing effect have been proposed in the literature, but none has been conclusive. A promising line of enquiry emerges from the proposal by \citet{chomsky1968}, who attribute the voicing effect to adjustments of the larynx when moving from a vowel to a consonant. This hypothesis, at that time just the product of a theory, can now be tested, thanks to recent advances in articulatory methods.
+    * I have established a series of research hypothesis that are undergoing assessment through an exploratory pilot experiment. Previous studies have shown that vowels followed by voiced consonants are usually longer than vowels followed by voiceless consonants \citep{house1953,chen1970,hussein1994,durvasula2012}. Several explanations for the voicing effect have been proposed in the literature, but none has been conclusive (for example, \citealt{belasco1953,chen1970,javkin1976,kluender1988}). A promising line of enquiry emerges from the proposal by \citet{chomsky1968}, who attribute the voicing effect to adjustments of the larynx when transitioning from a vowel to a consonant. This study will constitute a testing ground for this hypothesis.
 * *Application of Ethics Approval for experimental research*
     * I have applied for ethics approval and obtained clearance from the School Ethics Committee.
 * *Experimental design and pilot*
     * I ran a pilot study to test the methodology and explore possible variations in relative timing between oral and glottal gestures in different phonological conditions.
-    * A speaker of Polish and two speakers of Italian participated in the pilot. The subjects had to read sentences from a computer screen while being recorder. The sentences contained nonce words as target stimuli. The nonce words used in the experiment are shown in Table \@ref(tab:stimuli). The frame sentence was *Mówię \_\_\_ teraz* "Say \_\_\_ now" for polish, and *Dico \_\_\_ lentamente* "I say \_\_\_ slowly" for Italian. Audio, ultrasound (US) and electroglottographic (EGG) recordings were taken simultaneously. Synchronisation of the US and EGG recordings was achieved through cross-correlating the audio signals from those two sources.
+    * A speaker of Polish and two speakers of Italian participated in the pilot. The subjects had to read sentences from a computer screen while being recorded. The sentences contained nonce words as the target stimuli. The nonce words used in the experiment are shown in Table \@ref(tab:stimuli). The frame sentence was *Mówię \_\_\_ teraz* "Say \_\_\_ now" for Polish, and *Dico \_\_\_ lentamente* "I say \_\_\_ slowly" for Italian. Audio, ultrasound (US) and electroglottographic (EGG) recordings were taken simultaneously. Synchronisation of the US and EGG recordings was achieved through cross-correlating the audio signals from those two sources (see \Cref{s:sync}).
     * Due to technical issues, I could not collect EGG data for the Polish participant. I tested the analysis method on the data from one Italian speaker. The preliminary results show that, for the Italian speaker, the configuration of the glottis in vowels is affected by the phonation of the following consonants. This phenomenon is consistent with the idea that the differences in vowels in different consonantal contexts depend on the articulatory implementation of the vowel-to-consonant transition.
-* *Fund application*
-    * I have applied for a Small Grant by the Endangered Languages Documentation Project (ELDP). If successful, the grant will cover the costs of fieldwork activity in Italy, where I will collect data on Western Lombard. Western Lombard has been reported to show variation in vowel duration depending on the voicing of the following consonant. Interestingly, this language is of great importance to the understanding of this phenomenon, known as the voicing effect, due to an unusual phonological pattern of vowel duration, reported by @prieto2000. So far, research made on this matter has been based on older impressionistic descriptions of the phonology of the language [@sanga1988; @prieto2000; @torres-tamarit2015]. Fieldwork research will help assess the theoretical claims formulated in the literature and test them empirically.
+* *Funding application*
+    * I have applied for a Small Grant by the Endangered Languages Documentation Project (ELDP). If successful, the grant will cover the costs of fieldwork activity in Italy, where I will collect data on Italian and Western Lombard. Western Lombard has been reported to show variation in vowel duration depending on the voicing of the following consonant. Interestingly, this language is of great importance to the understanding of this phenomenon, known as the voicing effect, due to an unusual phonological pattern of vowel duration, reported by @prieto2000. So far, research made on this matter has been based on older impressionistic descriptions of the phonology of the language [@sanga1988; @prieto2000; @torres-tamarit2015]. Fieldwork research will help assess the theoretical claims formulated in the literature and test them empirically.
 
 Table: (\#tab:stimuli) Stimuli list (in broad IPA transcription)
 
@@ -45,9 +59,10 @@ Table: (\#tab:stimuli) Stimuli list (in broad IPA transcription)
 
 # Technical report
 
+Post-processing of audio data from both ultrasound and EGG has been developed in the Praat scripting language [@boersma2016].
+The following sections will describe the implementation of a method for the synchronisation of ultrasound and EGG sources (\Cref{s:sync}), and a technique for quantitative analysis of EGG data (\Cref{s:tracegram}).
 
-
-## Synchronisation of ultrasound and EGG signals
+## Synchronisation of ultrasound and EGG signals {#s:sync}
 
 Since the signals from the ultrasound machine and the EGG unit are recorded simultaneously but into two separate laptops, data from both sources need to be synchronised after acquisition.
 Synchronisation is achieved through the cross-correlation of the audio signals from both sources, using a methodology similar to that in @grimaldi2008.
@@ -59,7 +74,25 @@ A measure taken at any particular time in the ultrasound source can thus be rela
 
 ## Tracegram analysis {#s:tracegram}
 
-@herbst2010 describe a new technique, called electroglottographic wavegram, which displays the variations in the EGG or dEGG (first derivative of EGG) signals in a single graph.
+```{r import, include = FALSE}
+degg <- read_csv("tracegram/degg-tracing.csv")
+degg.all <- degg %>%
+    mutate_if(is.character, factor) %>%
+    mutate(sound = factor(sound, levels = c("modal", "breathy", "creaky1", "mod2bre", "mod2bre2mod")))
+
+degg <- filter(degg.all, sound != "creaky2" & sound != "mod2bre" & sound != "mod2bre2mod")
+degg.contour <- filter(degg.all, sound != "modal" & sound != "breathy" & sound != "creaky1")
+```
+
+```{r tracegram, include = TRUE, fig.width=5, fig.height=3, fig.cap="Tracegrams of a three tokens of [a] uttered with modal, breathy and creaky phonation (F~0~ 120 Hz). For each phonation type, the dEGG maximum is the lower line, while the dEGG minimum is the higher line."}
+ggplot(degg, aes(x = time, colour = sound)) +
+    geom_smooth(aes(y = maximum), size = 1, alpha = 0.2, se = FALSE) +
+    geom_smooth(aes(y = minimum), size = 1, alpha = 0.2, se = FALSE) +
+    ylim(0, 1) +
+    xlab("Time (sec)") + ylab("Glottal period proportion")
+```
+
+@herbst2010 describe a new technique, called electroglottographic wavegram, which displays the variations in the EGG or dEGG (EGG first derivative) signals in a single graph.
 A wavegram contains temporal information on the *x* and *y* axis, while changes in the vocal fold contact area (VFCA) are rendered as different colour intensities on the *z* axis.
 As the authors note, the wavegram technique has the limitation of not being suitable for quantitative analysis.
 A new visualisation technique, based on wavegrams, is introduced here: electroglottographic tracegram.
@@ -86,8 +119,14 @@ After derivation, the resulting dEGG is smoothed with the same method as before 
 The algorithm then searches for dEGG maxima and minima within each glottal period.
 Finally, relative dEGG~max~ and dEGG~min~ are calculated as proportions of the respective glottal period.
 The resulting values are between 0 (beginning of period) and 1 (end of period).
-
 After the calculation of the relative dEGG~max~ and dEGG~min~, these values are  plotted in a graph on the *y* axis at each time point which corresponds to the beginning of a glottal period.
 Since the values are restricted between 0 and 1 (being proportions), changes in glottal period (which corresponds to changes in fundamental frequency and hence pitch) are controlled for.
 The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
-Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA, @davidson2006).
+Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA [SSANOVA, @davidson2006].
+
+Figure \@ref(fig:tracegram) shows the tracegrams of three tokens of the vowel [a], uttered by the same speaker, at a stable fundamental frequency (F~0~) of 120 Hz.
+Each token differs in the type of phonation: modal, breathy, and creaky.
+The dEGG~max~ traces are located at different vertical values depending on phonation.
+dEGG~min~ traces for modal and breathy voice ideally overlap through their length, while the trace for creaky voice is lower.
+
+# References
