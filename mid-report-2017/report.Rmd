@@ -30,9 +30,10 @@ header-includes:
     * I have applied for ethics approval and obtained clearance from the School Ethics Committee.
 * Experimental design and pilot
     * I ran a pilot study to test the methodology and explore possible variations in relative timing between oral and glottal gestures in different phonological conditions.
-    * A speaker of Polish and two speakers of Italian participated in the pilot. The subjects had to read sentences from a computer screen while being recorder. The sentences containted nonce words as target stimuli. The nonce words used in the experiment are shown in Table \@ref(tab:stimuli). The frame sentence was *Mówię ... teraz* "Say ... now" for polish, and *Dico ... lentamente* "I say ... slowly" for Italian. Audio, ultrasound (US) and electroglottographic (EGG) recordings were taken simultaneously. Synchronisation of the US and EGG recordings was achieved through cross-correlating the audio signals from those two sources.
-    * Due to technical issues, I could not collect EGG data for the Polish participant. I tested the analysis method on the data from one Italian speaker. The preliminary results show that, for the Italian speaker, the configuration of the glottis in vowels is affected by the phonation of the following consonants. This phenomenon is consistent with...
-
+    * A speaker of Polish and two speakers of Italian participated in the pilot. The subjects had to read sentences from a computer screen while being recorder. The sentences containted nonce words as target stimuli. The nonce words used in the experiment are shown in Table \@ref(tab:stimuli). The frame sentence was *Mówię \_\_\_ teraz* "Say \_\_\_ now" for polish, and *Dico \_\_\_ lentamente* "I say \_\_\_ slowly" for Italian. Audio, ultrasound (US) and electroglottographic (EGG) recordings were taken simultaneously. Synchronisation of the US and EGG recordings was achieved through cross-correlating the audio signals from those two sources.
+    * Due to technical issues, I could not collect EGG data for the Polish participant. I tested the analysis method on the data from one Italian speaker. The preliminary results show that, for the Italian speaker, the configuration of the glottis in vowels is affected by the phonation of the following consonants. This phenomenon is consistent with the idea that the differences in vowels in different consonantal contexts depend on the articulatory implementation of the vowel-to-consonant transition.
+* Fund application
+    * I have applied for a Small Grant by the Endangered Languages Documentation Project (ELDP). If successful, the grant will cover the costs of fieldwork activity in Italy, where I will collect data on Italian.
 
 Table: (\#tab:stimuli) Stimuli list
 
@@ -42,3 +43,50 @@ Table: (\#tab:stimuli) Stimuli list
 | pada | bada | podo | bodo | pudu | budu |
 | paka | baka | poko | boko | puku | buku |
 | paga | baga | pogo | bogo | pugu | bugu |
+
+# Technical report
+
+## Synchronisation of ultrasound and EGG signals
+
+Since the signals from the ultrasound machine and the laryngograph are recorded simultaneously but into two separate laptop, data from both machines need to be synchronised after acquisition.
+Synchronisation is achieved through the cross-correlation of the audio signals from both sources [@grimaldi2008].
+The cross-correlation method creates a new sound file from two audio files.
+The created new file is a convolution of the original files.
+The time of the maximum amplitude in the convoluted sound wave is the amount of off-set between the two original files.
+The off-set is trimmed from the beginning of the longer audio file, with the result that the files will be in sync.
+A measure taken at any particular time in the ultrasound source can thus be related to a measure taken at that same time in the laryngograph source.
+
+## Calculation of dEGG and tracegram analysis {#s:tracegram}
+
+@herbst2010 describe a new technique, called electroglottographic wavegram, which displays the variations in the EGG and dEGG signals in a single graph.
+A wavegram contains temporal information on the *x* and *y* axis, while changes in the VFCA are rendered as different colour intensities on the *z* axis.
+
+The extraction of dEGG maxima and minima has been implemented in this study using the PRAAT scripting language.
+The algorithm consists of the following stages:
+
+1. detection of the glottal periods
+1. calculation of the dEGG
+1. extraction of absolute dEGG maximum (dEGG~max~) and minimum (dEGG~min~) for each glottal period
+1. calculation of dEGG~max~ and dEGG~min~ relative to the glottal period
+
+It is conventional to define a glottal period as the time between two consecutive moments of glottal closure, i.e. two consecutive dEGG maxima.
+However, since the maxima need to be identified in the first place, an arbitrary definition of glottal period is instead used.
+Glottal periods correspond to the intervals between two consecutive EGG minima [cf. ...].
+First, the EGG signal is band-pass filtered (40Hz-10KHz) and smoothing is applied.
+A weighted sliding-average smoothing method (triangular smooth) is used, with smooth width *m* = 11.
+EGG minima are thus extracted from the smoothed EGG signal.
+The interval between any two consecutive minima constitutes a glottal period.
+
+The dEGG is calculated with the formula $x_n' =  x_{n+1} - x_n$, where $x_n$ is the value of the EGG signal at the time n.
+After calculation, the resulting dEGG is smoothed with the same method as before (triangular smooth, *m* = 11).
+The algorithm then searches for dEGG maxima and minima within each glottal period (defined as two consecutive EGG minima).
+Finally, relative dEGG~max~ and dEGG~min~ are calculated as proportions of the respective glottal period.
+The resulting values are between 0 (beginning of period) and 1 (end of period).
+
+As @herbst2010 note, the wavegram technique has the limitation of not being suitable for quantitative analysis.
+A new visualisation technique, based on wavegrams, is introduced here: electroglottographic tracegram.
+The tracegram method, even if it reduces the displayed dimensions, allows a statistical assessment of the varying dEGG~max~ and dEGG~min~, thus constituting a partial improvement over wavegrams.
+After the calculation of the relative dEGG~max~ and dEGG~min~, these values are  plotted in a graph on the *y* axis at each time point which corresponds to the beginning of a glottal period.
+Since the values are restricted between 0 and 1 (being proportions), changes in glottal period (which corresponds to changes in fundamental frequency and hence pitch) are controlled for.
+The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
+Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
