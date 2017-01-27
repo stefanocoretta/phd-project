@@ -4,7 +4,7 @@
 
 1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID) as [ID]-00n.wav
 1. **Force alignment and search area**
-   1. Run `alingment_input.praat`: the output is a concatenanted `.wav` file and a `.txt` file listing the stimuli
+   1. Run `alingment_input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli
    1. Run SPPAS on concatenated `.wav` and `.txt`
    1. Run `separate_alignment.praat`: the output is TextGrid files for each `AAA` `.wav` file
    1. Import TextGrids back in `AAA`
