@@ -63,7 +63,7 @@ The following code applies tidy formatting to the data frame. It uses functions 
 
 ```{r tidy}
 splines <- raw.data %>%
-    gather(spline, coordinate, X_1:Y_42) %>%
+    gather(spline, coordinate, matches("[XY]_")) %>%
     separate(spline, c("axis", "fan"), convert = TRUE) %>%
     spread(axis, coordinate) %>%
     mutate(word = as.factor(word(prompt, 2))) %>%
