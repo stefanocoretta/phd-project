@@ -22,10 +22,10 @@ rsync -avz --no-whole-file --exclude '*.DS_Store' \
 # Backup
 
 ## Push to external HD
-rsync -anv --no-whole-file --exclude '*.DS_Store' \
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Multimedia/phd-project/
-rsync -avz --no-whole-file --exclude '*.DS_Store' \
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Multimedia/phd-project/
 
