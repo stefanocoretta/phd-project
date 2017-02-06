@@ -4,7 +4,7 @@ This file contains the documentation of the scripts in the `analysis/scripts` fo
 
 ## Prepare files for force alignment in SPPAS
 
-### alignment_input.praat
+### alignment-input.praat
 ```praat
 <<<get audio>>>
 
@@ -81,7 +81,7 @@ Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 
 ## Extract the search area for spline batch processing and kinematics in `AAA`
 
-### search_area.praat
+### search-area.praat
 ```praat
 <<<get alignment>>>
 
@@ -188,7 +188,7 @@ endfor
 
 The following chunk calls the header of the script, which is defined at the end of the documentation, the padding function, and the main function.
 
-### sync_egg.praat
+### sync-egg.praat
 ```praat
 <<<sync header>>>
 
@@ -421,7 +421,7 @@ endfor
 
 This script calculates the voiced and voiceless portions (VUV) in the synchronised EGG files based on the EGG signal.
 
-### extract_vuv.praat
+### extract-vuv.praat
 ```praat
 <<<get synced egg>>>
 
@@ -490,7 +490,7 @@ endif
 ### "sync header"
 ```praat
 ######################################
-# sync_egg.praat v1.0.0
+# sync-egg.praat v1.0.0
 ######################################
 # MIT License
 #
