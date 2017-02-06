@@ -5,7 +5,7 @@ endform
 
 directory_speaker$ = "../../'project$'/data/derived/ultrasound/'speaker$'"
 directory_audio$ = "'directory_speaker$'/audio"
-createDirectory ("'directory$'/alignment")
+createDirectory ("'directory_speaker$'/alignment")
 directory_alignment$ = "'directory_speaker$'/alignment"
 writeFile: "'directory_alignment$'/'speaker$'.txt", ""
 
@@ -47,4 +47,4 @@ Save as WAV file: "'directory_alignment$'/'speaker$'.wav"
 selectObject: "TextGrid chain"
 Copy: "filenames"
 Remove tier: 1
-Save as text file: "'directory_alignment$'/filenames.TextGrid"
+Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"

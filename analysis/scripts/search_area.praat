@@ -38,12 +38,8 @@ for interval to intervals
             ultrasound = Get interval at time: 4, start_ultrasound
             Set interval text: 4, ultrasound, "ultrasound"
 
-            start_kinematics_1 = Get start point: 1, interval + 3
-            start_kinematics_2 = Get end point: 1, interval + 3
-            start_kinematics = start_kinematics_1 + ((start_kinematics_2 - start_kinematics_1) / 2)
-            end_kinematics_1 = Get start point: 1, interval + 5
-            end_kinematics_2 = Get end point: 1, interval + 5
-            end_kinematics = end_kinematics_1 + ((end_kinematics_2 - end_kinematics_1) / 2)
+            start_kinematics = Get start point: 1, interval + 3
+            end_kinematics = Get start point: 1, interval + 6
             Insert boundary: 5, start_kinematics
             Insert boundary: 5, end_kinematics
             kinematics = Get interval at time: 5, start_kinematics

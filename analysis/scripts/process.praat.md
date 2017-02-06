@@ -24,7 +24,7 @@ endform
 
 directory_speaker$ = "../../'project$'/data/derived/ultrasound/'speaker$'"
 directory_audio$ = "'directory_speaker$'/audio"
-createDirectory ("'directory$'/alignment")
+createDirectory ("'directory_speaker$'/alignment")
 directory_alignment$ = "'directory_speaker$'/alignment"
 writeFile: "'directory_alignment$'/'speaker$'.txt", ""
 
@@ -76,7 +76,7 @@ Save as WAV file: "'directory_alignment$'/'speaker$'.wav"
 selectObject: "TextGrid chain"
 Copy: "filenames"
 Remove tier: 1
-Save as text file: "'directory_alignment$'/filenames.TextGrid"
+Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 ```
 
 ## Extract the search area for spline batch processing and kinematics in `AAA`
@@ -139,12 +139,8 @@ for interval to intervals
             ultrasound = Get interval at time: 4, start_ultrasound
             Set interval text: 4, ultrasound, "ultrasound"
 
-            start_kinematics_1 = Get start point: 1, interval + 3
-            start_kinematics_2 = Get end point: 1, interval + 3
-            start_kinematics = start_kinematics_1 + ((start_kinematics_2 - start_kinematics_1) / 2)
-            end_kinematics_1 = Get start point: 1, interval + 5
-            end_kinematics_2 = Get end point: 1, interval + 5
-            end_kinematics = end_kinematics_1 + ((end_kinematics_2 - end_kinematics_1) / 2)
+            start_kinematics = Get start point: 1, interval + 3
+            end_kinematics = Get start point: 1, interval + 6
             Insert boundary: 5, start_kinematics
             Insert boundary: 5, end_kinematics
             kinematics = Get interval at time: 5, start_kinematics
