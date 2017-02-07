@@ -3,10 +3,10 @@
 # Share
 
 ## Push to share
-rsync -anv --no-whole-file --exclude '*.DS_Store' \
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Phonology/Common/
-rsync -avz --no-whole-file --exclude '*.DS_Store' \
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Phonology/Common/
 
