@@ -315,6 +315,7 @@ selectObject: "Sound chain_ch2"
 
 To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
 intervals = Get number of intervals: 1
+Insert interval tier: 2, "new"
 
 ```
 
@@ -327,13 +328,18 @@ for interval from 1 to intervals
     if label$ == "speech"
         start = Get starting point: 1, interval
         end = Get end point: 1, interval
-        Insert boundary: 1, start - 1.5
-        Insert boundary: 1, end + 1
-        Remove left boundary: 1, interval + 1
-        Remove right boundary: 1, interval
+        Insert boundary: 2, start - 1.5
+        Insert boundary: 2, end + 1
     endif
 endfor
 
+for interval from 1 to intervals
+	if interval mod 2 == 0
+		Set interval text: 2, interval, "speech"
+	endif
+endfor
+
+Remove tier: 1
 ```
 
 We can now get the number of intervals of the updated TextGrid and set the counter `index` to 1. The counter is used to read the ultrasound audio files, and in the names of the output files (it is feeded to the `zeroPadding` procedure to create sortable file names).
@@ -352,7 +358,7 @@ For every interval in the TextGrid it is checked if the label is `speechsilence`
 ```praat
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
-    if label$ == "speechsilence"
+    if label$ == "speech"
         start = Get starting point: 1, interval
         end = Get end point: 1, interval
 
@@ -384,7 +390,7 @@ The extracted portion from the EGG audio channel is added to the selection. The 
 ```praat
         plusObject: "Sound chain_ch1_22050_part"
 
-        Cross-correlate: "peak 0.99", "zero"
+        crosscorrelated = Cross-correlate: "peak 0.99", "zero"
         offset = Get time of maximum: 0, 0, "Sinc70"
 
 ```
@@ -408,7 +414,7 @@ If the debugging mode is off, all the intermediate files are removed. Otherwise 
 ```praat
         if debug_mode == 0
             removeObject: "Sound chain_ch1_22050_part", "Sound " + file_us_name$,
-            ..."Sound chain_ch1_22050_part_" + file_us_name$, "Sound chain_part"
+            ...crosscorrelated, "Sound chain_part"
         endif
 
         index += 1

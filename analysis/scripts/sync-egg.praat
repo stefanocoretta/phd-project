@@ -99,26 +99,32 @@ selectObject: "Sound chain_ch2"
 
 To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
 intervals = Get number of intervals: 1
+Insert interval tier: 2, "new"
 
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
     if label$ == "speech"
         start = Get starting point: 1, interval
         end = Get end point: 1, interval
-        Insert boundary: 1, start - 1.5
-        Insert boundary: 1, end + 1
-        Remove left boundary: 1, interval + 1
-        Remove right boundary: 1, interval
+        Insert boundary: 2, start - 1.5
+        Insert boundary: 2, end + 1
     endif
 endfor
 
+for interval from 1 to intervals
+	if interval mod 2 == 0
+		Set interval text: 2, interval, "speech"
+	endif
+endfor
+
+Remove tier: 1
 intervals = Get number of intervals: 1
 
 index = 1
 
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
-    if label$ == "speechsilence"
+    if label$ == "speech"
         start = Get starting point: 1, interval
         end = Get end point: 1, interval
 
@@ -132,7 +138,7 @@ for interval from 1 to intervals
 
         plusObject: "Sound chain_ch1_22050_part"
 
-        Cross-correlate: "peak 0.99", "zero"
+        crosscorrelated = Cross-correlate: "peak 0.99", "zero"
         offset = Get time of maximum: 0, 0, "Sinc70"
 
         selectObject: "Sound chain"
@@ -144,7 +150,7 @@ for interval from 1 to intervals
 
         if debug_mode == 0
             removeObject: "Sound chain_ch1_22050_part", "Sound " + file_us_name$,
-            ..."Sound chain_ch1_22050_part_" + file_us_name$, "Sound chain_part"
+            ...crosscorrelated, "Sound chain_part"
         endif
 
         index += 1
