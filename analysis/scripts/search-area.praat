@@ -8,9 +8,9 @@ endform
 if language$ == "it"
     label_lang$ = "k"
     label_2_lang$ = "dico"
-elif language == "pl"
+elif language$ == "pl"
     label_lang$ = "j"
-    label_2_lang$ = "móvię"
+    label_2_lang$ = "mówię"
 else
     exit "The language you selected is not valid"
 endif
