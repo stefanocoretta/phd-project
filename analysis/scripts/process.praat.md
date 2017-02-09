@@ -186,39 +186,13 @@ endfor
 
 ## Synchronise EGG data with `AAA` audio data
 
-The following chunk calls the header of the script, which is defined at the end of the documentation, the padding function, and the main function.
+The following chunk calls the header of the script, which is defined at the end of the documentation, and the main function.
 
 ### sync-egg.praat
 ```praat
 <<<sync header>>>
 
-<<<padding>>>
-
 <<<sync function>>>
-```
-
-The following code creates a procedure called zeroPadding. The code is by Daniel Riggs and can be found at http://praatscriptingtutorial.com/procedures. The procedure allows automatic zero padding in file names with numeric indexes. For example: `Sound001.wav`, `Sound002.wav`, ..., `Sound010.wav`, ..., `Sound100.wav`.
-
-### "padding"
-```praat
-procedure zeroPadding: .num, .numZeros
-    .highestVal = 10 ^ .numZeros
-
-    .num$ = string$: .num
-    .numLen = length: .num$
-
-    .numToAdd = .numZeros - .numLen
-
-    .zeroPrefix$ = ""
-    if .numToAdd > 0
-        for i from 1 to .numToAdd
-            .zeroPrefix$ = .zeroPrefix$ + "0"
-        endfor
-    endif
-
-    .return$ = .zeroPrefix$ + .num$
-endproc
-
 ```
 
 The script works by selecting all the files in the Object window after loading files.
@@ -342,7 +316,7 @@ endfor
 Remove tier: 1
 ```
 
-We can now get the number of intervals of the updated TextGrid and set the counter `index` to 1. The counter is used to read the ultrasound audio files, and in the names of the output files (it is feeded to the `zeroPadding` procedure to create sortable file names).
+We can now get the number of intervals of the updated TextGrid and set the counter `index` to 1. The counter is used to read the ultrasound audio files, and in the names of the output files.
 
 ### "sync"+=
 ```praat
@@ -403,8 +377,7 @@ The concatenated stereo sound (or the recombined stereo if the `invert egg signa
 
         start = start - offset
         Extract part: start, end, "rectangular", 1, "no"
-        @zeroPadding: index, 3
-        Save as WAV file: "'out_directory$'/'speaker$'/'speaker$'-'zeroPadding.return$'.wav"
+        Save as WAV file: "'out_directory$'/'speaker$'/'file_us_name$'.wav"
 
 ```
 
@@ -531,8 +504,5 @@ endif
 #     - .wav mono files exported from AAA, saved in a separate folder
 # Output: - .wav stereo files (ch1 = audio, ch2 = EGG) whose start time is
 # synced with the start time of the correspondet AAA file
-#
-# The zeroPadding procedure code is by Daniel Riggs and can be found at
-# <http://praatscriptingtutorial.com/procedures>.
 ######################################
 ```

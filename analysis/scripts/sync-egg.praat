@@ -34,29 +34,7 @@
 #     - .wav mono files exported from AAA, saved in a separate folder
 # Output: - .wav stereo files (ch1 = audio, ch2 = EGG) whose start time is
 # synced with the start time of the correspondet AAA file
-#
-# The zeroPadding procedure code is by Daniel Riggs and can be found at
-# <http://praatscriptingtutorial.com/procedures>.
 ######################################
-
-procedure zeroPadding: .num, .numZeros
-    .highestVal = 10 ^ .numZeros
-
-    .num$ = string$: .num
-    .numLen = length: .num$
-
-    .numToAdd = .numZeros - .numLen
-
-    .zeroPrefix$ = ""
-    if .numToAdd > 0
-        for i from 1 to .numToAdd
-            .zeroPrefix$ = .zeroPrefix$ + "0"
-        endfor
-    endif
-
-    .return$ = .zeroPrefix$ + .num$
-endproc
-
 
 select all
 number_selected = numberOfSelected ()
@@ -145,8 +123,7 @@ for interval from 1 to intervals
 
         start = start - offset
         Extract part: start, end, "rectangular", 1, "no"
-        @zeroPadding: index, 3
-        Save as WAV file: "'out_directory$'/'speaker$'/'speaker$'-'zeroPadding.return$'.wav"
+        Save as WAV file: "'out_directory$'/'speaker$'/'file_us_name$'.wav"
 
         if debug_mode == 0
             removeObject: "Sound chain_ch1_22050_part", "Sound " + file_us_name$,
