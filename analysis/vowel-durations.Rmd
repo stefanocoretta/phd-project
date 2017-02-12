@@ -1,0 +1,16 @@
+---
+title: "Vowel duration"
+author: "Stefano Coretta"
+date: "12/02/2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../"))
+library(lme4)
+library(effects)
+library(ggplot2)
+theme_set(theme_bw())
+```
+
