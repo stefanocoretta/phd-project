@@ -41,4 +41,4 @@ for interval to intervals
     endif
 endfor
 
-removeObject: paling
+removeObject: palign
