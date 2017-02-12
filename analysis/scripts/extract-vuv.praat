@@ -16,13 +16,13 @@ for file from 1 to files
     filename$ = selected$("Sound")
 
     Extract one channel: 2
-    
+
     To PointProcess (periodic, cc): 75, 600
-    
+
     To TextGrid (vuv): 0.02, 0.001
 
     Write to text file: "'directory$'/'speaker$'/'filename$'-vuv.TextGrid"
-    
+
     if debug_mode == 0
         removeObject: "Sound " + filename$, "Sound " + filename$ + "_ch2",
         ..."PointProcess " + filename$ + "_ch2", "TextGrid " + filename$ + "_ch2"
