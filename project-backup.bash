@@ -31,18 +31,16 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 
 ## Pull data folder from external HD
 
-### Pilot
-rsync -anv --no-whole-file --exclude '*.DS_Store' \
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/pilot/data/ \
     ~/Documents/GitHub/phd-project/pilot/data
-rsync -avz --no-whole-file --exclude '*.DS_Store' \
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/phd-project/tracegram/data/ \
+    ~/Documents/GitHub/phd-project/tracegram/data
+
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/pilot/data/ \
     ~/Documents/GitHub/phd-project/pilot/data/
-
-### Tracegram
-rsync -anv --no-whole-file --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/pilot/data/ \
-    ~/Documents/GitHub/phd-project/tracegram/data
-rsync -avz --no-whole-file --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/pilot/data/ \
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/phd-project/tracegram/data/ \
     ~/Documents/GitHub/phd-project/tracegram/data/
