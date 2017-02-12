@@ -1,22 +1,33 @@
-form Select folder with files
-    text directory /Volumes/humrss$/Common/data/pilot/ultrasound/SC01/audio/alignment
-    text speaker SC
+form Get vowel duration
+    word project pilot
+    word speaker SC01
+    comment Supported languages: it, pl
+    word language pl
 endform
 
-result_file$ = "'directory$'/vowel-durations.csv"
+if language$ == "it"
+    label_lang$ = "dico"
+elif language$ == "pl"
+    label_lang$ = "mówię"
+else
+    exit "The language you selected is not valid"
+endif
+
+directory$ = "../../'project$'/data/derived/ultrasound/'speaker$'/alignment"
+
+result_file$ = "../../'project$'/results/'speaker$'-vowel-durations.csv"
 
 header$ = "index,word,duration"
-writeFileLine: "'result_file$'", "'header$'"
+writeFileLine: result_file$, header$
 
-Read from file: "'directory$'/'speaker$'.wav"
-Read from file: "'directory$'/'speaker$'-manual.TextGrid"
+palign = Read from file: "'directory$'/'speaker$'-palign.TextGrid"
 
 intervals = Get number of intervals: 2
 index = 0
 
 for interval to intervals
     label$ = Get label of interval: 2, interval
-    if label$ == "dico"
+    if label$ == label_lang$
         index += 1
         word$ = Get label of interval: 2, interval + 1
         start_target = Get starting point: 2, interval + 1
@@ -30,5 +41,4 @@ for interval to intervals
     endif
 endfor
 
-select all
-Remove
+removeObject: paling
