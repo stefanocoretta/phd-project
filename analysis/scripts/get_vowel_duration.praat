@@ -2,7 +2,7 @@ form Get vowel duration
     word project pilot
     word speaker SC01
     comment Supported languages: it, pl
-    word language pl
+    word language it
 endform
 
 if language$ == "it"
