@@ -28,14 +28,12 @@ first.columns <- c(
     "rec.date",
     "prompt",
     "label",
-    "TD.displacement",
-    "TT.displacement",
-    "TD.displacement.sm",
-    "TD.velocity",
-    "TD.velocity.abs",
     "TT.displacement.sm",
     "TT.velocity",
-    "TT.velocity.abs"
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
     )
 columns <- c(first.columns,
              paste0(rep(c("X", "Y"), num.splines),
@@ -81,14 +79,14 @@ ggplot(splines, aes(x = X, y = Y, group = word, colour = c2place)) +
 ```
 
 ```{r velar, eval=FALSE, include=FALSE}
-filter(splines, label == "target_TD") %>%
+filter(splines, label == "max_TD") %>%
 ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     geom_smooth(method = "loess") +
     coord_fixed(ratio = 1)
 ```
 
 ```{r coronal, eval=FALSE, include=FALSE}
-filter(splines, label == "target_TT") %>%
+filter(splines, label == "max_TT") %>%
 ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     geom_smooth(method = "loess") +
     coord_fixed(ratio = 1)
@@ -148,15 +146,14 @@ cons.gestures <- raw.data %>%
     select(subject:label) %>%
     separate(label, c("gesture", "tongue.area")) %>%
     spread(gesture, seconds) %>%
-    select(subject:tongue.area, target, max, release) %>%
-    mutate(closure = (release - target) * 1000) %>%
+    select(subject:tongue.area, GONS, NONS, max, NOFF, GOFF) %>%
     mutate(word = as.factor(word(prompt, 2))) %>%
     left_join(y = stimuli)
 ```
 
 Let's plot closure duration as a function of place of articulation and voicing of C2 (our target consonant in C1VC2V words).
 
-```{r closure-duration}
+```{r closure-duration, eval = FALSE}
 ggplot(cons.gestures, aes(c2phonation, closure)) +
     facet_grid(.~c2place) +
     geom_violin() +
