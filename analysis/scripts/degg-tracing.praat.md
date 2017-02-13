@@ -1,6 +1,6 @@
 
 
-#### degg_tracing.praat
+#### degg-tracing.praat
 ```praat
 <<<smoothing>>>
 
