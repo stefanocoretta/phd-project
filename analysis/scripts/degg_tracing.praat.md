@@ -58,12 +58,15 @@ for file to files
 if tiers == 4
     start = Get starting point: 3, 2
     end = Get end point: 3, 2
-    label$ = Get label of point: 4, 1
-    if label$ == "target_TD" or label$ == "target_TT"
-        target = Get time of point: 4, 1
-    else
-        target = undefined
-    endif
+    us_points = Get number of points: 4
+    for point to us_points
+        label$ = Get label of point: 4, point
+        if label$ == "max_TD" or label$ == "max_TT"
+            max = Get time of point: 4, point
+        else
+            max = undefined
+        endif
+    endfor
 
     selectObject: "Sound 'filename$'_ch2"
     Extract part: start, end, "rectangular", 1, "yes"
@@ -145,7 +148,7 @@ for point to egg_points - 2
         degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
         degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
 
-        time = egg_minimum_1 - target
+        time = egg_minimum_1 - max
 
         if time == undefined
         elif time < 0

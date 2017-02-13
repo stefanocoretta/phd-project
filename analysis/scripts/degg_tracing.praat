@@ -27,7 +27,7 @@ endform
 directory$ = "../../'project$'/data/derived/egg/'speaker$'"
 directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/annotations"
 
-result_file$ = "../../'project$'/results/'speaker$'_degg_tracing.csv"
+result_file$ = "../../'project$'/results/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,word,time,maximum,minimum,position"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -51,12 +51,15 @@ for file to files
 if tiers == 4
     start = Get starting point: 3, 2
     end = Get end point: 3, 2
-    label$ = Get label of point: 4, 1
-    if label$ == "target_TD" or label$ == "target_TT"
-        target = Get time of point: 4, 1
-    else
-        target = undefined
-    endif
+    us_points = Get number of points: 4
+    for point to us_points
+        label$ = Get label of point: 4, point
+        if label$ == "max_TD" or label$ == "max_TT"
+            max = Get time of point: 4, point
+        else
+            max = undefined
+        endif
+    endfor
 
     selectObject: "Sound 'filename$'_ch2"
     Extract part: start, end, "rectangular", 1, "yes"
@@ -93,13 +96,17 @@ if tiers == 4
             degg_maximum_point_1 = Get nearest index: egg_minimum_1
             degg_maximum = Get time from index: degg_maximum_point_1
     
+            if degg_maximum <= egg_minimum_1
+                degg_maximum = Get time from index: degg_maximum_point_1 + 1
+            endif
+    
             selectObject: "Sound degg_smooth"
             degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
     
             degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
             degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
     
-            time = egg_minimum_1 - target
+            time = egg_minimum_1 - max
     
             if time == undefined
             elif time < 0
