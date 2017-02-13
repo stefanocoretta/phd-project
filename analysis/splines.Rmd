@@ -94,11 +94,11 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
 
 ## SSANOVA
 ```{r ssanova}
-splines.cor <- filter(splines, label == "target_TT")
+splines.cor <- filter(splines, label == "max_TT")
 splines.cor.model <- ssanova(Y ~ c2phonation + X + c2phonation:X,
                              data = splines.cor)
 
-splines.vel <- filter(splines, label == "target_TD")
+splines.vel <- filter(splines, label == "max_TD")
 splines.vel.model <- ssanova(Y ~ c2phonation + X + c2phonation:X,
                              data = splines.vel)
 
