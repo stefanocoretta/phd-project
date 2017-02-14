@@ -36,15 +36,15 @@ degg <- filter(degg, speaker == "PS02")
 
 Let's first have a look at the tracegrams.
 
-```{r}
-ggplot(degg, aes(x = time, y = maximum, colour = c2phonation)) +
-    geom_smooth(size = 0.5, alpha = 0.2) +
-    xlim(0, 1)
+```{r tracegram}
+ggplot(degg, aes(x = time, colour = c2phonation)) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2)
 ```
 
 We can now calculate the SSANOVA model for dEGG maxima and minima.
 
-```{r }
+```{r ssanova}
 maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
 data = degg)
 
@@ -54,7 +54,7 @@ data = degg)
 
 And calculate the predicted splines based on the SSANOVA models.
 
-```{r }
+```{r predict}
 predicted.degg <- expand.grid(time = seq(min(degg$time), max(degg$time), length = 100),
                     c2phonation = c("voiced", "voiceless"))
 
@@ -66,7 +66,7 @@ predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$s
 
 Finally, we can plot the predicted splines with 95% confidence levels for significance evaluation.
 
-```{r}
+```{r ssanova-plot}
 ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
 geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
 geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
