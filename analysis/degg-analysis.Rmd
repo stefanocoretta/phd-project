@@ -29,17 +29,17 @@ degg <- list.files(path = "pilot/results",
 
 stimuli <- read_csv("pilot/stimuli/nonce.csv")
 
-degg <- left_join(degg, stimuli, by = c("word" = "orth"))
+degg <- left_join(degg, stimuli, by = c("word" = "word"))
 degg <- degg %>% mutate_if(is.character, factor)
-degg <- filter(degg, position == "before")
-degg <- filter(degg, speaker == "SC01")
+degg <- filter(degg, speaker == "PS02")
 ```
 
 Let's first have a look at the tracegrams.
 
 ```{r}
 ggplot(degg, aes(x = time, y = maximum, colour = c2phonation)) +
-    geom_smooth(size = 0.5, alpha = 0.2)
+    geom_smooth(size = 0.5, alpha = 0.2) +
+    xlim(0, 1)
 ```
 
 We can now calculate the SSANOVA model for dEGG maxima and minima.
@@ -75,6 +75,5 @@ geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
 geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
                     ymax = minimum.fit+(1.96*minimum.SE),
-                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
-    xlim(-0.1,-0.025) + ylim(0,1)
+                    fill = c2phonation ),alpha = 0.5,colour = "NA")
 ```
