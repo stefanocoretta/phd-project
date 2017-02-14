@@ -500,10 +500,10 @@ form dEGG tracing
 endform
 
 directory$ = "../../'project$'/data/derived/egg/'speaker$'"
-directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/annotations"
+directory_textgrid$ = "../../'project$'/data/derived/ultrasound/'speaker$'/audio"
 
 result_file$ = "../../'project$'/results/'speaker$'-degg-tracing.csv"
-header$ = "speaker,file,word,time,maximum,minimum,position"
+header$ = "speaker,file,word,abs.time,time,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
 Create Strings as file list: "filelist", "'directory$'/*.wav"
@@ -511,7 +511,7 @@ files = Get number of strings
 ```
 
 For each file, extract both channels.
-Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/annotations` and get the starting and end point of the `kinematics` interval.
+Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/audio` and get the starting and end point of the `vowel` interval.
 Now, we can extract the same interval from channel 2 of the EGG file.
 Rename the ectracted part as `egg`, and execute the main function, which extracts the dEGG trace.
 
@@ -529,27 +529,15 @@ for file to files
     Read separate channels from sound file: "'directory$'/'file$'"
 
     Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
-    tiers = Get number of tiers
 
-if tiers == 4
     start = Get starting point: 3, 2
     end = Get end point: 3, 2
-    us_points = Get number of points: 4
-    for point to us_points
-        label$ = Get label of point: 4, point
-        if label$ == "max_TD" or label$ == "max_TT"
-            max = Get time of point: 4, point
-        else
-            max = undefined
-        endif
-    endfor
 
     selectObject: "Sound 'filename$'_ch2"
     Extract part: start, end, "rectangular", 1, "yes"
     Rename: "egg"
 
     <<<main function>>>
-endif
 endfor
 ```
 
@@ -624,21 +612,12 @@ for point to egg_points - 2
         degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
         degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
 
-        time = egg_minimum_1 - max
+        time = (egg_minimum_1 - start) / (end - start)
 
-        if time == undefined
-        elif time < 0
-            position$ = "before"
-        elif time > 0
-            position$ = "after"
-        endif
+        result_line$ = "'speaker$','filename$','stimulus$','egg_minimum_1',
+            ...'time','degg_maximum_rel','degg_minimum_rel'"
 
-        if time != undefined
-            result_line$ = "'speaker$','filename$','stimulus$','time',
-                ...'degg_maximum_rel','degg_minimum_rel','position$'"
-
-            appendFileLine: "'result_file$'", "'result_line$'"
-        endif
+        appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
 ```
