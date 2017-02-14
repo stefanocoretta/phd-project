@@ -24,7 +24,7 @@ intervals = Get number of intervals: 1
 
 Insert interval tier: 4, "ultrasound"
 Insert interval tier: 5, "kinematics"
-Insert point tier: 6, "closure"
+Insert interval tier: 6, "vowel"
 
 for interval to intervals
     label$ = Get label of interval: 1, interval
@@ -46,8 +46,13 @@ for interval to intervals
             kinematics = Get interval at time: 5, start_kinematics
             Set interval text: 5, kinematics, "kinematics"
 
-            closure = Get end time of interval: 1, interval + 3
-            Insert point: 6, closure, "closure"
+            start_vowel = Get start time of interval: 1, interval + 3
+            end_vowel = Get end time of interval: 1, interval + 3
+            vowel$ = Get label of interval: 1, interval + 3
+            Insert boundary: 6, start_vowel
+            Insert boundary: 6, end_vowel
+            vowel_interval = Get interval at time: 6, start_vowel
+            Set interval text: 6, vowel_interval, vowel$
         endif
     endif
 endfor
@@ -59,12 +64,13 @@ Remove tier: 1
 Save as text file: "'directory_alignment$'/search.TextGrid"
 
 filenames = Read from file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
-filenames_tier = 3
 
 selectObject: palign
 plusObject: filenames
 
 Merge
+
+filenames_tier = 4
 
 intervals = Get number of intervals: filenames_tier
 
