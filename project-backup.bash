@@ -11,10 +11,10 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Phonology/Common/
 
 ## Pull from share
-rsync -anv --no-whole-file --exclude '*.DS_Store' \
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Phonology/Common/ \
     ~/Documents/GitHub/phd-project/
-rsync -avz --no-whole-file --exclude '*.DS_Store' \
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Phonology/Common/ \
     ~/Documents/GitHub/phd-project/
 
