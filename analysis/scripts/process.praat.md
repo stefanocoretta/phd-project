@@ -314,13 +314,9 @@ for interval from 1 to intervals
         end = Get end point: 1, interval
         Insert boundary: 2, start - 1.5
         Insert boundary: 2, end + 1
+        new_interval = Get interval at time: 2, start
+        Set interval text: 2, new_interval, "speech"
     endif
-endfor
-
-for interval from 1 to intervals
-	if interval mod 2 == 0
-		Set interval text: 2, interval, "speech"
-	endif
 endfor
 
 Remove tier: 1
