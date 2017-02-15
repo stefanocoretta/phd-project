@@ -25,7 +25,7 @@ vowels <- list.files(path = "pilot/results",
 
 words <- read.csv("./pilot/stimuli/nonce.csv")
 
-results <- left_join(vowels, words) %>%
+results <- left_join(vowels, words, by = c("word" = "orth")) %>%
     mutate(word = as.factor(word))
 ```
 
