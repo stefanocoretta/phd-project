@@ -51,8 +51,8 @@ summary(model)
 ```{r}
 ggplot(italian, aes(c1phonation, duration)) +
     facet_grid(. ~ vowel + c2place) +
-    geom_violin(draw_quantiles = 0.5) +
-    geom_boxplot(width=0.1)
+    geom_violin() +
+    geom_boxplot(width=0.2)
 
 ggplot(italian, aes(c1phonation, duration)) +
     geom_boxplot()
