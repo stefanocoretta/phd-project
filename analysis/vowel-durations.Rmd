@@ -29,7 +29,8 @@ vowels_raw <- list.files(path = "pilot/results",
 words <- read.csv("./pilot/stimuli/nonce.csv")
 
 vowels <- left_join(vowels_raw, words, by = c("word" = "orth")) %>%
-    mutate(word = as.factor(word))
+    mutate(word = as.factor(word)) %>%
+    mutate(duration.norm = (duration - mean(duration)) / sd(duration))
 ```
 
 Perform a mixed effect linear model for Italian.
@@ -50,7 +51,7 @@ summary(model)
 
 ```{r}
 ggplot(italian, aes(c1phonation, duration)) +
-    facet_grid(. ~ vowel + c2place) +
+    facet_grid(. ~ vowel + c2place + speaker) +
     geom_violin() +
     geom_boxplot(width=0.2)
 
