@@ -29,9 +29,9 @@ degg <- list.files(path = "pilot/results",
 
 stimuli <- read_csv("pilot/stimuli/nonce.csv")
 
-degg <- left_join(degg, stimuli, by = c("word" = "word"))
+degg <- left_join(degg, stimuli, by = c("word" = "orth"))
 degg <- degg %>% mutate_if(is.character, factor)
-degg <- filter(degg, speaker == "PS02")
+degg <- filter(degg, speaker != "PS02")
 ```
 
 Let's first have a look at the tracegrams.
@@ -39,7 +39,9 @@ Let's first have a look at the tracegrams.
 ```{r tracegram}
 ggplot(degg, aes(x = time, colour = c2phonation)) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
-    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2)
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period")
 ```
 
 We can now calculate the SSANOVA model for dEGG maxima and minima.
@@ -68,12 +70,14 @@ Finally, we can plot the predicted splines with 95% confidence levels for signif
 
 ```{r ssanova-plot}
 ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
-geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
-geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
+    geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
+    geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
                 ymax = maximum.fit+(1.96*maximum.SE),
                 fill = c2phonation ),alpha = 0.5,colour = "NA") +
-geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
+    geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
                     ymax = minimum.fit+(1.96*minimum.SE),
-                    fill = c2phonation ),alpha = 0.5,colour = "NA")
+                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period")
 ```
