@@ -2,7 +2,9 @@
 title: "Vowel duration"
 author: "Stefano Coretta"
 date: "12/02/2017"
-output: pdf_document
+output: 
+  pdf_document: 
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
@@ -23,39 +25,59 @@ Let's read the files.
 vowels_raw <- list.files(path = "pilot/results",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
-    map_df(~read_csv(.)) %>%
-    mutate(word = as.factor(word), speaker = as.factor(speaker))
+    map_df(~read_csv(.))
 
-words <- read.csv("./pilot/stimuli/nonce.csv")
+languages <- read_csv("./pilot/stimuli/languages.csv")
+words <- read_csv("./pilot/stimuli/nonce.csv")
 
-vowels <- left_join(vowels_raw, words, by = c("word" = "orth")) %>%
-    mutate(word = as.factor(word)) %>%
+
+vowels <- left_join(vowels_raw, languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character,as.factor) %>%
     mutate(duration.norm = (duration - mean(duration)) / sd(duration))
 ```
 
 Perform a mixed effect linear model for Italian.
 
-```{r italian-lmer}
-italian <- filter(vowels, speaker %in% c("SC01", "SDC02"))
+```{r lmer}
+italian <- filter(vowels, language == "italian")
 
-model <- lmer(duration ~ c2phonation * vowel + c1phonation + c2place +
+model.it <- lmer(duration ~ c2phonation * vowel + c1phonation + c2place +
                   (1 | word),
               data = italian
               )
+
+summary(model.it)
+
+polish <- filter(vowels, language == "polish")
+
+model.pl <- lmer(duration ~ c2phonation * vowel + c2place +
+                  (1 | word),
+              data = polish
+              )
+
+summary(model.pl)
+```
+
+```{r italian-effects-plot}
+plot(allEffects(model.it))
+```
+
+```{r polish-effects-plot}
+plot(allEffects(model.pl))
 ```
 
 ```{r}
-plot(allEffects(model))
-summary(model)
-```
+dodge <- position_dodge(width = 0.5)
 
-```{r}
-ggplot(italian, aes(c1phonation, duration)) +
-    facet_grid(. ~ vowel + c2place + speaker) +
+ggplot(italian, aes(c2phonation, duration, colour = speaker)) +
+    facet_grid(. ~ vowel + c2place) +
+    geom_violin(position = dodge) +
+    geom_boxplot(width=0.1, position = dodge)
+
+ggplot(polish, aes(c2phonation, duration)) +
+    facet_grid(. ~ vowel + c2place) +
     geom_violin() +
     geom_boxplot(width=0.2)
-
-ggplot(italian, aes(c1phonation, duration)) +
-    geom_boxplot()
 ```
 
