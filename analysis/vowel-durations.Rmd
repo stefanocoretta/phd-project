@@ -8,6 +8,9 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../"))
+library(readr)
+library(dplyr)
+library(purrr)
 library(lme4)
 library(effects)
 library(ggplot2)
@@ -17,7 +20,7 @@ theme_set(theme_bw())
 Let's read the files.
 
 ```{r read-files}
-vowels <- list.files(path = "pilot/results",
+vowels_raw <- list.files(path = "pilot/results",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.)) %>%
@@ -25,14 +28,14 @@ vowels <- list.files(path = "pilot/results",
 
 words <- read.csv("./pilot/stimuli/nonce.csv")
 
-results <- left_join(vowels, words, by = c("word" = "orth")) %>%
+vowels <- left_join(vowels_raw, words, by = c("word" = "orth")) %>%
     mutate(word = as.factor(word))
 ```
 
 Perform a mixed effect linear model for Italian.
 
 ```{r italian-lmer}
-italian <- filter(results, speaker %in% c("SC01", "SDC02"))
+italian <- filter(vowels, speaker %in% c("SC01", "SDC02"))
 
 model <- lmer(duration ~ c2phonation * vowel + c1phonation + c2place +
                   (1 | word),
@@ -48,7 +51,8 @@ summary(model)
 ```{r}
 ggplot(italian, aes(c1phonation, duration)) +
     facet_grid(. ~ vowel + c2place) +
-    geom_violin(draw_quantiles = 0.5)
+    geom_violin(draw_quantiles = 0.5) +
+    geom_boxplot(width=0.1)
 
 ggplot(italian, aes(c1phonation, duration)) +
     geom_boxplot()
