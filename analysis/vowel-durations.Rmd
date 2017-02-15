@@ -22,7 +22,7 @@ theme_set(theme_bw())
 Let's read the files.
 
 ```{r read-files}
-vowels_raw <- list.files(path = "pilot/results",
+vowels <- list.files(path = "pilot/results",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.))
@@ -31,9 +31,9 @@ languages <- read_csv("./pilot/stimuli/languages.csv")
 words <- read_csv("./pilot/stimuli/nonce.csv")
 
 
-vowels <- left_join(vowels_raw, languages) %>%
+vowels <- left_join(vowels, languages) %>%
     left_join(y = words) %>%
-    mutate_if(is.character,as.factor) %>%
+    mutate_if(is.character, as.factor) %>%
     mutate(duration.norm = (duration - mean(duration)) / sd(duration))
 ```
 

@@ -27,17 +27,22 @@ degg <- list.files(path = "pilot/results",
                    full.names = TRUE) %>%
     map_df(~read_csv(.))
 
-stimuli <- read_csv("pilot/stimuli/nonce.csv")
+languages <- read_csv("./pilot/stimuli/languages.csv")
+words <- read_csv("./pilot/stimuli/nonce.csv")
 
-degg <- left_join(degg, stimuli, by = c("word" = "orth"))
-degg <- degg %>% mutate_if(is.character, factor)
-degg <- filter(degg, speaker != "PS02")
+degg <- left_join(degg, languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+degg.it <- filter(degg, language == "italian")
+degg.pl <- filter(degg, language == "polish")
 ```
 
 Let's first have a look at the tracegrams.
 
 ```{r tracegram}
 ggplot(degg, aes(x = time, colour = c2phonation)) +
+    facet_grid(. ~ language) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("relative time (proportion of vowel duration)") +
@@ -48,10 +53,10 @@ We can now calculate the SSANOVA model for dEGG maxima and minima.
 
 ```{r ssanova}
 maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
-data = degg)
+data = degg.it)
 
 minimum.model <- ssanova(minimum ~ c2phonation + time + c2phonation:time,
-data = degg)
+data = degg.it)
 ```
 
 And calculate the predicted splines based on the SSANOVA models.
