@@ -8,6 +8,7 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../"))
+library(readr)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -23,7 +24,7 @@ Before importing the data, we need to specify the column names for the data set 
 ```{r col-names}
 num.splines = 42
 first.columns <- c(
-    "subject",
+    "speaker",
     "seconds",
     "rec.date",
     "prompt",
@@ -47,14 +48,16 @@ We can now read in the file.
 
 ```{r read}
 raw.data <- read.delim("pilot/results/SC01-aaa.txt", header = FALSE,
-                    na.string = '*', col.names = columns
+                    na.string = '*', col.names = columns,
+                    stringsAsFactors = FALSE
                     )
 
 rm(num.splines, first.columns, columns)
 
 raw.data <- unique(raw.data)
 
-stimuli <- read.csv("pilot/stimuli/nonce.csv")
+languages <- read_csv("./pilot/stimuli/languages.csv")
+words <- read_csv("./pilot/stimuli/nonce.csv")
 ```
 
 The following code applies tidy formatting to the data frame. It uses functions from the `tidyr` library.
@@ -64,8 +67,9 @@ splines <- raw.data %>%
     gather(spline, coordinate, matches("[XY]_")) %>%
     separate(spline, c("axis", "fan"), convert = TRUE) %>%
     spread(axis, coordinate) %>%
-    mutate(word = as.factor(word(prompt, 2))) %>%
-    left_join(y = stimuli)
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
 ```
 
 ## Some plotting
