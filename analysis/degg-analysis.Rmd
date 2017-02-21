@@ -59,7 +59,7 @@ As it can be seen from the graph, both Italian and Polish show a raising profile
 
 We can now calculate the SSANOVA model for dEGG maxima and minima.
 
-```{r ssanova}
+```{r ssanova-it}
 maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
 data = degg.it)
 
@@ -69,7 +69,7 @@ data = degg.it)
 
 And calculate the predicted splines based on the SSANOVA models.
 
-```{r predict}
+```{r predict-it}
 predicted.degg <- expand.grid(time = seq(min(degg.it$time), max(degg.it$time), length = 100),
                     c2phonation = c("voiced", "voiceless"))
 
@@ -81,7 +81,7 @@ predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$s
 
 Finally, we can plot the predicted splines for Italian with 95% confidence levels for significance evaluation.
 
-```{r ssanova-plot}
+```{r ssanova-it-plot}
 ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
     geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
@@ -98,7 +98,7 @@ ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation))
 
 # SSANOVA for Polish
 
-```{r ssanova}
+```{r ssanova-pl}
 maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
 data = degg.pl)
 
@@ -108,7 +108,7 @@ data = degg.pl)
 
 And calculate the predicted splines based on the SSANOVA models.
 
-```{r predict}
+```{r predict-pl}
 predicted.degg <- expand.grid(time = seq(min(degg.pl$time), max(degg.pl$time), length = 100),
                     c2phonation = c("voiced", "voiceless"))
 
@@ -120,7 +120,7 @@ predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$s
 
 Finally, we can plot the predicted splines for Polish with 95% confidence levels for significance evaluation.
 
-```{r ssanova-plot}
+```{r ssanova-pl-plot}
 ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
     geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
