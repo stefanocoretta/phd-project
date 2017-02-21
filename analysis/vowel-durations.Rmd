@@ -5,6 +5,7 @@ date: "12/02/2017"
 output: 
   pdf_document: 
     latex_engine: xelatex
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
