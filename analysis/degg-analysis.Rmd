@@ -70,7 +70,8 @@ data = degg.it)
 And calculate the predicted splines based on the SSANOVA models.
 
 ```{r predict-it}
-predicted.degg <- expand.grid(time = seq(min(degg.it$time), max(degg.it$time), length = 100),
+predicted.degg <- expand.grid(time = seq(min(degg.it$time), max(degg.it$time),
+                                         length = 100),
                     c2phonation = c("voiced", "voiceless"))
 
 predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
@@ -109,7 +110,8 @@ data = degg.pl)
 And calculate the predicted splines based on the SSANOVA models.
 
 ```{r predict-pl}
-predicted.degg <- expand.grid(time = seq(min(degg.pl$time), max(degg.pl$time), length = 100),
+predicted.degg <- expand.grid(time = seq(min(degg.pl$time), max(degg.pl$time),
+                                         length = 100),
                     c2phonation = c("voiced", "voiceless"))
 
 predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
