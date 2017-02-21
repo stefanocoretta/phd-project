@@ -1,8 +1,11 @@
 ---
-title: "dEGG tracing and SSANOVA"
+title: "Tracegram analysis"
 author: "Stefano Coretta"
-date: "11/01/2017"
-output: pdf_document
+date: \today
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -17,9 +20,9 @@ library(gss)
 library(stringr)
 ```
 
-## Data import
+# Data import
 
-Import all `degg-tracing` files in the `results` folder in the `degg` data frame, and reads `nonce.csv` as `stimuli` which contains phonological details about the stimuli. Then join `degg` with `stimuli`. Finally, filter data points which `position == "before"` (dEGG points before consonant closure). For now, I am filtering to get data from `SC01` only because there are problems with consonantal gestures detection for `SDC02` and this screws everything up.
+First, we import all `degg-tracing` files contained in the `results` folder into the `degg` data frame, and we merge with `languages` and `words` (the first data frame list the languages of each participant, the latter the variables for each word). Two separate data frames for Italian and Polish are then created.
 
 ```{r import}
 degg <- list.files(path = "pilot/results",
@@ -38,7 +41,7 @@ degg.it <- filter(degg, language == "italian")
 degg.pl <- filter(degg, language == "polish")
 ```
 
-Let's first have a look at the tracegrams.
+We can now plot smoothers for DEGG maxima and minima for both languages. The *x*-axis shows the normalised time as a proportion of the vowel duration, while values on the *y*-axix indicates the proportion of the glottal period at *x* time. The lines in the lower half of the graphs are the DEGG maxima, while the lines in the upper half are the minima. The second half of the vowel proportion contains information important for the effects of the phonation of the consonant following the vowel.
 
 ```{r tracegram}
 ggplot(degg, aes(x = time, colour = c2phonation)) +
@@ -46,8 +49,11 @@ ggplot(degg, aes(x = time, colour = c2phonation)) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("relative time (proportion of vowel duration)") +
-    ylab("proportion of glottal period")
+    ylab("proportion of glottal period") +
+    xlim(0, 1)
 ```
+
+As it can be seen from the graph, both Italian and Polish show a raising profile of the DEGG maxima in the voiceless condition in the second half of the vowel (Polish data are a bit more messy, but can still be interpreted this way).
 
 # SSANOVA for Italian
 
@@ -86,7 +92,8 @@ ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation))
                     ymax = minimum.fit+(1.96*minimum.SE),
                     fill = c2phonation ),alpha = 0.5,colour = "NA") +
     xlab("relative time (proportion of vowel duration)") +
-    ylab("proportion of glottal period")
+    ylab("proportion of glottal period") +
+    xlim(0, 1)
 ```
 
 # SSANOVA for Polish
@@ -124,5 +131,6 @@ ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation))
                     ymax = minimum.fit+(1.96*minimum.SE),
                     fill = c2phonation ),alpha = 0.5,colour = "NA") +
     xlab("relative time (proportion of vowel duration)") +
-    ylab("proportion of glottal period")
+    ylab("proportion of glottal period") +
+    xlim(0, 1)
 ```
