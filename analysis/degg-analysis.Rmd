@@ -49,6 +49,8 @@ ggplot(degg, aes(x = time, colour = c2phonation)) +
     ylab("proportion of glottal period")
 ```
 
+# SSANOVA for Italian
+
 We can now calculate the SSANOVA model for dEGG maxima and minima.
 
 ```{r ssanova}
@@ -62,7 +64,7 @@ data = degg.it)
 And calculate the predicted splines based on the SSANOVA models.
 
 ```{r predict}
-predicted.degg <- expand.grid(time = seq(min(degg$time), max(degg$time), length = 100),
+predicted.degg <- expand.grid(time = seq(min(degg.it$time), max(degg.it$time), length = 100),
                     c2phonation = c("voiced", "voiceless"))
 
 predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
@@ -71,7 +73,45 @@ predicted.degg$minimum.fit <- predict(minimum.model, predicted.degg, se = TRUE)$
 predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$se.fit
 ```
 
-Finally, we can plot the predicted splines with 95% confidence levels for significance evaluation.
+Finally, we can plot the predicted splines for Italian with 95% confidence levels for significance evaluation.
+
+```{r ssanova-plot}
+ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
+    geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
+    geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
+                ymax = maximum.fit+(1.96*maximum.SE),
+                fill = c2phonation ),alpha = 0.5,colour = "NA") +
+    geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
+    geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
+                    ymax = minimum.fit+(1.96*minimum.SE),
+                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period")
+```
+
+# SSANOVA for Polish
+
+```{r ssanova}
+maximum.model <- ssanova(maximum ~ c2phonation + time + c2phonation:time,
+data = degg.pl)
+
+minimum.model <- ssanova(minimum ~ c2phonation + time + c2phonation:time,
+data = degg.pl)
+```
+
+And calculate the predicted splines based on the SSANOVA models.
+
+```{r predict}
+predicted.degg <- expand.grid(time = seq(min(degg.pl$time), max(degg.pl$time), length = 100),
+                    c2phonation = c("voiced", "voiceless"))
+
+predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
+predicted.degg$maximum.SE <- predict(maximum.model, predicted.degg, se = TRUE)$se.fit
+predicted.degg$minimum.fit <- predict(minimum.model, predicted.degg, se = TRUE)$fit
+predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$se.fit
+```
+
+Finally, we can plot the predicted splines for Polish with 95% confidence levels for significance evaluation.
 
 ```{r ssanova-plot}
 ggplot(predicted.degg, aes(x = time, colour = c2phonation, group = c2phonation)) +
