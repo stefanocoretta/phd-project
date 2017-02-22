@@ -7,7 +7,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../"))
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(readr)
 library(tidyr)
 library(dplyr)
@@ -47,7 +47,7 @@ columns <- c(first.columns,
 We can now read in the file.
 
 ```{r read}
-splines.raw <- list.files(path = "pilot/results",
+splines.raw <- list.files(path = "./pilot/results",
                    pattern = "*-aaa.txt",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns, na = "*"))

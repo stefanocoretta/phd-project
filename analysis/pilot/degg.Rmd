@@ -10,7 +10,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../"))
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(tidyr)
 library(tidyverse)
 library(dplyr)
@@ -25,7 +25,7 @@ library(stringr)
 First, we import all `degg-tracing` files contained in the `results` folder into the `degg` data frame, and we merge with `languages` and `words` (the first data frame list the languages of each participant, the latter the variables for each word). Two separate data frames for Italian and Polish are then created.
 
 ```{r import}
-degg <- list.files(path = "pilot/results",
+degg <- list.files(path = "./pilot/results",
                    pattern = "*-degg-tracing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.))
