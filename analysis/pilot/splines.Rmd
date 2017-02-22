@@ -159,23 +159,23 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
 Now we can create a separate data frame where the observasional unit is each word and the variables are the consonantal getures (target, maximum closure, release).
 
 ```{r gestures}
-cons.gestures <- raw.data %>%
-    select(subject:label) %>%
+cons.gestures <- select(splines.raw, speaker:label) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
     separate(label, c("gesture", "tongue.area")) %>%
     spread(gesture, seconds) %>%
-    select(subject:tongue.area, GONS, NONS, max, NOFF, GOFF) %>%
-    mutate(word = as.factor(word(prompt, 2))) %>%
-    left_join(y = stimuli)
+    mutate(nucleus = NOFF - NONS) %>%
+    mutate_if(is.character, as.factor)
 ```
 
 Let's plot closure duration as a function of place of articulation and voicing of C2 (our target consonant in C1VC2V words).
 
 ```{r closure-duration, eval = FALSE}
-ggplot(cons.gestures, aes(c2phonation, closure)) +
-    facet_grid(.~c2place) +
+ggplot(cons.gestures, aes(c2phonation, nucleus)) +
+    facet_grid(.~language) +
     geom_violin() +
     geom_boxplot(width=0.1) +
-    ylim(15, 60) +
     theme(strip.background = element_rect(fill = "black"),
           strip.text = element_text(color = "white", face = "bold")
           )
