@@ -92,20 +92,35 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     coord_fixed(ratio = 1)
 ```
 
-## SSANOVA
+# SSANOVA
 ```{r ssanova}
-splines.cor <- filter(splines, label == "max_TT")
+splines.cor <- filter(splines.it, label == "max_TT")
 splines.cor.model <- ssanova(Y ~ c2phonation + X + c2phonation:X,
                              data = splines.cor)
 
-splines.vel <- filter(splines, label == "max_TD")
+splines.vel <- filter(splines.it, label == "max_TD")
 splines.vel.model <- ssanova(Y ~ c2phonation + X + c2phonation:X,
                              data = splines.vel)
 
-predicted.cor <- select(splines.cor, X:Y, c2phonation)
-predicted.vel <- select(splines.vel, X:Y, c2phonation)
+predicted.cor <- expand.grid(X = seq(min(splines.cor$X, na.rm = TRUE), max(splines.cor$X,
+                                                                           na.rm = TRUE),
+                                     length = 100),
+                             Y = seq(min(splines.cor$Y, na.rm = TRUE), max(splines.cor$Y,
+                                                                           na.rm = TRUE),
+                                     length = 100),
+                             c2phonation = c("voiced", "voiceless")
+                            )
+predicted.vel <- expand.grid(X = seq(min(splines.vel$X, na.rm = TRUE), max(splines.vel$X,
+                                                                           na.rm = TRUE),
+                                     length = 100),
+                             Y = seq(min(splines.vel$Y, na.rm = TRUE), max(splines.vel$Y,
+                                                                           na.rm = TRUE),
+                                     length = 100),
+                             c2phonation = c("voiced", "voiceless")
+                            )
 
-predicted.cor$splines.fit <- predict(splines.cor.model, predicted.cor, se = T)$fit
+predicted.cor$splines.fit <- predict(splines.cor.model, predicted.cor,
+                                     se = T)$fit
 predicted.cor$splines.SE <- predict(splines.cor.model, predicted.cor,
                                     se = T)$se.fit
 
@@ -115,7 +130,7 @@ predicted.vel$splines.SE <- predict(splines.vel.model, predicted.vel,
                                     se = T)$se.fit
 ```
 
-```{r ssanova-plot}
+```{r ssanova-cor-plot}
 ggplot(predicted.cor, aes(x = X, colour = c2phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
@@ -125,7 +140,9 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
             alpha = 0.5,
             color = "NA"
             )
+```
 
+```{r ssanova-vel-plot}
 ggplot(predicted.vel, aes(x = X, colour = c2phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
@@ -137,7 +154,7 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
             )
 ```
 
-## Consonantal gestures: target, maximum, release
+# Consonantal gestures: target, maximum, release
 
 Now we can create a separate data frame where the observasional unit is each word and the variables are the consonantal getures (target, maximum closure, release).
 
