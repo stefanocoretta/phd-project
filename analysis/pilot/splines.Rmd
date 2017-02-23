@@ -9,6 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(readr)
+library(purrr)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -181,7 +182,25 @@ ggplot(cons.gestures, aes(c2phonation, nucleus)) +
           )
 ```
 
+I want to check how good the gesture function in AAA is performing. The following gives the number of missing values per speaker.
 
+```{r}
+cons.gestures %>%
+    select(speaker, GOFF:NONS) %>%
+    group_by(speaker) %>%
+    summarise_each(funs(sum(is.na(.)))) %>%
+    select(speaker, GONS, NONS, max, NOFF, GOFF)
+```
+
+This chunk instead reports the total number of values per speaker.
+
+```{r}
+cons.gestures %>%
+    select(speaker, GOFF:NONS) %>%
+    group_by(speaker) %>%
+    summarise_each(funs(n())) %>%
+    select(speaker, GONS, NONS, max, NOFF, GOFF)
+```
 
 
 
