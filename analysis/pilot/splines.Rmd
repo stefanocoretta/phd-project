@@ -4,6 +4,9 @@ author: "Stefano Coretta"
 date: "27/12/2016"
 output: 
   pdf_document: 
+    fig_caption: yes
+    fig_height: 3.5
+    fig_width: 5
     latex_engine: xelatex
     number_sections: yes
 ---
@@ -140,7 +143,7 @@ ssanova.vel.u <- ssanovaTongue(splines.vel.u)
 ```
 
 
-```{r ssanova-cor-plot}
+```{r ssanova-cor-plot-it}
 ggplot(ssanova.cor.a, aes(x = X, colour = c2phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
@@ -172,7 +175,93 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
             )
 ```
 
-```{r ssanova-vel-plot}
+```{r ssanova-vel-plot-it}
+ggplot(ssanova.vel.a, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+
+ggplot(ssanova.vel.o, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+
+ggplot(ssanova.vel.u, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+```
+
+```{r ssanova-pl}
+splines.cor.a <- filter(splines.pl, vowel == "a", label == "max_TT")
+ssanova.cor.a <- ssanovaTongue(splines.cor.a)
+
+splines.cor.o <- filter(splines.pl, vowel == "o", label == "max_TT")
+ssanova.cor.o <- ssanovaTongue(splines.cor.a)
+
+splines.cor.u <- filter(splines.pl, vowel == "u", label == "max_TT")
+ssanova.cor.u <- ssanovaTongue(splines.cor.u)
+
+
+splines.vel.a <- filter(splines.pl, vowel == "a", label == "max_TD")
+ssanova.vel.a <- ssanovaTongue(splines.vel.a)
+
+splines.vel.o <- filter(splines.pl, vowel == "o", label == "max_TD")
+ssanova.vel.o <- ssanovaTongue(splines.vel.a)
+
+splines.vel.u <- filter(splines.pl, vowel == "u", label == "max_TD")
+ssanova.vel.u <- ssanovaTongue(splines.vel.u)
+```
+
+
+```{r ssanova-cor-plot-pl}
+ggplot(ssanova.cor.a, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+
+ggplot(ssanova.cor.o, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+
+ggplot(ssanova.cor.u, aes(x = X, colour = c2phonation)) +
+geom_line(aes(y = splines.fit)) +
+geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
+                ymax = splines.fit + (1.96 * splines.SE),
+                fill = c2phonation
+                ),
+            alpha = 0.5,
+            color = "NA"
+            )
+```
+
+```{r ssanova-vel-plot-pl}
 ggplot(ssanova.vel.a, aes(x = X, colour = c2phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
@@ -222,7 +311,7 @@ cons.gestures <- select(splines.raw, speaker:label) %>%
 
 Let's plot the nucleus duration (NOFF - NONS) as a function of place of articulation, voicing of C2 (our target consonant in C1VC2V words), and language.
 
-```{r nucleus-duration, eval = FALSE}
+```{r nucleus-duration}
 ggplot(cons.gestures, aes(c2phonation, nucleus)) +
     facet_grid(.~language + c2place) +
     geom_violin() +
@@ -233,7 +322,7 @@ ggplot(cons.gestures, aes(c2phonation, nucleus)) +
 ```
 
 
-```{r deceleration-duration, eval = FALSE}
+```{r deceleration-duration}
 ggplot(cons.gestures, aes(c2phonation, deceleration)) +
     facet_grid(.~language + c2place) +
     geom_violin() +
@@ -243,7 +332,7 @@ ggplot(cons.gestures, aes(c2phonation, deceleration)) +
           )
 ```
 
-```{r acceleration-duration, eval = FALSE}
+```{r acceleration-duration}
 ggplot(cons.gestures, aes(c2phonation, acceleration)) +
     facet_grid(.~language + c2place) +
     geom_violin() +
@@ -255,7 +344,7 @@ ggplot(cons.gestures, aes(c2phonation, acceleration)) +
 
 The follwing plots the skweness (`deceleration / nucleus`) of the nucleus gesture.
 
-```{r skewness-duration, eval = FALSE}
+```{r skewness-duration}
 ggplot(cons.gestures, aes(c2phonation, skewness)) +
     facet_grid(.~language + c2place) +
     geom_violin() +
@@ -285,7 +374,9 @@ cons.gestures %>%
     select(speaker, GONS, NONS, max, NOFF, GOFF)
 ```
 
+By comparing the two tables, what emerges is that the GONS (Gesture Onset) is almost always missed, followed by GOFF (Gesture Offset). The NOFF (Nucleus Offset) detection, performs slighly better, while NONS and MAX are detected most of the times.
 
+However, judging from the violin plots above, most values might be incorrect.
 
 
 
