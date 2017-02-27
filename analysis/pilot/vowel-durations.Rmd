@@ -1,9 +1,10 @@
 ---
 title: "Vowel duration"
 author: "Stefano Coretta"
-date: "12/02/2017"
+date: \today
 output: 
   pdf_document: 
+    fig_caption: yes
     latex_engine: xelatex
     number_sections: yes
 ---
@@ -15,10 +16,13 @@ library(readr)
 library(dplyr)
 library(purrr)
 library(lme4)
+library(afex)
 library(effects)
 library(ggplot2)
 theme_set(theme_bw())
 ```
+
+# Import data
 
 Let's read the files.
 
@@ -38,47 +42,69 @@ vowels <- left_join(vowels, languages) %>%
     mutate(duration.norm = (duration - mean(duration)) / sd(duration))
 ```
 
-Perform a mixed effect linear model for Italian.
+# Italian
 
-```{r lmer}
-italian <- filter(vowels, language == "italian")
+Fit a mixed effect linear model for Italian.
 
-model.it <- lmer(duration ~ c2phonation * vowel + c1phonation + c2place +
-                  (1 | word),
-              data = italian
+```{r lmer-it}
+vowels.it <- filter(vowels, language == "italian")
+
+model.it <- lmer(duration.norm ~ c2phonation * vowel + c1phonation + c2place +
+                  (1 | word) + (1|speaker),
+              data = vowels.it
               )
 
 summary(model.it)
 
-polish <- filter(vowels, language == "polish")
-
-model.pl <- lmer(duration ~ c2phonation * vowel + c2place +
-                  (1 | word),
-              data = polish
-              )
-
-summary(model.pl)
+mixed(duration.norm ~ c2phonation * vowel + c1phonation + c2place +
+                  (1 | word) + (1|speaker),
+              data = vowels.it)
 ```
 
 ```{r italian-effects-plot}
 plot(allEffects(model.it))
 ```
 
+# Polish
+
+Fit a mixed effect linear model for Polish
+
+```{r}
+vowels.pl <- filter(vowels, language == "polish")
+
+model.pl <- lmer(duration ~ c2phonation * vowel + c2place +
+                  (1 | word),
+              data = vowels.pl
+              )
+
+summary(model.pl)
+
+mixed(duration ~ c2phonation * vowel + c2place +
+                  (1 | word),
+              data = vowels.pl)
+```
+
 ```{r polish-effects-plot}
 plot(allEffects(model.pl))
 ```
 
-```{r}
+# Inter-speaker variation
+
+```{r variation}
 dodge <- position_dodge(width = 0.5)
 
-ggplot(italian, aes(c2phonation, duration, colour = speaker)) +
-    facet_grid(. ~ vowel + c2place) +
+ggplot(filter(vowels.it, c2place == "velar"), aes(c2phonation, duration, colour = speaker)) +
+    facet_grid(. ~ vowel) +
     geom_violin(position = dodge) +
     geom_boxplot(width=0.1, position = dodge)
 
-ggplot(polish, aes(c2phonation, duration)) +
+ggplot(filter(vowels.it, c2place == "coronal"), aes(c2phonation, duration, colour = speaker)) +
+    facet_grid(. ~ vowel) +
+    geom_violin(position = dodge) +
+    geom_boxplot(width=0.1, position = dodge)
+
+ggplot(vowels.pl, aes(c2phonation, duration)) +
     facet_grid(. ~ vowel + c2place) +
     geom_violin() +
     geom_boxplot(width=0.2)
 ```
-
