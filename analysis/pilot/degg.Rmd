@@ -4,6 +4,9 @@ author: "Stefano Coretta"
 date: \today
 output: 
   pdf_document: 
+    fig_caption: yes
+    fig_height: 3.5
+    fig_width: 5
     latex_engine: xelatex
     number_sections: yes
 ---
