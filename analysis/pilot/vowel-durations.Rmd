@@ -49,15 +49,15 @@ Fit a mixed effect linear model for Italian.
 ```{r lmer-it}
 vowels.it <- filter(vowels, language == "italian")
 
-model.it <- lmer(duration.norm ~ c2phonation * vowel + c1phonation + c2place +
-                  (1 | word) + (1|speaker),
+model.it <- lmer(duration ~ c2phonation * vowel + c1phonation + c2place +
+                  sentence + (1 | word) + (1|speaker),
               data = vowels.it
               )
 
 summary(model.it)
 
-mixed(duration.norm ~ c2phonation * vowel + c1phonation + c2place +
-                  (1 | word) + (1|speaker),
+mixed(duration ~ c2phonation * vowel + c1phonation + c2place +
+                  sentence + (1 | word) + (1|speaker),
               data = vowels.it)
 ```
 
@@ -73,14 +73,14 @@ Fit a mixed effect linear model for Polish
 vowels.pl <- filter(vowels, language == "polish")
 
 model.pl <- lmer(duration ~ c2phonation * vowel + c2place +
-                  (1 | word),
+                  sentence + (1 | word),
               data = vowels.pl
               )
 
 summary(model.pl)
 
 mixed(duration ~ c2phonation * vowel + c2place +
-                  (1 | word),
+                  sentence + (1 | word),
               data = vowels.pl)
 ```
 
