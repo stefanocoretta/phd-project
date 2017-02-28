@@ -117,16 +117,16 @@ directory_alignment$ = "../../'project$'/data/derived/ultrasound/'speaker$'/alig
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
 
 intervals = Get number of intervals: 1
-
-Insert interval tier: 4, "ultrasound"
-Insert interval tier: 5, "kinematics"
-Insert interval tier: 6, "vowel"
 ```
 
 Now we can create intervals cointaing the search area for ultrasound and kinematics which will be used in `AAA` for spline batch processing and to find consonantal gestures moments. Then, `search.TextGrid` is saved in the `alignmet` folder.
 
 ### "set search"
 ```praat
+Insert interval tier: 4, "ultrasound"
+Insert interval tier: 5, "kinematics"
+Insert interval tier: 6, "vowel"
+
 for interval to intervals
     label$ = Get label of interval: 1, interval
     if label$ == label_lang$
@@ -689,6 +689,68 @@ for interval to intervals
 endfor
 
 removeObject: palign
+```
+
+## Burst detection
+
+This script detects the burst in the consonant following the target vowels (C2). The algorythm is based on @avanthapadmanabha2014.
+
+### burst-detection.praat
+```praat
+<<<get alignment>>>
+
+<<<find consonant>>>
+```
+
+We start by identifying the inverval that corresponds to C2.
+
+### "find consonant"
+```praat
+sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
+
+speech_intervals = Get number of intervals: 3
+
+for speech_interval to speech_intervals
+    speech_label$ = Get label of interval: 3, speech_interval
+    if speech_label$ == "speech"
+        speech_start = Get start time of interval: 3, speech_interval
+        token_interval = Get interval at time: 2, speech_start
+        token_end = Get end time of interval: 2, token_interval
+        phone_interval = Get interval at time: 1, token_end
+        start_consonant = Get start time of interval: 1, phone_interval + 2
+        end_consonant = Get end time of interval: 1, phone_interval + 2
+
+        selectObject: sound
+        sound_consonant = Extract part: start_consonant, end_consonant,
+            ..."rectangular", 1, "yes"
+
+        <<<filter>>>
+
+        <<<plosion index>>>
+    endif
+endfor
+```
+
+To calculate the plosion index, it is first necessary to filter the sound file.
+
+### "filter"
+```praat
+Filter (pass Hann band): 400, 0, 100
+sound_band = selected("Sound")
+
+spectrum = To Spectrum: "no"
+Rename: "original"
+
+spectrum_hilbert = Copy: "hilbert"
+Formula: "if row=1 then Spectrum_original[2,col] else -Spectrum_original[1,col] fi"
+sound_hilbert = To Sound
+```
+
+We can now calculate the plosion index.
+
+### "plosion index"
+```praat
+
 ```
 
 ## Headers
