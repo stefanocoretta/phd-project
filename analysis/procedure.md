@@ -6,7 +6,7 @@
 1. **Force alignment and search area**
    1. Run `alingment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli
    1. Run SPPAS on concatenated `.wav` and `.txt`
-   1. Run `separate-alignment.praat`: the output is TextGrid files for each `AAA` `.wav` file
+   1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file
    1. Import TextGrids back in `AAA`
 1. **Tongue tracking**
    1. Create a spline template and save it (`.fst`)
@@ -22,7 +22,7 @@
    1. `Find...` > `Load` and `execute` `td_function_50.srh`
    1. Select TT stimuli
    1. `Find...` > `Load` and `execute` `tt_function_95.srh`
-1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]_aaa.txt`
+1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]-aaa.txt`
 1. **Export annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/annotations` folder as `[ID]-00n.TextGrid`
 
 ## EGG data
