@@ -36,10 +36,9 @@ for speech_interval to speech_intervals
         phone_interval = Get interval at time: 1, token_end
         start_consonant = Get start time of interval: 1, phone_interval + 2
         end_consonant = Get end time of interval: 1, phone_interval + 2
-        start_part = (end_consonant - start_consonant) / 2
 
         selectObject: sound
-        sound_consonant = Extract part: start_part, end_consonant,
+        sound_consonant = Extract part: start_consonant, end_consonant,
             ..."rectangular", 1, "yes"
 
         Filter (pass Hann band): 400, 0, 100
@@ -79,7 +78,7 @@ for speech_interval to speech_intervals
         endfor
         
         To Sound
-        Shift times by: start_part
+        Shift times by: start_consonant
         To PointProcess (extrema): 1, "yes", "no", "Sinc70"
         burst = Get time from index: 1
 
@@ -89,6 +88,3 @@ for speech_interval to speech_intervals
         endif
     endif
 endfor
-
-selectObject: textgrid
-Save as text file: "'directory_alignment$'/'speaker$'-burst.TextGrid"
