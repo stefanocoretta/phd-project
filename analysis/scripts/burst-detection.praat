@@ -80,6 +80,8 @@ for speech_interval to speech_intervals
         To Sound
         Shift times by: start_consonant
         To PointProcess (extrema): 1, "yes", "no", "Sinc70"
+        half_consonant = start_consonant + ((end_consonant - start_consonant) / 3) * 2
+        Remove points between: start_consonant, half_consonant
         burst = Get time from index: 1
 
         selectObject: textgrid
