@@ -88,3 +88,6 @@ for speech_interval to speech_intervals
         endif
     endif
 endfor
+
+selectObject: textgrid
+Save as text file: "'directory_alignment$'/'speaker$'-burst.TextGrid"
