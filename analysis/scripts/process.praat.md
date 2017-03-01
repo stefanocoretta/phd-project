@@ -798,7 +798,7 @@ burst = Get time from index: 1
 This script extracts several durations related to voicing. The main function `merge` is a loop that reads the TextGrids from the derived ultrasound and EGG folders and merges the tier with the gestures from the ultrasound and the tier with the voiced/unvoiced intervals from the EGG.
 
 
-#### get_measurements.praat
+#### get-measurements.praat
 ```praat
 
 <<<read>>>
@@ -811,14 +811,12 @@ This is the form that prompts the user to input the directories of the derived u
 
 ### "read"
 ```praat
-form Get voicing durations
-    word directory_us ../../pilot/data/derived/ultrasound
-    word directory_egg ../../pilot/data/derived/egg
+form Get measurements
     word speaker SC01
 endform
 
-directory_us_annotations$ = "'directory_us$'/'speaker$'/annotations"
-directory_egg_vuv$ = "'directory_egg$'/'speaker$'"
+directory_us_annotations$ = "../../pilot/data/derived/ultrasound/'speaker$'/annotations"
+directory_egg_vuv$ = "../../pilot/data/derived/egg/'speaker$'"
 
 createDirectory("../../pilot/data/derived/merged/'speaker$'")
 directory_out$ = "../../pilot/data/derived/merged/'speaker$'"

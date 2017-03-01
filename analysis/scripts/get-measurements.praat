@@ -1,12 +1,10 @@
 
-form Get voicing durations
-    word directory_us ../../pilot/data/derived/ultrasound
-    word directory_egg ../../pilot/data/derived/egg
+form Get measurements
     word speaker SC01
 endform
 
-directory_us_annotations$ = "'directory_us$'/'speaker$'/annotations"
-directory_egg_vuv$ = "'directory_egg$'/'speaker$'"
+directory_us_annotations$ = "../../pilot/data/derived/ultrasound/'speaker$'/annotations"
+directory_egg_vuv$ = "../../pilot/data/derived/egg/'speaker$'"
 
 createDirectory("../../pilot/data/derived/merged/'speaker$'")
 directory_out$ = "../../pilot/data/derived/merged/'speaker$'"
