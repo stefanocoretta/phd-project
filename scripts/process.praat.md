@@ -120,7 +120,7 @@ palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
 intervals = Get number of intervals: 1
 ```
 
-Now we can create intervals cointaing the search area for ultrasound and kinematics which will be used in `AAA` for spline batch processing and to find consonantal gestures moments. Then, `search.TextGrid` is saved in the `alignmet` folder.
+Now we can create intervals cointaing the search area for ultrasound and kinematics which will be used in `AAA` for spline batch processing and to find consonantal gestures moments. Then, `[ID]-search.TextGrid` is saved in the `alignment` folder.
 
 ### "set search"
 ```praat
@@ -163,10 +163,10 @@ Remove tier: 1
 Remove tier: 1
 Remove tier: 1
 
-Save as text file: "'directory_alignment$'/search.TextGrid"
+Save as text file: "'directory_alignment$'/'speaker$'-search.TextGrid"
 ```
 
-Then, the script saves each search area to separate TextGrids in the `audio` folder. The file names are extracted from `ID-filenames.TextGrid`.
+Then, the script saves each search area to separate TextGrids in the `audio` folder. The file names are extracted from `[ID]-filenames.TextGrid`.
 
 ### "extract search"
 ```praat

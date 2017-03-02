@@ -16,7 +16,8 @@ else
 endif
 
 directory_audio$ = "../../'project$'/data/derived/ultrasound/'speaker$'/audio"
-directory_alignment$ = "../../'project$'/data/derived/ultrasound/'speaker$'/alignment"
+directory_alignment$ = "../../'project$'/data/derived/ultrasound/
+    ...'speaker$'/alignment"
 
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
 
@@ -61,7 +62,7 @@ Remove tier: 1
 Remove tier: 1
 Remove tier: 1
 
-Save as text file: "'directory_alignment$'/search.TextGrid"
+Save as text file: "'directory_alignment$'/'speaker$'-search.TextGrid"
 
 filenames = Read from file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 
