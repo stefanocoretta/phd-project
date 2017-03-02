@@ -24,7 +24,7 @@
    1. Select TT stimuli
    1. `Find...` > `Load` and `execute` `tt_function_95.srh`
 1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]-aaa.txt`
-1. **Export annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/annotations` folder as `[ID]-00n.TextGrid`
+1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID]-00n.TextGrid`
 
 ## EGG data
 
