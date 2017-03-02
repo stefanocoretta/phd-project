@@ -25,6 +25,9 @@
    1. `Find...` > `Load` and `execute` `tt_function_95.srh`
 1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]-aaa.txt`
 1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID]-00n.TextGrid`
+1. **Burst detection**
+   1. Run `burst-detection.praat`: the output is a `.TextGrid` file, written in `/data/derived/ultrasound/[ID]/alignment`
+   1. Check bursts
 
 ## EGG data
 
