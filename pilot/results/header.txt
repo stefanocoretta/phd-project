@@ -1,1 +1,0 @@
-Client Surname	Time of sample in recording	Date and time of recording	Prompt	Annotation Label	TD_displacement	TT_displacement	TD_displacement_sm	TD_Velocity	TD_velocity_abs	TT_displacement_sm	TT_velocity	TT_velocity_abs	X,Y values of spline "Tongue" relative to "SC_biteplane" (rotated)

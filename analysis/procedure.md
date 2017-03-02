@@ -1,15 +1,16 @@
-# Procedure for analyzing data
+# Procedure for analysing data
 
 ## Ultrasound data
 
 1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID) as [ID]-00n.wav
 1. **Force alignment and search area**
    1. Run `alingment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli
-   1. Run SPPAS on concatenated `.wav` and `.txt`
-   1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file
+   1. **WARNING OVERWRITE** Run SPPAS on concatenated `.wav` and `.txt`
+   1. Check alignment
+   1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file, saved in `/data/derived/ultrasound/[ID]/audio`
    1. Import TextGrids back in `AAA`
 1. **Tongue tracking**
-   1. Create a spline template and save it (`.fst`)
+   1. Create a spline template for the speaker and save it (`.fst`)
    1. Batch process splines with template
    1. Check splines
    1. Batch process snap-to-fit
@@ -29,8 +30,8 @@
 
 1. **Synchronise** EGG with `sync-egg.praat`: the output is written in `/data/derived/egg/[ID]`
 1. **Extract vuv** (Voiced/UnVoiced) with `extract-vuv.praat`: the output is written in the same folder as above
-1. **Calculate measurements** from ultrasound and EGG annotations with `get-measurements.praat`: the resulting TextGrids are written in `/data/derived/merged/[ID]` and the measurements in `results` to the file `[ID]-measurements.csv`
 1. **Calculate dEGG tracegrams** with `degg-tracing.praat`: the results are written in `results`
+1. **Calculate measurements** from ultrasound and EGG annotations with `get-measurements.praat`: the resulting TextGrids are written in `/data/derived/merged/[ID]` and the measurements in `results` to the file `[ID]-measurements.csv`
 
 ## `AAA` files extensions
 * `.esu`: tabs in the main window
