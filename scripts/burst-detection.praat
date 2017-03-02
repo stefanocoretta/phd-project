@@ -16,7 +16,8 @@ else
 endif
 
 directory_audio$ = "../../'project$'/data/derived/ultrasound/'speaker$'/audio"
-directory_alignment$ = "../../'project$'/data/derived/ultrasound/'speaker$'/alignment"
+directory_alignment$ = "../../'project$'/data/derived/ultrasound/
+    ...'speaker$'/alignment"
 
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
 
@@ -69,8 +70,8 @@ for speech_interval to speech_intervals
         
             if plosion == undefined
                 plosion = 0
-        	elif plosion < 3
-        		plosion = 0
+            elif plosion < 3
+                plosion = 0
             endif
         
             selectObject: matrix

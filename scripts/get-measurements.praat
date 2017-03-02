@@ -3,7 +3,8 @@ form Get measurements
     word speaker SC01
 endform
 
-directory_us_annotations$ = "../../pilot/data/derived/ultrasound/'speaker$'/annotations"
+directory_us_annotations$ = "../../pilot/data/derived/ultrasound/'speaker$'/
+    ...annotations"
 directory_egg_vuv$ = "../../pilot/data/derived/egg/'speaker$'"
 
 createDirectory("../../pilot/data/derived/merged/'speaker$'")
