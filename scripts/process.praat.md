@@ -777,8 +777,8 @@ for sample from 1 to samples
 
     if plosion == undefined
         plosion = 0
-	elif plosion < 3
-		plosion = 0
+    elif plosion < 3
+        plosion = 0
     endif
 
     selectObject: matrix
@@ -798,7 +798,7 @@ burst = Get time from index: 1
 This script extracts several durations related to voicing. The main function `merge` is a loop that reads the TextGrids from the derived ultrasound and EGG folders and merges the tier with the gestures from the ultrasound and the tier with the voiced/unvoiced intervals from the EGG.
 
 
-#### get-measurements.praat
+### get-measurements.praat
 ```praat
 
 <<<read>>>
@@ -925,6 +925,8 @@ For the current TextGrid, get the number of points in the `gestures` point tier 
 ```
 
 ## Get the number of a tier based on the name
+
+The following is a procedure that returns the number of a tier in a TextGrid given the name of that tier. The value is returned to `getTierNumber.return`.
 
 ### "get tier number"
 ```praat
