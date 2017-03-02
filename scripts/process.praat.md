@@ -924,6 +924,25 @@ For the current TextGrid, get the number of points in the `gestures` point tier 
         appendFileLine: result_file$, result_line$
 ```
 
+## Get the number of a tier based on the name
+
+### "get tier number"
+```praat
+procedure getTierNumber: .tierName$
+    .numberOfTiers = Get number of tiers
+    .index = 1
+    repeat
+        .current$ = Get tier name: .index
+        .index += 1
+    until .current$ == .tierName$ or .index > .numberOfTiers
+    if .index > .numberOfTiers
+        exitScript: "The selected TextGrid does not have a tier named ''.tierName$''."
+        else
+            .return = .index - 1
+    endif
+endproc
+```
+
 ## Headers
 
 ### "sync header"
