@@ -7,7 +7,7 @@
    1. Run `alingment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `/data/derived/ultrasound/[ID]/alignment`
    1. **WARNING OVERWRITE** Run SPPAS on concatenated `.wav` and `.txt`
    1. Check alignment
-   1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file, saved in `/data/derived/ultrasound/[ID]/audio`
+   1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file, saved in `/data/derived/ultrasound/[ID]/audio`, and a merged TextGrid, saved in `/data/derived/ultrasound/[ID]/alignment`
    1. Import TextGrids back in `AAA`
 1. **Tongue tracking**
    1. Create a spline template for the speaker and save it (`.fst`)
