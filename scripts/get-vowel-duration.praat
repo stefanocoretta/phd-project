@@ -17,8 +17,11 @@ directory$ = "../'project$'/data/derived/ultrasound/'speaker$'/alignment"
 
 result_file$ = "../'project$'/results/'speaker$'-vowel-durations.csv"
 
-header$ = "index,speaker,word,duration,sentence"
+header$ = "index,speaker,word,vowel.duration,closure.duration,
+    ...sentence.duration"
 writeFileLine: result_file$, header$
+
+bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
 
 palign = Read from file: "'directory$'/'speaker$'-palign.TextGrid"
 
@@ -26,6 +29,7 @@ intervals = Get number of intervals: 2
 index = 0
 
 for interval to intervals
+    selectObject: palign
     label$ = Get label of interval: 2, interval
     if label$ == label_lang$
         index += 1
@@ -40,9 +44,18 @@ for interval to intervals
         end_sentence = Get end time of interval: 3, sentence_interval
         sentence_duration = end_sentence - start_sentence
 
-        result_line$ = "'index','speaker$','word$','v_duration','sentence_duration'"
+        selectObject: bursts
+        burst_interval = Get nearest index from time: 1, end_vowel
+        burst = Get time of point: 1, burst_interval
+        if burst < end_vowel or burst > end_sentence
+            burst = undefined
+        endif
+
+        closure = (burst - end_vowel) * 1000
+
+        result_line$ = "'index','speaker$','word$','v_duration','closure','sentence_duration'"
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
 
-removeObject: palign
+removeObject: palign, bursts
