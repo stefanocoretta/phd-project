@@ -30,7 +30,7 @@ Let's read the files.
 vowels <- list.files(path = "pilot/results",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
-    map_df(~read_csv(.))
+    map_df(~read_csv(., na = "--undefined--"))
 
 languages <- read_csv("./pilot/stimuli/languages.csv")
 words <- read_csv("./pilot/stimuli/nonce.csv")
@@ -39,7 +39,8 @@ words <- read_csv("./pilot/stimuli/nonce.csv")
 vowels <- left_join(vowels, languages) %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(duration.norm = (duration - mean(duration)) / sd(duration))
+    mutate(duration.norm = (vowel.duration - mean(vowel.duration)) /
+               sd(vowel.duration))
 ```
 
 # Italian
@@ -49,21 +50,44 @@ Fit a mixed effect linear model for Italian.
 ```{r lmer-it}
 vowels.it <- filter(vowels, language == "italian")
 
-model.it <- lmer(duration ~ c2phonation * vowel + c1phonation + c2place +
-                  sentence + (1 | word) + (1|speaker),
+model.it <- lmer(vowel.duration ~ c2phonation * vowel + c1phonation + c2place +
+                  sentence.duration + (1 | word) + (1|speaker),
               data = vowels.it
               )
 
 summary(model.it)
 
-mixed(duration ~ c2phonation * vowel + c1phonation + c2place +
-                  sentence + (1 | word) + (1|speaker),
+mixed(vowel.duration ~ c2phonation * vowel + c1phonation + c2place +
+                  sentence.duration + (1 | word) + (1|speaker),
               data = vowels.it)
 ```
 
 ```{r italian-effects-plot}
 plot(allEffects(model.it))
 ```
+
+## Vowel duration and consonant closure duration
+
+```{r lmer-closure-it}
+vowels.closure.it <- filter(vowels, language == "italian")
+
+model.closure.it <- lmer(vowel.duration ~ closure.duration * vowel + 
+                             c1phonation + c2place +
+                  sentence.duration + (1 | word) + (1|speaker),
+              data = vowels.closure.it
+              )
+
+summary(model.closure.it)
+
+mixed(vowel.duration ~ closure.duration * vowel + c1phonation + c2place +
+                  sentence.duration + (1 | word) + (1|speaker),
+              data = vowels.closure.it)
+```
+
+```{r closure-italian-effects-plot}
+plot(allEffects(model.closure.it))
+```
+
 
 # Polish
 
@@ -72,15 +96,15 @@ Fit a mixed effect linear model for Polish
 ```{r}
 vowels.pl <- filter(vowels, language == "polish")
 
-model.pl <- lmer(duration ~ c2phonation * vowel + c2place +
-                  sentence + (1 | word),
+model.pl <- lmer(vowel.duration ~ c2phonation * vowel + c2place +
+                  sentence.duration + (1 | word),
               data = vowels.pl
               )
 
 summary(model.pl)
 
-mixed(duration ~ c2phonation * vowel + c2place +
-                  sentence + (1 | word),
+mixed(vowel.duration ~ c2phonation * vowel + c2place +
+                  sentence.duration + (1 | word),
               data = vowels.pl)
 ```
 
@@ -93,17 +117,17 @@ plot(allEffects(model.pl))
 ```{r variation}
 dodge <- position_dodge(width = 0.5)
 
-ggplot(filter(vowels.it, c2place == "velar"), aes(c2phonation, duration, colour = speaker)) +
+ggplot(filter(vowels.it, c2place == "velar"), aes(c2phonation, vowel.duration, colour = speaker)) +
     facet_grid(. ~ vowel) +
     geom_violin(position = dodge) +
     geom_boxplot(width=0.1, position = dodge)
 
-ggplot(filter(vowels.it, c2place == "coronal"), aes(c2phonation, duration, colour = speaker)) +
+ggplot(filter(vowels.it, c2place == "coronal"), aes(c2phonation, vowel.duration, colour = speaker)) +
     facet_grid(. ~ vowel) +
     geom_violin(position = dodge) +
     geom_boxplot(width=0.1, position = dodge)
 
-ggplot(vowels.pl, aes(c2phonation, duration)) +
+ggplot(vowels.pl, aes(c2phonation, vowel.duration)) +
     facet_grid(. ~ vowel + c2place) +
     geom_violin() +
     geom_boxplot(width=0.2)
