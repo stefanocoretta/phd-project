@@ -4,7 +4,7 @@ form Extract vuv
     boolean debug_mode
 endform
 
-directory$ = "../../'project$'/data/derived/egg"
+directory$ = "../'project$'/data/derived/egg"
 
 Create Strings as file list: "filelist", "'directory$'/'speaker$'/*.wav"
 files = Get number of strings

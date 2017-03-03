@@ -3,7 +3,7 @@ form Generate input for force alignment with SPPAS
     word speaker SC01
 endform
 
-directory_speaker$ = "../../'project$'/data/derived/ultrasound/'speaker$'"
+directory_speaker$ = "../'project$'/data/derived/ultrasound/'speaker$'"
 directory_audio$ = "'directory_speaker$'/audio"
 createDirectory ("'directory_speaker$'/alignment")
 directory_alignment$ = "'directory_speaker$'/alignment"

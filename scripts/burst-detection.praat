@@ -15,8 +15,8 @@ else
     exit "The language you selected is not valid"
 endif
 
-directory_audio$ = "../../'project$'/data/derived/ultrasound/'speaker$'/audio"
-directory_alignment$ = "../../'project$'/data/derived/ultrasound/
+directory_audio$ = "../'project$'/data/derived/ultrasound/'speaker$'/audio"
+directory_alignment$ = "../'project$'/data/derived/ultrasound/
     ...'speaker$'/alignment"
 
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"

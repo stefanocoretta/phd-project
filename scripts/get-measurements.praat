@@ -3,14 +3,14 @@ form Get measurements
     word speaker SC01
 endform
 
-directory_us_annotations$ = "../../pilot/data/derived/ultrasound/'speaker$'/
+directory_us_annotations$ = "../pilot/data/derived/ultrasound/'speaker$'/
     ...annotations"
-directory_egg_vuv$ = "../../pilot/data/derived/egg/'speaker$'"
+directory_egg_vuv$ = "../pilot/data/derived/egg/'speaker$'"
 
-createDirectory("../../pilot/data/derived/merged/'speaker$'")
-directory_out$ = "../../pilot/data/derived/merged/'speaker$'"
+createDirectory("../pilot/data/derived/merged/'speaker$'")
+directory_out$ = "../pilot/data/derived/merged/'speaker$'"
 
-result_file$ = "../../pilot/results/'speaker$'-measurements.csv"
+result_file$ = "../pilot/results/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
 writeFileLine: result_file$, result_header$
 

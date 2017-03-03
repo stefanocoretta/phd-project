@@ -48,9 +48,9 @@ form Syncronise EGG data
     word speaker SC01
     boolean debug_mode
 endform
-egg_directory$ = "../../'project$'/data/raw/egg"
-us_directory$ = "../../'project$'/data/derived/ultrasound"
-out_directory$ = "../../'project$'/data/derived/egg"
+egg_directory$ = "../'project$'/data/raw/egg"
+us_directory$ = "../'project$'/data/derived/ultrasound"
+out_directory$ = "../'project$'/data/derived/egg"
 createDirectory ("'out_directory$'/'speaker$'")
 
 Create Strings as file list: "filelist_egg", "'egg_directory$'/'speaker$'/*.wav"
