@@ -93,8 +93,8 @@ plot(allEffects(model.closure.it))
 
 Fit a mixed effect linear model for Polish
 
-```{r}
-vowels.pl <- filter(vowels, language == "polish")
+```{r pl-vowel-phonation}
+vowels.pl <- filter(vowels, language == "polish", closure.duration < 90)
 
 model.pl <- lmer(vowel.duration ~ c2phonation * vowel + c2place +
                   sentence.duration + (1 | word),
@@ -111,6 +111,56 @@ mixed(vowel.duration ~ c2phonation * vowel + c2place +
 ```{r polish-effects-plot}
 plot(allEffects(model.pl))
 ```
+
+```{r pl-closure}
+closure.pl <- lmer(
+    closure.duration ~
+        c2phonation +
+        vowel +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+
+summary(closure.pl)
+plot(allEffects(closure.pl))
+
+mixed(
+    closure.duration ~
+        c2phonation +
+        vowel +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+```
+
+
+```{r pl-vowel-closure}
+vowels.closure.pl <- lmer(
+    vowel.duration ~
+        closure.duration +
+        vowel +
+        c2phonation +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+
+summary(vowels.closure.pl)
+plot(allEffects(vowels.closure.pl))
+
+mixed(
+    vowel.duration ~
+        closure.duration +
+        vowel +
+        c2phonation +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+```
+
 
 # Inter-speaker variation
 
