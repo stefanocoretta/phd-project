@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(readr)
 library(dplyr)
+library(tidyr)
 library(purrr)
 library(lme4)
 library(afex)
@@ -182,3 +183,25 @@ ggplot(vowels.pl, aes(c2phonation, vowel.duration)) +
     geom_violin() +
     geom_boxplot(width=0.2)
 ```
+
+# Proportions
+
+```{r proportions}
+proportions <- vowels %>%
+    group_by(c2phonation, language) %>%
+    summarise(
+        total = mean(vowel.duration, na.rm = TRUE) +
+            mean(closure.duration, na.rm = TRUE),
+        vowel = mean(vowel.duration, na.rm = TRUE) / total,
+        closure = mean(closure.duration, na.rm = TRUE) / total
+    ) %>%
+    gather(segment, duration, vowel:closure)
+```
+
+```{r plot-proportions}
+ggplot(proportions, aes(c2phonation, duration, fill = segment)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    facet_grid(language ~ .)
+```
+
