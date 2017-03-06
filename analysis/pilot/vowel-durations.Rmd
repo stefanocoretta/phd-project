@@ -251,6 +251,7 @@ proportions <- vowels %>%
 ggplot(proportions, aes(c2phonation, duration, fill = segment)) +
     geom_bar(stat = "identity") +
     coord_flip() +
-    facet_grid(language ~ .)
+    facet_grid(language ~ .) +
+    guides(fill = guide_legend(reverse = TRUE))
 ```
 
