@@ -237,11 +237,14 @@ proportions <- vowels %>%
     group_by(c2phonation, language) %>%
     summarise(
         total = mean(vowel.duration, na.rm = TRUE) +
-            mean(closure.duration, na.rm = TRUE),
+            mean(closure.duration, na.rm = TRUE) +
+            mean(rvt, na.rm = TRUE),
         vowel = mean(vowel.duration, na.rm = TRUE) / total,
-        closure = mean(closure.duration, na.rm = TRUE) / total
+        closure = mean(closure.duration, na.rm = TRUE) / total,
+        rvt = mean(rvt, na.rm = TRUE) / total
     ) %>%
-    gather(segment, duration, vowel:closure)
+    gather(segment, duration, vowel:rvt) %>%
+    mutate(segment = factor(segment, levels = c("rvt", "closure", "vowel")))
 ```
 
 ```{r plot-proportions}
