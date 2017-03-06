@@ -661,7 +661,7 @@ directory$ = "../'project$'/data/derived/ultrasound/'speaker$'/alignment"
 
 result_file$ = "../'project$'/results/'speaker$'-vowel-durations.csv"
 
-header$ = "index,speaker,word,time,vowel.duration,closure.duration,
+header$ = "index,speaker,word,time,word.duration,vowel.duration,closure.duration,
     ...rvt,consonant.duration,sentence.duration"
 writeFileLine: result_file$, header$
 
@@ -679,6 +679,8 @@ for interval to intervals
         index += 1
         word$ = Get label of interval: 2, interval + 1
         start_target = Get start time of interval: 2, interval + 1
+        end_target = Get end time of interval: 2, interval + 1
+        word_duration = (end_target - start_target) * 1000
         start_consonant = Get interval at time: 1, start_target
         start_vowel = Get start time of interval: 1, start_consonant + 1
         end_vowel = Get end time of interval: 1, start_consonant + 1
@@ -701,8 +703,8 @@ for interval to intervals
         consonant_duration = closure + rvt
 
         result_line$ = "'index','speaker$','word$','start_target',
-            ...'v_duration','closure','rvt','consonant_duration',
-            ...'sentence_duration'"
+            ...'word_duration','v_duration','closure','rvt',
+            ...'consonant_duration','sentence_duration'"
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
