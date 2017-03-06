@@ -39,20 +39,18 @@ words <- read_csv("./pilot/stimuli/nonce.csv")
 
 vowels <- left_join(vowels, languages) %>%
     left_join(y = words) %>%
-    mutate_if(is.character, as.factor) %>%
-    mutate(duration.norm = (vowel.duration - mean(vowel.duration)) /
-               sd(vowel.duration),
-           consonant.duration = closure.duration + vot
-           )
+    mutate_if(is.character, as.factor)
 ```
 
 # Italian
 
+```{r}
+vowels.it <- filter(vowels, language == "italian")
+```
+
 Fit a mixed effect linear model for Italian.
 
 ```{r lmer-it}
-vowels.it <- filter(vowels, language == "italian")
-
 model.it <- lmer(vowel.duration ~ c2phonation * vowel + c1phonation + c2place +
                   sentence.duration + (1 | word) + (1|speaker),
               data = vowels.it
@@ -72,12 +70,10 @@ plot(allEffects(model.it))
 ## Vowel duration and consonant closure duration
 
 ```{r lmer-closure-it}
-vowels.closure.it <- filter(vowels, language == "italian")
-
 model.closure.it <- lmer(vowel.duration ~ closure.duration * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.closure.it
+              data = vowels.it
               )
 
 summary(model.closure.it)
@@ -85,7 +81,7 @@ summary(model.closure.it)
 mixed(vowel.duration ~ closure.duration * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.closure.it
+              data = vowels.it
       )
 ```
 
@@ -96,12 +92,10 @@ plot(allEffects(model.closure.it))
 ## Vowel duration and consonant duration
 
 ```{r lmer-consonants-it}
-vowels.consonants.it <- filter(vowels, language == "italian")
-
 model.consonants.it <- lmer(vowel.duration ~ consonant.duration * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.consonants.it
+              data = vowels.it
               )
 
 summary(model.consonants.it)
@@ -109,7 +103,7 @@ summary(model.consonants.it)
 mixed(vowel.duration ~ consonant.duration * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.consonants.it
+              data = vowels.it
       )
 ```
 
@@ -120,12 +114,10 @@ plot(allEffects(model.consonants.it))
 ## Consonant closure duration and voicing
 
 ```{r lmer-closure-voicing-it}
-vowels.closvoic.it <- filter(vowels, language == "italian")
-
 model.closvoic.it <- lmer(closure.duration ~ c2phonation +  vowel + 
                              c1phonation + c2place +
                   sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.closvoic.it
+              data = vowels.it
               )
 
 summary(model.closvoic.it)
@@ -133,7 +125,7 @@ summary(model.closvoic.it)
 mixed(closure.duration ~ c2phonation * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.closvoic.it
+              data = vowels.it
       )
 ```
 
@@ -143,11 +135,14 @@ plot(allEffects(model.closvoic.it))
 
 # Polish
 
+```{r}
+vowels.pl <- filter(vowels, language == "polish")
+```
+
+
 Fit a mixed effect linear model for Polish
 
 ```{r pl-vowel-phonation}
-vowels.pl <- filter(vowels, language == "polish", closure.duration < 90)
-
 model.pl <- lmer(vowel.duration ~ c2phonation * vowel + c2place +
                   sentence.duration + (1 | word),
               data = vowels.pl
