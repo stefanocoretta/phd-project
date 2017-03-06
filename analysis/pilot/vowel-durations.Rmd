@@ -48,6 +48,42 @@ vowels <- left_join(vowels, languages) %>%
 vowels.it <- filter(vowels, language == "italian")
 ```
 
+# Word duration
+
+```{r word-it}
+word.it <- lmer(
+    word.duration ~
+        c2phonation +
+        c1phonation +
+        vowel +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = vowels.it
+)
+
+summary(word.it)
+plot(allEffects(word.it))
+
+mixed(
+    word.duration ~
+        c2phonation +
+        c1phonation +
+        vowel +
+        sentence.duration +
+        (1|word),
+    data = vowels.it
+)
+```
+
+```{r word-plot-it}
+ggplot(vowels.it, aes(c2phonation, word.duration, colour = speaker)) +
+    geom_boxplot()
+```
+
+
+# Vowel duration
+
 Fit a mixed effect linear model for Italian.
 
 ```{r lmer-it}
@@ -139,6 +175,41 @@ plot(allEffects(model.closvoic.it))
 vowels.pl <- filter(vowels, language == "polish")
 ```
 
+# Word duration
+
+```{r word-pl}
+word.pl <- lmer(
+    word.duration ~
+        c2phonation +
+        vowel +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+
+summary(word.pl)
+plot(allEffects(word.pl))
+
+mixed(
+    word.duration ~
+        c2phonation +
+        vowel +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+```
+
+It seems there is no diffirence in duration between words with a voiceless stop and words with a voiced stop in Polish.
+
+```{r word-plot-pl}
+ggplot(vowels.pl, aes(c2phonation, word.duration)) +
+    geom_violin() +
+    geom_boxplot(width = 0.2)
+```
+
+
+# Vowel duration
 
 Fit a mixed effect linear model for Polish
 
