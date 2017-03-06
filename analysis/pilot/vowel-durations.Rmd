@@ -48,7 +48,7 @@ vowels <- left_join(vowels, languages) %>%
 vowels.it <- filter(vowels, language == "italian")
 ```
 
-# Word duration
+## Word duration
 
 ```{r word-it}
 word.it <- lmer(
@@ -82,7 +82,7 @@ ggplot(vowels.it, aes(c2phonation, word.duration, colour = speaker)) +
 ```
 
 
-# Vowel duration
+## Vowel duration
 
 Fit a mixed effect linear model for Italian.
 
@@ -175,7 +175,7 @@ plot(allEffects(model.closvoic.it))
 vowels.pl <- filter(vowels, language == "polish")
 ```
 
-# Word duration
+## Word duration
 
 ```{r word-pl}
 word.pl <- lmer(
@@ -209,7 +209,7 @@ ggplot(vowels.pl, aes(c2phonation, word.duration)) +
 ```
 
 
-# Vowel duration
+## Vowel duration
 
 Fit a mixed effect linear model for Polish
 
