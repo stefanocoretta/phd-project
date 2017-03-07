@@ -44,7 +44,7 @@ vowels <- left_join(vowels, languages) %>%
 
 # Italian
 
-```{r}
+```{r italian}
 vowels.it <- filter(vowels, language == "italian")
 ```
 
@@ -171,7 +171,7 @@ plot(allEffects(model.closvoic.it))
 
 # Polish
 
-```{r}
+```{r polish}
 vowels.pl <- filter(vowels, language == "polish")
 ```
 
@@ -326,3 +326,34 @@ ggplot(proportions, aes(c2phonation, duration, fill = segment)) +
     guides(fill = guide_legend(reverse = TRUE))
 ```
 
+```{r word-proportions}
+word.proportions <- vowels %>%
+    group_by(c1phonation, c2phonation, language) %>%
+    summarise(
+        total = 
+            mean(c1.duration, na.rm = TRUE) +
+            mean(vowel.duration, na.rm = TRUE) +
+            mean(closure.duration, na.rm = TRUE) +
+            mean(rvt, na.rm = TRUE) +
+            mean(v2.duration, na.rm = TRUE),
+        c1 = mean(c1.duration, na.rm = TRUE),
+        vowel = mean(vowel.duration, na.rm = TRUE),
+        closure = mean(closure.duration, na.rm = TRUE),
+        rvt = mean(rvt, na.rm = TRUE),
+        v2 = mean(v2.duration, na.rm = TRUE)
+    ) %>%
+    gather(segment, duration, c1:v2) %>%
+    mutate(segment = factor(segment,
+                            levels = c("v2", "rvt", "closure", "vowel", "c1")
+                            )
+           ) %>%
+    unite(phonation, c1phonation, c2phonation)
+```
+
+```{r plot-word-proportions}
+ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    facet_grid(language ~ .) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
