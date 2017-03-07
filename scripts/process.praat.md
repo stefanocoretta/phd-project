@@ -638,9 +638,9 @@ procedure smoothing : .width
 endproc
 ```
 
-## Get vowel durations
+## Get durations
 
-### get-vowel-duration.praat
+### get-durations.praat
 ```praat
 form Get vowel duration
     word project pilot

@@ -18,7 +18,7 @@
    1. Check relevant splines for Tongue Dorsum and Tongue Tip
    1. Load `AnaVal-[ID].avl` from `Edit values` and change splines to TD and TT splines (Save it for the future)
    1. Calculate Maths for entire session
-1. **Find target, maximum and release**
+1. **Find consonantal gestures**
    1. Select TD stimuli
    1. `Find...` > `Load` and `execute` `td_function_50.srh`
    1. Select TT stimuli
@@ -28,6 +28,8 @@
 1. **Burst detection**
    1. Run `burst-detection.praat`: the output is a `.TextGrid` file, written in `/data/derived/ultrasound/[ID]/alignment`
    1. Check bursts
+1. **Get durations**
+   1. Run `get-durations.praat`: the output is written in the `results` folder
 
 ## EGG data
 
