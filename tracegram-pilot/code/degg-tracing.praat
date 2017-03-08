@@ -80,7 +80,7 @@ for file to numberOfFiles
                     deggMaximumRel = (deggMaximum - eggMinimum1) / period
                     deggMinimumRel = (deggMinimum - eggMinimum1) / period
             
-                    time = (eggMinimum1 - start) / (end - start)
+                    time = (eggMinimum1 - selectionStart) / (selectionEnd - selectionStart)
             
                     resultLine$ = "'fileBareName$','token','time','eggMinimum1',
                         ...'deggMaximumRel','deggMinimumRel'"
