@@ -17,7 +17,7 @@ smoothWidth = 11
 results$ = "../results"
 createDirectory(results$)
 data$ = "../data"
-resultsHeader$ = "file,time,egg.minimum,degg.maximum,degg.minimum"
+resultsHeader$ = "file,token,time,egg.minimum,degg.maximum,degg.minimum"
 resultsFile$ = "'results$'/results.csv"
 writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
@@ -45,10 +45,12 @@ endfor
 
 ## "vowel loop"
 ```praat
+token = 0
 for interval to numberOfIntervals
     selectObject: textGrid
     intervalLabel$ = Get label of interval: 1, interval
     if intervalLabel$ == "V"
+        token += 1
         start = Get start time of interval: 1, interval
         end = Get end time of interval: 1, interval
         vowelDuration = end - start
@@ -116,7 +118,7 @@ for point to eggPoints - 2
 
         time = (eggMinimum1 - start) / (end - start)
 
-        resultLine$ = "'fileBareName$','time','eggMinimum1',
+        resultLine$ = "'fileBareName$','token','time','eggMinimum1',
             ...'deggMaximumRel','deggMinimumRel'"
 
         appendFileLine: resultsFile$, resultLine$
