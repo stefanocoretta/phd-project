@@ -24,16 +24,18 @@ library(ggplot2)
 degg.tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(phonation = factor(phonation, levels = c("modal", "breathy")))
+    mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
+    gather(peak, value, degg.maximum:degg.minimum)
 ```
 
 # Tracegram plot
 
 ```{r tracegram-plot}
-ggplot(degg.tracing, aes(x = time, colour = phonation)) +
-    geom_smooth(aes(y = degg.maximum), size = 0.5, alpha = 0.2) +
-    geom_smooth(aes(y = degg.minimum), size = 0.5, alpha = 0.2) +
+ggplot(degg.tracing, aes(time, value, colour = peak)) +
+    geom_point(size = 0.5, alpha = 0.1) +
+    geom_smooth(size = 0.5, method = "lm") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
-    facet_grid(. ~ speaker)
+    facet_grid(speaker ~ phonation) +
+    ylim(0, 1)
 ```
