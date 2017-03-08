@@ -32,6 +32,20 @@ degg.tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     gather(peak, value, degg.maximum:degg.minimum)
 ```
 
+# dEGG maxima and minima
+
+```{r degg-boxplot}
+ggplot(degg.tracing, aes(peak, value, colour = phonation)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r degg-violin}
+ggplot(degg.tracing, aes(peak, value, colour = phonation)) +
+    geom_violin() +
+    facet_grid(. ~ speaker)
+```
+
 # Tracegram plot
 
 ```{r tracegram-plot}
