@@ -30,6 +30,14 @@ degg.tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
     gather(peak, value, degg.maximum:degg.minimum)
+
+quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
+    separate(file, c("speaker", "phonation")) %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(phonation = factor(phonation, levels = c("modal", "breathy")),
+           closed.quotient = degg.minimum - degg.maximum
+           ) %>%
+    filter(speaker != "js")
 ```
 
 # dEGG maxima and minima
@@ -57,3 +65,53 @@ ggplot(degg.tracing, aes(time, value, colour = peak)) +
     facet_grid(speaker ~ phonation) +
     ylim(0, 1)
 ```
+
+# Closed quotient
+
+```{r cq-density}
+ggplot(quotient, aes(closed.quotient, colour = phonation)) +
+    geom_density() +
+    facet_grid(. ~ speaker)
+```
+
+```{r cq-boxplot}
+ggplot(quotient, aes(phonation, closed.quotient)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r quotient-lmer}
+quotient.lmer <- lmer(
+    closed.quotient ~
+        phonation +
+        (1 + phonation|speaker),
+    data = quotient
+)
+
+summary(quotient.lmer)
+```
+
+```{r quotient-likelyhood}
+quotient.lmer.null <- lmer(
+    closed.quotient ~
+        (1 + phonation|speaker),
+    data = quotient
+)
+
+anova(quotient.lmer.null, quotient.lmer)
+```
+
+
+```{r quotient-afex, eval = FALSE}
+mixed(
+    closed.quotient ~
+        phonation +
+        (1 + phonation|speaker),
+    data = quotient
+)
+```
+
+```{r quotient-lmer-effects}
+plot(allEffects(quotient.lmer))
+```
+
