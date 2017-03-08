@@ -1,0 +1,39 @@
+---
+title: "Tracegram pilot"
+author: "Stefano Coretta"
+date: "08/03/2017"
+output: 
+  pdf_document: 
+    fig_caption: yes
+    latex_engine: xelatex
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+# Data import
+
+```{r data}
+degg.tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
+    separate(file, c("speaker", "phonation")) %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(phonation = factor(phonation, levels = c("modal", "breathy")))
+```
+
+# Tracegram plot
+
+```{r tracegram-plot}
+ggplot(degg.tracing, aes(x = time, colour = phonation)) +
+    geom_smooth(aes(y = degg.maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = degg.minimum), size = 0.5, alpha = 0.2) +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    facet_grid(. ~ speaker)
+```
