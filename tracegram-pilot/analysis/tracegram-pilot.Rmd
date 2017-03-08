@@ -16,6 +16,10 @@ library(readr)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+theme_set(theme_bw())
+library(lme4)
+library(effects)
+library(afex)
 ```
 
 # Data import
