@@ -35,12 +35,18 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/pilot/data/ \
     ~/Documents/GitHub/phd-project/pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/tracegram/data/ \
-    ~/Documents/GitHub/phd-project/tracegram/data
+    /Volumes/Multimedia/phd-project/tracegram-prepilot/data/ \
+    ~/Documents/GitHub/phd-project/tracegram-prepilot/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
+    ~/Documents/GitHub/phd-project/tracegram-pilot/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/pilot/data/ \
     ~/Documents/GitHub/phd-project/pilot/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/tracegram/data/ \
-    ~/Documents/GitHub/phd-project/tracegram/data/
+    /Volumes/Multimedia/phd-project/tracegram-prepilot/data/ \
+    ~/Documents/GitHub/phd-project/tracegram-prepilot/data/
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
+    ~/Documents/GitHub/phd-project/tracegram-pilot/data/
