@@ -89,7 +89,7 @@ ggplot(degg.tracing, aes(time, value, colour = peak)) +
 ```{r norm-tracegram-plot}
 ggplot(degg.tracing, aes(time, value.norm, colour = phonation)) +
     geom_point(size = 0.5, alpha = 0.1) +
-    geom_smooth(size = 0.5, method = "lm") +
+    geom_smooth(size = 0.5, method = "loess") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     facet_grid(. ~ peak)
