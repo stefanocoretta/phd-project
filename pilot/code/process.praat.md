@@ -22,7 +22,7 @@ form Generate input for force alignment with SPPAS
     word speaker SC01
 endform
 
-directory_speaker$ = "../'project$'/data/derived/ultrasound/'speaker$'"
+directory_speaker$ = "../data/derived/ultrasound/'speaker$'"
 directory_audio$ = "'directory_speaker$'/audio"
 createDirectory ("'directory_speaker$'/alignment")
 directory_alignment$ = "'directory_speaker$'/alignment"
@@ -111,8 +111,8 @@ else
     exit "The language you selected is not valid"
 endif
 
-directory_audio$ = "../'project$'/data/derived/ultrasound/'speaker$'/audio"
-directory_alignment$ = "../'project$'/data/derived/ultrasound/
+directory_audio$ = "../data/derived/ultrasound/'speaker$'/audio"
+directory_alignment$ = "../data/derived/ultrasound/
     ...'speaker$'/alignment"
 
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
@@ -245,9 +245,9 @@ The number of files in the EGG folder is saved in `files`.
 
 ### "read files"+=
 ```praat
-egg_directory$ = "../'project$'/data/raw/egg"
-us_directory$ = "../'project$'/data/derived/ultrasound"
-out_directory$ = "../'project$'/data/derived/egg"
+egg_directory$ = "../data/raw/egg"
+us_directory$ = "../data/derived/ultrasound"
+out_directory$ = "../data/derived/egg"
 createDirectory ("'out_directory$'/'speaker$'")
 
 Create Strings as file list: "filelist_egg", "'egg_directory$'/'speaker$'/*.wav"
@@ -424,7 +424,7 @@ form Extract vuv
     boolean debug_mode
 endform
 
-directory$ = "../'project$'/data/derived/egg"
+directory$ = "../data/derived/egg"
 
 Create Strings as file list: "filelist", "'directory$'/'speaker$'/*.wav"
 files = Get number of strings
@@ -496,10 +496,10 @@ form dEGG tracing
     real smooth_width 11
 endform
 
-directory$ = "../'project$'/data/derived/egg/'speaker$'"
-directory_textgrid$ = "../'project$'/data/derived/ultrasound/'speaker$'/audio"
+directory$ = "../data/derived/egg/'speaker$'"
+directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
-result_file$ = "../'project$'/results/'speaker$'-degg-tracing.csv"
+result_file$ = "../results/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,word,abs.time,time,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -657,9 +657,9 @@ else
     exit "The language you selected is not valid"
 endif
 
-directory$ = "../'project$'/data/derived/ultrasound/'speaker$'/alignment"
+directory$ = "../data/derived/ultrasound/'speaker$'/alignment"
 
-result_file$ = "../'project$'/results/'speaker$'-vowel-durations.csv"
+result_file$ = "../results/'speaker$'-vowel-durations.csv"
 
 header$ = "index,speaker,word,time,word.duration,c1.duration,vowel.duration,
     ...closure.duration,rvt,c2.duration,v2.duration,sentence.duration"
@@ -838,14 +838,14 @@ form Get measurements
     word speaker SC01
 endform
 
-directory_us_annotations$ = "../pilot/data/derived/ultrasound/'speaker$'/
+directory_us_annotations$ = "../data/derived/ultrasound/'speaker$'/
     ...annotations"
-directory_egg_vuv$ = "../pilot/data/derived/egg/'speaker$'"
+directory_egg_vuv$ = "../data/derived/egg/'speaker$'"
 
-createDirectory("../pilot/data/derived/merged/'speaker$'")
-directory_out$ = "../pilot/data/derived/merged/'speaker$'"
+createDirectory("../data/derived/merged/'speaker$'")
+directory_out$ = "../data/derived/merged/'speaker$'"
 
-result_file$ = "../pilot/results/'speaker$'-measurements.csv"
+result_file$ = "../results/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
 writeFileLine: result_file$, result_header$
 
