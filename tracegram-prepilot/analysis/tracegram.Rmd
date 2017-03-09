@@ -22,7 +22,7 @@ library(gss)
 Import data from `degg-tracing.csv` as `degg`.
 
 ```{r import}
-degg <- read_csv("tracegram/degg-tracing.csv")
+degg <- read_csv("tracegram-prepilot/results/degg-tracing.csv")
 degg.all <- degg %>%
     mutate_if(is.character, factor) %>%
     mutate(sound = factor(sound, levels = c("modal", "breathy", "creaky1", "mod2bre", "mod2bre2mod")))
