@@ -63,7 +63,6 @@ word.it <- lmer(
 )
 
 summary(word.it)
-plot(allEffects(word.it))
 
 mixed(
     word.duration ~
@@ -76,9 +75,12 @@ mixed(
 )
 ```
 
+In Italian, words with voiceless are longer.
+
 ```{r word-plot-it}
 ggplot(vowels.it, aes(c2phonation, word.duration, colour = speaker)) +
     geom_boxplot()
+plot(allEffects(word.it))
 ```
 
 
@@ -188,7 +190,6 @@ word.pl <- lmer(
 )
 
 summary(word.pl)
-plot(allEffects(word.pl))
 
 mixed(
     word.duration ~
@@ -206,6 +207,7 @@ It seems there is no diffirence in duration between words with a voiceless stop 
 ggplot(vowels.pl, aes(c2phonation, word.duration)) +
     geom_violin() +
     geom_boxplot(width = 0.2)
+plot(allEffects(word.pl))
 ```
 
 
