@@ -8,8 +8,9 @@
 # OpenOffice lock files
 .~lock*
 
-# Data folder
+# Data folder and .pdf
 data/
+*.pdf
 
 ########
 # R
