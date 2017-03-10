@@ -13,9 +13,9 @@ else
     exit "The language you selected is not valid"
 endif
 
-directory$ = "../'project$'/data/derived/ultrasound/'speaker$'/alignment"
+directory$ = "../data/derived/ultrasound/'speaker$'/alignment"
 
-result_file$ = "../'project$'/results/'speaker$'-vowel-durations.csv"
+result_file$ = "../results/'speaker$'-vowel-durations.csv"
 
 header$ = "index,speaker,word,time,word.duration,c1.duration,vowel.duration,
     ...closure.duration,rvt,c2.duration,v2.duration,sentence.duration"

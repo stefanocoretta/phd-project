@@ -24,10 +24,10 @@ form dEGG tracing
     real smooth_width 11
 endform
 
-directory$ = "../'project$'/data/derived/egg/'speaker$'"
-directory_textgrid$ = "../'project$'/data/derived/ultrasound/'speaker$'/audio"
+directory$ = "../data/derived/egg/'speaker$'"
+directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
-result_file$ = "../'project$'/results/'speaker$'-degg-tracing.csv"
+result_file$ = "../results/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,word,abs.time,time,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
