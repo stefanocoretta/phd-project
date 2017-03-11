@@ -144,3 +144,9 @@ mixed(
 plot(allEffects(quotient.lmer))
 ```
 
+```{r cq-plot}
+ggplot(quotient, aes(time, closed.quotient, colour = speaker)) +
+    geom_point(alpha = 0.2) +
+    facet_grid(phonation ~ .)
+```
+
