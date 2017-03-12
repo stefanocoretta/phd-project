@@ -150,3 +150,10 @@ ggplot(quotient, aes(time, closed.quotient, colour = speaker)) +
     facet_grid(phonation ~ .)
 ```
 
+```{r cq-plot}
+filter(quotient, token == 1) %>%
+ggplot(aes(time, closed.quotient)) +
+    geom_point(alpha = 0.2) +
+    geom_smooth() +
+    facet_grid(phonation ~ speaker)
+```
