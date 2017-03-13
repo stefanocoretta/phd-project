@@ -58,6 +58,19 @@ velocity <- velocity %>%
 
 velocity.coronal <- filter(velocity, c2place == "coronal")
 velocity.velar <- filter(velocity, c2place == "velar")
+
+degg.word <- list.files(path = "./pilot/results",
+                   pattern = "*-degg-tracing-word.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(.)) %>%
+    mutate(closed.quotient = minimum - maximum)
+
+degg.word <- left_join(degg.word, languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+degg.word.it <- filter(degg.word, language == "italian")
+degg.word.pl <- filter(degg.word, language == "polish")
 ```
 
 # Velocity plots
@@ -73,3 +86,13 @@ ggplot(velocity.velar, aes(rel.time, TD.velocity.abs)) +
     geom_point(alpha = 0.2) +
     facet_grid(vowel ~ c2phonation)
 ```
+
+## Closed quotient
+
+```{r}
+filter(degg.word, closed.quotient < 1, closed.quotient > 0) %>%
+ggplot(aes(proportion, closed.quotient, colour = word)) +
+    geom_point() +
+    facet_grid(speaker ~ c2phonation)
+```
+
