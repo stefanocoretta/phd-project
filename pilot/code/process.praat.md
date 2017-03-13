@@ -500,7 +500,7 @@ directory$ = "../data/derived/egg/'speaker$'"
 directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
 result_file$ = "../results/'speaker$'-degg-tracing.csv"
-header$ = "speaker,file,word,abs.time,time,maximum,minimum"
+header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
 Create Strings as file list: "filelist", "'directory$'/*.wav"
@@ -609,10 +609,11 @@ for point to egg_points - 2
         degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
         degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
 
-        time = (egg_minimum_1 - start) / (end - start)
+        time = egg_minimum_1 - start
+        proportion = (egg_minimum_1 - start) / (end - start)
 
         result_line$ = "'speaker$','filename$','stimulus$','egg_minimum_1',
-            ...'time','degg_maximum_rel','degg_minimum_rel'"
+            ...'time','proportion','degg_maximum_rel','degg_minimum_rel'"
 
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
@@ -636,6 +637,66 @@ procedure smoothing : .width
 
     Formula: .formula$
 endproc
+```
+
+## Word DEGG tracing
+
+### word-degg-tracing.praat
+```praat
+<<<smoothing>>>
+
+<<<get files list word>>>
+
+<<<file loop word>>>
+```
+
+### "get files list word"
+```praat
+form dEGG tracing
+    word project pilot
+    word speaker SC01
+    comment Specify the lower and upper frequency (in Hz) for filtering:
+    real lower 40
+    real upper 10000
+    comment Specify the smooth width "m" (the number of points):
+    real smooth_width 11
+endform
+
+directory$ = "../data/derived/egg/'speaker$'"
+directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
+
+result_file$ = "../results/'speaker$'-word-degg-tracing.csv"
+header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
+writeFileLine: "'result_file$'", "'header$'"
+
+Create Strings as file list: "filelist", "'directory$'/*.wav"
+files = Get number of strings
+```
+
+### "file loop word"
+```praat
+for file to files
+    selectObject: "Strings filelist"
+    file$ = Get string: file
+    filename$ = file$ - ".wav"
+
+    Read Strings from raw text file: "'directory_textgrid$'/'filename$'.txt"
+    prompt$ = Get string: 1
+    stimulus$ = extractWord$(prompt$, " ")
+
+    Read separate channels from sound file: "'directory$'/'file$'"
+
+    Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
+
+    start = Get starting point: 2, 2
+    end = Get end point: 2, 2
+
+    selectObject: "Sound 'filename$'_ch2"
+    Extract part: start, end, "rectangular", 1, "yes"
+    Rename: "egg"
+
+    <<<main function>>>
+endfor
 ```
 
 ## Get durations

@@ -27,7 +27,7 @@ endform
 directory$ = "../data/derived/egg/'speaker$'"
 directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
-result_file$ = "../results/'speaker$'-degg-tracing.csv"
+result_file$ = "../results/'speaker$'-word-degg-tracing.csv"
 header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -47,8 +47,8 @@ for file to files
 
     Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
 
-    start = Get starting point: 3, 2
-    end = Get end point: 3, 2
+    start = Get starting point: 2, 2
+    end = Get end point: 2, 2
 
     selectObject: "Sound 'filename$'_ch2"
     Extract part: start, end, "rectangular", 1, "yes"
