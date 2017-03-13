@@ -641,7 +641,7 @@ endproc
 
 ## Word DEGG tracing
 
-### word-degg-tracing.praat
+### degg-tracing-word.praat
 ```praat
 <<<smoothing>>>
 
