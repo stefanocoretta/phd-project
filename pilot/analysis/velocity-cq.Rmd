@@ -84,11 +84,27 @@ degg.word <- left_join(degg.word, languages) %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 
+preceding <- ""
+counter = 0
+repetition <- as.numeric()
+for (item in degg.word$word) {
+    if (item != preceding) {
+        counter <- counter + 1
+        repetition <- c(repetition, counter)
+        preceding <- item
+    } else {
+        repetition <- c(repetition, counter)
+    }
+}
+
+degg.word <- cbind(degg.word, repetition) %>%
+    mutate(repetition = as.factor(repetition))
+
 degg.word.it <- filter(degg.word, language == "italian")
 degg.word.pl <- filter(degg.word, language == "polish")
 ```
 
-# Velocity plots
+# Velocity
 
 ```{r coronal-velocity-plot}
 ggplot(velocity.coronal, aes(rel.time, TT.velocity.abs)) +
@@ -108,12 +124,84 @@ ggplot(velocity, aes(rel.time, TD.velocity.abs)) +
     facet_grid(speaker + c2place ~ c2phonation + vowel)
 ```
 
-## Closed quotient
+# Closed quotient
 
-```{r}
+```{r cq-plot}
 filter(degg.word, closed.quotient < 1, closed.quotient > 0) %>%
 ggplot(aes(rel.time, closed.quotient)) +
     geom_point() +
+    facet_grid(speaker + c2place ~ c2phonation + vowel)
+```
+
+# Velocity and CQ
+
+```{r}
+pata.polish <- filter(velocity, repetition == "12")
+paka.polish <- filter(velocity, repetition == "3")
+pata.italian <- filter(velocity, repetition == "99")
+paka.italian <- filter(velocity, repetition == "103")
+
+pata.degg.polish <- filter(degg.word, repetition == "13", closed.quotient < 1, closed.quotient > 0)
+paka.degg.polish <- filter(degg.word, repetition == "4", closed.quotient < 1, closed.quotient > 0)
+pata.degg.italian <- filter(degg.word, repetition == "99", closed.quotient < 1, closed.quotient > 0)
+paka.degg.italian <- filter(degg.word, repetition == "103", closed.quotient < 1, closed.quotient > 0)
+```
+
+```{r}
+ggplot(pata.polish, aes(rel.time, TT.velocity)) +
+    geom_line() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(pata.degg.polish, aes(rel.time, closed.quotient)) +
+    geom_point() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(paka.polish, aes(rel.time, TD.velocity)) +
+    geom_line() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(paka.degg.polish, aes(rel.time, closed.quotient)) +
+    geom_point() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(pata.italian, aes(rel.time, TT.displacement.sm)) +
+    geom_line() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(pata.degg.italian, aes(rel.time, closed.quotient)) +
+    geom_point() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(paka.italian, aes(rel.time, TD.displacement.sm)) +
+    geom_line() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r}
+ggplot(paka.degg.italian, aes(rel.time, closed.quotient)) +
+    geom_point() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+# Tracegram
+
+```{r tracegram}
+filter(degg.word, minimum < 1, minimum > 0) %>%
+ggplot(aes(x = proportion)) +
+    geom_point(aes(y = maximum)) +
+    geom_point(aes(y = minimum)) +
     facet_grid(speaker + c2place ~ c2phonation + vowel)
 ```
 
