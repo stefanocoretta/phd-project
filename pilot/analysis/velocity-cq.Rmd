@@ -12,7 +12,6 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library(knitr)
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(purrr)
@@ -56,6 +55,22 @@ velocity <- velocity %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 
+preceding <- ""
+counter = 0
+repetition <- as.numeric()
+for (item in velocity$word) {
+    if (item != preceding) {
+        counter <- counter + 1
+        repetition <- c(repetition, counter)
+        preceding <- item
+    } else {
+        repetition <- c(repetition, counter)
+    }
+}
+
+velocity <- cbind(velocity, repetition) %>%
+    mutate(repetition = as.factor(repetition))
+
 velocity.coronal <- filter(velocity, c2place == "coronal")
 velocity.velar <- filter(velocity, c2place == "velar")
 
@@ -77,22 +92,28 @@ degg.word.pl <- filter(degg.word, language == "polish")
 
 ```{r coronal-velocity-plot}
 ggplot(velocity.coronal, aes(rel.time, TT.velocity.abs)) +
-    geom_point(alpha = 0.2) +
-    facet_grid(vowel ~ c2phonation)
+    geom_line() +
+    facet_grid(speaker ~ c2phonation + vowel)
 ```
 
 ```{r velar-velocity-plot}
 ggplot(velocity.velar, aes(rel.time, TD.velocity.abs)) +
-    geom_point(alpha = 0.2) +
-    facet_grid(vowel ~ c2phonation)
+    geom_line() +
+    facet_grid(speaker ~ c2phonation + vowel)
+```
+
+```{r velocity-plot}
+ggplot(velocity, aes(rel.time, TD.velocity.abs)) +
+    geom_line() +
+    facet_grid(speaker + c2place ~ c2phonation + vowel)
 ```
 
 ## Closed quotient
 
 ```{r}
 filter(degg.word, closed.quotient < 1, closed.quotient > 0) %>%
-ggplot(aes(proportion, closed.quotient, colour = word)) +
+ggplot(aes(rel.time, closed.quotient)) +
     geom_point() +
-    facet_grid(speaker ~ c2phonation)
+    facet_grid(speaker + c2place ~ c2phonation + vowel)
 ```
 
