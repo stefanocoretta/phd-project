@@ -90,65 +90,116 @@ plot(allEffects(word.it))
 Fit a mixed effect linear model for Italian.
 
 ```{r lmer-it}
-model.it <- lmer(vowel.duration ~ c2phonation * vowel + c1phonation + c2place +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-              )
+model.it <- lmer(
+    vowel.duration ~
+        c2phonation *
+        vowel +
+        c1phonation +
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
 
 summary(model.it)
 
-mixed(vowel.duration ~ c2phonation * vowel + c1phonation + c2place +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it)
+mixed(
+    vowel.duration ~
+        c2phonation *
+        vowel +
+        c1phonation +
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
 ```
 
 ```{r italian-effects-plot}
 plot(allEffects(model.it))
 ```
 
+C2 voicing and vowel identity have an effect on vowel duration, although there is an interaction between those two terms. Low and mid-low vowels have a stronger voicing effect than the high vowel.
+
 ## Vowel duration and consonant closure duration
 
 ```{r lmer-closure-it}
-model.closure.it <- lmer(vowel.duration ~ closure.duration * vowel + 
-                             c1phonation + c2place + c2place:vowel +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-              )
+model.closure.it <- lmer(
+    vowel.duration ~
+        closure.duration *
+        vowel + 
+        c1phonation +
+        c2place +
+        c2place:vowel +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
 
 summary(model.closure.it)
 
-mixed(vowel.duration ~ closure.duration * vowel + 
-                             c1phonation + c2place + c2place:vowel +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-      )
+mixed(
+    vowel.duration ~
+        closure.duration *
+        vowel + 
+        c1phonation +
+        c2place +
+        c2place:vowel +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
 ```
 
 ```{r closure-italian-effects-plot}
 plot(allEffects(model.closure.it))
 ```
 
+There is an iteraction between closure duration and vowel identity: the high vowel has a stronger effect of closure duration on vowel duration (cf. with not so strong effect of voicing).
+
 ## Vowel duration and consonant duration
 
+The following includes closure and RVOT duration.
+
 ```{r lmer-consonants-it}
-model.consonants.it <- lmer(vowel.duration ~ c2.duration * vowel + 
-                             c1phonation + c2place + c2place:vowel +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-              )
+model.consonants.it <- lmer(
+    vowel.duration ~
+        c2.duration *
+        vowel +
+        c1phonation +
+        c2place +
+        c2place:vowel +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
 
 summary(model.consonants.it)
 
-mixed(vowel.duration ~ c2.duration * vowel + 
-                             c1phonation + c2place + c2place:vowel +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-      )
+mixed(
+    vowel.duration ~
+        c2.duration *
+        vowel +
+        c1phonation +
+        c2place +
+        c2place:vowel +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
 ```
 
 ```{r consonant-italian-effects-plot}
 plot(allEffects(model.consonants.it))
 ```
+
+It would be worth probably measuring vowel height in terms of tongue distance from the palate.
 
 ## Consonant closure duration and voicing
 
@@ -321,6 +372,8 @@ proportions <- vowels %>%
     mutate(segment = factor(segment, levels = c("rvt", "closure", "vowel")))
 ```
 
+The following graph is misleading, because the VOR in Italian and in Polish is not constant in the voiceless and voiced conditions.
+
 ```{r plot-proportions}
 ggplot(proportions, aes(c2phonation, duration, fill = segment)) +
     geom_bar(stat = "identity") +
@@ -352,6 +405,8 @@ word.proportions <- vowels %>%
            ) %>%
     unite(phonation, c1phonation, c2phonation)
 ```
+
+In Italian, the first C and the last vowel are held constant, while in Polish is the foot and the stressed vowel?
 
 ```{r plot-word-proportions}
 ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
