@@ -152,15 +152,9 @@ paka.degg.italian <- filter(degg.word, repetition == "103", closed.quotient < 1,
 
 ```{r}
 pata.plot.1 <- ggplot(pata.polish, aes(rel.time, TT.velocity)) +
-    geom_line()
-```
-
-```{r}
+    geom_line() + xlim(0, 0.21)
 pata.plot.2 <- ggplot(pata.degg.polish, aes(rel.time, closed.quotient)) +
-    geom_point()
-```
-
-```{r}
+    geom_point() + xlim(0, 0.21)
 pata.plot.1 <- ggplot_gtable(ggplot_build(pata.plot.1))
 pata.plot.2 <- ggplot_gtable(ggplot_build(pata.plot.2))
 
@@ -168,45 +162,64 @@ maxWidth <- unit.pmax(pata.plot.1$widths[2:3], pata.plot.2$widths[2:3])
 
 pata.plot.1$widths[2:3] <- maxWidth
 pata.plot.2$widths[2:3] <- maxWidth
-
-grid.arrange(pata.plot.1, pata.plot.2, heights = c(3, 2))
-```
-
-
-```{r}
-ggplot(paka.polish, aes(rel.time, TD.velocity)) +
-    geom_line() +
-    facet_grid(speaker ~ c2phonation + vowel)
 ```
 
 ```{r}
-ggplot(paka.degg.polish, aes(rel.time, closed.quotient)) +
-    geom_point() +
-    facet_grid(speaker ~ c2phonation + vowel)
+grid.arrange(pata.plot.1, pata.plot.2, heights = c(1, 1))
 ```
 
 ```{r}
-ggplot(pata.italian, aes(rel.time, TT.displacement.sm)) +
-    geom_line() +
-    facet_grid(speaker ~ c2phonation + vowel)
+paka.plot.1 <- ggplot(paka.polish, aes(rel.time, TD.velocity)) +
+    geom_line() + xlim(0, 0.25)
+paka.plot.2 <- ggplot(paka.degg.polish, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.25)
+paka.plot.1 <- ggplot_gtable(ggplot_build(paka.plot.1))
+paka.plot.2 <- ggplot_gtable(ggplot_build(paka.plot.2))
+
+maxWidth <- unit.pmax(paka.plot.1$widths[2:3], paka.plot.2$widths[2:3])
+
+paka.plot.1$widths[2:3] <- maxWidth
+paka.plot.2$widths[2:3] <- maxWidth
 ```
 
 ```{r}
-ggplot(pata.degg.italian, aes(rel.time, closed.quotient)) +
-    geom_point() +
-    facet_grid(speaker ~ c2phonation + vowel)
+grid.arrange(paka.plot.1, paka.plot.2, heights = c(1, 1))
 ```
 
 ```{r}
-ggplot(paka.italian, aes(rel.time, TD.displacement.sm)) +
-    geom_line() +
-    facet_grid(speaker ~ c2phonation + vowel)
+pata.plot.1 <- ggplot(pata.italian, aes(rel.time, TT.velocity)) +
+    geom_line() + xlim(0, 0.31)
+pata.plot.2 <- ggplot(pata.degg.italian, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.31)
+pata.plot.1 <- ggplot_gtable(ggplot_build(pata.plot.1))
+pata.plot.2 <- ggplot_gtable(ggplot_build(pata.plot.2))
+
+maxWidth <- unit.pmax(pata.plot.1$widths[2:3], pata.plot.2$widths[2:3])
+
+pata.plot.1$widths[2:3] <- maxWidth
+pata.plot.2$widths[2:3] <- maxWidth
 ```
 
 ```{r}
-ggplot(paka.degg.italian, aes(rel.time, closed.quotient)) +
-    geom_point() +
-    facet_grid(speaker ~ c2phonation + vowel)
+grid.arrange(pata.plot.1, pata.plot.2, heights = c(1, 1))
+```
+
+```{r}
+paka.plot.1 <- ggplot(paka.italian, aes(rel.time, TD.velocity)) +
+    geom_line() + xlim(0, 0.3)
+paka.plot.2 <- ggplot(paka.degg.italian, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.3)
+paka.plot.1 <- ggplot_gtable(ggplot_build(paka.plot.1))
+paka.plot.2 <- ggplot_gtable(ggplot_build(paka.plot.2))
+
+maxWidth <- unit.pmax(paka.plot.1$widths[2:3], paka.plot.2$widths[2:3])
+
+paka.plot.1$widths[2:3] <- maxWidth
+paka.plot.2$widths[2:3] <- maxWidth
+```
+
+```{r}
+grid.arrange(paka.plot.1, paka.plot.2, heights = c(1, 1))
 ```
 
 # Tracegram
