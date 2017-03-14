@@ -131,7 +131,7 @@ plot(allEffects(model.closure.it))
 ## Vowel duration and consonant duration
 
 ```{r lmer-consonants-it}
-model.consonants.it <- lmer(vowel.duration ~ consonant.duration * vowel + 
+model.consonants.it <- lmer(vowel.duration ~ c2.duration * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
               data = vowels.it
@@ -139,7 +139,7 @@ model.consonants.it <- lmer(vowel.duration ~ consonant.duration * vowel +
 
 summary(model.consonants.it)
 
-mixed(vowel.duration ~ consonant.duration * vowel + 
+mixed(vowel.duration ~ c2.duration * vowel + 
                              c1phonation + c2place + c2place:vowel +
                   sentence.duration + (1 | word) + (1|speaker),
               data = vowels.it
