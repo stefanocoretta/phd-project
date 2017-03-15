@@ -2,15 +2,13 @@
 # Misc
 ########
 
-# .DS_Store
+*.pdf
+*.html
 *.DS_Store
-
-# OpenOffice lock files
 .~lock*
 
-# Data folder and .pdf
+# Data folder
 data/
-*.pdf
 
 ########
 # R
