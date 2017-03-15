@@ -77,7 +77,7 @@ mixed(
 )
 ```
 
-In Italian, words with voiceless are longer.
+In Italian, words with voiceless stops are longer.
 
 ```{r word-plot-it}
 ggplot(vowels.it, aes(c2phonation, word.duration, colour = speaker)) +
@@ -85,8 +85,41 @@ ggplot(vowels.it, aes(c2phonation, word.duration, colour = speaker)) +
 plot(allEffects(word.it))
 ```
 
+## Consonant closure duration and phonation
 
-## Vowel duration
+```{r lmer-closure-voicing-it}
+model.closvoic.it <- lmer(
+    closure.duration ~
+        c2phonation +
+        vowel +
+        c1phonation +
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
+
+summary(model.closvoic.it)
+
+mixed(
+    closure.duration ~
+        c2phonation +
+        vowel +
+        c1phonation +
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
+```
+
+```{r closure-voicing-italian-effects-plot}
+plot(allEffects(model.closvoic.it))
+```
+
+## Vowel duration and phonation
 
 Fit a mixed effect linear model for Italian.
 
@@ -97,6 +130,7 @@ model.it <- lmer(
         vowel +
         c1phonation +
         c2place +
+        c2place:vowel +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -111,6 +145,7 @@ mixed(
         vowel +
         c1phonation +
         c2place +
+        c2place:vowel +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -122,18 +157,17 @@ mixed(
 plot(allEffects(model.it))
 ```
 
-C2 voicing and vowel identity have an effect on vowel duration, although there is an interaction between those two terms. Low and mid-low vowels have a stronger voicing effect than the high vowel.
+C2 voicing and vowel identity have an effect on vowel duration, although there is an interaction between those two terms. Low and mid-low vowels have a stronger voicing effect than the high vowel. But, see below: if you add an interaction with closure duration, vowel identity is not significant anymore.
 
 ## Vowel duration and consonant closure duration
 
 ```{r lmer-closure-it}
 model.closure.it <- lmer(
     vowel.duration ~
+        vowel * 
         closure.duration *
-        vowel + 
-        c1phonation +
         c2place +
-        c2place:vowel +
+        c1phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -144,11 +178,10 @@ summary(model.closure.it)
 
 mixed(
     vowel.duration ~
+        vowel * 
         closure.duration *
-        vowel + 
-        c1phonation +
         c2place +
-        c2place:vowel +
+        c1phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -157,10 +190,17 @@ mixed(
 ```
 
 ```{r closure-italian-effects-plot}
-plot(allEffects(model.closure.it))
+plot(allEffects(model.closure.it)[3])
 ```
 
-There is an iteraction between closure duration and vowel identity: the high vowel has a stronger effect of closure duration on vowel duration (cf. with not so strong effect of voicing).
+There is an iteraction between closure duration and vowel identity: the high vowel has a stronger effect of closure duration on vowel duration (cf. with not so strong effect of voicing). But, vowel identity on itself is not significant.
+
+```{r plot-vowel-closure-c2place}
+ggplot(vowels.it, aes(closure.duration, vowel.duration)) +
+    geom_smooth(method = "lm") +
+    facet_grid(vowel ~ c2place)
+```
+
 
 ## Vowel duration and consonant duration
 
@@ -170,10 +210,9 @@ The following includes closure and RVOT duration.
 model.consonants.it <- lmer(
     vowel.duration ~
         c2.duration *
-        vowel +
-        c1phonation +
+        vowel *
         c2place +
-        c2place:vowel +
+        c1phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -185,10 +224,9 @@ summary(model.consonants.it)
 mixed(
     vowel.duration ~
         c2.duration *
-        vowel +
-        c1phonation +
+        vowel *
         c2place +
-        c2place:vowel +
+        c1phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -197,38 +235,12 @@ mixed(
 ```
 
 ```{r consonant-italian-effects-plot}
-plot(allEffects(model.consonants.it))
+plot(allEffects(model.consonants.it)[3])
 ```
 
 It would be worth probably measuring vowel height in terms of tongue distance from the palate.
 
-## Consonant closure duration and voicing
-
-```{r lmer-closure-voicing-it}
-model.closvoic.it <- lmer(closure.duration ~ c2phonation +  vowel + 
-                             c1phonation + c2place +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-              )
-
-summary(model.closvoic.it)
-
-mixed(closure.duration ~ c2phonation * vowel + 
-                             c1phonation + c2place + c2place:vowel +
-                  sentence.duration + (1 | word) + (1|speaker),
-              data = vowels.it
-      )
-```
-
-```{r closure-voicing-italian-effects-plot}
-plot(allEffects(model.closvoic.it))
-```
-
 # Polish
-
-```{r polish}
-vowels.pl <- filter(vowels, language == "polish")
-```
 
 ## Word duration
 
@@ -263,29 +275,9 @@ ggplot(vowels.pl, aes(c2phonation, word.duration)) +
 plot(allEffects(word.pl))
 ```
 
+## Consonant closure duration and phonation
 
-## Vowel duration
-
-Fit a mixed effect linear model for Polish
-
-```{r pl-vowel-phonation}
-model.pl <- lmer(vowel.duration ~ c2phonation * vowel + c2place +
-                  sentence.duration + (1 | word),
-              data = vowels.pl
-              )
-
-summary(model.pl)
-
-mixed(vowel.duration ~ c2phonation * vowel + c2place +
-                  sentence.duration + (1 | word),
-              data = vowels.pl)
-```
-
-```{r polish-effects-plot}
-plot(allEffects(model.pl))
-```
-
-```{r pl-closure}
+```{r pl-closure-duration}
 closure.pl <- lmer(
     closure.duration ~
         c2phonation +
@@ -296,7 +288,6 @@ closure.pl <- lmer(
 )
 
 summary(closure.pl)
-plot(allEffects(closure.pl))
 
 mixed(
     closure.duration ~
@@ -308,30 +299,75 @@ mixed(
 )
 ```
 
+```{r effects-pl-closure-duration}
+plot(allEffects(closure.pl))
+```
+
+In Polish, the closure duration of voiced stops is smaller than that of voiceless stops.
+
+## Vowel duration and phonation
+
+Fit a mixed effect linear model for Polish
+
+```{r pl-vowel-phonation}
+model.pl <- lmer(
+    vowel.duration ~
+        c2phonation *
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|word),
+    data = vowels.pl
+)
+
+summary(model.pl)
+
+mixed(vowel.duration ~
+          c2phonation *
+          vowel +
+          c2place +
+          sentence.duration +
+          (1|word),
+      data = vowels.pl
+)
+```
+
+```{r polish-effects-plot}
+plot(allEffects(model.pl))
+```
+
+[u] is shorter than [a] and [o]. The interaction between voicing and vowel identity is in the same direction as with Italian but voicing is not significant (nor is the interaction). But, see below.
+
+
+
+## Vowel duration and consonant closure duration
 
 ```{r pl-vowel-closure}
 vowels.closure.pl <- lmer(
     vowel.duration ~
-        closure.duration +
-        vowel +
-        c2phonation +
+        closure.duration *
+        vowel * 
+        c2place +
         sentence.duration +
         (1|word),
     data = vowels.pl
 )
 
 summary(vowels.closure.pl)
-plot(allEffects(vowels.closure.pl))
 
 mixed(
     vowel.duration ~
-        closure.duration +
-        vowel +
-        c2phonation +
+        closure.duration *
+        vowel *
+        c2place +
         sentence.duration +
         (1|word),
     data = vowels.pl
 )
+```
+
+```{r effects-pl-vowel-closure}
+plot(allEffects(vowels.closure.pl)[2])
 ```
 
 
