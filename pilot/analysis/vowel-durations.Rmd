@@ -1,7 +1,7 @@
 ---
 title: "Vowel duration"
 author: "Stefano Coretta"
-date: "\today"
+date: \today
 output:
   html_document: default
   pdf_document:
