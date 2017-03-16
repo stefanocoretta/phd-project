@@ -22,6 +22,9 @@ library(ggplot2)
 theme_set(theme_bw())
 library(gss)
 library(stringr)
+library(lme4)
+library(afex)
+library(effects)
 ```
 
 # Data import
