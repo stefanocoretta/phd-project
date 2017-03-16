@@ -310,12 +310,16 @@ cons.gestures <- select(splines.raw, speaker:label) %>%
     mutate(nucleus = NOFF - NONS, deceleration = max - NONS, 
            acceleration = NOFF - max, skewness = deceleration / nucleus) %>%
     mutate_if(is.character, as.factor)
+
+gestures.it <- filter(cons.gestures, language == "italian")
+gestures.pl <- filter(cons.gestures, language == "polish")
 ```
 
 Let's plot the nucleus duration (NOFF - NONS) as a function of place of articulation, voicing of C2 (our target consonant in C1VC2V words), and language.
 
 ```{r nucleus-duration}
-ggplot(cons.gestures, aes(c2phonation, nucleus)) +
+filter(cons.gestures, nucleus < 0.1) %>%
+ggplot(aes(c2phonation, nucleus)) +
     facet_grid(.~language + c2place) +
     geom_violin() +
     geom_boxplot(width=0.1) +
@@ -324,6 +328,56 @@ ggplot(cons.gestures, aes(c2phonation, nucleus)) +
           )
 ```
 
+```{r nucleus-lmer-it}
+nucleus.model.it <- lmer(
+    nucleus ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word) +
+        (1|speaker),
+    data = gestures.it
+)
+
+summary(nucleus.model.it)
+
+mixed(
+    nucleus ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word) +
+        (1|speaker),
+    data = gestures.it
+)
+```
+
+```{r nucleus-plot-it}
+plot(allEffects(nucleus.model.it))
+```
+
+
+```{r nucleus-lmer-pl}
+nucleus.model.pl <- lmer(
+    nucleus ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word),
+    data = gestures.pl
+)
+
+summary(nucleus.model.pl)
+
+mixed(
+    nucleus ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word),
+    data = gestures.pl
+)
+```
 
 ```{r deceleration-duration}
 ggplot(cons.gestures, aes(c2phonation, deceleration)) +
