@@ -1029,6 +1029,13 @@ procedure getTierNumber: .tierName$
 endproc
 ```
 
+## Get duration of voicing in vowels
+
+### voicing-duration.praat
+```praat
+
+```
+
 ## Headers
 
 ### "sync header"
