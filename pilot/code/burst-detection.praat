@@ -20,6 +20,8 @@ directory_alignment$ = "../data/derived/ultrasound/
     ...'speaker$'/alignment"
 
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
+palign.o = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
+selectObject: palign
 
 intervals = Get number of intervals: 1
 

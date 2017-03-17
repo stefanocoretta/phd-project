@@ -116,6 +116,8 @@ directory_alignment$ = "../data/derived/ultrasound/
     ...'speaker$'/alignment"
 
 palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
+palign.o = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
+selectObject: palign
 
 intervals = Get number of intervals: 1
 ```
@@ -191,6 +193,11 @@ for interval from 1 to intervals
 
     Remove tier: filenames_tier
     Write to text file: "'directory_audio$'/'filename$'.TextGrid"
+    Remove
+
+    selectObject: palign.o
+    Extract part: start, end, "no"
+    Write to text file: "'directory_audio$'/'filename$'-palign.TextGrid"
     Remove
 endfor
 ```
