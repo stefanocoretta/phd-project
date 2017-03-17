@@ -55,6 +55,10 @@ voicing <- list.files(path = "pilot/results",
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(index = as.factor(index))
+
+voicing.voiceless <- filter(voicing, c2phonation == "voiceless")
+voicing.voiceless.it <- filter(voicing.voiceless, language == "italian")
+voicing.voiceless.pl <- filter(voicing.voiceless, language == "polish")
 ```
 
 # Italian
@@ -463,4 +467,64 @@ ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
 ```
 
 # Voicing durations
+
+```{r voicing-duration}
+ggplot(voicing.voiceless, aes(vowel, voicing)) +
+    geom_boxplot() +
+    facet_grid(c2place ~ speaker)
+```
+
+```{r voicing-lmer-it}
+voicing.model.it <- lmer(
+    voicing ~
+        vowel *
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = voicing.voiceless.it
+)
+
+summary(voicing.model.it)
+
+mixed(
+    voicing ~
+        vowel *
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = voicing.voiceless.it
+)
+```
+
+```{r}
+plot(allEffects(voicing.model.it))
+```
+
+```{r voicing-lmer-pl}
+voicing.model.pl <- lmer(
+    voicing ~
+        vowel *
+        c2place +
+        sentence.duration +
+        (1|word),
+    data = voicing.voiceless.pl
+)
+
+summary(voicing.model.pl)
+
+mixed(
+    voicing ~
+        vowel *
+        c2place +
+        sentence.duration +
+        (1|word),
+    data = voicing.voiceless.pl
+)
+```
+
+```{r}
+plot(allEffects(voicing.model.pl))
+```
 
