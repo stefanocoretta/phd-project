@@ -1059,6 +1059,7 @@ writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
 numberOfVuv = Get number of strings
+index = 0
 ```
 
 ### "voicing loop"
@@ -1080,8 +1081,6 @@ endfor
 
 ### "words loop"
 ```praat
-index = 0
-
 for word to numberOfWords
     word$ = Get label of interval: 3, word
     if word$ == "dico" or word$ == "mówię"

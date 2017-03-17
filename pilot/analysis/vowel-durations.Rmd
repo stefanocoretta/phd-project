@@ -46,6 +46,15 @@ vowels <- left_join(vowels, languages) %>%
 
 vowels.it <- filter(vowels, language == "italian")
 vowels.pl <- filter(vowels, language == "polish")
+
+voicing <- list.files(path = "pilot/results",
+                   pattern = "*-voicing.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(., na = "--undefined--")) %>%
+    left_join(., languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(index = as.factor(index))
 ```
 
 # Italian
@@ -452,3 +461,6 @@ ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
     facet_grid(language ~ .) +
     guides(fill = guide_legend(reverse = TRUE))
 ```
+
+# Voicing durations
+
