@@ -10,6 +10,7 @@ writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
 numberOfVuv = Get number of strings
+index = 0
 
 for vuv to numberOfVuv
     selectObject: "Strings vuvList"
@@ -22,8 +23,6 @@ for vuv to numberOfVuv
     Merge
     numberOfWords = Get number of intervals: 3
 
-    index = 0
-    
     for word to numberOfWords
         word$ = Get label of interval: 3, word
         if word$ == "dico" or word$ == "mówię"
