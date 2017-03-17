@@ -723,7 +723,7 @@ directory$ = "../data/derived/ultrasound/'speaker$'/alignment"
 result_file$ = "../results/'speaker$'-vowel-durations.csv"
 
 header$ = "index,speaker,word,time,word.duration,c1.duration,vowel.duration,
-    ...closure.duration,rvt,c2.duration,v2.duration,sentence.duration"
+    ...closure.duration,rvot,c2.duration,v2.duration,sentence.duration"
 writeFileLine: result_file$, header$
 
 bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
@@ -762,11 +762,11 @@ for interval to intervals
         endif
 
         closure = (burst - end_vowel) * 1000
-        rvt = (end_consonant2 - burst) * 1000
-        consonant_duration = closure + rvt
+        rvot = (end_consonant2 - burst) * 1000
+        consonant_duration = closure + rvot
 
         result_line$ = "'index','speaker$','word$','start_target',
-            ...'word_duration','c1_duration','v_duration','closure','rvt',
+            ...'word_duration','c1_duration','v_duration','closure','rvot',
             ...'consonant_duration','v2_duration','sentence_duration'"
         appendFileLine: "'result_file$'", "'result_line$'"
     endif

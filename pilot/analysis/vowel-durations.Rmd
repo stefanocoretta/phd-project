@@ -400,13 +400,13 @@ proportions <- vowels %>%
     summarise(
         total = mean(vowel.duration, na.rm = TRUE) +
             mean(closure.duration, na.rm = TRUE) +
-            mean(rvt, na.rm = TRUE),
+            mean(rvot, na.rm = TRUE),
         vowel = mean(vowel.duration, na.rm = TRUE) / total,
         closure = mean(closure.duration, na.rm = TRUE) / total,
-        rvt = mean(rvt, na.rm = TRUE) / total
+        rvot = mean(rvot, na.rm = TRUE) / total
     ) %>%
-    gather(segment, duration, vowel:rvt) %>%
-    mutate(segment = factor(segment, levels = c("rvt", "closure", "vowel")))
+    gather(segment, duration, vowel:rvot) %>%
+    mutate(segment = factor(segment, levels = c("rvot", "closure", "vowel")))
 ```
 
 The following graph is misleading, because the VOR in Italian and in Polish is not constant in the voiceless and voiced conditions.
@@ -427,17 +427,17 @@ word.proportions <- vowels %>%
             mean(c1.duration, na.rm = TRUE) +
             mean(vowel.duration, na.rm = TRUE) +
             mean(closure.duration, na.rm = TRUE) +
-            mean(rvt, na.rm = TRUE) +
+            mean(rvot, na.rm = TRUE) +
             mean(v2.duration, na.rm = TRUE),
         c1 = mean(c1.duration, na.rm = TRUE),
         vowel = mean(vowel.duration, na.rm = TRUE),
         closure = mean(closure.duration, na.rm = TRUE),
-        rvt = mean(rvt, na.rm = TRUE),
+        rvot = mean(rvot, na.rm = TRUE),
         v2 = mean(v2.duration, na.rm = TRUE)
     ) %>%
     gather(segment, duration, c1:v2) %>%
     mutate(segment = factor(segment,
-                            levels = c("v2", "rvt", "closure", "vowel", "c1")
+                            levels = c("v2", "rvot", "closure", "vowel", "c1")
                             )
            ) %>%
     unite(phonation, c1phonation, c2phonation)
