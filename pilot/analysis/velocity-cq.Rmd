@@ -110,15 +110,15 @@ degg.word.pl <- filter(degg.word, language == "polish")
 # Velocity
 
 ```{r coronal-velocity-plot}
-ggplot(velocity.coronal, aes(rel.time, TT.velocity.abs)) +
+ggplot(velocity.coronal, aes(rel.time, TT.velocity.abs, group = repetition)) +
     geom_line() +
-    facet_grid(speaker ~ c2phonation + vowel)
+    facet_grid(speaker ~ vowel + c2phonation)
 ```
 
 ```{r velar-velocity-plot}
-ggplot(velocity.velar, aes(rel.time, TD.velocity.abs)) +
+ggplot(velocity.velar, aes(rel.time, TD.velocity.abs, group = repetition)) +
     geom_line() +
-    facet_grid(speaker ~ c2phonation + vowel)
+    facet_grid(speaker ~ vowel + c2phonation)
 ```
 
 ```{r velocity-plot}
