@@ -56,7 +56,7 @@ voicing <- list.files(path = "pilot/results",
     mutate_if(is.character, as.factor) %>%
     mutate(index = as.factor(index))
 
-voicing.voiceless <- filter(voicing, c1phonation == "voiceless", c2phonation == "voiceless")
+voicing.voiceless <- filter(voicing, c2phonation == "voiceless")
 voicing.voiceless.it <- filter(voicing.voiceless, language == "italian")
 voicing.voiceless.pl <- filter(voicing.voiceless, language == "polish")
 ```
