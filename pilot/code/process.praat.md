@@ -144,14 +144,23 @@ for interval to intervals
             Set interval text: 4, ultrasound, "ultrasound"
 
             start_kinematics = Get start time of interval: 1, interval + 3
-            end_kinematics = Get start time of interval: 1, interval + 6
+            end_kinematics = Get end time of interval: 1, interval + 5
+            start_vowel = Get start time of interval: 1, interval + 3
+            end_vowel = Get end time of interval: 1, interval + 3
+
+            if label_2$ == "dico"
+                start_kinematics = ((end_vowel - start_kinematics) / 2) +
+                    ...start_kinematics
+                start_vowel_2 = Get start time of interval: 1, interval + 5
+                end_kinematics = ((end_kinematics - start_vowel_2) / 2) +
+                    ...start_vowel_2
+            endif
+
             Insert boundary: 5, start_kinematics
             Insert boundary: 5, end_kinematics
             kinematics = Get interval at time: 5, start_kinematics
             Set interval text: 5, kinematics, "kinematics"
 
-            start_vowel = Get start time of interval: 1, interval + 3
-            end_vowel = Get end time of interval: 1, interval + 3
             vowel$ = Get label of interval: 1, interval + 3
             Insert boundary: 6, start_vowel
             Insert boundary: 6, end_vowel
