@@ -319,7 +319,7 @@ gestures.pl <- filter(cons.gestures, language == "polish")
 Let's plot the nucleus duration (NOFF - NONS) as a function of place of articulation, voicing of C2 (our target consonant in C1VC2V words), and language.
 
 ```{r nucleus-duration}
-filter(cons.gestures, nucleus < 0.1) %>%
+filter(cons.gestures, nucleus < 0.05) %>%
 ggplot(aes(c2phonation, nucleus)) +
     facet_grid(.~language + c2place) +
     geom_violin() +
@@ -380,6 +380,11 @@ mixed(
 )
 ```
 
+```{r nucleus-plot-pl}
+plot(allEffects(nucleus.model.pl))
+```
+
+
 ```{r deceleration-duration}
 ggplot(cons.gestures, aes(c2phonation, deceleration)) +
     facet_grid(.~language + c2place) +
@@ -390,27 +395,8 @@ ggplot(cons.gestures, aes(c2phonation, deceleration)) +
           )
 ```
 
-```{r acceleration-duration}
-ggplot(cons.gestures, aes(c2phonation, acceleration)) +
-    facet_grid(.~language + c2place) +
-    geom_violin() +
-    geom_boxplot(width=0.1) +
-    theme(strip.background = element_rect(fill = "black"),
-          strip.text = element_text(color = "white", face = "bold")
-          )
-```
 
-The follwing plots the skweness (`deceleration / nucleus`) of the nucleus gesture.
-
-```{r skewness-duration}
-ggplot(cons.gestures, aes(c2phonation, skewness)) +
-    facet_grid(.~language + c2place) +
-    geom_violin() +
-    geom_boxplot(width=0.1) +
-    theme(strip.background = element_rect(fill = "black"),
-          strip.text = element_text(color = "white", face = "bold")
-          )
-```
+# Kinematics performance
 
 I want to check how good the gesture function in AAA is performing. The following gives the number of missing values per speaker.
 
