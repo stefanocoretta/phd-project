@@ -309,8 +309,7 @@ cons.gestures <- select(splines.raw, speaker:label) %>%
     left_join(y = words) %>%
     separate(label, c("gesture", "tongue.area")) %>%
     spread(gesture, seconds) %>%
-    mutate(nucleus = NOFF - NONS, deceleration = max - NONS, 
-           acceleration = NOFF - max, skewness = deceleration / nucleus) %>%
+    mutate(nucleus = NOFF - NONS, deceleration = max - peak1) %>%
     mutate_if(is.character, as.factor)
 
 gestures.it <- filter(cons.gestures, language == "italian")
