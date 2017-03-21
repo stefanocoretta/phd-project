@@ -58,7 +58,7 @@ We can now read in the file.
 
 ```{r read}
 splines.raw <- list.files(path = "./pilot/results",
-                   pattern = "*-aaa.txt",
+                   pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns, na = "*"))
 
