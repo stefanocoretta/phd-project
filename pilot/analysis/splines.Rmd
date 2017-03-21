@@ -402,25 +402,23 @@ I want to check how good the gesture function in AAA is performing. The followin
 
 ```{r performance-na}
 cons.gestures %>%
-    select(speaker, GOFF:NONS) %>%
+    select(speaker, max:peak1) %>%
     group_by(speaker) %>%
     summarise_each(funs(sum(is.na(.)))) %>%
-    select(speaker, GONS, NONS, max, NOFF, GOFF)
+    select(speaker, peak1, NONS, max, NOFF)
 ```
 
 This chunk instead reports the total number of values per speaker.
 
 ```{r performance-total}
 cons.gestures %>%
-    select(speaker, GOFF:NONS) %>%
+    select(speaker, max:peak1) %>%
     group_by(speaker) %>%
     summarise_each(funs(n())) %>%
-    select(speaker, GONS, NONS, max, NOFF, GOFF)
+    select(speaker, peak1, NONS, max, NOFF)
 ```
 
-By comparing the two tables, what emerges is that the GONS (Gesture Onset) is almost always missed, followed by GOFF (Gesture Offset). The NOFF (Nucleus Offset) detection, performs slighly better, while NONS and MAX are detected most of the times.
-
-However, judging from the violin plots above, most values might be incorrect.
+By comparing the two tables, it seems that the function is now performing quite well, but there could still be false detections.
 
 
 
