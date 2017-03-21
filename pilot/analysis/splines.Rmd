@@ -90,16 +90,18 @@ We can finally plot splines.
 
 ```{r velar, eval=FALSE}
 filter(splines, label == "max_TD") %>%
-ggplot(aes(x = X, y = Y, colour = c2phonation)) +
-    geom_smooth(method = "loess") +
-    coord_fixed(ratio = 1)
+ggplot(aes(x = X, y = Y, colour = c2phonation, group = word)) +
+    geom_smooth(method = "loess", se = FALSE) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ language)
 ```
 
 ```{r coronal, eval=FALSE}
 filter(splines, label == "max_TT") %>%
-ggplot(aes(x = X, y = Y, colour = c2phonation)) +
-    geom_smooth(method = "loess") +
-    coord_fixed(ratio = 1)
+ggplot(aes(x = X, y = Y, colour = c2phonation, group = word)) +
+    geom_smooth(method = "loess", se = FALSE) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ language)
 ```
 
 # SSANOVA
