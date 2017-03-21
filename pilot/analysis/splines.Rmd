@@ -395,6 +395,30 @@ ggplot(cons.gestures, aes(c2phonation, deceleration)) +
           )
 ```
 
+```{r deceleration-lmer-it}
+deceleration.model.it <- lmer(
+    deceleration ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word) +
+        (1|speaker),
+    data = gestures.it
+)
+
+summary(deceleration.model.it)
+
+mixed(
+    deceleration ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word) +
+        (1|speaker),
+    data = gestures.it
+)
+```
+
 
 # Kinematics performance
 
