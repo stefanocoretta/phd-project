@@ -28,7 +28,7 @@ directory$ = "../data/derived/egg/'speaker$'"
 directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
 result_file$ = "../results/'speaker$'-degg-tracing.csv"
-header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
+header$ = "speaker,file,date,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
 Create Strings as file list: "filelist", "'directory$'/*.wav"
@@ -42,6 +42,7 @@ for file to files
     Read Strings from raw text file: "'directory_textgrid$'/'filename$'.txt"
     prompt$ = Get string: 1
     stimulus$ = extractWord$(prompt$, " ")
+    date$ = Get string: 2
 
     Read separate channels from sound file: "'directory$'/'file$'"
 
@@ -98,7 +99,7 @@ for file to files
             time = egg_minimum_1 - start
             proportion = (egg_minimum_1 - start) / (end - start)
     
-            result_line$ = "'speaker$','filename$','stimulus$','egg_minimum_1',
+            result_line$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1',
                 ...'time','proportion','degg_maximum_rel','degg_minimum_rel'"
     
             appendFileLine: "'result_file$'", "'result_line$'"

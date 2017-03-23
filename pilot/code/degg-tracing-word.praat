@@ -98,7 +98,7 @@ for file to files
             time = egg_minimum_1 - start
             proportion = (egg_minimum_1 - start) / (end - start)
     
-            result_line$ = "'speaker$','filename$','stimulus$','egg_minimum_1',
+            result_line$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1',
                 ...'time','proportion','degg_maximum_rel','degg_minimum_rel'"
     
             appendFileLine: "'result_file$'", "'result_line$'"
