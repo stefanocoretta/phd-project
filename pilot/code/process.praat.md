@@ -19,7 +19,7 @@ The following chunk asks the user for the name of the project directory and the 
 ```praat
 form Generate input for force alignment with SPPAS
     word project pilot
-    word speaker SC01
+    word speaker sc01
 endform
 
 directory_speaker$ = "../data/derived/ultrasound/'speaker$'"
@@ -96,7 +96,7 @@ The user is prompt to indicate the project name, the participant ID and the lang
 ```praat
 form Select folder with TextGrid
     word project pilot
-    word speaker SC01
+    word speaker sc01
     comment Supported languages: it, pl
     word language it
 endform
@@ -251,7 +251,7 @@ The form asks for the project name and the participant ID. A boolean is stored a
 ```praat
 form Syncronise EGG data
     word project pilot
-    word speaker SC01
+    word speaker sc01
     boolean debug_mode
 endform
 ```
@@ -436,7 +436,7 @@ We first read ask for the project name and the speaker ID.
 ```praat
 form Extract vuv
     word project pilot
-    word speaker SC01
+    word speaker sc01
     boolean debug_mode
 endform
 
@@ -504,7 +504,7 @@ First we get the file list and we start looping through the files.
 ```praat
 form dEGG tracing
     word project pilot
-    word speaker SC01
+    word speaker sc01
     comment Specify the lower and upper frequency (in Hz) for filtering:
     real lower 40
     real upper 10000
@@ -671,7 +671,7 @@ endproc
 ```praat
 form dEGG tracing
     word project pilot
-    word speaker SC01
+    word speaker sc01
     comment Specify the lower and upper frequency (in Hz) for filtering:
     real lower 40
     real upper 10000
@@ -722,7 +722,7 @@ endfor
 ```praat
 form Get vowel duration
     word project pilot
-    word speaker SC01
+    word speaker sc01
     comment Supported languages: it, pl
     word language it
 endform
@@ -913,7 +913,7 @@ This is the form that prompts the user to input the directories of the derived u
 ### "read"
 ```praat
 form Get measurements
-    word speaker SC01
+    word speaker sc01
 endform
 
 directory_us_annotations$ = "../data/derived/ultrasound/'speaker$'/
@@ -1058,7 +1058,7 @@ endproc
 ### "voicing setup"
 ```praat
 form Get duration of voicing
-    word speaker SC01
+    word speaker sc01
 endform
 
 vuvDirectory$ = "../data/derived/egg/'speaker$'"

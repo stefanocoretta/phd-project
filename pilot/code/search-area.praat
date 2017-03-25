@@ -1,6 +1,6 @@
 form Select folder with TextGrid
     word project pilot
-    word speaker SC01
+    word speaker sc01
     comment Supported languages: it, pl
     word language it
 endform

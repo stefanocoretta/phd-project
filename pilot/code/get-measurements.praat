@@ -1,6 +1,6 @@
 
 form Get measurements
-    word speaker SC01
+    word speaker sc01
 endform
 
 directory_us_annotations$ = "../data/derived/ultrasound/'speaker$'/

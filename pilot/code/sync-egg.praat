@@ -45,7 +45,7 @@ endif
 
 form Syncronise EGG data
     word project pilot
-    word speaker SC01
+    word speaker sc01
     boolean debug_mode
 endform
 egg_directory$ = "../data/raw/egg"

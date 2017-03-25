@@ -1,6 +1,6 @@
 form Extract vuv
     word project pilot
-    word speaker SC01
+    word speaker sc01
     boolean debug_mode
 endform
 

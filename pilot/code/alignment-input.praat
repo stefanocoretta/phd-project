@@ -1,6 +1,6 @@
 form Generate input for force alignment with SPPAS
     word project pilot
-    word speaker SC01
+    word speaker sc01
 endform
 
 directory_speaker$ = "../data/derived/ultrasound/'speaker$'"

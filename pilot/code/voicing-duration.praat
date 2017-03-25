@@ -1,5 +1,5 @@
 form Get duration of voicing
-    word speaker SC01
+    word speaker sc01
 endform
 
 vuvDirectory$ = "../data/derived/egg/'speaker$'"
