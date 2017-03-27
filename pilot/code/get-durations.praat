@@ -8,7 +8,7 @@ endform
 if language$ == "it"
     label_lang$ = "dico"
 elif language$ == "pl"
-    label_lang$ = "mówię"
+    label_lang$ = "mowie"
 else
     exit "The language you selected is not valid"
 endif

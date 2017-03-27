@@ -730,7 +730,7 @@ endform
 if language$ == "it"
     label_lang$ = "dico"
 elif language$ == "pl"
-    label_lang$ = "mówię"
+    label_lang$ = "mowie"
 else
     exit "The language you selected is not valid"
 endif
@@ -1064,7 +1064,7 @@ endform
 vuvDirectory$ = "../data/derived/egg/'speaker$'"
 palignDirectory$ = "../data/derived/ultrasound/'speaker$'/audio"
 resultsFile$ = "../results/'speaker$'-voicing.csv"
-resultsHeader$ = "index,speaker,file,word,voicing,sentence.duration"
+resultsHeader$ = "index,speaker,file,rec.date,word,voicing.start,voicing.end,voicing.duration,sentence.duration"
 writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
@@ -1080,6 +1080,10 @@ for vuv to numberOfVuv
     vuvTextGrid = Read from file: "'vuvDirectory$'/'vuvFile$'"
     vuvTextGrid$ = selected$("TextGrid")
     palignTextGrid$ = vuvTextGrid$ - "-vuv"
+
+    Read Strings from raw text file: "'palignDirectory$'/'palignTextGrid$'.txt"
+    recDate$ = Get string: 2
+
     palignTextGrid = Read from file: "'palignDirectory$'/'palignTextGrid$'-palign.TextGrid"
     plusObject: vuvTextGrid
     Merge
@@ -1093,7 +1097,7 @@ endfor
 ```praat
 for word to numberOfWords
     word$ = Get label of interval: 3, word
-    if word$ == "dico" or word$ == "mówię"
+    if word$ == "dico" or word$ == "mowie"
         index = index + 1
         wordStart = Get start time of interval: 3, word
         segment = Get interval at time: 2, wordStart
@@ -1110,7 +1114,8 @@ for word to numberOfWords
         sentenceEnd = Get end time of interval: 4, 2
         sentenceDuration = sentenceEnd - sentenceStart
 
-        resultLine$ = "'index','speaker$','palignTextGrid$','stimulus$','voicing','sentenceDuration'"
+        resultLine$ = "'index','speaker$','palignTextGrid$','recDate$','stimulus$',
+            ...'voicedStart','voicedEnd','voicing','sentenceDuration'"
         appendFileLine: resultsFile$, resultLine$
     endif
 endfor
