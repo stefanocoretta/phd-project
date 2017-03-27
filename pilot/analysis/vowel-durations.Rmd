@@ -469,14 +469,14 @@ ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
 # Voicing durations
 
 ```{r voicing-duration}
-ggplot(voicing.voiceless, aes(vowel, voicing)) +
+ggplot(voicing.voiceless, aes(vowel, voicing.duration)) +
     geom_boxplot() +
     facet_grid(c2place ~ speaker)
 ```
 
 ```{r voicing-lmer-it}
 voicing.model.it <- lmer(
-    voicing ~
+    voicing.duration ~
         vowel *
         c2place +
         sentence.duration +
@@ -488,7 +488,7 @@ voicing.model.it <- lmer(
 summary(voicing.model.it)
 
 mixed(
-    voicing ~
+    voicing.duration ~
         vowel *
         c2place +
         sentence.duration +
@@ -504,7 +504,7 @@ plot(allEffects(voicing.model.it))
 
 ```{r voicing-lmer-pl}
 voicing.model.pl <- lmer(
-    voicing ~
+    voicing.duration ~
         vowel *
         c2place +
         sentence.duration +
@@ -515,7 +515,7 @@ voicing.model.pl <- lmer(
 summary(voicing.model.pl)
 
 mixed(
-    voicing ~
+    voicing.duration ~
         vowel *
         c2place +
         sentence.duration +
