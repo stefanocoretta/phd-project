@@ -298,7 +298,7 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
             )
 ```
 
-# Consonantal gestures: target, maximum, release
+# Consonantal gestures: NONS, maximum, NOFS
 
 Now we can create a separate data frame where the observasional unit is each word and the variables are the consonantal getures (target, maximum closure, release).
 
