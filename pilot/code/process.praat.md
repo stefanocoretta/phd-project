@@ -106,7 +106,7 @@ if language$ == "it"
     label_2_lang$ = "dico"
 elif language$ == "pl"
     label_lang$ = "j"
-    label_2_lang$ = "mówię"
+    label_2_lang$ = "mowie"
 else
     exit "The language you selected is not valid"
 endif
