@@ -528,3 +528,53 @@ mixed(
 plot(allEffects(voicing.model.pl))
 ```
 
+# Voice Onset to Max
+
+```{r}
+voicing.gestures <- left_join(voicing, cons.gestures) %>%
+    filter(c1phonation == "voiceless") %>%
+    mutate(VOM = max - voicing.start, VOP = peak1 - voicing.start) %>%
+    mutate_if(is.character, as.factor)
+
+voicing.gestures.it <- filter(voicing.gestures, language == "italian")
+voicing.gestures.pl <- filter(voicing.gestures, language == "polish")
+```
+
+```{r}
+ggplot(voicing.gestures, aes(c2phonation, VOM)) +
+    geom_boxplot() +
+    facet_grid(language + speaker ~ vowel + c2place)
+```
+
+```{r}
+ggplot(voicing.gestures, aes(VOM, colour = c2phonation)) +
+    geom_density() +
+    facet_grid(language + speaker ~ vowel + c2place)
+```
+
+```{r it-voicing-gestures-lmer}
+model.voicing.gestures.it <- lmer(
+    VOM ~
+        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = voicing.gestures.it
+)
+
+summary(model.voicing.gestures.it)
+
+mixed(
+    VOM ~
+        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = voicing.gestures.it
+)
+```
+
