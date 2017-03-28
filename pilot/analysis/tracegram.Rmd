@@ -147,6 +147,8 @@ ggplot(predicted.degg, aes(x = proportion, colour = c2phonation, group = c2phona
 
 # GAMM
 
+## Maximum
+
 ```{r maximum-gam}
 degg.ord <- degg %>%
     filter(language == "italian") %>%
@@ -171,6 +173,8 @@ plot_smooth(maximum.gam, view = "proportion", plot_all = "c2phonation.ord", rug 
 ```{r maximum-plot-difference}
 plot_diff(maximum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
 ```
+
+## Minimum
 
 ```{r minimum-gam}
 minimum.gam <- bam(
