@@ -23,6 +23,9 @@ library(ggplot2)
 theme_set(theme_bw())
 library(gss)
 library(stringr)
+library(gamm4)
+library(mgcv)
+library(itsadug)
 ```
 
 # Data import
@@ -50,7 +53,7 @@ We can now plot smoothers for DEGG maxima and minima for both languages. The *x*
 
 ```{r tracegram}
 ggplot(degg, aes(x = proportion, colour = c2phonation)) +
-    facet_grid(. ~ language) +
+    facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("relative time (proportion of vowel duration)") +
@@ -140,4 +143,51 @@ ggplot(predicted.degg, aes(x = proportion, colour = c2phonation, group = c2phona
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     xlim(0, 1)
+```
+
+# GAMM
+
+```{r maximum-gam}
+degg.ord <- degg %>%
+    filter(language == "italian") %>%
+    mutate(c2phonation.ord = as.ordered(c2phonation))
+contrasts(degg.ord$c2phonation.ord) <- "contr.treatment"
+
+maximum.gam <- bam(
+    maximum ~
+        c2phonation.ord +
+        s(proportion, bs = "cr") +
+        s(proportion, by = c2phonation.ord, bs = "cr"),
+    data = degg.ord
+)
+
+summary(maximum.gam)
+```
+
+```{r maximum-plot-smooth}
+plot_smooth(maximum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
+```
+
+```{r maximum-plot-difference}
+plot_diff(maximum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
+```
+
+```{r minimum-gam}
+minimum.gam <- bam(
+    minimum ~
+        c2phonation.ord +
+        s(proportion, bs = "cr") +
+        s(proportion, by = c2phonation.ord, bs = "cr"),
+    data = degg.ord
+)
+
+summary(minimum.gam)
+```
+
+```{r maximum-plot-smooth}
+plot_smooth(minimum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
+```
+
+```{r maximum-plot-difference}
+plot_diff(minimum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
 ```
