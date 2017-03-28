@@ -25,6 +25,9 @@ library(stringr)
 library(lme4)
 library(afex)
 library(effects)
+library(gamm4)
+library(mgcv)
+library(itsadug)
 ```
 
 # Data import
@@ -82,6 +85,8 @@ splines <- splines.raw %>%
 
 splines.it <- filter(splines, language == "italian")
 splines.pl <- filter(splines, language == "polish")
+splines.cor <- filter(splines, c2place == "coronal")
+splines.vel <- filter(splines, c2place == "velar")
 ```
 
 # Some plotting
@@ -445,6 +450,100 @@ cons.gestures %>%
 By comparing the two tables, it seems that the function is now performing quite well, but there could still be false detections.
 
 
+# GAMM
+
+## Coronal
+
+```{r}
+splines.cor.max <- splines.cor %>%
+    filter(label == "max_TT") %>%
+    mutate(c2phonation.ord = as.ordered(c2phonation),
+           language.ord = as.ordered(language),
+           vowel.ord = as.ordered(vowel))
+contrasts(splines.cor$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.cor$language.ord) <- "contr.treatment"
+contrasts(splines.cor$vowel.ord) <- "contr.treatment"
+
+coronal.gam <- bam(
+    Y ~
+        c2phonation.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(rec.date, bs = "re") +
+        s(speaker, bs = "re"),
+    data = splines.cor.max,
+    method = "ML"
+)
+
+summary(coronal.gam)
+
+coronal.gam.null <- bam(
+    Y ~
+        c2phonation.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr"),
+    data = splines.cor.max,
+    method = "ML"
+)
+
+compareML(coronal.gam, coronal.gam.null)
+```
+
+```{r}
+plot_smooth(coronal.gam, view="X", plot_all="c2phonation.ord", rug=F)
+```
+
+```{r}
+plot_smooth(coronal.gam, view="X", plot_all="vowel.ord", rug=F)
+```
+
+
+```{r}
+plot_diff(coronal.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")))
+```
+
+```{r}
+plot_diff(coronal.gam, view="X", comp=list(vowel.ord=c("o", "a")))
+```
 
 
 
+## Velar
+
+```{r}
+splines.vel <- splines.vel %>%
+    mutate(c2phonation.ord = as.ordered(c2phonation))
+contrasts(splines.vel$c2phonation.ord) <- "contr.treatment"
+
+velar.gam <- bam(
+    Y ~
+        c2phonation.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr"),
+    data = splines.vel,
+    method = "ML"
+)
+
+summary(velar.gam)
+
+velar.gam.null <- bam(
+    Y ~
+        c2phonation.ord +
+        s(X, bs = "cr"),
+    data = splines.vel,
+    method = "ML"
+)
+
+compareML(velar.gam, velar.gam.null)
+```
+
+```{r}
+plot_smooth(velar.gam, view="X", plot_all="c2phonation.ord", rug=F)
+```
+
+```{r}
+plot_diff(velar.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")))
+```
