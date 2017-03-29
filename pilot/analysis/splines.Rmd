@@ -510,6 +510,9 @@ plot_diff(coronal.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced
 plot_diff(coronal.gam, view="X", comp=list(vowel.ord=c("o", "a")))
 ```
 
+```{r}
+acf_plot(resid(coronal.gam), split_by=list(splines.cor.max$rec.date))
+```
 
 
 ## Velar
