@@ -482,10 +482,10 @@ summary(coronal.gam)
 
 coronal.gam.null <- bam(
     Y ~
-        c2phonation.ord +
         vowel.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr"),
+        s(rec.date, bs = "re") +
+        s(speaker, bs = "re"),
     data = splines.cor.max,
     method = "ML"
 )
