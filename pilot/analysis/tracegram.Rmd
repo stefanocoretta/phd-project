@@ -62,7 +62,7 @@ ggplot(degg, aes(x = proportion, colour = c2phonation)) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
-    xlim(0, 1)
+    xlim(0.1, 0.9)
 ```
 
 ```{r tracegram-c2place}
