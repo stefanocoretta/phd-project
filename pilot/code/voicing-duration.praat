@@ -31,7 +31,7 @@ for vuv to numberOfVuv
         word$ = Get label of interval: 3, word
         if word$ == "dico" or word$ == "mowie"
             index = index + 1
-            wordStart = Get start time of interval: 3, word
+            wordStart = Get start time of interval: 3, word + 1
             segment = Get interval at time: 2, wordStart
             vowelStart = Get start time of interval: 2, segment + 1
             vowelEnd = Get end time of interval: 2, segment + 1
@@ -42,8 +42,9 @@ for vuv to numberOfVuv
             voicing = (voicedEnd - voicedStart) * 1000
             stimulus$ = Get label of interval: 3, word + 1
     
-            sentenceStart = Get start time of interval: 4, 2
-            sentenceEnd = Get end time of interval: 4, 2
+            sentenceInterval = Get interval at time: 4, vowelStart
+            sentenceStart = Get start time of interval: 4, sentenceInterval
+            sentenceEnd = Get end time of interval: 4, sentenceInterval
             sentenceDuration = sentenceEnd - sentenceStart
     
             resultLine$ = "'index','speaker$','palignTextGrid$','recDate$','stimulus$',
