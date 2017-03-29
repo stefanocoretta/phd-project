@@ -541,15 +541,15 @@ voicing.gestures.pl <- filter(voicing.gestures, language == "polish")
 ```
 
 ```{r}
-ggplot(voicing.gestures, aes(c2phonation, VOM)) +
+ggplot(voicing.gestures, aes(language, VOM, colour = c2phonation)) +
     geom_boxplot() +
-    facet_grid(language + speaker ~ vowel + c2place)
+    facet_grid(vowel ~ c2place)
 ```
 
 ```{r}
 ggplot(voicing.gestures, aes(VOM, colour = c2phonation)) +
     geom_density() +
-    facet_grid(language + speaker ~ vowel + c2place)
+    facet_grid(language ~ vowel + c2place)
 ```
 
 ```{r it-voicing-gestures-lmer}
@@ -578,3 +578,36 @@ mixed(
 )
 ```
 
+```{r it-voicing-gestures-plot}
+plot(allEffects(model.voicing.gestures.it))
+```
+
+```{r pl-voicing-gestures-lmer}
+model.voicing.gestures.pl <- lmer(
+    VOM ~
+        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = voicing.gestures.pl
+)
+
+summary(model.voicing.gestures.pl)
+
+mixed(
+    VOM ~
+        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = voicing.gestures.pl
+)
+```
+
+```{r pl-voicing-gestures-plot}
+plot(allEffects(model.voicing.gestures.pl))
+```
