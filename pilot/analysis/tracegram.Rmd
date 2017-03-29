@@ -2,8 +2,9 @@
 title: "Tracegram analysis"
 author: "Stefano Coretta"
 date: \today
-output: 
-  pdf_document: 
+output:
+  html_document: default
+  pdf_document:
     fig_caption: yes
     fig_height: 3.5
     fig_width: 5
@@ -81,7 +82,7 @@ ggplot(degg.it, aes(c2phonation, maximum)) +
     facet_grid(. ~ speaker)
 ```
 
-```{r maximum-boxplot-it}
+```{r maximum-boxplot-pl}
 ggplot(degg.pl, aes(c2phonation, maximum)) +
     geom_boxplot() +
     facet_grid(. ~ speaker)
@@ -233,11 +234,11 @@ minimum.gam <- bam(
 summary(minimum.gam)
 ```
 
-```{r maximum-plot-smooth-it}
+```{r minimum-plot-smooth-it}
 plot_smooth(minimum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
 ```
 
-```{r maximum-plot-difference-it}
+```{r minimum-plot-difference-it}
 plot_diff(minimum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
 ```
 
@@ -301,10 +302,10 @@ minimum.gam <- bam(
 summary(minimum.gam)
 ```
 
-```{r maximum-plot-smooth-pl}
+```{r minimum-plot-smooth-pl}
 plot_smooth(minimum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
 ```
 
-```{r maximum-plot-difference-pl}
+```{r minimum-plot-difference-pl}
 plot_diff(minimum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
 ```
