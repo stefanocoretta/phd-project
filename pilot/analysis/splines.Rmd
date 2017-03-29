@@ -2,8 +2,9 @@
 title: "Spline plotting and SSANOVA"
 author: "Stefano Coretta"
 date: \today
-output: 
-  pdf_document: 
+output:
+  html_document: default
+  pdf_document:
     fig_caption: yes
     fig_height: 3.5
     fig_width: 5
@@ -460,9 +461,9 @@ splines.cor.max <- splines.cor %>%
     mutate(c2phonation.ord = as.ordered(c2phonation),
            language.ord = as.ordered(language),
            vowel.ord = as.ordered(vowel))
-contrasts(splines.cor$c2phonation.ord) <- "contr.treatment"
-contrasts(splines.cor$language.ord) <- "contr.treatment"
-contrasts(splines.cor$vowel.ord) <- "contr.treatment"
+contrasts(splines.cor.max$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.cor.max$language.ord) <- "contr.treatment"
+contrasts(splines.cor.max$vowel.ord) <- "contr.treatment"
 
 coronal.gam <- bam(
     Y ~
