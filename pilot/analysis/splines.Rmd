@@ -754,15 +754,25 @@ filter(cons.gestures, speaker == "sdc02") %>%
 ```{r pp-lmer-it}
 pp.lmer.it <- lmer(
     PP ~
-        c2phonation *
-        vowel *
+        c2phonation +
         c2place +
+        vowel +
         (1|word) +
         (1|speaker),
-    data = gestures.it
+    data = filter(gestures.it, PP > 0)
 )
 
 summary(pp.lmer.it)
+
+mixed(
+    PP ~
+        c2phonation +
+        c2place +
+        vowel +
+        (1|word) +
+        (1|speaker),
+    data = filter(gestures.it, PP > 0)
+)
 ```
 
 ```{r}
