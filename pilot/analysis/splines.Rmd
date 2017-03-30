@@ -613,14 +613,21 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     labs(title = "Tongue shape at acoustic closure of coronals")
 ```
 
-```{r closure-vowel, eval=FALSE}
+```{r closure-vowel-cor, eval=FALSE}
 filter(splines.closure, c2place == "coronal") %>%
-ggplot(aes(x = X, y = Y, colour = vowel)) +
-    geom_smooth(method = "loess", se = FALSE) +
-    coord_fixed(ratio = 1) +
-    facet_grid(c2phonation ~ speaker)
+    ggplot(aes(x = X, y = Y, colour = vowel)) +
+        geom_smooth(method = "loess", se = FALSE) +
+        coord_fixed(ratio = 1) +
+        facet_grid(c2phonation ~ speaker)
 ```
 
+```{r closure-vowel-vel, eval=FALSE}
+filter(splines.closure, c2place == "velar") %>%
+    ggplot(aes(x = X, y = Y, colour = vowel)) +
+        geom_smooth(method = "loess", se = FALSE) +
+        coord_fixed(ratio = 1) +
+        facet_grid(c2phonation ~ speaker)
+```
 
 ## GAMM
 
@@ -737,9 +744,28 @@ filter(splines.phantom.closure, c2place == "velar") %>%
 # Peak to peak duration
 
 ```{r peak-to-peak-plot}
-filter(cons.gestures, speaker == "sdc02", PP != 0) %>%
+filter(cons.gestures, speaker == "sdc02") %>%
     ggplot(aes(c2phonation, PP)) +
     geom_violin() +
-    geom_boxplot(width = 0.4)
+    geom_boxplot(width = 0.2) +
+    facet_grid(. ~ c2place)
+```
+
+```{r pp-lmer-it}
+pp.lmer.it <- lmer(
+    PP ~
+        c2phonation *
+        vowel *
+        c2place +
+        (1|word) +
+        (1|speaker),
+    data = gestures.it
+)
+
+summary(pp.lmer.it)
+```
+
+```{r}
+plot(allEffects(pp.lmer.it))
 ```
 

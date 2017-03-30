@@ -560,7 +560,7 @@ plot(allEffects(voicing.closure.it))
 
 
 ```{r voicing-closure-pl}
-ggplot(voicing.voiceless.pl, aes(closure.duration, voicing.duration)) +
+ggplot(voicing.voiceless.pl, aes(closure.duration, voicing.duration, colour = speaker)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
@@ -573,10 +573,23 @@ voicing.closure.pl <- lmer(
         sentence.duration +
         (1|word) +
         (1|speaker),
-    data = voicing.voiceless.pl
+    data = voicing.voiceless.pl,
+    REML = FALSE
 )
 
 summary(voicing.closure.pl)
+
+voicing.closure.pl.null <- lmer(
+    voicing.duration ~
+        closure.duration +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = voicing.voiceless.pl,
+    REML = FALSE
+)
+
+anova(voicing.closure.pl.null, voicing.closure.pl)
 ```
 
 
