@@ -118,6 +118,22 @@ splines.phantom <- splines.phantom.raw %>%
     mutate_if(is.character, as.factor)
 ```
 
+Now we can create a separate data frame where the observasional unit is each word and the variables are the consonantal getures (target, maximum closure, release).
+
+```{r gestures}
+cons.gestures <- select(splines.raw, speaker:label) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    separate(label, c("gesture", "tongue.area")) %>%
+    spread(gesture, seconds) %>%
+    mutate(nucleus = NOFF - NONS, deceleration = max - peak1, PP = peak2-peak1) %>%
+    mutate_if(is.character, as.factor)
+
+gestures.it <- filter(cons.gestures, language == "italian")
+gestures.pl <- filter(cons.gestures, language == "polish")
+```
+
 # Some plotting
 
 We can finally plot splines.
@@ -342,22 +358,6 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
 ```
 
 # Consonantal gestures: NONS, maximum, NOFS
-
-Now we can create a separate data frame where the observasional unit is each word and the variables are the consonantal getures (target, maximum closure, release).
-
-```{r gestures}
-cons.gestures <- select(splines.raw, speaker:label) %>%
-    mutate(word = word(prompt, 2)) %>%
-    left_join(y = languages) %>%
-    left_join(y = words) %>%
-    separate(label, c("gesture", "tongue.area")) %>%
-    spread(gesture, seconds) %>%
-    mutate(nucleus = NOFF - NONS, deceleration = max - peak1, PP = peak2-peak1) %>%
-    mutate_if(is.character, as.factor)
-
-gestures.it <- filter(cons.gestures, language == "italian")
-gestures.pl <- filter(cons.gestures, language == "polish")
-```
 
 Let's plot the nucleus duration (NOFF - NONS) as a function of place of articulation, voicing of C2 (our target consonant in C1VC2V words), and language.
 
