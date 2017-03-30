@@ -350,10 +350,9 @@ cons.gestures <- select(splines.raw, speaker:label) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
-    left_join(y = voicing) %>%
     separate(label, c("gesture", "tongue.area")) %>%
     spread(gesture, seconds) %>%
-    mutate(nucleus = NOFF - NONS, deceleration = max - peak1) %>%
+    mutate(nucleus = NOFF - NONS, deceleration = max - peak1, PP = peak2-peak1) %>%
     mutate_if(is.character, as.factor)
 
 gestures.it <- filter(cons.gestures, language == "italian")
@@ -735,5 +734,12 @@ filter(splines.phantom.closure, c2place == "velar") %>%
     labs(title = "Tongue shape at acoustic closure of coronals")
 ```
 
-# Compare 1/3 closure
+# Peak to peak duration
+
+```{r peak-to-peak-plot}
+filter(cons.gestures, speaker == "sdc02", PP != 0) %>%
+    ggplot(aes(c2phonation, PP)) +
+    geom_violin() +
+    geom_boxplot(width = 0.4)
+```
 
