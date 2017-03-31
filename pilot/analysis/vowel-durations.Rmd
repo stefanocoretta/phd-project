@@ -175,11 +175,18 @@ C2 voicing and vowel identity have an effect on vowel duration, although there i
 
 ## Vowel duration and consonant closure duration
 
+```{r vowel-duration-plot-it}
+ggplot(vowels.it, aes(vowel, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(speaker ~ c2place + c2phonation)
+```
+
+
 ```{r lmer-closure-it}
 model.closure.it <- lmer(
     vowel.duration ~
-        vowel * 
-        closure.duration *
+        vowel + 
+#        closure.duration +
         c2place +
         c1phonation +
         sentence.duration +
@@ -192,8 +199,8 @@ summary(model.closure.it)
 
 mixed(
     vowel.duration ~
-        vowel * 
-        closure.duration *
+        vowel + 
+#        closure.duration +
         c2place +
         c1phonation +
         sentence.duration +
@@ -204,7 +211,7 @@ mixed(
 ```
 
 ```{r closure-italian-effects-plot}
-plot(allEffects(model.closure.it)[3])
+plot(allEffects(model.closure.it))
 ```
 
 There is an iteraction between closure duration and vowel identity: the high vowel has a stronger effect of closure duration on vowel duration (cf. with not so strong effect of voicing). But, vowel identity on itself is not significant.
@@ -359,8 +366,8 @@ plot(allEffects(model.pl))
 ```{r pl-vowel-closure}
 vowels.closure.pl <- lmer(
     vowel.duration ~
-        closure.duration *
-        vowel * 
+#        closure.duration *
+        vowel + 
         c2place +
         sentence.duration +
         (1|word),
@@ -371,8 +378,8 @@ summary(vowels.closure.pl)
 
 mixed(
     vowel.duration ~
-        closure.duration *
-        vowel *
+#        closure.duration *
+        vowel +
         c2place +
         sentence.duration +
         (1|word),
@@ -473,15 +480,16 @@ ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
 
 ```{r voicing-duration}
 ggplot(voicing.voiceless, aes(vowel, voicing.duration)) +
-    geom_boxplot() +
+    geom_violin() +
+    geom_boxplot(width = 0.1) +
     facet_grid(c2place ~ speaker)
 ```
 
 ```{r voicing-lmer-it}
 voicing.model.it <- lmer(
     voicing.duration ~
-        vowel *
-        c2place +
+        vowel +
+#        c2place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -492,8 +500,8 @@ summary(voicing.model.it)
 
 mixed(
     voicing.duration ~
-        vowel *
-        c2place +
+        vowel +
+#        c2place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -508,10 +516,11 @@ plot(allEffects(voicing.model.it))
 ```{r voicing-lmer-pl}
 voicing.model.pl <- lmer(
     voicing.duration ~
-        vowel *
+        vowel +
         c2place +
         sentence.duration +
-        (1|word),
+        (1|word) +
+        (1|speaker),
     data = voicing.voiceless.pl
 )
 
@@ -519,10 +528,11 @@ summary(voicing.model.pl)
 
 mixed(
     voicing.duration ~
-        vowel *
+        vowel +
         c2place +
         sentence.duration +
-        (1|word),
+        (1|word) +
+        (1|speaker),
     data = voicing.voiceless.pl
 )
 ```
