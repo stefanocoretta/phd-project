@@ -1,0 +1,127 @@
+---
+title: "Ultrafest"
+author: "Stefano Coretta"
+date: "03/04/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
+library(readr)
+library(purrr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+theme_set(theme_bw())
+library(gss)
+library(stringr)
+library(lme4)
+library(afex)
+library(effects)
+library(gamm4)
+library(mgcv)
+library(itsadug)
+```
+
+# Data
+
+```{r col-names}
+num.splines <- 42
+first.columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+    )
+columns <- c(first.columns,
+             paste0(rep(c("X", "Y"), num.splines),
+                    "_",
+                    rep(1:num.splines, each = 2)
+                    )
+             )
+```
+
+```{r read}
+splines.raw <- list.files(path = "./pilot/results",
+                   pattern = "*-aaa.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_tsv(., col_names = columns, na = "*"))
+
+splines.closure.raw <- list.files(path = "./pilot/results",
+                   pattern = "*-closure.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_tsv(., col_names = columns, na = "*"))
+
+splines.phantom.raw <- list.files(path = "./pilot/results",
+                   pattern = "*-phantom.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_tsv(., col_names = columns, na = "*"))
+
+rm(num.splines, first.columns, columns)
+
+languages <- read_csv("./pilot/stimuli/languages.csv")
+words <- read_csv("./pilot/stimuli/nonce.csv")
+```
+
+
+```{r tidy}
+splines <- splines.raw %>%
+    gather(spline, coordinate, matches("[XY]_")) %>%
+    separate(spline, c("axis", "fan"), convert = TRUE) %>%
+    spread(axis, coordinate) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+splines.it <- filter(splines, language == "italian")
+splines.pl <- filter(splines, language == "polish")
+```
+
+# Italian
+
+## Plot
+
+```{r coronal-it}
+filter(splines.it, label == "max_TT") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r velar-it}
+filter(splines.it, label == "max_TD") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
+# Polish
+
+## Plot
+
+```{r coronal-pl}
+filter(splines.pl, label == "max_TT") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1.5) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r velar-pl}
+filter(splines.pl, label == "max_TD") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1.5) +
+    facet_grid(speaker ~ vowel)
+```
