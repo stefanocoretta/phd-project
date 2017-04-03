@@ -364,7 +364,7 @@ Let's plot the nucleus duration (NOFF - NONS) as a function of place of articula
 ```{r nucleus-duration}
 filter(cons.gestures, nucleus < 0.05) %>%
 ggplot(aes(c2phonation, nucleus)) +
-    facet_grid(.~language + c2place) +
+    facet_grid(c2place ~ speaker) +
     geom_violin() +
     geom_boxplot(width=0.1) +
     theme(strip.background = element_rect(fill = "black"),
@@ -431,8 +431,8 @@ plot(allEffects(nucleus.model.pl))
 ```{r deceleration-duration}
 ggplot(cons.gestures, aes(c2phonation, deceleration)) +
     facet_grid(.~language + c2place) +
-    geom_violin() +
-    geom_boxplot(width=0.1) +
+#    geom_violin() +
+    geom_boxplot() +
     theme(strip.background = element_rect(fill = "black"),
           strip.text = element_text(color = "white", face = "bold")
           )
@@ -444,7 +444,7 @@ deceleration.model.it <- lmer(
         c2phonation *
         vowel *
         c2place +
-        sentence.duration +
+
         (1|word) +
         (1|speaker),
     data = gestures.it
@@ -457,11 +457,15 @@ mixed(
         c2phonation *
         vowel *
         c2place +
-        sentence.duration +
+
         (1|word) +
         (1|speaker),
     data = gestures.it
 )
+```
+
+```{r peak-to-nons-it}
+plot(allEffects(deceleration.model.it))
 ```
 
 
@@ -777,5 +781,47 @@ mixed(
 
 ```{r}
 plot(allEffects(pp.lmer.it))
+```
+
+```{r pp-lmer-pl}
+pp.lmer.pl <- lmer(
+    PP ~
+        c2phonation +
+        c2place +
+        vowel +
+        (1|word) +
+        (1|speaker),
+    data = filter(gestures.pl, PP > 0)
+)
+
+summary(pp.lmer.pl)
+
+mixed(
+    PP ~
+        c2phonation +
+        c2place +
+        vowel +
+        (1|word) +
+        (1|speaker),
+    data = filter(gestures.pl, PP > 0)
+)
+```
+
+```{r}
+plot(allEffects(pp.lmer.pl))
+```
+
+# Tongue shapes at Peak 1
+
+```{r}
+filter(splines, label == "peak1_TT", language == "italian") %>%
+    ggplot(aes(x = X, y = Y, colour = c2phonation)) +
+        geom_line(stat = "smooth", method = "loess", se = FALSE) +
+        coord_fixed(ratio = 1) +
+        facet_grid(vowel ~ speaker)
+```
+
+```{r}
+
 ```
 
