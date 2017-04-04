@@ -158,12 +158,19 @@ filter(splines.it, label == "peak1_TD") %>%
 
 ## GAMMs at maximum constriction
 
-```{r max-it-gam}
+```{r gam-it}
 splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
+splines.it$c2place.ord <- as.ordered(splines.it$c2place)
+splines.it$vowel.ord <- as.ordered(splines.it$vowel)
 contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.it$c2place.ord) <- "contr.treatment"
+contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
     na.omit()
+```
 
+
+```{r max-it-gam}
 max.it.gam <- bam(
     Y ~
         c2phonation.ord +
@@ -197,15 +204,6 @@ acf_plot(resid(max.it.gam), split_by=list(max.it$rec.date))
 ```
 
 ```{r max-it-gam-2}
-splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
-splines.it$c2place.ord <- as.ordered(splines.it$c2place)
-splines.it$vowel.ord <- as.ordered(splines.it$vowel)
-contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
-contrasts(splines.it$c2place.ord) <- "contr.treatment"
-contrasts(splines.it$vowel.ord) <- "contr.treatment"
-max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
-    na.omit()
-
 max.it.gam.2 <- bam(
     Y ~
         c2phonation.ord +
@@ -243,12 +241,6 @@ plot_diff(max.it.gam.2, view = "X",
 ```
 
 ```{r max-it-gamm}
-splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
-
-contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
-max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
-    na.omit()
-
 max.it.gamm <- bam(
     Y ~
         c2phonation.ord +
@@ -283,6 +275,62 @@ max.it.gam.null <- bam(
 compareML(max.it.gamm, max.it.gam.null)
 ```
 
+```{r max-it-gamm-plot}
+plot_smooth(max.it.gamm, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(max.it.gamm, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r max-it-gamm-acf}
+acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
+```
+
+```{r max-it-gam-ar}
+max.it <- arrange(max.it, rec.date, fan) %>%
+    mutate(rec.date = as.character(rec.date))
+previous <- ""
+for (i in 1:nrow(max.it)) {
+    if (max.it$rec.date[i] != previous) {
+        max.it$start.event[i] <- TRUE
+        previous <- max.it$rec.date[i]
+    } else {
+        max.it$start.event[i] <- FALSE
+        previous <- max.it$rec.date[i]
+    }
+}
+
+r1 <- start_value_rho(max.it.gam.2)
+
+max.it.gam.AR <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = max.it,
+    method = "fREML",
+    rho = r1,
+    AR.start = max.it$start.event
+)
+
+summary(max.it.gam.AR)
+```
+
+```{r max-it-gam-ar-acf}
+acf_plot(resid(max.it.gam.AR), split_by=list(max.it$rec.date))
+acf_resid(max.it.gam.AR, split_pred = "AR.start")
+```
+
+```{r max-it-gam-ar-plot}
+plot_smooth(max.it.gam.AR, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(max.it.gam.AR, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
 
 ## GAMMs at peak 1
 
