@@ -156,6 +156,169 @@ filter(splines.it, label == "peak1_TD") %>%
     facet_grid(speaker ~ vowel)
 ```
 
+## GAMMs at maximum constriction
+
+```{r max-it-gam}
+splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
+contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
+max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
+    na.omit()
+
+max.it.gam <- bam(
+    Y ~
+        c2phonation.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr"),
+    data = max.it,
+    method = "ML"
+)
+
+summary(max.it.gam)
+
+max.it.gam.null <- bam(
+    Y ~
+        s(X, bs = "cr"),
+    data = max.it,
+    method = "ML"
+)
+
+compareML(max.it.gam, max.it.gam.null)
+```
+
+```{r max-it-gam-plot}
+plot_smooth(max.it.gam, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(max.it.gam, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r max-it-gam-acf}
+acf_plot(resid(max.it.gam), split_by=list(max.it$rec.date))
+```
+
+```{r max-it-gam-2}
+splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
+splines.it$c2place.ord <- as.ordered(splines.it$c2place)
+splines.it$vowel.ord <- as.ordered(splines.it$vowel)
+contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.it$c2place.ord) <- "contr.treatment"
+contrasts(splines.it$vowel.ord) <- "contr.treatment"
+max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
+    na.omit()
+
+max.it.gam.2 <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = max.it,
+    method = "fREML"
+)
+
+summary(max.it.gam.2)
+
+max.it.gam.null <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr"),
+    data = max.it,
+    method = "fREML"
+)
+
+compareML(max.it.gam.2, max.it.gam.null)
+```
+
+```{r max-it-gam-2-plot}
+plot_smooth(max.it.gam.2, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(max.it.gam.2, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r max-it-gamm}
+splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
+
+contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
+max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
+    na.omit()
+
+max.it.gamm <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = max.it,
+    method = "fREML"
+)
+
+summary(max.it.gamm)
+
+max.it.gam.null <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = max.it,
+    method = "fREML"
+)
+
+compareML(max.it.gamm, max.it.gam.null)
+```
+
+
+## GAMMs at peak 1
+
+```{r}
+splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
+contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
+peak.it <- filter(splines.it, label %in% c("peak1_TT", "peak1_TD"))
+
+peak.it.gam <- bam(
+    Y ~
+        c2phonation.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr"),
+    data = peak.it,
+    method = "ML"
+)
+
+summary(peak.it.gam)
+
+peak.it.gam.null <- bam(
+    Y ~
+        s(X, bs = "cr"),
+    data = peak.it,
+    method = "ML"
+)
+
+compareML(peak.it.gam, peak.it.gam.null)
+```
+
+```{r plot}
+plot_smooth(peak.it.gam, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(peak.it.gam, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
 # Polish
 
 ## Plot at maximum constriction
