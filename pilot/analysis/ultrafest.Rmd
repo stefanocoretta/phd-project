@@ -124,7 +124,7 @@ filter(splines.it, label == "max_TD") %>%
 
 ## Plot at peak 1
 
-```{r group-coronal-it}
+```{r p1-group-coronal-it}
 filter(splines.it, label == "peak1_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
@@ -132,7 +132,7 @@ filter(splines.it, label == "peak1_TT") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-```{r group-velar-it}
+```{r p1-group-velar-it}
 filter(splines.it, label == "peak1_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
@@ -140,7 +140,7 @@ filter(splines.it, label == "peak1_TD") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-```{r coronal-it}
+```{r p1-coronal-it}
 filter(splines.it, label == "peak1_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_line(stat = "smooth", method = "loess") +
@@ -148,7 +148,7 @@ filter(splines.it, label == "peak1_TT") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-```{r velar-it}
+```{r p1-velar-it}
 filter(splines.it, label == "peak1_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_line(stat = "smooth", method = "loess") +
@@ -194,7 +194,7 @@ filter(splines.pl, label == "max_TD") %>%
 
 ## Plot at peak 1
 
-```{r group-coronal-pl}
+```{r p1-group-coronal-pl}
 filter(splines.pl, label == "peak1_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
@@ -202,7 +202,7 @@ filter(splines.pl, label == "peak1_TT") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-```{r group-velar-pl}
+```{r p1-group-velar-pl}
 filter(splines.pl, label == "peak1_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
@@ -210,7 +210,7 @@ filter(splines.pl, label == "peak1_TD") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-```{r coronal-pl}
+```{r p1-coronal-pl}
 filter(splines.pl, label == "peak1_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_line(stat = "smooth", method = "loess") +
@@ -218,7 +218,7 @@ filter(splines.pl, label == "peak1_TT") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-```{r velar-pl}
+```{r p1-velar-pl}
 filter(splines.pl, label == "peak1_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_line(stat = "smooth", method = "loess") +
