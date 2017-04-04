@@ -53,7 +53,7 @@ columns <- c(first.columns,
 splines.raw <- list.files(path = "./pilot/results",
                    pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
-    map_df(~read_tsv(., col_names = columns, na = "*"))
+    map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
 splines.closure.raw <- list.files(path = "./pilot/results",
                    pattern = "*-closure.csv",
