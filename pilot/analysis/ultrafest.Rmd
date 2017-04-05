@@ -26,7 +26,7 @@ library(itsadug)
 
 # Data
 
-```{r col-names}
+```{r read}
 num.splines <- 42
 first.columns <- c(
     "speaker",
@@ -47,9 +47,7 @@ columns <- c(first.columns,
                     rep(1:num.splines, each = 2)
                     )
              )
-```
 
-```{r read}
 splines.raw <- list.files(path = "./pilot/results",
                    pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
@@ -84,6 +82,18 @@ splines <- splines.raw %>%
 
 splines.it <- filter(splines, language == "italian")
 splines.pl <- filter(splines, language == "polish")
+
+closure <- splines.closure.raw %>%
+    gather(spline, coordinate, matches("[XY]_")) %>%
+    separate(spline, c("axis", "fan"), convert = TRUE) %>%
+    spread(axis, coordinate) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+closure.it <- filter(closure, language == "italian")
+closure.pl <- filter(closure, language == "polish")
 ```
 
 # Italian
