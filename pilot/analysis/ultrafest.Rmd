@@ -214,7 +214,19 @@ contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.it$c2place.ord) <- "contr.treatment"
 contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
-    na.omit()
+    na.omit() %>%
+    arrange(rec.date, fan)
+
+previous <- ""
+for (i in 1:nrow(max.it)) {
+    if (max.it$rec.date[i] != previous) {
+        max.it$start.event[i] <- TRUE
+        previous <- max.it$rec.date[i]
+    } else {
+        max.it$start.event[i] <- FALSE
+        previous <- max.it$rec.date[i]
+    }
+}
 ```
 
 
@@ -330,8 +342,6 @@ plot_diff(max.it.gamm, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
-
-
 ```{r max-it-gamm-acf}
 acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
 ```
@@ -339,6 +349,173 @@ acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
 ### Autoregressive correction
 
 ```{r max-it-gam-ar}
+r1 <- start_value_rho(max.it.gam.2)
+
+max.it.gam.AR <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = max.it,
+    method = "fREML",
+    rho = r1,
+    AR.start = max.it$start.event
+)
+
+summary(max.it.gam.AR)
+```
+
+```{r max-it-gam-ar-acf}
+acf_plot(resid(max.it.gam.AR), split_by=list(max.it$rec.date))
+acf_resid(max.it.gam.AR, split_pred = "AR.start")
+```
+
+```{r max-it-gam-ar-plot}
+plot_smooth(max.it.gam.AR, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(max.it.gam.AR, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+## GAMMs at closure
+
+```{r closure-it}
+closure.it$c2phonation.ord <- as.ordered(closure.it$c2phonation)
+closure.it$c2place.ord <- as.ordered(closure.it$c2place)
+closure.it$vowel.ord <- as.ordered(closure.it$vowel)
+contrasts(closure.it$c2phonation.ord) <- "contr.treatment"
+contrasts(closure.it$c2place.ord) <- "contr.treatment"
+contrasts(closure.it$vowel.ord) <- "contr.treatment"
+closure.it <- closure.it %>%
+    na.omit()
+```
+
+
+```{r closure-it-gam}
+closure.it.gam <- bam(
+    Y ~
+        c2phonation.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr"),
+    data = closure.it,
+    method = "ML"
+)
+
+summary(closure.it.gam)
+
+closure.it.gam.null <- bam(
+    Y ~
+        s(X, bs = "cr"),
+    data = closure.it,
+    method = "ML"
+)
+
+compareML(closure.it.gam, closure.it.gam.null)
+```
+
+```{r closure-it-gam-plot}
+plot_smooth(closure.it.gam, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(closure.it.gam, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r closure-it-gam-acf}
+acf_plot(resid(closure.it.gam), split_by=list(closure.it$rec.date))
+```
+
+```{r closure-it-gam-2}
+closure.it.gam.2 <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.it,
+    method = "fREML"
+)
+
+summary(closure.it.gam.2)
+
+closure.it.gam.null <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr"),
+    data = closure.it,
+    method = "fREML"
+)
+
+compareML(closure.it.gam.2, closure.it.gam.null)
+```
+
+```{r closure-it-gam-2-plot}
+plot_smooth(closure.it.gam.2, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(closure.it.gam.2, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r closure-it-gamm}
+closure.it.gamm <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.it,
+    method = "fREML"
+)
+
+summary(closure.it.gamm)
+
+closure.it.gam.null <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.it,
+    method = "fREML"
+)
+
+compareML(closure.it.gamm, closure.it.gam.null)
+```
+
+```{r closure-it-gamm-plot}
+plot_smooth(closure.it.gamm, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(closure.it.gamm, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+
+
+```{r closure-it-gamm-acf}
+acf_resid(closure.it.gamm, split_pred=c("rec.date"))
+```
+
+### Autoregressive correction
+
+```{r closure-it-gam-ar}
 max.it <- arrange(max.it, rec.date, fan) %>%
     mutate(rec.date = as.character(rec.date))
 previous <- ""
@@ -372,12 +549,12 @@ max.it.gam.AR <- bam(
 summary(max.it.gam.AR)
 ```
 
-```{r max-it-gam-ar-acf}
+```{r closure-it-gam-ar-acf}
 acf_plot(resid(max.it.gam.AR), split_by=list(max.it$rec.date))
 acf_resid(max.it.gam.AR, split_pred = "AR.start")
 ```
 
-```{r max-it-gam-ar-plot}
+```{r closure-it-gam-ar-plot}
 plot_smooth(max.it.gam.AR, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
 plot_diff(max.it.gam.AR, view = "X",
@@ -386,7 +563,7 @@ plot_diff(max.it.gam.AR, view = "X",
 
 ## GAMMs at peak 1
 
-```{r}
+```{r p1-it-gam}
 splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
 contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
 peak.it <- filter(splines.it, label %in% c("peak1_TT", "peak1_TD"))
@@ -412,7 +589,7 @@ peak.it.gam.null <- bam(
 compareML(peak.it.gam, peak.it.gam.null)
 ```
 
-```{r plot}
+```{r p1-it-gam-plot}
 plot_smooth(peak.it.gam, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
 plot_diff(peak.it.gam, view = "X",
