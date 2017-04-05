@@ -170,6 +170,40 @@ filter(splines.it, label == "peak1_TD") %>%
     facet_grid(speaker ~ vowel)
 ```
 
+## Plot at closure
+
+```{r closure-group-coronal-it}
+filter(closure.it, c2place == "coronal") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r closure-group-velar-it}
+filter(closure.it, c2place == "velar") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r closure-coronal-it}
+filter(closure.it, c2place == "coronal") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_line(stat = "smooth", method = "loess") +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r closure-velar-it}
+filter(closure.it, c2place == "velar") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_line(stat = "smooth", method = "loess") +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
 ## GAMMs at maximum constriction
 
 ```{r max-it}
