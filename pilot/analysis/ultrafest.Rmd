@@ -87,7 +87,7 @@ splines <- splines.raw %>%
 splines.it <- filter(splines, language == "italian")
 splines.pl <- filter(splines, language == "polish")
 
-closure <- splines.closure.raw %>%
+splines.closure <- splines.closure.raw %>%
     gather(spline, coordinate, matches("[XY]_")) %>%
     separate(spline, c("axis", "fan"), convert = TRUE) %>%
     spread(axis, coordinate) %>%
@@ -96,8 +96,8 @@ closure <- splines.closure.raw %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 
-closure.it <- filter(closure, language == "italian")
-closure.pl <- filter(closure, language == "polish")
+splines.closure.it <- filter(closure, language == "italian")
+splines.closure.pl <- filter(closure, language == "polish")
 ```
 
 # Italian
@@ -384,14 +384,16 @@ plot_diff(max.it.gam.AR, view = "X",
 ## GAMMs at closure
 
 ```{r closure-it}
-closure.it$c2phonation.ord <- as.ordered(closure.it$c2phonation)
-closure.it$c2place.ord <- as.ordered(closure.it$c2place)
-closure.it$vowel.ord <- as.ordered(closure.it$vowel)
-contrasts(closure.it$c2phonation.ord) <- "contr.treatment"
-contrasts(closure.it$c2place.ord) <- "contr.treatment"
-contrasts(closure.it$vowel.ord) <- "contr.treatment"
-closure.it <- closure.it %>%
-    na.omit()
+splines.closure.it$c2phonation.ord <- as.ordered(splines.closure.it$c2phonation)
+splines.closure.it$c2place.ord <- as.ordered(splines.closure.it$c2place)
+splines.closure.it$vowel.ord <- as.ordered(splines.closure.it$vowel)
+contrasts(splines.closure.it$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.closure.it$c2place.ord) <- "contr.treatment"
+contrasts(splines.closure.it$vowel.ord) <- "contr.treatment"
+closure.it <- splines.closure.it %>%
+    na.omit() %>%
+    arrange(rec.date, fan) %>%
+    start_event(column = "fan", event = c("rec.date"))
 ```
 
 
