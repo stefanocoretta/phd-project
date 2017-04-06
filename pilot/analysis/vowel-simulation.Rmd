@@ -13,7 +13,9 @@ library(ggplot2)
 library(effects)
 ```
 
-# Model with categorical F1 and duration, and no correlation within categories
+# No correlation
+
+## Model 1: categorical F1 and duration, and no correlation within categories
 
 ```{r}
 a <- rmvnorm(n=5000,mean=c(25,100),sigma=matrix(c(5,0*sqrt(50), 
@@ -56,19 +58,21 @@ summary(vowels.3.lm)
 plot(allEffects(vowels.3.lm))
 ```
 
-# Model with categorical F1 and duration, and correlation within categories
+# Correlation: stored and physiological duration
+
+## Model 2: categorical F1 and duration, and correlation within categories
 
 ```{r}
 a <- rmvnorm(n=5000,mean=c(25,100),sigma=matrix(c(5,0.4*sqrt(50), 
 0.4*sqrt(50),10),2,2)) %>%
     data.frame() %>%
     mutate(vowel = "a")
-o <- rmvnorm(n=5000,mean=c(15,90),sigma=matrix(c(5,0.3*sqrt(50), 
-0.3*sqrt(50),10),2,2)) %>%
+o <- rmvnorm(n=5000,mean=c(15,90),sigma=matrix(c(5,0.4*sqrt(50), 
+0.4*sqrt(50),10),2,2)) %>%
     data.frame() %>%
     mutate(vowel = "o")
-u <- rmvnorm(n=5000,mean=c(5,80),sigma=matrix(c(5,0.1*sqrt(50), 
-0.1*sqrt(50),10),2,2)) %>%
+u <- rmvnorm(n=5000,mean=c(5,80),sigma=matrix(c(5,0.4*sqrt(50), 
+0.4*sqrt(50),10),2,2)) %>%
     data.frame() %>%
     mutate(vowel = "u")
 
@@ -109,13 +113,13 @@ vowels.lm <- lm(
 summary(vowels.lm)
 ```
 
-# Model with categorical F1 and correlated duration across F1
+## Model 3: categorical F1 and correlated duration across F1
 
 ```{r}
 n     <- 15000                    # length of vector
-rho   <- 0.4                   # desired correlation = cos(angle)
+rho   <- 0.6                   # desired correlation = cos(angle)
 theta <- acos(rho)             # corresponding angle
-x1    <- c(rnorm(5000, 100, 10), rnorm(5000, 90, 10), rnorm(5000, 80, 10))        # fixed given data
+x1    <- c(rnorm(5000, 100, 5), rnorm(5000, 90, 5), rnorm(5000, 80, 5))        # fixed given data
 x2    <- rnorm(n, 2, 0.5)      # new random data
 X     <- cbind(x1, x2)         # matrix
 Xctr  <- scale(X, center=TRUE, scale=FALSE)   # centered columns (mean 0)
@@ -156,3 +160,16 @@ summary(vowels.2.lm)
 plot(allEffects(vowels.2.lm))
 ```
 
+```{r}
+vowels.2.lm <- lm(
+    duration ~
+        f1,
+    data = filter(vowels.2, vowel == "u")
+)
+
+summary(vowels.2.lm)
+```
+
+# Discussion
+
+The results so far are inconclusive. The problem now is differentiating between Model 2 and Model 3. 
