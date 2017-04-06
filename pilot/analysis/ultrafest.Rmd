@@ -513,6 +513,7 @@ closure.it.gam.null <- bam(
 )
 
 compareML(closure.it.gamm, closure.it.gam.null)
+AIC(closure.it.gamm, closure.it.gam.null)
 ```
 
 ```{r closure-it-gamm-plot}
