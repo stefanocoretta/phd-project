@@ -484,7 +484,7 @@ closure.it.gamm <- bam(
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
-#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = closure.it,
@@ -500,7 +500,7 @@ closure.it.gam.null <- bam(
         vowel.ord +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
-#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = closure.it,
@@ -524,7 +524,7 @@ acf_resid(closure.it.gamm, split_pred=c("rec.date"))
 ### AR1 model
 
 ```{r closure-it-gam-ar}
-r1 <- start_value_rho(closure.it.gam.2)
+r1 <- start_value_rho(closure.it.gamm)
 
 closure.it.gam.AR <- bam(
     Y ~
@@ -533,6 +533,8 @@ closure.it.gam.AR <- bam(
         vowel.ord +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = closure.it,
@@ -556,7 +558,6 @@ plot_diff(closure.it.gam.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
-### AR1 model 2
 
 ## GAMMs at peak 1
 
