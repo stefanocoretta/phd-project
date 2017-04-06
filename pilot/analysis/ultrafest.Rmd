@@ -497,7 +497,7 @@ closure.it.gamm <- bam(
 
 summary(closure.it.gamm)
 
-closure.it.gam.null <- bam(
+closure.it.gamm.null <- bam(
     Y ~
 #        c2phonation.ord +
         c2place.ord +
@@ -512,8 +512,8 @@ closure.it.gam.null <- bam(
     method = "fREML"
 )
 
-compareML(closure.it.gamm, closure.it.gam.null)
-AIC(closure.it.gamm, closure.it.gam.null)
+compareML(closure.it.gamm, closure.it.gamm.null)
+AIC(closure.it.gamm, closure.it.gamm.null)
 ```
 
 ```{r closure-it-gamm-plot}
@@ -553,8 +553,6 @@ summary(closure.it.gam.AR)
 ```
 
 ```{r closure-it-gam-ar-comparison}
-r1 <- start_value_rho(closure.it.gamm)
-
 closure.it.gam.AR.null <- bam(
     Y ~
 #        c2phonation.ord +
