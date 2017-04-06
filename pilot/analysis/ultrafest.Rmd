@@ -517,8 +517,6 @@ plot_diff(closure.it.gamm, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
-
-
 ```{r closure-it-gamm-acf}
 acf_resid(closure.it.gamm, split_pred=c("rec.date"))
 ```
