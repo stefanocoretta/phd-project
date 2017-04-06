@@ -454,11 +454,13 @@ summary(closure.it.gam.2)
 
 closure.it.gam.null <- bam(
     Y ~
-        c2phonation.ord +
+#        c2phonation.ord +
         c2place.ord +
+        vowel.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
-        s(X, by = c2place.ord, bs = "cr"),
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
     data = closure.it,
     method = "fREML"
 )
@@ -497,12 +499,13 @@ summary(closure.it.gamm)
 
 closure.it.gam.null <- bam(
     Y ~
-        c2phonation.ord +
+#        c2phonation.ord +
         c2place.ord +
         vowel.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = closure.it,
@@ -520,7 +523,7 @@ plot_diff(closure.it.gamm, view = "X",
 ```
 
 ```{r closure-it-gamm-acf}
-acf_resid(closure.it.gamm, split_pred=c("rec.date"))
+acf_plot(resid(closure.it.gamm), split_by=list(closure.it$rec.date))
 ```
 
 ### AR1 model
