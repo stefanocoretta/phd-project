@@ -846,3 +846,153 @@ plot_smooth(max.pl.gamm, view = "X",
 plot_diff(max.pl.gamm, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
+
+## GAMMs at closure
+
+```{r closure-pl}
+splines.closure.pl$c2phonation.ord <- as.ordered(splines.closure.pl$c2phonation)
+splines.closure.pl$c2place.ord <- as.ordered(splines.closure.pl$c2place)
+splines.closure.pl$vowel.ord <- as.ordered(splines.closure.pl$vowel)
+contrasts(splines.closure.pl$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.closure.pl$c2place.ord) <- "contr.treatment"
+contrasts(splines.closure.pl$vowel.ord) <- "contr.treatment"
+closure.pl <- splines.closure.pl %>%
+    na.omit() %>%
+    arrange(rec.date, fan) %>%
+    start_event(column = "fan", event = c("rec.date"))
+```
+
+```{r closure-pl-gam}
+closure.pl.gam <- bam(
+    Y ~
+        c2phonation.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr"),
+    data = closure.pl,
+    method = "ML"
+)
+
+summary(closure.pl.gam)
+
+closure.pl.gam.null <- bam(
+    Y ~
+        s(X, bs = "cr"),
+    data = closure.pl,
+    method = "ML"
+)
+
+compareML(closure.pl.gam, closure.pl.gam.null)
+```
+
+```{r closure-pl-gam-plot}
+plot_smooth(closure.pl.gam, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(closure.pl.gam, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r closure-pl-gamm}
+closure.pl.gamm <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.pl,
+    method = "fREML"
+)
+
+summary(closure.pl.gamm)
+
+closure.pl.gamm.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.pl,
+    method = "fREML"
+)
+
+compareML(closure.pl.gamm, closure.pl.gamm.null)
+AIC(closure.pl.gamm, closure.pl.gamm.null)
+```
+
+```{r closure-pl-gamm-plot}
+plot_smooth(closure.pl.gamm, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(closure.pl.gamm, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r closure-pl-gamm-acf}
+acf_plot(resid(closure.pl.gamm), split_by=list(closure.pl$rec.date))
+```
+
+### AR1 model
+
+```{r closure-it-gam-ar}
+r1 <- start_value_rho(closure.pl.gamm)
+
+closure.pl.gam.AR <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.pl,
+    method = "fREML",
+    rho = r1,
+    AR.start = closure.pl$start.event
+)
+
+summary(closure.pl.gam.AR)
+```
+
+```{r closure-pl-gam-ar-comparison}
+closure.pl.gam.AR.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.pl,
+    method = "fREML",
+    rho = r1,
+    AR.start = closure.pl$start.event
+)
+
+compareML(closure.pl.gam.AR, closure.pl.gam.AR.null)
+```
+
+```{r closure-pl-gam-ar-acf}
+acf_plot(resid(closure.pl.gam.AR), split_by=list(closure.pl$rec.date))
+acf_resid(closure.pl.gam.AR, split_pred = "AR.start")
+```
+
+```{r closure-pl-gam-ar-plot}
+plot_smooth(closure.pl.gam.AR, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(closure.pl.gam.AR, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
