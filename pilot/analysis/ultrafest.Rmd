@@ -96,8 +96,8 @@ splines.closure <- splines.closure.raw %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 
-splines.closure.it <- filter(closure, language == "italian")
-splines.closure.pl <- filter(closure, language == "polish")
+splines.closure.it <- filter(splines.closure, language == "italian")
+splines.closure.pl <- filter(splines.closure, language == "polish")
 ```
 
 # Italian
@@ -550,6 +550,29 @@ closure.it.gam.AR <- bam(
 )
 
 summary(closure.it.gam.AR)
+```
+
+```{r closure-it-gam-ar-comparison}
+r1 <- start_value_rho(closure.it.gamm)
+
+closure.it.gam.AR.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = closure.it,
+    method = "fREML",
+    rho = r1,
+    AR.start = closure.it$start.event
+)
+
+compareML(closure.it.gam.AR, closure.it.gam.AR.null)
 ```
 
 ```{r closure-it-gam-ar-acf}
