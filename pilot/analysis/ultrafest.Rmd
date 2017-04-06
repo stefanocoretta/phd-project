@@ -214,19 +214,19 @@ contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.it$c2place.ord) <- "contr.treatment"
 contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
-    na.omit() #%>%
-#    arrange(rec.date, fan)
+    na.omit() %>%
+    arrange(rec.date, fan)
 
-# previous <- ""
-# for (i in 1:nrow(max.it)) {
-#     if (max.it$rec.date[i] != previous) {
-#         max.it$start.event[i] <- TRUE
-#         previous <- max.it$rec.date[i]
-#     } else {
-#         max.it$start.event[i] <- FALSE
-#         previous <- max.it$rec.date[i]
-#     }
-# }
+previous <- ""
+for (i in 1:nrow(max.it)) {
+    if (max.it$rec.date[i] != previous) {
+        max.it$start.event[i] <- TRUE
+        previous <- max.it$rec.date[i]
+    } else {
+        max.it$start.event[i] <- FALSE
+        previous <- max.it$rec.date[i]
+    }
+}
 ```
 
 
@@ -343,14 +343,13 @@ plot_diff(max.it.gamm, view = "X",
 ```
 
 ```{r max-it-gamm-acf}
-max.it.arranged <- arrange(max.it, rec.date, fan)
-acf_plot(resid(max.it.gamm), split_by=list(max.it.arranged$rec.date))
+acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
 ```
 
 ### Autoregressive correction
 
 ```{r max-it-gam-ar}
-r1 <- start_value_rho(max.it.gam.2)
+r1 <- start_value_rho(max.it.gam.2, plot = TRUE)
 
 max.it.gam.AR <- bam(
     Y ~
