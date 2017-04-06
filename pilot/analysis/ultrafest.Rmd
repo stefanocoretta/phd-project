@@ -858,6 +858,7 @@ contrasts(splines.closure.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$vowel.ord) <- "contr.treatment"
 closure.pl <- splines.closure.pl %>%
     na.omit() %>%
+    filter(speaker == "ps02") %>%
     arrange(rec.date, fan) %>%
     start_event(column = "fan", event = c("rec.date"))
 ```
