@@ -300,6 +300,10 @@ plot_diff(max.it.gam.2, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
+```{r max-it-gam-2-acf}
+acf_plot(resid(max.it.gam.2), split_by=list(max.it$rec.date))
+```
+
 ```{r max-it-gamm}
 max.it.gamm <- bam(
     Y ~
@@ -465,6 +469,10 @@ plot_smooth(closure.it.gam.2, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
 plot_diff(closure.it.gam.2, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r closure-it-gamm-acf}
+acf_plot(resid(closure.it.gam.2), split_by=list(closure.it$rec.date))
 ```
 
 ```{r closure-it-gamm}
