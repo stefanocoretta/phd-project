@@ -350,7 +350,7 @@ plot_diff(max.it.gamm, view = "X",
 acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
 ```
 
-### Autoregressive correction
+### AR1 model
 
 ```{r max-it-gam-ar}
 r1 <- start_value_rho(max.it.gam.2, plot = TRUE)
@@ -471,7 +471,7 @@ plot_diff(closure.it.gam.2, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
-```{r closure-it-gamm-acf}
+```{r closure-it-gam-2-acf}
 acf_plot(resid(closure.it.gam.2), split_by=list(closure.it$rec.date))
 ```
 
@@ -521,25 +521,12 @@ plot_diff(closure.it.gamm, view = "X",
 acf_resid(closure.it.gamm, split_pred=c("rec.date"))
 ```
 
-### Autoregressive correction
+### AR1 model
 
 ```{r closure-it-gam-ar}
-max.it <- arrange(max.it, rec.date, fan) %>%
-    mutate(rec.date = as.character(rec.date))
-previous <- ""
-for (i in 1:nrow(max.it)) {
-    if (max.it$rec.date[i] != previous) {
-        max.it$start.event[i] <- TRUE
-        previous <- max.it$rec.date[i]
-    } else {
-        max.it$start.event[i] <- FALSE
-        previous <- max.it$rec.date[i]
-    }
-}
+r1 <- start_value_rho(closure.it.gam.2)
 
-r1 <- start_value_rho(max.it.gam.2)
-
-max.it.gam.AR <- bam(
+closure.it.gam.AR <- bam(
     Y ~
         c2phonation.ord +
         c2place.ord +
@@ -548,26 +535,28 @@ max.it.gam.AR <- bam(
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
-    data = max.it,
+    data = closure.it,
     method = "fREML",
     rho = r1,
-    AR.start = max.it$start.event
+    AR.start = closure.it$start.event
 )
 
-summary(max.it.gam.AR)
+summary(closure.it.gam.AR)
 ```
 
 ```{r closure-it-gam-ar-acf}
-acf_plot(resid(max.it.gam.AR), split_by=list(max.it$rec.date))
-acf_resid(max.it.gam.AR, split_pred = "AR.start")
+acf_plot(resid(closure.it.gam.AR), split_by=list(closure.it$rec.date))
+acf_resid(closure.it.gam.AR, split_pred = "AR.start")
 ```
 
 ```{r closure-it-gam-ar-plot}
-plot_smooth(max.it.gam.AR, view = "X",
+plot_smooth(closure.it.gam.AR, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
-plot_diff(max.it.gam.AR, view = "X",
+plot_diff(closure.it.gam.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
+
+### AR1 model 2
 
 ## GAMMs at peak 1
 
