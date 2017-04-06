@@ -13,19 +13,62 @@ library(ggplot2)
 library(effects)
 ```
 
+# Model with categorical F1 and duration, and no correlation within categories
+
+```{r}
+a <- rmvnorm(n=5000,mean=c(25,100),sigma=matrix(c(5,0*sqrt(50), 
+0*sqrt(50),10),2,2)) %>%
+    data.frame() %>%
+    mutate(vowel = "a")
+o <- rmvnorm(n=5000,mean=c(15,90),sigma=matrix(c(5,0*sqrt(50), 
+0*sqrt(50),10),2,2)) %>%
+    data.frame() %>%
+    mutate(vowel = "o")
+u <- rmvnorm(n=5000,mean=c(5,80),sigma=matrix(c(5,0*sqrt(50), 
+0*sqrt(50),10),2,2)) %>%
+    data.frame() %>%
+    mutate(vowel = "u")
+
+vowels.3 <- rbind(a, o, u) %>%
+    rename(duration = X1, f1 = X2) %>%
+    mutate_if(is.character, as.factor)
+```
+
+```{r}
+vowels.3 %>%
+    ggplot(aes(duration, f1)) +
+    geom_point(aes(colour = vowel)) +
+    geom_smooth(method = "lm")
+```
+
+```{r}
+vowels.3.lm <- lm(
+    duration ~
+        f1 *
+        vowel,
+    data = vowels.3
+)
+
+summary(vowels.3.lm)
+```
+
+```{r}
+plot(allEffects(vowels.3.lm))
+```
+
 # Model with categorical F1 and duration, and correlation within categories
 
 ```{r}
-a <- rmvnorm(n=5000,mean=c(20,100),sigma=matrix(c(5,0.6*sqrt(50), 
-0.6*sqrt(50),10),2,2)) %>%
-    data.frame() %>%
-    mutate(vowel = "a")
-o <- rmvnorm(n=5000,mean=c(15,90),sigma=matrix(c(5,0.4*sqrt(50), 
+a <- rmvnorm(n=5000,mean=c(25,100),sigma=matrix(c(5,0.4*sqrt(50), 
 0.4*sqrt(50),10),2,2)) %>%
     data.frame() %>%
+    mutate(vowel = "a")
+o <- rmvnorm(n=5000,mean=c(15,90),sigma=matrix(c(5,0.3*sqrt(50), 
+0.3*sqrt(50),10),2,2)) %>%
+    data.frame() %>%
     mutate(vowel = "o")
-u <- rmvnorm(n=5000,mean=c(10,80),sigma=matrix(c(5,0.2*sqrt(50), 
-0.2*sqrt(50),10),2,2)) %>%
+u <- rmvnorm(n=5000,mean=c(5,80),sigma=matrix(c(5,0.1*sqrt(50), 
+0.1*sqrt(50),10),2,2)) %>%
     data.frame() %>%
     mutate(vowel = "u")
 
@@ -56,47 +99,14 @@ summary(vowels.lm)
 plot(allEffects(vowels.lm))
 ```
 
-# Model with categorical F1 and duration, and no correlation within categories
-
 ```{r}
-a <- rmvnorm(n=5000,mean=c(20,100),sigma=matrix(c(5,0*sqrt(50), 
-0*sqrt(50),10),2,2)) %>%
-    data.frame() %>%
-    mutate(vowel = "a")
-o <- rmvnorm(n=5000,mean=c(15,90),sigma=matrix(c(5,0*sqrt(50), 
-0*sqrt(50),10),2,2)) %>%
-    data.frame() %>%
-    mutate(vowel = "o")
-u <- rmvnorm(n=5000,mean=c(10,80),sigma=matrix(c(5,0*sqrt(50), 
-0*sqrt(50),10),2,2)) %>%
-    data.frame() %>%
-    mutate(vowel = "u")
-
-vowels.3 <- rbind(a, o, u) %>%
-    rename(duration = X1, f1 = X2) %>%
-    mutate_if(is.character, as.factor)
-```
-
-```{r}
-vowels.3 %>%
-    ggplot(aes(duration, f1)) +
-    geom_point(aes(colour = vowel)) +
-    geom_smooth(method = "lm")
-```
-
-```{r}
-vowels.3.lm <- lm(
+vowels.lm <- lm(
     duration ~
-        f1 *
-        vowel,
-    data = vowels.3
+        f1,
+    data = filter(vowels, vowel == "u")
 )
 
-summary(vowels.3.lm)
-```
-
-```{r}
-plot(allEffects(vowels.3.lm))
+summary(vowels.lm)
 ```
 
 # Model with categorical F1 and correlated duration across F1
