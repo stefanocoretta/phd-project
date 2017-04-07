@@ -724,7 +724,7 @@ splines.pl$vowel.ord <- as.ordered(splines.pl$vowel)
 contrasts(splines.pl$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.pl$vowel.ord) <- "contr.treatment"
-max.pl <- filter(splines.pl, label %in% c("max_TT", "max_TD")) %>%
+max.pl <- filter(splines.pl, label %in% c("max_TT", "max_TD"), speaker == "ps02", vowel != "u", X > -15) %>%
     na.omit() %>%
     arrange(rec.date, fan) %>%
     start_event(column = "fan", event = c("rec.date"))
@@ -778,11 +778,13 @@ summary(max.pl.gam.2)
 
 max.pl.gam.null <- bam(
     Y ~
-        c2phonation.ord +
+#        c2phonation.ord +
         c2place.ord +
+        vowel.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
-        s(X, by = c2place.ord, bs = "cr"),
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
     data = max.pl,
     method = "fREML"
 )
@@ -806,7 +808,7 @@ max.pl.gamm <- bam(
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1) +
-        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = max.pl,
@@ -817,11 +819,11 @@ summary(max.pl.gamm)
 
 max.pl.gam.null <- bam(
     Y ~
-        c2phonation.ord +
+#        c2phonation.ord +
         c2place.ord +
         vowel.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
@@ -849,8 +851,8 @@ contrasts(splines.closure.pl$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$vowel.ord) <- "contr.treatment"
 closure.pl <- splines.closure.pl %>%
+    filter(speaker == "ps02", vowel != "u", X > -15) %>%
     na.omit() %>%
-    filter(speaker == "ps02") %>%
     arrange(rec.date, fan) %>%
     start_event(column = "fan", event = c("rec.date"))
 ```
@@ -945,7 +947,7 @@ closure.pl.gam.AR <- bam(
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
-        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = closure.pl,
@@ -966,7 +968,7 @@ closure.pl.gam.AR.null <- bam(
         s(X, bs = "cr") +
 #        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
-        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = closure.pl,
