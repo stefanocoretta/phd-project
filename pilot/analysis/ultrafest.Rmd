@@ -215,18 +215,8 @@ contrasts(splines.it$c2place.ord) <- "contr.treatment"
 contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
     na.omit() %>%
-    arrange(rec.date, fan)
-
-previous <- ""
-for (i in 1:nrow(max.it)) {
-    if (max.it$rec.date[i] != previous) {
-        max.it$start.event[i] <- TRUE
-        previous <- max.it$rec.date[i]
-    } else {
-        max.it$start.event[i] <- FALSE
-        previous <- max.it$rec.date[i]
-    }
-}
+    arrange(rec.date, fan) %>%
+    start_event(column = "fan", event = c("rec.date"))
 ```
 
 
@@ -735,7 +725,9 @@ contrasts(splines.pl$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.pl$vowel.ord) <- "contr.treatment"
 max.pl <- filter(splines.pl, label %in% c("max_TT", "max_TD")) %>%
-    na.omit()
+    na.omit() %>%
+    arrange(rec.date, fan) %>%
+    start_event(column = "fan", event = c("rec.date"))
 ```
 
 
