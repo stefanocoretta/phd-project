@@ -627,7 +627,7 @@ filter(splines.pl, label == "max_TT") %>%
 filter(splines.pl, label == "max_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
-    coord_fixed(ratio = 1.5) +
+    coord_fixed(ratio = 1) +
     facet_grid(speaker ~ vowel)
 ```
 
@@ -724,7 +724,7 @@ splines.pl$vowel.ord <- as.ordered(splines.pl$vowel)
 contrasts(splines.pl$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.pl$vowel.ord) <- "contr.treatment"
-max.pl <- filter(splines.pl, label %in% c("max_TT", "max_TD"), speaker == "ps02", vowel != "u", X > -15) %>%
+max.pl <- filter(splines.pl, label %in% c("max_TT", "max_TD"), speaker == "ab03") %>%
     na.omit() %>%
     arrange(rec.date, fan) %>%
     start_event(column = "fan", event = c("rec.date"))
@@ -807,7 +807,7 @@ max.pl.gamm <- bam(
         vowel.ord +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
-        s(X, rec.date, bs="fs", xt="cr", m=1) +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
 #        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
@@ -825,6 +825,7 @@ max.pl.gam.null <- bam(
         s(X, bs = "cr") +
 #        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = max.pl,
@@ -851,7 +852,7 @@ contrasts(splines.closure.pl$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$vowel.ord) <- "contr.treatment"
 closure.pl <- splines.closure.pl %>%
-    filter(speaker == "ps02", vowel != "u", X > -15) %>%
+    filter(speaker == "ab03", vowel != "u", X > -15) %>%
     na.omit() %>%
     arrange(rec.date, fan) %>%
     start_event(column = "fan", event = c("rec.date"))
