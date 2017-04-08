@@ -305,7 +305,7 @@ max.it.gamm <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
     method = "fREML"
 )
@@ -355,7 +355,7 @@ max.it.gam.AR <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
     method = "fREML",
     rho = r1,
@@ -435,7 +435,7 @@ closure.it.gam.2 <- bam(
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = closure.it,
     method = "fREML"
 )
@@ -450,7 +450,7 @@ closure.it.gam.null <- bam(
         s(X, bs = "cr") +
 #        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = closure.it,
     method = "fREML"
 )
@@ -480,7 +480,7 @@ closure.it.gamm <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = closure.it,
     method = "fREML"
 )
@@ -497,7 +497,7 @@ closure.it.gamm.null <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = closure.it,
     method = "fREML"
 )
@@ -532,7 +532,7 @@ closure.it.gam.AR <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = closure.it,
     method = "fREML",
     rho = r1,
@@ -553,7 +553,7 @@ closure.it.gam.AR.null <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = closure.it,
     method = "fREML",
     rho = r1,
@@ -810,7 +810,7 @@ max.pl.gamm <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
 #        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = max.pl,
     method = "fREML"
 )
@@ -827,7 +827,7 @@ max.pl.gam.null <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
 #        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord), bs = "cr",
+        s(X, by = vowel.ord, bs = "cr"),
     data = max.pl,
     method = "fREML"
 )
