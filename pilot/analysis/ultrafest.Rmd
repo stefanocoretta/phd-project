@@ -631,6 +631,79 @@ plot_diff(peak.it.gam, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
+## Comparison of voiced consonants at closure and maximum constriction
+
+```{r voiced-it}
+voiced.it <- rbind(max.it, closure.it) %>%
+    filter(c2phonation == "voiced") %>%
+    mutate(label.ord = ifelse(label %in% c("max_TT", "max_TD"), "maximum", "closure"))
+
+voiced.it$label.ord <- as.ordered(voiced.it$label.ord)
+contrasts(voiced.it$label.ord) <- "contr.treatment"
+```
+
+```{r voiced-it-coronal}
+filter(voiced.it, c2place == "coronal") %>%
+    ggplot(aes(X, Y, colour = label.ord)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(speaker ~ vowel)
+```
+
+
+```{r voiced-it-gamm}
+voiced.it.gamm <- bam(
+    Y ~
+        label.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = label.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = voiced.it,
+    method = "fREML"
+)
+
+summary(voiced.it.gamm)
+```
+
+```{r voiced-it-gam-ar}
+r1 <- start_value_rho(voiced.it.gamm)
+
+voiced.it.gam.AR <- bam(
+    Y ~
+        label.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = label.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = voiced.it,
+    method = "fREML",
+    rho = r1,
+    AR.start = voiced.it$start.event
+)
+
+summary(voiced.it.gam.AR)
+```
+
+```{r voiced-it-gam-ar-plot}
+plot_smooth(voiced.it.gam.AR, view = "X",
+            plot_all= "label.ord", rug = FALSE)
+plot_diff(voiced.it.gam.AR, view = "X",
+          comp = list(label.ord = c("maximum", "closure")))
+```
+
+```{r voiced-it-gam-ar-acf}
+acf_resid(voiced.it.gam.AR, split_pred = "AR.start")
+```
+
 # Polish
 
 ## Plot at maximum constriction
