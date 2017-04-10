@@ -734,7 +734,7 @@ filter(splines.closure.pl, c2place == "velar") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-## GAMMs at maximum constriction
+## GAMMs at maximum constriction ab03
 
 ```{r max-pl}
 splines.pl$c2phonation.ord <- as.ordered(splines.pl$c2phonation)
@@ -916,6 +916,93 @@ acf_resid(max.pl.gam.AR, split_pred = "AR.start")
 plot_smooth(max.pl.gam.AR, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
 plot_diff(max.pl.gam.AR, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")))
+```
+
+## GAMMs at maximum constriction ps02
+
+```{r max-pl}
+max.pl.ps02 <- splines.pl %>%
+    filter(label %in% c("max_TT", "max_TD"),
+           speaker == "ps02",
+           vowel != "u"
+    ) %>%
+    na.omit() %>%
+    arrange(rec.date, fan) %>%
+    start_event(column = "fan", event = c("rec.date"))
+```
+
+
+```{r max-pl-gamm}
+max.pl.gamm.ps02 <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = max.pl.ps02,
+    method = "fREML"
+)
+
+summary(max.pl.gamm.ps02)
+```
+
+### AR1 model
+
+```{r max-pl-gam-ar}
+r1 <- start_value_rho(max.pl.gamm.ps02)
+
+max.pl.gam.ps02.AR <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = max.pl.ps02,
+    method = "fREML",
+    rho = r1,
+    AR.start = max.pl.ps02$start.event
+)
+
+summary(max.pl.gam.ps02.AR)
+
+max.pl.gam.ps02.AR.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = max.pl.ps02,
+    method = "fREML",
+    rho = r1,
+    AR.start = max.pl.ps02$start.event
+)
+
+compareML(max.pl.gam.ps02.AR.null, max.pl.gam.ps02.AR)
+```
+
+```{r max-pl-gam-ar-acf}
+acf_plot(resid(max.pl.gam.ps02.AR), split_by=list(max.pl.ps02$rec.date))
+acf_resid(max.pl.gam.ps02.AR, split_pred = "AR.start")
+```
+
+```{r max-pl-gam-ar-plot}
+plot_smooth(max.pl.gam.ps02.AR, view = "X",
+            plot_all= "c2phonation.ord", rug = FALSE)
+plot_diff(max.pl.gam.ps02.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
