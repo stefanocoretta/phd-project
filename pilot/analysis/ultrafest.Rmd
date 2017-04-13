@@ -999,7 +999,9 @@ plot_diff(max.pl.gam.AR, view = "X",
 max.pl.ps02 <- splines.pl %>%
     filter(label %in% c("max_TT", "max_TD"),
            speaker == "ps02",
-           vowel != "u"
+           vowel != "u",
+           X < 40,
+           X > -15
     ) %>%
     na.omit() %>%
     arrange(rec.date, fan) %>%
