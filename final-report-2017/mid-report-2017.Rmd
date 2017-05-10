@@ -50,7 +50,7 @@ Its output is a synchronised stereo recording which contains the EGG signal from
 
 # Methodology
 
-## Equipment setup
+## Equipment setup {#s:setup}
 
 ![Equipment set-up scheme\label{f:setup}](../graphics/setup.png){ width=80% }
 
@@ -125,6 +125,21 @@ After the calculation of the relative dEGG~max~ and dEGG~min~, these values are 
 Since the values are restricted between 0 and 1 (being proportions), changes in glottal period (which corresponds to changes in fundamental frequency and hence pitch) are controlled for.
 The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
 Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
+
+# Pilot study
+
+I ran a pilot study to assess the performance of the methodology.
+Two speakers of Italian (2 males) and two speakers of Polish (1 female, 1 male) were recorded using the setup described in \Cref{s:setup}.
+The target words were of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/. The words were embedded in prosodically similar sentences (Italian *Dico X lentamente* 'I say X slowly', and Polish *Mówię X teraz* 'I say X now').
+
+## Results
+
+![Tongue contour at maximum constriction of coronal consonants in Italian.\label{f:it-coronal}](../graphics/it-coronal.pdf){ width=90% }
+
+![Tongue contour at maximum constriction of coronal consonants in Polish.\label{f:pl-coronal}](../graphics/pl-coronal.pdf){ width=90% }
+
+\Cref{f:it-coronal} and \Cref{f:pl-coronal} show the tongue countours of the speaker of, respectively, Italian and Polish.
+The contours at maximum closure of coronal consonants only are plotted, separately for each of the three vowels /a, o, u/ (columns) and speaker (rows).
 
 
 # References
