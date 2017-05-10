@@ -109,7 +109,8 @@ filter(splines.it, label == "max_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1) +
-    facet_grid(speaker ~ vowel)
+    facet_grid(speaker ~ vowel) +
+    scale_colour_discrete(name = "Phonation of C2")
 ```
 
 ```{r group-velar-it}
@@ -117,7 +118,8 @@ filter(splines.it, label == "max_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1) +
-    facet_grid(speaker ~ vowel)
+    facet_grid(speaker ~ vowel) +
+    scale_colour_discrete(name = "Phonation of C2")
 ```
 
 ```{r coronal-it}
@@ -713,7 +715,8 @@ filter(splines.pl, label == "max_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1.5) +
-    facet_grid(speaker ~ vowel)
+    facet_grid(speaker ~ vowel) +
+    scale_colour_discrete(name = "Phonation of C2")
 ```
 
 ```{r group-velar-pl}
@@ -721,7 +724,8 @@ filter(splines.pl, label == "max_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1) +
-    facet_grid(speaker ~ vowel)
+    facet_grid(speaker ~ vowel) +
+    scale_colour_discrete(name = "Phonation of C2")
 ```
 
 ```{r coronal-pl}
