@@ -126,20 +126,34 @@ Since the values are restricted between 0 and 1 (being proportions), changes in 
 The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
 Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
 
+# Statistical testing
+
 # Pilot study
 
-I ran a pilot study to assess the performance of the methodology.
+I ran a pilot study to verify the performance of the methodology.
 Two speakers of Italian (2 males) and two speakers of Polish (1 female, 1 male) were recorded using the setup described in \Cref{s:setup}.
 The target words were of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/. The words were embedded in prosodically similar sentences (Italian *Dico X lentamente* 'I say X slowly', and Polish *Mówię X teraz* 'I say X now').
 
 ## Results
 
-![Tongue contour at maximum constriction of coronal consonants in Italian.\label{f:it-coronal}](../graphics/it-coronal.pdf){ width=90% }
+![Tongue contour at maximum constriction of coronal consonants in Italian and Polish.\label{f:coronal}](../graphics/coronal.pdf){ width=90% }
 
-![Tongue contour at maximum constriction of coronal consonants in Polish.\label{f:pl-coronal}](../graphics/pl-coronal.pdf){ width=90% }
 
-\Cref{f:it-coronal} and \Cref{f:pl-coronal} show the tongue countours of the speaker of, respectively, Italian and Polish.
-The contours at maximum closure of coronal consonants only are plotted, separately for each of the three vowels /a, o, u/ (columns) and speaker (rows).
+\Cref{f:coronal} shows the tongue countours of the speakers of Italian and Polish.
+Only the contours at maximum closure of coronal consonants are plotted, separately for each vowel (rows) and speaker (columns).
+The root of the rongue is on the left of each graph, while the tip is on the right.
+The contours of the anterior part of the tongue in voiced (red lines) and voiceless stops (blue lines) overlap both in Italian and Polish.
+This indicates that the the saggital shape of the tongue at maximum constriction is not affected by the voicing of the consonant.
+However, the tongue root seems to be advanced in voiced stops (red lines) compared to voiceless stops (blue lines) in Italian, but not in Polish.
+According to a generalised additive mixed effects model fitted on the Italian and Polish data, the tongue root was significantly advanced in voiced stops in Italian, while there was no significant difference in Polish (\Cref{f:it-pl}).
 
+![Tongue contour in voiceless and voiced stops at maximum constriction in Italian (left) and Polish (right). When the confidence intervals of the difference smooth (grey) do not cross 0 on the y-axis, they indicate a significant difference (red line on the x-axis).\label{f:it-pl}](../graphics/it-pl.pdf){ width=90% }
+
+The analysis of the EGG data is underway, although, as derived from the visual inspection of the data, it seems that both Italian and Polish voiceless stops entail earlier glottal spread, reflected in the tracegram of these stops, shown in \Cref{f:tracegram}.
+The dEGG maximum starts raising at around 60% of the vowel in Italian and Polish if the vowel is followed by voiceless stops.
+A raised dEGG maximum during the last portion of the vowel indicates that glottal spreading (which is the configuration of the vocal folds during the production of voiceless stops) is initiated even before consonant closure is achieved.
+On the contrary, there seems to be no significant increase in the dEGG maximum in voiced stops in neither language.
+
+![Tracegram.\label{f:tracegram}](../graphics/tracegram.pdf){ width=80% }
 
 # References
