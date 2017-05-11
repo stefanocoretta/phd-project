@@ -22,6 +22,10 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Introduction
+
+This document 
+
 # Purpose
 
 The combination of techniques described in the following sections allows a synchronous mapping of lingual gestures and phonation during speech.
