@@ -24,7 +24,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-This document 
+This document is a technical report of the methodology specifically developed for this PhD project.
+The discussion of a pilot study testing the methodology will also be discussed.
+Part of this report will be included in the dissertation ("Literature review" and "Methodology" chapters).
 
 # Purpose
 
@@ -35,7 +37,7 @@ These techniques employ ultrasound tongue imaging (UTI) and electroglottography 
 ## Ultrasound tongue imaging
 
 Ultrasound tongue imaging (UTI) uses ultrasonography for charting the movements of the tongue into a two-dimensional image.
-In medical sonography, ultrasound waves (sound waves at high frequencies, ranging between 2 and 14 MHz) are emitted from a probe in a fan-like manner, and travel through organic material (such as skin and muscles).
+In medical sonography, ultrasound waves (sound waves at high frequencies, ranging between 2 and 14 MHz) are emitted from a probe in a fan-like manner, and travel through organic tissue (such as skin and muscles).
 When the surface of a material with different density is hit, the ultrasound waves are partially reflected, and such "echo" is registered by the probe.
 These echoes can then be plotted on a two-dimensional graph, where different densities are represented by different shades (higher densities are brighter, while lower densities are darker).
 The graph, or ultrasound image, will show high density surfaces as very bright lines, surrounded by darker areas.
@@ -45,14 +47,19 @@ By positioning the ultrasound probe in contact with the submental triangle (the 
 ## Electroglottography
 
 Electroglottography [@fabre1957] is a technique that measures the size of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
-A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage.
+A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage (\Cref{f:egg-setup}).
 The impedance of the current is directly correlated with VFCA, while its amplitude is inversely correlated.
 Thus, impedance increases with lower VFCA and decreases with higher VFCA.
 Conversely, amplitude decreases when the VFCA increases and it increases when the VFCA decreases.
 The EGG unit registers changes in impedance and it converts it in amplitude.
 Its output is a synchronised stereo recording which contains the EGG signal from the electrodes in right channel and the audio signal from the microphone in the left channel.
 
+![A schematic representation of the electroglottograph.\label{f:egg-setup}](../graphics/egg-setup.pdf){ width=80% }
+
 # Methodology
+
+This section describes the equipment setup, the procedure for the acquisition of data, the synchronisation of the UTI and EGG data, and the analysis of the data.
+Statisitcal testing will be the subject of \Cref{s:stats}.
 
 ## Equipment setup {#s:setup}
 
@@ -69,11 +76,9 @@ A TELEMED Echo Blaster 128 system is used for ultrasonography and a Glottal Ente
 The subject wears a headset (a metallic ..., not shown in \Cref{f:setup}) which holds the ultrasound probe in position (allowing free head movement by the subject) and a velcro strap with the EGG electrodes, located on each side of the thyroid cartilage, at the level of the glottis.
 The microphones are clipped to the headset on either side, at identical height.
 
-## Acquisition and post-processing of ultrasound and EGG
+## Acquisition of ultrasound and EGG
 
-Ultrasound and EGG inputs are acquired and recorded in separate laptops by means of, respectively, Articulate Assistant Advanced [AAA, ] and Praat [].
-Detection of tongue profile and calculation of velocity measures and consonantal target and release are automatically performed in AAA using built-in functions.
-EGG post-processing is described in \Cref{s:tracegram}.
+Ultrasound and EGG inputs are acquired and recorded in separate laptops by means of, respectively, Articulate Assistant Advanced [AAA,@articulate2011] and Praat [@boersma2016].
 
 ## Ultrasound and EGG synchronisation
 
@@ -87,7 +92,16 @@ A measure taken at any particular time in the ultrasound source can thus be rela
 
 [image of cross-correlation]: #
 
-## Calculation of dEGG and tracegram analysis {#s:tracegram}
+## Analysis of ultrasound data
+
+The ultrasound data is analysed with the same programme used for recording [@articulate2011].
+The tracking of the tongue contours is performed using a built-in automatic spline tracker.
+The splines as resulting from the automatic tracking are then checked and corrected manually if necessary.
+Velocity measures are subsequently calculated based on tongue displacement along two fan lines (one for the tongue tip and one for the tongue dorsum).
+Appropriate fan line selection is achieved by inspecting the standard deviation of tongue displacement on a few fan lines which lie on relevant portions of the tongue (front for the tongue tip and back-centre for tongue dorsum).
+The fan line of each respective tongue portion with the largest standard deviation is chosen and the velocity of tongue displacement is calculated.
+
+## Analysis of EGG data {#s:tracegram}
 
 Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
 The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
@@ -130,7 +144,7 @@ Since the values are restricted between 0 and 1 (being proportions), changes in 
 The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
 Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
 
-# Statistical testing
+# Statistical testing {#s:stats}
 
 # Pilot study
 
@@ -143,11 +157,11 @@ The target words were of the form C\textsubscript{1}V\textsubscript{1}C\textsubs
 ![Tongue contour at maximum constriction of coronal consonants in Italian and Polish.\label{f:coronal}](../graphics/coronal.pdf){ width=90% }
 
 
-\Cref{f:coronal} shows the tongue countours of the speakers of Italian and Polish.
+\Cref{f:coronal} shows the tongue contours of the speakers of Italian and Polish.
 Only the contours at maximum closure of coronal consonants are plotted, separately for each vowel (rows) and speaker (columns).
-The root of the rongue is on the left of each graph, while the tip is on the right.
+The root of the tongue is on the left of each graph, while the tip is on the right.
 The contours of the anterior part of the tongue in voiced (red lines) and voiceless stops (blue lines) overlap both in Italian and Polish.
-This indicates that the the saggital shape of the tongue at maximum constriction is not affected by the voicing of the consonant.
+This indicates that the the sagittal shape of the tongue at maximum constriction is not affected by the voicing of the consonant.
 However, the tongue root seems to be advanced in voiced stops (red lines) compared to voiceless stops (blue lines) in Italian, but not in Polish.
 According to a generalised additive mixed effects model fitted on the Italian and Polish data, the tongue root was significantly advanced in voiced stops in Italian, while there was no significant difference in Polish (\Cref{f:it-pl}).
 
