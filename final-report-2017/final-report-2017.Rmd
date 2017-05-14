@@ -100,13 +100,14 @@ The splines as resulting from the automatic tracking are then checked and correc
 Velocity measures are subsequently calculated based on tongue displacement along two fan lines (one for the tongue tip and one for the tongue dorsum).
 Appropriate fan line selection is achieved by inspecting the standard deviation of tongue displacement on a few fan lines which lie on relevant portions of the tongue (front for the tongue tip and back-centre for tongue dorsum).
 The fan line of each respective tongue portion with the largest standard deviation is chosen and the velocity of tongue displacement along that line is calculated.
-Finally, the onset and offset of the consonantal gesture and its nucleus are identified from the absolute velocity values using the method described in the following paragraph.
+Finally, four gestural landmarks (the onset and offset of the consonantal gesture and of its nucleus) are identified from the absolute velocity values using the method described in the following paragraph.
 
 A single consonantal gesture is normally constituted by a closing phase that starts during the preceding vowel, a moment of maximum constriction during the consonant closure, and an opening phase that that terminates during the following vowel.
 The time of maximum constriction corresponds to the time of the minimum absolute velocity within the interval of the consonant closure.
 The velocity minimum is preceded and followed by two velocity maxima.
 The onset and offset of the nucleus of the consonantal gesture then correspond to the time where the absolute velocity reaches the 20% of the peak velocity, respectively before and after the maximum constriction.
 Finally, the gesture onset and offset are defined as the time where the peak velocity preceding and following the peaks reaches the 20% of the local peak velocity.
+The time and spline coordinates at each of the four gestural landmarks are then extracted for statistical analysis in R.
 
 ## Analysis of EGG data {#s:tracegram}
 
@@ -151,7 +152,7 @@ Since the values are restricted between 0 and 1 (being proportions), changes in 
 The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
 Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
 
-# Statistical testing {#s:stats}
+# Statistical analysis {#s:stats}
 
 # Pilot study
 
