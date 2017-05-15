@@ -1,7 +1,7 @@
 ---
 title: "A time-aligned account of lingual and laryngeal gestures using ultrasound tongue imaging (UTI) and electroglottography (EGG)"
 author: "Stefano Coretta"
-date: "14/01/2017"
+date: "\\today"
 output:
   bookdown::pdf_document2:
     citation_package: natbib
@@ -25,8 +25,8 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction
 
 This document is a technical report of the methodology specifically developed for this PhD project.
-The discussion of a pilot study testing the methodology will also be discussed.
-Part of this report will be included in the dissertation ("Literature review" and "Methodology" chapters).
+The results of a pilot study testing the methodology will also be discussed.
+Extracts of this report will be included in the dissertation as part of the "Literature review" and "Methodology" chapters.
 
 # Purpose
 
@@ -48,24 +48,24 @@ By positioning the ultrasound probe in contact with the submental triangle (the 
 
 Electroglottography [@fabre1957] is a technique that measures the size of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
 A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage (\Cref{f:egg-setup}).
-The impedance of the current is directly correlated with VFCA, while its amplitude is inversely correlated.
+The impedance of the current is directly correlated with VFCA, while its amplitude is inversely correlated [@titze1990].
 Thus, impedance increases with lower VFCA and decreases with higher VFCA.
 Conversely, amplitude decreases when the VFCA increases and it increases when the VFCA decreases.
 The EGG unit registers changes in impedance and it converts it in amplitude.
 Its output is a synchronised stereo recording which contains the EGG signal from the electrodes in right channel and the audio signal from the microphone in the left channel.
 
-![A schematic representation of the electroglottograph.\label{f:egg-setup}](../graphics/egg-setup.pdf){ width=80% }
+![A schematic representation of the electroglottograph. The trasnversal section of the neck at the level of the glottis is represented: the effect of the glottis are shown on the left (open glottis) and on the right figure (closed glottis).\label{f:egg-setup}](../graphics/egg-setup.pdf){ width=80% }
 
 # Methodology
 
-This section describes the equipment setup, the procedure for the acquisition of data, the synchronisation of the UTI and EGG data, and the analysis of the data.
-Statisitcal testing will be the subject of \Cref{s:stats}.
+This section describes the equipment setup, the procedure for the acquisition, synchronisation, and analysis of the UTI and EGG data.
+Statistical testing will be the subject of \Cref{s:stats}.
 
 ## Equipment setup {#s:setup}
 
-![Equipment set-up scheme\label{f:setup}](../graphics/setup.png){ width=80% }
+![Equipment set-up scheme\label{f:setup}](../graphics/setup.pdf){ width=80% }
 
-\Cref{f:setup} shows the equipment set-up employed.
+\Cref{f:setup} shows the equipment set-up employed in the study.
 The left part of the figure shows the ultrasound set-up, while the EGG set-up is shown on the right.
 Two separate laptops are used for the acquisition of the ultrasound and EGG recordings.
 The ultrasound unit is plugged into one laptop.
@@ -73,7 +73,7 @@ A P-Stretch unit (used for signal synchronisation) and the ultrasound probe are 
 The P-Stretch unit and a microphone feed a pre-amplifier system, which is plugged into the ultrasound laptop.
 A second microphone and the electrodes are connected to the EGG unit, which is plugged into the second laptop.
 A TELEMED Echo Blaster 128 system is used for ultrasonography and a Glottal Enterprises EG2-PCX2 unit for EGG.
-The subject wears a headset (a metallic ..., not shown in \Cref{f:setup}) which holds the ultrasound probe in position (allowing free head movement by the subject) and a velcro strap with the EGG electrodes, located on each side of the thyroid cartilage, at the level of the glottis.
+The subject wears a headset (not shown in \Cref{f:setup}) which holds the ultrasound probe in position (allowing free head movement) and a velcro strap with the EGG electrodes, located on each side of the thyroid cartilage, at the level of the glottis.
 The microphones are clipped to the headset on either side, at identical height.
 
 ## Acquisition of ultrasound and EGG
@@ -111,7 +111,7 @@ The time and spline coordinates at each of the four gestural landmarks are then 
 
 ## Analysis of EGG data {#s:tracegram}
 
-Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle (glottal period).
+Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle, or glottal period [].
 The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
 The time of maximum velocity in the first derivative of the EGG signal (dEGG) roughly corresponds to the moment of glottal closure.
 The time of minimum velocity corresponds to the moment of glottal opening.
@@ -150,9 +150,13 @@ The tracegram method, even if it reduces the displayed dimensions, allows a stat
 After the calculation of the relative dEGG~max~ and dEGG~min~, these values are  plotted in a graph on the *y* axis at each time point which corresponds to the beginning of a glottal period.
 Since the values are restricted between 0 and 1 (being proportions), changes in glottal period (which corresponds to changes in fundamental frequency and hence pitch) are controlled for.
 The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ as they change in time, in a way similar to the display of pitch contours.
-Statistical analysis is then performed on both traces separately using a Smoothing Spline ANOVA (SSANOVA).
 
 # Statistical analysis {#s:stats}
+
+Traditionally, differences in tongue contours has been assessed using Smoothing Spline ANOVA (SSANOVA) models [@gu2013,@davidson2006].
+More recently, generalised additive models (GAMs) have been applied to dynamic linguistic data including a space or time dimension [@wood2006,@soskuthy2017].
+GAMs are considered to be a more conservative type of statistical model than SSANOVA, thus reducing the probability of getting false positive results.
+I am thus currently testing the application of GAMs on UTI and EGG data.
 
 # Pilot study
 
