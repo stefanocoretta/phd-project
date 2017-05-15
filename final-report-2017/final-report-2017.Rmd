@@ -15,7 +15,9 @@ mainfontoptions: Numbers=Lining
 bibliography: linguistics.bib
 biblio-style: unified.bst
 header-includes:
+- \frenchspacing
 - \usepackage{cleveref}
+- \setcitestyle{aysep={},notesep={:},citesep={,}}
 ---
 
 ```{r setup, include=FALSE}
@@ -40,9 +42,10 @@ Ultrasound tongue imaging (UTI) uses ultrasonography for charting the movements 
 In medical sonography, ultrasound waves (sound waves at high frequencies, ranging between 2 and 14 MHz) are emitted from a probe in a fan-like manner, and travel through organic tissue (such as skin and muscles).
 When the surface of a material with different density is hit, the ultrasound waves are partially reflected, and such "echo" is registered by the probe.
 These echoes can then be plotted on a two-dimensional graph, where different densities are represented by different shades (higher densities are brighter, while lower densities are darker).
-The graph, or ultrasound image, will show high density surfaces as very bright lines, surrounded by darker areas.
+The graph, or ultrasound image, will show high density surfaces as very bright lines, surrounded by darker areas (\Cref{f:uti}).
 By positioning the ultrasound probe in contact with the submental triangle (the surface below the chin), sagittally oriented, it is possible to infer the cross-sectional profile of the tongue, which appears as a bright line in the resulting ultrasound image.
 
+![An ultrasound image of the tongue.\label{f:uti}](../graphics/uti.png){ width=60% }
 
 ## Electroglottography
 
@@ -54,16 +57,16 @@ Conversely, amplitude decreases when the VFCA increases and it increases when th
 The EGG unit registers changes in impedance and it converts it in amplitude.
 Its output is a synchronised stereo recording which contains the EGG signal from the electrodes in right channel and the audio signal from the microphone in the left channel.
 
-![A schematic representation of the electroglottograph. The trasnversal section of the neck at the level of the glottis is represented: the effect of the glottis are shown on the left (open glottis) and on the right figure (closed glottis).\label{f:egg-setup}](../graphics/egg-setup.pdf){ width=80% }
+![A schematic representation of the electroglottograph. The transversal section of the neck at the level of the glottis is represented: the effect of the glottis on the electric field are shown on the left for the open glottis and on the right figure for the closed glottis.\label{f:egg-setup}](../graphics/egg-setup.pdf){ width=80% }
 
 # Methodology
 
-This section describes the equipment setup, the procedure for the acquisition, synchronisation, and analysis of the UTI and EGG data.
-Statistical testing will be the subject of \Cref{s:stats}.
+This section describes the equipment setup, and the procedure for the acquisition, synchronisation, and analysis of the UTI and EGG data.
+Statistical analysis will be the subject of \Cref{s:stats}.
 
 ## Equipment setup {#s:setup}
 
-![Equipment set-up scheme\label{f:setup}](../graphics/setup.pdf){ width=80% }
+![Equipment set-up scheme.\label{f:setup}](../graphics/setup.pdf){ width=80% }
 
 \Cref{f:setup} shows the equipment set-up employed in the study.
 The left part of the figure shows the ultrasound set-up, while the EGG set-up is shown on the right.
@@ -82,15 +85,14 @@ Ultrasound and EGG inputs are acquired and recorded in separate laptops by means
 
 ## Ultrasound and EGG synchronisation
 
-Since the signals from the ultrasound machine and the laryngograph are recorded simultaneously but separately, data from both machines need to be synchronised after acquisition.
+Since the signals from the ultrasound machine and the electroglottograph are recorded simultaneously but separately, data from both machines need to be synchronised after acquisition.
 Synchronisation is achieved through the cross-correlation of the audio signals from both sources [@grimaldi2008].
-The cross-correlation method creates a new sound file from two audio files.
-The created new file is a convolution of the original files.
-The time of the maximum amplitude in the convoluted sound wave is the amount of off-set between the two original files.
-The off-set is trimmed from the beginning of the longer audio file, with the result that the files will be in sync.
-A measure taken at any particular time in the ultrasound source can thus be related to a measure taken at that same time in the laryngograph source.
+This method creates a sound file from two audio files which is the cross-correlation of the original files (\Cref{f:cross-correlation}).
+The interval between the start of the cross-correlated sound file and the time of maximum amplitude is equal to the lag between the two original files.
+Syncing of the original sound files is achieved by trimming the longer sound from its start by the same amount as the lag.
+A measure taken at any particular time in the ultrasound source can thus be related to a measure taken at that same time in the EGG source.
 
-[image of cross-correlation]: #
+![Synchronisation of two sounds by cross-correlation. \label{f:cross-correlation}](../graphics/cross-correlation.pdf){ width=80% }
 
 ## Analysis of ultrasound data
 
@@ -103,16 +105,18 @@ The fan line of each respective tongue portion with the largest standard deviati
 Finally, four gestural landmarks (the onset and offset of the consonantal gesture and of its nucleus) are identified from the absolute velocity values using the method described in the following paragraph.
 
 A single consonantal gesture is normally constituted by a closing phase that starts during the preceding vowel, a moment of maximum constriction during the consonant closure, and an opening phase that that terminates during the following vowel.
-The time of maximum constriction corresponds to the time of the minimum absolute velocity within the interval of the consonant closure.
+The time of maximum constriction corresponds to the time of the minimum absolute velocity within the interval of the consonant closure (\Cref{f:velocity}).
 The velocity minimum is preceded and followed by two velocity maxima.
 The onset and offset of the nucleus of the consonantal gesture then correspond to the time where the absolute velocity reaches the 20% of the peak velocity, respectively before and after the maximum constriction.
 Finally, the gesture onset and offset are defined as the time where the peak velocity preceding and following the peaks reaches the 20% of the local peak velocity.
-The time and spline coordinates at each of the four gestural landmarks are then extracted for statistical analysis in R.
+The time and spline coordinates at each of the four gestural landmarks are then extracted for statistical analysis.
+
+![Identification of the gestural landmarks from the absolute tongue velocity profile (`gons` = gesture onset, `nons` = nucleus onset, `max` = maximum constriction, `noff` = nucleus offset, `goff` = gesture offset).\label{f:velocity}](../graphics/velocity.pdf){ width=80% }
 
 ## Analysis of EGG data {#s:tracegram}
 
-Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle, or glottal period [].
-The first derivative of a signal is basically the velocity of the signal, in other words how fast the signal changes in time.
+Previous studies have shown that the mathematical first derivative of the EGG signal helps determine the moments of glottal closure and opening in each vibration cycle, or glottal period [@henrich2004;@henrich2005].
+The first derivative of a signal is the velocity of the signal, in other words how fast the signal changes in time.
 The time of maximum velocity in the first derivative of the EGG signal (dEGG) roughly corresponds to the moment of glottal closure.
 The time of minimum velocity corresponds to the moment of glottal opening.
 Thus, glottal closure and opening for each glottal period can be extracted from the dEGG.
@@ -153,10 +157,11 @@ The resulting graph, the tracegram, shows the traces of dEGG~max~ and dEGG~min~ 
 
 # Statistical analysis {#s:stats}
 
-Traditionally, differences in tongue contours has been assessed using Smoothing Spline ANOVA (SSANOVA) models [@gu2013,@davidson2006].
-More recently, generalised additive models (GAMs) have been applied to dynamic linguistic data including a space or time dimension [@wood2006,@soskuthy2017].
+Traditionally, differences in tongue contours has been assessed using Smoothing Spline ANOVA (SSANOVA) models [@gu2013;@davidson2006].
+More recently, generalised additive models (GAMs) have been applied to dynamic linguistic data including a space or time dimension [@wood2006;@soskuthy2017].
 GAMs are considered to be a more conservative type of statistical model than SSANOVA, thus reducing the probability of getting false positive results.
 I am thus currently testing the application of GAMs on UTI and EGG data.
+Data post-processing and statistical analysis is performed in R [@r-core-team2015].
 
 # Pilot study
 
