@@ -1,7 +1,7 @@
 ---
 title: "Tracegram pilot"
 author: "Stefano Coretta"
-date: "08/03/2017"
+date: "\\today"
 output: 
   pdf_document: 
     fig_caption: yes
@@ -150,7 +150,7 @@ ggplot(quotient, aes(time, closed.quotient, colour = speaker)) +
     facet_grid(phonation ~ .)
 ```
 
-```{r cq-plot}
+```{r cq-plot-2}
 filter(quotient, token == 1) %>%
 ggplot(aes(time, closed.quotient)) +
     geom_point(alpha = 0.2) +
