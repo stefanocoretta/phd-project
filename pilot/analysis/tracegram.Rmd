@@ -1,15 +1,15 @@
 ---
 title: "Tracegram analysis"
 author: "Stefano Coretta"
-date: \today
+date: "\\today"
 output:
-  html_document: default
   pdf_document:
     fig_caption: yes
     fig_height: 3.5
     fig_width: 5
     latex_engine: xelatex
     number_sections: yes
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

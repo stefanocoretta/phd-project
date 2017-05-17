@@ -1,9 +1,10 @@
 ---
 title: "Ultrafest"
 author: "Stefano Coretta"
-date: "03/04/2017"
-output: 
-  html_document: 
+date: "\\today"
+output:
+  pdf_document: default
+  html_document:
     highlight: tango
     number_sections: yes
     theme: readable
