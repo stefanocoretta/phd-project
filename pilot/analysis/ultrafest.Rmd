@@ -999,7 +999,7 @@ plot_diff(max.pl.gam.AR, view = "X",
 
 ## GAMMs at maximum constriction ps02
 
-```{r max-pl}
+```{r max-pl-ps02}
 max.pl.ps02 <- splines.pl %>%
     filter(label %in% c("max_TT", "max_TD"),
            speaker == "ps02",
@@ -1013,7 +1013,7 @@ max.pl.ps02 <- splines.pl %>%
 ```
 
 
-```{r max-pl-gamm}
+```{r max-pl-gamm-ps02}
 max.pl.gamm.ps02 <- bam(
     Y ~
         c2phonation.ord +
@@ -1034,7 +1034,7 @@ summary(max.pl.gamm.ps02)
 
 ### AR1 model
 
-```{r max-pl-gam-ar}
+```{r max-pl-gam-ar-ps02}
 r1 <- start_value_rho(max.pl.gamm.ps02)
 
 max.pl.gam.ps02.AR <- bam(
@@ -1074,12 +1074,12 @@ max.pl.gam.ps02.AR.null <- bam(
 compareML(max.pl.gam.ps02.AR.null, max.pl.gam.ps02.AR)
 ```
 
-```{r max-pl-gam-ar-acf}
+```{r max-pl-gam-ar-acf-ps02}
 acf_plot(resid(max.pl.gam.ps02.AR), split_by=list(max.pl.ps02$rec.date))
 acf_resid(max.pl.gam.ps02.AR, split_pred = "AR.start")
 ```
 
-```{r max-pl-gam-ar-plot}
+```{r max-pl-gam-ar-plot-ps02}
 plot_smooth(max.pl.gam.ps02.AR, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
 plot_diff(max.pl.gam.ps02.AR, view = "X",
@@ -1181,7 +1181,7 @@ acf_plot(resid(closure.pl.gamm), split_by=list(closure.pl$rec.date))
 
 ### AR1 model
 
-```{r closure-it-gam-ar}
+```{r closure-pl-gam-ar}
 r1 <- start_value_rho(closure.pl.gamm)
 
 closure.pl.gam.AR <- bam(
