@@ -10,15 +10,6 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Phonology/Common/
 
-## Pull from share
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Phonology/Common/ \
-    ~/Documents/GitHub/phd-project/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Phonology/Common/ \
-    ~/Documents/GitHub/phd-project/
-
-
 # Backup
 
 ## Push to external HD
@@ -50,3 +41,13 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data/
+
+# DANGER
+
+## Pull from share
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Phonology/Common/ \
+    ~/Documents/GitHub/phd-project/
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Phonology/Common/ \
+    ~/Documents/GitHub/phd-project/
