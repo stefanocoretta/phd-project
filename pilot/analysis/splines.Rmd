@@ -15,12 +15,9 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../../"))
-library(readr)
-library(purrr)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)
 theme_set(theme_bw())
+library(scales)
 library(gss)
 library(stringr)
 library(lme4)
@@ -92,7 +89,12 @@ splines <- splines.raw %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
-    mutate_if(is.character, as.factor)
+    mutate_if(is.character, as.factor) %>%
+    group_by(speaker) %>%
+    mutate(
+        X.norm = rescale(X),
+        Y.norm = rescale(Y)
+    )
 
 splines.it <- filter(splines, language == "italian")
 splines.pl <- filter(splines, language == "polish")
@@ -139,11 +141,20 @@ gestures.pl <- filter(cons.gestures, language == "polish")
 We can finally plot splines.
 
 ```{r velar, eval=FALSE}
-filter(splines, label == "NONS_TD") %>%
+filter(splines, label == "max_TD") %>%
 ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     geom_smooth(method = "loess", se = FALSE) +
     coord_fixed(ratio = 1) +
-    facet_grid(vowel ~ language)
+    facet_grid(vowel ~ speaker)
+```
+
+```{r velar-scaled, eval=FALSE}
+filter(splines, label == "max_TD") %>%
+ggplot(aes(x = X.norm, y = Y.norm, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", se = FALSE, alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    xlim(0, 1) + ylim(0, 1)
 ```
 
 ```{r coronal, eval=FALSE}
@@ -154,6 +165,14 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
     facet_grid(vowel ~ language)
 ```
 
+```{r coronal-scaled, eval=FALSE}
+filter(splines, label == "max_TT") %>%
+ggplot(aes(x = X.norm, y = Y.norm, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", se = FALSE, alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    xlim(0, 1) + ylim(0, 1)
+```
 
 ```{r}
 filter(splines, c2place == "coronal") %>%
@@ -824,4 +843,6 @@ filter(splines, label == "peak1_TT", language == "italian") %>%
 ```{r}
 
 ```
+
+# Experimental rescaling
 
