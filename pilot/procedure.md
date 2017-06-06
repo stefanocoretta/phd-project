@@ -21,9 +21,9 @@
    1. Calculate Maths for entire session
 1. **Find consonantal gestures**
    1. Select TD stimuli
-   1. `Find...` > `Load` and `execute` `td_function_50.srh`
+   1. `Find...` > `Load` and `execute` `td_function.srh`
    1. Select TT stimuli
-   1. `Find...` > `Load` and `execute` `tt_function_95.srh`
+   1. `Find...` > `Load` and `execute` `tt_function.srh`
 1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]-aaa.txt`
 1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID]-00n.TextGrid`
 1. **Burst detection**
