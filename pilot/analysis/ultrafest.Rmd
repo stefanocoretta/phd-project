@@ -1235,7 +1235,7 @@ plot_diff(closure.pl.gam.AR, view = "X",
 
 # Plot smooth and difference
 
-```{r}
+```{r max-it-gam-combo}
 diff.df <- plot_diff(max.it.gam.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")),
           plot = FALSE)
@@ -1243,9 +1243,7 @@ diff.df <- plot_diff(max.it.gam.AR, view = "X",
 smooth.df <- get_predictions(max.it.gam.AR, cond = list(c2phonation.ord = c("voiceless", "voiced"), X = seq(min(diff.df$X), max(diff.df$X), length = 200)))
 
 sig.diff <- find_difference(diff.df$est, diff.df$CI, diff.df$X)
-```
 
-```{r}
 smooth.plot <- smooth.df %>%
     ggplot(aes(X, fit)) +
     annotate("rect", xmin=sig.diff$start, xmax=sig.diff$end, ymin=-Inf, ymax=Inf, alpha=0.2, fill="red") +
@@ -1273,7 +1271,46 @@ diff.plot <- diff.df %>%
     xlim(min(diff.df$X), max(diff.df$X))
 ```
 
-```{r}
+```{r max-it-gam-combo-plot}
 plot_grid(smooth.plot, diff.plot, align = "v", nrow = 2, rel_heights = c(2/3, 1/3))
 ```
 
+```{r closure-it-gam-combo}
+diff.df <- plot_diff(closure.it.gam.AR, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")),
+          plot = FALSE)
+
+smooth.df <- get_predictions(closure.it.gam.AR, cond = list(c2phonation.ord = c("voiceless", "voiced"), X = seq(min(diff.df$X), max(diff.df$X), length = 200)))
+
+sig.diff <- find_difference(diff.df$est, diff.df$CI, diff.df$X)
+
+smooth.plot <- smooth.df %>%
+    ggplot(aes(X, fit)) +
+    annotate("rect", xmin=sig.diff$start, xmax=sig.diff$end, ymin=-Inf, ymax=Inf, alpha=0.2, fill="red") +
+    geom_ribbon(aes(ymin = fit - CI,
+                ymax = fit + CI,
+                fill = c2phonation.ord
+                ),
+            alpha = 0.2,
+            colour = "NA"
+            ) +
+    geom_line(aes(colour = c2phonation.ord)) +
+    theme(axis.title.x=element_blank(), legend.position = "top") +
+    xlim(min(diff.df$X), max(diff.df$X))
+
+diff.plot <- diff.df %>%
+    ggplot(aes(X, est)) +
+    geom_hline(yintercept = 0, size = 0.3) +
+    annotate("rect", xmin=sig.diff$start, xmax=sig.diff$end, ymin=-Inf, ymax=Inf, alpha=0.2, fill="red") +
+    geom_ribbon(aes(ymin = est - CI,
+                ymax = est + CI
+                ),
+            alpha = 0.2
+            ) +
+    geom_line() +
+    xlim(min(diff.df$X), max(diff.df$X))
+```
+
+```{r closure-it-gam-combo-plot}
+plot_grid(smooth.plot, diff.plot, align = "v", nrow = 2, rel_heights = c(2/3, 1/3))
+```
