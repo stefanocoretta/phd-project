@@ -14,6 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(tidyverse)
+library(cowplot)
 theme_set(theme_bw())
 library(gss)
 library(stringr)
@@ -1231,3 +1232,49 @@ plot_smooth(closure.pl.gam.AR, view = "X",
 plot_diff(closure.pl.gam.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
+
+# Plot smooth and difference
+
+```{r}
+smooth.df <- get_predictions(max.it.gam.AR, cond = list(c2phonation.ord = c("voiceless", "voiced"), X = seq(-39, 54, length = 200)))
+
+diff.df <- plot_diff(max.it.gam.AR, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")),
+          plot = FALSE)
+
+sig.diff <- find_difference(diff.df$est, diff.df$CI, diff.df$X)
+```
+
+```{r}
+smooth.plot <- smooth.df %>%
+    ggplot(aes(X, fit)) +
+    annotate("rect", xmin=sig.diff$start, xmax=sig.diff$end, ymin=-Inf, ymax=Inf, alpha=0.2, fill="red") +
+#    geom_rect(aes(xmin = sig.diff$start, xmax = sig.diff$end,
+#                  ymin = -Inf, ymax = Inf), alpha = 0.2) +
+    geom_ribbon(aes(ymin = fit - CI,
+                ymax = fit + CI,
+                fill = c2phonation.ord
+                ),
+            alpha = 0.2,
+            colour = "NA"
+            ) +
+    geom_line(aes(colour = c2phonation.ord)) +
+    theme(axis.title.x=element_blank(), legend.position = "top") +
+    xlim(-40, 50)
+
+diff.plot <- diff.df %>%
+    ggplot(aes(X, est)) +
+    annotate("rect", xmin=sig.diff$start, xmax=sig.diff$end, ymin=-Inf, ymax=Inf, alpha=0.2, fill="red") +
+    geom_ribbon(aes(ymin = est - CI,
+                ymax = est + CI
+                ),
+            alpha = 0.2
+            ) +
+    geom_line() +
+    xlim(-40, 50)
+```
+
+```{r}
+plot_grid(smooth.plot, diff.plot, align = "hv", nrow = 2, rel_heights = c(3/4, 1/4))
+```
+
