@@ -14,9 +14,11 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 
 ## Push to external HD
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    --exclude '.Rproj.user' --exclude '.git' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Multimedia/phd-project/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    --exclude '.Rproj.user' --exclude '.git' \
     ~/Documents/GitHub/phd-project/ \
     /Volumes/Multimedia/phd-project/
 
