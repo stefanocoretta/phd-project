@@ -1,0 +1,235 @@
+---
+title: "Velocity and Closed Quotient"
+author: "Stefano Coretta"
+date: \today
+output:
+  html_document: default
+  pdf_document:
+    fig_caption: yes
+    fig_height: 3.5
+    fig_width: 5
+    latex_engine: xelatex
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
+library(purrr)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+theme_set(theme_bw())
+library(stringr)
+library(grid)
+library(gridExtra)
+```
+
+# Data import
+
+```{r read-files}
+columns <- c(
+    "speaker",
+    "time",
+    "rel.time",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+    )
+
+velocity <- list.files(path = "./voicing-effect/results",
+                   pattern = "*-velocity-profiles.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_tsv(., col_names = columns, na = "*"))
+
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+velocity <- velocity %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+preceding <- ""
+counter = 0
+repetition <- as.numeric()
+for (item in velocity$word) {
+    if (item != preceding) {
+        counter <- counter + 1
+        repetition <- c(repetition, counter)
+        preceding <- item
+    } else {
+        repetition <- c(repetition, counter)
+    }
+}
+
+velocity <- cbind(velocity, repetition) %>%
+    mutate(repetition = as.factor(repetition))
+
+velocity.coronal <- filter(velocity, c2place == "coronal")
+velocity.velar <- filter(velocity, c2place == "velar")
+
+degg.word <- list.files(path = "./voicing-effect/results",
+                   pattern = "*-degg-tracing-word.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(.)) %>%
+    mutate(closed.quotient = minimum - maximum)
+
+degg.word <- left_join(degg.word, languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+preceding <- ""
+counter = 0
+repetition <- as.numeric()
+for (item in degg.word$word) {
+    if (item != preceding) {
+        counter <- counter + 1
+        repetition <- c(repetition, counter)
+        preceding <- item
+    } else {
+        repetition <- c(repetition, counter)
+    }
+}
+
+degg.word <- cbind(degg.word, repetition) %>%
+    mutate(repetition = as.factor(repetition))
+
+degg.word.it <- filter(degg.word, language == "italian")
+degg.word.pl <- filter(degg.word, language == "polish")
+```
+
+# Velocity
+
+```{r coronal-velocity-plot}
+ggplot(velocity.coronal, aes(rel.time, TT.velocity.abs, group = repetition)) +
+    geom_line() +
+    facet_grid(speaker ~ vowel + c2phonation)
+```
+
+```{r velar-velocity-plot}
+ggplot(velocity.velar, aes(rel.time, TD.velocity.abs, group = repetition)) +
+    geom_line() +
+    facet_grid(speaker ~ vowel + c2phonation)
+```
+
+```{r velocity-plot}
+ggplot(velocity, aes(rel.time, TD.velocity.abs)) +
+    geom_line() +
+    facet_grid(speaker + c2place ~ c2phonation + vowel)
+```
+
+# Closed quotient
+
+```{r cq-plot}
+filter(degg.word, closed.quotient < 1, closed.quotient > 0) %>%
+ggplot(aes(rel.time, closed.quotient)) +
+    geom_point() +
+    facet_grid(speaker + c2place ~ c2phonation + vowel)
+```
+
+# Velocity and CQ
+
+```{r}
+pata.polish <- filter(velocity, repetition == "12")
+paka.polish <- filter(velocity, repetition == "3")
+pata.italian <- filter(velocity, repetition == "99")
+paka.italian <- filter(velocity, repetition == "103")
+
+pata.degg.polish <- filter(degg.word, repetition == "13", closed.quotient < 1, closed.quotient > 0)
+paka.degg.polish <- filter(degg.word, repetition == "4", closed.quotient < 1, closed.quotient > 0)
+pata.degg.italian <- filter(degg.word, repetition == "99", closed.quotient < 1, closed.quotient > 0)
+paka.degg.italian <- filter(degg.word, repetition == "103", closed.quotient < 1, closed.quotient > 0)
+```
+
+```{r}
+pata.plot.1 <- ggplot(pata.polish, aes(rel.time, TT.velocity)) +
+    geom_line() + xlim(0, 0.21)
+pata.plot.2 <- ggplot(pata.degg.polish, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.21)
+pata.plot.1 <- ggplot_gtable(ggplot_build(pata.plot.1))
+pata.plot.2 <- ggplot_gtable(ggplot_build(pata.plot.2))
+
+maxWidth <- unit.pmax(pata.plot.1$widths[2:3], pata.plot.2$widths[2:3])
+
+pata.plot.1$widths[2:3] <- maxWidth
+pata.plot.2$widths[2:3] <- maxWidth
+```
+
+```{r}
+grid.arrange(pata.plot.1, pata.plot.2, heights = c(1, 1))
+```
+
+```{r}
+paka.plot.1 <- ggplot(paka.polish, aes(rel.time, TD.velocity)) +
+    geom_line() + xlim(0, 0.25)
+paka.plot.2 <- ggplot(paka.degg.polish, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.25)
+paka.plot.1 <- ggplot_gtable(ggplot_build(paka.plot.1))
+paka.plot.2 <- ggplot_gtable(ggplot_build(paka.plot.2))
+
+maxWidth <- unit.pmax(paka.plot.1$widths[2:3], paka.plot.2$widths[2:3])
+
+paka.plot.1$widths[2:3] <- maxWidth
+paka.plot.2$widths[2:3] <- maxWidth
+```
+
+```{r}
+grid.arrange(paka.plot.1, paka.plot.2, heights = c(1, 1))
+```
+
+```{r}
+pata.plot.1 <- ggplot(pata.italian, aes(rel.time, TT.velocity)) +
+    geom_line() + xlim(0, 0.31)
+pata.plot.2 <- ggplot(pata.degg.italian, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.31)
+pata.plot.1 <- ggplot_gtable(ggplot_build(pata.plot.1))
+pata.plot.2 <- ggplot_gtable(ggplot_build(pata.plot.2))
+
+maxWidth <- unit.pmax(pata.plot.1$widths[2:3], pata.plot.2$widths[2:3])
+
+pata.plot.1$widths[2:3] <- maxWidth
+pata.plot.2$widths[2:3] <- maxWidth
+```
+
+```{r}
+grid.arrange(pata.plot.1, pata.plot.2, heights = c(1, 1))
+```
+
+```{r}
+paka.plot.1 <- ggplot(paka.italian, aes(rel.time, TD.velocity)) +
+    geom_line() + xlim(0, 0.3)
+paka.plot.2 <- ggplot(paka.degg.italian, aes(rel.time, closed.quotient)) +
+    geom_point() + xlim(0, 0.3)
+paka.plot.1 <- ggplot_gtable(ggplot_build(paka.plot.1))
+paka.plot.2 <- ggplot_gtable(ggplot_build(paka.plot.2))
+
+maxWidth <- unit.pmax(paka.plot.1$widths[2:3], paka.plot.2$widths[2:3])
+
+paka.plot.1$widths[2:3] <- maxWidth
+paka.plot.2$widths[2:3] <- maxWidth
+```
+
+```{r}
+grid.arrange(paka.plot.1, paka.plot.2, heights = c(1, 1))
+```
+
+# Tracegram
+
+```{r tracegram}
+filter(degg.word, minimum < 1, minimum > 0) %>%
+ggplot(aes(x = proportion)) +
+    geom_point(aes(y = maximum)) +
+    geom_point(aes(y = minimum)) +
+    facet_grid(speaker + c2place ~ c2phonation + vowel)
+```
+
