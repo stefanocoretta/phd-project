@@ -14,7 +14,7 @@
    1. Create a spline template for the speaker and save it (`.fst`)
    1. Batch process splines with template
    1. Check splines
-   1. Batch process snap-to-fit
+   1. (Batch process snap-to-fit)
 1. **Calculate kinematics**
    1. Check relevant splines for Tongue Dorsum and Tongue Tip
    1. Load `AnaVal-[ID].avl` from `Edit values` and change splines to TD and TT splines (Save it for the future)
