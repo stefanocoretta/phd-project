@@ -21,7 +21,7 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_knit$set(root.dir=normalizePath("../"))
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(readr)
 library(tidyr)
 library(tidyverse)
