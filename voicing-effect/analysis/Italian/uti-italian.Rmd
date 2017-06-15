@@ -1,0 +1,89 @@
+---
+title: "Italian UTI"
+author: "Stefano Coretta"
+date: "15/06/2017"
+output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    theme: readable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+library(tidyverse)
+library(stringr)
+library(cowplot)
+theme_set(theme_bw())
+library(rticulate)
+```
+
+# Read data
+
+```{r}
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+    )
+
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+splines.it <- list.files(
+    path = "./voicing-effect/results",
+    pattern = "*-aaa.csv",
+    full.names = TRUE
+    ) %>%
+    map_df(~read_aaa(., columns)) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    filter(language == "italian") %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+```
+
+# Data exploration
+
+```{r group-coronal-it}
+filter(splines.it, label == "max_TT") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r group-velar-it}
+filter(splines.it, label == "max_TD") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r coronal-it}
+filter(splines.it, label == "max_TT") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_line(stat = "smooth", method = "loess") +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker)
+```
+
+```{r velar-it}
+filter(splines.it, label == "max_TD") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_line(stat = "smooth", method = "loess") +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker)
+```
