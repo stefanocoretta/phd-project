@@ -14,7 +14,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../../"))
+knitr::opts_knit$set(root.dir=normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
 library(scales)
