@@ -50,6 +50,21 @@ splines.it <- list.files(
     filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
+
+splines.pol.it <- list.files(
+    path = "./voicing-effect/results",
+    pattern = "*-aaa-polar.csv",
+    full.names = TRUE
+    ) %>%
+    map_df(~read_aaa(., columns, coordinates = "polar")) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    filter(language == "italian") %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+
+splines.pol.it <- splines.pol.it %>%
+    mutate(X.car = X * cos(Y), Y.car = X * sin(Y))
 ```
 
 # Data exploration
@@ -86,4 +101,55 @@ filter(splines.it, label == "max_TD") %>%
     geom_line(stat = "smooth", method = "loess") +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker)
+```
+
+## Comparison
+
+```{r group-coronal-it}
+filter(splines.pol.it, label == "max_TT") %>%
+    ggplot(aes(Y, X, colour = c2phonation)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    geom_point(alpha = 0.1) +
+    facet_grid(. ~ vowel) +
+    scale_colour_discrete(name = "Phonation of C2") + coord_polar(start = 3.15) + xlim(-3, 3)
+```
+
+```{r group-coronal-it}
+filter(splines.pol.it, label == "max_TT") %>%
+    ggplot(aes(Y.car, X.car, colour = c2phonation, group = rec.date)) +
+#    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    geom_point() +
+    facet_grid(. ~ vowel) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r}
+filter(splines.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
+        ggplot(aes(X, Y, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    geom_point(alpha = 0.1, aes(group = rec.date)) +
+    coord_fixed(ratio = 1) +
+    facet_grid(. ~ c2phonation) +
+    geom_path(aes(group = rec.date), alpha = 0.1) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r}
+filter(splines.pol.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
+        ggplot(aes(Y.car, X.car)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    geom_point(alpha = 0.1, aes(group = rec.date)) +
+    coord_fixed(ratio = 1) +
+    facet_grid(. ~ c2phonation) +
+    geom_path(aes(group = rec.date), alpha = 0.1) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r}
+filter(splines.pol.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
+        ggplot(aes(Y.car, X.car)) +
+    geom_line(stat = "smooth", method = "gam", formula = y ~ s(x, k = 3), alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(. ~ c2phonation) +
+    scale_colour_discrete(name = "Phonation of C2")
 ```
