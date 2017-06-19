@@ -1,0 +1,110 @@
+---
+title: "Tongue contour simulation"
+author: "Stefano Coretta"
+date: "18/06/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(gamm4)
+library(itsadug)
+```
+
+```{r}
+x <- seq(0,1,0.01)
+k <- 10
+
+origin.voiceless <- 0
+y.voiceless <- 1 / (1 + exp(-k * (x + origin.voiceless)))
+
+origin.voiced <- -0.05
+y.voiced <- 1 / (1 + exp(-k * (x + origin.voiced)))
+
+min.tongue <- min(y.voiceless)
+
+tongue <- tibble(
+    X = c(x, x),
+    Y = c(y.voiceless, y.voiced),
+    phonation = rep(c("voiceless", "voiced"), each = length(x))
+) %>%
+    filter(Y >= min.tongue)
+```
+
+```{r}
+tongue %>%
+    ggplot(aes(X, Y, colour = phonation)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(method = "loess")
+```
+
+```{r}
+set.seed(878)
+
+x <- seq(0,1,0.01)
+k <- 10
+stdev <- 0.02
+
+origin.voiceless <- rnorm(50, mean = 0, sd = stdev)
+y.voiceless <- NULL
+
+for (i in 1:50) {
+    y.voiceless.current <- 1 / (1 + exp(-k * (x + origin.voiceless[i])))
+    y.voiceless <- c(y.voiceless, y.voiceless.current)
+}
+
+origin.voiced <- rnorm(50, mean = -0.05, sd = stdev)
+y.voiced <- NULL
+
+for (i in 1:50) {
+    y.voiced.current <- 1 / (1 + exp(-k * (x + origin.voiced[i])))
+    y.voiced <- c(y.voiced, y.voiced.current)
+}
+
+min.tongue <- min(y.voiceless)
+
+tongue2 <- tibble(
+    X = rep(x, 50 * 2),
+    Y = c(y.voiceless, y.voiced),
+    phonation = rep(c("voiceless", "voiced"), each = length(rep(x, 50))),
+    item = as.factor(rep(1:100, each = 101)),
+    start.event = rep(c(TRUE, rep(FALSE, 100)), 100)
+) %>%
+    filter(Y >= min.tongue) %>%
+    mutate(
+        phonation.ord = as.ordered(phonation)
+    )
+
+contrasts(tongue2$phonation.ord) <- "contr.treatment"
+```
+
+```{r}
+tongue2 %>%
+    ggplot(aes(X, Y, colour = phonation)) +
+    geom_point(alpha = 0.05) +
+    geom_smooth()
+```
+
+```{r}
+gamm <- bam(
+    Y ~
+        phonation.ord +
+        s(X, bs = "cr") +
+        s(X, by = phonation.ord, bs = "cr") +
+        s(X, item, bs="fs", xt="cr", m=1, k=5),
+    data = tongue2,
+    method = "fREML"
+)
+```
+
+```{r}
+plot_smooth(gamm, view = "X",
+            plot_all= "phonation.ord", rug = FALSE)
+plot_diff(gamm, view = "X",
+          comp = list(phonation.ord = c("voiceless", "voiced")))
+```
+
+```{r}
+acf_plot(resid(gamm), split_by=list(tongue2$item))
+```
