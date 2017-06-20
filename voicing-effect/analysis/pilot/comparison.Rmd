@@ -50,7 +50,7 @@ splines.it <- list.files(
 
 splines.pol.it <- list.files(
     path = "./voicing-effect/results",
-    pattern = "*-aaa-polar.csv",
+    pattern = "*-tongue-polar.tsv",
     full.names = TRUE
     ) %>%
     map_df(~read_aaa(., columns, coordinates = "polar")) %>%
@@ -66,8 +66,8 @@ splines.pol.it <- list.files(
 
 ```{r group-coronal-it}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(Y, X, colour = c2phonation)) +
-    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    ggplot(aes(theta, radius, colour = c2phonation)) +
+#    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1) +
     facet_grid(. ~ vowel) +
     scale_colour_discrete(name = "Phonation of C2") + coord_polar(start = pi) + xlim(-pi, pi) + ylim(0, 60)
