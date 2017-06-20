@@ -17,7 +17,8 @@ library(stringr)
 library(cowplot)
 theme_set(theme_bw())
 library(rticulate)
-library(plotrix)
+library(gamm4)
+library(itsadug)
 ```
 
 # Read data
@@ -42,63 +43,95 @@ words <- read_csv("./voicing-effect/stimuli/nonce.csv")
 
 splines.it <- list.files(
     path = "./voicing-effect/results",
-    pattern = "*-aaa.csv",
+    pattern = "*-tongue-cart.tsv",
     full.names = TRUE
     ) %>%
     map_df(~read_aaa(., columns)) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
-    filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
-
-splines.pol.it <- list.files(
-    path = "./voicing-effect/results",
-    pattern = "*-aaa-polar.csv",
-    full.names = TRUE
-    ) %>%
-    map_df(~read_aaa(., columns, coordinates = "polar")) %>%
-    mutate(word = word(prompt, 2)) %>%
-    left_join(y = languages) %>%
-    filter(language == "italian") %>%
-    left_join(y = words) %>%
-    mutate_if(is.character, as.factor) %>%
-    mutate(X = radius * sin(theta), Y = radius * cos(theta))
 ```
 
 # Data exploration
 
 ```{r group-coronal-it}
 filter(splines.it, label == "max_TT") %>%
-    ggplot(aes(X, Y)) +
-    geom_line(colour = "red", stat = "smooth", method = "loess", alpha = 0.5) +
-#    geom_point(alpha = 0.1) +
-    geom_path(colour = "blue", alpha = 0.5) +
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_path(alpha = 0.5) +
     coord_fixed(ratio = 1) +
-    facet_grid(vowel ~ speaker)
+    facet_grid(vowel ~ speaker) +
+    xlim(-40, 40) +
+    scale_colour_discrete(name = "Phonation of C2")
 ```
 
 ```{r group-velar-it}
 filter(splines.it, label == "max_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
-    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    geom_path(alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
+    xlim(-40, 40) +
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
-```{r coronal-it}
-filter(splines.it, label == "max_TT") %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
-    geom_line(stat = "smooth", method = "loess") +
-    coord_fixed(ratio = 1) +
-    facet_grid(vowel ~ speaker)
+
+# Statistical analysis
+
+```{r}
+splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
+splines.it$c2place.ord <- as.ordered(splines.it$c2place)
+splines.it$vowel.ord <- as.ordered(splines.it$vowel)
+contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.it$c2place.ord) <- "contr.treatment"
+contrasts(splines.it$vowel.ord) <- "contr.treatment"
+max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
+    na.omit() %>%
+    arrange(rec.date, fan)
 ```
 
-```{r velar-it}
-filter(splines.it, label == "max_TD") %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
-    geom_line(stat = "smooth", method = "loess") +
-    coord_fixed(ratio = 1) +
-    facet_grid(vowel ~ speaker)
+
+```{r}
+max.it.gamm <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = max.it,
+    method = "fREML"
+)
+
+summary(max.it.gamm)
+
+max.it.gam.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = max.it,
+    method = "fREML"
+)
+
+compareML(max.it.gamm, max.it.gam.null)
+```
+
+```{r max-it-gamm-plot}
+plot_smooth(max.it.gamm, view = "X",
+            plot_all= "c2phonation.ord", 
+            cond = list(vowel.ord = "u", c2place = "coronal", speaker = "fc05"),
+            rug = FALSE)
+plot_diff(max.it.gamm, view = "X",
+          comp = list(c2phonation.ord = c("voiceless", "voiced")),
+          cond = list(vowel.ord = "u", c2place = "coronal", speaker = "fc05"))
 ```
