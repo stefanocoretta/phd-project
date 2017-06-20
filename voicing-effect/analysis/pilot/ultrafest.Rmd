@@ -1406,3 +1406,25 @@ plot_smdiff <- function(model, view, comparison) {
 ```{r plot-smdiff-max-it}
 plot_smdiff(max.it.gam.AR, "X", list(c2phonation.ord = c("voiceless", "voiced")))
 ```
+
+# Start event tibble functions
+
+```{r}
+event <- as.character(pull(max.it, rec.date))
+previous <- ""
+event.start <- NULL
+
+for (i in 1:length(event)) {
+    current <- event[i]
+    if (current == previous) {
+        event.start.current <- FALSE
+    } else {
+        event.start.current <- TRUE
+    }
+    
+    previous <- current
+    
+    event.start <- c(event.start, event.start.current)
+}
+```
+
