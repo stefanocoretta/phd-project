@@ -51,9 +51,22 @@ splines.it <- list.files(
     left_join(y = languages) %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
+
+splines.clos.it <- list.files(
+    path = "./voicing-effect/results/ultrasound",
+    pattern = "*-tongue-clos-cart.tsv",
+    full.names = TRUE
+    ) %>%
+    map_df(~read_aaa(., columns)) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
 ```
 
 # Data exploration
+
+## Maximum constriction
 
 ```{r point-coronal}
 filter(splines.it, label == "max_TT") %>%
@@ -97,6 +110,30 @@ filter(splines.it, label == "max_TD") %>%
     theme(legend.position = "top")
 ```
 
+## Closure
+
+```{r point-coronal-closure}
+splines.clos.it %>%
+    filter(c2place == "coronal") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_point(alpha = 0.1) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    scale_colour_discrete(name = "Phonation of C2") +
+    theme(legend.position = "top")
+```
+
+```{r point-velar-closure}
+splines.clos.it %>%
+    filter(c2place == "velar") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_point(alpha = 0.1) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    scale_colour_discrete(name = "Phonation of C2") +
+    theme(legend.position = "top")
+```
+
 # Data cleaning
 
 Given the spurious spline data after 5 on the x axis in sdc02, let's filter the data.
@@ -106,6 +143,12 @@ splines.it <- splines.it %>%
     filter(X < 50)
 ```
 
+For the closure data, 40 is better.
+
+```{r filter-clos-data}
+splines.clos.it <- splines.clos.it %>%
+    filter(X < 40)
+```
 
 # Statistical analysis
 
@@ -123,6 +166,21 @@ contrasts(splines.it$vowel.ord) <- "contr.treatment"
 
 max.it <- splines.it %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
+    na.omit() %>%
+    arrange(rec.date, fan)
+
+splines.clos.it <- splines.clos.it %>%
+    mutate(
+        c2phonation.ord = as.ordered(c2phonation),
+        c2place.ord = as.ordered(c2place),
+        vowel.ord = as.ordered(vowel)
+    )
+
+contrasts(splines.clos.it$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.clos.it$c2place.ord) <- "contr.treatment"
+contrasts(splines.clos.it$vowel.ord) <- "contr.treatment"
+
+clos.it <- splines.clos.it %>%
     na.omit() %>%
     arrange(rec.date, fan)
 ```
@@ -170,7 +228,7 @@ acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
 ```
 
 ```{r max-it-gamm-ar}
-r1 <- start_value_rho(max.it.gamm)
+r1.max.it <- start_value_rho(max.it.gamm)
 
 max.it.gamm.ar <- bam(
     Y ~
@@ -185,7 +243,7 @@ max.it.gamm.ar <- bam(
         s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
     method = "fREML",
-    rho = r1,
+    rho = r1.max.it,
     AR.start = max.it$start.event
 )
 
@@ -204,7 +262,7 @@ max.it.gamm.ar.null <- bam(
         s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
     method = "fREML",
-    rho = r1,
+    rho = r1.max.it,
     AR.start = max.it$start.event
 )
 
@@ -222,9 +280,9 @@ plot_smooth(
     max.it.gamm.ar, view = "X",
     plot_all= "c2phonation.ord", 
     cond = list(
-        vowel.ord = "o",
-        c2place = "coronal",
-        speaker = "fc05"
+        vowel.ord = "a",
+        c2place.ord = "coronal",
+        speaker = "sc01"
     ),
     rug = FALSE
 )
@@ -235,9 +293,124 @@ plot_diff(
         c2phonation.ord = c("voiceless", "voiced")
         ),
     cond = list(
-        vowel.ord = "o",
-        c2place = "coronal",
-        speaker = "fc05"
+        vowel.ord = "a",
+        c2place.ord = "coronal",
+        speaker = "sc01"
+        )
+)
+```
+
+## Tongue contour at closure
+
+```{r clos-it-gamm}
+clos.it.gamm <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = clos.it,
+    method = "fREML"
+)
+
+summary(clos.it.gamm)
+
+clos.it.gamm.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord), bs = "cr",
+    data = clos.it,
+    method = "fREML"
+)
+
+compareML(clos.it.gamm, clos.it.gamm.null)
+```
+
+```{r clos-it-gamm-acf}
+acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
+```
+
+```{r clos-it-gamm-ar}
+r1.clos.it <- start_value_rho(clos.it.gamm)
+
+clos.it.gamm.ar <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = clos.it,
+    method = "fREML",
+    rho = r1.clos.it,
+    AR.start = clos.it$start.event
+)
+
+summary(clos.it.gamm.ar)
+
+clos.it.gamm.ar.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = clos.it,
+    method = "fREML",
+    rho = r1.clos.it,
+    AR.start = clos.it$start.event
+)
+
+compareML(clos.it.gamm.ar, clos.it.gamm.ar.null)
+```
+
+```{r clos-it-gamm-ar-acf}
+acf_plot(resid(clos.it.gamm.ar), split_by=list(clos.it$rec.date))
+
+acf_resid(clos.it.gamm.ar, split_pred = "AR.start")
+```
+
+    ```{r clos-it-gamm-plot}
+plot_smooth(
+    clos.it.gamm.ar, view = "X",
+    plot_all= "c2phonation.ord", 
+    cond = list(
+        vowel.ord = "a",
+        c2place.ord = "coronal",
+        speaker = "sc01"
+    ),
+    rug = FALSE
+)
+
+plot_diff(
+    clos.it.gamm.ar, view = "X",
+    comp = list(
+        c2phonation.ord = c("voiceless", "voiced")
+        ),
+    cond = list(
+        vowel.ord = "a",
+        c2place.ord = "coronal",
+        speaker = "sc01"
         )
 )
 ```
