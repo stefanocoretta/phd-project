@@ -93,6 +93,15 @@ filter(splines.it, label == "max_TD") %>%
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
+# Data cleaning
+
+Given the spurious spline data after 5 on the x axis in sdc02, let's filter the data.
+
+```{r}
+splines.it <- splines.it %>%
+    filter(X < 50)
+```
+
 
 # Statistical analysis
 
