@@ -46,7 +46,7 @@ splines.it <- list.files(
     pattern = "*-tongue-cart.tsv",
     full.names = TRUE
     ) %>%
-    map_df(~read_aaa(., columns)) %>%
+    read_aaa(., columns) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
@@ -57,7 +57,7 @@ splines.clos.it <- list.files(
     pattern = "*-tongue-clos-cart.tsv",
     full.names = TRUE
     ) %>%
-    map_df(~read_aaa(., columns)) %>%
+    read_aaa(., columns) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
