@@ -105,14 +105,20 @@ splines.it <- splines.it %>%
 
 # Statistical analysis
 
-```{r}
-splines.it$c2phonation.ord <- as.ordered(splines.it$c2phonation)
-splines.it$c2place.ord <- as.ordered(splines.it$c2place)
-splines.it$vowel.ord <- as.ordered(splines.it$vowel)
+```{r preparation}
+splines.it <- splines.it %>%
+    mutate(
+        c2phonation.ord = as.ordered(c2phonation),
+        c2place.ord = as.ordered(c2place),
+        vowel.ord = as.ordered(vowel)
+    )
+
 contrasts(splines.it$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.it$c2place.ord) <- "contr.treatment"
 contrasts(splines.it$vowel.ord) <- "contr.treatment"
-max.it <- filter(splines.it, label %in% c("max_TT", "max_TD")) %>%
+
+max.it <- splines.it %>%
+    filter(label %in% c("max_TT", "max_TD")) %>%
     na.omit() %>%
     arrange(rec.date, fan)
 ```
