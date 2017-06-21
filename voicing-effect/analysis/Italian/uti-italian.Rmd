@@ -55,7 +55,7 @@ splines.it <- list.files(
 
 # Data exploration
 
-```{r group-coronal-it}
+```{r point-coronal}
 filter(splines.it, label == "max_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_point(alpha = 0.5) +
@@ -64,7 +64,7 @@ filter(splines.it, label == "max_TT") %>%
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
-```{r group-coronal-it}
+```{r path-coronal}
 filter(splines.it, label == "max_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_path(alpha = 0.5) +
@@ -74,7 +74,7 @@ filter(splines.it, label == "max_TT") %>%
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
-```{r group-velar-it}
+```{r point-velar}
 filter(splines.it, label == "max_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_point(alpha = 0.5) +
@@ -83,7 +83,7 @@ filter(splines.it, label == "max_TD") %>%
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
-```{r group-velar-it}
+```{r path-velar}
 filter(splines.it, label == "max_TD") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_path(alpha = 0.5) +
@@ -97,7 +97,7 @@ filter(splines.it, label == "max_TD") %>%
 
 Given the spurious spline data after 5 on the x axis in sdc02, let's filter the data.
 
-```{r}
+```{r filter-data}
 splines.it <- splines.it %>%
     filter(X < 50)
 ```
