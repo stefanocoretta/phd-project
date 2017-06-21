@@ -123,8 +123,9 @@ max.it <- splines.it %>%
     arrange(rec.date, fan)
 ```
 
+## Tongue contour at maximum displacement
 
-```{r}
+```{r max-it-gamm}
 max.it.gamm <- bam(
     Y ~
         c2phonation.ord +
@@ -142,7 +143,7 @@ max.it.gamm <- bam(
 
 summary(max.it.gamm)
 
-max.it.gam.null <- bam(
+max.it.gamm.null <- bam(
     Y ~
 #        c2phonation.ord +
         c2place.ord +
@@ -150,21 +151,89 @@ max.it.gam.null <- bam(
         s(X, bs = "cr") +
 #        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord), bs = "cr",
     data = max.it,
     method = "fREML"
 )
 
-compareML(max.it.gamm, max.it.gam.null)
+compareML(max.it.gamm, max.it.gamm.null)
+```
+
+```{r max-it-gamm-acf}
+acf_plot(resid(max.it.gamm), split_by=list(max.it$rec.date))
+```
+
+```{r max-it-gamm-ar}
+r1 <- start_value_rho(max.it.gamm)
+
+max.it.gamm.ar <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = max.it,
+    method = "fREML",
+    rho = r1,
+    AR.start = max.it$start.event
+)
+
+summary(max.it.gamm.ar)
+
+max.it.gamm.ar.null <- bam(
+    Y ~
+#        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = max.it,
+    method = "fREML",
+    rho = r1,
+    AR.start = max.it$start.event
+)
+
+compareML(max.it.gamm.ar, max.it.gamm.ar.null)
+```
+
+```{r max-it-gamm-ar-acf}
+acf_plot(resid(max.it.gamm.ar), split_by=list(max.it$rec.date))
+
+acf_resid(max.it.gamm.ar, split_pred = "AR.start")
 ```
 
 ```{r max-it-gamm-plot}
-plot_smooth(max.it.gamm, view = "X",
-            plot_all= "c2phonation.ord", 
-            cond = list(vowel.ord = "u", c2place = "coronal", speaker = "fc05"),
-            rug = FALSE)
-plot_diff(max.it.gamm, view = "X",
-          comp = list(c2phonation.ord = c("voiceless", "voiced")),
-          cond = list(vowel.ord = "u", c2place = "coronal", speaker = "fc05"))
+plot_smooth(
+    max.it.gamm.ar, view = "X",
+    plot_all= "c2phonation.ord", 
+    cond = list(
+        vowel.ord = "o",
+        c2place = "coronal",
+        speaker = "fc05"
+    ),
+    rug = FALSE
+)
+
+plot_diff(
+    max.it.gamm.ar, view = "X",
+    comp = list(
+        c2phonation.ord = c("voiceless", "voiced")
+        ),
+    cond = list(
+        vowel.ord = "o",
+        c2place = "coronal",
+        speaker = "fc05"
+        )
+)
 ```
