@@ -58,10 +58,28 @@ splines.it <- list.files(
 ```{r group-coronal-it}
 filter(splines.it, label == "max_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_point(alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r group-coronal-it}
+filter(splines.it, label == "max_TT") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
     geom_path(alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
     xlim(-40, 40) +
+    scale_colour_discrete(name = "Phonation of C2")
+```
+
+```{r group-velar-it}
+filter(splines.it, label == "max_TD") %>%
+    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    geom_point(alpha = 0.5) +
+    coord_fixed(ratio = 1) +
+    facet_grid(vowel ~ speaker) +
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
