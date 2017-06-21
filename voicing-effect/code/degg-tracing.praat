@@ -27,7 +27,7 @@ endform
 directory$ = "../data/derived/egg/'speaker$'"
 directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
-result_file$ = "../results/'speaker$'-degg-tracing.csv"
+result_file$ = "../results/egg/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,date,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 

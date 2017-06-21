@@ -10,7 +10,7 @@ directory_egg_vuv$ = "../data/derived/egg/'speaker$'"
 createDirectory("../data/derived/merged/'speaker$'")
 directory_out$ = "../data/derived/merged/'speaker$'"
 
-result_file$ = "../results/'speaker$'-measurements.csv"
+result_file$ = "../results/durations/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
 writeFileLine: result_file$, result_header$
 

@@ -4,7 +4,7 @@ endform
 
 vuvDirectory$ = "../data/derived/egg/'speaker$'"
 palignDirectory$ = "../data/derived/ultrasound/'speaker$'/audio"
-resultsFile$ = "../results/'speaker$'-voicing.csv"
+resultsFile$ = "../results/egg/'speaker$'-voicing.csv"
 resultsHeader$ = "index,speaker,file,rec.date,word,voicing.start,voicing.end,voicing.duration,sentence.duration"
 writeFileLine: resultsFile$, resultsHeader$
 

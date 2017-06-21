@@ -515,7 +515,7 @@ endform
 directory$ = "../data/derived/egg/'speaker$'"
 directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
-result_file$ = "../results/'speaker$'-degg-tracing.csv"
+result_file$ = "../results/egg/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,date,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -682,7 +682,7 @@ endform
 directory$ = "../data/derived/egg/'speaker$'"
 directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 
-result_file$ = "../results/'speaker$'-degg-tracing-word.csv"
+result_file$ = "../results/egg/'speaker$'-degg-tracing-word.csv"
 header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -737,7 +737,7 @@ endif
 
 directory$ = "../data/derived/ultrasound/'speaker$'/alignment"
 
-result_file$ = "../results/'speaker$'-vowel-durations.csv"
+result_file$ = "../results/durations/'speaker$'-vowel-durations.csv"
 
 header$ = "index,speaker,file,word,time,word.duration,c1.duration,vowel.duration,
     ...closure.duration,rvot,c2.duration,v2.duration,sentence.duration"
@@ -929,7 +929,7 @@ directory_egg_vuv$ = "../data/derived/egg/'speaker$'"
 createDirectory("../data/derived/merged/'speaker$'")
 directory_out$ = "../data/derived/merged/'speaker$'"
 
-result_file$ = "../results/'speaker$'-measurements.csv"
+result_file$ = "../results/durations/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
 writeFileLine: result_file$, result_header$
 
@@ -1069,7 +1069,7 @@ endform
 
 vuvDirectory$ = "../data/derived/egg/'speaker$'"
 palignDirectory$ = "../data/derived/ultrasound/'speaker$'/audio"
-resultsFile$ = "../results/'speaker$'-voicing.csv"
+resultsFile$ = "../results/egg/'speaker$'-voicing.csv"
 resultsHeader$ = "index,speaker,file,rec.date,word,voicing.start,voicing.end,voicing.duration,sentence.duration"
 writeFileLine: resultsFile$, resultsHeader$
 

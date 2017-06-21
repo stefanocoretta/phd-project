@@ -15,7 +15,7 @@ endif
 
 directory$ = "../data/derived/ultrasound/'speaker$'/alignment"
 
-result_file$ = "../results/'speaker$'-vowel-durations.csv"
+result_file$ = "../results/durations/'speaker$'-vowel-durations.csv"
 
 header$ = "index,speaker,file,word,time,word.duration,c1.duration,vowel.duration,
     ...closure.duration,rvot,c2.duration,v2.duration,sentence.duration"
