@@ -61,7 +61,8 @@ filter(splines.it, label == "max_TT") %>%
     geom_point(alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
-    scale_colour_discrete(name = "Phonation of C2")
+    scale_colour_discrete(name = "Phonation of C2") +
+    theme(legend.position = "top")
 ```
 
 ```{r path-coronal}
@@ -71,7 +72,8 @@ filter(splines.it, label == "max_TT") %>%
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
     xlim(-40, 40) +
-    scale_colour_discrete(name = "Phonation of C2")
+    scale_colour_discrete(name = "Phonation of C2") +
+    theme(legend.position = "top")
 ```
 
 ```{r point-velar}
@@ -80,7 +82,8 @@ filter(splines.it, label == "max_TD") %>%
     geom_point(alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
-    scale_colour_discrete(name = "Phonation of C2")
+    scale_colour_discrete(name = "Phonation of C2") +
+    theme(legend.position = "top")
 ```
 
 ```{r path-velar}
@@ -90,7 +93,8 @@ filter(splines.it, label == "max_TD") %>%
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
     xlim(-40, 40) +
-    scale_colour_discrete(name = "Phonation of C2")
+    scale_colour_discrete(name = "Phonation of C2") +
+    theme(legend.position = "top")
 ```
 
 # Data cleaning
