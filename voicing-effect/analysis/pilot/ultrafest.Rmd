@@ -810,7 +810,7 @@ filter(splines.closure.pl, c2place == "velar") %>%
     facet_grid(speaker ~ vowel)
 ```
 
-## GAMMs at maximum constriction ab03
+## GAMMs at maximum constriction pl03
 
 ```{r max-pl}
 splines.pl$c2phonation.ord <- as.ordered(splines.pl$c2phonation)
@@ -821,7 +821,7 @@ contrasts(splines.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.pl$vowel.ord) <- "contr.treatment"
 max.pl <- splines.pl %>%
     filter(label %in% c("max_TT", "max_TD"),
-           speaker == "ab03",
+           speaker == "pl03",
            vowel != "u"
     ) %>%
     na.omit() %>%
@@ -995,12 +995,12 @@ plot_diff(max.pl.gam.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
-## GAMMs at maximum constriction ps02
+## GAMMs at maximum constriction pl02
 
-```{r max-pl-ps02}
-max.pl.ps02 <- splines.pl %>%
+```{r max-pl-pl02}
+max.pl.pl02 <- splines.pl %>%
     filter(label %in% c("max_TT", "max_TD"),
-           speaker == "ps02",
+           speaker == "pl02",
            vowel != "u",
            X < 40,
            X > -15
@@ -1011,8 +1011,8 @@ max.pl.ps02 <- splines.pl %>%
 ```
 
 
-```{r max-pl-gamm-ps02}
-max.pl.gamm.ps02 <- bam(
+```{r max-pl-gamm-pl02}
+max.pl.gamm.pl02 <- bam(
     Y ~
         c2phonation.ord +
         c2place.ord +
@@ -1023,19 +1023,19 @@ max.pl.gamm.ps02 <- bam(
 #        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
-    data = max.pl.ps02,
+    data = max.pl.pl02,
     method = "fREML"
 )
 
-summary(max.pl.gamm.ps02)
+summary(max.pl.gamm.pl02)
 ```
 
 ### AR1 model
 
-```{r max-pl-gam-ar-ps02}
-r1 <- start_value_rho(max.pl.gamm.ps02)
+```{r max-pl-gam-ar-pl02}
+r1 <- start_value_rho(max.pl.gamm.pl02)
 
-max.pl.gam.ps02.AR <- bam(
+max.pl.gam.pl02.AR <- bam(
     Y ~
         c2phonation.ord +
         c2place.ord +
@@ -1045,15 +1045,15 @@ max.pl.gam.ps02.AR <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
-    data = max.pl.ps02,
+    data = max.pl.pl02,
     method = "fREML",
     rho = r1,
-    AR.start = max.pl.ps02$start.event
+    AR.start = max.pl.pl02$start.event
 )
 
-summary(max.pl.gam.ps02.AR)
+summary(max.pl.gam.pl02.AR)
 
-max.pl.gam.ps02.AR.null <- bam(
+max.pl.gam.pl02.AR.null <- bam(
     Y ~
 #        c2phonation.ord +
         c2place.ord +
@@ -1063,24 +1063,24 @@ max.pl.gam.ps02.AR.null <- bam(
         s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
-    data = max.pl.ps02,
+    data = max.pl.pl02,
     method = "fREML",
     rho = r1,
-    AR.start = max.pl.ps02$start.event
+    AR.start = max.pl.pl02$start.event
 )
 
-compareML(max.pl.gam.ps02.AR.null, max.pl.gam.ps02.AR)
+compareML(max.pl.gam.pl02.AR.null, max.pl.gam.pl02.AR)
 ```
 
-```{r max-pl-gam-ar-acf-ps02}
-acf_plot(resid(max.pl.gam.ps02.AR), split_by=list(max.pl.ps02$rec.date))
-acf_resid(max.pl.gam.ps02.AR, split_pred = "AR.start")
+```{r max-pl-gam-ar-acf-pl02}
+acf_plot(resid(max.pl.gam.pl02.AR), split_by=list(max.pl.pl02$rec.date))
+acf_resid(max.pl.gam.pl02.AR, split_pred = "AR.start")
 ```
 
-```{r max-pl-gam-ar-plot-ps02}
-plot_smooth(max.pl.gam.ps02.AR, view = "X",
+```{r max-pl-gam-ar-plot-pl02}
+plot_smooth(max.pl.gam.pl02.AR, view = "X",
             plot_all= "c2phonation.ord", rug = FALSE)
-plot_diff(max.pl.gam.ps02.AR, view = "X",
+plot_diff(max.pl.gam.pl02.AR, view = "X",
           comp = list(c2phonation.ord = c("voiceless", "voiced")))
 ```
 
@@ -1094,7 +1094,7 @@ contrasts(splines.closure.pl$c2phonation.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$c2place.ord) <- "contr.treatment"
 contrasts(splines.closure.pl$vowel.ord) <- "contr.treatment"
 closure.pl <- splines.closure.pl %>%
-    filter(speaker == "ab03", vowel != "u", X > -15) %>%
+    filter(speaker == "pl03", vowel != "u", X > -15) %>%
     na.omit() %>%
     arrange(rec.date, fan) %>%
     start_event(column = "fan", event = c("rec.date"))

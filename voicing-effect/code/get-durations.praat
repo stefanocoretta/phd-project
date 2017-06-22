@@ -1,6 +1,6 @@
 form Get vowel duration
     word project voicing-effect
-    word speaker sc01
+    word speaker it01
     comment Supported languages: it, pl
     word language it
 endform

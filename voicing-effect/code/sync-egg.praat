@@ -45,7 +45,7 @@ endif
 
 form Syncronise EGG data
     word project voicing-effect
-    word speaker sc01
+    word speaker it01
     boolean debug_mode
 endform
 egg_directory$ = "../data/raw/egg"

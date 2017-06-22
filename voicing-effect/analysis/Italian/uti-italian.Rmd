@@ -136,7 +136,7 @@ splines.clos.it %>%
 
 # Data cleaning
 
-Given the spurious spline data after 5 on the x axis in sdc02, let's filter the data.
+Given the spurious spline data after 5 on the x axis in it02, let's filter the data.
 
 ```{r filter-data}
 splines.it <- splines.it %>%
@@ -282,7 +282,7 @@ plot_smooth(
     cond = list(
         vowel.ord = "a",
         c2place.ord = "coronal",
-        speaker = "sc01"
+        speaker = "it01"
     ),
     rug = FALSE
 )
@@ -295,7 +295,7 @@ plot_diff(
     cond = list(
         vowel.ord = "a",
         c2place.ord = "coronal",
-        speaker = "sc01"
+        speaker = "it01"
         )
 )
 ```
@@ -397,7 +397,7 @@ plot_smooth(
     cond = list(
         vowel.ord = "a",
         c2place.ord = "coronal",
-        speaker = "sc01"
+        speaker = "it01"
     ),
     rug = FALSE
 )
@@ -410,7 +410,7 @@ plot_diff(
     cond = list(
         vowel.ord = "a",
         c2place.ord = "coronal",
-        speaker = "sc01"
+        speaker = "it01"
         )
 )
 ```

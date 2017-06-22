@@ -1,6 +1,6 @@
 form Extract vuv
     word project voicing-effect
-    word speaker sc01
+    word speaker it01
     boolean debug_mode
 endform
 

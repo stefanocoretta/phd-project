@@ -657,7 +657,7 @@ filter(splines.closure, c2place == "velar") %>%
 ### Coronal
 
 ```{r}
-splines.cor.max <- filter(splines.closure, c2place == "coronal", speaker == "sc01", vowel != "u") %>%
+splines.cor.max <- filter(splines.closure, c2place == "coronal", speaker == "it01", vowel != "u") %>%
     mutate(c2phonation.ord = as.ordered(c2phonation),
            language.ord = as.ordered(language),
            vowel.ord = as.ordered(vowel))
@@ -699,7 +699,7 @@ plot_diff(coronal.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced
 ### Velar
 
 ```{r}
-splines.vel.max <- filter(splines.closure, c2place == "velar", speaker == "sc01") %>%
+splines.vel.max <- filter(splines.closure, c2place == "velar", speaker == "it01") %>%
     mutate(c2phonation.ord = as.ordered(c2phonation),
            language.ord = as.ordered(language),
            vowel.ord = as.ordered(vowel))
@@ -767,7 +767,7 @@ filter(splines.phantom.closure, c2place == "velar") %>%
 # Peak to peak duration
 
 ```{r peak-to-peak-plot}
-filter(cons.gestures, speaker == "sdc02") %>%
+filter(cons.gestures, speaker == "it02") %>%
     ggplot(aes(c2phonation, PP)) +
     geom_violin() +
     geom_boxplot(width = 0.2) +

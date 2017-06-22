@@ -1,6 +1,6 @@
 form Select folder with TextGrid
     word project voicing-effect
-    word speaker sc01
+    word speaker it01
     comment Supported languages: it, pl
     word language it
 endform

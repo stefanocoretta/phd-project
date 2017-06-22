@@ -16,7 +16,7 @@ endproc
 
 form dEGG tracing
     word project voicing-effect
-    word speaker sc01
+    word speaker it01
     comment Specify the lower and upper frequency (in Hz) for filtering:
     real lower 40
     real upper 10000

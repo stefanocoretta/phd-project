@@ -92,7 +92,7 @@ filter(splines.pol.it, label == "max_TT") %>%
 ```
 
 ```{r}
-filter(splines.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
+filter(splines.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
         ggplot(aes(X, Y, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1, aes(group = rec.date)) +
@@ -103,7 +103,7 @@ filter(splines.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
 ```
 
 ```{r}
-filter(splines.pol.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
+filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
         ggplot(aes(Y.car, X.car)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1, aes(group = rec.date)) +
@@ -114,7 +114,7 @@ filter(splines.pol.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
 ```
 
 ```{r}
-filter(splines.pol.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
+filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
         ggplot(aes(Y.car, X.car)) +
     geom_line(stat = "smooth", method = "gam", formula = y ~ s(x, k = 3), alpha = 0.5) +
     coord_fixed(ratio = 1) +
@@ -124,7 +124,7 @@ filter(splines.pol.it, label == "max_TT", speaker == "sc01", vowel == "u") %>%
 
 ```{r}
 splines.pol.it.u <- splines.pol.it %>%
-    filter(label == "max_TT", speaker == "sc01", vowel == "a") 
+    filter(label == "max_TT", speaker == "it01", vowel == "a") 
 
 radial.plot(na.omit(splines.pol.it.u$X), na.omit(splines.pol.it.u$Y), rp.type="s", labels = "", clockwise = T, start = pi/2, radial.labels = "", xlim = c(-pi, pi))
 ```
