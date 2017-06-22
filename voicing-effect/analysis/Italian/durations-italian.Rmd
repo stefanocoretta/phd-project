@@ -37,6 +37,13 @@ vowels %>%
     geom_histogram()
 ```
 
+```{r vowel-hist}
+vowels %>%
+    ggplot(aes(vowel.duration, fill = c2phonation)) +
+    geom_histogram() +
+    facet_wrap(~ speaker)
+```
+
 ```{r vowel-density}
 vowels %>%
     ggplot(aes(vowel.duration, colour = c2phonation)) +
@@ -58,3 +65,20 @@ vowels %>%
     geom_boxplot() +
     facet_wrap(~ speaker)
 ```
+
+```{r}
+vowels %>%
+    filter(c2place == "coronal") %>%
+    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    geom_violin() +
+    facet_wrap(~ speaker)
+```
+
+```{r}
+vowels %>%
+    filter(c2place == "velar") %>%
+    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    geom_violin() +
+    facet_wrap(~ speaker)
+```
+
