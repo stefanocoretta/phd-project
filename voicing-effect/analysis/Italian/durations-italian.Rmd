@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir=normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
+library(lmerTest)
+library(effects)
 ```
 
 # Import data
@@ -82,12 +84,53 @@ vowels %>%
     facet_wrap(~ speaker)
 ```
 
+```{r}
+table(!is.na(vowels$closure.duration), vowels$c2place, vowels$c2phonation)
+```
+
+
 # Data cleaning
 
 There are a few tokens which are longer than 199 msec. Although one speaker has very long vowels, they are tokens of speakers with shorter vowels and so they are clear outliers for those speakers. 
 
-```{r}
+```{r data-clean}
 vowels <- vowels %>%
     filter(vowel.duration < 199)
 ```
+
+# More plotting
+
+```{r}
+vowels %>%
+    ggplot(aes(closure.duration, vowel.duration, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(method = "lm")
+```
+
+```{r}
+vowels %>%
+    ggplot(aes(closure.duration, vowel.duration, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(method = "lm") +
+    facet_wrap(~ speaker)
+```
+
+```{r}
+vowels %>%
+    ggplot(aes(word.duration, vowel.duration, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(method = "lm")
+```
+
+```{r}
+vowels %>%
+    ggplot(aes(word.duration, vowel.duration, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth(method = "lm") +
+    facet_wrap(~ speaker)
+```
+
+
+# Statistical analysis
+
 
