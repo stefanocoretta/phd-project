@@ -82,3 +82,12 @@ vowels %>%
     facet_wrap(~ speaker)
 ```
 
+# Data cleaning
+
+There are a few tokens which are longer than 199 msec. Although one speaker has very long vowels, they are tokens of speakers with shorter vowels and so they are clear outliers for those speakers. 
+
+```{r}
+vowels <- vowels %>%
+    filter(vowel.duration < 199)
+```
+
