@@ -1,0 +1,60 @@
+---
+title: "Italian durations"
+author: "Stefano Coretta"
+date: "22/06/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+# Import data
+
+```{r read-data}
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+vowels <- list.files(path = "voicing-effect/results/durations",
+                   pattern = "*-vowel-durations.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(., na = "--undefined--")) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    filter(language == "italian") %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(index = as.factor(index))
+```
+
+# Data plotting
+
+```{r vowel-hist}
+vowels %>%
+    ggplot(aes(vowel.duration, fill = c2phonation)) +
+    geom_histogram()
+```
+
+```{r vowel-density}
+vowels %>%
+    ggplot(aes(vowel.duration, colour = c2phonation)) +
+    geom_density() +
+    facet_wrap(~ speaker)
+```
+
+
+```{r vowel-violin}
+vowels %>%
+    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    geom_violin() +
+    facet_wrap(~ speaker)
+```
+
+```{r vowel-boxplot}
+vowels %>%
+    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    geom_boxplot() +
+    facet_wrap(~ speaker)
+```
