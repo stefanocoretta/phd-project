@@ -1,0 +1,43 @@
+---
+title: "Italian tracegrams"
+author: "Stefano Coretta"
+date: "22/06/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+# Data import
+
+```{r import}
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+degg.it <- list.files(path = "./voicing-effect/results/egg",
+                   pattern = "*-degg-tracing.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(.)) %>%
+    left_join(y = languages) %>%
+    filter(language == "italian") %>%
+    left_join(y = words) %>%
+    filter(c1phonation == "voiceless") %>%
+    mutate_if(is.character, as.factor)
+```
+
+# Data exploration
+
+```{r tracegram}
+degg.it %>%
+ggplot(aes(x = proportion, colour = c2phonation)) +
+    facet_grid(. ~ language + speaker) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    xlim(0.1, 0.9)
+```
