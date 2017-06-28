@@ -29,6 +29,9 @@ library(itsadug)
 # Data
 
 ```{r read}
+languages <- read_csv("voicing-effect/stimuli/languages.csv")
+words <- read_csv("voicing-effect/stimuli/nonce.csv")
+
 num.splines <- 42
 first.columns <- c(
     "speaker",
@@ -50,25 +53,22 @@ columns <- c(first.columns,
                     )
              )
 
-splines.raw <- list.files(path = "./voicing-effect/results",
+splines.raw <- list.files(path = "./voicing-effect/results/cached",
                    pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.closure.raw <- list.files(path = "./voicing-effect/results",
+splines.closure.raw <- list.files(path = "./voicing-effect/results/cached",
                    pattern = "*-closure.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.phantom.raw <- list.files(path = "./voicing-effect/results",
+splines.phantom.raw <- list.files(path = "./voicing-effect/results/cached",
                    pattern = "*-phantom.csv",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns, na = "*"))
 
 rm(num.splines, first.columns, columns)
-
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
 ```
 
 
@@ -104,7 +104,7 @@ splines.closure.pl <- filter(splines.closure, language == "polish")
 
 ```{r group-coronal-it}
 filter(splines.it, label == "max_TT") %>%
-    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+    ggplot(aes(fan, Y, colour = c2phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(speaker ~ vowel) +
@@ -711,7 +711,7 @@ acf_resid(voiced.it.gam.AR, split_pred = "AR.start")
 ```{r group-coronal-pl}
 filter(splines.pl, label == "max_TT") %>%
     ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
-    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    geom_point(alpha = 0.1) +
     coord_fixed(ratio = 1.5) +
     facet_grid(speaker ~ vowel) +
     scale_colour_discrete(name = "Phonation of C2")
@@ -1320,7 +1320,7 @@ plot_grid(smooth.plot, diff.plot, align = "v", nrow = 2, rel_heights = c(2/3, 1/
 ```{r plot-smdiff}
 plot_smdiff <- function(model, view, comparison) {
     diff.df <- itsadug::plot_diff(
-        max.it.gam.AR,
+        model,
         view = view,
         comp = comparison,
         plot = FALSE)
@@ -1331,7 +1331,7 @@ plot_smdiff <- function(model, view, comparison) {
     names(condition) <- view
     
     smooth.df <- itsadug::get_predictions(
-        max.it.gam.AR,
+        model,
         cond = c(comparison, condition)
         )
     
