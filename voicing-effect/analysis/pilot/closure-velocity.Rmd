@@ -1,0 +1,102 @@
+---
+title: "Closure velocity"
+author: "Stefano Coretta"
+date: "29/06/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+library(rticulate)
+```
+
+# Data import
+
+```{r data-import}
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+)
+
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+closure <- list.files(
+    path = "./voicing-effect/results/ultrasound",
+    pattern = "*-tongue-clos-cart.tsv",
+    full.names = TRUE
+    ) %>%
+    read_aaa(., columns) %>%
+    select(seconds, rec.date) %>%
+    unique()
+
+gons <- list.files(
+    path = "./voicing-effect/results/ultrasound",
+    pattern = "*-closing-gons.tsv",
+    full.names = TRUE
+    ) %>%
+    map_df(~read_tsv(., col_names = columns)) %>%
+    inner_join(y = closure, by = "rec.date", suffix = c(".gons", ".clos")) %>%
+    mutate(closing = seconds.clos - seconds.gons, word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+```
+
+# Data plotting
+
+```{r}
+gons %>%
+    ggplot(aes(closing)) +
+    geom_density()
+```
+
+```{r}
+gons %>%
+    ggplot(aes(closing)) +
+    geom_histogram()
+```
+
+```{r}
+gons %>%
+    ggplot(aes(closing, colour = c2phonation)) +
+    geom_density()
+```
+
+```{r}
+gons %>%
+    filter(c2place == "velar") %>%
+    ggplot(aes(closing, colour = c2phonation)) +
+    geom_density() +
+    facet_grid(. ~ vowel)
+```
+
+```{r}
+gons %>%
+    ggplot(aes(closing, fill = c2phonation)) +
+    geom_histogram()
+```
+
+```{r}
+gons %>%
+    ggplot(aes(c2phonation, closing)) +
+    geom_boxplot() +
+    facet_grid(vowel ~ c2place)
+```
+
+```{r}
+table(gons$c2phonation, gons$vowel, gons$c2place)
+```
+
