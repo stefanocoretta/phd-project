@@ -96,6 +96,8 @@ gamm <- bam(
     data = tongue2,
     method = "fREML"
 )
+
+summary(gamm)
 ```
 
 ```{r}
