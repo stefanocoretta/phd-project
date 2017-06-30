@@ -71,7 +71,7 @@ tongue2 <- tibble(
     item = as.factor(rep(1:100, each = 101)),
     start.event = rep(c(TRUE, rep(FALSE, 100)), 100)
 ) %>%
-    filter(Y >= min.tongue) %>%
+    filter(Y >= 0.6) %>%
     mutate(
         phonation.ord = as.ordered(phonation)
     )
