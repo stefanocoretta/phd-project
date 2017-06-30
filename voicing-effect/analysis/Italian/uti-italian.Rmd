@@ -290,7 +290,8 @@ plot_smooth(
         c2place.ord = "coronal",
         speaker = "it01"
     ),
-    rug = FALSE
+    rug = FALSE,
+    rm.ranef = T
 )
 
 plot_diff(
@@ -302,7 +303,8 @@ plot_diff(
         vowel.ord = "a",
         c2place.ord = "coronal",
         speaker = "it01"
-        )
+        ),
+    rm.ranef = T
 )
 ```
 
