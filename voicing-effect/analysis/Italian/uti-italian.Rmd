@@ -49,8 +49,10 @@ splines.it <- list.files(
     read_aaa(., columns) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
+    filter(language == "italian") %>%
     left_join(y = words) %>%
-    mutate_if(is.character, as.factor)
+    mutate_if(is.character, as.factor) %>%
+    droplevels()
 
 splines.clos.it <- list.files(
     path = "./voicing-effect/results/ultrasound",
@@ -60,6 +62,7 @@ splines.clos.it <- list.files(
     read_aaa(., columns) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
+    filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 ```
