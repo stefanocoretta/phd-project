@@ -201,8 +201,8 @@ max.it.gamm <- bam(
         vowel.ord +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
-        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
-        s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+        s(X, speaker, bs="fs", xt="cr", m=1, k=4) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
@@ -248,7 +248,7 @@ max.it.gamm.ar <- bam(
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
-    method = "fREML",
+    method = "ML",
     rho = r1.max.it,
     AR.start = max.it$start.event
 )
@@ -267,7 +267,7 @@ max.it.gamm.ar.null <- bam(
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
     data = max.it,
-    method = "fREML",
+    method = "ML",
     rho = r1.max.it,
     AR.start = max.it$start.event
 )
