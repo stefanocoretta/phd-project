@@ -19,6 +19,7 @@ theme_set(theme_bw())
 library(rticulate)
 library(gamm4)
 library(itsadug)
+library(tidymv)
 ```
 
 # Read data
@@ -170,7 +171,8 @@ contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- splines.it %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
     na.omit() %>%
-    arrange(rec.date, fan)
+    arrange(rec.date, fan) %>%
+    create_event_start(event.col = "rec.date")
 
 splines.clos.it <- splines.clos.it %>%
     mutate(
@@ -185,7 +187,8 @@ contrasts(splines.clos.it$vowel.ord) <- "contr.treatment"
 
 clos.it <- splines.clos.it %>%
     na.omit() %>%
-    arrange(rec.date, fan)
+    arrange(rec.date, fan) %>%
+    create_event_start(event.col = "rec.date")
 ```
 
 ## Tongue contour at maximum displacement
