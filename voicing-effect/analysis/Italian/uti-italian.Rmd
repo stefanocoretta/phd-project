@@ -171,7 +171,7 @@ contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- splines.it %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
     na.omit() %>%
-    arrange(rec.date, fan) %>%
+    arrange(rec.date, desc(fan)) %>%
     create_event_start(event.col = "rec.date")
 
 splines.clos.it <- splines.clos.it %>%
