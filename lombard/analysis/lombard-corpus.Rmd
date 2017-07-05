@@ -35,3 +35,20 @@ lombard <- list.files(
     unnest_tokens(word, lines)
 ```
 
+# Search
+
+```{r}
+stop.final <- lombard %>%
+    filter(str_detect(word, "^*[aeiouöü]((gh)|(ch)|(t)|(d)|(p)|(b))$")) %>%
+    unique()
+```
+
+```{r}
+four.grams <- lombard %>%
+    filter(
+        str_detect(word, "^....$"),
+        !str_detect(word, "(\\d)|(')")
+) %>%
+    unique()
+```
+
