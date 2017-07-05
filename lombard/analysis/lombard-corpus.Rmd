@@ -1,0 +1,37 @@
+---
+title: "Lombard corpus"
+author: "Stefano Coretta"
+date: "05/07/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
+library(tidyverse)
+library(tidytext)
+library(stringr)
+```
+
+# Pre-processing
+
+After the extraction of text from the Wikipedia dump, we can create the corpus.
+
+```{r}
+lombard <- list.files(
+    path = "./lombard/data/derived/extracted/AA",
+    pattern = "wiki*",
+    full.names = TRUE
+) %>%
+    map(~readLines(.)) %>%
+    unlist() %>%
+    tibble(
+        lines = .
+    ) %>%
+    filter(
+        lines != "",
+        !str_detect(lines, "^<")
+    ) %>%
+    unnest_tokens(word, lines)
+```
+
