@@ -1,0 +1,337 @@
+---
+title: "Exploration of GAMMs with UTI data"
+author: "Stefano Coretta"
+date: "11/07/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+library(tidyverse)
+library(tidymv)
+theme_set(theme_bw())
+library(rticulate)
+library(stringr)
+library(itsadug)
+options(contrasts = rep("contr.sum", 2))
+```
+
+```{r}
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+)
+
+languages <- read_csv("voicing-effect/stimuli/languages.csv")
+words <- read_csv("voicing-effect/stimuli/nonce.csv")
+
+tongue <- read_aaa("voicing-effect/results/ultrasound/it01-tongue-cart.tsv", columns) %>%
+    separate(label, c("gesture", "position")) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    plot_tongue(geom = "path", alpha = 0.5) +
+    aes(group = rec.date) +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    plot_tongue(geom = "path", alpha = 0.5) +
+    aes(group = rec.date, colour = c2phonation) +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    plot_tongue(alpha = 0.5) +
+    aes(group = rec.date) +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    plot_tongue(geom = "point", size = 0.5) +
+    aes(group = rec.date) +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    ggplot(aes(fan.line, Y, group = rec.date)) +
+    geom_path(alpha = 0.5) +
+    facet_grid(c2place ~ vowel) +
+    scale_x_reverse()
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    ggplot(aes(fan.line, Y, group = rec.date)) +
+    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
+    facet_grid(c2place ~ vowel) +
+    scale_x_reverse()
+```
+
+```{r}
+tongue %>%
+    filter(gesture == "max") %>%
+    ggplot(aes(fan.line, Y, group = rec.date, colour = c2phonation)) +
+    geom_path(alpha = 0.5) +
+    facet_grid(c2place ~ vowel) +
+    scale_x_reverse()
+```
+
+```{r}
+tongue.max <- tongue %>%
+    filter(gesture == "max") %>%
+    arrange(rec.date, fan.line) %>%
+    create_event_start("rec.date") %>%
+    mutate(
+        c2phonation.ord = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        c2place.ord = ordered(c2place, levels = c("coronal", "velar")),
+        vowel.ord = ordered(vowel, levels = c("a", "o", "u")),
+        fan.line.rev = -fan.line
+    )
+```
+
+
+```{r}
+tongue.m1 <- bam(
+    Y ~
+#        c2phonation.ord +
+        vowel.ord +
+        c2place.ord +
+        s(fan.line, bs = "cr") +
+        s(fan.line, by = c2phonation.ord, bs = "cr") +
+        s(fan.line, by = vowel.ord, bs = "cr") +
+        s(fan.line, by = c2place.ord, bs = "cr"),
+    data = tongue.max,
+    method = "ML"
+)
+
+summary(tongue.m1)
+
+tongue.m2 <- bam(
+    Y ~
+        c2phonation.ord +
+        vowel.ord +
+        c2place.ord +
+        s(fan.line, bs = "cr") +
+        s(fan.line, by = c2phonation.ord, bs = "cr") +
+        s(fan.line, by = vowel.ord, bs = "cr") +
+        s(fan.line, by = c2place.ord, bs = "cr"),
+    data = tongue.max,
+    method = "ML"
+)
+
+compareML(tongue.m2, tongue.m1)
+```
+
+Adding a parametric term `c2phonation.ord` does not improve the model.
+
+```{r}
+plot_gamsd(
+    tongue.m1,
+    "fan.line",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
+
+```{r}
+tongue.m3 <- bam(
+    Y ~
+        vowel.ord +
+        c2place.ord +
+        s(fan.line.rev, bs = "cr") +
+        s(fan.line.rev, by = c2phonation.ord, bs = "cr") +
+        s(fan.line.rev, by = vowel.ord, bs = "cr") +
+        s(fan.line.rev, by = c2place.ord, bs = "cr") +
+        s(fan.line.rev, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.max,
+    method = "fREML"
+)
+
+summary(tongue.m3)
+
+tongue.m3.2 <- bam(
+    Y ~
+        vowel.ord +
+        c2place.ord +
+        s(fan.line.rev, bs = "cr") +
+        s(fan.line.rev, by = c2phonation.ord, bs = "cr") +
+        s(fan.line.rev, by = vowel.ord, bs = "cr") +
+        s(fan.line.rev, by = c2place.ord, bs = "cr"),
+    data = tongue.max,
+    method = "fREML"
+)
+
+compareML(tongue.m3, tongue.m3.2)
+```
+
+```{r}
+acf_plot(resid(tongue.m3), split_by=list(tongue.max$rec.date))
+```
+
+
+```{r}
+plot_gamsd(
+    tongue.m3,
+    "fan.line.rev",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
+
+```{r}
+tongue.m4 <- bam(
+    Y ~
+        vowel.ord +
+        c2place.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.max,
+    method = "fREML"
+)
+
+rho <- start_value_rho(tongue.m4)
+
+tongue.m4.ar <- bam(
+    Y ~
+        vowel.ord +
+        c2place.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr"),
+    data = tongue.max,
+    method = "fREML",
+    rho = rho,
+    AR.start = tongue.max$start.event
+)
+
+summary(tongue.m4)
+summary(tongue.m4.ar)
+```
+
+```{r}
+plot_gamsd(
+    tongue.m4,
+    "X",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
+
+```{r}
+plot_gamsd(
+    tongue.m4.ar,
+    "X",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
+
+```{r}
+tongue.max.a <- tongue.max %>%
+    filter(vowel == "a")
+```
+
+```{r}
+tongue.m5 <- bam(
+    Y ~
+        c2place.ord +
+        s(fan.line.rev, bs = "cr") +
+        s(fan.line.rev, by = c2phonation.ord, bs = "cr") +
+        s(fan.line.rev, by = c2place.ord, bs = "cr") +
+        s(fan.line.rev, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.max.a,
+    method = "fREML"
+)
+
+summary(tongue.m5)
+```
+
+```{r}
+plot_gamsd(
+    tongue.m5,
+    "fan.line.rev",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
+
+```{r}
+tongue.pol <- read_aaa("voicing-effect/results/ultrasound/it01-tongue-pol.tsv", columns, coordinates = "polar") %>%
+    separate(label, c("gesture", "position")) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+```
+
+```{r}
+tongue.pol %>%
+    filter(gesture == "max") %>%
+    ggplot(aes(theta, radius, group = rec.date, colour = c2phonation)) +
+    geom_path(alpha = 0.5) +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue.max.pol <- tongue.pol %>%
+    filter(gesture == "max") %>%
+    arrange(rec.date, fan.line) %>%
+    create_event_start("rec.date") %>%
+    mutate(
+        c2phonation.ord = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        c2place.ord = ordered(c2place, levels = c("coronal", "velar")),
+        vowel.ord = ordered(vowel, levels = c("a", "o", "u")),
+        phon.vowel = interaction(c2phonation, vowel),
+        phon.vowel.ord = as.ordered(phon.vowel)
+    )
+```
+
+```{r}
+tongue.m6 <- bam(
+    radius ~
+        vowel.ord +
+        c2place.ord +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation.ord, bs = "cr") +
+        s(theta, by = vowel.ord, bs = "cr") +
+        s(theta, by = c2place.ord, bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.max.pol,
+    method = "fREML"
+)
+
+summary(tongue.m6)
+```
+
+```{r}
+plot_gamsd(
+    tongue.m6,
+    "theta",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
