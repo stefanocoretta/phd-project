@@ -37,8 +37,8 @@ languages <- read_csv("./voicing-effect/stimuli/languages.csv")
 words <- read_csv("./voicing-effect/stimuli/nonce.csv")
 
 splines.it <- list.files(
-    path = "./voicing-effect/results",
-    pattern = "*-aaa.csv",
+    path = "./voicing-effect/results/ultrasound",
+    pattern = "*-tongue-cart.tsv",
     full.names = TRUE
     ) %>%
     map_df(~read_aaa(., columns)) %>%
@@ -49,7 +49,7 @@ splines.it <- list.files(
     mutate_if(is.character, as.factor)
 
 splines.pol.it <- list.files(
-    path = "./voicing-effect/results",
+    path = "./voicing-effect/results/ultrasound",
     pattern = "*-tongue-polar.tsv",
     full.names = TRUE
     ) %>%
