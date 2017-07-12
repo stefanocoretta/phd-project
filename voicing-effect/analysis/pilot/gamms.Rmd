@@ -541,3 +541,34 @@ plot_gamsd(
     list(c2phonation.ord = c("voiceless", "voiced"))
 )
 ```
+
+```{r}
+tongue.pol.mm <- rbind(tongue.max.pol[,1:31], tongue.mm.5[,1:31])
+```
+
+```{r}
+tongue.m10 <- bam(
+    radius ~
+        vowel.ord +
+        c2place.ord +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation.ord, bs = "cr") +
+        s(theta, by = vowel.ord, bs = "cr") +
+        s(theta, by = c2place.ord, bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", m = 1, k = 5) +
+        s(theta, speaker, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.pol.mm,
+    method = "fREML"
+)
+
+summary(tongue.m10)
+```
+
+```{r}
+plot_gamsd(
+    tongue.m10,
+    "theta",
+    list(c2phonation.ord = c("voiceless", "voiced")),
+    list(vowel.ord = "a", c2place.ord = "coronal")
+)
+```
