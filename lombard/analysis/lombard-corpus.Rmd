@@ -38,17 +38,19 @@ lombard <- list.files(
 # Search
 
 ```{r}
-stop.final <- lombard %>%
-    filter(str_detect(word, "^*[aeiouöü]((gh)|(ch)|(t)|(d)|(p)|(b))$")) %>%
-    unique()
-```
+stimuli <- lombard %>%
+    filter(str_detect(word, "^.[aeiouöü](gh|ch|t|tt|d|p|b|s|ss|z|zz)$")) %>%
+    unique() %>%
+    mutate(
+        voicing = ifelse(
+            str_detect(word, "(gh|d|b|z)$"), "voiced", "voiceless"
+        ),
+        manner = ifelse(
+            str_detect(word, "(s|z)$"), "fricative", "stop"
+        )
+    )
 
-```{r}
-four.grams <- lombard %>%
-    filter(
-        str_detect(word, "^....$"),
-        !str_detect(word, "(\\d)|(')")
-) %>%
-    unique()
+stimuli.voiced <- stimuli %>%
+    filter(voicing == "voiced", manner == "stop")
 ```
 
