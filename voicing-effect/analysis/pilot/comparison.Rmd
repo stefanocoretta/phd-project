@@ -50,7 +50,7 @@ splines.it <- list.files(
 
 splines.pol.it <- list.files(
     path = "./voicing-effect/results/ultrasound",
-    pattern = "*-tongue-polar.tsv",
+    pattern = "*-tongue-pol.tsv",
     full.names = TRUE
     ) %>%
     map_df(~read_aaa(., columns, coordinates = "polar")) %>%

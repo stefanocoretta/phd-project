@@ -572,3 +572,45 @@ plot_gamsd(
     list(vowel.ord = "a", c2place.ord = "coronal")
 )
 ```
+
+```{r}
+tongue.it01.pol.m1 <- bam(
+    radius ~
+        vowel.ord +
+        c2place.ord +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation.ord, bs = "cr") +
+        s(theta, by = vowel.ord, bs = "cr") +
+        s(theta, by = c2place.ord, bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.max.pol
+)
+
+rho <- start_value_rho(tongue.it01.pol.m1)
+
+tongue.it01.pol.m1.ar <- bam(
+    radius ~
+        vowel.ord +
+        c2place.ord +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation.ord, bs = "cr") +
+        s(theta, by = vowel.ord, bs = "cr") +
+        s(theta, by = c2place.ord, bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = tongue.max.pol,
+    rho = rho,
+    AR.start = tongue.max.pol$start.event
+)
+
+summary(tongue.it01.pol.m1)
+summary(tongue.it01.pol.m1.ar)
+```
+
+```{r}
+plot_gamsd(
+    tongue.it01.pol.m1.ar,
+    "theta",
+    list(c2phonation.ord = c("voiceless", "voiced"))
+)
+```
+
