@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<PsychoPy2experiment encoding="utf-8" version="1.85.2">
+  <Settings>
+    <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
+    <Param name="color" updates="None" val="$[0,0,0]" valType="str"/>
+    <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
+    <Param name="Experiment info" updates="None" val="{u'participant': u''}" valType="code"/>
+    <Param name="JS libs" updates="None" val="packaged" valType="str"/>
+    <Param name="Units" updates="None" val="use prefs" valType="str"/>
+    <Param name="Save excel file" updates="None" val="False" valType="bool"/>
+    <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
+    <Param name="Save psydat file" updates="None" val="True" valType="bool"/>
+    <Param name="Window size (pixels)" updates="None" val="[1280, 800]" valType="code"/>
+    <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
+    <Param name="blendMode" updates="None" val="avg" valType="str"/>
+    <Param name="Use version" updates="None" val="" valType="str"/>
+    <Param name="HTML path" updates="None" val="html" valType="str"/>
+    <Param name="Save csv file" updates="None" val="False" valType="bool"/>
+    <Param name="OSF Project ID" updates="None" val="" valType="str"/>
+    <Param name="Save log file" updates="None" val="True" valType="bool"/>
+    <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
+    <Param name="Show mouse" updates="None" val="False" valType="bool"/>
+    <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
+    <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
+    <Param name="expName" updates="None" val="lombard-pilot" valType="str"/>
+    <Param name="logging level" updates="None" val="exp" valType="code"/>
+    <Param name="Screen" updates="None" val="1" valType="num"/>
+  </Settings>
+  <Routines>
+    <Routine name="trial">
+      <TextComponent name="text">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="set every repeat" val="$sentence" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_1">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_1" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="1" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <LoopInitiator loopType="TrialHandler" name="trials">
+      <Param name="conditionsFile" updates="None" val="prompts.csv" valType="str"/>
+      <Param name="name" updates="None" val="trials" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="5" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="[{'item': 1, 'translation': u'I see the lake', 'gloss': u'lake', 'word': u'lagh', 'sentence': u'A vighi ul lagh'}, {'item': 2, 'translation': u'I am thirsty', 'gloss': u'thirst', 'word': u'sed', 'sentence': u&quot;A g'ho sed&quot;}, {'item': 3, 'translation': u'I see the fig', 'gloss': u'fig', 'word': u'figh', 'sentence': u'A vighi ul figh'}, {'item': 4, 'translation': u'I see the nose', 'gloss': u'nose', 'word': u'nas', 'sentence': u'A vighi ul nas'}, {'item': 5, 'translation': u'I see the boy', 'gloss': u'boy', 'word': u'tus', 'sentence': u'A vighi ul tus'}, {'item': 6, 'translation': u'I see the fire', 'gloss': u'fire', 'word': u'f\xf6gh', 'sentence': u'A vighi ul f\xf6gh'}, {'item': 7, 'translation': u'I see the hunchback', 'gloss': u'hunchback', 'word': u'g\xf6b', 'sentence': u'A vighi ul g\xf6b'}, {'item': 8, 'translation': u'That one is new', 'gloss': u'new.ms', 'word': u'n\xf6v', 'sentence': u&quot;Cul l\xec l'\xe8 n\xf6v&quot;}, {'item': 9, 'translation': u'It is not the way', 'gloss': u'way', 'word': u'm\xf6d', 'sentence': u&quot;L'\xe8 mia ul m\xf6d&quot;}, {'item': 10, 'translation': u'I see the sack', 'gloss': u'sack', 'word': u'sach', 'sentence': u'A vighi ul sach'}, {'item': 11, 'translation': u'I have seven of them', 'gloss': u'seven', 'word': u'set', 'sentence': u&quot;A n'ho set&quot;}, {'item': 12, 'translation': u&quot;I didn't give anything&quot;, 'gloss': u'stroke', 'word': u'pich', 'sentence': u&quot;A g'ho dai un pich&quot;}, {'item': 13, 'translation': u'I make a step', 'gloss': u'step', 'word': u'pass', 'sentence': u'A faghi un pass'}, {'item': 14, 'translation': u'I have the cough', 'gloss': u'cough', 'word': u'tuss', 'sentence': u&quot;A g'ho la tuss&quot;}, {'item': 15, 'translation': u'The lake is up', 'gloss': u'lake', 'word': u'lagh', 'sentence': u&quot;Ul lagh l'\xe8 s\xfc&quot;}, {'item': 16, 'translation': u'Being thirsty is bad', 'gloss': u'thirst', 'word': u'sed', 'sentence': u&quot;La sed l'\xe8 br\xfcta&quot;}, {'item': 17, 'translation': u'The fig is sweet', 'gloss': u'fig', 'word': u'figh', 'sentence': u&quot;Ul figh l'\xe8 dulz&quot;}, {'item': 18, 'translation': u'The nose is long', 'gloss': u'nose', 'word': u'nas', 'sentence': u&quot;Ul nas l'\xe8 lung&quot;}, {'item': 19, 'translation': u'My son is old', 'gloss': u'boy', 'word': u'tus', 'sentence': u&quot;Ul me tus l'\xe8 grand&quot;}, {'item': 20, 'translation': u'Fire is red', 'gloss': u'fire', 'word': u'f\xf6gh', 'sentence': u&quot;Ul f\xf6gh l'\xe8 russ&quot;}, {'item': 21, 'translation': u'The hunchback is short', 'gloss': u'hunchback', 'word': u'g\xf6b', 'sentence': u&quot;Ul g\xf6b l'\xe8 bass&quot;}, {'item': 22, 'translation': u'The new Pope is young', 'gloss': u'new.ms', 'word': u'n\xf6v', 'sentence': u&quot;Ul papa n\xf6v l'\xe8 giuven&quot;}, {'item': 23, 'translation': u&quot;It's easy that way&quot;, 'gloss': u'way', 'word': u'm\xf6d', 'sentence': u&quot;In cul m\xf6d l'\xe8 facil&quot;}, {'item': 24, 'translation': u'The sack is full', 'gloss': u'sack', 'word': u'sach', 'sentence': u&quot;Ul sach l'\xe8 pien&quot;}, {'item': 25, 'translation': u'Seven is a number', 'gloss': u'seven', 'word': u'set', 'sentence': u&quot;Ul set l'\xe8 un n\xfcmar&quot;}, {'item': 26, 'translation': u'The ace of spades is a card', 'gloss': u'stroke', 'word': u'pich', 'sentence': u&quot;L'ass da pich l'\xe8 na carta&quot;}, {'item': 27, 'translation': u'You have a slow step', 'gloss': u'step', 'word': u'pass', 'sentence': u&quot;Ti gh'\xe8 ul pass lent&quot;}, {'item': 28, 'translation': u&quot;The cough comes when it's cold&quot;, 'gloss': u'cough', 'word': u't\xfcss', 'sentence': u'La t\xfcss la vegn cul frecc'}]" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials"/>
+  </Flow>
+</PsychoPy2experiment>
