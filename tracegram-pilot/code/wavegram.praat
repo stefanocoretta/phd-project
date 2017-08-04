@@ -36,27 +36,27 @@ for file from 1 to numberOfFiles
             vowelDuration = end - start
             midPoint = start + (vowelDuration / 2)
             # Warning: The following two lines are easily breakable
-            selectionStart = midPoint - 0.25
-            selectionEnd = midPoint + 0.25
+            selectionStart = midPoint - 0.05
+            selectionEnd = midPoint + 0.05
             selectObject: sound2
             selection = Extract part: selectionStart, selectionEnd, "rectangular",
                 ...1, "yes"
-
+    
             eggSmooth = Filter (pass Hann band): lower, upper, 100
             @smoothing: smoothWidth
             Rename: "egg_smooth"
             eggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
-
+            
             selectObject: eggSmooth
             deggSmooth = Copy: "degg_smooth"
             Formula: "self [col + 1] - self [col]"
             @smoothing: smoothWidth
             deggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
-
+    
             selectObject: eggPointProcess
             eggPoints = Get number of points
             meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
-
+            
             for point to eggPoints - 2
                 selectObject: eggPointProcess
                 point1 = Get time from index: point
@@ -66,40 +66,40 @@ for file from 1 to numberOfFiles
                 eggMinimum1 = Get time of minimum: point1, point2, "Sinc70"
                 eggMinimum2 = Get time of minimum: point2, point3, "Sinc70"
                 period = eggMinimum2 - eggMinimum1
-
+            
                 if period <= meanPeriod * 2
                     selectObject: deggSmooth
                     minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
                     maxAmplitude = Get maximum: eggMinimum1, eggMinimum2, "Sinc70"
-
+                
                     sampleStart = Get sample number from time: eggMinimum1
                     sampleEnd = Get sample number from time: eggMinimum2
                     numberOfSamples = sampleEnd - sampleStart
                     sample = sampleStart
-
-                    while sample < numberOfSamples
+                
+                    while sample <= sampleEnd
                         amplitude = Get value at sample number: 1, sample
-
+                
                         amplitudeNorm = (amplitude - minAmplitude) /
                             ...(maxAmplitude - minAmplitude)
-
-                        sampleNorm = (sample - eggMinimum1) /
-                            ...(eggMinimum2 - eggMinimum1)
-
+                
+                        sampleNorm = (sample - sampleStart) /
+                            ...(sampleEnd - sampleStart)
+                
                         sampleTime = Get time from sample number: sample
                         timeNorm = sampleTime - eggMinimum1
-
+                
                         # At sample rate 44100 Hz, each period has around 400 samples
                         sample = sample + 2
-
+                
                         resultLine$ = "'fileBareName$','token','timeNorm','sampleNorm','amplitudeNorm'"
-
+                
                         appendFileLine: resultsFile$, resultLine$
                     endwhile
                 endif
-
+            
             endfor
-
+    
             removeObject: selection
         endif
     endfor

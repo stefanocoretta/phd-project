@@ -64,8 +64,8 @@ for interval to numberOfIntervals
         vowelDuration = end - start
         midPoint = start + (vowelDuration / 2)
         # Warning: The following two lines are easily breakable
-        selectionStart = midPoint - 0.25
-        selectionEnd = midPoint + 0.25
+        selectionStart = midPoint - 0.05
+        selectionEnd = midPoint + 0.05
         selectObject: sound2
         selection = Extract part: selectionStart, selectionEnd, "rectangular",
             ...1, "yes"
@@ -132,14 +132,14 @@ if period <= meanPeriod * 2
     numberOfSamples = sampleEnd - sampleStart
     sample = sampleStart
 
-    while sample < numberOfSamples
+    while sample <= sampleEnd
         amplitude = Get value at sample number: 1, sample
 
         amplitudeNorm = (amplitude - minAmplitude) /
             ...(maxAmplitude - minAmplitude)
 
-        sampleNorm = (sample - eggMinimum1) /
-            ...(eggMinimum2 - eggMinimum1)
+        sampleNorm = (sample - sampleStart) /
+            ...(sampleEnd - sampleStart)
 
         sampleTime = Get time from sample number: sample
         timeNorm = sampleTime - eggMinimum1
