@@ -19,7 +19,7 @@ smoothWidth = 11
 results$ = "../results"
 createDirectory(results$)
 data$ = "../data"
-resultsHeader$ = "file,token,time,"
+resultsHeader$ = "file,token,time,sample,amplitude"
 resultsFile$ = "'results$'/wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
@@ -72,7 +72,7 @@ for interval to numberOfIntervals
 
         <<<degg>>>
 
-        <<<get periods>>>
+        <<<period loop>>>
 
         removeObject: selection
     endif
@@ -97,27 +97,61 @@ deggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 
 The raw EGG is filtered and smoothed using a triangular smooth, and from this the DEGG is calculated. Two PointProcess files are also created, which roughly mark each glottal period in the EGG and DEGG.
 
-## "get periods"
+## "period loop"
 ```praat
-for period from 1 to numberOfPeriods
-    minAmplitude = Get minimum: 0, 0, "Sinc70"
-    maxAmplitude = Get maximum: 0, 0, "Sinc70"
+selectObject: eggPointProcess
+eggPoints = Get number of points
+meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
 
-    periodStart = Get start time
-    periodEnd = Get end time
+for point to eggPoints - 2
+    selectObject: eggPointProcess
+    point1 = Get time from index: point
+    point2 = Get time from index: point + 1
+    point3 = Get time from index: point + 2
+    selectObject: eggSmooth
+    eggMinimum1 = Get time of minimum: point1, point2, "Sinc70"
+    eggMinimum2 = Get time of minimum: point2, point3, "Sinc70"
+    period = eggMinimum2 - eggMinimum1
 
-    while sampleTime < periodTime
-        sampleTime = sampleTime + sampleRate
+    <<<wavegram>>>
 
-        amplitude = Get value at time: 1, sampleTime, "Sinc70"
+endfor
+```
+
+Each glottal period is detected by finding the EGG minima. The interval between two consecutive EGG minima is a glottal period.
+
+## "wavegram"
+```praat
+if period <= meanPeriod * 2
+    selectObject: deggSmooth
+    minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
+    maxAmplitude = Get maximum: eggMinimum1, eggMinimum2, "Sinc70"
+
+    sampleStart = Get sample number from time: eggMinimum1
+    sampleEnd = Get sample number from time: eggMinimum2
+    numberOfSamples = sampleEnd - sampleStart
+    sample = sampleStart
+
+    while sample < numberOfSamples
+        amplitude = Get value at sample number: 1, sample
 
         amplitudeNorm = (amplitude - minAmplitude) /
             ...(maxAmplitude - minAmplitude)
 
-        sampleTimeNorm = (sampleTime - periodStart) /
-            ...(periodEnd - periodStart)
+        sampleNorm = (sample - eggMinimum1) /
+            ...(eggMinimum2 - eggMinimum1)
+
+        sampleTime = Get time from sample number: sample
+        timeNorm = sampleTime - eggMinimum1
+
+        # At sample rate 44100 Hz, each period has around 400 samples
+        sample = sample + 2
+
+        resultLine$ = "'fileBareName$','token','timeNorm','sampleNorm','amplitudeNorm'"
+
+        appendFileLine: resultsFile$, resultLine$
     endwhile
-endfor
+endif
 ```
 
 For each glottal period, the normalised amplitude is calculated for each sample within the period. Normalisation of amplitude and sample time is achieved through unity-based rescaling (range 0-1).
