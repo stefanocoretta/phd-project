@@ -19,7 +19,7 @@ smoothWidth = 11
 results$ = "../results"
 createDirectory(results$)
 data$ = "../data"
-resultsHeader$ = "file,token,time,sample,amplitude"
+resultsHeader$ = "file,token,time,sequence,sample,amplitude"
 resultsFile$ = "'results$'/wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
@@ -103,6 +103,8 @@ selectObject: eggPointProcess
 eggPoints = Get number of points
 meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
 
+sequence = 0
+
 for point to eggPoints - 2
     selectObject: eggPointProcess
     point1 = Get time from index: point
@@ -115,6 +117,7 @@ for point to eggPoints - 2
 
     <<<wavegram>>>
 
+    sequence = sequence + 1
 endfor
 ```
 
@@ -132,6 +135,9 @@ if period <= meanPeriod * 2
     numberOfSamples = sampleEnd - sampleStart
     sample = sampleStart
 
+    timeNorm = (eggMinimum1 - selectionStart) /
+        ...(selectionEnd - selectionStart)
+
     while sample <= sampleEnd
         amplitude = Get value at sample number: 1, sample
 
@@ -141,13 +147,10 @@ if period <= meanPeriod * 2
         sampleNorm = (sample - sampleStart) /
             ...(sampleEnd - sampleStart)
 
-        sampleTime = Get time from sample number: sample
-        timeNorm = sampleTime - eggMinimum1
-
         # At sample rate 44100 Hz, each period has around 400 samples
         sample = sample + 2
 
-        resultLine$ = "'fileBareName$','token','timeNorm','sampleNorm','amplitudeNorm'"
+        resultLine$ = "'fileBareName$','token','timeNorm','sequence','sampleNorm','amplitudeNorm'"
 
         appendFileLine: resultsFile$, resultLine$
     endwhile
