@@ -1,0 +1,66 @@
+---
+title: "Wavegram"
+author: "Stefano Coretta"
+date: "08/08/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(itsadug)
+options(contrasts = rep ("contr.treatment", 2))
+```
+
+# Data import
+
+```{r data}
+wavegram <- read_csv("../results/wavegram.csv") %>%
+    separate(file, c("speaker", "phonation"))
+
+dm <- filter(wavegram, speaker == "dm") %>%
+    mutate(phonation, phonation.ord = ordered(phonation, levels = c("modal", "breathy")))
+```
+
+# Analysis
+
+```{r}
+dm.gam <- bam(
+    amplitude ~
+        s(sequence) + s(sample) +
+        s(sequence, by = phonation.ord) + s(sample, by = phonation.ord) +
+        ti(sequence, sample) +
+        ti(sequence, sample, by = phonation.ord),
+    data = dm
+)
+
+summary(dm.gam)
+```
+
+```{r}
+plot_diff2(
+    dm.gam,
+    view=c("sequence", "sample"), 
+    comp=list(phonation.ord=c("modal", "breathy")), 
+    plotCI=TRUE,
+    zlim = c(-1, 1)
+)
+```
+
+```{r}
+fvisgam(
+    dm.gam,
+    view = c("sequence","sample"),
+    cond = list(phonation.ord = "modal"),
+    zlim = c(0, 1)
+)
+
+fvisgam(
+    dm.gam,
+    view = c("sequence","sample"),
+    cond = list(phonation.ord = "breathy"),
+    zlim = c(0, 1)
+)
+```
+
+
