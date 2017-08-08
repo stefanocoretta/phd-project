@@ -1,0 +1,15 @@
+---
+title: "Vowel duration and tongue root advancement in Italian and Polish"
+author: "Stefano Coretta"
+date: "07/08/2017"
+output:
+  beamer_presentation:
+    colortheme: "owl"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
