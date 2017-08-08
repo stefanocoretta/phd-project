@@ -7,12 +7,11 @@ item,word,sentence,translation,gloss
 6,fögh,A vighi ul fögh,I see the fire,fire
 7,göb,A vighi ul göb,I see the hunchback,hunchback
 8,növ,Cul lì l'è növ,That one is new,new.ms
-9,möd,L'è mia ul möd,It is not the way,way
 10,sach,A vighi ul sach,I see the sack,sack
-11,set,A n'ho set,I have seven of them,seven
+11,set,A gn'ho set,I have seven of them,seven
 12,pich,A g'ho dai un pich,I didn't give anything,stroke
-13,pass,A faghi un pass,I make a step,step
-14,tuss,A g'ho la tuss,I have the cough,cough
+13,pass,A fagh un pass,I make a step,step
+14,tüss,A g'ho la tüss,I have the cough,cough
 15,lagh,Ul lagh l'è sü,The lake is up,lake
 16,sed,La sed l'è brüta,Being thirsty is bad,thirst
 17,figh,Ul figh l'è dulz,The fig is sweet,fig
@@ -20,8 +19,7 @@ item,word,sentence,translation,gloss
 19,tus,Ul me tus l'è grand,My son is old,boy
 20,fögh,Ul fögh l'è russ,Fire is red,fire
 21,göb,Ul göb l'è bass,The hunchback is short,hunchback
-22,növ,Ul papa növ l'è giuven,The new Pope is young,new.ms
-23,möd,In cul möd l'è facil,It's easy that way,way
+22,növ,Ul papa növ l'è giuvin,The new Pope is young,new.ms
 24,sach,Ul sach l'è pien,The sack is full,sack
 25,set,Ul set l'è un nümar,Seven is a number,seven
 26,pich,L'ass da pich l'è na carta,The ace of spades is a card,stroke
