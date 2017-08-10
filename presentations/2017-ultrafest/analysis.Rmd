@@ -1,0 +1,144 @@
+---
+title: "Ultrafest analysis"
+author: "Stefano Coretta"
+date: "10/08/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(rticulate)
+library(stringr)
+library(scales)
+library(tidymv)
+library(itsadug)
+options(contrasts = rep ("contr.treatment", 2))
+```
+
+# Import data
+
+```{r tongues}
+languages <- read_csv("voicing-effect/stimuli/languages.csv")
+words <- read_csv("voicing-effect/stimuli/nonce.csv")
+
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+)
+
+aaa.files <- list.files(
+    path = "./voicing-effect/results/ultrasound",
+    pattern = "*-tongue-cart.tsv",
+    full.names = TRUE
+)
+
+tongues <- read_aaa(
+    aaa.files,
+    columns, 
+    na.rm = TRUE
+) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor)
+```
+
+```{r it}
+it <- tongues %>%
+    filter(
+        speaker %in% c("it01", "it02"),
+        label %in% c("max_TT", "max_TD")
+    )
+```
+
+```{r pl}
+pl <- tongues %>%
+    filter(
+        speaker %in% c("pl02", "pl03"),
+        label %in% c("max_TT", "max_TD")
+    )
+```
+
+```{r tongue-max}
+tongue_max <- rbind(it, pl)
+```
+
+
+# Exploration
+
+```{r coronal}
+tongue_max %>%
+    filter(c2place == "coronal") %>%
+    plot_tongue(geom = "point", alpha = 0.5) +
+    aes(colour = c2phonation) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r velar}
+tongue_max %>%
+    filter(c2place == "velar") %>%
+    plot_tongue(geom = "point", alpha = 0.5) +
+    aes(colour = c2phonation) +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r rescale}
+tongue_max <- tongue_max %>%
+    group_by(speaker) %>%
+    mutate(
+        X.re = rescale(X),
+        Y.re = rescale(Y)
+    ) %>%
+    ungroup()
+```
+
+```{r coronal-re}
+tongue_max %>%
+    filter(c2place == "coronal") %>%
+    ggplot(aes(X.re, Y.re, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    facet_grid(speaker ~ vowel) +
+    coord_fixed(0.7)
+```
+
+```{r velar-re}
+tongue_max %>%
+    filter(c2place == "velar") %>%
+    ggplot(aes(X.re, Y.re, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    facet_grid(speaker ~ vowel) +
+    coord_fixed(0.7)
+```
+
+# Testing
+
+```{r tongue-gam}
+tongue_max <- tongue_max %>%
+    filter(vowel != "u") %>%
+    mutate(
+        vowel.ord = ordered(vowel, levels = c("a", "o")),
+        c2place.ord = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation.ord = ordered(c2phonation, levels = c("voiceless", "voiced"))
+    ) %>%
+    arrange(rec.date, fan.line) %>%
+    create_event_start("rec.date")
+
+tongue_max_it <- tongue_max %>%
+    filter(language == "italian")
+
+tongue_max_pl <- tongue_max %>%
+    filter(language == "polish")
+```
+
