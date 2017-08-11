@@ -83,7 +83,7 @@ max_pl_34 <- max %>%
 
 # Exploration
 
-```{r coronal}
+```{r coronal-it}
 max %>%
     filter(c2place == "coronal", language == "italian") %>%
     plot_tongue(geom = "point", alpha = 0.5) +
@@ -91,16 +91,16 @@ max %>%
     facet_grid(vowel ~ speaker)
 ```
 
-```{r velar}
-tongue_max %>%
+```{r velar-it}
+max %>%
     filter(c2place == "velar", language == "italian") %>%
     plot_tongue(geom = "point", alpha = 0.5) +
     aes(colour = c2phonation) +
-    facet_grid(speaker ~ vowel)
+    facet_grid(vowel ~ speaker)
 ```
 
 ```{r coronal-pl}
-max_pl_34 %>%
+max %>%
     filter(c2place == "coronal", language == "polish") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
@@ -108,8 +108,8 @@ max_pl_34 %>%
     coord_fixed(0.7)
 ```
 
-```{r coronal-re}
-max_pl_34 %>%
+```{r coronal-pl-re}
+max %>%
     filter(c2place == "coronal", language == "polish") %>%
     ggplot(aes(X.re, Y.re, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
@@ -117,8 +117,8 @@ max_pl_34 %>%
     coord_fixed(0.7)
 ```
 
-```{r velar-re}
-tongue_max %>%
+```{r velar-pl-re}
+max %>%
     filter(c2place == "velar", language == "polish") %>%
     ggplot(aes(X.re, Y.re, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
@@ -142,7 +142,7 @@ pl.m1 <- bam(
         s(X.re, by = vowel.ord, bs = "cr") +
         s(X.re, rec.date, bs = "fs", xt = "cr", m = 1, k = 5) +
         s(X.re, speaker, bs = "fs", xt = "cr", m = 1, k = 5),
-    data = tongue_max_pl,
+    data = max_pl_23,
     method = "fREML"
 )
 
@@ -157,10 +157,10 @@ pl.m1.ar <- bam(
         s(X.re, by = vowel.ord, bs = "cr") +
         s(X.re, rec.date, bs = "fs", xt = "cr", m = 1, k = 5) +
         s(X.re, speaker, bs = "fs", xt = "cr", m = 1, k = 5),
-    data = tongue_max_pl,
+    data = max_pl_23,
     method = "fREML",
     rho = rho,
-    AR.start = tongue_max_pl$start.event
+    AR.start = max_pl_23$start.event
 )
 
 summary(pl.m1)
@@ -173,7 +173,7 @@ pl.m1.null <- bam(
         s(X.re, by = vowel.ord, bs = "cr") +
         s(X.re, rec.date, bs = "fs", xt = "cr", m = 1, k = 5) +
         s(X.re, speaker, bs = "fs", xt = "cr", m = 1, k = 5),
-    data = tongue_max_pl,
+    data = max_pl_23,
     method = "fREML"
 )
 
@@ -217,7 +217,7 @@ plot_gamsd(
 ### PL02
 
 ```{r}
-pl02_max <- filter(tongue_max_pl, speaker == "pl02")
+pl02_max <- filter(max, speaker == "pl02")
 
 pl02.m1 <- bam(
     Y ~
@@ -692,3 +692,128 @@ plot_gamsd(
     conditions = list(c2place.ord = "coronal")
 )
 ```
+
+### IT01
+
+```{r}
+it01_max <- filter(max, speaker == "it01")
+
+it01.m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_max,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it01.m1)
+
+it01.m1.ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it01_max$start.event
+)
+
+summary(it01.m1.ar)
+
+it01.m1.ar.null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it01_max$start.event
+)
+
+compareML(it01.m1.ar, it01.m1.ar.null)
+```
+
+```{r}
+plot_gamsd(
+    it01.m1.ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+### IT02
+
+```{r}
+it02_max <- filter(max, speaker == "it02")
+
+it02.m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it02_max,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it02.m1)
+
+it02.m1.ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it02_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it02_max$start.event
+)
+
+summary(it02.m1.ar)
+
+it02.m1.ar.null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it02_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it02_max$start.event
+)
+
+compareML(it02.m1.ar, it02.m1.ar.null)
+```
+
+```{r}
+plot_gamsd(
+    it02.m1.ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+# Italian tongue at closure
+
