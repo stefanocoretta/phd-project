@@ -117,6 +117,15 @@ max %>%
     coord_fixed(0.7)
 ```
 
+```{r velar-pl}
+max %>%
+    filter(c2place == "velar", language == "polish") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    facet_grid(speaker ~ vowel) +
+    coord_fixed(0.7)
+```
+
 ```{r velar-pl-re}
 max %>%
     filter(c2place == "velar", language == "polish") %>%
