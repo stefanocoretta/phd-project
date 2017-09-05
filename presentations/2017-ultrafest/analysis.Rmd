@@ -60,7 +60,7 @@ tongues <- read_aaa(
     ) %>%
     ungroup() %>%
     mutate(
-        vowel.ord = ordered(vowel, levels = c("a", "o")),
+        vowel.ord = ordered(vowel, levels = c("a", "o", "u")),
         c2place.ord = ordered(c2place, levels = c("coronal", "velar")),
         c2phonation.ord = ordered(c2phonation, levels = c("voiceless", "voiced"))
     )
@@ -78,6 +78,35 @@ max_pl_23 <- max %>%
 
 max_pl_34 <- max %>%
     filter(speaker %in% c("pl03", "pl04"))
+
+aaa_files_clos <- list.files(
+    path = "./voicing-effect/results/ultrasound",
+    pattern = "*-tongue-clos-cart.tsv",
+    full.names = TRUE
+)
+
+tongues_clos <- read_aaa(
+    aaa_files_clos,
+    columns, 
+    na.rm = TRUE
+) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor) %>%
+    group_by(speaker) %>%
+    mutate(
+        X.re = rescale(X),
+        Y.re = rescale(Y)
+    ) %>%
+    ungroup() %>%
+    mutate(
+        vowel.ord = ordered(vowel, levels = c("a", "o", "u")),
+        c2place.ord = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation.ord = ordered(c2phonation, levels = c("voiceless", "voiced"))
+    ) %>%
+    arrange(rec.date, fan.line) %>%
+    create_event_start("rec.date")
 ```
 
 
@@ -104,8 +133,8 @@ max %>%
     filter(c2place == "coronal", language == "polish") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
-    facet_grid(speaker ~ vowel) +
-    coord_fixed(0.7)
+    facet_grid(vowel ~ speaker) +
+    coord_fixed(1.5)
 ```
 
 ```{r coronal-pl-re}
@@ -122,7 +151,7 @@ max %>%
     filter(c2place == "velar", language == "polish") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
-    facet_grid(speaker ~ vowel) +
+    facet_grid(vowel ~ speaker) +
     coord_fixed(0.7)
 ```
 
@@ -137,7 +166,7 @@ max %>%
 
 # Testing
 
-Comparing fixed effects models works best with ML, otherwise you can use fREML with AIC, but if there is an AR1 model cannot use AIC.
+Comparing fixed effects models works best with ML, otherwise you can use fREML with AIC for fixed effects, but if there is an AR1 model cannot use AIC, so need ML.
 
 ## Polish
 
@@ -226,7 +255,7 @@ plot_gamsd(
 ### PL02
 
 ```{r}
-pl02_max <- filter(max, speaker == "pl02")
+pl02_max <- filter(max, speaker == "pl02", X > -20)
 
 pl02.m1 <- bam(
     Y ~
@@ -237,7 +266,7 @@ pl02.m1 <- bam(
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl02_max,
-    method = "fREML"
+    method = "ML"
 )
 
 rho <- start_value_rho(pl02.m1)
@@ -251,7 +280,7 @@ pl02.m1.ar <- bam(
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl02_max,
-    method = "fREML",
+    method = "ML",
     rho = rho,
     AR.start = pl02_max$start.event
 )
@@ -266,7 +295,7 @@ pl02.m1.null <- bam(
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl02_max,
-    method = "fREML"
+    method = "ML"
 )
 
 compareML(pl02.m1, pl02.m1.null)
@@ -630,6 +659,8 @@ plot_gamsd(
 
 ## Italian
 
+it01 and it02 have TRA at maximum displacement.
+
 ```{r}
 it.m1 <- bam(
     Y.re ~
@@ -825,4 +856,144 @@ plot_gamsd(
 ```
 
 # Italian tongue at closure
+
+```{r}
+tongues_clos %>%
+    filter(c2place == "coronal", language == "italian") %>%
+    plot_tongue(geom = "point", alpha = 0.5) +
+    aes(colour = c2phonation) +
+    facet_grid(vowel ~ speaker)
+```
+
+
+## IT01
+
+```{r it01-clos}
+it01_clos <- tongues_clos %>%
+    filter(speaker == "it01", vowel != "u")
+```
+
+```{r it01-clos-gamm}
+it01_clos_m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_clos,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it01_clos_m1)
+
+it01_clos_m1_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = it01_clos$start.event
+)
+
+summary(it01_clos_m1_ar)
+
+it01_clos_m1_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = it01_clos$start.event
+)
+
+compareML(it01_clos_m1_ar, it01_clos_m1_ar_null)
+```
+
+```{r plot-it01-clos-gamm}
+plot_gamsd(
+    it01_clos_m1_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+## IT02
+
+```{r it02-clos}
+it02_clos <- tongues_clos %>%
+    filter(speaker == "it02", vowel != "u")
+```
+
+```{r it02-clos-gamm}
+it02_clos_m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it02_clos,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it02_clos_m1)
+
+it02_clos_m1_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it02_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = it02_clos$start.event
+)
+
+summary(it02_clos_m1_ar)
+
+it02_clos_m1_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it02_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = it02_clos$start.event
+)
+
+compareML(it02_clos_m1_ar, it02_clos_m1_ar_null)
+```
+
+```{r plot-it02-clos-gamm}
+plot_gamsd(
+    it02_clos_m1_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+Both it01 and it02 show TRA at closure. It is difficult to quantify the difference compared to TRA at maximum displacement.
+
 
