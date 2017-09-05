@@ -5,11 +5,64 @@ date: "07/08/2017"
 output:
   beamer_presentation:
     colortheme: "owl"
+    citation_package: natbib
+    latex_engine: xelatex
+bibliography: linguistics.bib
+biblio-style: unified.bst
+header-includes:
+- \frenchspacing
+- \usepackage{cleveref}
+- \setcitestyle{aysep={},notesep={:},citesep={,}}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Background
 
+- tongue root advancement (**TRA**)
+    - voicing [@westbury1983]
+    - VOT [@ahn2015]
+    - also *vowel duration*?
+- **voicing effect**
+    - @house1953, @chen1970, @klatt1973, @lisker1973
+    - no consensual explanation
 
+# Background
+
+- Italian
+    - voicing effect [@farnetani1986]
+- Polish
+    - no voicing effect [@keating1984]
+
+→ Assessment of tongue contour using ultrasonography
+
+(part of a broader research project)
+
+# Methods
+
+- pilot study
+- Italian (2 males), Polish (1 female, 1 male)
+-  C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
+    - C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
+- frame sentence
+    - *Dico X lentamente*, 'I say X slowly'
+    - *Mówię X teraz*, 'I say X now'
+
+# Equipment set-up
+
+- Articulate Instruments set-up
+    - TELEMED Echo Blaster 128 unit
+    - TELEMED C3.5/20/128Z-3 ultrasonic transducer
+    - Movo LV4-O2 Lavalier Microphone
+    - sync unit
+- probe stabilisation with Articulate Instruments headset
+- Articulate Assistant Advanced [@articulate2011]
+- FRAME RATE
+
+# Results
+
+- generalised additive mixed effect model (GAMM)
+
+# References
