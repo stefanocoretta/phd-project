@@ -667,7 +667,7 @@ plot_gamsd(
 
 it01 and it02 have TRA at maximum displacement.
 
-```{r}
+```{r eval=FALSE}
 it.m1 <- bam(
     Y.re ~
         X.re +
@@ -730,7 +730,7 @@ it.m1.null <- bam(
 compareML(it.m1.ar, it.m1.ar.null)
 ```
 
-```{r}
+```{r eval=FALSE}
 plot_gamsd(
     it.m1.ar,
     view = "X.re",
