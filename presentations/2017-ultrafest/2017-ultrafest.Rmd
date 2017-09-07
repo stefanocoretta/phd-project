@@ -4,8 +4,9 @@ author: "Stefano Coretta"
 date: "07/08/2017"
 output:
   beamer_presentation:
-    colortheme: "owl"
     citation_package: natbib
+    colortheme: "owl"
+    highlight: zenburn
     latex_engine: xelatex
 bibliography: linguistics.bib
 biblio-style: unified.bst
@@ -61,8 +62,41 @@ knitr::opts_chunk$set(echo = FALSE)
 - Articulate Assistant Advanced [@articulate2011]
 - FRAME RATE
 
-# Results
+# Analysis
 
-- generalised additive mixed effect model (GAMM)
+- spline data at maximum constriction [@strycharczuk2015] and acoustic closure
+- generalised additive mixed effect model [GAMM, @wood2006]
+- one model per speaker
+    - parametric term Y
+    - reference smooth Y
+    - difference smooth Y by phonation, vowel, place
+    - random smooth by item
+    - cubic regression splines
+- includes first order autoregressive model (AR1)
+- model comparison and visual inspection [@soskuthy2017]
+
+# Results: Italian
+
+\begin{figure}
+\includegraphics[width = \textwidth]{it01.pdf}
+\end{figure}
+
+# Results: Polish
+
+\begin{figure}
+\includegraphics[width = \textwidth]{pl04.pdf}
+\end{figure}
+
+# Results: Italian (closure)
+
+\begin{figure}
+\includegraphics[width = \textwidth]{it01-clos.pdf}
+\end{figure}
+
+# Results: Polish (closure)
+
+\begin{figure}
+\includegraphics[width = \textwidth]{pl04-clos.pdf}
+\end{figure}
 
 # References
