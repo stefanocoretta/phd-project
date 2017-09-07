@@ -1010,6 +1010,70 @@ Both it01 and it02 show TRA at closure. It is difficult to quantify the differen
 
 # Polish tongue at closure
 
+## PL02
+
+```{r pl02-clos}
+pl02_clos <- tongues_clos %>%
+    filter(speaker == "pl02", vowel != "u", X > -21)
+```
+
+```{r pl02-clos-gamm}
+pl02_clos_m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl02_clos,
+    method = "fREML"
+)
+
+rho <- start_value_rho(pl02_clos_m1)
+
+pl02_clos_m1_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl02_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = pl02_clos$start.event
+)
+
+summary(pl02_clos_m1_ar)
+
+pl02_clos_m1_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl02_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = pl02_clos$start.event
+)
+
+compareML(pl02_clos_m1_ar, pl02_clos_m1_ar_null)
+```
+
+```{r plot-pl02-clos-gamm}
+plot_gamsd(
+    pl02_clos_m1_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
 ## PL04
 
 ```{r pl04-clos}
