@@ -480,7 +480,7 @@ acf_plot(resid(pl04.m1.ar), split_by=list(pl04_max$rec.date))
 acf_resid(pl04.m1.ar, split_pred = "AR.start")
 ```
 
-```{r}
+```{r eval=FALSE}
 pl04_a <- filter(max, speaker == "pl04", vowel == "a")
 
 pl04.m1 <- bam(
@@ -528,7 +528,7 @@ compareML(pl04.m1.ar, pl04.m1.ar.null)
 
 If only /a/ is used, no significance at all. With /o/ and X > -30, no significance, but with all X some significant difference at the very left end of the tongue.
 
-```{r}
+```{r eval=FALSE}
 plot_gamsd(
     pl04.m1.ar,
     view = "X",
@@ -1138,4 +1138,79 @@ plot_gamsd(
 )
 
 ggsave("presentations/2017-ultrafest/pl04-clos.pdf", width = 6, height = 4)
+```
+
+# Comparison of Italian voiced at closure and maximum displacement
+
+## IT01
+
+```{r}
+it01_voiced <- rbind(it01_max, it01_clos) %>%
+    filter(c2phonation == "voiced") %>%
+    mutate(
+        position = ifelse(label %in% c("max_TT", "max_TD"), "maximum", "closure"),
+        position_ord = ordered(position, levels = c("maximum", "closure"))
+    ) %>%
+    unite(item_no, seconds:rec.date) %>%
+    filter(vowel != "u") %>%
+    mutate_if(is.character, as.factor)
+```
+
+```{r it02-voiced-gamm}
+it02_voiced_m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = position_ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, item_no, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_voiced,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it02_voiced_m1)
+
+it02_voiced_m1_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = position_ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, item_no, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_voiced,
+    method = "ML",
+    rho = rho,
+    AR.start = it01_voiced$start.event
+)
+
+summary(it02_voiced_m1_ar)
+
+it02_voiced_m1_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, item_no, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it01_voiced,
+    method = "ML",
+    rho = rho,
+    AR.start = it01_voiced$start.event
+)
+
+compareML(it02_voiced_m1_ar, it02_voiced_m1_ar_null)
+```
+
+```{r plot-it02-voiced-gamm}
+plot_gamsd(
+    it02_voiced_m1_ar,
+    view = "X",
+    comparison = list(position_ord = c("maximum", "closure")),
+    conditions = list(c2place.ord = "coronal")
+)
+
+ggsave("presentations/2017-ultrafest/it01-voiced.pdf", width = 6, height = 4)
 ```
