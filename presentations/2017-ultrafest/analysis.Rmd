@@ -2,7 +2,11 @@
 title: "Ultrafest analysis"
 author: "Stefano Coretta"
 date: "10/08/2017"
-output: html_document
+output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    theme: readable
 ---
 
 ```{r setup, include=FALSE}
@@ -170,7 +174,7 @@ Comparing fixed effects models works best with ML, otherwise you can use fREML w
 
 ## Polish
 
-```{r}
+```{r eval=FALSE}
 pl.m1 <- bam(
     Y.re ~
         X.re +
@@ -218,7 +222,7 @@ pl.m1.null <- bam(
 compareML(pl.m1, pl.m1.null)
 ```
 
-```{r}
+```{r eval=FALSE}
 plot_smooth(
     pl.m1,
     view = "X.re",
@@ -234,7 +238,7 @@ plot_diff(
 )
 ```
 
-```{r}
+```{r eval=FALSE}
 plot_gamsd(
     pl.m1,
     view = "X.re",
@@ -243,7 +247,7 @@ plot_gamsd(
 )
 ```
 
-```{r}
+```{r eval=FALSE}
 plot_gamsd(
     pl.m1.ar,
     view = "X.re",
@@ -467,6 +471,8 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+
+ggsave("presentations/2017-ultrafest/pl04.pdf", width = 6, height = 4)
 ```
 
 ```{r}
@@ -533,7 +539,7 @@ plot_gamsd(
 
 ### PL03-PL04
 
-```{r pl34}
+```{r pl34, eval=FALSE}
 pl34.m1 <- bam(
     Y ~
         X +
@@ -583,7 +589,7 @@ summary(pl34.m1.ar)
 compareML(pl34.m1.ar, pl34.m1.ar.null)
 ```
 
-```{r}
+```{r eval=FALSE}
 plot_gamsd(
     pl34.m1.ar,
     view = "X",
@@ -594,7 +600,7 @@ plot_gamsd(
 
 The models with X, Y are not reliable because the tongue size differs a lot between speakers.
 
-```{r pl34-re}
+```{r pl34-re, eval=FALSE}
 pl34.m1.re <- bam(
     Y.re ~
         X.re +
@@ -642,7 +648,7 @@ summary(pl34.m1.ar.re)
 compareML(pl34.m1.ar.re, pl34.m1.ar.re.null)
 ```
 
-```{r}
+```{r eval=FALSE}
 plot_gamsd(
     pl34.m1.ar.re,
     view = "X.re",
@@ -792,6 +798,8 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+
+ggsave("presentations/2017-ultrafest/it01.pdf", width = 6, height = 4)
 ```
 
 ### IT02
@@ -928,6 +936,8 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+
+ggsave("presentations/2017-ultrafest/it01-clos.pdf", width = 6, height = 4)
 ```
 
 ## IT02
@@ -994,6 +1004,74 @@ plot_gamsd(
 )
 ```
 
-Both it01 and it02 show TRA at closure. It is difficult to quantify the difference compared to TRA at maximum displacement.
+Both it01 and it02 show TRA at closure. It is difficult to quantify the difference compared to TRA at maximum displacement. Need a model to check that.
 
 
+
+# Polish tongue at closure
+
+## PL04
+
+```{r pl04-clos}
+pl04_clos <- tongues_clos %>%
+    filter(speaker == "pl04", vowel != "u")
+```
+
+```{r pl04-clos-gamm}
+pl04_clos_m1 <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl04_clos,
+    method = "fREML"
+)
+
+rho <- start_value_rho(pl04_clos_m1)
+
+pl04_clos_m1_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl04_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = pl04_clos$start.event
+)
+
+summary(pl04_clos_m1_ar)
+
+pl04_clos_m1_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl04_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = pl04_clos$start.event
+)
+
+compareML(pl04_clos_m1_ar, pl04_clos_m1_ar_null)
+```
+
+```{r plot-pl04-clos-gamm}
+plot_gamsd(
+    pl04_clos_m1_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+
+ggsave("presentations/2017-ultrafest/pl04-clos.pdf", width = 6, height = 4)
+```
