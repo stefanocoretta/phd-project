@@ -5,7 +5,6 @@ date: "07/08/2017"
 output:
   beamer_presentation:
     citation_package: natbib
-    colortheme: "owl"
     highlight: zenburn
     latex_engine: xelatex
 bibliography: linguistics.bib
@@ -14,6 +13,7 @@ header-includes:
 - \frenchspacing
 - \usepackage{cleveref}
 - \setcitestyle{aysep={},notesep={:},citesep={,}}
+- \usetheme{metropolis}
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = FALSE)
     - also *vowel duration*?
 - **voicing effect**
     - @house1953, @chen1970, @klatt1973, @lisker1973
-    - no consensual explanation
+    - no consesus
 
 # Background
 
@@ -37,13 +37,11 @@ knitr::opts_chunk$set(echo = FALSE)
 - Polish
     - no voicing effect [@keating1984]
 
-→ Assessment of tongue contour using ultrasonography
-
-(part of a broader research project)
+→ Assessment of tongue contour using ultrasonography (part of a broader research project)
 
 # Methods
 
-- pilot study
+- pilot study (work in progress)
 - Italian (2 males), Polish (1 female, 1 male)
 -  C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
     - C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
@@ -64,7 +62,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Analysis
 
-- spline data at maximum constriction [@strycharczuk2015] and acoustic closure
+- spline data at maximum displacement [@strycharczuk2015] and acoustic closure
 - generalised additive mixed effect model [GAMM, @wood2006]
 - one model per speaker
     - parametric term Y
@@ -75,16 +73,22 @@ knitr::opts_chunk$set(echo = FALSE)
 - includes first order autoregressive model (AR1)
 - model comparison and visual inspection [@soskuthy2017]
 
-# Results: Italian
-
-\begin{figure}
-\includegraphics[width = \textwidth]{it01.pdf}
-\end{figure}
-
-# Results: Polish
+# Results: Polish (maximum)
 
 \begin{figure}
 \includegraphics[width = \textwidth]{pl04.pdf}
+\end{figure}
+
+# Results: Polish (closure)
+
+\begin{figure}
+\includegraphics[width = \textwidth]{pl04-clos.pdf}
+\end{figure}
+
+# Results: Italian (maximum)
+
+\begin{figure}
+\includegraphics[width = \textwidth]{it01.pdf}
 \end{figure}
 
 # Results: Italian (closure)
@@ -93,10 +97,22 @@ knitr::opts_chunk$set(echo = FALSE)
 \includegraphics[width = \textwidth]{it01-clos.pdf}
 \end{figure}
 
-# Results: Polish (closure)
+# Results: Italian (closure vs. maximum)
 
 \begin{figure}
-\includegraphics[width = \textwidth]{pl04-clos.pdf}
+\includegraphics[width = \textwidth]{it01-voiced.pdf}
 \end{figure}
+
+# Discussion
+
+- Polish does not show TRA
+- Italian shows TRA at closure and maximum displacement
+- TRA increases from closure to maximum displacement
+
+→ TRA is initiated **before closure** in voiced stops in Italian
+
+- time to allow TRA → longer vowel
+- cf. @halle1967
+
 
 # References
