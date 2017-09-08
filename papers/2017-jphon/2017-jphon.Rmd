@@ -17,3 +17,20 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
+
+# Methodology
+
+## Participants
+
+Native speakers of Italian and Polish have been recruited in Manchester and in Italy.
+Four speakers per language participated in the experiment.
+The participants recieved a compensation of £10 (or Euro equivalent).
+
+## Materials
+
+Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, and C\textsubscript{2} = /t, d, k, g/ (e.g. /pata/, /pada/, /poto/, etc.).
+All possible combinations were employed, yelding to a total of 12 target words.
+The words were embedded in a frame sentence in medial position.
+Prosodically similar sentences were used to ensure comparability between languages.
+The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
+
