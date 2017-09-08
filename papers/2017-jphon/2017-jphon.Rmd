@@ -34,3 +34,22 @@ The words were embedded in a frame sentence in medial position.
 Prosodically similar sentences were used to ensure comparability between languages.
 The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
 
+<!--
+say reasons behind choices and explain why prosodically similar
+-->
+
+## Equipment set-up
+
+An Articulate Instruments set-up was used for this study.
+This is constituted by a TELEMED C3.5/20/128Z-3 ultrasonic transducer plugged into a TELEMED Echo Blaster 128 unit.
+A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
+A Movo LV4-O2 Lavalier microphone plugged into a ... was used for audio recording.
+Articulate Assistant Advanced v2.17.1 running on a Windows laptop was used for the acquisition of audio and ultrasonic signal.
+
+<!--
+headset
+-->
+
+## Procedure
+
+The stimuli were randomised for each participant and repeated six times (the random order was kept the same in each of the six repetitions due to software constraints).
