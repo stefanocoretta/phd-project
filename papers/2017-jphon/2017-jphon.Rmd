@@ -1,0 +1,19 @@
+---
+title: 'The link between tongue root advancement and the voicing effect: an ultrasound
+  study of Italian and Polish'
+author: "Stefano Coretta"
+date: "08/09/2017"
+output:
+    pdf_document:
+      fig_caption: yes
+      latex_engine: xelatex
+      number_sections: yes
+      template: template.tex
+documentclass: elsarticle
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
