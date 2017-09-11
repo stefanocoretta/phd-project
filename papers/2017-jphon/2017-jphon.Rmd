@@ -1,11 +1,11 @@
 ---
-title: 'The link between tongue root advancement and the voicing effect: an ultrasound
-  study of Italian and Polish'
+title: 'The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish'
 author: "Stefano Coretta"
 date: "08/09/2017"
 output:
     pdf_document:
       fig_caption: yes
+      keep_tex: yes
       latex_engine: xelatex
       number_sections: yes
       template: template.tex
@@ -17,6 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
+
+
 
 # Methodology
 
@@ -45,11 +47,20 @@ This is constituted by a TELEMED C3.5/20/128Z-3 ultrasonic transducer plugged in
 A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
 A Movo LV4-O2 Lavalier microphone plugged into a ... was used for audio recording.
 Articulate Assistant Advanced v2.17.1 running on a Windows laptop was used for the acquisition of audio and ultrasonic signal.
-
-<!--
-headset
--->
+A stabilisation headset produced by Articulate Instruments was used for probe stabilisation [].
 
 ## Procedure
 
-The stimuli were randomised for each participant and repeated six times (the random order was kept the same in each of the six repetitions due to software constraints).
+The stimuli were randomised for each participant and repeated six times (the order was kept the same in each of the six repetitions due to software constraints).
+Before recording the stimuli, the occlusal plane of the participant was imaged using a bite plate (), and the palate asking the participant to swallow water.
+
+## Analysis
+
+The spline data was normalised within speaker by coordinate offsetting and rotation based on the occlusal plane.
+Generalised additive mixed effects models (GAMM) were used for statistical analysis in R [@r-core-team2017].
+
+# Results
+
+
+
+# Discussion
