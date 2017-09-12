@@ -19,6 +19,8 @@ library(stringr)
 library(scales)
 library(tidymv)
 library(itsadug)
+library(lmerTest)
+library(effects)
 options(contrasts = rep ("contr.treatment", 2))
 ```
 
@@ -1401,3 +1403,149 @@ plot_gamsd(
 
 ggsave("presentations/2017-ultrafest/it01-voiced.pdf", width = 6, height = 4)
 ```
+
+# Vowel duration
+
+## Duration data
+
+```{r vowels}
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+vowels <- list.files(path = "voicing-effect/results/durations",
+                   pattern = "*-vowel-durations.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(., na = "--undefined--")) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(index = as.factor(index))
+
+it_vow <- vowels %>%
+    filter(speaker %in% c("it02", "it05"))
+
+pl_vow <- vowels %>%
+    filter(speaker %in% c("pl02", "pl05"))
+```
+
+## Italian
+
+
+```{r it-vow-all}
+vowels %>%
+    filter(language == "italian") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_violin(draw_quantiles = 0.5) +
+    facet_grid(. ~ speaker)
+```
+
+```{r it01-02-vowels}
+vowels %>%
+    filter(speaker %in% c("it01", "it02")) %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r it01-02-vowels-violin}
+vowels %>%
+    filter(speaker %in% c("it01", "it02")) %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_violin(draw_quantiles = 0.5) +
+    facet_grid(. ~ speaker)
+```
+
+Vowels followed by voiceless consonants are shorter. The bimodal distribution of duration in the voiceless context in IT01 is very likely due to pre-aspiration.
+
+The following test includes all italian speakers except IT05, because no TRA in IT05 (only slight).
+
+```{r it-vow-lm}
+it_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "italian", vowel != "u", speaker != "it05")
+)
+
+summary(it_vow_lm)
+
+it_vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "italian", vowel != "u", speaker != "it05")
+)
+
+anova(it_vow_lm_null, it_vow_lm)
+```
+
+```{r it-vow-lm-plot}
+plot(allEffects(it_vow_lm))
+```
+
+## Polish
+
+```{r pl-vow-all}
+vowels %>%
+    filter(language == "polish") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_violin(draw_quantiles = 0.5) +
+    facet_grid(. ~ speaker)
+```
+
+
+
+```{r pl03-04-vowels}
+pl_vow %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r pl03-04-vowels-violin}
+pl_vow %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_violin() +
+    facet_grid(. ~ speaker)
+```
+
+```{r pl-vow-lm}
+pl_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        vowel +
+        c2place:vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish", vowel != "u")
+)
+
+summary(pl_vow_lm)
+
+pl_vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        vowel +
+        c2place:vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish", vowel != "u")
+)
+
+anova(pl_vow_lm_null, pl_vow_lm)
+```
+
+```{r pl-vow-lm-plot}
+plot(allEffects(pl_vow_lm))
+```
+
