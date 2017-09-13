@@ -25,6 +25,8 @@ library(ggplot2)
 theme_set(theme_bw())
 ```
 
+The text in this file is outdated. More data is now now available and the results do not reflect what is the text here.
+
 # Import data
 
 Let's read the files.
