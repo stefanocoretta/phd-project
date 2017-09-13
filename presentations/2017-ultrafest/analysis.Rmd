@@ -1435,6 +1435,14 @@ vowels %>%
     facet_grid(. ~ speaker)
 ```
 
+```{r it-vow-all-box}
+vowels %>%
+    filter(language == "italian") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
 ```{r it01-02-vowels}
 vowels %>%
     filter(speaker %in% c("it01", "it02")) %>%
@@ -1497,7 +1505,13 @@ vowels %>%
     facet_grid(. ~ speaker)
 ```
 
-
+```{r pl-vow-all-box}
+vowels %>%
+    filter(language == "polish") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
 
 ```{r pl03-04-vowels}
 pl_vow %>%
