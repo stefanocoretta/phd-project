@@ -21,6 +21,9 @@ library(tidymv)
 library(itsadug)
 library(lmerTest)
 library(effects)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
 options(contrasts = rep ("contr.treatment", 2))
 ```
 
@@ -126,7 +129,8 @@ vowels <- list.files(path = "voicing-effect/results/durations",
     left_join(y = languages) %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(index = as.factor(index))
+    mutate(index = as.factor(index)) %>%
+    filter(!(file == "it04-002" | file == "pl03-020")) # filter clear outliers
 
 it_vow <- vowels %>%
     filter(speaker %in% c("it02", "it05"))
@@ -1423,7 +1427,7 @@ plot_gamsd(
 ggsave("presentations/2017-ultrafest/it01-voiced.pdf", width = 6, height = 4)
 ```
 
-# Vowel duration
+# Vowel durations
 
 ## Italian
 
@@ -1467,12 +1471,12 @@ The following test includes all italian speakers except IT05, because no TRA in 
 it_vow_lm <- lmer(
     vowel.duration ~
         c2phonation +
-        c2place +
+#        c2place +
         vowel +
         sentence.duration +
         (1+c2phonation|speaker) +
         (1|word),
-    data = filter(vowels, language == "italian", vowel != "u", speaker != "it05")
+    data = filter(vowels, language == "italian", speaker != "it05")
 )
 
 summary(it_vow_lm)
@@ -1480,12 +1484,12 @@ summary(it_vow_lm)
 it_vow_lm_null <- lmer(
     vowel.duration ~
 #        c2phonation +
-        c2place +
+#        c2place +
         vowel +
         sentence.duration +
         (1+c2phonation|speaker) +
         (1|word),
-    data = filter(vowels, language == "italian", vowel != "u", speaker != "it05")
+    data = filter(vowels, language == "italian", speaker != "it05")
 )
 
 anova(it_vow_lm_null, it_vow_lm)
@@ -1513,6 +1517,38 @@ vowels %>%
     facet_grid(. ~ speaker)
 ```
 
+```{r pl-vow-all-box-2}
+vowels %>%
+    filter(language == "polish", vowel != "u") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r pl04-05-density}
+vowels %>%
+    filter(speaker %in% c("pl04", "pl05")) %>%
+    ggplot(aes(vowel.duration, colour = c2phonation)) +
+    geom_density() +
+    facet_grid(. ~ speaker)
+```
+
+```{r pl04-05-density-2}
+vowels %>%
+    filter(speaker %in% c("pl04", "pl05"), !(word == "paga" | word == "pada"), vowel != "u") %>%
+    ggplot(aes(vowel.duration, colour = c2phonation)) +
+    geom_density() +
+    facet_grid(. ~ speaker)
+```
+
+```{r pl04-05-box}
+vowels %>%
+    filter(speaker %in% c("pl04", "pl05"), !(word == "paga" | word == "pada"), vowel != "u") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
 ```{r pl03-04-vowels}
 pl_vow %>%
     ggplot(aes(c2phonation, vowel.duration)) +
@@ -1532,7 +1568,44 @@ pl_vow_lm <- lmer(
     vowel.duration ~
         c2phonation +
         vowel +
-        c2place:vowel +
+#        c2place:vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+summary(pl_vow_lm)
+
+pl_vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        vowel +
+#        c2place:vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+anova(pl_vow_lm_null, pl_vow_lm)
+```
+
+```{r pl-vow-lm-plot}
+plot(allEffects(pl_vow_lm))
+```
+
+```{r pl-lm-res}
+qqnorm(resid(pl_vow_lm))
+```
+
+
+```{r pl-vow-lm-2}
+pl_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation *
+        vowel *
+        c2place +
         sentence.duration +
         (1+c2phonation|speaker) +
         (1|word),
@@ -1544,8 +1617,8 @@ summary(pl_vow_lm)
 pl_vow_lm_null <- lmer(
     vowel.duration ~
 #        c2phonation +
-        vowel +
-        c2place:vowel +
+        vowel *
+        c2place +
         sentence.duration +
         (1+c2phonation|speaker) +
         (1|word),
@@ -1557,5 +1630,9 @@ anova(pl_vow_lm_null, pl_vow_lm)
 
 ```{r pl-vow-lm-plot}
 plot(allEffects(pl_vow_lm))
+```
+
+```{r pl-lm-slopes}
+sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration")
 ```
 
