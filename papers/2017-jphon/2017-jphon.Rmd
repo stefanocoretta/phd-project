@@ -18,6 +18,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
+It is known that tongue root plays a role in maintainng voicing in voiced stops in English.
+Recent ultrasound tongue imaging work has confirmed that the tongue root is advanced in voiced consonants.
+Tongue root advancement has been shown to be present also when vocal fold vibration is not present [@ahn2016].
+An interesting question arising from this is weather tongue root advancement might be correlated to other factors like, the focus of this paper, vowel duration.
+Several studies showed that vowels followed by voiced stops are longer than vowels followed by voiceless stops.
+Different languages show different magnitudes of such durational differential and some languages do not show it at all.
+Given the connection between voicing and tongue root advancement, it is natural to ask whether tongue root advancement is also linked to vowel duration.
+If this is indeed the case, then one would expect tongue root advancemnt to play a role in language that have the voicing effect, but not in languages that do not show it.
+
+To test this hypothesis, I conducted an acoustic and articulatory study that looked at vowel duration and tongue contours to assess the possible link between consonantal and vocalic tongue gestures.
+
+Although several attempts have been put forward to explain the effect of voicing on vowel durations, to date no consensus has been reached.
+A recurrent theme focusses on the difference in gestural implementation that characterises voiced stops in comparison with voiceless stops.\footnote{However, see ... for a perceptually inclined account.}
+One of the first accounts that attributed the voicing effect to a difference in production is that of @halle1967, subsequently reiterated by @chomsky1968.
+According to this account, voicing in vowels is produced with a state of the glottis that diverges from the configuration necessary to produce voiced consonants, due to the aerodynamics of the vocal tract.
+On the contrary, it is claimed that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuaded during the vowel naturally ceases at closure.
+The authors thus hypothesise that, to allow the glottal state to change in voiced stops from sonorant voicing to obstruent voicing, the vowel is lengthen so that enough time is available for the change to happen without compromising the quality of voicing during the vowel.
+Although such account seemed promising at that time, later studies could not demonstrate that obstruent voicing is any different from sonorant voicing.
+
+Tongue root advancement differences seems like a promising area of enquiry since its link to voicing has been already confirmed.
+On the same line of the laryngeal hypothesis, I put forward a similar account in which it is tongue root advancement rather than fold configuration that requires extra time during the vowel to be implemented.
+If tongue root advancement plays a role in determining the duration of preceding vowels through the extension mechanism described before, than one expects languages with the voicing effect to show a systematic advancement of the tongue root in voiced stops.
+On the contrary, tongue root advancement in languages without the voicing effect should be absent or less systematic.
+
 
 
 # Methodology
