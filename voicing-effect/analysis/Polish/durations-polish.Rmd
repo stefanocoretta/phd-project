@@ -84,6 +84,8 @@ vowels %>%
     facet_wrap(~ speaker)
 ```
 
+Count of available closure duration measurements. FALSE = missing.
+
 ```{r}
 table(!is.na(vowels$closure.duration), vowels$c2place, vowels$c2phonation)
 ```
