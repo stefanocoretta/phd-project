@@ -7,9 +7,11 @@ output:
       fig_caption: yes
       keep_tex: yes
       latex_engine: xelatex
+      citation_package: natbib
       number_sections: yes
       template: template.tex
 documentclass: elsarticle
+bibliography: linguistics.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -77,6 +79,17 @@ A stabilisation headset produced by Articulate Instruments was used for probe st
 
 The stimuli were randomised for each participant and repeated six times (the order was kept the same in each of the six repetitions due to software constraints).
 Before recording the stimuli, the occlusal plane of the participant was imaged using a bite plate (), and the palate asking the participant to swallow water.
+
+## Data processing
+
+Durational measurements were obtained from acoustics.
+A first rough annotation was achieved through force alignment using the SPASS force aligner.
+The criteria for the annotation of the acoustic data were the following:
+
+- the target vowel onset was marked by visual inspection at the time of appearance of higher formants in the spectrogram following the burst of /p/
+- the target vowel offset was marked by visual inspection at the time of disappearance of the higher formants in the spectrogram; this point also corresponded with the consonantal onset
+- closure offset was marked by visual inspection at the time of formants onsets of the following vowel
+- burst onset was determined automatically by a Praat implementation of the algorythm described in @ananthapadmanabha2014
 
 ## Analysis
 
