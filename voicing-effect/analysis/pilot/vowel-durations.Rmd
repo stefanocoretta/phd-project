@@ -30,7 +30,7 @@ theme_set(theme_bw())
 Let's read the files.
 
 ```{r read-files}
-vowels <- list.files(path = "voicing-effect/results",
+vowels <- list.files(path = "voicing-effect/results/durations",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--"))
@@ -47,7 +47,7 @@ vowels <- left_join(vowels, languages) %>%
 vowels.it <- filter(vowels, language == "italian")
 vowels.pl <- filter(vowels, language == "polish")
 
-voicing <- list.files(path = "voicing-effect/results",
+voicing <- list.files(path = "voicing-effect/results/cached",
                    pattern = "*-voicing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%
