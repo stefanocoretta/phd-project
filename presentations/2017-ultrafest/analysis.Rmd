@@ -1743,3 +1743,87 @@ sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration")
 ```
 
 Voicing is a significant predictor, although one speaker pl05 has a very strong VE while the other three don't (theyh have a slightly opposite effect).
+
+# Closure durations
+
+## Polish
+
+```{r}
+vowels %>%
+    filter(language == "polish") %>%
+    ggplot(aes(c2phonation, closure.duration)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r}
+vowels %>%
+    filter(language == "polish") %>%
+    ggplot(aes(closure.duration, vowel.duration)) +
+    geom_smooth(method = "lm") +
+    facet_grid(. ~ speaker)
+```
+
+```{r}
+pl_clos_lm <- lmer(
+    vowel.duration ~
+        closure.duration +
+        vowel +
+        sentence.duration +
+        (1+closure.duration|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+summary(pl_clos_lm)
+
+pl_clos_lm_null <- lmer(
+    vowel.duration ~
+#        closure.duration +
+        vowel +
+        sentence.duration +
+        (1+closure.duration|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+anova(pl_clos_lm_null, pl_clos_lm)
+```
+
+```{r}
+plot(allEffects(pl_clos_lm))
+```
+
+```{r pl-lm-slopes}
+ranef(pl_clos_lm)$speaker
+sjp.lmer(pl_clos_lm, type = "rs.ri", vars = "vowel.duration")
+```
+
+```{r}
+pl_clos_lm <- lmer(
+    vowel.duration ~
+        c2.duration +
+        vowel +
+        sentence.duration +
+        (1+c2.duration|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+summary(pl_clos_lm)
+
+pl_clos_lm_null <- lmer(
+    vowel.duration ~
+#        closure.duration +
+        vowel +
+        sentence.duration +
+        (1+closure.duration|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+anova(pl_clos_lm_null, pl_clos_lm)
+```
+
+Closure duration rather than consonant duration seems to be a slighlty better predictor (coefficient -0.38 vs -0.3).
+No significant interactions.
