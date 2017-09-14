@@ -137,6 +137,9 @@ it_vow <- vowels %>%
 
 pl_vow <- vowels %>%
     filter(speaker %in% c("pl02", "pl05"))
+
+it_vow_4 <- vowels %>%
+    filter(language == "italian", speaker != "it05")
 ```
 
 # Exploration
@@ -1497,6 +1500,68 @@ anova(it_vow_lm_null, it_vow_lm)
 
 ```{r it-vow-lm-plot}
 plot(allEffects(it_vow_lm))
+plot(fitted(it_vow_lm),residuals(it_vow_lm))
+```
+
+```{r it-vow-lm-2}
+it_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = it_vow_4
+)
+
+summary(it_vow_lm)
+
+it_vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = it_vow_4
+)
+
+anova(it_vow_lm_null, it_vow_lm)
+
+it_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        c2place +
+        vowel +
+        c2phonation:vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = it_vow_4
+)
+
+summary(it_vow_lm)
+
+it_vow_lm_null <- lmer(
+    vowel.duration ~
+        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = it_vow_4
+)
+
+anova(it_vow_lm_null, it_vow_lm)
+```
+
+```{r it-vow-lm-2-plot}
+plot(allEffects(it_vow_lm))
+plot(fitted(it_vow_lm),residuals(it_vow_lm))
+qqnorm(resid(it_vow_lm))
 ```
 
 ## Polish
@@ -1603,8 +1668,8 @@ qqnorm(resid(pl_vow_lm))
 ```{r pl-vow-lm-2}
 pl_vow_lm <- lmer(
     vowel.duration ~
-        c2phonation *
-        vowel *
+        c2phonation +
+        vowel +
         c2place +
         sentence.duration +
         (1+c2phonation|speaker) +
@@ -1617,7 +1682,7 @@ summary(pl_vow_lm)
 pl_vow_lm_null <- lmer(
     vowel.duration ~
 #        c2phonation +
-        vowel *
+        vowel +
         c2place +
         sentence.duration +
         (1+c2phonation|speaker) +
@@ -1636,3 +1701,38 @@ plot(allEffects(pl_vow_lm))
 sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration")
 ```
 
+`c2phonation` is partially significant. No interactions came out as significant.
+
+```{r pl-vow-lm-2-3}
+pl_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+summary(pl_vow_lm)
+
+pl_vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish")
+)
+
+anova(pl_vow_lm_null, pl_vow_lm)
+```
+
+```{r pl-vow-lm-2-plot}
+plot(allEffects(pl_vow_lm))
+plot(fitted(pl_vow_lm),residuals(pl_vow_lm))
+qqnorm(resid(pl_vow_lm))
+```
