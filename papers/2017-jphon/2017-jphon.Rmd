@@ -20,14 +20,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-It is known that tongue root plays a role in maintainng voicing in voiced stops in English.
+It is known that tongue root plays a role in maintaining voicing in voiced stops in English.
 Recent ultrasound tongue imaging work has confirmed that the tongue root is advanced in voiced consonants.
 Tongue root advancement has been shown to be present also when vocal fold vibration is not present [@ahn2016].
 An interesting question arising from this is weather tongue root advancement might be correlated to other factors like, the focus of this paper, vowel duration.
 Several studies showed that vowels followed by voiced stops are longer than vowels followed by voiceless stops.
 Different languages show different magnitudes of such durational differential and some languages do not show it at all.
 Given the connection between voicing and tongue root advancement, it is natural to ask whether tongue root advancement is also linked to vowel duration.
-If this is indeed the case, then one would expect tongue root advancemnt to play a role in language that have the voicing effect, but not in languages that do not show it.
+If this is indeed the case, then one would expect tongue root advancement to play a role in language that have the voicing effect, but not in languages that do not show it.
 
 To test this hypothesis, I conducted an acoustic and articulatory study that looked at vowel duration and tongue contours to assess the possible link between consonantal and vocalic tongue gestures.
 
@@ -35,7 +35,7 @@ Although several attempts have been put forward to explain the effect of voicing
 A recurrent theme focusses on the difference in gestural implementation that characterises voiced stops in comparison with voiceless stops.\footnote{However, see ... for a perceptually inclined account.}
 One of the first accounts that attributed the voicing effect to a difference in production is that of @halle1967, subsequently reiterated by @chomsky1968.
 According to this account, voicing in vowels is produced with a state of the glottis that diverges from the configuration necessary to produce voiced consonants, due to the aerodynamics of the vocal tract.
-On the contrary, it is claimed that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuaded during the vowel naturally ceases at closure.
+On the contrary, it is claimed that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuated during the vowel naturally ceases at closure.
 The authors thus hypothesise that, to allow the glottal state to change in voiced stops from sonorant voicing to obstruent voicing, the vowel is lengthen so that enough time is available for the change to happen without compromising the quality of voicing during the vowel.
 Although such account seemed promising at that time, later studies could not demonstrate that obstruent voicing is any different from sonorant voicing.
 
@@ -44,27 +44,13 @@ On the same line of the laryngeal hypothesis, I put forward a similar account in
 If tongue root advancement plays a role in determining the duration of preceding vowels through the extension mechanism described before, than one expects languages with the voicing effect to show a systematic advancement of the tongue root in voiced stops.
 On the contrary, tongue root advancement in languages without the voicing effect should be absent or less systematic.
 
-
-
 # Methodology
 
 ## Participants
 
 Native speakers of Italian and Polish have been recruited in Manchester and in Italy.
 Four speakers per language participated in the experiment.
-The participants recieved a compensation of £10 (or Euro equivalent).
-
-## Materials
-
-Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, and C\textsubscript{2} = /t, d, k, g/ (e.g. /pata/, /pada/, /poto/, etc.).
-All possible combinations were employed, yelding to a total of 12 target words.
-The words were embedded in a frame sentence in medial position.
-Prosodically similar sentences were used to ensure comparability between languages.
-The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
-
-<!--
-say reasons behind choices and explain why prosodically similar
--->
+The participants received a compensation of £10 (or equivalent in Euro).
 
 ## Equipment set-up
 
@@ -74,6 +60,20 @@ A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and us
 A Movo LV4-O2 Lavalier microphone plugged into a ... was used for audio recording.
 Articulate Assistant Advanced v2.17.1 running on a Windows laptop was used for the acquisition of audio and ultrasonic signal.
 A stabilisation headset produced by Articulate Instruments was used for probe stabilisation [].
+
+## Materials
+
+Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, and C\textsubscript{2} = /t, d, k, g/ (e.g. /pata/, /pada/, /poto/, etc.).
+A bilabial stop /p/ was chosen as the first consonant to reduce influence on the following vowel (although cf. @vazquez-alvarez2007).
+Only coronal and velar stops were used as target consonants since labial consonants cannot be imaged with ultrasonography.
+All possible combinations were employed, yielding to a total of 12 target words.
+The words were embedded in medial position within a frame sentence.
+Prosodically similar sentences were used to ensure comparability between languages.
+The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
+
+<!--
+say reasons behind choices and explain why prosodically similar
+-->
 
 ## Procedure
 
@@ -89,12 +89,15 @@ The criteria for the annotation of the acoustic data were the following:
 - the target vowel onset was marked by visual inspection at the time of appearance of higher formants in the spectrogram following the burst of /p/
 - the target vowel offset was marked by visual inspection at the time of disappearance of the higher formants in the spectrogram; this point also corresponded with the consonantal onset
 - closure offset was marked by visual inspection at the time of formants onsets of the following vowel
-- burst onset was determined automatically by a Praat implementation of the algorythm described in @ananthapadmanabha2014
+- burst onset was determined automatically by a Praat implementation of the algorithm described in @ananthapadmanabha2014
+
+Finally, vowel duration, consonant duration (including burst and VOT), and closure duration (from vowel offset to burst onset) were also automatically extracted with a Praat script.
 
 ## Analysis
 
 The spline data was normalised within speaker by coordinate offsetting and rotation based on the occlusal plane.
 Generalised additive mixed effects models (GAMM) were used for statistical analysis in R [@r-core-team2017].
+Duration measurements were subject to linear mixed effects model using `lme4` in R.
 
 # Results
 
