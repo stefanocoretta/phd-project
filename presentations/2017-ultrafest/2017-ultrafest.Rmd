@@ -73,19 +73,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - includes first order autoregressive model (AR1)
 - model comparison and visual inspection [@soskuthy2017]
 
-# Results: Polish (maximum)
-
-\begin{figure}
-\includegraphics[width = \textwidth]{pl04.pdf}
-\end{figure}
-
-# Results: Polish (closure)
-
-\begin{figure}
-\includegraphics[width = \textwidth]{pl04-clos.pdf}
-\end{figure}
-
-# Results: Italian (maximum)
+# Results: Italian (maximum displacement)
 
 \begin{figure}
 \includegraphics[width = \textwidth]{it01.pdf}
@@ -97,10 +85,22 @@ knitr::opts_chunk$set(echo = FALSE)
 \includegraphics[width = \textwidth]{it01-clos.pdf}
 \end{figure}
 
-# Results: Italian (closure vs. maximum)
+# Results: Italian (closure vs. maximum displacement)
 
 \begin{figure}
 \includegraphics[width = \textwidth]{it01-voiced.pdf}
+\end{figure}
+
+# Results: Polish (maximum displacement)
+
+\begin{figure}
+\includegraphics[width = \textwidth]{pl04.pdf}
+\end{figure}
+
+# Results: Polish (closure)
+
+\begin{figure}
+\includegraphics[width = \textwidth]{pl04-clos.pdf}
 \end{figure}
 
 # Discussion
