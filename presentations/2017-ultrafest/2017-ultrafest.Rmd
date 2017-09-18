@@ -32,23 +32,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Background
 
-- Italian
+- **Italian**
     - voicing effect [@farnetani1986]
-- Polish
+- **Polish**
     - no voicing effect [@keating1984]
 
 → Assessment of tongue contour using ultrasonography (part of a broader research project)
 
 # Methods
 
-- pilot study (work in progress)
-- Italian (2 males), Polish (1 female, 1 male)
+- **pilot** study (work in progress)
+- Italian (*2 males*), Polish (*1 female, 1 male*)
 -  C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
     - C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
 - frame sentence
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
 
+<!--
 # Equipment set-up
 
 - Articulate Instruments set-up
@@ -72,6 +73,17 @@ knitr::opts_chunk$set(echo = FALSE)
     - cubic regression splines
 - includes first order autoregressive model (AR1)
 - model comparison and visual inspection [@soskuthy2017]
+-->
+
+# Methods
+
+- Articulate Instruments set-up with probe stabilisation headset [@articulate2011]
+- data
+    - tongue contours at maximum tongue displacement [@strycharczuk2015] and acoustic closure
+    - vowel, closure and consonant duration
+- analysis
+    - linear mixed effects models [@bates2015]
+    - generalised additive mixed effects models [@wood2006]
 
 # Results: Italian (maximum displacement)
 
@@ -105,11 +117,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Discussion
 
-- Polish does not show TRA
-- Italian shows TRA at closure and maximum displacement
-- TRA increases from closure to maximum displacement
+- no TRA in Polish
+- TRA in Italian (at closure and maximum displacement)
+- TRA in Italian increases from closure to maximum displacement
 
-→ TRA is initiated **before closure** in voiced stops in Italian
+→ TRA is initiated **before closure** in voiced stops
 
 - time to allow TRA → longer vowel
 - cf. @halle1967
