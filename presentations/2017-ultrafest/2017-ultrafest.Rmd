@@ -77,11 +77,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Methods
 
-- Articulate Instruments set-up with probe stabilisation headset [@articulate2011]
-- data
+- **equipment**
+    - Articulate Instruments set-up with probe stabilisation headset [@articulate2011]
+- **data**
+    - vowel, closure and consonant durations
     - tongue contours at maximum tongue displacement [@strycharczuk2015] and acoustic closure
-    - vowel, closure and consonant duration
-- analysis
+- **analysis**
     - linear mixed effects models [@bates2015]
     - generalised additive mixed effects models [@wood2006]
 
@@ -118,10 +119,10 @@ knitr::opts_chunk$set(echo = FALSE)
 # Discussion
 
 - no TRA in Polish
-- TRA in Italian (at closure and maximum displacement)
-- TRA in Italian increases from closure to maximum displacement
+- **TRA in Italian** (at closure *and* maximum displacement)
+    - *increases from closure to maximum displacement*
 
-→ TRA is initiated **before closure** in voiced stops
+→ TRA is **initiated before closure** in voiced stops
 
 - time to allow TRA → longer vowel
 - cf. @halle1967
