@@ -1,7 +1,8 @@
 ---
 title: "Vowel duration and tongue root advancement in Italian and Polish"
 author: "Stefano Coretta"
-date: "07/08/2017"
+date: "University of Manchester"
+institute: "4 October 2017, Ultrafest VIII (Potsdam)"
 output:
   beamer_presentation:
     citation_package: natbib
@@ -80,11 +81,11 @@ knitr::opts_chunk$set(echo = FALSE)
 - **equipment**
     - Articulate Instruments set-up with probe stabilisation headset [@articulate2011]
 - **data**
-    - vowel, closure and consonant durations
     - tongue contours at maximum tongue displacement [@strycharczuk2015] and acoustic closure
+    - vowel, closure and consonant durations
 - **analysis**
-    - linear mixed effects models [@bates2015]
     - generalised additive mixed effects models [@wood2006]
+    - linear mixed effects models [@bates2015]
 
 # Results: Italian (maximum displacement)
 
@@ -115,6 +116,13 @@ knitr::opts_chunk$set(echo = FALSE)
 \begin{figure}
 \includegraphics[width = \textwidth]{pl04-clos.pdf}
 \end{figure}
+
+# Results: vowel durations
+
+- Italian: **22** (±6) msec voicing effect
+    - $\chi^2$(3) = 16.61, *p* = 0.00085 ***
+- Polish: **8** (±3.3) msec voicing effect
+    - $\chi^2$(1) = 5.4, *p* = 0.02 *
 
 # Discussion
 
