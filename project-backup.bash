@@ -33,6 +33,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/phd-project/lombard/data/ \
+    ~/Documents/GitHub/phd-project/lombard/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/voicing-effect/data/ \
@@ -43,6 +46,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data/
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/phd-project/lombard/data/ \
+    ~/Documents/GitHub/phd-project/lombard/data/
 
 # DANGER
 
