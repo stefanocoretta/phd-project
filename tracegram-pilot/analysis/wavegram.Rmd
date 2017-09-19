@@ -16,10 +16,10 @@ options(contrasts = rep ("contr.treatment", 2))
 
 ```{r data}
 wavegram <- read_csv("../results/wavegram.csv") %>%
-    separate(file, c("speaker", "phonation"))
-
-dm <- filter(wavegram, speaker == "dm") %>%
-    mutate(phonation, phonation.ord = ordered(phonation, levels = c("modal", "breathy")))
+    separate(file, c("speaker", "phonation")) %>%
+    mutate(
+        phonation.ord = ordered(phonation, levels = c("modal", "breathy"))
+    )
 ```
 
 # Analysis
@@ -31,7 +31,7 @@ dm.gam <- bam(
         s(sequence, by = phonation.ord) + s(sample, by = phonation.ord) +
         ti(sequence, sample) +
         ti(sequence, sample, by = phonation.ord),
-    data = dm
+    data = filter(wavegram, speaker == "dm")
 )
 
 summary(dm.gam)
@@ -63,4 +63,101 @@ fvisgam(
 )
 ```
 
+```{r}
+sn.gam <- bam(
+    amplitude ~
+        s(sequence, k = 8) + s(sample) +
+        s(sequence, by = phonation.ord, k = 8) + s(sample, by = phonation.ord),
+#        ti(sequence, sample) +
+#        ti(sequence, sample, by = phonation.ord),
+    data = filter(wavegram, speaker == "sn")
+)
 
+summary(sn.gam)
+```
+
+```{r}
+plot_diff2(
+    sn.gam,
+    view=c("sequence", "sample"), 
+    comp=list(phonation.ord=c("modal", "breathy")),
+    zlim = c(-1, 1)
+)
+```
+
+```{r}
+js.gam <- bam(
+    amplitude ~
+        s(sequence, k = 8) + s(sample) +
+        s(sequence, by = phonation.ord, k = 8) + s(sample, by = phonation.ord) +
+        ti(sequence, sample) +
+        ti(sequence, sample, by = phonation.ord),
+    data = filter(wavegram, speaker == "js"),
+    method = "fREML"
+)
+
+summary(sn.gam)
+
+js.gam.null <- bam(
+    amplitude ~
+        s(sequence, k = 8) + s(sample) +
+#        s(sequence, by = phonation.ord, k = 8) + s(sample, by = phonation.ord) +
+        ti(sequence, sample),# +
+#        ti(sequence, sample, by = phonation.ord),
+    data = filter(wavegram, speaker == "js"),
+    method = "fREML"
+)
+
+compareML(js.gam.null, js.gam)
+```
+
+```{r}
+plot_diff2(
+    js.gam,
+    view=c("sequence", "sample"), 
+    comp=list(phonation.ord=c("modal", "breathy")),
+    zlim = c(-1, 1)
+)
+```
+
+```{r}
+acf_plot(resid(js.gam))
+```
+
+```{r}
+gb.gam <- bam(
+    amplitude ~
+        s(sequence, k = 6) +
+        s(sample) +
+        s(sequence, by = phonation.ord, k = 6) +
+        s(sample, by = phonation.ord) +
+        ti(sequence, sample) +
+        ti(sequence, sample, by = phonation.ord),
+    data = filter(wavegram, speaker == "gb"),
+    method = "fREML"
+)
+
+summary(sn.gam)
+
+gb.gam.null <- bam(
+    amplitude ~
+        s(sequence, k = 6) +
+        s(sample) +
+#        s(sequence, by = phonation.ord, k = 8) + s(sample, by = phonation.ord) +
+        ti(sequence, sample),# +
+#        ti(sequence, sample, by = phonation.ord),
+    data = filter(wavegram, speaker == "gb"),
+    method = "fREML"
+)
+
+compareML(gb.gam.null, gb.gam)
+```
+
+```{r}
+plot_diff2(
+    gb.gam,
+    view=c("sequence", "sample"), 
+    comp=list(phonation.ord=c("modal", "breathy")),
+    zlim = c(-1, 1)
+)
+```
