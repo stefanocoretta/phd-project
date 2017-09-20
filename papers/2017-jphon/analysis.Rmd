@@ -575,6 +575,122 @@ plot_gamsd(
 )
 ```
 
+### PL03
+
+```{r pl03-tra}
+pl03_max <- filter(tongues, speaker == "pl03", X > -25)
+
+pl03_gamm <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl03_max,
+    method = "ML"
+)
+
+rho <- start_value_rho(pl03_gamm)
+
+pl03_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl03_max,
+    method = "ML",
+    rho = rho,
+    AR.start = pl03_max$start.event
+)
+
+summary(pl03_gamm_ar)
+
+pl03_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl03_max,
+    method = "ML"
+)
+
+compareML(pl03_gamm_ar_null, pl03_gamm_ar)
+```
+
+```{r pl03-tra-plot}
+plot_gamsd(
+    pl03_gamm_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+### PL05
+
+```{r pl05-tra}
+pl05_max <- filter(tongues, speaker == "pl05", X > -25)
+
+pl05_gamm <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_max,
+    method = "ML"
+)
+
+rho <- start_value_rho(pl05_gamm)
+
+pl05_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_max,
+    method = "ML",
+    rho = rho,
+    AR.start = pl05_max$start.event
+)
+
+summary(pl05_gamm_ar)
+
+pl05_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_max,
+    method = "ML"
+)
+
+compareML(pl05_gamm_ar_null, pl05_gamm_ar)
+```
+
+```{r pl05-tra-plot}
+plot_gamsd(
+    pl05_gamm_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
 # Tongue root advancement at closure
 
 ## Italian
