@@ -14,6 +14,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir=normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(rticulate) # https://github.com/stefanocoretta/rticulate
@@ -31,8 +32,8 @@ options(contrasts = rep ("contr.treatment", 2))
 `tongues` contains splines coordinates at maximum displacement, `tongues_clos` has splines coordinates at acoustic closure, and `vowels` has durational data.
 
 ```{r data}
-languages <- read_csv("data/languages.csv")
-words <- read_csv("data/nonce.csv")
+languages <- read_csv("voicing-effect/stimuli/languages.csv")
+words <- read_csv("voicing-effect/stimuli/nonce.csv")
 
 columns <- c(
     "speaker",
@@ -49,7 +50,7 @@ columns <- c(
 )
 
 aaa_files <- list.files(
-    path = "./data/tongue",
+    path = "papers/2017-jphon/data/tongues",
     pattern = "*-tongue-cart.tsv",
     full.names = TRUE
 )
@@ -79,7 +80,7 @@ tongues <- read_aaa(
     create_event_start("rec.date")
 
 aaa_files_clos <- list.files(
-    path = "./data/tongue",
+    path = "papers/2017-jphon/data/tongues",
     pattern = "*-tongue-clos-cart.tsv",
     full.names = TRUE
 )
@@ -108,7 +109,7 @@ tongues_clos <- read_aaa(
     arrange(rec.date, fan.line) %>%
     create_event_start("rec.date")
 
-vowels <- list.files(path = "data/durations",
+vowels <- list.files(path = "papers/2017-jphon/data/durations",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%
@@ -317,6 +318,139 @@ compareML(it02_gamm_ar_null, it02_gamm_ar)
 ```{r it02-tra-plot}
 plot_gamsd(
     it02_gamm_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+
+### IT03
+
+```{r it03-tra}
+it03_max <- filter(tongues, speaker == "it03") %>%
+    mutate(c2phon_vowel = as.ordered(interaction(c2phonation.ord, vowel.ord)))
+
+it03_gamm <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, by = c2phon_vowel, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it03_max,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it03_gamm)
+
+it03_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, by = c2phon_vowel, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it03_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it03_max$start.event
+)
+
+summary(it03_gamm_ar)
+
+it03_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+#        s(X, by = c2phon_vowel, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it03_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it03_max$start.event
+)
+
+compareML(it03_gamm_ar_null, it03_gamm_ar)
+```
+
+```{r it03-tra-plot}
+plot_gamsd(
+    it03_gamm_ar,
+    view = "X",
+    comparison = list(c2phon_vowel = c("voiceless.a", "voiced.a")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+### IT04
+
+```{r it04-tra}
+it04_max <- filter(tongues, speaker == "it04", X > -20) %>%
+    mutate(c2phon_vowel = as.ordered(interaction(c2phonation.ord, vowel.ord)))
+
+it04_gamm <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+#        s(X, by = c2phon_vowel, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it04_max,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it04_gamm)
+
+it04_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+#        s(X, by = c2phon_vowel, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it04_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it04_max$start.event
+)
+
+summary(it04_gamm_ar)
+
+it04_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+#        s(X, by = c2phon_vowel, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it04_max,
+    method = "ML",
+    rho = rho,
+    AR.start = it04_max$start.event
+)
+
+compareML(it04_gamm_ar_null, it04_gamm_ar)
+
+summary(it04_gamm_ar_null)
+```
+
+```{r it04-tra-plot}
+plot_gamsd(
+    it04_gamm_ar,
     view = "X",
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
