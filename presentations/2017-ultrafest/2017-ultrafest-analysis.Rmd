@@ -1580,7 +1580,7 @@ vowels %>%
 ```{r pl-vow-all-box}
 vowels %>%
     filter(language == "polish") %>%
-    ggplot(aes(c2phonation, vowel.duration)) +
+    ggplot(aes(c2phonation, vowel.duration, colour = vowel)) +
     geom_boxplot() +
     facet_grid(. ~ speaker)
 ```
