@@ -24,6 +24,7 @@ library(tidymv) # https://github.com/stefanocoretta/tidymv
 library(itsadug)
 library(lmerTest)
 library(effects)
+library(sjPlot)
 options(contrasts = rep ("contr.treatment", 2))
 ```
 
@@ -162,6 +163,11 @@ qqnorm(resid(it_vow_lm))
 plot(allEffects(it_vow_lm))
 ```
 
+```{r it-duration-lm-slopes}
+ranef(it_vow_lm)$speaker
+sjp.lmer(it_vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
+```
+
 ## Polish
 
 ```{r pl-duration-lm}
@@ -196,6 +202,11 @@ anova(pl_vow_lm_null, pl_vow_lm)
 plot(fitted(pl_vow_lm),residuals(pl_vow_lm))
 qqnorm(resid(pl_vow_lm))
 plot(allEffects(pl_vow_lm))
+```
+
+```{r pl-duration-lm-slopes}
+ranef(pl_vow_lm)$speaker
+sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
 ```
 
 # Tongue root advancement at maximum displacement
