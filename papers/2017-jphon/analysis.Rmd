@@ -636,7 +636,7 @@ plot_gamsd(
 ### PL05
 
 ```{r pl05-tra}
-pl05_max <- filter(tongues, speaker == "pl05", X > -25)
+pl05_max <- filter(tongues, speaker == "pl05")
 
 pl05_gamm <- bam(
     Y ~
