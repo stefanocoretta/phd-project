@@ -44,6 +44,10 @@ On the same line of the laryngeal hypothesis, I put forward a similar account in
 If tongue root advancement plays a role in determining the duration of preceding vowels through the extension mechanism described before, than one expects languages with the voicing effect to show a systematic advancement of the tongue root in voiced stops.
 On the contrary, tongue root advancement in languages without the voicing effect should be absent or less systematic.
 
+<!--
+Add lit about VE in Italian and Polish
+-->
+
 # Methodology
 
 ## Participants
@@ -71,14 +75,10 @@ The words were embedded in medial position within a frame sentence.
 Prosodically similar sentences were used to ensure comparability between languages.
 The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
 
-<!--
-say reasons behind choices and explain why prosodically similar
--->
-
 ## Procedure
 
 The stimuli were randomised for each participant and repeated six times (the order was kept the same in each of the six repetitions due to software constraints).
-Before recording the stimuli, the occlusal plane of the participant was imaged using a bite plate (), and the palate asking the participant to swallow water.
+Before recording the stimuli, the occlusal plane of the participant was imaged using a bite plate [@scobbie2011], and the palate asking the participant to swallow water.
 
 ## Data processing
 
@@ -95,11 +95,29 @@ Finally, vowel duration, consonant duration (including burst and VOT), and closu
 
 ## Analysis
 
-The spline data was normalised within speaker by coordinate offsetting and rotation based on the occlusal plane.
-Generalised additive mixed effects models (GAMM) were used for statistical analysis in R [@r-core-team2017].
-Duration measurements were subject to linear mixed effects model using `lme4` in R.
+The contours were normalised by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
+Generalised additive mixed effects models [@wood2006] were used for the statistical analysis of tongue contour data in R [@r-core-team2017].
+Duration measurements were subject to linear mixed effects models using `lme4` in R [@bates2015].
 
 # Results
+
+## Vowel duration and voicing
+
+A linear mixed effect regression model was fit on the Italian vowel durations with duration as the outcome variable, vowel quality (/a, o, u/), voicing and place of articulation of the following consonant, sentence duration as fixed effects, random intercepts by speaker and word, and random slopes for voicing by speaker.
+An interaction between voicing and vowel quality was also included, which turned out to be significant.
+P-values were obtained through likelihood ration tests comparing a model including voicing with a null model without voicing.
+According to the model, Italian vowels are 19.5 msec (±5.5) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p = 0.000337).
+
+For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
+Surprisingly, the model reported a partially significant 8 msec (±3) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
+The exploration of the random slopes by speaker showed that one speaker showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data.
+This observation will come handy while discussing about the results of the tongue contour data.
+
+## Tongue contours
+
+The Italian tongue contour analysis showed that voiced stops are produced with advancement of the root of the tongue.
+Generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were the outcome variable; the x-coordinates the parametric term; a reference smooth term for X, with difference smooths for X by voicing, vowel quality, and place of articulation of following consonant; random smooths by word.
+A first-order autoregressive model was included, given the high auto-correlation residuals as gained by visual inspection of the residuals.
 
 
 
