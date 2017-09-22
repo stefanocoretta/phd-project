@@ -220,7 +220,7 @@ it01_max <- filter(tongues, speaker == "it01")
 
 it01_gamm <- bam(
     Y ~
-        X.re +
+        X +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
@@ -281,7 +281,7 @@ it02_max <- filter(tongues, speaker == "it02")
 
 it02_gamm <- bam(
     Y ~
-        X.re +
+        X +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
@@ -344,7 +344,7 @@ it03_max <- filter(tongues, speaker == "it03") %>%
 
 it03_gamm <- bam(
     Y ~
-        X.re +
+        X +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
@@ -409,7 +409,7 @@ it04_max <- filter(tongues, speaker == "it04", X > -20) %>%
 
 it04_gamm <- bam(
     Y ~
-        X.re +
+        X +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
