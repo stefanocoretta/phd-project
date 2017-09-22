@@ -950,6 +950,66 @@ plot_gamsd(
 )
 ```
 
+### PL05
+
+```{r pl05-tra-clos}
+pl05_clos <- filter(tongues_clos, speaker == "pl05", X > -25)
+
+pl05_gamm <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_clos,
+    method = "ML"
+)
+
+rho <- start_value_rho(pl05_gamm)
+
+pl05_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = pl05_clos$start.event
+)
+
+summary(pl05_gamm_ar)
+
+pl05_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = pl05_clos$start.event
+)
+
+compareML(pl05_gamm_ar_null, pl05_gamm_ar)
+```
+
+```{r pl05-tra-clos-plot}
+plot_gamsd(
+    pl05_gamm_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
 # Comparison tongue at closure and maximum displacement in Italian
 
 ## IT01
@@ -1094,6 +1154,6 @@ plot_gamsd(
 
 # Summary
 
-Italian has TRA at closure and maximum displacement. Polish does not have TRA. Italian TR at closure is less advanced than at maximum displacement.
+Italian has TRA at closure and maximum displacement. Polish does not have TRA, except for pl05. Italian TR at closure is less advanced than at maximum displacement.
 
-Italian vowels are 22 msec longer if followed by voiced stops. Polish vowels are 8 msec longer if followed by voiced stops.
+Italian vowels are 22 msec longer if followed by voiced stops. Polish vowels are 8 msec longer if followed by voiced stops, but pl05 has a bigger estimate.
