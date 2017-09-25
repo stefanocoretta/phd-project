@@ -44,7 +44,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - **pilot** study (work in progress)
 - Italian (*2 males*), Polish (*1 female, 1 male*)
--  C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
+-  C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
     - C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
 - frame sentence
     - *Dico X lentamente*, 'I say X slowly'
