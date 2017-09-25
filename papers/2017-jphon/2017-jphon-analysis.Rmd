@@ -209,6 +209,34 @@ ranef(pl_vow_lm)$speaker
 sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
 ```
 
+```{r pl-duration-lm-2}
+pl_vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish", speaker != "pl05")
+)
+
+summary(pl_vow_lm)
+
+pl_vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        vowel +
+        c2place +
+        sentence.duration +
+        (1|speaker) +
+        (1|word),
+    data = filter(vowels, language == "polish", speaker != "pl05")
+)
+
+anova(pl_vow_lm_null, pl_vow_lm)
+```
+
 # Tongue root advancement at maximum displacement
 
 ## Italian
