@@ -162,8 +162,8 @@ teraz} `I say X now' for Polish.
 The stimuli were randomised for each participant and repeated six times
 (the order was kept the same in each of the six repetitions due to
 software constraints). Before recording the stimuli, the occlusal plane
-of the participant was imaged using a bite plate (), and the palate
-asking the participant to swallow water.
+of the participant was imaged using a bite plate \citep{scobbie2011},
+and the palate asking the participant to swallow water.
 
 \subsection{Data processing}\label{data-processing}
 
@@ -196,15 +196,77 @@ automatically extracted with a Praat script.
 
 \subsection{Analysis}\label{analysis}
 
-The spline data was normalised within speaker by coordinate offsetting
-and rotation based on the occlusal plane. Generalised additive mixed
-effects models (GAMM) were used for statistical analysis in R
+The contours were normalised by applying offsetting and rotation
+relative to the participant's occlusal plane \citep{scobbie2011}.
+Generalised additive mixed effects models \citep{wood2006} were used for
+the statistical analysis of tongue contour data in R
 \citep{r-core-team2017}. Duration measurements were subject to linear
-mixed effects model using \texttt{lme4} in R.
+mixed effects models using \texttt{lme4} in R \citep{bates2015}.
 
 \section{Results}\label{results}
 
-\renewcommand\refname{Discussion}
+\subsection{Vowel duration and
+voicing}\label{vowel-duration-and-voicing}
+
+A linear mixed effect regression model was fit on the Italian vowel
+durations with duration as the outcome variable, vowel quality (/a, o,
+u/), voicing and place of articulation of the following consonant,
+sentence duration as fixed effects, random intercepts by speaker and
+word, and random slopes for voicing by speaker. An interaction between
+voicing and vowel quality was also included, which turned out to be
+significant. P-values were obtained through likelihood ration tests
+comparing a model including voicing with a null model without voicing.
+According to the model, Italian vowels are 19.5 msec (±5.5) longer if
+followed by a voiced stop (\(\chi^2\)(3) = 18.5, p = 0.000337).
+
+For Polish, the same model structure was used, excluding the
+voicing-vowel interaction (which was not significant). Surprisingly, the
+model reported a partially significant 8 msec (±3) effect of consonantal
+voicing on the preceding vowel (\(\chi^2\)(1) = 5.4, p = 0.02). The
+exploration of the random slopes by speaker showed that one speaker
+showed a particularly higher slope for voicing, meaning that the effect
+of voicing was stronger in his data. This observation will come handy
+while discussing about the results of the tongue contour data.
+
+\subsection{Tongue contours}\label{tongue-contours}
+
+The Italian tongue contour analysis showed that voiced stops are
+produced with advancement of the root of the tongue. Generalised
+additive mixed effect models were fitted for each speaker: the
+y-coordinates of the contours were the outcome variable; the
+x-coordinates the parametric term; a reference smooth term for X, with
+difference smooths for X by voicing, vowel quality, and place of
+articulation of following consonant; random smooths by word. A
+first-order autoregressive model was included, given the high
+auto-correlation residuals as obtained by visual inspection of the
+residuals. For two participants out of four, the root was significantly
+more front in voiced stops in both vocalic contexts (/a, o/). On the
+other hand, one participant had significant tongue root advancement only
+following /a/, while the fourth participant didn't show advancement at
+all. For Polish, three out of four speakers did not have tongue root
+advancement, while the fourth speaker showed significant advancement in
+both vocalic contexts.
+
+\section{Discussion}\label{discussion}
+
+The presence of tongue root advancement in Italian but not in Polish
+initially supports the idea that vowel are longer if followed by voiced
+stops to allow time for the root to reach a position suitable for
+consonantal voicing. The reported absence of the voicing effect in
+Polish could then be ascribed to the absence of tongue root advancement
+in the voiced consonants of Polish. However, such overstatement is
+complicated by two facts that emerged from the data analysed in this
+study. First, tongue root advancement was found in one of the Polish
+speakers and it was absent from one of the Italian speakers. Second,
+even though the effect was not as big as for Italian, the Polish
+duration data nonetheless showed a difference of 8 msec. However, as
+mentioned above, one Polish speaker had a particularly high slope value
+for voicing, and incidentally this is also the same and only Polish
+speaker who showed root advancement. Moreover, a difference of 8
+milliseconds could be considered to be quite small in any case, although
+statistically
+detectable.\footnote{A model fitted on the data excluding the outlier speaker leads in fact to a smaller estimate of about 6 msec.}
+
 \bibliography{linguistics.bib}
 
 \end{document}

@@ -117,8 +117,17 @@ This observation will come handy while discussing about the results of the tongu
 
 The Italian tongue contour analysis showed that voiced stops are produced with advancement of the root of the tongue.
 Generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were the outcome variable; the x-coordinates the parametric term; a reference smooth term for X, with difference smooths for X by voicing, vowel quality, and place of articulation of following consonant; random smooths by word.
-A first-order autoregressive model was included, given the high auto-correlation residuals as gained by visual inspection of the residuals.
-
-
+A first-order autoregressive model was included, given the high auto-correlation residuals as obtained by visual inspection of the residuals.
+For two participants out of four, the root was significantly more front in voiced stops in both vocalic contexts (/a, o/).
+On the other hand, one participant had significant tongue root advancement only following /a/, while the fourth participant didn't show advancement at all.
+For Polish, three out of four speakers did not have tongue root advancement, while the fourth speaker showed significant advancement in both vocalic contexts.
 
 # Discussion
+
+The presence of tongue root advancement in Italian but not in Polish initially supports the idea that vowel are longer if followed by voiced stops to allow time for the root to reach a position suitable for consonantal voicing.
+The reported absence of the voicing effect in Polish could then be ascribed to the absence of tongue root advancement in the voiced consonants of Polish.
+However, such overstatement is complicated by two facts that emerged from the data analysed in this study.
+First, tongue root advancement was found in one of the Polish speakers and it was absent from one of the Italian speakers.
+Second, even though the effect was not as big as for Italian, the Polish duration data nonetheless showed a difference of 8 msec.
+However, as mentioned above, one Polish speaker had a particularly high slope value for voicing, and incidentally this is also the same and only Polish speaker who showed root advancement.
+Moreover, a difference of 8 milliseconds could be considered to be quite small in any case, although statistically detectable.\footnote{A model fitted on the data excluding the outlier speaker leads in fact to a smaller estimate of about 6 msec.}
