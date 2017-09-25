@@ -16,7 +16,9 @@ Create Strings as file list: "sound_list", "'data_folder$'/*.wav"
 number_files = Get number of strings
 
 createDirectory: "../results"
-formant_result$ = "../results/formants.csv"
+result_file$ = "../results/formants.csv"
+header$ = ""
+writeFileLine: result_file$, header$
 ```
 
 ## "file loop"
