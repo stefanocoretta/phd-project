@@ -17,7 +17,7 @@ number_files = Get number of strings
 
 createDirectory: "../results"
 result_file$ = "../results/formants.csv"
-header$ = ""
+header$ = "speaker,word,point,time,f1,f2,f3,pitch,vowel_duration"
 writeFileLine: result_file$, header$
 ```
 
