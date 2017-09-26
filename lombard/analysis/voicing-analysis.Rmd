@@ -18,6 +18,6 @@ praat_run("./lombard/code/get-measurements.praat")
 ```
 
 ```{r}
-lombard <- read_csv("./lombard/results/formants.csv")
+lombard <- read_csv("./lombard/results/lombard.csv")
 ```
 
