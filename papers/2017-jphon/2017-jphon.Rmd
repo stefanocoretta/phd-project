@@ -44,9 +44,16 @@ On the same line of the laryngeal hypothesis, I put forward a similar account in
 If tongue root advancement plays a role in determining the duration of preceding vowels through the extension mechanism described before, than one expects languages with the voicing effect to show a systematic advancement of the tongue root in voiced stops.
 On the contrary, tongue root advancement in languages without the voicing effect should be absent or less systematic.
 
-<!--
-Add lit about VE in Italian and Polish
--->
+Italian has been reported to have the voicing effect.
+@farnetani1986, in a study assessing general properties on segmental durations of spoken Italian, found for the pair of nonce words /lata/ ~ /lada/ that the vowel /a/ was on average 35 msec longer when followed by the voiced stop /d/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
+@esposito2002 extended the research to all vowels and stops and found that vowels were longer when followed by a voiced stop.
+Although the estimates from the statistical models are not reported in the paper, judging from the figures in the graphs, an average of 30-35 msec difference was found, which is similar to what has been reported by @farnetani1986.
+<!-- Add two papers that will come through document supply -->
+
+On the other hand, @keating1984 reported that vowels in Polish are not affected by the voicing of the following consonant.
+<!-- actually it's Keating 1979 PhD dissertation -->
+She tested vowel duration in the word pair /rata/ ~ /rada/ and found that there was a durational difference of 2 milliseconds.
+As for the some of the Italian studies, statistical analysis was not performed, although judging by the size of the difference, it can be assumed that it is not significant.
 
 # Methodology
 
@@ -122,12 +129,23 @@ For two participants out of four, the root was significantly more front in voice
 On the other hand, one participant had significant tongue root advancement only following /a/, while the fourth participant didn't show advancement at all.
 For Polish, three out of four speakers did not have tongue root advancement, while the fourth speaker showed significant advancement in both vocalic contexts.
 
+Further contour analysis was carried out at the point of acoustic closure for Italian and for the Polish speaker showing advancement.
+Surprisingly, the tongue root in the voiced condition was found to be already in advanced position at closure.
+Both the Italian (4 speakers) and the Polish data (1 speaker) show that the root of the tongue at the time of consonantal closure is advanced in both languages.
+Models fitted on the individual speakers comparing tongue contours at closure and at maximum displacement further confirmed that root advancement was bigger at maximum displacement for Italian, but not for Polish.
+
 # Discussion
 
-The presence of tongue root advancement in Italian but not in Polish initially supports the idea that vowel are longer if followed by voiced stops to allow time for the root to reach a position suitable for consonantal voicing.
+The presence of tongue root advancement in Italian but not in Polish initially supports the idea that vowels are longer if followed by voiced stops to allow time for the root to reach a position suitable for consonantal voicing.
 The reported absence of the voicing effect in Polish could then be ascribed to the absence of tongue root advancement in the voiced consonants of Polish.
-However, such overstatement is complicated by two facts that emerged from the data analysed in this study.
+However, such statement is complicated by two facts that emerged from the data analysed in this study.
 First, tongue root advancement was found in one of the Polish speakers and it was absent from one of the Italian speakers.
 Second, even though the effect was not as big as for Italian, the Polish duration data nonetheless showed a difference of 8 msec.
-However, as mentioned above, one Polish speaker had a particularly high slope value for voicing, and incidentally this is also the same and only Polish speaker who showed root advancement.
+However, as mentioned above, one Polish speaker had a particularly higher slope for voicing, and incidentally this is also the same and only Polish speaker who showed root advancement.
 Moreover, a difference of 8 milliseconds could be considered to be quite small in any case, although statistically detectable.\footnote{A model fitted on the data excluding the outlier speaker leads in fact to a smaller estimate of about 6 msec.}
+
+The data also showed raising of the tongue dorsum concomitant to the advancement of the root.
+Although such gesture was not prospected on the basis of the tested hypothesis, it makes sense from an anatomical stand point.
+Given the anteriorisation of the tongue root, other things being equal, it derives that the tongue mass gets compressed.
+Such compression can be counterbalanced (entirely or partially) by allowing the dorsum of the tongue to raise.
+It is not thus surprising to observe a raised dorsum in voiced stops accompanying root advancement.
