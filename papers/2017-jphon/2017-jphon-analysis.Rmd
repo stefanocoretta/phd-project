@@ -993,7 +993,7 @@ plot_gamsd(
 ### PL05
 
 ```{r pl05-tra-clos}
-pl05_clos <- filter(tongues_clos, speaker == "pl05", X > -25)
+pl05_clos <- filter(tongues_clos, speaker == "pl05")
 
 pl05_gamm <- bam(
     Y ~
@@ -1050,7 +1050,7 @@ plot_gamsd(
 )
 ```
 
-# Comparison tongue at closure and maximum displacement in Italian
+# Comparison tongue at closure and maximum displacement
 
 ## IT01
 
@@ -1186,6 +1186,76 @@ compareML(it02_voiced_gamm_ar_null, it02_voiced_gamm_ar)
 ```{r it02-voiced-plot}
 plot_gamsd(
     it02_voiced_gamm_ar,
+    view = "X",
+    comparison = list(position_ord = c("maximum", "closure")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+## PL05
+
+```{r pl05-voiced-data}
+pl05_voiced <- rbind(pl05_max, pl05_clos) %>%
+    filter(c2phonation == "voiced") %>%
+    mutate(
+        position = ifelse(label %in% c("max_TT", "max_TD"), "maximum", "closure"),
+        position_ord = ordered(position, levels = c("maximum", "closure"))
+    ) %>%
+    unite(item_no, seconds:rec.date) %>%
+    mutate_if(is.character, as.factor)
+```
+
+```{r pl05-voiced}
+pl05_voiced_gamm <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = position_ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, item_no, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_voiced,
+    method = "fREML"
+)
+
+rho <- start_value_rho(pl05_voiced_gamm)
+
+pl05_voiced_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = position_ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, item_no, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_voiced,
+    method = "ML",
+    rho = rho,
+    AR.start = pl05_voiced$start.event
+)
+
+summary(pl05_voiced_gamm_ar)
+
+pl05_voiced_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, item_no, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = pl05_voiced,
+    method = "ML",
+    rho = rho,
+    AR.start = pl05_voiced$start.event
+)
+
+compareML(pl05_voiced_gamm_ar_null, pl05_voiced_gamm_ar)
+```
+
+```{r pl05-voiced-plot}
+plot_gamsd(
+    pl05_voiced_gamm_ar,
     view = "X",
     comparison = list(position_ord = c("maximum", "closure")),
     conditions = list(c2place.ord = "coronal")
