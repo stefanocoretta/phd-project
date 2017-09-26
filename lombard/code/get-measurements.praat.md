@@ -16,9 +16,12 @@ Create Strings as file list: "sound_list", "'data_folder$'/*.wav"
 number_files = Get number of strings
 
 createDirectory: "../results"
-result_file$ = "../results/lombard.csv"
-header$ = "speaker,word,point,time,f1,f2,f3,pitch,vowel_duration"
-writeFileLine: result_file$, header$
+acoustic_file$ = "../results/acoustics.csv"
+acoustic_header$ = "speaker,word,time,point,f1,f2,f3,pitch"
+writeFileLine: acoustic_file$, acoustic_header$
+duration_file$ = "../results/durations.csv"
+duration_header$ = "speaker,word,time,word_duration,vowel_duration,consonant_duration"
+writeFileLine: duration_file$, duration_header$
 ```
 
 ## "file loop"
@@ -49,6 +52,10 @@ for interval from 1 to number_intervals
         step = vowel_duration / 11
         word_interval = Get interval at time: 3, vowel_start
         word$ = Get label of interval: 3, word_interval
+        word_start = Get start time of interval: 3, word_interval
+        word_end = Get end time of interval: 3, word_interval
+        word_duration = word_end - word_start
+        consonant_duration = word_end - vowel_end
 
         selectObject: sound
         sound_part = Extract part: vowel_start - 0.05, vowel_end + 0.05, "rectangular", 1, "yes"
@@ -68,9 +75,12 @@ for interval from 1 to number_intervals
             selectObject: pitch
             pitch_value = Get value at time: point_time, "Hertz", "Linear"
 
-            appendFileLine: result_file$, "'speaker$','word$','point',
-                ...'point_time','f1','f2','f3','pitch_value','vowel_duration'"
+            appendFileLine: acoustic_file$, "'speaker$','word$','word_start',
+                ...'point','f1','f2','f3','pitch_value'"
         endfor
+
+        appendFileLine: duration_file$, "'speaker$','word$','word_start',
+            ...'word_duration','vowel_duration','consonant_duration'"
 
     endif
 endfor
