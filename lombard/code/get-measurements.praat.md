@@ -52,8 +52,11 @@ for interval from 1 to number_intervals
 
         selectObject: sound
         sound_part = Extract part: vowel_start - 0.05, vowel_end + 0.05, "rectangular", 1, "yes"
-        formant = To Formant (burg): 0, 5, 5500, 0.025, 50
-        pitch = To Pitch: 0, 75, 600
+        noprogress To Formant (burg): 0, 5, 5500, 0.025, 50
+        formant = selected("Formant")
+        selectObject: sound_part
+        noprogress To Pitch: 0, 75, 600
+        pitch = selected("Pitch")
 
         for point from 1 to 10
             selectObject: formant

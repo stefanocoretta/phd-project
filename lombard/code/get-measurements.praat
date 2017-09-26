@@ -4,7 +4,7 @@ number_files = Get number of strings
 
 createDirectory: "../results"
 result_file$ = "../results/formants.csv"
-header$ = ""
+header$ = "speaker,word,point,time,f1,f2,f3,pitch,vowel_duration"
 writeFileLine: result_file$, header$
 
 for file from 1 to number_files
@@ -30,8 +30,11 @@ for file from 1 to number_files
     
             selectObject: sound
             sound_part = Extract part: vowel_start - 0.05, vowel_end + 0.05, "rectangular", 1, "yes"
-            formant = To Formant (burg): 0, 5, 5500, 0.025, 50
-            pitch = To Pitch: 0, 75, 600
+            noprogress To Formant (burg): 0, 5, 5500, 0.025, 50
+            formant = selected("Formant")
+            selectObject: sound_part
+            noprogress To Pitch: 0, 75, 600
+            pitch = selected("Pitch")
     
             for point from 1 to 10
                 selectObject: formant
@@ -43,7 +46,7 @@ for file from 1 to number_files
                 selectObject: pitch
                 pitch_value = Get value at time: point_time, "Hertz", "Linear"
     
-                writeFileLine: result_file$, "'speaker$','word$','point',
+                appendFileLine: result_file$, "'speaker$','word$','point',
                     ...'point_time','f1','f2','f3','pitch_value','vowel_duration'"
             endfor
     
