@@ -1,27 +1,27 @@
-item,word,sentence,translation,gloss,phonetic,consonant1,vowel,consonant2,voicing,place,manner,position,voicing_c1
-1,lagh,A vighi ul lagh,I see the lake,lake,,l,a,g,voiced,velar,stop,final,voiced
-2,sed,A g'ho sed,I am thirsty,thirst,,s,e,d,voiced,coronal,stop,final,voiceless
-3,figh,A vighi ul figh,I see the fig,fig,,f,i,g,voiced,velar,stop,final,voiceless
-4,nas,A vighi ul nas,I see the nose,nose,,n,a,z,voiced,coronal,fricative,final,voiced
-5,tus,A vighi ul tus,I see the boy,boy,,t,u,z,voiced,coronal,fricative,final,voiceless
-6,fögh,A vighi ul fögh,I see the fire,fire,,f,ø,g,voiced,velar,stop,final,voiceless
-7,göb,A vighi ul göb,I see the hunchback,hunchback,,g,ø,b,voiced,labial,stop,final,voiced
-8,növ,Cul lì l'è növ,That one is new,new.ms,,n,ø,v,voiced,labial,fricative,final,voiced
-10,sach,A vighi ul sach,I see the sack,sack,,s,a,k,voiceless,velar,stop,final,voiceless
-11,set,A gn'ho set,I have seven of them,seven,,s,e,t,voiceless,coronal,stop,final,voiceless
-12,pich,A g'ho dai un pich,I didn't give anything,stroke,,p,i,k,voiceless,velar,stop,final,voiceless
-13,pass,A fagh un pass,I make a step,step,,p,a,s,voiceless,coronal,fricative,final,voiceless
-14,tüss,A g'ho la tüss,I have the cough,cough,,t,y,s,voiceless,coronal,fricative,final,voiceless
-15,lagh,Ul lagh l'è sü,The lake is up,lake,,l,a,g,voiced,velar,stop,medial,voiced
-16,sed,La sed l'è brüta,Being thirsty is bad,thirst,,s,e,d,voiced,coronal,stop,medial,voiceless
-17,figh,Ul figh l'è dulz,The fig is sweet,fig,,f,i,g,voiced,velar,stop,medial,voiceless
-18,nas,Ul nas l'è lung,The nose is long,nose,,n,a,z,voiced,coronal,fricative,medial,voiced
-19,tus,Ul me tus l'è grand,My son is old,boy,,t,u,z,voiced,coronal,fricative,medial,voiceless
-20,fögh,Ul fögh l'è russ,Fire is red,fire,,f,ø,g,voiced,velar,stop,medial,voiceless
-21,göb,Ul göb l'è bass,The hunchback is short,hunchback,,g,ø,b,voiced,labial,stop,medial,voiced
-22,növ,Ul papa növ l'è giuvin,The new Pope is young,new.ms,,n,ø,v,voiced,labial,fricative,medial,voiced
-24,sach,Ul sach l'è pien,The sack is full,sack,,s,a,k,voiceless,velar,stop,medial,voiceless
-25,set,Ul set l'è un nümar,Seven is a number,seven,,s,e,t,voiceless,coronal,stop,medial,voiceless
-26,pich,L'ass da pich l'è na carta,The ace of spades is a card,stroke,,p,i,k,voiceless,velar,stop,medial,voiceless
-27,pass,Ti gh'è ul pass lent,You have a slow step,step,,p,a,s,voiceless,coronal,fricative,medial,voiceless
-28,tüss,La tüss la vegn cul frecc,The cough comes when it's cold,cough,,t,y,s,voiceless,coronal,fricative,medial,voiceless
+item,word,sentence,translation,gloss,phonetic,consonant1,vowel,consonant2,voicing,place,manner,position,voicing_c1,sentence_norm
+1,lagh,A vighi ul lagh,I see the lake,lake,,l,a,g,voiced,velar,stop,final,voiced,a vighi ul lagh
+2,sed,A g'ho sed,I am thirsty,thirst,,s,e,d,voiced,coronal,stop,final,voiceless,a g' ho sed
+3,figh,A vighi ul figh,I see the fig,fig,,f,i,g,voiced,velar,stop,final,voiceless,a vighi ul figh
+4,nas,A vighi ul nas,I see the nose,nose,,n,a,z,voiced,coronal,fricative,final,voiced,a vighi ul nas
+5,tus,A vighi ul tus,I see the boy,boy,,t,u,z,voiced,coronal,fricative,final,voiceless,a vighi ul tus
+6,fögh,A vighi ul fögh,I see the fire,fire,,f,ø,g,voiced,velar,stop,final,voiceless,a vighi ul fögh
+7,göb,A vighi ul göb,I see the hunchback,hunchback,,g,ø,b,voiced,labial,stop,final,voiced,a vighi ul göb
+8,növ,Cul lì l'è növ,That one is new,new.ms,,n,ø,v,voiced,labial,fricative,final,voiced,cul lì l' è növ
+10,sach,A vighi ul sach,I see the sack,sack,,s,a,k,voiceless,velar,stop,final,voiceless,a vighi ul sach
+11,set,A gn'ho set,I have seven of them,seven,,s,e,t,voiceless,coronal,stop,final,voiceless,a gn' ho set
+12,pich,A g'ho dai un pich,I didn't give anything,stroke,,p,i,k,voiceless,velar,stop,final,voiceless,a g' ho dai un pich
+13,pass,A fagh un pass,I make a step,step,,p,a,s,voiceless,coronal,fricative,final,voiceless,a fagh un pass
+14,tüss,A g'ho la tüss,I have the cough,cough,,t,y,s,voiceless,coronal,fricative,final,voiceless,a g' ho la tüss
+15,lagh,Ul lagh l'è sü,The lake is up,lake,,l,a,g,voiced,velar,stop,medial,voiced,ul lagh l' è sü
+16,sed,La sed l'è brüta,Being thirsty is bad,thirst,,s,e,d,voiced,coronal,stop,medial,voiceless,la sed l' è brüta
+17,figh,Ul figh l'è dulz,The fig is sweet,fig,,f,i,g,voiced,velar,stop,medial,voiceless,ul figh l' è dulz
+18,nas,Ul nas l'è lung,The nose is long,nose,,n,a,z,voiced,coronal,fricative,medial,voiced,ul nas l' è lung
+19,tus,Ul me tus l'è grand,My son is old,boy,,t,u,z,voiced,coronal,fricative,medial,voiceless,ul me tus l' è grand
+20,fögh,Ul fögh l'è russ,Fire is red,fire,,f,ø,g,voiced,velar,stop,medial,voiceless,ul fögh l' è russ
+21,göb,Ul göb l'è bass,The hunchback is short,hunchback,,g,ø,b,voiced,labial,stop,medial,voiced,ul göb l' è bass
+22,növ,Ul papa növ l'è giuvin,The new Pope is young,new.ms,,n,ø,v,voiced,labial,fricative,medial,voiced,ul papa növ l' è giuvin
+24,sach,Ul sach l'è pien,The sack is full,sack,,s,a,k,voiceless,velar,stop,medial,voiceless,ul sach l' è pien
+25,set,Ul set l'è un nümar,Seven is a number,seven,,s,e,t,voiceless,coronal,stop,medial,voiceless,ul set l' è un nümar
+26,pich,L'ass da pich l'è na carta,The ace of spades is a card,stroke,,p,i,k,voiceless,velar,stop,medial,voiceless,l' ass da pich l' è na carta
+27,pass,Ti gh'è ul pass lent,You have a slow step,step,,p,a,s,voiceless,coronal,fricative,medial,voiceless,ti gh' è ul pass lent
+28,tüss,La tüss la vegn cul frecc,The cough comes when it's cold,cough,,t,y,s,voiceless,coronal,fricative,medial,voiceless,la tüss la vegn cul frecc
