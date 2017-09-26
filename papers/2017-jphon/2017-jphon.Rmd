@@ -71,6 +71,7 @@ A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and us
 A Movo LV4-O2 Lavalier microphone plugged into a ... was used for audio recording.
 Articulate Assistant Advanced v2.17.1 running on a Windows laptop was used for the acquisition of audio and ultrasonic signal.
 A stabilisation headset produced by Articulate Instruments was used for probe stabilisation [].
+<!-- more about probe and frame rate, maybe in procedure? -->
 
 ## Materials
 
@@ -90,7 +91,7 @@ Before recording the stimuli, the occlusal plane of the participant was imaged u
 ## Data processing
 
 Durational measurements were obtained from acoustics.
-A first rough annotation was achieved through force alignment using the SPASS force aligner.
+A first rough annotation was achieved through force alignment using the SPASS force aligner [@bigi2015].
 The criteria for the annotation of the acoustic data were the following:
 
 - the target vowel onset was marked by visual inspection at the time of appearance of higher formants in the spectrogram following the burst of /p/
@@ -100,8 +101,21 @@ The criteria for the annotation of the acoustic data were the following:
 
 Finally, vowel duration, consonant duration (including burst and VOT), and closure duration (from vowel offset to burst onset) were also automatically extracted with a Praat script.
 
+Tongue contours were extracted from the ultrasonic data using Articulate Assistant Advanced [AAA, @articulate2011].
+Spline lines were first fitted to the visible contours using the batch tracking function natively included in AAA.
+Manual correction was applied in the cases where the automatic tracking showed clear errors.
+Tongue displacement along time was thus calculated in AAA using a custom module provided by Dr. Patrycja Strycharczuk [@Strycharczuk2015].
+The displacement was calculated based on the movement of the splines along a given fan line.
+For each speaker, two relevant fan lines were chosen: one for the tongue tip and one for the tongue dorsum.
+The selection of the fan lines was based on the inspection of the standard deviation of the splines in the relevant area of the tongue.
+The fan line that showed the highest standard deviation was then chosen as the relevant fan line for the calculation of displacement.
+Velocity and tangential velocity were also calculated.
+The time of maximum displacement based on tangential velocity was finally obtained using a modified version of a search set-up provided by Dr. Patrycja Strycharczuk.
+<!-- change to "both the x and y were provided by Dr." -->
+
 ## Analysis
 
+The coordinates of the splines were exported at acoustic closure and at maximum displacement.
 The contours were normalised by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
 Generalised additive mixed effects models [@wood2006] were used for the statistical analysis of tongue contour data in R [@r-core-team2017].
 Duration measurements were subject to linear mixed effects models using `lme4` in R [@bates2015].
