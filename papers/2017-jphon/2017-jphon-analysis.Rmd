@@ -541,7 +541,9 @@ pl02_gamm_ar_null <- bam(
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl02_max,
-    method = "ML"
+    method = "ML",
+    rho = rho,
+    AR.start = pl02_max$start.event
 )
 
 compareML(pl02_gamm_ar_null, pl02_gamm_ar)
@@ -599,7 +601,9 @@ pl04_gamm_ar_null <- bam(
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl04_max,
-    method = "ML"
+    method = "ML",
+    rho = rho,
+    AR.start = pl04_max$start.event
 )
 
 compareML(pl04_gamm_ar_null, pl04_gamm_ar)
@@ -617,7 +621,8 @@ plot_gamsd(
 ### PL03
 
 ```{r pl03-tra}
-pl03_max <- filter(tongues, speaker == "pl03", X > -25)
+pl03_max <- filter(tongues, speaker == "pl03") %>%
+    mutate(c2phon_vowel = as.ordered(interaction(c2phonation.ord, vowel.ord)))
 
 pl03_gamm <- bam(
     Y ~
@@ -626,6 +631,7 @@ pl03_gamm <- bam(
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr") +
+#        s(X, by = c2phon_vowel, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl03_max,
     method = "ML"
@@ -640,6 +646,7 @@ pl03_gamm_ar <- bam(
         s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr") +
+#        s(X, by = c2phon_vowel, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl03_max,
     method = "ML",
@@ -653,11 +660,14 @@ pl03_gamm_ar_null <- bam(
     Y ~
         X +
         s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl03_max,
-    method = "ML"
+    method = "ML",
+    rho = rho,
+    AR.start = pl03_max$start.event
 )
 
 compareML(pl03_gamm_ar_null, pl03_gamm_ar)
@@ -715,7 +725,9 @@ pl05_gamm_ar_null <- bam(
         s(X, by = vowel.ord, bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
     data = pl05_max,
-    method = "ML"
+    method = "ML",
+    rho = rho,
+    AR.start = pl05_max$start.event
 )
 
 compareML(pl05_gamm_ar_null, pl05_gamm_ar)
