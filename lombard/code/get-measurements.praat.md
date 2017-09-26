@@ -57,6 +57,9 @@ for interval from 1 to number_intervals
         word_duration = word_end - word_start
         consonant_duration = word_end - vowel_end
 
+        appendFileLine: duration_file$, "'speaker$','word$','word_start',
+            ...'word_duration','vowel_duration','consonant_duration'"
+
         selectObject: sound
         sound_part = Extract part: vowel_start - 0.05, vowel_end + 0.05, "rectangular", 1, "yes"
         noprogress To Formant (burg): 0, 5, 5500, 0.025, 50
@@ -78,9 +81,6 @@ for interval from 1 to number_intervals
             appendFileLine: acoustic_file$, "'speaker$','word$','word_start',
                 ...'point','f1','f2','f3','pitch_value'"
         endfor
-
-        appendFileLine: duration_file$, "'speaker$','word$','word_start',
-            ...'word_duration','vowel_duration','consonant_duration'"
 
     endif
 endfor
