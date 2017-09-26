@@ -68,7 +68,7 @@ for interval from 1 to number_intervals
             selectObject: pitch
             pitch_value = Get value at time: point_time, "Hertz", "Linear"
 
-            writeFileLine: result_file$, "'speaker$','word$','point',
+            appendFileLine: result_file$, "'speaker$','word$','point',
                 ...'point_time','f1','f2','f3','pitch_value','vowel_duration'"
         endfor
 
