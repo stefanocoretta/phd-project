@@ -12,6 +12,12 @@ library(tidyverse)
 library(speakr)
 ```
 
-```{r}
+```{r speakr}
 lmt("./lombard/code/get-measurements.praat.md")
+praat_run("./lombard/code/get-measurements.praat")
 ```
+
+```{r}
+lombard <- read_csv("./lombard/results/formants.csv")
+```
+
