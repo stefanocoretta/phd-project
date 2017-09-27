@@ -37,9 +37,11 @@ knitr::opts_chunk$set(echo = FALSE)
 - time to allow tongue root advancement → longer vowel
 - assessment of tongue contour using ultrasonography (part of a broader research project)
 
-→ H1a: *No TRA in Polish.*
-→ H1b: *TRA in Italian at closure and maximum displacement.*
-→ H2: *TRA in Italian at closure is smaller that maximum displacement.*
+→ H1: *No TRA in Polish.*
+
+→ H2a: *TRA in Italian at closure and maximum displacement.*
+
+→ H2b: *TRA in Italian at closure is smaller that maximum displacement.*
 
 # Methods
 
