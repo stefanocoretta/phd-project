@@ -29,26 +29,26 @@ knitr::opts_chunk$set(echo = FALSE)
     - also *vowel duration*?
 - **voicing effect**
     - @house1953, @chen1970, @klatt1973, @lisker1973
-    - no consesus, but cf. @halle1967
-    - Italian [@farnetani1986], Polish [@keating1984]
+    - no consesus on which factors play a role
 
 # Background
 
-- time to allow tongue root advancement → longer vowel
 - assessment of tongue contour using ultrasonography (part of a broader research project)
+- Italian [@farnetani1986], Polish [@keating1984]
 
-→ H1: *No TRA in Polish.*
+→ H1a: *No TRA in Polish.*
 
-→ H2a: *TRA in Italian at closure and maximum displacement.*
+→ H1b: *TRA in Italian at closure onset and maximum displacement.*
 
-→ H2b: *TRA in Italian at closure is smaller that maximum displacement.*
+→ H2: *TRA in Italian at closure onset is smaller that maximum displacement.*
 
 # Methods
 
-- **pilot** study (work in progress)
+- **pilot** study
 - Italian (*2 males*), Polish (*1 female, 1 male*)
 -  C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
-    - C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
+    - C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o/, C\textsubscript{2} = /t, d, k, g/
+    - *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
 - frame sentence
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
@@ -83,38 +83,41 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - **equipment**
     - Articulate Instruments set-up with probe stabilisation headset [@articulate2011]
+        - Echo Blaster 128, frame rate = 60 fps 
 - **data**
-    - tongue contours at maximum tongue displacement [@strycharczuk2015] and acoustic closure
-    - vowel, closure and consonant durations
+    - tongue contours
+        - maximum tongue displacement [from ultrasound, @strycharczuk2015]
+        - closure onset (from acoustics)
+<!--    - vowel, closure and consonant durations -->
 - **analysis**
     - generalised additive mixed effects models [@wood2006]
-    - linear mixed effects models [@bates2015]
+<!--    - linear mixed effects models [@bates2015] -->
 
-# Results: Italian (maximum displacement)
+# Results: Italian (maximum displacement), speaker IT01
 
 \begin{figure}
 \includegraphics[width = \textwidth]{it01.pdf}
 \end{figure}
 
-# Results: Italian (closure)
+# Results: Italian (closure onset), speaker IT01
 
 \begin{figure}
 \includegraphics[width = \textwidth]{it01-clos.pdf}
 \end{figure}
 
-# Results: Italian (closure vs. maximum displacement)
+# Results: Italian (closure onset vs. maximum displacement), speaker IT01
 
 \begin{figure}
 \includegraphics[width = \textwidth]{it01-voiced.pdf}
 \end{figure}
 
-# Results: Polish (maximum displacement)
+# Results: Polish (maximum displacement), speaker PL04
 
 \begin{figure}
 \includegraphics[width = \textwidth]{pl04.pdf}
 \end{figure}
 
-# Results: Polish (closure)
+# Results: Polish (closure onset), speaker PL04
 
 \begin{figure}
 \includegraphics[width = \textwidth]{pl04-clos.pdf}
@@ -124,11 +127,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - **results**
     - no TRA in Polish (H1a)
-    - **TRA in Italian** at closure *and* maximum displacement (H1b)
-        - *increases from closure to maximum displacement* (H2)
-        - TRA is **initiated before closure**
-- "**time to allow TRA → longer vowel**" is supported by the data
-    - *with some caveats*
+    - **TRA in Italian** at closure onset *and* maximum displacement (H1b)
+        - *increases from closure onset to maximum displacement* (H2)
+        - TRA is **initiated before closure onset**
+- correlation between voicing effect and tongue root advancement is supported by the data
+    - time to allow TRA → longer vowel [cf. @halle1967]
 
 # 
 
