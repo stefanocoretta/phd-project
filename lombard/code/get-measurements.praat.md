@@ -17,10 +17,11 @@ number_files = Get number of strings
 
 createDirectory: "../results"
 acoustic_file$ = "../results/acoustics.csv"
-acoustic_header$ = "speaker,word,time,point,f1,f2,f3,pitch"
+acoustic_header$ = "speaker,word,time,point,f1,f2,f3,pitch,sentence_norm"
 writeFileLine: acoustic_file$, acoustic_header$
 duration_file$ = "../results/durations.csv"
-duration_header$ = "speaker,word,time,word_duration,vowel_duration,consonant_duration"
+duration_header$ = "speaker,word,time,word_duration,vowel_duration,
+    ...consonant_duration,sentence_norm"
 writeFileLine: duration_file$, duration_header$
 ```
 
@@ -32,6 +33,7 @@ for file from 1 to number_files
     sound = Read from file: "'data_folder$'/'file$'"
     speaker$ = selected$("Sound")
     textgrid = Read from file: "'data_folder$'/'speaker$'-palign_copy.TextGrid"
+    tokenisation = Read from file: "'data_folder$'/'speaker$'-token.TextGrid"
 
     <<<vowel loop>>>
 endfor
@@ -57,8 +59,13 @@ for interval from 1 to number_intervals
         word_duration = word_end - word_start
         consonant_duration = word_end - vowel_end
 
+        selectObject: tokenisation
+        sentence_interval = Get interval at time: 1, word_start
+        sentence_norm$ = Get label of interval: 1, sentence_interval
+
         appendFileLine: duration_file$, "'speaker$','word$','word_start',
-            ...'word_duration','vowel_duration','consonant_duration'"
+            ...'word_duration','vowel_duration','consonant_duration',
+            ...'sentence_norm$'"
 
         selectObject: sound
         sound_part = Extract part: vowel_start - 0.05, vowel_end + 0.05, "rectangular", 1, "yes"
@@ -79,7 +86,7 @@ for interval from 1 to number_intervals
             pitch_value = Get value at time: point_time, "Hertz", "Linear"
 
             appendFileLine: acoustic_file$, "'speaker$','word$','word_start',
-                ...'point','f1','f2','f3','pitch_value'"
+                ...'point','f1','f2','f3','pitch_value','sentence_norm$'"
         endfor
 
     endif
