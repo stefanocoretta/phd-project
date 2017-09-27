@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
+theme_set(theme_minimal())
 library(speakr)
 ```
 
@@ -18,6 +19,57 @@ praat_run("./lombard/code/get-measurements.praat")
 ```
 
 ```{r}
-lombard <- read_csv("./lombard/results/lombard.csv")
+stimuli <- read_csv("./lombard/task/prompts.csv")
+
+acoustics <- read_csv("./lombard/results/acoustics.csv") %>%
+    left_join(y = stimuli)
+
+durations <- read_csv("./lombard/results/durations.csv") %>%
+    left_join(y = stimuli)
 ```
 
+
+```{r}
+durations %>%
+    ggplot(aes(voicing, vowel_duration, colour = position)) +
+    geom_boxplot() +
+    facet_grid(speaker ~ vowel)
+```
+
+```{r}
+durations %>%
+    ggplot(aes(voicing, vowel_duration, colour = position)) +
+    geom_boxplot() +
+    facet_grid( ~ vowel)
+```
+
+```{r}
+durations %>%
+    ggplot(aes(voicing, vowel_duration, colour = position)) +
+    geom_boxplot()
+```
+
+```{r}
+acoustics %>%
+    ggplot(aes(point, f1, colour = voicing)) +
+    geom_jitter(alpha = 0.5) +
+    geom_smooth() +
+    facet_wrap(~ vowel)
+```
+
+
+```{r}
+acoustics %>%
+    ggplot(aes(point, f2, colour = voicing)) +
+    geom_jitter(alpha = 0.5) +
+    geom_smooth() +
+    facet_wrap(~ vowel)
+```
+
+```{r}
+acoustics %>%
+    ggplot(aes(point, pitch, colour = voicing)) +
+    geom_point(alpha = 0.5) +
+#    geom_smooth() +
+    facet_wrap(~ vowel)
+```
