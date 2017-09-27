@@ -17,7 +17,8 @@ number_files = Get number of strings
 
 createDirectory: "../results"
 acoustic_file$ = "../results/acoustics.csv"
-acoustic_header$ = "speaker,word,time,point,f1,f2,f3,pitch,sentence_norm"
+acoustic_header$ = "speaker,word,time,time_norm,point,f1,f2,f3,
+    ...pitch,sentence_norm"
 writeFileLine: acoustic_file$, acoustic_header$
 duration_file$ = "../results/durations.csv"
 duration_header$ = "speaker,word,time,word_duration,vowel_duration,
@@ -78,6 +79,7 @@ for interval from 1 to number_intervals
         for point from 1 to 10
             selectObject: formant
             point_time = vowel_start + (step * point)
+            time_norm = point_time - vowel_start
             f1 = Get value at time: 1, point_time, "Hertz", "Linear"
             f2 = Get value at time: 2, point_time, "Hertz", "Linear"
             f3 = Get value at time: 3, point_time, "Hertz", "Linear"
@@ -86,7 +88,8 @@ for interval from 1 to number_intervals
             pitch_value = Get value at time: point_time, "Hertz", "Linear"
 
             appendFileLine: acoustic_file$, "'speaker$','word$','word_start',
-                ...'point','f1','f2','f3','pitch_value','sentence_norm$'"
+                ...'time_norm','point','f1','f2','f3','pitch_value',
+                ...'sentence_norm$'"
         endfor
 
     endif
@@ -94,3 +97,4 @@ endfor
 ```
 
 `step` is the duration between each measurement point such that there are 10 points independently of the duration of the vowel.
+`time_norm` is the time in milliseconds from the onset of the vowel to the relevant measurement point.
