@@ -21,10 +21,10 @@ praat_run("./lombard/code/get-measurements.praat")
 ```{r}
 stimuli <- read_csv("./lombard/task/prompts.csv")
 
-acoustics <- read_csv("./lombard/results/acoustics.csv") %>%
+acoustics <- read_csv("./lombard/results/acoustics.csv", na = "--undefined--") %>%
     left_join(y = stimuli)
 
-durations <- read_csv("./lombard/results/durations.csv") %>%
+durations <- read_csv("./lombard/results/durations.csv", na = "--undefined--") %>%
     left_join(y = stimuli)
 ```
 
@@ -68,8 +68,9 @@ acoustics %>%
 
 ```{r}
 acoustics %>%
+    filter(pitch < 400) %>%
     ggplot(aes(point, pitch, colour = voicing)) +
-    geom_point(alpha = 0.5) +
-#    geom_smooth() +
+    geom_jitter(alpha = 0.5) +
+    geom_smooth() +
     facet_wrap(~ vowel)
 ```
