@@ -29,16 +29,17 @@ knitr::opts_chunk$set(echo = FALSE)
     - also *vowel duration*?
 - **voicing effect**
     - @house1953, @chen1970, @klatt1973, @lisker1973
-    - no consesus
+    - no consesus, but cf. @halle1967
+    - Italian [@farnetani1986], Polish [@keating1984]
 
 # Background
 
-- **Italian**
-    - voicing effect [@farnetani1986]
-- **Polish**
-    - no voicing effect [@keating1984]
+- time to allow tongue root advancement → longer vowel
+- assessment of tongue contour using ultrasonography (part of a broader research project)
 
-→ Assessment of tongue contour using ultrasonography (part of a broader research project)
+→ H1a: *No TRA in Polish.*
+→ H1b: *TRA in Italian at closure and maximum displacement.*
+→ H2: *TRA in Italian at closure is smaller that maximum displacement.*
 
 # Methods
 
@@ -117,23 +118,28 @@ knitr::opts_chunk$set(echo = FALSE)
 \includegraphics[width = \textwidth]{pl04-clos.pdf}
 \end{figure}
 
+# Summary
+
+- **results**
+    - no TRA in Polish (H1a)
+    - **TRA in Italian** at closure *and* maximum displacement (H1b)
+        - *increases from closure to maximum displacement* (H2)
+        - TRA is **initiated before closure**
+- "**time to allow TRA → longer vowel**" is supported by the data
+    - *with some caveats*
+
+# 
+
+\begin{center}
+\Huge
+\textbf{THANK YOU!}
+\end{center}
+
 # Results: vowel durations
 
 - Italian: **22** (±6) msec voicing effect
     - $\chi^2$(3) = 16.61, *p* = 0.00085 ***
 - Polish: **8** (±3.3) msec voicing effect
     - $\chi^2$(1) = 5.4, *p* = 0.02 *
-
-# Discussion
-
-- no TRA in Polish
-- **TRA in Italian** (at closure *and* maximum displacement)
-    - *increases from closure to maximum displacement*
-
-→ TRA is **initiated before closure** in voiced stops
-
-- time to allow TRA → longer vowel
-- cf. @halle1967
-
 
 # References
