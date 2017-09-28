@@ -27,20 +27,31 @@ knitr::opts_chunk$set(echo = FALSE)
     - voicing [@westbury1983]
     - VOT [@ahn2015]
     - also *vowel duration*?
+
+\begin{figure}
+\includegraphics[width = .6\textwidth]{graphics/tra.pdf}
+\end{figure}
+
+# Background
+
 - **voicing effect**
     - @house1953, @chen1970, @klatt1973, @lisker1973
     - no consesus on which factors play a role
 
+\begin{figure}
+\includegraphics[width = \textwidth]{graphics/voicing-effect.pdf}
+\end{figure}
+
 # Background
 
-- assessment of tongue contour using ultrasonography (part of a broader research project)
-- Italian [@farnetani1986], Polish [@keating1984]
+- assessment of tongue contour using ultrasonography
+- **Italian** [@farnetani1986], **Polish** [@keating1984]
 
-→ H1a: *No TRA in Polish.*
+→ **H1a**: No TRA in Polish.
 
-→ H1b: *TRA in Italian at closure onset and maximum displacement.*
+→ **H1b**: TRA in Italian at closure onset and maximum displacement.
 
-→ H2: *TRA in Italian at closure onset is smaller that maximum displacement.*
+→ **H2**: TRA in Italian at closure onset is smaller that maximum displacement.
 
 # Methods
 
@@ -126,9 +137,9 @@ knitr::opts_chunk$set(echo = FALSE)
 # Summary
 
 - **results**
-    - no TRA in Polish (H1a)
-    - **TRA in Italian** at closure onset *and* maximum displacement (H1b)
-        - *increases from closure onset to maximum displacement* (H2)
+    - no TRA in Polish (**H1a**)
+    - **TRA in Italian** at closure onset *and* maximum displacement (**H1b**)
+    - *increases from closure onset to maximum displacement* (**H2**)
         - TRA is **initiated before closure onset**
 - correlation between voicing effect and tongue root advancement is supported by the data
     - time to allow TRA → longer vowel [cf. @halle1967]
@@ -140,11 +151,20 @@ knitr::opts_chunk$set(echo = FALSE)
 \textbf{THANK YOU!}
 \end{center}
 
-# Results: vowel durations
+# Vowel durations
 
-- Italian: **22** (±6) msec voicing effect
-    - $\chi^2$(3) = 16.61, *p* = 0.00085 ***
-- Polish: **8** (±3.3) msec voicing effect
-    - $\chi^2$(1) = 5.4, *p* = 0.02 *
+- methods
+    - vowel durations from acoustics
+    - four speakers per language, /a, o, u/
+    - linear mixed effects models [@bates2015]
+- results
+    - Italian: **22** (±6) msec voicing effect
+        - $\chi^2$(3) = 16.61, *p* = 0.00085 ***
+    - Polish: **8** (±3.3) msec voicing effect
+        - $\chi^2$(1) = 5.4, *p* = 0.02 *
+- discussion
+    - the Italian estimate is in line with previous work
+    - Polish is suprising
+        - one speaker had bigger slope
 
 # References
