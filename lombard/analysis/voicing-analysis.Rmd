@@ -60,7 +60,7 @@ acoustics %>%
 ```{r}
 acoustics %>%
     ggplot(aes(time_norm, f1, colour = voicing)) +
-    geom_jitter(alpha = 0.5) +
+    geom_point(alpha = 0.5) +
     geom_smooth() +
     facet_wrap(~ vowel)
 ```
