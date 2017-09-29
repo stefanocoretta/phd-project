@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = FALSE)
     - also *vowel duration*?
 
 \begin{figure}
-\includegraphics[width = .6\textwidth]{graphics/tra.pdf}
+\includegraphics[width = \textwidth]{graphics/tra.pdf}
 \end{figure}
 
 # Background
@@ -44,14 +44,16 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Background
 
-- assessment of tongue contour using ultrasonography
-- **Italian** [@farnetani1986], **Polish** [@keating1984]
+- **Italian** [@farnetani1986]
+    - +35 msec / __D
+- **Polish** [@keating1984]
+    - no difference
 
-→ **H1a**: No TRA in Polish.
+→ **H1a**: TRA in Italian.
 
-→ **H1b**: TRA in Italian at closure onset and maximum displacement.
+→ **H1b**: TRA in Polish.
 
-→ **H2**: TRA in Italian at closure onset is smaller that maximum displacement.
+→ **H2**: TRA increases during closure in Italian.
 
 # Methods
 
@@ -97,48 +99,49 @@ knitr::opts_chunk$set(echo = FALSE)
         - Echo Blaster 128, frame rate = 60 fps 
 - **data**
     - tongue contours
-        - maximum tongue displacement [from ultrasound, @strycharczuk2015]
-        - closure onset (from acoustics)
+        - at closure onset
+        - at maximum tongue displacement [@strycharczuk2015]
 <!--    - vowel, closure and consonant durations -->
 - **analysis**
-    - generalised additive mixed effects models [@wood2006]
+    - generalised additive mixed effects models [@wood2006;@soskuthy2017;@van-rij2017]
+    - data and code available at <https://github.com/stefanocoretta/2017-ultrafest>
 <!--    - linear mixed effects models [@bates2015] -->
 
 # Results: Italian (maximum displacement), speaker IT01
 
 \begin{figure}
-\includegraphics[width = \textwidth]{it01.pdf}
+\includegraphics[width = \textwidth]{graphics/it01.pdf}
 \end{figure}
 
 # Results: Italian (closure onset), speaker IT01
 
 \begin{figure}
-\includegraphics[width = \textwidth]{it01-clos.pdf}
+\includegraphics[width = \textwidth]{graphics/it01-clos.pdf}
 \end{figure}
 
 # Results: Italian (closure onset vs. maximum displacement), speaker IT01
 
 \begin{figure}
-\includegraphics[width = \textwidth]{it01-voiced.pdf}
+\includegraphics[width = \textwidth]{graphics/it01-voiced.pdf}
 \end{figure}
 
 # Results: Polish (maximum displacement), speaker PL04
 
 \begin{figure}
-\includegraphics[width = \textwidth]{pl04.pdf}
+\includegraphics[width = \textwidth]{graphics/pl04.pdf}
 \end{figure}
 
 # Results: Polish (closure onset), speaker PL04
 
 \begin{figure}
-\includegraphics[width = \textwidth]{pl04-clos.pdf}
+\includegraphics[width = \textwidth]{graphics/pl04-clos.pdf}
 \end{figure}
 
 # Summary
 
 - **results**
-    - no TRA in Polish (**H1a**)
-    - **TRA in Italian** at closure onset *and* maximum displacement (**H1b**)
+    - **TRA in Italian** at closure onset *and* maximum displacement (**H1a**)
+    - no TRA in Polish (**H1b**)
     - *increases from closure onset to maximum displacement* (**H2**)
         - TRA is **initiated before closure onset**
 - correlation between voicing effect and tongue root advancement is supported by the data
