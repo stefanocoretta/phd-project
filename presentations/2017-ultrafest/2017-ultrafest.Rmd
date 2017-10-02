@@ -50,9 +50,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - **Polish** [@keating1984]
     - no difference
 
-→ **H1a**: TRA in Italian.
-
-→ **H1b**: TRA in Polish.
+→ **H1**: TRA in Italian (*a*), TRA in Polish (*b*).
 
 → **H2**: TRA increases during closure in Italian.
 
@@ -151,8 +149,12 @@ knitr::opts_chunk$set(echo = FALSE)
 # 
 
 \begin{center}
-\Huge
-\textbf{THANK YOU!}
+
+\textbf{\Huge THANK YOU!}
+
+\vspace{2cm}
+
+Aknowledgements: P. Strycharczuk, R. Bermúdez-Otero, members of the Phonetics Lab at UoM
 \end{center}
 
 # Vowel durations
