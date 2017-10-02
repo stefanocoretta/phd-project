@@ -95,7 +95,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 - **equipment**
     - Articulate Instruments set-up with probe stabilisation headset [@articulate2011]
-        - Echo Blaster 128, frame rate = 60 fps 
+        - Echo Blaster 128, frame rate = 68 fps 
 - **data**
     - tongue contours
         - at closure onset
