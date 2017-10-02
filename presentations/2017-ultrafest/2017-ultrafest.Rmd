@@ -15,6 +15,7 @@ header-includes:
 - \usepackage{cleveref}
 - \setcitestyle{aysep={},notesep={:},citesep={,}}
 - \usetheme{metropolis}
+- \titlegraphic{\includegraphics[height=1cm]{./graphics/logo.png}}
 ---
 
 ```{r setup, include=FALSE}
