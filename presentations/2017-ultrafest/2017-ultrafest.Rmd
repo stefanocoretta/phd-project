@@ -46,7 +46,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Background
 
 - **Italian** [@farnetani1986]
-    - +35 msec / __D
+    - +35 msec / _D
 - **Polish** [@keating1984]
     - no difference
 
