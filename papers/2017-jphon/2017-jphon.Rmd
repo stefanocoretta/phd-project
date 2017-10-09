@@ -67,18 +67,19 @@ As for the some of the Italian studies, statistical analysis was not performed, 
 
 Native speakers of Italian and Polish have been recruited in Manchester and in Italy.
 Four speakers per language participated in the experiment.
+The Italian speakers were two females and two males, one of which is the author (age 26-53).
 The participants received a compensation of £10 (or equivalent in Euro).
 
 ## Equipment set-up
 
 ![Schematic representation of the equipment setup (\citealt{articulate2011}, se text for details).\label{f:uti-setup}](../../graphics/uti-setup.pdf){ width=100% }
 
-An Articulate Instruments set-up was used for this study (\Cref{f:uti-setup}).
+An Articulate Instruments Inc. set-up was used for this study (\Cref{f:uti-setup}).
 This is constituted by a TELEMED C3.5/20/128Z-3 (20mm radius, 2-4 MHz) ultrasonic transducer plugged into a TELEMED Echo Blaster 128 unit.
 A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
 A Movo LV4-O2 Lavalier microphone plugged into a FocusRight pre-amplifier was used for audio recording.
-Articulate Assistant Advanced (AAA) v2.17.1 running on a Windows laptop was used for the acquisition of the audio and ultrasonic signals.
-A stabilisation headset produced by Articulate Instruments was used for probe stabilisation [].
+Articulate Assistant Advanced (AAA) v2.17.2 running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7 was used for the acquisition of the audio and ultrasonic signals.
+Stabilisation of the ultrasound probe was ensured by using the stabilisation headset produced by Articulate Instruments Inc.
 <!-- more about probe and frame rate, maybe in procedure? -->
 
 ## Materials
