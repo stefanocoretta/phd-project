@@ -1,4 +1,4 @@
-\documentclass[]{elsarticle}
+\documentclass[authoryear]{elsarticle}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -30,6 +30,15 @@
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{plainnat}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 \IfFileExists{parskip.sty}{%
 \usepackage{parskip}
 }{% else
@@ -55,6 +64,10 @@
 %\def\fps@figure{htbp}
 %\makeatother
 
+\frenchspacing
+\usepackage{cleveref}
+\setcitestyle{aysep={},notesep={:},citesep={,}}
+\usepackage{ctable}
 
 \title{The link between tongue root advancement and the voicing effect: an
 ultrasound study of Italian and Polish}
@@ -149,16 +162,24 @@ The participants received a compensation of £10 (or equivalent in Euro).
 
 \subsection{Equipment set-up}\label{equipment-set-up}
 
-An Articulate Instruments set-up was used for this study. This is
-constituted by a TELEMED C3.5/20/128Z-3 ultrasonic transducer plugged
-into a TELEMED Echo Blaster 128 unit. A synchronisation unit (P-Stretch)
-was plugged into the Echo Blaster unit and used for automatic
-audio/ultrasound synchronisation. A Movo LV4-O2 Lavalier microphone
-plugged into a \ldots{} was used for audio recording. Articulate
-Assistant Advanced v2.17.1 running on a Windows laptop was used for the
-acquisition of audio and ultrasonic signal. A stabilisation headset
-produced by Articulate Instruments was used for probe stabilisation
-{[}{]}.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1.00000\textwidth]{../../graphics/uti-setup.pdf}
+\caption{Schematic representation of the equipment setup
+(\citealt{articulate2011}, se text for details).\label{f:uti-setup}}
+\end{figure}
+
+An Articulate Instruments set-up was used for this study
+(\Cref{f:uti-setup}). This is constituted by a TELEMED C3.5/20/128Z-3
+(20mm radius, 2-4 MHz) ultrasonic transducer plugged into a TELEMED Echo
+Blaster 128 unit. A synchronisation unit (P-Stretch) was plugged into
+the Echo Blaster unit and used for automatic audio/ultrasound
+synchronisation. A Movo LV4-O2 Lavalier microphone plugged into a
+FocusRight pre-amplifier was used for audio recording. Articulate
+Assistant Advanced (AAA) v2.17.1 running on a Windows laptop was used
+for the acquisition of the audio and ultrasonic signals. A stabilisation
+headset produced by Articulate Instruments was used for probe
+stabilisation {[}{]}.
 
 \subsection{Materials}\label{materials}
 
@@ -179,40 +200,43 @@ teraz} `I say X now' for Polish.
 
 \subsection{Procedure}\label{procedure}
 
-The stimuli were randomised for each participant and repeated six times
-(the order was kept the same in each of the six repetitions due to
-software constraints). Before recording the stimuli, the occlusal plane
-of the participant was imaged using a bite plate \citep{scobbie2011},
-and the palate asking the participant to swallow water.
+The stimuli were randomised for each participant, but the order was kept
+the same within participant due to software constraints. Each
+participant repeated the list of randomised stimuli six times. The
+participants' occlusal plane was obtained using a bite plate, and the
+hard palate was imaged by asking the participant to swallow water
+\citep{scobbie2011}. The frame rate of the acquisition of the ultrasonic
+data varied between 55 and 65 frames per second (one frame every 18-15
+milliseconds). The audio signal was recorded at 22050 MHz, 16-bit.
 
 \subsection{Data processing}\label{data-processing}
 
-Durational measurements were obtained from acoustics. A first rough
-annotation was achieved through force alignment using the SPASS force
-aligner \citep{bigi2015}. The criteria for the annotation of the
-acoustic data were the following:
+Synchronisation of the ultrasonic and audio signal was achieved in
+post-processing, using the built-in procedure in AAA. The data were then
+subjected to force alignment using the SPASS force aligner
+\citep{bigi2015}. The outcome of the automatic annotation was then
+manually corrected, according to the criteria in \Cref{t:dur-measures}.
+The onset of the target consonant burst (C2 burst) was detected
+automatically employing a Praat implementation of the algorithm
+described in \citet{ananthapadmanabha2014}. The duration of the
+following intervals was then extracted from the acoustic landmarks using
+an automated procedure in Praat: vowel duration (V1 onset to V1 offset),
+consonant duration (V2 offset to C2 offset), closure duration (V2 offset
+to C2 burst).
 
-\begin{itemize}
-\tightlist
-\item
-  the target vowel onset was marked by visual inspection at the time of
-  appearance of higher formants in the spectrogram following the burst
-  of /p/
-\item
-  the target vowel offset was marked by visual inspection at the time of
-  disappearance of the higher formants in the spectrogram; this point
-  also corresponded with the consonantal onset
-\item
-  closure offset was marked by visual inspection at the time of formants
-  onsets of the following vowel
-\item
-  burst onset was determined automatically by a Praat implementation of
-  the algorithm described in \citet{ananthapadmanabha2014}
-\end{itemize}
-
-Finally, vowel duration, consonant duration (including burst and VOT),
-and closure duration (from vowel offset to burst onset) were also
-automatically extracted with a Praat script.
+\ctable[caption = List of measurements as extracted from acoustics.,
+label = t:dur-measures,
+width=\textwidth
+]{ll>{\raggedright}p{5cm}}{}{
+\FL
+\textbf{measure}               &                  & \textbf{criteria}                                                                                    \ML
+vowel onset           & V1 onset         & appearance of higher formants in the spectrogram following the burst of /p/ (C1)            \NN
+vowel offset          & V1 offset        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
+consonant onset       & C2 onset         & corresponds to V1 offset                                                                    \NN
+closure onset         & C2 closure onset & corresponds to V1 offset                                                                    \NN
+consonant offset      & C2 offset        & appearance of higher formants of the vowel following C2 (V2)                                \NN
+consonant burst onset & C2 burst         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
+}
 
 Tongue contours were extracted from the ultrasonic data using Articulate
 Assistant Advanced \citep[AAA,][]{articulate2011}. Spline lines were
