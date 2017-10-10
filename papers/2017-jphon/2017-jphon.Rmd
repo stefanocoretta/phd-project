@@ -65,10 +65,9 @@ As for the some of the Italian studies, statistical analysis was not performed, 
 
 ## Participants
 
-Native speakers of Italian and Polish have been recruited in Manchester and in Italy.
-Four speakers per language participated in the experiment.
-The Italian speakers were two females and two males, one of which is the author (age 26-53).
-The participants received a compensation of £10 (or equivalent in Euro).
+Four native speakers for each of Italian and Polish have been recruited in Manchester and in Italy.
+<!-- ethics -->
+They received a compensation of £10/10€  for participation.
 
 ## Equipment set-up
 
