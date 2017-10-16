@@ -154,29 +154,32 @@ Duration measurements were subject to linear mixed effects models using `lme4` i
 
 ## Vowel duration and voicing
 
-A linear mixed effect regression model was fit on the Italian vowel durations with duration as the outcome variable, vowel quality (/a, o, u/), voicing and place of articulation of the following consonant, sentence duration as fixed effects, random intercepts by speaker and word, and random slopes for voicing by speaker.
-An interaction between voicing and vowel quality was also included, which turned out to be significant.
-P-values were obtained through likelihood ration tests comparing a model including voicing with a null model without voicing.
-According to the model, Italian vowels are 19.5 msec (±5.5) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p = 0.000337).
+A linear mixed effect regression model was fitted on the Italian vowel durations with duration as the outcome variable; vowel quality (/a, o, u/), voicing and place of articulation of the following consonant, sentence duration as fixed effects; random intercepts by speaker and word, and random slopes for voicing by speaker.
+An interaction between voicing and vowel quality was also included in the final model, since it turned out to be significant.
+P-values were obtained through likelihood ration tests comparing the full model including voicing with a null model without voicing as a predictor.
+According to the full model, Italian vowels are 19.5 msec (±5.5 standard errors) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p = 0.000337).
 
 For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
-Surprisingly, the model reported a partially significant 8 msec (±3) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
-The exploration of the random slopes by speaker showed that one speaker showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data.
-This observation will come handy while discussing about the results of the tongue contour data.
+Surprisingly, the model reported a partially significant 8 msec (±3 standard errors) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
+The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data.
+This observation will come at hand when discussing about the results of the tongue contour data.
 
 ## Tongue contours
 
-The Italian tongue contour analysis showed that voiced stops are produced with advancement of the root of the tongue.
-Generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were the outcome variable; the x-coordinates the parametric term; a reference smooth term for X, with difference smooths for X by voicing, vowel quality, and place of articulation of following consonant; random smooths by word.
-A first-order autoregressive model was included, given the high auto-correlation residuals as obtained by visual inspection of the residuals.
-For two participants out of four, the root was significantly more front in voiced stops in both vocalic contexts (/a, o/).
-On the other hand, one participant had significant tongue root advancement only following /a/, while the fourth participant didn't show advancement at all.
-For Polish, three out of four speakers did not have tongue root advancement, while the fourth speaker showed significant advancement in both vocalic contexts.
+Given the poor quality of the ultrasonic data for /u/, this vowel was not included in the statistical analysis.
+The analysis of the Italian ultrasonic data showed that voiced stops are produced with advancement of the root of the tongue, as expected based on previous research on English.
+Individual generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were included in the model as the outcome variable; the x-coordinates as the only parametric term.
+The following smooths were specified: a reference smooth term for the x-coordinates, three difference smooths for the x-coordinates by voicing, vowel quality, and place of articulation of the following consonant respectively, and random smooths by word.
+A first-order autoregressive model was included to correct for the high auto-correlation residuals.
+In two participants out of four (IT01, IT02), the root was significantly more front in voiced stops in both vocalic contexts (/a, o/).
+On the other hand, one participant (IT03) had significant tongue root advancement only following /a/, while the fourth participant (IT04) didn't show advancement at all.
+For Polish, three out of four speakers (PL02, PL03, PL04) did not have tongue root advancement, while the fourth speaker (PL05) had significant advancement in voiced stops in both vocalic contexts.
 
-Further contour analysis was carried out at the point of acoustic closure for Italian and for the Polish speaker showing advancement.
-Surprisingly, the tongue root in the voiced condition was found to be already in advanced position at closure.
-Both the Italian (4 speakers) and the Polish data (1 speaker) show that the root of the tongue at the time of consonantal closure is advanced in both languages.
-Models fitted on the individual speakers comparing tongue contours at closure and at maximum displacement further confirmed that root advancement was bigger at maximum displacement for Italian, but not for Polish.
+Further contour analysis was carried out at C2 closure onset for Italian and Polish speakers showing advancement.
+The tongue root at closure onset was found to be already in an advanced position in voiced consonants.
+<!-- would be interesting to compare closure and maximum with voiceless stops as well, and track displacement through time within vowel -->
+<!-- Both the Italian (4 speakers) and the Polish data (1 speaker) show that the root of the tongue at the time of consonantal closure is advanced in both languages. -->
+Comparisons of tongue contours at C2 onset and at the time of maximum tongue displacement in voiced consonants only further confirmed that the degree of root advancement was larger at maximum displacement for Italian speakers, but not for Polish.
 
 # Discussion
 
