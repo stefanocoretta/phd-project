@@ -39,33 +39,28 @@ An interesting question arising from the connection between voicing and tongue r
 An extensive pool of studies showed that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973].
 Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see @laeufer1992.}
 Although several attempts have been put forward to explain the effect of voicing on vowel durations, no consensus has been reached to date.
-Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see @javkin1976 and @kluender1988 for two perceptually inclined proposals.}
+Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see \citep{javkin1976} and \cite{kluender1988} for two perceptually inclined proposals.}
 One of the earliest articulatory accounts of the voicing effect attributed the difference in vowel duration to the divergent configuration of the vocal folds in sonorant and obstruent voicing [@halle1967; reiterated in @chomsky1968].
 According to @halle1967, voicing in obstruents is produced with a state of the glottis that is different from the configuration necessary to produce vocal fold vibration in sonorants like vowels.
-On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuated during the vowel can just naturally ceases at closure (or a few milliseconds thereof).
+On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuated during the vowel can just naturally ceases at closure (or a few milliseconds after it).
 The authors thus hypothesise that, to allow the glottal state to change from sonorant voicing to obstruent voicing, the vowel is lengthen so that enough time is available for the change to happen.
-Although such account seemed promising at the time it was proposed, later studies failed to demonstrate that obstruent voicing is any different from sonorant voicing.
 
-Given the connection between voicing and tongue root advancement, it is natural to ask whether tongue root advancement is also linked to vowel duration.
-If this is indeed the case, then one would expect tongue root advancement to play a role in language that have the voicing effect, but not in languages that do not show it.
+Although such account seemed promising at the time it was proposed, later studies failed to demonstrate that obstruent voicing is any different from sonorant voicing [].
+Given the established connection between voicing and tongue root advancement, the hypothesis follows that tongue root advancement could also be linked to vowel duration.
+If this were the case, a language in which vowels have different durations depending on the voicing of the following consonant should also show tongue root advancement in voiced stops, while in those languages in which vowel durations are not affected by voicing, tongue root advancement should not be employed.
+On the same line of the hypothesis in @halle1967, I put forward an account in which a more complex tongue gesture in voiced consonants requires a longer time to be achieved.
+A possible solution to allow for this additional time is to maintain the vocalic gesture for a prolonged time (as in the @halle1967 hypothesis).
+If tongue root advancement plays a role in determining the duration of preceding vowels through such extension mechanism, than it is expected that languages with the voicing effect show a systematic advancement of the tongue root in voiced stops.
 
-To test this hypothesis, I conducted an acoustic and articulatory study that looked at vowel duration and tongue contours to assess the possible link between consonantal and vocalic tongue gestures.
-
-Tongue root advancement differences seems like a promising area of enquiry since its link to voicing has been already confirmed.
-On the same line of the laryngeal hypothesis, I put forward a similar account in which it is tongue root advancement rather than fold configuration that requires extra time during the vowel to be implemented.
-If tongue root advancement plays a role in determining the duration of preceding vowels through the extension mechanism described before, than one expects languages with the voicing effect to show a systematic advancement of the tongue root in voiced stops.
-On the contrary, tongue root advancement in languages without the voicing effect should be absent or less systematic.
-
-Italian has been reported to have the voicing effect.
-@farnetani1986, in a study assessing general properties on segmental durations of spoken Italian, found for the pair of nonce words /lata/ ~ /lada/ that the vowel /a/ was on average 35 msec longer when followed by the voiced stop /d/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
-@esposito2002 extended the research to all vowels and stops and found that vowels were longer when followed by a voiced stop.
-Although the estimates from the statistical models are not reported in the paper, judging from the figures in the graphs, an average of 30-35 msec difference was found, which is similar to what has been reported by @farnetani1986.
+In a study assessing general properties on segmental durations of spoken Italian, @farnetani1986 found that the first vowel in /lada/ was on average 35 msec longer than the vowel in /lata/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
+@esposito2002 extended Farnetanis's research to all vowels and stops and found that vowels were longer when followed by a voiced stop, with an estimate similar to what reported in @farnetani1986.
 <!-- Add two papers that will come through document supply -->
+Vowels in Polish, on the other hand, are not affected by the voicing of the following consonant, according to @keating1984.
+Italian and Polish have been chosen as the two test languages for this study.
 
-On the other hand, @keating1984 reported that vowels in Polish are not affected by the voicing of the following consonant.
 <!-- actually it's Keating 1979 PhD dissertation -->
-She tested vowel duration in the word pair /rata/ ~ /rada/ and found that there was a durational difference of 2 milliseconds.
-As for the some of the Italian studies, statistical analysis was not performed, although judging by the size of the difference, it can be assumed that it is not significant.
+<!-- The duration of vowels n in the word pair /rata/ ~ /rada/ and found that there was a durational difference of 2 milliseconds.
+As for the some of the Italian studies, statistical analysis was not performed, although judging by the size of the difference, it can be assumed that it is not significant. -->
 
 # Methodology
 
@@ -77,7 +72,12 @@ The participants received a monetary compensation of £10/10€.
 
 ## Equipment set-up
 
-![Schematic representation of the equipment setup (\citealt{articulate2011}, se text for details).\label{f:uti-setup}](../../graphics/uti-setup.pdf){ width=100% }
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{../../graphics/uti-setup.pdf}
+\caption{Schematic representation of the equipment setup
+(\citealt{articulate2011}, se text for details).\label{f:uti-setup}}
+\end{figure*}
 
 An Articulate Instruments Inc. set-up was used for this study (\Cref{f:uti-setup}).
 This is constituted by a TELEMED C3.5/20/128Z-3 (20mm radius, 2-4 MHz) ultrasonic transducer plugged into a TELEMED Echo Blaster 128 unit.
@@ -120,8 +120,9 @@ The onset of the consonant burst (C2 burst) was detected automatically employing
 
 \ctable[caption = List of measurements as extracted from acoustics.,
 label = t:dur-measures,
-width=\textwidth
-]{ll>{\raggedright}p{5cm}}{}{
+width=\textwidth,
+star
+]{ll>{\raggedright}p{8cm}}{}{
 \FL
 \textbf{measure}               &                  & \textbf{criteria}                                                                                    \ML
 vowel onset           & V1 onset         & appearance of higher formants in the spectrogram following the burst of /p/ (C1)            \NN
