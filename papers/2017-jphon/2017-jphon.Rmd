@@ -68,7 +68,25 @@ As for the some of the Italian studies, statistical analysis was not performed, 
 
 ## Participants
 
-Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) have been recorded in Manchester and in Italy.
+\ctable[caption = Sociolinguistic information on participants.,
+label = t:participants
+]{lllll}{}{
+\FL
+\textbf{id}   & \textbf{sex} & \textbf{age} & \textbf{city}     & \textbf{\textgreater} 6 mo \ML
+IT01 & m   & 28  & Verbania & yes               \NN
+IT02 & m   & 26  & Udine    & yes               \NN
+IT03 & f   & 27  & Verbania & no                \NN
+IT04 & f   & 54  & Verbania & no                \NN
+PL02 & f   & 32  & Poznań   & yes               \NN
+PL03 & m   & 26  & Poznań   & yes               \NN
+PL04 & f   & 34  & Warsaw   & no                \NN
+PL05 & m   & 34  & -        & no               \LL
+}
+
+Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) have been recorded in Manchester and in Italy \Cref{t:participants}.
+The Italian speakers were from Northern Italy (three from the Northwest and one from Northeast).
+The Polish group was more heterogeneous, with two speakers from Poznań, and one from Warsaw.
+<!-- add PL05 -->
 This research has obtained ethic clearance from the University of Manchester (REF 2016-0099-76).
 The participants received a monetary compensation of £10/10€.
 
@@ -189,15 +207,13 @@ Based on the established link between tongue root and voicing, and based on the 
 It has been proposed that the additional time required for the tongue to reach an advanced position in voiced stops could be compensated for during the preceding vowel, thus make it longer in comparison with vowels followed by voiceless stops.
 To test the correlation hypothesis, ultrasonic data were collected from two languages with and without the voicing effect, Italian and Polish respectively.
 
-The presence of tongue root advancement in Italian but not in Polish provides initial support to the idea that vowels are longer if followed by voiced stops so that enough time is allowed prior to the consonantal closure for the root to reach an advanced position.
-The reported absence of the voicing effect in Polish would then be ascribed to the absence of tongue root advancement in the production of voiced consonants in this language.
+The presence of tongue root advancement in Italian but not in Polish provides initial support to the idea that vowels are longer if followed by voiced stops so that enough time is allowed for the root to reach an advanced position, prior to the consonantal closure.
+The reported absence of the voicing effect in Polish could then be ascribed to the absence of tongue root advancement in the production of voiced consonants in this language.
 However, two complications derive from the data analysed in this study.
-First, significant tongue root advancement was found in one of the Polish speakers (PL05) on one hand and it was absent from one of the Italian speakers (IT04) on the other.
-
+First, tongue root advancement was found in one of the Polish speakers (PL05) on one hand and it was absent from one of the Italian speakers (IT04) on the other.
 Second, vowels followed by voiced stops in Polish were 8 milliseconds longer in Polish, contrary to what argued in @keating1984.
 
-However, as mentioned above, one Polish speaker (PL05) had a strikingly higher slope estimate for the effect of voicing on vowel duration.
-
+However, as mentioned above, PL05 had a strikingly higher slope estimate for the effect of voicing on vowel duration, compared to the other speakers, meaning that the voicing effect in his data is stronger.
 Incidentally, PL05 is also the only Polish speaker who produced voiced consonants with an advanced tongue root.
 
 
