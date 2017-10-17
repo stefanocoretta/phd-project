@@ -38,7 +38,7 @@ She also showed that tongue root advancement is present even when vocal fold vib
 An interesting question arising from the connection between voicing and tongue root is weather the advancement of the root is correlated with other phonetic characteristics, like the duration of vowels preceding obstruents.
 
 An extensive pool of studies showed that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973].
-Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see @laeufer1992.}
+Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see \citep{laeufer1992}.}
 Although several attempts have been put forward to explain the effect of voicing on vowel durations, no consensus has been reached to date.
 Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see \citep{javkin1976} and \cite{kluender1988} for two perceptually inclined proposals.}
 
@@ -68,7 +68,7 @@ As for the some of the Italian studies, statistical analysis was not performed, 
 
 ## Participants
 
-\ctable[caption = Sociolinguistic information on participants.,
+\ctable[caption = Sociolinguistic information on participants. The right-most column indicates whether the participant spent more than 6 consecutive months abroad.,
 label = t:participants
 ]{lllll}{}{
 \FL
@@ -80,13 +80,12 @@ IT04 & f   & 54  & Verbania & no                \NN
 PL02 & f   & 32  & Poznań   & yes               \NN
 PL03 & m   & 26  & Poznań   & yes               \NN
 PL04 & f   & 34  & Warsaw   & no                \NN
-PL05 & m   & 34  & -        & no               \LL
+PL05 & m   & 34  & Przasnysz & no               \LL
 }
 
 Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) have been recorded in Manchester and in Italy \Cref{t:participants}.
 The Italian speakers were from Northern Italy (three from the Northwest and one from Northeast).
-The Polish group was more heterogeneous, with two speakers from Poznań, and one from Warsaw.
-<!-- add PL05 -->
+The Polish group was more heterogeneous, with two speakers from Poznań, one from Przasnysz, and one from Warsaw.
 This research has obtained ethic clearance from the University of Manchester (REF 2016-0099-76).
 The participants received a monetary compensation of £10/10€.
 
@@ -95,7 +94,7 @@ The participants received a monetary compensation of £10/10€.
 \begin{figure*}
     \centering
     \includegraphics[width=.7\textwidth]{../../graphics/uti-setup.pdf}
-    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, se text for details).}
+    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, see text for details).}
     \label{f:uti-setup}
 \end{figure*}
 
@@ -177,11 +176,11 @@ Duration measurements were subject to linear mixed effects models using `lme4` i
 A linear mixed effect regression model was fitted on the Italian vowel durations with duration as the outcome variable; vowel quality (/a, o, u/), voicing and place of articulation of the following consonant, sentence duration as fixed effects; random intercepts by speaker and word, and random slopes for voicing by speaker.
 An interaction between voicing and vowel quality was also included in the final model, since it turned out to be significant.
 P-values were obtained through likelihood ration tests comparing the full model including voicing with a null model without voicing as a predictor.
-According to the full model, Italian vowels are 19.5 msec (±5.5 standard errors) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p = 0.000337).
+According to the full model, Italian vowels are 19.5 milliseconds (±5.5 standard errors) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p = 0.000337).
 
 For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
-Surprisingly, the model reported a partially significant 8 msec (±3 standard errors) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
-The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data.
+Surprisingly, the model reported a partially significant 8 milliseconds (±3 standard errors) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
+The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data, with an estimated 14 milliseconds effect of voicing.
 This observation will come at hand when discussing about the results of the tongue contour data.
 
 ## Tongue contours
@@ -213,12 +212,22 @@ However, two complications derive from the data analysed in this study.
 First, tongue root advancement was found in one of the Polish speakers (PL05) on one hand and it was absent from one of the Italian speakers (IT04) on the other.
 Second, vowels followed by voiced stops in Polish were 8 milliseconds longer in Polish, contrary to what argued in @keating1984.
 
-However, as mentioned above, PL05 had a strikingly higher slope estimate for the effect of voicing on vowel duration, compared to the other speakers, meaning that the voicing effect in his data is stronger.
+However, as mentioned above, PL05 had a strikingly higher slope estimate for the effect of voicing on vowel duration, compared to the other speakers, meaning that the voicing effect in his data is stronger and it is probably driving the effect.\footnote{\label{fn:polish-small} However, note that excluding PL05 from the data yielded to an estimate of 6 milliseconds, which would still need to be explained. Given the small magnitude of the effect, it is likely that it arises from the difficulty of segmenting vowel to consonant transitions when the consonant is voiced. Such downside would not apply to the data in PL05 given the larger estimates for the effect of voicing and the random slope, as discussed above.}
 Incidentally, PL05 is also the only Polish speaker who produced voiced consonants with an advanced tongue root.
+Assuming the effect in the other Polish speakers is small enough to be discarded as an artefact (see \cref{fn:polish-small}), it follows that, independently of the language, the presence of tongue root advancement in voiced stops correlates with a concomitant increased duration in vowels preceding voiced consonants.
 
+Moreover, given the smaller effect of voicing in PL05 compared to the effect in Italian, a potential hypothesis could be that the effect of voicing on vowel duration is gradual, rather then categorical.
+In this case, even within language it should be possible to see different magnitudes of durational differential in vowels depending on the magnitude of advancement of the tongue root.
+Since the durational difference in the polish speaker PL05 was quite small (14 milliseconds, versus 19.5 milliseconds in Italian), one expects the magnitude of the advancement of the root to be proportionately smaller in this speaker.
+Future work will set out to investigate the hypothetic correlation between vowel duration and amount of tongue root advancement.
 
-The data also showed raising of the tongue dorsum concomitant to the advancement of the root.
-Although such gesture was not prospected on the basis of the tested hypothesis, it makes sense from an anatomical stand point.
-Given the anteriorisation of the tongue root, other things being equal, it derives that the tongue mass gets compressed.
-Such compression can be counterbalanced (entirely or partially) by allowing the dorsum of the tongue to raise.
-It is not thus surprising to observe a raised dorsum in voiced stops accompanying root advancement.
+<!-- say something about no TRA in closure for PL05? -->
+
+Finally, the ultrasonic data showed raising of the tongue dorsum concomitant to root advancement.
+The presence of such gesture, although not expected, makes sense from an anatomical point of view.
+Raising of the tongue body could be implemented as a way to counterbalance the compression of the tongue mass caused by the advancement of the root.
+It is not thus surprising to observe a raised tongue body in voiced stops accompanying root advancement.
+An alternative account could ascribe tongue body raising to aerodynamic properties of voiced stops.
+Since the intra-oral pressure is higher in voiced stops due to the amount of air needed to maintain voicing, a firmer seal at the point of oral constriction could be used to compensate for the increased pressure.
+Increasing the area of contact by raising the tongue body would provide for a such firmer constriction.
+It is not possible with the data from this study to chose between the two possible accounts, so such question is left to future research.
