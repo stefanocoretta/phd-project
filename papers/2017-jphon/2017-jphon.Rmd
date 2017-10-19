@@ -185,6 +185,20 @@ This observation will come at hand when discussing about the results of the tong
 
 ## Tongue contours
 
+\begin{figure*}
+    \centering
+    \includegraphics[width=.7\textwidth]{fig/italian-tra.pdf}
+    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, see text for details).}
+    \label{f:uti-setup}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=.7\textwidth]{fig/polish-tra.pdf}
+    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, see text for details).}
+    \label{f:uti-setup}
+\end{figure*}
+
 Given the poor quality of the ultrasonic data for /u/, this vowel was not included in the statistical analysis.
 The analysis of the Italian ultrasonic data showed that voiced stops are produced with advancement of the root of the tongue, as expected based on previous research on English.
 Individual generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were included in the model as the outcome variable; the x-coordinates as the only parametric term.
