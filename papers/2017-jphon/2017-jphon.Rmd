@@ -87,7 +87,7 @@ Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 m
 The Italian speakers were from Northern Italy (three from the Northwest and one from Northeast).
 The Polish group was more heterogeneous, with two speakers from Poznań, one from Przasnysz, and one from Warsaw.
 This research has obtained ethic clearance from the University of Manchester (REF 2016-0099-76).
-The participants received a monetary compensation of £10/10€.
+The participants received a small monetary compensation.
 
 ## Equipment set-up
 
@@ -187,16 +187,10 @@ This observation will come at hand when discussing about the results of the tong
 
 \begin{figure*}
     \centering
-    \includegraphics[width=.7\textwidth]{fig/italian-tra.pdf}
-    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, see text for details).}
-    \label{f:uti-setup}
-\end{figure*}
-
-\begin{figure*}
-    \centering
-    \includegraphics[width=.7\textwidth]{fig/polish-tra.pdf}
-    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, see text for details).}
-    \label{f:uti-setup}
+    \includegraphics[width=.8\textwidth]{fig/italian-tra.pdf}
+    \includegraphics[width=.8\textwidth]{fig/polish-tra.pdf}
+    \caption{Comparison of tongue contours at maximum tongue displacement (within C2 closure) in Italian (top half) and Polish (bottom half). The plotted contours are reference contours for the coronal consonants preceded by /a/. See text for more details.}
+    \label{f:tra}
 \end{figure*}
 
 Given the poor quality of the ultrasonic data for /u/, this vowel was not included in the statistical analysis.
@@ -204,9 +198,15 @@ The analysis of the Italian ultrasonic data showed that voiced stops are produce
 Individual generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were included in the model as the outcome variable; the x-coordinates as the only parametric term.
 The following smooths were specified: a reference smooth term for the x-coordinates, three difference smooths for the x-coordinates by \textsc{voicing}, \textsc{vowel quality}, and \textsc{place} of articulation of the following consonant respectively, and random smooths by word.
 A first-order autoregressive model was included to correct for the high auto-correlation residuals.
+
+\Cref{f:tra} (top half) shows the predicted tongue contours in voiceless (in red) and voiced stops (in blue) at maximum tongue displacement for each of the four Italian speakers.
+Beneath each tongue contour panel the difference smooth for voicing is also shown (black line, confidence interval in grey).
+If the confidence interval of the difference smooth do not cross 0 on the ordinate axis, the tongue contours are significantly different.
+The significantly different portions of the contours are also indicated in the figure by a shaded red area.
+
 In two participants out of four (IT01, IT02), the root was significantly more front in voiced stops in both vocalic contexts (/a, o/).
 On the other hand, one participant (IT03) had significant tongue root advancement only following /a/, while the fourth participant (IT04) didn't show advancement at all.
-For Polish, three out of four speakers (PL02, PL03, PL04) did not have tongue root advancement, while the fourth speaker (PL05) had significant advancement in voiced stops in both vocalic contexts.
+For Polish, three out of four speakers (PL02, PL03, PL04) did not have tongue root advancement, while the fourth speaker (PL05) had significant advancement in voiced stops in both vocalic contexts (bottom half of \Cref{f:tra}).
 
 Further contour analysis was carried out at C2 closure onset for Italian and Polish speakers showing advancement.
 The tongue root at closure onset was found to be already in an advanced position in voiced consonants.
@@ -231,10 +231,10 @@ Incidentally, PL05 is also the only Polish speaker who produced voiced consonant
 Furthermore, a model comparing tongue root at closure onset versus maximum tongue displacement in PL05 indicated that there was virtually no difference in tongue root advancement at these two time points.
 Assuming the effect in the other Polish speakers is small enough to be discarded as an artefact (see \cref{fn:polish-small}), it follows that, independently of the language, the presence of tongue root advancement in voiced stops correlates with a concomitant increased duration in vowels preceding voiced consonants.
 
-Moreover, given the smaller effect of voicing in PL05 compared to the effect in Italian, a potential hypothesis could be that the effect of voicing on vowel duration is gradual, rather then categorical.
-In this case, even within language it should be possible to see different magnitudes of durational differential in vowels depending on the magnitude of advancement of the tongue root.
+Moreover, given the smaller effect of voicing in PL05 compared to the effect in Italian, a potential hypothesis could be that the correlation between tongue root advancement and vowel duration is gradual, rather then categorical.
+In this case, even within language it should be possible to see different magnitudes of difference in vowel durations depending on the amount of advancement of the tongue root.
 Since the durational difference in the polish speaker PL05 was quite small (14 milliseconds, versus 19.5 milliseconds in Italian), one expects the magnitude of the advancement of the root to be proportionately smaller in this speaker.
-Future work will set out to investigate the hypothetic correlation between vowel duration and amount of tongue root advancement.
+Future work will set out to investigate the hypothetically gradual correlation between vowel duration and amount of tongue root advancement.
 
 Finally, the ultrasonic data showed raising of the tongue dorsum concomitant to root advancement.
 The presence of such gesture, although not expected, makes sense from an anatomical point of view.
