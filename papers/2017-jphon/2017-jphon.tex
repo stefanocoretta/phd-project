@@ -252,7 +252,7 @@ closure duration (V1 offset to C2 burst).
 label = t:dur-measures,
 width=\textwidth,
 star
-]{ll>{\raggedright}p{8cm}}{}{
+]{ll>{\raggedright}p{9cm}}{}{
 \FL
 \textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
 vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the burst of /p/ (C1)            \NN
@@ -290,16 +290,17 @@ mixed effects models using \texttt{lme4} in R \citep{bates2015}.
 voicing}\label{vowel-duration-and-voicing}
 
 A linear mixed effect regression model was fitted on the Italian vowel
-durations with duration as the outcome variable; vowel quality (/a, o,
-u/), voicing and place of articulation of the following consonant,
-sentence duration as fixed effects; random intercepts by speaker and
-word, and random slopes for voicing by speaker. An interaction between
-voicing and vowel quality was also included in the final model, since it
-turned out to be significant. P-values were obtained through likelihood
-ration tests comparing the full model including voicing with a null
-model without voicing as a predictor. According to the full model,
-Italian vowels are 19.5 milliseconds (±5.5 standard errors) longer if
-followed by a voiced stop (\(\chi^2\)(3) = 18.5, p = 0.000337).
+durations with duration as the outcome variable; \textsc{vowel quality}
+(/a, o, u/), \textsc{voicing} and \textsc{place of articulation} of the
+following consonant, \textsc{sentence duration} as fixed effects; random
+intercepts by speaker and word, and by-speaker random slopes for voicing
+. An interaction between voicing and vowel quality was also included in
+the final model, since it turned out to be significant. P-values were
+obtained through likelihood ration tests comparing the full model
+including voicing with a null model without voicing as a predictor.
+According to the full model, Italian vowels are 19.5 milliseconds (±5.5
+standard errors) longer if followed by a voiced stop (\(\chi^2\)(3) =
+18.5, p = 0.000337).
 
 For Polish, the same model structure was used, excluding the
 voicing-vowel interaction (which was not significant). Surprisingly, the
@@ -323,17 +324,17 @@ for each speaker: the y-coordinates of the contours were included in the
 model as the outcome variable; the x-coordinates as the only parametric
 term. The following smooths were specified: a reference smooth term for
 the x-coordinates, three difference smooths for the x-coordinates by
-voicing, vowel quality, and place of articulation of the following
-consonant respectively, and random smooths by word. A first-order
-autoregressive model was included to correct for the high
-auto-correlation residuals. In two participants out of four (IT01,
-IT02), the root was significantly more front in voiced stops in both
-vocalic contexts (/a, o/). On the other hand, one participant (IT03) had
-significant tongue root advancement only following /a/, while the fourth
-participant (IT04) didn't show advancement at all. For Polish, three out
-of four speakers (PL02, PL03, PL04) did not have tongue root
-advancement, while the fourth speaker (PL05) had significant advancement
-in voiced stops in both vocalic contexts.
+\textsc{voicing}, \textsc{vowel quality}, and \textsc{place} of
+articulation of the following consonant respectively, and random smooths
+by word. A first-order autoregressive model was included to correct for
+the high auto-correlation residuals. In two participants out of four
+(IT01, IT02), the root was significantly more front in voiced stops in
+both vocalic contexts (/a, o/). On the other hand, one participant
+(IT03) had significant tongue root advancement only following /a/, while
+the fourth participant (IT04) didn't show advancement at all. For
+Polish, three out of four speakers (PL02, PL03, PL04) did not have
+tongue root advancement, while the fourth speaker (PL05) had significant
+advancement in voiced stops in both vocalic contexts.
 
 Further contour analysis was carried out at C2 closure onset for Italian
 and Polish speakers showing advancement. The tongue root at closure
@@ -376,12 +377,14 @@ speakers, meaning that the voicing effect in his data is stronger and it
 is probably driving the
 effect.\footnote{\label{fn:polish-small} However, note that excluding PL05 from the data yielded to an estimate of 6 milliseconds, which would still need to be explained. Given the small magnitude of the effect, it is likely that it arises from the difficulty of segmenting vowel to consonant transitions when the consonant is voiced. Such downside would not apply to the data in PL05 given the larger estimates for the effect of voicing and the random slope, as discussed above.}
 Incidentally, PL05 is also the only Polish speaker who produced voiced
-consonants with an advanced tongue root. Assuming the effect in the
-other Polish speakers is small enough to be discarded as an artefact
-(see \cref{fn:polish-small}), it follows that, independently of the
-language, the presence of tongue root advancement in voiced stops
-correlates with a concomitant increased duration in vowels preceding
-voiced consonants.
+consonants with an advanced tongue root. Furthermore, a model comparing
+tongue root at closure onset versus maximum tongue displacement in PL05
+indicated that there was virtually no difference in tongue root
+advancement at these two time points. Assuming the effect in the other
+Polish speakers is small enough to be discarded as an artefact (see
+\cref{fn:polish-small}), it follows that, independently of the language,
+the presence of tongue root advancement in voiced stops correlates with
+a concomitant increased duration in vowels preceding voiced consonants.
 
 Moreover, given the smaller effect of voicing in PL05 compared to the
 effect in Italian, a potential hypothesis could be that the effect of
@@ -407,9 +410,19 @@ intra-oral pressure is higher in voiced stops due to the amount of air
 needed to maintain voicing, a firmer seal at the point of oral
 constriction could be used to compensate for the increased pressure.
 Increasing the area of contact by raising the tongue body would provide
-for a such firmer constriction. It is not possible with the data from
-this study to chose between the two possible accounts, so such question
-is left to future research.
+for a such firmer constriction.
+
+A possible critique to the account proposed here is that, if an active
+gesture for maintaining voicing is required during the closure of voiced
+stops, then it is not clear how the Polish speakers without tongue root
+advancement can maintain voicing. However, tongue root advancement is
+not the only solution: manipulations of the larynx or of the
+velopharyngeal port, rather than the tongue, can also counterbalance the
+increasing intra-oral pressure {[}{]}. The gestural timing of the larynx
+and the velopharyngeal port are anatomically independent (although not
+completely) from the timing of tongue gestures {[}{]}, and would ideally
+not require a more complex planning as with an articulatory
+implementation that requires two gestures operated by the tongue.
 
 \bibliography{linguistics.bib}
 
