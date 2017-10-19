@@ -300,6 +300,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("it01-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ### IT02
@@ -361,6 +362,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("it02-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 
@@ -427,6 +429,7 @@ plot_gamsd(
     comparison = list(c2phon_vowel = c("voiceless.a", "voiced.a")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("it03-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ### IT04
@@ -494,6 +497,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("it04-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ## Polish
@@ -556,6 +560,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("pl02-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ### PL04
@@ -616,6 +621,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("pl04-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ### PL03
@@ -680,6 +686,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("pl03-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ### PL05
@@ -740,6 +747,7 @@ plot_gamsd(
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("pl05-tra-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 # Tongue root advancement at closure
@@ -862,6 +870,67 @@ compareML(it02_gamm_ar_null, it02_gamm_ar)
 ```{r it02-tra-clos-plot}
 plot_gamsd(
     it02_gamm_ar,
+    view = "X",
+    comparison = list(c2phonation.ord = c("voiceless", "voiced")),
+    conditions = list(c2place.ord = "coronal")
+)
+```
+
+### IT03
+
+```{r it03-tra-clos}
+it03_clos <- filter(tongues_clos, speaker == "it03")
+
+it03_gamm <- bam(
+    Y ~
+        X.re +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it03_clos,
+    method = "fREML"
+)
+
+rho <- start_value_rho(it03_gamm)
+
+it03_gamm_ar <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it03_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = it03_clos$start.event
+)
+
+summary(it03_gamm_ar)
+
+it03_gamm_ar_null <- bam(
+    Y ~
+        X +
+        s(X, bs = "cr") +
+#        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", m = 1, k = 5),
+    data = it03_clos,
+    method = "ML",
+    rho = rho,
+    AR.start = it03_clos$start.event
+)
+
+compareML(it03_gamm_ar_null, it03_gamm_ar)
+```
+
+```{r it03-tra-clos-plot}
+plot_gamsd(
+    it03_gamm_ar,
     view = "X",
     comparison = list(c2phonation.ord = c("voiceless", "voiced")),
     conditions = list(c2place.ord = "coronal")
@@ -1120,6 +1189,7 @@ plot_gamsd(
     comparison = list(position_ord = c("maximum", "closure")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("it01-voiced-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 ## IT02
@@ -1260,6 +1330,7 @@ plot_gamsd(
     comparison = list(position_ord = c("maximum", "closure")),
     conditions = list(c2place.ord = "coronal")
 )
+ggsave("pl05-voiced-plot.pdf", width = 7, height = 5, path = "./papers/2017-jphon/fig")
 ```
 
 # Summary
