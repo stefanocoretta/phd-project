@@ -40,7 +40,7 @@ An interesting question arising from the connection between voicing and tongue r
 An extensive pool of studies showed that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973, just to mention a few].
 Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see \citet{laeufer1992}.}
 Although several attempts have been put forward to explain the effect of voicing on vowel durations, no consensus has been reached to date.
-Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see \citep{javkin1976} and \cite{kluender1988} for two perceptually inclined proposals.}
+Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see \citet{javkin1976} and \citet{kluender1988} for two perceptually inclined proposals.}
 
 One of the earliest articulatory accounts of the voicing effect attributed the difference in vowel duration to the divergent configuration of the vocal folds in sonorant and obstruent voicing [@halle1967; reiterated in @chomsky1968].
 According to @halle1967, voicing in obstruents is produced with a state of the glottis that is different from the configuration necessary to produce vocal fold vibration in sonorants like vowels.
@@ -222,6 +222,7 @@ Comparisons of tongue contours at C2 onset and at the time of maximum tongue dis
 \end{figure*}
 
 # Discussion
+\label{s:discussion}
 
 Based on the established link between tongue root and voicing, and on the account by @halle1967, it was proposed at the beginning of the paper that the presence of the voicing effect in a language should be correlated with the presence of tongue root advancement in voiced stops, if the latter has a link with the durational differences found in vowels before voiced stops.
 The hypothesis was that the additional time required for the tongue to reach an advanced position in voiced stops could be compensated for during the preceding vowel, thus lengthening in comparison to vowels followed by voiceless stops.
