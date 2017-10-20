@@ -26,39 +26,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced obstruents.
+It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants.
 The production of vocal fold vibration requires a pressure differential between the sub-glottal and the supra-glottal cavities (with lower pressure in the supra-glottal cavity).
-During the production of voiced obstruents, the pressure in the supra-glottal cavity quickly increases, due to the additional air injected from the lungs in the supra-glottal cavity, which is completely sealed in obstruent consonants.
+During the production of voiced obstruents, the pressure in the supra-glottal cavity quickly increases, due to the additional air injected from the lungs in the supra-glottal cavity, which is completely sealed in stops.
 Such pressure increase can hinder the ability to maintain voicing during closure, at the point that voicing can stop if the lowest threshold of pressure differential is reached and surpassed.
 
 @westbury1983 argued that one way to counterbalance the pressure increase in the supra-glottal cavity is to enlarge the cavity through expansion of the pharyngeal walls.
 One way to achieve this is to advance the root of the tongue.
-@ahn2016 has recently has demonstrated, drawing from ultrasound tongue imaging, that the root of the tongue is advanced during the articulation of voiced consonants in American English.
-She also showed that tongue root advancement is present even when vocal fold vibration is not present during closure in underlyingly voiced stops.
-An interesting question arising from the connection between voicing and tongue root is weather the advancement of the root is correlated with other phonetic characteristics, like the duration of vowels preceding obstruents.
+@ahn2016 have recently demonstrated, drawing from ultrasound tongue imaging, that the root of the tongue is advanced during the articulation of voiced consonants in American English.
+They also showed that tongue root advancement is present even when vocal fold vibration is not implemented during closure in underlyingly voiced stops.
+An interesting question arising from the connection between voicing and tongue root is weather the advancement of the root is correlated with other phonetic characteristics, like the duration of vowels preceding stops.
 
-An extensive pool of studies showed that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973].
-Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see \citep{laeufer1992}.}
+An extensive pool of studies showed that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973, just to mention a few].
+Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see \citet{laeufer1992}.}
 Although several attempts have been put forward to explain the effect of voicing on vowel durations, no consensus has been reached to date.
 Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see \citep{javkin1976} and \cite{kluender1988} for two perceptually inclined proposals.}
 
 One of the earliest articulatory accounts of the voicing effect attributed the difference in vowel duration to the divergent configuration of the vocal folds in sonorant and obstruent voicing [@halle1967; reiterated in @chomsky1968].
 According to @halle1967, voicing in obstruents is produced with a state of the glottis that is different from the configuration necessary to produce vocal fold vibration in sonorants like vowels.
 On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuated during the vowel can just naturally ceases at closure (or a few milliseconds after it).
-The authors thus hypothesise that, to allow the glottal state to change from sonorant voicing to obstruent voicing, the vowel is lengthen so that enough time is available for the change to happen.
+The authors thus hypothesise that, to allow the glottal state to change from sonorant voicing to obstruent voicing, the vowel is lengthen so that enough time is available for the adjustments to happen.
 
 Although such account seemed promising at the time it was proposed, later studies failed to demonstrate that obstruent voicing is any different from sonorant voicing [].
 Given the established connection between voicing and tongue root advancement, the hypothesis follows that tongue root advancement could also be linked to vowel duration.
-If this were the case, a language in which vowels have different durations depending on the voicing of the following consonant should also show tongue root advancement in voiced stops, while in those languages in which vowel durations are not affected by voicing, tongue root advancement should not be employed.
+If this were the case, a language in which vowels have different durations depending on the voicing of the following consonant should also show tongue root advancement in voiced stops, while tongue root advancement should not be employed in those languages in which vowel durations are not affected by voicing.
 On the same line of the hypothesis in @halle1967, I put forward an account in which a more complex tongue gesture in voiced consonants requires a longer time to be achieved.
-A possible solution to allow for this additional time is to maintain the vocalic gesture for a prolonged time (as in the @halle1967 hypothesis).
-If tongue root advancement plays a role in determining the duration of preceding vowels through such extension mechanism, than it is expected that languages with the voicing effect show a systematic advancement of the tongue root in voiced stops.
+A possible solution to allow for this additional time is to maintain the vocalic gesture for a prolonged time.
+If tongue root advancement plays a role in determining the duration of preceding vowels through such mechanism, than it is expected that languages with the voicing effect should show a systematic advancement of the tongue root in voiced stops.
 
 In a study assessing general properties on segmental durations of spoken Italian, @farnetani1986 found that the first vowel in /lada/ was on average 35 msec longer than the vowel in /lata/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
 @esposito2002 extended Farnetanis's research to all vowels and stops and found that vowels were longer when followed by a voiced stop, with an estimate similar to what reported in @farnetani1986.
 <!-- Add two papers that will come through document supply -->
 Vowels in Polish, on the other hand, are not affected by the voicing of the following consonant, according to @keating1984.
-Italian and Polish have been chosen as the two test languages for this study.
+For these reasons, Italian and Polish have been chosen as the two test languages for this study.
 
 <!-- actually it's Keating 1979 PhD dissertation -->
 <!-- The duration of vowels n in the word pair /rata/ ~ /rada/ and found that there was a durational difference of 2 milliseconds.
@@ -83,7 +83,7 @@ PL04 & f   & 34  & Warsaw   & no                \NN
 PL05 & m   & 34  & Przasnysz & no               \LL
 }
 
-Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) have been recorded in Manchester and in Italy \Cref{t:participants}.
+Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) have been recorded in Manchester and in Italy (\Cref{t:participants}).
 The Italian speakers were from Northern Italy (three from the Northwest and one from Northeast).
 The Polish group was more heterogeneous, with two speakers from Poznań, one from Przasnysz, and one from Warsaw.
 This research has obtained ethic clearance from the University of Manchester (REF 2016-0099-76).
@@ -99,16 +99,16 @@ The participants received a small monetary compensation.
 \end{figure*}
 
 An Articulate Instruments Inc. set-up was used for this study (\Cref{f:uti-setup}).
-This is constituted by a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
+This was constituted by a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
 A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
 A FocusRight pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
 The acquisition of the ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
-Finally, stabilisation of the ultrasound probe was ensured by using a stabilisation headset produced by Articulate Instruments Inc. (not shown in the figure).
+Stabilisation of the ultrasonic transducer was ensured by using a stabilisation headset produced by Articulate Instruments Inc. (not shown in the figure).
 
 ## Materials
 
 Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.), yielding a total of 12 target words.
-A labial stop was chosen as the first consonant to reduce influence on the following vowel (although cf. @vazquez-alvarez2007).
+A labial stop was chosen as the first consonant to reduce influence on the following vowel (although cf. \citealt{vazquez-alvarez2007}).
 Only coronal and velar stops were used as target consonants since labial consonants cannot be imaged with ultrasonography.
 The target words were embedded in a frame sentence.
 Prosodically similar sentences were used to ensure comparability between languages.
@@ -118,17 +118,17 @@ The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *M�
 
 The sentences with the target words were randomised for each participant, although the order was kept the same between repetitions within participant due to software constraints.
 Each participant repeated the list of randomised stimuli six times.
-The participant occlusal plane was obtained using a bite plate, and the hard palate was imaged by asking the participant to swallow water [@scobbie2011].
-The frame rate of the acquisition of the ultrasonic data varied between 55 and 65 frames per second (one frame every 18-15 milliseconds).
+The participant's occlusal plane was obtained using a bite plate, and the hard palate was imaged by asking the participant to swallow water [@scobbie2011].
+The frame rate of the acquisition of the ultrasonic data varied between 55 and 65 frames per second (one frame every 15-18 milliseconds).
 The audio signal was recorded at 22050 MHz (16-bit).
 
 ## Data processing
 
 Synchronisation of the ultrasonic and audio signal was achieved in post-processing, using a built-in procedure of AAA.
-The data were then subjected to force alignment using the SPASS force aligner [@bigi2015].
+The data were then subject to force alignment using the SPPAS force aligner [@bigi2015].
 The outcome of the automatic annotation was then manually corrected, according to the criteria in \Cref{t:dur-measures}.
-The onset of the target consonant burst (C2 burst) was detected automatically employing a Praat [@boersma2016] implementation of the algorithm described in @ananthapadmanabha2014.
-The duration of the following intervals was then extracted from the acoustic landmarks using an automated procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 burst).
+The onset of the target consonant burst (C2 burst) was detected automatically in Praat [@boersma2016], employing a implementation of the algorithm described in @ananthapadmanabha2014.
+The durations of the following intervals were then extracted from the acoustic landmarks using an automated procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 burst).
 
 <!--
 The outcome of the automatic annotation was then manually corrected, according to the criteria in \Cref{t:dur-measures}.: the target vowel onset (V1 onset) was marked by visual inspection at the time of appearance of higher formants in the spectrogram following the burst of /p/ (C1); the target vowel offset (V1 offset) was marked by visual inspection at the time of disappearance of the higher formants in the spectrogram; this point also coincides with the consonant onset (C2 onset) and the closure onset (C2 closure onset); consonant offset (C2 offset) was marked by visual inspection at the time of formants onsets of the following vowel.
@@ -164,43 +164,44 @@ The time of maximum displacement was finally obtained from tangential velocity [
 
 ## Analysis
 
-The tongue contours coordinates were exported at two time points: (1) at the C2 closure onset, and (2) at maximum tongue displacement.
+The tongue contours coordinates were exported at two time points: (1) at the onset of C2 closure, and (2) at maximum tongue displacement (within C2 closure).
 The contours were normalised by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
-Generalised additive mixed effects regression models [@wood2006] were used for the statistical analysis of tongue contour data in R [@r-core-team2017].
+Generalised additive mixed effects regression models [GAMMs, @wood2006] were used for the statistical analysis of tongue contour data in R [@r-core-team2017].
 Duration measurements were subject to linear mixed effects models using `lme4` in R [@bates2015].
 
 # Results
 
 ## Vowel duration and voicing
 
-A linear mixed effect regression model was fitted on the Italian vowel durations with duration as the outcome variable; \textsc{vowel quality} (/a, o, u/), \textsc{voicing} and \textsc{place of articulation} of the following consonant, \textsc{sentence duration} as fixed effects; random intercepts by speaker and word, and by-speaker random slopes for voicing .
-An interaction between voicing and vowel quality was also included in the final model, since it turned out to be significant.
-P-values were obtained through likelihood ration tests comparing the full model including voicing with a null model without voicing as a predictor.
+A linear mixed effects regression model was fitted on the Italian vowel duration data with \textsc{duration} as the outcome variable; \textsc{vowel quality} (/a, o, u/), \textsc{voicing} and \textsc{place of articulation} of the following consonant, \textsc{sentence duration} as fixed effects; random intercepts by speaker and word, and by-speaker random slopes for voicing.
+An interaction between voicing and vowel quality was also included in the final model, since it significantly improved the model.
+P-values were obtained through likelihood ratio tests comparing the full model including voicing with a null model without voicing as a predictor.
 According to the full model, Italian vowels are 19.5 milliseconds (±5.5 standard errors) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p = 0.000337).
 
 For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
 Surprisingly, the model reported a partially significant 8 milliseconds (±3 standard errors) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
-The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data, with an estimated 14 milliseconds effect of voicing.
-This observation will come at hand when discussing about the results of the tongue contour data.
+The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data.
+The estimated effect of voicing on vowel duration for PL05 was 14 milliseconds.
+This observation will come handy when discussing about the results of the tongue contour data.
 
 ## Tongue contours
 
 \begin{figure*}
     \centering
-    \includegraphics[width=.8\textwidth]{fig/italian-tra.pdf}
-    \includegraphics[width=.8\textwidth]{fig/polish-tra.pdf}
+    \includegraphics[height=.9\textheight]{fig/tra.pdf}
     \caption{Comparison of tongue contours at maximum tongue displacement (within C2 closure) in Italian (top half) and Polish (bottom half). The plotted contours are reference contours for the coronal consonants preceded by /a/. See text for more details.}
     \label{f:tra}
 \end{figure*}
 
 Given the poor quality of the ultrasonic data for /u/, this vowel was not included in the statistical analysis.
-The analysis of the Italian ultrasonic data showed that voiced stops are produced with advancement of the root of the tongue, as expected based on previous research on English.
-Individual generalised additive mixed effect models were fitted for each speaker: the y-coordinates of the contours were included in the model as the outcome variable; the x-coordinates as the only parametric term.
-The following smooths were specified: a reference smooth term for the x-coordinates, three difference smooths for the x-coordinates by \textsc{voicing}, \textsc{vowel quality}, and \textsc{place} of articulation of the following consonant respectively, and random smooths by word.
-A first-order autoregressive model was included to correct for the high auto-correlation residuals.
+Significant testing in GAMMs was achieved through model comparison and visual inspection of the difference smooth, as suggested in \citep{soskuthy2017}.
+The analysis of the Italian ultrasonic data showed that voiced stops are produced with advancement of the root of the tongue (), as expected based on previous research on English.
+Individual GAMMs were fitted for each speaker: the \textsc{y-coordinates} of the contours were included in the model as the outcome variable; the \textsc{x-coordinates} as the only parametric term.
+The following smooths were specified: a reference smooth term for the x-coordinates, three difference smooths for the x-coordinates by \textsc{voicing}, \textsc{vowel quality}, and \textsc{place} of articulation of the following consonant respectively, and by-word random smooths.
+A first-order autoregressive model was included to correct for the high autocorrelation residuals.
 
-\Cref{f:tra} (top half) shows the predicted tongue contours in voiceless (in red) and voiced stops (in blue) at maximum tongue displacement for each of the four Italian speakers.
-Beneath each tongue contour panel the difference smooth for voicing is also shown (black line, confidence interval in grey).
+\Cref{f:tra} (top half) shows the predicted tongue contours in voiceless (red) and voiced stops (blue) at maximum tongue displacement for each Italian speaker.
+Below each tongue contour panel, the difference smooth for voicing is also shown (black line, confidence interval in grey).
 If the confidence interval of the difference smooth do not cross 0 on the ordinate axis, the tongue contours are significantly different.
 The significantly different portions of the contours are also indicated in the figure by a shaded red area.
 
