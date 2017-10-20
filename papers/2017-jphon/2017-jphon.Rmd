@@ -240,9 +240,9 @@ Incidentally, PL05 is also the only Polish speaker who produced voiced consonant
 Furthermore, a model comparing tongue root at closure onset versus maximum tongue displacement in PL05 indicated that there was no difference in tongue root advancement at these two time points ().
 Assuming the effect in the other Polish speakers is small enough to be discarded as an artefact (see \cref{fn:polish-small}), it follows that, independently of the language, the presence of tongue root advancement in voiced stops correlates with a concomitant increased duration in vowels preceding voiced consonants.
 
-Moreover, given the smaller effect of voicing in PL05 compared to the effect in Italian, a potential hypothesis could be that the correlation between tongue root advancement and vowel duration is gradual, rather then categorical.
-In this case, even within language it should be possible to see different magnitudes of difference in vowel durations depending on the amount of advancement of the tongue root.
-Since the durational difference in the polish speaker PL05 was quite small (14 milliseconds, versus 19.5 milliseconds in Italian), one expects the magnitude of the advancement of the root to be proportionately smaller in this speaker.
+Given the smaller effect of voicing in PL05 compared to the effect in Italian (14 vs 19.5 milliseconds), a possible hypothesis could be that the correlation between tongue root advancement and vowel duration is gradual, rather then categorical.
+In this case, the magnitude of the voicing effect should correlate with the amount of tongue root advancement even *within speaker*, or at least across speakers independently of their language.
+Since the durational difference in the Polish speaker PL05 was quite small, one expects the magnitude of the advancement of the root to be proportionately smaller for this speaker.
 Future work will set out to investigate the hypothetically gradual correlation between vowel duration and amount of tongue root advancement.
 
 Finally, the ultrasonic data showed raising of the tongue dorsum concomitant to root advancement.
@@ -250,9 +250,10 @@ The presence of such gesture, although not expected, makes sense from an anatomi
 Raising of the tongue body could be implemented as a way to counterbalance the compression of the tongue mass caused by the advancement of the root.
 It is not thus surprising to observe a raised tongue body in voiced stops accompanying root advancement.
 An alternative account could ascribe tongue body raising to aerodynamic properties of voiced stops.
-Since the intra-oral pressure is higher in voiced stops due to the amount of air needed to maintain voicing, a firmer seal at the point of oral constriction could be used to compensate for the increased pressure.
-Increasing the area of contact by raising the tongue body would provide for a such firmer constriction.
+Since the intra-oral pressure is higher in voiced stops due to the amount of air needed to maintain voicing, a firmer seal at the point of oral constriction could be used to compensate for the increasing pressure.
+Expanding the area of contact by raising the tongue body would provide for such a firmer constriction.
+<!-- could also be a matter of velocity -->
 
-A possible critique to the account proposed here is that, if an active gesture for maintaining voicing is required during the closure of voiced stops, then it is not clear how the Polish speakers without tongue root advancement can maintain voicing.
-However, tongue root advancement is not the only solution: manipulations of the larynx or of the velopharyngeal port, rather than the tongue, can also counterbalance the increasing intra-oral pressure [].
-The gestural timing of the larynx and the velopharyngeal port are anatomically independent (although not completely) from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation that requires two gestures operated by the tongue.
+A possible critique to the account proposed here is that, if an active gesture for maintaining voicing is required during the closure of voiced stops, then it is not clear how the Polish speakers can maintain voicing without tongue root advancement.
+However, root advancement is not the only solution: manipulations of the larynx or of the velopharyngeal port, rather than the tongue, can also counterbalance the increased intra-oral pressure [].
+The gestural timing of the larynx and the velopharyngeal port are (at least partially) anatomically independent from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation that of multiple tongue gestures.
