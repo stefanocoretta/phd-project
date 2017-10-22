@@ -224,16 +224,14 @@ Comparisons of tongue contours at C2 onset and at the time of maximum tongue dis
 # Discussion
 \label{s:discussion}
 
-Based on the established link between tongue root and voicing, and on the account by @halle1967, it was proposed at the beginning of the paper that the presence of the voicing effect in a language should be correlated with the presence of tongue root advancement in voiced stops, if the latter has a link with the durational differences found in vowels before voiced stops.
-The hypothesis was that the additional time required for the tongue to reach an advanced position in voiced stops could be compensated for during the preceding vowel, thus lengthening in comparison to vowels followed by voiceless stops.
+Based on the established link between tongue root and voicing, it was proposed at the beginning of the paper that the presence of the voicing effect in a language should be correlated with the presence of tongue root advancement in voiced stops.
 To test the correlation between tongue root advancement and vowel durations, ultrasonic data were collected from two languages with and without the voicing effect, Italian and Polish respectively.
-
 The generalised presence of tongue root advancement in Italian but not in Polish, as found in the data from this study, provides initial support to the proposed link between longer vowels following voiced stops and tongue root advancement.
-A plausible cause for the longer duration of vowels before voiced consonants with tongue root advancement (as in Italian) is that a more complex tongue gesture---a gesture that requires adjustments of both the tongue root and the tongue dorsum/tip---requires longer time to be achieved.
-Protracting the preceding vocalic gesture in time could then be a solution to allow for the required additional time.
+
+Following the reasoning of the poposal by @halle1967, a plausible cause for the longer duration of vowels before voiced consonants with tongue root advancement (as in Italian) could therefore be the additional time required to achieve a more complex consonantal gesture---a gesture that requires adjustments of both the tongue root and the tongue dorsum/tip.
 The reported absence of the voicing effect in Polish could then be ascribed to the absence of tongue root advancement in the production of voiced consonants in this language.
 However, two complications derive from the data presented in this study.
-First, tongue root advancement was found in one of the Polish speakers (PL05) on one hand and it was absent from one of the Italian speakers (IT04) on the other.
+First, tongue root advancement was found in one of the Polish speakers on one hand (PL05), and it was absent from one of the Italian speakers on the other (IT04).
 Second, vowels followed by voiced stops in Polish were 8 milliseconds longer in Polish, contrary to what argued in @keating1984.
 
 The first issue can be overcome by the observation that, as mentioned above, PL05 had a strikingly higher slope estimate for the effect of voicing on vowel duration, compared to the other Polish speakers, meaning that the voicing effect in his data was stronger.\footnote{\label{fn:polish-small} Note that excluding PL05 from the durational data produced an estimated difference of vowel duration of 6 milliseconds, which still calls for an explanation. Given the small magnitude of the effect, however, it is likely that such effect is an artefact of the difficulty of segmenting vowel to consonant transitions when the consonant is voiced []. Moreover, such downside would not apply to the data in PL05 given the larger estimates for the effect of voicing and the random slope, as discussed above.}
@@ -244,7 +242,7 @@ Assuming the effect in the other Polish speakers is small enough to be discarded
 Given the smaller effect of voicing in PL05 compared to the effect in Italian (14 vs 19.5 milliseconds), a possible hypothesis could be that the correlation between tongue root advancement and vowel duration is gradual, rather then categorical.
 In this case, the magnitude of the voicing effect should correlate with the amount of tongue root advancement even *within speaker*, or at least across speakers independently of their language.
 Since the durational difference in the Polish speaker PL05 was quite small, one expects the magnitude of the advancement of the root to be proportionately smaller for this speaker.
-Future work will set out to investigate the hypothetically gradual correlation between vowel duration and amount of tongue root advancement.
+Future work will set out to investigate the hypothetically gradient correlation between vowel duration and amount of tongue root advancement.
 
 Finally, the ultrasonic data showed raising of the tongue dorsum concomitant to root advancement.
 The presence of such gesture, although not expected, makes sense from an anatomical point of view.
@@ -257,4 +255,4 @@ Expanding the area of contact by raising the tongue body would provide for such 
 
 A possible critique to the account proposed here is that, if an active gesture for maintaining voicing is required during the closure of voiced stops, then it is not clear how the Polish speakers can maintain voicing without tongue root advancement.
 However, root advancement is not the only solution: manipulations of the larynx or of the velopharyngeal port, rather than the tongue, can also counterbalance the increased intra-oral pressure [].
-The gestural timing of the larynx and the velopharyngeal port are (at least partially) anatomically independent from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation that of multiple tongue gestures.
+The gestural timing of the larynx and the velopharyngeal port are (at least partially) anatomically independent from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation of multiple tongue gestures.
