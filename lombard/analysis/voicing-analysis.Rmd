@@ -11,6 +11,8 @@ knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(speakr)
+library(lme4)
+library(effects)
 ```
 
 ```{r speakr}
@@ -25,7 +27,8 @@ acoustics <- read_csv("./lombard/results/acoustics.csv", na = "--undefined--") %
     left_join(y = stimuli)
 
 durations <- read_csv("./lombard/results/durations.csv", na = "--undefined--") %>%
-    left_join(y = stimuli)
+    left_join(y = stimuli) %>%
+    mutate_if(is.character, as.factor)
 ```
 
 
@@ -48,6 +51,24 @@ durations %>%
     ggplot(aes(voicing, vowel_duration, colour = position)) +
     geom_boxplot()
 ```
+
+```{r}
+vowel_dur_lm <- lmer(
+    vowel_duration ~
+        voicing *
+        position +
+        (1|speaker) +
+        (1|word),
+    data = durations
+)
+
+summary(vowel_dur_lm)
+```
+
+```{r}
+plot(allEffects(vowel_dur_lm))
+```
+
 
 ```{r}
 acoustics %>%
