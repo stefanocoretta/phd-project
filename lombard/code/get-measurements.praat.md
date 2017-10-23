@@ -33,6 +33,15 @@ for file from 1 to number_files
     file$ = Get string: file
     sound = Read from file: "'data_folder$'/'file$'"
     speaker$ = selected$("Sound")
+
+    if speaker$ == "lm01"
+        highest_frequency = 5500
+        number_of_formants = 5
+    else
+        highest_frequency = 5000
+        number_of_formants = 5
+    endif
+
     textgrid = Read from file: "'data_folder$'/'speaker$'-palign_copy.TextGrid"
     tokenisation = Read from file: "'data_folder$'/'speaker$'-token.TextGrid"
 
@@ -70,7 +79,7 @@ for interval from 1 to number_intervals
 
         selectObject: sound
         sound_part = Extract part: vowel_start - 0.05, vowel_end + 0.05, "rectangular", 1, "yes"
-        noprogress To Formant (burg): 0, 5, 5500, 0.025, 50
+        noprogress To Formant (burg): 0, number_of_formants, highest_frequency, 0.025, 50
         formant = selected("Formant")
         selectObject: sound_part
         noprogress To Pitch: 0, 75, 600
