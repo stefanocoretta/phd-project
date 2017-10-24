@@ -77,6 +77,20 @@ summary(vowel_dur_lm)
 plot(allEffects(vowel_dur_lm))
 ```
 
+```{r c-duration-plot}
+durations %>%
+    ggplot(aes(position, consonant_duration, colour = voicing)) +
+    geom_boxplot()
+```
+
+```{r}
+durations %>%
+    ggplot(aes(consonant_duration, vowel_duration, colour = voicing)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid(position ~ .)
+```
+
 
 ```{r}
 acoustics %>%
