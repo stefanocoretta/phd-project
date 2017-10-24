@@ -7,7 +7,7 @@
 <<<file loop>>>
 ```
 
-The script reads each `.wav` file in `data/rediver/audio/` and performs standard calculations.
+The script reads each `.wav` file in `data/derived/audio/` and extracts standard acoustic measurements.
 
 ## "preparation"
 ```praat
