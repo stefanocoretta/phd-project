@@ -29,37 +29,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants.
+It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants \citep{halle1967,kent1969,perkell1969,westbury1983}.
 The production of vocal fold vibration requires a pressure differential between the sub-glottal and the supra-glottal cavities (with lower pressure in the supra-glottal cavity).
 During the production of voiced obstruents, the pressure in the supra-glottal cavity quickly increases, due to the additional air injected from the lungs in the supra-glottal cavity, which is completely sealed in stops.
 Such pressure increase can hinder the ability to maintain voicing during closure, at the point that voicing can stop if the lowest threshold of pressure differential is reached and surpassed.
 
-@westbury1983 argued that one way to counterbalance the pressure increase in the supra-glottal cavity is to enlarge the cavity through expansion of the pharyngeal walls.
-One way to achieve this is to advance the root of the tongue.
-@ahn2016 have recently demonstrated, drawing from ultrasound tongue imaging, that the root of the tongue is advanced during the articulation of voiced consonants in American English.
+@westbury1983 argues that one way to counterbalance the pressure increase in the supra-glottal cavity is to enlarge the cavity through the advancement of the tongue root.
+Drawing from ultrasound tongue imaging, @ahn2016 demonstrate that the root of the tongue is advanced during the articulation of voiced consonants in American English.
 They also showed that tongue root advancement is present even when vocal fold vibration is not implemented during closure in underlyingly voiced stops.
 An interesting question arising from the connection between voicing and tongue root is weather the advancement of the root is correlated with other phonetic characteristics, like the duration of vowels preceding stops.
+Such hypothesis will be expanded on in this section, after a brief overview of work on the effect of consonant voicing on vowel duration.
 
-An extensive pool of studies showed that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973, just to mention a few].
-Most of the literature on the topic suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see \citet{laeufer1992}.}
+An extensive pool of studies shows that vowels tend to be longer when followed by voiced obstruents and shorter when followed by voiceless obstruents [@house1953; @chen1970; @klatt1973; @lisker1973, just to mention a few].
+Most of the literature on this phenomenon, known as the "voicing effect", suggests that different languages show different magnitudes of such durational differential, and that in some other languages the duration of vowels is not affected by the voicing of the following obstruent.\footnote{For a different opinion on the first matter, see \citet{laeufer1992}.}
 Although several attempts have been put forward to explain the effect of voicing on vowel durations, no consensus has been reached to date.
 Nonetheless, a recurrent theme focusses on the differences that characterise the gestural implementation of voiced and voiceless stops.\footnote{However, see \citet{javkin1976} and \citet{kluender1988} for two perceptually inclined proposals.}
 
-One of the earliest articulatory accounts of the voicing effect attributed the difference in vowel duration to the divergent configuration of the vocal folds in sonorant and obstruent voicing [@halle1967; reiterated in @chomsky1968].
+One of the earliest articulatory accounts of the voicing effect attributed the difference in vowel duration to the divergent configuration of the vocal folds between voicing in sonorants and in obstruents [@halle1967; reiterated in @chomsky1968].
 According to @halle1967, voicing in obstruents is produced with a state of the glottis that is different from the configuration necessary to produce vocal fold vibration in sonorants like vowels.
-On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing perpetuated during the vowel can just naturally ceases at closure (or a few milliseconds after it).
-The authors thus hypothesise that, to allow the glottal state to change from sonorant voicing to obstruent voicing, the vowel is lengthen so that enough time is available for the adjustments to happen.
+On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing of the preceding vowel can just naturally ceases at closure (or a few milliseconds after it).
+@halle1967 thus hypothesise that, to allow the glottal state to change from the sonorant voicing of the preceding vowel to obstruent voicing, the vowel is lengthened so that enough time is available for such adjustments to happen.
 
 Although such account seemed promising at the time it was proposed, later studies failed to demonstrate that obstruent voicing is any different from sonorant voicing [].
 Given the established connection between voicing and tongue root advancement, the hypothesis follows that tongue root advancement could also be linked to vowel duration.
 If this were the case, a language in which vowels have different durations depending on the voicing of the following consonant should also show tongue root advancement in voiced stops, while tongue root advancement should not be employed in those languages in which vowel durations are not affected by voicing.
-On the same line of the hypothesis in @halle1967, I put forward an account in which a more complex tongue gesture in voiced consonants requires a longer time to be achieved (\Cref{s:discussion}).
+Building on the hypothesis in @halle1967, I put forward an account in which a relatively more complex tongue gesture in voiced consonants requires a longer time to be achieved (\Cref{s:discussion}).
 
-In a study assessing general properties on segmental durations of spoken Italian, @farnetani1986 found that the first vowel in /lada/ was on average 35 msec longer than the vowel in /lata/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
-@esposito2002 extended Farnetanis's research to all vowels and stops and found that vowels were longer when followed by a voiced stop, with an estimate similar to what reported in @farnetani1986.
+In this paper, I focus on two languages, Italian and Polish, that have been reported to show and lack the voicing effect respectively.
+In a study assessing general properties on segmental durations of spoken Italian, @farnetani1986 shows that the first vowel in /lada/ is on average 35 milliseconds longer than the vowel in /lata/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
+@esposito2002 extends Farnetanis's research to all vowels and stops and demonstrates that vowels are longer when followed by a voiced stop, with an estimate similar to what reported in @farnetani1986.
 <!-- Add two papers that will come through document supply -->
-Vowels in Polish, on the other hand, are not affected by the voicing of the following consonant, according to @keating1984.
-For these reasons, Italian and Polish have been chosen as the two test languages for this study.
+On the other hand, @keating1984 reports that vowels in Polish are not affected by the voicing of the following consonant.
+The average duration of the first vowel in /rata/ is 167.5 milliseconds, while the pre-consonantal vowel in /rada/ is just two milliseconds longer.
+Based on the hypothesis put forward that there is a link between tongue root advancement and the voicing effect, it is expected that Italian will show tongue root advancement, while Polish will lack such articulatory gesture in the implementation of voiced stops.
 
 <!-- actually it's Keating 1979 PhD dissertation -->
 <!-- The duration of vowels n in the word pair /rata/ ~ /rada/ and found that there was a durational difference of 2 milliseconds.
@@ -84,10 +86,10 @@ PL04 & f   & 34  & Warsaw   & no                \NN
 PL05 & m   & 34  & Przasnysz & no               \LL
 }
 
-Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) have been recorded in Manchester and in Italy (\Cref{t:participants}).
+Eight native speakers of Italian (2 females, 2 males) and Polish (2 females, 2 males) were recorded in Manchester and in Italy (\Cref{t:participants}).
 The Italian speakers were from Northern Italy (three from the Northwest and one from Northeast).
-The Polish group was more heterogeneous, with two speakers from Poznań, one from Przasnysz, and one from Warsaw.
-This research has obtained ethic clearance from the University of Manchester (REF 2016-0099-76).
+The Polish group was more heterogeneous, with two speakers from the North-west (Poznań), and two from the North-east (Warsaw and Przasnysz).
+Ethical clearance was obtained for this work from the University of Manchester (REF 2016-0099-76).
 The participants received a small monetary compensation.
 
 ## Equipment set-up
