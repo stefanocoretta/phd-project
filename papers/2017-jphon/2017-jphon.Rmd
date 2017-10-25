@@ -122,7 +122,8 @@ The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *MÃ
 The sentences with the target words were randomised for each participant, although the order was kept the same between repetitions within participant due to software constraints.
 Each participant repeated the list of randomised stimuli six times.
 The participant's occlusal plane was obtained using a bite plate [@scobbie2011], and the hard palate was imaged by asking the participant to swallow water [@epstein2005].
-The frame rate of the acquisition of the ultrasonic data varied between 55 and 65 frames per second (one frame every 15-18 milliseconds).
+The frame rate of the acquisition of the ultrasonic data ranged between 43 and 68 frames per second.
+Other settings varied depending on the frame rate (scanlines = 88-114, pixel per scanline = 980-988, field of view = 71-93, pixel offset = 109-263, depth (mm) = 75-180).
 The audio signal was recorded at 22050 MHz (16-bit).
 
 ## Data processing and analysis
