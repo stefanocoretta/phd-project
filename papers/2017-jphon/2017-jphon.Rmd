@@ -47,7 +47,7 @@ Nonetheless, a recurrent theme focusses on the differences that characterise the
 
 One of the earliest articulatory accounts of the voicing effect attributed the difference in vowel duration to the divergent configuration of the vocal folds between voicing in sonorants and in obstruents [@halle1967; reiterated in @chomsky1968].
 According to @halle1967, voicing in obstruents is produced with a state of the glottis that is different from the configuration necessary to produce vocal fold vibration in sonorants like vowels.
-On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing of the preceding vowel can just naturally ceases at closure (or a few milliseconds after it).
+On the contrary, they claim that voiceless stops do not require any specific glottal configuration and thus the voicing of the preceding vowel can just naturally cease at closure (or a few milliseconds after it).
 @halle1967 thus hypothesise that, to allow the glottal state to change from the sonorant voicing of the preceding vowel to obstruent voicing, the vowel is lengthened so that enough time is available for such adjustments to happen.
 
 Although such account seemed promising at the time it was proposed, later studies failed to demonstrate that obstruent voicing is any different from sonorant voicing [].
