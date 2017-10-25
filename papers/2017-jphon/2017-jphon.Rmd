@@ -180,7 +180,7 @@ P-values were obtained through likelihood ratio tests comparing the full model i
 According to the full model, Italian vowels are 19.5 milliseconds (SE = 5.5) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p < 0.001).
 
 For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
-Contrary to previous findings, the model reveals a partially significant 8 milliseconds (SE = 3) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p = 0.02).
+Contrary to previous findings, the model reveals a significant 8 milliseconds (SE = 3) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p < 0.05).
 The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data, but removing this speaker from the model doesn't remove the effect.
 The estimated effect of voicing on vowel duration for PL05 was 14 milliseconds.
 These observations will become relevant when discussing about the results of the tongue contour data.
