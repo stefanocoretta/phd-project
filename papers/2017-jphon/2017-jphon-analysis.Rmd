@@ -126,6 +126,39 @@ vowels <- list.files(path = "papers/2017-jphon/results/durations",
 
 # Vowel duration
 
+```{r duration-lm}
+vow_lm <- lmer(
+    vowel.duration ~
+        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels)
+)
+
+summary(vow_lm)
+
+vow_lm_null <- lmer(
+    vowel.duration ~
+#        c2phonation +
+        c2place +
+        vowel +
+        sentence.duration +
+        (1+c2phonation|speaker) +
+        (1|word),
+    data = filter(vowels)
+)
+
+anova(vow_lm_null, vow_lm)
+```
+
+```{r duration-lm-slopes}
+ranef(vow_lm)$speaker
+sjp.lmer(vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
+```
+
 ## Italian
 
 ```{r it-duration-lm}
