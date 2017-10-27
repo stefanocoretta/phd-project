@@ -181,11 +181,11 @@ Generalised additive mixed effects regression models [GAMMs, @wood2006] were use
 
 A linear mixed effects regression model was fitted to the Italian vowel duration data with \textsc{duration} as the outcome variable; \textsc{vowel quality} (/a, o, u/), \textsc{voicing} and \textsc{place of articulation} of the following consonant, \textsc{sentence duration} as fixed effects; random intercepts by speaker and word, and by-speaker random slopes for voicing.
 An interaction between voicing and vowel quality was also included in the final model, since it significantly improved the model.
-P-values were obtained through likelihood ratio tests comparing the full model including voicing with a null model without voicing as a predictor.
-According to the full model, Italian vowels are 22 milliseconds (SE = 6) longer if followed by a voiced stop ($\chi^2$(3) = 16.6; p < 0.001).
+P-values were obtained with `lmerTest` [] which employs Satterthwaite approximations to degrees of freedom.
+According to the full model, Italian vowels are 22 milliseconds (SE = 6) longer if followed by a voiced stop (*t*(12.7) = 3.596; p < 0.01).
 
 For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
-Contrary to previous findings, the model reveals a significant 8 milliseconds (SE = 3) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p < 0.05).
+Contrary to previous findings, the model reveals a significant 8 milliseconds (SE = 3) effect of consonantal voicing on the preceding vowel (*t*(6.86) = 2.418, p < 0.05).
 The exploration of the random slopes for each speaker indicated that PL05 showed a particularly higher slope for voicing, meaning that the effect of voicing was stronger in his data, but removing this speaker from the model doesn't remove the effect.
 The estimated effect of voicing on vowel duration for PL05 was 14 milliseconds.
 These observations will become relevant when discussing about the results of the tongue contour data.
