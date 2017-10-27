@@ -132,7 +132,7 @@ Synchronisation of the ultrasonic and audio signal was achieved in post-processi
 The data were then subject to force alignment using the SPPAS force aligner [@bigi2015].
 The outcome of the automatic annotation was then manually corrected, according to the criteria in \Cref{t:dur-measures}.
 The onset of the target consonant burst (C2 burst) was detected automatically in Praat [@boersma2016], employing a implementation of the algorithm described in @ananthapadmanabha2014.
-The durations of the following intervals were then extracted from the acoustic landmarks using an automated procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 burst).
+The durations of the following intervals were extracted from the acoustic landmarks using an automated procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 burst).
 
 <!--
 The outcome of the automatic annotation was then manually corrected, according to the criteria in \Cref{t:dur-measures}.: the target vowel onset (V1 onset) was marked by visual inspection at the time of appearance of higher formants in the spectrogram following the burst of /p/ (C1); the target vowel offset (V1 offset) was marked by visual inspection at the time of disappearance of the higher formants in the spectrogram; this point also coincides with the consonant onset (C2 onset) and the closure onset (C2 closure onset); consonant offset (C2 offset) was marked by visual inspection at the time of formants onsets of the following vowel.
@@ -157,17 +157,22 @@ consonant burst onset & (C2 burst)         & automatic detection \citep{ananthap
 Spline curves were automatically fitted to the visible contours using the AAA batch tracking function.
 Manual correction was applied in those cases that showed clear tracking errors.
 The time of maximum tongue displacement within consonant closure was then calculated in AAA following the method in @strycharczuk2015.
-<!-- The displacement was calculated based on the movement of the splines along one of the 42 fan lines. -->
-<!-- For each speaker, two relevant fan lines were chosen: one for the tongue tip and one for the tongue dorsum. -->
+A fan-like frame consisting of 42 equidistant radial lines was used as the coordinate system.
+The origin of the 42 fan-lines coincides with the centre of the ultrasonic probe, such that each fan-line is parallel to the direction of the ultrasonic signal.
+Tongue displacement was thus calculated as the displacement of the fitted splines along the fan-line vectors.
+The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation.
+The vector search area was restricted to the portion of the splines corresponding to the tongue tip for coronal consonants, and to the portion corresponding to the tongue dorsum for velar consonants.
+<!-- The displacement was calculated based on the movement of the splines along one of the 42 fan lines.
 Fan line selection in this study was achieved by finding the fan line within the relevant area of the tongue (tongue tip for coronal consonants and tongue dorsum for velar consonants) with the highest standard deviation of displacement.
-Tongue contours were exported in Cartesian coordinates at two time points: (1) at the onset of C2 closure, and (2) at maximum tongue displacement (within C2 closure).
+-->
+
+The cartesian coordinates of the tongue contours were exported from two time points: the onset of C2 closure, and the time maximum tongue displacement (which is always within C2 closure).
 The contours were normalised by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
 <!-- on the inspection of the standard deviation of the splines in the relevant area of the tongue (tongue tip for coronal consonants and tongue dorsum for velar consonants).
 The fan line that showed the highest standard deviation within the relevant area was used for calculating displacement.
 Tongue displacement velocity and tangential velocity were then derived.
 The time of maximum displacement was finally obtained from tangential velocity [@strycharczuk2015]. -->
-
-Durational measurements were analysed using linear mixed effects models using `lme4` in R [@r-core-team2017; @bates2015].
+Durational measurements were analysed with linear mixed effects models using `lme4` in R [@r-core-team2017; @bates2015].
 Generalised additive mixed effects regression models [GAMMs, @wood2006] were used for the statistical analysis of tongue contour data.
 
 # Results
@@ -177,7 +182,7 @@ Generalised additive mixed effects regression models [GAMMs, @wood2006] were use
 A linear mixed effects regression model was fitted to the Italian vowel duration data with \textsc{duration} as the outcome variable; \textsc{vowel quality} (/a, o, u/), \textsc{voicing} and \textsc{place of articulation} of the following consonant, \textsc{sentence duration} as fixed effects; random intercepts by speaker and word, and by-speaker random slopes for voicing.
 An interaction between voicing and vowel quality was also included in the final model, since it significantly improved the model.
 P-values were obtained through likelihood ratio tests comparing the full model including voicing with a null model without voicing as a predictor.
-According to the full model, Italian vowels are 19.5 milliseconds (SE = 5.5) longer if followed by a voiced stop ($\chi^2$(3) = 18.5, p < 0.001).
+According to the full model, Italian vowels are 22 milliseconds (SE = 6) longer if followed by a voiced stop ($\chi^2$(3) = 16.6; p < 0.001).
 
 For Polish, the same model structure was used, excluding the voicing-vowel interaction (which was not significant).
 Contrary to previous findings, the model reveals a significant 8 milliseconds (SE = 3) effect of consonantal voicing on the preceding vowel ($\chi^2$(1) = 5.4, p < 0.05).

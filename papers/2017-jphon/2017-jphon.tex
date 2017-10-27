@@ -12,7 +12,7 @@
   \else
     \usepackage{fontspec}
   \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Ligatures=TeX}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -50,9 +50,9 @@
 \fi
 
 % set default figure placement to htbp
-%\makeatletter
-%\def\fps@figure{htbp}
-%\makeatother
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
 \frenchspacing
 \usepackage{cleveref}
@@ -123,7 +123,7 @@ obstruents is produced with a state of the glottis that is different
 from the configuration necessary to produce vocal fold vibration in
 sonorants like vowels. On the contrary, they claim that voiceless stops
 do not require any specific glottal configuration and thus the voicing
-of the preceding vowel can just naturally ceases at closure (or a few
+of the preceding vowel can just naturally cease at closure (or a few
 milliseconds after it). \citet{halle1967} thus hypothesise that, to
 allow the glottal state to change from the sonorant voicing of the
 preceding vowel to obstruent voicing, the vowel is lengthened so that
@@ -237,8 +237,10 @@ repeated the list of randomised stimuli six times. The participant's
 occlusal plane was obtained using a bite plate \citep{scobbie2011}, and
 the hard palate was imaged by asking the participant to swallow water
 \citep{epstein2005}. The frame rate of the acquisition of the ultrasonic
-data varied between 55 and 65 frames per second (one frame every 15-18
-milliseconds). The audio signal was recorded at 22050 MHz (16-bit).
+data ranged between 43 and 68 frames per second. Other settings varied
+depending on the frame rate (scanlines = 88-114, pixel per scanline =
+980-988, field of view = 71-93, pixel offset = 109-263, depth (mm) =
+75-180). The audio signal was recorded at 22050 MHz (16-bit).
 
 \subsection{Data processing and
 analysis}\label{data-processing-and-analysis}
@@ -251,9 +253,9 @@ manually corrected, according to the criteria in \Cref{t:dur-measures}.
 The onset of the target consonant burst (C2 burst) was detected
 automatically in Praat \citep{boersma2016}, employing a implementation
 of the algorithm described in \citet{ananthapadmanabha2014}. The
-durations of the following intervals were then extracted from the
-acoustic landmarks using an automated procedure in Praat: vowel duration
-(V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and
+durations of the following intervals were extracted from the acoustic
+landmarks using an automated procedure in Praat: vowel duration (V1
+onset to V1 offset), consonant duration (V1 offset to V2 onset), and
 closure duration (V1 offset to C2 burst).
 
 \ctable[caption = List of measurements as extracted from acoustics.,
@@ -275,18 +277,25 @@ Spline curves were automatically fitted to the visible contours using
 the AAA batch tracking function. Manual correction was applied in those
 cases that showed clear tracking errors. The time of maximum tongue
 displacement within consonant closure was then calculated in AAA
-following the method in \citet{strycharczuk2015}. Fan line selection in
-this study was achieved by finding the fan line within the relevant area
-of the tongue (tongue tip for coronal consonants and tongue dorsum for
-velar consonants) with the highest standard deviation of displacement.
-Tongue contours were exported in Cartesian coordinates at two time
-points: (1) at the onset of C2 closure, and (2) at maximum tongue
-displacement (within C2 closure). The contours were normalised by
-applying offsetting and rotation relative to the participant's occlusal
-plane \citep{scobbie2011}.
+following the method in \citet{strycharczuk2015}. A fan-like frame
+consisting of 42 equidistant radial lines was used as the coordinate
+system. The origin of the 42 fan-lines coincides with the centre of the
+ultrasonic probe, such that each fan-line is parallel to the direction
+of the ultrasonic signal. Tongue displacement was thus calculated as the
+displacement of the fitted splines along the fan-line vectors. The time
+of maximum tongue displacement was the time of greater displacement
+along the vector that showed the greatest standard deviation. The vector
+search area was restricted to the portion of the splines corresponding
+to the tongue tip for coronal consonants, and to the portion
+corresponding to the tongue dorsum for velar consonants.
 
-Durational measurements were analysed using linear mixed effects models
-using \texttt{lme4} in R \citep{r-core-team2017, bates2015}. Generalised
+The cartesian coordinates of the tongue contours were exported from two
+time points: the onset of C2 closure, and the time maximum tongue
+displacement (which is always within C2 closure). The contours were
+normalised by applying offsetting and rotation relative to the
+participant's occlusal plane \citep{scobbie2011}. Durational
+measurements were analysed with linear mixed effects models using
+\texttt{lme4} in R \citep{r-core-team2017, bates2015}. Generalised
 additive mixed effects regression models \citep[GAMMs,][]{wood2006} were
 used for the statistical analysis of tongue contour data.
 
@@ -311,14 +320,14 @@ According to the full model, Italian vowels are 19.5 milliseconds (SE =
 
 For Polish, the same model structure was used, excluding the
 voicing-vowel interaction (which was not significant). Contrary to
-previous findings, the model reveals a partially significant 8
-milliseconds (SE = 3) effect of consonantal voicing on the preceding
-vowel (\(\chi^2\)(1) = 5.4, p = 0.02). The exploration of the random
-slopes for each speaker indicated that PL05 showed a particularly higher
-slope for voicing, meaning that the effect of voicing was stronger in
-his data, but removing this speaker from the model doesn't remove the
-effect. The estimated effect of voicing on vowel duration for PL05 was
-14 milliseconds. These observations will become relevant when discussing
+previous findings, the model reveals a significant 8 milliseconds (SE =
+3) effect of consonantal voicing on the preceding vowel (\(\chi^2\)(1) =
+5.4, p \textless{} 0.05). The exploration of the random slopes for each
+speaker indicated that PL05 showed a particularly higher slope for
+voicing, meaning that the effect of voicing was stronger in his data,
+but removing this speaker from the model doesn't remove the effect. The
+estimated effect of voicing on vowel duration for PL05 was 14
+milliseconds. These observations will become relevant when discussing
 about the results of the tongue contour data.
 
 \subsection{Tongue contours}\label{tongue-contours}
