@@ -267,12 +267,17 @@ This generalisation holds independently of the speaker's language.
 The fact that the degree of tongue advancement at C2 closure onset and at maximum displacement in the voiced consonants does not differ in PL05 could be related to the relative weaker effect of voicing in this speaker.
 All things considered, it can be inferred that, other things being equal, if a speaker realises voiced consonants with concomitant advancement of the tongue root, then the same speaker will also show a considerable durational difference in vowels depending on the voicing of the following consonant.
 
-In addition to tongue root advancement, the ultrasonic data also showed raising of the tongue dorsum.
-The presence of such gesture, although not expected, makes sense from an anatomical point of view.
+The smaller effect of voicing in PL05 compared to the effect in Italian (14 vs 22 milliseconds) suggests that the relationship between tongue root advancement and vowel duration could be gradual, rather then categorical.
+If this is the case, the magnitude of the voicing effect should correlate with the degree of tongue root advancement.
+More specifically, vowel duration is predicted to be directly correlated with the degree of advancement.
+Future work will set out to investigate the hypothetically gradient effect of tongue root advancement on vowel duration.
+
+In addition to tongue root advancement, the ultrasonic data showed raising of the tongue body.
+The presence of such gesture, although unexpected, makes sense from an anatomical point of view.
 Raising of the tongue body could be implemented as a way to counterbalance the compression of the tongue mass caused by the advancement of the root.
 It is not thus surprising to observe a raised tongue body in voiced stops accompanying root advancement.
-An alternative account could ascribe tongue body raising to aerodynamic properties of voiced stops.
-Since the intra-oral pressure is higher in voiced stops due to the amount of air needed to maintain voicing, a firmer seal at the point of oral constriction could be used to compensate for the increasing pressure.
+An alternative account ascribes tongue body raising to aerodynamic properties of voiced stops.
+Since the intra-oral pressure is higher in voiced stops due to the amount of air needed to maintain voicing, a firmer seal at the point of oral constriction could be used to compensate for the increased pressure.
 Expanding the area of contact by raising the tongue body would provide for such a firmer constriction.
 <!-- could be a matter of velocity -->
 
@@ -281,11 +286,6 @@ Expanding the area of contact by raising the tongue body would provide for such 
 
 
 <!--
-Given the smaller effect of voicing in PL05 compared to the effect in Italian (14 vs 19.5 milliseconds), a possible hypothesis could be that the correlation between tongue root advancement and vowel duration is gradual, rather then categorical.
-In this case, the magnitude of the voicing effect should correlate with the amount of tongue root advancement even *within speaker*, or at least across speakers independently of their language.
-Since the durational difference in the Polish speaker PL05 was quite small, one expects the magnitude of the advancement of the root to be proportionately smaller for this speaker.
-Future work will set out to investigate the hypothetically gradient correlation between vowel duration and amount of tongue root advancement.
-
 Following the reasoning of the proposal by @halle1967, a plausible cause for the longer duration of vowels before voiced consonants with tongue root advancement (as in Italian) could therefore be the additional time required to achieve a more complex consonantal gesture---a gesture that requires adjustments of both the tongue root and the tongue dorsum/tip.
 The reported absence of the voicing effect in Polish could then be ascribed to the absence of tongue root advancement in the production of voiced consonants in this language.
 
