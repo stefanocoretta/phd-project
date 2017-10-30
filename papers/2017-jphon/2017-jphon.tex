@@ -50,9 +50,9 @@
 \fi
 
 % set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+%\makeatletter
+%\def\fps@figure{htbp}
+%\makeatother
 
 \frenchspacing
 \usepackage{cleveref}
@@ -312,23 +312,32 @@ duration data with \textsc{duration} as the outcome variable;
 speaker and word, and by-speaker random slopes for voicing. An
 interaction between voicing and vowel quality was also included in the
 final model, since it significantly improved the model. P-values were
-obtained through likelihood ratio tests comparing the full model
-including voicing with a null model without voicing as a predictor.
-According to the full model, Italian vowels are 19.5 milliseconds (SE =
-5.5) longer if followed by a voiced stop (\(\chi^2\)(3) = 18.5, p
-\textless{} 0.001).
+obtained with likelihood ratio tests comparing the full model with a
+nested model without the tested predictor, and with \texttt{lmerTest}
+{[}{]}, which employs the Satterthwaite approximation to degrees of
+freedom. According to the full model as specified above, Italian vowels
+are 22 milliseconds (SE = 6) longer if followed by a voiced stop
+(\(\chi\^2\)(3) = 16.61; p \textless{} 0.001). The following terms and
+interactions were also significant: place of articulation C2, vowel
+identity, sentence duration, and the interaction between C2 voicing and
+vowel identity.
 
 For Polish, the same model structure was used, excluding the
 voicing-vowel interaction (which was not significant). Contrary to
-previous findings, the model reveals a significant 8 milliseconds (SE =
-3) effect of consonantal voicing on the preceding vowel (\(\chi^2\)(1) =
-5.4, p \textless{} 0.05). The exploration of the random slopes for each
-speaker indicated that PL05 showed a particularly higher slope for
-voicing, meaning that the effect of voicing was stronger in his data,
-but removing this speaker from the model doesn't remove the effect. The
-estimated effect of voicing on vowel duration for PL05 was 14
-milliseconds. These observations will become relevant when discussing
-about the results of the tongue contour data.
+previous findings, the model reveals a significant 8 milliseconds effect
+(SE = 3) of consonantal voicing on the preceding vowel (\(\chi\^2\)(1) =
+5.4, p \textless{} 0.05). Vowel identity and sentence duration were also
+significant. The place of C2 significantly improved the model
+(\(\chi\^2\)(1) = 6.1, p \textless{} 0.05), so it was included in the
+full model even though p \textgreater{} 0.05 according to the single
+predictor p-value. The inspection of the model residuals confirmed the
+assumptions of normality and homoscedasticity. The exploration of the
+random slopes for each speaker indicated that PL05 showed a particularly
+higher slope for voicing, meaning that the effect of voicing was
+stronger in his data, but removing this speaker from the model doesn't
+remove the effect. The estimated effect of voicing on vowel duration for
+PL05 was 14 milliseconds. These observations will become relevant when
+discussing about the results of the tongue contour data.
 
 \subsection{Tongue contours}\label{tongue-contours}
 
@@ -359,16 +368,16 @@ contours, hence the results reported in this section only refer to /a/
 and /o/.
 
 The analysis of the Italian ultrasonic data shows that voiced stops are
-produced with advancement of the root of the tongue (), as expected
-based on previous research on English. \Cref{f:tra} (top half) shows the
-predicted tongue contours in voiceless (red) and voiced stops (blue) at
-maximum tongue displacement for each Italian speaker. Below each tongue
-contour panel, the difference smooth for voicing is also shown (black
-line, confidence interval in grey). Tongue contours are significantly
-different in those point in which the confidence interval of the
-difference smooth does not include 0 on the ordinate axis. The
-significantly different portions of the contours are also indicated in
-the figures by a shaded red area.
+produced with advancement of the root of the tongue, as expected based
+on previous research on English. \Cref{f:tra} (top half) shows the
+predicted tongue contours in voiceless (dashed line) and voiced stops
+(thick line) at maximum tongue displacement for each Italian speaker.
+Below each tongue contour panel, the difference smooth for voicing is
+also shown (black line, confidence interval in grey). Tongue contours
+are significantly different in those point in which the confidence
+interval of the difference smooth does not include 0 on the ordinate
+axis. The significantly different portions of the contours are also
+indicated in the figures by a shaded grey area.
 
 In two participants out of four (IT01, IT02), the root was significantly
 more front in voiced stops in both vocalic contexts (/a, o/). On the
