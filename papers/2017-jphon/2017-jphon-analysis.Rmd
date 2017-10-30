@@ -243,7 +243,7 @@ sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
 ```
 
 ```{r pl-duration-lm-2}
-pl_vow_lm <- lmer(
+pl_vow_lm_2 <- lmer(
     vowel.duration ~
         c2phonation +
         vowel +
@@ -254,9 +254,9 @@ pl_vow_lm <- lmer(
     data = filter(vowels, language == "polish", speaker != "pl05")
 )
 
-summary(pl_vow_lm)
+summary(pl_vow_lm_2)
 
-pl_vow_lm_null <- lmer(
+pl_vow_lm_null_2 <- lmer(
     vowel.duration ~
 #        c2phonation +
         vowel +
@@ -267,7 +267,13 @@ pl_vow_lm_null <- lmer(
     data = filter(vowels, language == "polish", speaker != "pl05")
 )
 
-anova(pl_vow_lm_null, pl_vow_lm)
+anova(pl_vow_lm_null_2, pl_vow_lm_2)
+```
+
+```{r pl-duration-lm-2-plots}
+plot(fitted(pl_vow_lm_2),residuals(pl_vow_lm_2))
+qqnorm(resid(pl_vow_lm_2))
+plot(allEffects(pl_vow_lm_2))
 ```
 
 # Tongue root advancement at maximum displacement
