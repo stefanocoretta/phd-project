@@ -262,8 +262,8 @@ This is true for all the speakers of Italian, except one (IT04), who still had a
 A possible interpretation of the different behaviour of IT04 as an age effect derives from the older age of this speaker (54 years old, vs an average of 26 for the other speakers), although a bigger and more balanced sample is needed for confirmation.
 
 Overall, the speakers who didn't produce voiced consonants with an advanced tongue root had a relatively weaker voicing effect.
-On the other hand, speakers with tongue root advancement showed a relatively strong effect, with estimates of durational differences ranging between 15 and 30 milliseconds.
-This generalisation applies independently of the speaker's language.
+On the other hand, speakers with tongue root advancement showed a relatively strong effect, with estimates of the durational differences ranging between 15 and 30 milliseconds.
+This generalisation holds independently of the speaker's language.
 The fact that the degree of tongue advancement at C2 closure onset and at maximum displacement in the voiced consonants does not differ in PL05 could be related to the relative weaker effect of voicing in this speaker.
 All things considered, it can be inferred that, other things being equal, if a speaker realises voiced consonants with concomitant advancement of the tongue root, then the same speaker will also show a considerable durational difference in vowels depending on the voicing of the following consonant.
 
