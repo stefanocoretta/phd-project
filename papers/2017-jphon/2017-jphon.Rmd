@@ -258,15 +258,14 @@ Note, however, that a model fitted to the Polish data with the exclusion of PL05
 Incidentally, though, PL05 is also the only Polish speaker who produced voiced consonants with an advanced tongue root, both at C2 closure onset and at the time of maximum tongue displacement.
 
 This pattern is similar to that of the Italian speakers, who have both a relatively strong voicing effect and tongue root advancement.
-This is true for all the speakers of Italian, except one (IT04), whose tongue root did not differ in voiced and voiceless stops, while still having an appreciable difference in vowel duration (around 22 milliseconds).
+This is true for all the speakers of Italian, except one (IT04), who still had a 22 milliseconds difference in vowel duration but whose tongue root did not differ in voiced and voiceless stops.
 A possible interpretation of the different behaviour of IT04 as an age effect derives from the older age of this speaker (54 years old, vs an average of 26 for the other speakers), although a bigger and more balanced sample is needed for confirmation.
 
 Overall, the speakers who didn't produce voiced consonants with an advanced tongue root had a relatively weaker voicing effect.
 On the other hand, speakers with tongue root advancement showed a relatively strong effect, with estimates of durational differences ranging between 15 and 30 milliseconds.
 This generalisation applies independently of the speaker's language.
 The fact that the degree of tongue advancement at C2 closure onset and at maximum displacement in the voiced consonants does not differ in PL05 could be related to the relative weaker effect of voicing in this speaker.
-All things considered,
-
+All things considered, it can be inferred that, other things being equal, if a speaker realises voiced consonants with concomitant advancement of the tongue root, then the same speaker will also show a considerable durational difference in vowels depending on the voicing of the following consonant.
 
 In addition to tongue root advancement, the ultrasonic data also showed raising of the tongue dorsum.
 The presence of such gesture, although not expected, makes sense from an anatomical point of view.
