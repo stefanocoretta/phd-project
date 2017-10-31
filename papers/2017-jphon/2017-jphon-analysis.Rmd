@@ -276,6 +276,21 @@ qqnorm(resid(pl_vow_lm_2))
 plot(allEffects(pl_vow_lm_2))
 ```
 
+```{r plot-vowel-duration}
+vowels %>%
+    filter(language == "italian") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_violin() +
+    facet_wrap(~speaker)
+
+vowels %>%
+    filter(language == "polish") %>%
+    ggplot(aes(c2phonation, vowel.duration)) +
+    geom_violin() +
+    facet_wrap(~speaker)
+```
+
+
 # Tongue root advancement at maximum displacement
 
 ## Italian
