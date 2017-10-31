@@ -50,17 +50,16 @@
 \fi
 
 % set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+%\makeatletter
+%\def\fps@figure{htbp}
+%\makeatother
 
 \frenchspacing
 \usepackage{cleveref}
 \setcitestyle{aysep={},notesep={:},citesep={,}}
 \usepackage{ctable}
 \author[mcr]{Stefano Coretta\corref{cor1}}
-\ead{stefano.coretta at manchester.ac.uk}
-\cortext[cor1]{Corresponding author}
+\cortext[cor1]{Corresponding author \ead{stefano.coretta@manchester.ac.uk}}
 \address[mcr]{University of Manchester, Linguistics and English Language}
 
 \title{The link between tongue root advancement and the voicing effect: an
@@ -101,12 +100,12 @@ consonant voicing on vowel duration.
 
 An extensive pool of studies shows that vowels tend to be longer when
 followed by voiced obstruents and shorter when followed by voiceless
-obstruents \citep[just to mention a
-few]{house1953, chen1970, klatt1973, lisker1973}. Most of the literature
-on this phenomenon, known as the ``voicing effect'', suggests that
-different languages show different magnitudes of such durational
-differential, and that in some other languages the duration of vowels is
-not affected by the voicing of the following
+obstruents (\citealt{house1953,chen1970,klatt1973,lisker1973}, just to
+mention a few). Most of the literature on this phenomenon, known as the
+`voicing effect,' suggests that different languages show different
+magnitudes of such durational differential, and that in some other
+languages the duration of vowels is not affected by the voicing of the
+following
 obstruent.\footnote{For a different opinion on the first matter, see \citet{laeufer1992}.}
 Although several attempts have been put forward to explain the effect of
 voicing on vowel durations, no consensus has been reached to date.
@@ -314,13 +313,13 @@ interaction between voicing and vowel quality was also included in the
 final model, since it significantly improved the model. P-values were
 obtained with likelihood ratio tests comparing the full model with a
 nested model without the tested predictor, and with \texttt{lmerTest}
-{[}{]}, which employs the Satterthwaite approximation to degrees of
-freedom. According to the full model as specified above, Italian vowels
-are 22 milliseconds (SE = 6) longer if followed by a voiced stop
-(\(\chi\^2\)(3) = 16.61; p \textless{} 0.001). The following terms and
-interactions were also significant: place of articulation C2, vowel
-identity, sentence duration, and the interaction between C2 voicing and
-vowel identity.
+\citep{kuznetsova2016}, which employs the Satterthwaite approximation to
+degrees of freedom. According to the full model as specified above,
+Italian vowels are 22 milliseconds (SE = 6) longer if followed by a
+voiced stop (\(\chi\^2\)(3) = 16.61; p \textless{} 0.001). The following
+terms and interactions were also significant: place of articulation C2,
+vowel identity, sentence duration, and the interaction between C2
+voicing and vowel identity.
 
 For Polish, the same model structure was used, excluding the
 voicing-vowel interaction (which was not significant). Contrary to
@@ -400,10 +399,19 @@ example for Italian and from PL05.
 
 \begin{figure*}
     \centering
-    \includegraphics[height=.9\textheight]{fig/voiced.pdf}
+    \includegraphics[width=.9\textwidth]{fig/voiced.pdf}
     \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). See text for more details.}
     \label{f:voiced}
 \end{figure*}
+
+The ultrasonic data showed that the tongue body was raised in speakers
+with tongue root advancement. The presence of this gesture in addition
+to root advancement makes sense from an anatomical point of view.
+Raising of the tongue body could be implemented as a way to
+counterbalance the compression of the tongue mass caused by the
+advancement of the root \citep{fulop1998}. It is not thus surprising to
+observe a raised tongue body in voiced stops accompanying root
+advancement.
 
 \section{Discussion}\label{discussion}
 
@@ -446,12 +454,12 @@ maximum tongue displacement.
 
 This pattern is similar to that of the Italian speakers, who have both a
 relatively strong voicing effect and tongue root advancement. This is
-true for all the speakers of Italian, except one (IT04), who still had a
-22 milliseconds difference in vowel duration but whose tongue root did
-not differ in voiced and voiceless stops. A possible interpretation of
-the different behaviour of IT04 as an age effect derives from the older
-age of this speaker (54 years old, vs an average of 26 for the other
-speakers), although a bigger and more balanced sample is needed for
+true for all the Italian speakers in this sample, except one (IT04), who
+had a 22 milliseconds difference in vowel duration but whose tongue root
+did not differ in voiced and voiceless stops. A possible interpretation
+of the different behaviour of IT04 as an age effect derives from the
+older age of this speaker (54 years old, vs an average of 26 for the
+other speakers), although a more balanced sample is needed for
 confirmation.
 
 Overall, the speakers who didn't produce voiced consonants with an
@@ -460,38 +468,23 @@ other hand, speakers with tongue root advancement showed a relatively
 strong effect, with estimates of the durational differences ranging
 between 15 and 30 milliseconds. This generalisation holds independently
 of the speaker's language. The fact that the degree of tongue
-advancement at C2 closure onset and at maximum displacement in the
-voiced consonants does not differ in PL05 could be related to the
-relative weaker effect of voicing in this speaker. All things
-considered, it can be inferred that, other things being equal, if a
-speaker realises voiced consonants with concomitant advancement of the
-tongue root, then the same speaker will also show a considerable
-durational difference in vowels depending on the voicing of the
-following consonant.
+advancement at C2 closure onset and at maximum displacement does not
+differ in PL05's voiced consonants could be linked to the relative
+weaker effect of voicing in this speaker. All things considered, it can
+be inferred that, other things being equal, if a speaker realises voiced
+consonants with concomitant advancement of the tongue root, then that
+same same speaker will also show a considerable durational difference in
+vowels, with longer vowels preceding voiced consonants.
 
 The smaller effect of voicing in PL05 compared to the effect in Italian
 (14 vs 22 milliseconds) suggests that the relationship between tongue
-root advancement and vowel duration could be gradual, rather then
-categorical. If this is the case, the magnitude of the voicing effect
-should correlate with the degree of tongue root advancement. More
-specifically, vowel duration is predicted to be directly correlated with
-the degree of advancement. Future work will set out to investigate the
-hypothetically gradient effect of tongue root advancement on vowel
-duration.
-
-In addition to tongue root advancement, the ultrasonic data showed
-raising of the tongue body. The presence of such gesture, although
-unexpected, makes sense from an anatomical point of view. Raising of the
-tongue body could be implemented as a way to counterbalance the
-compression of the tongue mass caused by the advancement of the root. It
-is not thus surprising to observe a raised tongue body in voiced stops
-accompanying root advancement. An alternative account ascribes tongue
-body raising to aerodynamic properties of voiced stops. Since the
-intra-oral pressure is higher in voiced stops due to the amount of air
-needed to maintain voicing, a firmer seal at the point of oral
-constriction could be used to compensate for the increased pressure.
-Expanding the area of contact by raising the tongue body would provide
-for such a firmer constriction.
+root advancement and vowel duration might be gradual rather then
+categorical (presence vs.~absence). If this is the case, the magnitude
+of the voicing effect should correlate with the degree of tongue root
+advancement. More specifically, vowel duration is predicted to be
+directly correlated with the degree of advancement. Future work will set
+out to investigate the hypothetically gradient effect of tongue root
+advancement on vowel duration.
 
 \section{Conclusion}
 \label{s:conclusion}
