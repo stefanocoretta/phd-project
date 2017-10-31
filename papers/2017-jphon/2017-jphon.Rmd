@@ -120,6 +120,7 @@ The frame sentence was *Dico X lentamente* 'I say X slowly' for Italian, and *MÃ
 
 The sentences with the target words were randomised for each participant, although the order was kept the same between repetitions within participant due to software constraints.
 Each participant repeated the list of randomised stimuli six times.
+A grand total of 576 tokens (288 per language) was recorded.
 The participant's occlusal plane was obtained using a bite plate [@scobbie2011], and the hard palate was imaged by asking the participant to swallow water [@epstein2005].
 The frame rate of the acquisition of the ultrasonic data ranged between 43 and 68 frames per second.
 Other settings varied depending on the frame rate (scanlines = 88-114, pixel per scanline = 980-988, field of view = 71-93, pixel offset = 109-263, depth (mm) = 75-180).
@@ -199,7 +200,7 @@ These observations will become relevant when discussing about the results of the
 \begin{figure*}
     \centering
     \includegraphics[height=.9\textheight]{fig/tra.pdf}
-    \caption{Comparison of tongue contours at maximum tongue displacement (within C2 closure) in Italian (top half) and Polish (bottom half). The plotted contours are reference contours for the coronal consonants preceded by /a/. See \Cref{s:splines} for more details.}
+    \caption{Comparison of tongue contours at the time of maximum tongue displacement (within C2 closure) in Italian (top half) and Polish (bottom half). The plotted contours are the estimated curves in the context of the vowel /a/ followed by coronal consonants. See \Cref{s:splines} for more details.}
     \label{f:tra}
 \end{figure*}
 
@@ -230,13 +231,13 @@ Comparisons of tongue contours at C2 onset and at the time of maximum tongue dis
 \begin{figure*}
     \centering
     \includegraphics[width=.9\textwidth]{fig/voiced.pdf}
-    \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). See text for more details.}
+    \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). See \Cref{s:splines} for more details.}
     \label{f:voiced}
 \end{figure*}
 
 The ultrasonic data showed that the tongue body was raised in speakers with tongue root advancement.
 The presence of this gesture in addition to root advancement makes sense from an anatomical point of view.
-Raising of the tongue body could be implemented as a way to counterbalance the compression of the tongue mass caused by the advancement of the root [@fulop1998].
+Raising of the tongue body could be implemented as a way to counterbalance the compression of the tongue mass caused by the advancement of the root [@perkell1969;@jackson1988;@kingston1997;@fulop1998].
 It is not thus surprising to observe a raised tongue body in voiced stops accompanying root advancement.
 <!--
 A possible alternative account ascribes tongue body raising to aerodynamic properties of voiced stops.
@@ -256,7 +257,7 @@ However, the results of this study point to a more fine-grained interpretation o
 \begin{figure}
     \centering
     \includegraphics[height=.35\textwidth]{fig/polish-re.pdf}
-    \caption{By-speaker random slopes (left) and intercepts (right) for C2 voicing in the Polish vowel duration data. The higher slope estimate for PL05 indicates a relatively stronger effect of voicing on vowel duration for this participant.}
+    \caption{By-speaker random intercepts (left) and slopes (right) for the effect of C2 voicing on vowel duration in the Polish. The higher slope estimate (+6.3 ms) for PL05 indicates a relatively stronger effect of voicing on vowel duration for this participant.}
     \label{f:polish-re}
 \end{figure}
 
