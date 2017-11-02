@@ -13,12 +13,13 @@ output:
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE)
-opts_knit$set(root.dir=normalizePath("../../../"))
+opts_knit$set(root.dir = normalizePath("../../../"))
 library(readr)
 library(dplyr)
 library(tidyr)
 library(purrr)
 library(lme4)
+library(lmerTest)
 library(afex)
 library(effects)
 library(ggplot2)
@@ -188,9 +189,9 @@ ggplot(vowels.it, aes(vowel, vowel.duration)) +
 model.closure.it <- lmer(
     vowel.duration ~
         vowel + 
-#        closure.duration +
-        c2place +
+        closure.duration +
         c1phonation +
+        c2place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -198,6 +199,20 @@ model.closure.it <- lmer(
 )
 
 summary(model.closure.it)
+
+model.closure.it.null <- lmer(
+    vowel.duration ~
+        vowel + 
+#        closure.duration +
+        c1phonation +
+        c2place +
+        sentence.duration +
+        (1|word) +
+        (1|speaker),
+    data = vowels.it
+)
+
+anova(model.closure.it.null, model.closure.it)
 
 mixed(
     vowel.duration ~
@@ -215,6 +230,14 @@ mixed(
 ```{r closure-italian-effects-plot}
 plot(allEffects(model.closure.it))
 ```
+
+```{r}
+vowels.it %>%
+    ggplot(aes(closure.duration, vowel.duration, colour = c2phonation)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
 
 There is an iteraction between closure duration and vowel identity: the high vowel has a stronger effect of closure duration on vowel duration (cf. with not so strong effect of voicing). But, vowel identity on itself is not significant.
 
