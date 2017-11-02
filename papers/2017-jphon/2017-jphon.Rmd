@@ -50,6 +50,14 @@ One of the first articulatory accounts of the voicing effect is based on differe
 \citep{halle1967} argue that vowels are longer before voiced consonants because more time is needed for the glottis to achieve a position suitable for maintaining voicing during consonant closure.
 Later studies, though, established that the glottal configuration of voicing in obstruents does not differ from the one in vowels \citep{lisker1974,kagaya1975}, hence the claim that a glottal adjustment is required in voiced consonants is not supported empirically.
 
+A known articulatory difference between voiced and voiceless consonants regards a supra-glottal ... rather than laryngeal ..., namely the horizontal position of the tongue root.
+It has been observed that the tongue root is in a more advanced position in voiced than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
+This has been interpreted as a mechanism to ensure voicing can be maintained during closure.
+The realisation of vocal fold vibration (voicing) requires the air pressure of the supra-glottal cavity to be lower than a certain threshold in comparison with the air pressure of the sub-glottal cavity.
+During the articulation of voiced obstruents, the supra-glottal pressure quickly increases.
+Such pressure increase can hinder the ability to maintain voicing during closure, to the point that voicing can cease if the pressure cut-off threshold is reached.
+An articulatory solution to the counterbalance the increased pressure is to expand the supra-glottal cavity by advancing the root of the tongue.
+
 <!--
 It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants \citep{halle1967,kent1969,perkell1969,westbury1983}.
 The production of vocal fold vibration requires a pressure differential between the sub-glottal and the supra-glottal cavities (with lower pressure in the supra-glottal cavity).
