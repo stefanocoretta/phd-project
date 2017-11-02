@@ -63,8 +63,15 @@ An articulatory solution to counterbalance the increased pressure is to expand t
 Drawing on ultrasound tongue imaging data, @ahn2016 demonstrate that the root of the tongue is advanced during the articulation of voiced consonants in American English, even when voicing is not implemented during the closure in underlyingly voiced stops.
 Based on data from Korean, they further show that tongue root advancement not only favours voicing in stops, but it also facilitates short lag VOT in the Korean tense stops.
 The established link between voicing and tongue root advancement on one hand, and between voicing and vowel duration on the other, raise the question of whether there a correlation exists between tongue root advancement and vowel duration.
-If tongue root advancement plays a role in the voicing effect, then it is expected that voiced consonants should be articulated with tongue root advancement in voicing-effect languages, but not in language without the voicing effect.
+If tongue root advancement plays a role in the voicing effect, then it is expected that voiced consonants should be articulated with tongue root advancement in voicing-effect languages, but not in languages without the voicing effect.
 
+In this study I focus on two languages, Italian and Polish, that have been reported to have and lack the voicing effect respectively.
+In a study investigating the general properties of segmental durations of Italian, @farnetani1986 show that the first vowel in /lada/ is on average 35 milliseconds longer than the vowel in /lata/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
+@esposito2002 extends Farnetanis's research to all vowels and stops and demonstrates that vowels are longer when followed by a voiced stop, with an estimate similar to what reported in @farnetani1986.
+<!-- Add two papers that will come through document supply -->
+On the other hand, @keating1984 reports that vowels in Polish are not affected by the voicing of the following consonant.
+The average duration of the first vowel in /rata/ is 167.5 milliseconds, while the pre-consonantal vowel in /rada/ is just two milliseconds longer.
+Based on the hypothesis put forward that there is a link between tongue root advancement and the voicing effect, it is expected that Italian will show tongue root advancement, while Polish will lack such articulatory gesture in the implementation of voiced stops.
 
 <!--
 It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants \citep{halle1967,kent1969,perkell1969,westbury1983}.
