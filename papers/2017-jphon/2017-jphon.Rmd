@@ -28,6 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
+<!--
 It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants \citep{halle1967,kent1969,perkell1969,westbury1983}.
 The production of vocal fold vibration requires a pressure differential between the sub-glottal and the supra-glottal cavities (with lower pressure in the supra-glottal cavity).
 During the production of voiced obstruents, the pressure in the supra-glottal cavity quickly increases, due to the additional air injected from the lungs in the supra-glottal cavity, which is completely sealed in stops.
@@ -58,13 +59,14 @@ In this paper, I focus on two languages, Italian and Polish, that have been repo
 In a study assessing general properties on segmental durations of spoken Italian, @farnetani1986 shows that the first vowel in /lada/ is on average 35 milliseconds longer than the vowel in /lata/ (/lata/ 223 msec, sd = 18; /lada/ 258 msec, sd = 13, p. 26).
 @esposito2002 extends Farnetanis's research to all vowels and stops and demonstrates that vowels are longer when followed by a voiced stop, with an estimate similar to what reported in @farnetani1986.
 <!-- Add two papers that will come through document supply -->
-On the other hand, @keating1984 reports that vowels in Polish are not affected by the voicing of the following consonant.
+<!-- On the other hand, @keating1984 reports that vowels in Polish are not affected by the voicing of the following consonant.
 The average duration of the first vowel in /rata/ is 167.5 milliseconds, while the pre-consonantal vowel in /rada/ is just two milliseconds longer.
-Based on the hypothesis put forward that there is a link between tongue root advancement and the voicing effect, it is expected that Italian will show tongue root advancement, while Polish will lack such articulatory gesture in the implementation of voiced stops.
+Based on the hypothesis put forward that there is a link between tongue root advancement and the voicing effect, it is expected that Italian will show tongue root advancement, while Polish will lack such articulatory gesture in the implementation of voiced stops. -->
 
 <!-- actually it's Keating 1979 PhD dissertation -->
 <!-- The duration of vowels n in the word pair /rata/ ~ /rada/ and found that there was a durational difference of 2 milliseconds.
 As for the some of the Italian studies, statistical analysis was not performed, although judging by the size of the difference, it can be assumed that it is not significant. -->
+
 
 # Methodology
 
