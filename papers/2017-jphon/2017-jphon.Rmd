@@ -56,7 +56,15 @@ This has been interpreted as a mechanism to ensure voicing can be maintained dur
 The realisation of vocal fold vibration (voicing) requires the air pressure of the supra-glottal cavity to be lower than a certain threshold in comparison with the air pressure of the sub-glottal cavity.
 During the articulation of voiced obstruents, the supra-glottal pressure quickly increases.
 Such pressure increase can hinder the ability to maintain voicing during closure, to the point that voicing can cease if the pressure cut-off threshold is reached.
-An articulatory solution to the counterbalance the increased pressure is to expand the supra-glottal cavity by advancing the root of the tongue.
+An articulatory solution to counterbalance the increased pressure is to expand the supra-glottal cavity by advancing the root of the tongue.
+
+<!-- need to mention speaker control of TRA -->
+
+Drawing on ultrasound tongue imaging data, @ahn2016 demonstrate that the root of the tongue is advanced during the articulation of voiced consonants in American English, even when voicing is not implemented during the closure in underlyingly voiced stops.
+Based on data from Korean, they further show that tongue root advancement not only favours voicing in stops, but it also facilitates short lag VOT in the Korean tense stops.
+The established link between voicing and tongue root advancement on one hand, and between voicing and vowel duration on the other, raise the question of whether there a correlation exists between tongue root advancement and vowel duration.
+If tongue root advancement plays a role in the voicing effect, then it is expected that voiced consonants should be articulated with tongue root advancement in voicing-effect languages, but not in language without the voicing effect.
+
 
 <!--
 It is known that the root of the tongue can play a role in maintaining voicing during the closure of voiced stop consonants \citep{halle1967,kent1969,perkell1969,westbury1983}.
