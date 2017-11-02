@@ -1,0 +1,101 @@
+My instinct would be to begin with a short, punchy, two-sentence 
+paragraph telling the reader what the paper is about: something along 
+the lines of 'Using ultrasound data from speakers of different varieties 
+of Italian and Polish, this paper documents a correlation between tongue 
+root advancement in the production of voiced stops and longer duration 
+of the preceding vowels. I suggest that this correlation points to a new 
+articulatory explanation of the so-called voicing effect, whereby vowels 
+tend to be longer before voiced than before voiceless obstruents.'
+
+Having told the reader where you're going, the introduction proper 
+begins in the next paragraph. Now, the big selling point of your paper 
+is a new empirical observation about, and a possible new explanation of, 
+the voicing effect, which is one of those big questions that lots of 
+people care about and that lots of people have written about. 
+Accordingly, it makes good sense to launch the exposition by talking 
+about the voicing effect itself, saying something along the lines that 
+it is a pervasive phenomenon found in many--though not all--languages 
+(cue long list of references) but whose causes remain controversial 
+despite decades of research (cue long list of references). Notice that 
+this is much better than starting with an explanation of how tongue root 
+advancement helps voicing in obstruents, which is uncontroversial and 
+risks boring knowledgeable readers.
+
+The natural next move is to run through some of the problems for 
+existing explanations. After all, the drawbacks of existing accounts are 
+what provides the raison d'être for your paper. You could for example 
+begin by noting that an adequate account of the voicing effect has to 
+deal with the fact that some languages, like certain varieties of 
+Polish, don't have it. This is one of the reasons that led Kluender et 
+al (1988) to pursue a perceptual explanation (see their note 4 on page 
+163), so that gives you a bridge to the discussion of perceptual 
+accounts. You don't need to spend too much time on this, but you do want 
+a sentence or two on why they aren't satisfactory. Here the obvious 
+weapon in Fowler (1992) (PDF enclosed).
+
+Having cast doubt on the perceptual accounts, you have now given readers 
+a reason to contemplate an articulatory account. Help them by explicitly 
+laying out the crucial desiderata: the right account should point to 
+some articulatory property of voiced or voiceless obstruents that 
+favours longer or shorter preceding vowels, but either the property 
+itself or the mechanism linking it to preceding vowel duration must be 
+language-specific, since the voicing effect itself is not universal.
+
+Now you can introduce the first articulatory attempt by Halle & Stevens 
+(1967). After explaining what they claim, you focus on where they go 
+wrong: namely, they assume that the action of the glottis in producing 
+voicing during a voiced obstruent is different from the action of the 
+glottis in producing voicing during a sonorant, but more recent research 
+suggests that this is not the case; rather what is special about active 
+voicing in obstruents are the adjustments of the supraglottal chamber 
+that help to maintain the transglottal pressure differential. (This 
+needs to be backed up with references, though.)
+
+If that is the case, then we are inexorably led to look for the cause of 
+the voicing effect in some aspect of the articulation of obstruents that 
+is (a) supraglottal and (b) language-specific. Et voilà: tongue root 
+advancement now immediately suggests itself. Cue the explanation of how 
+tongue root advancement helps voicing (boring, but now you've given 
+readers a reason to engage) and, ideally, cue references on how the 
+amount of tongue root advancement is under speaker control and 
+language-specific.
+
+Now that you've prepared the ground, you can solemnly state your 
+empirical hypothesis (in D major and with brass fanfares): languages 
+that show the voicing effect should show tongue root advancement in 
+voiced stops. Now you bring in Italian and Polish, etc etc.
+
+Having placed the major emphasis on the idea that, if we find the 
+voicing effect, then we expect to find its putative precursor, i.e. 
+tongue root advancement in voiced obstruents, you switch to a modest, 
+reasonable tone of voice and concede that, of course, the explanation 
+won't be complete without specifying the mechanism that actually leads 
+from  tongue root advancement to longer vowels, and that the details of 
+the mechanism will determine the extent to which we expect the actual 
+magnitudes of the voicing effect and of tongue root advancement to be 
+correlated, whether there will be threshold effects, etc. And now you 
+can quietly outline your causal proposal in relative safety, having 
+staked your major claim on the correlation, rather than on the actual 
+causal mechanism.
+
+So, to summarize, here is the skeleton implicit in what I've just said:
+
+• two-sentence summary of what the paper is trying to do
+• the voicing effect: pervasive, well-studied, but still not well-understood
+• key fact to take into account: not all languages show the voicing effect
+• Kluender et al. deal with this by proposing a perceptual mechanism
+• but their account is problematic for the reasons Fowler gives
+• so we have reason to try the articulatory route
+• Halle & Stevens had tried this route early on in the debate, but were 
+wrong about the difference between active voicing in obstruents and 
+sonorant voicing; difference lies in supraglottal adjustments
+• so the right articulatory account will be based on aspect of obstruent 
+voicing that is (a) supraglottal and (b) language-specific
+• obvious candidate: tongue root advancement
+etc etc
+
+Hope this helps. As you can see, there is nothing in this sketch that 
+isn't already in your draft, with the possible exception of the 
+reference to Fowler (1992); all I've done is rearrange the furniture you 
+provide. But, as you can imagine, readers are usually grateful if they 
+don't have to climb over the sofa to get into the room.
