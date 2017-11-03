@@ -50,9 +50,9 @@
 \fi
 
 % set default figure placement to htbp
-%\makeatletter
-%\def\fps@figure{htbp}
-%\makeatother
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
 \frenchspacing
 \usepackage{cleveref}
@@ -215,15 +215,17 @@ females, 2 males) were recorded in Manchester and in Italy
 (three from the Northwest and one from Northeast). The Polish group was
 more heterogeneous, with two speakers from the North-west (Poznań), and
 two from the North-east (Warsaw and Przasnysz). Ethical clearance was
-obtained for this work from the University of Manchester (REF
+obtained for this study from the University of Manchester (REF
 2016-0099-76). The participants received a small monetary compensation.
 
 \subsection{Equipment set-up}\label{equipment-set-up}
 
+\section{s:equipment}
+
 \begin{figure*}
     \centering
     \includegraphics[width=.7\textwidth]{../../graphics/uti-setup.pdf}
-    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}, see text for details).}
+    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}). The system is described in details in \Cref{s:equipment}.}
     \label{f:uti-setup}
 \end{figure*}
 
@@ -239,7 +241,7 @@ software Articulate Assistant Advanced (AAA, v2.17.2) running on a
 Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
 Stabilisation of the ultrasonic transducer was ensured by using a
 stabilisation headset produced by Articulate Instruments Ltd™
-(\citealt{articulate2008}, not shown in figure).
+(\citealt{articulate2008}).
 
 \subsection{Materials}\label{materials}
 
@@ -249,7 +251,7 @@ were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1}
 = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} =
 V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.), yielding a total
 of 12 target words. A labial stop was chosen as the first consonant to
-reduce influence on the following vowel (although see
+reduce possible coarticulation with the following vowel (although see
 \citealt{vazquez-alvarez2007}). Only coronal and velar stops were used
 as target consonants since labial consonants cannot be imaged with
 ultrasonography. The target words were embedded in a frame sentence.
@@ -267,25 +269,26 @@ tokens (288 per language) was recorded. The participant's occlusal plane
 was obtained using a bite plate \citep{scobbie2011}, and the hard palate
 was imaged by asking the participant to swallow water
 \citep{epstein2005}. The frame rate of the acquisition of the ultrasonic
-data ranged between 43 and 68 frames per second. Other settings varied
-depending on the frame rate (scanlines = 88-114, pixel per scanline =
-980-988, field of view = 71-93, pixel offset = 109-263, depth (mm) =
-75-180). The audio signal was recorded at 22050 MHz (16-bit).
+data ranged between 43 and 68 frames per second. Other settings values
+varied depending on the frame rate. The ranges of the settings in this
+study were: scanlines = 88-114, pixel per scanline = 980-988, field of
+view = 71-93, pixel offset = 109-263, depth (mm) = 75-180. The audio
+signal was recorded at 22050 MHz (16-bit).
 
 \subsection{Data processing and
 analysis}\label{data-processing-and-analysis}
 
 Synchronisation of the ultrasonic and audio signal was achieved in
-post-processing, using a built-in procedure of AAA. The data were then
+post-processing, using a built-in procedure of AAA. The audio data were
 subject to force alignment using the SPPAS force aligner
-\citep{bigi2015}. The outcome of the automatic annotation was then
-manually corrected, according to the criteria in \Cref{t:dur-measures}.
-The onset of the target consonant burst (C2 burst) was detected
-automatically in Praat \citep{boersma2016}, employing a implementation
+\citep{bigi2015}. The outcome of the automatic annotation was manually
+corrected after the force alignment, according to the criteria in
+\Cref{t:dur-measures}. The onset of the target consonant burst (C2
+burst) was detected automatically in Praat \citep{boersma2016} by means
 of the algorithm described in \citet{ananthapadmanabha2014}. The
-durations of the following intervals were extracted from the acoustic
-landmarks using an automated procedure in Praat: vowel duration (V1
-onset to V1 offset), consonant duration (V1 offset to V2 onset), and
+durations of the following intervals were extracted from the annotated
+acoustic landmarks using an automated procedure in Praat: vowel duration
+(V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and
 closure duration (V1 offset to C2 burst).
 
 \ctable[caption = List of measurements as extracted from acoustics.,
@@ -322,52 +325,66 @@ corresponding to the tongue dorsum for velar consonants.
 The cartesian coordinates of the tongue contours were exported from two
 time points: the onset of C2 closure, and the time maximum tongue
 displacement (which is always within C2 closure). The contours were
-normalised by applying offsetting and rotation relative to the
-participant's occlusal plane \citep{scobbie2011}. Durational
-measurements were analysed with linear mixed effects models using
-\texttt{lme4} in R \citep{r-core-team2017, bates2015}. Generalised
-additive mixed effects regression models \citep[GAMMs,][]{wood2006} were
-used for the statistical analysis of tongue contour data.
+normalised within speaker by applying offsetting and rotation relative
+to the participant's occlusal plane \citep{scobbie2011}. The durational
+data were analysed with linear mixed effects models using \texttt{lme4}
+in R \citep{r-core-team2017, bates2015}. P-values were obtained with
+likelihood ratio tests comparing the full model with a nested model
+without the tested predictor, and with \texttt{lmerTest}
+\citep{kuznetsova2016}, which employs the Satterthwaite approximation to
+degrees of freedom. Generalised additive mixed models
+\citep[GAMMs,][]{wood2006, zuur2012} were used for the statistical
+analysis of tongue contour data. Significance testing in GAMMs was
+achieved through model comparison and visual inspection of the
+difference smooth, as suggested in \citep{soskuthy2017}.
 
 \section{Results}\label{results}
+
+The following sections report the results of the durational data
+(\Cref{s:vow-duration}), and of the ultrasonic data (\Cref{s:splines}).
+Given the poor quality of the ultrasonic data for /u/, this vowel was
+not included in the statistical analysis of tongue contours, but the
+durational data of /u/ were kept in the linear regression models. The
+results in \Cref{s:splines} thus refer only to /a/ and /o/.
 
 \subsection{Vowel duration and
 voicing}\label{vowel-duration-and-voicing}
 
+\label{s:vow-duration}
+
 A linear mixed effects regression model was fitted to the Italian vowel
 duration data with \textsc{duration} as the outcome variable;
-\textsc{vowel quality} (/a, o, u/), \textsc{voicing} and
+\textsc{vowel identity} (/a, o, u/), \textsc{voicing} and
 \textsc{place of articulation} of the following consonant,
 \textsc{sentence duration} as fixed effects; random intercepts by
 speaker and word, and by-speaker random slopes for voicing. An
 interaction between voicing and vowel quality was also included in the
-final model, since it significantly improved the model. P-values were
-obtained with likelihood ratio tests comparing the full model with a
-nested model without the tested predictor, and with \texttt{lmerTest}
-\citep{kuznetsova2016}, which employs the Satterthwaite approximation to
-degrees of freedom. According to the full model as specified above,
-Italian vowels are 22 milliseconds (SE = 6) longer if followed by a
-voiced stop (\(\chi\^2\)(3) = 16.61; p \textless{} 0.001). The following
-terms and interactions were also significant: place of articulation C2,
-vowel identity, sentence duration, and the interaction between C2
-voicing and vowel identity.
+final model, since it significantly improved the model. According to the
+full model as specified above, Italian vowels are 22 milliseconds longer
+(se = 6) if followed by a voiced stop (\(\chi\^2\) = 16.61; p
+\textless{} 0.001; df = 3). The following terms and interactions were
+also significant: place of articulation C2, vowel identity, sentence
+duration, and the interaction between C2 voicing and vowel identity.
 
-For Polish, the same model structure was used, excluding the
-voicing-vowel interaction (which was not significant). Contrary to
-previous findings, the model reveals a significant 8 milliseconds effect
-(SE = 3) of consonantal voicing on the preceding vowel (\(\chi\^2\)(1) =
-5.4, p \textless{} 0.05). Vowel identity and sentence duration were also
-significant. The place of C2 significantly improved the model
-(\(\chi\^2\)(1) = 6.1, p \textless{} 0.05), so it was included in the
-full model even though p \textgreater{} 0.05 according to the single
-predictor p-value. The inspection of the model residuals confirmed the
+For Polish, the same model structure was used, to the exclusion of the
+voicing/vowel-identity interaction (which was not significant). Contrary
+to previous findings, the model reveals a significant 8 milliseconds
+effect (se = 3) of consonantal voicing on the preceding vowel
+(\(\chi\^2\) = 5.4; p \textless{} 0.05, df = 1). Vowel identity and
+sentence duration were also significant. The place of C2 significantly
+improved the model (\(\chi\^2\) = 6.1; p \textless{} 0.05; df = 1), so
+it was included in the full model even though it is deemed as non
+significant according to the single predictor p-value (\emph{t} = -2.3;
+ns; df = 7). The inspection of the model residuals confirmed the
 assumptions of normality and homoscedasticity. The exploration of the
-random slopes for each speaker indicated that PL05 showed a particularly
-higher slope for voicing, meaning that the effect of voicing was
-stronger in his data, but removing this speaker from the model doesn't
-remove the effect. The estimated effect of voicing on vowel duration for
-PL05 was 14 milliseconds. These observations will become relevant when
-discussing about the results of the tongue contour data.
+random coefficients for each speaker indicated that PL05 has a
+particularly higher coefficient for voicing, meaning that the effect of
+voicing is stronger in his data Note that excluding this speaker from
+the model doesn't remove the effect. The estimated effect of voicing on
+vowel duration for PL05 was about 14 milliseconds (vowels followed by
+voiced stops are on average 14 ms longer in PL05). These observations
+will become relevant in the next section, in which the results of the
+tongue contour data will be discussed.
 
 \subsection{Tongue contours}\label{tongue-contours}
 
@@ -376,38 +393,32 @@ discussing about the results of the tongue contour data.
 \begin{figure*}
     \centering
     \includegraphics[height=.9\textheight]{fig/tra.pdf}
-    \caption{Comparison of tongue contours at the time of maximum tongue displacement (within C2 closure) in Italian (top half) and Polish (bottom half). The plotted contours are the estimated curves in the context of the vowel /a/ followed by coronal consonants. See \Cref{s:splines} for more details.}
+    \caption{Comparison of tongue contours at the time of maximum tongue displacement (within C2 closure) in Italian (top half) and Polish (bottom half). The plotted contours are the estimated curves in the context of the vowel /a/ followed by coronal consonants. By-voicing difference smooths are shown below the estimated curves. See \Cref{s:splines} for more details.}
     \label{f:tra}
 \end{figure*}
 
-The tongue contour data were analysed with GAMMs \citep{wood2006}.
-Individual GAMMs were fitted for each speaker: the
+GAMMs were fitted to the data of each speaker individually: the
 \textsc{y-coordinates} of the contours were included in the model as the
 outcome variable; the \textsc{x-coordinates} as the only parametric
 term. The following smooths were specified: a reference smooth term for
 the x-coordinates, three difference smooths for the x-coordinates by
-\textsc{voicing}, \textsc{vowel quality}, and \textsc{place} of
+\textsc{voicing}, \textsc{vowel identity}, and \textsc{place} of
 articulation of the following consonant respectively, and
 \textsc{by-word} random smooths. A first-order autoregressive model was
-included to correct for the high autocorrelation residuals. Significance
-testing in GAMMs was achieved through model comparison and visual
-inspection of the difference smooth, as suggested in
-\citep{soskuthy2017}. Given the poor quality of the ultrasonic data for
-/u/, this vowel was not included in the statistical analysis of tongue
-contours, hence the results reported in this section only refer to /a/
-and /o/.
+included to correct for the high autocorrelation of the residuals.
 
 The analysis of the Italian ultrasonic data shows that voiced stops are
-produced with advancement of the root of the tongue, as expected based
-on previous research on English. \Cref{f:tra} (top half) shows the
-predicted tongue contours in voiceless (dashed line) and voiced stops
-(thick line) at maximum tongue displacement for each Italian speaker.
-Below each tongue contour panel, the difference smooth for voicing is
-also shown (black line, confidence interval in grey). Tongue contours
-are significantly different in those point in which the confidence
-interval of the difference smooth does not include 0 on the ordinate
-axis. The significantly different portions of the contours are also
-indicated in the figures by a shaded grey area.
+produced with advancement of the root of the tongue, similarly to what
+found in previous research on English \citep{ahn2016}. \Cref{f:tra} (top
+half) shows for each Italian speaker the estimated tongue contours in
+voiceless (dashed lines) and voiced stops (continuous lines) at the time
+of maximum tongue displacement. Below each tongue contour panel, the
+by-voicing difference smooth is also shown (confidence interval in
+grey). Tongue contours are significantly different in those points in
+which the confidence interval of the difference smooth does not include
+0 on the ordinate axis. The significantly different portions of the
+contours are also indicated in the figures by a shaded rectangular
+shape.
 
 In two participants out of four (IT01, IT02), the root was significantly
 more front in voiced stops in both vocalic contexts (/a, o/). On the
@@ -418,15 +429,15 @@ didn't show advancement at all. For Polish (bottom half of
 have tongue root advancement, while the fourth speaker (PL05) had
 significant advancement in voiced stops in both vocalic contexts.
 
-Further contour analysis was carried out at C2 closure onset for the
-Italian and Polish speakers showing advancement. The tongue root at
-closure onset was found to be in advanced in voiced consonants ().
-Comparisons of tongue contours at C2 onset and at the time of maximum
-tongue displacement in voiced consonants further indicated that the
-degree of root advancement was larger at maximum displacement for the
-Italian speakers (IT01, IT02, IT03), but not for the Polish speaker
-(PL05). \Cref{f:voiced} shows the results from IT01 as a representative
-example for Italian and from PL05.
+An additional contour analysis was carried out at C2 closure onset for
+the Italian and Polish speakers showing advancement. The tongue root at
+closure onset was found to be advanced in the voiced consonants of all
+these speakers. Comparisons of tongue contours at C2 onset and at the
+time of maximum tongue displacement in voiced consonants further
+indicated that the degree of root advancement was larger at maximum
+displacement for the Italian speakers (IT01, IT02, IT03), but not for
+the Polish speaker (PL05). \Cref{f:voiced} exemplifies the results with
+IT01 and PL05.
 
 \begin{figure*}
     \centering
@@ -435,12 +446,11 @@ example for Italian and from PL05.
     \label{f:voiced}
 \end{figure*}
 
-The ultrasonic data showed that the tongue body was raised in speakers
-with tongue root advancement. The presence of this gesture in addition
-to root advancement makes sense from an anatomical point of view.
-Raising of the tongue body could be implemented as a way to
-counterbalance the compression of the tongue mass caused by the
-advancement of the root
+The ultrasonic data also showed that the tongue body was raised in
+speakers with tongue root advancement. The presence of this gesture in
+addition to root advancement makes sense from an anatomical point of
+view. Raising the tongue body could be a way to counterbalance the
+compression of the tongue mass caused by the advancement of the root
 \citep{perkell1969, jackson1988, kingston1997, fulop1998}. It is not
 thus surprising to observe a raised tongue body in voiced stops
 accompanying root advancement.
