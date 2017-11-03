@@ -141,7 +141,7 @@ Ethical clearance was obtained for this study from the University of Manchester 
 The participants received a small monetary compensation.
 
 ## Equipment set-up
-\section{s:equipment}
+\label{s:equipment}
 
 \begin{figure*}
     \centering
