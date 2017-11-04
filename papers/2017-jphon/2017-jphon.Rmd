@@ -26,6 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
+\label{s:intro}
 
 This paper reports a previously undocumented link between tongue root advancement in the production of voiced stops and longer duration of the preceding vowels.
 Using ultrasonic data from speakers of Italian and Polish, I demonstrate that the presence of tongue root advancement correlates with that of the so-called voicing effect, whereby vowels tend to be longer before voiced than before voiceless stops.
@@ -340,7 +341,18 @@ If this is the case, the magnitude of the voicing effect should correlate with t
 More specifically, vowel duration is predicted to be directly correlated with the degree of advancement.
 Future work will set out to investigate the putative gradient effect of tongue root advancement on vowel duration.
 
-\section{Conclusion}
+## An articulatory source for the voicing effect
+
+Having demonstrated that tongue root advancement in voiced stops is associated with a relatively stronger voicing effect, it is now possible to revisit the problem of finding a source for the voicing effect which concerns supra-glottal properties of stops, and in relation to which speakers can diverge in their behaviour.
+As evinced by the data presented here, tongue root advancement is an ideal candidate.
+
+The requirement of involving a supra-glottal gesture is straightforwardly met by tongue root advancement, which is related to an oral articulator.
+As for the requisite of being speaker dependent, the results of this study show that speakers can adopt or not tongue root advancement, but if they do, they do so in such a way that the root in voiced stops is already advanced at the onset of the consonant closure.
+This observation can only be interpreted as an indication that the advancement of the root is initiated before the closure onset, which means that it is implemented even during the articulation of the vowel preceding the consonant.
+
+Adapting the reasoning of the proposal by Halle and Stevens (1967, see \Cref{s:intro}), a plausible cause for the longer duration of vowels before voiced consonants could therefore be the additional time required to achieve a complex consonantal gesture in voiced stops that also involves adjustments of the tongue root.
+
+# Conclusion
 \label{s:conclusion}
 
 
