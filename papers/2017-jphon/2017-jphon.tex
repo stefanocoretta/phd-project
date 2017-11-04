@@ -26,7 +26,7 @@
             pdftitle={The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish},
             pdfborder={0 0 0},
             breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+%\urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{plainnat}
 \IfFileExists{parskip.sty}{%
@@ -50,9 +50,9 @@
 \fi
 
 % set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
+%\makeatletter
+%\def\fps@figure{htbp}
+%\makeatother
 
 \frenchspacing
 \usepackage{cleveref}
@@ -376,15 +376,25 @@ improved the model (\(\chi\^2\) = 6.1; p \textless{} 0.05; df = 1), so
 it was included in the full model even though it is deemed as non
 significant according to the single predictor p-value (\emph{t} = -2.3;
 ns; df = 7). The inspection of the model residuals confirmed the
-assumptions of normality and homoscedasticity. The exploration of the
-random coefficients for each speaker indicated that PL05 has a
-particularly higher coefficient for voicing, meaning that the effect of
-voicing is stronger in his data Note that excluding this speaker from
-the model doesn't remove the effect. The estimated effect of voicing on
-vowel duration for PL05 was about 14 milliseconds (vowels followed by
-voiced stops are on average 14 ms longer in PL05). These observations
-will become relevant in the next section, in which the results of the
-tongue contour data will be discussed.
+assumptions of normality and homoscedasticity.
+
+\begin{figure}
+    \centering
+    \includegraphics[height=.3\textwidth]{fig/polish-re.pdf}
+    \caption{By-speaker random intercepts (left) and coefficients (right) for the effect of C2 voicing on vowel duration in Polish. The higher coefficient estimate (+6.3 ms) for PL05 indicates a relatively stronger effect of voicing for this participant.}
+    \label{f:polish-re}
+\end{figure}
+
+The exploration of the random coefficients for each speaker indicated
+that PL05 has a particularly higher coefficient for voicing, meaning
+that the effect of voicing is stronger in his data (\Cref{f:polish-re}).
+Note that the exclusion of this speaker from the model doesn't remove
+the effect (\(\beta\) = 6 ms; sd = 2; \(\chi\^2\) = 8.28; p \textless{}
+0.01, df = 1). The estimated effect of voicing on vowel duration for
+PL05 was about 14 milliseconds (vowels followed by voiced stops are on
+average 14 ms longer in PL05). These observations will become relevant
+in the next section, in which the results of the tongue contour data
+will be discussed.
 
 \subsection{Tongue contours}\label{tongue-contours}
 
@@ -467,42 +477,35 @@ correlation between tongue root advancement and vowel durations,
 ultrasonic data were collected from two languages that differ in the
 presence/absence of the voicing effect, Italian and Polish respectively.
 It was predicted that voiced consonants should be produced with an
-advanced tongue root in Italian, but not in Polish. However, the results
-of this study point to a more fine-grained interpretation of the
-proposed link between tongue root and vowel duration.
+advanced tongue root in Italian, but not in Polish. The results indicate
+that tongue root advancement in voiced stops indeed correlates with the
+presence of the VE, although the details of such correlation differ from
+what was expected. This section will discuss \ldots{} and the
+implications of the findings reported in this paper with regard to the
+source of the voicing effect.
 
-\begin{figure}
-    \centering
-    \includegraphics[height=.35\textwidth]{fig/polish-re.pdf}
-    \caption{By-speaker random intercepts (left) and slopes (right) for the effect of C2 voicing on vowel duration in the Polish. The higher slope estimate (+6.3 ms) for PL05 indicates a relatively stronger effect of voicing on vowel duration for this participant.}
-    \label{f:polish-re}
-\end{figure}
-
-The durational data of Polish indicate a small effect of voicing in this
-language, such that vowels followed by voiced stops are on average 8
-milliseconds longer, contrary to previous findings in
-\citet{keating1984}. The hypothesis that voiced consonants should not
-have tongue root advancement in Polish rests on the assumption that
-Polish is a non-voicing-effect language, which does not hold for the
-data of this study. The voicing effect was found to be stronger in one
-of the Polish speakers, PL05, who has a higher random slope estimate
-compared to the other Polish speakers (\Cref{f:polish-re}). Note,
-however, that a model fitted to the Polish data with the exclusion of
-PL05 still indicates a difference of 6 milliseconds in vowel duration
-(\(\chi\^2\)(1) = 8.28; p \textless{} 0.01). Incidentally, though, PL05
-is also the only Polish speaker who produced voiced consonants with an
-advanced tongue root, both at C2 closure onset and at the time of
-maximum tongue displacement.
+\citet{keating1984} investigated the effect of consonant voicing on the
+duration of preceding vowels and reported that vowels followed by
+voiceless and voiced stops do not differ in duration. Nevertheless, the
+analysis of the durational data discussed above indicates that an effect
+of voicing exists in the Polish speakers of this study, such that vowels
+followed by voiced stops are on average 8 milliseconds longer. The
+hypothesis that voiced consonants should not have tongue root
+advancement in Polish rests on the notion that Polish has been reported
+as a non-voicing-effect language, which was not corroborated by our
+data. Crucially, the Polish speaker with the strongest effect of voicing
+(PL05, cf. \Cref{s:vow-duration}) is also the only Polish speaker who
+produced voiced consonants with an advanced tongue root, both at C2
+closure onset and at the time of maximum tongue displacement.
 
 This pattern is similar to that of the Italian speakers, who have both a
 relatively strong voicing effect and tongue root advancement. This is
-true for all the Italian speakers in this sample, except one (IT04), who
-had a 22 milliseconds difference in vowel duration but whose tongue root
-did not differ in voiced and voiceless stops. A possible interpretation
-of the different behaviour of IT04 as an age effect derives from the
-older age of this speaker (54 years old, vs an average of 26 for the
-other speakers), although a more balanced sample is needed for
-confirmation.
+true for all the speakers of Italian in this sample, except IT04. The
+vowels in this speaker are 22 milliseconds longer when followed by
+voiced stops, but her tongue root position does not differ in voiced and
+voiceless stops. The interpretation of IT04's different behaviour as an
+age effect suggests itself given the older age of this speaker (54 year
+old vs.~the average age of the other Italian speaker, which was 26.)
 
 Overall, the speakers who didn't produce voiced consonants with an
 advanced tongue root had a relatively weaker voicing effect. On the
