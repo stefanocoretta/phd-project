@@ -327,7 +327,7 @@ Crucially, the Polish speaker with the strongest effect of voicing (PL05, cf. \C
 This pattern is similar to that of the Italian speakers, who have both a relatively strong voicing effect and tongue root advancement.
 This is true for all the speakers of Italian in this sample, except IT04.
 The vowels in this speaker are 22 milliseconds longer when followed by voiced stops, but her tongue root position does not differ in voiced and voiceless stops.
-The interpretation of IT04's different behaviour as an age effect suggests itself given the older age of this speaker (54 year old vs. the average age of the other Italian speaker, which was 26.)
+The interpretation of IT04's different behaviour as an age effect suggests itself given the older age of this speaker (54 year old vs. the average age of the other Italian speaker, which was 26).
 
 Overall, the speakers who didn't produce voiced consonants with an advanced tongue root had a relatively weaker voicing effect.
 On the other hand, speakers with tongue root advancement showed a relatively strong effect, with estimates of the durational differences ranging between 15 and 30 milliseconds.
