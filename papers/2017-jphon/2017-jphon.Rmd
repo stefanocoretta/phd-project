@@ -343,14 +343,20 @@ Future work will set out to investigate the putative gradient effect of tongue r
 
 ## An articulatory source for the voicing effect
 
-Having demonstrated that tongue root advancement in voiced stops is associated with a relatively stronger voicing effect, it is now possible to revisit the problem of finding a source for the voicing effect which concerns supra-glottal properties of stops, and in relation to which speakers can diverge in their behaviour.
-As evinced by the data presented here, tongue root advancement is an ideal candidate.
+Having demonstrated that tongue root advancement in voiced stops is associated with a relatively stronger voicing effect, it is now possible to revisit the question of which is the source of the voicing effect.
+As pointed out in \Cref{s:intro}, the ideal candidate should be related to supra-glottal articulatory properties of stops.
+It should also be subject to language- and/or speaker-specific behaviour.
+As evinced by the data presented here, tongue root advancement satisfies both of these requirements.
 
-The requirement of involving a supra-glottal gesture is straightforwardly met by tongue root advancement, which is related to an oral articulator.
-As for the requisite of being speaker dependent, the results of this study show that speakers can adopt or not tongue root advancement, but if they do, they do so in such a way that the root in voiced stops is already advanced at the onset of the consonant closure.
-This observation can only be interpreted as an indication that the advancement of the root is initiated before the closure onset, which means that it is implemented even during the articulation of the vowel preceding the consonant.
+Tongue root advancement as an oral gesture does not need discussion, since it involves a lingual articulation.
+As for the second requisite, the results of this study show that speakers can adopt or not tongue root advancement, but if they do, they do so in such a way that the root in voiced stops is already advanced at the onset of the consonant closure.
+This observation can only be interpreted as an indication that the advancement of the root is initiated before the closure onset.
+What this implies is that the advancement gesture is implemented even during the articulation of the vowel.
 
-Adapting the reasoning of the proposal by Halle and Stevens (1967, see \Cref{s:intro}), a plausible cause for the longer duration of vowels before voiced consonants could therefore be the additional time required to achieve a complex consonantal gesture in voiced stops that also involves adjustments of the tongue root.
+Adapting the reasoning of the proposal by Halle and Stevens (1967, see \Cref{s:intro}), a possible cause for the longer duration of vowels before voiced consonants could therefore be the additional time required to achieve tongue root advancement in the context of voiced stops.
+Such gestural timing account is intended as diachronic source of the voicing effect as a property of languages, rather than as a mechanic condition by which the voicing effect should be observed synchronically.
+This is especially true if one considers that one speaker of Italian did not produced voiced consonants with tongue root advancement, while still having a relatively strong voicing effect.
+
 
 # Conclusion
 \label{s:conclusion}
