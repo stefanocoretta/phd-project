@@ -24,7 +24,7 @@ library(tidymv) # https://github.com/stefanocoretta/tidymv
 library(itsadug)
 library(lmerTest)
 library(effects)
-library(sjPlot)
+#library(sjPlot)
 options(contrasts = rep("contr.treatment", 2))
 ```
 
@@ -154,7 +154,7 @@ vow_lm_null <- lmer(
 anova(vow_lm_null, vow_lm)
 ```
 
-```{r duration-lm-slopes}
+```{r duration-lm-slopes, eval = FALSE}
 ranef(vow_lm)$speaker
 sjp.lmer(vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
 ```
@@ -196,7 +196,7 @@ qqnorm(resid(it_vow_lm))
 plot(allEffects(it_vow_lm))
 ```
 
-```{r it-duration-lm-slopes}
+```{r it-duration-lm-slopes, eval = FALSE}
 ranef(it_vow_lm)$speaker
 sjp.lmer(it_vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
 ```
@@ -237,7 +237,7 @@ qqnorm(resid(pl_vow_lm))
 plot(allEffects(pl_vow_lm))
 ```
 
-```{r pl-duration-lm-slopes}
+```{r pl-duration-lm-slopes, eval = FALSE}
 ranef(pl_vow_lm)$speaker
 sjp.lmer(pl_vow_lm, type = "rs.ri", vars = "vowel.duration", show.legend = T)
 ```
