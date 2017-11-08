@@ -26,7 +26,7 @@
             pdftitle={The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish},
             pdfborder={0 0 0},
             breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+%\urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{plainnat}
 \IfFileExists{parskip.sty}{%
@@ -358,19 +358,21 @@ random \textsc{coefficients} for voicing. An interaction between voicing
 and vowel quality was also included, since it significantly improved the
 model. According to the full model as specified above, Italian vowels
 are 22 milliseconds longer (se = 6) if followed by a voiced stop
-(\(\chi\^2\) = 16.61; p \textless{} 0.001; df = 3).
+(\(\chi\^2\) = 16.61; p \textless{} 0.001; df = 3; see
+\Cref{t:lmer-italian} for a summary of the fixed effects).
 
 For Polish, the same model structure was used, to the exclusion of the
 voicing/vowel-identity interaction (which was not significant). Contrary
 to previous findings, the model reveals a significant 8 milliseconds
 effect (se = 3) of consonantal voicing on the preceding vowel
-(\(\chi\^2\) = 5.4; p \textless{} 0.05, df = 1). Vowel identity and
-sentence duration were also significant. The place of C2 significantly
-improved the model (\(\chi\^2\) = 6.1; p \textless{} 0.05; df = 1), so
-it was included in the full model even though it is deemed as non
-significant according to the single predictor p-value (\emph{t} = -2.3;
-ns; df = 7). The inspection of the model residuals confirmed the
-assumptions of normality and homoscedasticity.
+(\(\chi\^2\) = 5.4; p \textless{} 0.05; df = 1; see \Cref{t:lmer-polish}
+for a summary of the fixed effects). Vowel identity and sentence
+duration were also significant. The place of C2 significantly improved
+the model (\(\chi\^2\) = 6.1; p \textless{} 0.05; df = 1), so it was
+included in the full model even though it is deemed as non significant
+according to the single predictor p-value (\emph{t} = -2.3; ns; df = 7).
+The inspection of the model residuals confirmed the assumptions of
+normality and homoscedasticity.
 
 \begin{figure}
     \centering
@@ -389,6 +391,34 @@ PL05 was about 14 milliseconds (vowels followed by voiced stops are on
 average 14 ms longer in PL05). These observations will become relevant
 in the next section, in which the results of the tongue contour data
 will be discussed.
+
+\ctable[caption = Summary of fixed effects of the linear mixed-effects regression fitted to the Italian vowel duration data (see \Cref{s:vow-duration} for the model details).,
+label = t:lmer-italian
+]{lrrrr}{}{
+\FL
+ & $\beta$ & se  &    df & t \ML
+Intercept              &  14.51   &  12.43 & 133.6 &  1.16 \NN
+voicing        &  21.84   &   6.07 & 12.7  & 3.59 \NN
+place             &  -8.52   &   2.80 & 15.7 & -3.04 \NN
+vowel /o/                   &  -8.69   &   4.864 & 15.8 & -1.78 \NN
+vowel /u/                   & -29.68   &   4.860 & 15.8 & -6.10 \NN
+sent. dur.        &  77.00   &   6.66 & 336.6 & 11.55 \NN
+voi:vow /o/ &   2.56   &   6.86 & 15.7 &  0.37 \NN
+voi:vow /u/ & -15.57   &   6.86 & 15.7 & -2.26 \LL
+}
+
+\ctable[caption = Summary of fixed effects of the linear mixed-effects regression fitted to the Polish vowel duration data (see \Cref{s:vow-duration} for the model details).,
+label = t:lmer-polish
+]{lrrrr}{}{
+\FL
+ & $\beta$ & se &      df & t \ML
+Intercept       &  22.92   &  10.43 & 127.13  & 2.19 \NN
+voicing &   7.88   &   3.25  & 6.860  & 2.41 \NN
+vowel (/o/)            & -11.79   &   3.00  & 7.000 & -3.92 \NN
+vowel (/u/)            & -29.27   &   3.01  & 7.100 & -9.70 \NN
+place      &  -5.57   &   2.45  & 7.00 & -2.27 \NN
+sent. dur. &  70.81   &   9.74  & 261.04 &  7.26 \NN
+}
 
 \subsection{Tongue contours}\label{tongue-contours}
 
@@ -529,13 +559,13 @@ advancement on vowel duration.
 effect}\label{an-articulatory-source-for-the-voicing-effect}
 
 Having demonstrated that tongue root advancement in voiced stops is
-associated with a relatively stronger voicing effect, it is now possible
-to revisit the question of what is the source of the voicing effect. As
-pointed out in \Cref{s:intro}, the ideal candidate should be related to
-supra-glottal articulatory properties of stops. It should also be
-subject to language- and/or speaker-specific behaviour. As evinced by
-the data presented here, tongue root advancement satisfies both of these
-requirements.
+associated with a relatively stronger voicing effect, we can now move to
+discuss tongue root advancement as the precursor of the voicing effect.
+As pointed out in \Cref{s:intro}, the source of the voicing effect
+should be found among the supra-glottal articulatory properties of
+stops. Such putative source should also be subject to language- and/or
+speaker-specific behaviour. As evinced by the data presented here,
+tongue root advancement satisfies both of these requirements.
 
 Tongue root advancement as an oral gesture does not need discussion,
 since it involves a lingual articulation. As for the second requisite,
@@ -546,77 +576,73 @@ closure. The most straightforward interpretation is that the advancement
 of the root is initiated before the consonant closure is achieved. This
 implies that the advancement gesture is implemented even during the
 articulation of the vowel. Adapting the reasoning of the proposal by
-Halle and Stevens (1967, see \Cref{s:intro}), a possible cause for the
+Halle and Stevens (1967, see \Cref{s:intro}), a possible source of the
 longer duration of vowels before voiced consonants could therefore be
 the additional time required to achieve tongue root advancement in the
 context of voiced stops.
 
-Such gestural account is intended as a diachronic source of the voicing
-effect, rather than as a mechanic condition according to which the
-voicing effect should be observed synchronically. This is in compliance
-with the fact that one speaker of Italian did not produce voiced
-consonants with tongue root advancement, while still having a relatively
-strong voicing effect. Moreover, this account assumes that the size of
-the effect of voicing on vowel duration plays a role. Tongue root
-advancement, if found, is expected to be linked to a greater durational
-differential. As we saw earlier in this section, the presence of tongue
-root advancement in the Polish speaker PL05 was accompanied by an 8
-millisecond increase in the degree to which voicing affects vowel
-duration. This aspect, coupled with the hypothesis explored above that
-the effect of voicing on vowel duration could be gradient, clearly
-illustrates the complexity of this phenomenon, that has escaped our
-understanding for almost a century.
+Such gestural account is intended as the diachronic source of the
+voicing effect, rather than as a mechanic condition according to which
+the voicing effect should be observed synchronically. This is in
+compliance with the fact that one speaker of Italian did not produce
+voiced consonants with tongue root advancement, while still having a
+relatively strong voicing effect. Moreover, this account confers a more
+salient function to the size of the effect. If found, tongue root
+advancement is expected to co-occur with a relatively stronger voicing
+effect. As we saw earlier, the presence of tongue root advancement in
+the Polish speaker PL05 was accompanied by an 8 millisecond increase in
+the degree to which voicing affects vowel duration. This aspect, coupled
+with the hypothesis explored above that the effect of voicing on vowel
+duration could be gradient, evidently illustrates the complexity of this
+phenomenon, that has been escaping our understanding for almost a
+century.
 
 \section{Conclusion}\label{conclusion}
 
 \label{s:conclusion}
 
-In this paper I investigated the so called voicing effect, by which
-vowels tend to be longer before voiced than before voiceless stops in a
-variety of languages. No consensus has been reached in the literature
-regarding the source of this effect. On the other hand, voicing in stops
-has been long known to be facilitated by pharyngeal cavity expansion,
+In this paper I discussed the so called voicing effect, by which vowels
+tend to be longer before voiced than before voiceless stops in a variety
+of languages. No consensus has been reached in the literature regarding
+the source of this effect. On the other hand, voicing in stops has long
+been known to be facilitated by pharyngeal cavity expansion, which is
 often implemented by means of tongue root advancement. I therefore
 introduced the hypothesis that tongue root advancement in voiced stops
 might play a role in determining the presence of the voicing effect.
 
-I presented acoustic and ultrasonic data from Italian (a voicing-effect
-language) and Polish (a non-voicing-effect language) and showed that:
+Drawing on acoustic and ultrasonic data from Italian (a voicing-effect
+language) and Polish (a non-voicing-effect language), I showed that:
 
 \begin{itemize}
 \tightlist
 \item
-  vowels in Polish are on average 6 milliseconds longer when followed by
-  voiced stops;
+  Vowels in Polish are on average 6 milliseconds longer when followed by
+  voiced stops.
 \item
-  voiced stops in Polish are realised without tongue root advancement,
-  except in one speaker;
+  In Italian, vowels are on average 22 milliseconds longer before voiced
+  stops.
 \item
-  the durational increment in this same speaker's vowels is double
-  compared to the other Polish speakers, but still smaller than that of
-  the Italian speakers;
+  Voiced stops were realised with tongue root advancement in three
+  Italian speakers and one Polish speaker.
 \item
-  in Italian, vowels are on average 22 milliseconds longer before voiced
-  stops, whether the root of the tongue is advanced or not;
+  The durational increment in the Polish speaker with tongue root
+  advancement is double compared to the other Polish speakers, although
+  still smaller than that of the Italian speakers.
 \item
-  tongue root advancement is found both during the closure of voiced
-  stops and at the onset of closure, both in the Italian and Polish
-  speakers showing root advancement;
+  Tongue root advancement was found both during the closure and at the
+  time of closure onset of voiced consonants, both in the Italian and
+  the Polish speakers showing root advancement.
 \item
-  the degree of tongue root advancement increases during closure in the
-  Italian speakers but not in the only Polish speaker with root
-  advancement.
+  The degree of tongue root advancement increases during closure in the
+  Italian speakers but not in the Polish speaker.
 \end{itemize}
 
-Based on these observations, I proposed that a possible diachronic
-source for the longer duration of vowels before voiced stops is the
-additional time required for the tongue root to reach an advanced
-position during the articulation of the vowel. Moreover, I put forward
-the hypothesis that the relation between the degree of tongue root
-advancement and the magnitude of the voicing effect is gradient rather
-than a matter of presence vs.~absence.
-
-\section{References}\label{references}
+I put forward the hypothesis that the relation between the degree of
+tongue root advancement and the magnitude of the voicing effect is
+gradient rather than a matter of presence vs.~absence. Finally, I
+proposed that the additional time required for the tongue root to reach
+an advanced position is a possible diachronic precursor of the longer
+duration of vowels before voiced stops.
 
 \bibliography{linguistics.bib}
 
