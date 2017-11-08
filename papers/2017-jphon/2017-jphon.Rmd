@@ -263,6 +263,28 @@ Note that the exclusion of this speaker from the model doesn't remove the effect
 The estimated effect of voicing on vowel duration for PL05 was about 14 milliseconds (vowels followed by voiced stops are on average 14 ms longer in PL05).
 These observations will become relevant in the next section, in which the results of the tongue contour data will be discussed.
 
+\ctable[caption = Lmer italian.,
+label = t:lmer-italian
+]{lrrrr}{}{
+ & Estimate & se  &    df & t-value
+(Intercept)              &  14.513   &  12.434 & 133.6 &  1.167
+c2phonationvoiced        &  21.841   &   6.073 & 12.7  & 3.596
+c2placevelar             &  -8.524   &   2.803 & 15.7 & -3.041
+vowelo                   &  -8.697   &   4.864 & 15.8 & -1.788
+vowelu                   & -29.686   &   4.860 & 15.8 & -6.108
+sentence.duration        &  77.009   &   6.662 & 336.6 & 11.559
+c2phonationvoiced:vowelo &   2.561   &   6.869 & 15.7 &  0.373
+c2phonationvoiced:vowelu & -15.577   &   6.866 & 15.7 & -2.269
+}
+
+ & Estimate & se &      df & t-value
+(Intercept)       &  22.928   &  10.437 & 127.130  & 2.197
+c2phonationvoiced &   7.881   &   3.259  & 6.860  & 2.418
+vowelo            & -11.795   &   3.005  & 7.000 & -3.925
+vowelu            & -29.276   &   3.016  & 7.100 & -9.707
+c2placevelar      &  -5.577   &   2.453  & 7.000 & -2.273
+sentence.duration &  70.813   &   9.743  & 261.040 &  7.268
+
 ## Tongue contours
 \label{s:splines}
 
@@ -384,7 +406,7 @@ Based on these observations, I proposed that a possible diachronic source for th
 Moreover, I put forward the hypothesis that the relation between the degree of tongue root advancement and the magnitude of the voicing effect is gradient rather than a matter of presence vs. absence.
 
 
-
+# References
 
 <!--
 Following the reasoning of the proposal by @halle1967, a plausible cause for the longer duration of vowels before voiced consonants with tongue root advancement (as in Italian) could therefore be the additional time required to achieve a more complex consonantal gesture---a gesture that requires adjustments of both the tongue root and the tongue dorsum/tip.
