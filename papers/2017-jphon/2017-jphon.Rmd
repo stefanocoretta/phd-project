@@ -361,10 +361,28 @@ This is in compliance with the fact that one speaker of Italian did not produce 
 Moreover, this account assumes that the size of the effect of voicing on vowel duration plays a role.
 Tongue root advancement, if found, is expected to be linked to a greater durational differential.
 As we saw earlier in this section, the presence of tongue root advancement in the Polish speaker PL05 was accompanied by an 8 millisecond increase in the degree to which voicing affects vowel duration.
-This aspect, coupled with the hypothesis explored above that the effect of voicing on vowel duration could be gradient, clearly illustrate the complexity of this phenomenon, that still ... after years of investigation.
+This aspect, coupled with the hypothesis explored above that the effect of voicing on vowel duration could be gradient, clearly illustrates the complexity of this phenomenon, that has escaped our understanding for almost a century.
 
 # Conclusion
 \label{s:conclusion}
+
+In this paper I investigated the so called voicing effect, by which vowels tend to be longer before voiced than before voiceless stops in a variety of languages.
+No consensus has been reached in the literature regarding the source of this effect.
+On the other hand, voicing in stops has been long known to be facilitated by pharyngeal cavity expansion, often implemented by means of tongue root advancement.
+I therefore introduced the hypothesis that tongue root advancement in voiced stops might play a role in determining the presence of the voicing effect.
+
+I presented acoustic and ultrasonic data from Italian (a voicing-effect language) and Polish (a non-voicing-effect language) and showed that:
+
+* vowels in Polish are on average 6 milliseconds longer when followed by voiced stops;
+* voiced stops in Polish are realised without tongue root advancement, except in one speaker;
+* the durational increment in this same speaker's vowels is double compared to the other Polish speakers, but still smaller than that of the Italian speakers;
+* in Italian, vowels are on average 22 milliseconds longer before voiced stops, whether the root of the tongue is advanced or not;
+* tongue root advancement is found both during the closure of voiced stops and at the onset of closure, both in the Italian and Polish speakers showing root advancement;
+* the degree of tongue root advancement increases during closure in the Italian speakers but not in the only Polish speaker with root advancement.
+
+Based on these observations, I proposed that a possible diachronic source for the longer duration of vowels before voiced stops is the additional time required for the tongue root to reach an advanced position.
+
+
 
 
 <!--
