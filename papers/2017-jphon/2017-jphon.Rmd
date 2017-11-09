@@ -372,8 +372,8 @@ If this is the case, the magnitude of the voicing effect should correlate with t
 More specifically, vowel duration is predicted to be directly correlated with the degree of advancement.
 Future work will set out to investigate the putative gradient effect of tongue root advancement on vowel duration.
 
-## An articulatory source for the voicing effect
-\label{s:source}
+<!-- ## An articulatory precursor of the voicing effect -->
+<!-- \label{s:source} -->
 
 Having demonstrated that tongue root advancement in voiced stops is associated with a relatively stronger voicing effect, we can now move to discuss tongue root advancement as the precursor of the voicing effect.
 As pointed out in \Cref{s:intro}, the source of the voicing effect should be found among the supra-glottal articulatory properties of stops.
