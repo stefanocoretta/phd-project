@@ -398,10 +398,10 @@ This aspect, coupled with the hypothesis explored above that the effect of voici
 # Conclusion
 \label{s:conclusion}
 
-In this paper I discussed the so called voicing effect, by which vowels tend to be longer before voiced than before voiceless stops in a variety of languages.
+This paper focussed on the so called voicing effect, by which vowels tend to be longer before voiced than before voiceless stops in a variety of languages.
 No consensus has been reached in the literature regarding the source of this effect.
 On the other hand, voicing in stops has long been known to be facilitated by pharyngeal cavity expansion, which is often implemented by means of tongue root advancement.
-I therefore introduced the hypothesis that tongue root advancement in voiced stops might play a role in determining the presence of the voicing effect.
+I therefore offered the hypothesis that tongue root advancement in voiced stops might play a role in determining the presence vs. absence of the voicing effect in a particular language.
 
 Drawing on acoustic and ultrasonic data from Italian (a voicing-effect language) and Polish (a non-voicing-effect language), I showed that:
 
@@ -412,8 +412,10 @@ Drawing on acoustic and ultrasonic data from Italian (a voicing-effect language)
 * Tongue root advancement was found both during the closure and at the time of closure onset of voiced consonants, both in the Italian and the Polish speakers showing root advancement.
 * The degree of root advancement increases during closure in the Italian speakers but not in the Polish speaker.
 
-I put forward the hypothesis that the relation between the degree of tongue root advancement and the magnitude of the voicing effect is gradient rather than a matter of presence vs. absence.
-Finally, I proposed that the additional time required for the tongue root to reach an advanced position is a possible diachronic precursor of the longer duration of vowels before voiced stops.
+These results indicate that tongue root advancement is correlated with vowel duration, although in a unexpected way.
+More specifically, I found that, independent of language, the difference in vowel duration was greater in speakers who produce voiced consonants with tongue root advancement, than in speakers without tongue root advancement.
+Following from this, I advanced the hypothesis that the relation between the degree of tongue root advancement and the magnitude of the voicing effect is gradient rather than a matter of presence vs. absence.
+Finally, I speculated that the additional time required for the tongue root to reach an advanced position is a possible diachronic precursor of the longer duration of vowels preceding voiced stops.
 
 <!--
 Following the reasoning of the proposal by @halle1967, a plausible cause for the longer duration of vowels before voiced consonants with tongue root advancement (as in Italian) could therefore be the additional time required to achieve a more complex consonantal gesture---a gesture that requires adjustments of both the tongue root and the tongue dorsum/tip.
