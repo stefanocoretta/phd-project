@@ -378,7 +378,7 @@ Future work will set out to investigate the putative gradient effect of tongue r
 Having demonstrated that tongue root advancement in voiced stops is associated with a relatively stronger voicing effect, we can now move to discuss tongue root advancement as the precursor of the voicing effect.
 As pointed out in \Cref{s:intro}, the source of the voicing effect should be found among the supra-glottal articulatory properties of stops.
 Such putative source should also be subject to language- and/or speaker-specific behaviour.
-As evinced by the data presented here, tongue root advancement satisfies both of these requirements.
+As evinced from the data presented here, tongue root advancement satisfies both of these requirements.
 
 Tongue root advancement as an oral gesture does not need discussion, since it involves a lingual articulation.
 As for the second requisite, the results of this study show that speakers can adopt tongue root advancement or not, but, if they do, they do so in such a way that the root in voiced stops is already advanced at the onset of the consonant closure.
