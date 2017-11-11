@@ -38,34 +38,37 @@ including (but not limited to) English, German, Hindi, Russian, Italian, Arabic,
 A common stance in the literature is that the magnitude of the voicing effect differs depending on the language (although see \citealt{laeufer1992}), and that this phenomenon is not a universal tendency, since the duration of vowels is not affected by the voicing of the following obstruents in some languages, like Polish and Czech \citep{keating1984}.
 Although several attempts have been made to explain the voicing effect, an account that survives all empirical data is still lacking \citep{durvasula2012}.
 
-To provide a rationale for the language-specificity of the voicing effect, \citet{kluender1988} propose that the source of the effect lies at the level of the perceptual system.
+To provide a rationale for the language-specificity of the voicing effect, \citet{kluender1988} propose that the source of the effect is to be found in the perceptual system.
 They argue that speakers actively manipulate vowel durations to enhance the closure-duration difference which can cue the voicing distinction in obstruents.
 <!-- According to another perceptually inclined account, speakers misperceive the voiced portion of the consonant closure of a voiced stop as part of the preceding vowel, which subsequently leads to the production of longer vowel durations before voiced stops \citep{javkin1976}. -->
 However, \citet{fowler1992} shows by means of perceptual experiments that speakers judge vowels to be longer if the consonant closure duration is increased, and that, conversely, consonant closure is perceived to be longer when vowel duration is increased.
 Fowler's experimental results thus challenge the premise that speakers exploit durational contrasts to enhance voicing distinctions.
 <!-- Crucially, \citet{davis1989} demonstrate that closure duration is not employed as a cue to voicing, fact that further confutes accounts based on closure-duration enhancement. -->
 
-A desirable account of the voicing effect should then satisfy both of the following requirements: (1) it should allow for a language-specific implementation of the voicing effect, and (2) it should place the source of the effect in articulatory properties of voiced or voiceless obstruents that could favour longer or shorter vowel durations.
+In the light of the difficulties incurred by perceptual explanations, we have reason to seek an alternative account of the voicing effect with the following attributes: (1) it allows for a language-specific implementation of the voicing effect, and (2) it places the source of the effect in articulatory properties of voiced or voiceless obstruents that could favour longer or shorter vowel durations.
 One of the first articulatory accounts to be proposed points to differences in the adjustment of the glottis before voiced and voiceless stops (\citealt{halle1967}, reiterated in \citealt{chomsky1968}).
 \citet{halle1967} state that the glottal configuration during voicing in vowels is different from that of the closure of voiced consonants.
 Their argument is that vowels are longer before voiced consonants so that more time is available to the glottis to achieve a position suitable for maintaining within-closure voicing.
 This guarantees that such configuration is secured before the onset of the consonant closure.
 Later studies, however, established that the glottal configuration of voicing in obstruents does not differ from the one in vowels \citep{lisker1974,kagaya1975}.
+As a consequence of this observation, it is reasonable to look for the articulatory source of the voicing effect not in properties of vocal folds activity during obstruent voicing, but rather in the supra-glottal adjustments that accompany it.
+<!-- This suggests that the articulatory source of the voicing effect should be sought not in the action of the glottis during obstruent voicing, but rather in the supra-glottal adjustments that accompany it. -->
 <!-- Hence, the claim that vowels are longer to allow glottal adjustments cannot be supported empirically. -->
 
-A known articulatory difference between voiced and voiceless consonants regards instead a supra-glottal rather than a laryngeal gesture, namely the position of the tongue root along the front-back plane of the oral tract.
+One of the known differences in supra-glottal articulation between voiced and voiceless consonants concerns the position of the tongue root along the front-back plane of the oral tract.
 It has been observed that the tongue root is in a more advanced position in voiced than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
 This gesture has been interpreted as a mechanism to ensure voicing during closure.
 The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
 During the production of voiced obstruents, the supra-glottal pressure quickly increases.
 Such pressure increase can hinder the ability to maintain voicing during closure, to the point that voicing can cease if the supra-glottal pressure is higher than the sub-glottal pressure [@ohala2011].
 An articulatory solution to counterbalance the increase in pressure is to expand the supra-glottal cavity by advancing the root of the tongue.
+The ability to lower the supra-glottal air pressure by advancing the tongue root is put to a different use in Korean, where it facilitates the maintenance of short lag VOT in tense stops [@ahn2016].
 
 <!-- need to mention speaker control of TRA -->
 
-Drawing on ultrasound tongue imaging data, @ahn2016 show that tongue root advancement not only favours voicing in English voiced stops, but it also facilitates a short lag VOT in the tense stops of Korean.
+<!-- Drawing on ultrasound tongue imaging data, @ahn2016 show that tongue root advancement not only favours voicing in English voiced stops, but it also facilitates a short lag VOT in the tense stops of Korean. -->
 <!-- demonstrate that the root of the tongue is advanced during the articulation of voiced consonants in American English, even when voicing is not implemented during the closure in underlyingly voiced stops. -->
-The established link between voicing, VOT duration, and tongue root advancement on one hand, and between voicing and vowel duration on the other, raises the question of whether a correlation exists between tongue root advancement and vowel duration.
+The link between tongue root advancement and properties of phonation like voicing and VOT duration on one hand, and between voicing and duration of vowels on the other, raises the question of whether a direct correlation exists between tongue root advancement and vowel duration.
 If tongue root advancement plays a role in determining the presence or development of the voicing effect, then it is expected that voiced consonants should be articulated with tongue root advancement in voicing-effect languages, but not in languages without the voicing effect.
 
 For this study ultrasonic tongue data were recorded from speakers of Italian and Polish, two languages that have been reported to have and lack the voicing effect respectively.
@@ -341,7 +344,7 @@ Could also be a matter of velocity -->
 # Discussion
 \label{s:discussion}
 
-Based on the previously established link between tongue root advancement and voicing, it was proposed at the beginning of this paper that the presence of the voicing effect in a language is correlated with the presence of tongue root advancement in the voiced stops of that language.
+Based on the previously established link between tongue root advancement and voicing, it was proposed at the beginning of this paper that the presence of the voicing effect in a language could be correlated with the presence of tongue root advancement in the voiced stops of that language.
 To test the correlation between tongue root advancement and vowel durations, ultrasonic data were collected from speakers of two languages that differ in the presence/absence of the voicing effect, Italian and Polish respectively.
 It was predicted that voiced consonants should be produced with an advanced tongue root in Italian, but not in Polish.
 The results of this study do not bear out this simple scenario, however, suggesting instead that the voicing effect is related to tongue root advancement in voiced stops in a complex way.
@@ -351,9 +354,9 @@ The results of this study rather indicate that tongue root advancement in voiced
 <!-- However, the results of this study point to a more fine-grained interpretation of the proposed link between tongue root and vowel duration. -->
 <!-- The data from most speakers pattern according to the hypothesis that a link subsists between longer vowels following voiced stops and tongue root advancement in that type of consonants. -->
 
-@keating1984 investigated the effect of consonant voicing on the duration of preceding vowels and reported that vowels followed by voiceless and voiced stops do not differ in duration.
+@keating1984 investigated the effect of consonant voicing on the duration of preceding vowels in Polish and reported that vowels followed by voiceless and voiced stops do not differ in duration.
 Nevertheless, the analysis of the durational data discussed above indicates that an effect of voicing exists in the Polish speakers of this study, such that vowels followed by voiced stops are on average 8 milliseconds longer.
-The hypothesis that voiced consonants should not have tongue root advancement in Polish rests on the notion that Polish is a non-voicing-effect language.
+The hypothesis that voiced consonants should not have tongue root advancement in Polish rested on previous reports that Polish is a non-voicing-effect language.
 The data from this study indicate instead the presence of a voicing effect.
 Crucially, the Polish speaker with the strongest effect of voicing (PL05, cf. \Cref{s:vow-duration}) is also the only Polish speaker who produced voiced consonants with an advanced tongue root, both at C2 closure onset and at the time of maximum tongue displacement.
 
@@ -391,7 +394,7 @@ Such gestural account is intended as a diachronic source of the voicing effect, 
 This is in compliance with the fact that one speaker of Italian did not produce voiced consonants with tongue root advancement, while still having a relatively strong voicing effect.
 A speculative explanation is that, once a strong voicing effect is stabilised in a language (or a variety of a language), speakers of that language will learn the effect while being able to adopt different strategies to cope with the decreasing trans-glottal pressure drop.
 
-To conclude, the size of the effect of voicing on vowel duration assumes a prominent function in the gestural-timing account proposed here.
+To conclude, the gestural-timing account proposed here places greater emphasis on the size of the effect of voicing on vowel duration.
 If present, tongue root advancement is expected to co-occur with a relatively stronger voicing effect.
 As we saw earlier, the presence of tongue root advancement in the Polish speaker PL05 was accompanied by an 8 millisecond increase in the degree to which voicing affects vowel duration.
 This aspect, coupled with the hypothesis explored above that the effect of voicing on vowel duration could be gradient, evidently illustrates the complexity of this phenomenon, which has being escaping our understanding for almost a century.
@@ -412,7 +415,7 @@ Drawing on acoustic and ultrasonic data from Italian (a voicing-effect language)
 * Tongue root advancement was found at closure onset and within closure in voiced consonants in Italian and Polish.
 * The advancement of the root increases during closure in the Italian speakers but not in the Polish speaker.
 
-These results indicate that tongue root advancement does not determine the presence of the voicing effect or its absence, but it is rather correlated with vowel duration in an unanticipated way.
+These results indicate that tongue root advancement does not determine the presence of the voicing effect or its absence, but it is rather correlated with vowel duration in a more complex way.
 More specifically, the difference in vowel duration was greater in speakers who produce voiced consonants with tongue root advancement, than in speakers without tongue root advancement, independent of their language.
 I thus advanced the hypothesis that the relation between the degree of tongue root advancement and the magnitude of the voicing effect is gradient rather than a matter of presence vs. absence.
 Finally, it was speculated that the additional time required for the tongue root to reach an advanced position is a possible diachronic precursor of the longer duration of vowels followed by voiced stops.
