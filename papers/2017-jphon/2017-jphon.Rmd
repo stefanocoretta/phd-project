@@ -25,6 +25,16 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+\begin{abstract}
+<!-- voicing effect > no account is satisfactory > research seems to point to an account that is supra-glottal and language-specific > tongue root advancement in voiced stops > if there is a link then VE languages have TRA > results show that the relationship is more complex,  -->
+<!-- A long debated property of voicing in consonants is that it tends to co-occur with longer durations of the preceding vowels. -->
+<!-- This phenomenon, the so-called voicing effect, still calls for a satisfactory account. -->
+In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer duration of the preceding vowels.
+In several languages, vowels tend to be longer before voiced than before voiceless obstruents.
+This phenomenon, the so-called voicing effect, has been the subject of a century long debate, although none of the proposed accounts survives scrutiny.
+Previous research indicates that ...
+\end{abstract}
+
 # Introduction
 \label{s:intro}
 
