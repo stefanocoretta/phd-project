@@ -15,6 +15,7 @@ header-includes:
 - \frenchspacing
 - \usepackage{cleveref}
 - \usepackage{ctable}
+- \journal{Journal of Phonetics}
 ---
 
 ```{r setup, include=FALSE}
