@@ -36,7 +36,11 @@ knitr::opts_chunk$set(echo = TRUE)
 \address[mcr]{University of Manchester, Linguistics and English Language}
 
 \begin{abstract}
-In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer durations of the preceding vowels. A wide variety of languages have been reported to show the so-called voicing effect, whereby vowels tend to be longer before voiced than before voiceless stops. The voicing effect has attracted the attention of researchers for about a century. However, the accounts put forward so far are challenged by empirical scrutiny. Previous research indicates that
+In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer duration of the preceding vowels. A wide variety of languages have been reported to show the so-called voicing effect, whereby vowels tend to be longer before voiced than before voiceless stops. Although the voicing effect has attracted the attention of researchers for about a century, no consensus regarding its source has been reached to date.
+Tongue root advancement is known to facilitate voicing during closure and short lag VOT durations.
+Given the established link between tongue root advancement and voicing and VOT durations on one hand, and between voicing and vowel durations on the other, I set out to test the putative link between tongue root advancement and vowel duration.
+Drawing on ultrasonic data from speakers of Italian and Polish, I show that tongue root advancement in voiced stops correlates with a stronger voicing effect, independent of language.
+%Previous research points to accounts that allow for a language-specific implementation of the voicing effect and that place its source in supra-glottal articulatory properties of voiced or voiceless stops.
 \end{abstract}
 
 \end{frontmatter}
