@@ -26,7 +26,7 @@
             pdftitle={The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish},
             pdfborder={0 0 0},
             breaklinks=true}
-%\urlstyle{same}  % don't use monospace font for urls
+\urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{plainnat}
 \IfFileExists{parskip.sty}{%
@@ -68,6 +68,16 @@ ultrasound study of Italian and Polish}
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+<!-- voicing effect > no account is satisfactory > research seems to point to an account that is supra-glottal and language-specific > tongue root advancement in voiced stops > if there is a link then VE languages have TRA > results show that the relationship is more complex,  -->
+<!-- A long debated property of voicing in consonants is that it tends to co-occur with longer durations of the preceding vowels. -->
+<!-- This phenomenon, the so-called voicing effect, still calls for a satisfactory account. -->
+In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer duration of the preceding vowels.
+In several languages, vowels tend to be longer before voiced than before voiceless obstruents.
+This phenomenon, the so-called voicing effect, has been the subject of a century long debate, although none of the proposed accounts survives scrutiny.
+Previous research indicates that ...
+\end{abstract}
 
 \section{Introduction}\label{introduction}
 
@@ -355,15 +365,16 @@ voicing}\label{vowel-duration-and-voicing}
 A linear mixed effects regression model was fitted to the Italian vowel
 duration data with \textsc{vowel duration} (in milliseconds) as the
 outcome variable; \textsc{vowel identity} (/a, o, u/), \textsc{voicing}
-and \textsc{place of articulation} of the following consonant,
-\textsc{sentence duration} (in seconds) as fixed effects;
-\textsc{by-speaker} and \textsc{by-word} random \textsc{intercepts}, and
-\textsc{by-speaker} random \textsc{coefficients} for voicing. An
-interaction between voicing and vowel quality was also included, since
-it significantly improved the model. According to the full model as
-specified above, Italian vowels are 22 milliseconds longer (se = 6) if
-followed by a voiced stop (\(\chi\^2\) = 16.61; p \textless{} 0.001; df
-= 3; see \Cref{t:lmer-italian} for a summary of the fixed effects).
+(voiceless vs.~voiced) and \textsc{place of articulation} (coronal
+vs.~velar) of the following consonant, \textsc{sentence duration} (in
+seconds) as fixed effects; \textsc{by-speaker} and \textsc{by-word}
+random \textsc{intercepts}, and \textsc{by-speaker} random
+\textsc{coefficients} for voicing. An interaction between voicing and
+vowel quality was also included, since it significantly improved the
+model. According to the full model as specified above, Italian vowels
+are 22 milliseconds longer (se = 6) if followed by a voiced stop
+(\(\chi\^2\) = 16.61; p \textless{} 0.001; df = 3; see
+\Cref{t:lmer-italian} for a summary of the fixed effects).
 
 For Polish, the same model structure was used, to the exclusion of the
 voicing/vowel-identity interaction (which did not improve the model).
@@ -435,11 +446,11 @@ sent. dur. &  70.81   &   9.74  & 261.04 &  7.26 \NN
 GAMMs were fitted to the data of each speaker individually: the
 \textsc{y-coordinates} of the contours were included in the model as the
 outcome variable; the \textsc{x-coordinates} as the only parametric
-term. The following smooths were specified: a reference smooth term for
-the x-coordinates, three difference smooths for the x-coordinates by
-\textsc{voicing}, \textsc{vowel identity}, and \textsc{place} of
-articulation of the following consonant respectively, and
-\textsc{by-word} random \textsc{smooths}.
+term. The following smooths were specified: a \textsc{reference smooth}
+term for the \textsc{x-coordinates}, three \textsc{difference smooths}
+for the x-coordinates by \textsc{voicing}, \textsc{vowel identity}, and
+\textsc{place} of articulation of the following consonant respectively,
+and \textsc{by-word random smooths}.
 
 The analysis of the Italian ultrasonic data shows that voiced stops are
 produced with advancement of the tongue root. \Cref{f:tra} (top half)
@@ -484,7 +495,7 @@ gesture makes sense from an anatomical point of view. Raising the tongue
 body is a way to counterbalance the compression of the tongue mass
 caused by the advancement of the root
 \citep{perkell1969, jackson1988, sproat1993, kingston1997, fulop1998}.
-It is not thus surprising to observe a raised tongue body in voiced
+It is thus not surprising to observe a raised tongue body in voiced
 stops accompanying root advancement.
 
 \section{Discussion}\label{discussion}
