@@ -1,4 +1,4 @@
-\documentclass[authoryear, twocolumn]{elsarticle}
+\documentclass[authoryear, 5p]{elsarticle}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -23,18 +23,17 @@
 }{}
 \usepackage[unicode=true]{hyperref}
 \hypersetup{
-            pdftitle={The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
-\bibliographystyle{plainnat}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
+\bibliographystyle{model2-names.bst}
+%\IfFileExists{parskip.sty}{%
+%\usepackage{parskip}
+%}{% else
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{6pt plus 2pt minus 1pt}
+%}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -56,28 +55,25 @@
 
 \frenchspacing
 \usepackage{cleveref}
-\setcitestyle{aysep={},notesep={:},citesep={,}}
 \usepackage{ctable}
+
+\date{}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish}
+
 \author[mcr]{Stefano Coretta\corref{cor1}}
 \cortext[cor1]{Corresponding author \ead{stefano.coretta@manchester.ac.uk}}
 \address[mcr]{University of Manchester, Linguistics and English Language}
 
-\title{The link between tongue root advancement and the voicing effect: an
-ultrasound study of Italian and Polish}
-\date{}
-
-\begin{document}
-\maketitle
-
 \begin{abstract}
-<!-- voicing effect > no account is satisfactory > research seems to point to an account that is supra-glottal and language-specific > tongue root advancement in voiced stops > if there is a link then VE languages have TRA > results show that the relationship is more complex,  -->
-<!-- A long debated property of voicing in consonants is that it tends to co-occur with longer durations of the preceding vowels. -->
-<!-- This phenomenon, the so-called voicing effect, still calls for a satisfactory account. -->
-In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer duration of the preceding vowels.
-In several languages, vowels tend to be longer before voiced than before voiceless obstruents.
-This phenomenon, the so-called voicing effect, has been the subject of a century long debate, although none of the proposed accounts survives scrutiny.
-Previous research indicates that ...
+In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer durations of the preceding vowels. A wide variety of languages have been reported to show the so-called voicing effect, whereby vowels tend to be longer before voiced than before voiceless stops. The voicing effect has attracted the attention of researchers for about a century. However, the accounts put forward so far are challenged by empirical scrutiny. Previous research indicates that
 \end{abstract}
+
+\end{frontmatter}
 
 \section{Introduction}\label{introduction}
 
@@ -658,6 +654,10 @@ than a matter of presence vs.~absence. Finally, it was speculated that
 the additional time required for the tongue root to reach an advanced
 position is a possible diachronic precursor of the longer duration of
 vowels followed by voiced stops.
+
+\section*{References}
+
+\biboptions{authoryear}
 
 \bibliography{linguistics.bib}
 

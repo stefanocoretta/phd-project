@@ -1,39 +1,45 @@
 ---
-title: 'The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish'
 output:
     pdf_document:
+      citation_package: natbib
       fig_caption: yes
       keep_tex: yes
       latex_engine: xelatex
-      citation_package: natbib
       number_sections: yes
-      template: template.tex
+      template: my-template.tex
 documentclass: elsarticle
-classoption: authoryear, twocolumn
+classoption: authoryear, 5p
 bibliography: linguistics.bib
+biblio-style: model2-names.bst
 header-includes:
 - \frenchspacing
 - \usepackage{cleveref}
-- \setcitestyle{aysep={},notesep={:},citesep={,}}
 - \usepackage{ctable}
-- \author[mcr]{Stefano Coretta\corref{cor1}}
-- \cortext[cor1]{Corresponding author \ead{stefano.coretta@manchester.ac.uk}}
-- \address[mcr]{University of Manchester, Linguistics and English Language}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+<!-- %voicing effect > no account is satisfactory > research seems to point to an account that is supra-glottal and language-specific > tongue root advancement in voiced stops > if there is a link then VE languages have TRA > results show that the relationship is more complex, -->
+<!-- %A long debated property of voicing in consonants is that it tends to co-occur with longer durations of the preceding vowels. -->
+<!-- %This phenomenon, the so-called voicing effect, still calls for a satisfactory account. -->
+
+\begin{frontmatter}
+
+\title{The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish}
+
+\author[mcr]{Stefano Coretta\corref{cor1}}
+\cortext[cor1]{Corresponding author \ead{stefano.coretta@manchester.ac.uk}}
+\address[mcr]{University of Manchester, Linguistics and English Language}
+
 \begin{abstract}
-<!-- voicing effect > no account is satisfactory > research seems to point to an account that is supra-glottal and language-specific > tongue root advancement in voiced stops > if there is a link then VE languages have TRA > results show that the relationship is more complex,  -->
-<!-- A long debated property of voicing in consonants is that it tends to co-occur with longer durations of the preceding vowels. -->
-<!-- This phenomenon, the so-called voicing effect, still calls for a satisfactory account. -->
-In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer duration of the preceding vowels.
-In several languages, vowels tend to be longer before voiced than before voiceless obstruents.
-This phenomenon, the so-called voicing effect, has been the subject of a century long debate, although none of the proposed accounts survives scrutiny.
-Previous research indicates that ...
+In this paper I demonstrate that tongue root advancement in voiced stops correlates with longer durations of the preceding vowels. A wide variety of languages have been reported to show the so-called voicing effect, whereby vowels tend to be longer before voiced than before voiceless stops. The voicing effect has attracted the attention of researchers for about a century. However, the accounts put forward so far are challenged by empirical scrutiny. Previous research indicates that
 \end{abstract}
+
+\end{frontmatter}
+
 
 # Introduction
 \label{s:intro}
@@ -442,3 +448,8 @@ Given the small magnitude of the effect, however, it is likely that such effect 
 A possible critique to the account proposed here is that, if an active gesture for maintaining voicing is required during the closure of voiced stops, then it is not clear how the Polish speakers can maintain voicing without tongue root advancement.
 However, root advancement is not the only solution: manipulations of the larynx or of the velopharyngeal port, rather than the tongue, can also counterbalance the increased intra-oral pressure [].
 The gestural timing of the larynx and the velopharyngeal port are (at least partially) anatomically independent from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation of multiple tongue gestures. -->
+
+\section*{References}
+
+
+\biboptions{authoryear}
