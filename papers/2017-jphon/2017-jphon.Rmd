@@ -33,7 +33,8 @@ knitr::opts_chunk$set(echo = TRUE)
 \title{The link between tongue root advancement and the voicing effect: an ultrasound study of Italian and Polish}
 
 \author[mcr]{Stefano Coretta\corref{cor1}}
-\cortext[cor1]{Corresponding author \ead{stefano.coretta@manchester.ac.uk}}
+\cortext[cor1]{Corresponding author}
+\ead{stefano.coretta@manchester.ac.uk}
 \address[mcr]{University of Manchester, Linguistics and English Language, School of Arts, Languages and Cultures, Oxford Road, Manchester, M13 9PL, UK}
 
 \begin{abstract}
@@ -469,6 +470,10 @@ Given the small magnitude of the effect, however, it is likely that such effect 
 A possible critique to the account proposed here is that, if an active gesture for maintaining voicing is required during the closure of voiced stops, then it is not clear how the Polish speakers can maintain voicing without tongue root advancement.
 However, root advancement is not the only solution: manipulations of the larynx or of the velopharyngeal port, rather than the tongue, can also counterbalance the increased intra-oral pressure [].
 The gestural timing of the larynx and the velopharyngeal port are (at least partially) anatomically independent from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation of multiple tongue gestures. -->
+
+\section*{Reproducibility statement}
+The data and code used in this work are available at XXX.
+We obtained written consent from the participants in this study, who agreed to make their data publicly available.
 
 \section*{Acknowledgements}
 I am extremely grateful to the participants of this study who patiently wore the equipment for several minutes.
