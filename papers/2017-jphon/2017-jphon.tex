@@ -51,6 +51,8 @@
 \usepackage{cleveref}
 \usepackage{ctable}
 \journal{Journal of Phonetics}
+\usepackage{lineno}
+\modulolinenumbers[5]
 
 \date{}
 
@@ -116,7 +118,7 @@ is not a universal tendency, since the duration of vowels is not
 affected by the voicing of the following obstruents in some languages,
 like Polish and Czech \citep{keating1984}. Although several attempts
 have been made to explain the voicing effect, an account that survives
-all empirical data is still lacking \citep{durvasula2012}.
+all empirical data is still lacking \citep{durvasula2012,soskuthy2013}.
 
 To provide a rationale for the language-specificity of the voicing
 effect, \citet{kluender1988} propose that the source of the effect is to
@@ -181,21 +183,22 @@ consonants should be articulated with tongue root advancement in
 voicing-effect languages, but not in languages without the voicing
 effect.
 
-For this study ultrasonic tongue data were recorded from speakers of
-Italian and Polish, two languages that have been reported to have and
-lack the voicing effect respectively. In an investigation of the general
-properties of segmental durations of Italian, \citet{farnetani1986} show
-that the first vowel in /lada/ is on average 35 milliseconds longer than
-the vowel in /lata/ (\(\bar{x}\) = 223 ms, sd = 18 in /lata/;
-\(\bar{x}\) = 258 ms, sd = 13 in /lada/, \citealt[26]{farnetani1986}).
-\citet{esposito2002} extends Farnetani's research to all the vowels and
-stops of Italian and confirms that vowels are longer when followed by a
-voiced stop, with an estimated mean duration similar to that reported in
-\citet{farnetani1986}. As for Polish, although a difference of 2
-milliseconds in vowel duration can be observed (167.5 ms in /rata/,
-169.5 ms in /rada/), such difference has been deemed as non-significant
-according to statistical testing \citep{keating1984}. Vowels in Polish
-are thus not affected by the voicing of the following consonant.
+For this study ultrasonic tongue imaging data were recorded from
+speakers of Italian and Polish, two languages that have been reported to
+have and lack the voicing effect respectively. In an investigation of
+the general properties of segmental durations of Italian,
+\citet{farnetani1986} show that the first vowel in /lada/ is on average
+35 milliseconds longer than the vowel in /lata/ (\(\bar{x}\) = 223 ms,
+sd = 18 in /lata/; \(\bar{x}\) = 258 ms, sd = 13 in /lada/,
+\citealt[26]{farnetani1986}). \citet{esposito2002} extends Farnetani's
+research to all the vowels and stops of Italian and confirms that vowels
+are longer when followed by a voiced stop, with an estimated mean
+duration similar to that reported in \citet{farnetani1986}. As for
+Polish, although a difference of 2 milliseconds in vowel duration can be
+observed (167.5 ms in /rata/, 169.5 ms in /rada/), such difference has
+been deemed as non-significant according to statistical testing
+\citep{keating1984}. Vowels in Polish are thus not affected by the
+voicing of the following consonant.
 
 Based on the hypothesis that tongue root advancement correlates with the
 voicing effect (and hence with vowel duration), the expectations with
@@ -382,17 +385,15 @@ vowel quality was also included, since it significantly improved the
 model. According to the full model as specified above, Italian vowels
 are 22 milliseconds longer (se = 6) if followed by a voiced stop
 (\(\chi\)\textsuperscript{2} = 16.61; p \textless{} 0.001; df = 3; see
-\Cref{t:lmer-italian} for a summary of the fixed effects).
-
-For Polish, the same model structure was used, to the exclusion of the
+\Cref{t:lmer-italian} for a summary of the fixed effects). For Polish,
+the same model structure was used, to the exclusion of the
 voicing/vowel-identity interaction (which did not improve the model).
 Contrary to previous findings, the model reveals an 8 millisecond effect
 (se = 3) of consonantal voicing on the preceding vowel
 (\(\chi\)\textsuperscript{2} = 5.4; p \textless{} 0.05; df = 1; see
-\Cref{t:lmer-polish} for a summary of the fixed effects). Vowel
-identity, C2 place of articulation, and sentence duration also had an
-effect on vowel duration. The inspection of the model residuals
-confirmed the assumptions of normality and homoscedasticity.
+\Cref{t:lmer-polish} for a summary of the fixed effects). The inspection
+of the model residuals confirmed the assumptions of normality and
+homoscedasticity.
 
 \begin{figure}
     \centering
@@ -434,8 +435,8 @@ label = t:lmer-polish
  & $\beta$ & se &      df & t \ML
 Intercept       &  22.92   &  10.43 & 127.13  & 2.19 \NN
 voicing &   7.88   &   3.25  & 6.860  & 2.41 \NN
-vowel (/o/)            & -11.79   &   3.00  & 7.000 & -3.92 \NN
-vowel (/u/)            & -29.27   &   3.01  & 7.100 & -9.70 \NN
+vowel /o/            & -11.79   &   3.00  & 7.000 & -3.92 \NN
+vowel /u/            & -29.27   &   3.01  & 7.100 & -9.70 \NN
 place      &  -5.57   &   2.45  & 7.00 & -2.27 \NN
 sent. dur. &  70.81   &   9.74  & 261.04 &  7.26 \NN
 }
@@ -638,7 +639,7 @@ language) and Polish (a non-voicing-effect language), I showed that:
 \tightlist
 \item
   Vowels followed by voiced stops are on average 22 milliseconds longer
-  in Italian and 6 milliseconds longer in Polish.
+  in Italian and 8 milliseconds longer in Polish.
 \item
   Voiced stops were realised with tongue root advancement in three
   Italian speakers and one Polish speaker.
@@ -669,9 +670,9 @@ vowels followed by voiced stops.
 
 \section*{Reproducibility statement}
 
-The data and code used in this work are available at XXX. We obtained
-written consent from the participants in this study, who agreed to make
-their data publicly available.
+The data and code used in the statistical analysis of this work are
+available at XXX. We obtained written consent from the participants in
+this study, who agreed to make their data publicly available.
 
 \section*{Acknowledgements}
 
