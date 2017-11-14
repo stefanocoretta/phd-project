@@ -1,0 +1,4 @@
+- Vowels are longer when followed by voiced stops in Italian but also in Polish, contrary to previous findings.
+- The size of the difference in vowel duration is greater in speakers who produce voiced stops with tongue root advancement, independent of their language.
+- It is suggested that the relationship between tongue root advancement and vowel duration is gradient.
+- Tongue root advancement in voiced stops is proposed as the diachronic precursor of the voicing effect.
