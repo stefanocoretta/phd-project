@@ -470,6 +470,14 @@ A possible critique to the account proposed here is that, if an active gesture f
 However, root advancement is not the only solution: manipulations of the larynx or of the velopharyngeal port, rather than the tongue, can also counterbalance the increased intra-oral pressure [].
 The gestural timing of the larynx and the velopharyngeal port are (at least partially) anatomically independent from the timing of tongue gestures [], and would ideally not require a more complex planning as with an articulatory implementation of multiple tongue gestures. -->
 
+\section*{Acknowledgements}
+I am extremely grateful with the participants of this study who patiently wore the equipment for several minutes.
+I would like to thank Dr Ricardo Bermúdez-Otero and Dr Patrycja Strycharczuk for their invaluable input on both content and form of this research.
+I also wish to thank all the graduate members of the University of Manchester Phonetics Lab for their crucial support and writing assistance, and the participants of the Ultrafest VIII conference for their influential feedback.
+Any errors are still my own.
+This research was funded by the School of Arts, Cultures and Humanities of the University of Manchester, UK.
+
+
 \section*{References}
 
 

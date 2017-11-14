@@ -12,7 +12,7 @@
   \else
     \usepackage{fontspec}
   \fi
-  \defaultfontfeatures{Ligatures=TeX}
+  \defaultfontfeatures{Mapping=tex-text}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -25,7 +25,7 @@
 \hypersetup{
             pdfborder={0 0 0},
             breaklinks=true}
-%\urlstyle{same}  % don't use monospace font for urls
+\urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{model2-names.bst}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
