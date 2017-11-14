@@ -43,7 +43,7 @@ Although the voicing effect has been the focus of a century-long debate, no cons
 In this paper I demonstrate that longer vowel duration is linked to another correlate of voicing, namely tongue root advancement.
 Tongue root advancement is known to facilitate voicing during closure and shorter VOT durations in stops.
 If tongue root advancement is also related to vowel duration, then we expect to find tongue root advancement in voiced stops in languages with the voicing effect, but not in languages that lack it.
-To test the putative correlation between vowel duration and tongue root advancement, acoustic and ultrasound tongue imaging data were collected from eight speakers of Italian and Polish, a voicing-effect and a non-voicing-effect language respectively.
+To test for the putative correlation between vowel duration and tongue root advancement, acoustic and ultrasound tongue imaging data were collected from eight speakers of Italian and Polish, a voicing-effect and a non-voicing-effect language respectively.
 The results indicate that both Italian and Polish have a voicing effect (contrary to previous findings), although the size of the effect is stronger in those speakers who produce voiced stops with root advancement, independent of their language.
 I suggest that the relationship points to a new articulatory account of vowel duration as a covariate of voicing, by which tongue root advancement is proposed as a plausible diachronic precursor of the voicing effect.
 
