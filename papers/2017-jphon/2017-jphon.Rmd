@@ -38,7 +38,6 @@ knitr::opts_chunk$set(echo = TRUE)
 \address[mcr]{University of Manchester, Linguistics and English Language, School of Arts, Languages and Cultures, Oxford Road, Manchester, M13 9PL, UK}
 
 \begin{abstract}
-
 A wide variety of languages have been reported to show the so-called voicing effect, whereby vowels tend to be longer before voiced than before voiceless stops.
 Although the voicing effect has been the focus of a century-long debate, no consensus regarding its source has been reached to date.
 In this paper I demonstrate that longer vowel duration is linked to another correlate of voicing, namely tongue root advancement.
@@ -47,13 +46,6 @@ If tongue root advancement is also related to vowel duration, then we expect to 
 To test for the putative correlation between vowel duration and tongue root advancement, acoustic and ultrasound tongue imaging data were collected from eight speakers of Italian and Polish, a voicing-effect and a non-voicing-effect language respectively.
 The results indicate that both Italian and Polish have a voicing effect (contrary to previous findings), although the size of the effect is stronger in those speakers who produce voiced stops with root advancement, independent of their language.
 I suggest that the relationship points to a new articulatory account of vowel duration as a covariate of voicing, by which tongue root advancement is proposed as a plausible diachronic precursor of the voicing effect.
-
-%Given the established link between tongue root advancement and voicing and VOT durations on one hand, and between voicing and vowel durations on the other, I set out to test the putative link between tongue root advancement and vowel duration.
-%Drawing on ultrasonic data from speakers of Italian and Polish, I show that tongue root advancement in voiced stops correlates with a stronger voicing effect, independent of language.
-
-
-
-%Previous research points to accounts that allow for a language-specific implementation of the voicing effect and that place its source in supra-glottal articulatory properties of voiced or voiceless stops.
 \end{abstract}
 
 \begin{keyword}
