@@ -156,7 +156,7 @@ splines.clos.it <- splines.clos.it %>%
 
 # Statistical analysis
 
-These gams are wrong. There is no parametric term `X` for example.
+These gams are wrong. There is no parametric term `X` for example. Actually, they are right, and the ones with `X` are wrong...
 
 ```{r preparation}
 splines.it <- splines.it %>%
