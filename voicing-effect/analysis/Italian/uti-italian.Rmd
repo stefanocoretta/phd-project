@@ -156,6 +156,8 @@ splines.clos.it <- splines.clos.it %>%
 
 # Statistical analysis
 
+These gams are wrong. There is no parametric term `X` for example.
+
 ```{r preparation}
 splines.it <- splines.it %>%
     mutate(
@@ -171,7 +173,7 @@ contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- splines.it %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
     na.omit() %>%
-    arrange(rec.date, desc(fan)) %>%
+    arrange(rec.date, desc(fan.line)) %>%
     create_event_start(event.col = "rec.date")
 
 splines.clos.it <- splines.clos.it %>%
@@ -187,7 +189,7 @@ contrasts(splines.clos.it$vowel.ord) <- "contr.treatment"
 
 clos.it <- splines.clos.it %>%
     na.omit() %>%
-    arrange(rec.date, fan) %>%
+    arrange(rec.date, fan.line) %>%
     create_event_start(event.col = "rec.date")
 ```
 
@@ -198,16 +200,18 @@ max.it.gamm <- bam(
     Y ~
         c2phonation.ord +
         c2place.ord +
-        vowel.ord +
-        s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
+#        vowel.ord +
+        s(fan.line, bs = "cr") +
+        s(fan.line, by = c2phonation.ord, bs = "cr") +
 #        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
-        s(X, speaker, bs="fs", xt="cr", m=1, k=4) +
-        s(X, by = c2place.ord, bs = "cr") +
-        s(X, by = vowel.ord, bs = "cr"),
-    data = max.it,
+        s(fan.line, speaker, bs="fs", xt="cr", m=1, k=4) +
+        s(fan.line, by = c2place.ord, bs = "cr"),
+#        s(X, by = vowel.ord, bs = "cr"),
+    data = filter(max.it, vowel == "u"),
     method = "fREML"
 )
+
+plot_gamsd(max.it.gamm, view = "fan.line", comparison = list(c2phonation.ord = c("voiced", "voiceless")), conditions = list(c2place.ord = "coronal"))
 
 summary(max.it.gamm)
 
