@@ -269,7 +269,7 @@ The durational data were analysed with linear mixed effects models using `lme4` 
 *P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor.
 <!-- P-values were obtained with likelihood ratio tests comparing the full model with a nested model without the tested predictor, and with `lmerTest` [@kuznetsova2016], which employs the Satterthwaite approximation to degrees of freedom. -->
 Generalised additive mixed models [GAMMs, @wood2006;@zuur2012] were used for the statistical analysis of tongue contour data.
-Significance testing in GAMMs was achieved through model comparison with `itsadug` [@van-rij2017] and visual inspection of the difference smooth, as suggested in \citet{soskuthy2017}.
+Significance testing in GAMMs was achieved through model comparison with `itsadug` [@van-rij2017], while visual inspection of the difference smooth was employed to localise the portion along which the contours diverge if model comparison indicated a significant difference, as suggested in \citet{soskuthy2017}.
 A first-order autoregressive model was used to correct for the high autocorrelation of the residuals in GAMMs.
 
 # Results
@@ -341,7 +341,7 @@ sent. dur. &  70.81   &   9.74  & 261.04 &  7.26 \NN
     \label{f:tra}
 \end{figure*}
 
-GAMMs were fitted to the data of each speaker individually: the \textsc{y-coordinates} of the contours were included in the model as the outcome variable; the \textsc{x-coordinates} as the only parametric term.
+GAMMs were fitted to the data of each speaker individually: the \textsc{y-coordinates} of the contours were included in the model as the outcome variable; \textsc{voicing}, \textsc{vowel identity}, and \textsc{place} of articulation as parametric terms.
 The following smooths were specified: a \textsc{reference smooth} term for the \textsc{x-coordinates}, three \textsc{difference smooths} for the x-coordinates by \textsc{voicing}, \textsc{vowel identity}, and \textsc{place} of articulation of the following consonant respectively, and \textsc{by-word random smooths}.
 
 The analysis of the Italian ultrasonic data shows that voiced stops are produced with advancement of the tongue root.
@@ -358,12 +358,12 @@ The tongue root at closure onset was found to be advanced in the voiced consonan
 <!-- would be interesting to compare closure and maximum with voiceless stops as well, and track displacement through time within vowel -->
 <!-- Both the Italian (4 speakers) and the Polish data (1 speaker) show that the root of the tongue at the time of consonantal closure is advanced in both languages. -->
 Comparisons of tongue contours at C2 onset and at the time of maximum tongue displacement in voiced consonants further indicated that the degree of root advancement was larger at maximum displacement for the Italian speakers (IT01, IT02, IT03), but not for the Polish speaker (PL05).
-\Cref{f:voiced} exemplifies the results with the model results from IT01 and PL05.
+\Cref{f:voiced} exemplifies the results with the model results from IT01 and PL05.\footnote{Although the confidence interval of the difference smooth does not include 0 in the velar region for PL05, model comparison confirms that the difference shown in the picture is non-significant.}
 
 \begin{figure*}
     \centering
     \includegraphics[width=.9\textwidth]{fig/voiced-colour.pdf}
-    \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). See \Cref{s:splines} for more details.}
+    \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). The difference in PL05 is non-significant according to model comparison. See \Cref{s:splines} for more details.}
     \label{f:voiced}
 \end{figure*}
 

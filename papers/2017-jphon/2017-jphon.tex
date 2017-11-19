@@ -12,7 +12,7 @@
   \else
     \usepackage{fontspec}
   \fi
-  \defaultfontfeatures{Mapping=tex-text}
+  \defaultfontfeatures{Ligatures=TeX}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -25,7 +25,7 @@
 \hypersetup{
             pdfborder={0 0 0},
             breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+%\urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{model2-names.bst}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
@@ -354,10 +354,11 @@ without the relevant predictor. Generalised additive mixed models
 \citep[GAMMs,][]{wood2006, zuur2012} were used for the statistical
 analysis of tongue contour data. Significance testing in GAMMs was
 achieved through model comparison with \texttt{itsadug}
-\citep{van-rij2017} and visual inspection of the difference smooth, as
-suggested in \citet{soskuthy2017}. A first-order autoregressive model
-was used to correct for the high autocorrelation of the residuals in
-GAMMs.
+\citep{van-rij2017}, while visual inspection of the difference smooth
+was employed to localise the portion along which the contours diverge if
+model comparison indicated a significant difference, as suggested in
+\citet{soskuthy2017}. A first-order autoregressive model was used to
+correct for the high autocorrelation of the residuals in GAMMs.
 
 \section{Results}\label{results}
 
@@ -454,10 +455,11 @@ sent. dur. &  70.81   &   9.74  & 261.04 &  7.26 \NN
 
 GAMMs were fitted to the data of each speaker individually: the
 \textsc{y-coordinates} of the contours were included in the model as the
-outcome variable; the \textsc{x-coordinates} as the only parametric
-term. The following smooths were specified: a \textsc{reference smooth}
-term for the \textsc{x-coordinates}, three \textsc{difference smooths}
-for the x-coordinates by \textsc{voicing}, \textsc{vowel identity}, and
+outcome variable; \textsc{voicing}, \textsc{vowel identity}, and
+\textsc{place} of articulation as parametric terms. The following
+smooths were specified: a \textsc{reference smooth} term for the
+\textsc{x-coordinates}, three \textsc{difference smooths} for the
+x-coordinates by \textsc{voicing}, \textsc{vowel identity}, and
 \textsc{place} of articulation of the following consonant respectively,
 and \textsc{by-word random smooths}.
 
@@ -489,12 +491,13 @@ time of maximum tongue displacement in voiced consonants further
 indicated that the degree of root advancement was larger at maximum
 displacement for the Italian speakers (IT01, IT02, IT03), but not for
 the Polish speaker (PL05). \Cref{f:voiced} exemplifies the results with
-the model results from IT01 and PL05.
+the model results from IT01 and
+PL05.\footnote{Although the confidence interval of the difference smooth does not include 0 in the velar region for PL05, model comparison confirms that the difference shown in the picture is non-significant.}
 
 \begin{figure*}
     \centering
     \includegraphics[width=.9\textwidth]{fig/voiced-colour.pdf}
-    \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). See \Cref{s:splines} for more details.}
+    \caption{Comparison of tongue contours of voiced consonants at C2 closure onset and maximum tongue displacement (within C2 closure) in IT01 (Italian) and PL05 (Polish). The difference in PL05 is non-significant according to model comparison. See \Cref{s:splines} for more details.}
     \label{f:voiced}
 \end{figure*}
 
