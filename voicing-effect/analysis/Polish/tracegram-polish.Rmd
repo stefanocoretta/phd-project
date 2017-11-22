@@ -27,7 +27,10 @@ degg_pl <- list.files(path = "./voicing-effect/results/egg",
     left_join(y = words) %>%
     filter(c1phonation == "voiceless") %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")))
+    mutate(
+        c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        closed_quotient = minimum - maximum
+    )
 ```
 
 # Data exploration
@@ -76,4 +79,25 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
     xlab("vowel duration") +
     ylab("proportion of glottal period") +
     scale_color_discrete(name = "C2 voicing")
+```
+
+```{r}
+degg_pl %>%
+ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_smooth(aes(y = closed_quotient)) +
+    xlab("vowel duration") +
+    ylab("proportion of glottal period") +
+    scale_color_discrete(name = "C2 voicing")
+```
+
+```{r}
+degg_pl %>%
+    group_by(speaker, c2phonation_o, date) %>%
+    summarise(closed_quotient = mean(closed_quotient)) %>%
+ggplot(aes(x = c2phonation_o, y = closed_quotient)) +
+    facet_grid(. ~ speaker) +
+    geom_boxplot() +
+    xlab("C2 phonation") +
+    ylab("closed quotient")
 ```
