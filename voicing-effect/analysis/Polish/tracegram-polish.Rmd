@@ -1,0 +1,79 @@
+---
+title: "Polish tracegrams"
+author: "Stefano Coretta"
+date: "22/11/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+# Data import
+
+```{r import}
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+degg_pl <- list.files(path = "./voicing-effect/results/egg",
+                   pattern = "*-degg-tracing.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(.)) %>%
+    left_join(y = languages) %>%
+    filter(language == "polish") %>%
+    left_join(y = words) %>%
+    filter(c1phonation == "voiceless") %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")))
+```
+
+# Data exploration
+
+```{r tracegram-point}
+degg_pl %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_point(aes(y = maximum), alpha = 0.5) +
+    geom_point(aes(y = minimum), alpha = 0.5) +
+    xlab("proportion of vowel duration") +
+    ylab("proportion of glottal period") +
+    xlim(0.1, 0.9) +
+    scale_color_discrete(name = "C2 voicing")
+```
+
+```{r tracegram-smooth}
+degg_pl %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_smooth(aes(y = maximum)) +
+    geom_smooth(aes(y = minimum)) +
+    xlab("proportion of vowel duration") +
+    ylab("proportion of glottal period") +
+    xlim(0.1, 0.9) +
+    scale_color_discrete(name = "C2 voicing")
+```
+
+```{r tracegram-point-time}
+degg_pl %>%
+ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_point(aes(y = maximum), alpha = 0.5) +
+    geom_point(aes(y = minimum), alpha = 0.5) +
+    xlab("vowel duration") +
+    ylab("proportion of glottal period") +
+    scale_color_discrete(name = "C2 voicing")
+```
+
+```{r tracegram-smooth-time}
+degg_pl %>%
+ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_smooth(aes(y = maximum)) +
+    geom_smooth(aes(y = minimum)) +
+    xlab("vowel duration") +
+    ylab("proportion of glottal period") +
+    scale_color_discrete(name = "C2 voicing")
+```
