@@ -81,7 +81,7 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
     scale_color_discrete(name = "C2 voicing")
 ```
 
-```{r}
+```{r cq-trajectory}
 degg_pl %>%
 ggplot(aes(x = rel.time, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
@@ -91,7 +91,7 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
     scale_color_discrete(name = "C2 voicing")
 ```
 
-```{r}
+```{r cq-boxplot}
 degg_pl %>%
     group_by(speaker, c2phonation_o, date) %>%
     summarise(closed_quotient = mean(closed_quotient)) %>%
