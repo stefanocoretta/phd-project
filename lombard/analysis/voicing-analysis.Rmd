@@ -71,6 +71,19 @@ vowel_dur_lm <- lmer(
 )
 
 summary(vowel_dur_lm)
+
+vowel_dur_lm_null <- lmer(
+    vowel_duration ~
+        voicing *
+#        position +
+        manner +
+        place +
+        (1|speaker) +
+        (1|word),
+    data = durations
+)
+
+anova(vowel_dur_lm_null, vowel_dur_lm)
 ```
 
 ```{r duration-lmer-effects}
