@@ -96,6 +96,39 @@ durations %>%
     geom_boxplot()
 ```
 
+```{r c-duration-lmer}
+c_dur_lm <- lmer(
+    consonant_duration ~
+        voicing *
+        position +
+        manner +
+        place +
+        (1|speaker) +
+        (1|word),
+    data = durations
+)
+
+summary(c_dur_lm)
+
+c_dur_lm_null <- lmer(
+    consonant_duration ~
+        voicing *
+#        position +
+        manner +
+        place +
+        (1|speaker) +
+        (1|word),
+    data = durations
+)
+
+anova(c_dur_lm_null, c_dur_lm)
+```
+
+```{r c-dur-lmer-effects}
+plot(allEffects(c_dur_lm))
+```
+
+
 ```{r}
 durations %>%
     ggplot(aes(consonant_duration, vowel_duration, colour = voicing)) +
