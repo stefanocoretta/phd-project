@@ -170,3 +170,30 @@ acoustics %>%
     geom_smooth() +
     facet_wrap(~ vowel)
 ```
+
+# Proportions
+
+```{r proportions}
+proportions <- durations %>%
+    group_by(voicing, position) %>%
+    summarise(
+        total = 
+            mean(vowel_duration, na.rm = TRUE) +
+            mean(consonant_duration, na.rm = TRUE),
+        vowel = mean(vowel_duration, na.rm = TRUE),
+        consonant = mean(consonant_duration, na.rm = TRUE)
+    ) %>%
+    gather(segment, duration, vowel:consonant) %>%
+    mutate(segment = factor(segment,
+                            levels = c("vowel", "consonant")
+                            )
+           )
+```
+
+```{r plot-proportions}
+ggplot(proportions, aes(voicing, duration, fill = segment)) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    facet_grid(position ~ .) +
+    guides(fill = guide_legend(reverse = TRUE))
+```
