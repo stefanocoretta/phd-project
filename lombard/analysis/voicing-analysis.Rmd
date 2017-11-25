@@ -16,10 +16,14 @@ library(lmerTest)
 library(effects)
 ```
 
-```{r speakr}
+# Extract data
+
+```{r speakr, eval = FALSE}
 lmt("./lombard/code/get-measurements.praat.md")
 praat_run("./lombard/code/get-measurements.praat")
 ```
+
+# Import data
 
 ```{r read-data}
 stimuli <- read_csv("./lombard/task/prompts.csv")
@@ -37,6 +41,7 @@ durations <- read_csv("./lombard/results/durations.csv", na = "--undefined--") %
     )
 ```
 
+# Vowel duration
 
 ```{r vowel-duration-speaker-plot}
 durations %>%
@@ -52,13 +57,20 @@ durations %>%
     facet_grid( ~ vowel)
 ```
 
-```{r duration-plot}
+```{r vowel-duration-plot}
 durations %>%
     ggplot(aes(position, vowel_duration, colour = voicing)) +
     geom_boxplot()
 ```
 
-```{r duration-lmer}
+```{r vowel-duration-plot-speakers}
+durations %>%
+    ggplot(aes(position, vowel_duration, colour = voicing)) +
+    geom_boxplot() +
+    facet_grid(. ~ speaker)
+```
+
+```{r vowel-duration-lmer}
 vowel_dur_lm <- lmer(
     vowel_duration ~
         voicing *
@@ -86,17 +98,19 @@ vowel_dur_lm_null <- lmer(
 anova(vowel_dur_lm_null, vowel_dur_lm)
 ```
 
-```{r duration-lmer-effects}
+```{r vowel-duration-lmer-effects}
 plot(allEffects(vowel_dur_lm))
 ```
 
-```{r c-duration-plot}
+# Consonant duration
+
+```{r consonant-duration-plot}
 durations %>%
     ggplot(aes(position, consonant_duration, colour = voicing)) +
     geom_boxplot()
 ```
 
-```{r c-duration-lmer}
+```{r consonant-duration-lmer}
 c_dur_lm <- lmer(
     consonant_duration ~
         voicing *
@@ -124,12 +138,22 @@ c_dur_lm_null <- lmer(
 anova(c_dur_lm_null, c_dur_lm)
 ```
 
-```{r c-dur-lmer-effects}
+```{r consonant-duration-lmer-effects}
 plot(allEffects(c_dur_lm))
 ```
 
+# Word duration
 
-```{r}
+```{r word-duration-plot}
+durations %>%
+    ggplot(aes(position, word_duration, colour = voicing)) +
+    geom_boxplot() +
+    ylab("Word duration (seconds)")
+```
+
+# Vowel and consonant duration
+
+```{r vowel-consonant-duration-plot}
 durations %>%
     ggplot(aes(consonant_duration, vowel_duration, colour = voicing)) +
     geom_point() +
@@ -138,7 +162,7 @@ durations %>%
 ```
 
 
-```{r}
+```{r f1-plot}
 acoustics %>%
     ggplot(aes(point, f1, colour = voicing)) +
     geom_jitter(alpha = 0.5) +
@@ -168,7 +192,7 @@ acoustics %>%
     ggplot(aes(point, pitch, colour = voicing)) +
     geom_jitter(alpha = 0.5) +
     geom_smooth() +
-    facet_wrap(~ vowel)
+    facet_wrap(~ speaker)
 ```
 
 # Proportions
