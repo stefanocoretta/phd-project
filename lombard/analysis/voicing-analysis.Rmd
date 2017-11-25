@@ -20,6 +20,7 @@ library(effects)
 
 ```{r speakr, eval = FALSE}
 lmt("./lombard/code/get-measurements.praat.md")
+lmt("./lombard/code/egg.praat.md")
 praat_run("./lombard/code/get-measurements.praat")
 ```
 
