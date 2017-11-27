@@ -20,8 +20,9 @@ library(effects)
 
 ```{r speakr, eval = FALSE}
 lmt("./lombard/code/get-measurements.praat.md")
-lmt("./lombard/code/egg.praat.md")
 praat_run("./lombard/code/get-measurements.praat")
+lmt("./lombard/code/egg.praat.md")
+praat_run("./lombard/code/get-voicing.praat", 40, 10000, 11, 0)
 ```
 
 # Import data
@@ -40,6 +41,9 @@ durations <- read_csv("./lombard/results/durations.csv", na = "--undefined--") %
         position = factor(position, levels = c("medial", "final")),
         place = factor(place, levels = c("velar", "coronal", "labial"))
     )
+
+voicing <- read_csv("./lombard/results/voicing.csv", na = "--undefined--") %>%
+    left_join(y = stimuli)
 ```
 
 # Vowel duration
