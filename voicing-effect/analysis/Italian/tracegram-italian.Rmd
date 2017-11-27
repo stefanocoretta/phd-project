@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
 ```
@@ -18,7 +18,7 @@ theme_set(theme_bw())
 languages <- read_csv("./voicing-effect/stimuli/languages.csv")
 words <- read_csv("./voicing-effect/stimuli/nonce.csv")
 
-degg.it <- list.files(path = "./voicing-effect/results/egg",
+degg_it <- list.files(path = "./voicing-effect/results/egg",
                    pattern = "*-degg-tracing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.)) %>%
@@ -26,18 +26,47 @@ degg.it <- list.files(path = "./voicing-effect/results/egg",
     filter(language == "italian") %>%
     left_join(y = words) %>%
     filter(c1phonation == "voiceless") %>%
-    mutate_if(is.character, as.factor)
+    mutate_if(is.character, as.factor) %>%
+    mutate(c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")))
 ```
 
 # Data exploration
 
-```{r tracegram}
-degg.it %>%
-ggplot(aes(x = proportion, colour = c2phonation)) +
+```{r tracegram-point}
+degg_it %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_point(aes(y = maximum), alpha = 0.5) +
+    geom_point(aes(y = minimum), alpha = 0.5) +
+    xlab("proportion of vowel duration") +
+    ylab("proportion of glottal period") +
+    xlim(0.1, 0.9) +
+    scale_color_discrete(name = "C2 voicing")
+```
+
+```{r tracegram-smooth}
+degg_it %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     xlim(0.1, 0.9)
+```
+
+Plotting tracegram with vowel duration rather than normalised time is tricky because of IT03, who has some very high values for the dEGG maximum towards the end of some vowel tokens.
+The filter tries to reduce the effect of these outliers by limiting data up to 0.17 seconds into the vowel.
+This solution only fixes voiced tokens though (cf. the steep increase for the voiceless tokens).
+
+```{r tracegram-smooth-time}
+degg_it %>%
+    filter(rel.time < 0.17) %>%
+ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
+    xlab("vowel duration") +
+    ylab("proportion of glottal period") +
+    scale_color_discrete(name = "C2 voicing")
 ```

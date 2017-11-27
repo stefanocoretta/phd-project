@@ -51,8 +51,8 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
 degg_pl %>%
 ggplot(aes(x = proportion, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
-    geom_smooth(aes(y = maximum)) +
-    geom_smooth(aes(y = minimum)) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("proportion of vowel duration") +
     ylab("proportion of glottal period") +
     xlim(0.1, 0.9) +
@@ -74,8 +74,8 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
 degg_pl %>%
 ggplot(aes(x = rel.time, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
-    geom_smooth(aes(y = maximum)) +
-    geom_smooth(aes(y = minimum)) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("vowel duration") +
     ylab("proportion of glottal period") +
     scale_color_discrete(name = "C2 voicing")
