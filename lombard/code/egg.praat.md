@@ -30,6 +30,8 @@ Create Strings as file list: "file_list", "'directory$'/*.wav"
 files = Get number of strings
 ```
 
+Set a few parameters and get a list of the `.wav` files in `/data/raw`.
+
 ### "vuv"
 ```praat
 for file from 1 to files
@@ -48,6 +50,8 @@ endfor
 removeObject: "Strings file_list"
 ```
 
+For each file in the list, extract channel 2, which contains the EGG signal, create a TextGrid with the voiced and non-voiced (VUV) intervals, then remove objects if `debug_mode == 0`.
+
 #### "to vuv"
 ```praat
 Filter (pass Hann band): lower, upper, 100
@@ -57,6 +61,8 @@ To PointProcess (periodic, cc): 75, 600
 
 To TextGrid (vuv): 0.02, 0.001
 ```
+
+To extract the VUV intervals, pass filter and smooth the EGG signal, create a PointProcess object and create a VUV TextGrid from the PointProcess object.
 
 ### "remove objects"
 ```praat
