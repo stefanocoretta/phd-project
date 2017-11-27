@@ -43,7 +43,28 @@ durations <- read_csv("./lombard/results/durations.csv", na = "--undefined--") %
     )
 
 voicing <- read_csv("./lombard/results/voicing.csv", na = "--undefined--") %>%
-    left_join(y = stimuli)
+    left_join(y = stimuli) %>%
+    mutate(
+        voicing = factor(voicing, levels = c("voiceless", "voiced")),
+        position = factor(position, levels = c("medial", "final")),
+        place = factor(place, levels = c("velar", "coronal", "labial")),
+        devoicing = ifelse(voicing_duration > consonant_duration / 2, "voiced", "devoiced"),
+        devoicing_3 = ifelse(voicing_duration > consonant_duration / 3, "voiced", "devoiced"),
+        devoiced = ifelse(
+            voicing_duration < consonant_duration / 5, "devoiced_1",
+            ifelse(
+                voicing_duration < consonant_duration / 5 * 2, "devoiced_2",
+                ifelse(
+                    voicing_duration < consonant_duration / 5 * 3, "devoiced_3",
+                    ifelse(
+                        voicing_duration < consonant_duration / 5 * 4, "devoiced_4",
+                        "voiced"
+                    )
+                )
+            )
+        )
+    ) %>%
+    mutate_if(is.character, as.factor)
 ```
 
 # Vowel duration
@@ -225,4 +246,44 @@ ggplot(proportions, aes(voicing, duration, fill = segment)) +
     coord_flip() +
     facet_grid(position ~ .) +
     guides(fill = guide_legend(reverse = TRUE))
+```
+
+# Voicing durations
+
+```{r voicing-duration-boxplot}
+voicing %>%
+    ggplot(aes(voicing, voicing_duration)) +
+    geom_boxplot() +
+    facet_grid(speaker ~ position)
+```
+
+```{r voicing-duration-density}
+voicing %>%
+    ggplot(aes(voicing_duration,colour = voicing)) +
+    geom_density() +
+    facet_grid(. ~ position)
+```
+
+```{r devoicing-2}
+voicing %>%
+    filter(voicing == "voiced") %>%
+    ggplot(aes(devoicing)) +
+    geom_bar() +
+    facet_grid(speaker ~ position)
+```
+
+```{r devoicing-3}
+voicing %>%
+    filter(voicing == "voiced") %>%
+    ggplot(aes(devoicing_3)) +
+    geom_bar() +
+    facet_grid(speaker ~ position)
+```
+
+```{r devoiced}
+voicing %>%
+    filter(voicing == "voiced") %>%
+    ggplot(aes(devoiced)) +
+    geom_bar() +
+    facet_grid(speaker ~ position)
 ```
