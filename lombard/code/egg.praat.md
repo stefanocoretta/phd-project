@@ -69,7 +69,7 @@ To extract the VUV intervals, pass filter and smooth the EGG signal, create a Po
 if debug_mode == 0
     removeObject: "Sound " + file_name$, "Sound " + file_name$ + "_ch2",
     ..."Sound " + file_name$ + "_ch2_band", "PointProcess " + file_name$ + "_ch2_band",
-    ..."TextGrid " + file_name$ + "_ch2_band", "Sound " + egg$
+    ..."TextGrid " + file_name$ + "_ch2_band"
 endif
 ```
 
