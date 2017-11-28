@@ -235,7 +235,7 @@ proportions <- durations %>%
     ) %>%
     gather(segment, duration, vowel:consonant) %>%
     mutate(segment = factor(segment,
-                            levels = c("vowel", "consonant")
+                            levels = c("consonant", "vowel")
                             )
            )
 ```
