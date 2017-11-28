@@ -11,13 +11,13 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(readr)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 theme_set(theme_bw())
-library(lme4)
+library(lmerTest)
 library(effects)
 library(afex)
 ```
@@ -142,6 +142,10 @@ mixed(
 
 ```{r quotient-lmer-effects}
 plot(allEffects(quotient.lmer))
+```
+
+```{r quotient-lmer-random-coefficients}
+coefficients(quotient.lmer)$speaker
 ```
 
 ```{r cq-plot}
