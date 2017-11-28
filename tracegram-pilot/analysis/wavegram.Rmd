@@ -192,3 +192,35 @@ plot_diff2(
     zlim = c(-1, 1)
 )
 ```
+
+```{r}
+phonation_gam <- bam(
+    amplitude ~
+        phonation.ord +
+        s(sequence, k = 6) +
+        s(sample) +
+        s(sequence, by = phonation.ord, k = 6) +
+        s(sample, by = phonation.ord) +
+        ti(sequence, sample) +
+        ti(sequence, sample, by = phonation.ord) +
+        s(sequence, speaker, bs = "fs", m = 1),
+    data = wavegram,
+    method = "ML"
+)
+
+summary(phonation_gam)
+
+phonation_gam_null <- bam(
+    amplitude ~
+#        phonation.ord +
+        s(sequence, k = 6) +
+        s(sample) +
+#        s(sequence, by = phonation.ord, k = 8) + s(sample, by = phonation.ord) +
+        ti(sequence, sample),# +
+#        ti(sequence, sample, by = phonation.ord),
+    data = wavegram,
+    method = "ML"
+)
+
+compareML(phonation_gam_null, phonation_gam)
+```
