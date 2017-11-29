@@ -3,13 +3,13 @@ title: "Pilot study of Lombard voicing"
 author: "Stefano Coretta"
 date: "20/09/2017"
 output: 
-  pdf_document: 
-    highlight: tango
-    number_sections: yes
   html_document: 
     highlight: tango
     number_sections: yes
-    theme: readable
+    theme: paper
+  pdf_document: 
+    highlight: tango
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
