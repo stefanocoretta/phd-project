@@ -2,11 +2,15 @@
 title: "Italian tracegrams"
 author: "Stefano Coretta"
 date: "22/06/2017"
-output: html_document
+output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    theme: paper
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
@@ -32,6 +36,10 @@ degg_it <- list.files(path = "./voicing-effect/results/egg",
 
 # Data exploration
 
+The following plots show traces of the maximum and minimum values of the dEGG curve in individual glottal periods through time (during vowels) preceding voiceless and voiced stops.
+The dEGG maximum is found towards the beginning of the glottal period, while the minimum is towards the end of the period. This means that in the plots the maximum is below and the minimum is above.
+Tracking in IT03 is probably off, judging by the dispertion of the points compared to the other two speakers.
+
 ```{r tracegram-point}
 degg_it %>%
 ggplot(aes(x = proportion, colour = c2phonation_o)) +
@@ -43,6 +51,8 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     xlim(0.1, 0.9) +
     scale_color_discrete(name = "C2 voicing")
 ```
+
+Vocal fold activity during vowels before voiceless stops changes from about 60% into the duration of the vowel. An increase in values of the dEGG maximum (bottom lines in the graphs) is known to be correlated with vocal fold abduction and acoustic correlates of breathy voicing.
 
 ```{r tracegram-smooth}
 degg_it %>%
@@ -62,11 +72,23 @@ This solution only fixes voiced tokens though (cf. the steep increase for the vo
 ```{r tracegram-smooth-time}
 degg_it %>%
     filter(rel.time < 0.17) %>%
-ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+ggplot(aes(x = rel.time * 1000, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
-    xlab("vowel duration") +
+    xlab("vowel duration (msec)") +
+    ylab("proportion of glottal period") +
+    scale_color_discrete(name = "C2 voicing")
+```
+
+```{r tracegram-points-time}
+degg_it %>%
+    filter(rel.time < 0.17) %>%
+ggplot(aes(x = rel.time * 1000, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_point(aes(y = maximum), alpha = 0.5) +
+    geom_point(aes(y = minimum), alpha = 0.5) +
+    xlab("vowel duration (msec)") +
     ylab("proportion of glottal period") +
     scale_color_discrete(name = "C2 voicing")
 ```

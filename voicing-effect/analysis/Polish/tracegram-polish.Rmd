@@ -2,11 +2,15 @@
 title: "Polish tracegrams"
 author: "Stefano Coretta"
 date: "22/11/2017"
-output: html_document
+output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    theme: paper
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
@@ -35,6 +39,8 @@ degg_pl <- list.files(path = "./voicing-effect/results/egg",
 
 # Data exploration
 
+Compared to Italian, there's more variation. It could be an artefact of the new algorith, so I will need to check.
+
 ```{r tracegram-point}
 degg_pl %>%
 ggplot(aes(x = proportion, colour = c2phonation_o)) +
@@ -46,6 +52,8 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     xlim(0.1, 0.9) +
     scale_color_discrete(name = "C2 voicing")
 ```
+
+There is an increase in the dEGG maximum for voiceless stops in PL02, 03, 05. PL04 does not show this pattern. Moreover, PL05 seems to have the biggest difference in dEGG maximum in the voiceless/voiced context. Recall from the JPhon paper that PL05 is also the speaker with the strongest effect of voicing.
 
 ```{r tracegram-smooth}
 degg_pl %>%
@@ -90,6 +98,9 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
     ylab("proportion of glottal period") +
     scale_color_discrete(name = "C2 voicing")
 ```
+
+If we look at the close quotient (CQ = dEGG minimum - dEGG maximum), it seems that again PL05 shows the biggest difference.
+The CQ is problematic I think but it can still tell us something. I am working on it so I'll tell you more about it after Xmas.
 
 ```{r cq-boxplot}
 degg_pl %>%
