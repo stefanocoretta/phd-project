@@ -74,8 +74,9 @@ selectObject: "Sound chain_ch1"
 Resample: 22050, 50
 
 selectObject: "Sound chain_ch2"
+Filter (pass Hann band): 40, 10000, 100
 
-To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
+textgrid_silences = To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
 intervals = Get number of intervals: 1
 Insert interval tier: 2, "new"
 
@@ -127,6 +128,6 @@ for interval from 1 to intervals
         endif
 
         index += 1
-        select TextGrid chain_ch2
+        selectObject: textgrid_silences
     endif
 endfor

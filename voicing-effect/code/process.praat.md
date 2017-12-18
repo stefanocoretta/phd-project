@@ -306,15 +306,14 @@ selectObject: "Sound chain_ch1"
 Resample: 22050, 50
 ```
 
-The extraction of each simulus from the concatenated sound is achieved through the EGG signal. The function `To TextGrid (silences)` efficiently recognises the voiced streaches of the audio which roughly corresponds to the spoken stimuli. (*Warning*: this assumes that the EGG files don't contain spurious material)
-The minimum duration for silence is set to 1 second to avoid voiceless segments being annotated as silence. The output is `TextGrid chain_ch2`.
-The number of intervals in the TextGrid is saved in the variable `intervals`.
+The extraction of each simulus from the concatenated sound is achieved through the EGG signal. The function `To TextGrid (silences)` efficiently recognises the voiced streaches of the audio which roughly corresponds to the spoken stimuli. (*Warning*: this assumes that the EGG files don't contain spurious material.) The minimum duration for silence is set to 1 second to avoid voiceless segments being annotated as silence. The EGG signal is first pass filtered. The output is `TextGrid chain_ch2`. The number of intervals in the TextGrid is saved in the variable `intervals`.
 
 ### "sync"
 ```praat
 selectObject: "Sound chain_ch2"
+Filter (pass Hann band): 40, 10000, 100
 
-To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
+textgrid_silences = To TextGrid (silences): 100, 0, -25, 1, 0.1, "silence", "speech"
 intervals = Get number of intervals: 1
 Insert interval tier: 2, "new"
 
@@ -414,7 +413,7 @@ If the debugging mode is off, all the intermediate files are removed. Otherwise 
         endif
 
         index += 1
-        select TextGrid chain_ch2
+        selectObject: textgrid_silences
     endif
 endfor
 ```
