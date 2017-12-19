@@ -553,15 +553,18 @@ for file to files
     Read separate channels from sound file: "'directory$'/'file$'"
 
     Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
+    intervals = Get number of intervals: 3
 
-    start = Get starting point: 3, 2
-    end = Get end point: 3, 2
+    if intervals > 1
+        start = Get starting point: 3, 2
+        end = Get end point: 3, 2
 
-    selectObject: "Sound 'filename$'_ch2"
-    Rename: "egg"
+        selectObject: "Sound 'filename$'_ch2"
         ; Extract part: start, end, "rectangular", 1, "yes"
+        Rename: "egg"
 
-    <<<main function>>>
+        <<<main function>>>
+    endif
 endfor
 ```
 
