@@ -92,7 +92,7 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
 
 ```{r cq-trajectory}
 degg_pl %>%
-ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = closed_quotient)) +
     xlab("vowel duration") +
