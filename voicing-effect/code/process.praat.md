@@ -586,7 +586,7 @@ Create PointProcess (peaks) of dEGG (`PointProcess degg_smooth`).
 Filter (pass Hann band): lower, upper, 100
 @smoothing: smooth_width
 Rename: "egg_smooth"
-To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 pp_end = Get end time
 Remove points between: 0, start
 Remove points between: end, pp_end
@@ -596,7 +596,7 @@ Copy: "degg"
 Formula: "self [col + 1] - self [col]"
 ; @smoothing: smooth_width
 Rename: "degg_smooth"
-To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 Remove points between: 0, start
 Remove points between: end, pp_end
 ```
