@@ -12,6 +12,13 @@ library(tidyverse)
 library(speakr)
 ```
 
+## Tangle code
+
+```{r tangle}
+lmt("./voicing-effect/code/process.praat.md")
+```
+
+
 ## Ultrasound data
 
 1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID) as [ID]-00n.wav
