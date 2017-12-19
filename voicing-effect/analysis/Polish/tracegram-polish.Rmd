@@ -34,7 +34,8 @@ degg_pl <- list.files(path = "./voicing-effect/results/egg",
     mutate(
         c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")),
         closed_quotient = minimum - maximum
-    )
+    ) %>%
+    filter(minimum > 0)
 ```
 
 # Data exploration
