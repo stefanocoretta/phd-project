@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 library(speakr)
+library(beepr)
 ```
 
 ## Tangle code
@@ -84,11 +85,13 @@ praat_run(
     10000,
     11
 )
+
+beep()
 ```
 
 1. **Calculate measurements** from ultrasound and EGG annotations with `get-measurements.praat`: the resulting TextGrids are written in `/data/derived/merged/[ID]` and the measurements in `results` to the file `[ID]-measurements.csv`
 
-```{r}
+```{r get-measurements}
 praat_run(
     "./voicing-effect/code/get-measurements.praat",
     speaker
