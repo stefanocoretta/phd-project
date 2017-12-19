@@ -57,7 +57,7 @@ for file to files
     Filter (pass Hann band): lower, upper, 100
     @smoothing: smooth_width
     Rename: "egg_smooth"
-    To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+    noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
     pp_end = Get end time
     Remove points between: 0, start
     Remove points between: end, pp_end
@@ -66,8 +66,9 @@ for file to files
     Copy: "degg"
     Formula: "self [col + 1] - self [col]"
     ; @smoothing: smooth_width
+    Remove noise: 0, 0.25, 0.025, 80, 10000, 40, "Spectral subtraction"
     Rename: "degg_smooth"
-    To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+    noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
     Remove points between: 0, start
     Remove points between: end, pp_end
     
