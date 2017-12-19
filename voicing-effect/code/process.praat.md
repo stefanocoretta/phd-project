@@ -595,6 +595,7 @@ selectObject: "Sound egg_smooth"
 Copy: "degg"
 Formula: "self [col + 1] - self [col]"
 ; @smoothing: smooth_width
+Remove noise: 0, 0.25, 0.025, 80, 10000, 40, "Spectral subtraction"
 Rename: "degg_smooth"
 noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 Remove points between: 0, start
