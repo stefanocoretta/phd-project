@@ -116,3 +116,16 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     scale_color_discrete(name = "C2 voicing")
 ```
 
+```{r tracegram-point-test}
+degg_it %>%
+    filter(speaker == "it03", word == "paca") %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    facet_grid(. ~ language + speaker) +
+    geom_point(aes(y = maximum), alpha = 0.5) +
+    geom_point(aes(y = minimum), alpha = 0.5) +
+    xlab("proportion of vowel duration") +
+    ylab("proportion of glottal period") +
+    xlim(0.1, 0.9) +
+    scale_color_discrete(name = "C2 voicing") +
+    facet_wrap(~ date)
+```
