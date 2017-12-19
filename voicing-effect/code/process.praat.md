@@ -558,8 +558,8 @@ for file to files
     end = Get end point: 3, 2
 
     selectObject: "Sound 'filename$'_ch2"
-    Extract part: start, end, "rectangular", 1, "yes"
     Rename: "egg"
+        ; Extract part: start, end, "rectangular", 1, "yes"
 
     <<<main function>>>
 endfor
@@ -584,6 +584,9 @@ Filter (pass Hann band): lower, upper, 100
 @smoothing: smooth_width
 Rename: "egg_smooth"
 To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+pp_end = Get end time
+Remove points between: 0, start
+Remove points between: end, pp_end
 
 selectObject: "Sound egg_smooth"
 Copy: "degg"
@@ -591,6 +594,8 @@ Formula: "self [col + 1] - self [col]"
 @smoothing: smooth_width
 Rename: "degg_smooth"
 To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+Remove points between: 0, start
+Remove points between: end, pp_end
 ```
 
 Loop through the EGG points and get minimum between the first two points.
