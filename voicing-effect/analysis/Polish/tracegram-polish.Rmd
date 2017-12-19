@@ -35,7 +35,7 @@ degg_pl <- list.files(path = "./voicing-effect/results/egg",
         c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")),
         closed_quotient = minimum - maximum
     ) %>%
-    filter(minimum > 0)
+    filter(minimum < 1, minimum > 0)
 ```
 
 # Data exploration
@@ -64,7 +64,7 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("proportion of vowel duration") +
     ylab("proportion of glottal period") +
-    xlim(0.1, 0.9) +
+    xlim(0, 1) +
     scale_color_discrete(name = "C2 voicing")
 ```
 
