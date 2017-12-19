@@ -58,6 +58,9 @@ for file to files
     @smoothing: smooth_width
     Rename: "egg_smooth"
     To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+    pp_end = Get end time
+    Remove points between: 0, start
+    Remove points between: end, pp_end
     
     selectObject: "Sound egg_smooth"
     Copy: "degg"
@@ -65,6 +68,8 @@ for file to files
     @smoothing: smooth_width
     Rename: "degg_smooth"
     To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+    Remove points between: 0, start
+    Remove points between: end, pp_end
     
     selectObject: "PointProcess egg_smooth"
     egg_points = Get number of points
