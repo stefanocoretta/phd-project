@@ -60,31 +60,40 @@ lmt("./voicing-effect/code/process.praat.md")
 1. **Calculate dEGG tracegrams** with `degg-tracing.praat`: the results are written in `results`
 
 ```{r sync-vuv-degg}
-speaker <- "pl03"
+# speakers <- "it01"
+speakers <- c("it01", "it02", "it03", "it07", "pl02", "pl03", "pl04", "pl05")
 
-praat_run(
-    "./voicing-effect/code/sync-egg.praat",
-    "voicing-effect",
-    speaker,
-    0
-)
-praat_run(
-    "./voicing-effect/code/extract-vuv.praat",
-    "voicing-effect",
-    speaker,
-    40,
-    10000,
-    11,
-    0
-)
-praat_run(
-    "./voicing-effect/code/degg-tracing.praat",
-    "voicing-effect",
-    speaker,
-    40,
-    10000,
-    11
-)
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/sync-egg.praat",
+        "voicing-effect",
+        speakers[i],
+        0
+    )
+}
+
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/extract-vuv.praat",
+        "voicing-effect",
+        speakers[i],
+        40,
+        10000,
+        11,
+        0
+    )
+}
+
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/degg-tracing.praat",
+        "voicing-effect",
+        speakers[i],
+        40,
+        10000,
+        11
+    )
+}
 
 beep()
 ```
