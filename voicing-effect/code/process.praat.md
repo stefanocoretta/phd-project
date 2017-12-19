@@ -581,9 +581,9 @@ endfor
 ```
 
 The EGG signal file `egg` is selected.
-Filter EGG signal (`egg_band`) and smooth it with moving average (renamed to `egg_smooth`).
+Filter EGG signal (`egg_band`) with a pass band filter (40-10KHz, @macerata) and smooth it with moving average (11 point moving average, @macerata, renamed to `egg_smooth`).
 Create PointProcess (peaks) for EGG (`PointProcess egg_smooth`).
-Calculate dEGG and smooth it (?) (`degg_smooth`).
+Calculate dEGG and remove noise (Praat noise removal based on the first 0.25 seconds, renamed `degg_smooth`).
 Create PointProcess (peaks) of dEGG (`PointProcess degg_smooth`).
 
 ### "degg"
