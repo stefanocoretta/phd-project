@@ -1,0 +1,86 @@
+---
+title: "TRA and vowel duration"
+author: "Stefano Coretta"
+date: "20/12/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+```{r read-data}
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs",
+    "TR.displacement.sm",
+    "TR.velocity",
+    "TR.velocity.abs"
+)
+
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+vowels <- read_csv(
+    "./voicing-effect/results/durations/it01-vowel-durations.csv",
+    na = "--undefined--"
+)
+
+tongue_root <- read_tsv(
+    "./voicing-effect/results/ultrasound/it01-tra-cart.tsv",
+    col_names = columns
+) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    left_join(y = vowels)
+```
+
+```{r tr-density}
+tongue_root %>%
+    ggplot(aes(TR.displacement.sm, colour = c2phonation)) +
+    geom_density()
+```
+
+```{r tr-vowel-duration}
+tongue_root %>%
+    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+```{r tr-vowel-duration-vowel}
+tongue_root %>%
+    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid( ~ vowel)
+```
+
+```{r tr-vowel-duration-place}
+tongue_root %>%
+    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid( ~ c2place)
+```
+
+```{r tr-vowel-duration-vowel-place}
+tongue_root %>%
+    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid(c2place ~ vowel)
+```
