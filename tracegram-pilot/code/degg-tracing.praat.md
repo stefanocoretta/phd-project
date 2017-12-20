@@ -1,4 +1,4 @@
-# Wavegram of modal and breathy phonated vowels
+# Tracegram of modal and breathy phonated vowels
 
 ## degg-tracing.praat
 ```praat
@@ -35,7 +35,7 @@ for file to numberOfFiles
     Multiply: -1
     # Check the paramenters of the filter in the literature
     Filter (pass Hann band): 100, 0, 100
-    pointProcess = To PointProcess (periodic, peaks): 75, 600, "no", "yes"
+    pointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "no", "yes"
     textGrid = To TextGrid (vuv): 0.02, 0.001
     numberOfIntervals = Get number of intervals: 1
 
@@ -76,13 +76,13 @@ endfor
 eggSmooth = Filter (pass Hann band): lower, upper, 100
 @smoothing: smoothWidth
 Rename: "egg-smooth"
-eggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 
 selectObject: eggSmooth
 deggSmooth = Copy: "degg-smooth"
 Formula: "self [col + 1] - self [col]"
 @smoothing: smoothWidth
-deggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 ```
 
 ## "tracing loop"
