@@ -19,7 +19,7 @@ for file to numberOfFiles
     Multiply: -1
     # Check the paramenters of the filter in the literature
     Filter (pass Hann band): 100, 0, 100
-    pointProcess = To PointProcess (periodic, peaks): 75, 600, "no", "yes"
+    pointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "no", "yes"
     textGrid = To TextGrid (vuv): 0.02, 0.001
     numberOfIntervals = Get number of intervals: 1
 
@@ -42,14 +42,20 @@ for file to numberOfFiles
     
             eggSmooth = Filter (pass Hann band): lower, upper, 100
             @smoothing: smoothWidth
+            sampling_period = Get sampling period
+            time_lag = (smoothWidth - 1) / 2 * sampling_period
+            Shift times by: time_lag
             Rename: "egg-smooth"
-            eggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+            eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
             
             selectObject: eggSmooth
             deggSmooth = Copy: "degg-smooth"
             Formula: "self [col + 1] - self [col]"
             @smoothing: smoothWidth
-            deggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+            sampling_period = Get sampling period
+            time_lag = (smoothWidth - 1) / 2 * sampling_period
+            Shift times by: time_lag
+            deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
     
             selectObject: eggPointProcess
             eggPoints = Get number of points
