@@ -68,6 +68,16 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     xlim(0, 1)
 ```
 
+```{r tracegram-smooth}
+degg_it %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    xlim(0, 1)
+```
+
 Plotting tracegram with vowel duration rather than normalised time is tricky because of IT03, who has some very high values for the dEGG maximum towards the end of some vowel tokens.
 The filter tries to reduce the effect of these outliers by limiting data up to 0.17 seconds into the vowel.
 This solution only fixes voiced tokens though (cf. the steep increase for the voiceless tokens).
@@ -114,6 +124,17 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     xlab("vowel duration") +
     ylab("proportion of glottal period") +
     scale_color_discrete(name = "C2 voicing")
+```
+
+```{r cq-boxplot}
+degg_it %>%
+    group_by(speaker, c2phonation_o, date) %>%
+    summarise(closed_quotient = mean(closed_quotient)) %>%
+ggplot(aes(x = c2phonation_o, y = closed_quotient)) +
+    facet_grid(. ~ speaker) +
+    geom_boxplot() +
+    xlab("C2 phonation") +
+    ylab("closed quotient")
 ```
 
 ```{r tracegram-point-test}

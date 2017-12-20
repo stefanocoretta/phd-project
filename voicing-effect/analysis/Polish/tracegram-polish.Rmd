@@ -68,6 +68,17 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
     scale_color_discrete(name = "C2 voicing")
 ```
 
+```{r tracegram-smooth}
+degg_pl %>%
+ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+    geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
+    xlab("proportion of vowel duration") +
+    ylab("proportion of glottal period") +
+    xlim(0, 1) +
+    scale_color_discrete(name = "C2 voicing")
+```
+
 ```{r tracegram-point-time}
 degg_pl %>%
 ggplot(aes(x = rel.time, colour = c2phonation_o)) +
