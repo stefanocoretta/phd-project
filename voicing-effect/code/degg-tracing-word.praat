@@ -56,6 +56,9 @@ for file to files
 
     Filter (pass Hann band): lower, upper, 100
     @smoothing: smooth_width
+    sampling_period = Get sampling period
+    time_lag = (smooth_width - 1) / 2 * sampling_period
+    Shift times by: time_lag
     Rename: "egg_smooth"
     noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
     pp_end = Get end time
