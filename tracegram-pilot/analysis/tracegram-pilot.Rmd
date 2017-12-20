@@ -22,42 +22,42 @@ library(afex)
 # Data import
 
 ```{r data}
-degg.tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
+degg_tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
     gather(peak, value, degg.maximum:degg.minimum)
 
-degg.tracing.norm <- read_csv("./tracegram-pilot/results/results.csv") %>%
+degg_tracing_norm <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(phonation = factor(phonation, levels = c("modal", "breathy")))%>%
+    mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
     group_by(speaker) %>%
-    mutate(maximum.norm = scale(degg.maximum),
-           minimum.norm = scale(degg.minimum)) %>%
-    gather(peak, value.norm, maximum.norm:minimum.norm)
+    mutate(maximum_norm = scale(degg.maximum),
+           minimum_norm = scale(degg.minimum)) %>%
+    gather(peak, value_norm, maximum_norm:minimum_norm)
 
-value.norm <- degg.tracing.norm$value.norm
-degg.tracing <- cbind(degg.tracing, value.norm)
+value_norm <- degg_tracing_norm$value_norm
+degg_tracing <- cbind(degg_tracing, value_norm)
 
 quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy")),
-           closed.quotient = degg.minimum - degg.maximum
+           closed_quotient = degg.minimum - degg.maximum
            )
 ```
 
 # dEGG maxima and minima
 
 ```{r degg-boxplot}
-ggplot(degg.tracing, aes(peak, value, colour = phonation)) +
+ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
     geom_boxplot() +
     facet_grid(. ~ speaker)
 ```
 
 ```{r degg-violin}
-ggplot(degg.tracing, aes(peak, value, colour = phonation)) +
+ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
     geom_violin() +
     facet_grid(. ~ speaker)
 ```
@@ -65,7 +65,7 @@ ggplot(degg.tracing, aes(peak, value, colour = phonation)) +
 # Tracegram plot
 
 ```{r speaker-tracegram-plot}
-ggplot(degg.tracing, aes(time, value, colour = peak)) +
+ggplot(degg_tracing, aes(time, value, colour = peak)) +
     geom_point(size = 0.5, alpha = 0.1) +
     geom_smooth(size = 0.5, method = "lm") +
     xlab("relative time (proportion of vowel duration)") +
@@ -75,7 +75,7 @@ ggplot(degg.tracing, aes(time, value, colour = peak)) +
 ```
 
 ```{r tracegram-plot}
-ggplot(degg.tracing, aes(time, value, colour = peak)) +
+ggplot(degg_tracing, aes(time, value, colour = peak)) +
     geom_point(size = 0.5, alpha = 0.1) +
     geom_smooth(size = 0.5, method = "loess") +
     xlab("relative time (proportion of vowel duration)") +
@@ -84,7 +84,7 @@ ggplot(degg.tracing, aes(time, value, colour = peak)) +
 ```
 
 ```{r norm-tracegram-plot}
-ggplot(degg.tracing, aes(time, value.norm, colour = phonation)) +
+ggplot(degg_tracing, aes(time, value_norm, colour = phonation)) +
     geom_point(size = 0.5, alpha = 0.1) +
     geom_smooth(size = 0.5, method = "loess") +
     xlab("relative time (proportion of vowel duration)") +
@@ -95,13 +95,13 @@ ggplot(degg.tracing, aes(time, value.norm, colour = phonation)) +
 # Closed quotient
 
 ```{r cq-density}
-ggplot(quotient, aes(closed.quotient, colour = phonation)) +
+ggplot(quotient, aes(closed_quotient, colour = phonation)) +
     geom_density() +
     facet_grid(. ~ speaker)
 ```
 
 ```{r cq-boxplot}
-ggplot(quotient, aes(phonation, closed.quotient)) +
+ggplot(quotient, aes(phonation, closed_quotient)) +
     geom_boxplot() +
     facet_grid(. ~ speaker)
 ```
