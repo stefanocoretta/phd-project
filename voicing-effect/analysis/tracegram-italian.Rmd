@@ -11,7 +11,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
-knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_bw())
 ```
@@ -57,7 +57,7 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
 
 Vocal fold activity during vowels before voiceless stops changes from about 60% into the duration of the vowel. An increase in values of the dEGG maximum (bottom lines in the graphs) is known to be correlated with vocal fold abduction and acoustic correlates of breathy voicing.
 
-```{r tracegram-smooth}
+```{r tracegram-smooth-speaker}
 degg_it %>%
 ggplot(aes(x = proportion, colour = c2phonation_o)) +
     facet_grid(. ~ language + speaker) +
@@ -139,7 +139,7 @@ ggplot(aes(x = c2phonation_o, y = closed_quotient)) +
 
 ```{r tracegram-point-test}
 degg_it %>%
-    filter(speaker == "it03", word == "paga") %>%
+    filter(speaker == "it02", word == "paca") %>%
 ggplot(aes(x = proportion)) +
     facet_grid(. ~ language + speaker) +
     geom_point(aes(y = maximum), alpha = 0.5, colour = "red") +
