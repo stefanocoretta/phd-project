@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(lmerTest)
+library(effects)
 ```
 
 ```{r read-data}
@@ -43,9 +45,10 @@ tongue_root <- list.files(path = "./voicing-effect/results/ultrasound/",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns)) %>%
     mutate(word = word(prompt, 2)) %>%
-    left_join(y = languages) %>%
     left_join(y = words) %>%
     left_join(y = vowels) %>%
+    left_join(y = languages) %>%
+    mutate_if(is.character, as.factor) %>%
     group_by(speaker) %>%
     mutate(
         vowel_duration_z = scale(vowel.duration),
@@ -102,3 +105,28 @@ tongue_root %>%
 ```
 
 /a/ and /o/ show more advancement in the voiced condition (lower TR_displacement).
+
+```{r}
+tra_lm <- lmer(
+    vowel_duration_z ~
+        TR_displacement_z *
+        c2place +
+        vowel *
+        c2phonation +
+        (1+TR_displacement_z|speaker) +
+        (1|word),
+    data = tongue_root
+)
+
+summary(tra_lm)
+```
+
+```{r}
+plot(allEffects(tra_lm))
+```
+
+```{r}
+coef(tra_lm)$speaker
+```
+
+The lmer detects a correlation, but I need to be cautious because it's only two speakers.
