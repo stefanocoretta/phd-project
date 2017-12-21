@@ -33,20 +33,27 @@ columns <- c(
 languages <- read_csv("./voicing-effect/stimuli/languages.csv")
 words <- read_csv("./voicing-effect/stimuli/nonce.csv")
 
-vowels <- read_csv(
-    "./voicing-effect/results/durations/it01-vowel-durations.csv",
-    na = "--undefined--"
-)
+vowels <- list.files(path = "./voicing-effect/results/durations",
+                   pattern = "*-vowel-durations.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(., na = "--undefined--"))
 
-tongue_root <- read_tsv(
-    "./voicing-effect/results/ultrasound/it01-tra-cart.tsv",
-    col_names = columns
-) %>%
+tongue_root <- list.files(path = "./voicing-effect/results/ultrasound/",
+                   pattern = "*-tra-cart.tsv",
+                   full.names = TRUE) %>%
+    map_df(~read_tsv(., col_names = columns)) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
-    left_join(y = vowels)
+    left_join(y = vowels) %>%
+    group_by(speaker) %>%
+    mutate(
+        vowel_duration_z = scale(vowel.duration),
+        TR_displacement_z = scale(TR.displacement.sm)
+    )
 ```
+
+Vowel duration and tongue root displacement are normalised within each speaker using z-scores.
 
 ```{r tr-density}
 tongue_root %>%
@@ -56,22 +63,22 @@ tongue_root %>%
 
 ```{r tr-vowel-duration}
 tongue_root %>%
-    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2phonation)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
 
 ```{r tr-vowel-duration-vowel}
 tongue_root %>%
-    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
-    facet_grid( ~ vowel)
+    facet_grid(vowel ~ .)
 ```
 
 ```{r tr-vowel-duration-place}
 tongue_root %>%
-    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
     facet_grid( ~ c2place)
@@ -79,7 +86,7 @@ tongue_root %>%
 
 ```{r tr-vowel-duration-vowel-place}
 tongue_root %>%
-    ggplot(aes(TR.displacement.sm, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
     facet_grid(c2place ~ vowel)
