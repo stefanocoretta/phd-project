@@ -91,3 +91,14 @@ tongue_root %>%
     geom_smooth(method = "lm") +
     facet_grid(c2place ~ vowel)
 ```
+
+It does not seem to be a correlation. Maybe I should check TRA not at maximum TT/TD displacement?
+
+```{r}
+tongue_root %>%
+    ggplot(aes(c2phonation, TR_displacement_z)) +
+    geom_boxplot() +
+    facet_grid(. ~ vowel)
+```
+
+/a/ and /o/ show more advancement in the voiced condition (lower TR_displacement).
