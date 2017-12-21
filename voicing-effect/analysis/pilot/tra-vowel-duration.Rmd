@@ -130,3 +130,21 @@ coef(tra_lm)$speaker
 ```
 
 The lmer detects a correlation, but I need to be cautious because it's only two speakers.
+
+```{r}
+mean_tra_lm <- lmer(
+    TR_displacement_z ~
+        c2phonation +
+        vowel +
+        c2place +
+        (1|speaker) +
+        (1|word),
+    data = tongue_root
+)
+summary(mean_tra_lm)
+```
+
+```{r}
+plot(allEffects(mean_tra_lm))
+```
+
