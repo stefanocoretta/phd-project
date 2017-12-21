@@ -52,6 +52,22 @@ lmt("./voicing-effect/code/process.praat.md")
    1. Check bursts
 1. **Get durations**
    1. Run `get-durations.praat`: the output is written in the `results` folder
+   
+```{r get-durations}
+# speakers <- "it01"
+speakers <- c("it01", "it02", "it03", "it07", "pl02", "pl03", "pl04", "pl05")
+languages <- c("it", "it", "it", "it", "pl", "pl", "pl", "pl")
+
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/get-durations.praat",
+        "voicing-effect",
+        speakers[i],
+        languages[i]
+    )
+}
+```
+
 
 ## EGG data
 
