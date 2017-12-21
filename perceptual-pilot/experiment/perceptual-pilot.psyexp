@@ -27,6 +27,305 @@
     <Param name="Screen" updates="None" val="1" valType="num"/>
   </Settings>
   <Routines>
+    <Routine name="train_2">
+      <SoundComponent name="sound_3">
+        <Param name="sound" updates="set every repeat" val="$file_name" valType="str"/>
+        <Param name="volume" updates="constant" val="1" valType="code"/>
+        <Param name="name" updates="None" val="sound_3" valType="code"/>
+        <Param name="stopVal" updates="constant" val="3.5" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+      </SoundComponent>
+      <TextComponent name="text_6">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_6" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="t                   d" valType="str"/>
+        <Param name="stopVal" updates="constant" val="4" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.2" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_6">
+        <Param name="correctAns" updates="constant" val="$correct_answer" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="True" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_6" valType="code"/>
+        <Param name="stopVal" updates="constant" val="3" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'z', 'slash'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="1" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="feedback">
+      <CodeComponent name="code">
+        <Param name="Begin Experiment" updates="constant" val="msg='doh!'" valType="extendedCode"/>
+        <Param name="name" updates="None" val="code" valType="code"/>
+        <Param name="Begin Routine" updates="constant" val="if not key_resp_3.keys :&amp;#10;    msg=&quot;Non hai risposto.&quot;&amp;#10;    msg_colour = &quot;white&quot;&amp;#10;elif key_resp_3.corr:#stored on last run routine&amp;#10;    msg=&quot;Corretto!&quot;&amp;#10;    msg_colour = &quot;lime&quot;&amp;#10;else:&amp;#10;    msg=&quot;Ops! Sbagliato.&quot;&amp;#10;    msg_colour = &quot;red&quot;" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+      </CodeComponent>
+      <TextComponent name="text_4">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_4" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="set every repeat" val="$msg_colour" valType="str"/>
+        <Param name="text" updates="set every repeat" val="$msg" valType="str"/>
+        <Param name="stopVal" updates="constant" val="1.5" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="instructions_4">
+      <TextComponent name="text_12">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_12" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="text" updates="constant" val="Prima di iniziare l'esperimento, faremo una veloce prova.&amp;#10;&amp;#10;Come nell'esperimento vero e proprio, dovrai dire se la parola che hai sentito contiene una &quot;t&quot; o una &quot;d&quot;. Dopo aver dato la risposta, vedrai un messaggio che ti dirà se hai risposto correttamente o meno.&amp;#10;&amp;#10;(premi la barra spaziatrice per continuare, l'esperimento non inizierà per ora)" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_11">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_11" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="3" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instructions_5">
+      <TextComponent name="text_13">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_13" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="text" updates="constant" val="Questa prova potrà sembrarti semplice, ma considera che serve solo per farti familiarizzare con l'esperimento.&amp;#10;&amp;#10;Posiziona ora l'indice della mano sinistra e della mano destra sui tasti.&amp;#10;&amp;#10;Quando sei pronta/o per iniziare la prova, premi la barra spaziatrice sulla tastiera.&amp;#10;&amp;#10;(premi la barra spaziatrice per iniziare la prova)" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_12">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_12" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="3" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="ready_2">
+      <TextComponent name="text_8">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_8" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="La prova è terminata.&amp;#10;&amp;#10;Ora possiamo passare all'esperimento vero e proprio.&amp;#10;&amp;#10;Quando sei pronta/o per iniziare, premi la barra spaziatrice sulla tastiera." valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_7">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_7" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instructions_2">
+      <TextComponent name="text_10">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_10" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="Le parole che sentirai sono parole inventante e iniziano tutte con una &quot;p&quot;. Per esempio: &quot;pata&quot;, &quot;pudu&quot;.&amp;#10;&amp;#10;Una volta ascoltata la parola, dovrai premere il tasto per la &quot;t&quot; se pensi che la seconda consonante era una &quot;t&quot; o il tasto per la &quot;d&quot; se pensi che la seconda consonante era una &quot;d&quot;.&amp;#10;&amp;#10;(premi la barra spaziatrice per continuare, l'esperimento non inizierà per ora)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_9">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_9" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="3" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instructions_3">
+      <TextComponent name="text_11">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_11" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="Potrai ascoltare ogni parola solo una volta. Dopo aver sentito una parola, dovrai premere un tasto per indicare se la parola aveva una &quot;t&quot; o una &quot;d&quot;. Le lettere che vedrai sullo schermo ti aiuteranno a ricordare quale tasto premere.&amp;#10;&amp;#10;Cerca di rispondere velocemente ma accuratamente.&amp;#10;&amp;#10;(premi la barra spaziatrice per continuare, l'esperimento non inizierà per ora)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_10">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_10" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="3" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="feedback_2">
+      <CodeComponent name="code_2">
+        <Param name="Begin Experiment" updates="constant" val="msg='doh!'" valType="extendedCode"/>
+        <Param name="name" updates="None" val="code_2" valType="code"/>
+        <Param name="Begin Routine" updates="constant" val="if not key_resp_3.keys :&amp;#10;    msg=&quot;Non hai risposto.&quot;&amp;#10;    msg_colour = &quot;white&quot;&amp;#10;elif key_resp_3.corr:#stored on last run routine&amp;#10;    msg=&quot;Corretto!&quot;&amp;#10;    msg_colour = &quot;lime&quot;&amp;#10;else:&amp;#10;    msg=&quot;Ops! Sbagliato.&quot;&amp;#10;    msg_colour = &quot;red&quot;" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+      </CodeComponent>
+      <TextComponent name="text_7">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_7" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="set every repeat" val="$msg_colour" valType="str"/>
+        <Param name="text" updates="set every repeat" val="$msg" valType="str"/>
+        <Param name="stopVal" updates="constant" val="1.5" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+    </Routine>
     <Routine name="trial">
       <SoundComponent name="sound_1">
         <Param name="sound" updates="set every repeat" val="$file_name" valType="str"/>
@@ -71,7 +370,7 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="allowedKeys" updates="constant" val="'z', 'slash'" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="startVal" updates="None" val="0.9" valType="code"/>
+        <Param name="startVal" updates="None" val="1" valType="code"/>
         <Param name="store" updates="constant" val="last key" valType="str"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
@@ -81,7 +380,7 @@
         <Param name="sound" updates="set every repeat" val="$file_name" valType="str"/>
         <Param name="volume" updates="constant" val="1" valType="code"/>
         <Param name="name" updates="None" val="sound_2" valType="code"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="3.5" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
@@ -95,7 +394,7 @@
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
         <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="text" updates="constant" val="d                   t" valType="str"/>
-        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="4" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -112,6 +411,93 @@
         <Param name="correctAns" updates="constant" val="$correct_answer" valType="str"/>
         <Param name="storeCorrect" updates="constant" val="True" valType="bool"/>
         <Param name="name" updates="None" val="key_resp_3" valType="code"/>
+        <Param name="stopVal" updates="constant" val="3" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'z', 'slash'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="1" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="ready">
+      <TextComponent name="text_3">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_3" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="La prova è terminata.&amp;#10;&amp;#10;Ora possiamo passare all'esperimento vero e proprio.&amp;#10;&amp;#10;Quando sei pronta/o per iniziare, premi la barra spaziatrice sulla tastiera." valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_4">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_4" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="trial_2">
+      <SoundComponent name="sound_4">
+        <Param name="sound" updates="set every repeat" val="$file_name" valType="str"/>
+        <Param name="volume" updates="constant" val="1" valType="code"/>
+        <Param name="name" updates="None" val="sound_4" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+      </SoundComponent>
+      <TextComponent name="text_9">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_9" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="t                   d" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.2" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_8">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_8" valType="code"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
@@ -120,38 +506,135 @@
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="allowedKeys" updates="constant" val="'z', 'slash'" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
-        <Param name="startVal" updates="None" val="0.9" valType="code"/>
+        <Param name="startVal" updates="None" val="1" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instructions">
+      <TextComponent name="text_5">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_5" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="Grazie per aver accettato di partecipare a questo esperimento.&amp;#10;&amp;#10;Quello che devi fare è semplicemente ascoltare delle parole e dire se secondo te la seconda consonante è una &quot;t&quot; o una &quot;d&quot;&amp;#10;&amp;#10;(premi la barra spaziatrice per continuare, l'esperimento non inizierà per ora)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_5">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_5" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="3" valType="code"/>
         <Param name="store" updates="constant" val="last key" valType="str"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
     </Routine>
   </Routines>
   <Flow>
+    <Routine name="instructions"/>
+    <Routine name="instructions_2"/>
+    <Routine name="instructions_3"/>
+    <Routine name="instructions_4"/>
+    <Routine name="instructions_5"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_3">
+      <Param name="conditionsFile" updates="None" val="" valType="str"/>
+      <Param name="name" updates="None" val="trials_3" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="int(expInfo['participant'][-3:]) % 2 == 1" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+    </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="trials_2">
-      <Param name="conditionsFile" updates="None" val="stimuli-train.csv" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="stimuli-train-tright.csv" valType="str"/>
       <Param name="name" updates="None" val="trials_2" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'index': 1, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'vowel': u'a', 'correct_answer': u'z', 'condition': u'confound'}, {'index': 2, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'vowel': u'a', 'correct_answer': u'slash', 'condition': u'voicing'}, {'index': 3, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'vowel': u'i', 'correct_answer': u'z', 'condition': u'confound'}, {'index': 4, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'vowel': u'i', 'correct_answer': u'slash', 'condition': u'voicing'}, {'index': 5, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'vowel': u'u', 'correct_answer': u'z', 'condition': u'confound'}, {'index': 6, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'vowel': u'u', 'correct_answer': u'slash', 'condition': u'voicing'}]" valType="str"/>
-      <Param name="Selected rows" updates="None" val="" valType="code"/>
+      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train"/>
+    <Routine name="feedback"/>
     <LoopTerminator name="trials_2"/>
+    <Routine name="ready"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
-      <Param name="conditionsFile" updates="None" val="stimuli.csv" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="stimuli-tright.csv" valType="str"/>
       <Param name="name" updates="None" val="trials" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="5" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'index': 1, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'vowel': u'a', 'condition': u'confound'}, {'index': 2, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada0.wav', 'vowel': u'a', 'condition': u'burst'}, {'index': 3, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada1.wav', 'vowel': u'a', 'condition': u'burst'}, {'index': 4, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada2.wav', 'vowel': u'a', 'condition': u'burst'}, {'index': 5, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada3.wav', 'vowel': u'a', 'condition': u'burst'}, {'index': 6, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada4.wav', 'vowel': u'a', 'condition': u'burst'}, {'index': 7, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada5.wav', 'vowel': u'a', 'condition': u'burst'}, {'index': 8, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 9, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/pata1.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 10, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/pata2.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 11, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/pata3.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 12, 'burst': 5, 'voicing': 4, 'file_name': u'../data/raw/stimuli/pata4.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 13, 'burst': 5, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pata5.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 14, 'burst': 5, 'voicing': 6, 'file_name': u'../data/raw/stimuli/pata6.wav', 'vowel': u'a', 'condition': u'voicing'}, {'index': 15, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'vowel': u'i', 'condition': u'confound'}, {'index': 16, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi0.wav', 'vowel': u'i', 'condition': u'burst'}, {'index': 17, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi1.wav', 'vowel': u'i', 'condition': u'burst'}, {'index': 18, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi2.wav', 'vowel': u'i', 'condition': u'burst'}, {'index': 19, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi3.wav', 'vowel': u'i', 'condition': u'burst'}, {'index': 20, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi4.wav', 'vowel': u'i', 'condition': u'burst'}, {'index': 21, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi5.wav', 'vowel': u'i', 'condition': u'burst'}, {'index': 22, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 23, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/piti1.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 24, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/piti2.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 25, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/piti3.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 26, 'burst': 5, 'voicing': 4, 'file_name': u'../data/raw/stimuli/piti4.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 27, 'burst': 5, 'voicing': 5, 'file_name': u'../data/raw/stimuli/piti5.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 28, 'burst': 5, 'voicing': 6, 'file_name': u'../data/raw/stimuli/piti6.wav', 'vowel': u'i', 'condition': u'voicing'}, {'index': 29, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'vowel': u'u', 'condition': u'confound'}, {'index': 30, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu0.wav', 'vowel': u'u', 'condition': u'burst'}, {'index': 31, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu1.wav', 'vowel': u'u', 'condition': u'burst'}, {'index': 32, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu2.wav', 'vowel': u'u', 'condition': u'burst'}, {'index': 33, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu3.wav', 'vowel': u'u', 'condition': u'burst'}, {'index': 34, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu4.wav', 'vowel': u'u', 'condition': u'burst'}, {'index': 35, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu5.wav', 'vowel': u'u', 'condition': u'burst'}, {'index': 36, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'vowel': u'u', 'condition': u'voicing'}, {'index': 37, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/putu1.wav', 'vowel': u'u', 'condition': u'voicing'}, {'index': 38, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/putu2.wav', 'vowel': u'u', 'condition': u'voicing'}, {'index': 39, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/putu3.wav', 'vowel': u'u', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'index': 1, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada0.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 3, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada1.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 4, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada2.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 5, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada3.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 6, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada4.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 7, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada5.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 8, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 9, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/pata1.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 10, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/pata2.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 11, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/pata3.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 12, 'burst': 5, 'voicing': 4, 'file_name': u'../data/raw/stimuli/pata4.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 13, 'burst': 5, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pata5.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 14, 'burst': 5, 'voicing': 6, 'file_name': u'../data/raw/stimuli/pata6.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 15, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 16, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi0.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 17, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi1.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 18, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi2.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 19, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi3.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 20, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi4.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 21, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi5.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 22, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 23, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/piti1.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 24, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/piti2.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 25, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/piti3.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 26, 'burst': 5, 'voicing': 4, 'file_name': u'../data/raw/stimuli/piti4.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 27, 'burst': 5, 'voicing': 5, 'file_name': u'../data/raw/stimuli/piti5.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 28, 'burst': 5, 'voicing': 6, 'file_name': u'../data/raw/stimuli/piti6.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 29, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 30, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu0.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 31, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu1.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 32, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu2.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 33, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu3.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 34, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu4.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 35, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu5.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 36, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 37, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/putu1.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 38, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/putu2.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 39, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/putu3.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="trial"/>
     <LoopTerminator name="trials"/>
+    <LoopTerminator name="trials_3"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_4">
+      <Param name="conditionsFile" updates="None" val="" valType="str"/>
+      <Param name="name" updates="None" val="trials_4" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="int(expInfo['participant'][-3:]) % 2 == 0" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+    </LoopInitiator>
+    <LoopInitiator loopType="TrialHandler" name="trials_5">
+      <Param name="conditionsFile" updates="None" val="stimuli-train-tleft.csv" valType="str"/>
+      <Param name="name" updates="None" val="trials_5" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="5" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+    </LoopInitiator>
+    <Routine name="train_2"/>
+    <Routine name="feedback_2"/>
+    <LoopTerminator name="trials_5"/>
+    <Routine name="ready_2"/>
+    <LoopInitiator loopType="TrialHandler" name="trials_6">
+      <Param name="conditionsFile" updates="None" val="stimuli-tleft.csv" valType="str"/>
+      <Param name="name" updates="None" val="trials_6" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="5" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="[{'index': 1, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada0.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 3, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada1.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 4, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada2.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 5, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada3.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 6, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada4.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 7, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pada5.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 8, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 9, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/pata1.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 10, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/pata2.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 11, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/pata3.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 12, 'burst': 5, 'voicing': 4, 'file_name': u'../data/raw/stimuli/pata4.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 13, 'burst': 5, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pata5.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 14, 'burst': 5, 'voicing': 6, 'file_name': u'../data/raw/stimuli/pata6.wav', 'vowel': u'a', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 15, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 16, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi0.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 17, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi1.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 18, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi2.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 19, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi3.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 20, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi4.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 21, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pidi5.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 22, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 23, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/piti1.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 24, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/piti2.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 25, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/piti3.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 26, 'burst': 5, 'voicing': 4, 'file_name': u'../data/raw/stimuli/piti4.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 27, 'burst': 5, 'voicing': 5, 'file_name': u'../data/raw/stimuli/piti5.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 28, 'burst': 5, 'voicing': 6, 'file_name': u'../data/raw/stimuli/piti6.wav', 'vowel': u'i', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 29, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 30, 'burst': 0, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu0.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 31, 'burst': 1, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu1.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 32, 'burst': 2, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu2.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 33, 'burst': 3, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu3.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 34, 'burst': 4, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu4.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 35, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pudu5.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'burst'}, {'index': 36, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 37, 'burst': 5, 'voicing': 1, 'file_name': u'../data/raw/stimuli/putu1.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 38, 'burst': 5, 'voicing': 2, 'file_name': u'../data/raw/stimuli/putu2.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 39, 'burst': 5, 'voicing': 3, 'file_name': u'../data/raw/stimuli/putu3.wav', 'vowel': u'u', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+    </LoopInitiator>
+    <Routine name="trial_2"/>
+    <LoopTerminator name="trials_6"/>
+    <LoopTerminator name="trials_4"/>
   </Flow>
 </PsychoPy2experiment>
