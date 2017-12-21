@@ -1,0 +1,7 @@
+index,file_name,vowel,voicing,burst,condition,correct_answer,side_condition
+1,../data/raw/stimuli/pada.wav,a,5,0,confound,z,t_right
+2,../data/raw/stimuli/pata0.wav,a,0,5,voicing,slash,t_right
+3,../data/raw/stimuli/pidi.wav,i,5,0,confound,z,t_right
+4,../data/raw/stimuli/piti0.wav,i,0,5,voicing,slash,t_right
+5,../data/raw/stimuli/pudu.wav,u,5,0,confound,z,t_right
+6,../data/raw/stimuli/putu0.wav,u,0,5,voicing,slash,t_right
