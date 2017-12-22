@@ -87,34 +87,39 @@ It looks like the abduction gesture starts earlier in Italian (60% of vowel dura
 
 ## Closed qotient
 
+```{r cq-layers}
+cq_layers <- list(
+    xlim(0, 1),
+    xlab("vowel duration"),
+    ylab("proportion of glottal period"),
+    scale_color_discrete(name = "C2 voicing"),
+    scale_linetype_discrete(name = "C2 voicing")
+)
+```
+
+
 ```{r cq-points}
 degg %>%
     ggplot(aes(x = proportion, colour = c2phonation_o)) +
         facet_wrap(~ speaker, nrow = 2) +
         geom_point(aes(y = closed_quotient), alpha = 0.5) +
-        xlab("vowel duration") +
-        ylab("proportion of glottal period") +
-        scale_color_discrete(name = "C2 voicing")
+        cq_layers
 ```
 
 ```{r cq-smooth-speakers}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
         facet_wrap(~ speaker, nrow = 2) +
-        geom_smooth(aes(y = closed_quotient), size = 0.5, alpha = 0.5) +
-        xlim(0.1, 0.9) +
-        xlab("vowel duration") +
-        ylab("proportion of glottal period") +
-        scale_color_discrete(name = "C2 voicing")
+        geom_point(size = 0.2, alpha = 0.1) +
+        geom_smooth(size = 0.5, alpha = 0.5) +
+        cq_layers
 ```
 
 ```{r cq-smooth-language}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
         facet_wrap(~ language) +
-        geom_smooth(aes(y = closed_quotient), size = 0.5, alpha = 0.5) +
-        xlim(0.1, 0.9) +
-        xlab("vowel duration") +
-        ylab("proportion of glottal period") +
-        scale_color_discrete(name = "C2 voicing")
+        geom_point(size = 0.2, alpha = 0.1) +
+        geom_smooth(alpha = 0.5) +
+        cq_layers
 ```
