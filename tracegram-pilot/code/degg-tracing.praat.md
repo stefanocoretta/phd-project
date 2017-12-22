@@ -17,7 +17,7 @@ smoothWidth = 11
 results$ = "../results"
 createDirectory(results$)
 data$ = "../data"
-resultsHeader$ = "file,token,time,egg.minimum,degg.maximum,degg.minimum"
+resultsHeader$ = "file,token,time,egg_minimum,degg_maximum,degg_minimum"
 resultsFile$ = "'results$'/results.csv"
 writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
