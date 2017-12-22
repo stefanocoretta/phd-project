@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
@@ -60,7 +60,7 @@ Vowel duration and tongue root displacement are normalised within each speaker u
 
 ```{r tr-density}
 tongue_root %>%
-    ggplot(aes(TR.displacement.sm, colour = c2phonation)) +
+    ggplot(aes(TR_displacement_z, colour = c2phonation)) +
     geom_density()
 ```
 
@@ -76,7 +76,7 @@ tongue_root %>%
     ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
-    facet_grid(vowel ~ .)
+    facet_grid(. ~ vowel)
 ```
 
 ```{r tr-vowel-duration-place}
@@ -109,7 +109,7 @@ tongue_root %>%
 ```{r}
 tra_lm <- lmer(
     vowel_duration_z ~
-        TR_displacement_z *
+        TR_displacement_z +
         c2place +
         vowel *
         c2phonation +
