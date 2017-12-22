@@ -26,15 +26,15 @@ degg_tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
-    gather(peak, value, degg.maximum:degg.minimum)
+    gather(peak, value, degg_maximum:degg_minimum)
 
 degg_tracing_norm <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
     group_by(speaker) %>%
-    mutate(maximum_norm = scale(degg.maximum),
-           minimum_norm = scale(degg.minimum)) %>%
+    mutate(maximum_norm = scale(degg_maximum),
+           minimum_norm = scale(degg_minimum)) %>%
     gather(peak, value_norm, maximum_norm:minimum_norm)
 
 value_norm <- degg_tracing_norm$value_norm
@@ -44,7 +44,7 @@ quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy")),
-           closed_quotient = degg.minimum - degg.maximum
+           closed_quotient = degg_minimum - degg_maximum
            )
 ```
 
