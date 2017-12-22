@@ -86,7 +86,7 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
 ```{r norm-tracegram-plot}
 ggplot(degg_tracing, aes(time, value_norm, colour = phonation)) +
     geom_point(size = 0.5, alpha = 0.1) +
-    geom_smooth(size = 0.5, method = "loess") +
+    geom_smooth(size = 0.5, method = "lm") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     facet_grid(. ~ peak)
@@ -107,30 +107,30 @@ ggplot(quotient, aes(phonation, closed_quotient)) +
 ```
 
 ```{r quotient-lmer}
-quotient.lmer <- lmer(
-    closed.quotient ~
+quotient_lmer <- lmer(
+    closed_quotient ~
         phonation +
         (1 + phonation|speaker),
     data = quotient
 )
 
-summary(quotient.lmer)
+summary(quotient_lmer)
 ```
 
 ```{r quotient-likelyhood}
-quotient.lmer.null <- lmer(
-    closed.quotient ~
+quotient_lmer_null <- lmer(
+    closed_quotient ~
         (1 + phonation|speaker),
     data = quotient
 )
 
-anova(quotient.lmer.null, quotient.lmer)
+anova(quotient_lmer_null, quotient_lmer)
 ```
 
 
 ```{r quotient-afex, eval = FALSE}
 mixed(
-    closed.quotient ~
+    closed_quotient ~
         phonation +
         (1 + phonation|speaker),
     data = quotient
@@ -138,22 +138,22 @@ mixed(
 ```
 
 ```{r quotient-lmer-effects}
-plot(allEffects(quotient.lmer))
+plot(allEffects(quotient_lmer))
 ```
 
 ```{r quotient-lmer-random-coefficients}
-coefficients(quotient.lmer)$speaker
+coefficients(quotient_lmer)$speaker
 ```
 
 ```{r cq-plot}
-ggplot(quotient, aes(time, closed.quotient, colour = speaker)) +
+ggplot(quotient, aes(time, closed_quotient, colour = speaker)) +
     geom_point(alpha = 0.2) +
     facet_grid(phonation ~ .)
 ```
 
 ```{r cq-plot-2}
 filter(quotient, token == 1) %>%
-ggplot(aes(time, closed.quotient, colour = phonation)) +
+ggplot(aes(time, closed_quotient, colour = phonation)) +
     geom_point(alpha = 0.2) +
     geom_smooth(method = "lm") +
     facet_grid(. ~ speaker)
