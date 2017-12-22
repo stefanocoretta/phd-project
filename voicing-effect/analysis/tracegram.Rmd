@@ -85,6 +85,16 @@ degg %>%
 As a first impression, it seems that both in Italian and Polish vocal folds start abducting in the voiceless condition before closure is achieved.
 It looks like the abduction gesture starts earlier in Italian (60% of vowel duration) than in Polish (75% of vowel duration).
 
+```{r tracegram-smooth-languages-vowels}
+degg %>%
+    ggplot(aes(x = proportion, colour = c2phonation_o, linetype = c2phonation_o)) +
+        geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
+        geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
+        tracegram_layers +
+        facet_grid(language ~ vowel)
+```
+
+
 ## Closed qotient
 
 ```{r cq-layers}
@@ -119,6 +129,15 @@ degg %>%
 degg %>%
     ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
         facet_wrap(~ language) +
+        geom_point(size = 0.2, alpha = 0.1) +
+        geom_smooth(alpha = 0.5) +
+        cq_layers
+```
+
+```{r cq-smooth-language-vowel}
+degg %>%
+    ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
+        facet_grid(language ~ vowel) +
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(alpha = 0.5) +
         cq_layers
