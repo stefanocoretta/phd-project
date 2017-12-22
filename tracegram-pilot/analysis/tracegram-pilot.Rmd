@@ -1,7 +1,7 @@
 ---
 title: "Tracegram pilot"
 author: "Stefano Coretta"
-date: "\\today"
+date: "22 December 2017"
 output: 
   pdf_document: 
     fig_caption: yes
@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_bw())
