@@ -49,6 +49,8 @@ tongue_root <- list.files(path = "./voicing-effect/results/ultrasound/",
     left_join(y = words) %>%
     left_join(y = vowels) %>%
     mutate_if(is.character, as.factor) %>%
+    # filter clear outlier
+    filter(TR.displacement.sm > 40) %>%
     group_by(speaker) %>%
     mutate(
         vowel_duration_z = scale(vowel.duration),
