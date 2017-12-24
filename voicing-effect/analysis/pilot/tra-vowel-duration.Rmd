@@ -63,7 +63,8 @@ Vowel duration and tongue root displacement are normalised within each speaker u
 ```{r tr-density}
 tongue_root %>%
     ggplot(aes(TR_displacement_z, colour = c2phonation)) +
-    geom_density()
+    geom_density() +
+    facet_grid(. ~ language)
 ```
 
 ```{r tr-vowel-duration}
@@ -103,7 +104,7 @@ It does not seem to be a correlation. Maybe I should check TRA not at maximum TT
 tongue_root %>%
     ggplot(aes(c2phonation, TR_displacement_z)) +
     geom_boxplot() +
-    facet_grid(. ~ vowel)
+    facet_grid(language ~ vowel)
 ```
 
 /a/ and /o/ show more advancement in the voiced condition (lower TR_displacement).
@@ -117,7 +118,7 @@ tra_lm <- lmer(
         c2phonation +
         (1+TR_displacement_z|speaker) +
         (1|word),
-    data = tongue_root
+    data = filter(tongue_root, language == "italian")
 )
 
 summary(tra_lm)
@@ -131,7 +132,7 @@ plot(allEffects(tra_lm))
 coef(tra_lm)$speaker
 ```
 
-The lmer detects a correlation, but I need to be cautious because it's only two speakers.
+The lmer detects a correlation, but I need to be cautious.
 
 ```{r}
 mean_tra_lm <- lmer(
