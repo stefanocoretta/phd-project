@@ -67,10 +67,10 @@ splines.pol.it <- list.files(
 ```{r group-coronal-it}
 filter(splines.pol.it, label == "max_TT") %>%
     ggplot(aes(theta, radius, colour = c2phonation)) +
-#    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
-    geom_point(alpha = 0.1) +
+    # geom_line(stat = "smooth", method = "loess") +
+    geom_point(alpha = 0.5) +
     facet_grid(. ~ vowel) +
-    scale_colour_discrete(name = "Phonation of C2") + coord_polar(start = pi) + xlim(-pi, pi) + ylim(0, 60)
+    scale_colour_discrete(name = "Phonation of C2") + coord_polar(start = 1) + xlim(0, 4) + ylim(0, 60)
 ```
 
 ```{r group-coronal-it}
@@ -92,7 +92,7 @@ filter(splines.pol.it, label == "max_TT") %>%
 ```
 
 ```{r}
-filter(splines.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
+filter(splines.it, label == "max_TT", speaker == "it01", vowel == "a") %>%
         ggplot(aes(X, Y, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1, aes(group = rec.date)) +
@@ -129,3 +129,17 @@ splines.pol.it.u <- splines.pol.it %>%
 radial.plot(na.omit(splines.pol.it.u$X), na.omit(splines.pol.it.u$Y), rp.type="s", labels = "", clockwise = T, start = pi/2, radial.labels = "", xlim = c(-pi, pi))
 ```
 
+
+```{r}
+filter(splines.pol.it, label == "max_TT") %>%
+    ggplot(aes(theta, radius, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    facet_grid(. ~ vowel)
+```
+
+```{r}
+filter(splines.pol.it, label == "max_TT") %>%
+    ggplot(aes(theta, radius, colour = c2phonation)) +
+    geom_smooth(method = "loess") +
+    facet_grid(. ~ vowel)
+```
