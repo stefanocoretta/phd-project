@@ -83,7 +83,7 @@ filter(splines.pol.it, label == "max_TT", vowel == "u") %>%
     scale_colour_discrete(name = "Phonation of C2") + coord_polar(start = pi) + xlim(-pi, pi) + ylim(0, 60)
 ```
 
-```{r group-coronal-it}
+```{r group-coronal-it, eval = FALSE}
 filter(splines.pol.it, label == "max_TT") %>%
     ggplot(aes(Y.car, X.car, colour = c2phonation, group = rec.date)) +
 #    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
@@ -104,7 +104,7 @@ filter(splines.it, label == "max_TT", speaker == "it01", vowel == "a") %>%
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
-```{r}
+```{r eval = FALSE}
 filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
         ggplot(aes(Y.car, X.car)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
@@ -115,7 +115,7 @@ filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
-```{r}
+```{r eval = FALSE}
 filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
         ggplot(aes(Y.car, X.car)) +
     geom_line(stat = "smooth", method = "gam", formula = y ~ s(x, k = 3), alpha = 0.5) +
