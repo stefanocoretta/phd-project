@@ -3,6 +3,8 @@ title: "Comparison of cartesian and polar coordinates"
 author: "Stefano Coretta"
 date: "19/06/2017"
 output: html_document
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -143,3 +145,77 @@ filter(splines.pol.it, label == "max_TT") %>%
     geom_smooth(method = "loess") +
     facet_grid(. ~ vowel)
 ```
+
+```{r}
+splines.pol.it %>%
+    filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
+    ggplot(aes(-X, -Y, colour = c2phonation)) +
+    geom_point()
+```
+
+```{r}
+splines.it %>%
+    filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_point()
+```
+
+```{r}
+coord <- splines.it %>%
+    filter(rec.date %in% c("29/11/2016 15:10:47", "29/11/2016 15:10:57"))
+
+x_1 <- c(coord$X[coord$fan.line == 1][1], coord$X[coord$fan.line == 1][2])
+y_1 <- c(coord$Y[coord$fan.line == 1][1], coord$Y[coord$fan.line == 1][2])
+
+x_2 <- c(coord$X[coord$fan.line == 2][1], coord$X[coord$fan.line == 2][2])
+y_2 <- c(coord$Y[coord$fan.line == 2][1], coord$Y[coord$fan.line == 2][2])
+
+x <- ((x_1[1]*y_1[2] - y_1[1]*x_1[2]) * (x_2[1] - x_2[2]) - (x_1[1] - x_1[2]) * (x_2[1] * y_2[2] - y_2[1] * x_2[2])) / ((x_1[1] - x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] - x_2[2]))
+
+y <- ((x_1[1]*y_1[2] - y_1[1]*x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] * y_2[2] - y_2[1] * x_2[2])) / ((x_1[1] - x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] - x_2[2]))
+```
+
+```{r}
+splines.it %>%
+    filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
+    ggplot(aes(X, Y)) +
+    geom_point(aes(colour = c2phonation)) +
+    geom_point(data = tibble(X = x, Y = y), colour = "blue", size = 2, shape = 4)
+```
+
+```{r}
+splines.it %>%
+    filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
+    ggplot(aes(fan.line, Y)) +
+    geom_point(aes(colour = c2phonation)) +
+    geom_smooth(aes(colour = c2phonation))
+```
+
+```{r}
+polar_data <- splines.it %>%
+    filter(speaker == "it01") %>%
+    mutate(
+        radius = sqrt((X - x) ^ 2 + (Y - y) ^ 2),
+        theta = pi + atan2(Y - y, X - x)
+    )
+```
+
+```{r}
+polar_data %>%
+    filter(label == "max_TT", vowel == "a") %>%
+    ggplot(aes(theta, radius, colour = c2phonation)) +
+    geom_point() +
+    geom_smooth(method = "loess")
+```
+
+```{r}
+polar_data %>%
+    mutate(
+        X = x - radius * cos(theta),
+        Y = radius * sin(theta) - y
+    ) %>%
+    filter(label == "max_TT", vowel == "a") %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_point()
+```
+
