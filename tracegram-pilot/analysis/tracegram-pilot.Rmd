@@ -40,7 +40,10 @@ mean_degg_tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     mutate(
         phonation = factor(phonation, levels = c("modal", "breathy")),
         mean_degg = (degg_maximum + degg_minimum) / 2
-    )
+    ) %>%
+    group_by(speaker) %>%
+    mutate(mean_degg_norm = scale(mean_degg)) %>%
+    ungroup()
 
 quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
@@ -80,6 +83,16 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
     ylim(0, 1)
 ```
 
+```{r speaker-mean-tracegram-plot}
+ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
+    geom_point(size = 0.5, alpha = 0.1) +
+    geom_smooth(size = 0.5, method = "lm") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    facet_wrap(~ speaker) +
+    ylim(0, 1)
+```
+
 ```{r tracegram-plot}
 ggplot(degg_tracing, aes(time, value, colour = peak)) +
     geom_point(size = 0.5, alpha = 0.1) +
@@ -89,6 +102,15 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
     facet_grid(. ~ phonation)
 ```
 
+```{r mean-tracegram-plot}
+ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
+    geom_point(size = 0.5, alpha = 0.1) +
+    geom_smooth(size = 0.5, method = "lm") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    ylim(0, 1)
+```
+
 ```{r norm-tracegram-plot}
 ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
     geom_point(size = 0.5, alpha = 0.1) +
@@ -96,6 +118,15 @@ ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     facet_grid(. ~ phonation)
+```
+
+```{r norm-mean-tracegram-plot}
+ggplot(mean_degg_tracing, aes(time, mean_degg_norm, colour = phonation)) +
+    geom_point(size = 0.5, alpha = 0.1) +
+    geom_smooth(size = 0.5, method = "lm") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    ylim(0, 1)
 ```
 
 # Closed quotient
