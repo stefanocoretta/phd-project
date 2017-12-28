@@ -29,7 +29,7 @@ degg_tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
-    gather(peak, value, degg_maximum:degg_minimum)
+    gather(peak, value, degg_maximum:degg_minimum) %>%
     group_by(speaker) %>%
     mutate(value_norm = scale(value)) %>%
     ungroup()
