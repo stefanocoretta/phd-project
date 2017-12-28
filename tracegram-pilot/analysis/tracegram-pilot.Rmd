@@ -92,13 +92,13 @@ ggplot(degg_tracing_norm, aes(time, value_norm, colour = peak)) +
 ```{r cq-density}
 ggplot(quotient, aes(closed_quotient, colour = phonation)) +
     geom_density() +
-    facet_grid(. ~ speaker)
+    facet_wrap(~ speaker)
 ```
 
 ```{r cq-boxplot}
 ggplot(quotient, aes(phonation, closed_quotient)) +
     geom_boxplot() +
-    facet_grid(. ~ speaker)
+    facet_wrap(~ speaker)
 ```
 
 ```{r quotient-lmer}
