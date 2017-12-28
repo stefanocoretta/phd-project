@@ -55,6 +55,10 @@ quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
 quotient_mean <- quotient %>%
     group_by(speaker, phonation, token) %>%
     summarise(mean_quotient = mean(closed_quotient))
+
+mean_degg_tracing_mean <- mean_degg_tracing %>%
+    group_by(speaker, phonation, token) %>%
+    summarise(mean_degg_mean = mean(mean_degg))
 ```
 
 # dEGG maxima and minima
@@ -129,6 +133,13 @@ ggplot(mean_degg_tracing, aes(time, mean_degg_norm, colour = phonation)) +
     ylim(0, 1)
 ```
 
+```{r boxplot-mean-degg}
+mean_degg_tracing %>%
+    ggplot(aes(phonation, mean_degg)) +
+    geom_boxplot()
+```
+
+
 # Closed quotient
 
 ```{r cq-density}
@@ -200,4 +211,15 @@ mean_quotient_lmer <- lmer(
 )
 
 summary(mean_quotient_lmer)
+```
+
+```{r mean-degg-lmer}
+mean_degg_lmer <- lmer(
+    mean_degg ~
+        phonation +
+        (1 + phonation|speaker),
+    data = mean_degg_tracing
+)
+
+summary(mean_degg_lmer)
 ```
