@@ -3,6 +3,10 @@ title: "Tracegram pilot"
 author: "Stefano Coretta"
 date: "22 December 2017"
 output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    theme: readable
   pdf_document: 
     fig_caption: yes
     latex_engine: xelatex
