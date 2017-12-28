@@ -41,6 +41,10 @@ quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy")),
            closed_quotient = degg_minimum - degg_maximum
            )
+
+quotient_mean <- quotient %>%
+    group_by(speaker, phonation, token) %>%
+    summarise(mean_quotient = mean(closed_quotient))
 ```
 
 # dEGG maxima and minima
@@ -142,4 +146,15 @@ ggplot(aes(time, closed_quotient, colour = phonation)) +
     geom_point(alpha = 0.2) +
     geom_smooth(method = "lm") +
     facet_grid(. ~ speaker)
+```
+
+```{r mean-quotient-lmer}
+mean_quotient_lmer <- lmer(
+    mean_quotient ~
+        phonation +
+        (1 + phonation|speaker),
+    data = quotient_mean
+)
+
+summary(mean_quotient_lmer)
 ```
