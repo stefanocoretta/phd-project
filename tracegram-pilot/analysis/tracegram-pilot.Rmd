@@ -16,7 +16,6 @@ library(tidyverse)
 theme_set(theme_bw())
 library(lmerTest)
 library(effects)
-library(afex)
 ```
 
 # Data import
@@ -125,16 +124,6 @@ quotient_lmer_null <- lmer(
 )
 
 anova(quotient_lmer_null, quotient_lmer)
-```
-
-
-```{r quotient-afex, eval = FALSE}
-mixed(
-    closed_quotient ~
-        phonation +
-        (1 + phonation|speaker),
-    data = quotient
-)
 ```
 
 ```{r quotient-lmer-effects}
