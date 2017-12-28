@@ -31,13 +31,9 @@ degg_tracing_norm <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
+    gather(peak, value, degg_maximum:degg_minimum) %>%
     group_by(speaker) %>%
-    mutate(maximum_norm = scale(degg_maximum),
-           minimum_norm = scale(degg_minimum)) %>%
-    gather(peak, value_norm, maximum_norm:minimum_norm)
-
-value_norm <- degg_tracing_norm$value_norm
-degg_tracing <- cbind(degg_tracing, value_norm)
+    mutate(value_norm = scale(value))
 
 quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
@@ -83,12 +79,12 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
 ```
 
 ```{r norm-tracegram-plot}
-ggplot(degg_tracing, aes(time, value_norm, colour = phonation)) +
+ggplot(degg_tracing_norm, aes(time, value_norm, colour = peak)) +
     geom_point(size = 0.5, alpha = 0.1) +
     geom_smooth(size = 0.5, method = "lm") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
-    facet_grid(. ~ peak)
+    facet_grid(. ~ phonation)
 ```
 
 # Closed quotient
