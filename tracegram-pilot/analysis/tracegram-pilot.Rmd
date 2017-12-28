@@ -103,10 +103,15 @@ ggplot(quotient, aes(closed_quotient, colour = phonation)) +
     facet_wrap(~ speaker)
 ```
 
-```{r cq-boxplot}
+```{r speaker-cq-boxplot}
 ggplot(quotient, aes(phonation, closed_quotient)) +
     geom_boxplot() +
     facet_wrap(~ speaker)
+```
+
+```{r cq-boxplot}
+ggplot(quotient, aes(phonation, closed_quotient)) +
+    geom_boxplot()
 ```
 
 ```{r quotient-lmer}
