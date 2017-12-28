@@ -30,14 +30,17 @@ degg_tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
     gather(peak, value, degg_maximum:degg_minimum)
-
-degg_tracing_norm <- read_csv("./tracegram-pilot/results/results.csv") %>%
+    group_by(speaker) %>%
+    mutate(value_norm = scale(value)) %>%
+    ungroup()
+    
+mean_degg_tracing <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(phonation = factor(phonation, levels = c("modal", "breathy"))) %>%
-    gather(peak, value, degg_maximum:degg_minimum) %>%
-    group_by(speaker) %>%
-    mutate(value_norm = scale(value))
+    mutate(
+        phonation = factor(phonation, levels = c("modal", "breathy")),
+        mean_degg = (degg_maximum + degg_minimum) / 2
+    )
 
 quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
@@ -87,7 +90,7 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
 ```
 
 ```{r norm-tracegram-plot}
-ggplot(degg_tracing_norm, aes(time, value_norm, colour = peak)) +
+ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
     geom_point(size = 0.5, alpha = 0.1) +
     geom_smooth(size = 0.5, method = "lm") +
     xlab("relative time (proportion of vowel duration)") +
