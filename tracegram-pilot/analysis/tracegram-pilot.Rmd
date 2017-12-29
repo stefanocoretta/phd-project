@@ -89,15 +89,7 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
     ylim(0, 1)
 ```
 
-```{r speaker-mean-tracegram-plot}
-ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
-    geom_point(size = 0.5, alpha = 0.1) +
-    geom_smooth(size = 0.5, method = "lm") +
-    xlab("relative time (proportion of vowel duration)") +
-    ylab("proportion of glottal period") +
-    facet_wrap(~ speaker) +
-    ylim(0, 1)
-```
+
 
 ```{r tracegram-plot}
 ggplot(degg_tracing, aes(time, value, colour = peak)) +
@@ -108,14 +100,7 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
     facet_grid(. ~ phonation)
 ```
 
-```{r mean-tracegram-plot}
-ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
-    geom_point(size = 0.5, alpha = 0.1) +
-    geom_smooth(size = 0.5, method = "lm") +
-    xlab("relative time (proportion of vowel duration)") +
-    ylab("proportion of glottal period") +
-    ylim(0, 1)
-```
+
 
 ```{r norm-tracegram-plot}
 ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
@@ -124,6 +109,27 @@ ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     facet_grid(. ~ phonation)
+```
+
+# Mean dEGG
+
+```{r speaker-mean-tracegram-plot}
+ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
+    geom_point(size = 0.5, alpha = 0.1) +
+    geom_smooth(size = 0.5, method = "lm") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    facet_wrap(~ speaker) +
+    ylim(0, 1)
+```
+
+```{r mean-tracegram-plot}
+ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
+    geom_point(size = 0.5, alpha = 0.1) +
+    geom_smooth(size = 0.5, method = "lm") +
+    xlab("relative time (proportion of vowel duration)") +
+    ylab("proportion of glottal period") +
+    ylim(0, 1)
 ```
 
 ```{r norm-mean-tracegram-plot}
@@ -140,7 +146,6 @@ mean_degg_tracing %>%
     ggplot(aes(phonation, mean_degg)) +
     geom_boxplot()
 ```
-
 
 # Closed quotient
 
@@ -160,6 +165,22 @@ ggplot(quotient, aes(phonation, closed_quotient)) +
 ggplot(quotient, aes(phonation, closed_quotient)) +
     geom_boxplot()
 ```
+
+```{r cq-plot}
+ggplot(quotient, aes(time, closed_quotient, colour = speaker)) +
+    geom_point(alpha = 0.2) +
+    facet_grid(phonation ~ .)
+```
+
+```{r cq-plot-2}
+filter(quotient, token == 1) %>%
+ggplot(aes(time, closed_quotient, colour = phonation)) +
+    geom_point(alpha = 0.2) +
+    geom_smooth(method = "lm") +
+    facet_grid(. ~ speaker)
+```
+
+# Comparison
 
 ```{r quotient-lmer}
 quotient_lmer <- lmer(
@@ -188,20 +209,6 @@ plot(allEffects(quotient_lmer))
 
 ```{r quotient-lmer-random-coefficients}
 coefficients(quotient_lmer)$speaker
-```
-
-```{r cq-plot}
-ggplot(quotient, aes(time, closed_quotient, colour = speaker)) +
-    geom_point(alpha = 0.2) +
-    facet_grid(phonation ~ .)
-```
-
-```{r cq-plot-2}
-filter(quotient, token == 1) %>%
-ggplot(aes(time, closed_quotient, colour = phonation)) +
-    geom_point(alpha = 0.2) +
-    geom_smooth(method = "lm") +
-    facet_grid(. ~ speaker)
 ```
 
 ```{r mean-quotient-lmer}
