@@ -31,7 +31,9 @@ degg <- list.files(path = "./voicing-effect/results/egg",
             c2phonation,
             levels = c("voiceless", "voiced")
         ),
-        closed_quotient = minimum - maximum
+        closed_quotient = minimum - maximum,
+        quotient_centre = (minimum + maximum) / 2,
+        weighted_quotient_centre = (minimum + maximum) / 2 * sqrt((minimum - (minimum + maximum) / 2) ^ 2 + (maximum - (minimum + maximum) / 2) ^ 2)
     ) %>%
     filter(minimum > 0, minimum < 1)
 ```
@@ -141,4 +143,20 @@ degg %>%
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(alpha = 0.5) +
         cq_layers
+```
+
+## Closed Quotient Centre
+
+```{r}
+degg %>%
+    ggplot(aes(proportion, quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_wrap(~ speaker, nrow = 2)
+```
+
+```{r}
+degg %>%
+    ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_wrap(~ speaker, nrow = 2)
 ```
