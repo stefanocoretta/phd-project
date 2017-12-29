@@ -66,13 +66,15 @@ mean_degg_tracing_mean <- mean_degg_tracing %>%
 ```{r degg-boxplot}
 ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
     geom_boxplot() +
-    facet_grid(. ~ speaker)
+    facet_wrap(~ speaker) +
+    ylim(0, 1)
 ```
 
 ```{r degg-violin}
 ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
     geom_violin() +
-    facet_grid(. ~ speaker)
+    facet_wrap(~ speaker) +
+    ylim(0, 1)
 ```
 
 # Tracegram plot
