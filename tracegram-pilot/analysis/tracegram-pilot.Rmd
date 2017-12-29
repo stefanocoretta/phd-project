@@ -231,4 +231,12 @@ mean_degg_lmer <- lmer(
 )
 
 summary(mean_degg_lmer)
+
+mean_degg_lmer_null <- lmer(
+    mean_degg ~
+        (1 + phonation|speaker),
+    data = mean_degg_tracing
+)
+
+anova(mean_degg_lmer_null, mean_degg_lmer)
 ```
