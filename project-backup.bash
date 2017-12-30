@@ -17,69 +17,69 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 ### Test
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/voicing-effect/data/ \
-    /Volumes/Multimedia/phd-project/voicing-effect/data
+    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/tracegram-prepilot/data/ \
-    /Volumes/Multimedia/phd-project/tracegram-prepilot/data
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-prepilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data/ \
-    /Volumes/Multimedia/phd-project/tracegram-pilot/data
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/lombard/data/ \
-    /Volumes/Multimedia/phd-project/lombard/data
+    /Volumes/Multimedia/ling-data-backup/phd-project/lombard/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/perceptual-pilot/data/ \
-    /Volumes/Multimedia/phd-project/perceptual-pilot/data
+    /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data
 
 ### Run
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/voicing-effect/data/ \
-    /Volumes/Multimedia/phd-project/voicing-effect/data/
+    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/tracegram-prepilot/data/ \
-    /Volumes/Multimedia/phd-project/tracegram-prepilot/data/
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-prepilot/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data/ \
-    /Volumes/Multimedia/phd-project/tracegram-pilot/data/
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-pilot/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/lombard/data/ \
-    /Volumes/Multimedia/phd-project/lombard/data/
+    /Volumes/Multimedia/ling-data-backup/phd-project/lombard/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/Documents/GitHub/phd-project/perceptual-pilot/data/ \
-    /Volumes/Multimedia/phd-project/perceptual-pilot/data
+    /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data
 
 ## Pull data folder from external HD
 
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/voicing-effect/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
     ~/Documents/GitHub/phd-project/voicing-effect/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/tracegram-prepilot/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-prepilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-prepilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-pilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/lombard/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/lombard/data/ \
     ~/Documents/GitHub/phd-project/lombard/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/perceptual-pilot/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data/ \
     ~/Documents/GitHub/phd-project/perceptual-pilot/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/voicing-effect/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
     ~/Documents/GitHub/phd-project/voicing-effect/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/tracegram-prepilot/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-prepilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-prepilot/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/tracegram-pilot/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/tracegram-pilot/data/ \
     ~/Documents/GitHub/phd-project/tracegram-pilot/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/lombard/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/lombard/data/ \
     ~/Documents/GitHub/phd-project/lombard/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/phd-project/perceptual-pilot/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data/ \
     ~/Documents/GitHub/phd-project/perceptual-pilot/data
 
 # DANGER
