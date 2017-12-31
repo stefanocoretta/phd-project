@@ -33,7 +33,7 @@ degg <- list.files(path = "./voicing-effect/results/egg",
         ),
         closed_quotient = minimum - maximum,
         quotient_centre = (minimum + maximum) / 2,
-        weighted_quotient_centre = (minimum + maximum) / 2 * sqrt((minimum - (minimum + maximum) / 2) ^ 2 + (maximum - (minimum + maximum) / 2) ^ 2)
+        weighted_quotient_centre = ((minimum + maximum) / 2 ) * (minimum)
     ) %>%
     filter(minimum > 0, minimum < 1)
 ```
@@ -154,9 +154,25 @@ degg %>%
     facet_wrap(~ speaker, nrow = 2)
 ```
 
+```{r cq-centre-language}
+degg %>%
+    ggplot(aes(proportion, quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_grid(~ language) +
+    ylim(0, 1)
+```
+
 ```{r}
 degg %>%
     ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
     geom_smooth() +
     facet_wrap(~ speaker, nrow = 2)
+```
+
+```{r}
+degg %>%
+    ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_grid(~ language) +
+    ylim(0, 1)
 ```
