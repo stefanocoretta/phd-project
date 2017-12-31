@@ -147,7 +147,7 @@ degg %>%
 
 ## Closed Quotient Centre
 
-```{r}
+```{r cq-centre-speaker}
 degg %>%
     ggplot(aes(proportion, quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
     geom_smooth() +
@@ -162,14 +162,14 @@ degg %>%
     ylim(0, 1)
 ```
 
-```{r}
+```{r weighted-cq-centre-speaker}
 degg %>%
     ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
     geom_smooth() +
     facet_wrap(~ speaker, nrow = 2)
 ```
 
-```{r}
+```{r weighted-cq-centre-language}
 degg %>%
     ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
     geom_smooth() +
