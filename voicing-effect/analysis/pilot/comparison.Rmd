@@ -164,11 +164,11 @@ splines.it %>%
 coord <- splines.it %>%
     filter(rec.date %in% c("29/11/2016 15:10:47", "29/11/2016 15:10:57"))
 
-x_1 <- c(coord$X[coord$fan.line == 1][1], coord$X[coord$fan.line == 1][2])
-y_1 <- c(coord$Y[coord$fan.line == 1][1], coord$Y[coord$fan.line == 1][2])
+x_1 <- c(coord$X[coord$fan_line == 1][1], coord$X[coord$fan_line == 1][2])
+y_1 <- c(coord$Y[coord$fan_line == 1][1], coord$Y[coord$fan_line == 1][2])
 
-x_2 <- c(coord$X[coord$fan.line == 2][1], coord$X[coord$fan.line == 2][2])
-y_2 <- c(coord$Y[coord$fan.line == 2][1], coord$Y[coord$fan.line == 2][2])
+x_2 <- c(coord$X[coord$fan_line == 2][1], coord$X[coord$fan_line == 2][2])
+y_2 <- c(coord$Y[coord$fan_line == 2][1], coord$Y[coord$fan_line == 2][2])
 
 x <- ((x_1[1]*y_1[2] - y_1[1]*x_1[2]) * (x_2[1] - x_2[2]) - (x_1[1] - x_1[2]) * (x_2[1] * y_2[2] - y_2[1] * x_2[2])) / ((x_1[1] - x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] - x_2[2]))
 
