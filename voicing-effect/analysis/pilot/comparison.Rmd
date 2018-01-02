@@ -164,16 +164,29 @@ splines.it %>%
 coord <- splines.it %>%
     filter(rec.date %in% c("29/11/2016 15:10:47", "29/11/2016 15:10:57"))
 
-x_1 <- c(coord$X[coord$fan_line == 1][1], coord$X[coord$fan_line == 1][2])
-y_1 <- c(coord$Y[coord$fan_line == 1][1], coord$Y[coord$fan_line == 1][2])
+x_1 <- c(coord$X[coord$fan_line == 20][1], coord$X[coord$fan_line == 20][2])
+y_1 <- c(coord$Y[coord$fan_line == 20][1], coord$Y[coord$fan_line == 20][2])
 
-x_2 <- c(coord$X[coord$fan_line == 2][1], coord$X[coord$fan_line == 2][2])
-y_2 <- c(coord$Y[coord$fan_line == 2][1], coord$Y[coord$fan_line == 2][2])
+x_2 <- c(coord$X[coord$fan_line == 21][1], coord$X[coord$fan_line == 21][2])
+y_2 <- c(coord$Y[coord$fan_line == 21][1], coord$Y[coord$fan_line == 21][2])
 
 x <- ((x_1[1]*y_1[2] - y_1[1]*x_1[2]) * (x_2[1] - x_2[2]) - (x_1[1] - x_1[2]) * (x_2[1] * y_2[2] - y_2[1] * x_2[2])) / ((x_1[1] - x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] - x_2[2]))
 
 y <- ((x_1[1]*y_1[2] - y_1[1]*x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] * y_2[2] - y_2[1] * x_2[2])) / ((x_1[1] - x_1[2]) * (y_2[1] - y_2[2]) - (y_1[1] - y_1[2]) * (x_2[1] - x_2[2]))
 ```
+
+Using equations leads to more consistent results.
+
+```{r get-origin-eq}
+for (i in 1:10) {
+    m1 <- lm(Y ~ X, data = filter(coord, fan_line == i))
+    m2 <- lm(Y ~ X, data = filter(coord, fan_line == i + 20))
+
+    cm <- rbind(coef(m1),coef(m2)) # Coefficient matrix
+    print(c(-solve(cbind(cm[,2],-1)) %*% cm[,1]))
+}
+```
+
 
 ```{r}
 splines.it %>%
