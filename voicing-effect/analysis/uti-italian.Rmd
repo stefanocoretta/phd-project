@@ -464,3 +464,41 @@ plot_smooths(
     series_length = 100
 )
 ```
+
+```{r clos-it-gamm}
+it01 <- filter(clos.it, speaker == "it01") %>%
+    mutate(
+        vowphon.ord = ordered(interaction(vowel.ord, c2phonation.ord)),
+        placephon.ord = ordered(interaction(c2place.ord, c2phonation.ord))
+    )
+
+closure_gam_it01_2 <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        vowphon.ord +
+        placephon.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr") +
+        s(X, by = vowphon.ord, bs = "cr") +
+        s(X, by = placephon.ord, bs = "cr"),
+    data = it01,
+    method = "fREML"
+)
+
+summary(closure_gam_it01_2)
+```
+
+```{r}
+plot_smooths(
+    closure_gam_it01_2,
+    X,
+    c2phonation.ord,
+    c2place.ord + vowel.ord,
+    series_length = 100
+) + theme(legend.position = "top")
+```
+
