@@ -11,13 +11,12 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 library(stringr)
 library(cowplot)
-theme_set(theme_bw())
+theme_set(theme_minimal())
 library(rticulate)
-library(gamm4)
 library(itsadug)
 library(tidymv)
 ```
@@ -53,7 +52,9 @@ splines.it <- list.files(
     filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
+    filter(vowel != "u") %>%
     droplevels()
+    
 
 splines.clos.it <- list.files(
     path = "./voicing-effect/results/ultrasound",
@@ -65,7 +66,9 @@ splines.clos.it <- list.files(
     left_join(y = languages) %>%
     filter(language == "italian") %>%
     left_join(y = words) %>%
-    mutate_if(is.character, as.factor)
+    mutate_if(is.character, as.factor) %>%
+    filter(vowel != "u") %>%
+    droplevels()
 ```
 
 # Data exploration
@@ -173,8 +176,8 @@ contrasts(splines.it$vowel.ord) <- "contr.treatment"
 max.it <- splines.it %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
     na.omit() %>%
-    arrange(rec.date, desc(fan.line)) %>%
-    create_event_start(event.col = "rec.date")
+    arrange(rec.date, desc(fan_line)) %>%
+    create_event_start(event_col = "rec.date")
 
 splines.clos.it <- splines.clos.it %>%
     mutate(
@@ -189,8 +192,8 @@ contrasts(splines.clos.it$vowel.ord) <- "contr.treatment"
 
 clos.it <- splines.clos.it %>%
     na.omit() %>%
-    arrange(rec.date, fan.line) %>%
-    create_event_start(event.col = "rec.date")
+    arrange(rec.date, fan_line) %>%
+    create_event_start(event_col = "rec.date")
 ```
 
 ## Tongue contour at maximum displacement
@@ -200,13 +203,13 @@ max.it.gamm <- bam(
     Y ~
         c2phonation.ord +
         c2place.ord +
-#        vowel.ord +
-        s(fan.line, bs = "cr") +
-        s(fan.line, by = c2phonation.ord, bs = "cr") +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
 #        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
-        s(fan.line, speaker, bs="fs", xt="cr", m=1, k=4) +
-        s(fan.line, by = c2place.ord, bs = "cr"),
-#        s(X, by = vowel.ord, bs = "cr"),
+        s(X, speaker, bs="fs", xt="cr", m=1, k=4) +
+        s(X, by = c2place.ord, bs = "cr"),
+        s(X, by = vowel.ord, bs = "cr"),
     data = filter(max.it, vowel == "u"),
     method = "fREML"
 )
@@ -322,7 +325,7 @@ clos.it.gamm <- bam(
         vowel.ord +
         s(X, bs = "cr") +
         s(X, by = c2phonation.ord, bs = "cr") +
-        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
+#        s(X, rec.date, bs="fs", xt="cr", m=1, k=5) +
         s(X, speaker, bs="fs", xt="cr", m=1, k=5) +
         s(X, by = c2place.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr"),
@@ -424,5 +427,40 @@ plot_diff(
         c2place.ord = "coronal",
         speaker = "it01"
         )
+)
+```
+
+```{r}
+plot_smooths(
+    clos.it.gamm,
+    X,
+    c2phonation.ord,
+    vowel.ord + c2place.ord,
+    series_length = 100
+)
+```
+
+```{r clos-it-gamm}
+closure_gam_it01 <- bam(
+    Y ~
+        c2phonation.ord +
+        c2place.ord +
+        vowel.ord +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2place.ord, bs = "cr") +
+        s(X, by = vowel.ord, bs = "cr"),
+    data = filter(clos.it, speaker == "it01"),
+    method = "fREML"
+)
+```
+
+```{r}
+plot_smooths(
+    closure_gam_it01,
+    X,
+    c2phonation.ord,
+    vowel.ord + c2place.ord,
+    series_length = 100
 )
 ```

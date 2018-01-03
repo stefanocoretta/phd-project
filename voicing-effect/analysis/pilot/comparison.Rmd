@@ -185,6 +185,9 @@ for (i in 1:10) {
     cm <- rbind(coef(m1),coef(m2)) # Coefficient matrix
     print(c(-solve(cbind(cm[,2],-1)) %*% cm[,1]))
 }
+
+x <- c(-solve(cbind(cm[,2],-1)) %*% cm[,1])[1]
+y <- c(-solve(cbind(cm[,2],-1)) %*% cm[,1])[2]
 ```
 
 
@@ -199,7 +202,7 @@ splines.it %>%
 ```{r}
 splines.it %>%
     filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
-    ggplot(aes(fan.line, Y)) +
+    ggplot(aes(fan_line, Y)) +
     geom_point(aes(colour = c2phonation)) +
     geom_smooth(aes(colour = c2phonation))
 ```
@@ -225,7 +228,7 @@ polar_data %>%
 polar_data %>%
     mutate(
         X = x - radius * cos(theta),
-        Y = radius * sin(theta) - y
+        Y = -radius * sin(theta) - y
     ) %>%
     filter(label == "max_TT", vowel == "a") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
