@@ -621,6 +621,25 @@ plot_smooths(
 ```
 
 ```{r}
+it01_gam_all_r_null <- bam(
+    radius ~
+#        c2phonation +
+        c2place +
+        vowel +
+        s(theta, bs = "cr") +
+#        s(theta, by = c2phonation,  bs = "cr") +
+        s(theta, by = c2place,  bs = "cr") +
+        s(theta, by = vowel,  bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+    data = it01_all_r,
+    method = "ML"
+)
+
+compareML(it01_gam_all_r_null, it01_gam_all_r)
+```
+
+
+```{r}
 it01_gam_all_r_pred <- get_gam_predictions(
     it01_gam_all_r,
     theta,
