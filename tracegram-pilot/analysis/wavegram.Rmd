@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(itsadug)
-options(contrasts = rep ("contr.treatment", 2))
+options(contrasts = rep("contr.treatment", 2))
 ```
 
 # Data import
@@ -18,46 +18,49 @@ options(contrasts = rep ("contr.treatment", 2))
 wavegram <- read_csv("../results/wavegram.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate(
-        phonation.ord = ordered(phonation, levels = c("modal", "breathy"))
-    )
+        phonation = ordered(phonation, levels = c("modal", "breathy")),
+        speaker_phon = ordered(interaction(speaker, phonation))
+    ) %>%
+    mutate_if(is.character, as.factor)
 ```
 
 # Analysis
 
-```{r}
-dm.gam <- bam(
+```{r s01-gam}
+s01_gam <- bam(
     amplitude ~
+        phonation +
         s(sequence) + s(sample) +
-        s(sequence, by = phonation.ord) + s(sample, by = phonation.ord) +
+        s(sequence, by = phonation) + s(sample, by = phonation) +
         ti(sequence, sample) +
-        ti(sequence, sample, by = phonation.ord),
-    data = filter(wavegram, speaker == "dm")
+        ti(sequence, sample, by = phonation),
+    data = filter(wavegram, speaker == "01")
 )
 
-summary(dm.gam)
+summary(s01_gam)
 ```
 
-```{r}
+```{r s01-gam-diff}
 plot_diff2(
-    dm.gam,
+    s01_gam,
     view = c("sequence", "sample"), 
-    comp = list(phonation.ord = c("modal", "breathy")),
+    comp = list(phonation = c("modal", "breathy")),
     zlim = c(-1, 1)
 )
 ```
 
-```{r}
+```{r s01-gam-plot}
 fvisgam(
-    dm.gam,
+    s01_gam,
     view = c("sequence","sample"),
-    cond = list(phonation.ord = "modal"),
+    cond = list(phonation = "modal"),
     zlim = c(0, 1)
 )
 
 fvisgam(
-    dm.gam,
+    s01_gam,
     view = c("sequence","sample"),
-    cond = list(phonation.ord = "breathy"),
+    cond = list(phonation = "breathy"),
     zlim = c(0, 1)
 )
 ```
@@ -193,17 +196,17 @@ plot_diff2(
 )
 ```
 
-```{r}
+```{r all-gam}
 phonation_gam <- bam(
     amplitude ~
-        phonation.ord +
+        phonation +
         s(sequence, k = 6) +
         s(sample) +
-        s(sequence, by = phonation.ord, k = 6) +
-        s(sample, by = phonation.ord) +
+        s(sequence, by = phonation, k = 6) +
+        s(sample, by = phonation) +
         ti(sequence, sample) +
-        ti(sequence, sample, by = phonation.ord) +
-        s(sequence, speaker, bs = "fs", m = 1),
+        ti(sequence, sample, by = phonation) +
+        s(sequence, speaker_phon, bs = "fs", m = 1),
     data = wavegram,
     method = "ML"
 )
@@ -212,15 +215,44 @@ summary(phonation_gam)
 
 phonation_gam_null <- bam(
     amplitude ~
-#        phonation.ord +
+#        phonation +
         s(sequence, k = 6) +
         s(sample) +
-#        s(sequence, by = phonation.ord, k = 8) + s(sample, by = phonation.ord) +
-        ti(sequence, sample),# +
-#        ti(sequence, sample, by = phonation.ord),
+#        s(sequence, by = phonation, k = 8) + s(sample, by = phonation) +
+        ti(sequence, sample) +
+#        ti(sequence, sample, by = phonation)+
+        s(sequence, speaker_phon, bs = "fs", m = 1),
     data = wavegram,
     method = "ML"
 )
 
 compareML(phonation_gam_null, phonation_gam)
+```
+
+```{r all-gam-diff}
+plot_diff2(
+    phonation_gam,
+    view = c("sequence", "sample"), 
+    comp = list(phonation = c("modal", "breathy")),
+    zlim = c(-1, 1),
+    rm.ranef = TRUE
+)
+```
+
+```{r all-gam-plot}
+fvisgam(
+    phonation_gam,
+    view = c("sequence","sample"),
+    cond = list(phonation = "modal"),
+    zlim = c(0, 1),
+    rm.ranef = TRUE
+)
+
+fvisgam(
+    phonation_gam,
+    view = c("sequence","sample"),
+    cond = list(phonation = "breathy"),
+    zlim = c(0, 1),
+    rm.ranef = TRUE
+)
 ```
