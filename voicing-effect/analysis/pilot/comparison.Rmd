@@ -444,3 +444,198 @@ plot_smooths(
 )
 ```
 
+# Polar GAM of a coronal using Mielke's origing
+
+Mielke's origin is: -1.11658857142857, -43.447776
+
+```{r it01-polar-mielke}
+polar_m <- splines.it %>%
+    filter(
+        speaker == "it01",
+        label == "max_TT",
+        vowel == "a"
+    ) %>%
+    transform_coord(origin = c(-0.800933928571429, -43.434646))
+```
+
+```{r plot-it01-polar-mielke}
+ggplot(polar_m, aes(theta, radius, colour = c2phonation)) +
+    geom_point(alpha = 0.5)
+```
+
+
+```{r prepare-gam-data-mielke}
+it01_m <- polar_m %>%
+    mutate(
+        vowel = ordered(vowel, levels = c("a", "o", "u")),
+        c2place = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+    ) %>%
+    arrange(rec.date, fan_line) %>%
+    create_event_start("rec.date") %>%
+    droplevels()
+```
+
+```{r it01-gam-mielke}
+it01_gam_m <- bam(
+    radius ~
+        c2phonation +
+#        c2place +
+#        vowel +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation,  bs = "cr") +
+#        s(theta, by = c2place,  bs = "cr") +
+#        s(theta, by = vowel,  bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+    data = it01_m,
+    method = "ML"
+)
+
+summary(it01_gam_m)
+```
+
+```{r}
+plot_smooths(
+    it01_gam_m,
+    theta,
+    c2phonation
+)
+```
+
+# Polar GAM of a coronal using real origin
+
+```{r it01-polar-real}
+polar_r <- splines.it %>%
+    filter(
+        speaker == "it01",
+        label == "max_TT",
+        vowel == "a"
+    ) %>%
+    transform_coord()
+```
+
+```{r plot-it01-polar-real}
+ggplot(polar_r, aes(theta, radius, colour = c2phonation)) +
+    geom_point(alpha = 0.5)
+```
+
+```{r prepare-gam-data-real}
+it01_r <- polar_r %>%
+    mutate(
+        vowel = ordered(vowel, levels = c("a", "o", "u")),
+        c2place = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+    ) %>%
+    arrange(rec.date, fan_line) %>%
+    create_event_start("rec.date") %>%
+    droplevels()
+```
+
+```{r it01-gam-real}
+it01_gam_r <- bam(
+    radius ~
+        c2phonation +
+#        c2place +
+#        vowel +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation,  bs = "cr") +
+#        s(theta, by = c2place,  bs = "cr") +
+#        s(theta, by = vowel,  bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+    data = it01_r,
+    method = "ML"
+)
+
+summary(it01_gam_r)
+```
+
+```{r plot-it01-gam-real}
+plot_smooths(
+    it01_gam_r,
+    theta,
+    c2phonation
+)
+```
+
+# Polar GAM of all with real origin
+
+```{r it01-polar-all-real}
+polar_all_r <- splines.it %>%
+    filter(
+        speaker == "it01",
+        label %in% c("max_TT", "max_TD")
+    ) %>%
+    transform_coord()
+```
+
+```{r plot-it01-polar-all-real}
+ggplot(polar_all_r, aes(theta, radius, colour = c2phonation)) +
+    geom_point(alpha = 0.5) +
+    geom_smooth() +
+    facet_grid(vowel ~ c2place)
+```
+
+```{r prepare-gam-data-real}
+it01_all_r <- polar_all_r %>%
+    mutate(
+        vowel = ordered(vowel, levels = c("a", "o", "u")),
+        c2place = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+    ) %>%
+    arrange(rec.date, fan_line) %>%
+    create_event_start("rec.date") %>%
+    droplevels()
+```
+
+```{r it01-gam-real}
+it01_gam_all_r <- bam(
+    radius ~
+        c2phonation +
+        c2place +
+        vowel +
+        s(theta, bs = "cr") +
+        s(theta, by = c2phonation,  bs = "cr") +
+        s(theta, by = c2place,  bs = "cr") +
+        s(theta, by = vowel,  bs = "cr") +
+        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+    data = it01_all_r,
+    method = "ML"
+)
+
+summary(it01_gam_all_r)
+```
+
+```{r plot-it01-gam-real}
+plot_smooths(
+    it01_gam_all_r,
+    theta,
+    c2phonation,
+    vowel + c2place
+)
+```
+
+```{r}
+it01_gam_all_r_pred <- get_gam_predictions(
+    it01_gam_all_r,
+    theta,
+    series_length = 100
+) %>%
+    transform_coord(
+        to = "cartesian",
+        origin = c(14.3901026453293, -65.2314764646618)
+    )
+```
+
+```{r}
+it01_gam_all_r_pred %>%
+    ggplot(aes(X, Y, colour = c2phonation)) +
+    geom_path() +
+    facet_grid(c2place ~ vowel)
+```
+
