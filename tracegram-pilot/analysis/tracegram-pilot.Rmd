@@ -70,6 +70,8 @@ ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
     ylim(0, 1)
 ```
 
+03 does not show much difference, although the two phonations sound different.
+
 ```{r degg-violin}
 ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
     geom_violin() +
@@ -89,7 +91,7 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
     ylim(0, 1)
 ```
 
-
+Here 03 shows a shift upwards, although it seems that the CQ is more or less the same.
 
 ```{r tracegram-plot}
 ggplot(degg_tracing, aes(time, value, colour = peak)) +
@@ -100,7 +102,7 @@ ggplot(degg_tracing, aes(time, value, colour = peak)) +
     facet_grid(. ~ phonation)
 ```
 
-
+On average, breathy voice has higher maximum and minimum, and they are close to each other (lower CQ = higher OQ = breathiness).
 
 ```{r norm-tracegram-plot}
 ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
@@ -110,6 +112,8 @@ ggplot(degg_tracing, aes(time, value_norm, colour = peak)) +
     ylab("proportion of glottal period") +
     facet_grid(. ~ phonation)
 ```
+
+Same as before, but the dEGG values have been normalised within speaker.
 
 # Mean dEGG
 
@@ -122,6 +126,8 @@ ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
     facet_wrap(~ speaker) +
     ylim(0, 1)
 ```
+
+Mean dEGG cannot accout for concomitant symmettric increase and decrise of minimum and maximum: the mean stays the same.
 
 ```{r mean-tracegram-plot}
 ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
@@ -155,11 +161,15 @@ ggplot(quotient, aes(closed_quotient, colour = phonation)) +
     facet_wrap(~ speaker)
 ```
 
+The CQ does not perform well.
+
 ```{r speaker-cq-boxplot}
 ggplot(quotient, aes(phonation, closed_quotient)) +
     geom_boxplot() +
     facet_wrap(~ speaker)
 ```
+
+In 03, the median is higher for breathy voice (should be lower).
 
 ```{r cq-boxplot}
 ggplot(quotient, aes(phonation, closed_quotient)) +
@@ -203,6 +213,8 @@ quotient_lmer_null <- lmer(
 anova(quotient_lmer_null, quotient_lmer)
 ```
 
+The CQ does not perform well in the lmer.
+
 ```{r quotient-lmer-effects}
 plot(allEffects(quotient_lmer))
 ```
@@ -240,3 +252,5 @@ mean_degg_lmer_null <- lmer(
 
 anova(mean_degg_lmer_null, mean_degg_lmer)
 ```
+
+The mean dEGG performs well here.
