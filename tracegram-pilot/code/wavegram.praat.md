@@ -85,14 +85,20 @@ In this loop, each interval corresponding to an uttered vowel is extracted, the 
 ```praat
 eggSmooth = Filter (pass Hann band): lower, upper, 100
 @smoothing: smoothWidth
+sampling_period = Get sampling period
+time_lag = (smoothWidth - 1) / 2 * sampling_period
+Shift times by: time_lag
 Rename: "egg_smooth"
-eggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 
 selectObject: eggSmooth
 deggSmooth = Copy: "degg_smooth"
 Formula: "self [col + 1] - self [col]"
 @smoothing: smoothWidth
-deggPointProcess = To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+sampling_period = Get sampling period
+time_lag = (smoothWidth - 1) / 2 * sampling_period
+Shift times by: time_lag
+deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 ```
 
 The raw EGG is filtered and smoothed using a triangular smooth, and from this the DEGG is calculated. Two PointProcess files are also created, which roughly mark each glottal period in the EGG and DEGG.
