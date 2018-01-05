@@ -655,6 +655,7 @@ it01_gam_all_r_pred <- get_gam_predictions(
 it01_gam_all_r_pred %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
     geom_path() +
-    facet_grid(c2place ~ vowel)
+    facet_grid(c2place ~ vowel) +
+    coord_fixed(ratio = 1)
 ```
 
