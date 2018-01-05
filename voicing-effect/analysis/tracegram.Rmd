@@ -33,7 +33,8 @@ degg <- list.files(path = "./voicing-effect/results/egg",
         ),
         closed_quotient = minimum - maximum,
         quotient_centre = (minimum + maximum) / 2,
-        weighted_quotient_centre = ((minimum + maximum) / 2 ) * (minimum)
+        weighted_quotient_centre = ((minimum + maximum) / 2 ) * (minimum),
+        peaks_ratio = maximum / minimum
     ) %>%
     filter(minimum > 0, minimum < 1)
 ```
@@ -176,3 +177,16 @@ degg %>%
     facet_grid(~ language) +
     ylim(0, 1)
 ```
+
+## Peaks ratio
+
+The peaks ratio is `dEGG_max / dEGG_min`.
+
+```{r peaks-ratio-speaker}
+degg %>%
+    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_wrap(~ speaker, nrow = 2)
+```
+
+Yes, this clearly works.
