@@ -24,6 +24,8 @@ fileList = Create Strings as file list: "fileList", data$
 numberOfFiles = Get number of strings
 ```
 
+The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems. 
+
 ## "main loop"
 ```praat
 for file to numberOfFiles

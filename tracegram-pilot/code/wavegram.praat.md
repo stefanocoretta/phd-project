@@ -27,6 +27,7 @@ numberOfFiles = Get number of strings
 ```
 
 The preamble defines a few settings for filtering and smoothing, and the results file.
+The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems. 
 
 ## "main loop"
 ```praat
@@ -39,8 +40,8 @@ for file from 1 to numberOfFiles
     sound2 = Extract one channel: 2
     # signal is inverted when recorded
     Multiply: -1
-    Filter (pass Hann band): lower, upper, 100
-    pointProcess = To PointProcess (periodic, peaks): 75, 600, "no", "yes"
+    Filter (pass Hann band): 100, 0, 100
+    pointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "no", "yes"
     textGrid = To TextGrid (vuv): 0.02, 0.001
     numberOfIntervals = Get number of intervals: 1
 

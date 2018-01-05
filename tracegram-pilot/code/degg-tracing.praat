@@ -17,7 +17,6 @@ for file to numberOfFiles
     sound = Read from file: "'data$'/'fileName$'"
     sound2 = Extract one channel: 2
     Multiply: -1
-    # Check the paramenters of the filter in the literature
     Filter (pass Hann band): 100, 0, 100
     pointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "no", "yes"
     textGrid = To TextGrid (vuv): 0.02, 0.001
@@ -39,7 +38,7 @@ for file to numberOfFiles
             selectObject: sound2
             selection = Extract part: selectionStart, selectionEnd, "rectangular",
                 ...1, "yes"
-    
+
             eggSmooth = Filter (pass Hann band): lower, upper, 100
             @smoothing: smoothWidth
             sampling_period = Get sampling period
@@ -47,7 +46,7 @@ for file to numberOfFiles
             Shift times by: time_lag
             Rename: "egg-smooth"
             eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
-            
+
             selectObject: eggSmooth
             deggSmooth = Copy: "degg-smooth"
             Formula: "self [col + 1] - self [col]"
@@ -56,11 +55,11 @@ for file to numberOfFiles
             time_lag = (smoothWidth - 1) / 2 * sampling_period
             Shift times by: time_lag
             deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
-    
+
             selectObject: eggPointProcess
             eggPoints = Get number of points
             meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
-            
+
             for point to eggPoints - 2
                 selectObject: eggPointProcess
                 point1 = Get time from index: point
@@ -70,31 +69,31 @@ for file to numberOfFiles
                 eggMinimum1 = Get time of minimum: point1, point2, "Sinc70"
                 eggMinimum2 = Get time of minimum: point2, point3, "Sinc70"
                 period = eggMinimum2 - eggMinimum1
-            
+
                 if period <= meanPeriod * 2
                     selectObject: deggPointProcess
                     deggMaximumPoint1 = Get nearest index: eggMinimum1
                     deggMaximum = Get time from index: deggMaximumPoint1
-            
+
                     if deggMaximum <= eggMinimum1
                         deggMaximum = Get time from index: deggMaximumPoint1 + 1
                     endif
-            
+
                     selectObject: deggSmooth
                     deggMinimum = Get time of minimum: deggMaximum, eggMinimum2, "Sinc70"
-            
+
                     deggMaximumRel = (deggMaximum - eggMinimum1) / period
                     deggMinimumRel = (deggMinimum - eggMinimum1) / period
-            
+
                     time = (eggMinimum1 - selectionStart) / (selectionEnd - selectionStart)
-            
+
                     resultLine$ = "'fileBareName$','token','time','eggMinimum1',
                         ...'deggMaximumRel','deggMinimumRel'"
-            
+
                     appendFileLine: resultsFile$, resultLine$
                 endif
             endfor
-    
+
             removeObject: selection
         endif
     endfor
