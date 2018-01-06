@@ -63,14 +63,14 @@ splines.pol.it <- list.files(
     filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(X = radius * sin(theta), Y = radius * cos(theta))
+    mutate(X = radius * sin(angle), Y = radius * cos(angle))
 ```
 
 ## Comparison
 
 ```{r group-coronal-it}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(theta, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2phonation)) +
     # geom_line(stat = "smooth", method = "loess") +
     geom_point(alpha = 0.5) +
     facet_grid(. ~ vowel) +
@@ -136,14 +136,14 @@ radial.plot(na.omit(splines.pol.it.u$X), na.omit(splines.pol.it.u$Y), rp.type="s
 
 ```{r}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(theta, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
     facet_grid(. ~ vowel)
 ```
 
 ```{r}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(theta, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2phonation)) +
     geom_smooth(method = "loess") +
     facet_grid(. ~ vowel)
 ```
@@ -214,14 +214,14 @@ polar_data <- splines.it %>%
     filter(speaker == "it01") %>%
     mutate(
         radius = sqrt((X - x) ^ 2 + (Y - y) ^ 2),
-        theta = pi + atan2(Y - y, X - x)
+        angle = pi + atan2(Y - y, X - x)
     )
 ```
 
 ```{r}
 polar_data %>%
     filter(label == "max_TT", vowel == "a") %>%
-    ggplot(aes(theta, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2phonation)) +
     geom_point() +
     geom_smooth(method = "loess")
 ```
@@ -229,8 +229,8 @@ polar_data %>%
 ```{r}
 polar_data %>%
     mutate(
-        X = x - radius * cos(theta),
-        Y = -radius * sin(theta) - y
+        X = x - radius * cos(angle),
+        Y = -radius * sin(angle) - y
     ) %>%
     filter(label == "max_TT", vowel == "a") %>%
     ggplot(aes(X, Y, colour = c2phonation)) +
@@ -248,7 +248,7 @@ polar <- splines.it %>%
 ```{r}
 polar %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
-    ggplot(aes(theta, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2phonation)) +
     geom_point() +
     facet_wrap(~ c2place + vowel)
 ```
@@ -256,7 +256,7 @@ polar %>%
 ```{r}
 polar %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
-    ggplot(aes(theta, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2phonation)) +
     geom_smooth() +
     facet_wrap(~ c2place + vowel)
 ```
@@ -299,7 +299,7 @@ it01 <- polar %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
     droplevels() %>%
-    filter(theta > 3.7, theta < 5.8)
+    filter(angle > 3.7, angle < 5.8)
 ```
 
 ```{r}
@@ -308,11 +308,11 @@ it01_gam <- bam(
         c2phonation +
         c2place +
         vowel +
-        s(theta, bs = "cr") +
-        s(theta, by = c2phonation,  bs = "cr") +
-        s(theta, by = c2place,  bs = "cr") +
-        s(theta, by = vowel,  bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+        s(angle, by = c2phonation,  bs = "cr") +
+        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = vowel,  bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = filter(it01, vowel != "u")
 )
 
@@ -322,7 +322,7 @@ summary(it01_gam)
 ```{r}
 plot_smooths(
     it01_gam,
-    theta,
+    angle,
     c2phonation,
     c2place + vowel
 )
@@ -334,11 +334,11 @@ it01_gam_null <- bam(
 #        c2phonation +
         c2place +
         vowel +
-        s(theta) +
-#        s(theta, by = c2phonation) +
-        s(theta, by = c2place) +
-        s(theta, by = vowel) +
-        s(theta, rec.date, bs = "fs", k = 5),
+        s(angle) +
+#        s(angle, by = c2phonation) +
+        s(angle, by = c2place) +
+        s(angle, by = vowel) +
+        s(angle, rec.date, bs = "fs", k = 5),
     data = filter(it01, vowel != "u")
 )
 
@@ -351,13 +351,13 @@ it01_gam_2 <- bam(
         c2phonation +
         c2place +
         vowel +
-        s(theta, bs = "cr") +
-        s(theta, by = c2phonation, bs = "cr") +
-        s(theta, by = c2place, bs = "cr") +
-        s(theta, by = vowel, bs = "cr") +
-        s(theta, by = vow_phon, bs = "cr") +
-        s(theta, by = place_phon, bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+        s(angle, by = c2phonation, bs = "cr") +
+        s(angle, by = c2place, bs = "cr") +
+        s(angle, by = vowel, bs = "cr") +
+        s(angle, by = vow_phon, bs = "cr") +
+        s(angle, by = place_phon, bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = filter(it01, vowel != "u")
 )
 
@@ -368,13 +368,13 @@ it01_gam_2_null <- bam(
 #        c2phonation +
         c2place +
         vowel +
-        s(theta, bs = "cr") +
-#        s(theta, by = c2phonation, bs = "cr") +
-        s(theta, by = c2place, bs = "cr") +
-        s(theta, by = vowel, bs = "cr") +
-        s(theta, by = vow_phon, bs = "cr") +
-        s(theta, by = place_phon, bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+#        s(angle, by = c2phonation, bs = "cr") +
+        s(angle, by = c2place, bs = "cr") +
+        s(angle, by = vowel, bs = "cr") +
+        s(angle, by = vow_phon, bs = "cr") +
+        s(angle, by = place_phon, bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = filter(it01, vowel != "u")
 )
 
@@ -384,14 +384,14 @@ compareML(it01_gam_2_null, it01_gam_2)
 ```{r}
 plot_smooths(
     it01_gam_2,
-    theta,
+    angle,
     c2phonation,
     c2place + vowel
 )
 ```
 
 ```{r}
-polar_pred <- get_gam_predictions(it01_gam_2, theta)
+polar_pred <- get_gam_predictions(it01_gam_2, angle)
 ```
 
 ```{r}
@@ -459,7 +459,7 @@ polar_m <- splines.it %>%
 ```
 
 ```{r plot-it01-polar-mielke}
-ggplot(polar_m, aes(theta, radius, colour = c2phonation)) +
+ggplot(polar_m, aes(angle, radius, colour = c2phonation)) +
     geom_point(alpha = 0.5)
 ```
 
@@ -484,11 +484,11 @@ it01_gam_m <- bam(
         c2phonation +
 #        c2place +
 #        vowel +
-        s(theta, bs = "cr") +
-        s(theta, by = c2phonation,  bs = "cr") +
-#        s(theta, by = c2place,  bs = "cr") +
-#        s(theta, by = vowel,  bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+        s(angle, by = c2phonation,  bs = "cr") +
+#        s(angle, by = c2place,  bs = "cr") +
+#        s(angle, by = vowel,  bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_m,
     method = "ML"
 )
@@ -499,7 +499,7 @@ summary(it01_gam_m)
 ```{r}
 plot_smooths(
     it01_gam_m,
-    theta,
+    angle,
     c2phonation
 )
 ```
@@ -517,7 +517,7 @@ polar_r <- splines.it %>%
 ```
 
 ```{r plot-it01-polar-real}
-ggplot(polar_r, aes(theta, radius, colour = c2phonation)) +
+ggplot(polar_r, aes(angle, radius, colour = c2phonation)) +
     geom_point(alpha = 0.5)
 ```
 
@@ -541,11 +541,11 @@ it01_gam_r <- bam(
         c2phonation +
 #        c2place +
 #        vowel +
-        s(theta, bs = "cr") +
-        s(theta, by = c2phonation,  bs = "cr") +
-#        s(theta, by = c2place,  bs = "cr") +
-#        s(theta, by = vowel,  bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+        s(angle, by = c2phonation,  bs = "cr") +
+#        s(angle, by = c2place,  bs = "cr") +
+#        s(angle, by = vowel,  bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_r,
     method = "ML"
 )
@@ -556,7 +556,7 @@ summary(it01_gam_r)
 ```{r plot-it01-gam-real}
 plot_smooths(
     it01_gam_r,
-    theta,
+    angle,
     c2phonation
 )
 ```
@@ -573,7 +573,7 @@ polar_all_r <- splines.it %>%
 ```
 
 ```{r plot-it01-polar-all-real}
-ggplot(polar_all_r, aes(theta, radius, colour = c2phonation)) +
+ggplot(polar_all_r, aes(angle, radius, colour = c2phonation)) +
     geom_point(alpha = 0.5) +
     geom_smooth() +
     facet_grid(vowel ~ c2place)
@@ -599,11 +599,11 @@ it01_gam_all_r <- bam(
         c2phonation +
         c2place +
         vowel +
-        s(theta, bs = "cr") +
-        s(theta, by = c2phonation,  bs = "cr") +
-        s(theta, by = c2place,  bs = "cr") +
-        s(theta, by = vowel,  bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+        s(angle, by = c2phonation,  bs = "cr") +
+        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = vowel,  bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_all_r,
     method = "ML"
 )
@@ -614,7 +614,7 @@ summary(it01_gam_all_r)
 ```{r plot-it01-gam-real}
 plot_smooths(
     it01_gam_all_r,
-    theta,
+    angle,
     c2phonation,
     vowel + c2place
 )
@@ -626,11 +626,11 @@ it01_gam_all_r_null <- bam(
 #        c2phonation +
         c2place +
         vowel +
-        s(theta, bs = "cr") +
-#        s(theta, by = c2phonation,  bs = "cr") +
-        s(theta, by = c2place,  bs = "cr") +
-        s(theta, by = vowel,  bs = "cr") +
-        s(theta, rec.date, bs = "fs", xt = "cr", k = 5),
+        s(angle, bs = "cr") +
+#        s(angle, by = c2phonation,  bs = "cr") +
+        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = vowel,  bs = "cr") +
+        s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_all_r,
     method = "ML"
 )
@@ -642,7 +642,7 @@ compareML(it01_gam_all_r_null, it01_gam_all_r)
 ```{r}
 it01_gam_all_r_pred <- get_gam_predictions(
     it01_gam_all_r,
-    theta,
+    angle,
     series_length = 100
 ) %>%
     transform_coord(
