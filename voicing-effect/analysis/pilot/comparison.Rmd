@@ -659,3 +659,10 @@ it01_gam_all_r_pred %>%
     coord_fixed(ratio = 1)
 ```
 
+```{r}
+it01_gam_all_r_pred %>%
+    ggplot(aes(angle, radius)) +
+    geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = c2phonation), alpha = 0.2) +
+    geom_path(aes(colour = c2phonation)) +
+    facet_grid(c2place ~ vowel)
+```
