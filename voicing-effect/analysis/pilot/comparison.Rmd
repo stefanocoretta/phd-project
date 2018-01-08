@@ -63,10 +63,101 @@ splines.pol.it <- list.files(
     filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
-    mutate(X = radius * sin(angle), Y = radius * cos(angle))
+    mutate(X = radius * sin(theta), Y = radius * cos(theta))
 ```
 
-## Comparison
+# Functions
+
+```{r polar-function}
+polar_gam <- function(formula, data, origin = NULL, fan_lines = c(10, 25), ...) {
+    polar_data <- data %>%
+        rticulate::transform_coord(., to = "polar", origin = origin, fan_lines = fan_lines, use_XY = TRUE)
+    
+    model <- mgcv::bam(formula = formula, data = polar_data, ...)
+    
+    return(model)
+}
+
+transform_ci <- function(predictions, origin = NULL) {
+    predictions <- predictions %>%
+        dplyr::mutate(
+            CI_upper_X = origin[1] - CI_upper * cos(X),
+            CI_upper_Y = -(CI_upper * sin(X) - origin[2]),
+            CI_lower_X = origin[1] - CI_lower * cos(X),
+            CI_lower_Y = -(CI_lower * sin(X) - origin[2]),
+            index = seq(1, n())
+        )
+    
+    predictions_upper <- predictions %>%
+        dplyr::select(-CI_lower_X, -CI_lower_Y) %>%
+        dplyr::rename(
+            CI_X = CI_upper_X,
+            CI_Y = CI_upper_Y
+        )
+    
+    predictions_lower <- predictions %>%
+        dplyr::select(-CI_upper_X, -CI_upper_Y) %>%
+        dplyr::arrange(desc(index)) %>%
+        dplyr::rename(
+            CI_X = CI_lower_X,
+            CI_Y = CI_lower_Y
+        )
+    
+    predictions <- rbind(predictions_upper, predictions_lower)
+    
+    return(predictions)
+}
+
+plot_polar_smooths <- function(model, time_series, comparison, origin = NULL, facet_terms = NULL, conditions = NULL, exclude_random = TRUE, series_length = 100) {
+    time_series_q <- dplyr::enquo(time_series)
+    comparison_q <- dplyr::enquo(comparison)
+    facet_terms_q <- dplyr::enquo(facet_terms)
+    if (facet_terms_q == dplyr::quo(NULL)) {
+        facet_terms_q <- NULL
+    }
+    outcome_q <- model$formula[[2]]
+
+    predicted_tbl <- get_gam_predictions(model, !!time_series_q, conditions, exclude_random = exclude_random, series_length = series_length)
+    
+    cartesian_predicted <- predicted_tbl %>%
+        transform_coord(
+            to = "cartesian",
+            origin = c(origin[1], origin[2]),
+            use_XY = TRUE
+        )
+    
+    cartesian_ci <- transform_ci(predicted_tbl, origin = c(origin[1], origin[2]))
+
+    smooths_plot <- cartesian_predicted %>%
+        ggplot2::ggplot(
+            ggplot2::aes_string(
+                dplyr::quo_name(time_series_q), dplyr::quo_name(outcome_q)
+            )
+        ) +
+        ggplot2::geom_polygon(
+            data = cartesian_ci,
+            ggplot2::aes_string(
+                x = "CI_X",
+                y = "CI_Y",
+                fill = dplyr::quo_name(comparison_q)
+            ),
+            alpha = 0.2
+        ) +
+        ggplot2::geom_path(
+            ggplot2::aes_string(
+                colour = dplyr::quo_name(comparison_q),
+                linetype = dplyr::quo_name(comparison_q)
+            )
+        ) +
+        {if (!is.null(facet_terms_q)) {
+            ggplot2::facet_wrap(facet_terms_q)
+        }}
+
+    return(smooths_plot)
+}
+```
+
+# Comparison
 
 ```{r group-coronal-it}
 filter(splines.pol.it, label == "max_TT") %>%
@@ -563,6 +654,7 @@ plot_smooths(
 
 # Polar GAM of all with real origin
 
+
 ```{r it01-polar-all-real}
 polar_all_r <- splines.it %>%
     filter(
@@ -639,7 +731,7 @@ compareML(it01_gam_all_r_null, it01_gam_all_r)
 ```
 
 
-```{r}
+```{r it01-get-gam-prediction}
 it01_gam_all_r_pred <- get_gam_predictions(
     it01_gam_all_r,
     angle,
@@ -666,3 +758,81 @@ it01_gam_all_r_pred %>%
     geom_path(aes(colour = c2phonation)) +
     facet_grid(c2place ~ vowel)
 ```
+
+# Convert polar CI to cartesian CI
+
+```{r}
+cartesian_ci <- transform_ci(it01_gam_all_r_pred, origin = c(14.3901026453293, -65.2314764646618))
+```
+
+```{r}
+cartesian_ci %>%
+    ggplot(aes(CI_X, CI_Y, fill = c2phonation)) +
+    geom_polygon(alpha = 0.2) +
+    geom_path(data = it01_gam_all_r_pred, aes(X, Y, colour = c2phonation)) +
+    facet_grid(c2place ~ vowel) +
+    coord_fixed(ratio = 1) +
+    xlab("") +
+    ylab("")
+```
+
+
+```{r}
+plot_polar_smooths(
+    it01_gam_all_r,
+    X,
+    c2phonation,
+    c(14.3901026453293, -65.2314764646618),
+    vowel,
+    exclude_random = FALSE
+)
+```
+
+# Test of polar functions
+
+```{r prepare}
+it01 <- splines.it %>%
+    filter(
+        speaker == "it01",
+        label %in% c("max_TT", "max_TD")
+    ) %>%
+    mutate(
+        vowel = ordered(vowel, levels = c("a", "o", "u")),
+        c2place = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+    ) %>%
+    arrange(rec.date, fan_line) %>%
+    create_event_start("rec.date") %>%
+    droplevels()
+```
+
+```{r it01-polar-gam}
+it01_polar_gam <- polar_gam(
+    Y ~
+        c2phonation +
+        c2place +
+        vowel +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation,  bs = "cr") +
+        s(X, by = c2place,  bs = "cr") +
+        s(X, by = vowel,  bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", k = 5),
+    data = it01,
+    method = "ML"
+)
+
+summary(it01_polar_gam)
+```
+
+```{r it01-polar-gam-plot}
+plot_polar_smooths(
+    it01_polar_gam,
+    X,
+    c2phonation,
+    facet_terms = c2place ~ vowel,
+    origin = c(14.3901026453293, -65.2314764646618)
+)
+```
+
