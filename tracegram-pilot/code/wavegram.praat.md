@@ -27,7 +27,7 @@ numberOfFiles = Get number of strings
 ```
 
 The preamble defines a few settings for filtering and smoothing, and the results file.
-The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems. 
+The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems.
 
 ## "main loop"
 ```praat
