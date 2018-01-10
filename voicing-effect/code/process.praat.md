@@ -1173,39 +1173,59 @@ This script extracts wavegram data from the EGG data.
 
 ### "preamble"
 ```praat
+form Wavegram
+    word speaker it01
+endform
+
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../results"
+results$ = "../results/wavegram"
+directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 createDirectory(results$)
-data$ = "../data"
-resultsHeader$ = "file,token,time,sequence,sample,amplitude"
-resultsFile$ = "'results$'/wavegram.csv"
+directory$ = "../data/derived/egg/'speaker$'"
+resultsHeader$ = "speaker,file,date,word,rel_time,time,sequence,sample,amplitude"
+resultsFile$ = "'results$'/'speaker$'-wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
-fileList = Create Strings as file list: "fileList", data$
+fileList = Create Strings as file list: "fileList", "'directory$'/*.wav"
 numberOfFiles = Get number of strings
 ```
 
 The preamble defines a few settings for filtering and smoothing, and the results file.
-The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems.
 
 ### "main loop"
 ```praat
 #### Files loop ####
-for file from 1 to numberOfFiles
+for file to numberOfFiles
     selectObject: fileList
-    fileName$ = Get string: file
-    fileBareName$ = fileName$ - ".wav"
-    sound = Read from file: "'data$'/'fileName$'"
-    sound2 = Extract one channel: 2
-    # signal is inverted when recorded
-    Multiply: -1
-    Filter (pass Hann band): 100, 0, 100
-    pointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "no", "yes"
-    textGrid = To TextGrid (vuv): 0.02, 0.001
-    numberOfIntervals = Get number of intervals: 1
+    file$ = Get string: file
+    filename$ = file$ - ".wav"
 
-    <<<vowel loop>>>
+    Read Strings from raw text file: "'directory_textgrid$'/'filename$'.txt"
+    prompt$ = Get string: 1
+    stimulus$ = extractWord$(prompt$, " ")
+    date$ = Get string: 2
+
+    Read separate channels from sound file: "'directory$'/'file$'"
+
+    Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
+    intervals = Get number of intervals: 3
+
+    if intervals > 1
+        start = Get starting point: 3, 2
+        end = Get end point: 3, 2
+
+        selectObject: "Sound 'filename$'_ch2"
+        ; Extract part: start, end, "rectangular", 1, "yes"
+        Rename: "egg"
+
+        <<<vowel loop>>>
+    endif
+
+    ; removeObject: "Sound egg", "Sound egg_smooth",
+    ;     ..."PointProcess egg_smooth",
+    ;     ..."Sound degg_smooth", "PointProcess degg_smooth", "Sound degg"
+
 endfor
 ```
 
@@ -1214,30 +1234,9 @@ The main loop goes through each file, extracts the relevat portions using a vuv 
 ### "vowel loop"
 ```praat
 #### Vowel loop ####
-token = 0
-for interval to numberOfIntervals
-    selectObject: textGrid
-    intervalLabel$ = Get label of interval: 1, interval
-    if intervalLabel$ == "V"
-        token += 1
-        start = Get start time of interval: 1, interval
-        end = Get end time of interval: 1, interval
-        vowelDuration = end - start
-        midPoint = start + (vowelDuration / 2)
-        # Warning: The following two lines are easily breakable
-        selectionStart = midPoint - 0.05
-        selectionEnd = midPoint + 0.05
-        selectObject: sound2
-        selection = Extract part: selectionStart, selectionEnd, "rectangular",
-            ...1, "yes"
+<<<degg-wave>>>
 
-        <<<degg-wave>>>
-
-        <<<period loop>>>
-
-        removeObject: selection
-    endif
-endfor
+<<<period loop>>>
 ```
 
 In this loop, each interval corresponding to an uttered vowel is extracted, the DEGG is calculated and the wavegram data is extracted from the DEGG.
@@ -1251,15 +1250,21 @@ time_lag = (smoothWidth - 1) / 2 * sampling_period
 Shift times by: time_lag
 Rename: "egg_smooth"
 eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+pp_end = Get end time
+Remove points between: 0, start
+Remove points between: end, pp_end
 
 selectObject: eggSmooth
 deggSmooth = Copy: "degg_smooth"
 Formula: "self [col + 1] - self [col]"
-@smoothing: smoothWidth
-sampling_period = Get sampling period
-time_lag = (smoothWidth - 1) / 2 * sampling_period
-Shift times by: time_lag
+; @smoothing: smoothWidth
+Remove noise: 0, 0.25, 0.025, 80, 10000, 40, "Spectral subtraction"
+; sampling_period = Get sampling period
+; time_lag = (smoothWidth - 1) / 2 * sampling_period
+; Shift times by: time_lag
 deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+Remove points between: 0, start
+Remove points between: end, pp_end
 ```
 
 The raw EGG is filtered and smoothed using a triangular smooth, and from this the DEGG is calculated. Two PointProcess files are also created, which roughly mark each glottal period in the EGG and DEGG.
@@ -1302,8 +1307,8 @@ if period <= meanPeriod * 2
     numberOfSamples = sampleEnd - sampleStart
     sample = sampleStart
 
-    timeNorm = (eggMinimum1 - selectionStart) /
-        ...(selectionEnd - selectionStart)
+    timeNorm = (eggMinimum1 - start) /
+        ...(end - start)
 
     while sample <= sampleEnd
         amplitude = Get value at sample number: 1, sample
@@ -1317,7 +1322,7 @@ if period <= meanPeriod * 2
         # At sample rate 44100 Hz, each period has around 400 samples
         sample = sample + 2
 
-        resultLine$ = "'fileBareName$','token','timeNorm','sequence','sampleNorm','amplitudeNorm'"
+        resultLine$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1','timeNorm','sequence','sampleNorm','amplitudeNorm'"
 
         appendFileLine: resultsFile$, resultLine$
     endwhile

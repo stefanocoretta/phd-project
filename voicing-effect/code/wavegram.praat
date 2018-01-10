@@ -1,117 +1,123 @@
+form Wavegram
+    word speaker it01
+endform
+
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../results"
+results$ = "../results/wavegram"
+directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
 createDirectory(results$)
-data$ = "../data"
-resultsHeader$ = "file,token,time,sequence,sample,amplitude"
-resultsFile$ = "'results$'/wavegram.csv"
+directory$ = "../data/derived/egg/'speaker$'"
+resultsHeader$ = "speaker,file,date,word,rel_time,time,sequence,sample,amplitude"
+resultsFile$ = "'results$'/'speaker$'-wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
-fileList = Create Strings as file list: "fileList", data$
+fileList = Create Strings as file list: "fileList", "'directory$'/*.wav"
 numberOfFiles = Get number of strings
 
 #### Files loop ####
-for file from 1 to numberOfFiles
+for file to numberOfFiles
     selectObject: fileList
-    fileName$ = Get string: file
-    fileBareName$ = fileName$ - ".wav"
-    sound = Read from file: "'data$'/'fileName$'"
-    sound2 = Extract one channel: 2
-    # signal is inverted when recorded
-    Multiply: -1
-    Filter (pass Hann band): 100, 0, 100
-    pointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "no", "yes"
-    textGrid = To TextGrid (vuv): 0.02, 0.001
-    numberOfIntervals = Get number of intervals: 1
+    file$ = Get string: file
+    filename$ = file$ - ".wav"
 
-    #### Vowel loop ####
-    token = 0
-    for interval to numberOfIntervals
-        selectObject: textGrid
-        intervalLabel$ = Get label of interval: 1, interval
-        if intervalLabel$ == "V"
-            token += 1
-            start = Get start time of interval: 1, interval
-            end = Get end time of interval: 1, interval
-            vowelDuration = end - start
-            midPoint = start + (vowelDuration / 2)
-            # Warning: The following two lines are easily breakable
-            selectionStart = midPoint - 0.05
-            selectionEnd = midPoint + 0.05
-            selectObject: sound2
-            selection = Extract part: selectionStart, selectionEnd, "rectangular",
-                ...1, "yes"
-    
-            eggSmooth = Filter (pass Hann band): lower, upper, 100
-            @smoothing: smoothWidth
-            sampling_period = Get sampling period
-            time_lag = (smoothWidth - 1) / 2 * sampling_period
-            Shift times by: time_lag
-            Rename: "egg_smooth"
-            eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
-            
-            selectObject: eggSmooth
-            deggSmooth = Copy: "degg_smooth"
-            Formula: "self [col + 1] - self [col]"
-            @smoothing: smoothWidth
-            sampling_period = Get sampling period
-            time_lag = (smoothWidth - 1) / 2 * sampling_period
-            Shift times by: time_lag
-            deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
-    
+    Read Strings from raw text file: "'directory_textgrid$'/'filename$'.txt"
+    prompt$ = Get string: 1
+    stimulus$ = extractWord$(prompt$, " ")
+    date$ = Get string: 2
+
+    Read separate channels from sound file: "'directory$'/'file$'"
+
+    Read from file: "'directory_textgrid$'/'filename$'.TextGrid"
+    intervals = Get number of intervals: 3
+
+    if intervals > 1
+        start = Get starting point: 3, 2
+        end = Get end point: 3, 2
+
+        selectObject: "Sound 'filename$'_ch2"
+        ; Extract part: start, end, "rectangular", 1, "yes"
+        Rename: "egg"
+
+        #### Vowel loop ####
+        eggSmooth = Filter (pass Hann band): lower, upper, 100
+        @smoothing: smoothWidth
+        sampling_period = Get sampling period
+        time_lag = (smoothWidth - 1) / 2 * sampling_period
+        Shift times by: time_lag
+        Rename: "egg_smooth"
+        eggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+        pp_end = Get end time
+        Remove points between: 0, start
+        Remove points between: end, pp_end
+        
+        selectObject: eggSmooth
+        deggSmooth = Copy: "degg_smooth"
+        Formula: "self [col + 1] - self [col]"
+        ; @smoothing: smoothWidth
+        Remove noise: 0, 0.25, 0.025, 80, 10000, 40, "Spectral subtraction"
+        ; sampling_period = Get sampling period
+        ; time_lag = (smoothWidth - 1) / 2 * sampling_period
+        ; Shift times by: time_lag
+        deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
+        Remove points between: 0, start
+        Remove points between: end, pp_end
+        
+        selectObject: eggPointProcess
+        eggPoints = Get number of points
+        meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
+        
+        sequence = 0
+        
+        for point to eggPoints - 2
             selectObject: eggPointProcess
-            eggPoints = Get number of points
-            meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
+            point1 = Get time from index: point
+            point2 = Get time from index: point + 1
+            point3 = Get time from index: point + 2
+            selectObject: eggSmooth
+            eggMinimum1 = Get time of minimum: point1, point2, "Sinc70"
+            eggMinimum2 = Get time of minimum: point2, point3, "Sinc70"
+            period = eggMinimum2 - eggMinimum1
+        
+            if period <= meanPeriod * 2
+                selectObject: deggSmooth
+                minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
+                maxAmplitude = Get maximum: eggMinimum1, eggMinimum2, "Sinc70"
             
-            sequence = 0
+                sampleStart = Get sample number from time: eggMinimum1
+                sampleEnd = Get sample number from time: eggMinimum2
+                numberOfSamples = sampleEnd - sampleStart
+                sample = sampleStart
             
-            for point to eggPoints - 2
-                selectObject: eggPointProcess
-                point1 = Get time from index: point
-                point2 = Get time from index: point + 1
-                point3 = Get time from index: point + 2
-                selectObject: eggSmooth
-                eggMinimum1 = Get time of minimum: point1, point2, "Sinc70"
-                eggMinimum2 = Get time of minimum: point2, point3, "Sinc70"
-                period = eggMinimum2 - eggMinimum1
+                timeNorm = (eggMinimum1 - start) /
+                    ...(end - start)
             
-                if period <= meanPeriod * 2
-                    selectObject: deggSmooth
-                    minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
-                    maxAmplitude = Get maximum: eggMinimum1, eggMinimum2, "Sinc70"
-                
-                    sampleStart = Get sample number from time: eggMinimum1
-                    sampleEnd = Get sample number from time: eggMinimum2
-                    numberOfSamples = sampleEnd - sampleStart
-                    sample = sampleStart
-                
-                    timeNorm = (eggMinimum1 - selectionStart) /
-                        ...(selectionEnd - selectionStart)
-                
-                    while sample <= sampleEnd
-                        amplitude = Get value at sample number: 1, sample
-                
-                        amplitudeNorm = (amplitude - minAmplitude) /
-                            ...(maxAmplitude - minAmplitude)
-                
-                        sampleNorm = (sample - sampleStart) /
-                            ...(sampleEnd - sampleStart)
-                
-                        # At sample rate 44100 Hz, each period has around 400 samples
-                        sample = sample + 2
-                
-                        resultLine$ = "'fileBareName$','token','timeNorm','sequence','sampleNorm','amplitudeNorm'"
-                
-                        appendFileLine: resultsFile$, resultLine$
-                    endwhile
-                endif
+                while sample <= sampleEnd
+                    amplitude = Get value at sample number: 1, sample
             
-                sequence = sequence + 1
-            endfor
-    
-            removeObject: selection
-        endif
-    endfor
+                    amplitudeNorm = (amplitude - minAmplitude) /
+                        ...(maxAmplitude - minAmplitude)
+            
+                    sampleNorm = (sample - sampleStart) /
+                        ...(sampleEnd - sampleStart)
+            
+                    # At sample rate 44100 Hz, each period has around 400 samples
+                    sample = sample + 2
+            
+                    resultLine$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1','timeNorm','sequence','sampleNorm','amplitudeNorm'"
+            
+                    appendFileLine: resultsFile$, resultLine$
+                endwhile
+            endif
+        
+            sequence = sequence + 1
+        endfor
+    endif
+
+    ; removeObject: "Sound egg", "Sound egg_smooth",
+    ;     ..."PointProcess egg_smooth",
+    ;     ..."Sound degg_smooth", "PointProcess degg_smooth", "Sound degg"
+
 endfor
 
 procedure smoothing : .width

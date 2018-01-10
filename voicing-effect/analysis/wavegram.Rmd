@@ -1,0 +1,61 @@
+---
+title: "Wavegram"
+author: "Stefano Coretta"
+date: "10/01/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(itsadug)
+library(tidymv)
+```
+
+# Data import
+
+```{r import}
+languages <- read_csv("./voicing-effect/stimuli/languages.csv")
+words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+
+wavegram <- list.files(path = "./voicing-effect/results/wavegram",
+                   pattern = "*-wavegram.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(.)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    filter(c1phonation == "voiceless") %>%
+    mutate_if(is.character, as.factor)
+```
+
+# Exploration
+
+```{r it01-gam}
+it01_gam <- bam(
+    amplitude ~
+        c2phonation +
+        s(sequence) + s(sample) +
+        s(sequence, by = c2phonation) + s(sample, by = c2phonation) +
+        ti(sequence, sample) +
+        ti(sequence, sample, by = c2phonation),
+    data = filter(wavegram, speaker == "it01")
+)
+```
+
+```{r it01-gam-plot}
+fvisgam(
+    it01_gam,
+    view = c("sequence","sample"),
+    cond = list(c2phonation = "voiceless"),
+    zlim = c(0, 1)
+)
+
+fvisgam(
+    it01_gam,
+    view = c("sequence","sample"),
+    cond = list(c2phonation = "voiced"),
+    zlim = c(0, 1)
+)
+```
