@@ -100,7 +100,7 @@ tongue_root %>%
 
 It does not seem to be a correlation. Maybe I should check TRA not at maximum TT/TD displacement?
 
-```{r}
+```{r tr-phonation}
 tongue_root %>%
     ggplot(aes(c2phonation, TR_displacement_z)) +
     geom_boxplot() +
@@ -109,8 +109,8 @@ tongue_root %>%
 
 /a/ and /o/ show more advancement in the voiced condition (lower TR_displacement).
 
-```{r}
-tra_lm <- lmer(
+```{r tra-lm-it}
+tra_lm_it <- lmer(
     vowel_duration_z ~
         TR_displacement_z +
         c2place +
@@ -121,15 +121,15 @@ tra_lm <- lmer(
     data = filter(tongue_root, language == "italian")
 )
 
-summary(tra_lm)
+summary(tra_lm_it)
 ```
 
 ```{r}
-plot(allEffects(tra_lm))
+plot(allEffects(tra_lm_it))
 ```
 
 ```{r}
-coef(tra_lm)$speaker
+coef(tra_lm_it)$speaker
 ```
 
 The lmer detects a correlation, but I need to be cautious.
@@ -149,5 +149,57 @@ summary(mean_tra_lm)
 
 ```{r}
 plot(allEffects(mean_tra_lm))
+```
+
+```{r tra-lm}
+tra_lm <- lmer(
+    vowel_duration_z ~
+        TR_displacement_z *
+        c2phonation *
+        language *
+        c2place *
+        vowel +
+        (1+TR_displacement_z|speaker) +
+        (1|word),
+    data = tongue_root
+)
+
+summary(tra_lm)
+```
+
+```{r tra-lm-effects}
+plot(allEffects(tra_lm))
+```
+
+```{r tra-lm-pl}
+tra_lm_pl <- lmer(
+    vowel_duration_z ~
+        TR_displacement_z +
+        c2place +
+        vowel *
+        c2phonation +
+        (1|speaker) +
+        (1|word),
+    data = filter(tongue_root, language == "polish")
+)
+
+summary(tra_lm_pl)
+
+tra_lm_pl_null <- lmer(
+    vowel_duration_z ~
+#        TR_displacement_z *
+        c2phonation +
+        vowel +
+        c2place +
+        (1|speaker) +
+        (1|word),
+    data = filter(tongue_root, language == "polish")
+)
+
+anova(tra_lm_pl_null, tra_lm_pl)
+```
+
+```{r}
+plot(allEffects(tra_lm_pl))
 ```
 
