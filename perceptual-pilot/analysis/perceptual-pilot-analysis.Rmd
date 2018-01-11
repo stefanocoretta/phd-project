@@ -1,0 +1,38 @@
+---
+title: "Perceptual pilot experiment"
+author: "Stefano Coretta"
+date: "11/01/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+# Import data
+
+```{r import}
+pilot <- read_csv("./perceptual-pilot/experiment/data/f001_perceptual-pilot_2018_Jan_11_1419.csv") %>%
+    mutate_if(is.character, as.factor)
+```
+
+# Explore
+
+```{r}
+pilot %>%
+    filter(!is.na(key_resp_2.keys), condition == "burst") %>%
+    ggplot(aes(burst, as.numeric(key_resp_2.keys))) +
+#    geom_point() +
+    geom_smooth(method = "loess")
+```
+
+```{r}
+pilot %>%
+    filter(!is.na(key_resp_2.keys), condition == "voicing") %>%
+    ggplot(aes(voicing, as.numeric(key_resp_2.keys))) +
+#    geom_point() +
+    geom_smooth(method = "loess")
+```
