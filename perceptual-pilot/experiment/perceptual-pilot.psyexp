@@ -20,7 +20,7 @@
     <Param name="Save log file" updates="None" val="False" valType="bool"/>
     <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
     <Param name="Show mouse" updates="None" val="False" valType="bool"/>
-    <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
+    <Param name="Data filename" updates="None" val="u'results/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
     <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
     <Param name="expName" updates="None" val="perceptual-pilot" valType="str"/>
     <Param name="logging level" updates="None" val="exp" valType="code"/>
@@ -111,15 +111,15 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="name" updates="None" val="text_12" valType="code"/>
-        <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="Prima di iniziare l'esperimento, faremo una veloce prova.&amp;#10;&amp;#10;Come nell'esperimento vero e proprio, dovrai dire se la parola che hai sentito contiene una &quot;t&quot; o una &quot;d&quot;. Dopo aver dato la risposta, vedrai un messaggio che ti dirà se hai risposto correttamente o meno.&amp;#10;&amp;#10;(premi la barra spaziatrice per continuare, l'esperimento non inizierà per ora)" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
-        <Param name="text" updates="constant" val="Prima di iniziare l'esperimento, faremo una veloce prova.&amp;#10;&amp;#10;Come nell'esperimento vero e proprio, dovrai dire se la parola che hai sentito contiene una &quot;t&quot; o una &quot;d&quot;. Dopo aver dato la risposta, vedrai un messaggio che ti dirà se hai risposto correttamente o meno.&amp;#10;&amp;#10;(premi la barra spaziatrice per continuare, l'esperimento non inizierà per ora)" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
@@ -149,15 +149,15 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
         <Param name="name" updates="None" val="text_13" valType="code"/>
-        <Param name="color" updates="constant" val="white" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="Questa prova potrà sembrarti semplice, ma considera che serve solo per farti familiarizzare con l'esperimento.&amp;#10;&amp;#10;Posiziona ora l'indice della mano sinistra e della mano destra sui tasti.&amp;#10;&amp;#10;Quando sei pronta/o per iniziare la prova, premi la barra spaziatrice sulla tastiera.&amp;#10;&amp;#10;(premi la barra spaziatrice per iniziare la prova)" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
-        <Param name="text" updates="constant" val="Questa prova potrà sembrarti semplice, ma considera che serve solo per farti familiarizzare con l'esperimento.&amp;#10;&amp;#10;Posiziona ora l'indice della mano sinistra e della mano destra sui tasti.&amp;#10;&amp;#10;Quando sei pronta/o per iniziare la prova, premi la barra spaziatrice sulla tastiera.&amp;#10;&amp;#10;(premi la barra spaziatrice per iniziare la prova)" valType="str"/>
         <Param name="startType" updates="None" val="time (s)" valType="str"/>
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
@@ -300,7 +300,7 @@
       <CodeComponent name="code_2">
         <Param name="Begin Experiment" updates="constant" val="msg='doh!'" valType="extendedCode"/>
         <Param name="name" updates="None" val="code_2" valType="code"/>
-        <Param name="Begin Routine" updates="constant" val="if not key_resp_3.keys :&amp;#10;    msg=&quot;Non hai risposto.&quot;&amp;#10;    msg_colour = &quot;white&quot;&amp;#10;elif key_resp_3.corr:#stored on last run routine&amp;#10;    msg=&quot;Corretto!&quot;&amp;#10;    msg_colour = &quot;lime&quot;&amp;#10;else:&amp;#10;    msg=&quot;Ops! Sbagliato.&quot;&amp;#10;    msg_colour = &quot;red&quot;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="if not key_resp_6.keys :&amp;#10;    msg=&quot;Non hai risposto.&quot;&amp;#10;    msg_colour = &quot;white&quot;&amp;#10;elif key_resp_6.corr:#stored on last run routine&amp;#10;    msg=&quot;Corretto!&quot;&amp;#10;    msg_colour = &quot;lime&quot;&amp;#10;else:&amp;#10;    msg=&quot;Ops! Sbagliato.&quot;&amp;#10;    msg_colour = &quot;red&quot;" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
@@ -575,7 +575,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'index': 1, 'correct_answer': u'z', 'vowel': u'a', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'correct_answer': u'slash', 'vowel': u'a', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 3, 'correct_answer': u'z', 'vowel': u'i', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 4, 'correct_answer': u'slash', 'vowel': u'i', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 5, 'correct_answer': u'z', 'vowel': u'u', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 6, 'correct_answer': u'slash', 'vowel': u'u', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train"/>
@@ -615,7 +615,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="5" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'index': 1, 'correct_answer': u'z', 'vowel': u'a', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'correct_answer': u'slash', 'vowel': u'a', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 3, 'correct_answer': u'z', 'vowel': u'i', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 4, 'correct_answer': u'slash', 'vowel': u'i', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 5, 'correct_answer': u'z', 'vowel': u'u', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 6, 'correct_answer': u'slash', 'vowel': u'u', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train_2"/>
