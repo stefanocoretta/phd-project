@@ -551,10 +551,22 @@
     </Routine>
   </Routines>
   <Flow>
+    <LoopInitiator loopType="TrialHandler" name="trials_7">
+      <Param name="conditionsFile" updates="None" val="" valType="str"/>
+      <Param name="name" updates="None" val="trials_7" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="code"/>
+    </LoopInitiator>
     <Routine name="instructions"/>
     <Routine name="instructions_2"/>
     <Routine name="instructions_3"/>
     <Routine name="instructions_4"/>
+    <LoopTerminator name="trials_7"/>
     <Routine name="instructions_5"/>
     <LoopInitiator loopType="TrialHandler" name="trials_3">
       <Param name="conditionsFile" updates="None" val="" valType="str"/>
@@ -575,7 +587,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'index': 1, 'correct_answer': u'z', 'vowel': u'a', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'correct_answer': u'slash', 'vowel': u'a', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 3, 'correct_answer': u'z', 'vowel': u'i', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 4, 'correct_answer': u'slash', 'vowel': u'i', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 5, 'correct_answer': u'z', 'vowel': u'u', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 6, 'correct_answer': u'slash', 'vowel': u'u', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train"/>
@@ -615,7 +627,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="5" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'index': 1, 'correct_answer': u'z', 'vowel': u'a', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'correct_answer': u'slash', 'vowel': u'a', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 3, 'correct_answer': u'z', 'vowel': u'i', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 4, 'correct_answer': u'slash', 'vowel': u'i', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 5, 'correct_answer': u'z', 'vowel': u'u', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 6, 'correct_answer': u'slash', 'vowel': u'u', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'index': 1, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'vowel': u'a', 'correct_answer': u'slash', 'side_condition': u't_left', 'condition': u'confound'}, {'index': 2, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'vowel': u'a', 'correct_answer': u'z', 'side_condition': u't_left', 'condition': u'voicing'}, {'index': 3, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'vowel': u'i', 'correct_answer': u'slash', 'side_condition': u't_left', 'condition': u'confound'}, {'index': 4, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'vowel': u'i', 'correct_answer': u'z', 'side_condition': u't_left', 'condition': u'voicing'}, {'index': 5, 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'vowel': u'u', 'correct_answer': u'slash', 'side_condition': u't_left', 'condition': u'confound'}, {'index': 6, 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'vowel': u'u', 'correct_answer': u'z', 'side_condition': u't_left', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train_2"/>
