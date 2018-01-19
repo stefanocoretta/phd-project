@@ -70,10 +70,16 @@ splines.pol.it <- list.files(
 
 ```{r polar-function}
 polar_gam <- function(formula, data, origin = NULL, fan_lines = c(10, 25), ...) {
+    if (is.null(origin)) {
+        origin <- rticulate::get_origin(data, fan_lines = fan_lines)
+    }
+    
     polar_data <- data %>%
-        rticulate::transform_coord(., to = "polar", origin = origin, fan_lines = fan_lines, use_XY = TRUE)
+        rticulate::transform_coord(., to = "polar", origin = origin, use_XY = TRUE)
     
     model <- mgcv::bam(formula = formula, data = polar_data, ...)
+    
+    model$polar_origin <- origin
     
     return(model)
 }
@@ -119,14 +125,21 @@ plot_polar_smooths <- function(model, time_series, comparison, origin = NULL, fa
 
     predicted_tbl <- get_gam_predictions(model, !!time_series_q, conditions, exclude_random = exclude_random, series_length = series_length)
     
+    if (is.null(origin)) {
+        origin <- model$polar_origin
+    }
+    
     cartesian_predicted <- predicted_tbl %>%
         transform_coord(
             to = "cartesian",
-            origin = c(origin[1], origin[2]),
+            origin = origin,
             use_XY = TRUE
         )
     
-    cartesian_ci <- transform_ci(predicted_tbl, origin = c(origin[1], origin[2]))
+    cartesian_ci <- transform_ci(
+        predicted_tbl,
+        origin = origin
+    )
 
     smooths_plot <- cartesian_predicted %>%
         ggplot2::ggplot(
@@ -831,8 +844,7 @@ plot_polar_smooths(
     it01_polar_gam,
     X,
     c2phonation,
-    facet_terms = c2place ~ vowel,
-    origin = c(14.3901026453293, -65.2314764646618)
+    facet_terms = c2place ~ vowel
 )
 ```
 
