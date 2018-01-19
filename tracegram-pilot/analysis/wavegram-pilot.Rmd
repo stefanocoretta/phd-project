@@ -1,5 +1,5 @@
 ---
-title: "Wavegram"
+title: "Wavegram pilot"
 author: "Stefano Coretta"
 date: "08/08/2017"
 output: 
