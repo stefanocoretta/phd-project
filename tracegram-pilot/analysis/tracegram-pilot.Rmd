@@ -49,12 +49,19 @@ quotient <- read_csv("./tracegram-pilot/results/results.csv") %>%
     separate(file, c("speaker", "phonation")) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(phonation = factor(phonation, levels = c("modal", "breathy")),
-           closed_quotient = degg_minimum - degg_maximum
+           contact_quotient = degg_minimum - degg_maximum
+           )
+
+peaks_ratio <- read_csv("./tracegram-pilot/results/results.csv") %>%
+    separate(file, c("speaker", "phonation")) %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(phonation = factor(phonation, levels = c("modal", "breathy")),
+           peaks_ratio = degg_maximum / degg_minimum
            )
 
 quotient_mean <- quotient %>%
     group_by(speaker, phonation, token) %>%
-    summarise(mean_quotient = mean(closed_quotient))
+    summarise(mean_quotient = mean(contact_quotient))
 
 mean_degg_tracing_mean <- mean_degg_tracing %>%
     group_by(speaker, phonation, token) %>%
@@ -153,10 +160,10 @@ mean_degg_tracing %>%
     geom_boxplot()
 ```
 
-# Closed quotient
+# Contact quotient
 
 ```{r cq-density}
-ggplot(quotient, aes(closed_quotient, colour = phonation)) +
+ggplot(quotient, aes(contact_quotient, colour = phonation)) +
     geom_density() +
     facet_wrap(~ speaker)
 ```
@@ -164,7 +171,7 @@ ggplot(quotient, aes(closed_quotient, colour = phonation)) +
 The CQ does not perform well.
 
 ```{r speaker-cq-boxplot}
-ggplot(quotient, aes(phonation, closed_quotient)) +
+ggplot(quotient, aes(phonation, contact_quotient)) +
     geom_boxplot() +
     facet_wrap(~ speaker)
 ```
@@ -172,19 +179,19 @@ ggplot(quotient, aes(phonation, closed_quotient)) +
 In 03, the median is higher for breathy voice (should be lower).
 
 ```{r cq-boxplot}
-ggplot(quotient, aes(phonation, closed_quotient)) +
+ggplot(quotient, aes(phonation, contact_quotient)) +
     geom_boxplot()
 ```
 
 ```{r cq-plot}
-ggplot(quotient, aes(time, closed_quotient, colour = speaker)) +
+ggplot(quotient, aes(time, contact_quotient, colour = speaker)) +
     geom_point(alpha = 0.2) +
     facet_grid(phonation ~ .)
 ```
 
 ```{r cq-plot-2}
 filter(quotient, token == 1) %>%
-ggplot(aes(time, closed_quotient, colour = phonation)) +
+ggplot(aes(time, contact_quotient, colour = phonation)) +
     geom_point(alpha = 0.2) +
     geom_smooth(method = "lm") +
     facet_wrap(~ speaker)
@@ -194,7 +201,7 @@ ggplot(aes(time, closed_quotient, colour = phonation)) +
 
 ```{r quotient-lmer}
 quotient_lmer <- lmer(
-    closed_quotient ~
+    contact_quotient ~
         phonation +
         (1 + phonation|speaker),
     data = quotient
@@ -205,7 +212,7 @@ summary(quotient_lmer)
 
 ```{r quotient-likelyhood}
 quotient_lmer_null <- lmer(
-    closed_quotient ~
+    contact_quotient ~
         (1 + phonation|speaker),
     data = quotient
 )
@@ -253,4 +260,13 @@ mean_degg_lmer_null <- lmer(
 anova(mean_degg_lmer_null, mean_degg_lmer)
 ```
 
-The mean dEGG performs well here.
+The mean dEGG performs well here, but not in other cases (see voicing-effect project).
+
+```{r peaks-ratio}
+peaks_ratio %>%
+    ggplot(aes(time, peaks_ratio, colour = phonation, linetype = phonation)) +
+    geom_smooth() +
+    facet_wrap(~ speaker)
+```
+
+As noted in voicing-effect, the peaks ratio works well, here even with S03.
