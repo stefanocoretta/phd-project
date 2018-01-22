@@ -1,3 +1,30 @@
+######################################
+# This is a script from the project 'Vowel duration and consonant voicing: An
+# articulatory study', Stefano Coretta
+######################################
+# MIT License
+#
+# Copyright (c) 2016 Stefano Coretta
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+######################################
+
 form Wavegram
     word speaker it01
 endform
@@ -5,10 +32,10 @@ endform
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../results/wavegram"
-directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
+results$ = "../data/datasets/egg"
+directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 createDirectory(results$)
-directory$ = "../data/derived/egg/'speaker$'"
+directory$ = "../data/egg/derived/'speaker$'"
 resultsHeader$ = "speaker,file,date,word,rel_time,time,sequence,sample,amplitude"
 resultsFile$ = "'results$'/'speaker$'-wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$

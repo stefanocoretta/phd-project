@@ -6,6 +6,8 @@ This file contains the documentation of the scripts in the `analysis/scripts` fo
 
 ### alignment-input.praat
 ```praat
+<<<script header>>>
+
 <<<get audio>>>
 
 <<<concatenate recoverably>>>
@@ -22,10 +24,10 @@ form Generate input for force alignment with SPPAS
     word speaker it01
 endform
 
-directory_speaker$ = "../data/derived/ultrasound/'speaker$'"
-directory_audio$ = "'directory_speaker$'/audio"
-createDirectory ("'directory_speaker$'/alignment")
-directory_alignment$ = "'directory_speaker$'/alignment"
+directory_speaker$ = "../data/ultrasound/derived/'speaker$'"
+directory_audio$ = "'directory_speaker$'/recordings"
+createDirectory ("'directory_speaker$'/concatenated")
+directory_alignment$ = "'directory_speaker$'/concatenated"
 writeFile: "'directory_alignment$'/'speaker$'.txt", ""
 
 Create Strings as file list: "filelist", "'directory_audio$'/*.wav"
@@ -83,6 +85,8 @@ Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 
 ### search-area.praat
 ```praat
+<<<script header>>>
+
 <<<get alignment>>>
 
 <<<set search>>>
@@ -111,11 +115,12 @@ else
     exit "The language you selected is not valid"
 endif
 
-directory_audio$ = "../data/derived/ultrasound/'speaker$'/audio"
-directory_alignment$ = "../data/derived/ultrasound/
-    ...'speaker$'/alignment"
+directory_audio$ = "../data/ultrasound/derived/'speaker$'/recordings"
+directory_alignment$ = "../data/ultrasound/derived/
+    ...'speaker$'/concatenated"
+directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
-palign = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
+palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
 palign.o = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
 selectObject: palign
 
@@ -217,7 +222,7 @@ The following chunk calls the header of the script, which is defined at the end 
 
 ### sync-egg.praat
 ```praat
-<<<sync header>>>
+<<<script header>>>
 
 <<<sync function>>>
 ```
@@ -261,14 +266,14 @@ The number of files in the EGG folder is saved in `files`.
 
 ### "read files"+=
 ```praat
-egg_directory$ = "../data/raw/egg"
-us_directory$ = "../data/derived/ultrasound"
-out_directory$ = "../data/derived/egg"
+egg_directory$ = "../data/egg/raw"
+us_directory$ = "../data/ultrasound/derived"
+out_directory$ = "../data/egg/derived"
 createDirectory ("'out_directory$'/'speaker$'")
 
 Create Strings as file list: "filelist_egg", "'egg_directory$'/'speaker$'/*.wav"
 files = Get number of strings
-Create Strings as file list: "filelist_us", "'us_directory$'/'speaker$'/audio/*.wav"
+Create Strings as file list: "filelist_us", "'us_directory$'/'speaker$'/recordings/*.wav"
 
 ```
 
@@ -375,7 +380,7 @@ The counter `index` is now used to read the audio file from the ultrasound direc
 ```praat
         selectObject: "Strings filelist_us"
         file_us$ = Get string: index
-        Read from file: "'us_directory$'/'speaker$'/audio/'file_us$'"
+        Read from file: "'us_directory$'/'speaker$'/recordings/'file_us$'"
         file_us_name$ = selected$ ("Sound")
 
 ```
@@ -424,6 +429,8 @@ This script calculates the voiced and voiceless portions (VUV) in the synchronis
 
 ### extract-vuv.praat
 ```praat
+<<<script header>>>
+
 <<<smoothing>>>
 
 <<<get synced egg>>>
@@ -446,7 +453,7 @@ form Extract vuv
     boolean debug_mode
 endform
 
-directory$ = "../data/derived/egg"
+directory$ = "../data/egg/derived"
 
 Create Strings as file list: "filelist", "'directory$'/'speaker$'/*.wav"
 files = Get number of strings
@@ -501,6 +508,8 @@ endif
 
 ### degg-tracing.praat
 ```praat
+<<<script header>>>
+
 <<<smoothing>>>
 
 <<<get files list>>>
@@ -522,10 +531,10 @@ form dEGG tracing
     real smooth_width 11
 endform
 
-directory$ = "../data/derived/egg/'speaker$'"
-directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
+directory$ = "../data/egg/derived/'speaker$'"
+directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 
-result_file$ = "../results/egg/'speaker$'-degg-tracing.csv"
+result_file$ = "../data/datasets/egg/'speaker$'-degg-tracing.csv"
 header$ = "speaker,file,date,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -534,7 +543,7 @@ files = Get number of strings
 ```
 
 For each file, extract both channels.
-Read from the corrisponding TextGrid in `/data/derived/ultrasound/ID/audio` and get the starting and end point of the `vowel` interval.
+Read from the corrisponding TextGrid in `/data/ultrasound/derived/ID/recordings` and get the starting and end point of the `vowel` interval.
 Now, we can extract the same interval from channel 2 of the EGG file.
 Rename the ectracted part as `egg`, and execute the main function, which extracts the dEGG trace.
 
@@ -687,6 +696,8 @@ endproc
 
 ### degg-tracing-word.praat
 ```praat
+<<<script header>>>
+
 <<<smoothing>>>
 
 <<<get files list word>>>
@@ -706,10 +717,10 @@ form dEGG tracing
     real smooth_width 11
 endform
 
-directory$ = "../data/derived/egg/'speaker$'"
-directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
+directory$ = "../data/egg/derived/'speaker$'"
+directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 
-result_file$ = "../results/egg/'speaker$'-degg-tracing-word.csv"
+result_file$ = "../data/datasets/egg/'speaker$'-degg-tracing-word.csv"
 header$ = "speaker,file,word,time,rel.time,proportion,maximum,minimum"
 writeFileLine: "'result_file$'", "'header$'"
 
@@ -747,6 +758,8 @@ endfor
 
 ### get-durations.praat
 ```praat
+<<<script header>>>
+
 form Get vowel duration
     word project voicing-effect
     word speaker it01
@@ -762,9 +775,10 @@ else
     exit "The language you selected is not valid"
 endif
 
-directory$ = "../data/derived/ultrasound/'speaker$'/alignment"
+directory$ = "../data/ultrasound/derived/'speaker$'/concatenated"
+directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
-result_file$ = "../results/durations/'speaker$'-vowel-durations.csv"
+result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
 header$ = "index,speaker,file,rec.date,word,time,word.duration,c1.duration,vowel.duration,
     ...closure.duration,rvot,c2.duration,v2.duration,sentence.duration"
@@ -772,7 +786,7 @@ writeFileLine: result_file$, header$
 
 bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
 
-palign = Read from file: "'directory$'/'speaker$'-palign.TextGrid"
+palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
 
 intervals = Get number of intervals: 2
 
@@ -815,7 +829,7 @@ for interval to intervals
         fileName = Get interval at time: 1, start_vowel
         fileName$ = Get label of interval: 1, fileName
 
-        Read Strings from raw text file: "../data/derived/ultrasound/'speaker$'/audio/'fileName$'.txt"
+        Read Strings from raw text file: "../data/ultrasound/derived/'speaker$'/recordings/'fileName$'.txt"
         rec_date$ = Get string: 2
 
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$','start_target',
@@ -834,6 +848,8 @@ This script detects the burst in the consonant following the target vowels (C2).
 
 ### burst-detection.praat
 ```praat
+<<<script header>>>
+
 <<<get alignment>>>
 
 <<<find consonant>>>
@@ -937,6 +953,7 @@ This script extracts several durations related to voicing. The main function `me
 
 ### get-measurements.praat
 ```praat
+<<<script header>>>
 
 <<<read>>>
 
@@ -952,14 +969,13 @@ form Get measurements
     word speaker it01
 endform
 
-directory_us_annotations$ = "../data/derived/ultrasound/'speaker$'/
-    ...annotations"
-directory_egg_vuv$ = "../data/derived/egg/'speaker$'"
+directory_us_annotations$ = "../data/ultrasound/derived/'speaker$'/
+    ...recordings"
+directory_egg_vuv$ = "../data/egg/derived/'speaker$'"
 
-createDirectory("../data/derived/merged/'speaker$'")
-directory_out$ = "../data/derived/merged/'speaker$'"
+directory_out$ = "../data/datasets/acoustics'"
 
-result_file$ = "../results/durations/'speaker$'-measurements.csv"
+result_file$ = "'directory_out$'/'speaker$'-measurements.csv"
 result_header$ = "speaker,word,target,max,release,voff,voffr"
 writeFileLine: result_file$, result_header$
 
@@ -1086,6 +1102,8 @@ endproc
 
 ### voicing-duration.praat
 ```praat
+<<<script header>>>
+
 <<<voicing setup>>>
 
 <<<voicing loop>>>
@@ -1097,9 +1115,9 @@ form Get duration of voicing
     word speaker it01
 endform
 
-vuvDirectory$ = "../data/derived/egg/'speaker$'"
-palignDirectory$ = "../data/derived/ultrasound/'speaker$'/audio"
-resultsFile$ = "../results/egg/'speaker$'-voicing.csv"
+vuvDirectory$ = "../data/egg/derived/'speaker$'"
+recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
+resultsFile$ = "../datasets/egg/'speaker$'-voicing.csv"
 resultsHeader$ = "index,speaker,file,rec.date,word,voicing.start,voicing.end,voicing.duration,sentence.duration"
 writeFileLine: resultsFile$, resultsHeader$
 
@@ -1117,10 +1135,10 @@ for vuv to numberOfVuv
     vuvTextGrid$ = selected$("TextGrid")
     palignTextGrid$ = vuvTextGrid$ - "-vuv"
 
-    Read Strings from raw text file: "'palignDirectory$'/'palignTextGrid$'.txt"
+    Read Strings from raw text file: "'recordings_dir$'/'palignTextGrid$'.txt"
     recDate$ = Get string: 2
 
-    palignTextGrid = Read from file: "'palignDirectory$'/'palignTextGrid$'-palign.TextGrid"
+    palignTextGrid = Read from file: "'recordings_dir$'/'palignTextGrid$'-palign.TextGrid"
     plusObject: vuvTextGrid
     Merge
     numberOfWords = Get number of intervals: 3
@@ -1164,6 +1182,8 @@ This script extracts wavegram data from the EGG data.
 
 ### wavegram.praat
 ```praat
+<<<script header>>>
+
 <<<preamble>>>
 
 <<<main loop>>>
@@ -1180,10 +1200,10 @@ endform
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../results/wavegram"
-directory_textgrid$ = "../data/derived/ultrasound/'speaker$'/audio"
+results$ = "../data/datasets/egg"
+directory_textgrid$ = "../data/ultrasound/derived/'speaker$'/recordings"
 createDirectory(results$)
-directory$ = "../data/derived/egg/'speaker$'"
+directory$ = "../data/egg/derived/'speaker$'"
 resultsHeader$ = "speaker,file,date,word,rel_time,time,sequence,sample,amplitude"
 resultsFile$ = "'results$'/'speaker$'-wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
@@ -1334,10 +1354,11 @@ For each glottal period, the normalised amplitude is calculated for each sample 
 
 ## Headers
 
-### "sync header"
+### "script header"
 ```praat
 ######################################
-# sync-egg.praat v1.0.0
+# This is a script from the project 'Vowel duration and consonant voicing: An
+# articulatory study', Stefano Coretta
 ######################################
 # MIT License
 #
@@ -1360,17 +1381,5 @@ For each glottal period, the normalised amplitude is calculated for each sample 
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-######################################
-# This script syncs the audio files acquired by the Laryngograph with the audio
-# files exported from AAA. Syncing is obtained through pair-wise
-# cross-correlation of the audio files. The cross-correlation function returns
-# the off-set in seconds between two files. The off-set is used to remove the
-# leading audio from the longer file.
-#
-# Input: - .wav stereo files from the Laryngograph recordings (ch1 = audio, ch2 =
-# EGG), saved in a folder
-#     - .wav mono files exported from AAA, saved in a separate folder
-# Output: - .wav stereo files (ch1 = audio, ch2 = EGG) whose start time is
-# synced with the start time of the correspondet AAA file
 ######################################
 ```

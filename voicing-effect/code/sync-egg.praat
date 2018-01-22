@@ -1,5 +1,6 @@
 ######################################
-# sync-egg.praat v1.0.0
+# This is a script from the project 'Vowel duration and consonant voicing: An
+# articulatory study', Stefano Coretta
 ######################################
 # MIT License
 #
@@ -23,18 +24,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ######################################
-# This script syncs the audio files acquired by the Laryngograph with the audio
-# files exported from AAA. Syncing is obtained through pair-wise
-# cross-correlation of the audio files. The cross-correlation function returns
-# the off-set in seconds between two files. The off-set is used to remove the
-# leading audio from the longer file.
-#
-# Input: - .wav stereo files from the Laryngograph recordings (ch1 = audio, ch2 =
-# EGG), saved in a folder
-#     - .wav mono files exported from AAA, saved in a separate folder
-# Output: - .wav stereo files (ch1 = audio, ch2 = EGG) whose start time is
-# synced with the start time of the correspondet AAA file
-######################################
 
 select all
 number_selected = numberOfSelected ()
@@ -48,14 +37,14 @@ form Syncronise EGG data
     word speaker it01
     boolean debug_mode
 endform
-egg_directory$ = "../data/raw/egg"
-us_directory$ = "../data/derived/ultrasound"
-out_directory$ = "../data/derived/egg"
+egg_directory$ = "../data/egg/raw"
+us_directory$ = "../data/ultrasound/derived"
+out_directory$ = "../data/egg/derived"
 createDirectory ("'out_directory$'/'speaker$'")
 
 Create Strings as file list: "filelist_egg", "'egg_directory$'/'speaker$'/*.wav"
 files = Get number of strings
-Create Strings as file list: "filelist_us", "'us_directory$'/'speaker$'/audio/*.wav"
+Create Strings as file list: "filelist_us", "'us_directory$'/'speaker$'/recordings/*.wav"
 
 for file from 1 to files
     select Strings filelist_egg
@@ -108,7 +97,7 @@ for interval from 1 to intervals
 
         selectObject: "Strings filelist_us"
         file_us$ = Get string: index
-        Read from file: "'us_directory$'/'speaker$'/audio/'file_us$'"
+        Read from file: "'us_directory$'/'speaker$'/recordings/'file_us$'"
         file_us_name$ = selected$ ("Sound")
 
         plusObject: "Sound chain_ch1_22050_part"
