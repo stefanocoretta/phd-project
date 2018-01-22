@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
-theme_set(theme_bw())
+theme_set(theme_minimal())
 library(lmerTest)
 library(effects)
 ```
@@ -280,3 +280,28 @@ peaks_ratio %>%
 ```
 
 As noted in voicing-effect, the peaks ratio works well, here even with S03.
+
+# Figures
+
+```{r speaker-cq}
+ggplot(quotient, aes(phonation, contact_quotient)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker) +
+  xlab("Phonation type") + ylab("Contact quotient")
+
+ggsave("img/speaker-cq.pdf")
+```
+
+```{r speaker-tracegram}
+ggplot(degg_tracing, aes(time, value, colour = peak)) +
+  geom_point(size = 0.5, alpha = 0.1) +
+  geom_smooth(size = 0.5, method = "loess", se = FALSE) +
+  xlab("Relative time (proportion of vowel duration)") +
+  ylab("Proportion of glottal period") +
+  facet_grid(speaker ~ phonation) +
+  ylim(0, 1) +
+  theme(legend.position = "top", panel.spacing.x = unit(1, "lines")) +
+  scale_color_discrete(name = "dEGG peaks", labels = c("maximum", "minimum"))
+
+ggsave("img/speaker-tracegram.pdf", width = 7, height = 7)
+```
