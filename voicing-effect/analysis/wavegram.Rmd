@@ -17,10 +17,10 @@ library(tidymv)
 # Data import
 
 ```{r import}
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
-wavegram <- list.files(path = "./voicing-effect/results/wavegram",
+wavegram <- list.files(path = "./voicing-effect/data/datasets/egg",
                    pattern = "*-wavegram.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.)) %>%
