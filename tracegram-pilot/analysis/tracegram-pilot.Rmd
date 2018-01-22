@@ -90,12 +90,12 @@ ggplot(degg_tracing, aes(peak, value, colour = phonation)) +
 
 ```{r speaker-tracegram-plot}
 ggplot(degg_tracing, aes(time, value, colour = peak)) +
-    geom_point(size = 0.5, alpha = 0.1) +
-    geom_smooth(size = 0.5, method = "lm") +
-    xlab("relative time (proportion of vowel duration)") +
-    ylab("proportion of glottal period") +
-    facet_grid(speaker ~ phonation) +
-    ylim(0, 1)
+  geom_point(size = 0.5, alpha = 0.1) +
+  geom_smooth(size = 0.5, method = "loess", se = FALSE) +
+  xlab("relative time (proportion of vowel duration)") +
+  ylab("proportion of glottal period") +
+  facet_grid(speaker ~ phonation) +
+  ylim(0, 1)
 ```
 
 Here 03 shows a shift upwards, although it seems that the CQ is more or less the same.
@@ -182,6 +182,16 @@ In 03, the median is higher for breathy voice (should be lower).
 ggplot(quotient, aes(phonation, contact_quotient)) +
     geom_boxplot()
 ```
+
+```{r average-cq}
+quotient %>%
+  group_by(phonation) %>%
+  summarise(
+    mean = mean(contact_quotient),
+    cq = sd(contact_quotient)
+  )
+```
+
 
 ```{r cq-plot}
 ggplot(quotient, aes(time, contact_quotient, colour = speaker)) +
