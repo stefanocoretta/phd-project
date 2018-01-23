@@ -293,15 +293,15 @@ ggsave("img/speaker-cq.pdf")
 ```
 
 ```{r speaker-tracegram}
-ggplot(degg_tracing, aes(time, value, colour = peak)) +
-  geom_point(size = 0.5, alpha = 0.1) +
-  geom_smooth(size = 0.5, method = "loess", se = FALSE) +
+ggplot(degg_tracing, aes(time, value, colour = peak, linetype = peak)) +
+  geom_smooth(size = 1, method = "loess", se = FALSE) +
   xlab("Relative time (proportion of vowel duration)") +
   ylab("Proportion of glottal period") +
   facet_grid(speaker ~ phonation) +
   ylim(0, 1) +
   theme(legend.position = "top", panel.spacing.x = unit(1, "lines")) +
-  scale_color_discrete(name = "dEGG peaks", labels = c("maximum", "minimum"))
+  scale_color_discrete(name = "dEGG peaks", labels = c("maximum", "minimum")) +
+  scale_linetype_discrete(name = "dEGG peaks", labels = c("maximum", "minimum"))
 
-ggsave("img/speaker-tracegram.pdf", width = 7, height = 7)
+ggsave("./tracegram-pilot/analysis/img/speaker-tracegram.pdf", width = 7, height = 7)
 ```
