@@ -32,15 +32,15 @@ columns <- c(
     "TR.velocity.abs"
 )
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
-vowels <- list.files(path = "./voicing-effect/results/durations",
-                   pattern = "*-vowel-durations.csv",
+vowels <- list.files(path = "./voicing-effect/data/datasets/acoustics",
+                   pattern = "*-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--"))
 
-tongue_root <- list.files(path = "./voicing-effect/results/ultrasound/",
+tongue_root <- list.files(path = "./voicing-effect/data/datasets/ultrasound/",
                    pattern = "*-tra-cart.tsv",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns)) %>%
