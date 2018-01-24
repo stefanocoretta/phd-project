@@ -112,13 +112,15 @@ tongue_root %>%
 ```{r tra-lm-it}
 tra_lm_it <- lmer(
     vowel_duration_z ~
-        TR_displacement_z +
-        c2place +
+        TR_displacement_z *
+        c2place *
         vowel *
         c2phonation +
         (1+TR_displacement_z|speaker) +
         (1|word),
-    data = filter(tongue_root, language == "italian")
+    data = filter(tongue_root, language == "italian"),
+    REML = FALSE, 
+    control = lmerControl(optimizer ="Nelder_Mead")
 )
 
 summary(tra_lm_it)
