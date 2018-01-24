@@ -21,13 +21,17 @@ languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
 words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 wavegram <- list.files(path = "./voicing-effect/data/datasets/egg",
-                   pattern = "*-wavegram.csv",
-                   full.names = TRUE) %>%
-    map_df(~read_csv(.)) %>%
-    left_join(y = languages) %>%
-    left_join(y = words) %>%
-    filter(c1phonation == "voiceless") %>%
-    mutate_if(is.character, as.factor)
+                 pattern = "*-wavegram.csv",
+                 full.names = TRUE) %>%
+  map_df(~read_csv(.)) %>%
+  left_join(y = languages) %>%
+  left_join(y = words) %>%
+  filter(c1phonation == "voiceless") %>%
+  mutate_if(is.character, as.factor) %>%
+  group_by(date) %>%
+  mutate(
+    sequence_prop = sequence / max(sequence)
+  )
 ```
 
 # Exploration
@@ -36,10 +40,10 @@ wavegram <- list.files(path = "./voicing-effect/data/datasets/egg",
 it01_gam <- bam(
     amplitude ~
         c2phonation +
-        s(sequence) + s(sample) +
-        s(sequence, by = c2phonation) + s(sample, by = c2phonation) +
-        ti(sequence, sample) +
-        ti(sequence, sample, by = c2phonation),
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = c2phonation) + s(sample, by = c2phonation) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = c2phonation),
     data = filter(wavegram, speaker == "it01")
 )
 ```
@@ -47,13 +51,13 @@ it01_gam <- bam(
 ```{r it01-gam-plot}
 fvisgam(
     it01_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     cond = list(c2phonation = "voiceless")
 )
 
 fvisgam(
     it01_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     cond = list(c2phonation = "voiced")
 )
 ```
@@ -118,11 +122,11 @@ fvisgam(
 italian_gam <- bam(
     amplitude ~
         c2phonation +
-        s(sequence) + s(sample) +
-        s(sequence, by = c2phonation) + s(sample, by = c2phonation) +
-        ti(sequence, sample) +
-        ti(sequence, sample, by = c2phonation) +
-        s(sequence, speaker, bs = "fs"),
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = c2phonation) + s(sample, by = c2phonation) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = c2phonation) +
+        s(sequence_prop, speaker, bs = "fs"),
     data = filter(wavegram, language == "italian")
 )
 ```
@@ -130,7 +134,7 @@ italian_gam <- bam(
 ```{r italian-gam-plot}
 fvisgam(
     italian_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     cond = list(c2phonation = "voiceless"),
 #    zlim = c(0, 1),
     rm.ranef = TRUE
@@ -138,7 +142,7 @@ fvisgam(
 
 fvisgam(
     italian_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     cond = list(c2phonation = "voiced"),
 #    zlim = c(0, 1),
     rm.ranef = TRUE
@@ -146,7 +150,7 @@ fvisgam(
 
 plot_diff2(
     italian_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     comp = list(c2phonation = c("voiced", "voiceless")),
     rm.ranef = TRUE
 )
@@ -156,11 +160,11 @@ plot_diff2(
 polish_gam <- bam(
     amplitude ~
         c2phonation +
-        s(sequence) + s(sample) +
-        s(sequence, by = c2phonation) + s(sample, by = c2phonation) +
-        ti(sequence, sample) +
-        ti(sequence, sample, by = c2phonation) +
-        s(sequence, speaker, bs = "fs"),
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = c2phonation) + s(sample, by = c2phonation) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = c2phonation) +
+        s(sequence_prop, speaker, bs = "fs"),
     data = filter(wavegram, language == "polish")
 )
 ```
@@ -168,7 +172,7 @@ polish_gam <- bam(
 ```{r polish-gam-plot}
 fvisgam(
     polish_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     cond = list(c2phonation = "voiceless"),
 #    zlim = c(0, 1),
     rm.ranef = TRUE
@@ -176,7 +180,7 @@ fvisgam(
 
 fvisgam(
     polish_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     cond = list(c2phonation = "voiced"),
 #    zlim = c(0, 1),
     rm.ranef = TRUE
@@ -184,7 +188,7 @@ fvisgam(
 
 plot_diff2(
     polish_gam,
-    view = c("sequence","sample"),
+    view = c("sequence_prop","sample"),
     comp = list(c2phonation = c("voiced", "voiceless")),
     rm.ranef = TRUE
 )
