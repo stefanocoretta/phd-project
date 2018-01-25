@@ -37,11 +37,11 @@ columns <- c(
     "TD.velocity.abs"
     )
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 splines.it <- list.files(
-    path = "./voicing-effect/results/ultrasound",
+    path = "./voicing-effect/data/datasets/ultrasound",
     pattern = "*-tongue-cart.tsv",
     full.names = TRUE
     ) %>%
@@ -53,7 +53,7 @@ splines.it <- list.files(
     mutate_if(is.character, as.factor)
 
 splines.pol.it <- list.files(
-    path = "./voicing-effect/results/ultrasound",
+    path = "./voicing-effect/data/datasets/ultrasound",
     pattern = "*-tongue-pol.tsv",
     full.names = TRUE
     ) %>%
