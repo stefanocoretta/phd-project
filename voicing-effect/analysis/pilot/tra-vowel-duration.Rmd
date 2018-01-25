@@ -262,7 +262,7 @@ distance <- NULL
 
 for (i in 1:length(radius)) {
   i_fan_line <- fan_line[i]
-  fan_line_idx <- which(angle == i_fan_line)
+  fan_line_idx <- which(fan_line == i_fan_line)
   i_phonation <- phonation[i]
   phonation_index <- which(phonation[fan_line_idx] != i_phonation)
   neighbours <- radius[phonation_index]
@@ -275,7 +275,7 @@ distance <- NULL
 
 for (i in 1:length(radius)) {
   i_fan_line <- fan_line[i]
-  fan_line_idx <- which(angle == i_fan_line)
+  fan_line_idx <- which(fan_line == i_fan_line)
   i_phonation <- phonation[i]
   phonation_index <- which(phonation[fan_line_idx] == "voiceless")
   i_vowel <- vowel[i_fan_line]
