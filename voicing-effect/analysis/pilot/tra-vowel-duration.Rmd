@@ -6,13 +6,16 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(lmerTest)
 library(effects)
+library(rticulate)
 ```
+
+# Read data
 
 ```{r read-data}
 columns <- c(
@@ -56,9 +59,40 @@ tongue_root <- list.files(path = "./voicing-effect/data/datasets/ultrasound/",
         vowel_duration_z = scale(vowel.duration),
         TR_displacement_z = scale(TR.displacement.sm)
     )
+
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+)
+
+tongue <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns)) %>%
+  filter(label %in% c("max_TT", "max_TD")) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = languages) %>%
+  left_join(y = words) %>%
+  left_join(y = vowels) %>%
+  mutate_if(is.character, as.factor) %>%
+  group_by(speaker) %>%
+  do(transform_coord(.))
 ```
 
 Vowel duration and tongue root displacement are normalised within each speaker using z-scores.
+
+# Using TR fan line
 
 ```{r tr-density}
 tongue_root %>%
@@ -120,7 +154,7 @@ tra_lm_it <- lmer(
         (1|word),
     data = filter(tongue_root, language == "italian"),
     REML = FALSE, 
-    control = lmerControl(optimizer ="Nelder_Mead")
+    control = lmerControl(optimizer = "Nelder_Mead")
 )
 
 summary(tra_lm_it)
@@ -204,4 +238,50 @@ anova(tra_lm_pl_null, tra_lm_pl)
 ```{r}
 plot(allEffects(tra_lm_pl))
 ```
+
+# Using average curve distance
+
+```{r it01-polar-plot}
+tongue %>%
+  filter(speaker == "it01") %>%
+  ggplot(aes(angle, radius, colour = c2phonation)) +
+  geom_point()
+```
+
+```{r}
+it01 <- tongue %>%
+  filter(speaker == "it01")
+
+radius <- it01$radius
+fan_line <- it01$fan_line
+phonation <- it01$c2phonation
+distance <- NULL
+
+for (i in 1:length(radius)) {
+  i_fan_line <- fan_line[i]
+  fan_line_idx <- which(angle == i_fan_line)
+  i_phonation <- phonation[i]
+  phonation_index <- which(phonation[fan_line_idx] != i_phonation)
+  neighbours <- radius[phonation_index]
+  i_distance <- mean(abs(radius[i] - radius[neighbours]))
+  
+  distance <- c(distance, i_distance)
+}
+
+it01$distance <- distance
+
+it01_dist <- it01 %>%
+  group_by(rec.date) %>%
+  summarise(distance = mean(distance)) %>%
+  left_join(y = vowels) %>%
+  left_join(y = words)
+```
+
+```{r}
+it01_dist %>%
+  ggplot(aes(distance, vowel.duration)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
 
