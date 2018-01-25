@@ -87,7 +87,8 @@ tongue <- list.files(
   left_join(y = vowels) %>%
   mutate_if(is.character, as.factor) %>%
   group_by(speaker) %>%
-  do(transform_coord(.))
+  do(transform_coord(.)) %>%
+  na.omit()
 ```
 
 Vowel duration and tongue root displacement are normalised within each speaker using z-scores.
@@ -291,6 +292,7 @@ for (i in 1:length(radius)) {
 it01$distance <- distance
 
 it01_dist <- it01 %>%
+  na.omit() %>%
   group_by(rec.date) %>%
   summarise(distance = mean(distance)) %>%
   left_join(y = vowels) %>%
