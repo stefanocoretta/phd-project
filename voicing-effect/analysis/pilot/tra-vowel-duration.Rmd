@@ -252,7 +252,7 @@ tongue %>%
 
 ```{r}
 it01 <- tongue %>%
-  filter(speaker == "it01")
+  filter(speaker == "it02")
 
 radius <- it01$radius
 fan_line <- it01$fan_line
@@ -278,12 +278,12 @@ for (i in 1:length(radius)) {
   i_fan_line <- fan_line[i]
   fan_line_idx <- which(fan_line == i_fan_line)
   i_phonation <- phonation[i]
-  phonation_index <- which(phonation[fan_line_idx] == "voiceless")
-  i_vowel <- vowel[i_fan_line]
-  vowel_index <- which(vowel[phonation_index] == i_vowel)
-  i_place <- place[i_fan_line]
-  place_index <- which(place[vowel_index] == i_place)
-  neighbours <- radius[place_index]
+  phonation_idx <- which(phonation[fan_line_idx] == "voiceless")
+  i_vowel <- vowel[i]
+  vowel_idx <- which(vowel[phonation_idx] == i_vowel)
+  i_place <- place[i]
+  place_idx <- which(place[vowel_idx] == i_place)
+  neighbours <- radius[place_idx]
   i_distance <- mean(abs(radius[i] - radius[neighbours]))
   
   distance <- c(distance, i_distance)
@@ -296,8 +296,7 @@ it01_dist <- it01 %>%
   group_by(rec.date) %>%
   summarise(distance = mean(distance)) %>%
   left_join(y = vowels) %>%
-  left_join(y = words) %>%
-  filter(distance < 13)
+  left_join(y = words)
 ```
 
 ```{r}
@@ -308,4 +307,108 @@ it01_dist %>%
   facet_grid(~ c2place)
 ```
 
+```{r}
+speakers <- levels(tongue$speaker)
+
+distance <- NULL
+
+for (speaker in 1:length(speakers)) {
+  speaker_tbl <- filter(tongue, speaker == speakers[speaker])
+  
+  radius <- speaker_tbl$radius
+  fan_line <- speaker_tbl$fan_line
+  phonation <- speaker_tbl$c2phonation
+  vowel <- speaker_tbl$vowel
+  place <- speaker_tbl$c2place
+  
+  for (i in 1:length(radius)) {
+    i_fan_line <- fan_line[i]
+    fan_line_idx <- which(fan_line == i_fan_line)
+    i_phonation <- phonation[i]
+    phonation_index <- which(phonation[fan_line_idx] == "voiceless")
+    i_vowel <- vowel[i_fan_line]
+    vowel_index <- which(vowel[phonation_index] == i_vowel)
+    i_place <- place[i_fan_line]
+    place_index <- which(place[vowel_index] == i_place)
+    neighbours <- radius[place_index]
+    i_distance <- mean(abs(radius[i] - radius[neighbours]))
+    distance <- c(distance, i_distance)
+  }
+}
+
+get_tongue_distance <- function(data) {
+  radius <- data$radius
+  fan_line <- data$fan_line
+  phonation <- data$c2phonation
+  vowel <- data$vowel
+  place <- data$c2place
+  
+  distance <- NULL
+  
+  for (i in 1:length(radius)) {
+    i_fan_line <- fan_line[i]
+    fan_line_idx <- which(fan_line == i_fan_line)
+#    i_phonation <- phonation[i]
+    phonation_idx <- which(phonation[fan_line_idx] == "voiceless")
+    i_vowel <- vowel[i]
+    vowel_idx <- which(vowel[phonation_idx] == i_vowel)
+    i_place <- place[i]
+    place_idx <- which(place[vowel_idx] == i_place)
+    neighbours <- radius[place_idx]
+    i_distance <- mean(abs(radius[i] - radius[neighbours]))
+    distance <- c(distance, i_distance)
+  }
+  
+  data$distance <- distance
+  return(data)
+}
+
+tongue_distance <- tongue %>%
+  group_by(speaker) %>%
+  do(get_tongue_distance(.)) %>%
+  na.omit() %>%
+  group_by(rec.date) %>%
+  summarise(distance = mean(distance)) %>%
+  left_join(y = vowels) %>%
+  left_join(y = languages) %>%
+  inner_join(y = words) %>%
+  mutate_if(is.character, as.factor)
+
+```
+
+```{r}
+tongue_distance %>%
+  filter(language == "italian") %>%
+  ggplot(aes(distance, vowel.duration, colour = vowel)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~speaker + c2place)
+```
+
+```{r}
+tongue_distance %>%
+  filter(language == "polish") %>%
+  ggplot(aes(distance, vowel.duration, colour = vowel)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~speaker + c2place)
+```
+
+```{r}
+distance_lm <- lmer(
+  vowel.duration ~
+    distance *
+    vowel *
+    c2place *
+    language +
+    (1+distance|speaker),
+  data = tongue_distance
+)
+
+summary(distance_lm)
+```
+
+```{r}
+plot(allEffects(distance_lm))
+```
 
