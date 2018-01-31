@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_bw())
+library(lmerTest)
+library(effects)
 ```
 
 # Data import
@@ -37,6 +39,11 @@ degg <- list.files(path = "./voicing-effect/data/datasets/egg",
         peaks_ratio = maximum / minimum
     ) %>%
     filter(minimum > 0, minimum < 1)
+
+min_activity <- degg %>%
+  group_by(language, c2phonation_o, date) %>%
+  summarise(peaks_ratio = min(peaks_ratio)) %>%
+  left_join(y = degg)
 ```
 
 # Data exploration
@@ -203,8 +210,9 @@ The peaks ratio is `dEGG_max / dEGG_min`.
 ```{r peaks-ratio-speaker}
 degg %>%
     ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
-    geom_smooth() +
-    facet_wrap(~ speaker, nrow = 2)
+  geom_smooth() +
+  facet_wrap(~ speaker, nrow = 2) +
+  xlim(0.1, 0.9)
 ```
 
 Yes, this clearly works.
@@ -233,3 +241,25 @@ degg %>%
   geom_smooth() +
   xlim(0.1, 0.9)
 ```
+
+```{r}
+min_activity %>%
+  ggplot(aes(c2phonation_o, proportion, colour = language)) +
+  geom_boxplot()
+```
+
+```{r}
+min_activity_lm <- lmer(
+  proportion ~
+    language *
+    c2phonation_o +
+    (1|speaker),
+  data = min_activity
+)
+summary(min_activity_lm)
+```
+
+```{r}
+plot(allEffects(min_activity_lm))
+```
+
