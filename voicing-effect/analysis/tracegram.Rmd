@@ -146,6 +146,15 @@ degg %>%
         cq_layers
 ```
 
+```{r cq-language-voiceless}
+degg %>%
+  filter(c2phonation_o == "voiceless") %>%
+    ggplot(aes(proportion, closed_quotient, colour = language, linetype = language)) +
+        geom_point(size = 0.2, alpha = 0.1) +
+        geom_smooth(alpha = 0.5) +
+        cq_layers
+```
+
 ## Closed Quotient Centre
 
 ```{r cq-centre-speaker}
@@ -190,3 +199,17 @@ degg %>%
 ```
 
 Yes, this clearly works.
+
+```{r peaks-ratio-language}
+degg %>%
+    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_wrap(~ language)
+```
+
+```{r peaks-ratio-language-voiceless}
+degg %>%
+  filter(c2phonation_o == "voiceless") %>%
+    ggplot(aes(proportion, peaks_ratio, colour = language, linetype = language)) +
+    geom_smooth()
+```
