@@ -15,10 +15,10 @@ theme_set(theme_bw())
 # Data import
 
 ```{r import}
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
-degg <- list.files(path = "./voicing-effect/results/egg",
+degg <- list.files(path = "./voicing-effect/data/datasets/egg",
                    pattern = "*-degg-tracing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.)) %>%
