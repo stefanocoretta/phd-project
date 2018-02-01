@@ -295,7 +295,7 @@ ggsave("img/speaker-cq.pdf")
 ```{r speaker-tracegram}
 ggplot(degg_tracing, aes(time, value, colour = peak, linetype = peak)) +
   geom_smooth(size = 1, method = "loess", se = FALSE) +
-  xlab("Relative time (proportion of vowel duration)") +
+  xlab("Proportion of vowel duration") +
   ylab("Proportion of glottal period") +
   facet_grid(speaker ~ phonation) +
   ylim(0, 1) +
