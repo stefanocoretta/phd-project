@@ -1117,7 +1117,7 @@ endform
 
 vuvDirectory$ = "../data/egg/derived/'speaker$'"
 recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
-resultsFile$ = "../datasets/egg/'speaker$'-voicing.csv"
+resultsFile$ = "../data/datasets/egg/'speaker$'-voicing.csv"
 resultsHeader$ = "index,speaker,file,rec.date,word,voicing.start,voicing.end,voicing.duration,sentence.duration"
 writeFileLine: resultsFile$, resultsHeader$
 
