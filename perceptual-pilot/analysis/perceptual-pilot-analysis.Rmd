@@ -15,8 +15,12 @@ theme_set(theme_minimal())
 # Import data
 
 ```{r import}
-pilot <- read_csv("./perceptual-pilot/experiment/data/f001_perceptual-pilot_2018_Jan_11_1419.csv") %>%
-    mutate_if(is.character, as.factor)
+pilot <- list.files(
+  path = "./perceptual-pilot/experiment/results/",
+  pattern = "*.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., col_types = cols(.default = "c")))
 ```
 
 # Explore
