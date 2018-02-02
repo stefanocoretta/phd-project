@@ -33,13 +33,13 @@ The text in this file is outdated. More data is now now available and the result
 Let's read the files.
 
 ```{r read-files}
-vowels <- list.files(path = "voicing-effect/results/durations",
-                   pattern = "*-vowel-durations.csv",
+vowels <- list.files(path = "voicing-effect/data/datasets/acoustics/",
+                   pattern = "*-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--"))
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 
 vowels <- left_join(vowels, languages) %>%
@@ -50,7 +50,7 @@ vowels <- left_join(vowels, languages) %>%
 vowels.it <- filter(vowels, language == "italian")
 vowels.pl <- filter(vowels, language == "polish")
 
-voicing <- list.files(path = "voicing-effect/results/cached",
+voicing <- list.files(path = "voicing-effect/data/datasets/cached",
                    pattern = "*-voicing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%
@@ -510,6 +510,18 @@ ggplot(voicing.voiceless, aes(vowel, voicing.duration)) +
     facet_grid(c2place ~ speaker)
 ```
 
+```{r voicing-duration-plot}
+voicing.voiceless %>%
+  ggplot(aes(vowel, voicing.duration)) +
+  geom_boxplot()
+```
+
+```{r voicing-duration-language-plot}
+voicing.voiceless %>%
+  ggplot(aes(language, voicing.duration, colour = vowel)) +
+  geom_boxplot()
+```
+
 ```{r voicing-lmer-it}
 voicing.model.it <- lmer(
     voicing.duration ~
@@ -565,6 +577,26 @@ mixed(
 ```{r voicing-lmer-pl-effect-plot}
 plot(allEffects(voicing.model.pl))
 ```
+
+```{r voicing-lmer}
+voicing_lm <- lmer(
+  voicing.duration ~
+    vowel *
+    language +
+#    c2place +
+#    sentence.duration +
+    (1|word) +
+    (1|speaker),
+  data = voicing.voiceless
+)
+
+summary(voicing_lm)
+```
+
+```{r}
+plot(allEffects(voicing_lm))
+```
+
 
 ## Voicing duration and closure duration
 
