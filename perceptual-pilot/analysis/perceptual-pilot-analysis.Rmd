@@ -20,7 +20,13 @@ pilot <- list.files(
   pattern = "*.csv",
   full.names = TRUE
 ) %>%
-  map_df(~read_csv(., col_types = cols(.default = "c")))
+  map_df(~read_csv(., col_types = cols(.default = "c"))) %>%
+  mutate(
+    key_resp_2.keys = ifelse(key_resp_2.keys == "z", "d", "t"),
+    key_resp_8.keys = ifelse(key_resp_8.keys == "z", "t", "d"),
+    response = coalesce(key_resp_2.keys, key_resp_8.keys)
+  ) %>%
+  filter(!is.na(response))
 ```
 
 # Explore
