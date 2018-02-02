@@ -50,7 +50,7 @@ vowels <- left_join(vowels, languages) %>%
 vowels.it <- filter(vowels, language == "italian")
 vowels.pl <- filter(vowels, language == "polish")
 
-voicing <- list.files(path = "voicing-effect/data/datasets/cached",
+voicing <- list.files(path = "voicing-effect/data/datasets/egg",
                    pattern = "*-voicing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%
@@ -60,7 +60,9 @@ voicing <- list.files(path = "voicing-effect/data/datasets/cached",
     mutate(index = as.factor(index)) %>%
     left_join(y = vowels)
 
-voicing.voiceless <- filter(voicing, c1phonation == "voiceless", c2phonation == "voiceless")
+voicing.voiceless <- filter(voicing, c1phonation == "voiceless", c2phonation == "voiceless") %>%
+  group_by(speaker) %>%
+  mutate(voicing_duration = scale(voicing.duration))
 voicing.voiceless.it <- filter(voicing.voiceless, language == "italian")
 voicing.voiceless.pl <- filter(voicing.voiceless, language == "polish")
 ```
@@ -595,6 +597,32 @@ summary(voicing_lm)
 
 ```{r}
 plot(allEffects(voicing_lm))
+```
+
+```{r}
+voicing.voiceless %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r}
+voicing_lm_scaled <- lmer(
+  voicing_duration ~
+    vowel *
+    language +
+#    c2place +
+#    sentence.duration +
+    (1|word) +
+    (1|speaker),
+  data = voicing.voiceless
+)
+
+summary(voicing_lm_scaled)
+```
+
+```{r}
+plot(allEffects(voicing_lm_scaled))
 ```
 
 
