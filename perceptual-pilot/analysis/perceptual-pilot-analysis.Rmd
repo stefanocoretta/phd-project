@@ -24,7 +24,10 @@ pilot <- list.files(
   mutate(
     key_resp_2.keys = ifelse(key_resp_2.keys == "z", "d", "t"),
     key_resp_8.keys = ifelse(key_resp_8.keys == "z", "t", "d"),
-    response = coalesce(key_resp_2.keys, key_resp_8.keys)
+    response = coalesce(key_resp_2.keys, key_resp_8.keys),
+    response = factor(response, levels = c("t", "d")),
+    burst = as.numeric(burst),
+    voicing = as.numeric(voicing)
   ) %>%
   filter(!is.na(response))
 ```
@@ -33,16 +36,14 @@ pilot <- list.files(
 
 ```{r}
 pilot %>%
-    filter(!is.na(key_resp_2.keys), condition == "burst") %>%
-    ggplot(aes(burst, as.numeric(key_resp_2.keys))) +
-#    geom_point() +
+    filter(condition == "burst") %>%
+    ggplot(aes(burst, as.numeric(response))) +
     geom_smooth(method = "loess")
 ```
 
 ```{r}
 pilot %>%
-    filter(!is.na(key_resp_2.keys), condition == "voicing") %>%
-    ggplot(aes(voicing, as.numeric(key_resp_2.keys))) +
-#    geom_point() +
+    filter(condition == "voicing") %>%
+    ggplot(aes(voicing, as.numeric(response))) +
     geom_smooth(method = "loess")
 ```
