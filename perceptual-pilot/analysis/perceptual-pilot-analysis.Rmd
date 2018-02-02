@@ -38,12 +38,14 @@ pilot <- list.files(
 pilot %>%
     filter(condition == "burst") %>%
     ggplot(aes(burst, as.numeric(response))) +
-    geom_smooth(method = "loess")
+    geom_smooth(method = "loess", se = FALSE) +
+  ylim(1, 2)
 ```
 
 ```{r}
 pilot %>%
     filter(condition == "voicing") %>%
     ggplot(aes(voicing, as.numeric(response))) +
-    geom_smooth(method = "loess")
+    geom_smooth(method = "loess", se = FALSE) +
+  ylim(1, 2)
 ```
