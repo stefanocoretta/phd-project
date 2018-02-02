@@ -607,6 +607,13 @@ voicing.voiceless %>%
 ```
 
 ```{r}
+voicing.voiceless %>%
+  ggplot(aes(voicing_duration, colour = vowel)) +
+  geom_density() +
+  facet_grid(~ language)
+```
+
+```{r}
 voicing_lm_scaled <- lmer(
   voicing_duration ~
     vowel *
