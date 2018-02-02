@@ -18,6 +18,7 @@ library(mgcv)
 library(itsadug)
 library(tidymv)
 library(plotrix)
+library(scales)
 ```
 
 # Read data
@@ -846,5 +847,101 @@ plot_polar_smooths(
     c2phonation,
     facet_terms = c2place ~ vowel
 )
+```
+
+# Try rescale with polar coordinates
+
+```{r}
+splines_it <- splines.it %>%
+  group_by(speaker) %>%
+  do(transform_coord(.)) %>%
+  mutate(
+    angle_norm = scales::rescale(angle),
+    radius_norm = scales::rescale(radius),
+    vowel = ordered(vowel, levels = c("a", "o", "u")),
+    c2place = ordered(c2place, levels = c("coronal", "velar")),
+    c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+    vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+    place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+) %>%
+  ungroup() %>%
+  arrange(rec.date, fan_line) %>%
+  create_event_start("rec.date") %>%
+  droplevels()
+```
+
+```{r}
+splines_it %>%
+  filter(vowel == "a") %>%
+  ggplot(aes(angle_norm, radius, colour = c2phonation)) +
+  geom_point(alpha = 0.2) +
+  facet_grid(c2place ~ speaker)
+```
+
+```{r}
+splines_it %>%
+  ggplot(aes(angle_norm, radius, colour = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ speaker)
+```
+
+```{r}
+splines_it %>%
+  ggplot(aes(angle_norm, radius_norm, colour = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ speaker)
+```
+
+```{r}
+splines_it %>%
+  ggplot(aes(angle, radius, colour = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ speaker)
+```
+
+```{r}
+tongue_it_gam <- bam(
+  radius ~
+    c2phonation +
+    c2place +
+    vowel +
+    s(angle_norm) +
+    s(angle_norm, by = c2phonation) +
+    s(angle_norm, by = c2place) +
+    s(angle_norm, by = vowel),
+  data = splines_it
+)
+
+rho <- start_value_rho(tongue_it_gam)
+
+tongue_it_gam_ar <- bam(
+  radius ~
+    c2phonation +
+    c2place +
+    vowel +
+    s(angle_norm) +
+    s(angle_norm, by = c2phonation) +
+    s(angle_norm, by = c2place) +
+    s(angle_norm, by = vowel) +
+    s(angle_norm, speaker, bs = "fs"),
+  data = splines_it,
+  AR.start = splines_it$start.event,
+  rho = rho
+)
+
+summary(tongue_it_gam_ar)
+```
+
+```{r}
+plot_smooths(
+  tongue_it_gam_ar,
+  angle_norm,
+  c2phonation,
+  c2place + vowel
+)
+```
+
+```{r}
+acf_resid(tongue_it_gam_ar, split_pred = "AR.start")
 ```
 
