@@ -123,6 +123,14 @@ praat_run(
 )
 ```
 
+```{r voicing-duration}
+speakers <- c("it01", "it02", "it03", "it07", "pl02", "pl03", "pl04", "pl05")
+
+for (i in 1:length(speakers)) {
+  praat_run("./voicing-effect/code/voicing-duration.praat", speakers[i])
+}
+```
+
 
 ## `AAA` files extensions
 * `.esu`: tabs in the main window
