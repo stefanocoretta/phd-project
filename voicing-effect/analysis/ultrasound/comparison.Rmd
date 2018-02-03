@@ -945,3 +945,22 @@ plot_smooths(
 acf_resid(tongue_it_gam_ar, split_pred = "AR.start")
 ```
 
+```{r}
+tongue_it_pred <- get_gam_predictions(
+  tongue_it_gam_ar,
+  angle_norm
+) %>%
+  mutate(
+    angle = scales::rescale(angle_norm, to = c(4.214744, 5.842607))
+  ) %>%
+  transform_coord(., to = "cartesian", origin = c(14.3900792705248, -65.231492830589)) %>%
+  transform_ci(origin = c(14.3900792705248, -65.231492830589))
+```
+
+```{r}
+tongue_it_pred %>%
+  ggplot(aes(X, Y, colour = c2phonation, linetype = c2phonation)) +
+  geom_path() +
+  facet_grid(c2place ~ vowel)
+```
+
