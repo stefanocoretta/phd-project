@@ -76,6 +76,44 @@
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
     </Routine>
+    <Routine name="end">
+      <TextComponent name="text_14">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_14" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="L'esperimento è finito!&amp;#10;&amp;#10;Grazie!&amp;#10;&amp;#10;Premi la barra spaziatrice per uscire." valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_13">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_13" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.8" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
     <Routine name="feedback">
       <CodeComponent name="code">
         <Param name="Begin Experiment" updates="constant" val="msg='doh!'" valType="extendedCode"/>
@@ -587,7 +625,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'index': 1, 'correct_answer': u'z', 'vowel': u'a', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 2, 'correct_answer': u'slash', 'vowel': u'a', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 3, 'correct_answer': u'z', 'vowel': u'i', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 4, 'correct_answer': u'slash', 'vowel': u'i', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'side_condition': u't_right', 'condition': u'voicing'}, {'index': 5, 'correct_answer': u'z', 'vowel': u'u', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'side_condition': u't_right', 'condition': u'confound'}, {'index': 6, 'correct_answer': u'slash', 'vowel': u'u', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'z', 'side_condition': u't_right', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'slash', 'side_condition': u't_right', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train"/>
@@ -627,7 +665,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="2" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'index': 1, 'correct_answer': u'slash', 'vowel': u'a', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pada.wav', 'side_condition': u't_left', 'condition': u'confound'}, {'index': 2, 'correct_answer': u'z', 'vowel': u'a', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/pata0.wav', 'side_condition': u't_left', 'condition': u'voicing'}, {'index': 3, 'correct_answer': u'slash', 'vowel': u'i', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pidi.wav', 'side_condition': u't_left', 'condition': u'confound'}, {'index': 4, 'correct_answer': u'z', 'vowel': u'i', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/piti0.wav', 'side_condition': u't_left', 'condition': u'voicing'}, {'index': 5, 'correct_answer': u'slash', 'vowel': u'u', 'burst': 0, 'voicing': 5, 'file_name': u'../data/raw/stimuli/pudu.wav', 'side_condition': u't_left', 'condition': u'confound'}, {'index': 6, 'correct_answer': u'z', 'vowel': u'u', 'burst': 5, 'voicing': 0, 'file_name': u'../data/raw/stimuli/putu0.wav', 'side_condition': u't_left', 'condition': u'voicing'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'file_name': u'../data/raw/stimuli/pada.wav', 'index': 1, 'vowel': u'a', 'burst': 0, 'voicing': 5, 'correct_answer': u'slash', 'side_condition': u't_left', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/pata0.wav', 'index': 2, 'vowel': u'a', 'burst': 5, 'voicing': 0, 'correct_answer': u'z', 'side_condition': u't_left', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pidi.wav', 'index': 3, 'vowel': u'i', 'burst': 0, 'voicing': 5, 'correct_answer': u'slash', 'side_condition': u't_left', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/piti0.wav', 'index': 4, 'vowel': u'i', 'burst': 5, 'voicing': 0, 'correct_answer': u'z', 'side_condition': u't_left', 'condition': u'voicing'}, {'file_name': u'../data/raw/stimuli/pudu.wav', 'index': 5, 'vowel': u'u', 'burst': 0, 'voicing': 5, 'correct_answer': u'slash', 'side_condition': u't_left', 'condition': u'confound'}, {'file_name': u'../data/raw/stimuli/putu0.wav', 'index': 6, 'vowel': u'u', 'burst': 5, 'voicing': 0, 'correct_answer': u'z', 'side_condition': u't_left', 'condition': u'voicing'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="train_2"/>
@@ -648,5 +686,6 @@
     <Routine name="trial_2"/>
     <LoopTerminator name="trials_6"/>
     <LoopTerminator name="trials_4"/>
+    <Routine name="end"/>
   </Flow>
 </PsychoPy2experiment>
