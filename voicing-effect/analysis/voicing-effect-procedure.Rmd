@@ -22,9 +22,9 @@ lmt("./voicing-effect/code/process.praat.md")
 
 ## Ultrasound data
 
-1. **Export** `.wav` and `.txt` from `AAA` to `/data/derived/ultrasound/[ID]/audio` folder ([ID] = participant ID) as [ID]-00n.wav
+1. **Export** `.wav` and `.txt` from `AAA` to `/data/ultrasound/derived/[ID]/recordings` folder ([ID] = participant ID) as [ID]-nnn.wav
 1. **Force alignment and search area**
-   1. Run `alignment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `/data/derived/ultrasound/[ID]/alignment`
+   1. Run `alignment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `/data/ultrasound/derived/[ID]/concatenated`
    1. Make sure the `.txt` contains "Mowie" (unicode safe because of AAA)
    1. **WARNING OVERWRITE** Run SPPAS on concatenated `.wav` and `.txt`
    1. Check alignment
