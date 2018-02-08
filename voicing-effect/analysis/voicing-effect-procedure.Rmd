@@ -27,7 +27,7 @@ lmt("./voicing-effect/code/process.praat.md")
    1. Run `alignment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `/data/ultrasound/derived/[ID]/concatenated`
    1. Make sure the `.txt` contains "Mowie" (unicode safe because of AAA)
    1. **WARNING OVERWRITE** Run SPPAS on concatenated `.wav` and `.txt`
-   1. Check alignment
+   1. Check alignment and save it to `data/ultrasound/raw/corrected-palign/`
    1. Run `search-area.praat`: the output is TextGrid files for each `AAA` `.wav` file, saved in `/data/derived/ultrasound/[ID]/audio`, and a merged TextGrid, saved in `/data/derived/ultrasound/[ID]/alignment`
         1. **NOTE**: Needed for EGG processing!
    1. Import TextGrids back in `AAA`
