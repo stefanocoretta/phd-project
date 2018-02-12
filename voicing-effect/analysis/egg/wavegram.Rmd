@@ -193,3 +193,79 @@ plot_diff2(
     rm.ranef = TRUE
 )
 ```
+
+```{r voiceless-gam}
+voiceless_gam <- bam(
+    amplitude ~
+        language +
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = language) + s(sample, by = language) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = language) +
+        s(sequence_prop, speaker, bs = "fs"),
+    data = filter(wavegram, c2phonation == "voiceless")
+)
+```
+
+```{r voiceless-gam-plot}
+fvisgam(
+    voiceless_gam,
+    view = c("sequence_prop","sample"),
+    cond = list(language = "italian"),
+    zlim = c(0, 1),
+    rm.ranef = TRUE
+)
+
+fvisgam(
+    voiceless_gam,
+    view = c("sequence_prop","sample"),
+    cond = list(language = "polish"),
+    zlim = c(0, 1),
+    rm.ranef = TRUE
+)
+
+plot_diff2(
+    voiceless_gam,
+    view = c("sequence_prop","sample"),
+    comp = list(language = c("polish", "italian")),
+    rm.ranef = TRUE
+)
+```
+
+```{r voiced-gam}
+voiced_gam <- bam(
+    amplitude ~
+        language +
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = language) + s(sample, by = language) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = language) +
+        s(sequence_prop, speaker, bs = "fs"),
+    data = filter(wavegram, c2phonation == "voiced")
+)
+```
+
+```{r voiced-gam-plot}
+fvisgam(
+    voiced_gam,
+    view = c("sequence_prop","sample"),
+    cond = list(language = "italian"),
+    zlim = c(0, 1),
+    rm.ranef = TRUE
+)
+
+fvisgam(
+    voiced_gam,
+    view = c("sequence_prop","sample"),
+    cond = list(language = "polish"),
+    zlim = c(0, 1),
+    rm.ranef = TRUE
+)
+
+plot_diff2(
+    voiced_gam,
+    view = c("sequence_prop","sample"),
+    comp = list(language = c("polish", "italian")),
+    rm.ranef = TRUE
+)
+```
