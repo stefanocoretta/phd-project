@@ -234,7 +234,7 @@ plot_diff2(
 )
 ```
 
-There is a difference in activity towards the end of the vowel.
+There is a difference in activity towards the end of the vowel. I am not sure how to interpret these results though.
 
 ```{r}
 plot_smooth(
