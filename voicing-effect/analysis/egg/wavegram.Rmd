@@ -240,14 +240,14 @@ There is a difference in activity towards the end of the vowel.
 plot_smooth(
   voiceless_gam,
   view = "sample",
-  cond = list(sequence_prop = 0.6),
+  cond = list(sequence_prop = 0.1),
   rm.ranef = TRUE,
   col = "red"
 )
 plot_smooth(
   voiceless_gam,
   view = "sample",
-  cond = list(sequence_prop = 0.8),
+  cond = list(sequence_prop = 0.5),
   rm.ranef = TRUE,
   add = TRUE,
   col = "green"
@@ -266,14 +266,14 @@ plot_smooth(
 plot_smooth(
   voiceless_gam,
   view = "sample",
-  cond = list(sequence_prop = 0.6, language = "polish"),
+  cond = list(sequence_prop = 0.5, language = "polish"),
   rm.ranef = TRUE,
   col = "red"
 )
 plot_smooth(
   voiceless_gam,
   view = "sample",
-  cond = list(sequence_prop = 0.8, language = "polish"),
+  cond = list(sequence_prop = 0.7, language = "polish"),
   rm.ranef = TRUE,
   add = TRUE,
   col = "green"
@@ -281,7 +281,7 @@ plot_smooth(
 plot_smooth(
   voiceless_gam,
   view = "sample",
-  cond = list(sequence_prop = 0.95, language = "polish"),
+  cond = list(sequence_prop = 0.9, language = "polish"),
   rm.ranef = TRUE,
   add = TRUE,
   col = "blue"
