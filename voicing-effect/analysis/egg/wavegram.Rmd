@@ -194,6 +194,8 @@ plot_diff2(
 )
 ```
 
+## Voiceless stops in Italian and Polish
+
 ```{r voiceless-gam}
 voiceless_gam <- bam(
     amplitude ~
@@ -231,6 +233,116 @@ plot_diff2(
     rm.ranef = TRUE
 )
 ```
+
+There is a difference in activity towards the end of the vowel.
+
+```{r}
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.6),
+  rm.ranef = TRUE,
+  col = "red"
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.8),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "green"
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.95),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "blue"
+)
+```
+
+```{r}
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.6, language = "polish"),
+  rm.ranef = TRUE,
+  col = "red"
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.8, language = "polish"),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "green"
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.95, language = "polish"),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "blue"
+)
+```
+
+```{r}
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.7),
+  rm.ranef = TRUE,
+  col = "red",
+  ylim = c(0, 1)
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.7, language = "polish"),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "green",
+  ylim = c(0, 1)
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.8),
+  rm.ranef = TRUE,
+  col = "red",
+  ylim = c(0, 1)
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.8, language = "polish"),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "green",
+  ylim = c(0, 1)
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.9),
+  rm.ranef = TRUE,
+  col = "red",
+  ylim = c(0, 1)
+)
+plot_smooth(
+  voiceless_gam,
+  view = "sample",
+  cond = list(sequence_prop = 0.9, language = "polish"),
+  rm.ranef = TRUE,
+  add = TRUE,
+  col = "green",
+  ylim = c(0, 1)
+)
+```
+
+## Voiced stops in Italian and Polish
 
 ```{r voiced-gam}
 voiced_gam <- bam(
