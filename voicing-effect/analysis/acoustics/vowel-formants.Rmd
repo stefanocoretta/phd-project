@@ -1,0 +1,39 @@
+---
+title: "Vowel formants and fundamental frequency"
+author: "Stefano Coretta"
+date: "12/02/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+# Data import
+
+```{r}
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+formants <- list.files(
+  path = "voicing-effect/data/datasets/acoustics/",
+  pattern = "*-formants.csv",
+  full.names = TRUE
+) %>%
+    map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = words) %>%
+  mutate_if(is.character, as.factor)
+```
+
+# Exploration
+
+```{r}
+formants %>%
+  ggplot(aes(time, f1, colour = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ vowel)
+```
+
