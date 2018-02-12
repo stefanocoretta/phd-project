@@ -263,3 +263,9 @@ summary(min_activity_lm)
 plot(allEffects(min_activity_lm))
 ```
 
+```{r}
+min_activity %>%
+  ggplot(aes(c2phonation_o, proportion, colour = speaker)) +
+  geom_boxplot() +
+  facet_grid(. ~ language)
+```
