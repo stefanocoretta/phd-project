@@ -130,11 +130,10 @@ ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
     geom_smooth(size = 0.5, method = "lm") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
-    facet_wrap(~ speaker) +
-    ylim(0, 1)
+    facet_wrap(~ speaker)
 ```
 
-Mean dEGG cannot accout for concomitant symmettric increase and decrise of minimum and maximum: the mean stays the same.
+Mean dEGG cannot accout for concomitant symmetric increase and decrease of minimum and maximum: the mean stays the same.
 
 ```{r mean-tracegram-plot}
 ggplot(mean_degg_tracing, aes(time, mean_degg, colour = phonation)) +
