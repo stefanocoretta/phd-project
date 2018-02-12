@@ -283,7 +283,7 @@ As noted in voicing-effect, the peaks ratio works well, here even with S03.
 
 # Figures
 
-```{r speaker-cq}
+```{r speaker-cq, eval=FALSE}
 ggplot(quotient, aes(phonation, contact_quotient)) +
   geom_boxplot() +
   facet_wrap(~ speaker) +
@@ -292,7 +292,7 @@ ggplot(quotient, aes(phonation, contact_quotient)) +
 ggsave("img/speaker-cq.pdf")
 ```
 
-```{r speaker-tracegram}
+```{r speaker-tracegram, eval=FALSE}
 ggplot(degg_tracing, aes(time, value, colour = peak, linetype = peak)) +
   geom_smooth(size = 1, method = "loess", se = FALSE) +
   xlab("Proportion of vowel duration") +
