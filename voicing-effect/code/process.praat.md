@@ -1361,7 +1361,7 @@ form Get formants and fundamental frequency
   word speaker it01
 endform
 
-result_header$ = "speaker,file,word,vowel,time,f1,f2,f3,f0"
+result_header$ = "speaker,file,word,time,f1,f2,f3,f0"
 result_file$ = "../data/datasets/acoustics/'speaker$'-formants.csv"
 writeFileLine: result_file$, result_header$
 
@@ -1416,7 +1416,7 @@ if vowel$ != ""
     selectObject: pitch
     f0 = Get value at time: time, "Hertz", "Linear"
 
-    result_line$ = "'speaker$','file_bare$','word$','vowel$','time_point','f1','f2','f3','f0'"
+    result_line$ = "'speaker$','file_bare$','word$','time_point','f1','f2','f3','f0'"
     appendFileLine: result_file$, result_line$
   endfor
 
