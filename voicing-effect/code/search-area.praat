@@ -48,7 +48,6 @@ directory_alignment$ = "../data/ultrasound/derived/
 directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
 palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
-palign.o = Read from file: "'directory_alignment$'/'speaker$'-palign.TextGrid"
 selectObject: palign
 
 intervals = Get number of intervals: 1
@@ -126,7 +125,7 @@ for interval from 1 to intervals
     Write to text file: "'directory_audio$'/'filename$'.TextGrid"
     Remove
 
-    selectObject: palign.o
+    selectObject: palign
     Extract part: start, end, "no"
     Write to text file: "'directory_audio$'/'filename$'-palign.TextGrid"
     Remove
