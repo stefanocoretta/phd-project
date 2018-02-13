@@ -65,10 +65,10 @@ for file from 1 to files
 
     Extract one channel: 2
     
-    Filter (pass Hann band): lower, upper, 100
+    noprogress Filter (pass Hann band): lower, upper, 100
     @smoothing: smooth_width
     
-    To PointProcess (periodic, cc): 75, 600
+    noprogress To PointProcess (periodic, cc): 75, 600
     
     To TextGrid (vuv): 0.02, 0.001
 

@@ -483,10 +483,10 @@ To calculate voiced and voicelss intervals, we can exploit the already available
 ```praat
 Extract one channel: 2
 
-Filter (pass Hann band): lower, upper, 100
+noprogress Filter (pass Hann band): lower, upper, 100
 @smoothing: smooth_width
 
-To PointProcess (periodic, cc): 75, 600
+noprogress To PointProcess (periodic, cc): 75, 600
 
 To TextGrid (vuv): 0.02, 0.001
 ```
@@ -1359,7 +1359,14 @@ For each glottal period, the normalised amplitude is calculated for each sample 
 
 form Get formants and fundamental frequency
   word speaker it01
+  word sex f
 endform
+
+if sex$ == "f"
+  max_formant = 5500
+else
+  max_formant = 5000
+endif
 
 result_header$ = "speaker,file,word,time,f1,f2,f3,f0"
 result_file$ = "../data/datasets/acoustics/'speaker$'-formants.csv"
@@ -1399,7 +1406,7 @@ if vowel$ != ""
 
   selectObject: sound
   sound_vowel = Extract part: vowel_start - 0.5, vowel_end + 0.5, "rectangular", 1, "yes"
-  formant = noprogress To Formant (burg): 0, 5, 5000, 0.025, 50
+  formant = noprogress To Formant (burg): 0, 5, max_formant, 0.025, 50
   selectObject: sound
   pitch = noprogress To Pitch: 0, 75, 600
   selectObject: palign
