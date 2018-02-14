@@ -17,7 +17,7 @@ library(tidymv)
 # Data import
 
 ```{r import}
-languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 wavegram <- list.files(path = "./voicing-effect/data/datasets/egg",
