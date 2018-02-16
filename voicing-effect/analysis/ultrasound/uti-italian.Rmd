@@ -52,7 +52,6 @@ splines.it <- list.files(
     filter(language == "italian") %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor) %>%
-    filter(vowel != "u") %>%
     droplevels()
     
 
