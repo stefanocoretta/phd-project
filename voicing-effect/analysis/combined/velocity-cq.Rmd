@@ -45,13 +45,13 @@ columns <- c(
     "TD.velocity.abs"
     )
 
-velocity <- list.files(path = "./voicing-effect/results",
+velocity <- list.files(path = "./voicing-effect/data/datasets/cached/",
                    pattern = "*-velocity-profiles.csv",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns, na = "*"))
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+words <- read_csv("./voicing-effect//data/datasets/stimuli.csv")
 
 velocity <- velocity %>%
     mutate(word = word(prompt, 2)) %>%
