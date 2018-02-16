@@ -38,7 +38,7 @@ columns <- c(
     "TD.velocity.abs"
     )
 
-languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 splines.it <- list.files(
