@@ -11,7 +11,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = normalizePath("../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 library(stringr)
 library(cowplot)
@@ -38,11 +38,11 @@ columns <- c(
     "TD.velocity.abs"
     )
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 splines.it <- list.files(
-    path = "./voicing-effect/results/ultrasound",
+    path = "./voicing-effect/data/datasets/ultrasound",
     pattern = "*-tongue-cart.tsv",
     full.names = TRUE
     ) %>%
@@ -57,7 +57,7 @@ splines.it <- list.files(
     
 
 splines.clos.it <- list.files(
-    path = "./voicing-effect/results/ultrasound",
+    path = "./voicing-effect/data/datasets/ultrasound",
     pattern = "*-tongue-clos-cart.tsv",
     full.names = TRUE
     ) %>%
