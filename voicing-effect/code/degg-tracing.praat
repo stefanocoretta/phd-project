@@ -121,26 +121,32 @@ for file to files
         
             if period <= mean_period * 2
                 selectObject: "PointProcess degg_smooth"
-                degg_maximum_point_1 = Get nearest index: egg_minimum_1
-                degg_maximum = Get time from index: degg_maximum_point_1
+                pp_degg_points = Get number of points
         
-                if degg_maximum <= egg_minimum_1
-                    degg_maximum = Get time from index: degg_maximum_point_1 + 1
+                if pp_degg_points != 0
+                  degg_maximum_point_1 = Get nearest index: egg_minimum_1
+                  degg_maximum = Get time from index: degg_maximum_point_1
+        
+                  if degg_maximum <= egg_minimum_1
+                      degg_maximum = Get time from index: degg_maximum_point_1 + 1
+                  endif
+        
+                  if degg_maximum != undefined
+                    selectObject: "Sound degg_smooth"
+                    degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
+        
+                    degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
+                    degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
+        
+                    time = egg_minimum_1 - start
+                    proportion = (egg_minimum_1 - start) / (end - start)
+        
+                    result_line$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1',
+                        ...'time','proportion','degg_maximum_rel','degg_minimum_rel'"
+        
+                    appendFileLine: "'result_file$'", "'result_line$'"
+                  endif
                 endif
-        
-                selectObject: "Sound degg_smooth"
-                degg_minimum = Get time of minimum: degg_maximum, egg_minimum_2, "Sinc70"
-        
-                degg_maximum_rel = (degg_maximum - egg_minimum_1) / period
-                degg_minimum_rel = (degg_minimum - egg_minimum_1) / period
-        
-                time = egg_minimum_1 - start
-                proportion = (egg_minimum_1 - start) / (end - start)
-        
-                result_line$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1',
-                    ...'time','proportion','degg_maximum_rel','degg_minimum_rel'"
-        
-                appendFileLine: "'result_file$'", "'result_line$'"
             endif
         endfor
     endif
