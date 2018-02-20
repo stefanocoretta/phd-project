@@ -37,7 +37,7 @@ lmt("./voicing-effect/code/process.praat.md")
     1. Check splines
     1. (Batch process snap-to-fit)
 1. **Calculate kinematics**
-    1. Check relevant splines for Tongue Dorsum and Tongue Tip
+    1. Check relevant splines for Tongue Dorsum, Tongue Tip, and Tongue Root
     1. Load `AnaVal-[ID].avl` from `Edit values` and change splines to TD and TT splines (Save it for the future)
     1. Calculate Maths for entire session
 1. **Find consonantal gestures**
@@ -45,8 +45,12 @@ lmt("./voicing-effect/code/process.praat.md")
     1. `Find...` > `Load` and `execute` `td_function.srh`
     1. Select TT stimuli
     1. `Find...` > `Load` and `execute` `tt_function.srh`
-1. **Export data** in `results` folder with `Export.xsu` to the file `[ID]-aaa.txt`
-1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID]-00n.TextGrid`
+1. **Export data** in `datasets/ultrasound/` folder
+    1. `Export-tongue-cart.xsu`: export cartesian coordinates at peaks, nucleus onset and offset, and maximum, `[ID]-tongue-cart.tsv`
+    1. `Export-tongue-clos-cart.xsu`: export cartesian coordinates at acoustic closure `[ID]-tongue-clos-cart.tsv`
+    1. `Export-closing-gons.xsu`: export closing gesture onset `[ID]-closing-gons.tsv`
+    1. `Export-tra-cart.xsu`: export tongue root displacement at maximum `[ID]-tra-cart.tsv`
+1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID].TextGrid`
 1. **Burst detection**
     1. Run `burst-detection.praat`: the output is a `.TextGrid` file, written in `data/ultrasound/derived/[ID]/concatenated/`
     1. Check bursts `[ID]-burst.TextGrid` + `[ID].wav`

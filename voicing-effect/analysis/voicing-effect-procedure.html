@@ -165,8 +165,14 @@ $(document).ready(function () {
 <li>Select TT stimuli</li>
 <li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>tt_function.srh</code></li>
 </ol></li>
-<li><strong>Export data</strong> in <code>results</code> folder with <code>Export.xsu</code> to the file <code>[ID]-aaa.txt</code></li>
-<li><strong>Export kinematics annotations</strong> (from <code>Export &gt; Files...</code>) in <code>data/derived/ultrasound/[ID]/kinematics</code> folder as <code>[ID]-00n.TextGrid</code></li>
+<li><strong>Export data</strong> in <code>datasets/ultrasound/</code> folder
+<ol style="list-style-type: decimal">
+<li><code>Export-tongue-cart.xsu</code>: export cartesian coordinates at peaks, nucleus onset and offset, and maximum, <code>[ID]-tongue-cart.tsv</code></li>
+<li><code>Export-tongue-clos-cart.xsu</code>: export cartesian coordinates at acoustic closure <code>[ID]-tongue-clos-cart.tsv</code></li>
+<li><code>Export-closing-gons.xsu</code>: export closing gesture onset <code>[ID]-closing-gons.tsv</code></li>
+<li><code>Export-tra-cart.xsu</code>: export tongue root displacement at maximum <code>[ID]-tra-cart.tsv</code></li>
+</ol></li>
+<li><strong>Export kinematics annotations</strong> (from <code>Export &gt; Files...</code>) in <code>data/derived/ultrasound/[ID]/kinematics</code> folder as <code>[ID].TextGrid</code></li>
 <li><strong>Burst detection</strong>
 <ol style="list-style-type: decimal">
 <li>Run <code>burst-detection.praat</code>: the output is a <code>.TextGrid</code> file, written in <code>data/ultrasound/derived/[ID]/concatenated/</code></li>
@@ -193,9 +199,9 @@ for (i in 1:length(speakers)) {
 <div id="egg-data" class="section level2">
 <h2>EGG data</h2>
 <ol style="list-style-type: decimal">
-<li><strong>Synchronise</strong> EGG with <code>sync-egg.praat</code>: the output is written in <code>/data/derived/egg/[ID]</code></li>
+<li><strong>Synchronise</strong> EGG with <code>sync-egg.praat</code>: the output is written in <code>data/egg/derived/[ID]/</code></li>
 <li><strong>Extract vuv</strong> (Voiced/UnVoiced) with <code>extract-vuv.praat</code>: the output is written in the same folder as above</li>
-<li><strong>Calculate dEGG tracegrams</strong> with <code>degg-tracing.praat</code>: the results are written in <code>results</code></li>
+<li><strong>Calculate dEGG tracegrams</strong> with <code>degg-tracing.praat</code>: the results are written in <code>data/datasets/egg/</code></li>
 </ol>
 <pre class="r"><code># speakers &lt;- &quot;it01&quot;
 speakers &lt;- c(&quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;)
