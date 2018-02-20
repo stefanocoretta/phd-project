@@ -27,6 +27,7 @@ degg <- list.files(path = "./voicing-effect/data/datasets/egg",
     left_join(y = languages) %>%
     left_join(y = words) %>%
     filter(c1phonation == "voiceless") %>%
+    mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(
         c2phonation_o = ordered(
@@ -242,13 +243,13 @@ degg %>%
   xlim(0.1, 0.9)
 ```
 
-```{r}
+```{r min-activity}
 min_activity %>%
   ggplot(aes(c2phonation_o, proportion, colour = language)) +
   geom_boxplot()
 ```
 
-```{r}
+```{r min-activity-lm}
 min_activity_lm <- lmer(
   proportion ~
     language *
@@ -259,13 +260,49 @@ min_activity_lm <- lmer(
 summary(min_activity_lm)
 ```
 
-```{r}
+```{r min-activity-effects}
 plot(allEffects(min_activity_lm))
 ```
 
-```{r}
+```{r min-activity-speaker}
 min_activity %>%
   ggplot(aes(c2phonation_o, proportion, colour = speaker)) +
   geom_boxplot() +
   facet_grid(. ~ language)
 ```
+
+The average peaks ratio does not tell much it seems, but compare with lmer.
+
+```{r average-peaks-ratio}
+degg %>%
+  ggplot(aes(language, peaks_ratio)) +
+  geom_boxplot() +
+  facet_grid(~ c2phonation_o)
+```
+
+Lower peaks ratio in Polish between 45-55% of the vowel duration, but not significant.
+
+```{r average-peaks-ratio-centre}
+degg %>%
+  filter(proportion > 0.45, proportion < 0.55) %>%
+  ggplot(aes(language, peaks_ratio)) +
+  geom_boxplot() +
+  facet_grid(~ c2phonation_o)
+```
+
+```{r average-peaks-ratio-lm}
+peaks_ratio_lm <- lmer(
+  peaks_ratio ~
+    language *
+    c2phonation +
+    (1|speaker),
+  data = filter(degg)
+)
+
+summary(peaks_ratio_lm)
+```
+
+```{r average-peaks-ratio-effects}
+plot(allEffects(peaks_ratio_lm))
+```
+
