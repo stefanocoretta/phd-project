@@ -154,8 +154,8 @@ $(document).ready(function () {
 </ol></li>
 <li><strong>Calculate kinematics</strong>
 <ol style="list-style-type: decimal">
-<li>Check relevant splines for Tongue Dorsum and Tongue Tip</li>
-<li>Load <code>AnaVal-[ID].avl</code> from <code>Edit values</code> and change splines to TD and TT splines (Save it for the future)</li>
+<li>Check relevant fan lines for Tongue Dorsum, Tongue Tip, and Tongue Root</li>
+<li>Load <code>AnaVal-[ID].avl</code> from <code>Edit values</code> and change fan lines numbers (Save it for the future)</li>
 <li>Calculate Maths for entire session</li>
 </ol></li>
 <li><strong>Find consonantal gestures</strong>
@@ -164,12 +164,13 @@ $(document).ready(function () {
 <li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>td_function.srh</code></li>
 <li>Select TT stimuli</li>
 <li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>tt_function.srh</code></li>
+<li>Find GONS</li>
 </ol></li>
 <li><strong>Export data</strong> in <code>datasets/ultrasound/</code> folder
 <ol style="list-style-type: decimal">
-<li><code>Export-tongue-cart.xsu</code>: export cartesian coordinates at peaks, nucleus onset and offset, and maximum, <code>[ID]-tongue-cart.tsv</code></li>
-<li><code>Export-tongue-clos-cart.xsu</code>: export cartesian coordinates at acoustic closure <code>[ID]-tongue-clos-cart.tsv</code></li>
-<li><code>Export-closing-gons.xsu</code>: export closing gesture onset <code>[ID]-closing-gons.tsv</code></li>
+<li><code>Export-tongue-cart.xsu</code>: export cartesian coordinates at peaks, nucleus onset and offset, and maximum (Annotation: “_“), <code>[ID]-tongue-cart.tsv</code></li>
+<li><code>Export-tongue-clos-cart.xsu</code>: export cartesian coordinates at acoustic closure (Annotation: vowel) <code>[ID]-tongue-clos-cart.tsv</code></li>
+<li><code>Export-closing-gons.xsu</code>: export closing gesture onset (Annotation: “GONS”) <code>[ID]-closing-gons.tsv</code></li>
 <li><code>Export-tra-cart.xsu</code>: export tongue root displacement at maximum <code>[ID]-tra-cart.tsv</code></li>
 </ol></li>
 <li><strong>Export kinematics annotations</strong> (from <code>Export &gt; Files...</code>) in <code>data/derived/ultrasound/[ID]/kinematics</code> folder as <code>[ID].TextGrid</code></li>
