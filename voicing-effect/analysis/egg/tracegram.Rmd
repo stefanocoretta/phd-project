@@ -39,11 +39,24 @@ degg <- list.files(path = "./voicing-effect/data/datasets/egg",
         weighted_quotient_centre = ((minimum + maximum) / 2 ) * (minimum),
         peaks_ratio = maximum / minimum
     ) %>%
-    filter(minimum > 0, minimum < 1)
+    filter(minimum > 0, minimum < 1) %>%
+  group_by(speaker) %>%
+  mutate(
+    peaks_ratio_norm = scale(peaks_ratio)
+  )
 
 min_activity <- degg %>%
   group_by(language, c2phonation_o, date) %>%
-  summarise(peaks_ratio = min(peaks_ratio)) %>%
+  summarise(
+    peaks_ratio = min(peaks_ratio)
+  ) %>%
+  left_join(y = degg)
+
+min_activity_norm <- degg %>%
+  group_by(language, c2phonation_o, date) %>%
+  summarise(
+    peak_ratio_norm = min(peaks_ratio_norm)
+  ) %>%
   left_join(y = degg)
 ```
 
@@ -295,8 +308,9 @@ peaks_ratio_lm <- lmer(
   peaks_ratio ~
     language *
     c2phonation +
-    (1|speaker),
-  data = filter(degg)
+    (1|speaker) +
+    (1|word),
+  data = degg
 )
 
 summary(peaks_ratio_lm)
@@ -306,3 +320,60 @@ summary(peaks_ratio_lm)
 plot(allEffects(peaks_ratio_lm))
 ```
 
+
+### Normalised peaks ratio
+
+```{r peaks-ratio-language-norm}
+degg %>%
+    ggplot(aes(proportion, peaks_ratio_norm, colour = c2phonation_o, linetype = c2phonation_o)) +
+    geom_smooth() +
+    facet_wrap(~ language) +
+  xlim(0.1, 0.9)
+```
+
+
+```{r peaks-ratio-language-voiceless-norm}
+degg %>%
+  filter(c2phonation_o == "voiceless") %>%
+    ggplot(aes(proportion, peaks_ratio_norm, colour = language, linetype = language)) +
+    geom_smooth() +
+  xlim(0.1, 0.9)
+```
+
+```{r peaks-ratio-language-voiced-norm}
+degg %>%
+  filter(c2phonation_o == "voiced") %>%
+    ggplot(aes(proportion, peaks_ratio_norm, colour = language, linetype = language)) +
+    geom_smooth() +
+  xlim(0.1, 0.9)
+```
+
+```{r average-peaks-ratio-centre-norm}
+degg %>%
+  filter(proportion > 0.45, proportion < 0.55) %>%
+  ggplot(aes(language, peaks_ratio_norm)) +
+  geom_boxplot() +
+  facet_grid(~ c2phonation_o)
+```
+
+```{r average-peaks-ratio-norm-lm}
+peaks_ratio_norm_lm <- lmer(
+  peaks_ratio_norm ~
+    language *
+    c2phonation +
+    (1|word),
+  data = degg
+)
+
+summary(peaks_ratio_norm_lm)
+```
+
+```{r average-peaks-ratio-norm-effects}
+plot(allEffects(peaks_ratio_norm_lm))
+```
+
+```{r min-activity-norm}
+min_activity %>%
+  ggplot(aes(c2phonation_o, proportion, colour = language)) +
+  geom_boxplot()
+```
