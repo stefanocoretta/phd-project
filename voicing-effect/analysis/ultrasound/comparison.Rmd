@@ -964,3 +964,53 @@ tongue_it_pred %>%
   facet_grid(c2place ~ vowel)
 ```
 
+# Polar GAMs
+
+```{r it01-data}
+it01 <- splines.it %>%
+    filter(
+        speaker == "it01",
+        label %in% c("max_TT", "max_TD")
+    ) %>%
+    mutate(
+        vowel = ordered(vowel, levels = c("a", "o", "u")),
+        c2place = ordered(c2place, levels = c("coronal", "velar")),
+        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+    ) %>%
+    arrange(rec.date, fan_line) %>%
+    create_event_start("rec.date") %>%
+    droplevels()
+```
+
+```{r it01-polar-gam-2}
+it01_polar_gam_2 <- polar_gam(
+    Y ~
+        c2phonation +
+        c2place +
+        vowel +
+        vow_phon +
+        place_phon +
+        s(X, bs = "cr") +
+        s(X, by = c2phonation,  bs = "cr") +
+        s(X, by = c2place,  bs = "cr") +
+        s(X, by = vowel,  bs = "cr") +
+        s(X, by = vow_phon,  bs = "cr") +
+        s(X, by = place_phon,  bs = "cr") +
+        s(X, rec.date, bs = "fs", xt = "cr", k = 5),
+    data = it01,
+    method = "ML"
+)
+
+summary(it01_polar_gam_2)
+```
+
+```{r it01-polar-gam-2-plot}
+plot_polar_smooths(
+    it01_polar_gam_2,
+    X,
+    c2phonation,
+    facet_terms = c2place ~ vowel
+)
+```
