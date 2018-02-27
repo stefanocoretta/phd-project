@@ -356,13 +356,46 @@ degg %>%
   facet_grid(~ c2phonation_o)
 ```
 
+```{r average-peaks-ratio-centre-norm-interaction}
+degg %>%
+  filter(proportion > 0.45, proportion < 0.55) %>%
+  ggplot(aes(c2phonation_o, peaks_ratio_norm, colour = language)) +
+  geom_boxplot() +
+  facet_grid(vowel ~ c2place)
+```
+
+```{r density-peaks-ratio-second-half-norm}
+degg %>%
+  filter(proportion > 0.5) %>%
+  ggplot(aes(peaks_ratio_norm, colour = c2phonation_o)) +
+  geom_density() +
+  facet_grid(~ language)
+```
+
+```{r average-peaks-ratio-second-half-norm}
+degg %>%
+  filter(proportion > 0.5) %>%
+  ggplot(aes(language, peaks_ratio_norm)) +
+  geom_boxplot() +
+  facet_grid(~ c2phonation_o)
+```
+
+```{r speaker-average-peaks-ratio-second-half-norm}
+degg %>%
+  filter(proportion > 0.5) %>%
+  ggplot(aes(speaker, peaks_ratio_norm, colour = c2phonation_o)) +
+  geom_boxplot()
+```
+
 ```{r average-peaks-ratio-norm-lm}
+degg_50 <- filter(degg, proportion > 0.5)
+
 peaks_ratio_norm_lm <- lmer(
   peaks_ratio_norm ~
-    language *
-    c2phonation +
+    c2phonation *
+    language +
     (1|word),
-  data = degg
+  data = degg_50
 )
 
 summary(peaks_ratio_norm_lm)
@@ -376,4 +409,24 @@ plot(allEffects(peaks_ratio_norm_lm))
 min_activity %>%
   ggplot(aes(c2phonation_o, proportion, colour = language)) +
   geom_boxplot()
+```
+
+```{r peaks-ratio-it01}
+degg %>%
+  filter(speaker == "it01") %>%
+    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+  geom_path(alpha = 0.5, aes(group = date)) +
+  geom_smooth() +
+  facet_grid(~ c2phonation_o) +
+  xlim(0.1, 0.9)
+```
+
+```{r peaks-ratio-pl04}
+degg %>%
+  filter(speaker == "pl04") %>%
+    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+  geom_path(alpha = 0.5, aes(group = date)) +
+  geom_smooth() +
+  facet_grid(~ c2phonation_o) +
+  xlim(0.1, 0.9)
 ```
