@@ -266,11 +266,22 @@ min_activity %>%
 min_activity_lm <- lmer(
   proportion ~
     language *
-    c2phonation_o +
-    (1|speaker),
+    c2phonation +
+    (1|speaker) +
+    (1|word),
   data = min_activity
 )
 summary(min_activity_lm)
+
+min_activity_lm_2 <- lmer(
+  proportion ~
+#    language *
+    c2phonation +
+    (1|speaker) +
+    (1|word),
+  data = min_activity
+)
+summary(min_activity_lm_2)
 ```
 
 ```{r min-activity-effects}
@@ -405,11 +416,26 @@ summary(peaks_ratio_norm_lm)
 plot(allEffects(peaks_ratio_norm_lm))
 ```
 
+Maybe the normalisation is obscuring differences?
+
 ```{r min-activity-norm}
-min_activity %>%
-  ggplot(aes(c2phonation_o, proportion, colour = language)) +
+min_activity_norm %>%
+  ggplot(aes(c2phonation, proportion, colour = language)) +
   geom_boxplot()
 ```
+
+```{r min-activity-norm-lm}
+min_activity_norm_lm <- lmer(
+  proportion ~
+    c2phonation *
+    language +
+    (1|word),
+  data = min_activity_norm
+)
+
+summary(min_activity_norm_lm)
+```
+
 
 ```{r peaks-ratio-it01}
 degg %>%
