@@ -617,11 +617,10 @@ voicing.voiceless %>%
 voicing_lm_scaled <- lmer(
   voicing_duration ~
     vowel *
-    language +
-#    c2place +
+#    language +
+    c2place +
 #    sentence.duration +
-    (1|word) +
-    (1|speaker),
+    (1|word),
   data = voicing.voiceless
 )
 
