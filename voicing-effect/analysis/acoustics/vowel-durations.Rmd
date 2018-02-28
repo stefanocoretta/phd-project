@@ -38,7 +38,7 @@ vowels <- list.files(path = "voicing-effect/data/datasets/acoustics/",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--"))
 
-languages <- read_csv("./voicing-effect/data/datasets/languages.csv")
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 
