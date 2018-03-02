@@ -47,6 +47,7 @@ directory_alignment$ = "../data/ultrasound/derived/
     ...'speaker$'/concatenated"
 directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
+palign_original = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
 palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
 selectObject: palign
 
