@@ -1,0 +1,49 @@
+---
+title: "Voicing durations"
+author: "Stefano Coretta"
+date: "02/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(lmerTest)
+```
+
+# Read data
+
+```{r}
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+voicing <- list.files(
+  path = "voicing-effect/data/datasets/egg/",
+  pattern = "*-voicing.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(., languages) %>%
+  left_join(y = words) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(index = as.factor(index))
+
+voicing_voiceless <- filter(voicing, c2phonation == "voiceless", c1phonation == "voiceless")
+```
+
+```{r}
+voicing_voiceless %>%
+  filter(voicing.duration < 300) %>%
+  ggplot(aes(vowel, voicing.duration)) +
+  geom_boxplot()
+```
+
+```{r}
+voicing_voiceless %>%
+  filter(voicing.duration < 300) %>%
+  ggplot(aes(vowel, voicing.duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
