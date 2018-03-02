@@ -11,6 +11,7 @@ opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(lmerTest)
+library(effects)
 ```
 
 # Read data
@@ -28,9 +29,17 @@ voicing <- list.files(
   left_join(., languages) %>%
   left_join(y = words) %>%
   mutate_if(is.character, as.factor) %>%
-  mutate(index = as.factor(index))
+  mutate(
+    index = as.factor(index)
+  )
+
 
 voicing_voiceless <- filter(voicing, c2phonation == "voiceless", c1phonation == "voiceless")
+
+voicing_norm <- voicing_voiceless %>%
+  filter(voicing.duration < 300) %>%
+  group_by(speaker) %>%
+  mutate(voicing_duration_norm = scale(voicing.duration))
 ```
 
 ```{r}
@@ -47,3 +56,33 @@ voicing_voiceless %>%
   geom_boxplot() +
   facet_grid(~ language)
 ```
+
+```{r}
+voicing_norm %>%
+  ggplot(aes(vowel, voicing_duration_norm)) +
+  geom_boxplot()
+```
+
+```{r}
+voicing_norm %>%
+  ggplot(aes(vowel, voicing_duration_norm)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r}
+voicing_lm <- lmer(
+  voicing.duration ~
+    vowel *
+    language +
+    (1|speaker) +
+    (1|word),
+  data = voicing_voiceless
+)
+summary(voicing_lm)
+```
+
+```{r}
+plot(allEffects(voicing_lm))
+```
+
