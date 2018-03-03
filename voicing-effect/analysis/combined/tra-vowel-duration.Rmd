@@ -87,7 +87,7 @@ tongue <- list.files(
   left_join(y = vowels) %>%
   mutate_if(is.character, as.factor) %>%
   group_by(speaker) %>%
-  do(transform_coord(.)) %>%
+  do(transform_coord(., fan_lines = c(15, 25))) %>%
   na.omit()
 ```
 
