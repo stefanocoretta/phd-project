@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-opts_knit$set(root.dir = normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(lmerTest)
@@ -16,7 +16,7 @@ library(effects)
 
 # Read data
 
-```{r}
+```{r read-data}
 languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
@@ -42,14 +42,16 @@ voicing_norm <- voicing_voiceless %>%
   mutate(voicing_duration_norm = scale(voicing.duration))
 ```
 
-```{r}
+# Plots
+
+```{r vowel-boxplot}
 voicing_voiceless %>%
   filter(voicing.duration < 300) %>%
   ggplot(aes(vowel, voicing.duration)) +
   geom_boxplot()
 ```
 
-```{r}
+```{r vowel-language-boxplot}
 voicing_voiceless %>%
   filter(voicing.duration < 300) %>%
   ggplot(aes(vowel, voicing.duration)) +
@@ -57,20 +59,22 @@ voicing_voiceless %>%
   facet_grid(~ language)
 ```
 
-```{r}
+```{r norm-vowel-boxplot}
 voicing_norm %>%
   ggplot(aes(vowel, voicing_duration_norm)) +
   geom_boxplot()
 ```
 
-```{r}
+```{r norm-vowel-language-boxplot}
 voicing_norm %>%
   ggplot(aes(vowel, voicing_duration_norm)) +
   geom_boxplot() +
   facet_grid(~ language)
 ```
 
-```{r}
+# Lmer
+
+```{r voicing-lm}
 voicing_lm <- lmer(
   voicing.duration ~
     vowel *
@@ -82,7 +86,7 @@ voicing_lm <- lmer(
 summary(voicing_lm)
 ```
 
-```{r}
+```{r voicing-effect}
 plot(allEffects(voicing_lm))
 ```
 
