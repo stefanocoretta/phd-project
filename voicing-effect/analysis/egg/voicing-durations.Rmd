@@ -44,6 +44,14 @@ voicing_norm <- voicing_voiceless %>%
 
 # Plots
 
+```{r}
+voicing_voiceless %>%
+  filter(voicing.duration < 300) %>%
+  ggplot(aes(vowel, voicing.duration)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
 ```{r vowel-boxplot}
 voicing_voiceless %>%
   filter(voicing.duration < 300) %>%
