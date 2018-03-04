@@ -766,7 +766,7 @@ filter(splines.phantom.closure, c2place == "velar") %>%
 # Peak to peak duration
 
 ```{r peak-to-peak-plot}
-filter(cons.gestures, speaker == "it02") %>%
+filter(cons.gestures, speaker == "it02", PP > 1) %>%
     ggplot(aes(c2phonation, PP)) +
     geom_violin() +
     geom_boxplot(width = 0.2) +
