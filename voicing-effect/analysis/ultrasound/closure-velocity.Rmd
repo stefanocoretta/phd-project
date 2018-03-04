@@ -75,6 +75,44 @@ gons <- list.files(
     left_join(y = words) %>%
   filter(closing > 0, closing_2 > 0) %>%
     mutate_if(is.character, as.factor)
+
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs",
+    "TR.displacement.sm",
+    "TR.velocity",
+    "TR.velocity.abs"
+)
+
+gons_select <- select(gons, rec.date, closing, closing_2)
+
+tongue_root <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tra-cart.tsv",
+  full.names = TRUE
+) %>%
+    map_df(~read_tsv(., col_names = columns)) %>%
+    mutate(word = word(prompt, 2)) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+    mutate_if(is.character, as.factor) %>%
+    left_join(y = gons_select) %>%
+    # filter clear outlier
+    filter(TR.displacement.sm > 40, closing < 200) %>%
+    group_by(speaker) %>%
+    mutate(
+        TR_displacement_z = scale(TR.displacement.sm),
+        closing_2_norm = scale(closing_2)
+    )
 ```
 
 # Data plotting
@@ -175,4 +213,60 @@ gons %>%
   ggplot(aes(vowel, closing_2, colour = c2phonation)) +
   geom_boxplot() +
   facet_grid(c2place ~ speaker)
+```
+
+## TRA and closing gesture duration
+
+```{r}
+tongue_root %>%
+  ggplot(aes(TR_displacement_z, closing, colour = c2phonation)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(TR_displacement_z, closing_2, colour = c2phonation)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(TR_displacement_z, closing_2_norm, colour = c2phonation)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(TR_displacement_z, closing_2_norm, colour = c2phonation)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(TR_displacement_z, closing_2_norm)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tongue_root %>%
+  filter(speaker %in% c("it01", "it02", "pl02", "pl03")) %>%
+  ggplot(aes(TR_displacement_z, closing_2_norm)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(TR_displacement_z, closing_2_norm)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ speaker)
 ```
