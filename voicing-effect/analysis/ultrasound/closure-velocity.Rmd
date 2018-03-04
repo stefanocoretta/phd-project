@@ -12,6 +12,8 @@ library(tidyverse)
 theme_set(theme_bw())
 library(stringr)
 library(rticulate)
+library(lmerTest)
+library(effects)
 ```
 
 # Data import
@@ -97,12 +99,38 @@ gons %>%
 
 ```{r}
 gons %>%
-    ggplot(aes(c2phonation, closing)) +
+    ggplot(aes(language, closing, colour = c2phonation)) +
     geom_boxplot() +
     facet_grid(vowel ~ c2place)
 ```
 
 ```{r}
 table(gons$c2phonation, gons$vowel, gons$c2place)
+```
+
+```{r}
+gons %>%
+  filter(language == "italian") %>%
+  ggplot(aes(c2place, closing, colour = c2phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r}
+gons_lm <- lmer(
+  closing ~
+#    c2phonation *
+    vowel *
+    c2place +
+    (1|speaker) +
+    (1|word),
+  data = gons
+)
+
+summary(gons_lm)
+```
+
+```{r}
+plot(allEffects(gons_lm))
 ```
 
