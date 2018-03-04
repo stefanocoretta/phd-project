@@ -14,7 +14,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir=normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
 library(scales)
@@ -23,7 +23,6 @@ library(stringr)
 library(lme4)
 library(afex)
 library(effects)
-library(gamm4)
 library(mgcv)
 library(itsadug)
 ```
@@ -58,25 +57,25 @@ columns <- c(first.columns,
 We can now read in the file.
 
 ```{r read}
-splines.raw <- list.files(path = "./voicing-effect/results",
+splines.raw <- list.files(path = "./voicing-effect/data/datasets/cached/",
                    pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.closure.raw <- list.files(path = "./voicing-effect/results",
+splines.closure.raw <- list.files(path = "./voicing-effect/data/datasets/cached/",
                    pattern = "*-closure.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.phantom.raw <- list.files(path = "./voicing-effect/results",
+splines.phantom.raw <- list.files(path = "./voicing-effect/data/datasets/cached/",
                    pattern = "*-phantom.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
 rm(num.splines, first.columns, columns)
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 ```
 
 The following code applies tidy formatting to the data frame. It uses functions from the `tidyr` library.
