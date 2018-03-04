@@ -45,6 +45,16 @@ closure <- list.files(
     select(seconds, rec.date) %>%
     unique()
 
+nons <- list.files(
+    path = "./voicing-effect/data/datasets/ultrasound",
+    pattern = "*-tongue-cart.tsv",
+    full.names = TRUE
+    ) %>%
+    read_aaa(., columns) %>%
+  filter(label %in% c("NONS_TT", "NONS_TD")) %>%
+    select(seconds, rec.date) %>%
+    unique()
+
 gons <- list.files(
     path = "./voicing-effect/data/datasets/ultrasound",
     pattern = "*-closing-gons.tsv",
@@ -57,13 +67,24 @@ gons <- list.files(
       closing = closing * 1000,
       word = word(prompt, 2)
     ) %>%
+  inner_join(y = nons) %>%
+  mutate(
+    closing_2 = (seconds - seconds.gons) * 1000
+  ) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
-  filter(closing > 0) %>%
+  filter(closing > 0, closing_2 > 0) %>%
     mutate_if(is.character, as.factor)
 ```
 
 # Data plotting
+
+```{r}
+gons %>%
+  ggplot(aes(c2phonation, closing)) +
+  geom_boxplot()
+```
+
 
 ```{r}
 gons %>%
@@ -134,3 +155,24 @@ summary(gons_lm)
 plot(allEffects(gons_lm))
 ```
 
+## Closure 2
+
+```{r}
+gons %>%
+  ggplot(aes(c2phonation, closing_2)) +
+  geom_boxplot()
+```
+
+```{r}
+gons %>%
+  ggplot(aes(c2phonation, closing_2)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r}
+gons %>%
+  ggplot(aes(vowel, closing_2, colour = c2phonation)) +
+  geom_boxplot() +
+  facet_grid(c2place ~ speaker)
+```
