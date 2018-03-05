@@ -1,0 +1,85 @@
+---
+title: "Closing gesture velocity and vowel duration"
+author: "Stefano Coretta"
+date: "05/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(lmerTest)
+library(effects)
+library(rticulate)
+```
+
+```{r read-data}
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec_date",
+    "prompt",
+    "label",
+    "TT_displacement_sm",
+    "TT_velocity",
+    "TT_velocity_abs",
+    "TD_displacement_sm",
+    "TD_velocity",
+    "TD_velocity_abs",
+    "TR_displacement_sm",
+    "TR_velocity",
+    "TR_velocity_abs"
+)
+
+languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+vowels <- list.files(path = "./voicing-effect/data/datasets/acoustics",
+                   pattern = "*-durations.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(., na = "--undefined--"))
+
+columns_2 <- c(
+    "speaker",
+    "seconds",
+    "rec_date",
+    "prompt",
+    "label",
+    "TT_displacement_sm",
+    "TT_velocity",
+    "TT_velocity_abs",
+    "TD_displacement_sm",
+    "TD_velocity",
+    "TD_velocity_abs"
+)
+
+closure <- list.files(
+    path = "./voicing-effect/data/datasets/ultrasound",
+    pattern = "*-tongue-clos-cart.tsv",
+    full.names = TRUE
+    ) %>%
+    read_aaa(., columns_2) %>%
+    select(seconds, rec_date) %>%
+    unique()
+
+gons <- list.files(
+    path = "./voicing-effect/data/datasets/ultrasound",
+    pattern = "*-closing-gons.tsv",
+    full.names = TRUE
+    ) %>%
+    map_df(~read_tsv(., col_names = columns_2)) %>%
+    inner_join(y = closure, by = "rec_date", suffix = c("_gons", "_clos")) %>%
+    mutate(
+      closing = seconds_clos - seconds_gons,
+      closing = closing * 1000,
+      word = word(prompt, 2)
+    ) %>%
+  inner_join(y = vowels) %>%
+    left_join(y = languages) %>%
+    left_join(y = words) %>%
+  filter(closing > 0) %>%
+    mutate_if(is.character, as.factor)
+```
+
