@@ -1,0 +1,11 @@
+---
+title: "Tongue root advancement and vowel duraƟon: a gradient eﬀect?"
+author: "Stefano Coretta"
+date: "05/03/2018"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
