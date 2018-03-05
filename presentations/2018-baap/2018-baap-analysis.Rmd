@@ -13,6 +13,7 @@ theme_set(theme_minimal())
 library(mgcv)
 library(tidymv)
 library(rticulate)
+options(contrasts = rep("contr.sum", 2))
 ```
 
 # Data import
@@ -44,7 +45,13 @@ splines <- list.files(
   mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
-  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate(
+    c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+    vowel = ordered(vowel, levels = c("a", "o", "u")),
+    c2place = ordered(c2place, levels = c("coronal", "velar")),
+    vow_phon = as.ordered(interaction(vowel, c2phonation)),
+    c2place_phon = as.ordered(interaction(c2place, c2phonation))
+  ) %>%
   mutate_if(is.character, as.factor)
 
 vowels <- list.files(
@@ -177,3 +184,40 @@ vowels %>%
   geom_boxplot() +
   facet_wrap(~ speaker, ncol = 2)
 ```
+
+# Polar GAMs
+
+## Italian
+
+```{r it01}
+it01 <- filter(splines, speaker == "it01", label %in% c("max_TT", "max_TD"))
+```
+
+```{r it01-polar-gam}
+it01_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+    vow_phon +
+    c2place_phon +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+    s(X, by = vow_phon, bs = "cr") +
+    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01
+)
+summary(it01_polar_gam)
+```
+
+```{r}
+plot_polar_smooths(
+  it01_polar_gam,
+  X,
+  c2phonation,
+  facet_terms = c2place + vowel
+)
+```
+
