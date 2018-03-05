@@ -95,12 +95,39 @@ Vowel duration and tongue root displacement are normalised within each speaker u
 
 # Using TR fan line
 
+## Tongue root advancement
+
 ```{r tr-density}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, colour = c2phonation)) +
-    geom_density() +
+    ggplot(aes(TR_displacement_z, fill = c2phonation)) +
+    geom_density(alpha = 0.2) +
     facet_grid(. ~ language)
 ```
+
+```{r tr-boxplot}
+tongue_root %>%
+    ggplot(aes(c2phonation, -TR_displacement_z)) +
+    geom_boxplot() +
+    facet_grid(. ~ language)
+```
+
+
+```{r tr-boxplot-speakers}
+tongue_root %>%
+    ggplot(aes(c2phonation, -TR_displacement_z)) +
+    geom_boxplot() +
+    facet_wrap(~ speaker)
+```
+
+```{r tr-italian}
+tongue_root %>%
+  filter(language == "italian") %>%
+    ggplot(aes(c2phonation, -TR_displacement_z)) +
+    geom_boxplot() +
+    facet_grid(c2place ~ vowel)
+```
+
+## Tongue root and vowel duration
 
 ```{r tr-vowel-duration}
 tongue_root %>%
@@ -240,7 +267,30 @@ anova(tra_lm_pl_null, tra_lm_pl)
 plot(allEffects(tra_lm_pl))
 ```
 
+## More plotting
+
+```{r it-tr-vowel-dur}
+tongue_root %>%
+  filter(language == "italian") %>%
+    ggplot(aes(TR_displacement_z, vowel_duration_z)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r pl-tr-vowel-dur}
+tongue_root %>%
+  filter(language == "polish") %>%
+    ggplot(aes(TR_displacement_z, vowel_duration_z)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_grid(c2place ~ vowel)
+```
+
+
 # Using average curve distance
+
+It does not work really.
 
 ```{r it01-polar-plot}
 tongue %>%
