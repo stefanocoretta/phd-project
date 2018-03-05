@@ -12,7 +12,7 @@ library(tidyverse)
 theme_set(theme_bw())
 library(stringr)
 library(rticulate)
-library(lmerTest)
+library(lme4)
 library(effects)
 ```
 
@@ -142,6 +142,7 @@ velocity <- list.files(
     TT_velocity_abs_norm = scale(TT_velocity_abs),
     TD_velocity_abs_norm = scale(TD_velocity_abs)
   ) %>%
+  ungroup() %>%
   left_join(y = languages) %>%
   left_join(y = words) %>%
   mutate_if(is.character, as.factor)
