@@ -44,18 +44,136 @@ splines <- list.files(
   mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
+  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor)
 
 vowels <- list.files(
-  path = "voicing-effect/data/datasets/acoustics/",
+  path = "./presentations/2018-baap/datasets/acoustics/",
   pattern = "*-durations.csv",
   full.names = TRUE
 ) %>%
   map_df(~read_csv(., na = "--undefined--")) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
+  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor)
 ```
 
 # Exploratory
 
+## Ultrasound
+
+```{r it-coronal-tongue}
+splines %>%
+  filter(
+    language == "italian",
+    label == "max_TT"
+  ) %>%
+  ggplot(aes(X, Y, colour = c2phonation)) +
+  geom_point(size = 0.5) +
+  facet_grid(vowel ~ speaker) +
+  coord_fixed(ratio = 1) +
+  theme(legend.position = "top")
+```
+
+```{r it-velar-tongue}
+splines %>%
+  filter(
+    language == "italian",
+    label == "max_TD"
+  ) %>%
+  ggplot(aes(X, Y, colour = c2phonation)) +
+  geom_point(size = 0.5) +
+  facet_grid(vowel ~ speaker) +
+  coord_fixed(ratio = 1) +
+  theme(legend.position = "top")
+```
+
+```{r pl-coronal-tongue}
+splines %>%
+  filter(
+    language == "polish",
+    label == "max_TT"
+  ) %>%
+  ggplot(aes(X, Y, colour = c2phonation)) +
+  geom_point(size = 0.5) +
+  facet_grid(vowel ~ speaker) +
+  coord_fixed(ratio = 1) +
+  theme(legend.position = "top")
+```
+
+```{r pl-velar-tongue}
+splines %>%
+  filter(
+    language == "polish",
+    label == "max_TD"
+  ) %>%
+  ggplot(aes(X, Y, colour = c2phonation)) +
+  geom_point(size = 0.5) +
+  facet_grid(vowel ~ speaker) +
+  coord_fixed(ratio = 1) +
+  theme(legend.position = "top")
+```
+
+## Vowel duration
+
+```{r vowdur-dens}
+vowels %>%
+  ggplot(aes(vowel.duration, fill = c2phonation, colour = c2phonation)) +
+  geom_density(alpha = 0.2) +
+  facet_grid(~ language)
+```
+
+```{r vowdur-dens}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel.duration)) %>%
+  ggplot(aes(vowel_duration, fill = c2phonation, colour = c2phonation)) +
+  geom_density(alpha = 0.2) +
+  facet_grid(~ language)
+```
+
+```{r vowdur-box}
+vowels %>%
+  ggplot(aes(c2phonation, vowel.duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vowdur-norm}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel.duration)) %>%
+  ggplot(aes(c2phonation, vowel_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vowdur-norm-vowels}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel.duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r it-vowdur-norm-vowels}
+vowels %>%
+  filter(language == "italian") %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel.duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 2)
+```
+
+```{r pl-vowdur-norm-vowels}
+vowels %>%
+  filter(language == "polish") %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel.duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 2)
+```
