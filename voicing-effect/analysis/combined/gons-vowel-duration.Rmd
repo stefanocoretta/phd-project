@@ -39,7 +39,9 @@ words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 vowels <- list.files(path = "./voicing-effect/data/datasets/acoustics",
                    pattern = "*-durations.csv",
                    full.names = TRUE) %>%
-    map_df(~read_csv(., na = "--undefined--"))
+    map_df(~read_csv(., na = "--undefined--")) %>%
+  select(rec.date, vowel.duration) %>%
+  unique()
 
 columns_2 <- c(
     "speaker",
@@ -76,10 +78,20 @@ gons <- list.files(
       closing = closing * 1000,
       word = word(prompt, 2)
     ) %>%
-  inner_join(y = vowels) %>%
+  inner_join(y = vowels, by = c("rec_date" = "rec.date")) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
   filter(closing > 0) %>%
     mutate_if(is.character, as.factor)
+```
+
+# Plotting
+
+```{r}
+gons %>%
+  filter(closing < 200) %>%
+  ggplot(aes(closing, vowel.duration)) +
+  geom_point() +
+  geom_smooth(method = "lm") + facet_grid(~ language)
 ```
 
