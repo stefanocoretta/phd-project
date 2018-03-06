@@ -150,6 +150,20 @@ vowels %>%
   facet_grid(~ language)
 ```
 
+```{r vowdur-box-speakers}
+vowels %>%
+  ggplot(aes(c2phonation, vowel.duration)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```
+
+```{r vowdur-box-speakers-vowels}
+vowels %>%
+  ggplot(aes(c2phonation, vowel.duration, fill = vowel)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```
+
 ```{r vowdur-norm}
 vowels %>%
   group_by(speaker) %>%
