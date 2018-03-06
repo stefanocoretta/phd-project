@@ -10,11 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(lme4)
+library(effects)
 library(mgcv)
 library(itsadug)
 library(tidymv)
 library(rticulate)
-options(contrasts = rep("contr.sum", 2))
+options(contrasts = rep("contr.treatment", 2))
 ```
 
 # Data import
@@ -336,3 +338,46 @@ plot_polar_smooths(
 )
 ```
 
+# Vowel duration
+
+```{r}
+vowels_it <- filter(vowels, language == "italian")
+
+vowels_it_lm <- lmer(
+  vowel.duration ~
+    c2phonation +
+    c2place +
+    vowel +
+    sentence.duration +
+    (1+c2phonation|speaker) +
+    (1|word),
+  data = vowels_it
+)
+
+summary(vowels_it_lm)
+```
+
+```{r}
+plot(allEffects(vowels_it_lm))
+```
+
+```{r}
+vowels_pl <- filter(vowels, language == "polish")
+
+vowels_pl_lm <- lmer(
+  vowel.duration ~
+    c2phonation +
+    c2place +
+    vowel +
+    sentence.duration +
+    (1+c2phonation|speaker) +
+    (1|word),
+  data = vowels_pl
+)
+
+summary(vowels_pl_lm)
+```
+
+```{r}
+plot(allEffects(vowels_pl_lm))
+```
