@@ -19,6 +19,7 @@ library(itsadug)
 library(tidymv)
 library(plotrix)
 library(scales)
+options(contrasts = rep("contr.sum", 2))
 ```
 
 # Read data
