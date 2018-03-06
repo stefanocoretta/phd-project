@@ -11,6 +11,7 @@ knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(mgcv)
+library(itsadug)
 library(tidymv)
 library(rticulate)
 options(contrasts = rep("contr.sum", 2))
@@ -52,7 +53,9 @@ splines <- list.files(
     vow_phon = as.ordered(interaction(vowel, c2phonation)),
     c2place_phon = as.ordered(interaction(c2place, c2phonation))
   ) %>%
-  mutate_if(is.character, as.factor)
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
 
 vowels <- list.files(
   path = "./presentations/2018-baap/datasets/acoustics/",
