@@ -206,7 +206,9 @@ vowels %>%
 
 # Polar GAMs
 
-## Italian
+## Italian maximum constriction
+
+### IT01
 
 ```{r it01}
 it01 <- filter(splines, speaker == "it01", label %in% c("max_TT", "max_TD"))
@@ -304,6 +306,8 @@ plot_polar_smooths(
 )
 ```
 
+### IT02
+
 ```{r it02}
 it02 <- filter(splines, speaker == "it02", label %in% c("max_TT", "max_TD"))
 ```
@@ -329,13 +333,369 @@ it02_polar_gam <- polar_gam(
 summary(it02_polar_gam)
 ```
 
-```{r it01-polar-smooth}
+```{r it02-polar-smooth}
 plot_polar_smooths(
   it02_polar_gam,
   X,
   c2phonation,
   facet_terms = c2place + vowel
 )
+```
+
+```{r it02-polar-gam-null}
+it02_polar_gam_null <- polar_gam(
+  Y ~
+#    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it02,
+  method = "ML"
+)
+
+compareML(it02_polar_gam_null, it02_polar_gam)
+```
+
+```{r it02-acf}
+acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
+```
+
+### IT03
+
+```{r it03}
+it03 <- filter(splines, speaker == "it03", label %in% c("max_TT", "max_TD"))
+```
+
+```{r it03-polar-gam}
+it03_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML"
+)
+summary(it03_polar_gam)
+```
+
+```{r it03-polar-gam-null}
+it03_polar_gam_null <- polar_gam(
+  Y ~
+#    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML"
+)
+
+compareML(it03_polar_gam_null, it03_polar_gam)
+```
+
+```{r it03-polar-smooth}
+plot_polar_smooths(
+  it03_polar_gam,
+  X,
+  c2phonation,
+  facet_terms = c2place + vowel
+)
+```
+
+```{r it03-ar}
+rho <- start_value_rho(it03_polar_gam)
+
+it03_polar_gam_ar <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML",
+  rho = rho,
+  AR_start = it03$start.event
+)
+summary(it03_polar_gam_ar)
+```
+
+### IT04
+
+```{r it04}
+it04 <- filter(splines, speaker == "it04", label %in% c("max_TT", "max_TD"))
+```
+
+```{r it04-polar-gam}
+it04_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04,
+  method = "ML"
+)
+summary(it04_polar_gam)
+```
+
+```{r it04-polar-gam-null}
+it04_polar_gam_null <- polar_gam(
+  Y ~
+#    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04,
+  method = "ML"
+)
+
+compareML(it04_polar_gam_null, it04_polar_gam)
+```
+
+## Polish maximum constriction
+
+### PL02
+
+```{r pl02}
+pl02 <- filter(splines, speaker == "pl02", label %in% c("max_TT", "max_TD"))
+```
+
+```{r pl02-polar-gam}
+pl02_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl02,
+  method = "ML"
+)
+summary(pl02_polar_gam)
+```
+
+### PL03
+
+```{r pl03}
+pl03 <- filter(splines, speaker == "pl03", label %in% c("max_TT", "max_TD"))
+```
+
+```{r pl03-polar-gam}
+pl03_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl03,
+  method = "ML"
+)
+summary(pl03_polar_gam)
+```
+
+```{r pl03-polar-gam-null}
+pl03_polar_gam_null <- polar_gam(
+  Y ~
+#    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl03,
+  method = "ML"
+)
+compareML(pl03_polar_gam_null, pl03_polar_gam)
+```
+
+```{r pl03-polar-smooth}
+plot_polar_smooths(
+  pl03_polar_gam,
+  X,
+  c2phonation,
+  facet_terms = c2place + vowel
+)
+```
+
+### PL04
+
+```{r pl04}
+pl04 <- filter(splines, speaker == "pl04", label %in% c("max_TT", "max_TD"))
+```
+
+```{r pl04-polar-gam}
+pl04_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl04,
+  method = "ML"
+)
+summary(pl04_polar_gam)
+beep()
+```
+
+```{r pl04-polar-gam-null}
+pl04_polar_gam_null <- polar_gam(
+  Y ~
+#    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl04,
+  method = "ML"
+)
+compareML(pl04_polar_gam_null, pl04_polar_gam)
+```
+
+```{r pl04-polar-smooth}
+plot_polar_smooths(
+  pl04_polar_gam,
+  X,
+  c2phonation,
+  facet_terms = c2place + vowel
+)
+```
+
+### PL05
+
+```{r pl05}
+pl05 <- filter(splines, speaker == "pl05", label %in% c("max_TT", "max_TD"))
+```
+
+```{r pl05-polar-gam}
+pl05_polar_gam <- polar_gam(
+  Y ~
+    c2phonation +
+    vowel +
+    c2place +
+    vow_phon +
+    c2place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+    s(X, by = vow_phon, bs = "cr") +
+    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl05,
+  method = "ML"
+)
+summary(pl05_polar_gam)
+```
+
+```{r pl05-polar-smooths}
+plot_polar_smooths(
+  pl05_polar_gam,
+  X,
+  c2phonation,
+  facet_terms = c2place + vowel
+)
+```
+
+```{r pl05-polar-gam-null}
+pl05_polar_gam_null <- polar_gam(
+  Y ~
+#    c2phonation +
+    vowel +
+    c2place +
+#    vow_phon +
+#    c2place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl05,
+  method = "ML"
+)
+
+compareML(pl05_polar_gam_null, pl05_polar_gam)
 ```
 
 # Vowel duration
