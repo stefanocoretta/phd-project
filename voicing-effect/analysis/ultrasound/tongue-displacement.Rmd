@@ -1,0 +1,66 @@
+---
+title: "Tongue displacement"
+author: "Stefano Coretta"
+date: "08/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+library(stringr)
+library(rticulate)
+library(lme4)
+library(effects)
+```
+
+# Read data
+
+```{r read-data}
+columns <- c(
+    "speaker",
+    "seconds",
+    "rec.date",
+    "prompt",
+    "label",
+    "TT.displacement.sm",
+    "TT.velocity",
+    "TT.velocity.abs",
+    "TD.displacement.sm",
+    "TD.velocity",
+    "TD.velocity.abs"
+)
+
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+gons <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-closing-gons.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_tsv(., col_names = columns))
+
+displacement <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns)) %>%
+  select(-X, -Y, -fan_line) %>%
+  unique() %>%
+  mutate(word = word(prompt, 2)) %>%
+  bind_rows(gons) %>%
+  mutate(label = str_sub(label, 1, nchar(label) - 3)) %>%
+  filter(label %in% c("GONS", "peak1")) %>%
+  gather("key", "displacement", TT.displacement.sm, TD.displacement.sm) %>%
+  select(-key) %>%
+  unique() %>%
+  spread(label, displacement) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate_if(is.character, as.factor)
+```
+
