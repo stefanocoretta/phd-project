@@ -1436,6 +1436,60 @@ if vowel$ != ""
 endif
 ```
 
+## Create closure annotations
+
+### closure-annotation.praat
+```praat
+<<<script header>>>
+
+<<<speakers loop>>>
+```
+
+### "speakers loop"
+```praat
+ultrasound_dir$ = "../data/ultrasound/derived"
+
+directory_list = Create Strings as directory list: "directory_list", ultrasound_dir$
+number_of_dirs = Get number of strings
+
+for dir from 1 to number_of_dirs
+  selectObject: directory_list
+  speaker$ = Get string: dir
+  speaker_rec_dir$ = "'ultrasound_dir$'/'speaker$'/recordings"
+  file_list = Create Strings as file list: "file_list", "'speaker_rec_dir$'/*.wav"
+  number_of_files = Get number of strings
+
+  <<<textgrids loop>>>
+endfor
+```
+
+The script loops through each directory in `./data/ultrasound/derived/` and reads the search area TextGrids in `./data/ultrasound/derived/[ID]/recordings/`.
+
+### "textgrids loop"
+```praat
+for wav from 1 to number_of_files
+  selectObject: file_list
+  wav_file$ = Get string: wav
+  textgrid_file$ = wav_file$ - ".wav"
+  textgrid = Read from file: "'speaker_rec_dir$'/'textgrid_file$'.TextGrid"
+
+  Insert point tier: 4, "closure"
+  number_of_intervals = Get number of intervals: 3
+
+  if number_of_intervals == 3
+  vowel$ = Get label of interval: 3, 2
+
+    if vowel$ != ""
+      closure = Get end time of interval: 3, 2
+      Insert point: 4, closure, "closure_"
+    endif
+  endif
+
+  Save as text file: "'speaker_rec_dir$'/'textgrid_file$'.TextGrid"
+  removeObject: textgrid
+endfor
+```
+
 ## Headers
 
 ### "script header"
