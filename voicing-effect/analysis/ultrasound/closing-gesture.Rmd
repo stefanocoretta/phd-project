@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
-library(stringr)
 library(rticulate)
 library(lme4)
 library(effects)
@@ -19,101 +18,6 @@ library(effects)
 # Data import
 
 ```{r data-import}
-columns <- c(
-    "speaker",
-    "seconds",
-    "rec.date",
-    "prompt",
-    "label",
-    "TT.displacement.sm",
-    "TT.velocity",
-    "TT.velocity.abs",
-    "TD.displacement.sm",
-    "TD.velocity",
-    "TD.velocity.abs"
-)
-
-languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
-
-closure <- list.files(
-    path = "./voicing-effect/data/datasets/ultrasound",
-    pattern = "*-tongue-clos-cart.tsv",
-    full.names = TRUE
-    ) %>%
-    read_aaa(., columns) %>%
-    select(seconds, rec.date) %>%
-    unique()
-
-nons <- list.files(
-    path = "./voicing-effect/data/datasets/ultrasound",
-    pattern = "*-tongue-cart.tsv",
-    full.names = TRUE
-    ) %>%
-    read_aaa(., columns) %>%
-  filter(label %in% c("NONS_TT", "NONS_TD")) %>%
-    select(seconds, rec.date) %>%
-    unique()
-
-gons <- list.files(
-    path = "./voicing-effect/data/datasets/ultrasound",
-    pattern = "*-closing-gons.tsv",
-    full.names = TRUE
-    ) %>%
-    map_df(~read_tsv(., col_names = columns)) %>%
-    inner_join(y = closure, by = "rec.date", suffix = c(".gons", ".clos")) %>%
-    mutate(
-      closing = seconds.clos - seconds.gons,
-      closing = closing * 1000,
-      word = word(prompt, 2)
-    ) %>%
-  inner_join(y = nons) %>%
-  mutate(
-    closing_2 = (seconds - seconds.gons) * 1000
-  ) %>%
-    left_join(y = languages) %>%
-    left_join(y = words) %>%
-  filter(closing > 0, closing_2 > 0) %>%
-    mutate_if(is.character, as.factor)
-
-columns <- c(
-    "speaker",
-    "seconds",
-    "rec.date",
-    "prompt",
-    "label",
-    "TT.displacement.sm",
-    "TT.velocity",
-    "TT.velocity.abs",
-    "TD.displacement.sm",
-    "TD.velocity",
-    "TD.velocity.abs",
-    "TR.displacement.sm",
-    "TR.velocity",
-    "TR.velocity.abs"
-)
-
-gons_select <- select(gons, rec.date, closing, closing_2)
-
-tongue_root <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound/",
-  pattern = "*-tra-cart.tsv",
-  full.names = TRUE
-) %>%
-    map_df(~read_tsv(., col_names = columns)) %>%
-    mutate(word = word(prompt, 2)) %>%
-    left_join(y = languages) %>%
-    left_join(y = words) %>%
-    mutate_if(is.character, as.factor) %>%
-    left_join(y = gons_select) %>%
-    # filter clear outlier
-    filter(TR.displacement.sm > 40, closing < 200) %>%
-    group_by(speaker) %>%
-    mutate(
-        TR_displacement_z = scale(TR.displacement.sm),
-        closing_2_norm = scale(closing_2)
-    )
-
 columns <- c(
   "speaker",
   "seconds",
@@ -125,215 +29,159 @@ columns <- c(
   "TT_velocity_abs",
   "TD_displacement_sm",
   "TD_velocity",
-  "TD_velocity_abs"
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
 )
 
-velocity <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound/",
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+tongue <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%
-  map_df(~read_aaa(., column_names = columns)) %>%
-  select(-X, -Y) %>%
-  unique() %>%
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
   mutate(word = word(prompt, 2)) %>%
-  group_by(speaker) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
   mutate(
-    TT_velocity_abs_norm = scale(TT_velocity_abs),
-    TD_velocity_abs_norm = scale(TD_velocity_abs)
+    c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))
   ) %>%
-  ungroup() %>%
-  left_join(y = languages) %>%
-  left_join(y = words) %>%
   mutate_if(is.character, as.factor)
+
+closing <- tongue %>%
+  filter(label %in% c("closure_", "GONS_TD", "GONS_TT")) %>%
+  select(-(TT_displacement_sm:TR_velocity_abs)) %>%
+  mutate(
+    label = ifelse(
+      label %in% c("GONS_TT", "GONS_TD"),
+      "GONS",
+      "closure"
+    )
+  ) %>%
+  spread(label, seconds) %>%
+  na.omit() %>%
+  mutate(
+    closing_duration = closure - GONS
+  ) %>%
+  filter(closing_duration > 0)
+
+tongue_root <- tongue %>%
+  filter(label %in% c("max_TT", "max_TD")) %>%
+  group_by(speaker) %>%
+  mutate(TRA = -scale(TR_displacement_sm)) %>%
+  ungroup() %>%
+  select(rec_date, TR_displacement_sm, TRA) %>%
+  inner_join(y = closing)
+
+closing_velocity <- tongue %>%
+  filter(label %in% c("peak1_TT", "peak1_TD"))
 ```
 
 # Closing gesture duration
 
 ```{r}
-gons %>%
-  ggplot(aes(c2phonation, closing)) +
+closing %>%
+  ggplot(aes(c2phonation, closing_duration)) +
   geom_boxplot()
 ```
 
 
 ```{r}
-gons %>%
-    ggplot(aes(closing)) +
+closing %>%
+    ggplot(aes(closing_duration)) +
     geom_density()
 ```
 
 ```{r}
-gons %>%
-    ggplot(aes(closing)) +
+closing %>%
+    ggplot(aes(closing_duration)) +
     geom_histogram()
 ```
 
 ```{r}
-gons %>%
-    ggplot(aes(closing, colour = c2phonation)) +
+closing %>%
+    ggplot(aes(closing_duration, colour = c2phonation)) +
     geom_density()
 ```
 
 ```{r}
-gons %>%
-    filter(c2place == "velar") %>%
-    ggplot(aes(closing, colour = c2phonation)) +
+closing %>%
+    ggplot(aes(closing_duration, colour = c2phonation)) +
     geom_density() +
-    facet_grid(. ~ vowel)
+    facet_grid(c2place ~ vowel)
 ```
 
 ```{r}
-gons %>%
-    ggplot(aes(closing, fill = c2phonation)) +
+closing %>%
+    ggplot(aes(closing_duration, fill = c2phonation)) +
     geom_histogram()
 ```
 
 ```{r}
-gons %>%
-    ggplot(aes(language, closing, colour = c2phonation)) +
+closing %>%
+    ggplot(aes(language, closing_duration, colour = c2phonation)) +
     geom_boxplot() +
     facet_grid(vowel ~ c2place)
 ```
 
 ```{r}
-table(gons$c2phonation, gons$vowel, gons$c2place)
+table(closing$c2phonation, closing$vowel, closing$c2place)
 ```
 
 ```{r}
-gons %>%
-  filter(language == "italian") %>%
-  ggplot(aes(c2place, closing, colour = c2phonation)) +
+closing %>%
+  ggplot(aes(c2place, closing_duration, colour = c2phonation)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```
 
 ```{r}
-gons_lm <- lmer(
-  closing ~
-#    c2phonation *
-    vowel *
+closing_lm <- lmer(
+  closing_duration ~
+    c2phonation +
+    vowel +
     c2place +
-    (1|speaker) +
+    (1+c2phonation|speaker) +
     (1|word),
-  data = gons
+  data = closing
 )
 
-summary(gons_lm)
+summary(closing_lm)
 ```
 
 ```{r}
 plot(allEffects(gons_lm))
 ```
 
-## Closure 2
-
-```{r}
-gons %>%
-  ggplot(aes(c2phonation, closing_2)) +
-  geom_boxplot()
-```
-
-```{r}
-gons %>%
-  ggplot(aes(c2phonation, closing_2)) +
-  geom_boxplot() +
-  facet_wrap(~ speaker)
-```
-
-```{r}
-gons %>%
-  ggplot(aes(vowel, closing_2, colour = c2phonation)) +
-  geom_boxplot() +
-  facet_grid(c2place ~ speaker)
-```
-
 ## TRA and closing gesture duration
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(TR_displacement_z, closing, colour = c2phonation)) +
-  geom_point() +
-  geom_smooth(method = "lm")
-```
-
-```{r}
-tongue_root %>%
-  ggplot(aes(TR_displacement_z, closing_2, colour = c2phonation)) +
+  ggplot(aes(TR_displacement_sm, closing_duration, colour = c2phonation)) +
   geom_point() +
   geom_smooth(method = "lm") +
-  facet_grid(c2place ~ vowel)
-```
-
-```{r}
-tongue_root %>%
-  ggplot(aes(TR_displacement_z, closing_2_norm, colour = c2phonation)) +
-  geom_point() +
-  geom_smooth(method = "lm")
-```
-
-```{r}
-tongue_root %>%
-  ggplot(aes(TR_displacement_z, closing_2_norm, colour = c2phonation)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_grid(c2place ~ vowel)
-```
-
-```{r}
-tongue_root %>%
-  ggplot(aes(TR_displacement_z, closing_2_norm)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_grid(c2place ~ vowel)
-```
-
-```{r}
-tongue_root %>%
-  filter(speaker %in% c("it01", "it02", "pl02", "pl03")) %>%
-  ggplot(aes(TR_displacement_z, closing_2_norm)) +
-  geom_point() +
-  geom_smooth(method = "lm")
-```
-
-```{r}
-tongue_root %>%
-  ggplot(aes(TR_displacement_z, closing_2_norm)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_wrap(~ speaker)
+  facet_grid(~ language)
 ```
 
 # Closing gesture velocity
 
 ```{r}
-velocity %>%
+closing_velocity %>%
   filter(label == "peak1_TT") %>%
-  ggplot(aes(c2phonation, TT_velocity_abs_norm)) +
+  ggplot(aes(c2phonation, TT_velocity)) +
   geom_boxplot() +
-  facet_grid(~ language)
+  facet_wrap(~ speaker)
 ```
 
 ```{r}
-velocity %>%
-  filter(label == "peak1_TT", language == "italian") %>%
-  ggplot(aes(c2phonation, TT_velocity_abs_norm)) +
+closing_velocity %>%
+  filter(label == "peak1_TD") %>%
+  ggplot(aes(c2phonation, TD_velocity)) +
   geom_boxplot() +
-  facet_grid(. ~ vowel)
-```
-
-```{r}
-velocity %>%
-  filter(label == "peak1_TD", language == "italian") %>%
-  ggplot(aes(c2phonation, TD_velocity_abs_norm)) +
-  geom_boxplot() +
-  facet_grid(. ~ vowel)
-```
-
-```{r}
-velocity %>%
-  filter(label == "peak1_TT", language == "italian") %>%
-  ggplot(aes(c2phonation, TT_velocity_abs_norm)) +
-  geom_boxplot() +
-  facet_grid(vowel ~ speaker)
+  facet_wrap(~ speaker)
 ```
