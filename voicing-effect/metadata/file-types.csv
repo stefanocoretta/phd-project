@@ -9,7 +9,7 @@ UTI,derived,UTI alignment files ,.TextGrid,UTI alignment audio; UTI alignment te
 UTI,raw,UTI palign,.TextGrid,,,search-area.praat; get-durations.praat; burst-detection.praat; voicing-duration.praat
 UTI,derived,UTI palign chunks,.TextGrid,UTI palign,search-area.praat,voicing-duration.praat
 UTI,derived,UTI search intervals,.TextGrid,UTI palign; UTI audio filenames,search-area.praat,
-UTI,derived,UTI search intervals chunks,.TextGrid,UTI search intervals,search-area.praat,degg-tracing.praat; wavegram.praat
+UTI,derived,UTI search intervals chunks,.TextGrid,UTI search intervals,"search-area.praat, closure-annotation.praat",closure-annotation.praat; degg-tracing.praat; wavegram.praat
 UTI,derived,UTI tongue data,.tsv,UTI AAA data,,
 UTI,derived,UTI closing GONS data,.tsv,UTI AAA data,,
 UTI,derived,UTI TRA data,.tsv,UTI AAA data,,
