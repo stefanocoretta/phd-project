@@ -59,6 +59,26 @@ splines <- list.files(
   arrange(rec_date, fan_line) %>%
   create_event_start("rec_date")
 
+splines_closure <- list.files(
+  path = "./presentations/2018-baap/datasets/ultrasound",
+  pattern = "*-tongue-clos-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., columns)) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
+    vowel = ordered(vowel, levels = c("a", "o", "u")),
+    c2place = ordered(c2place, levels = c("coronal", "velar")),
+    vow_phon = as.ordered(interaction(vowel, c2phonation)),
+    c2place_phon = as.ordered(interaction(c2place, c2phonation))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
+
 vowels <- list.files(
   path = "./presentations/2018-baap/datasets/acoustics/",
   pattern = "*-durations.csv",
@@ -697,6 +717,10 @@ pl05_polar_gam_null <- polar_gam(
 
 compareML(pl05_polar_gam_null, pl05_polar_gam)
 ```
+
+## Italian closure
+
+
 
 # Vowel duration
 
