@@ -1,0 +1,76 @@
+---
+title: "Durations"
+author: "Stefano Coretta"
+date: "09/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(lme4)
+```
+
+# Data import
+
+```{r}
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+duration <- list.files(
+  path = "voicing-effect/data/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor)
+```
+
+# Plotting data
+
+```{r}
+duration %>%
+  ggplot(aes(vowel, vowel.duration, fill = c2phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r}
+duration %>%
+  filter(speaker == "pl05") %>%
+  ggplot(aes(vowel, vowel.duration, fill = c2phonation)) +
+  geom_boxplot() +
+  facet_grid(~ c2place)
+```
+
+```{r}
+duration %>%
+  filter(speaker == "pl05") %>%
+  ggplot(aes(vowel.duration, fill = c2phonation)) +
+  geom_density(alpha = 0.5, linetype = 0) +
+  facet_grid(~ c2place)
+```
+
+# Analysis
+
+```{r}
+vowdur_lm <- lmer(
+  vowel.duration ~
+    c2phonation +
+    vowel +
+    (1+c2phonation|speaker) +
+    (1|word),
+  data = filter(duration, language == "polish")
+)
+summary(vowdur_lm)
+```
+
+```{r}
+ranef(vowdur_lm)$speaker
+```
+
