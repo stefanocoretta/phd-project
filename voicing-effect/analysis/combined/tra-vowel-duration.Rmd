@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
-library(lmerTest)
+library(lme4)
 library(effects)
 library(rticulate)
 ```
@@ -19,60 +19,54 @@ library(rticulate)
 
 ```{r read-data}
 columns <- c(
-    "speaker",
-    "seconds",
-    "rec.date",
-    "prompt",
-    "label",
-    "TT.displacement.sm",
-    "TT.velocity",
-    "TT.velocity.abs",
-    "TD.displacement.sm",
-    "TD.velocity",
-    "TD.velocity.abs",
-    "TR.displacement.sm",
-    "TR.velocity",
-    "TR.velocity.abs"
+  "speaker",
+  "seconds",
+  "rec.date",
+  "prompt",
+  "label",
+  "TT.displacement.sm",
+  "TT.velocity",
+  "TT.velocity.abs",
+  "TD.displacement.sm",
+  "TD.velocity",
+  "TD.velocity.abs",
+  "TR.displacement.sm",
+  "TR.velocity",
+  "TR.velocity.abs"
 )
 
-languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
-vowels <- list.files(path = "./voicing-effect/data/datasets/acoustics",
-                   pattern = "*-durations.csv",
-                   full.names = TRUE) %>%
-    map_df(~read_csv(., na = "--undefined--"))
+vowels <- list.files(
+  path = "./voicing-effect/data/datasets/acoustics",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
 
-tongue_root <- list.files(path = "./voicing-effect/data/datasets/ultrasound/",
-                   pattern = "*-tra-cart.tsv",
-                   full.names = TRUE) %>%
-    map_df(~read_tsv(., col_names = columns)) %>%
-    mutate(word = word(prompt, 2)) %>%
-    left_join(y = languages) %>%
-    left_join(y = words) %>%
-    left_join(y = vowels) %>%
-    mutate_if(is.character, as.factor) %>%
-    # filter clear outlier
-    filter(TR.displacement.sm > 40) %>%
-    group_by(speaker) %>%
-    mutate(
-        vowel_duration_z = scale(vowel.duration),
-        TR_displacement_z = scale(TR.displacement.sm)
-    )
+tongue_root <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns, format = "wide")) %>%
+  select(-(X_1:Y_42)) %>%
+  filter(label == "closure_") %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  left_join(y = vowels) %>%
+  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor) %>%
+  # filter clear outlier
+  filter(TR.displacement.sm > 40) %>%
+  group_by(speaker) %>%
+  mutate(
+    vowel_duration_z = scale(vowel.duration),
+    TR_displacement_z = scale(TR.displacement.sm)
+  )
 
-columns <- c(
-    "speaker",
-    "seconds",
-    "rec.date",
-    "prompt",
-    "label",
-    "TT.displacement.sm",
-    "TT.velocity",
-    "TT.velocity.abs",
-    "TD.displacement.sm",
-    "TD.velocity",
-    "TD.velocity.abs"
-)
 
 tongue <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound/",
@@ -82,8 +76,8 @@ tongue <- list.files(
   map_df(~read_aaa(., column_names = columns)) %>%
   filter(label %in% c("max_TT", "max_TD")) %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = languages) %>%
-  left_join(y = words) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
   left_join(y = vowels) %>%
   mutate_if(is.character, as.factor) %>%
   group_by(speaker) %>%
@@ -99,7 +93,7 @@ Vowel duration and tongue root displacement are normalised within each speaker u
 
 ```{r tr-density}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, fill = c2phonation)) +
+    ggplot(aes(-TR_displacement_z, fill = c2phonation)) +
     geom_density(alpha = 0.2) +
     facet_grid(. ~ language)
 ```
@@ -173,27 +167,46 @@ tongue_root %>%
 
 ```{r tra-lm-it}
 tra_lm_it <- lmer(
-    vowel_duration_z ~
-        TR_displacement_z *
-        c2place *
-        vowel *
-        c2phonation +
-        (1+TR_displacement_z|speaker) +
-        (1|word),
-    data = filter(tongue_root, language == "italian"),
-    REML = FALSE, 
-    control = lmerControl(optimizer = "Nelder_Mead")
+  vowel_duration_z ~
+    TR_displacement_z +
+    c2place +
+    vowel *
+    c2phonation +
+    vowel:c2place +
+    TR_displacement_z:vowel +
+    (1+TR_displacement_z|speaker) +
+    (1|word),
+  data = filter(tongue_root, language == "italian"),
+  REML = FALSE
 )
 
 summary(tra_lm_it)
+
+tra_lm_it_null <- lmer(
+  vowel_duration_z ~
+    TR_displacement_z +
+    c2place +
+    vowel *
+    c2phonation +
+    vowel:c2place +
+#    TR_displacement_z:vowel +
+    (1+TR_displacement_z|speaker) +
+    (1|word),
+  data = filter(tongue_root, language == "italian"),
+  REML = FALSE
+)
+
+summary(tra_lm_it_null)
+
+anova(tra_lm_it_null, tra_lm_it)
 ```
 
 ```{r}
-plot(allEffects(tra_lm_it))
+plot(allEffects(tra_lm_it_null))
 ```
 
 ```{r}
-coef(tra_lm_it)$speaker
+ranef(tra_lm_it)$speaker
 ```
 
 The lmer detects a correlation, but I need to be cautious.
