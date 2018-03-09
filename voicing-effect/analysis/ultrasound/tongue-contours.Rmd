@@ -1,0 +1,67 @@
+---
+title: "Tongue contour"
+author: "Stefano Coretta"
+date: "09/03/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+library(rticulate)
+```
+
+# Data import
+
+```{r read-data}
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+tongue <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  filter(c1phonation == "voiceless") %>%
+  mutate(
+    c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  mutate_if(is.character, as.factor)
+
+tongue_max <- tongue %>%
+  filter(label %in% c("max_TT", "max_TD"))
+```
+
+# Plotting data
+
+```{r}
+tongue_max %>%
+  filter(language == "polish", c2place == "coronal", vowel == "a") %>%
+  ggplot(aes(X, Y, colour = c2phonation)) +
+  geom_point(size = 0.5) +
+  facet_wrap(~ speaker)
+```
+
