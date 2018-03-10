@@ -64,7 +64,8 @@ tongue_root <- list.files(
   group_by(speaker) %>%
   mutate(
     vowel_duration_z = scale(vowel.duration),
-    TR_displacement_z = scale(TR.displacement.sm)
+    TR_displacement_z = scale(TR.displacement.sm),
+    tra = -TR_displacement_z
   )
 
 
@@ -93,16 +94,17 @@ Vowel duration and tongue root displacement are normalised within each speaker u
 
 ```{r tr-density}
 tongue_root %>%
-    ggplot(aes(-TR_displacement_z, fill = c2phonation)) +
+    ggplot(aes(tra, fill = c2phonation, linetype = c2phonation, colour = c2phonation)) +
     geom_density(alpha = 0.2) +
     facet_grid(. ~ language)
 ```
 
 ```{r tr-boxplot}
 tongue_root %>%
-    ggplot(aes(c2phonation, -TR_displacement_z)) +
-    geom_boxplot() +
-    facet_grid(. ~ language)
+  ggplot(aes(c2phonation, tra)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2) +
+  facet_grid(. ~ language)
 ```
 
 
@@ -121,11 +123,36 @@ tongue_root %>%
     facet_grid(c2place ~ vowel)
 ```
 
+```{r tr-density-vowels}
+tongue_root %>%
+  ggplot(aes(tra, fill = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r tr-density-vowels-filtered}
+tongue_root %>%
+  filter(tra < 4) %>%
+  ggplot(aes(tra, fill = vowel, colour = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5, size = 0.7) +
+  scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
+  labs(x = "tongue root advancement (z-scores)")
+```
+
+```{r tr-density-vowels-filtered}
+tongue_root %>%
+  filter(tra < 4) %>%
+  ggplot(aes(tra, fill = vowel, colour = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5, size = 0.7) +
+  scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
+  labs(x = "tongue root advancement (z-scores)") +
+  facet_grid(~ c2place)
+```
+
 ## Tongue root and vowel duration
 
 ```{r tr-vowel-duration}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2phonation)) +
+    ggplot(aes(TR_displacement_z, vowel_duration_z)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
@@ -228,26 +255,6 @@ summary(mean_tra_lm)
 plot(allEffects(mean_tra_lm))
 ```
 
-```{r tra-lm}
-tra_lm <- lmer(
-    vowel_duration_z ~
-        TR_displacement_z *
-        c2phonation *
-        language *
-        c2place *
-        vowel +
-        (1+TR_displacement_z|speaker) +
-        (1|word),
-    data = tongue_root
-)
-
-summary(tra_lm)
-```
-
-```{r tra-lm-effects}
-plot(allEffects(tra_lm))
-```
-
 ```{r tra-lm-pl}
 tra_lm_pl <- lmer(
     vowel_duration_z ~
@@ -280,25 +287,66 @@ anova(tra_lm_pl_null, tra_lm_pl)
 plot(allEffects(tra_lm_pl))
 ```
 
+### Lmer with all data
+
+```{r tra-lm}
+tra_lm <- lmer(
+  vowel.duration ~
+    TR.displacement.sm +
+    c2phonation +
+    vowel +
+    (1|speaker) +
+    (1|word),
+data = tongue_root
+)
+
+summary(tra_lm)
+```
+
+```{r tra-lm-effects}
+plot(allEffects(tra_lm))
+```
+
 ## More plotting
+
+```{r tr-vowel-dur-faceted}
+tongue_root %>%
+  filter(TR_displacement_z > -3) %>%
+  ggplot(aes(-TR_displacement_z, vowel_duration_z)) +
+  geom_point(alpha = 0.3, stroke = 0) +
+  geom_smooth(method = "lm", aes(colour = vowel)) +
+  facet_grid(c2place ~ vowel, scales = "free") +
+  labs(
+    x = "Tongue root advacement (z-scores)",
+    y = "Vowel duration (z-scores)"
+  )
+```
 
 ```{r it-tr-vowel-dur}
 tongue_root %>%
-  filter(language == "italian") %>%
+  filter(language == "italian", TR_displacement_z > -2.7) %>%
   ggplot(aes(-TR_displacement_z, vowel_duration_z)) +
-  geom_point(alpha = 0.5, stroke = 0) +
-  geom_smooth(method = "lm") +
-  facet_grid(c2place ~ vowel)
+  geom_point(alpha = 0.3, stroke = 0) +
+  geom_smooth(method = "lm", aes(colour = vowel)) +
+  facet_grid(c2place ~ vowel, scales = "free") +
+  labs(
+    title = "Correlation between tongue root advancement and vowel duration in Italian",
+    x = "Tongue root advacement (z-scores)",
+    y = "Vowel duration (z-scores)"
+  )
 ```
 
 ```{r pl-tr-vowel-dur}
 tongue_root %>%
-  filter(language == "polish") %>%
-  filter(TR_displacement_z > -2, TR_displacement_z < 2) %>%
+  filter(language == "polish", TR_displacement_z > -3, TR_displacement_z < 3) %>%
   ggplot(aes(-TR_displacement_z, vowel_duration_z)) +
-  geom_point(alpha = 0.5, stroke = 0) +
-  geom_smooth(method = "lm") +
-  facet_grid(c2place ~ vowel)
+  geom_point(alpha = 0.3, stroke = 0) +
+  geom_smooth(method = "lm", aes(colour = vowel)) +
+  facet_grid(c2place ~ vowel, scales = "free") +
+  labs(
+    x = "tongue root advacement (z-scores)",
+    y = "vowel duration (z-scores)"
+  )
 ```
 
 
