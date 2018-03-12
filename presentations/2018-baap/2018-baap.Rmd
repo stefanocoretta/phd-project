@@ -1,11 +1,41 @@
 ---
-title: "Tongue root advancement and vowel duraƟon: a gradient eﬀect?"
+title: "Tongue root advancement and vowel duratioon: a gradient eﬀect?"
 author: "Stefano Coretta"
 date: "05/03/2018"
-output: beamer_presentation
+output:
+  beamer_presentation:
+    citation_package: natbib
+    highlight: zenburn
+    latex_engine: xelatex
+bibliography: linguistics.bib
+biblio-style: unified.bst
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+# Background
+
+\begin{figure}
+\includegraphics[width = \textwidth]{graphics/voicing.pdf}
+\end{figure}
+
+# Research hypotheses
+
+* \textbf{H$_1$}: Vowels are longer if followed by voiced stops in Italian, but not in Polish.
+* \textbf{H$_2$}: Italian speakers, but not Polish speakers, produce voiced consonants with tongue root advancement.
+
+# Methods
+
+* **Participants**: 4 Italians (2 F, 2 M), 4 Polish (2 F, 2 M)
+* **Procedure**:
+  * simultaneous ultrasound tongue imaging and audio recording
+* **Materials**:
+  * C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
+    * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o/, C\textsubscript{2} = /t, d, k, g/
+    * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
+  * frame sentence
+    - *Dico X lentamente*, 'I say X slowly'
+    - *Mówię X teraz*, 'I say X now'
 
