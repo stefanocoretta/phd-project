@@ -23,7 +23,7 @@ formants <- list.files(
   pattern = "*-formants.csv",
   full.names = TRUE
 ) %>%
-    map_df(~read_csv(., na = "--undefined--")) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
   left_join(y = speakers) %>%
   left_join(y = words) %>%
   mutate_if(is.character, as.factor)
