@@ -56,6 +56,13 @@ duration %>%
   facet_grid(~ c2place)
 ```
 
+```{r}
+duration %>%
+  ggplot(aes(vowel.duration, colour = c2phonation, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(vowel ~ c2place)
+```
+
 # Analysis
 
 ```{r}

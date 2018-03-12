@@ -99,6 +99,75 @@ tongue_root %>%
     facet_grid(. ~ language)
 ```
 
+```{r}
+tongue_root %>%
+  ggplot(aes(tra)) +
+  geom_histogram(bins = 15)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra, fill = vowel)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+tongue_root %>%
+  filter(vowel == "a") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(language ~ c2place)
+```
+
+```{r}
+tongue_root %>%
+  filter(vowel == "o") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(language ~ c2place)
+```
+
+Two outliers are tokens of /o/.
+
+```{r}
+tongue_root %>%
+  filter(vowel == "u") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(language ~ c2place)
+```
+
+/u/ is bimodally distributed but I don't know why.
+
+```{r}
+tongue_root %>%
+  filter(vowel == "u") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(speaker ~ c2place)
+```
+
 ```{r tr-boxplot}
 tongue_root %>%
   ggplot(aes(c2phonation, tra)) +
