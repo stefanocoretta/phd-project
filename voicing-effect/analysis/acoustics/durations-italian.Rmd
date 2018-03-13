@@ -35,20 +35,20 @@ vowels <- list.files(path = "voicing-effect/results/durations",
 
 ```{r vowel-hist}
 vowels %>%
-    ggplot(aes(vowel.duration, fill = c2phonation)) +
+    ggplot(aes(vowel.duration, fill = c2_phonation)) +
     geom_histogram()
 ```
 
 ```{r vowel-hist}
 vowels %>%
-    ggplot(aes(vowel.duration, fill = c2phonation)) +
+    ggplot(aes(vowel.duration, fill = c2_phonation)) +
     geom_histogram() +
     facet_wrap(~ speaker)
 ```
 
 ```{r vowel-density}
 vowels %>%
-    ggplot(aes(vowel.duration, colour = c2phonation)) +
+    ggplot(aes(vowel.duration, colour = c2_phonation)) +
     geom_density() +
     facet_wrap(~ speaker)
 ```
@@ -56,36 +56,36 @@ vowels %>%
 
 ```{r vowel-violin}
 vowels %>%
-    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(vowel, vowel.duration, colour = c2_phonation)) +
     geom_violin() +
     facet_wrap(~ speaker)
 ```
 
 ```{r vowel-boxplot}
 vowels %>%
-    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(vowel, vowel.duration, colour = c2_phonation)) +
     geom_boxplot() +
     facet_wrap(~ speaker)
 ```
 
 ```{r}
 vowels %>%
-    filter(c2place == "coronal") %>%
-    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    filter(c2_place == "coronal") %>%
+    ggplot(aes(vowel, vowel.duration, colour = c2_phonation)) +
     geom_violin() +
     facet_wrap(~ speaker)
 ```
 
 ```{r}
 vowels %>%
-    filter(c2place == "velar") %>%
-    ggplot(aes(vowel, vowel.duration, colour = c2phonation)) +
+    filter(c2_place == "velar") %>%
+    ggplot(aes(vowel, vowel.duration, colour = c2_phonation)) +
     geom_violin() +
     facet_wrap(~ speaker)
 ```
 
 ```{r}
-table(!is.na(vowels$closure.duration), vowels$c2place, vowels$c2phonation)
+table(!is.na(vowels$closure.duration), vowels$c2_place, vowels$c2_phonation)
 ```
 
 
@@ -102,14 +102,14 @@ vowels <- vowels %>%
 
 ```{r}
 vowels %>%
-    ggplot(aes(closure.duration, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(closure.duration, vowel.duration, colour = c2_phonation)) +
     geom_point(alpha = 0.5) +
     geom_smooth(method = "lm")
 ```
 
 ```{r}
 vowels %>%
-    ggplot(aes(closure.duration, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(closure.duration, vowel.duration, colour = c2_phonation)) +
     geom_point(alpha = 0.5) +
     geom_smooth(method = "lm") +
     facet_wrap(~ speaker)
@@ -117,14 +117,14 @@ vowels %>%
 
 ```{r}
 vowels %>%
-    ggplot(aes(word.duration, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(word.duration, vowel.duration, colour = c2_phonation)) +
     geom_point(alpha = 0.5) +
     geom_smooth(method = "lm")
 ```
 
 ```{r}
 vowels %>%
-    ggplot(aes(word.duration, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(word.duration, vowel.duration, colour = c2_phonation)) +
     geom_point(alpha = 0.5) +
     geom_smooth(method = "lm") +
     facet_wrap(~ speaker)

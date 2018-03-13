@@ -75,8 +75,8 @@ for (item in velocity$word) {
 velocity <- cbind(velocity, repetition) %>%
     mutate(repetition = as.factor(repetition))
 
-velocity.coronal <- filter(velocity, c2place == "coronal")
-velocity.velar <- filter(velocity, c2place == "velar")
+velocity.coronal <- filter(velocity, c2_place == "coronal")
+velocity.velar <- filter(velocity, c2_place == "velar")
 
 degg.word <- list.files(path = "./voicing-effect/results",
                    pattern = "*-degg-tracing-word.csv",
@@ -113,19 +113,19 @@ degg.word.pl <- filter(degg.word, language == "polish")
 ```{r coronal-velocity-plot}
 ggplot(velocity.coronal, aes(rel.time, TT.velocity.abs, group = repetition)) +
     geom_line() +
-    facet_grid(speaker ~ vowel + c2phonation)
+    facet_grid(speaker ~ vowel + c2_phonation)
 ```
 
 ```{r velar-velocity-plot}
 ggplot(velocity.velar, aes(rel.time, TD.velocity.abs, group = repetition)) +
     geom_line() +
-    facet_grid(speaker ~ vowel + c2phonation)
+    facet_grid(speaker ~ vowel + c2_phonation)
 ```
 
 ```{r velocity-plot}
 ggplot(velocity, aes(rel.time, TD.velocity.abs)) +
     geom_line() +
-    facet_grid(speaker + c2place ~ c2phonation + vowel)
+    facet_grid(speaker + c2_place ~ c2_phonation + vowel)
 ```
 
 # Closed quotient
@@ -134,7 +134,7 @@ ggplot(velocity, aes(rel.time, TD.velocity.abs)) +
 filter(degg.word, closed.quotient < 1, closed.quotient > 0) %>%
 ggplot(aes(rel.time, closed.quotient)) +
     geom_point() +
-    facet_grid(speaker + c2place ~ c2phonation + vowel)
+    facet_grid(speaker + c2_place ~ c2_phonation + vowel)
 ```
 
 # Velocity and CQ
@@ -230,6 +230,6 @@ filter(degg.word, minimum < 1, minimum > 0) %>%
 ggplot(aes(x = proportion)) +
     geom_point(aes(y = maximum)) +
     geom_point(aes(y = minimum)) +
-    facet_grid(speaker + c2place ~ c2phonation + vowel)
+    facet_grid(speaker + c2_place ~ c2_phonation + vowel)
 ```
 

@@ -34,40 +34,40 @@ formants <- list.files(
 ```{r}
 formants %>%
   filter(language == "italian") %>%
-  ggplot(aes(time, f1, colour = c2phonation)) +
+  ggplot(aes(time, f1, colour = c2_phonation)) +
   geom_smooth() +
-  facet_grid(c2place ~ vowel)
+  facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
 formants %>%
   filter(language == "italian") %>%
-  ggplot(aes(time, f2, colour = c2phonation)) +
+  ggplot(aes(time, f2, colour = c2_phonation)) +
   geom_smooth() +
-  facet_grid(c2place ~ vowel)
+  facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
 formants %>%
   filter(language == "italian") %>%
-  ggplot(aes(time, f3, colour = c2phonation)) +
+  ggplot(aes(time, f3, colour = c2_phonation)) +
   geom_smooth() +
-  facet_grid(c2place ~ vowel)
+  facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
 formants %>%
   filter(language == "italian") %>%
-  ggplot(aes(x = time, colour = c2phonation)) +
+  ggplot(aes(x = time, colour = c2_phonation)) +
   geom_smooth(aes(y = f1)) +
   geom_smooth(aes(y = f2)) +
-  facet_grid(c2place ~ vowel)
+  facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
 formants %>%
   filter(language == "polish") %>%
-  ggplot(aes(x = time, colour = c2phonation)) +
+  ggplot(aes(x = time, colour = c2_phonation)) +
   geom_smooth(aes(y = f1)) +
   geom_smooth(aes(y = f2)) +
   facet_grid(. ~ vowel)
@@ -77,9 +77,9 @@ formants %>%
 for (i in 1:9) {
   print(formants %>%
   filter(time == i, language == "italian", vowel != "u") %>%
-  ggplot(aes(f2, f1, colour = c2phonation)) +
+  ggplot(aes(f2, f1, colour = c2_phonation)) +
   geom_point() +
-  facet_grid(c2place ~ vowel) +
+  facet_grid(c2_place ~ vowel) +
   scale_x_reverse(lim = c(max(formants$f2), min(formants$f2))) +
   scale_y_reverse(lim = c(max(formants$f1), min(formants$f1)))
   )
@@ -90,9 +90,9 @@ for (i in 1:9) {
 for (i in 1:9) {
   print(formants %>%
   filter(time == i, language == "polish", vowel != "u") %>%
-  ggplot(aes(f2, f1, colour = c2phonation)) +
+  ggplot(aes(f2, f1, colour = c2_phonation)) +
   geom_point() +
-  facet_grid(c2place ~ vowel) +
+  facet_grid(c2_place ~ vowel) +
   scale_x_reverse(lim = c(max(formants$f2), min(formants$f2))) +
   scale_y_reverse(lim = c(max(formants$f1), min(formants$f1)))
   )

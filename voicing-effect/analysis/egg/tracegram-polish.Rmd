@@ -29,10 +29,10 @@ degg_pl <- list.files(path = "./voicing-effect/results/egg",
     left_join(y = languages) %>%
     filter(language == "polish") %>%
     left_join(y = words) %>%
-    filter(c1phonation == "voiceless") %>%
+    filter(c1_phonation == "voiceless") %>%
     mutate_if(is.character, as.factor) %>%
     mutate(
-        c2phonation_o = ordered(c2phonation, levels = c("voiceless", "voiced")),
+        c2_phonation_o = ordered(c2_phonation, levels = c("voiceless", "voiced")),
         closed_quotient = minimum - maximum
     ) %>%
     filter(minimum < 1, minimum > 0)
@@ -44,7 +44,7 @@ Compared to Italian, there's more variation. It could be an artefact of the new 
 
 ```{r tracegram-point}
 degg_pl %>%
-ggplot(aes(x = proportion, colour = c2phonation_o)) +
+ggplot(aes(x = proportion, colour = c2_phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_point(aes(y = maximum), alpha = 0.5) +
     geom_point(aes(y = minimum), alpha = 0.5) +
@@ -58,7 +58,7 @@ There is an increase in the dEGG maximum for voiceless stops in PL02, 03, 05. PL
 
 ```{r tracegram-smooth}
 degg_pl %>%
-ggplot(aes(x = proportion, colour = c2phonation_o)) +
+ggplot(aes(x = proportion, colour = c2_phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
@@ -70,7 +70,7 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
 
 ```{r tracegram-smooth}
 degg_pl %>%
-ggplot(aes(x = proportion, colour = c2phonation_o)) +
+ggplot(aes(x = proportion, colour = c2_phonation_o)) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("proportion of vowel duration") +
@@ -81,7 +81,7 @@ ggplot(aes(x = proportion, colour = c2phonation_o)) +
 
 ```{r tracegram-point-time}
 degg_pl %>%
-ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+ggplot(aes(x = rel.time, colour = c2_phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_point(aes(y = maximum), alpha = 0.5) +
     geom_point(aes(y = minimum), alpha = 0.5) +
@@ -92,7 +92,7 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
 
 ```{r tracegram-smooth-time}
 degg_pl %>%
-ggplot(aes(x = rel.time, colour = c2phonation_o)) +
+ggplot(aes(x = rel.time, colour = c2_phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
@@ -103,7 +103,7 @@ ggplot(aes(x = rel.time, colour = c2phonation_o)) +
 
 ```{r cq-trajectory}
 degg_pl %>%
-ggplot(aes(x = proportion, colour = c2phonation_o)) +
+ggplot(aes(x = proportion, colour = c2_phonation_o)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = closed_quotient)) +
     xlab("vowel duration") +
@@ -116,9 +116,9 @@ The CQ is problematic I think but it can still tell us something. I am working o
 
 ```{r cq-boxplot}
 degg_pl %>%
-    group_by(speaker, c2phonation_o, date) %>%
+    group_by(speaker, c2_phonation_o, date) %>%
     summarise(closed_quotient = mean(closed_quotient)) %>%
-ggplot(aes(x = c2phonation_o, y = closed_quotient)) +
+ggplot(aes(x = c2_phonation_o, y = closed_quotient)) +
     facet_grid(. ~ speaker) +
     geom_boxplot() +
     xlab("C2 phonation") +

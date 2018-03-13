@@ -9,7 +9,7 @@ splines <- filter(
 
 ss <- polar.ssanova(
     splines,
-    "c2phonation",
+    "c2_phonation",
     CI.fill = TRUE,
     is.polar = FALSE,
     flip = T
@@ -17,24 +17,24 @@ ss <- polar.ssanova(
 
 splines_pol <- make.polar(splines, c(-0.800933928571429, -43.434646))
 
-ggplot(splines_pol, aes(X, Y, colour = c2phonation)) +
+ggplot(splines_pol, aes(X, Y, colour = c2_phonation)) +
     geom_point()
 
 splines_pol_2 <- transform_coord(splines, origin = c(-0.800933928571429, -43.434646))
 
-ggplot(splines_pol_2, aes(theta, radius, colour = c2phonation)) +
+ggplot(splines_pol_2, aes(theta, radius, colour = c2_phonation)) +
     geom_point(alpha = 0.2) +
     geom_smooth()
 
 splines_pol_3 <- transform_coord(splines)
 
-ggplot(splines_pol_3, aes(theta, radius, colour = c2phonation)) +
+ggplot(splines_pol_3, aes(theta, radius, colour = c2_phonation)) +
     geom_point(alpha = 0.2) +
     geom_smooth()
 
 splines_cart <- make.cartesian(select(splines_pol, X:Y))
 
-ggplot(splines_cart, aes(X, Y, colour = c2phonation)) +
+ggplot(splines_cart, aes(X, Y, colour = c2_phonation)) +
     geom_smooth()
 
 polar_data %>%
@@ -68,7 +68,7 @@ my_enquo <- function(my_list) {
 splines_o <- filter(
     splines.it,
     speaker == "it01",
-    c2place == "velar",
+    c2_place == "velar",
     vowel == "o",
     !is.na(Y)
 ) %>%
@@ -76,7 +76,7 @@ splines_o <- filter(
 
 ss_o <- polar.ssanova(
     splines_o,
-    "c2phonation",
+    "c2_phonation",
     CI.fill = TRUE,
     is.polar = FALSE,
     flip = T

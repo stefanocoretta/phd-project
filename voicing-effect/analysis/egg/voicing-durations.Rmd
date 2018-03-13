@@ -34,7 +34,7 @@ voicing <- list.files(
   )
 
 
-voicing_voiceless <- filter(voicing, c2phonation == "voiceless", c1phonation == "voiceless")
+voicing_voiceless <- filter(voicing, c2_phonation == "voiceless", c1_phonation == "voiceless")
 
 voicing_norm <- voicing_voiceless %>%
   filter(voicing.duration < 300) %>%

@@ -45,7 +45,7 @@ words <- read_csv("./voicing-effect/stimuli/nonce.csv")
 degg <- degg %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
-    filter(c1phonation == "voiceless") %>%
+    filter(c1_phonation == "voiceless") %>%
     mutate_if(is.character, as.factor)
 
 degg.it <- filter(degg, language == "italian")
@@ -57,7 +57,7 @@ degg.pl <- filter(degg, language == "polish")
 We can now plot smoothers for DEGG maxima and minima for both languages. The *x*-axis shows the normalised time as a proportion of the vowel duration, while values on the *y*-axix indicates the proportion of the glottal period at *x* time. The lines in the lower half of the graphs are the DEGG maxima, while the lines in the upper half are the minima. The second half of the vowel proportion contains information important for the effects of the phonation of the consonant following the vowel.
 
 ```{r tracegram}
-ggplot(degg, aes(x = proportion, colour = c2phonation)) +
+ggplot(degg, aes(x = proportion, colour = c2_phonation)) +
     facet_grid(. ~ language + speaker) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
@@ -66,9 +66,9 @@ ggplot(degg, aes(x = proportion, colour = c2phonation)) +
     xlim(0.1, 0.9)
 ```
 
-```{r tracegram-c2place}
-ggplot(degg, aes(x = proportion, colour = c2phonation)) +
-    facet_grid(speaker ~  c2place) +
+```{r tracegram-c2_place}
+ggplot(degg, aes(x = proportion, colour = c2_phonation)) +
+    facet_grid(speaker ~  c2_place) +
     geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
     xlab("relative time (proportion of vowel duration)") +
@@ -77,13 +77,13 @@ ggplot(degg, aes(x = proportion, colour = c2phonation)) +
 ```
 
 ```{r maximum-boxplot-it}
-ggplot(degg.it, aes(c2phonation, maximum)) +
+ggplot(degg.it, aes(c2_phonation, maximum)) +
     geom_boxplot() +
     facet_grid(. ~ speaker)
 ```
 
 ```{r maximum-boxplot-pl}
-ggplot(degg.pl, aes(c2phonation, maximum)) +
+ggplot(degg.pl, aes(c2_phonation, maximum)) +
     geom_boxplot() +
     facet_grid(. ~ speaker)
 ```
@@ -97,10 +97,10 @@ As it can be seen from the graph, both Italian and Polish show a raising profile
 We can now calculate the SSANOVA model for dEGG maxima and minima.
 
 ```{r ssanova-it}
-maximum.model <- ssanova(maximum ~ c2phonation + proportion + c2phonation:proportion,
+maximum.model <- ssanova(maximum ~ c2_phonation + proportion + c2_phonation:proportion,
 data = degg.it)
 
-minimum.model <- ssanova(minimum ~ c2phonation + proportion + c2phonation:proportion,
+minimum.model <- ssanova(minimum ~ c2_phonation + proportion + c2_phonation:proportion,
 data = degg.it)
 ```
 
@@ -109,7 +109,7 @@ And calculate the predicted splines based on the SSANOVA models.
 ```{r predict-it}
 predicted.degg <- expand.grid(proportion = seq(min(degg.it$proportion), max(degg.it$proportion),
                                          length = 100),
-                    c2phonation = c("voiced", "voiceless"))
+                    c2_phonation = c("voiced", "voiceless"))
 
 predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
 predicted.degg$maximum.SE <- predict(maximum.model, predicted.degg, se = TRUE)$se.fit
@@ -120,15 +120,15 @@ predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$s
 Finally, we can plot the predicted splines for Italian with 95% confidence levels for significance evaluation.
 
 ```{r ssanova-it-plot}
-ggplot(predicted.degg, aes(x = proportion, colour = c2phonation, group = c2phonation)) +
+ggplot(predicted.degg, aes(x = proportion, colour = c2_phonation, group = c2_phonation)) +
     geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
                 ymax = maximum.fit+(1.96*maximum.SE),
-                fill = c2phonation ),alpha = 0.5,colour = "NA") +
+                fill = c2_phonation ),alpha = 0.5,colour = "NA") +
     geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
                     ymax = minimum.fit+(1.96*minimum.SE),
-                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
+                    fill = c2_phonation ),alpha = 0.5,colour = "NA") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     xlim(0, 1)
@@ -137,10 +137,10 @@ ggplot(predicted.degg, aes(x = proportion, colour = c2phonation, group = c2phona
 ## Polish
 
 ```{r ssanova-pl}
-maximum.model <- ssanova(maximum ~ c2phonation + proportion + c2phonation:proportion,
+maximum.model <- ssanova(maximum ~ c2_phonation + proportion + c2_phonation:proportion,
 data = degg.pl)
 
-minimum.model <- ssanova(minimum ~ c2phonation + proportion + c2phonation:proportion,
+minimum.model <- ssanova(minimum ~ c2_phonation + proportion + c2_phonation:proportion,
 data = degg.pl)
 ```
 
@@ -149,7 +149,7 @@ And calculate the predicted splines based on the SSANOVA models.
 ```{r predict-pl}
 predicted.degg <- expand.grid(proportion = seq(min(degg.pl$proportion), max(degg.pl$proportion),
                                          length = 100),
-                    c2phonation = c("voiced", "voiceless"))
+                    c2_phonation = c("voiced", "voiceless"))
 
 predicted.degg$maximum.fit <- predict(maximum.model, predicted.degg, se = TRUE)$fit
 predicted.degg$maximum.SE <- predict(maximum.model, predicted.degg, se = TRUE)$se.fit
@@ -160,15 +160,15 @@ predicted.degg$minimum.SE <- predict(minimum.model, predicted.degg, se = TRUE)$s
 Finally, we can plot the predicted splines for Polish with 95% confidence levels for significance evaluation.
 
 ```{r ssanova-pl-plot}
-ggplot(predicted.degg, aes(x = proportion, colour = c2phonation, group = c2phonation)) +
+ggplot(predicted.degg, aes(x = proportion, colour = c2_phonation, group = c2_phonation)) +
     geom_line(aes(y = maximum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = maximum.fit-(1.96*maximum.SE),
                 ymax = maximum.fit+(1.96*maximum.SE),
-                fill = c2phonation ),alpha = 0.5,colour = "NA") +
+                fill = c2_phonation ),alpha = 0.5,colour = "NA") +
     geom_line(aes(y = minimum.fit), alpha = 1, colour = "grey20") +
     geom_ribbon(aes(ymin = minimum.fit-(1.96*minimum.SE),
                     ymax = minimum.fit+(1.96*minimum.SE),
-                    fill = c2phonation ),alpha = 0.5,colour = "NA") +
+                    fill = c2_phonation ),alpha = 0.5,colour = "NA") +
     xlab("relative time (proportion of vowel duration)") +
     ylab("proportion of glottal period") +
     xlim(0, 1)
@@ -183,14 +183,14 @@ ggplot(predicted.degg, aes(x = proportion, colour = c2phonation, group = c2phona
 ```{r maximum-gam-it}
 degg.ord <- degg %>%
     filter(language == "italian") %>%
-    mutate(c2phonation.ord = as.ordered(c2phonation))
-contrasts(degg.ord$c2phonation.ord) <- "contr.treatment"
+    mutate(c2_phonation.ord = as.ordered(c2_phonation))
+contrasts(degg.ord$c2_phonation.ord) <- "contr.treatment"
 
 maximum.gam <- bam(
     maximum ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(proportion, bs = "cr") +
-        s(proportion, by = c2phonation.ord, bs = "cr"),
+        s(proportion, by = c2_phonation.ord, bs = "cr"),
     data = degg.ord,
     method = "ML"
 )
@@ -213,11 +213,11 @@ compareML(maximum.gam, maximum.gam.null)
 
 
 ```{r maximum-plot-smooth-it}
-plot_smooth(maximum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
+plot_smooth(maximum.gam, view = "proportion", plot_all = "c2_phonation.ord", rug = FALSE)
 ```
 
 ```{r maximum-plot-difference-it}
-plot_diff(maximum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
+plot_diff(maximum.gam, view="proportion", comp = list(c2_phonation.ord = c("voiceless","voiced")))
 ```
 
 ### Minimum
@@ -225,9 +225,9 @@ plot_diff(maximum.gam, view="proportion", comp = list(c2phonation.ord = c("voice
 ```{r minimum-gam-it}
 minimum.gam <- bam(
     minimum ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(proportion, bs = "cr") +
-        s(proportion, by = c2phonation.ord, bs = "cr"),
+        s(proportion, by = c2_phonation.ord, bs = "cr"),
     data = degg.ord
 )
 
@@ -235,11 +235,11 @@ summary(minimum.gam)
 ```
 
 ```{r minimum-plot-smooth-it}
-plot_smooth(minimum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
+plot_smooth(minimum.gam, view = "proportion", plot_all = "c2_phonation.ord", rug = FALSE)
 ```
 
 ```{r minimum-plot-difference-it}
-plot_diff(minimum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
+plot_diff(minimum.gam, view="proportion", comp = list(c2_phonation.ord = c("voiceless","voiced")))
 ```
 
 # GAMM
@@ -251,14 +251,14 @@ plot_diff(minimum.gam, view="proportion", comp = list(c2phonation.ord = c("voice
 ```{r maximum-gam-pl}
 degg.ord <- degg %>%
     filter(language == "polish") %>%
-    mutate(c2phonation.ord = as.ordered(c2phonation))
-contrasts(degg.ord$c2phonation.ord) <- "contr.treatment"
+    mutate(c2_phonation.ord = as.ordered(c2_phonation))
+contrasts(degg.ord$c2_phonation.ord) <- "contr.treatment"
 
 maximum.gam <- bam(
     maximum ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(proportion, bs = "cr") +
-        s(proportion, by = c2phonation.ord, bs = "cr"),
+        s(proportion, by = c2_phonation.ord, bs = "cr"),
     data = degg.ord,
     method = "ML"
 )
@@ -281,11 +281,11 @@ compareML(maximum.gam, maximum.gam.null)
 
 
 ```{r maximum-plot-smooth-pl}
-plot_smooth(maximum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
+plot_smooth(maximum.gam, view = "proportion", plot_all = "c2_phonation.ord", rug = FALSE)
 ```
 
 ```{r maximum-plot-difference-pl}
-plot_diff(maximum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
+plot_diff(maximum.gam, view="proportion", comp = list(c2_phonation.ord = c("voiceless","voiced")))
 ```
 
 ### Minimum
@@ -293,9 +293,9 @@ plot_diff(maximum.gam, view="proportion", comp = list(c2phonation.ord = c("voice
 ```{r minimum-gam-pl}
 minimum.gam <- bam(
     minimum ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(proportion, bs = "cr") +
-        s(proportion, by = c2phonation.ord, bs = "cr"),
+        s(proportion, by = c2_phonation.ord, bs = "cr"),
     data = degg.ord
 )
 
@@ -303,9 +303,9 @@ summary(minimum.gam)
 ```
 
 ```{r minimum-plot-smooth-pl}
-plot_smooth(minimum.gam, view = "proportion", plot_all = "c2phonation.ord", rug = FALSE)
+plot_smooth(minimum.gam, view = "proportion", plot_all = "c2_phonation.ord", rug = FALSE)
 ```
 
 ```{r minimum-plot-difference-pl}
-plot_diff(minimum.gam, view="proportion", comp = list(c2phonation.ord = c("voiceless","voiced")))
+plot_diff(minimum.gam, view="proportion", comp = list(c2_phonation.ord = c("voiceless","voiced")))
 ```

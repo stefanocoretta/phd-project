@@ -97,8 +97,8 @@ splines <- splines.raw %>%
 
 splines.it <- filter(splines, language == "italian")
 splines.pl <- filter(splines, language == "polish")
-splines.cor <- filter(splines, c2place == "coronal")
-splines.vel <- filter(splines, c2place == "velar")
+splines.cor <- filter(splines, c2_place == "coronal")
+splines.vel <- filter(splines, c2_place == "velar")
 
 splines.closure <- splines.closure.raw %>%
     gather(spline, coordinate, matches("[XY]_")) %>%
@@ -141,7 +141,7 @@ We can finally plot splines.
 
 ```{r velar, eval=FALSE}
 filter(splines, label == "max_TD") %>%
-ggplot(aes(x = X, y = Y, colour = c2phonation)) +
+ggplot(aes(x = X, y = Y, colour = c2_phonation)) +
     geom_smooth(method = "loess", se = FALSE) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker)
@@ -149,7 +149,7 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
 
 ```{r velar-scaled, eval=FALSE}
 filter(splines, label == "max_TD") %>%
-ggplot(aes(x = X.norm, y = Y.norm, colour = c2phonation, group = rec.date)) +
+ggplot(aes(x = X.norm, y = Y.norm, colour = c2_phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", se = FALSE, alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
@@ -158,7 +158,7 @@ ggplot(aes(x = X.norm, y = Y.norm, colour = c2phonation, group = rec.date)) +
 
 ```{r coronal, eval=FALSE}
 filter(splines, label == "NONS_TT") %>%
-ggplot(aes(x = X, y = Y, colour = c2phonation)) +
+ggplot(aes(x = X, y = Y, colour = c2_phonation)) +
     geom_smooth(method = "loess", se = FALSE) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ language)
@@ -166,7 +166,7 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
 
 ```{r coronal-scaled, eval=FALSE}
 filter(splines, label == "max_TT") %>%
-ggplot(aes(x = X.norm, y = Y.norm, colour = c2phonation, group = rec.date)) +
+ggplot(aes(x = X.norm, y = Y.norm, colour = c2_phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", se = FALSE, alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ speaker) +
@@ -174,18 +174,18 @@ ggplot(aes(x = X.norm, y = Y.norm, colour = c2phonation, group = rec.date)) +
 ```
 
 ```{r}
-filter(splines, c2place == "coronal") %>%
+filter(splines, c2_place == "coronal") %>%
     ggplot(aes(x = X, y = Y, colour = label)) +
         geom_smooth(method = "loess", se = FALSE) +
         coord_fixed(ratio = 1) +
-        facet_grid(vowel ~ language + c2phonation)
+        facet_grid(vowel ~ language + c2_phonation)
 ```
 
 # SSANOVA
 
 ```{r ssanovaTongue}
 ssanovaTongue <- function(splines) {
-    model <- ssanova(Y ~ c2phonation + X + c2phonation:X, data = splines)
+    model <- ssanova(Y ~ c2_phonation + X + c2_phonation:X, data = splines)
     
     predicted <- expand.grid(X = seq(min(splines$X, na.rm = TRUE),
                                      max(splines$X, na.rm = TRUE),
@@ -193,7 +193,7 @@ ssanovaTongue <- function(splines) {
                              Y = seq(min(splines$Y, na.rm = TRUE),
                                      max(splines$Y, na.rm = TRUE),
                                      length = 100),
-                             c2phonation = c("voiced", "voiceless")
+                             c2_phonation = c("voiced", "voiceless")
     )
     
     predicted$splines.fit <- predict(model, predicted, se = T)$fit
@@ -226,31 +226,31 @@ ssanova.vel.u <- ssanovaTongue(splines.vel.u)
 
 
 ```{r ssanova-cor-plot-it}
-ggplot(ssanova.cor.a, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.cor.a, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.cor.o, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.cor.o, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.cor.u, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.cor.u, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
@@ -258,31 +258,31 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
 ```
 
 ```{r ssanova-vel-plot-it}
-ggplot(ssanova.vel.a, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.vel.a, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.vel.o, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.vel.o, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.vel.u, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.vel.u, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
@@ -312,31 +312,31 @@ ssanova.vel.u <- ssanovaTongue(splines.vel.u)
 
 
 ```{r ssanova-cor-plot-pl}
-ggplot(ssanova.cor.a, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.cor.a, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.cor.o, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.cor.o, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.cor.u, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.cor.u, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
@@ -344,31 +344,31 @@ geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
 ```
 
 ```{r ssanova-vel-plot-pl}
-ggplot(ssanova.vel.a, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.vel.a, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.vel.o, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.vel.o, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
             )
 
-ggplot(ssanova.vel.u, aes(x = X, colour = c2phonation)) +
+ggplot(ssanova.vel.u, aes(x = X, colour = c2_phonation)) +
 geom_line(aes(y = splines.fit)) +
 geom_ribbon(aes(ymin = splines.fit - (1.96 * splines.SE),
                 ymax = splines.fit + (1.96 * splines.SE),
-                fill = c2phonation
+                fill = c2_phonation
                 ),
             alpha = 0.5,
             color = "NA"
@@ -381,8 +381,8 @@ Let's plot the nucleus duration (NOFF - NONS) as a function of place of articula
 
 ```{r nucleus-duration}
 filter(cons.gestures, nucleus < 0.05) %>%
-ggplot(aes(c2phonation, nucleus)) +
-    facet_grid(c2place ~ speaker) +
+ggplot(aes(c2_phonation, nucleus)) +
+    facet_grid(c2_place ~ speaker) +
     geom_violin() +
     geom_boxplot(width=0.1) +
     theme(strip.background = element_rect(fill = "black"),
@@ -393,9 +393,9 @@ ggplot(aes(c2phonation, nucleus)) +
 ```{r nucleus-lmer-it}
 nucleus.model.it <- lmer(
     nucleus ~
-        c2phonation *
+        c2_phonation *
         vowel *
-        c2place +
+        c2_place +
         (1|word) +
         (1|speaker),
     data = gestures.it
@@ -405,9 +405,9 @@ summary(nucleus.model.it)
 
 mixed(
     nucleus ~
-        c2phonation *
+        c2_phonation *
         vowel *
-        c2place +
+        c2_place +
         (1|word) +
         (1|speaker),
     data = gestures.it
@@ -422,9 +422,9 @@ plot(allEffects(nucleus.model.it))
 ```{r nucleus-lmer-pl}
 nucleus.model.pl <- lmer(
     nucleus ~
-        c2phonation *
+        c2_phonation *
         vowel *
-        c2place +
+        c2_place +
         (1|word),
     data = gestures.pl
 )
@@ -433,9 +433,9 @@ summary(nucleus.model.pl)
 
 mixed(
     nucleus ~
-        c2phonation *
+        c2_phonation *
         vowel *
-        c2place +
+        c2_place +
         (1|word),
     data = gestures.pl
 )
@@ -447,8 +447,8 @@ plot(allEffects(nucleus.model.pl))
 
 
 ```{r deceleration-duration}
-ggplot(cons.gestures, aes(c2phonation, deceleration)) +
-    facet_grid(.~language + c2place) +
+ggplot(cons.gestures, aes(c2_phonation, deceleration)) +
+    facet_grid(.~language + c2_place) +
 #    geom_violin() +
     geom_boxplot() +
     theme(strip.background = element_rect(fill = "black"),
@@ -459,9 +459,9 @@ ggplot(cons.gestures, aes(c2phonation, deceleration)) +
 ```{r deceleration-lmer-it}
 deceleration.model.it <- lmer(
     deceleration ~
-        c2phonation *
+        c2_phonation *
         vowel *
-        c2place +
+        c2_place +
 
         (1|word) +
         (1|speaker),
@@ -472,9 +472,9 @@ summary(deceleration.model.it)
 
 mixed(
     deceleration ~
-        c2phonation *
+        c2_phonation *
         vowel *
-        c2place +
+        c2_place +
 
         (1|word) +
         (1|speaker),
@@ -519,19 +519,19 @@ By comparing the two tables, it seems that the function is now performing quite 
 ```{r}
 splines.cor.max <- splines.cor %>%
     filter(label == "max_TT") %>%
-    mutate(c2phonation.ord = as.ordered(c2phonation),
+    mutate(c2_phonation.ord = as.ordered(c2_phonation),
            language.ord = as.ordered(language),
            vowel.ord = as.ordered(vowel))
-contrasts(splines.cor.max$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.cor.max$c2_phonation.ord) <- "contr.treatment"
 contrasts(splines.cor.max$language.ord) <- "contr.treatment"
 contrasts(splines.cor.max$vowel.ord) <- "contr.treatment"
 
 coronal.gam <- bam(
     Y ~
-        c2phonation.ord +
+        c2_phonation.ord +
         vowel.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2_phonation.ord, bs = "cr") +
         s(X, by = vowel.ord, bs = "cr") +
         s(rec.date, bs = "re") +
         s(speaker, bs = "re"),
@@ -555,7 +555,7 @@ compareML(coronal.gam, coronal.gam.null)
 ```
 
 ```{r}
-plot_smooth(coronal.gam, view="X", plot_all="c2phonation.ord", rug=F)
+plot_smooth(coronal.gam, view="X", plot_all="c2_phonation.ord", rug=F)
 ```
 
 ```{r}
@@ -564,7 +564,7 @@ plot_smooth(coronal.gam, view="X", plot_all="vowel.ord", rug=F)
 
 
 ```{r}
-plot_diff(coronal.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")))
+plot_diff(coronal.gam, view="X", comp=list(c2_phonation.ord=c("voiceless","voiced")))
 ```
 
 ```{r}
@@ -580,14 +580,14 @@ acf_plot(resid(coronal.gam), split_by=list(splines.cor.max$rec.date))
 
 ```{r}
 splines.vel <- splines.vel %>%
-    mutate(c2phonation.ord = as.ordered(c2phonation))
-contrasts(splines.vel$c2phonation.ord) <- "contr.treatment"
+    mutate(c2_phonation.ord = as.ordered(c2_phonation))
+contrasts(splines.vel$c2_phonation.ord) <- "contr.treatment"
 
 velar.gam <- bam(
     Y ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr"),
+        s(X, by = c2_phonation.ord, bs = "cr"),
     data = splines.vel,
     method = "ML"
 )
@@ -596,7 +596,7 @@ summary(velar.gam)
 
 velar.gam.null <- bam(
     Y ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(X, bs = "cr"),
     data = splines.vel,
     method = "ML"
@@ -606,11 +606,11 @@ compareML(velar.gam, velar.gam.null)
 ```
 
 ```{r}
-plot_smooth(velar.gam, view="X", plot_all="c2phonation.ord", rug=F)
+plot_smooth(velar.gam, view="X", plot_all="c2_phonation.ord", rug=F)
 ```
 
 ```{r}
-plot_diff(velar.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")))
+plot_diff(velar.gam, view="X", comp=list(c2_phonation.ord=c("voiceless","voiced")))
 ```
 
 # Tongue shape at acoustic closure
@@ -618,8 +618,8 @@ plot_diff(velar.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")
 ## Plot
 
 ```{r closure-velar, eval=FALSE}
-filter(splines.closure, c2place == "velar") %>%
-ggplot(aes(x = X, y = Y, colour = c2phonation)) +
+filter(splines.closure, c2_place == "velar") %>%
+ggplot(aes(x = X, y = Y, colour = c2_phonation)) +
     geom_smooth(method = "loess", se = FALSE) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ language + speaker) +
@@ -627,8 +627,8 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
 ```
 
 ```{r closure-coronal, eval=FALSE}
-filter(splines.closure, c2place == "coronal") %>%
-ggplot(aes(x = X, y = Y, colour = c2phonation)) +
+filter(splines.closure, c2_place == "coronal") %>%
+ggplot(aes(x = X, y = Y, colour = c2_phonation)) +
     geom_line(stat = "smooth", method = "loess", se = FALSE) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ language + speaker) +
@@ -636,19 +636,19 @@ ggplot(aes(x = X, y = Y, colour = c2phonation)) +
 ```
 
 ```{r closure-vowel-cor, eval=FALSE}
-filter(splines.closure, c2place == "coronal") %>%
+filter(splines.closure, c2_place == "coronal") %>%
     ggplot(aes(x = X, y = Y, colour = vowel)) +
         geom_smooth(method = "loess", se = FALSE) +
         coord_fixed(ratio = 1) +
-        facet_grid(c2phonation ~ speaker)
+        facet_grid(c2_phonation ~ speaker)
 ```
 
 ```{r closure-vowel-vel, eval=FALSE}
-filter(splines.closure, c2place == "velar") %>%
+filter(splines.closure, c2_place == "velar") %>%
     ggplot(aes(x = X, y = Y, colour = vowel)) +
         geom_smooth(method = "loess", se = FALSE) +
         coord_fixed(ratio = 1) +
-        facet_grid(c2phonation ~ speaker)
+        facet_grid(c2_phonation ~ speaker)
 ```
 
 ## GAMM
@@ -656,19 +656,19 @@ filter(splines.closure, c2place == "velar") %>%
 ### Coronal
 
 ```{r}
-splines.cor.max <- filter(splines.closure, c2place == "coronal", speaker == "it01", vowel != "u") %>%
-    mutate(c2phonation.ord = as.ordered(c2phonation),
+splines.cor.max <- filter(splines.closure, c2_place == "coronal", speaker == "it01", vowel != "u") %>%
+    mutate(c2_phonation.ord = as.ordered(c2_phonation),
            language.ord = as.ordered(language),
            vowel.ord = as.ordered(vowel))
-contrasts(splines.cor.max$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.cor.max$c2_phonation.ord) <- "contr.treatment"
 #contrasts(splines.cor.max$language.ord) <- "contr.treatment"
 #contrasts(splines.cor.max$vowel.ord) <- "contr.treatment"
 
 coronal.gam <- bam(
     Y ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2_phonation.ord, bs = "cr") +
         s(rec.date, bs = "re"),
     data = splines.cor.max,
     method = "ML"
@@ -688,29 +688,29 @@ compareML(coronal.gam, coronal.gam.null)
 ```
 
 ```{r}
-plot_smooth(coronal.gam, view="X", plot_all="c2phonation.ord", rug=F)
+plot_smooth(coronal.gam, view="X", plot_all="c2_phonation.ord", rug=F)
 ```
 
 ```{r}
-plot_diff(coronal.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")))
+plot_diff(coronal.gam, view="X", comp=list(c2_phonation.ord=c("voiceless","voiced")))
 ```
 
 ### Velar
 
 ```{r}
-splines.vel.max <- filter(splines.closure, c2place == "velar", speaker == "it01") %>%
-    mutate(c2phonation.ord = as.ordered(c2phonation),
+splines.vel.max <- filter(splines.closure, c2_place == "velar", speaker == "it01") %>%
+    mutate(c2_phonation.ord = as.ordered(c2_phonation),
            language.ord = as.ordered(language),
            vowel.ord = as.ordered(vowel))
-contrasts(splines.cor.max$c2phonation.ord) <- "contr.treatment"
+contrasts(splines.cor.max$c2_phonation.ord) <- "contr.treatment"
 #contrasts(splines.cor.max$language.ord) <- "contr.treatment"
 #contrasts(splines.cor.max$vowel.ord) <- "contr.treatment"
 
 velar.gam <- bam(
     Y ~
-        c2phonation.ord +
+        c2_phonation.ord +
         s(X, bs = "cr") +
-        s(X, by = c2phonation.ord, bs = "cr") +
+        s(X, by = c2_phonation.ord, bs = "cr") +
         s(rec.date, bs = "re"),
     data = splines.vel.max,
     method = "ML"
@@ -730,24 +730,24 @@ compareML(velar.gam, velar.gam.null)
 ```
 
 ```{r}
-plot_smooth(velar.gam, view="X", plot_all="c2phonation.ord", rug=F)
+plot_smooth(velar.gam, view="X", plot_all="c2_phonation.ord", rug=F)
 ```
 
 ```{r}
-plot_diff(velar.gam, view="X", comp=list(c2phonation.ord=c("voiceless","voiced")))
+plot_diff(velar.gam, view="X", comp=list(c2_phonation.ord=c("voiceless","voiced")))
 ```
 
 # Compare voiceless closure to phantom voiced closure
 
 ```{r bind-phantom}
-splines.closure.voiceless <- filter(splines.closure, c2phonation == "voiceless", language == "italian")
+splines.closure.voiceless <- filter(splines.closure, c2_phonation == "voiceless", language == "italian")
 
 splines.phantom.closure <- rbind(splines.closure.voiceless, splines.phantom)
 ```
 
 ```{r}
-filter(splines.phantom.closure, c2place == "coronal") %>%
-    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+filter(splines.phantom.closure, c2_place == "coronal") %>%
+    ggplot(aes(X, Y, colour = c2_phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ language + speaker) +
@@ -755,8 +755,8 @@ filter(splines.phantom.closure, c2place == "coronal") %>%
 ```
 
 ```{r}
-filter(splines.phantom.closure, c2place == "velar") %>%
-    ggplot(aes(X, Y, colour = c2phonation, group = rec.date)) +
+filter(splines.phantom.closure, c2_place == "velar") %>%
+    ggplot(aes(X, Y, colour = c2_phonation, group = rec.date)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     coord_fixed(ratio = 1) +
     facet_grid(vowel ~ language + speaker) +
@@ -767,17 +767,17 @@ filter(splines.phantom.closure, c2place == "velar") %>%
 
 ```{r peak-to-peak-plot}
 filter(cons.gestures, speaker == "it02", PP > 1) %>%
-    ggplot(aes(c2phonation, PP)) +
+    ggplot(aes(c2_phonation, PP)) +
     geom_violin() +
     geom_boxplot(width = 0.2) +
-    facet_grid(. ~ c2place)
+    facet_grid(. ~ c2_place)
 ```
 
 ```{r pp-lmer-it}
 pp.lmer.it <- lmer(
     PP ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         (1|word) +
         (1|speaker),
@@ -788,8 +788,8 @@ summary(pp.lmer.it)
 
 mixed(
     PP ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         (1|word) +
         (1|speaker),
@@ -804,8 +804,8 @@ plot(allEffects(pp.lmer.it))
 ```{r pp-lmer-pl}
 pp.lmer.pl <- lmer(
     PP ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         (1|word) +
         (1|speaker),
@@ -816,8 +816,8 @@ summary(pp.lmer.pl)
 
 mixed(
     PP ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         (1|word) +
         (1|speaker),
@@ -833,7 +833,7 @@ plot(allEffects(pp.lmer.pl))
 
 ```{r}
 filter(splines, label == "peak1_TT", language == "italian") %>%
-    ggplot(aes(x = X, y = Y, colour = c2phonation)) +
+    ggplot(aes(x = X, y = Y, colour = c2_phonation)) +
         geom_line(stat = "smooth", method = "loess", se = FALSE) +
         coord_fixed(ratio = 1) +
         facet_grid(vowel ~ speaker)

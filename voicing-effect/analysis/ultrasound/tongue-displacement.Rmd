@@ -53,12 +53,12 @@ displacement <- list.files(
   mutate_if(is.character, as.factor)
 
 displacement_tt <- displacement %>%
-  filter(c2place == "coronal", speaker != "it12") %>%
+  filter(c2_place == "coronal", speaker != "it12") %>%
   select(-TD_displacement_sm) %>%
   spread(label, TT_displacement_sm)
 
 displacement_td <- displacement %>%
-  filter(c2place == "velar", speaker != "it12") %>%
+  filter(c2_place == "velar", speaker != "it12") %>%
   select(-TT_displacement_sm) %>%
   spread(label, TD_displacement_sm)
 
@@ -74,8 +74,8 @@ displacement <- bind_rows(displacement_tt, displacement_td) %>%
 
 ```{r}
 displacement %>%
-  ggplot(aes(vowel, displacement, fill = c2phonation)) +
+  ggplot(aes(vowel, displacement, fill = c2_phonation)) +
   geom_boxplot() +
-  facet_grid(language ~ c2place)
+  facet_grid(language ~ c2_place)
 ```
 

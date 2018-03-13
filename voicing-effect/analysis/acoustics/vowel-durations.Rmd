@@ -60,7 +60,7 @@ voicing <- list.files(path = "voicing-effect/data/datasets/egg",
     mutate(index = as.factor(index)) %>%
     left_join(y = vowels)
 
-voicing.voiceless <- filter(voicing, c1phonation == "voiceless", c2phonation == "voiceless") %>%
+voicing.voiceless <- filter(voicing, c1_phonation == "voiceless", c2_phonation == "voiceless") %>%
   group_by(speaker) %>%
   mutate(voicing_duration = scale(voicing.duration))
 voicing.voiceless.it <- filter(voicing.voiceless, language == "italian")
@@ -74,8 +74,8 @@ voicing.voiceless.pl <- filter(voicing.voiceless, language == "polish")
 ```{r word-it}
 word.it <- lmer(
     word.duration ~
-        c2phonation +
-        c1phonation +
+        c2_phonation +
+        c1_phonation +
         vowel +
         sentence.duration +
         (1|speaker) +
@@ -87,8 +87,8 @@ summary(word.it)
 
 mixed(
     word.duration ~
-        c2phonation +
-        c1phonation +
+        c2_phonation +
+        c1_phonation +
         vowel +
         sentence.duration +
         (1|word),
@@ -99,7 +99,7 @@ mixed(
 In Italian, words with voiceless stops are longer.
 
 ```{r word-plot-it}
-ggplot(vowels.it, aes(c2phonation, word.duration, colour = speaker)) +
+ggplot(vowels.it, aes(c2_phonation, word.duration, colour = speaker)) +
     geom_boxplot()
 plot(allEffects(word.it))
 ```
@@ -109,10 +109,10 @@ plot(allEffects(word.it))
 ```{r lmer-closure-voicing-it}
 model.closvoic.it <- lmer(
     closure.duration ~
-        c2phonation +
+        c2_phonation +
         vowel +
-        c1phonation +
-        c2place +
+        c1_phonation +
+        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -123,10 +123,10 @@ summary(model.closvoic.it)
 
 mixed(
     closure.duration ~
-        c2phonation +
+        c2_phonation +
         vowel +
-        c1phonation +
-        c2place +
+        c1_phonation +
+        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -145,11 +145,11 @@ Fit a mixed effect linear model for Italian.
 ```{r lmer-it}
 model.it <- lmer(
     vowel.duration ~
-        c2phonation *
+        c2_phonation *
         vowel +
-        c1phonation +
-        c2place +
-        c2place:vowel +
+        c1_phonation +
+        c2_place +
+        c2_place:vowel +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -160,11 +160,11 @@ summary(model.it)
 
 mixed(
     vowel.duration ~
-        c2phonation *
+        c2_phonation *
         vowel +
-        c1phonation +
-        c2place +
-        c2place:vowel +
+        c1_phonation +
+        c2_place +
+        c2_place:vowel +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -183,7 +183,7 @@ C2 voicing and vowel identity have an effect on vowel duration, although there i
 ```{r vowel-duration-plot-it}
 ggplot(vowels.it, aes(vowel, vowel.duration)) +
     geom_boxplot() +
-    facet_grid(speaker ~ c2place + c2phonation)
+    facet_grid(speaker ~ c2_place + c2_phonation)
 ```
 
 
@@ -192,8 +192,8 @@ model.closure.it <- lmer(
     vowel.duration ~
         vowel + 
         closure.duration +
-        c1phonation +
-        c2place +
+        c1_phonation +
+        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -206,8 +206,8 @@ model.closure.it.null <- lmer(
     vowel.duration ~
         vowel + 
 #        closure.duration +
-        c1phonation +
-        c2place +
+        c1_phonation +
+        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -220,8 +220,8 @@ mixed(
     vowel.duration ~
         vowel + 
 #        closure.duration +
-        c2place +
-        c1phonation +
+        c2_place +
+        c1_phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -235,7 +235,7 @@ plot(allEffects(model.closure.it))
 
 ```{r}
 vowels.it %>%
-    ggplot(aes(closure.duration, vowel.duration, colour = c2phonation)) +
+    ggplot(aes(closure.duration, vowel.duration, colour = c2_phonation)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
@@ -243,10 +243,10 @@ vowels.it %>%
 
 There is an iteraction between closure duration and vowel identity: the high vowel has a stronger effect of closure duration on vowel duration (cf. with not so strong effect of voicing). But, vowel identity on itself is not significant.
 
-```{r plot-vowel-closure-c2place}
+```{r plot-vowel-closure-c2_place}
 ggplot(vowels.it, aes(closure.duration, vowel.duration)) +
     geom_smooth(method = "lm") +
-    facet_grid(vowel ~ c2place)
+    facet_grid(vowel ~ c2_place)
 ```
 
 
@@ -259,8 +259,8 @@ model.consonants.it <- lmer(
     vowel.duration ~
         c2.duration *
         vowel *
-        c2place +
-        c1phonation +
+        c2_place +
+        c1_phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -273,8 +273,8 @@ mixed(
     vowel.duration ~
         c2.duration *
         vowel *
-        c2place +
-        c1phonation +
+        c2_place +
+        c1_phonation +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -295,7 +295,7 @@ It would be worth probably measuring vowel height in terms of tongue distance fr
 ```{r word-pl}
 word.pl <- lmer(
     word.duration ~
-        c2phonation +
+        c2_phonation +
         vowel +
         sentence.duration +
         (1|word),
@@ -306,7 +306,7 @@ summary(word.pl)
 
 mixed(
     word.duration ~
-        c2phonation +
+        c2_phonation +
         vowel +
         sentence.duration +
         (1|word),
@@ -317,7 +317,7 @@ mixed(
 It seems there is no diffirence in duration between words with a voiceless stop and words with a voiced stop in Polish.
 
 ```{r word-plot-pl}
-ggplot(vowels.pl, aes(c2phonation, word.duration)) +
+ggplot(vowels.pl, aes(c2_phonation, word.duration)) +
     geom_violin() +
     geom_boxplot(width = 0.2)
 plot(allEffects(word.pl))
@@ -328,7 +328,7 @@ plot(allEffects(word.pl))
 ```{r pl-closure-duration}
 closure.pl <- lmer(
     closure.duration ~
-        c2phonation +
+        c2_phonation +
         vowel +
         sentence.duration +
         (1|word),
@@ -339,7 +339,7 @@ summary(closure.pl)
 
 mixed(
     closure.duration ~
-        c2phonation +
+        c2_phonation +
         vowel +
         sentence.duration +
         (1|word),
@@ -360,9 +360,9 @@ Fit a mixed effect linear model for Polish
 ```{r pl-vowel-phonation}
 model.pl <- lmer(
     vowel.duration ~
-        c2phonation *
+        c2_phonation *
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|word),
     data = vowels.pl
@@ -371,9 +371,9 @@ model.pl <- lmer(
 summary(model.pl)
 
 mixed(vowel.duration ~
-          c2phonation *
+          c2_phonation *
           vowel +
-          c2place +
+          c2_place +
           sentence.duration +
           (1|word),
       data = vowels.pl
@@ -395,7 +395,7 @@ vowels.closure.pl <- lmer(
     vowel.duration ~
 #        closure.duration *
         vowel + 
-        c2place +
+        c2_place +
         sentence.duration +
         (1|word),
     data = vowels.pl
@@ -407,7 +407,7 @@ mixed(
     vowel.duration ~
 #        closure.duration *
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|word),
     data = vowels.pl
@@ -424,18 +424,18 @@ plot(allEffects(vowels.closure.pl)[2])
 ```{r variation}
 dodge <- position_dodge(width = 0.5)
 
-ggplot(filter(vowels.it, c2place == "velar"), aes(c2phonation, vowel.duration, colour = speaker)) +
+ggplot(filter(vowels.it, c2_place == "velar"), aes(c2_phonation, vowel.duration, colour = speaker)) +
     facet_grid(. ~ vowel) +
     geom_violin(position = dodge) +
     geom_boxplot(width=0.1, position = dodge)
 
-ggplot(filter(vowels.it, c2place == "coronal"), aes(c2phonation, vowel.duration, colour = speaker)) +
+ggplot(filter(vowels.it, c2_place == "coronal"), aes(c2_phonation, vowel.duration, colour = speaker)) +
     facet_grid(. ~ vowel) +
     geom_violin(position = dodge) +
     geom_boxplot(width=0.1, position = dodge)
 
-ggplot(vowels.pl, aes(c2phonation, vowel.duration)) +
-    facet_grid(. ~ vowel + c2place) +
+ggplot(vowels.pl, aes(c2_phonation, vowel.duration)) +
+    facet_grid(. ~ vowel + c2_place) +
     geom_violin() +
     geom_boxplot(width=0.2)
 ```
@@ -444,7 +444,7 @@ ggplot(vowels.pl, aes(c2phonation, vowel.duration)) +
 
 ```{r proportions}
 proportions <- vowels %>%
-    group_by(c2phonation, language) %>%
+    group_by(c2_phonation, language) %>%
     summarise(
         total = mean(vowel.duration, na.rm = TRUE) +
             mean(closure.duration, na.rm = TRUE) +
@@ -460,7 +460,7 @@ proportions <- vowels %>%
 The following graph is misleading, because the VOR in Italian and in Polish is not constant in the voiceless and voiced conditions.
 
 ```{r plot-proportions}
-ggplot(proportions, aes(c2phonation, duration, fill = segment)) +
+ggplot(proportions, aes(c2_phonation, duration, fill = segment)) +
     geom_bar(stat = "identity") +
     coord_flip() +
     facet_grid(language ~ .) +
@@ -469,7 +469,7 @@ ggplot(proportions, aes(c2phonation, duration, fill = segment)) +
 
 ```{r word-proportions}
 word.proportions <- vowels %>%
-    group_by(c1phonation, c2phonation, language) %>%
+    group_by(c1_phonation, c2_phonation, language) %>%
     summarise(
         total = 
             mean(c1.duration, na.rm = TRUE) +
@@ -488,7 +488,7 @@ word.proportions <- vowels %>%
                             levels = c("v2", "rvot", "closure", "vowel", "c1")
                             )
            ) %>%
-    unite(phonation, c1phonation, c2phonation)
+    unite(phonation, c1_phonation, c2_phonation)
 ```
 
 In Italian, the first C and the last vowel are held constant, while in Polish is the foot and the stressed vowel?
@@ -509,7 +509,7 @@ ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
 ggplot(voicing.voiceless, aes(vowel, voicing.duration)) +
     geom_violin() +
     geom_boxplot(width = 0.1) +
-    facet_grid(c2place ~ speaker)
+    facet_grid(c2_place ~ speaker)
 ```
 
 ```{r voicing-duration-plot}
@@ -528,7 +528,7 @@ voicing.voiceless %>%
 voicing.model.it <- lmer(
     voicing.duration ~
         vowel +
-#        c2place +
+#        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -540,7 +540,7 @@ summary(voicing.model.it)
 mixed(
     voicing.duration ~
         vowel +
-#        c2place +
+#        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -556,7 +556,7 @@ plot(allEffects(voicing.model.it))
 voicing.model.pl <- lmer(
     voicing.duration ~
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -568,7 +568,7 @@ summary(voicing.model.pl)
 mixed(
     voicing.duration ~
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|word) +
         (1|speaker),
@@ -585,7 +585,7 @@ voicing_lm <- lmer(
   voicing.duration ~
     vowel *
     language +
-#    c2place +
+#    c2_place +
 #    sentence.duration +
     (1|word) +
     (1|speaker),
@@ -618,7 +618,7 @@ voicing_lm_scaled <- lmer(
   voicing_duration ~
     vowel *
 #    language +
-    c2place +
+    c2_place +
 #    sentence.duration +
     (1|word),
   data = voicing.voiceless
@@ -699,7 +699,7 @@ anova(voicing.closure.pl.null, voicing.closure.pl)
 
 ```{r}
 voicing.gestures <- left_join(voicing, cons.gestures) %>%
-    filter(c1phonation == "voiceless") %>%
+    filter(c1_phonation == "voiceless") %>%
     mutate(VOM = max - voicing.start, VOP = peak1 - voicing.start) %>%
     mutate_if(is.character, as.factor)
 
@@ -708,23 +708,23 @@ voicing.gestures.pl <- filter(voicing.gestures, language == "polish")
 ```
 
 ```{r}
-ggplot(voicing.gestures, aes(language, VOM, colour = c2phonation)) +
+ggplot(voicing.gestures, aes(language, VOM, colour = c2_phonation)) +
     geom_boxplot() +
-    facet_grid(vowel ~ c2place)
+    facet_grid(vowel ~ c2_place)
 ```
 
 ```{r}
-ggplot(voicing.gestures, aes(VOM, colour = c2phonation)) +
+ggplot(voicing.gestures, aes(VOM, colour = c2_phonation)) +
     geom_density() +
-    facet_grid(language ~ vowel + c2place)
+    facet_grid(language ~ vowel + c2_place)
 ```
 
 ```{r it-voicing-gestures-lmer}
 model.voicing.gestures.it <- lmer(
     VOM ~
-        c2phonation +
+        c2_phonation +
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|speaker) +
         (1|word),
@@ -735,9 +735,9 @@ summary(model.voicing.gestures.it)
 
 mixed(
     VOM ~
-        c2phonation +
+        c2_phonation +
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|speaker) +
         (1|word),
@@ -752,9 +752,9 @@ plot(allEffects(model.voicing.gestures.it))
 ```{r pl-voicing-gestures-lmer}
 model.voicing.gestures.pl <- lmer(
     VOM ~
-        c2phonation +
+        c2_phonation +
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|speaker) +
         (1|word),
@@ -765,9 +765,9 @@ summary(model.voicing.gestures.pl)
 
 mixed(
     VOM ~
-        c2phonation +
+        c2_phonation +
         vowel +
-        c2place +
+        c2_place +
         sentence.duration +
         (1|speaker) +
         (1|word),

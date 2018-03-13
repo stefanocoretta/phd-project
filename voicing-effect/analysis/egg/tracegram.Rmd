@@ -26,12 +26,12 @@ degg <- list.files(path = "./voicing-effect/data/datasets/egg",
     map_df(~read_csv(.)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
-    filter(c1phonation == "voiceless") %>%
-    mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
+    filter(c1_phonation == "voiceless") %>%
+    mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
     mutate_if(is.character, as.factor) %>%
     mutate(
-        c2phonation_o = ordered(
-            c2phonation,
+        c2_phonation_o = ordered(
+            c2_phonation,
             levels = c("voiceless", "voiced")
         ),
         closed_quotient = minimum - maximum,
@@ -46,14 +46,14 @@ degg <- list.files(path = "./voicing-effect/data/datasets/egg",
   )
 
 min_activity <- degg %>%
-  group_by(language, c2phonation_o, date) %>%
+  group_by(language, c2_phonation_o, date) %>%
   summarise(
     peaks_ratio = min(peaks_ratio)
   ) %>%
   left_join(y = degg)
 
 min_activity_norm <- degg %>%
-  group_by(language, c2phonation_o, date) %>%
+  group_by(language, c2_phonation_o, date) %>%
   summarise(
     peak_ratio_norm = min(peaks_ratio_norm)
   ) %>%
@@ -80,7 +80,7 @@ tracegram_layers <- list(
 
 ```{r tracegram-point-speakers}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    ggplot(aes(x = proportion, colour = c2_phonation_o)) +
         facet_wrap(~ speaker, nrow = 2) +
         geom_point(aes(y = maximum), alpha = 0.5) +
         geom_point(aes(y = minimum), alpha = 0.5) +
@@ -89,7 +89,7 @@ degg %>%
 
 ```{r tracegram-smooth-speakers}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(x = proportion, colour = c2_phonation_o, linetype = c2_phonation_o)) +
         facet_wrap(~ speaker, nrow = 2) +
         geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
         geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
@@ -98,7 +98,7 @@ degg %>%
 
 ```{r tracegram-smooth-languages}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(x = proportion, colour = c2_phonation_o, linetype = c2_phonation_o)) +
         facet_wrap(~ language) +
         geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
         geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
@@ -111,7 +111,7 @@ It looks like the abduction gesture starts earlier in Italian (60% of vowel dura
 
 ```{r tracegram-smooth-languages-vowels}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(x = proportion, colour = c2_phonation_o, linetype = c2_phonation_o)) +
         geom_smooth(aes(y = maximum), size = 0.5, alpha = 0.2) +
         geom_smooth(aes(y = minimum), size = 0.5, alpha = 0.2) +
         tracegram_layers +
@@ -134,7 +134,7 @@ cq_layers <- list(
 
 ```{r cq-points}
 degg %>%
-    ggplot(aes(x = proportion, colour = c2phonation_o)) +
+    ggplot(aes(x = proportion, colour = c2_phonation_o)) +
         facet_wrap(~ speaker, nrow = 2) +
         geom_point(aes(y = closed_quotient), alpha = 0.5) +
         cq_layers
@@ -142,7 +142,7 @@ degg %>%
 
 ```{r cq-smooth-speakers}
 degg %>%
-    ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, closed_quotient, colour = c2_phonation_o, linetype = c2_phonation_o)) +
         facet_wrap(~ speaker, nrow = 2) +
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(size = 0.5, alpha = 0.5) +
@@ -151,7 +151,7 @@ degg %>%
 
 ```{r cq-smooth-language}
 degg %>%
-    ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, closed_quotient, colour = c2_phonation_o, linetype = c2_phonation_o)) +
         facet_wrap(~ language) +
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(alpha = 0.5) +
@@ -160,7 +160,7 @@ degg %>%
 
 ```{r cq-smooth-language-vowel}
 degg %>%
-    ggplot(aes(proportion, closed_quotient, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, closed_quotient, colour = c2_phonation_o, linetype = c2_phonation_o)) +
         facet_grid(language ~ vowel) +
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(alpha = 0.5) +
@@ -169,7 +169,7 @@ degg %>%
 
 ```{r cq-language-voiceless}
 degg %>%
-  filter(c2phonation_o == "voiceless") %>%
+  filter(c2_phonation_o == "voiceless") %>%
     ggplot(aes(proportion, closed_quotient, colour = language, linetype = language)) +
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(alpha = 0.5) +
@@ -178,7 +178,7 @@ degg %>%
 
 ```{r cq-language-voiced}
 degg %>%
-  filter(c2phonation_o == "voiced") %>%
+  filter(c2_phonation_o == "voiced") %>%
     ggplot(aes(proportion, closed_quotient, colour = language, linetype = language)) +
         geom_point(size = 0.2, alpha = 0.1) +
         geom_smooth(alpha = 0.5) +
@@ -189,14 +189,14 @@ degg %>%
 
 ```{r cq-centre-speaker}
 degg %>%
-    ggplot(aes(proportion, quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, quotient_centre, colour = c2_phonation_o, linetype = c2_phonation_o)) +
     geom_smooth() +
     facet_wrap(~ speaker, nrow = 2)
 ```
 
 ```{r cq-centre-language}
 degg %>%
-    ggplot(aes(proportion, quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, quotient_centre, colour = c2_phonation_o, linetype = c2_phonation_o)) +
     geom_smooth() +
     facet_grid(~ language) +
     ylim(0, 1)
@@ -204,14 +204,14 @@ degg %>%
 
 ```{r weighted-cq-centre-speaker}
 degg %>%
-    ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, weighted_quotient_centre, colour = c2_phonation_o, linetype = c2_phonation_o)) +
     geom_smooth() +
     facet_wrap(~ speaker, nrow = 2)
 ```
 
 ```{r weighted-cq-centre-language}
 degg %>%
-    ggplot(aes(proportion, weighted_quotient_centre, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, weighted_quotient_centre, colour = c2_phonation_o, linetype = c2_phonation_o)) +
     geom_smooth() +
     facet_grid(~ language) +
     ylim(0, 1)
@@ -223,7 +223,7 @@ The peaks ratio is `dEGG_max / dEGG_min`.
 
 ```{r peaks-ratio-speaker}
 degg %>%
-    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, peaks_ratio, colour = c2_phonation_o, linetype = c2_phonation_o)) +
   geom_smooth() +
   facet_wrap(~ speaker, nrow = 2) +
   xlim(0.1, 0.9)
@@ -233,7 +233,7 @@ Yes, this clearly works.
 
 ```{r peaks-ratio-language}
 degg %>%
-    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, peaks_ratio, colour = c2_phonation_o, linetype = c2_phonation_o)) +
     geom_smooth() +
     facet_wrap(~ language) +
   xlim(0.1, 0.9)
@@ -241,7 +241,7 @@ degg %>%
 
 ```{r peaks-ratio-language-voiceless}
 degg %>%
-  filter(c2phonation_o == "voiceless") %>%
+  filter(c2_phonation_o == "voiceless") %>%
     ggplot(aes(proportion, peaks_ratio, colour = language, linetype = language)) +
     geom_smooth() +
   xlim(0.1, 0.9)
@@ -249,7 +249,7 @@ degg %>%
 
 ```{r peaks-ratio-language-voiced}
 degg %>%
-  filter(c2phonation_o == "voiced") %>%
+  filter(c2_phonation_o == "voiced") %>%
   ggplot(aes(proportion, peaks_ratio, colour = language, linetype = language)) +
 #  geom_point(alpha = 0.1) +
   geom_smooth() +
@@ -258,7 +258,7 @@ degg %>%
 
 ```{r min-activity}
 min_activity %>%
-  ggplot(aes(c2phonation_o, proportion, colour = language)) +
+  ggplot(aes(c2_phonation_o, proportion, colour = language)) +
   geom_boxplot()
 ```
 
@@ -266,7 +266,7 @@ min_activity %>%
 min_activity_lm <- lmer(
   proportion ~
     language *
-    c2phonation +
+    c2_phonation +
     (1|speaker) +
     (1|word),
   data = min_activity
@@ -276,7 +276,7 @@ summary(min_activity_lm)
 min_activity_lm_2 <- lmer(
   proportion ~
 #    language *
-    c2phonation +
+    c2_phonation +
     (1|speaker) +
     (1|word),
   data = min_activity
@@ -290,7 +290,7 @@ plot(allEffects(min_activity_lm))
 
 ```{r min-activity-speaker}
 min_activity %>%
-  ggplot(aes(c2phonation_o, proportion, colour = speaker)) +
+  ggplot(aes(c2_phonation_o, proportion, colour = speaker)) +
   geom_boxplot() +
   facet_grid(. ~ language)
 ```
@@ -301,7 +301,7 @@ The average peaks ratio does not tell much it seems, but compare with lmer.
 degg %>%
   ggplot(aes(language, peaks_ratio)) +
   geom_boxplot() +
-  facet_grid(~ c2phonation_o)
+  facet_grid(~ c2_phonation_o)
 ```
 
 Lower peaks ratio in Polish between 45-55% of the vowel duration, but not significant.
@@ -311,14 +311,14 @@ degg %>%
   filter(proportion > 0.45, proportion < 0.55) %>%
   ggplot(aes(language, peaks_ratio)) +
   geom_boxplot() +
-  facet_grid(~ c2phonation_o)
+  facet_grid(~ c2_phonation_o)
 ```
 
 ```{r average-peaks-ratio-lm}
 peaks_ratio_lm <- lmer(
   peaks_ratio ~
     language *
-    c2phonation +
+    c2_phonation +
     (1|speaker) +
     (1|word),
   data = degg
@@ -336,7 +336,7 @@ plot(allEffects(peaks_ratio_lm))
 
 ```{r peaks-ratio-language-norm}
 degg %>%
-    ggplot(aes(proportion, peaks_ratio_norm, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, peaks_ratio_norm, colour = c2_phonation_o, linetype = c2_phonation_o)) +
     geom_smooth() +
     facet_wrap(~ language) +
   xlim(0.1, 0.9)
@@ -345,7 +345,7 @@ degg %>%
 
 ```{r peaks-ratio-language-voiceless-norm}
 degg %>%
-  filter(c2phonation_o == "voiceless") %>%
+  filter(c2_phonation_o == "voiceless") %>%
     ggplot(aes(proportion, peaks_ratio_norm, colour = language, linetype = language)) +
     geom_smooth() +
   xlim(0.1, 0.9)
@@ -353,7 +353,7 @@ degg %>%
 
 ```{r peaks-ratio-language-voiced-norm}
 degg %>%
-  filter(c2phonation_o == "voiced") %>%
+  filter(c2_phonation_o == "voiced") %>%
     ggplot(aes(proportion, peaks_ratio_norm, colour = language, linetype = language)) +
     geom_smooth() +
   xlim(0.1, 0.9)
@@ -364,21 +364,21 @@ degg %>%
   filter(proportion > 0.45, proportion < 0.55) %>%
   ggplot(aes(language, peaks_ratio_norm)) +
   geom_boxplot() +
-  facet_grid(~ c2phonation_o)
+  facet_grid(~ c2_phonation_o)
 ```
 
 ```{r average-peaks-ratio-centre-norm-interaction}
 degg %>%
   filter(proportion > 0.45, proportion < 0.55) %>%
-  ggplot(aes(c2phonation_o, peaks_ratio_norm, colour = language)) +
+  ggplot(aes(c2_phonation_o, peaks_ratio_norm, colour = language)) +
   geom_boxplot() +
-  facet_grid(vowel ~ c2place)
+  facet_grid(vowel ~ c2_place)
 ```
 
 ```{r density-peaks-ratio-second-half-norm}
 degg %>%
   filter(proportion > 0.5) %>%
-  ggplot(aes(peaks_ratio_norm, colour = c2phonation_o)) +
+  ggplot(aes(peaks_ratio_norm, colour = c2_phonation_o)) +
   geom_density() +
   facet_grid(~ language)
 ```
@@ -388,13 +388,13 @@ degg %>%
   filter(proportion > 0.5) %>%
   ggplot(aes(language, peaks_ratio_norm)) +
   geom_boxplot() +
-  facet_grid(~ c2phonation_o)
+  facet_grid(~ c2_phonation_o)
 ```
 
 ```{r speaker-average-peaks-ratio-second-half-norm}
 degg %>%
   filter(proportion > 0.5) %>%
-  ggplot(aes(speaker, peaks_ratio_norm, colour = c2phonation_o)) +
+  ggplot(aes(speaker, peaks_ratio_norm, colour = c2_phonation_o)) +
   geom_boxplot()
 ```
 
@@ -403,7 +403,7 @@ degg_50 <- filter(degg, proportion > 0.5)
 
 peaks_ratio_norm_lm <- lmer(
   peaks_ratio_norm ~
-    c2phonation *
+    c2_phonation *
     language +
     (1|word),
   data = degg_50
@@ -420,14 +420,14 @@ Maybe the normalisation is obscuring differences?
 
 ```{r min-activity-norm}
 min_activity_norm %>%
-  ggplot(aes(c2phonation, proportion, colour = language)) +
+  ggplot(aes(c2_phonation, proportion, colour = language)) +
   geom_boxplot()
 ```
 
 ```{r min-activity-norm-lm}
 min_activity_norm_lm <- lmer(
   proportion ~
-    c2phonation *
+    c2_phonation *
     language +
     (1|word),
   data = min_activity_norm
@@ -440,19 +440,19 @@ summary(min_activity_norm_lm)
 ```{r peaks-ratio-it01}
 degg %>%
   filter(speaker == "it01") %>%
-    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, peaks_ratio, colour = c2_phonation_o, linetype = c2_phonation_o)) +
   geom_path(alpha = 0.5, aes(group = date)) +
   geom_smooth() +
-  facet_grid(~ c2phonation_o) +
+  facet_grid(~ c2_phonation_o) +
   xlim(0.1, 0.9)
 ```
 
 ```{r peaks-ratio-pl04}
 degg %>%
   filter(speaker == "pl04") %>%
-    ggplot(aes(proportion, peaks_ratio, colour = c2phonation_o, linetype = c2phonation_o)) +
+    ggplot(aes(proportion, peaks_ratio, colour = c2_phonation_o, linetype = c2_phonation_o)) +
   geom_path(alpha = 0.5, aes(group = date)) +
   geom_smooth() +
-  facet_grid(~ c2phonation_o) +
+  facet_grid(~ c2_phonation_o) +
   xlim(0.1, 0.9)
 ```

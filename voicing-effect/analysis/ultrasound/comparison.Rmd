@@ -176,7 +176,7 @@ plot_polar_smooths <- function(model, time_series, comparison, origin = NULL, fa
 
 ```{r group-coronal-it}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(angle, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2_phonation)) +
     # geom_line(stat = "smooth", method = "loess") +
     geom_point(alpha = 0.5) +
     facet_grid(. ~ vowel) +
@@ -185,7 +185,7 @@ filter(splines.pol.it, label == "max_TT") %>%
 
 ```{r group-coronal-it}
 filter(splines.pol.it, label == "max_TT", vowel == "u") %>%
-    ggplot(aes(Y, X, colour = c2phonation)) +
+    ggplot(aes(Y, X, colour = c2_phonation)) +
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1) +
     scale_colour_discrete(name = "Phonation of C2") + coord_polar(start = pi) + xlim(-pi, pi) + ylim(0, 60)
@@ -193,7 +193,7 @@ filter(splines.pol.it, label == "max_TT", vowel == "u") %>%
 
 ```{r group-coronal-it, eval = FALSE}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(Y.car, X.car, colour = c2phonation, group = rec.date)) +
+    ggplot(aes(Y.car, X.car, colour = c2_phonation, group = rec.date)) +
 #    geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.5) +
     coord_fixed(ratio = 1) +
@@ -207,7 +207,7 @@ filter(splines.it, label == "max_TT", speaker == "it01", vowel == "a") %>%
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1, aes(group = rec.date)) +
     coord_fixed(ratio = 1) +
-    facet_grid(. ~ c2phonation) +
+    facet_grid(. ~ c2_phonation) +
     geom_path(aes(group = rec.date), alpha = 0.1) +
     scale_colour_discrete(name = "Phonation of C2")
 ```
@@ -218,7 +218,7 @@ filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
     geom_line(stat = "smooth", method = "loess", alpha = 0.5) +
     geom_point(alpha = 0.1, aes(group = rec.date)) +
     coord_fixed(ratio = 1) +
-    facet_grid(. ~ c2phonation) +
+    facet_grid(. ~ c2_phonation) +
     geom_path(aes(group = rec.date), alpha = 0.1) +
     scale_colour_discrete(name = "Phonation of C2")
 ```
@@ -228,7 +228,7 @@ filter(splines.pol.it, label == "max_TT", speaker == "it01", vowel == "u") %>%
         ggplot(aes(Y.car, X.car)) +
     geom_line(stat = "smooth", method = "gam", formula = y ~ s(x, k = 3), alpha = 0.5) +
     coord_fixed(ratio = 1) +
-    facet_grid(. ~ c2phonation) +
+    facet_grid(. ~ c2_phonation) +
     scale_colour_discrete(name = "Phonation of C2")
 ```
 
@@ -242,14 +242,14 @@ radial.plot(na.omit(splines.pol.it.u$X), na.omit(splines.pol.it.u$Y), rp.type="s
 
 ```{r}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(angle, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2_phonation)) +
     geom_point(alpha = 0.5) +
     facet_grid(. ~ vowel)
 ```
 
 ```{r}
 filter(splines.pol.it, label == "max_TT") %>%
-    ggplot(aes(angle, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2_phonation)) +
     geom_smooth(method = "loess") +
     facet_grid(. ~ vowel)
 ```
@@ -257,14 +257,14 @@ filter(splines.pol.it, label == "max_TT") %>%
 ```{r}
 splines.pol.it %>%
     filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
-    ggplot(aes(-X, -Y, colour = c2phonation)) +
+    ggplot(aes(-X, -Y, colour = c2_phonation)) +
     geom_point()
 ```
 
 ```{r}
 splines.it %>%
     filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
+    ggplot(aes(X, Y, colour = c2_phonation)) +
     geom_point()
 ```
 
@@ -303,7 +303,7 @@ y <- c(-solve(cbind(cm[,2],-1)) %*% cm[,1])[2]
 splines.it %>%
     filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
     ggplot(aes(X, Y)) +
-    geom_point(aes(colour = c2phonation)) +
+    geom_point(aes(colour = c2_phonation)) +
     geom_point(data = tibble(X = x, Y = y), colour = "blue", size = 2, shape = 4)
 ```
 
@@ -311,8 +311,8 @@ splines.it %>%
 splines.it %>%
     filter(label == "max_TT", speaker == "it01", vowel == "a") %>%
     ggplot(aes(fan_line, Y)) +
-    geom_point(aes(colour = c2phonation)) +
-    geom_smooth(aes(colour = c2phonation))
+    geom_point(aes(colour = c2_phonation)) +
+    geom_smooth(aes(colour = c2_phonation))
 ```
 
 ```{r}
@@ -327,7 +327,7 @@ polar_data <- splines.it %>%
 ```{r}
 polar_data %>%
     filter(label == "max_TT", vowel == "a") %>%
-    ggplot(aes(angle, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2_phonation)) +
     geom_point() +
     geom_smooth(method = "loess")
 ```
@@ -339,7 +339,7 @@ polar_data %>%
         Y = -radius * sin(angle) - y
     ) %>%
     filter(label == "max_TT", vowel == "a") %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
+    ggplot(aes(X, Y, colour = c2_phonation)) +
     geom_point()
 ```
 
@@ -354,17 +354,17 @@ polar <- splines.it %>%
 ```{r}
 polar %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
-    ggplot(aes(angle, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2_phonation)) +
     geom_point() +
-    facet_wrap(~ c2place + vowel)
+    facet_wrap(~ c2_place + vowel)
 ```
 
 ```{r}
 polar %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
-    ggplot(aes(angle, radius, colour = c2phonation)) +
+    ggplot(aes(angle, radius, colour = c2_phonation)) +
     geom_smooth() +
-    facet_wrap(~ c2place + vowel)
+    facet_wrap(~ c2_place + vowel)
 ```
 
 ```{r}
@@ -376,9 +376,9 @@ cartesian <- polar %>%
 ```{r}
 cartesian %>%
     filter(label %in% c("max_TT", "max_TD")) %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
+    ggplot(aes(X, Y, colour = c2_phonation)) +
     geom_point() +
-    facet_wrap(~ c2place + vowel)
+    facet_wrap(~ c2_place + vowel)
 ```
 
 Compare the above with the one below.
@@ -386,9 +386,9 @@ Compare the above with the one below.
 ```{r}
 splines.it %>%
     filter(speaker == "it01", label %in% c("max_TT", "max_TD")) %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
+    ggplot(aes(X, Y, colour = c2_phonation)) +
     geom_point() +
-    facet_wrap(~ c2place + vowel)
+    facet_wrap(~ c2_place + vowel)
 ```
 
 # Polar GAM
@@ -397,10 +397,10 @@ splines.it %>%
 it01 <- polar %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -411,12 +411,12 @@ it01 <- polar %>%
 ```{r}
 it01_gam <- bam(
     radius ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         s(angle, bs = "cr") +
-        s(angle, by = c2phonation,  bs = "cr") +
-        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = c2_phonation,  bs = "cr") +
+        s(angle, by = c2_place,  bs = "cr") +
         s(angle, by = vowel,  bs = "cr") +
         s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = filter(it01, vowel != "u")
@@ -429,20 +429,20 @@ summary(it01_gam)
 plot_smooths(
     it01_gam,
     angle,
-    c2phonation,
-    c2place + vowel
+    c2_phonation,
+    c2_place + vowel
 )
 ```
 
 ```{r}
 it01_gam_null <- bam(
     radius ~
-#        c2phonation +
-        c2place +
+#        c2_phonation +
+        c2_place +
         vowel +
         s(angle) +
-#        s(angle, by = c2phonation) +
-        s(angle, by = c2place) +
+#        s(angle, by = c2_phonation) +
+        s(angle, by = c2_place) +
         s(angle, by = vowel) +
         s(angle, rec.date, bs = "fs", k = 5),
     data = filter(it01, vowel != "u")
@@ -454,12 +454,12 @@ compareML(it01_gam_null, it01_gam)
 ```{r}
 it01_gam_2 <- bam(
     radius ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         s(angle, bs = "cr") +
-        s(angle, by = c2phonation, bs = "cr") +
-        s(angle, by = c2place, bs = "cr") +
+        s(angle, by = c2_phonation, bs = "cr") +
+        s(angle, by = c2_place, bs = "cr") +
         s(angle, by = vowel, bs = "cr") +
         s(angle, by = vow_phon, bs = "cr") +
         s(angle, by = place_phon, bs = "cr") +
@@ -471,12 +471,12 @@ summary(it01_gam_2)
 
 it01_gam_2_null <- bam(
     radius ~
-#        c2phonation +
-        c2place +
+#        c2_phonation +
+        c2_place +
         vowel +
         s(angle, bs = "cr") +
-#        s(angle, by = c2phonation, bs = "cr") +
-        s(angle, by = c2place, bs = "cr") +
+#        s(angle, by = c2_phonation, bs = "cr") +
+        s(angle, by = c2_place, bs = "cr") +
         s(angle, by = vowel, bs = "cr") +
         s(angle, by = vow_phon, bs = "cr") +
         s(angle, by = place_phon, bs = "cr") +
@@ -491,8 +491,8 @@ compareML(it01_gam_2_null, it01_gam_2)
 plot_smooths(
     it01_gam_2,
     angle,
-    c2phonation,
-    c2place + vowel
+    c2_phonation,
+    c2_place + vowel
 )
 ```
 
@@ -503,9 +503,9 @@ polar_pred <- get_gam_predictions(it01_gam_2, angle)
 ```{r}
 polar_pred <- transform_coord(polar_pred, to = "cartesian", origin = c(14.3900792705248, -65.231492830589))
 
-ggplot(polar_pred, aes(X, Y, colour = c2phonation)) +
+ggplot(polar_pred, aes(X, Y, colour = c2_phonation)) +
     geom_path() +
-    facet_wrap(~ c2place + vowel)
+    facet_wrap(~ c2_place + vowel)
 ```
 
 
@@ -514,10 +514,10 @@ it01_cart <- splines.it %>%
     filter(speaker == "it01") %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation)),
-        place_phon = ordered(interaction(c2place, c2phonation))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation)),
+        place_phon = ordered(interaction(c2_place, c2_phonation))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -527,12 +527,12 @@ it01_cart <- splines.it %>%
 ```{r}
 it01_gam_cart <- bam(
     Y ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         s(X, bs = "cr") +
-        s(X, by = c2phonation,  bs = "cr") +
-        s(X, by = c2place,  bs = "cr") +
+        s(X, by = c2_phonation,  bs = "cr") +
+        s(X, by = c2_place,  bs = "cr") +
         s(X, by = vowel,  bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", k = 5),
     data = filter(it01_cart, vowel != "u")
@@ -545,8 +545,8 @@ summary(it01_gam_cart)
 plot_smooths(
     it01_gam_cart,
     X,
-    c2phonation,
-    c2place + vowel
+    c2_phonation,
+    c2_place + vowel
 )
 ```
 
@@ -565,7 +565,7 @@ polar_m <- splines.it %>%
 ```
 
 ```{r plot-it01-polar-mielke}
-ggplot(polar_m, aes(angle, radius, colour = c2phonation)) +
+ggplot(polar_m, aes(angle, radius, colour = c2_phonation)) +
     geom_point(alpha = 0.5)
 ```
 
@@ -574,10 +574,10 @@ ggplot(polar_m, aes(angle, radius, colour = c2phonation)) +
 it01_m <- polar_m %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -587,12 +587,12 @@ it01_m <- polar_m %>%
 ```{r it01-gam-mielke}
 it01_gam_m <- bam(
     radius ~
-        c2phonation +
-#        c2place +
+        c2_phonation +
+#        c2_place +
 #        vowel +
         s(angle, bs = "cr") +
-        s(angle, by = c2phonation,  bs = "cr") +
-#        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = c2_phonation,  bs = "cr") +
+#        s(angle, by = c2_place,  bs = "cr") +
 #        s(angle, by = vowel,  bs = "cr") +
         s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_m,
@@ -606,7 +606,7 @@ summary(it01_gam_m)
 plot_smooths(
     it01_gam_m,
     angle,
-    c2phonation
+    c2_phonation
 )
 ```
 
@@ -623,7 +623,7 @@ polar_r <- splines.it %>%
 ```
 
 ```{r plot-it01-polar-real}
-ggplot(polar_r, aes(angle, radius, colour = c2phonation)) +
+ggplot(polar_r, aes(angle, radius, colour = c2_phonation)) +
     geom_point(alpha = 0.5)
 ```
 
@@ -631,10 +631,10 @@ ggplot(polar_r, aes(angle, radius, colour = c2phonation)) +
 it01_r <- polar_r %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -644,12 +644,12 @@ it01_r <- polar_r %>%
 ```{r it01-gam-real}
 it01_gam_r <- bam(
     radius ~
-        c2phonation +
-#        c2place +
+        c2_phonation +
+#        c2_place +
 #        vowel +
         s(angle, bs = "cr") +
-        s(angle, by = c2phonation,  bs = "cr") +
-#        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = c2_phonation,  bs = "cr") +
+#        s(angle, by = c2_place,  bs = "cr") +
 #        s(angle, by = vowel,  bs = "cr") +
         s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_r,
@@ -663,7 +663,7 @@ summary(it01_gam_r)
 plot_smooths(
     it01_gam_r,
     angle,
-    c2phonation
+    c2_phonation
 )
 ```
 
@@ -680,20 +680,20 @@ polar_all_r <- splines.it %>%
 ```
 
 ```{r plot-it01-polar-all-real}
-ggplot(polar_all_r, aes(angle, radius, colour = c2phonation)) +
+ggplot(polar_all_r, aes(angle, radius, colour = c2_phonation)) +
     geom_point(alpha = 0.5) +
     geom_smooth() +
-    facet_grid(vowel ~ c2place)
+    facet_grid(vowel ~ c2_place)
 ```
 
 ```{r prepare-gam-data-real}
 it01_all_r <- polar_all_r %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -703,12 +703,12 @@ it01_all_r <- polar_all_r %>%
 ```{r it01-gam-real}
 it01_gam_all_r <- bam(
     radius ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         s(angle, bs = "cr") +
-        s(angle, by = c2phonation,  bs = "cr") +
-        s(angle, by = c2place,  bs = "cr") +
+        s(angle, by = c2_phonation,  bs = "cr") +
+        s(angle, by = c2_place,  bs = "cr") +
         s(angle, by = vowel,  bs = "cr") +
         s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_all_r,
@@ -722,20 +722,20 @@ summary(it01_gam_all_r)
 plot_smooths(
     it01_gam_all_r,
     angle,
-    c2phonation,
-    vowel + c2place
+    c2_phonation,
+    vowel + c2_place
 )
 ```
 
 ```{r}
 it01_gam_all_r_null <- bam(
     radius ~
-#        c2phonation +
-        c2place +
+#        c2_phonation +
+        c2_place +
         vowel +
         s(angle, bs = "cr") +
-#        s(angle, by = c2phonation,  bs = "cr") +
-        s(angle, by = c2place,  bs = "cr") +
+#        s(angle, by = c2_phonation,  bs = "cr") +
+        s(angle, by = c2_place,  bs = "cr") +
         s(angle, by = vowel,  bs = "cr") +
         s(angle, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01_all_r,
@@ -760,18 +760,18 @@ it01_gam_all_r_pred <- get_gam_predictions(
 
 ```{r}
 it01_gam_all_r_pred %>%
-    ggplot(aes(X, Y, colour = c2phonation)) +
+    ggplot(aes(X, Y, colour = c2_phonation)) +
     geom_path() +
-    facet_grid(c2place ~ vowel) +
+    facet_grid(c2_place ~ vowel) +
     coord_fixed(ratio = 1)
 ```
 
 ```{r}
 it01_gam_all_r_pred %>%
     ggplot(aes(angle, radius)) +
-    geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = c2phonation), alpha = 0.2) +
-    geom_path(aes(colour = c2phonation)) +
-    facet_grid(c2place ~ vowel)
+    geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = c2_phonation), alpha = 0.2) +
+    geom_path(aes(colour = c2_phonation)) +
+    facet_grid(c2_place ~ vowel)
 ```
 
 # Convert polar CI to cartesian CI
@@ -782,10 +782,10 @@ cartesian_ci <- transform_ci(it01_gam_all_r_pred, origin = c(14.3901026453293, -
 
 ```{r}
 cartesian_ci %>%
-    ggplot(aes(CI_X, CI_Y, fill = c2phonation)) +
+    ggplot(aes(CI_X, CI_Y, fill = c2_phonation)) +
     geom_polygon(alpha = 0.2) +
-    geom_path(data = it01_gam_all_r_pred, aes(X, Y, colour = c2phonation)) +
-    facet_grid(c2place ~ vowel) +
+    geom_path(data = it01_gam_all_r_pred, aes(X, Y, colour = c2_phonation)) +
+    facet_grid(c2_place ~ vowel) +
     coord_fixed(ratio = 1) +
     xlab("") +
     ylab("")
@@ -796,7 +796,7 @@ cartesian_ci %>%
 plot_polar_smooths(
     it01_gam_all_r,
     X,
-    c2phonation,
+    c2_phonation,
     c(14.3901026453293, -65.2314764646618),
     vowel,
     exclude_random = FALSE
@@ -813,10 +813,10 @@ it01 <- splines.it %>%
     ) %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -826,12 +826,12 @@ it01 <- splines.it %>%
 ```{r it01-polar-gam}
 it01_polar_gam <- polar_gam(
     Y ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         s(X, bs = "cr") +
-        s(X, by = c2phonation,  bs = "cr") +
-        s(X, by = c2place,  bs = "cr") +
+        s(X, by = c2_phonation,  bs = "cr") +
+        s(X, by = c2_place,  bs = "cr") +
         s(X, by = vowel,  bs = "cr") +
         s(X, rec.date, bs = "fs", xt = "cr", k = 5),
     data = it01,
@@ -845,8 +845,8 @@ summary(it01_polar_gam)
 plot_polar_smooths(
     it01_polar_gam,
     X,
-    c2phonation,
-    facet_terms = c2place ~ vowel
+    c2_phonation,
+    facet_terms = c2_place ~ vowel
 )
 ```
 
@@ -860,10 +860,10 @@ splines_it <- splines.it %>%
     angle_norm = scales::rescale(angle),
     radius_norm = scales::rescale(radius),
     vowel = ordered(vowel, levels = c("a", "o", "u")),
-    c2place = ordered(c2place, levels = c("coronal", "velar")),
-    c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-    vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-    place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+    c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+    c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+    place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
 ) %>%
   ungroup() %>%
   arrange(rec.date, fan_line) %>%
@@ -874,41 +874,41 @@ splines_it <- splines.it %>%
 ```{r}
 splines_it %>%
   filter(vowel == "a") %>%
-  ggplot(aes(angle_norm, radius, colour = c2phonation)) +
+  ggplot(aes(angle_norm, radius, colour = c2_phonation)) +
   geom_point(alpha = 0.2) +
-  facet_grid(c2place ~ speaker)
+  facet_grid(c2_place ~ speaker)
 ```
 
 ```{r}
 splines_it %>%
-  ggplot(aes(angle_norm, radius, colour = c2phonation)) +
+  ggplot(aes(angle_norm, radius, colour = c2_phonation)) +
   geom_smooth() +
-  facet_grid(c2place ~ speaker)
+  facet_grid(c2_place ~ speaker)
 ```
 
 ```{r}
 splines_it %>%
-  ggplot(aes(angle_norm, radius_norm, colour = c2phonation)) +
+  ggplot(aes(angle_norm, radius_norm, colour = c2_phonation)) +
   geom_smooth() +
-  facet_grid(c2place ~ speaker)
+  facet_grid(c2_place ~ speaker)
 ```
 
 ```{r}
 splines_it %>%
-  ggplot(aes(angle, radius, colour = c2phonation)) +
+  ggplot(aes(angle, radius, colour = c2_phonation)) +
   geom_smooth() +
-  facet_grid(c2place ~ speaker)
+  facet_grid(c2_place ~ speaker)
 ```
 
 ```{r}
 tongue_it_gam <- bam(
   radius ~
-    c2phonation +
-    c2place +
+    c2_phonation +
+    c2_place +
     vowel +
     s(angle_norm) +
-    s(angle_norm, by = c2phonation) +
-    s(angle_norm, by = c2place) +
+    s(angle_norm, by = c2_phonation) +
+    s(angle_norm, by = c2_place) +
     s(angle_norm, by = vowel),
   data = splines_it
 )
@@ -917,12 +917,12 @@ rho <- start_value_rho(tongue_it_gam)
 
 tongue_it_gam_ar <- bam(
   radius ~
-    c2phonation +
-    c2place +
+    c2_phonation +
+    c2_place +
     vowel +
     s(angle_norm) +
-    s(angle_norm, by = c2phonation) +
-    s(angle_norm, by = c2place) +
+    s(angle_norm, by = c2_phonation) +
+    s(angle_norm, by = c2_place) +
     s(angle_norm, by = vowel) +
     s(angle_norm, speaker, bs = "fs"),
   data = splines_it,
@@ -937,8 +937,8 @@ summary(tongue_it_gam_ar)
 plot_smooths(
   tongue_it_gam_ar,
   angle_norm,
-  c2phonation,
-  c2place + vowel
+  c2_phonation,
+  c2_place + vowel
 )
 ```
 
@@ -960,9 +960,9 @@ tongue_it_pred <- get_gam_predictions(
 
 ```{r}
 tongue_it_pred %>%
-  ggplot(aes(X, Y, colour = c2phonation, linetype = c2phonation)) +
+  ggplot(aes(X, Y, colour = c2_phonation, linetype = c2_phonation)) +
   geom_path() +
-  facet_grid(c2place ~ vowel)
+  facet_grid(c2_place ~ vowel)
 ```
 
 # Polar GAMs
@@ -975,10 +975,10 @@ it01 <- splines.it %>%
     ) %>%
     mutate(
         vowel = ordered(vowel, levels = c("a", "o", "u")),
-        c2place = ordered(c2place, levels = c("coronal", "velar")),
-        c2phonation = ordered(c2phonation, levels = c("voiceless", "voiced")),
-        vow_phon = ordered(interaction(vowel, c2phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
-        place_phon = ordered(interaction(c2place, c2phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
+        c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+        c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+        vow_phon = ordered(interaction(vowel, c2_phonation), levels = c("a.voiceless", "a.voiced", "o.voiceless", "o.voiced", "u.voiceless", "u.voiced")),
+        place_phon = ordered(interaction(c2_place, c2_phonation), levels = c("coronal.voiceless", "coronal.voiced", "velar.voiceless", "velar.voiced"))
     ) %>%
     arrange(rec.date, fan_line) %>%
     create_event_start("rec.date") %>%
@@ -988,14 +988,14 @@ it01 <- splines.it %>%
 ```{r it01-polar-gam-2}
 it01_polar_gam_2 <- polar_gam(
     Y ~
-        c2phonation +
-        c2place +
+        c2_phonation +
+        c2_place +
         vowel +
         vow_phon +
         place_phon +
         s(X, bs = "cr") +
-        s(X, by = c2phonation,  bs = "cr") +
-        s(X, by = c2place,  bs = "cr") +
+        s(X, by = c2_phonation,  bs = "cr") +
+        s(X, by = c2_place,  bs = "cr") +
         s(X, by = vowel,  bs = "cr") +
         s(X, by = vow_phon,  bs = "cr") +
         s(X, by = place_phon,  bs = "cr") +
@@ -1011,7 +1011,7 @@ summary(it01_polar_gam_2)
 plot_polar_smooths(
     it01_polar_gam_2,
     X,
-    c2phonation,
-    facet_terms = c2place ~ vowel
+    c2_phonation,
+    facet_terms = c2_place ~ vowel
 )
 ```

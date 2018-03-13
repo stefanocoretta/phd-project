@@ -49,7 +49,7 @@ tongue <- list.files(
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   mutate(
-    c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
   mutate_if(is.character, as.factor)
 
@@ -86,7 +86,7 @@ closing_velocity <- tongue %>%
 
 ```{r}
 closing %>%
-  ggplot(aes(c2phonation, closing_duration)) +
+  ggplot(aes(c2_phonation, closing_duration)) +
   geom_boxplot()
 ```
 
@@ -105,37 +105,37 @@ closing %>%
 
 ```{r}
 closing %>%
-    ggplot(aes(closing_duration, colour = c2phonation)) +
+    ggplot(aes(closing_duration, colour = c2_phonation)) +
     geom_density()
 ```
 
 ```{r}
 closing %>%
-    ggplot(aes(closing_duration, colour = c2phonation)) +
+    ggplot(aes(closing_duration, colour = c2_phonation)) +
     geom_density() +
-    facet_grid(c2place ~ vowel)
+    facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
 closing %>%
-    ggplot(aes(closing_duration, fill = c2phonation)) +
+    ggplot(aes(closing_duration, fill = c2_phonation)) +
     geom_histogram()
 ```
 
 ```{r}
 closing %>%
-    ggplot(aes(language, closing_duration, colour = c2phonation)) +
+    ggplot(aes(language, closing_duration, colour = c2_phonation)) +
     geom_boxplot() +
-    facet_grid(vowel ~ c2place)
+    facet_grid(vowel ~ c2_place)
 ```
 
 ```{r}
-table(closing$c2phonation, closing$vowel, closing$c2place)
+table(closing$c2_phonation, closing$vowel, closing$c2_place)
 ```
 
 ```{r}
 closing %>%
-  ggplot(aes(c2place, closing_duration, colour = c2phonation)) +
+  ggplot(aes(c2_place, closing_duration, colour = c2_phonation)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```
@@ -143,10 +143,10 @@ closing %>%
 ```{r}
 closing_lm <- lmer(
   closing_duration ~
-    c2phonation +
+    c2_phonation +
     vowel +
-    c2place +
-    (1+c2phonation|speaker) +
+    c2_place +
+    (1+c2_phonation|speaker) +
     (1|word),
   data = closing
 )
@@ -162,7 +162,7 @@ plot(allEffects(gons_lm))
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(TR_displacement_sm, closing_duration, colour = c2phonation)) +
+  ggplot(aes(TR_displacement_sm, closing_duration, colour = c2_phonation)) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_grid(~ language)
@@ -173,7 +173,7 @@ tongue_root %>%
 ```{r}
 closing_velocity %>%
   filter(label == "peak1_TT") %>%
-  ggplot(aes(c2phonation, TT_velocity)) +
+  ggplot(aes(c2_phonation, TT_velocity)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```
@@ -181,7 +181,7 @@ closing_velocity %>%
 ```{r}
 closing_velocity %>%
   filter(label == "peak1_TD") %>%
-  ggplot(aes(c2phonation, TD_velocity)) +
+  ggplot(aes(c2_phonation, TD_velocity)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```

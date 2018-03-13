@@ -45,9 +45,9 @@ tongue <- list.files(
   mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
-  filter(c1phonation == "voiceless") %>%
+  filter(c1_phonation == "voiceless") %>%
   mutate(
-    c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
   mutate_if(is.character, as.factor)
 
@@ -59,8 +59,8 @@ tongue_max <- tongue %>%
 
 ```{r}
 tongue_max %>%
-  filter(language == "polish", c2place == "coronal", vowel == "a") %>%
-  ggplot(aes(X, Y, colour = c2phonation)) +
+  filter(language == "polish", c2_place == "coronal", vowel == "a") %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
   geom_point(size = 0.5) +
   facet_wrap(~ speaker)
 ```
