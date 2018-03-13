@@ -21,18 +21,18 @@ library(rticulate)
 columns <- c(
   "speaker",
   "seconds",
-  "rec.date",
+  "rec_date",
   "prompt",
   "label",
-  "TT.displacement.sm",
-  "TT.velocity",
-  "TT.velocity.abs",
-  "TD.displacement.sm",
-  "TD.velocity",
-  "TD.velocity.abs",
-  "TR.displacement.sm",
-  "TR.velocity",
-  "TR.velocity.abs"
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
 )
 
 speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
@@ -60,13 +60,14 @@ tongue_root <- list.files(
   mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor) %>%
   # filter clear outlier
-  filter(TR.displacement.sm > 40) %>%
+  filter(TR_displacement_sm > 40) %>%
   group_by(speaker) %>%
   mutate(
-    vowel_duration_z = scale(vowel.duration),
-    TR_displacement_z = scale(TR.displacement.sm),
-    tra = -TR_displacement_z
-  )
+    vowel_duration_z = scale(vowel_duration),
+    tra = -TR_displacement_sm,
+    tra_z = scale(tra)
+  ) %>%
+  ungroup()
 
 
 tongue <- list.files(
@@ -83,6 +84,7 @@ tongue <- list.files(
   mutate_if(is.character, as.factor) %>%
   group_by(speaker) %>%
   do(transform_coord(., fan_lines = c(15, 25))) %>%
+  ungroup() %>%
   na.omit()
 ```
 
@@ -92,14 +94,14 @@ Vowel duration and tongue root displacement are normalised within each speaker u
 
 ```{r tr-vowel-duration}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, vowel_duration_z)) +
+    ggplot(aes(tra_z, vowel_duration_z)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
 
 ```{r tr-vowel-duration-vowel}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2_phonation)) +
+    ggplot(aes(tra_z, vowel_duration_z, colour = c2_phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
     facet_grid(. ~ vowel)
@@ -107,7 +109,7 @@ tongue_root %>%
 
 ```{r tr-vowel-duration-place}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2_phonation)) +
+    ggplot(aes(tra_z, vowel_duration_z, colour = c2_phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
     facet_grid( ~ c2_place)
@@ -115,7 +117,7 @@ tongue_root %>%
 
 ```{r tr-vowel-duration-vowel-place}
 tongue_root %>%
-    ggplot(aes(TR_displacement_z, vowel_duration_z, colour = c2_phonation)) +
+    ggplot(aes(tra_z, vowel_duration_z, colour = c2_phonation)) +
     geom_point() +
     geom_smooth(method = "lm") +
     facet_grid(c2_place ~ vowel)
@@ -123,25 +125,18 @@ tongue_root %>%
 
 It does not seem to be a correlation. Maybe I should check TRA not at maximum TT/TD displacement?
 
-```{r tr-phonation}
-tongue_root %>%
-    ggplot(aes(c2_phonation, TR_displacement_z)) +
-    geom_boxplot() +
-    facet_grid(language ~ vowel)
-```
-
 /a/ and /o/ show more advancement in the voiced condition (lower TR_displacement).
 
 ```{r tra-lm-it}
 tra_lm_it <- lmer(
   vowel_duration_z ~
-    TR_displacement_z +
+    tra_z +
     c2_place +
     vowel *
     c2_phonation +
     vowel:c2_place +
-    TR_displacement_z:vowel +
-    (1+TR_displacement_z|speaker) +
+    tra_z:vowel +
+    (1+tra_z|speaker) +
     (1|word),
   data = filter(tongue_root, language == "italian"),
   REML = FALSE
@@ -151,13 +146,13 @@ summary(tra_lm_it)
 
 tra_lm_it_null <- lmer(
   vowel_duration_z ~
-    TR_displacement_z +
+    tra_z +
     c2_place +
     vowel *
     c2_phonation +
     vowel:c2_place +
-#    TR_displacement_z:vowel +
-    (1+TR_displacement_z|speaker) +
+#    tra_z:vowel +
+    (1+tra_z|speaker) +
     (1|word),
   data = filter(tongue_root, language == "italian"),
   REML = FALSE
@@ -180,7 +175,7 @@ The lmer detects a correlation, but I need to be cautious.
 
 ```{r}
 mean_tra_lm <- lmer(
-    TR_displacement_z ~
+    tra_z ~
         c2_phonation +
         vowel +
         c2_place +
@@ -198,7 +193,7 @@ plot(allEffects(mean_tra_lm))
 ```{r tra-lm-pl}
 tra_lm_pl <- lmer(
     vowel_duration_z ~
-        TR_displacement_z +
+        tra_z +
         c2_place +
         vowel *
         c2_phonation +
@@ -211,7 +206,7 @@ summary(tra_lm_pl)
 
 tra_lm_pl_null <- lmer(
     vowel_duration_z ~
-#        TR_displacement_z *
+#        tra_z *
         c2_phonation +
         vowel +
         c2_place +
@@ -229,15 +224,19 @@ plot(allEffects(tra_lm_pl))
 
 ### Lmer with all data
 
+```{r}
+tongue_root_clean <- filter(tongue_root, tra_z < 3)
+```
+
 ```{r tra-lm}
 tra_lm <- lmer(
-  vowel.duration ~
-    TR.displacement.sm +
+  vowel_duration ~
+    tra +
     c2_phonation +
     vowel +
     (1|speaker) +
     (1|word),
-data = tongue_root
+data = tongue_root_clean
 )
 
 summary(tra_lm)
@@ -251,12 +250,13 @@ plot(allEffects(tra_lm))
 
 ```{r tr-vowel-dur-faceted}
 tongue_root %>%
-  filter(TR_displacement_z > -3) %>%
-  ggplot(aes(-TR_displacement_z, vowel_duration_z)) +
+  filter(tra_z > -3) %>%
+  ggplot(aes(tra_z, vowel_duration_z)) +
   geom_point(alpha = 0.3, stroke = 0) +
   geom_smooth(method = "lm", aes(colour = vowel)) +
   facet_grid(c2_place ~ vowel, scales = "free") +
   labs(
+    title = "Correlation between tongue root advancement and vowel duration",
     x = "Tongue root advacement (z-scores)",
     y = "Vowel duration (z-scores)"
   )
@@ -264,8 +264,8 @@ tongue_root %>%
 
 ```{r it-tr-vowel-dur}
 tongue_root %>%
-  filter(language == "italian", TR_displacement_z > -2.7) %>%
-  ggplot(aes(-TR_displacement_z, vowel_duration_z)) +
+  filter(language == "italian", tra_z > -2.7) %>%
+  ggplot(aes(tra_z, vowel_duration_z)) +
   geom_point(alpha = 0.3, stroke = 0) +
   geom_smooth(method = "lm", aes(colour = vowel)) +
   facet_grid(c2_place ~ vowel, scales = "free") +
@@ -278,8 +278,8 @@ tongue_root %>%
 
 ```{r pl-tr-vowel-dur}
 tongue_root %>%
-  filter(language == "polish", TR_displacement_z > -3, TR_displacement_z < 3) %>%
-  ggplot(aes(-TR_displacement_z, vowel_duration_z)) +
+  filter(language == "polish", tra_z > -3, tra_z < 3) %>%
+  ggplot(aes(tra_z, vowel_duration_z)) +
   geom_point(alpha = 0.3, stroke = 0) +
   geom_smooth(method = "lm", aes(colour = vowel)) +
   facet_grid(c2_place ~ vowel, scales = "free") +
@@ -289,178 +289,4 @@ tongue_root %>%
   )
 ```
 
-
-# Using average curve distance
-
-It does not work really.
-
-```{r it01-polar-plot}
-tongue %>%
-  filter(speaker == "it01") %>%
-  ggplot(aes(angle, radius, colour = c2_phonation)) +
-  geom_point() +
-  facet_wrap(~vowel)
-```
-
-```{r}
-it01 <- tongue %>%
-  filter(speaker == "it02")
-
-radius <- it01$radius
-fan_line <- it01$fan_line
-phonation <- it01$c2_phonation
-vowel <- it01$vowel
-place <- it01$c2_place
-distance <- NULL
-
-for (i in 1:length(radius)) {
-  i_fan_line <- fan_line[i]
-  fan_line_idx <- which(fan_line == i_fan_line)
-  i_phonation <- phonation[i]
-  phonation_index <- which(phonation[fan_line_idx] != i_phonation)
-  neighbours <- radius[phonation_index]
-  i_distance <- mean(abs(radius[i] - radius[neighbours]))
-  
-  distance <- c(distance, i_distance)
-}
-
-distance <- NULL
-
-for (i in 1:length(radius)) {
-  i_fan_line <- fan_line[i]
-  fan_line_idx <- which(fan_line == i_fan_line)
-  i_phonation <- phonation[i]
-  phonation_idx <- which(phonation[fan_line_idx] == "voiceless")
-  i_vowel <- vowel[i]
-  vowel_idx <- which(vowel[phonation_idx] == i_vowel)
-  i_place <- place[i]
-  place_idx <- which(place[vowel_idx] == i_place)
-  neighbours <- radius[place_idx]
-  i_distance <- mean(abs(radius[i] - radius[neighbours]))
-  
-  distance <- c(distance, i_distance)
-}
-
-it01$distance <- distance
-
-it01_dist <- it01 %>%
-  na.omit() %>%
-  group_by(rec.date) %>%
-  summarise(distance = mean(distance)) %>%
-  left_join(y = vowels) %>%
-  left_join(y = words)
-```
-
-```{r}
-it01_dist %>%
-  ggplot(aes(distance, vowel.duration, colour = vowel)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_grid(~ c2_place)
-```
-
-```{r}
-speakers <- levels(tongue$speaker)
-
-distance <- NULL
-
-for (speaker in 1:length(speakers)) {
-  speaker_tbl <- filter(tongue, speaker == speakers[speaker])
-  
-  radius <- speaker_tbl$radius
-  fan_line <- speaker_tbl$fan_line
-  phonation <- speaker_tbl$c2_phonation
-  vowel <- speaker_tbl$vowel
-  place <- speaker_tbl$c2_place
-  
-  for (i in 1:length(radius)) {
-    i_fan_line <- fan_line[i]
-    fan_line_idx <- which(fan_line == i_fan_line)
-    i_phonation <- phonation[i]
-    phonation_index <- which(phonation[fan_line_idx] == "voiceless")
-    i_vowel <- vowel[i_fan_line]
-    vowel_index <- which(vowel[phonation_index] == i_vowel)
-    i_place <- place[i_fan_line]
-    place_index <- which(place[vowel_index] == i_place)
-    neighbours <- radius[place_index]
-    i_distance <- mean(abs(radius[i] - radius[neighbours]))
-    distance <- c(distance, i_distance)
-  }
-}
-
-get_tongue_distance <- function(data) {
-  radius <- data$radius
-  fan_line <- data$fan_line
-  phonation <- data$c2_phonation
-  vowel <- data$vowel
-  place <- data$c2_place
-  
-  distance <- NULL
-  
-  for (i in 1:length(radius)) {
-    i_fan_line <- fan_line[i]
-    fan_line_idx <- which(fan_line == i_fan_line)
-#    i_phonation <- phonation[i]
-    phonation_idx <- which(phonation[fan_line_idx] == "voiceless")
-    i_vowel <- vowel[i]
-    vowel_idx <- which(vowel[phonation_idx] == i_vowel)
-    i_place <- place[i]
-    place_idx <- which(place[vowel_idx] == i_place)
-    neighbours <- radius[place_idx]
-    i_distance <- mean(abs(radius[i] - radius[neighbours]))
-    distance <- c(distance, i_distance)
-  }
-  
-  data$distance <- distance
-  return(data)
-}
-
-tongue_distance <- tongue %>%
-  group_by(speaker) %>%
-  do(get_tongue_distance(.)) %>%
-  na.omit() %>%
-  group_by(rec.date) %>%
-  summarise(distance = mean(distance)) %>%
-  left_join(y = vowels) %>%
-  left_join(y = languages) %>%
-  inner_join(y = words) %>%
-  mutate_if(is.character, as.factor)
-
-```
-
-```{r}
-tongue_distance %>%
-  filter(language == "italian") %>%
-  ggplot(aes(distance, vowel.duration, colour = vowel)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_wrap(~speaker + c2_place)
-```
-
-```{r}
-tongue_distance %>%
-  filter(language == "polish") %>%
-  ggplot(aes(distance, vowel.duration, colour = vowel)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_wrap(~speaker + c2_place)
-```
-
-```{r}
-distance_lm <- lmer(
-  vowel.duration ~
-    distance *
-    vowel *
-    c2_place *
-    language +
-    (1+distance|speaker),
-  data = tongue_distance
-)
-
-summary(distance_lm)
-```
-
-```{r}
-plot(allEffects(distance_lm))
-```
 
