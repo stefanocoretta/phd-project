@@ -234,6 +234,7 @@ tra_lm <- lmer(
     tra +
     c2_phonation +
     vowel +
+    sentence_duration +
     (1|speaker) +
     (1|word),
 data = tongue_root_clean
