@@ -250,7 +250,7 @@ plot(allEffects(tra_lm))
 
 ```{r tr-vowel-dur-faceted}
 tongue_root %>%
-  filter(tra_z > -3) %>%
+  filter(tra_z < 3) %>%
   ggplot(aes(tra_z, vowel_duration_z)) +
   geom_point(alpha = 0.3, stroke = 0) +
   geom_smooth(method = "lm", aes(colour = vowel)) +
