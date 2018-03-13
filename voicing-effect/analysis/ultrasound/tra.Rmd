@@ -60,10 +60,10 @@ tra_series <- list.files(
   mutate(
     c2phonation = factor(c2phonation, levels = c("voiceless", "voiced")),
     proportion = (seconds - v_onset) / (v_offset - v_onset),
-    TRA = -TR_displacement_sm
+    tra = -TR_displacement_sm
   ) %>%
   group_by(speaker) %>%
-  mutate(TRA_z = scale(TRA)) %>%
+  mutate(tra_z = scale(tra)) %>%
   ungroup() %>%
   mutate_if(is.character, as.factor)
 
@@ -78,66 +78,64 @@ tongue_root <- list.files(
   mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
-  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate(
+    c2phonation = factor(c2phonation, levels = c("voiceless", "voiced")),
+    tra = -TR_displacement_sm
+  ) %>%
   mutate_if(is.character, as.factor) %>%
   # filter clear outlier
   filter(TR_displacement_sm > 40) %>%
   group_by(speaker) %>%
-  mutate(
-    TR_displacement_z = scale(TR_displacement_sm),
-    tra = -TR_displacement_z
-  ) %>%
+  mutate(tra_z = scale(tra),) %>%
   ungroup()
 ```
 
-# Using TR fan line
-
-## Tongue root advancement
+# Tongue root advancement
 
 ```{r tr-density}
 tongue_root %>%
-    ggplot(aes(tra, fill = c2phonation, linetype = c2phonation, colour = c2phonation)) +
+    ggplot(aes(tra_z, fill = c2phonation, linetype = c2phonation, colour = c2phonation)) +
     geom_density(alpha = 0.2) +
     facet_grid(. ~ language)
 ```
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(tra)) +
+  ggplot(aes(tra_z)) +
   geom_histogram(bins = 15)
 ```
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(tra)) +
+  ggplot(aes(tra_z)) +
   geom_density() +
   geom_rug()
 ```
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(tra, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation)) +
   geom_density(alpha = 0.5) +
   geom_rug()
 ```
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(tra, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(~ language)
 ```
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(tra, fill = vowel)) +
+  ggplot(aes(tra_z, fill = vowel)) +
   geom_density(alpha = 0.5)
 ```
 
 ```{r}
 tongue_root %>%
   filter(vowel == "a") %>%
-  ggplot(aes(tra, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(language ~ c2place)
 ```
@@ -145,7 +143,7 @@ tongue_root %>%
 ```{r}
 tongue_root %>%
   filter(vowel == "o") %>%
-  ggplot(aes(tra, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(language ~ c2place)
 ```
@@ -155,7 +153,7 @@ Two outliers are tokens of /o/.
 ```{r}
 tongue_root %>%
   filter(vowel == "u") %>%
-  ggplot(aes(tra, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(language ~ c2place)
 ```
@@ -165,14 +163,14 @@ tongue_root %>%
 ```{r}
 tongue_root %>%
   filter(vowel == "u") %>%
-  ggplot(aes(tra, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(speaker ~ c2place)
 ```
 
 ```{r tr-boxplot}
 tongue_root %>%
-  ggplot(aes(c2phonation, tra)) +
+  ggplot(aes(c2phonation, tra_z)) +
   geom_violin() +
   geom_boxplot(width = 0.2) +
   facet_grid(. ~ language)
@@ -196,14 +194,14 @@ tongue_root %>%
 
 ```{r tr-density-vowels}
 tongue_root %>%
-  ggplot(aes(tra, fill = vowel, linetype = vowel)) +
+  ggplot(aes(tra_z, fill = vowel, linetype = vowel)) +
   geom_density(alpha = 0.5)
 ```
 
 ```{r tr-density-vowels-filtered}
 tongue_root %>%
-  filter(tra < 4) %>%
-  ggplot(aes(tra, fill = vowel, colour = vowel, linetype = vowel)) +
+  filter(tra_z < 4) %>%
+  ggplot(aes(tra_z, fill = vowel, colour = vowel, linetype = vowel)) +
   geom_density(alpha = 0.5, size = 0.7) +
   scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
   labs(x = "tongue root advancement (z-scores)")
@@ -211,8 +209,8 @@ tongue_root %>%
 
 ```{r tr-density-vowels-filtered}
 tongue_root %>%
-  filter(tra < 4) %>%
-  ggplot(aes(tra, fill = vowel, colour = vowel, linetype = vowel)) +
+  filter(tra_z < 4) %>%
+  ggplot(aes(tra_z, fill = vowel, colour = vowel, linetype = vowel)) +
   geom_density(alpha = 0.5, size = 0.7) +
   scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
   labs(x = "tongue root advancement (z-scores)") +
@@ -223,19 +221,19 @@ tongue_root %>%
 
 ```{r}
 tra_series %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation, group = rec_date)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation, group = rec_date)) +
   geom_line(alpha = 0.2)
 ```
 
 ```{r}
 tra_series %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation)) +
   geom_smooth()
 ```
 
 ```{r}
 tra_series %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation, linetype = c2phonation)) +
   geom_smooth() +
   facet_grid(c2place ~ vowel)
 ```
@@ -243,7 +241,7 @@ tra_series %>%
 ```{r}
 tra_series %>%
   filter(speaker == "it01") %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation, linetype = c2phonation)) +
   geom_smooth() +
   facet_grid(c2place ~ vowel)
 ```
@@ -251,7 +249,7 @@ tra_series %>%
 ```{r}
 tra_series %>%
   filter(speaker == "it01", c2place == "coronal", vowel != "u") %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation, linetype = c2phonation)) +
   geom_smooth() +
   facet_grid(c2place ~ vowel)
 ```
@@ -259,7 +257,7 @@ tra_series %>%
 ```{r}
 tra_series %>%
   filter(speaker == "it02") %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation, linetype = c2phonation)) +
   geom_smooth() +
   facet_grid(c2place ~ vowel)
 ```
@@ -267,7 +265,7 @@ tra_series %>%
 ```{r}
 tra_series %>%
   filter(speaker == "pl05") %>%
-  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  ggplot(aes(proportion, tra_z, colour = c2phonation, linetype = c2phonation)) +
   geom_smooth() +
   facet_grid(c2place ~ vowel)
 ```
