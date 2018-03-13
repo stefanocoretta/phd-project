@@ -7,5 +7,116 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_bw())
+library(mgcv)
+library(tidymv)
+library(rticulate)
 ```
 
+# Read data
+
+```{r read-data}
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+duration <- list.files(
+  path = "voicing-effect/data/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  select(-speaker)
+
+tra_series <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-vowel-series.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
+  left_join(duration) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    c2phonation = factor(c2phonation, levels = c("voiceless", "voiced")),
+    proportion = (seconds - v_onset) / (v_offset - v_onset),
+    TRA = -TR_displacement_sm
+  ) %>%
+  group_by(speaker) %>%
+  mutate(TRA_z = scale(TRA)) %>%
+  ungroup() %>%
+  mutate_if(is.character, as.factor)
+```
+
+# TRA trajectories
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation, group = rec_date)) +
+  geom_line(alpha = 0.2)
+```
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation)) +
+  geom_smooth()
+```
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tra_series %>%
+  filter(speaker == "it01") %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tra_series %>%
+  filter(speaker == "it01", c2place == "coronal", vowel != "u") %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tra_series %>%
+  filter(speaker == "it02") %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ vowel)
+```
+
+```{r}
+tra_series %>%
+  filter(speaker == "pl05") %>%
+  ggplot(aes(proportion, TRA_z, colour = c2phonation, linetype = c2phonation)) +
+  geom_smooth() +
+  facet_grid(c2place ~ vowel)
+```
