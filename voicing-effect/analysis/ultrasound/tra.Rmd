@@ -86,81 +86,100 @@ tongue_root <- list.files(
   # filter clear outlier
   filter(TR_displacement_sm > 40) %>%
   group_by(speaker) %>%
-  mutate(tra_z = scale(tra),) %>%
+  mutate(tra_z = scale(tra)) %>%
   ungroup()
 ```
 
-# Tongue root advancement
+# Tongue root advancement at maximum displacement
 
-```{r tr-density}
+Tongue root advancement is calculated as the inverse of tongue root displacement along a selected fan line.
+
+```{r tr-density-phonation}
+tongue_root %>%
+  ggplot(aes(tra_z, fill = c2phonation, linetype = c2phonation, colour = c2phonation)) +
+  geom_density(alpha = 0.2)
+```
+
+As a general trend, the root is more advanced in the voiced condition.
+
+```{r tr-strip-voicing}
+tongue_root %>%
+  ggplot(aes(tra_z, c2phonation)) +
+  geom_jitter(alpha = 0.2)
+```
+
+There are two clear outliers with `tra_z > 4`.
+
+```{r tr-density-language}
 tongue_root %>%
     ggplot(aes(tra_z, fill = c2phonation, linetype = c2phonation, colour = c2phonation)) +
     geom_density(alpha = 0.2) +
     facet_grid(. ~ language)
 ```
 
-```{r}
+The pattern is stronger in Italian than in Polish.
+This makes sense, given that most Polish speakers do not show differences in root position.
+
+```{r tra-hist}
 tongue_root %>%
   ggplot(aes(tra_z)) +
   geom_histogram(bins = 15)
 ```
 
-```{r}
+```{r tra-density}
 tongue_root %>%
   ggplot(aes(tra_z)) +
   geom_density() +
   geom_rug()
 ```
 
-```{r}
+```{r tra-density-vowel}
 tongue_root %>%
-  ggplot(aes(tra_z, fill = c2phonation)) +
-  geom_density(alpha = 0.5) +
-  geom_rug()
+  ggplot(aes(tra_z, fill = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5)
 ```
 
-```{r}
+/u/ is bimodally distributed.
+There is no clear pattern in terms of TRA and vowel height.
+
+```{r tra-density-vowel-language}
 tongue_root %>%
-  ggplot(aes(tra_z, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = vowel, linetype = vowel)) +
   geom_density(alpha = 0.5) +
   facet_grid(~ language)
 ```
 
-```{r}
-tongue_root %>%
-  ggplot(aes(tra_z, fill = vowel)) +
-  geom_density(alpha = 0.5)
-```
+Italian /u/ has a big peak after the peak of /a/ but there another peak at values that are inferior of those of /o/.
 
-```{r}
+```{r tra-density-a}
 tongue_root %>%
   filter(vowel == "a") %>%
-  ggplot(aes(tra_z, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation, linetype = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(language ~ c2place)
 ```
 
-```{r}
+```{r tra-density-o}
 tongue_root %>%
   filter(vowel == "o") %>%
-  ggplot(aes(tra_z, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation, linetype = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(language ~ c2place)
 ```
 
-Two outliers are tokens of /o/.
+The two outliers are tokens of /o/.
 
 ```{r}
 tongue_root %>%
   filter(vowel == "u") %>%
-  ggplot(aes(tra_z, fill = c2phonation)) +
+  ggplot(aes(tra_z, fill = c2phonation, linetype = c2phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(language ~ c2place)
 ```
 
-/u/ is bimodally distributed but I don't know why.
+/u/ shows bimodally distributions but I don't know why.
 
-```{r}
+```{r tra-density-speakers}
 tongue_root %>%
   filter(vowel == "u") %>%
   ggplot(aes(tra_z, fill = c2phonation)) +
@@ -168,7 +187,7 @@ tongue_root %>%
   facet_grid(speaker ~ c2place)
 ```
 
-```{r tr-boxplot}
+```{r tra-boxplot}
 tongue_root %>%
   ggplot(aes(c2phonation, tra_z)) +
   geom_violin() +
@@ -176,29 +195,32 @@ tongue_root %>%
   facet_grid(. ~ language)
 ```
 
-
-```{r tr-boxplot-speakers}
+```{r tra-boxplot-filtered}
 tongue_root %>%
-    ggplot(aes(c2phonation, -TR_displacement_z)) +
-    geom_boxplot() +
-    facet_wrap(~ speaker)
+  filter(tra_z < 3) %>%
+  ggplot(aes(c2phonation, tra_z)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2) +
+  facet_grid(. ~ language)
 ```
 
-```{r tr-italian}
+```{r tra-boxplot-speakers}
+tongue_root %>%
+  filter(tra < 3) %>%
+  ggplot(aes(c2phonation, tra_z)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r tra-italian}
 tongue_root %>%
   filter(language == "italian") %>%
-    ggplot(aes(c2phonation, -TR_displacement_z)) +
+    ggplot(aes(c2phonation, tra_z)) +
     geom_boxplot() +
     facet_grid(c2place ~ vowel)
 ```
 
-```{r tr-density-vowels}
-tongue_root %>%
-  ggplot(aes(tra_z, fill = vowel, linetype = vowel)) +
-  geom_density(alpha = 0.5)
-```
-
-```{r tr-density-vowels-filtered}
+```{r tra-density-vowels-filtered}
 tongue_root %>%
   filter(tra_z < 4) %>%
   ggplot(aes(tra_z, fill = vowel, colour = vowel, linetype = vowel)) +
@@ -207,15 +229,17 @@ tongue_root %>%
   labs(x = "tongue root advancement (z-scores)")
 ```
 
-```{r tr-density-vowels-filtered}
+```{r tra-density-vowels-place-language}
 tongue_root %>%
   filter(tra_z < 4) %>%
   ggplot(aes(tra_z, fill = vowel, colour = vowel, linetype = vowel)) +
   geom_density(alpha = 0.5, size = 0.7) +
   scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
   labs(x = "tongue root advancement (z-scores)") +
-  facet_grid(~ c2place)
+  facet_grid(language ~ c2place)
 ```
+
+The bimodal distribution of /u/ seems to be related to the velar condition, especially in Italian.
 
 # TRA trajectories
 
