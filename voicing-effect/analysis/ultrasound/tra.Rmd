@@ -66,6 +66,157 @@ tra_series <- list.files(
   mutate(TRA_z = scale(TRA)) %>%
   ungroup() %>%
   mutate_if(is.character, as.factor)
+
+tongue_root <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns, format = "wide")) %>%
+  select(-(X_1:Y_42)) %>%
+  filter(label == "closure_") %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(c2phonation = factor(c2phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor) %>%
+  # filter clear outlier
+  filter(TR_displacement_sm > 40) %>%
+  group_by(speaker) %>%
+  mutate(
+    TR_displacement_z = scale(TR_displacement_sm),
+    tra = -TR_displacement_z
+  ) %>%
+  ungroup()
+```
+
+# Using TR fan line
+
+## Tongue root advancement
+
+```{r tr-density}
+tongue_root %>%
+    ggplot(aes(tra, fill = c2phonation, linetype = c2phonation, colour = c2phonation)) +
+    geom_density(alpha = 0.2) +
+    facet_grid(. ~ language)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra)) +
+  geom_histogram(bins = 15)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
+```{r}
+tongue_root %>%
+  ggplot(aes(tra, fill = vowel)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+tongue_root %>%
+  filter(vowel == "a") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(language ~ c2place)
+```
+
+```{r}
+tongue_root %>%
+  filter(vowel == "o") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(language ~ c2place)
+```
+
+Two outliers are tokens of /o/.
+
+```{r}
+tongue_root %>%
+  filter(vowel == "u") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(language ~ c2place)
+```
+
+/u/ is bimodally distributed but I don't know why.
+
+```{r}
+tongue_root %>%
+  filter(vowel == "u") %>%
+  ggplot(aes(tra, fill = c2phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(speaker ~ c2place)
+```
+
+```{r tr-boxplot}
+tongue_root %>%
+  ggplot(aes(c2phonation, tra)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2) +
+  facet_grid(. ~ language)
+```
+
+
+```{r tr-boxplot-speakers}
+tongue_root %>%
+    ggplot(aes(c2phonation, -TR_displacement_z)) +
+    geom_boxplot() +
+    facet_wrap(~ speaker)
+```
+
+```{r tr-italian}
+tongue_root %>%
+  filter(language == "italian") %>%
+    ggplot(aes(c2phonation, -TR_displacement_z)) +
+    geom_boxplot() +
+    facet_grid(c2place ~ vowel)
+```
+
+```{r tr-density-vowels}
+tongue_root %>%
+  ggplot(aes(tra, fill = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r tr-density-vowels-filtered}
+tongue_root %>%
+  filter(tra < 4) %>%
+  ggplot(aes(tra, fill = vowel, colour = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5, size = 0.7) +
+  scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
+  labs(x = "tongue root advancement (z-scores)")
+```
+
+```{r tr-density-vowels-filtered}
+tongue_root %>%
+  filter(tra < 4) %>%
+  ggplot(aes(tra, fill = vowel, colour = vowel, linetype = vowel)) +
+  geom_density(alpha = 0.5, size = 0.7) +
+  scale_linetype_manual(values = c("solid", "dotted", "longdash")) +
+  labs(x = "tongue root advancement (z-scores)") +
+  facet_grid(~ c2place)
 ```
 
 # TRA trajectories
