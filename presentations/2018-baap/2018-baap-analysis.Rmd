@@ -926,6 +926,6 @@ vowels_pl_lm <- lmer(
 summary(vowels_pl_lm)
 ```
 
-```{r vowe-pl-lm}
+```{r vow-pl-lm}
 plot(allEffects(vowels_pl_lm))
 ```
