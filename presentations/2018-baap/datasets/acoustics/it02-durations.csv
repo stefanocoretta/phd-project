@@ -1,4 +1,4 @@
-index,speaker,file,rec.date,word,time,word.duration,c1.duration,vowel.duration,closure.duration,rvot,c2.duration,v2.duration,sentence.duration
+index,speaker,file,rec_date,word,time,word_duration,c1_duration,vowel_duration,closure_duration,rvot,c2_duration,v2_duration,sentence_duration
 1,it02,it02-001,12/12/2016 14:42:09,pugu,1.709932,389.9999999999999,110.0000000000001,89.93497451804645,--undefined--,--undefined--,--undefined--,109.99999999999987,1.635011
 2,it02,it02-002,12/12/2016 14:42:18,butu,4.714966,439.9999999999995,126.32058337468699,134.65477621908573,--undefined--,--undefined--,--undefined--,89.99999999999986,1.6649890000000003
 3,it02,it02-003,12/12/2016 14:42:26,baca,8.209977,560.0000000000005,109.99999999999943,183.49743690351872,105.82461974094137,30.677943355540194,136.50256309648157,130.0000000000008,1.8249440000000012
