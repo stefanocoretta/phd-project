@@ -892,11 +892,11 @@ plot_polar_smooths(
 vowels_it <- filter(vowels, language == "italian")
 
 vowels_it_lm <- lmer(
-  vowel.duration ~
+  vowel_duration ~
     c2_phonation +
     c2_place +
     vowel +
-    sentence.duration +
+    sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
   data = vowels_it,
@@ -904,11 +904,11 @@ vowels_it_lm <- lmer(
 )
 
 vowels_it_lm_null <- lmer(
-  vowel.duration ~
+  vowel_duration ~
 #    c2_phonation +
     c2_place +
     vowel +
-    sentence.duration +
+    sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
   data = vowels_it,
@@ -928,11 +928,11 @@ plot(allEffects(vowels_it_lm))
 vowels_pl <- filter(vowels, language == "polish")
 
 vowels_pl_lm <- lmer(
-  vowel.duration ~
+  vowel_duration ~
     c2_phonation +
     c2_place +
     vowel +
-    sentence.duration +
+    sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
   data = vowels_pl,
@@ -940,11 +940,11 @@ vowels_pl_lm <- lmer(
 )
 
 vowels_pl_lm_null <- lmer(
-  vowel.duration ~
+  vowel_duration ~
 #    c2_phonation +
     c2_place +
     vowel +
-    sentence.duration +
+    sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
   data = vowels_pl,
