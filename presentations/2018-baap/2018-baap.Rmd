@@ -13,6 +13,27 @@ biblio-style: unified.bst
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(lme4)
+library(knitr)
+```
+
+```{r read-data, include=FALSE}
+speakers <- read_csv("./presentations/2018-baap/datasets/speakers.csv")
+stimuli <- read_csv("./presentations/2018-baap/datasets/stimuli.csv")
+
+vowels <- list.files(
+  path = "./presentations/2018-baap/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 # Background
@@ -39,3 +60,38 @@ knitr::opts_chunk$set(echo = FALSE)
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
 
+# Results: vowel duration
+
+```{r vow-it-lm, include=FALSE}
+vowels_it <- filter(vowels, language == "italian")
+
+vowels_it_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_it,
+  REML = FALSE
+)
+
+vowels_it_lm_null <- lmer(
+  vowel_duration ~
+#    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_it,
+  REML = FALSE
+)
+
+anova(vowels_it_lm_null, vowels_it_lm)
+```
+
+```{r vow-it-lm-coeff}
+kable(summary(vowels_it_lm)$coeff)
+```
