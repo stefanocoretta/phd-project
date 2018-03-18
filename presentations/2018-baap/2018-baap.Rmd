@@ -1,5 +1,5 @@
 ---
-title: "Tongue root advancement and vowel duratioon: a gradient effect?"
+title: "Tongue root advancement and vowel duration: a gradient effect?"
 author: "Stefano Coretta"
 date: "05/03/2018"
 output:
