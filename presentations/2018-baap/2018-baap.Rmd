@@ -47,25 +47,30 @@ vowels <- list.files(
 \includegraphics[width = \textwidth]{graphics/voicing.pdf}
 \end{figure}
 
-# Research hypotheses
+# Background
 
-* \textbf{H$_1$}: Vowels are longer if followed by voiced stops in Italian, but not in Polish.
-* \textbf{H$_2$}: Italian speakers, but not Polish speakers, produce voiced consonants with tongue root advancement.
+* **voicing effect**: vowels are longer when followed by voiced stops
+
+* *Italian*: voicing effect of 35msec [@farnetani1986]
+
+* *Polish*: mixed results
+    * @keating1984: no effect
+    * x: 5msec effect
 
 # Methods
 
 * **Participants**: 4 Italians (2 F, 2 M), 4 Polish (2 F, 2 M)
 * **Procedure**:
-  * simultaneous ultrasound tongue imaging and audio recording
+    * simultaneous ultrasound tongue imaging and audio recording
 * **Materials**:
-  * C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
-    * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o/, C\textsubscript{2} = /t, d, k, g/
-    * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
-  * frame sentence
-    - *Dico X lentamente*, 'I say X slowly'
-    - *Mówię X teraz*, 'I say X now'
+    * C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
+        * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o/, C\textsubscript{2} = /t, d, k, g/
+        * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
+    * frame sentence
+        - *Dico X lentamente*, 'I say X slowly'
+        - *Mówię X teraz*, 'I say X now'
 
-# Results: vowel duration
+# Results: vowel duration (Italian)
 
 ```{r vow-it-lm, include=FALSE}
 vowels_it <- filter(vowels, language == "italian")
@@ -100,3 +105,55 @@ anova(vowels_it_lm_null, vowels_it_lm)
 ```{r vow-it-lm-coeff}
 kable(summary(vowels_it_lm)$coeff)
 ```
+
+# Results: vowel duration (Polish)
+
+```{r vow-pl-lm, include=FALSE}
+vowels_pl <- filter(vowels, language == "polish")
+
+vowels_pl_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_pl,
+  REML = FALSE
+)
+
+vowels_pl_lm_null <- lmer(
+  vowel_duration ~
+#    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_pl,
+  REML = FALSE
+)
+
+anova(vowels_pl_lm_null, vowels_pl_lm)
+```
+
+```{r vow-pl-lm-coeff}
+kable(summary(vowels_pl_lm)$coeff)
+```
+
+# Results: summary
+
+|                      | IT01 | IT02 | IT03 | IT04 | PL02 | PL03 | PL04 | PL05 |
+|----------------------|------|------|------|------|------|------|------|------|
+| TRA [closure onset]  | yes  | yes? |      |      |      |      |      |      |
+| TRA [within closure] | yes  | yes  |      |      |      |      |      | yes  |
+
+# Discussion
+
+**TRA in voiced stops ⊃ relative stronger VE**
+
+|       | + TRA+ | − TRA+ |
+|-------|-------|-------|
+| + VE+ | ✅     | ✅     |
+| - VE+ | ❌     | ✅     |
