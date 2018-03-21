@@ -353,7 +353,7 @@ plot_polar_smooths(
 ### IT02
 
 ```{r it02}
-it02 <- filter(splines, speaker == "it02", label %in% c("max_TT", "max_TD"))
+it02 <- filter(splines, speaker == "it02", label %in% c("max_TT", "max_TD"), fan_line > 5, fan_line < 40)
 ```
 
 ```{r it02-polar-gam}
@@ -415,20 +415,20 @@ acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
 ### IT03
 
 ```{r it03}
-it03 <- filter(splines, speaker == "it03", label %in% c("max_TT", "max_TD"))
+it03 <- filter(splines, speaker == "it03", label %in% c("max_TT", "max_TD"), fan_line < 40, vowel == "a")
 ```
 
 ```{r it03-polar-gam}
 it03_polar_gam <- polar_gam(
   Y ~
     c2_phonation +
-    vowel +
+#    vowel +
     c2_place +
 #    vow_phon +
 #    c2_place_phon +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
-    s(X, by = vowel, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
 #    s(X, by = vow_phon, bs = "cr") +
 #    s(X, by = c2_place_phon, bs = "cr") +
@@ -443,13 +443,13 @@ summary(it03_polar_gam)
 it03_polar_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
-    vowel +
+#    vowel +
     c2_place +
 #    vow_phon +
 #    c2_place_phon +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
-    s(X, by = vowel, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
 #    s(X, by = vow_phon, bs = "cr") +
 #    s(X, by = c2_place_phon, bs = "cr") +
@@ -466,7 +466,7 @@ plot_polar_smooths(
   it03_polar_gam,
   X,
   c2_phonation,
-  facet_terms = c2_place + vowel
+  facet_terms = c2_place
 )
 ```
 
