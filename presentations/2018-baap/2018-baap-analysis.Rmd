@@ -983,3 +983,32 @@ summary(vowels_pl_lm)
 ```{r vow-pl-lm}
 plot(allEffects(vowels_pl_lm))
 ```
+
+```{r}
+vowels_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    language +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+    language:vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels,
+  REML = FALSE
+)
+summary(vowels_lm)
+```
+
+```{r}
+plot(allEffects(vowels_lm))
+```
+
+```{r}
+ranef(vowels_lm)$speaker
+
+round(coef(vowels_lm)$speaker$c2_phonationvoiced)
+```
+
