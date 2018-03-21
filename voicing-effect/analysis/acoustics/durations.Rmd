@@ -67,17 +67,23 @@ duration %>%
 
 ```{r}
 vowdur_lm <- lmer(
-  vowel.duration ~
+  vowel_duration ~
     c2_phonation +
+    language +
+    c2_place +
     vowel +
+    c2_phonation:vowel +
+    language:vowel +
+    sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
-  data = filter(duration, language == "polish")
+  REML = FALSE,
+  data = duration
 )
 summary(vowdur_lm)
 ```
 
 ```{r}
-ranef(vowdur_lm)$speaker
+round(ranef(vowdur_lm)$speaker)
 ```
 
