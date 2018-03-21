@@ -175,7 +175,7 @@ splines %>%
 
 ```{r vowdur-dens}
 vowels %>%
-  ggplot(aes(vowel.duration, fill = c2_phonation, colour = c2_phonation)) +
+  ggplot(aes(vowel_duration, fill = c2_phonation, colour = c2_phonation)) +
   geom_density(alpha = 0.2) +
   facet_grid(~ language)
 ```
@@ -183,7 +183,7 @@ vowels %>%
 ```{r vowdur-dens}
 vowels %>%
   group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel.duration)) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
   ggplot(aes(vowel_duration, fill = c2_phonation, colour = c2_phonation)) +
   geom_density(alpha = 0.2) +
   facet_grid(~ language)
@@ -191,21 +191,21 @@ vowels %>%
 
 ```{r vowdur-box}
 vowels %>%
-  ggplot(aes(c2_phonation, vowel.duration)) +
+  ggplot(aes(c2_phonation, vowel_duration)) +
   geom_boxplot() +
   facet_grid(~ language)
 ```
 
 ```{r vowdur-box-speakers}
 vowels %>%
-  ggplot(aes(c2_phonation, vowel.duration)) +
+  ggplot(aes(c2_phonation, vowel_duration)) +
   geom_boxplot() +
   facet_wrap(~ speaker, ncol = 4, scales = "free")
 ```
 
 ```{r vowdur-box-speakers-vowels}
 vowels %>%
-  ggplot(aes(c2_phonation, vowel.duration, fill = vowel)) +
+  ggplot(aes(c2_phonation, vowel_duration, fill = vowel)) +
   geom_boxplot() +
   facet_wrap(~ speaker, ncol = 4, scales = "free")
 ```
@@ -213,7 +213,7 @@ vowels %>%
 ```{r vowdur-norm}
 vowels %>%
   group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel.duration)) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
   ggplot(aes(c2_phonation, vowel_duration)) +
   geom_boxplot() +
   facet_grid(~ language)
@@ -222,7 +222,7 @@ vowels %>%
 ```{r vowdur-norm-vowels}
 vowels %>%
   group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel.duration)) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
   facet_grid(~ language)
@@ -232,7 +232,7 @@ vowels %>%
 vowels %>%
   filter(language == "italian") %>%
   group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel.duration)) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
   facet_wrap(~ speaker, ncol = 2)
@@ -242,7 +242,7 @@ vowels %>%
 vowels %>%
   filter(language == "polish") %>%
   group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel.duration)) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
   facet_wrap(~ speaker, ncol = 2)
