@@ -108,6 +108,18 @@ splines %>%
   theme(legend.position = "top")
 ```
 
+```{r it-coronal-tongue-fan}
+splines %>%
+  filter(
+    language == "italian",
+    label == "max_TT"
+  ) %>%
+  ggplot(aes(fan_line, Y, colour = c2_phonation)) +
+  geom_point(size = 0.5) +
+  facet_grid(vowel ~ speaker) +
+  theme(legend.position = "top")
+```
+
 ```{r it-velar-tongue}
 splines %>%
   filter(
@@ -118,6 +130,18 @@ splines %>%
   geom_point(size = 0.5) +
   facet_grid(vowel ~ speaker) +
   coord_fixed(ratio = 1) +
+  theme(legend.position = "top")
+```
+
+```{r it-velar-tongue-fan}
+splines %>%
+  filter(
+    language == "italian",
+    label == "max_TD"
+  ) %>%
+  ggplot(aes(fan_line, Y, colour = c2_phonation)) +
+  geom_point(size = 0.5) +
+  facet_grid(vowel ~ speaker) +
   theme(legend.position = "top")
 ```
 
