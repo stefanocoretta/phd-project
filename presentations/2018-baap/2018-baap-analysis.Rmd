@@ -91,7 +91,85 @@ vowels <- list.files(
   mutate_if(is.character, as.factor)
 ```
 
-# Exploratory
+# Data viz
+
+## Vowel duration
+
+```{r vowdur-dens}
+vowels %>%
+  ggplot(aes(vowel_duration, fill = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.2) +
+  facet_grid(~ language)
+```
+
+```{r vowdur-dens}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel_duration, fill = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.2) +
+  facet_grid(~ language)
+```
+
+```{r vowdur-box}
+vowels %>%
+  ggplot(aes(c2_phonation, vowel_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vowdur-box-speakers}
+vowels %>%
+  ggplot(aes(c2_phonation, vowel_duration)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```
+
+```{r vowdur-box-speakers-vowels}
+vowels %>%
+  ggplot(aes(c2_phonation, vowel_duration, fill = vowel)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```
+
+```{r vowdur-norm}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(c2_phonation, vowel_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vowdur-norm-vowels}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r it-vowdur-norm-vowels}
+vowels %>%
+  filter(language == "italian") %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 2)
+```
+
+```{r pl-vowdur-norm-vowels}
+vowels %>%
+  filter(language == "polish") %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, ncol = 2)
+```
+
 
 ## Ultrasound
 
@@ -171,82 +249,109 @@ splines %>%
   theme(legend.position = "top")
 ```
 
-## Vowel duration
+# Vowel duration
 
-```{r vowdur-dens}
-vowels %>%
-  ggplot(aes(vowel_duration, fill = c2_phonation, colour = c2_phonation)) +
-  geom_density(alpha = 0.2) +
-  facet_grid(~ language)
+```{r vow-it-lm}
+vowels_it <- filter(vowels, language == "italian")
+
+vowels_it_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_it,
+  REML = FALSE
+)
+
+vowels_it_lm_null <- lmer(
+  vowel_duration ~
+#    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_it,
+  REML = FALSE
+)
+
+anova(vowels_it_lm_null, vowels_it_lm)
+
+summary(vowels_it_lm)
 ```
 
-```{r vowdur-dens}
-vowels %>%
-  group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel_duration)) %>%
-  ggplot(aes(vowel_duration, fill = c2_phonation, colour = c2_phonation)) +
-  geom_density(alpha = 0.2) +
-  facet_grid(~ language)
+```{r vow-it-effects}
+plot(allEffects(vowels_it_lm))
 ```
 
-```{r vowdur-box}
-vowels %>%
-  ggplot(aes(c2_phonation, vowel_duration)) +
-  geom_boxplot() +
-  facet_grid(~ language)
+```{r vow-pl-lm}
+vowels_pl <- filter(vowels, language == "polish")
+
+vowels_pl_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_pl,
+  REML = FALSE
+)
+
+vowels_pl_lm_null <- lmer(
+  vowel_duration ~
+#    c2_phonation +
+    c2_place +
+    vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels_pl,
+  REML = FALSE
+)
+
+anova(vowels_pl_lm_null, vowels_pl_lm)
+
+summary(vowels_pl_lm)
 ```
 
-```{r vowdur-box-speakers}
-vowels %>%
-  ggplot(aes(c2_phonation, vowel_duration)) +
-  geom_boxplot() +
-  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```{r vow-pl-lm}
+plot(allEffects(vowels_pl_lm))
 ```
 
-```{r vowdur-box-speakers-vowels}
-vowels %>%
-  ggplot(aes(c2_phonation, vowel_duration, fill = vowel)) +
-  geom_boxplot() +
-  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```{r}
+vowels_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    language +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+    language:vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = vowels,
+  REML = FALSE
+)
+summary(vowels_lm)
 ```
 
-```{r vowdur-norm}
-vowels %>%
-  group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel_duration)) %>%
-  ggplot(aes(c2_phonation, vowel_duration)) +
-  geom_boxplot() +
-  facet_grid(~ language)
+```{r}
+plot(allEffects(vowels_lm))
 ```
 
-```{r vowdur-norm-vowels}
-vowels %>%
-  group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel_duration)) %>%
-  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
-  geom_boxplot() +
-  facet_grid(~ language)
+```{r}
+ranef(vowels_lm)$speaker
+
+round(coef(vowels_lm)$speaker$c2_phonationvoiced)
 ```
 
-```{r it-vowdur-norm-vowels}
-vowels %>%
-  filter(language == "italian") %>%
-  group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel_duration)) %>%
-  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
-  geom_boxplot() +
-  facet_wrap(~ speaker, ncol = 2)
-```
 
-```{r pl-vowdur-norm-vowels}
-vowels %>%
-  filter(language == "polish") %>%
-  group_by(speaker) %>%
-  mutate(vowel_duration = scale(vowel_duration)) %>%
-  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
-  geom_boxplot() +
-  facet_wrap(~ speaker, ncol = 2)
-```
 
 # Polar GAMs
 
@@ -907,106 +1012,3 @@ plot_polar_smooths(
   facet_terms = c2_place + vowel
 )
 ```
-
-# Vowel duration
-
-```{r vow-it-lm}
-vowels_it <- filter(vowels, language == "italian")
-
-vowels_it_lm <- lmer(
-  vowel_duration ~
-    c2_phonation +
-    c2_place +
-    vowel +
-    sentence_duration +
-    (1+c2_phonation|speaker) +
-    (1|word),
-  data = vowels_it,
-  REML = FALSE
-)
-
-vowels_it_lm_null <- lmer(
-  vowel_duration ~
-#    c2_phonation +
-    c2_place +
-    vowel +
-    sentence_duration +
-    (1+c2_phonation|speaker) +
-    (1|word),
-  data = vowels_it,
-  REML = FALSE
-)
-
-anova(vowels_it_lm_null, vowels_it_lm)
-
-summary(vowels_it_lm)
-```
-
-```{r vow-it-effects}
-plot(allEffects(vowels_it_lm))
-```
-
-```{r vow-pl-lm}
-vowels_pl <- filter(vowels, language == "polish")
-
-vowels_pl_lm <- lmer(
-  vowel_duration ~
-    c2_phonation +
-    c2_place +
-    vowel +
-    sentence_duration +
-    (1+c2_phonation|speaker) +
-    (1|word),
-  data = vowels_pl,
-  REML = FALSE
-)
-
-vowels_pl_lm_null <- lmer(
-  vowel_duration ~
-#    c2_phonation +
-    c2_place +
-    vowel +
-    sentence_duration +
-    (1+c2_phonation|speaker) +
-    (1|word),
-  data = vowels_pl,
-  REML = FALSE
-)
-
-anova(vowels_pl_lm_null, vowels_pl_lm)
-
-summary(vowels_pl_lm)
-```
-
-```{r vow-pl-lm}
-plot(allEffects(vowels_pl_lm))
-```
-
-```{r}
-vowels_lm <- lmer(
-  vowel_duration ~
-    c2_phonation +
-    language +
-    c2_place +
-    vowel +
-    c2_phonation:vowel +
-    language:vowel +
-    sentence_duration +
-    (1+c2_phonation|speaker) +
-    (1|word),
-  data = vowels,
-  REML = FALSE
-)
-summary(vowels_lm)
-```
-
-```{r}
-plot(allEffects(vowels_lm))
-```
-
-```{r}
-ranef(vowels_lm)$speaker
-
-round(coef(vowels_lm)$speaker$c2_phonationvoiced)
-```
-
