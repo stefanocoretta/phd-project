@@ -803,7 +803,7 @@ plot_polar_smooths(
 ### IT02
 
 ```{r it02-clos}
-it02_clos <- filter(splines_closure, speaker == "it02")
+it02_clos <- filter(splines_closure, speaker == "it02", fan_line > 5, fan_line < 40)
 ```
 
 ```{r it02-clos-polar-gam}
@@ -815,7 +815,7 @@ it02_clos_polar_gam <- polar_gam(
 #    vow_phon +
 #    c2_place_phon +
     s(X, bs = "cr") +
-    s(X, by = c2_phonation, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
 #    s(X, by = vow_phon, bs = "cr") +
@@ -844,8 +844,6 @@ it02_clos_polar_gam_null <- polar_gam(
 
 compareML(it02_clos_polar_gam_null, it02_clos_polar_gam)
 ```
-
-Non significant better fit with `c2_phonation`.
 
 ```{r it02-clos-polar-smooth}
 plot_polar_smooths(
