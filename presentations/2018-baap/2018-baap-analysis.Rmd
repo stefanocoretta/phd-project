@@ -259,6 +259,7 @@ vowels_it_lm <- lmer(
     c2_phonation +
     c2_place +
     vowel +
+    c2_phonation:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -271,6 +272,7 @@ vowels_it_lm_null <- lmer(
 #    c2_phonation +
     c2_place +
     vowel +
+#    c2_phonation:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -295,6 +297,8 @@ vowels_pl_lm <- lmer(
     c2_phonation +
     c2_place +
     vowel +
+    c2_phonation:vowel +
+    c2_place:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -307,6 +311,8 @@ vowels_pl_lm_null <- lmer(
 #    c2_phonation +
     c2_place +
     vowel +
+#    c2_phonation:vowel +
+    c2_place:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
