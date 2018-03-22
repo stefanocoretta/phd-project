@@ -43,9 +43,13 @@ vowels <- list.files(
 
 # Background
 
-\begin{figure}
-\includegraphics[width = \textwidth]{graphics/voicing.pdf}
-\end{figure}
+* **correlates of voicing**
+    * shorter VOT [@westbury1983;@davidson2016;@abramson2017]
+    * tongue root advancement TRA [@westbury1983;@ohala2011]
+    * correlation VOT ~ TRA [@ahn2015]
+    * longer vowel duration []
+
+* *relation between vowel duration and TRA*
 
 # Background
 
@@ -54,8 +58,7 @@ vowels <- list.files(
     * *Polish*: mixed results
         * @keating1984: no effect
         * @nowak2006: 4.5 msec effect
-
-* part of a bigger project
+* timing of laryngeal and tongue activity
     * simultaneous UTI + EGG + audio
 
 # Methods (a summary)
@@ -66,7 +69,7 @@ vowels <- list.files(
     * stabilisation headset [@articulate2008]
 * **Materials**:
     * C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
-        * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o/, C\textsubscript{2} = /t, d, k, g/
+        * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
         * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
         * stress on first syllable
     * frame sentence
@@ -74,7 +77,21 @@ vowels <- list.files(
         - *Mówię X teraz*, 'I say X now'
         - no pauses between words
 
-# Results: vowel duration (Italian)
+# Results: Vowel duration
+
+```{r vowel-duration-plot, echo=FALSE}
+vowels %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language, labeller = labeller(language = c(italian = "Italian", polish = "Polish"))) +
+  xlab("Vowel") +
+  ylab("Vowel duration (scaled)") +
+  scale_fill_discrete(name = "C2 voicing")
+```
+
+# Results: Vowel duration
 
 ```{r vow-it-lm, include=FALSE}
 vowels_it <- filter(vowels, language == "italian")
@@ -84,6 +101,7 @@ vowels_it_lm <- lmer(
     c2_phonation +
     c2_place +
     vowel +
+    c2_phonation:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -96,6 +114,7 @@ vowels_it_lm_null <- lmer(
 #    c2_phonation +
     c2_place +
     vowel +
+#    c2_phonation:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -103,14 +122,10 @@ vowels_it_lm_null <- lmer(
   REML = FALSE
 )
 
-anova(vowels_it_lm_null, vowels_it_lm)
-```
+summary(vowels_it_lm)$coeff
 
-```{r vow-it-lm-coeff}
-kable(summary(vowels_it_lm)$coeff)
+vowels_it_mc <- anova(vowels_it_lm_null, vowels_it_lm)
 ```
-
-# Results: vowel duration (Polish)
 
 ```{r vow-pl-lm, include=FALSE}
 vowels_pl <- filter(vowels, language == "polish")
@@ -120,6 +135,8 @@ vowels_pl_lm <- lmer(
     c2_phonation +
     c2_place +
     vowel +
+    c2_phonation:vowel +
+    c2_place:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -132,6 +149,8 @@ vowels_pl_lm_null <- lmer(
 #    c2_phonation +
     c2_place +
     vowel +
+#    c2_phonation:vowel +
+    c2_place:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|word),
@@ -139,14 +158,24 @@ vowels_pl_lm_null <- lmer(
   REML = FALSE
 )
 
-anova(vowels_pl_lm_null, vowels_pl_lm)
+summary(vowels_pl_lm)$coeff
+
+vowels_pl_mc <- anova(vowels_pl_lm_null, vowels_pl_lm)
 ```
 
-```{r vow-pl-lm-coeff}
-kable(summary(vowels_pl_lm)$coeff)
-```
+* linear mixed-effects models [@bates2015;@kuznetsova2016]
 
-# Results: summary
+* **Italian**
+    - `voicing + place + vowel + sentence duration + voicing:vowel`
+    - `(1+voicing|speaker) + (1|word)`
+    - $\beta$ = `r round(summary(vowels_it_lm)$coeff[2, 1])` msec, $\chi^2$(`r vowels_it_mc[2,7]`) = `r round(vowels_it_mc[2,6], 2)`, p = `r vowels_it_mc[2,8]`
+
+* **Polish**
+    - `voicing + place + vowel + sentence duration + voicing:vowel + place:vowel`
+    - `(1+voicing|speaker) + (1|word)`
+    - $\beta$ = `r round(summary(vowels_pl_lm)$coeff[2, 1])` msec, $\chi^2$(`r vowels_pl_mc[2,7]`) = `r round(vowels_pl_mc[2,6], 2)`, p = `r vowels_pl_mc[2,8]`
+
+# Results: Summary
 
 |                      | IT01 | IT02 | IT03 | IT04 | PL02 | PL03 | PL04 | PL05 |
 |----------------------|------|------|------|------|------|------|------|------|
