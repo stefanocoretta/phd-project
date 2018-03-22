@@ -49,6 +49,7 @@ lmt("./voicing-effect/code/process.praat.md")
     1. Find GONS
 1. **Export data** in `datasets/ultrasound/` folder
     1. `Export-tongue-cart.xsu`: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity at peaks, nucleus onset and offset, gesture onset, closure onset, and maximum (Annotation: "_"), `[ID]-tongue-cart.tsv`
+    1. `Export-vowel-series.xsu`: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity for every frame within the vowel (Annotation: "^[aoOu]$"), `[ID]-vowel-series.tsv`
 1. **Export kinematics annotations** (from `Export > Files...`) in `data/derived/ultrasound/[ID]/kinematics` folder as `[ID].TextGrid`
 1. **Burst detection**
     1. Run `burst-detection.praat`: the output is a `.TextGrid` file, written in `data/ultrasound/derived/[ID]/concatenated/`
