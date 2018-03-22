@@ -58,7 +58,7 @@ vowels <- list.files(
 * part of a bigger project
     * simultaneous UTI + EGG + audio
 
-# Methods
+# Methods (a summary)
 
 * **Participants**: 4 Italians (2 F, 2 M), 4 Polish (2 F, 2 M)
 * **Procedure**:
