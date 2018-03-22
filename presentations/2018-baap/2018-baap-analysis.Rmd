@@ -581,11 +581,11 @@ rho <- start_value_rho(it03_polar_gam)
 it03_polar_gam_ar <- polar_gam(
   Y ~
     c2_phonation +
-    vowel +
+#    vowel +
     c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
-    s(X, by = vowel, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it03,
@@ -595,6 +595,21 @@ it03_polar_gam_ar <- polar_gam(
 )
 summary(it03_polar_gam_ar)
 ```
+
+```{r it03-ar-acf}
+acf_resid(it03_polar_gam_ar, split_pred = "AR.start")
+```
+
+```{r it03-polar-smooth}
+plot_polar_smooths(
+  it03_polar_gam_ar,
+  X,
+  c2_phonation,
+  facet_terms = c2_place
+)
+```
+
+IT03 has TRA at maximum displacement only in /a/.
 
 ### IT04
 
