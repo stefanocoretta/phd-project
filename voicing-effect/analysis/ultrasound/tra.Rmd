@@ -257,6 +257,20 @@ tra_series %>%
 
 ```{r}
 tra_series %>%
+  ggplot(aes(proportion, tra_z, colour = c2_phonation)) +
+  geom_smooth() +
+  facet_wrap(~ speaker, ncol = 4)
+```
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, tra_z, colour = c2_phonation)) +
+  geom_smooth() +
+  facet_grid(vowel ~ speaker)
+```
+
+```{r}
+tra_series %>%
   ggplot(aes(proportion, tra_z, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth() +
   facet_grid(c2_place ~ vowel)
