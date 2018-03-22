@@ -143,6 +143,7 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li><strong>NOTE</strong>: Needed for EGG processing!</li>
 </ol></li>
+<li>Run <code>closure-annotation.praat</code>: it reads the search area chunks and adds a tier for the time of closure onset</li>
 <li>Import TextGrids back in <code>AAA</code></li>
 </ol></li>
 <li><strong>Tongue tracking</strong>
@@ -168,10 +169,8 @@ $(document).ready(function () {
 </ol></li>
 <li><strong>Export data</strong> in <code>datasets/ultrasound/</code> folder
 <ol style="list-style-type: decimal">
-<li><code>Export-tongue-cart.xsu</code>: export cartesian coordinates at peaks, nucleus onset and offset, and maximum (Annotation: “_“), <code>[ID]-tongue-cart.tsv</code></li>
-<li><code>Export-tongue-clos-cart.xsu</code>: export cartesian coordinates at acoustic closure (Annotation: vowel) <code>[ID]-tongue-clos-cart.tsv</code></li>
-<li><code>Export-closing-gons.xsu</code>: export closing gesture onset (Annotation: “GONS”) <code>[ID]-closing-gons.tsv</code></li>
-<li><code>Export-tra-cart.xsu</code>: export tongue root displacement at maximum <code>[ID]-tra-cart.tsv</code></li>
+<li><code>Export-tongue-cart.xsu</code>: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity at peaks, nucleus onset and offset, gesture onset, closure onset, and maximum (Annotation: “_“), <code>[ID]-tongue-cart.tsv</code></li>
+<li><code>Export-vowel-series.xsu</code>: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity for every frame within the vowel (Annotation: “<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>$”), <code>[ID]-vowel-series.tsv</code></li>
 </ol></li>
 <li><strong>Export kinematics annotations</strong> (from <code>Export &gt; Files...</code>) in <code>data/derived/ultrasound/[ID]/kinematics</code> folder as <code>[ID].TextGrid</code></li>
 <li><strong>Burst detection</strong>
@@ -262,6 +261,12 @@ for (i in 1:length(speakers)) {
 <li><code>.srh</code>: search analysis value</li>
 <li><code>.xsu</code>: export settings</li>
 </ul>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>aoOu<a href="#fnref1">↩</a></p></li>
+</ol>
 </div>
 
 
