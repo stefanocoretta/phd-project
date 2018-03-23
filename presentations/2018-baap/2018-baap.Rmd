@@ -177,12 +177,13 @@ vowels_pl_mc <- anova(vowels_pl_lm_null, vowels_pl_lm)
 
 # Results: Vowel duration
 
-```{r coeff-it}
-kable(round(coef(vowels_it_lm)$speaker[1:2], 1), col.names = c("Intercept", "Voiced"))
-```
-
-```{r coeff-pl}
-kable(round(coef(vowels_pl_lm)$speaker[1:2], 1), col.names = c("Intercept", "Voiced"))
+```{r}
+as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 4), rep("Polish", 4))) %>%
+  ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
+  geom_bar(stat = "identity") +
+  scale_fill_discrete(name = "Language") +
+  labs(title = "By-speaker random coefficients", y = "msec")
 ```
 
 # Results: Tongue contours
@@ -196,7 +197,7 @@ kable(round(coef(vowels_pl_lm)$speaker[1:2], 1), col.names = c("Intercept", "Voi
 
 * **General trends**
     * idiosyncratic use of TRA
-    * speakers with robust appreaciable TRA have stronger voicing effect
+    * speakers with appreaciable TRA have stronger voicing effect
 
 # Results: Tongue contours
 
