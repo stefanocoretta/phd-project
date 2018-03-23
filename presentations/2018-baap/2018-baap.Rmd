@@ -47,7 +47,7 @@ vowels <- list.files(
     * shorter VOT [@westbury1983;@davidson2016;@abramson2017]
     * tongue root advancement TRA [@westbury1983;@ohala2011]
     * correlation VOT ~ TRA [@ahn2015]
-    * longer vowel duration []
+    * longer vowel duration [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@fowler1992;@lampp2004]
 
 * *relation between vowel duration and TRA*
 
@@ -57,7 +57,7 @@ vowels <- list.files(
     * *Italian*: voicing effect of 35 msec [@farnetani1986]
     * *Polish*: mixed results
         * @keating1984: no effect
-        * @nowak2006: 4.5 msec effect
+        * @nowak2006 PhD dissertation: 4.5 msec effect
 * timing of laryngeal and tongue activity
     * simultaneous UTI + EGG + audio
 
