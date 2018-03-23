@@ -6,6 +6,7 @@
 .~lock*
 *_lastrun.py
 *.pyc
+Rplots.pdf
 
 # Data folder
 data/
