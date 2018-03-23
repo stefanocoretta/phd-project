@@ -446,6 +446,24 @@ it01_polar_gam_ar <- polar_gam(
   AR_start = it01$start.event
 )
 summary(it01_polar_gam_ar)
+
+it01_polar_gam_ar_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01,
+  method = "ML",
+  rho = rho,
+  AR_start = it01$start.event
+)
+
+compareML(it01_polar_gam_ar_null, it01_polar_gam_ar)
 ```
 
 ```{r it01-ar-acf}
@@ -522,6 +540,8 @@ compareML(it02_polar_gam_null, it02_polar_gam)
 ```{r it02-acf}
 acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
 ```
+
+ACF looks fine.
 
 ### IT03
 
@@ -600,6 +620,24 @@ it03_polar_gam_ar <- polar_gam(
   AR_start = it03$start.event
 )
 summary(it03_polar_gam_ar)
+
+it03_polar_gam_ar_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+#    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML",
+  rho = rho,
+  AR_start = it03$start.event
+)
+
+compareML(it03_polar_gam_ar_null, it03_polar_gam_ar)
 ```
 
 ```{r it03-ar-acf}
@@ -666,6 +704,10 @@ it04_polar_gam_null <- polar_gam(
 compareML(it04_polar_gam_null, it04_polar_gam)
 ```
 
+```{r it04-acf}
+acf_resid(it04_polar_gam, split_pred = list(it04$rec_date))
+```
+
 ## Polish maximum constriction
 
 ### PL02
@@ -693,6 +735,35 @@ pl02_polar_gam <- polar_gam(
   method = "ML"
 )
 summary(pl02_polar_gam)
+
+pl02_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl02,
+  method = "ML"
+)
+
+compareML(pl02_polar_gam_null, pl02_polar_gam)
+```
+
+```{r pl02-polar-smooth}
+plot_polar_smooths(
+  pl02_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
 ```
 
 ### PL03
@@ -752,6 +823,12 @@ plot_polar_smooths(
 )
 ```
 
+```{r it02-acf}
+acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
+```
+
+ACF looks good.
+
 ### PL04
 
 ```{r pl04}
@@ -777,10 +854,7 @@ pl04_polar_gam <- polar_gam(
   method = "ML"
 )
 summary(pl04_polar_gam)
-beep()
-```
 
-```{r pl04-polar-gam-null}
 pl04_polar_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
@@ -822,31 +896,20 @@ pl05_polar_gam <- polar_gam(
     c2_phonation +
     vowel +
     c2_place +
-    vow_phon +
-    c2_place_phon +
+#    vow_phon +
+#    c2_place_phon +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
-    s(X, by = vow_phon, bs = "cr") +
-    s(X, by = c2_place_phon, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = pl05,
   method = "ML"
 )
 summary(pl05_polar_gam)
-```
 
-```{r pl05-polar-smooths}
-plot_polar_smooths(
-  pl05_polar_gam,
-  X,
-  c2_phonation,
-  facet_terms = c2_place + vowel
-)
-```
-
-```{r pl05-polar-gam-null}
 pl05_polar_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
@@ -867,6 +930,21 @@ pl05_polar_gam_null <- polar_gam(
 
 compareML(pl05_polar_gam_null, pl05_polar_gam)
 ```
+
+```{r pl05-polar-smooths}
+plot_polar_smooths(
+  pl05_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+```{r pl05-acf}
+acf_resid(pl05_polar_gam, split_pred = list(pl05$rec_date))
+```
+
+ACF is fine.
 
 ## Italian closure
 
@@ -980,6 +1058,112 @@ plot_polar_smooths(
 )
 ```
 
+### IT03
+
+```{r it03-clos}
+it03_clos <- filter(splines_closure, speaker == "it03")
+```
+
+```{r it03-clos-polar-gam}
+it03_clos_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03_clos,
+  method = "ML"
+)
+summary(it03_clos_polar_gam)
+
+it03_clos_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03_clos,
+  method = "ML"
+)
+
+compareML(it03_clos_polar_gam_null, it03_clos_polar_gam)
+```
+
+```{r it03-clos-polar-smooth}
+plot_polar_smooths(
+  it03_clos_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+### IT04
+
+```{r it04-clos}
+it04_clos <- filter(splines_closure, speaker == "it04")
+```
+
+```{r it04-clos-polar-gam}
+it04_clos_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04_clos,
+  method = "ML"
+)
+summary(it04_clos_polar_gam)
+
+it04_clos_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04_clos,
+  method = "ML"
+)
+
+compareML(it04_clos_polar_gam_null, it04_clos_polar_gam)
+```
+
+```{r it04-clos-polar-smooth}
+plot_polar_smooths(
+  it04_clos_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+## Polish closure
+
 ### PL05
 
 ```{r pl05-clos}
@@ -1013,10 +1197,14 @@ pl05_clos_polar_gam_null <- polar_gam(
 #    c2_phonation +
     vowel +
     c2_place +
+    vow_phon +
+    c2_place_phon +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
+    s(X, by = vow_phon, bs = "cr") +
+    s(X, by = c2_place_phon, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = pl05_clos,
   method = "ML"
