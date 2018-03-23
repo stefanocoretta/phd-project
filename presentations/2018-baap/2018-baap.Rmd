@@ -43,22 +43,22 @@ vowels <- list.files(
 
 # Background
 
-* **correlates of voicing**
+* **Correlates of voicing**
     * shorter VOT [@westbury1983;@davidson2016;@abramson2017]
     * tongue root advancement TRA [@westbury1983;@ohala2011]
     * correlation VOT ~ TRA [@ahn2015]
     * longer vowel duration [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@fowler1992;@lampp2004]
 
-* *relation between vowel duration and TRA*
+* *Relation between vowel duration and TRA*
 
 # Background
 
-* **voicing effect**: vowels are longer when followed by voiced stops
+* **Voicing effect**: vowels are longer when followed by voiced stops
     * *Italian*: voicing effect of 35 msec [@farnetani1986]
     * *Polish*: mixed results
         * @keating1984: no effect
         * @nowak2006 PhD dissertation: 4.5 msec effect
-* timing of laryngeal and tongue activity
+* Timing of laryngeal and tongue activity
     * simultaneous UTI + EGG + audio
 
 # Methods (a summary)
@@ -163,7 +163,7 @@ summary(vowels_pl_lm)$coeff
 vowels_pl_mc <- anova(vowels_pl_lm_null, vowels_pl_lm)
 ```
 
-* linear mixed-effects models [@bates2015;@kuznetsova2016]
+* Linear mixed-effects models [@bates2015;@kuznetsova2016]
 
 * **Italian**
     - `voicing + place + vowel + sentence duration + voicing:vowel`
@@ -175,18 +175,28 @@ vowels_pl_mc <- anova(vowels_pl_lm_null, vowels_pl_lm)
     - `(1+voicing|speaker) + (1|word)`
     - $\beta$ = `r round(summary(vowels_pl_lm)$coeff[2, 1])` msec, $\chi^2$(`r vowels_pl_mc[2,7]`) = `r round(vowels_pl_mc[2,6], 2)`, p = `r vowels_pl_mc[2,8]`
 
+# Results: Vowel duration
+
+```{r coeff-it}
+kable(round(coef(vowels_it_lm)$speaker[1:2], 1), col.names = c("Intercept", "Voiced"))
+```
+
+```{r coeff-pl}
+kable(round(coef(vowels_pl_lm)$speaker[1:2], 1), col.names = c("Intercept", "Voiced"))
+```
+
 # Results: Tongue contours
 
-* tongue contours polar coordinates [@heyne2015a;@heyne2015;@mielke2015]
+* **Tongue contours polar coordinates** [@heyne2015a;@heyne2015;@mielke2015]
     * at acoustic closure onset
     * at maximum displacement [within closure, @strycharczuk2015]
 
-* generalised additive mixed effects models [@wood2006;@soskuthy2017;@soskuthy2017;@van-rij2017]
-    * `rticulate` R package [@coretta2018]
+* **Generalised additive mixed effects models** [@wood2006;@soskuthy2017;@van-rij2017]
+    * `rticulate` R package [@coretta2018;@coretta2018a]
 
-* general trends
-    * highly idiosyncratic use of TRA
-    * speakers with robust TRA have stronger voicing effect
+* **General trends**
+    * idiosyncratic use of TRA
+    * speakers with robust appreaciable TRA have stronger voicing effect
 
 # Results: Tongue contours
 
