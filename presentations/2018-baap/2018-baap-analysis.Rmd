@@ -353,8 +353,9 @@ plot(allEffects(vowels_lm))
 ```
 
 ```{r vowels-lm-ranef}
-ranef(vowels_lm)$speaker
+round(ranef(vowels_lm)$speaker, 2)
 round(ranef(vowels_lm)$speaker$c2_phonationvoiced, 1)
+round(coef(vowels_lm)$speaker[1:2], 1)
 ```
 
 
@@ -1004,6 +1005,8 @@ plot_polar_smooths(
 )
 ```
 
+TRA at closure.
+
 ### IT02
 
 ```{r it02-clos}
@@ -1058,6 +1061,8 @@ plot_polar_smooths(
 )
 ```
 
+TRA at closure but not great improvement (p < 0.05).
+
 ### IT03
 
 ```{r it03-clos}
@@ -1110,6 +1115,8 @@ plot_polar_smooths(
 )
 ```
 
+No TRA at closure.
+
 ### IT04
 
 ```{r it04-clos}
@@ -1120,18 +1127,18 @@ it04_clos <- filter(splines_closure, speaker == "it04")
 it04_clos_polar_gam <- polar_gam(
   Y ~
     c2_phonation +
-    vowel +
+#    vowel +
     c2_place +
 #    vow_phon +
 #    c2_place_phon +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
-    s(X, by = vowel, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
 #    s(X, by = vow_phon, bs = "cr") +
 #    s(X, by = c2_place_phon, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
-  data = it04_clos,
+  data = filter(it04_clos, vowel == "a"),
   method = "ML"
 )
 summary(it04_clos_polar_gam)
@@ -1139,14 +1146,14 @@ summary(it04_clos_polar_gam)
 it04_clos_polar_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
-    vowel +
+#    vowel +
     c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
-    s(X, by = vowel, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
     s(X, by = c2_place, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
-  data = it04_clos,
+  data = filter(it04_clos, vowel == "a"),
   method = "ML"
 )
 
@@ -1158,9 +1165,11 @@ plot_polar_smooths(
   it04_clos_polar_gam,
   X,
   c2_phonation,
-  facet_terms = c2_place + vowel
+  facet_terms = c2_place
 )
 ```
+
+TRA at closure in /a/ but only according model summary and not model comparison.
 
 ## Polish closure
 
@@ -1221,3 +1230,5 @@ plot_polar_smooths(
   facet_terms = c2_place + vowel
 )
 ```
+
+No TRA at closure.
