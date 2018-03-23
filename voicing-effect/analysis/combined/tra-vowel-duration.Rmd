@@ -224,7 +224,7 @@ plot(allEffects(tra_lm_pl))
 
 ### Lmer with all data
 
-```{r}
+```{r tongue-root-clean}
 tongue_root_clean <- filter(tongue_root, tra_z < 3)
 ```
 
@@ -237,10 +237,25 @@ tra_lm <- lmer(
     sentence_duration +
     (1|speaker) +
     (1|word),
-data = tongue_root_clean
+data = tongue_root_clean,
+REML = FALSE
 )
 
 summary(tra_lm)
+
+tra_lm_null <- lmer(
+  vowel_duration ~
+    tra +
+#    c2_phonation +
+    vowel +
+    sentence_duration +
+    (1|speaker) +
+    (1|word),
+data = tongue_root_clean,
+REML = FALSE
+)
+
+anova(tra_lm_null, tra_lm)
 ```
 
 ```{r tra-lm-effects}
