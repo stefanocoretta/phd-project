@@ -7,6 +7,7 @@ output:
     citation_package: natbib
     highlight: zenburn
     latex_engine: xelatex
+fontsize: 12pt
 bibliography: linguistics.bib
 biblio-style: unified.bst
 header-includes:
@@ -23,6 +24,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
 library(knitr)
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ```
 
 ```{r read-data, include=FALSE}
@@ -53,7 +55,7 @@ vowels <- list.files(
 
 # Background
 
-* **Voicing effect**: vowels are longer when followed by voiced stops
+* **Voicing effect** (VE): vowels are longer when followed by voiced stops
     * *Italian*: voicing effect of 35 msec [@farnetani1986]
     * *Polish*: mixed results
         * @keating1984: no effect
@@ -88,7 +90,7 @@ vowels %>%
   facet_grid(~ language, labeller = labeller(language = c(italian = "Italian", polish = "Polish"))) +
   xlab("Vowel") +
   ylab("Vowel duration (scaled)") +
-  scale_fill_discrete(name = "C2 voicing")
+  scale_fill_manual(name = "C2 voicing", values = cbPalette[2:3])
 ```
 
 # Results: Vowel duration
@@ -177,27 +179,56 @@ vowels_pl_mc <- anova(vowels_pl_lm_null, vowels_pl_lm)
 
 # Results: Vowel duration
 
-```{r}
+```{r vowels-lm-coef}
 as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 4), rep("Polish", 4))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  scale_fill_discrete(name = "Language") +
+  scale_fill_manual(name = "Language", values = cbPalette[2:3]) +
   labs(title = "By-speaker random coefficients", y = "msec")
 ```
 
 # Results: Tongue contours
 
-* **Tongue contours polar coordinates** [@heyne2015a;@heyne2015;@mielke2015]
-    * at acoustic closure onset
-    * at maximum displacement [within closure, @strycharczuk2015]
+* **Midsagittal tongue contours**
+    * polar coordinates [@heyne2015a;@heyne2015;@mielke2015]
+    * two timepoints:
+        * at acoustic closure onset
+        * at maximum displacement [within closure, @strycharczuk2015]
 
 * **Generalised additive mixed effects models** [@wood2006;@soskuthy2017;@van-rij2017]
     * `rticulate` R package [@coretta2018;@coretta2018a]
 
 * **General trends**
     * idiosyncratic use of TRA
-    * speakers with appreaciable TRA have stronger voicing effect
+    * 2 speakers with relatively greater TRA
 
 # Results: Tongue contours
+
+
+# Discussion
+
+* Results summary
+    * **effect of voicing on vowel duration**
+        * Italian: +22 msec
+        * Polish: +12 msec
+    * **tongue contours**
+        * 4 of 8 speakers (IT01, IT02, IT03, PL05) show TRA at maximum displacement
+        * 2 of 8 (IT01, IT02) also at closure onset
+    * 2 speakers (IT02, PL05) with stronger VE and greater TRA
+
+# Discussion
+
+* **New proposal**: *Longer vowel duration allows for greater tongue root advancement*.
+
+* Similar reasoning to that of @halle1967
+    * longer vowels allow for laryngeal adjustments from spontaneous voicing of vowels to obstruent voicing of voiced consonants.
+
+* If the new proposal is correct, we might see a positive correlation between vowel duration and degree of TRA.
+
+# Discussion: Vowel Duration ~ TRA
+
+\begin{figure}
+  \includegraphics{./graphics/tra-vow.png}
+\end{figure}
 
