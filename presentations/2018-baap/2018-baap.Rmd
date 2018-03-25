@@ -219,12 +219,31 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 
 # Discussion
 
-* **New proposal**: *Longer vowel duration allows for greater tongue root advancement*.
+* **TRA hypothesis**: *Longer vowel duration allows for greater tongue root advancement*.
 
 * Similar reasoning to that of @halle1967
-    * longer vowels allow for laryngeal adjustments from spontaneous voicing of vowels to obstruent voicing of voiced consonants.
+    * longer vowels allow for laryngeal adjustments from spontaneous voicing of vowels to obstruent voicing of voiced consonants
 
-* If the new proposal is correct, we might see a positive correlation between vowel duration and degree of TRA.
+# Discussion
+
+* @raphael1975: electromiography (EMG)
+
+<!--
+    * electromiography (EMG)
+    * sustained muscular activity after EMG peak in vowels followed by voiced stops
+    * onset of consonant activity relative to vowel activity offset
+-->
+
+\begin{figure}
+  \includegraphics[width = 0.7\textwidth]{./graphics/raphael.pdf}
+\end{figure}
+
+# Discussion
+
+* Sustained muscular activity in voiced consonants
+    * *time to allow tongue root advancement?*
+
+* If the TRA hypothesis is correct, we might see a **positive correlation between vowel duration and degree of TRA** (but caveat!)
 
 # Discussion: Vowel Duration ~ TRA
 
