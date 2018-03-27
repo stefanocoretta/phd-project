@@ -35,7 +35,16 @@ duration <- list.files(
 
 ```{r}
 duration %>%
-  ggplot(aes(vowel, vowel.duration, fill = c2_phonation)) +
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel, vowel_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r}
+duration %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```
