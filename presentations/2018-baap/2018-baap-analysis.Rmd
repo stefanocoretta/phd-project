@@ -16,7 +16,6 @@ library(mgcv)
 library(itsadug)
 library(tidymv)
 library(rticulate)
-options(contrasts = rep("contr.treatment", 2))
 ```
 
 # Data import
@@ -78,6 +77,8 @@ splines_closure <- list.files(
   mutate_if(is.character, as.factor) %>%
   arrange(rec_date, fan_line) %>%
   create_event_start("rec_date")
+
+# need to add contrast treatment
 
 vowels <- list.files(
   path = "./presentations/2018-baap/datasets/acoustics/",
