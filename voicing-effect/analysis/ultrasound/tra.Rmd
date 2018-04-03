@@ -11,8 +11,10 @@ knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
 library(mgcv)
+library(itsadug)
 library(tidymv)
 library(rticulate)
+options(contrasts = rep("contr.sum", 2))
 ```
 
 # Read data
@@ -58,14 +60,22 @@ tra_series <- list.files(
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   mutate(
-    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    vowel = ordered(vowel, levels = c("a", "o", "u")),
+    c2_place = ordered(c2_place, levels = c("coronal", "velar")),
     proportion = (seconds - v_onset) / (v_offset - v_onset),
     tra = -TR_displacement_sm
   ) %>%
   group_by(speaker) %>%
   mutate(tra_z = scale(tra)) %>%
   ungroup() %>%
-  mutate_if(is.character, as.factor)
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    speaker_phon = interaction(speaker, c2_phonation),
+    speaker_contexts = interaction(speaker, c2_phonation, c2_place, vowel),
+    place_vowel = interaction(c2_place, vowel),
+    place_vowel_phon = interaction(c2_place, vowel, c2_phonation)
+  )
 
 tongue_root <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound/",
@@ -265,8 +275,8 @@ tra_series %>%
 ```{r}
 tra_series %>%
   ggplot(aes(proportion, tra_z, colour = c2_phonation)) +
-  geom_smooth() +
-  facet_grid(vowel ~ speaker)
+  geom_smooth(se = FALSE) +
+  facet_wrap(~ speaker, ncol = 4)
 ```
 
 ```{r}
@@ -306,6 +316,66 @@ tra_series %>%
   ggplot(aes(proportion, tra_z, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth() +
   facet_grid(c2_place ~ vowel)
+```
+
+```{r tra-series-gam}
+tra_series_gam <- bam(
+  tra_z ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(proportion) +
+    s(proportion, by = c2_phonation) +
+    s(proportion, by = vowel) +
+    s(proportion, by = c2_place) +
+#    s(proportion, rec_date, bs = "fs") +
+    s(proportion, speaker, bs = "fs") +
+    s(proportion, speaker_contexts, bs = "fs"),
+  data = tra_series
+)
+
+summary(tra_series_gam)
+```
+
+```{r}
+plot_smooths(
+  tra_series_gam,
+  proportion,
+  c2_phonation,
+  exclude_random = FALSE,
+  conditions = quos(c2_place == "coronal", vowel == "a")
+) + facet_wrap(~ speaker, ncol = 4)
+```
+
+```{r}
+pred <- get_gam_predictions(tra_series_gam, proportion, exclude_random = FALSE) %>%
+  separate(speaker_contexts, c("speaker", "a", "b", "c"))
+
+filter(pred, vowel == "a", c2_place == "coronal") %>%
+  ggplot(aes(proportion, tra_z, colour = c2_phonation)) +
+  geom_path() +
+  facet_wrap(~ speaker, ncol = 4)
+```
+
+
+```{r tra-series-gam}
+tra_series_gam_pl05 <- bam(
+  tra_z ~
+    c2_phonation +
+    s(proportion) +
+    s(proportion, by = c2_phonation),
+  data = filter(tra_series, speaker == "it01")
+)
+
+summary(tra_series_gam_pl05)
+```
+
+```{r}
+plot_smooths(
+  tra_series_gam_pl05,
+  proportion,
+  c2_phonation
+)
 ```
 
 # Using average curve distance
