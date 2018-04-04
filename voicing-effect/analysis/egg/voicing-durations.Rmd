@@ -37,32 +37,51 @@ voicing <- list.files(
 voicing_voiceless <- filter(voicing, c2_phonation == "voiceless", c1_phonation == "voiceless")
 
 voicing_norm <- voicing_voiceless %>%
-  filter(voicing.duration < 300) %>%
+  filter(voicing_duration < 300) %>%
   group_by(speaker) %>%
-  mutate(voicing_duration_norm = scale(voicing.duration))
+  mutate(voicing_duration_norm = scale(voicing_duration))
 ```
 
 # Plots
 
 ```{r}
 voicing_voiceless %>%
-  filter(voicing.duration < 300) %>%
-  ggplot(aes(vowel, voicing.duration)) +
+  ggplot(aes(vowel, voicing_duration)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```
 
+It looks like there is something wrong with IT12 (Rome).
+IT12 has several tokens of voiceless stops with voicing within closure.
+It is probably better if I exclude IT12.
+
+```{r}
+voicing_voiceless %>%
+  filter(voicing_duration < 250) %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, scales = "free")
+```
+
 ```{r vowel-boxplot}
 voicing_voiceless %>%
-  filter(voicing.duration < 300) %>%
-  ggplot(aes(vowel, voicing.duration)) +
+  filter(voicing_duration < 250) %>%
+  ggplot(aes(vowel, voicing_duration)) +
   geom_boxplot()
 ```
 
 ```{r vowel-language-boxplot}
 voicing_voiceless %>%
-  filter(voicing.duration < 300) %>%
-  ggplot(aes(vowel, voicing.duration)) +
+  filter(voicing_duration < 250) %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vowel-language-boxplot}
+voicing_voiceless %>%
+  filter(speaker != "it12", voicing_duration < 250) %>%
+  ggplot(aes(vowel, voicing_duration)) +
   geom_boxplot() +
   facet_grid(~ language)
 ```
@@ -84,17 +103,63 @@ voicing_norm %>%
 
 ```{r voicing-lm}
 voicing_lm <- lmer(
-  voicing.duration ~
-    vowel *
+  voicing_duration ~
+    vowel +
     language +
-    (1|speaker) +
+    vowel:language +
+    (1+vowel|speaker) +
     (1|word),
-  data = voicing_voiceless
+  data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
+  REML = FALSE
 )
 summary(voicing_lm)
+
+voicing_lm_null <- lmer(
+  voicing_duration ~
+    vowel +
+    language +
+#    vowel:language +
+    (1+vowel|speaker) +
+    (1|word),
+  data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
+  REML = FALSE
+)
+
+anova(voicing_lm_null, voicing_lm)
+
+voicing_lm_null_2 <- lmer(
+  voicing_duration ~
+#    vowel +
+    language +
+#    vowel:language +
+    (1+vowel|speaker) +
+    (1|word),
+  data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
+  REML = FALSE
+)
+
+anova(voicing_lm_null_2, voicing_lm_null)
+
+voicing_lm_null_3 <- lmer(
+  voicing_duration ~
+#    vowel +
+    language +
+#    vowel:language +
+    (1|speaker) +
+    (1|word),
+  data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
+  REML = FALSE
+)
+
+anova(voicing_lm_null_3, voicing_lm_null_2)
 ```
 
 ```{r voicing-effect}
 plot(allEffects(voicing_lm))
 ```
 
+```{r voicing-effect-null}
+plot(allEffects(voicing_lm_null))
+```
+
+It seems vowel identity does not affect voicing duration (neither in Italian nor Polish).
