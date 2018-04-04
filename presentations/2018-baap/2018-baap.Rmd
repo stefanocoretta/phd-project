@@ -23,6 +23,8 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal(base_size = 20))
+library(rticulate)
+library(tidymv)
 library(lme4)
 library(effects)
 library(knitr)
@@ -43,6 +45,64 @@ vowels <- list.files(
   left_join(y = stimuli) %>%
   mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor)
+
+duration <- list.files(
+  path = "./presentations/2018-baap/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  select(-speaker)
+
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+tra_series <- list.files(
+  path = "./presentations/2018-baap/datasets/ultrasound/",
+  pattern = "*-vowel-series.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
+  left_join(duration) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    vowel = ordered(vowel, levels = c("a", "o", "u")),
+    c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+    proportion = (seconds - v_onset) / (v_offset - v_onset),
+    tra = -TR_displacement_sm
+  ) %>%
+  group_by(speaker) %>%
+  mutate(tra_z = scale(tra)) %>%
+  ungroup() %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    speaker_phon = interaction(speaker, c2_phonation),
+    speaker_contexts = interaction(speaker, c2_phonation, c2_place, vowel),
+    place_vowel = interaction(c2_place, vowel),
+    place_vowel_phon = interaction(c2_place, vowel, c2_phonation)
+  )
+
+contrasts(tra_series$c2_phonation) <- "contr.treatment"
+contrasts(tra_series$vowel) <- "contr.treatment"
+contrasts(tra_series$c2_place) <- "contr.treatment"
 ```
 
 # Background
@@ -253,13 +313,53 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 # Discussion
 
 * **TRA hypothesis**: *Longer vowel duration allows for greater tongue root advancement*.
+    * cf. with @halle1967: laryngeal adjustments
 
-* Similar reasoning to that of @halle1967
-    * longer vowels allow for laryngeal adjustments from spontaneous voicing of vowels to obstruent voicing of voiced consonants
+* If TRA hypothesis is correct:
+    - TRA during the vowel
+    - greater TRA in IT02 and PL05
 
-# Discussion
+# Discussion: TRA during the vowel
 
-* @raphael1975: electromiography (EMG)
+```{r tra-series-gam, include=FALSE, eval=FALSE}
+tra_series_gam <- bam(
+  tra_z ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(proportion) +
+    s(proportion, by = c2_phonation) +
+    s(proportion, by = vowel) +
+    s(proportion, by = c2_place) +
+#    s(proportion, rec_date, bs = "fs") +
+    s(proportion, speaker, bs = "fs") +
+    s(proportion, speaker_contexts, bs = "fs"),
+  data = tra_series
+)
+
+summary(tra_series_gam)
+```
+
+```{r tra-series-gam-smooths, eval=FALSE, include=FALSE}
+plot_smooths(
+  tra_series_gam,
+  proportion,
+  c2_phonation,
+  exclude_random = FALSE,
+  conditions = quos(c2_place == "coronal", vowel == "a")
+) + facet_wrap(~ speaker, ncol = 4) +
+  labs(
+    x = "Proportion of vowel duration (ratio)",
+    y = "Tongue root advancement (scaled)"
+  )
+ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height = 8)
+```
+
+\begin{figure}
+  \includegraphics[width = \textwidth]{./graphics/tra-series.pdf}
+\end{figure}
+
+# Discussion: Electromiography [EMG, @raphael1975]
 
 <!--
     * electromiography (EMG)
@@ -268,15 +368,16 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 -->
 
 \begin{figure}
-  \includegraphics[width = 0.7\textwidth]{./graphics/raphael.pdf}
+  \includegraphics[width = \textwidth]{./graphics/raphael.pdf}
 \end{figure}
 
 # Discussion
 
-* Sustained muscular activity in voiced consonants
-    * *time to allow tongue root advancement?*
+* @raphael1975: sustained muscular activity in voiced consonants
+    * *extra time allows more tongue root advancement?*
 
-* If the TRA hypothesis is correct, we might see a **positive correlation between vowel duration and degree of TRA** (but caveat!)
+* Is this a gradual (linear) relationship?
+    * we might see a **positive correlation between vowel duration and degree of TRA** (but caveat!)
 
 # Discussion: Vowel Duration ~ TRA
 
