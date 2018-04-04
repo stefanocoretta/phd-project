@@ -169,9 +169,19 @@ ggplot(quotient, aes(contact_quotient, colour = phonation)) +
 
 The CQ does not perform well.
 
-```{r speaker-cq-boxplot}
-ggplot(quotient, aes(phonation, contact_quotient)) +
-    geom_boxplot() +
+```{r cq-density-z}
+quotient %>%
+  group_by(speaker) %>%
+  mutate(contact_quotient_z = scale(contact_quotient)) %>%
+  ggplot(aes(contact_quotient_z, colour = phonation)) +
+    geom_density() +
+  geom_rug() +
+    facet_wrap(~ speaker)
+```
+
+```{r cq-density}
+ggplot(quotient_mean, aes(mean_quotient, colour = phonation)) +
+    geom_density() +
     facet_wrap(~ speaker)
 ```
 
