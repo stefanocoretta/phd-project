@@ -478,7 +478,9 @@ plot_polar_smooths(
   X,
   c2_phonation,
   facet_terms = c2_place + vowel
-)
+) +
+  labs(title = "IT01")
+ggsave("./presentations/2018-baap/graphics/it01-uti.pdf", width = 7, height = 4)
 ```
 
 ### IT02
@@ -514,7 +516,9 @@ plot_polar_smooths(
   X,
   c2_phonation,
   facet_terms = c2_place + vowel
-)
+) +
+  labs(title = "IT02")
+ggsave("./presentations/2018-baap/graphics/it02-uti.pdf", width = 7, height = 4)
 ```
 
 ```{r it02-polar-gam-null}
@@ -883,7 +887,9 @@ plot_polar_smooths(
   X,
   c2_phonation,
   facet_terms = c2_place + vowel
-)
+) +
+  labs(title = "PL04")
+ggsave("./presentations/2018-baap/graphics/pl04-uti.pdf", width = 7, height = 4)
 ```
 
 ### PL05
@@ -939,7 +945,9 @@ plot_polar_smooths(
   X,
   c2_phonation,
   facet_terms = c2_place + vowel
-)
+) +
+  labs(title = "PL05")
+ggsave("./presentations/2018-baap/graphics/pl05-uti.pdf", width = 5, height = 4)
 ```
 
 ```{r pl05-acf}
