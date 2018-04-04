@@ -1129,7 +1129,7 @@ endform
 vuvDirectory$ = "../data/egg/derived/'speaker$'"
 recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
 resultsFile$ = "../data/datasets/egg/'speaker$'-voicing.csv"
-resultsHeader$ = "index,speaker,file,rec.date,word,voicing.start,voicing.end,voicing.duration,sentence.duration"
+resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,sentence_duration"
 writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
