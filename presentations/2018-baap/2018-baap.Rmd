@@ -123,7 +123,7 @@ contrasts(tra_series$c2_place) <- "contr.treatment"
         * @keating1984: no effect
         * @nowak2006 PhD dissertation: 4.5 msec effect
 * **Larger study**: relative timing of laryngeal and lingual activity
-    * simultaneous UTI + EGG + audio
+    * Simultaneous UTI + EGG + audio
 * **This study**: exploratory, data driven
 
 # Methods (a summary)
@@ -137,8 +137,8 @@ contrasts(tra_series$c2_place) <- "contr.treatment"
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
 * **Data**
-    * durational data from acoustics
-    * tongue contours from ultrasound tongue imaging
+    * Durational data from acoustics
+    * Tongue contours from ultrasound tongue imaging
 
 # Results: Vowel duration
 
@@ -267,14 +267,14 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 # Results: Tongue contours
 
 * **Midsagittal tongue contours**
-    * from *within consonant closure* [at maximum tongue displacement, @strycharczuk2015], polar coordinates [@heyne2015a;@heyne2015;@mielke2015]
+    * From *within consonant closure* [at maximum tongue displacement, @strycharczuk2015], polar coordinates [@heyne2015a;@heyne2015;@mielke2015]
 
 * **Generalised additive mixed effects models (GAMMs)** [@wood2006;@soskuthy2017;@van-rij2017]
 
 * **Polar GAMMs** with the `rticulate` R package [@coretta2018;@coretta2018a]
 
 * **General trends**
-    * idiosyncratic use of TRA
+    * Idiosyncratic use of TRA
     * 2 speakers with relatively greater TRA
 
 # Results: Tongue contours
@@ -313,11 +313,11 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 # Discussion
 
 * **TRA hypothesis**: *Longer vowel duration allows for greater tongue root advancement*.
-    * cf. with @halle1967: laryngeal adjustments
+    * Cf. with @halle1967: laryngeal adjustments
 
 * If TRA hypothesis is correct:
     - TRA during the vowel
-    - greater TRA in IT02 and PL05
+    - Greater TRA in IT02 and PL05
 
 # Discussion: TRA during the vowel
 
@@ -377,7 +377,7 @@ ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height =
     * *extra time allows more tongue root advancement?*
 
 * Is this a gradual (linear) relationship?
-    * we might see a **positive correlation between vowel duration and degree of TRA** (but caveat!)
+    * We might see a **positive correlation between vowel duration and degree of TRA** (but caveat!)
 
 # Discussion: Vowel Duration ~ TRA
 
@@ -385,3 +385,15 @@ ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height =
   \includegraphics{./graphics/tra-vow.png}
 \end{figure}
 
+# Conclusion
+
+* Durational and ultrasound data from 8 speakers
+    * Stronger VE ~ Greater TRA
+    * TRA during the vowel
+    * Vowel duration ~ TRA
+
+* Future work
+    * More speakers
+    * Can the TRA gesture account for durational difference?
+
+# References
