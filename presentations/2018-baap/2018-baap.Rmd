@@ -1,7 +1,8 @@
 ---
 title: "Tongue root advancement and vowel duration: a gradient effect?"
 author: "Stefano Coretta"
-date: "05/03/2018"
+date: "The University of Manchester"
+institute: "13 April, BAAP 2018 (Canterbury)"
 output:
   beamer_presentation:
     citation_package: natbib
@@ -218,6 +219,27 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 
 # Results: Tongue contours
 
+\begin{figure}
+  \includegraphics[width = \textwidth]{./graphics/it01-uti.pdf}
+\end{figure}
+
+# Results: Tongue contours
+
+\begin{figure}
+  \includegraphics[width = \textwidth]{./graphics/it02-uti.pdf}
+\end{figure}
+
+# Results: Tongue contours
+
+\begin{figure}
+  \includegraphics[width = \textwidth]{./graphics/pl04-uti.pdf}
+\end{figure}
+
+# Results: Tongue contours
+
+\begin{figure}
+  \includegraphics[width = 0.8\textwidth]{./graphics/pl05-uti.pdf}
+\end{figure}
 
 # Discussion: Results summary
 
@@ -225,7 +247,7 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
     * Italian: +22 msec
     * Polish: +12 msec
 * **Tongue contours**
-    * 4 of 8 speakers (IT01, IT02, IT03, PL05) show TRA at maximum displacement
+    * 4 of 8 speakers (IT01, IT02, IT03, PL05) show TRA within closure
 * **2 speakers** (IT02, PL05) with stronger VE and greater TRA
 
 # Discussion
