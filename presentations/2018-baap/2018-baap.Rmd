@@ -19,15 +19,16 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal(base_size = 20))
-library(rticulate)
-library(tidymv)
+library(tidymv) # devtools::install_github("stefanocoretta/tidymv@e277a70", build_vignettes = TRUE)
+library(rticulate) # devtools::install_github("stefanocoretta/rticulate@bcef263", build_vignettes = TRUE)
 library(lme4)
 library(effects)
-library(knitr)
+library(itsadug)
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ```
 
@@ -103,6 +104,49 @@ tra_series <- list.files(
 contrasts(tra_series$c2_phonation) <- "contr.treatment"
 contrasts(tra_series$vowel) <- "contr.treatment"
 contrasts(tra_series$c2_place) <- "contr.treatment"
+contrasts(tra_series$place_vowel) <- "contr.treatment"
+contrasts(tra_series$place_vowel_phon) <- "contr.treatment"
+
+columns_2 <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs"
+)
+
+splines <- list.files(
+  path = "./presentations/2018-baap/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., columns_2)) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    vowel = ordered(vowel, levels = c("a", "o", "u")),
+    c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+    vow_phon = as.ordered(interaction(vowel, c2_phonation)),
+    c2_place_phon = as.ordered(interaction(c2_place, c2_phonation))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
+
+contrasts(splines$c2_phonation) <- "contr.treatment"
+contrasts(splines$vowel) <- "contr.treatment"
+contrasts(splines$c2_place) <- "contr.treatment"
+contrasts(splines$vow_phon) <- "contr.treatment"
+contrasts(splines$c2_place_phon) <- "contr.treatment"
+
 ```
 
 # Background
@@ -283,11 +327,245 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
   \includegraphics[width = \textwidth]{./graphics/it01-uti.pdf}
 \end{figure}
 
+```{r it01, eval=FALSE, include=FALSE}
+it01 <- filter(splines, speaker == "it01", label %in% c("max_TT", "max_TD"))
+
+it01_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01,
+  method = "ML"
+)
+
+# No need for interactions
+
+rho <- start_value_rho(it01_polar_gam)
+
+it01_polar_gam_ar <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01,
+  method = "ML",
+  rho = rho,
+  AR_start = it01$start.event
+)
+
+it01_polar_gam_ar_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01,
+  method = "ML",
+  rho = rho,
+  AR_start = it01$start.event
+)
+
+compareML(it01_polar_gam_ar_null, it01_polar_gam_ar)
+
+acf_resid(it01_polar_gam_ar, split_pred = "AR.start")
+
+plot_polar_smooths(
+  it01_polar_gam_ar,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+) +
+  labs(title = "IT01")
+```
+
 # Results: Tongue contours
 
 \begin{figure}
   \includegraphics[width = \textwidth]{./graphics/it02-uti.pdf}
 \end{figure}
+
+```{r it02, eval=FALSE, include=FALSE}
+it02 <- filter(splines, speaker == "it02", label %in% c("max_TT", "max_TD"), fan_line > 5, fan_line < 40) # filter out splines containing spurious data
+
+it02_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it02,
+  method = "ML"
+)
+
+plot_polar_smooths(
+  it02_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+) +
+  labs(title = "IT02")
+
+it02_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it02,
+  method = "ML"
+)
+
+compareML(it02_polar_gam_null, it02_polar_gam)
+
+acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
+```
+
+```{r it03, eval=FALSE, include=FALSE}
+it03 <- filter(splines, speaker == "it03", label %in% c("max_TT", "max_TD"), fan_line < 40, vowel == "a")
+
+it03_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+#    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML"
+)
+
+rho <- start_value_rho(it03_polar_gam)
+
+it03_polar_gam_ar <- polar_gam(
+  Y ~
+    c2_phonation +
+#    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML",
+  rho = rho,
+  AR_start = it03$start.event
+)
+
+
+it03_polar_gam_ar_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+#    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+#    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03,
+  method = "ML",
+  rho = rho,
+  AR_start = it03$start.event
+)
+
+compareML(it03_polar_gam_ar_null, it03_polar_gam_ar)
+
+acf_resid(it03_polar_gam_ar, split_pred = "AR.start")
+
+plot_polar_smooths(
+  it03_polar_gam_ar,
+  X,
+  c2_phonation,
+  facet_terms = c2_place
+)
+```
+
+```{r it04, eval=FALSE, include=FALSE}
+it04 <- filter(splines, speaker == "it04", label %in% c("max_TT", "max_TD"))
+
+it04_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04,
+  method = "ML"
+)
+
+it04_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04,
+  method = "ML"
+)
+
+compareML(it04_polar_gam_null, it04_polar_gam)
+
+acf_resid(it04_polar_gam, split_pred = list(it04$rec_date))
+```
 
 # Results: Tongue contours
 
@@ -295,11 +573,211 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
   \includegraphics[width = \textwidth]{./graphics/pl04-uti.pdf}
 \end{figure}
 
+```{r pl02, eval=FALSE, include=FALSE}
+pl02 <- filter(splines, speaker == "pl02", label %in% c("max_TT", "max_TD"))
+
+pl02_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl02,
+  method = "ML"
+)
+
+pl02_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl02,
+  method = "ML"
+)
+
+compareML(pl02_polar_gam_null, pl02_polar_gam)
+
+plot_polar_smooths(
+  pl02_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+```{r pl03, eval=FALSE, include=FALSE}
+pl03 <- filter(splines, speaker == "pl03", label %in% c("max_TT", "max_TD"))
+
+pl03_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl03,
+  method = "ML"
+)
+
+pl03_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl03,
+  method = "ML"
+)
+compareML(pl03_polar_gam_null, pl03_polar_gam)
+
+plot_polar_smooths(
+  pl03_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+
+acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
+```
+
+```{r pl04, eval=FALSE, include=FALSE}
+pl04 <- filter(splines, speaker == "pl04", label %in% c("max_TT", "max_TD"))
+
+pl04_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl04,
+  method = "ML"
+)
+
+pl04_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl04,
+  method = "ML"
+)
+compareML(pl04_polar_gam_null, pl04_polar_gam)
+
+plot_polar_smooths(
+  pl04_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+) +
+  labs(title = "PL04")
+```
+
 # Results: Tongue contours
 
 \begin{figure}
   \includegraphics[width = 0.8\textwidth]{./graphics/pl05-uti.pdf}
 \end{figure}
+
+```{r pl05, eval=FALSE, include=FALSE}
+pl05 <- filter(splines, speaker == "pl05", label %in% c("max_TT", "max_TD"))
+
+pl05_polar_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl05,
+  method = "ML"
+)
+
+pl05_polar_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+#    vow_phon +
+#    c2_place_phon +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+#    s(X, by = vow_phon, bs = "cr") +
+#    s(X, by = c2_place_phon, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl05,
+  method = "ML"
+)
+
+compareML(pl05_polar_gam_null, pl05_polar_gam)
+
+plot_polar_smooths(
+  pl05_polar_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+) +
+  labs(title = "PL05")
+
+acf_resid(pl05_polar_gam, split_pred = list(pl05$rec_date))
+```
 
 # Discussion: Results summary
 
@@ -312,7 +790,7 @@ as_tibble(rbind(coef(vowels_it_lm)$speaker[2], coef(vowels_pl_lm)$speaker[2]), r
 
 # Discussion
 
-* **TRA hypothesis**: *Longer vowel duration allows for greater tongue root advancement*.
+* **TRA hypothesis**: Longer vowel duration allows for greater tongue root advancement.
     * Cf. with @halle1967: laryngeal adjustments
 
 * If TRA hypothesis is correct:
@@ -352,7 +830,6 @@ plot_smooths(
     x = "Proportion of vowel duration (ratio)",
     y = "Tongue root advancement (scaled)"
   )
-ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height = 8)
 ```
 
 \begin{figure}
@@ -368,13 +845,13 @@ ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height =
 -->
 
 \begin{figure}
-  \includegraphics[width = \textwidth]{./graphics/raphael.pdf}
+  \includegraphics[width = 0.8\textwidth]{./graphics/raphael.pdf}
 \end{figure}
 
 # Discussion
 
-* @raphael1975: sustained muscular activity in voiced consonants
-    * *extra time allows more tongue root advancement?*
+* @raphael1975: **sustained muscular activity in voiced consonants**
+    * extra time allows more tongue root advancement?
 
 * Is this a gradual (linear) relationship?
     * We might see a **positive correlation between vowel duration and degree of TRA** (but caveat!)
@@ -382,7 +859,7 @@ ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height =
 # Discussion: Vowel Duration ~ TRA
 
 \begin{figure}
-  \includegraphics{./graphics/tra-vow.png}
+  \includegraphics[width=0.8\textwidth]{./graphics/tra-vow.png}
 \end{figure}
 
 # Conclusion
@@ -395,5 +872,13 @@ ggsave("./presentations/2018-baap/graphics/tra-series.pdf", width = 14, height =
 * Future work
     * More speakers
     * Can the TRA gesture account for durational difference?
+
+# Conclusion
+
+\begin{center}
+{\LARGE \textbf{THANK YOU!}}
+\end{center}
+
+**Aknowledgements**: Research funded by the School of Arts, Languages and Cultures at the University of Manchester. Thanks go to Patrycja Strycharczuk, Ricardo Bermúdez-Otero, and the members of the Phonetics Lab at UoM.
 
 # References
