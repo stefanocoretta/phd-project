@@ -183,6 +183,8 @@ contrasts(splines$c2_place_phon) <- "contr.treatment"
 * **Data**
     * Durational data from acoustics
     * Tongue contours from ultrasound tongue imaging
+* **Reproducibility**
+    - <https://github.com/stefanocoretta/2018-baap>
 
 # Results: Vowel duration
 
