@@ -95,8 +95,7 @@ tra_series <- list.files(
   ungroup() %>%
   mutate_if(is.character, as.factor) %>%
   mutate(
-    speaker_phon = interaction(speaker, c2_phonation),
-    speaker_contexts = interaction(speaker, c2_phonation, c2_place, vowel),
+    speaker_contexts = interaction(speaker, c2_place, vowel),
     place_vowel = interaction(c2_place, vowel),
     place_vowel_phon = interaction(c2_place, vowel, c2_phonation)
   )
@@ -801,42 +800,34 @@ acf_resid(pl05_polar_gam, split_pred = list(pl05$rec_date))
 
 # Discussion: TRA during the vowel
 
-```{r tra-series-gam, include=FALSE, eval=FALSE}
+```{r tra-series-gam, include=FALSE}
 tra_series_gam <- bam(
   tra_z ~
-    c2_phonation +
     vowel +
     c2_place +
-    s(proportion) +
-    s(proportion, by = c2_phonation) +
-    s(proportion, by = vowel) +
-    s(proportion, by = c2_place) +
-#    s(proportion, rec_date, bs = "fs") +
-    s(proportion, speaker, bs = "fs") +
-    s(proportion, speaker_contexts, bs = "fs"),
-  data = tra_series
+    s(proportion, k = 5) +
+    s(proportion, by = vowel, k = 5) +
+    s(proportion, by = c2_place, k = 5) +
+    s(proportion, speaker, bs = "fs", m = 1, k = 5) +
+    s(proportion, speaker_contexts, bs = "fs", m = 1, k = 5),
+  data = filter(tra_series, c2_phonation == "voiced")
 )
-
-summary(tra_series_gam)
 ```
 
-```{r tra-series-gam-smooths, eval=FALSE, include=FALSE}
+```{r tra-series-gam-smooths}
 plot_smooths(
   tra_series_gam,
   proportion,
-  c2_phonation,
+  c2_place,
   exclude_random = FALSE,
   conditions = quos(c2_place == "coronal", vowel == "a")
 ) + facet_wrap(~ speaker, ncol = 4) +
   labs(
     x = "Proportion of vowel duration (ratio)",
-    y = "Tongue root advancement (scaled)"
-  )
+    y = "Tongue root advancement (z-scores)"
+  ) +
+  theme(legend.position = "none", panel.spacing = unit(1, "lines"))
 ```
-
-\begin{figure}
-  \includegraphics[width = \textwidth]{./graphics/tra-series.pdf}
-\end{figure}
 
 # Discussion: Electromiography [EMG, @raphael1975]
 
