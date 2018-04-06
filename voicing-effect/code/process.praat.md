@@ -1129,7 +1129,7 @@ endform
 vuvDirectory$ = "../data/egg/derived/'speaker$'"
 recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
 resultsFile$ = "../data/datasets/egg/'speaker$'-voicing.csv"
-resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,sentence_duration"
+resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,voiced_points,sentence_duration"
 writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
@@ -1180,12 +1180,31 @@ for word to numberOfWords
         sentenceEnd = Get end time of interval: 4, sentenceInterval
         sentenceDuration = sentenceEnd - sentenceStart
 
+        consonant_start = Get start time of interval: 2, segment + 2
+        consonant_end = Get end time of interval: 2, segment + 2
+        consonant_duration = consonant_end - consonant_start
+        one_tenth = consonant_duration / 10
+
+        voiced_points = 0
+
+        for point from 1 to 5
+          this_point = consonant_start + (one_tenth * point)
+          vuv_interval = Get interval at time: 1, this_point
+          voicing$ = Get label of interval: 1, vuv_interval
+          if voicing$ == "V"
+            voiced_points = voiced_points + 1
+          endif
+        endfor
+
         resultLine$ = "'index','speaker$','palignTextGrid$','recDate$','stimulus$',
-            ...'voicedStart','voicedEnd','voicing','sentenceDuration'"
+            ...'voicedStart','voicedEnd','voicing','voiced_points','sentenceDuration'"
         appendFileLine: resultsFile$, resultLine$
     endif
 endfor
 ```
+
+Voicing during the consonant is extracted by means of 5 points distributed between the start and 50% of the consonant (including burst and pre-formant voicing).
+I will probably have to make this more robust by using the closure duration rather than the consonant duration.
 
 ## Wavegram analysis
 
