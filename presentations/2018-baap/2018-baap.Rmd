@@ -16,6 +16,8 @@ header-includes:
 - \usepackage{cleveref}
 - \usetheme{metropolis}
 - \usecolortheme[snowy]{owl}
+nocite: |
+  @westbury1983, @davidson2016, @abramson2017, @westbury1983, @ohala2011, @ahn2015
 ---
 
 ```{r setup, include=FALSE}
@@ -150,6 +152,7 @@ contrasts(splines$c2_place_phon) <- "contr.treatment"
 
 # Background
 
+<!--
 * **Correlates of voicing**
     * *shorter VOT* [@westbury1983;@davidson2016;@abramson2017]
     * *tongue root advancement TRA* [@westbury1983;@ohala2011]
@@ -157,12 +160,41 @@ contrasts(splines$c2_place_phon) <- "contr.treatment"
     * *longer vowel duration* [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@fowler1992;@lampp2004]
 
 * **Relation between vowel duration and TRA**
+-->
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/voicing_1.pdf}
+\end{figure}
 
 # Background
 
-* **Voicing effect** (VE): vowels are longer when followed by voiced stops
-    * *Italian*: voicing effect of 35 msec [@farnetani1986]
-    * *Polish*: mixed results
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/voicing_2.pdf}
+\end{figure}
+
+# Background
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/voicing_3.pdf}
+\end{figure}
+
+# Background
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/voicing_4.pdf}
+\end{figure}
+
+# Background
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/voicing_5.pdf}
+\end{figure}
+
+# Background
+
+* **Voicing effect** (VE): vowels are longer when followed by voiced stops [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@fowler1992;@lampp2004]
+    * **Italian**: voicing effect of 35 msec [@farnetani1986]
+    * **Polish**: mixed results
         * @keating1984: no effect
         * @nowak2006 PhD dissertation: 4.5 msec effect
 * **Larger study**: relative timing of laryngeal and lingual activity
@@ -173,7 +205,7 @@ contrasts(splines$c2_place_phon) <- "contr.treatment"
 
 * **Participants**: 4 Italians (2 F, 2 M), 4 Polish (2 F, 2 M)
 * **Targets**
-    * C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}
+    * \textbf{C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}}
     * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
     * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
 * **Frame sentence**
