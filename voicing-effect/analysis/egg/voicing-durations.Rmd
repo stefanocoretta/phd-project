@@ -37,12 +37,44 @@ voicing <- list.files(
 voicing_voiceless <- filter(voicing, c2_phonation == "voiceless", c1_phonation == "voiceless")
 
 voicing_norm <- voicing_voiceless %>%
-  filter(voicing_duration < 300) %>%
+  filter(voicing_duration < 250) %>%
   group_by(speaker) %>%
   mutate(voicing_duration_norm = scale(voicing_duration))
 ```
 
 # Plots
+
+```{r}
+voicing_voiceless %>%
+  ggplot(aes(voiced_points, fill = language)) +
+  geom_bar() +
+  facet_grid(~ language)
+```
+
+```{r}
+voicing_voiceless %>%
+  ggplot(aes(voiced_points, fill = vowel)) +
+  geom_bar() +
+  facet_grid(language ~ vowel)
+```
+
+```{r}
+voicing_voiceless %>%
+  group_by(language, voiced_points) %>%
+  summarise(n = n())
+```
+
+```{r}
+voicing_voiceless %>%
+  filter(voiced_points < 2) %>%
+  nrow()
+```
+
+```{r}
+voicing_voiceless %>%
+  filter(voiced_points < 4) %>%
+  nrow()
+```
 
 ```{r}
 voicing_voiceless %>%
@@ -63,9 +95,32 @@ voicing_voiceless %>%
   facet_wrap(~ speaker, scales = "free")
 ```
 
+```{r}
+voicing_voiceless %>%
+  filter(voiced_points < 4) %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker, scales = "free")
+```
+
 ```{r vowel-boxplot}
 voicing_voiceless %>%
   filter(voicing_duration < 250) %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot()
+```
+
+```{r vowel-boxplot}
+voicing_voiceless %>%
+  filter(voicing_duration < 250) %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot() +
+  facet_grid(c2_place ~ .)
+```
+
+```{r vowel-boxplot-2}
+voicing_voiceless %>%
+  filter(voiced_points < 4) %>%
   ggplot(aes(vowel, voicing_duration)) +
   geom_boxplot()
 ```
@@ -78,7 +133,15 @@ voicing_voiceless %>%
   facet_grid(~ language)
 ```
 
-```{r vowel-language-boxplot}
+```{r vowel-language-boxplot-2}
+voicing_voiceless %>%
+  filter(voiced_points < 4) %>%
+  ggplot(aes(vowel, voicing_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vowel-language-boxplot-3}
 voicing_voiceless %>%
   filter(speaker != "it12", voicing_duration < 250) %>%
   ggplot(aes(vowel, voicing_duration)) +
@@ -163,3 +226,51 @@ plot(allEffects(voicing_lm_null))
 ```
 
 It seems vowel identity does not affect voicing duration (neither in Italian nor Polish).
+
+```{r}
+voicing_lm_2 <- lmer(
+  voicing_duration ~
+    vowel +
+    language +
+    vowel:language +
+    (1+vowel|speaker) +
+    (1|word),
+  data = filter(voicing_voiceless, voiced_points < 4),
+  REML = FALSE
+)
+summary(voicing_lm_2)
+```
+
+```{r}
+plot(allEffects(voicing_lm_2))
+```
+
+```{r}
+voicing_lm_3 <- lmer(
+  voicing_duration ~
+    vowel +
+    language +
+    vowel:language +
+    (1+vowel|speaker) +
+    (1|word),
+  data = filter(voicing_voiceless, voiced_points < 4, speaker != "it12"),
+  REML = FALSE
+)
+summary(voicing_lm_3)
+```
+
+```{r}
+voicing_lm_4 <- lmer(
+  voicing_duration_norm ~
+    vowel +
+    (1|word),
+  data = filter(voicing_norm, voiced_points < 4),
+  REML = FALSE
+)
+summary(voicing_lm_4)
+```
+
+```{r}
+plot(allEffects(voicing_lm_4))
+```
+
