@@ -163,6 +163,12 @@ contrasts(splines$c2_place_phon) <- "contr.treatment"
 -->
 
 \begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/voicing_0.pdf}
+\end{figure}
+
+# Background
+
+\begin{figure}
   \includegraphics[width=0.8\textwidth]{./graphics/voicing_1.pdf}
 \end{figure}
 
