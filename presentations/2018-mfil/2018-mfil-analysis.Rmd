@@ -7,5 +7,76 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
+```
+
+```{r read-data}
+tracegram <- read_csv("./presentations/2018-mfil/datasets/tracegram.csv") %>%
+  separate(file, c("speaker", "phonation")) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    phonation = factor(phonation, levels = c("modal", "breathy")),
+    contact_quotient = degg_minimum - degg_maximum
+  )
+```
+
+# Data plotting
+
+## Contact quotient
+
+```{r cq-hist}
+tracegram %>%
+  ggplot(aes(contact_quotient)) +
+  geom_histogram()
+```
+
+```{r cq-hist-2}
+tracegram %>%
+  ggplot(aes(contact_quotient)) +
+  geom_histogram(binwidth = 0.025)
+```
+
+```{r cq-hist-phonation}
+tracegram %>%
+  ggplot(aes(contact_quotient, fill = phonation)) +
+  geom_histogram()
+```
+
+```{r cq-hist-phonation-speaker}
+tracegram %>%
+  ggplot(aes(contact_quotient, fill = phonation)) +
+  geom_histogram(binwidth = 0.025) +
+  facet_wrap(~ speaker, scales = "free")
+```
+
+```{r cq-dens-phonation-speaker}
+tracegram %>%
+  ggplot(aes(contact_quotient, fill = phonation)) +
+  geom_density(alpha = 0.5, size = 0.1) +
+  facet_wrap(~ speaker, scales = "free") +
+  geom_rug()
+```
+
+```{r mean-cq}
+tracegram %>%
+  group_by(speaker, token, phonation) %>%
+  summarise(mean_cq = mean(contact_quotient)) %>%
+  ggplot(aes(mean_cq, fill = phonation)) +
+  geom_density(alpha = 0.5, size = 0.1) +
+  facet_wrap(~ speaker, scales = "free") +
+  geom_rug()
+```
+
+```{r}
+tracegram %>%
+  ggplot(aes(phonation, contact_quotient, fill = phonation)) +
+  geom_jitter(alpha = 0.05) +
+  geom_violin(size = 0.1, alpha = 0.5) +
+  geom_boxplot(width = 0.3) +
+  facet_wrap(~ speaker) +
+  scale_fill_manual(values = cbPalette)
 ```
 
