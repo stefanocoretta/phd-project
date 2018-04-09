@@ -23,9 +23,9 @@ tracegram <- read_csv("./presentations/2018-mfil/datasets/tracegram.csv") %>%
   )
 ```
 
-# Data plotting
+## Data plotting
 
-## Contact quotient
+### Contact quotient
 
 ```{r cq-hist}
 tracegram %>%
@@ -57,7 +57,9 @@ tracegram %>%
   ggplot(aes(contact_quotient, fill = phonation)) +
   geom_density(alpha = 0.5, size = 0.1) +
   facet_wrap(~ speaker, scales = "free") +
-  geom_rug()
+  geom_rug() +
+  scale_fill_manual(values = cbPalette) +
+  theme_light()
 ```
 
 ```{r mean-cq}
@@ -80,3 +82,34 @@ tracegram %>%
   scale_fill_manual(values = cbPalette)
 ```
 
+```{r mean-cq-boxplot}
+tracegram %>%
+  group_by(speaker, token, phonation) %>%
+  summarise(mean_cq = mean(contact_quotient)) %>%
+  ggplot(aes(phonation, mean_cq, fill = phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker) +
+  scale_fill_manual(values = cbPalette)
+```
+
+### Tracegram
+
+```{r}
+tracegram %>%
+  ggplot(aes(time, colour = phonation, linetype = phonation)) +
+  geom_smooth(aes(y = degg_maximum), se = F) +
+  geom_smooth(aes(y = degg_minimum), se = F) +
+  facet_wrap(~speaker) +
+  scale_colour_manual(values = cbPalette) +
+  coord_fixed(ratio = 1) +
+  ylim(0, 1)
+```
+
+```{r}
+tracegram %>%
+  ggplot(aes(phonation, fill = phonation)) +
+  geom_boxplot(aes(y = degg_maximum)) +
+  geom_boxplot(aes(y = degg_minimum)) +
+  facet_wrap(~speaker) +
+  scale_fill_manual(values = cbPalette)
+```

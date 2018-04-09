@@ -38,7 +38,8 @@ Let's first have a look at the tracegrams of modal, breathy and creaky voice.
 ggplot(degg, aes(x = time, colour = sound)) +
     geom_smooth(aes(y = maximum), size = 1, alpha = 0.2) +
     geom_smooth(aes(y = minimum), size = 1, alpha = 0.2) +
-    ylim(0, 1)
+    ylim(0, 1) +
+  facet_grid(~ sound)
 ```
 
 ```{r}
