@@ -320,3 +320,16 @@ tongue_root %>%
   )
 ```
 
+```{r vowel-dur-tr-faceted}
+tongue_root %>%
+  filter(tra_z < 3) %>%
+  ggplot(aes(vowel_duration_z, tra_z)) +
+  geom_point(alpha = 0.3, stroke = 0) +
+  geom_smooth(method = "lm", aes(colour = vowel)) +
+  facet_grid(c2_place ~ vowel, scales = "free") +
+  labs(
+    title = "Correlation between tongue root advancement and vowel duration",
+    y = "Tongue root advacement (z-scores)",
+    x = "Vowel duration (z-scores)"
+  )
+```
