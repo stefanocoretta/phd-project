@@ -15,6 +15,7 @@ header-includes:
 - \frenchspacing
 - \usepackage{cleveref}
 - \usetheme{metropolis}
+- \titlegraphic{\includegraphics[height=1cm]{./graphics/logo.png}}
 - \usecolortheme[snowy]{owl}
 nocite: |
   @westbury1983, @davidson2016, @abramson2017, @westbury1983, @ohala2011, @ahn2015
@@ -198,7 +199,7 @@ contrasts(splines$c2_place_phon) <- "contr.treatment"
 
 # Background
 
-* **Voicing effect** (VE): vowels are longer when followed by voiced stops [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@fowler1992;@lampp2004]
+* **Voicing effect** (VE): **vowels are longer when followed by voiced stops** [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@fowler1992;@lampp2004]
     * **Italian**: voicing effect of 35 msec [@farnetani1986]
     * **Polish**: mixed results
         * @keating1984: no effect
@@ -881,7 +882,7 @@ plot_smooths(
 
 # Discussion
 
-* @raphael1975: **sustained muscular activity in voiced consonants**
+* @raphael1975: **sustained muscular activity in vowels followed by voiced consonants**
     * extra time allows more tongue root advancement?
 
 * Is this a gradual (linear) relationship?
@@ -910,6 +911,6 @@ plot_smooths(
 {\LARGE \textbf{THANK YOU!}}
 \end{center}
 
-**Aknowledgements**: Research funded by the School of Arts, Languages and Cultures at the University of Manchester. Thanks go to Patrycja Strycharczuk, Ricardo Bermúdez-Otero, and the members of the Phonetics Lab at UoM.
+**Aknowledgements**: Research funded by the School of Arts, Languages and Cultures at the University of Manchester. Thanks to Patrycja Strycharczuk, Ricardo Bermúdez-Otero, and the members of the Phonetics Lab at UoM for their invaluable feedback. All errors remain my own.
 
 # References
