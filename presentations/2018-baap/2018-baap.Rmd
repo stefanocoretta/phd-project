@@ -814,7 +814,9 @@ plot_polar_smooths(
   c2_phonation,
   facet_terms = c2_place + vowel
 ) +
-  labs(title = "PL05")
+  labs(title = "PL05") +
+  scale_colour_manual(values = cbPalette[2:3]) +
+  scale_fill_manual(values = cbPalette[2:3])
 
 acf_resid(pl05_polar_gam, split_pred = list(pl05$rec_date))
 ```
