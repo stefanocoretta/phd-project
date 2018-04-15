@@ -7,8 +7,64 @@ output: ioslides_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("./"))
+library(tidyverse)
+theme_set(theme_light())
+cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
+```
+
+```{r read-data, include=FALSE}
+tracegram <- read_csv("./datasets/tracegram.csv") %>%
+  separate(file, c("speaker", "phonation")) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    phonation = factor(phonation, levels = c("modal", "breathy")),
+    contact_quotient = degg_minimum - degg_maximum
+  )
 ```
 
 ## Background
 
 * contact quotient
+
+## Methods
+
+* 4 phonetically trained BE speakers
+
+* [ɑ] in modal and breathy voice: 10 × 2 = 20 tokens per speaker
+
+* 
+
+## Results
+
+```{r}
+tracegram %>%
+  ggplot(aes(contact_quotient, fill = phonation)) +
+  geom_density(alpha = 0.7, size = 0) +
+  facet_wrap(~ speaker, scales = "free") +
+  geom_rug() +
+  scale_fill_manual(values = cbPalette) +
+  theme_light() +
+  labs(
+    title = "Density plots of CQ in modal and breathy phonation by speaker",
+    x = "Contact quotient (CQ)"
+  )
+```
+
+## Results
+
+```{r}
+tracegram %>%
+  ggplot(aes(time, colour = phonation, linetype = phonation)) +
+  geom_smooth(aes(y = degg_maximum), se = F) +
+  geom_smooth(aes(y = degg_minimum), se = F) +
+  facet_wrap(~speaker) +
+  scale_colour_manual(values = cbPalette) +
+  coord_fixed(ratio = 1) +
+  ylim(0, 1) +
+  labs(
+    title = "Tracegrams of modal and breathy phonation by speaker",
+    x = "Time (normalised)",
+    y = "Proportion of period"
+  )
+```
