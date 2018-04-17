@@ -36,6 +36,8 @@ voicing <- list.files(
 
 voicing_voiceless <- filter(voicing, c2_phonation == "voiceless", c1_phonation == "voiceless")
 
+voicing_voiced <- filter(voicing, c2_phonation == "voiced", c1_phonation == "voiceless")
+
 voicing_norm <- voicing_voiceless %>%
   filter(voicing_duration < 250) %>%
   group_by(speaker) %>%
@@ -56,6 +58,30 @@ voicing_voiceless %>%
   ggplot(aes(voiced_points, fill = vowel)) +
   geom_bar() +
   facet_grid(language ~ vowel)
+```
+
+```{r}
+voicing_voiceless %>%
+  filter(language == "italian") %>%
+  ggplot(aes(voiced_points, fill = vowel)) +
+  geom_bar() +
+  facet_grid(speaker ~ vowel) +
+  theme_light()
+```
+
+```{r}
+voicing_voiced %>%
+  ggplot(aes(voiced_points, fill = vowel)) +
+  geom_bar() +
+  facet_grid(language ~ vowel)
+```
+
+```{r}
+voicing_voiced %>%
+  filter(language == "italian") %>%
+  ggplot(aes(voiced_points, fill = vowel)) +
+  geom_bar() +
+  facet_grid(speaker ~ vowel)
 ```
 
 ```{r}
