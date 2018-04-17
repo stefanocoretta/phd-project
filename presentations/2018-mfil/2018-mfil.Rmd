@@ -1,8 +1,22 @@
 ---
 title: 'Processing EGG data: New methods for a multidimensional time-series assessment of vocal fold activity'
 author: "Stefano Coretta"
-date: "13/03/2018"
-output: ioslides_presentation
+date: "The University of Manchester"
+institute: "mFiL"
+output:
+  beamer_presentation:
+    citation_package: natbib
+    highlight: zenburn
+    latex_engine: xelatex
+fontsize: 12pt
+bibliography: linguistics.bib
+biblio-style: unified.bst
+header-includes:
+- \frenchspacing
+- \usepackage{cleveref}
+- \usetheme{metropolis}
+- \titlegraphic{\includegraphics[height=1cm]{./graphics/logo.png}}
+- \usecolortheme[snowy]{owl}
 ---
 
 ```{r setup, include=FALSE}
@@ -11,6 +25,7 @@ knitr::opts_knit$set(root.dir = normalizePath("./"))
 library(tidyverse)
 theme_set(theme_light())
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
+library(lmerTest)
 ```
 
 ```{r read-data, include=FALSE}
@@ -23,37 +38,97 @@ tracegram <- read_csv("./datasets/tracegram.csv") %>%
   )
 ```
 
-## Background
+## Background: Electroglottography
 
-* contact quotient
+* EGG [@fabre1957; @scherer1987; @rothenberg1988]
+
+    * estimation of vocal folds contact area (VFCA) based on impedance of high frequency current
+
+* non-invasive
+
+* relatively simple signal
+
+## Background: Electroglottography
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/egg.jpg}
+\end{figure}
+
+## Background: Electroglottography
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/egg-setup.pdf}
+\end{figure}
+
+## Background: EGG signal
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/egg-signal.pdf}
+\end{figure}
+
+## Background: EGG signal
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/egg-phases.pdf}
+\end{figure}
+
+## Background: Contact quotient
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/egg-cq.pdf}
+\end{figure}
 
 ## Methods
 
 * 4 phonetically trained BE speakers
 
-* [ɑ] in modal and breathy voice: 10 × 2 = 20 tokens per speaker
+* [ɑ] in modal and breathy voice
+    * 10 × 2 = 20 tokens per speaker
 
-* 
+* 80 tokens
 
-## Results
+## Results: CQ
 
-```{r}
+\centering
+
+```{r cq-density}
 tracegram %>%
   ggplot(aes(contact_quotient, fill = phonation)) +
   geom_density(alpha = 0.7, size = 0) +
   facet_wrap(~ speaker, scales = "free") +
   geom_rug() +
   scale_fill_manual(values = cbPalette) +
-  theme_light() +
   labs(
     title = "Density plots of CQ in modal and breathy phonation by speaker",
     x = "Contact quotient (CQ)"
   )
 ```
 
+## Results: CQ
+
+\tiny
+
+```{r quotient-lmer}
+quotient_lmer <- lmer(
+    contact_quotient ~
+        phonation +
+        (1+phonation|speaker),
+    data = tracegram
+)
+
+summary(quotient_lmer)
+```
+
 ## Results
 
-```{r}
+\centering
+
+```{r tracegram, message=FALSE}
 tracegram %>%
   ggplot(aes(time, colour = phonation, linetype = phonation)) +
   geom_smooth(aes(y = degg_maximum), se = F) +
