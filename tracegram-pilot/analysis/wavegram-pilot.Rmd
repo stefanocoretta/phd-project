@@ -13,7 +13,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(itsadug)
-options(contrasts = rep("contr.treatment", 2))
 ```
 
 # Data import
@@ -27,6 +26,8 @@ wavegram <- read_csv("../results/wavegram.csv") %>%
     ) %>%
     mutate_if(is.character, as.factor) %>%
     filter(sequence < 8)
+contrasts(wavegram$phonation) <- "contr.treatment"
+contrasts(wavegram$speaker_phon) <- "contr.treatment"
 ```
 
 # Analysis
@@ -71,6 +72,8 @@ fvisgam(
     zlim = c(0, 1)
 )
 ```
+
+## S02
 
 ```{r s02-gam}
 s02_gam <- bam(
