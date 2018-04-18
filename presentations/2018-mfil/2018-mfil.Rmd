@@ -2,7 +2,7 @@
 title: 'Processing EGG data: New methods for a multidimensional time-series assessment of vocal fold activity'
 author: "Stefano Coretta"
 date: "The University of Manchester"
-institute: "mFiL"
+institute: "Manchester Forum in Linguistics, 26th April 2018"
 output:
   beamer_presentation:
     citation_package: natbib
@@ -36,6 +36,18 @@ tracegram <- read_csv("./datasets/tracegram.csv") %>%
     phonation = factor(phonation, levels = c("modal", "breathy")),
     contact_quotient = degg_minimum - degg_maximum
   )
+
+wavegram <- read_csv("../results/wavegram.csv") %>%
+  separate(file, c("speaker", "phonation")) %>%
+  mutate(
+    phonation = ordered(phonation, levels = c("modal", "breathy")),
+    speaker_phon = ordered(interaction(speaker, phonation))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  filter(sequence < 8)
+
+contrasts(wavegram$phonation) <- "contr.treatment"
+contrasts(wavegram$speaker_phon) <- "contr.treatment"
 ```
 
 ## Background: Electroglottography
@@ -83,14 +95,37 @@ tracegram <- read_csv("./datasets/tracegram.csv") %>%
   \includegraphics{./graphics/egg-cq.pdf}
 \end{figure}
 
+## Background: Wavegrams [@herbst2010]
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/wavegram.jpeg}
+\end{figure}
+
 ## Methods
 
-* 4 phonetically trained BE speakers
+* 4 phonetically trained BE speakers (1 F, 3 M)
 
 * [ɑ] in modal and breathy voice
     * 10 × 2 = 20 tokens per speaker
+    * 80 tokens
 
-* 80 tokens
+* equipment
+    * Glottal Enterprises EG2-PCX2 unit
+    * Movo LV4-O2 Lavalier microphone (sample rate 44100 Hz, 16-bit)
+
+## Methods
+
+* 500 ms portion centered around mid point of each token
+
+* dEGG maxima and minima of each cycle within the 500 ms portion
+
+    * CQ = minimum - maximum
+    * tracegram
+
+* wavegram data [@herbst2010]
+
+    * generalised additive mixed models [@wood2006;@soskuthy2017;@van-rij2017]
 
 ## Results: CQ
 
@@ -124,7 +159,7 @@ quotient_lmer <- lmer(
 summary(quotient_lmer)
 ```
 
-## Results
+## Results: Tracegram
 
 \centering
 
