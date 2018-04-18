@@ -10,11 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
+library(lme4)
 library(mgcv)
 library(itsadug)
 library(tidymv)
 library(rticulate)
-options(contrasts = rep("contr.sum", 2))
 ```
 
 # Read data
@@ -100,7 +100,7 @@ tongue_root <- list.files(
   ungroup()
 ```
 
-# Tongue root advancement at maximum displacement
+# Tongue root advancement at closure
 
 Tongue root advancement is calculated as the inverse of tongue root displacement along a selected fan line.
 
@@ -250,6 +250,22 @@ tongue_root %>%
 ```
 
 The bimodal distribution of /u/ seems to be related to the velar condition, especially in Italian.
+
+## LMER
+
+```{r tra-lm}
+tra_lm <- lmer(
+  tra ~
+    c2_phonation +
+    vowel +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = tongue_root
+)
+
+summary(tra_lm)
+```
+
 
 # TRA trajectories
 
