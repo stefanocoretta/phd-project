@@ -163,14 +163,15 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>Select TD stimuli</li>
 <li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>td_function.srh</code></li>
+<li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>find_gons_td.srh</code></li>
 <li>Select TT stimuli</li>
 <li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>tt_function.srh</code></li>
-<li>Find GONS</li>
+<li><code>Find...</code> &gt; <code>Load</code> and <code>execute</code> <code>find_gons_tt.srh</code></li>
 </ol></li>
 <li><strong>Export data</strong> in <code>datasets/ultrasound/</code> folder
 <ol style="list-style-type: decimal">
 <li><code>Export-tongue-cart.xsu</code>: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity at peaks, nucleus onset and offset, gesture onset, closure onset, and maximum (Annotation: “_“), <code>[ID]-tongue-cart.tsv</code></li>
-<li><code>Export-vowel-series.xsu</code>: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity for every frame within the vowel (Annotation: “<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>$”), <code>[ID]-vowel-series.tsv</code></li>
+<li><code>Export-vowel-series.xsu</code>: export cartesian coordinates, tongue tip/dorsum/root smoothed displacement, velocity and absolute velocity for every frame within the vowel (Annotation: “^[aoOu]$”), <code>[ID]-vowel-series.tsv</code></li>
 </ol></li>
 <li><strong>Export kinematics annotations</strong> (from <code>Export &gt; Files...</code>) in <code>data/derived/ultrasound/[ID]/kinematics</code> folder as <code>[ID].TextGrid</code></li>
 <li><strong>Burst detection</strong>
@@ -261,12 +262,6 @@ for (i in 1:length(speakers)) {
 <li><code>.srh</code>: search analysis value</li>
 <li><code>.xsu</code>: export settings</li>
 </ul>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>aoOu<a href="#fnref1">↩</a></p></li>
-</ol>
 </div>
 
 
