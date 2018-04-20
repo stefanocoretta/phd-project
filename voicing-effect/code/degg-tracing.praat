@@ -149,10 +149,10 @@ for file to files
                 endif
             endif
         endfor
-    endif
 
-    removeObject: "Sound egg", "Sound egg_smooth",
-        ..."PointProcess egg_smooth",
-        ..."Sound degg_smooth", "PointProcess degg_smooth", "Sound degg"
+        removeObject: "Sound egg", "Sound egg_smooth",
+            ..."PointProcess egg_smooth",
+            ..."Sound degg_smooth", "PointProcess degg_smooth", "Sound degg"
+    endif
 
 endfor
