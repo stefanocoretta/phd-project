@@ -188,6 +188,13 @@ voicing_norm %>%
   facet_grid(~ language)
 ```
 
+```{r place-boxplot}
+voicing_voiceless %>%
+  filter(voicing_duration < 250) %>%
+  ggplot(aes(c2_place, voicing_duration)) +
+  geom_boxplot()
+```
+
 # Lmer
 
 ```{r voicing-lm}
