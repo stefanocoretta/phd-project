@@ -86,6 +86,13 @@ contrasts(wavegram$speaker_phon) <- "contr.treatment"
 
 \begin{figure}
   \centering
+  \includegraphics{./graphics/degg-signal.pdf}
+\end{figure}
+
+## Background: EGG signal
+
+\begin{figure}
+  \centering
   \includegraphics{./graphics/egg-phases.pdf}
 \end{figure}
 
@@ -117,16 +124,15 @@ contrasts(wavegram$speaker_phon) <- "contr.treatment"
 
 ## Methods
 
-* 500 ms portion centered around mid point of each token
+* 500 ms portion centred around mid point of each token
 
-* dEGG maxima and minima of each cycle within the 500 ms portion
-
+    * dEGG maxima and minima of each cycle within the 500 ms portion
     * CQ = minimum - maximum
+    * wavegram data [@herbst2010]
+
+* two new techniques
     * tracegram
-
-* wavegram data [@herbst2010]
-
-    * generalised additive mixed models [@wood2006;@soskuthy2017;@van-rij2017]
+    * wavegram generalised additive mixed models (GAMs)
 
 ## Results: CQ
 
@@ -179,6 +185,14 @@ tracegram %>%
     y = "Proportion of period"
   )
 ```
+
+## Results: Wavegram GAM
+
+* generalised additive mixed models [@wood2006;@soskuthy2017;@van-rij2017]
+    * non-linear multidimensional data
+
+* statistical testing of wavegram data
+    * heat-map plots: time, period, amplitude
 
 ## Results: Wavegram GAM (modal)
 
@@ -256,4 +270,3 @@ compareML(phonation_gam_null, phonation_gam)
 
 * Wavegram GAMs
     * assessing fold activity data statistically
-
