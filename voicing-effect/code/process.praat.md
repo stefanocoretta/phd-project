@@ -1471,20 +1471,31 @@ endif
 
 ### "speakers loop"
 ```praat
+form Create closure annotations
+    word project voicing-effect
+    word speaker it01
+    comment Supported languages: it, pl
+    word language it
+endform
+
+if language$ == "it"
+    label_lang$ = "k"
+    label_2_lang$ = "dico"
+elif language$ == "pl"
+    label_lang$ = "j"
+    label_2_lang$ = "mowie"
+else
+    exit "The language you selected is not valid"
+endif
+
 ultrasound_dir$ = "../data/ultrasound/derived"
 
-directory_list = Create Strings as directory list: "directory_list", ultrasound_dir$
-number_of_dirs = Get number of strings
+speaker_rec_dir$ = "'ultrasound_dir$'/'speaker$'/recordings"
+file_list = Create Strings as file list: "file_list", "'speaker_rec_dir$'/*.wav"
+number_of_files = Get number of strings
 
-for dir from 1 to number_of_dirs
-  selectObject: directory_list
-  speaker$ = Get string: dir
-  speaker_rec_dir$ = "'ultrasound_dir$'/'speaker$'/recordings"
-  file_list = Create Strings as file list: "file_list", "'speaker_rec_dir$'/*.wav"
-  number_of_files = Get number of strings
+<<<textgrids loop>>>
 
-  <<<textgrids loop>>>
-endfor
 ```
 
 The script loops through each directory in `./data/ultrasound/derived/` and reads the search area TextGrids in `./data/ultrasound/derived/[ID]/recordings/`.
