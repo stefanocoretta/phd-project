@@ -26,6 +26,7 @@ library(tidyverse)
 theme_set(theme_light())
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
 library(lmerTest)
+library(itsadug)
 ```
 
 ```{r read-data, include=FALSE}
@@ -37,7 +38,7 @@ tracegram <- read_csv("./datasets/tracegram.csv") %>%
     contact_quotient = degg_minimum - degg_maximum
   )
 
-wavegram <- read_csv("../results/wavegram.csv") %>%
+wavegram <- read_csv("./datasets/wavegram.csv") %>%
   separate(file, c("speaker", "phonation")) %>%
   mutate(
     phonation = ordered(phonation, levels = c("modal", "breathy")),
@@ -178,3 +179,81 @@ tracegram %>%
     y = "Proportion of period"
   )
 ```
+
+## Results: Wavegram GAM (modal)
+
+```{r wavegram-gam, include=FALSE, cache=TRUE}
+phonation_gam <- bam(
+  amplitude ~
+    phonation +
+    s(sequence, k = 8) +
+    s(sample) +
+    s(sequence, by = phonation, k = 8) +
+    s(sample, by = phonation) +
+    ti(sequence, sample, k = 8) +
+    ti(sequence, sample, by = phonation, k = 8) +
+    s(sequence, speaker_phon, bs = "fs", m = 1, k = 8),
+  data = wavegram,
+  method = "ML"
+)
+
+phonation_gam_null <- bam(
+    amplitude ~
+#        phonation +
+        s(sequence, k = 8) +
+        s(sample) +
+#        s(sequence, by = phonation, k = 8) + s(sample, by = phonation) +
+        ti(sequence, sample, k = 8) +
+#        ti(sequence, sample, by = phonation) +
+        s(sequence, speaker_phon, bs = "fs", m = 1, k = 8),
+    data = wavegram,
+    method = "ML"
+)
+```
+
+\centering
+
+```{r wavegram-gam-plot-modal, cache=TRUE, dependson= "wavegram-gam"}
+fvisgam(
+    phonation_gam,
+    view = c("sequence","sample"),
+    cond = list(phonation = "modal"),
+    rm.ranef = TRUE,
+    print.summary = FALSE,
+    zlim = c(0, 0.9)
+)
+```
+
+## Results: Wavegram GAM (breathy)
+
+\centering
+
+```{r wavegram-gam-plot-breathy, cache=TRUE, dependson= "wavegram-gam"}
+fvisgam(
+    phonation_gam,
+    view = c("sequence","sample"),
+    cond = list(phonation = "breathy"),
+    rm.ranef = TRUE,
+    print.summary = FALSE,
+    zlim = c(0, 0.9)
+)
+```
+
+## Results: Wavegram GAM
+
+\tiny
+
+```{r wavegram-gam-compare}
+compareML(phonation_gam_null, phonation_gam)
+```
+
+## Discussion
+
+* CQ performed badly for speaker 03
+
+* Tracegrams
+    * non-resource-intensive method for visualising fold activity
+
+* Wavegram GAMs
+    * assessing fold activity data statistically
+
