@@ -19,7 +19,6 @@ library(beepr)
 lmt("./voicing-effect/code/process.praat.md")
 ```
 
-
 ## Ultrasound data
 
 1. **Export** `.wav` and `.txt` from `AAA` to `data/ultrasound/derived/[ID]/recordings/` folder ([ID] = participant ID) as [ID]-nnn.wav
@@ -32,6 +31,36 @@ lmt("./voicing-effect/code/process.praat.md")
         1. **NOTE**: Needed for EGG processing!
     1. Run `closure-annotation.praat`: it reads the search area chunks and adds a tier for the time of closure onset
     1. Import TextGrids back in `AAA`
+
+```{r search-area}
+speakers <- c(
+  "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
+  "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
+)
+languages <- c(
+  "it", "it", "it", "it", "it", "it", "it", "it","it",
+  "pl", "pl", "pl", "pl", "pl", "pl"
+)
+
+for (i in 1:length(speakers)) {
+  praat_run(
+    "./voicing-effect/code/search-area.praat",
+    "voicing-effect",
+    speakers[i],
+    languages[i]
+  )
+}
+
+for (i in 1:length(speakers)) {
+  praat_run(
+    "./voicing-effect/code/closure-annotation.praat",
+    "voicing-effect",
+    speakers[i],
+    languages[i]
+  )
+}
+```
+
 1. **Tongue tracking**
     1. Create a spline template for the speaker and save it (`.fst`)
     1. Batch process splines with template
@@ -59,9 +88,14 @@ lmt("./voicing-effect/code/process.praat.md")
     1. Run `get-durations.praat`: the output is written in the `results` folder
    
 ```{r get-durations}
-# speakers <- "it01"
-speakers <- c("it01", "it02", "it03", "it07", "pl02", "pl03", "pl04", "pl05")
-languages <- c("it", "it", "it", "it", "pl", "pl", "pl", "pl")
+speakers <- c(
+  "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
+  "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
+)
+languages <- c(
+  "it", "it", "it", "it", "it", "it", "it", "it","it",
+  "pl", "pl", "pl", "pl", "pl", "pl"
+)
 
 for (i in 1:length(speakers)) {
     praat_run(
@@ -81,8 +115,10 @@ for (i in 1:length(speakers)) {
 1. **Calculate dEGG tracegrams** with `degg-tracing.praat`: the results are written in `data/datasets/egg/`
 
 ```{r sync-vuv-degg}
-# speakers <- "it01"
-speakers <- c("it01", "it02", "it03", "it07", "pl02", "pl03", "pl04", "pl05")
+speakers <- c(
+  "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
+  "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
+)
 
 for (i in 1:length(speakers)) {
     praat_run(
@@ -129,7 +165,10 @@ praat_run(
 ```
 
 ```{r voicing-duration}
-speakers <- c("it01", "it02", "it03", "it07", "pl02", "pl03", "pl04", "pl05")
+speakers <- c(
+  "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
+  "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
+)
 
 for (i in 1:length(speakers)) {
   praat_run("./voicing-effect/code/voicing-duration.praat", speakers[i])

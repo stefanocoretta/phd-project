@@ -146,6 +146,34 @@ $(document).ready(function () {
 <li>Run <code>closure-annotation.praat</code>: it reads the search area chunks and adds a tier for the time of closure onset</li>
 <li>Import TextGrids back in <code>AAA</code></li>
 </ol></li>
+</ol>
+<pre class="r"><code>speakers &lt;- c(
+  &quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;it09&quot;, &quot;it11&quot;, &quot;it12&quot;, &quot;it13&quot;, &quot;it14&quot;,
+  &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;, &quot;pl06&quot;, &quot;pl07&quot;
+)
+languages &lt;- c(
+  &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;,&quot;it&quot;,
+  &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;
+)
+
+for (i in 1:length(speakers)) {
+  praat_run(
+    &quot;./voicing-effect/code/search-area.praat&quot;,
+    &quot;voicing-effect&quot;,
+    speakers[i],
+    languages[i]
+  )
+}
+
+for (i in 1:length(speakers)) {
+  praat_run(
+    &quot;./voicing-effect/code/closure-annotation.praat&quot;,
+    &quot;voicing-effect&quot;,
+    speakers[i],
+    languages[i]
+  )
+}</code></pre>
+<ol style="list-style-type: decimal">
 <li><strong>Tongue tracking</strong>
 <ol style="list-style-type: decimal">
 <li>Create a spline template for the speaker and save it (<code>.fst</code>)</li>
@@ -184,9 +212,14 @@ $(document).ready(function () {
 <li>Run <code>get-durations.praat</code>: the output is written in the <code>results</code> folder</li>
 </ol></li>
 </ol>
-<pre class="r"><code># speakers &lt;- &quot;it01&quot;
-speakers &lt;- c(&quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;)
-languages &lt;- c(&quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;)
+<pre class="r"><code>speakers &lt;- c(
+  &quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;it09&quot;, &quot;it11&quot;, &quot;it12&quot;, &quot;it13&quot;, &quot;it14&quot;,
+  &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;, &quot;pl06&quot;, &quot;pl07&quot;
+)
+languages &lt;- c(
+  &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;, &quot;it&quot;,&quot;it&quot;,
+  &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;, &quot;pl&quot;
+)
 
 for (i in 1:length(speakers)) {
     praat_run(
@@ -204,8 +237,10 @@ for (i in 1:length(speakers)) {
 <li><strong>Extract vuv</strong> (Voiced/UnVoiced) with <code>extract-vuv.praat</code>: the output is written in the same folder as above</li>
 <li><strong>Calculate dEGG tracegrams</strong> with <code>degg-tracing.praat</code>: the results are written in <code>data/datasets/egg/</code></li>
 </ol>
-<pre class="r"><code># speakers &lt;- &quot;it01&quot;
-speakers &lt;- c(&quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;)
+<pre class="r"><code>speakers &lt;- c(
+  &quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;it09&quot;, &quot;it11&quot;, &quot;it12&quot;, &quot;it13&quot;, &quot;it14&quot;,
+  &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;, &quot;pl06&quot;, &quot;pl07&quot;
+)
 
 for (i in 1:length(speakers)) {
     praat_run(
@@ -247,7 +282,10 @@ beep()</code></pre>
     &quot;./voicing-effect/code/get-measurements.praat&quot;,
     speaker
 )</code></pre>
-<pre class="r"><code>speakers &lt;- c(&quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;)
+<pre class="r"><code>speakers &lt;- c(
+  &quot;it01&quot;, &quot;it02&quot;, &quot;it03&quot;, &quot;it07&quot;, &quot;it09&quot;, &quot;it11&quot;, &quot;it12&quot;, &quot;it13&quot;, &quot;it14&quot;,
+  &quot;pl02&quot;, &quot;pl03&quot;, &quot;pl04&quot;, &quot;pl05&quot;, &quot;pl06&quot;, &quot;pl07&quot;
+)
 
 for (i in 1:length(speakers)) {
   praat_run(&quot;./voicing-effect/code/voicing-duration.praat&quot;, speakers[i])
