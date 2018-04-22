@@ -75,7 +75,8 @@ tra_series <- list.files(
     speaker_contexts = interaction(speaker, c2_phonation, c2_place, vowel),
     place_vowel = interaction(c2_place, vowel),
     place_vowel_phon = interaction(c2_place, vowel, c2_phonation)
-  )
+  ) %>%
+  filter(rec_date != "28/07/2017 15:40:44")
 
 tongue_root <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound/",
