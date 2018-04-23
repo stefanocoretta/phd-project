@@ -103,12 +103,28 @@ contrasts(wavegram$speaker_phon) <- "contr.treatment"
   \includegraphics{./graphics/egg-cq.pdf}
 \end{figure}
 
-## Background: Wavegrams [@herbst2010]
+## Background: Wavegrams 
+
+* CQ reduces dimentionality of EGG signal
+
+* @herbst2010 propose the wavegram as a multidimentional account of the EGG signal
+
+## Background: Wavegrams
 
 \begin{figure}
   \centering
   \includegraphics{./graphics/wavegram.jpeg}
 \end{figure}
+
+## Background: Tracegram and Wavegram GAMs
+
+* limitations
+    * CQ is not precise [@baken1992; @herbst2017]
+    * wavegram cannot be accessed statistically
+
+* two new techniques
+    * tracegram
+    * wavegram GAMs
 
 ## Methods
 
@@ -122,17 +138,8 @@ contrasts(wavegram$speaker_phon) <- "contr.treatment"
     * Glottal Enterprises EG2-PCX2 unit
     * Movo LV4-O2 Lavalier microphone (sample rate 44100 Hz, 16-bit)
 
-## Methods
-
-* 500 ms portion centred around mid point of each token
-
-    * dEGG maxima and minima of each cycle within the 500 ms portion
-    * CQ = minimum - maximum
-    * wavegram data [@herbst2010]
-
-* two new techniques
-    * tracegram
-    * wavegram generalised additive mixed models (GAMs)
+* analysis window
+    * 500 ms portion centred around mid point of each token
 
 ## Results: CQ
 
@@ -165,6 +172,13 @@ quotient_lmer <- lmer(
 
 summary(quotient_lmer)
 ```
+
+## Results: Tracegram
+
+\begin{figure}
+  \centering
+  \includegraphics{./graphics/tracegram.pdf}
+\end{figure}
 
 ## Results: Tracegram
 
@@ -270,3 +284,8 @@ compareML(phonation_gam_null, phonation_gam)
 
 * Wavegram GAMs
     * assessing fold activity data statistically
+
+## The end
+
+\centering
+\Huge Thanks!
