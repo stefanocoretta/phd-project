@@ -103,7 +103,7 @@ tongue_root <- list.files(
   ) %>%
   mutate_if(is.character, as.factor) %>%
   # filter clear outlier
-  filter(TR_displacement_sm > 40) %>%
+  filter(TR_displacement_sm > 40, c1_phonation == "voiceless") %>%
   group_by(speaker) %>%
   mutate(tra_z = scale(tra)) %>%
   ungroup()
@@ -125,7 +125,7 @@ tongue_root_max <- list.files(
   ) %>%
   mutate_if(is.character, as.factor) %>%
   # filter clear outlier
-  filter(TR_displacement_sm > 40) %>%
+  filter(TR_displacement_sm > 40, c1_phonation == "voiceless") %>%
   group_by(speaker) %>%
   mutate(tra_z = scale(tra)) %>%
   ungroup()
