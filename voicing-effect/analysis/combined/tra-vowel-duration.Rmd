@@ -60,7 +60,7 @@ tongue_root <- list.files(
   mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor) %>%
   # filter clear outlier
-  filter(TR_displacement_sm > 40) %>%
+  filter(TR_displacement_sm > 40, c1_phonation == "voiceless") %>%
   group_by(speaker) %>%
   mutate(
     vowel_duration_z = scale(vowel_duration),
@@ -82,6 +82,7 @@ tongue <- list.files(
   left_join(y = stimuli) %>%
   left_join(y = vowels) %>%
   mutate_if(is.character, as.factor) %>%
+  filter(c1_phonation == "voiceless") %>%
   group_by(speaker) %>%
   do(transform_coord(., fan_lines = c(15, 25))) %>%
   ungroup() %>%
@@ -236,7 +237,7 @@ tra_lm <- lmer(
     vowel +
     sentence_duration +
     (1|speaker) +
-    (1|word),
+    (1|item),
 data = tongue_root_clean,
 REML = FALSE
 )
@@ -250,7 +251,7 @@ tra_lm_null <- lmer(
     vowel +
     sentence_duration +
     (1|speaker) +
-    (1|word),
+    (1|item),
 data = tongue_root_clean,
 REML = FALSE
 )
