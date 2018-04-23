@@ -224,7 +224,7 @@ tongue_root %>%
 
 ```{r tra-boxplot-speakers}
 tongue_root %>%
-  filter(tra < 3) %>%
+  filter(tra_z < 3) %>%
   ggplot(aes(c2_phonation, tra_z)) +
   geom_boxplot() +
   facet_wrap(~ speaker)
@@ -268,12 +268,38 @@ tra_lm <- lmer(
     vowel +
     (1+c2_phonation|speaker) +
     (1|word),
-  data = tongue_root
+  data = filter(tongue_root, tra_z < 3)
 )
 
 summary(tra_lm)
+
+tra_lm_null <- lmer(
+  tra ~
+#    c2_phonation +
+    vowel +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = filter(tongue_root, tra_z < 3)
+)
+
+anova(tra_lm_null, tra_lm)
 ```
 
+```{r}
+as_tibble(ranef(tra_lm)$speaker[2], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker random coefficients", y = "msec")
+```
+
+```{r}
+as_tibble(coef(tra_lm)$speaker[2], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker random coefficients", y = "msec")
+```
 
 # TRA trajectories
 
