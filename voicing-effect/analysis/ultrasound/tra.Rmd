@@ -250,7 +250,7 @@ tongue_root %>%
   filter(tra_z < 3) %>%
   ggplot(aes(c2_phonation, tra_z)) +
   geom_boxplot() +
-  facet_wrap(~ speaker)
+  facet_wrap(~ speaker, ncol = 4)
 ```
 
 ```{r tra-italian}
@@ -358,7 +358,7 @@ plot(allEffects(tra_z_lm))
 ```
 
 ```{r tra-lm-rand}
-tra_lm <- lmer(
+tra_rand_lm <- lmer(
   tra ~
     c2_phonation +
     vowel +
@@ -368,9 +368,9 @@ tra_lm <- lmer(
   REML = FALSE
 )
 
-summary(tra_lm)
+summary(tra_rand_lm)
 
-tra_lm_null <- lmer(
+tra_rand_lm_null <- lmer(
   tra ~
     c2_phonation +
     vowel +
@@ -379,7 +379,9 @@ tra_lm_null <- lmer(
   REML = FALSE
 )
 
-anova(tra_lm_null, tra_lm)
+summary(tra_rand_lm_null)
+
+anova(tra_rand_lm_null, tra_rand_lm)
 ```
 
 ```{r}
