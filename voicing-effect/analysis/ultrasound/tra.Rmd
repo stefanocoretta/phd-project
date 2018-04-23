@@ -78,6 +78,13 @@ tra_series <- list.files(
   ) %>%
   filter(rec_date != "28/07/2017 15:40:44")
 
+contrasts(tra_series$c2_phonation) <- "contr.treatment"
+contrasts(tra_series$vowel) <- "contr.treatment"
+contrasts(tra_series$c2_place) <- "contr.treatment"
+contrasts(tra_series$vowel) <- "contr.treatment"
+contrasts(tra_series$place_vowel) <- "contr.treatment"
+contrasts(tra_series$place_vowel_phon) <- "contr.treatment"
+
 tongue_root <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound/",
   pattern = "*-tongue-cart.tsv",
