@@ -281,6 +281,21 @@ tongue_root %>%
 
 The bimodal distribution of /u/ seems to be related to the velar condition, especially in Italian.
 
+# Tongue root advancement at maximum displacement
+
+```{r tr-max-density-phonation}
+tongue_root %>%
+  ggplot(aes(tra_z, fill = c2_phonation, linetype = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.2)
+```
+
+```{r tr-max-density-phonation-lang}
+tongue_root %>%
+  ggplot(aes(tra_z, fill = c2_phonation, linetype = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.2) +
+  facet_grid(~ language)
+```
+
 ## LMER
 
 ```{r tra-lm}
@@ -334,7 +349,7 @@ tra_max_lm <- lmer(
     vowel +
     (1+c2_phonation|speaker) +
     (1|word),
-  data = tongue_root_max
+  data = filter(tongue_root_max, tra_z < 3)
 )
 
 summary(tra_lm)
@@ -345,7 +360,7 @@ tra_max_lm_null <- lmer(
     vowel +
     (1+c2_phonation|speaker) +
     (1|word),
-  data = tongue_root_max
+  data = filter(tongue_root_max, tra_z < 3)
 )
 
 anova(tra_max_lm_null, tra_max_lm)
