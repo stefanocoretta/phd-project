@@ -304,7 +304,7 @@ tra_lm <- lmer(
     c2_phonation +
     vowel +
     (1+c2_phonation|speaker) +
-    (1|word),
+    (1|item),
   data = filter(tongue_root, tra_z < 3)
 )
 
@@ -315,7 +315,7 @@ tra_lm_null <- lmer(
 #    c2_phonation +
     vowel +
     (1+c2_phonation|speaker) +
-    (1|word),
+    (1|item),
   data = filter(tongue_root, tra_z < 3)
 )
 
@@ -324,6 +324,31 @@ anova(tra_lm_null, tra_lm)
 
 ```{r}
 plot(allEffects(tra_lm))
+```
+
+```{r tra-lm-rand}
+tra_lm <- lmer(
+  tra ~
+    c2_phonation +
+    vowel +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = filter(tongue_root, tra_z < 3),
+  REML = FALSE
+)
+
+summary(tra_lm)
+
+tra_lm_null <- lmer(
+  tra ~
+    c2_phonation +
+    vowel +
+    (1+c2_phonation|speaker),
+  data = filter(tongue_root, tra_z < 3),
+  REML = FALSE
+)
+
+anova(tra_lm_null, tra_lm)
 ```
 
 ```{r}
