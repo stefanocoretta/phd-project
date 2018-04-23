@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_bw())
-library(lme4)
+library(lmerTest)
 library(mgcv)
 library(itsadug)
 library(tidymv)
@@ -93,6 +93,28 @@ tongue_root <- list.files(
   map_df(~read_aaa(., column_names = columns, format = "wide")) %>%
   select(-(X_1:Y_42)) %>%
   filter(label == "closure_") %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    tra = -TR_displacement_sm
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  # filter clear outlier
+  filter(TR_displacement_sm > 40) %>%
+  group_by(speaker) %>%
+  mutate(tra_z = scale(tra)) %>%
+  ungroup()
+
+tongue_root_max <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns, format = "wide")) %>%
+  select(-(X_1:Y_42)) %>%
+  filter(label %in% c("max_TT", "max_TD")) %>%
   mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
@@ -286,11 +308,15 @@ anova(tra_lm_null, tra_lm)
 ```
 
 ```{r}
+plot(allEffects(tra_lm))
+```
+
+```{r}
 as_tibble(ranef(tra_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random coefficients", y = "msec")
+  labs(title = "By-speaker random coefficients", y = "mm")
 ```
 
 ```{r}
@@ -298,7 +324,31 @@ as_tibble(coef(tra_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random coefficients", y = "msec")
+  labs(title = "By-speaker random coefficients", y = "mm")
+```
+
+```{r tra-max-lm}
+tra_max_lm <- lmer(
+  tra ~
+    c2_phonation +
+    vowel +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = tongue_root_max
+)
+
+summary(tra_lm)
+
+tra_max_lm_null <- lmer(
+  tra ~
+#    c2_phonation +
+    vowel +
+    (1+c2_phonation|speaker) +
+    (1|word),
+  data = tongue_root_max
+)
+
+anova(tra_max_lm_null, tra_max_lm)
 ```
 
 # TRA trajectories
