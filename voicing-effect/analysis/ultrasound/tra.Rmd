@@ -336,7 +336,8 @@ tra_z_lm <- lmer(
     vowel +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = filter(tongue_root, tra_z < 3)
+  data = filter(tongue_root, tra_z < 3),
+  REML = FALSE
 )
 
 summary(tra_z_lm)
@@ -347,7 +348,8 @@ tra_z_lm_null <- lmer(
     vowel +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = filter(tongue_root, tra_z < 3)
+  data = filter(tongue_root, tra_z < 3),
+  REML = FALSE
 )
 
 anova(tra_z_lm_null, tra_z_lm)
