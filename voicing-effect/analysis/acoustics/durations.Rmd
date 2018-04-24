@@ -72,6 +72,14 @@ duration %>%
   facet_grid(vowel ~ c2_place)
 ```
 
+## Word durations
+
+```{r}
+duration %>%
+  ggplot(aes())
+```
+
+
 # Analysis
 
 ```{r}
