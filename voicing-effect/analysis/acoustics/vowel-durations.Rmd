@@ -62,10 +62,11 @@ voicing <- list.files(path = "voicing-effect/data/datasets/egg",
 
 voicing.voiceless <- filter(voicing, c1_phonation == "voiceless", c2_phonation == "voiceless") %>%
   group_by(speaker) %>%
-  mutate(voicing_duration = scale(voicing.duration))
+  mutate(voicing_duration_z = scale(voicing_duration))
 voicing.voiceless.it <- filter(voicing.voiceless, language == "italian")
 voicing.voiceless.pl <- filter(voicing.voiceless, language == "polish")
 ```
+
 
 # Italian
 
@@ -506,7 +507,7 @@ ggplot(word.proportions, aes(phonation, duration, fill = segment)) +
 ## Vowel and place
 
 ```{r voicing-duration}
-ggplot(voicing.voiceless, aes(vowel, voicing.duration)) +
+ggplot(voicing.voiceless, aes(vowel, voicing_duration)) +
     geom_violin() +
     geom_boxplot(width = 0.1) +
     facet_grid(c2_place ~ speaker)
@@ -514,19 +515,19 @@ ggplot(voicing.voiceless, aes(vowel, voicing.duration)) +
 
 ```{r voicing-duration-plot}
 voicing.voiceless %>%
-  ggplot(aes(vowel, voicing.duration)) +
+  ggplot(aes(vowel, voicing_duration)) +
   geom_boxplot()
 ```
 
 ```{r voicing-duration-language-plot}
 voicing.voiceless %>%
-  ggplot(aes(language, voicing.duration, colour = vowel)) +
+  ggplot(aes(language, voicing_duration, colour = vowel)) +
   geom_boxplot()
 ```
 
 ```{r voicing-lmer-it}
 voicing.model.it <- lmer(
-    voicing.duration ~
+    voicing_duration ~
         vowel +
 #        c2_place +
         sentence.duration +
@@ -538,7 +539,7 @@ voicing.model.it <- lmer(
 summary(voicing.model.it)
 
 mixed(
-    voicing.duration ~
+    voicing_duration ~
         vowel +
 #        c2_place +
         sentence.duration +
@@ -554,7 +555,7 @@ plot(allEffects(voicing.model.it))
 
 ```{r voicing-lmer-pl}
 voicing.model.pl <- lmer(
-    voicing.duration ~
+    voicing_duration ~
         vowel +
         c2_place +
         sentence.duration +
@@ -566,7 +567,7 @@ voicing.model.pl <- lmer(
 summary(voicing.model.pl)
 
 mixed(
-    voicing.duration ~
+    voicing_duration ~
         vowel +
         c2_place +
         sentence.duration +
@@ -582,7 +583,7 @@ plot(allEffects(voicing.model.pl))
 
 ```{r voicing-lmer}
 voicing_lm <- lmer(
-  voicing.duration ~
+  voicing_duration ~
     vowel *
     language +
 #    c2_place +
@@ -601,21 +602,21 @@ plot(allEffects(voicing_lm))
 
 ```{r}
 voicing.voiceless %>%
-  ggplot(aes(vowel, voicing_duration)) +
+  ggplot(aes(vowel, voicing_duration_z)) +
   geom_boxplot() +
   facet_grid(~ language)
 ```
 
 ```{r}
 voicing.voiceless %>%
-  ggplot(aes(voicing_duration, colour = vowel)) +
+  ggplot(aes(voicing_duration_z, colour = vowel)) +
   geom_density() +
   facet_grid(~ language)
 ```
 
 ```{r}
 voicing_lm_scaled <- lmer(
-  voicing_duration ~
+  voicing_duration_z ~
     vowel *
 #    language +
     c2_place +
@@ -635,14 +636,14 @@ plot(allEffects(voicing_lm_scaled))
 ## Voicing duration and closure duration
 
 ```{r voicing-closure-it}
-ggplot(voicing.voiceless.it, aes(closure.duration, voicing.duration, colour = speaker)) +
+ggplot(voicing.voiceless.it, aes(closure.duration, voicing_duration, colour = speaker)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
 
 ```{r voicing-closure-it-lmer}
 voicing.closure.it <- lmer(
-    voicing.duration ~
+    voicing_duration ~
         closure.duration +
         vowel +
         sentence.duration +
@@ -661,14 +662,14 @@ plot(allEffects(voicing.closure.it))
 
 
 ```{r voicing-closure-pl}
-ggplot(voicing.voiceless.pl, aes(closure.duration, voicing.duration, colour = speaker)) +
+ggplot(voicing.voiceless.pl, aes(closure.duration, voicing_duration, colour = speaker)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
 
 ```{r voicing-closure-pl-lmer}
 voicing.closure.pl <- lmer(
-    voicing.duration ~
+    voicing_duration ~
         closure.duration +
         vowel +
         sentence.duration +
@@ -681,7 +682,7 @@ voicing.closure.pl <- lmer(
 summary(voicing.closure.pl)
 
 voicing.closure.pl.null <- lmer(
-    voicing.duration ~
+    voicing_duration ~
         closure.duration +
         sentence.duration +
         (1|word) +
