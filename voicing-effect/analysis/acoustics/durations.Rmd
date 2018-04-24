@@ -27,6 +27,7 @@ duration <- list.files(
   map_df(~read_csv(., na = "--undefined--")) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless") %>%
   mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor)
 ```
@@ -52,7 +53,7 @@ duration %>%
 ```{r}
 duration %>%
   filter(speaker == "pl05") %>%
-  ggplot(aes(vowel, vowel.duration, fill = c2_phonation)) +
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
   facet_grid(~ c2_place)
 ```
@@ -60,25 +61,53 @@ duration %>%
 ```{r}
 duration %>%
   filter(speaker == "pl05") %>%
-  ggplot(aes(vowel.duration, fill = c2_phonation)) +
+  ggplot(aes(vowel_duration, fill = c2_phonation)) +
   geom_density(alpha = 0.5, linetype = 0) +
   facet_grid(~ c2_place)
 ```
 
 ```{r}
 duration %>%
-  ggplot(aes(vowel.duration, colour = c2_phonation, fill = c2_phonation)) +
+  ggplot(aes(vowel_duration, colour = c2_phonation, fill = c2_phonation)) +
   geom_density(alpha = 0.5) +
   facet_grid(vowel ~ c2_place)
 ```
 
 ## Word durations
 
-```{r}
+```{r word-dur-density}
 duration %>%
-  ggplot(aes())
+  ggplot(aes(word_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
 ```
 
+```{r word-dur-density}
+duration %>%
+  group_by(speaker) %>%
+  mutate(word_duration_z = scale(word_duration)) %>%
+  ggplot(aes(word_duration_z, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(word_duration_z = scale(word_duration)) %>%
+  ggplot(aes(c2_phonation, word_duration_z, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(word_duration_z = scale(word_duration)) %>%
+  ggplot(aes(c2_phonation, word_duration_z, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ language)
+```
 
 # Analysis
 

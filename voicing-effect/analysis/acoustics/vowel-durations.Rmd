@@ -473,16 +473,16 @@ word.proportions <- vowels %>%
     group_by(c1_phonation, c2_phonation, language) %>%
     summarise(
         total = 
-            mean(c1.duration, na.rm = TRUE) +
-            mean(vowel.duration, na.rm = TRUE) +
-            mean(closure.duration, na.rm = TRUE) +
+            mean(c1_duration, na.rm = TRUE) +
+            mean(vowel_duration, na.rm = TRUE) +
+            mean(closure_duration, na.rm = TRUE) +
             mean(rvot, na.rm = TRUE) +
-            mean(v2.duration, na.rm = TRUE),
-        c1 = mean(c1.duration, na.rm = TRUE),
-        vowel = mean(vowel.duration, na.rm = TRUE),
-        closure = mean(closure.duration, na.rm = TRUE),
+            mean(v2_duration, na.rm = TRUE),
+        c1 = mean(c1_duration, na.rm = TRUE),
+        vowel = mean(vowel_duration, na.rm = TRUE),
+        closure = mean(closure_duration, na.rm = TRUE),
         rvot = mean(rvot, na.rm = TRUE),
-        v2 = mean(v2.duration, na.rm = TRUE)
+        v2 = mean(v2_duration, na.rm = TRUE)
     ) %>%
     gather(segment, duration, c1:v2) %>%
     mutate(segment = factor(segment,
