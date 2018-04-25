@@ -51,7 +51,8 @@ tongue <- list.files(
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
-  mutate_if(is.character, as.factor)
+  mutate_if(is.character, as.factor) %>%
+  filter(c1_phonation == "voiceless")
 
 closing <- tongue %>%
   filter(label %in% c("closure_", "GONS_TD", "GONS_TT")) %>%
@@ -148,14 +149,15 @@ closing_lm <- lmer(
     c2_place +
     (1+c2_phonation|speaker) +
     (1|word),
-  data = closing
+  data = closing,
+  REML = FALSE
 )
 
 summary(closing_lm)
 ```
 
 ```{r}
-plot(allEffects(gons_lm))
+plot(allEffects(closing_lm))
 ```
 
 ## TRA and closing gesture duration
