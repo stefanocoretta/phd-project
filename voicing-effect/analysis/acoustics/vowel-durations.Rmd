@@ -447,11 +447,11 @@ ggplot(vowels.pl, aes(c2_phonation, vowel.duration)) +
 proportions <- vowels %>%
     group_by(c2_phonation, language) %>%
     summarise(
-        total = mean(vowel.duration, na.rm = TRUE) +
-            mean(closure.duration, na.rm = TRUE) +
+        total = mean(vowel_duration, na.rm = TRUE) +
+            mean(closure_duration, na.rm = TRUE) +
             mean(rvot, na.rm = TRUE),
-        vowel = mean(vowel.duration, na.rm = TRUE) / total,
-        closure = mean(closure.duration, na.rm = TRUE) / total,
+        vowel = mean(vowel_duration, na.rm = TRUE) / total,
+        closure = mean(closure_duration, na.rm = TRUE) / total,
         rvot = mean(rvot, na.rm = TRUE) / total
     ) %>%
     gather(segment, duration, vowel:rvot) %>%
