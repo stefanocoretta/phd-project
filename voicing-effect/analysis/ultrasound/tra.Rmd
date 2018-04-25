@@ -16,6 +16,7 @@ library(mgcv)
 library(itsadug)
 library(tidymv)
 library(rticulate)
+library(dendextend)
 ```
 
 # Read data
@@ -741,5 +742,38 @@ summary(distance_lm)
 
 ```{r}
 plot(allEffects(distance_lm))
+```
+
+# Clustering TRA
+
+```{r}
+tra_summary <- tongue_root %>%
+  select(speaker, TT_displacement_sm, TD_displacement_sm, TR_displacement_sm, c2_phonation) %>%
+  gather(tongue, value, TT_displacement_sm, TD_displacement_sm, TR_displacement_sm) %>%
+  unite("tongue", tongue, c2_phonation) %>%
+  group_by(speaker, tongue) %>%
+  summarise(
+    value = mean(value)
+  ) %>%
+  spread(tongue, value) %>%
+  mutate(
+    TT = TT_displacement_sm_voiceless - TT_displacement_sm_voiced,
+    TD = TD_displacement_sm_voiceless - TD_displacement_sm_voiced,
+    TR = TR_displacement_sm_voiceless - TR_displacement_sm_voiced
+  ) %>%
+  select(speaker, TT, TD, TR)
+
+row.names(tra_summary) <- tra_summary$speaker
+
+tra_distance <- dist(tra_summary)
+
+tra_clust <- hclust(tra_distance)
+```
+
+```{r}
+tra_clust %>%
+  as.dendrogram %>%
+  as.ggdend() %>%
+  ggplot(horiz = TRUE)
 ```
 
