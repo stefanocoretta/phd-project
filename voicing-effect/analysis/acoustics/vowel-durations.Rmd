@@ -779,3 +779,37 @@ mixed(
 ```{r pl-voicing-gestures-plot}
 plot(allEffects(model.voicing.gestures.pl))
 ```
+
+# Vowel duration and voicing of C1 and C2
+
+```{r}
+vowels_2 <- filter(vowels, speaker %in% c("it01", "it02")) %>%
+  unite("c1c2_phonation", c1_phonation, c2_phonation, remove = FALSE) %>%
+  mutate(c1c2_phonation = factor(c1c2_phonation, levels = c("voiceless_voiceless", "voiced_voiceless", "voiceless_voiced", "voiced_voiced")))
+```
+
+```{r}
+vowels_2 %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(c1c2_phonation, vowel_duration)) +
+  geom_boxplot()
+```
+
+```{r}
+vow_lm <- lmer(
+  vowel_duration ~
+    c1c2_phonation +
+    (1|speaker) +
+    (1|item),
+  data = vowels_2,
+  REML = FALSE
+)
+
+summary(vow_lm)
+```
+
+```{r}
+plot(allEffects(vow_lm))
+```
+
