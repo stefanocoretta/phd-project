@@ -74,11 +74,11 @@ voicing.voiceless.pl <- filter(voicing.voiceless, language == "polish")
 
 ```{r word-it}
 word.it <- lmer(
-    word.duration ~
+    word_duration ~
         c2_phonation +
         c1_phonation +
         vowel +
-        sentence.duration +
+        sentence_duration +
         (1|speaker) +
         (1|word),
     data = vowels.it
@@ -100,8 +100,8 @@ mixed(
 In Italian, words with voiceless stops are longer.
 
 ```{r word-plot-it}
-ggplot(vowels.it, aes(c2_phonation, word.duration, colour = speaker)) +
-    geom_boxplot()
+ggplot(vowels.it, aes(c2_phonation, word_duration)) +
+    geom_boxplot() + facet_wrap(~speaker)
 plot(allEffects(word.it))
 ```
 
