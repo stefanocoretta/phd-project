@@ -786,7 +786,7 @@ directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
 header$ = "index,speaker,file,rec_date,word,time,word_duration,c1_duration,c1_closure,c1_rvot,vowel_duration,
-    ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,v_onset,v_offset"
+    ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,v_onset,v_offset,rel_rel"
 writeFileLine: result_file$, header$
 
 bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
@@ -840,7 +840,7 @@ for interval to intervals
 
         c1_duration = (start_vowel - start_target) * 1000
         c1_closure = (release_c1 - start_target) * 1000
-        c1_rvot = (release_c1 - start_vowel) * 1000
+        c1_rvot = (start_vowel - release_c1) * 1000
 
         selectObject: fileNames
         fileName = Get interval at time: 1, start_vowel
@@ -850,13 +850,15 @@ for interval to intervals
         v_onset = start_vowel - file_start
         v_offset = end_vowel - file_start
 
+        rel_rel = (burst - release_c1) * 1000
+
         Read Strings from raw text file: "../data/ultrasound/derived/'speaker$'/recordings/'fileName$'.txt"
         rec_date$ = Get string: 2
 
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$','start_target',
             ...'word_duration','c1_duration','c1_closure','c1_rvot','v_duration','closure','rvot',
             ...'consonant_duration','v2_duration','sentence_duration',
-            ...'v_onset','v_offset'"
+            ...'v_onset','v_offset','rel_rel'"
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
