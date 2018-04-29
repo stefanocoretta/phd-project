@@ -84,6 +84,29 @@ for (i in 1:length(speakers)) {
 1. **Burst detection**
     1. Run `burst-detection.praat`: the output is a `.TextGrid` file, written in `data/ultrasound/derived/[ID]/concatenated/`
     1. Check bursts `[ID]-burst.TextGrid` + `[ID].wav`
+1. **C1 release detection**
+    1. Run `release-detection-c1.praat`: the output is a `.TextGrid` file, written in `data/ultrasound/derived/[ID]/concatenated/`
+    1. Check bursts `[ID]-realease-c1.TextGrid` + `[ID].wav`
+
+```{r release-c1}
+speakers <- c(
+  "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
+  "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
+)
+languages <- c(
+  "it", "it", "it", "it", "it", "it", "it", "it","it",
+  "pl", "pl", "pl", "pl", "pl", "pl"
+)
+
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/release-detection-c1.praat",
+        speakers[i],
+        languages[i]
+    )
+}
+```
+
 1. **Get durations**
     1. Run `get-durations.praat`: the output is written in the `results` folder
    
