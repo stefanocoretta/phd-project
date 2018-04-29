@@ -30,6 +30,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/perceptual-pilot/data/ \
     /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/english/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/english/data
 
 ### Run
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
@@ -47,6 +50,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/perceptual-pilot/data/ \
     /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/english/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/english/data
 
 ## Pull data folder from external HD
 
@@ -65,6 +71,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data/ \
     ~/GitHub/phd-project/perceptual-pilot/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
+    ~/GitHub/phd-project/english/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
@@ -81,6 +90,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data/ \
     ~/GitHub/phd-project/perceptual-pilot/data
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
+    ~/GitHub/phd-project/english/data/
 
 # DANGER
 
