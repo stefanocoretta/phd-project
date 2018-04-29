@@ -85,11 +85,34 @@ duration %>%
   geom_boxplot()
 ```
 
-```{r}
+## Release to release
+
+```{r rr-density}
 duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(rel_rel, fill = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r rr-density-vow-c2_place}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(rel_rel, fill = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r rr-box}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
   ggplot(aes(vowel, rel_rel, fill = c2_phonation)) +
   geom_boxplot()
 ```
+
+The Release-Release interval duration does not seem to be affected by the voicing of C2.
 
 ## Word durations
 
