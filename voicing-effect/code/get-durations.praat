@@ -45,11 +45,13 @@ directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
 result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
-header$ = "index,speaker,file,rec_date,word,time,word_duration,c1_duration,vowel_duration,
+header$ = "index,speaker,file,rec_date,word,time,word_duration,c1_duration,c1_closure,c1_rvot,vowel_duration,
     ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,v_onset,v_offset"
 writeFileLine: result_file$, header$
 
 bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
+
+release_c1_textgrid = Read from file: "'directory$'/'speaker$'-release-c1.TextGrid"
 
 palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
 
@@ -69,7 +71,6 @@ for interval to intervals
         word_duration = (end_target - start_target) * 1000
         start_consonant = Get interval at time: 1, start_target
         start_vowel = Get start time of interval: 1, start_consonant + 1
-        c1_duration = (start_vowel - start_target) * 1000
         end_vowel = Get end time of interval: 1, start_consonant + 1
         end_consonant2 = Get end time of interval: 1, start_consonant + 2
         v_duration = (end_vowel - start_vowel) * 1000
@@ -90,6 +91,17 @@ for interval to intervals
         rvot = (end_consonant2 - burst) * 1000
         consonant_duration = closure + rvot
 
+        selectObject: release_c1_textgrid
+        release_c1_point = Get nearest index from time: 1, start_vowel
+        release_c1 = Get time of point: 1, release_c1_point
+        if release_c1 < start_target or release_c1 > end_sentence
+            release_c1 = undefined
+        endif
+
+        c1_duration = (start_vowel - start_target) * 1000
+        c1_closure = (release_c1 - start_target) * 1000
+        c1_rvot = (release_c1 - start_vowel) * 1000
+
         selectObject: fileNames
         fileName = Get interval at time: 1, start_vowel
         fileName$ = Get label of interval: 1, fileName
@@ -102,7 +114,7 @@ for interval to intervals
         rec_date$ = Get string: 2
 
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$','start_target',
-            ...'word_duration','c1_duration','v_duration','closure','rvot',
+            ...'word_duration','c1_duration','c1_closure','c1_rvot','v_duration','closure','rvot',
             ...'consonant_duration','v2_duration','sentence_duration',
             ...'v_onset','v_offset'"
         appendFileLine: "'result_file$'", "'result_line$'"
