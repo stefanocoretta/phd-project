@@ -14,7 +14,7 @@ theme_set(theme_bw())
 library(rticulate)
 library(stringr)
 library(itsadug)
-options(contrasts = rep("contr.sum", 2))
+options(contrasts = rep("contr.treatment", 2))
 ```
 
 ```{r}
