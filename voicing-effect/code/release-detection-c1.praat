@@ -54,7 +54,7 @@ intervals = Get number of intervals: 1
 
 speech_intervals = Get number of intervals: 3
 sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
-textgrid = To TextGrid: "burst","burst"
+textgrid = To TextGrid: "release_c1", "release_c1"
 
 for speech_interval to speech_intervals
     selectObject: palign
@@ -63,9 +63,10 @@ for speech_interval to speech_intervals
         speech_start = Get start time of interval: 3, speech_interval
         token_interval = Get interval at time: 2, speech_start
         token_end = Get end time of interval: 2, token_interval
+        # Get interval number of /p/ (C1)
         phone_interval = Get interval at time: 1, token_end
-        start_consonant = Get start time of interval: 1, phone_interval + 2
-        end_consonant = Get end time of interval: 1, phone_interval + 2
+        start_consonant = Get start time of interval: 1, phone_interval
+        end_consonant = Get end time of interval: 1, phone_interval
 
         selectObject: sound
         sound_consonant = Extract part: start_consonant, end_consonant,
@@ -116,10 +117,10 @@ for speech_interval to speech_intervals
 
         selectObject: textgrid
         if burst <> undefined
-            Insert point: 1, burst, "burst"
+            Insert point: 1, burst, "release_c1"
         endif
     endif
 endfor
 
 selectObject: textgrid
-Save as text file: "'directory_alignment$'/'speaker$'-burst.TextGrid"
+Save as text file: "'directory_alignment$'/'speaker$'-release-c1.TextGrid"

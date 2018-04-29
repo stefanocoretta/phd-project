@@ -99,7 +99,6 @@ The user is prompt to indicate the project name, the participant ID and the lang
 ### "get alignment"
 ```praat
 form Select folder with TextGrid
-    word project voicing-effect
     word speaker it01
     comment Supported languages: it, pl
     word language it
@@ -1524,6 +1523,59 @@ for wav from 1 to number_of_files
   removeObject: textgrid
 endfor
 ```
+
+## Get release of C1
+
+This script detects the release in the consonant preceding the target vowel (C1). The algorythm is based on @avanthapadmanabha2014.
+
+### release-detection-c1.praat
+```praat
+<<<script header>>>
+
+<<<get alignment>>>
+
+<<<find consonant c1>>>
+```
+
+### "find consonant c1"
+```praat
+speech_intervals = Get number of intervals: 3
+sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
+textgrid = To TextGrid: "release_c1", "release_c1"
+
+for speech_interval to speech_intervals
+    selectObject: palign
+    speech_label$ = Get label of interval: 3, speech_interval
+    if speech_label$ == "speech"
+        speech_start = Get start time of interval: 3, speech_interval
+        token_interval = Get interval at time: 2, speech_start
+        token_end = Get end time of interval: 2, token_interval
+        # Get interval number of /p/ (C1)
+        phone_interval = Get interval at time: 1, token_end
+        start_consonant = Get start time of interval: 1, phone_interval
+        end_consonant = Get end time of interval: 1, phone_interval
+
+        selectObject: sound
+        sound_consonant = Extract part: start_consonant, end_consonant,
+            ..."rectangular", 1, "yes"
+
+        <<<filter>>>
+
+        <<<plosion index>>>
+
+        selectObject: textgrid
+        if burst <> undefined
+            Insert point: 1, burst, "release_c1"
+        endif
+    endif
+endfor
+
+selectObject: textgrid
+Save as text file: "'directory_alignment$'/'speaker$'-release-c1.TextGrid"
+```
+
+We start by identifying the inverval that corresponds to C1.
+We do this by finding speech intervals, getting the second word and the first consonant of the second word (the C1 of the target word).
 
 ## Headers
 
