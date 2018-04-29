@@ -73,6 +73,24 @@ duration %>%
   facet_grid(vowel ~ c2_place)
 ```
 
+```{r}
+duration %>%
+  ggplot(aes(vowel, c1_rvot, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+duration %>%
+  ggplot(aes(vowel, c1_closure, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+duration %>%
+  ggplot(aes(vowel, rel_rel, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
 ## Word durations
 
 ```{r word-dur-density}
