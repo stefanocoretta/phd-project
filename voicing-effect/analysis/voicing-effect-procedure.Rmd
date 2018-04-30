@@ -90,11 +90,11 @@ for (i in 1:length(speakers)) {
 
 ```{r release-c1}
 speakers <- c(
-  "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
+  "it01", "it02", "it03", "it04", "it05", "it07", "it09", "it11", "it12", "it13", "it14",
   "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
 )
 languages <- c(
-  "it", "it", "it", "it", "it", "it", "it", "it","it",
+  "it", "it", "it", "it", "it", "it", "it", "it", "it", "it","it",
   "pl", "pl", "pl", "pl", "pl", "pl"
 )
 
