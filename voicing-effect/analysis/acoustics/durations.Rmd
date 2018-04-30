@@ -85,6 +85,17 @@ duration %>%
   geom_boxplot()
 ```
 
+## Closure duration
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(closure_duration = scale(closure_duration)) %>%
+  ggplot(aes(vowel, closure_duration)) +
+  geom_boxplot()
+```
+
+
 ## Release to release
 
 ```{r rr-density}
