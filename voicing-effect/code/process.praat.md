@@ -789,7 +789,7 @@ header$ = "index,speaker,file,rec_date,word,time,word_duration,c1_duration,c1_cl
     ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,v_onset,v_offset,rel_rel"
 writeFileLine: result_file$, header$
 
-bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
+bursts = Read from file: "'directory_palign$'/'speaker$'-burst.TextGrid"
 
 release_c1_textgrid = Read from file: "'directory$'/'speaker$'-release-c1.TextGrid"
 
