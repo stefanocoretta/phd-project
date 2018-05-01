@@ -96,6 +96,12 @@ duration %>%
   geom_boxplot()
 ```
 
+```{r}
+duration %>%
+  ggplot(aes(c2_phonation, closure_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
 
 ## Release to release
 
