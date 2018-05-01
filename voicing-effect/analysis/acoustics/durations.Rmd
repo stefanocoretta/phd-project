@@ -11,6 +11,7 @@ knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
+library(effects)
 ```
 
 # Data import
@@ -106,6 +107,15 @@ duration %>%
   geom_density(alpha = 0.5)
 ```
 
+```{r rr-density-lang}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(rel_rel, fill = c2_phonation, colour = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
 ```{r rr-density-vow-c2_place}
 duration %>%
   group_by(speaker) %>%
@@ -123,7 +133,38 @@ duration %>%
   geom_boxplot()
 ```
 
+```{r rr-box-lang}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(vowel, rel_rel, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
 The Release-Release interval duration does not seem to be affected by the voicing of C2.
+
+## Vowel duration ~ Closure
+
+```{r}
+vow_clos_lm <- lmer(
+  vowel_duration ~
+    closure_duration +
+    sentence_duration +
+    vowel +
+    c2_place +
+    (1|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+summary(vow_clos_lm)
+```
+
+```{r}
+plot(allEffects(vow_clos_lm))
+```
+
 
 ## Word durations
 
