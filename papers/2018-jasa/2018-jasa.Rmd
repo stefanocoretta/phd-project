@@ -1,0 +1,146 @@
+---
+title: "Vowel duration and tongue root advancement: Results from an exploratory study of the relation between voicing and vowel duration"
+author: "Stefano Coretta"
+date: "02/05/2018"
+output:
+  bookdown::pdf_document2:
+    citation_package: natbib
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+    fig_caption: yes
+papersize: A4
+fontsize: 12pt
+mainfont: Brill
+mainfontoptions: Numbers=Lining
+bibliography: linguistics.bib
+biblio-style: unified.bst
+header-includes:
+- \frenchspacing
+- \usepackage{cleveref}
+- \usepackage{ctable}
+- \setcitestyle{aysep={},notesep={:},citesep={,}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This paper reports a previously undocumented correlation between vowel duration and degree of tongue root advancement.
+In an exploratory study of the articulatory correlates of stop voicing, it has been found that tongue root advancement---a known mechanism that facilitates voicing during stop closure---can be implemented not only during the closure of a stop, but even during the production of the vowel preceding a stop.
+Moreover, vowel acoustic duration turned out to be linearly correlated with degree of tongue root advancement, such that longer vowels show greater tongue root advancement.
+
+One of the known differences in supra-glottal articulation between voiced and voiceless stops concerns the position of the tongue root relative to the front-back axis of the oral tract.
+It has been observed that the tongue root is more advanced in voiced than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
+This gesture has been interpreted as a mechanism to ensure voicing can be maintained during the closure of the stop.
+The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
+During the production of voiced obstruents, the supra-glottal pressure increases due to the immittance of air in the supra-glottal cavity.
+Such pressure increase can hinder the ability to sustain voicing during closure, to the point that voicing ceases if the supra-glottal pressure is higher than the sub-glottal pressure [@ohala2011].
+<!-- mention the aerodynamic voicing constraint -->
+One of the possible articulatory solution to counterbalance the increase in pressure during the closure of a voiced stop is to expand the supra-glottal cavity by advancing the root of the tongue.
+<!-- maybe mention Rothenberg? -->
+
+<!-- need to mention that VOT is typical of voiced consonants in English blah blah blah -->
+Tongue root advancement has also been reported as a mechanism for ensuring a short voice onset time [@ahn2016].
+
+An extensive number of studies show that, cross-linguistically, vowels tend to be longer when followed by voiced obstruents than when they are followed by voiceless obstruents [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@farnetani1986;@fowler1992;@hussein1994;@esposito2002;@lampp2004;@durvasula2012].
+This phenomenon, know as the voicing effect, has been reported in a variety of languages,
+including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive list).
+A common stance in the literature is that the magnitude of the voicing effect differs depending on the language (although see \citealt{laeufer1992} ), and that this phenomenon is not a universal tendency, since the duration of vowels is not affected by the voicing of the following obstruents in some languages, like Polish and Czech \citep{keating1984}.
+Although several attempts have been made to explain the voicing effect, an account that survives all empirical data is still lacking \citep{durvasula2012,soskuthy2013}.
+<!-- have to say that polish had mixed results -->
+
+To summarise, tongue root advancement, shorter VOT duration, and longer vowel durations are all correlates of voicing.
+Moreover, tongue root advancement and shorter VOT show a link.
+In this paper, I will report the results from an exploratory study which fill the gap in this picture of correlation, by showing that tongue root advancement is also linked to longer vowel durations.
+
+# Methodology
+
+<!-- \ctable[caption = Sociolinguistic information on participants. The right-most column indicates whether the participant spent more than 6 consecutive months abroad.,
+label = t:participants
+]{lllll}{}{
+\FL
+\textbf{id}   & \textbf{sex} & \textbf{age} & \textbf{city}     & \textbf{\textgreater} 6 mo \ML
+IT01 & m   & 28  & Verbania & yes               \NN
+IT02 & m   & 26  & Udine    & yes               \NN
+IT03 & f   & 27  & Verbania & no                \NN
+IT04 & f   & 54  & Verbania & no                \NN
+PL02 & f   & 32  & Poznań   & yes               \NN
+PL03 & m   & 26  & Poznań   & yes               \NN
+PL04 & f   & 34  & Warsaw   & no                \NN
+PL05 & m   & 34  & Przasnysz & no               \LL
+} -->
+
+12 native speakers of Italian (5 females, 7 males) and 6 native speakers of Polish (3 females, 3 males) were recorded in the Phonetics Laboratory at the University of Manchester and in a private location in Italy (see \Cref{t:participants}).
+<!-- need to update locations and everything -->
+The Italian speakers of this study are from Northern Italy (three from the north-west and one from north-east).
+The Polish group was more heterogeneous, with two speakers from the West (Poznań), and two from the East (Warsaw and Przasnysz).
+Ethical clearance was obtained for this study from the University of Manchester (REF 2016-0099-76).
+The participants received a monetary compensation.
+
+## Materials
+
+Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. *pata*, *pada*, *poto*, etc.), giving a total of 12 target words, used both for Italian and Polish.
+<!-- mention why you use these symbols for vowels coz it should be open o in Italian -->
+Most of these words were nonce words in both languages, with a few exceptions (see table).
+The words were presented using the respective writing conventions (see table).
+A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel.\footnote{Although there is a tendency in the articulatory literature to suggest that labial consonants do not affect lingual articulations, \citealt{vazquez-alvarez2007} report tongue body lowering in the context of labial stops.}
+<!-- check and explain better, is it just during the consonant or also during the vowel? -->
+At low power settings and high frame rates, high and mid front vowel have the double disadvantage of being often not clearly visible in the ultrasound image (given their greater distance from the probe) and of producing less displacement of the tongue (essential for the closing gesture identification, see XXX) in the movement from the vowel itself to the following consonant.
+For this reason, only central/back vowels (low /a/, mid /o/, and high /u/) were included in the target words.
+The use of back and central vowels (with the exclusion of mid/high front vowels) had the advantage of facilitating the identification of the consonantal gesture of C2.
+Since the original motive for the exploratory study was to study possible difference in the articulation of closure in voiceless vs. voiced stops, only coronal and velar stops were chosen as target consonants since, of course, the closure of labial consonants cannot be imaged with ultrasonography.
+The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
+<!-- say that speakers were instructed not to produce pauses and not to speak slowly -->
+The similarity of prosodic structure of these sentences ensured better comparability between the two languages.
+
+## Equipment and procedure
+\label{s:equipment}
+
+<!-- \begin{figure*}
+    \centering
+    \includegraphics[width=.7\textwidth]{../../graphics/uti-setup.pdf}
+    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}). The system is described in details in \Cref{s:equipment}.}
+    \label{f:uti-setup}
+\end{figure*} -->
+
+An Articulate Instruments Ltd™ set-up was used for this study (\Cref{f:uti-setup}).
+The ultrasonic data was collected through a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
+Stabilisation of the ultrasonic transducer was ensured by using a headset sold by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
+A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
+A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
+The acquisition of the ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+The synchronisation of the ultrasonic and audio signals was performed by AAA after recording.
+
+<!-- used all? -->
+The participant's occlusal plane was obtained using a bite plate [@scobbie2011], and the hard palate was imaged by asking the participant to swallow water [@epstein2005].
+The frame rate of the acquisition of the ultrasonic data ranged between 43 and 68 frames per second.
+Other settings values varied depending on the frame rate.
+The ranges of these settings in this study were: scanlines = 88–114, pixel per scanline = 980–988, field of view = 71–93, pixel offset = 109–263, depth (mm) = 75–180.
+The audio signal was recorded at 22050 MHz (16-bit).
+The sentences containing the target words were randomised between participants, although the order was kept the same between repetitions within participant due to design constraints of the AAA software.
+Each participant produced six repetitions of each sentence, which led to a grand total of 1296 sentences.
+
+## Data processing and analysis
+
+The audio data was subject to force alignment using the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
+The outcome of the automatic alignment was then manually corrected, according to the criteria in \Cref{t:dur-measures}.
+The onset of the target consonant release (C2 release) was detected automatically in Praat [@boersma2016] by means of the burst-detection algorithm described in @ananthapadmanabha2014.
+The durations of the following intervals were extracted from the annotated acoustic landmarks using a scripted procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 release).
+
+\ctable[caption = List of measurements as extracted from acoustics.,
+label = t:dur-measures,
+width=\textwidth,
+star
+]{ll>{\raggedright}p{9cm}}{}{
+\FL
+\textbf{landmarks}               &                  & \textbf{criteria}                                                                                    \ML
+vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
+vowel offset          & (V1 offset)        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
+consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
+closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
+consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
+consonant release & (C2 release)         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
+}
