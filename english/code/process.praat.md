@@ -93,6 +93,130 @@ Save as text file: "'directory_concatenated$'/'speaker$'-filenames.TextGrid"
 
 Finally, the concatenated `.wav` files and the `.TextGrid` with the file names are saved in `concatenated/`.
 
+## Ultrasound search intervals
+
+### search-intervals.praat
+```praat
+<<<script header>>>
+
+<<<get paling>>>
+
+<<<set search>>>
+
+<<<save search chunks>>>
+```
+
+### "get paling"
+```praat
+form Ultrasound search intervals
+    word speaker en01
+endform
+
+directory_recordings$ = "../data/ultrasound/derived/'speaker$'/recordings"
+directory_concatenated$ = "../data/ultrasound/derived/
+    ...'speaker$'/concatenated"
+directory_corrected$ = "../data/ultrasound/raw/corrected-textgrids"
+
+palign = Read from file: "'directory_corrected$'/'speaker$'-palign.TextGrid"
+# Activity tier: 3
+intervals = Get number of intervals: 3
+
+Insert interval tier: 4, "ultrasound"
+ultrasound_tier = 4
+Insert interval tier: 5, "consonants"
+consonants_tier = 5
+```
+
+The user is prompt to indicate the participant ID.
+Then the script read the TextGrid file with the corrected force alingment (`ID-palign.TextGrid`).
+The number of intervals of the TextGrid file is saved in `intervals` and two new tiers are created (`ultrasound` and `consonants`).
+
+### "set search"
+```praat
+for interval from 1 to intervals
+  activity$ = Get label of interval: 3, interval
+
+  if activity$ == "speech"
+    speech_start = Get start time of interval: 3, interval
+    phone_index = Get interval at time: 1, speech_start
+    # "ultrasound" interval starts at the start of "@U" (3rd phone)
+    ultrasound_start = Get start time of interval: 1, phone_index + 2
+    # "ultrasound" interval end at the end of "@" (11th phone)
+    ultrasound_end = Get end time of interval: 1, phone_index + 11
+
+    # Ultrasound tier
+    Insert boundary: ultrasound_tier, ultrasound_start
+    Insert boundary: ultrasound_tier, ultrasound_end
+    ultrasound_index = Get interval at time: ultrasound_tier, ultrasound_start
+    Set interval text: ultrasound_tier, ultrasound_index, "ultrasound"
+
+    # "c1" 7th phone
+    c1_start = Get start time of interval: 1, phone_index + 6
+    c1_end = Get end time of interval: 1, phone_index + 6
+    # "v1" 8th phone
+    v1_start = Get start time of interval: 1, phone_index + 7
+    v1_end = Get end time of interval: 1, phone_index + 7
+    # "c2" 9th phone
+    c2_start = Get start time of interval: 1, phone_index + 8
+    c2_end = Get end time of interval: 1, phone_index + 8
+
+    # Consonants tier
+    Insert boundary: consonants_tier, c1_start
+    Insert boundary: consonants_tier, c1_end
+    c1_index = Get interval at time: consonants_tier, c1_start
+    Set interval text: 5, c1_index, "c1"
+
+    Insert boundary: consonants_tier, c2_start
+    Insert boundary: consonants_tier, c2_end
+    c2_index = Get interval at time: 5, c2_start
+    Set interval text: 5, c2_index, "c2"
+
+    Set interval text: 5, c1_index + 1, "v1"
+
+  endif
+
+endfor
+
+Remove tier: 1 ; phones
+Remove tier: 1 ; words
+Remove tier: 1 ; activity
+
+Save as text file: "'directory_concatenated$'/'speaker$'-search.TextGrid"
+```
+
+Now we can create intervals cointaing the search intervals for ultrasound and kinematics which will be used in `AAA` for spline batch processing and to find consonantal gestures.
+For each interval in the activity tier containing the text "speech", the script gets the index of the first phone in the sentence ("aI"), then gets the start time of "\@U" in "sold" and the end time of the "@" in "today" which correspond to the start and end of the "ultrasound" interval.
+In the consonants tier, the intervals corresponding to C1, V1, and C2 are added.
+A concatenated `[ID]-search.TextGrid` is saved in the `concatenated` folder.
+
+### "save search chunks"
+```praat
+filenames = Read from file: "'directory_concatenated$'/'speaker$'-filenames.TextGrid"
+
+selectObject: palign ; now it only has the search interval tiers
+plusObject: filenames
+
+Merge
+
+filenames_tier = 3
+
+intervals = Get number of intervals: filenames_tier
+
+for interval from 1 to intervals
+    selectObject: "TextGrid merged"
+    start = Get start point: filenames_tier, interval
+    end  = Get end point: filenames_tier, interval
+    file_name$ = Get label of interval: filenames_tier, interval
+
+    Extract part: start, end, "no"
+
+    Remove tier: filenames_tier
+    Write to text file: "'directory_recordings$'/'file_name$'.TextGrid"
+    Remove
+endfor
+```
+
+Individual search interval TextGrid chunks are saved in the `recordings` folder for import in `AAA`.
 
 ## Script headers
 
