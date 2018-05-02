@@ -1,0 +1,29 @@
+---
+title: "Procedure for prosessing data in English project"
+author: "Stefano Coretta"
+date: "02/05/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+library(speakr)
+library(beepr)
+```
+
+## Tangle code
+
+```{r tangle}
+lmt("./english/code/process.praat.md")
+```
+
+## Ultrasound data
+
+1. **Export** `.wav` and `.txt` from `AAA` to `data/ultrasound/derived/[ID]/recordings/` folder ([ID] = participant ID) as [ID]-nnn.wav
+1. **Force alignment and search intervals**
+    1. Run `alignment-input.praat`: the output is a concatenated `.wav` file and a `.txt` file listing the stimuli, written in `data/ultrasound/derived/[ID]/concatenated/`
+    1. Run SPPAS on concatenated `.wav` and `.txt`
+    1. Check alignment and save it to `data/ultrasound/raw/corrected-textgrids/`
+    1. Run `search-intervals.praat`: the output is TextGrid files for each `AAA` `.wav` file, saved in `data/ultrasound/derived/[ID]/recordings/`, and a merged TextGrid, saved in `data/ultrasound/derived/[ID]/concatenated/`
