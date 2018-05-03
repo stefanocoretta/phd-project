@@ -64,6 +64,8 @@ contrasts(tongue$c2_place) <- "contr.treatment"
 
 # IT12
 
+## Maximum displacement
+
 ```{r it12-max}
 it12_max <- tongue %>%
   filter(
@@ -101,11 +103,11 @@ it12_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, by = c2_place, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it12_max_filt,
   method = "ML",
   fan_lines = c(15, 22)
@@ -116,11 +118,11 @@ it12_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-#    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, by = c2_place, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it12_max_filt,
   method = "ML",
   fan_lines = c(15, 22)
@@ -129,6 +131,80 @@ it12_max_gam_null <- polar_gam(
 compareML(it12_max_gam_null, it12_max_gam)
 ```
 
+```{r it12-max-smooths}
+plot_polar_smooths(
+  it12_max_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+``` 
+
+IT12 tongue contours do not differ.
+
+## Closure
+
+```{r it12-clos}
+it12_clo <- tongue %>%
+  filter(
+    speaker == "it12",
+    label %in% c("closure_"),
+    X < 35, Y > -40
+  )
+```
+
+IT13 closure data are fileterd as the maximum displacement data.
+
+```{r it12-clo-plot}
+it12_clo %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r it12-clo-gam}
+it12_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it12_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it12_clo_gam)
+
+it12_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it12_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it12_clo_gam_null, it12_clo_gam)
+```
+
+```{r it12-clo-smooths}
+plot_polar_smooths(
+  it12_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+Nor at closure there are differences.
 
 # IT13
 
@@ -171,11 +247,11 @@ it13_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, by = c2_place, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it13_max_filt,
   method = "ML"
 )
@@ -185,11 +261,11 @@ it13_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-#    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, by = c2_place, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it13_max_filt,
   method = "ML"
 )
@@ -221,7 +297,7 @@ it13_clo <- tongue %>%
 
 IT13 closure data are fileterd as the maximum displacement data (Y > -30).
 
-```{r it13-max-plot}
+```{r it13-clo-plot}
 it13_clo %>%
   ggplot(aes(X, Y, colour = c2_phonation)) +
   geom_point(alpha = 0.5) +
@@ -233,11 +309,11 @@ it13_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, by = c2_place, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it13_clo,
   method = "ML"
 )
@@ -247,11 +323,11 @@ it13_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-#    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, by = c2_place, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it13_clo,
   method = "ML"
 )
@@ -317,10 +393,10 @@ it14_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it14_clo,
   method = "ML"
 )
@@ -330,10 +406,10 @@ it14_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
-    s(X, bs = "cr", k = 6) +
-#    s(X, by = c2_phonation, bs = "cr", k = 6) +
-    s(X, by = vowel, bs = "cr", k = 6) +
-    s(X, rec_date, bs = "fs", xt = "cr"),
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = it14_clo,
   method = "ML"
 )
