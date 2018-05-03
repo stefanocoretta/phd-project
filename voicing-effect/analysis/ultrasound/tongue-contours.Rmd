@@ -63,6 +63,194 @@ contrasts(tongue$vowel) <- "contr.treatment"
 contrasts(tongue$c2_place) <- "contr.treatment"
 ```
 
+# IT01
+
+## Closure
+
+```{r it01-clos}
+it01_clo <- tongue %>%
+  filter(
+    speaker == "it01",
+    label %in% c("closure_")
+  )
+```
+
+```{r it01-clo-gam}
+it01_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it01_clo_gam)
+
+it01_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it01_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it01_clo_gam_null, it01_clo_gam)
+```
+
+# IT02
+
+## Closure
+
+```{r it02-clos}
+it02_clo <- tongue %>%
+  filter(
+    speaker == "it02",
+    label %in% c("closure_"),
+    fan_line > 5, fan_line < 40
+  )
+```
+
+```{r it02-clo-gam}
+it02_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it02_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it02_clo_gam)
+
+it02_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it02_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it02_clo_gam_null, it02_clo_gam)
+```
+
+
+# IT03
+
+## Closure
+
+```{r it03-clos}
+it03_clo <- tongue %>%
+  filter(
+    speaker == "it03",
+    label %in% c("closure_"),
+    fan_line < 40, vowel == "a"
+  )
+```
+
+```{r it03-clo-gam}
+it03_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it03_clo_gam)
+
+it03_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it03_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it03_clo_gam_null, it03_clo_gam)
+```
+
+# IT04
+
+## Closure
+
+```{r it04-clos}
+it04_clo <- tongue %>%
+  filter(
+    speaker == "it04",
+    label %in% c("closure_")
+  )
+```
+
+```{r it04-clo-gam}
+it04_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it04_clo_gam)
+
+it04_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it04_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it04_clo_gam_null, it04_clo_gam)
+```
+
 # IT05
 
 ## Maximum displacement
@@ -87,6 +275,7 @@ it05_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -102,6 +291,7 @@ it05_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -130,6 +320,7 @@ it05_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -145,6 +336,7 @@ it05_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -182,6 +374,7 @@ it07_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -197,6 +390,7 @@ it07_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -225,6 +419,7 @@ it07_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -240,6 +435,7 @@ it07_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -294,6 +490,7 @@ it09_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -309,6 +506,7 @@ it09_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -338,6 +536,7 @@ it09_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -353,6 +552,7 @@ it09_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -390,6 +590,7 @@ it11_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -405,6 +606,7 @@ it11_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -444,6 +646,7 @@ it11_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -459,6 +662,7 @@ it11_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -524,6 +728,7 @@ it12_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -539,6 +744,7 @@ it12_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -588,6 +794,7 @@ it12_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -603,6 +810,7 @@ it12_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -668,6 +876,7 @@ it13_max_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -682,6 +891,7 @@ it13_max_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -730,6 +940,7 @@ it13_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -744,6 +955,7 @@ it13_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -814,6 +1026,7 @@ it14_clo_gam <- polar_gam(
   Y ~
     c2_phonation +
     vowel +
+    c2_place +
     s(X, bs = "cr") +
     s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
@@ -827,6 +1040,7 @@ it14_clo_gam_null <- polar_gam(
   Y ~
 #    c2_phonation +
     vowel +
+  c2_place +
     s(X, bs = "cr") +
 #    s(X, by = c2_phonation, bs = "cr") +
     s(X, by = vowel, bs = "cr") +
