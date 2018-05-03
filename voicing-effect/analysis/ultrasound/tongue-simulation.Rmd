@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(gamm4)
 library(itsadug)
+library(rticulate)
 ```
 
 ```{r}
@@ -19,7 +20,7 @@ k <- 10
 origin.voiceless <- 0
 y.voiceless <- 1 / (1 + exp(-k * (x + origin.voiceless)))
 
-origin.voiced <- -0.05
+origin.voiced <- -0
 y.voiced <- 1 / (1 + exp(-k * (x + origin.voiced)))
 
 min.tongue <- min(y.voiceless)
@@ -40,11 +41,11 @@ tongue %>%
 ```
 
 ```{r}
-set.seed(878)
+set.seed(787)
 
 x <- seq(0,1,0.01)
 k <- 10
-stdev <- 0.02
+stdev <- 0.2
 
 origin.voiceless <- rnorm(50, mean = 0, sd = stdev)
 y.voiceless <- NULL
@@ -54,7 +55,9 @@ for (i in 1:50) {
     y.voiceless <- c(y.voiceless, y.voiceless.current)
 }
 
-origin.voiced <- rnorm(50, mean = -0.05, sd = stdev)
+set.seed(787)
+
+origin.voiced <- rnorm(50, mean = -0.055, sd = stdev)
 y.voiced <- NULL
 
 for (i in 1:50) {
@@ -71,9 +74,9 @@ tongue2 <- tibble(
     item = as.factor(rep(1:100, each = 101)),
     start.event = rep(c(TRUE, rep(FALSE, 100)), 100)
 ) %>%
-    filter(Y >= 0.6) %>%
+#    filter(Y >= 0.6) %>%
     mutate(
-        phonation.ord = as.ordered(phonation)
+        phonation.ord = ordered(phonation, levels = c("voiceless", "voiced"))
     )
 
 contrasts(tongue2$phonation.ord) <- "contr.treatment"
@@ -81,7 +84,7 @@ contrasts(tongue2$phonation.ord) <- "contr.treatment"
 
 ```{r}
 tongue2 %>%
-    ggplot(aes(X, Y, colour = phonation)) +
+    ggplot(aes(X, Y, colour = phonation.ord)) +
     geom_point(alpha = 0.05) +
     geom_smooth()
 ```
@@ -94,10 +97,22 @@ gamm <- bam(
         s(X, by = phonation.ord, bs = "cr") +
         s(X, item, bs="fs", xt="cr", m=1, k=5),
     data = tongue2,
-    method = "fREML"
+    method = "ML"
 )
 
 summary(gamm)
+
+gamm_null <- bam(
+    Y ~
+#        phonation.ord +
+        s(X, bs = "cr") +
+#        s(X, by = phonation.ord, bs = "cr") +
+        s(X, item, bs="fs", xt="cr", m=1, k=5),
+    data = tongue2,
+    method = "ML"
+)
+
+compareML(gamm_null, gamm)
 ```
 
 ```{r}
@@ -110,3 +125,58 @@ plot_diff(gamm, view = "X",
 ```{r}
 acf_plot(resid(gamm), split_by=list(tongue2$item))
 ```
+
+## Polar GAM
+
+```{r}
+polar <- polar_gam(
+  Y ~
+    phonation.ord +
+    s(X, bs = "cr") +
+    s(X, by = phonation.ord, bs = "cr") +
+    s(X, item, bs = "fs", xt = "cr", m = 1, k = 5),
+  origin = c(1, 0),
+  data = tongue2,
+  method = "ML"
+)
+summary(polar)
+```
+
+```{r}
+plot_polar_smooths(
+  polar,
+  X,
+  phonation.ord
+)
+```
+
+```{r}
+plot_diff(
+  polar,
+  view = "X",
+  comp = list(phonation.ord = c("voiceless", "voiced"))
+)
+```
+
+## Polar SSANOVA
+
+```{r}
+tongue2_df <- tongue2 %>%
+  select(X, Y, phonation, item) %>%
+  mutate(
+    token = as.numeric(item),
+    phonation = factor(phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  select(-item) %>%
+  as.data.frame(.)
+
+ssanova <- polar.ssanova(
+    tongue2_df,
+    "phonation",
+    CI.fill = TRUE,
+    is.polar = FALSE,
+    flip = T,
+    origin = c(1, 0)
+)
+```
+
