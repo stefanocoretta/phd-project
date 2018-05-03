@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(tidymv)
 library(rticulate)
 library(itsadug)
 ```
@@ -51,7 +52,8 @@ tongue <- list.files(
   mutate(
     c2_phonation = ordered(c2_phonation, levels = c("voiceless", "voiced")),
     vowel = ordered(vowel, levels = c("a", "o", "u")),
-    c2_place = ordered(c2_place, levels = c("coronal", "velar"))
+    c2_place = ordered(c2_place, levels = c("coronal", "velar")),
+    speaker_phon = interaction(speaker, c2_phonation)
   ) %>%
   mutate_if(is.character, as.factor)
 
