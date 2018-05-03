@@ -58,6 +58,8 @@ In this paper, I will report the results from an exploratory study which fill th
 
 # Methodology
 
+## Participants
+
 <!-- \ctable[caption = Sociolinguistic information on participants. The right-most column indicates whether the participant spent more than 6 consecutive months abroad.,
 label = t:participants
 ]{lllll}{}{
@@ -73,7 +75,7 @@ PL04 & f   & 34  & Warsaw   & no                \NN
 PL05 & m   & 34  & Przasnysz & no               \LL
 } -->
 
-12 native speakers of Italian (5 females, 7 males) and 6 native speakers of Polish (3 females, 3 males) were recorded in the Phonetics Laboratory at the University of Manchester and in a private location in Italy (see \Cref{t:participants}).
+Eleven native speakers of Italian (5 females, 6 males) and 6 native speakers of Polish (3 females, 3 males) were recorded in the Phonetics Laboratory at the University of Manchester and in a private location in Italy (see \Cref{t:participants}).
 <!-- need to update locations and everything -->
 The Italian speakers of this study are from Northern Italy (three from the north-west and one from north-east).
 The Polish group was more heterogeneous, with two speakers from the West (Poznań), and two from the East (Warsaw and Przasnysz).
@@ -106,31 +108,38 @@ The similarity of prosodic structure of these sentences ensured better comparabi
     \label{f:uti-setup}
 \end{figure*} -->
 
-An Articulate Instruments Ltd™ set-up was used for this study (\Cref{f:uti-setup}).
-The ultrasonic data was collected through a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
-Stabilisation of the ultrasonic transducer was ensured by using a headset sold by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
-A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
-A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
-The acquisition of the ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
-The synchronisation of the ultrasonic and audio signals was performed by AAA after recording.
+An Articulate Instruments Ltd™ system was used for this study.
+The system is made of a TELEMED Echo Blaster 128 unit, an Articulate Instruments Ltd™ P-Stretch synchronisation unit, and a FocusRight Scarlett Solo pre-amplifier (see \Cref{f:uti-setup}).
+A TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz) and a Movo LV4-O2 Lavalier microphone were used respectively the acquisition of ultrasonic and audio data.
+Stabilisation of the ultrasonic transducer was ensured by means of a metallic headset designed by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
+<!-- add figure -->
+The transducer was placed in contact with the sub-mental triangle, aligned with the mid-sagittal plane.
+The headset holds the transducer and it keeps it in a constant position and inclination relative to the sub-mental triangle, thus allowing head movements without the need for post-processing correction.
+The acquisition of the mid-sagittal ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+The synchronisation of the ultrasonic and audio signals was performed by AAA after recording by means of a synchronisation signal produced by the P-Stretch unit.
+The ranges of the ultrasonic settings were: frames per second = 43-68, number of scan lines = 88–114, pixel per scan line = 980–988, field of view = 71–93°, pixel offset = 109–263, depth (mm) = 75–180.
+The audio signal was recorded at 22050 Hz (16-bit).
 
-<!-- used all? -->
-The participant's occlusal plane was obtained using a bite plate [@scobbie2011], and the hard palate was imaged by asking the participant to swallow water [@epstein2005].
-The frame rate of the acquisition of the ultrasonic data ranged between 43 and 68 frames per second.
-Other settings values varied depending on the frame rate.
-The ranges of these settings in this study were: scanlines = 88–114, pixel per scanline = 980–988, field of view = 71–93, pixel offset = 109–263, depth (mm) = 75–180.
-The audio signal was recorded at 22050 MHz (16-bit).
-The sentences containing the target words were randomised between participants, although the order was kept the same between repetitions within participant due to design constraints of the AAA software.
-Each participant produced six repetitions of each sentence, which led to a grand total of 1296 sentences.
+The head set with the prob was fitted at the beginning of the experimental session.
+Then the hard palate was imaged by recording the participant swallowing water [@epstein2005].
+A between-speaker reference coordinate system was derived from imaging the occlusal plane, which corresponds to the trace of a metallic bite plate inserted in the mouth of the participant [@scobbie2011].
+The participant gently bites on the bite plate while pressing the tongue against it.
+<!-- add image -->
+The participant then started reading six repetitions of the sentences with the target words.
+These were presented on the screen in a randomised order across participants, although the order was kept the same for each repetition within participant due to design constraints of the AAA software.
+<!-- say grand total -->
 
 ## Data processing and analysis
 
+### Acoustic data
+
 The audio data was subject to force alignment using the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
-The outcome of the automatic alignment was then manually corrected, according to the criteria in \Cref{t:dur-measures}.
-The onset of the target consonant release (C2 release) was detected automatically in Praat [@boersma2016] by means of the burst-detection algorithm described in @ananthapadmanabha2014.
+The outcome of the automatic alignment was then manually corrected, according to the criteria in \Cref{t:dur-measures}, which were mainly based on properties of the the spectrogram.
+<!-- add reference -->
+The release C2 was detected automatically in Praat [@boersma2016] by means of the burst-detection algorithm described in @ananthapadmanabha2014.
 The durations of the following intervals were extracted from the annotated acoustic landmarks using a scripted procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 release).
 
-\ctable[caption = List of measurements as extracted from acoustics.,
+\ctable[caption = List of measurements extracted from the acoustic data.,
 label = t:dur-measures,
 width=\textwidth,
 star
@@ -144,3 +153,21 @@ closure onset         & (C2 closure onset) & corresponds to V1 offset           
 consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
 consonant release & (C2 release)         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
 }
+
+### Ultrasonic data
+
+Mid-sagittal tongue contours were obtained from the ultrasonic data according to the following method.
+Smoothing splines were automatically fitted to the visible tongue contours in AAA.
+Manual correction was then applied in cases of clear tracking errors.
+The time of maximum tongue displacement within consonant closure was then calculated in AAA following the method described in @strycharczuk2015, which is based on the velocity of tongue displacement along a vector.
+To obtain the time of maximum displacement, a fan-like frame consisting of 42 equidistant radial lines is used as the coordinate system.
+The origin of the 42 fan-lines coincides with the centre of the ultrasonic transducer, such that each fan-line is parallel to the direction of the ultrasonic scan lines.
+Tongue displacement was thus calculated as the displacement of the fitted splines along the fan-line vectors.
+The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation of displacement.
+The fan-lines from which the relevant vector was chosen were restricted to the fan-lines corresponding to the tongue tip for coronal consonants, and to the fan-lines corresponding to the tongue dorsum for velar consonants.
+<!-- The displacement was calculated based on the movement of the splines along one of the 42 fan lines.
+Fan line selection in this study was achieved by finding the fan line within the relevant area of the tongue (tongue tip for coronal consonants and tongue dorsum for velar consonants) with the highest standard deviation of displacement.
+-->
+
+The polar coordinates of the tongue contours were exported from two time points: the onset of C2 closure, and the time of maximum tongue displacement (which is always within C2 closure).
+The contours were normalised within speaker by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
