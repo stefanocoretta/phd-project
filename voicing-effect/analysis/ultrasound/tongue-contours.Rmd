@@ -13,6 +13,7 @@ theme_set(theme_minimal())
 library(tidymv)
 library(rticulate)
 library(itsadug)
+library(beepr)
 ```
 
 # Data import
@@ -61,6 +62,426 @@ contrasts(tongue$c2_phonation) <- "contr.treatment"
 contrasts(tongue$vowel) <- "contr.treatment"
 contrasts(tongue$c2_place) <- "contr.treatment"
 ```
+
+# IT05
+
+## Maximum displacement
+
+```{r it05-max}
+it05_max <- tongue %>%
+  filter(
+    speaker == "it05",
+    label %in% c("max_TT", "max_TD")
+  )
+```
+
+```{r it05-max-plot}
+it05_max %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r it05-max-gam}
+it05_max_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it05_max,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it05_max_gam)
+
+it05_max_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it05_max,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it05_max_gam_null, it05_max_gam)
+```
+
+## Closure
+
+```{r it05-clos}
+it05_clo <- tongue %>%
+  filter(
+    speaker == "it05",
+    label %in% c("closure_")
+  )
+```
+
+```{r it05-clo-gam}
+it05_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it05_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it05_clo_gam)
+
+it05_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it05_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it05_clo_gam_null, it05_clo_gam)
+```
+
+# IT07
+
+## Maximum displacement
+
+```{r it07-max}
+it07_max <- tongue %>%
+  filter(
+    speaker == "it07",
+    label %in% c("max_TT", "max_TD")
+  )
+```
+
+```{r it07-max-plot}
+it07_max %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r it07-max-gam}
+it07_max_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it07_max,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it07_max_gam)
+
+it07_max_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it07_max,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it07_max_gam_null, it07_max_gam)
+```
+
+## Closure
+
+```{r it07-clos}
+it07_clo <- tongue %>%
+  filter(
+    speaker == "it07",
+    label %in% c("closure_")
+  )
+```
+
+```{r it07-clo-gam}
+it07_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it07_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it07_clo_gam)
+
+it07_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it07_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it07_clo_gam_null, it07_clo_gam)
+```
+
+# IT09
+
+## Maximum displacement
+
+```{r it09-max}
+it09_max <- tongue %>%
+  filter(
+    speaker == "it09",
+    label %in% c("max_TT", "max_TD")
+  )
+```
+
+```{r it09-max-plot}
+it09_max %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r it09-max-plot-filt}
+it09_max %>%
+  filter(Y > -40) %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r it09-max-filt}
+it09_max_filt <- tongue %>%
+  filter(
+    speaker == "it09",
+    label %in% c("max_TT", "max_TD"),
+    Y > -40
+  )
+```
+
+```{r it09-max-gam}
+it09_max_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it09_max_filt,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it09_max_gam)
+
+it09_max_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it09_max_filt,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it09_max_gam_null, it09_max_gam)
+```
+
+## Closure
+
+```{r it09-clos}
+it09_clo <- tongue %>%
+  filter(
+    speaker == "it09",
+    label %in% c("closure_"),
+    Y > -40
+  )
+```
+
+```{r it09-clo-gam}
+it09_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it09_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it09_clo_gam)
+
+it09_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it09_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it09_clo_gam_null, it09_clo_gam)
+```
+
+# IT11
+
+## Maximum displacement
+
+```{r it11-max}
+it11_max <- tongue %>%
+  filter(
+    speaker == "it11",
+    label %in% c("max_TT", "max_TD")
+  )
+```
+
+```{r it11-max-plot}
+it11_max %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r it11-max-gam}
+it11_max_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it11_max,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it11_max_gam)
+
+it11_max_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it11_max,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it11_max_gam_null, it11_max_gam)
+```
+
+```{r it11-max-smooths}
+plot_polar_smooths(
+  it11_max_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+IT11 show different contours: voiced has retracted tongue and higher tongue tip/body.
+
+## Closure
+
+```{r it11-clos}
+it11_clo <- tongue %>%
+  filter(
+    speaker == "it11",
+    label %in% c("closure_")
+  )
+```
+
+```{r it11-clo-gam}
+it11_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it11_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+summary(it11_clo_gam)
+
+it11_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = it11_clo,
+  method = "ML",
+  fan_lines = c(15, 22)
+)
+
+compareML(it11_clo_gam_null, it11_clo_gam)
+```
+
+```{r it11-clo-smooths}
+plot_polar_smooths(
+  it11_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
+Same for closure: tongue root retraction in voiced and tongue tip raised.
 
 # IT12
 
@@ -424,5 +845,9 @@ plot_polar_smooths(
   c2_phonation,
   facet_terms = vowel
 )
+```
+
+```{r}
+beep(2)
 ```
 
