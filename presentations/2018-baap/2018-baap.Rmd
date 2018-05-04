@@ -709,7 +709,7 @@ plot_polar_smooths(
   facet_terms = c2_place + vowel
 )
 
-acf_resid(it02_polar_gam, split_pred = list(it02$rec_date))
+acf_resid(it03_polar_gam, split_pred = list(it03$rec_date))
 ```
 
 ```{r pl04, eval=FALSE, include=FALSE}
