@@ -110,6 +110,15 @@ it01_clo_gam_null <- polar_gam(
 compareML(it01_clo_gam_null, it01_clo_gam)
 ```
 
+```{r it01-clo-smooths}
+plot_polar_smooths(
+  it01_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
 # IT02
 
 ## Closure
@@ -158,6 +167,14 @@ it02_clo_gam_null <- polar_gam(
 compareML(it02_clo_gam_null, it02_clo_gam)
 ```
 
+```{r it02-clo-smooths}
+plot_polar_smooths(
+  it02_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
 
 # IT03
 
@@ -202,6 +219,15 @@ it03_clo_gam_null <- polar_gam(
 )
 
 compareML(it03_clo_gam_null, it03_clo_gam)
+```
+
+```{r it03-clo-smooths}
+plot_polar_smooths(
+  it03_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place
+)
 ```
 
 # IT04
