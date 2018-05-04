@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(lme4)
+library(effects)
 ```
 
 # Data import
@@ -18,15 +20,30 @@ theme_set(theme_minimal())
 speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
-formants <- list.files(
+durations <- list.files(
+  path = "voicing-effect/data/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
+
+vowels <- list.files(
   path = "voicing-effect/data/datasets/acoustics/",
   pattern = "*-formants.csv",
   full.names = TRUE
 ) %>%
   map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = durations, by = c("speaker", "file", "word")) %>%
   left_join(y = speakers) %>%
   left_join(y = words) %>%
   mutate_if(is.character, as.factor)
+
+f1_dur <- vowels %>%
+  group_by(speaker, vowel, file) %>%
+  summarise(
+    f1 = mean(f1),
+    vowel_duration = mean(vowel_duration)
+  )
 ```
 
 # Exploration
@@ -98,3 +115,32 @@ for (i in 1:9) {
   )
 }
 ```
+
+```{r height-duration}
+vowels %>%
+  group_by(file) %>%
+  summarise(
+    f1 = mean(f1),
+    vowel_duration = mean(vowel_duration)
+  ) %>%
+  ggplot(aes(f1, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+f1_dur_lm <- lmer(
+  vowel_duration ~
+    f1 +
+    vowel +
+    f1:vowel +
+    (1|speaker),
+  data = f1_dur
+)
+summary(f1_dur_lm)
+```
+
+```{r}
+plot(allEffects(f1_dur_lm))
+```
+
