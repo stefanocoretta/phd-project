@@ -1,25 +1,24 @@
 ---
-title: "Vowel duration and tongue root advancement: Results from an exploratory study of the relation between voicing and vowel duration"
-author: "Stefano Coretta"
-date: "02/05/2018"
+title: |
+  Vowel duration and tongue root advancement: Results from an exploratory study of the relation between voicing and vowel duration
+author:
+- name: Stefano Coretta
+  affiliation: The University of Manchester
+  email: stefano.coretta\@manchester.ac.uk
 output:
-  bookdown::pdf_document2:
+  jasaarticle::jasa_article:
     citation_package: natbib
-    latex_engine: xelatex
-    number_sections: yes
-    toc: no
-    fig_caption: yes
-papersize: A4
-fontsize: 12pt
-mainfont: Brill
-mainfontoptions: Numbers=Lining
+abstract: |
+  Put your abstract here. Abstracts are limited to 200 words for
+  regular articles and 100 words for Letters to the Editor. Please no
+  personal pronouns, also please do not use the words ``new'' and/or
+  ``novel'' in the abstract. An article usually includes an abstract, a
+  concise summary of the work covered at length in the main body of the
+  article.
 bibliography: linguistics.bib
-biblio-style: unified.bst
 header-includes:
-- \frenchspacing
 - \usepackage{cleveref}
 - \usepackage{ctable}
-- \setcitestyle{aysep={},notesep={:},citesep={,}}
 ---
 
 ```{r setup, include=FALSE}
@@ -97,7 +96,6 @@ Since the original motive for the exploratory study was to study possible differ
 The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' for Italian, and *Mówię X teraz* 'I say X now' for Polish.
 <!-- say that speakers were instructed not to produce pauses and not to speak slowly -->
 The similarity of prosodic structure of these sentences ensured better comparability between the two languages.
-<!-- say no filer to keep the experiment short for discomfort from headset -->
 
 ## Equipment and procedure
 \label{s:equipment}
@@ -127,8 +125,7 @@ A between-speaker reference coordinate system was derived from imaging the occlu
 The participant gently bites on the bite plate while pressing the tongue against it.
 <!-- add image -->
 The participant then started reading six repetitions of the sentences with the target words.
-<!-- say about told them to speak naturally and without pauses -->
-These were presented on the computer screen in a randomised order across participants, although the order was kept the same for each repetition within participant due to design constraints of the AAA software.
+These were presented on the screen in a randomised order across participants, although the order was kept the same for each repetition within participant due to design constraints of the AAA software.
 <!-- say grand total -->
 
 ## Data processing and analysis
@@ -167,15 +164,9 @@ The origin of the 42 fan-lines coincides with the centre of the ultrasonic trans
 Tongue displacement was thus calculated as the displacement of the fitted splines along the fan-line vectors.
 The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation of displacement.
 The fan-lines from which the relevant vector was chosen were restricted to the fan-lines corresponding to the tongue tip for coronal consonants, and to the fan-lines corresponding to the tongue dorsum for velar consonants.
+<!-- The displacement was calculated based on the movement of the splines along one of the 42 fan lines.
+Fan line selection in this study was achieved by finding the fan line within the relevant area of the tongue (tongue tip for coronal consonants and tongue dorsum for velar consonants) with the highest standard deviation of displacement.
+-->
 
 The polar coordinates of the tongue contours were exported from two time points: the onset of C2 closure, and the time of maximum tongue displacement (which is always within C2 closure).
-Offsetting and rotation relative to the participant’s occlusal plane were applied on the contour coordinates, such that the bite plate trace is aligned horizontally and the origin (0, 0) of the coordinate system corresponds to the left edge of the trace [@scobbie2011].
-
-### Statistical analysis
-
-The acoustic durational data were subject to linear mixed-effects regressions.
-The durational data were analysed with linear mixed effects models using `lme4` in R [@r-core-team2017; @bates2015].
-*P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor.
-Generalised additive mixed models [GAMMs, @wood2006;@zuur2012] were used for the statistical analysis of tongue contour data.
-Significance testing in GAMMs was achieved through model comparison with the `compareML()` function from the `itsadug` package [@van-rij2017], while visual inspection of the difference smooth was employed to localise the portion along which the contours diverge if model comparison indicated a significant difference, as suggested in \citet{soskuthy2017}.
-<!-- maybe I don't look at the difference smooth at all -->
+The contours were normalised within speaker by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
