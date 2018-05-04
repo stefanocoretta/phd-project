@@ -1085,6 +1085,301 @@ plot_polar_smooths(
 )
 ```
 
+# PL02
+
+## Closure
+
+```{r pl02-clos}
+pl02_clo <- tongue %>%
+  filter(
+    speaker == "pl02",
+    label %in% c("closure_")
+  )
+```
+
+```{r pl02-clo-gam}
+pl02_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl02_clo,
+  method = "ML"
+)
+summary(pl02_clo_gam)
+
+pl02_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+  c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl02_clo,
+  method = "ML"
+)
+
+compareML(pl02_clo_gam_null, pl02_clo_gam)
+```
+
+# PL03
+
+## Closure
+
+```{r pl03-clos}
+pl03_clo <- tongue %>%
+  filter(
+    speaker == "pl03",
+    label %in% c("closure_")
+  )
+```
+
+```{r pl03-clo-gam}
+pl03_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl03_clo,
+  method = "ML"
+)
+summary(pl03_clo_gam)
+
+pl03_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+  c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl03_clo,
+  method = "ML"
+)
+
+compareML(pl03_clo_gam_null, pl03_clo_gam)
+```
+
+# PL04
+
+## Closure
+
+```{r pl04-clos}
+pl04_clo <- tongue %>%
+  filter(
+    speaker == "pl04",
+    label %in% c("closure_")
+  )
+```
+
+```{r pl04-clo-gam}
+pl04_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl04_clo,
+  method = "ML"
+)
+summary(pl04_clo_gam)
+
+pl04_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+  c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl04_clo,
+  method = "ML"
+)
+
+compareML(pl04_clo_gam_null, pl04_clo_gam)
+```
+
+# PL05
+
+## Closure
+
+```{r pl05-clos}
+pl05_clo <- tongue %>%
+  filter(
+    speaker == "pl05",
+    label %in% c("closure_")
+  )
+```
+
+```{r pl05-clo-gam}
+pl05_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl05_clo,
+  method = "ML"
+)
+summary(pl05_clo_gam)
+
+pl05_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+  c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl05_clo,
+  method = "ML"
+)
+
+compareML(pl05_clo_gam_null, pl05_clo_gam)
+```
+
+# PL06
+
+## Closure
+
+```{r pl06-clos}
+pl06_clo <- tongue %>%
+  filter(
+    speaker == "pl06",
+    label %in% c("closure_"),
+    X < 26,
+    Y > -30
+  )
+```
+
+```{r pl06-clo-plot}
+pl06_clo %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r pl06-clo-gam}
+pl06_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl06_clo,
+  method = "ML"
+)
+summary(pl06_clo_gam)
+
+pl06_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+  c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl06_clo,
+  method = "ML"
+)
+
+compareML(pl06_clo_gam_null, pl06_clo_gam)
+```
+
+# PL07
+
+## Closure
+
+```{r pl07-clos}
+pl07_clo <- tongue %>%
+  filter(
+    speaker == "pl07",
+    label %in% c("closure_"),
+    Y > -26
+  )
+```
+
+```{r pl07-clo-plot}
+pl07_clo %>%
+  ggplot(aes(X, Y, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r pl07-clo-gam}
+pl07_clo_gam <- polar_gam(
+  Y ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(X, bs = "cr") +
+    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl07_clo,
+  method = "ML"
+)
+summary(pl07_clo_gam)
+
+pl07_clo_gam_null <- polar_gam(
+  Y ~
+#    c2_phonation +
+    vowel +
+  c2_place +
+    s(X, bs = "cr") +
+#    s(X, by = c2_phonation, bs = "cr") +
+    s(X, by = vowel, bs = "cr") +
+    s(X, by = c2_place, bs = "cr") +
+    s(X, rec_date, bs = "fs", xt = "cr", m = 1),
+  data = pl07_clo,
+  method = "ML"
+)
+
+compareML(pl07_clo_gam_null, pl07_clo_gam)
+```
+
+
+
+
+
+
+
+
+
 ```{r}
 beep(2)
 ```
