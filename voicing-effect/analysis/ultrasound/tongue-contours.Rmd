@@ -1265,6 +1265,15 @@ pl05_clo_gam_null <- polar_gam(
 compareML(pl05_clo_gam_null, pl05_clo_gam)
 ```
 
+```{r pl05-clo-smooths}
+plot_polar_smooths(
+  pl05_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
+```
+
 # PL06
 
 ## Closure
@@ -1298,7 +1307,8 @@ pl06_clo_gam <- polar_gam(
     s(X, by = c2_place, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = pl06_clo,
-  method = "ML"
+  method = "ML",
+  fan_lines = c(16, 19)
 )
 summary(pl06_clo_gam)
 
@@ -1313,10 +1323,20 @@ pl06_clo_gam_null <- polar_gam(
     s(X, by = c2_place, bs = "cr") +
     s(X, rec_date, bs = "fs", xt = "cr", m = 1),
   data = pl06_clo,
-  method = "ML"
+  method = "ML",
+  fan_lines = c(16, 19)
 )
 
 compareML(pl06_clo_gam_null, pl06_clo_gam)
+```
+
+```{r pl06-clo-smooths}
+plot_polar_smooths(
+  pl06_clo_gam,
+  X,
+  c2_phonation,
+  facet_terms = c2_place + vowel
+)
 ```
 
 # PL07
