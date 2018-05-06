@@ -376,11 +376,12 @@ as_tibble(coef(tra_z_lm)$speaker[2], rownames = "speaker") %>%
   labs(title = "By-speaker random coefficients", y = "TRA (scaled)")
 ```
 
-```{r tra-lm-rand}
+```{r tra-rand-lm}
 tra_rand_lm <- lmer(
   tra ~
     c2_phonation +
     vowel +
+    c2_place +
     (1+c2_phonation|speaker) +
     (1|item),
   data = filter(tongue_root, tra_z < 3),
@@ -391,9 +392,11 @@ summary(tra_rand_lm)
 
 tra_rand_lm_null <- lmer(
   tra ~
-    c2_phonation +
+ #   c2_phonation +
     vowel +
-    (1+c2_phonation|speaker),
+    c2_place +
+    (1+c2_phonation|speaker) +
+   (1|item),
   data = filter(tongue_root, tra_z < 3),
   REML = FALSE
 )
@@ -403,20 +406,36 @@ summary(tra_rand_lm_null)
 anova(tra_rand_lm_null, tra_rand_lm)
 ```
 
-```{r}
-as_tibble(ranef(tra_lm)$speaker[2], rownames = "speaker") %>%
+```{r tra-rand-lm-ranef-coeff}
+as_tibble(ranef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
   labs(title = "By-speaker random coefficients", y = "mm")
 ```
 
-```{r}
-as_tibble(coef(tra_lm)$speaker[2], rownames = "speaker") %>%
+```{r tra-rand-lm-ranef-intercept}
+as_tibble(ranef(tra_rand_lm)$speaker[1], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, `(Intercept)`, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker random intercepts", y = "mm")
+```
+
+```{r tra-rand-lm-coef}
+as_tibble(coef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
   labs(title = "By-speaker random coefficients", y = "mm")
+```
+
+```{r tra-rand-lm-coef-intercept}
+as_tibble(coef(tra_rand_lm)$speaker[1], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, -`(Intercept)`, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker random intercepts", y = "mm")
 ```
 
 ```{r tra-max-lm}
@@ -467,7 +486,7 @@ tra_series %>%
 ```{r}
 tra_series %>%
   ggplot(aes(proportion, tra_z, colour = c2_phonation)) +
-  geom_smooth(se = FALSE) +
+  geom_smooth(se = TRUE) +
   facet_wrap(~ speaker, ncol = 4)
 ```
 
@@ -516,13 +535,12 @@ tra_series_gam <- bam(
     c2_phonation +
     vowel +
     c2_place +
-    s(proportion) +
-    s(proportion, by = c2_phonation) +
-    s(proportion, by = vowel) +
-    s(proportion, by = c2_place) +
-#    s(proportion, rec_date, bs = "fs") +
-    s(proportion, speaker, bs = "fs") +
-    s(proportion, speaker_contexts, bs = "fs"),
+    s(proportion, bs = "cr") +
+    s(proportion, by = c2_phonation, bs = "cr") +
+    s(proportion, by = vowel, bs = "cr") +
+    s(proportion, by = c2_place, bs = "cr") +
+    s(proportion, rec_date, bs = "fs", m = 1, xt = "cr") +
+    s(proportion, speaker_contexts, bs = "fs", m = 1, xt = "cr"),
   data = tra_series
 )
 
@@ -550,7 +568,7 @@ filter(pred, vowel == "a", c2_place == "coronal") %>%
 ```
 
 
-```{r tra-series-gam}
+```{r tra-series-gam-pl05}
 tra_series_gam_pl05 <- bam(
   tra_z ~
     c2_phonation +
