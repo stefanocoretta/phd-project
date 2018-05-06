@@ -204,7 +204,7 @@ voicing_lm <- lmer(
     language +
     vowel:language +
     (1+vowel|speaker) +
-    (1|word),
+    (1|item),
   data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
   REML = FALSE
 )
@@ -216,7 +216,7 @@ voicing_lm_null <- lmer(
     language +
 #    vowel:language +
     (1+vowel|speaker) +
-    (1|word),
+    (1|item),
   data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
   REML = FALSE
 )
@@ -229,7 +229,7 @@ voicing_lm_null_2 <- lmer(
     language +
 #    vowel:language +
     (1+vowel|speaker) +
-    (1|word),
+    (1|item),
   data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
   REML = FALSE
 )
@@ -242,7 +242,7 @@ voicing_lm_null_3 <- lmer(
     language +
 #    vowel:language +
     (1|speaker) +
-    (1|word),
+    (1|item),
   data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
   REML = FALSE
 )
