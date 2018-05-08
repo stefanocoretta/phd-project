@@ -386,10 +386,13 @@ tra_rand_lm_null <- lmer(
   REML = FALSE
 )
 
-summary(tra_rand_lm_null)
-
 anova(tra_rand_lm_null, tra_rand_lm)
 ```
+
+```{r}
+plot(allEffects(tra_rand_lm))
+```
+
 
 ```{r tra-rand-lm-ranef-coeff}
 as_tibble(ranef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
@@ -412,15 +415,15 @@ as_tibble(coef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random coefficients", y = "mm")
+  labs(title = "By-speaker coefficients", y = "mm")
 ```
 
 ```{r tra-rand-lm-coef-intercept}
 as_tibble(coef(tra_rand_lm)$speaker[1], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
-  ggplot(aes(speaker, -`(Intercept)`, fill = language)) +
+  ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random intercepts", y = "mm")
+  labs(title = "By-speaker intercepts", y = "mm")
 ```
 
 ```{r tra-max-lm}
