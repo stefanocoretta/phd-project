@@ -527,7 +527,7 @@ tra_series_gam <- bam(
     s(proportion, by = c2_phonation, bs = "cr") +
     s(proportion, by = vowel, bs = "cr") +
     s(proportion, by = c2_place, bs = "cr") +
-    s(proportion, rec_date, bs = "fs", m = 1, xt = "cr") +
+#    s(proportion, rec_date, bs = "fs", m = 1, xt = "cr") +
     s(proportion, speaker_contexts, bs = "fs", m = 1, xt = "cr"),
   data = tra_series
 )
@@ -550,19 +550,52 @@ pred <- get_gam_predictions(tra_series_gam, proportion, exclude_random = FALSE) 
   separate(speaker_contexts, c("speaker", "a", "b", "c"))
 
 filter(pred, vowel == "a", c2_place == "coronal") %>%
-  ggplot(aes(proportion, tra_z, colour = c2_phonation)) +
-  geom_path() +
+  ggplot(aes(proportion, tra_z)) +
+  geom_ribbon(aes(ymin = CI_lower,ymax = CI_upper, fill = c2_phonation), alpha = 0.2) +
+  geom_path(aes(colour = c2_phonation)) +
   facet_wrap(~ speaker, ncol = 4)
 ```
 
+```{r tra-series-gam-non-z}
+tra_series_gam_2 <- bam(
+  tra ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    s(proportion, bs = "cr") +
+    s(proportion, by = c2_phonation, bs = "cr") +
+    s(proportion, by = vowel, bs = "cr") +
+    s(proportion, by = c2_place, bs = "cr") +
+#    s(proportion, rec_date, bs = "fs", m = 1, xt = "cr") +
+    s(proportion, speaker_contexts, bs = "fs", m = 1, xt = "cr"),
+  data = tra_series
+)
+
+summary(tra_series_gam_2)
+```
+
+```{r}
+pred_2 <- get_gam_predictions(tra_series_gam, proportion, exclude_random = FALSE) %>%
+  separate(speaker_contexts, c("speaker", "a", "b", "c"))
+
+filter(pred_2, vowel == "a", c2_place == "coronal") %>%
+  ggplot(aes(proportion, tra_z)) +
+  geom_ribbon(aes(ymin = CI_lower,ymax = CI_upper, fill = c2_phonation), alpha = 0.2) +
+  geom_path(aes(colour = c2_phonation)) +
+  facet_wrap(~ speaker, ncol = 4)
+```
 
 ```{r tra-series-gam-pl05}
 tra_series_gam_pl05 <- bam(
   tra_z ~
     c2_phonation +
+    vowel +
+    c2_place +
     s(proportion) +
-    s(proportion, by = c2_phonation),
-  data = filter(tra_series, speaker == "it01")
+    s(proportion, by = c2_phonation) +
+    s(proportion, by = vowel) +
+    s(proportion, by = c2_place),
+  data = filter(tra_series, speaker == "it13")
 )
 
 summary(tra_series_gam_pl05)
@@ -572,7 +605,8 @@ summary(tra_series_gam_pl05)
 plot_smooths(
   tra_series_gam_pl05,
   proportion,
-  c2_phonation
+  c2_phonation,
+  facet_terms = c2_place + vowel
 )
 ```
 
