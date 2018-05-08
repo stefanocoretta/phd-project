@@ -247,3 +247,19 @@ as_tibble(ranef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
   geom_bar(stat = "identity") +
   labs(title = "By-speaker random intercepts", y = "Vowel duration (msec)")
 ```
+
+```{r vowdur-lm-ranef-coeff}
+as_tibble(coef(vowdur_lm)$speaker[2], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker coefficients", y = "msec")
+```
+
+```{r vowdur-lm-ranef-intercept}
+as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, `(Intercept)`, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker intercepts", y = "Vowel duration (msec)")
+```
