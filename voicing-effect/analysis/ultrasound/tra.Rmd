@@ -519,6 +519,8 @@ tra_series %>%
   facet_grid(c2_place ~ vowel)
 ```
 
+### Normalised
+
 ```{r tra-series-gam}
 tra_series_gam <- bam(
   tra_z ~
@@ -537,23 +539,11 @@ tra_series_gam <- bam(
 summary(tra_series_gam)
 ```
 
-```{r}
+```{r tra-series-gam-acf}
 acf_plot(resid(tra_series_gam), split_by = list(tra_series$rec_date))
 ```
 
-
-```{r}
-plot_smooths(
-  tra_series_gam,
-  proportion,
-  c2_phonation,
-  exclude_random = FALSE,
-  exclude_terms = "s(proportion,rec_date)",
-  conditions = quos(c2_place == "coronal", vowel == "a")
-)
-```
-
-```{r}
+```{r tra-series-gam-smooths}
 pred <- get_gam_predictions(
   tra_series_gam,
   proportion,
@@ -568,6 +558,8 @@ filter(pred, vowel == "a", c2_place == "coronal") %>%
   geom_path(aes(colour = c2_phonation)) +
   facet_wrap(~ speaker, ncol = 4)
 ```
+
+### Non-normalised
 
 ```{r tra-series-gam-non-z}
 tra_series_gam_2 <- bam(
