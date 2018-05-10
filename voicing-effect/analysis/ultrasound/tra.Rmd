@@ -558,8 +558,7 @@ pred <- get_gam_predictions(
   tra_series_gam,
   proportion,
   exclude_random = FALSE,
-  exclude_terms = "s(proportion,rec_date)",
-  series_length = 5
+  exclude_terms = "s(proportion,rec_date)"
 ) %>%
   separate(speaker_contexts, c("speaker", "c2_phonation_a", "c2_place_b", "vowel_c"))
 
