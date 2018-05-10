@@ -67,7 +67,7 @@ closing <- tongue %>%
   spread(label, seconds) %>%
   na.omit() %>%
   mutate(
-    closing_duration = closure - GONS
+    closing_duration = (closure - GONS) * 1000
   ) %>%
   filter(closing_duration > 0)
 
@@ -164,11 +164,31 @@ plot(allEffects(closing_lm))
 
 ```{r}
 tongue_root %>%
-  ggplot(aes(TR_displacement_sm, closing_duration, colour = c2_phonation)) +
+  filter(TRA < 3) %>%
+  ggplot(aes(TRA, closing_duration, colour = c2_phonation)) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_grid(~ language)
 ```
+
+```{r}
+tra_closing <- lmer(
+  closing_duration ~
+    TRA +
+    vowel +
+    c2_phonation +
+    (1|speaker) +
+    (1|item),
+  data = filter(tongue_root, TRA < 3),
+  REML = FALSE
+)
+summary(tra_closing)
+```
+
+```{r}
+plot(allEffects(tra_closing))
+```
+
 
 # Closing gesture velocity
 
