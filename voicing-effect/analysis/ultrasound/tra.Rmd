@@ -856,13 +856,13 @@ tra_clust %>%
 
 # Tongue root displacement between vowel onsent and offset
 
-```{r}
+```{r tra-difference-density}
 tra_difference %>%
   ggplot(aes(tra_difference, fill = c2_phonation)) +
   geom_density(alpha = 0.5)
 ```
 
-```{r}
+```{r tra-difference-density-vowplace}
 tra_difference %>%
   ggplot(aes(tra_difference, fill = c2_phonation)) +
   geom_density(alpha = 0.5) +
@@ -876,7 +876,7 @@ tra_difference %>%
   geom_smooth(method = "lm")
 ```
 
-```{r}
+```{r tra-difference-lm}
 tra_difference_lm <- lmer(
   tra_difference ~
     vowel_duration +
@@ -889,7 +889,7 @@ tra_difference_lm <- lmer(
 summary(tra_difference_lm)
 ```
 
-```{r}
+```{r tra-difference-lm-plot}
 plot(allEffects(tra_difference_lm))
 ```
 
