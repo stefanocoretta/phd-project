@@ -576,7 +576,7 @@ acf_plot(resid(tra_series_gam), split_by = list(tra_series$rec_date))
 ```
 
 ```{r tra-series-gam-smooths}
-pred <- get_gam_predictions(
+tra_series_gam_pred <- get_gam_predictions(
   tra_series_gam,
   proportion,
   exclude_random = FALSE,
@@ -584,7 +584,19 @@ pred <- get_gam_predictions(
 ) %>%
   separate(speaker_contexts, c("speaker", "c2_phonation_a", "c2_place_b", "vowel_c"))
 
-filter(pred, vowel == "a", c2_place == "coronal") %>%
+filter(tra_series_gam_pred, vowel == "a", c2_place == "coronal") %>%
+  ggplot(aes(proportion, tra_z)) +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = c2_phonation), alpha = 0.2) +
+  geom_path(aes(colour = c2_phonation)) +
+  facet_wrap(~ speaker, ncol = 4)
+
+filter(tra_series_gam_pred, vowel == "o", c2_place == "coronal") %>%
+  ggplot(aes(proportion, tra_z)) +
+  geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = c2_phonation), alpha = 0.2) +
+  geom_path(aes(colour = c2_phonation)) +
+  facet_wrap(~ speaker, ncol = 4)
+
+filter(tra_series_gam_pred, vowel == "u", c2_place == "coronal") %>%
   ggplot(aes(proportion, tra_z)) +
   geom_ribbon(aes(ymin = CI_lower, ymax = CI_upper, fill = c2_phonation), alpha = 0.2) +
   geom_path(aes(colour = c2_phonation)) +
