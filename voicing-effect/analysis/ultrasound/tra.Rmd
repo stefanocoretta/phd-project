@@ -78,7 +78,7 @@ tra_series <- list.files(
     place_vowel = interaction(c2_place, vowel),
     place_vowel_phon = interaction(c2_place, vowel, c2_phonation)
   ) %>%
-  filter(rec_date != "28/07/2017 15:40:44") %>%
+  filter(rec_date != "28/07/2017 15:40:44", c1_phonation == "voiceless") %>%
   arrange(rec_date, seconds) %>%
   create_event_start("rec_date")
 
@@ -88,6 +88,38 @@ contrasts(tra_series$c2_place) <- "contr.treatment"
 contrasts(tra_series$vowel) <- "contr.treatment"
 contrasts(tra_series$place_vowel) <- "contr.treatment"
 contrasts(tra_series$place_vowel_phon) <- "contr.treatment"
+
+tra_difference <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-vowel-series.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
+  left_join(duration) %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate(tra = -TR_displacement_sm) %>%
+  arrange(rec_date, seconds) %>%
+  create_event_start("rec_date") %>%
+  group_by(rec_date) %>%
+  filter(row_number() %in% c(1, n())) %>%
+  ungroup() %>%
+  mutate(
+    position = ifelse(start.event == TRUE, "start", "end"),
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    vowel = factor(vowel, levels = c("a", "o", "u")),
+    c2_place = factor(c2_place, levels = c("coronal", "velar"))
+  ) %>%
+  select(-seconds, -(TT_displacement_sm:TR_velocity_abs), -start.event) %>%
+  spread(position, tra) %>%
+  mutate(
+    tra_difference = end - start
+  ) %>%
+  mutate_if(is.character, as.factor)
+  
 
 tongue_root <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound/",
@@ -820,5 +852,44 @@ tra_clust %>%
   as.dendrogram %>%
   as.ggdend() %>%
   ggplot(horiz = TRUE)
+```
+
+# Tongue root displacement between vowel onsent and offset
+
+```{r}
+tra_difference %>%
+  ggplot(aes(tra_difference, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+tra_difference %>%
+  ggplot(aes(tra_difference, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r tra-diff-dur}
+tra_difference %>%
+  ggplot(aes(tra_difference, vowel_duration)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+tra_difference_lm <- lmer(
+  tra_difference ~
+    vowel_duration +
+    c2_phonation +
+    vowel +
+    (1|speaker) +
+    (1|item),
+  data = tra_difference
+)
+summary(tra_difference_lm)
+```
+
+```{r}
+plot(allEffects(tra_difference_lm))
 ```
 
