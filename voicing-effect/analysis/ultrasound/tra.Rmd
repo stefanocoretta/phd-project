@@ -884,12 +884,29 @@ tra_difference_lm <- lmer(
     vowel +
     (1|speaker) +
     (1|item),
-  data = tra_difference
+  data = tra_difference,
+  REML = FALSE
 )
 summary(tra_difference_lm)
+
+tra_difference_lm_null <- lmer(
+  tra_difference ~
+    vowel_duration +
+#    c2_phonation +
+    vowel +
+    (1|speaker) +
+    (1|item),
+  data = tra_difference,
+  REML = FALSE
+)
+
+anova(tra_difference_lm_null, tra_difference_lm)
 ```
 
 ```{r tra-difference-lm-plot}
 plot(allEffects(tra_difference_lm))
 ```
 
+The difference in TR displacement between vowel onset and offset increases with increasing vowel duration.
+There is a tendency for the difference to be greater in voiced stops, although, considering the inter-speaker variation, it is not surprising that it is not deemed significant.
+There is no significant interaction of voicing and vowel duration.
