@@ -53,6 +53,13 @@ duration %>%
 
 ```{r}
 duration %>%
+  filter(vowel == "a") %>%
+  ggplot(aes(speaker, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+duration %>%
   filter(speaker == "pl05") %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
