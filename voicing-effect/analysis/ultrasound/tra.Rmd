@@ -295,6 +295,13 @@ tongue_root %>%
   geom_boxplot()
 ```
 
+```{r tra-boxplot-speakers-2}
+tongue_root %>%
+  filter(tra_z < 3, c2_place == "coronal", vowel == "a") %>%
+  ggplot(aes(speaker, tra_z, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
 ```{r tra-italian}
 tongue_root %>%
   filter(language == "italian") %>%
