@@ -21,7 +21,7 @@ library(dendextend)
 
 # Read data
 
-```{r read-data}
+```{r read-data, message=FALSE}
 columns <- c(
   "speaker",
   "seconds",
@@ -286,6 +286,13 @@ tongue_root %>%
   ggplot(aes(c2_phonation, tra_z)) +
   geom_boxplot() +
   facet_wrap(~ speaker, ncol = 4)
+```
+
+```{r tra-boxplot-speakers-2}
+tongue_root %>%
+  filter(tra_z < 3) %>%
+  ggplot(aes(speaker, tra_z, fill = c2_phonation)) +
+  geom_boxplot()
 ```
 
 ```{r tra-italian}
