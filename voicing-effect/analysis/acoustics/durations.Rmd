@@ -210,7 +210,7 @@ duration %>%
 
 # Analysis
 
-```{r}
+```{r vowdur-lm}
 vowdur_lm <- lmer(
   vowel_duration ~
     c2_phonation +
@@ -228,16 +228,16 @@ vowdur_lm <- lmer(
 summary(vowdur_lm)
 ```
 
-```{r}
+```{r vowdur-ranef}
 round(ranef(vowdur_lm)$speaker)
 ```
 
-```{r vowdur-lm-ranef-coeff}
+```{r vowdur-lm-ranef-condmodes}
 as_tibble(ranef(vowdur_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random coefficients", y = "msec")
+  labs(title = "By-speaker conditional modes", y = "msec")
 ```
 
 ```{r vowdur-lm-ranef-intercept}
@@ -248,18 +248,29 @@ as_tibble(ranef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
   labs(title = "By-speaker random intercepts", y = "Vowel duration (msec)")
 ```
 
-```{r vowdur-lm-ranef-coeff}
+```{r corr-ranef}
+as_tibble(ranef(vowdur_lm)$speaker, rownames = "speaker") %>%
+  filter(c2_phonationvoiced < 10) %>%
+  ggplot(aes(`(Intercept)`, c2_phonationvoiced)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+No correlation between vowel duration random intercept and random coefficient (slope).
+
+```{r vowdur-lm-coeff-phonation}
 as_tibble(coef(vowdur_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker coefficients", y = "msec")
+  labs(title = "By-speaker coefficients for phonation", y = "msec")
 ```
 
-```{r vowdur-lm-ranef-intercept}
+```{r vowdur-lm-coeff-intercept}
 as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker intercepts", y = "Vowel duration (msec)")
+  labs(title = "By-speaker coefficients for vowel duration", y = "Vowel duration (msec)")
 ```
+
