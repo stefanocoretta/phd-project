@@ -221,11 +221,11 @@ duration %>%
 vowdur_lm <- lmer(
   vowel_duration ~
     c2_phonation +
-    language +
+#    language +
     c2_place +
     vowel +
     c2_phonation:vowel +
-    language:vowel +
+#    language:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
     (1|item),
@@ -233,6 +233,10 @@ vowdur_lm <- lmer(
   data = duration
 )
 summary(vowdur_lm)
+```
+
+```{r vowdur-lm-plot}
+plot(allEffects(vowdur_lm))
 ```
 
 ```{r vowdur-ranef}
