@@ -333,8 +333,8 @@ The bimodal distribution of /u/ seems to be related to the velar condition, espe
 
 ## LMER
 
-```{r tra-rand-lm}
-tra_rand_lm <- lmer(
+```{r tra-lm}
+tra_lm <- lmer(
   tra ~
     c2_phonation +
     vowel +
@@ -344,9 +344,9 @@ tra_rand_lm <- lmer(
   REML = FALSE
 )
 
-summary(tra_rand_lm)
+summary(tra_lm)
 
-tra_rand_lm_null <- lmer(
+tra_lm_null <- lmer(
   tra ~
  #   c2_phonation +
     vowel +
@@ -356,40 +356,39 @@ tra_rand_lm_null <- lmer(
   REML = FALSE
 )
 
-anova(tra_rand_lm_null, tra_rand_lm)
+anova(tra_lm_null, tra_lm)
 ```
 
-```{r}
-plot(allEffects(tra_rand_lm))
+```{r tra-lm-plot}
+plot(allEffects(tra_lm))
 ```
 
-
-```{r tra-rand-lm-ranef-coeff}
-as_tibble(ranef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
+```{r tra-lm-ranef-coeff}
+as_tibble(ranef(tra_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker conditional modes of phonation", y = "mm")
+  labs(title = "By-speaker conditional means for phonation", y = "Tongue root position (mm)")
 ```
 
 ```{r tra-rand-lm-ranef-intercept}
-as_tibble(ranef(tra_rand_lm)$speaker[1], rownames = "speaker") %>%
+as_tibble(ranef(tra_lm)$speaker[1], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker conditional modes of intercept", y = "mm")
+  labs(title = "By-speaker conditional modes for tongue root position (intercept)", y = "Tongue root position (mm)")
 ```
 
 ```{r tra-rand-lm-coef}
-as_tibble(coef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
+as_tibble(coef(tra_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random coefficients of phonation", y = "Tongue root position (mm)")
+  labs(title = "By-speaker random coefficients for phonation", y = "Tongue root position (mm)")
 ```
 
 ```{r tra-rand-lm-coef-intercept}
-as_tibble(coef(tra_rand_lm)$speaker[1], rownames = "speaker") %>%
+as_tibble(coef(tra_lm)$speaker[1], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
