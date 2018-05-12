@@ -269,7 +269,7 @@ tra_lm_2 <- lmer(
     vowel_duration +
     vowel +
     sentence_duration +
-    (1+vowel_duration|speaker) +
+    (1|speaker) +
     (1|item),
 data = tongue_root_clean,
 REML = FALSE
@@ -282,7 +282,7 @@ tra_lm_2_null <- lmer(
 #    vowel_duration +
     vowel +
     sentence_duration +
-    (1+vowel_duration|speaker) +
+    (1|speaker) +
     (1|item),
 data = tongue_root_clean,
 REML = FALSE
