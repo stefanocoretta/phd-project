@@ -414,7 +414,6 @@ tra_rand_lm <- lmer(
   tra ~
     c2_phonation +
     vowel +
-    c2_place +
     (1+c2_phonation|speaker) +
     (1|item),
   data = filter(tongue_root, tra_z < 3),
@@ -427,9 +426,8 @@ tra_rand_lm_null <- lmer(
   tra ~
  #   c2_phonation +
     vowel +
-    c2_place +
     (1+c2_phonation|speaker) +
-   (1|item),
+    (1|item),
   data = filter(tongue_root, tra_z < 3),
   REML = FALSE
 )
@@ -463,7 +461,7 @@ as_tibble(coef(tra_rand_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random coefficients of phonation", y = "mm")
+  labs(title = "By-speaker random coefficients of phonation", y = "Tongue root position (mm)")
 ```
 
 ```{r tra-rand-lm-coef-intercept}
@@ -471,7 +469,7 @@ as_tibble(coef(tra_rand_lm)$speaker[1], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random intercepts", y = "mm")
+  labs(title = "By-speaker random intercepts", y = "Tongue root position (mm)")
 ```
 
 ```{r tra-max-lm}

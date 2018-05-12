@@ -228,7 +228,7 @@ vowdur_lm <- lmer(
     language:vowel +
     sentence_duration +
     (1+c2_phonation|speaker) +
-    (1|word),
+    (1|item),
   REML = FALSE,
   data = duration
 )
