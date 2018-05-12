@@ -248,7 +248,7 @@ as_tibble(ranef(vowdur_lm)$speaker[2], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker conditional modes", y = "msec")
+  labs(title = "By-speaker conditional means for phonation", y = "Vowel duration (msec)")
 ```
 
 ```{r vowdur-lm-ranef-intercept}
@@ -256,7 +256,7 @@ as_tibble(ranef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
   mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
-  labs(title = "By-speaker random intercepts", y = "Vowel duration (msec)")
+  labs(title = "By-speaker conditional means for vowel duration (intercept)", y = "Vowel duration (msec)")
 ```
 
 ```{r corr-ranef}
@@ -267,7 +267,7 @@ as_tibble(ranef(vowdur_lm)$speaker, rownames = "speaker") %>%
   geom_smooth(method = "lm")
 ```
 
-No correlation between vowel duration random intercept and random coefficient (slope).
+No correlation between vowel duration and phonation conditional means.
 
 ```{r vowdur-lm-coeff-phonation}
 as_tibble(coef(vowdur_lm)$speaker[2], rownames = "speaker") %>%
