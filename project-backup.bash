@@ -72,7 +72,7 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data/ \
     ~/GitHub/phd-project/perceptual-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/english/data/ \
     ~/GitHub/phd-project/english/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
@@ -91,7 +91,7 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/perceptual-pilot/data/ \
     ~/GitHub/phd-project/perceptual-pilot/data
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/english/data/ \
     ~/GitHub/phd-project/english/data/
 
 # DANGER
