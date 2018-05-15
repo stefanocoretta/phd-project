@@ -1,32 +1,3 @@
-# Create stimuli for perceptual study
-
-## Create stimuli
-
-### stimuli.praat
-```praat
-<<<script header>>>
-
-<<<read material>>>
-
-<<<create stimuli>>>
-```
-
-This scripts creates the stimuli for the perceptual study on perception of closure voicing as vowel duration.
-
-### "read material"
-```praat
-raw_data$ = "../data/raw/stimuli"
-
-wav = Read from file: "'raw_data$'/pata.wav"
-textgrid = Read from file: "'raw_data$'/pata.TextGrid"
-vowel = Read from file: "'raw_data$'/vowel.wav"
-voicing = Read from file: "'raw_data$'/voicing.wav"
-```
-
-## Header
-
-### "script header"
-```praat
 ######################################
 # This is a script from the project 'Vowel duration and consonant voicing: An
 # articulatory study', Stefano Coretta
@@ -53,4 +24,12 @@ voicing = Read from file: "'raw_data$'/voicing.wav"
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ######################################
-```
+
+raw_data$ = "../data/raw/stimuli"
+
+wav = Read from file: "'raw_data$'/pata.wav"
+textgrid = Read from file: "'raw_data$'/pata.TextGrid"
+vowel = Read from file: "'raw_data$'/vowel.wav"
+voicing = Read from file: "'raw_data$'/voicing.wav"
+
+<<<create stimuli>>>
