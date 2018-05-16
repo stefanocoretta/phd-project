@@ -105,6 +105,15 @@ duration %>%
 
 ```{r}
 duration %>%
+  group_by(speaker) %>%
+  mutate(closure_duration = scale(closure_duration)) %>%
+  ggplot(aes(vowel, closure_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r}
+duration %>%
   ggplot(aes(c2_phonation, closure_duration)) +
   geom_boxplot() +
   facet_grid(~ language)
@@ -118,6 +127,24 @@ duration %>%
   mutate(rel_rel = scale(rel_rel)) %>%
   ggplot(aes(rel_rel, fill = c2_phonation, colour = c2_phonation)) +
   geom_density(alpha = 0.5)
+```
+
+```{r rr-density-vowel}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(rel_rel, fill = vowel, colour = vowel)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
+```{r rr-box-vowel}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(vowel, rel_rel, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~ language)
 ```
 
 ```{r rr-density-lang}
@@ -156,6 +183,37 @@ duration %>%
 ```
 
 The Release-Release interval duration does not seem to be affected by the voicing of C2.
+
+## RVOT of C1
+
+```{r c1-rvot-density-vowel}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_rvot = scale(c1_rvot)) %>%
+  ggplot(aes(c1_rvot, fill = vowel, colour = vowel)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
+## RVoffT of C1
+
+```{r c1-rvofft-density-vowel}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_rvofft = scale(c1_rvofft)) %>%
+  ggplot(aes(c1_rvofft, fill = vowel, colour = vowel)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(~ language)
+```
+
+```{r c1-rvofft-box-vowel}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_rvofft = scale(c1_rvofft)) %>%
+  ggplot(aes(vowel, c1_rvofft, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
 
 ## Vowel duration ~ Closure
 
