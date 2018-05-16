@@ -1,0 +1,9 @@
+index,sound_first,sound_second,sound_third
+1,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_0.wav
+2,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_0.wav
+3,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_v_1.wav
+4,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_v_1.wav
+5,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_v_2.wav
+6,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_v_2.wav
+7,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_v_3.wav
+8,../data/raw/stimuli/pata_a_5.wav,../data/raw/stimuli/pata_0.wav,../data/raw/stimuli/pata_v_3.wav
