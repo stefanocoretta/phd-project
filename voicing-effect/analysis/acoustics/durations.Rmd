@@ -320,9 +320,19 @@ duration %>%
 duration %>%
   group_by(speaker) %>%
   mutate(c1_vot = scale(c1_vot)) %>%
-  filter(c1_vot < 4, c1_vot > -4) %>%
+  filter(c1_vot < 3, c1_vot > -3) %>%
   ggplot(aes(vowel, c1_vot, fill = vowel)) +
   geom_boxplot()
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot = scale(c1_vot)) %>%
+  filter(c1_vot < 3, c1_vot > -3) %>%
+  ggplot(aes(vowel, c1_vot, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~ language)
 ```
 
 # Analysis
@@ -398,20 +408,27 @@ as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
 ## VOT
 
 ```{r vot-lm}
+vot_clean <- duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot_z = scale(c1_vot)) %>%
+  filter(c1_vot_z > -3, c1_vot_z < 3) %>%
+  ungroup()
+
 vot_lm <- lmer(
   c1_vot ~
-    vowel +
-    sentence_duration +
+    vowel *
+    language +
+#    sentence_duration +
     (1|speaker) +
     (1|item),
-  data = duration,
+  data = vot_clean,
   REML = FALSE
 )
 
 summary(vot_lm)
 ```
 
-```{r}
+```{r vot-lm-plot}
 plot(allEffects(vot_lm))
 ```
 
