@@ -432,3 +432,24 @@ summary(vot_lm)
 plot(allEffects(vot_lm))
 ```
 
+## RVOffT
+
+```{r rvofft-lm}
+rvofft_lm <- lmer(
+  c1_rvofft ~
+    vowel *
+    language +
+    sentence_duration +
+    (1|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+summary(rvofft_lm)
+```
+
+```{r}
+plot(allEffects(rvofft_lm))
+```
+
