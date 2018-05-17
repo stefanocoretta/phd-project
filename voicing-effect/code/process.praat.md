@@ -850,6 +850,7 @@ for interval to intervals
 
         v_onset = start_vowel - file_start
         v_offset = end_vowel - file_start
+        c1_rel = release_c1 - file_start
 
         rel_rel = (burst - release_c1) * 1000
 
@@ -859,7 +860,7 @@ for interval to intervals
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$','start_target',
             ...'word_duration','c1_duration','c1_closure','c1_rvot','c1_rvofft','v_duration','closure','rvot',
             ...'consonant_duration','v2_duration','sentence_duration',
-            ...'release_c1','v_onset','v_offset','rel_rel'"
+            ...'c1_rel','v_onset','v_offset','rel_rel'"
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
