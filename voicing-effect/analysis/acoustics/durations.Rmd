@@ -16,9 +16,16 @@ library(effects)
 
 # Data import
 
-```{r}
+```{r read-data}
 speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+voicing <- voicing <- list.files(
+  path = "voicing-effect/data/datasets/egg/",
+  pattern = "*-voicing.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
 
 duration <- list.files(
   path = "voicing-effect/data/datasets/acoustics/",
@@ -26,10 +33,14 @@ duration <- list.files(
   full.names = TRUE
 ) %>%
   map_df(~read_csv(., na = "--undefined--")) %>%
+  inner_join(y = voicing) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   filter(c1_phonation == "voiceless") %>%
-  mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    c1_vot = (voicing_start - c1_rel) * 1000
+  ) %>%
   mutate_if(is.character, as.factor)
 ```
 
@@ -273,6 +284,47 @@ duration %>%
   facet_wrap(~ language)
 ```
 
+## VOT
+
+```{r}
+duration %>%
+  ggplot(aes(c1_vot)) +
+  geom_density()
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot = scale(c1_vot)) %>%
+  ggplot(aes(c1_vot)) +
+  geom_density()
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot = scale(c1_vot)) %>%
+  ggplot(aes(c1_vot, fill = vowel)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot = scale(c1_vot)) %>%
+  ggplot(aes(vowel, c1_vot, fill = vowel)) +
+  geom_boxplot()
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot = scale(c1_vot)) %>%
+  filter(c1_vot < 4, c1_vot > -4) %>%
+  ggplot(aes(vowel, c1_vot, fill = vowel)) +
+  geom_boxplot()
+```
+
 # Analysis
 
 ```{r vowdur-lm}
@@ -341,5 +393,25 @@ as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
   labs(title = "By-speaker coefficients for vowel duration", y = "Vowel duration (msec)")
+```
+
+## VOT
+
+```{r vot-lm}
+vot_lm <- lmer(
+  c1_vot ~
+    vowel +
+    sentence_duration +
+    (1|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+summary(vot_lm)
+```
+
+```{r}
+plot(allEffects(vot_lm))
 ```
 
