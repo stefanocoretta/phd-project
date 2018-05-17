@@ -786,7 +786,7 @@ directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
 header$ = "index,speaker,file,rec_date,word,time,word_duration,c1_duration,c1_closure,c1_rvot,c1_rvofft,vowel_duration,
-    ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,v_onset,v_offset,rel_rel"
+    ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,c1_rel,v_onset,v_offset,rel_rel"
 writeFileLine: result_file$, header$
 
 bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
@@ -859,7 +859,7 @@ for interval to intervals
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$','start_target',
             ...'word_duration','c1_duration','c1_closure','c1_rvot','c1_rvofft','v_duration','closure','rvot',
             ...'consonant_duration','v2_duration','sentence_duration',
-            ...'v_onset','v_offset','rel_rel'"
+            ...'release_c1','v_onset','v_offset','rel_rel'"
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
