@@ -335,6 +335,26 @@ duration %>%
   facet_grid(~ language)
 ```
 
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot_z = scale(c1_vot)) %>%
+  filter(c1_vot_z < 3, c1_vot_z > -3) %>%
+  ggplot(aes(vowel, c1_vot, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(c1_vot_z = scale(c1_vot)) %>%
+  filter(c1_vot_z < 3, c1_vot_z > -3, c1_vot > -50) %>%
+  ggplot(aes(vowel, c1_vot, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
 # Analysis
 
 ```{r vowdur-lm}
@@ -411,7 +431,7 @@ as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
 vot_clean <- duration %>%
   group_by(speaker) %>%
   mutate(c1_vot_z = scale(c1_vot)) %>%
-  filter(c1_vot_z > -3, c1_vot_z < 3) %>%
+  filter(c1_vot_z > -1.5, c1_vot_z < 1.5) %>%
   ungroup()
 
 vot_lm <- lmer(
