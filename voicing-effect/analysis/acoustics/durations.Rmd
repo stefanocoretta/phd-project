@@ -431,7 +431,7 @@ as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
 vot_clean <- duration %>%
   group_by(speaker) %>%
   mutate(c1_vot_z = scale(c1_vot)) %>%
-  filter(c1_vot_z > -1.5, c1_vot_z < 1.5) %>%
+  filter(c1_vot_z > -2.5, c1_vot_z < 2.5) %>%
   ungroup()
 
 vot_lm <- lmer(
