@@ -331,6 +331,30 @@ tongue_root %>%
 
 The bimodal distribution of /u/ seems to be related to the velar condition, especially in Italian.
 
+```{r tr-voicing-box}
+tongue_root %>%
+  ggplot(aes(speaker, tra, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r tr-it02}
+tongue_root %>%
+  filter(speaker == "it02") %>%
+  ggplot(aes(c2_phonation, tra, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r tr-difference-voicing}
+tongue_root %>%
+  group_by(speaker, c2_phonation) %>%
+  summarise(mean = mean(tra)) %>%
+  spread(c2_phonation, mean) %>%
+  mutate(difference = voiced - voiceless) %>%
+  ggplot(aes(speaker, difference)) +
+  geom_bar(stat = "identity")
+```
+
+
 ## LMER
 
 ```{r tra-lm}
