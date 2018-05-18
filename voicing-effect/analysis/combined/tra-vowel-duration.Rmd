@@ -269,7 +269,7 @@ tra_lm_2 <- lmer(
     vowel_duration +
     vowel +
     sentence_duration +
-    (1|speaker) +
+    (1+vowel_duration|speaker) +
     (1|item),
 data = tongue_root_clean,
 REML = FALSE
@@ -282,7 +282,7 @@ tra_lm_2_null <- lmer(
 #    vowel_duration +
     vowel +
     sentence_duration +
-    (1|speaker) +
+    (1+vowel_duration|speaker) +
     (1|item),
 data = tongue_root_clean,
 REML = FALSE
@@ -294,6 +294,8 @@ anova(tra_lm_2_null, tra_lm_2)
 ```{r tra-lm-effects}
 plot(allEffects(tra_lm_2))
 ```
+
+Including random slopes for vowel duration improves the model, vowel duration is still significant term.
 
 ## More plotting
 
