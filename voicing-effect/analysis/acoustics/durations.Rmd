@@ -357,6 +357,8 @@ duration %>%
 
 # Analysis
 
+## Vowel duration
+
 ```{r vowdur-lm}
 vowdur_lm <- lmer(
   vowel_duration ~
@@ -423,6 +425,44 @@ as_tibble(coef(vowdur_lm)$speaker[1], rownames = "speaker") %>%
   ggplot(aes(speaker, `(Intercept)`, fill = language)) +
   geom_bar(stat = "identity") +
   labs(title = "By-speaker coefficients for vowel duration", y = "Vowel duration (msec)")
+```
+
+### Italian
+
+```{r vowdur-it}
+vowdur_it <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+    c2_place:vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  REML = FALSE,
+  data = filter(duration, language == "italian")
+)
+summary(vowdur_it)
+```
+
+### Polish
+
+```{r vowdur-pl}
+vowdur_pl <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+    c2_place:vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  REML = FALSE,
+  data = filter(duration, language == "polish")
+)
+summary(vowdur_pl)
 ```
 
 ## VOT
