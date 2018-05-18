@@ -1,0 +1,21 @@
+---
+title: 'Year 2: End of year report'
+author: "Stefano Coretta"
+date: "18/05/2018"
+output: 
+  pdf_document: 
+    highlight: tango
+    latex_engine: xelatex
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Exploratory study on acoustic and articulatory properties of VC sequences in Italian and Polish
+
+# Results
+
+## Acoustic durations
+
