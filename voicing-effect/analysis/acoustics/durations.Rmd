@@ -513,3 +513,39 @@ summary(rvot_lm)
 plot(allEffects(rvot_lm))
 ```
 
+## Release to release
+
+```{r rr-lm}
+rr_lm <- lmer(
+  rel_rel ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    sentence_duration +
+    (1 + c2_phonation|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+summary(rr_lm)
+
+rr_lm_null <- lmer(
+  rel_rel ~
+    vowel +
+    c2_place +
+    sentence_duration +
+    (1 + c2_phonation|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+anova(rr_lm_null, rr_lm)
+```
+
+```{r rr-lm-plot}
+plot(allEffects(rr_lm))
+```
+
+Including c2_phonation in the model does not improve the fit.
+The Release to Release interval duration is not affected by voicing of C.
