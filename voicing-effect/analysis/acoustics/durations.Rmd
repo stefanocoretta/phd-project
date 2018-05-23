@@ -33,7 +33,7 @@ duration <- list.files(
   full.names = TRUE
 ) %>%
   map_df(~read_csv(., na = "--undefined--")) %>%
-  inner_join(y = voicing) %>%
+  left_join(y = voicing) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
   filter(c1_phonation == "voiceless") %>%
