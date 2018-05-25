@@ -295,10 +295,10 @@ It would be worth probably measuring vowel height in terms of tongue distance fr
 
 ```{r word-pl}
 word.pl <- lmer(
-    word.duration ~
+    word_duration ~
         c2_phonation +
         vowel +
-        sentence.duration +
+        sentence_duration +
         (1|word),
     data = vowels.pl
 )
