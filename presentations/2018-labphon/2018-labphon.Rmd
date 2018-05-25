@@ -1,0 +1,52 @@
+---
+title: 'Longer vowel duration correlates with tongue root advancement in Italian and Polish: An ultrasound study'
+author: "Stefano Coretta"
+date: "The University of Manchester"
+institute: "LabPhon"
+output:
+  beamer_presentation:
+    citation_package: natbib
+    highlight: zenburn
+    latex_engine: xelatex
+fontsize: 12pt
+bibliography: linguistics.bib
+biblio-style: unified.bst
+header-includes:
+- \frenchspacing
+- \usepackage{cleveref}
+- \usetheme{metropolis}
+- \titlegraphic{\includegraphics[height=1cm]{./graphics/logo.png}}
+- \usecolortheme[snowy]{owl}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Background
+
+The **voicing effect**
+
+* shorter vowels before voiceless stops, longer vowels before voiced stops
+
+\tiny
+
+@heffner1937;@house1953;@belasco1953;@peterson1960;@halle1967;@chen1970;@klatt1973;@lisker1974;@raphael1975;@javkin1976;@maddieson1976;@farnetani1986;@kluender1988;@lauefer1992;@fowler1992;@hussein1994;@esposito2002;@lampp2004;@warren2005;@durvasula2012
+
+\normalsize
+
+Still no consensus on source!
+
+# Background
+
+Several hypothesis:
+
+* production
+    * constant articulatory force [@belasco1953;@delattre1962]
+    * durational trade-off [@cohen1970;@lehiste1970]
+    * laryngeal adjustment [@halle1967]
+    * closing gesture duration [@chen1970]
+
+* perception
+    * misperception [@javkin1976]
+    * enhancement [@kluender1988]
