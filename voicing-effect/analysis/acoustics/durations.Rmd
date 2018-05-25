@@ -377,6 +377,8 @@ vowdur_lm <- lmer(
 summary(vowdur_lm)
 ```
 
+Language and language:voicing interaction do not improve fit.
+
 ```{r vowdur-lm-plot}
 plot(allEffects(vowdur_lm))
 ```
