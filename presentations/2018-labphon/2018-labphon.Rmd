@@ -31,7 +31,7 @@ The **voicing effect**
 
 \tiny
 
-@heffner1937;@house1953;@belasco1953;@peterson1960;@halle1967;@chen1970;@klatt1973;@lisker1974;@raphael1975;@javkin1976;@maddieson1976;@farnetani1986;@kluender1988;@lauefer1992;@fowler1992;@hussein1994;@esposito2002;@lampp2004;@warren2005;@durvasula2012
+@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @lauefer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012
 
 \normalsize
 
@@ -39,14 +39,40 @@ Still no consensus on source!
 
 # Background
 
-Several hypothesis:
+Proposed accounts:
 
-* production
+* **production**
     * constant articulatory force [@belasco1953;@delattre1962]
-    * durational trade-off [@cohen1970;@lehiste1970]
+    * durational trade-off [@slis1969;@lehiste1970]
     * laryngeal adjustment [@halle1967]
     * closing gesture duration [@chen1970]
 
-* perception
+* **perception**
     * misperception [@javkin1976]
     * enhancement [@kluender1988]
+
+* but problems [@maddieson1976;@fowler1992]
+
+# Background
+
+**This talk**:
+
+* support for *durational trade-off hypothesis*
+
+* positive correlation between *vowel duration and tongue root position*
+
+# Methods
+
+* **Participants**: 11 Italians (5 F, 6 M), 6 Polish (3 F, 3 M)
+* **Targets**
+    * \textbf{C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}}
+    * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
+    * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
+* **Frame sentence**
+    - *Dico X lentamente*, 'I say X slowly'
+    - *Mówię X teraz*, 'I say X now'
+* **Data**
+    * Durational data from acoustics
+    * Tongue root from ultrasound tongue imaging
+* **Reproducibility**
+    - <https://github.com/stefanocoretta/2018-labphon>
