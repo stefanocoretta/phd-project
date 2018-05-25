@@ -467,6 +467,60 @@ vowdur_pl <- lmer(
 summary(vowdur_pl)
 ```
 
+## Closure duration
+
+```{r vowdur-lm}
+closdur_lm <- lmer(
+  closure_duration ~
+    c2_phonation +
+#    language +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+#    language:vowel +
+    sentence_duration +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  REML = FALSE,
+  data = duration
+)
+summary(closdur_lm)
+```
+
+```{r closdur-lm-ranef-condmodes}
+as_tibble(ranef(closdur_lm)$speaker[2], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6))) %>%
+  ggplot(aes(speaker, c2_phonationvoiced, fill = language)) +
+  geom_bar(stat = "identity") +
+  labs(title = "By-speaker conditional means for phonation", y = "Closure duration (msec)")
+```
+
+```{r}
+vowdur_cond <- as_tibble(ranef(vowdur_lm)$speaker[2], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6)))
+
+closdur_cond <- as_tibble(ranef(closdur_lm)$speaker[2], rownames = "speaker") %>%
+  mutate(language = c(rep("Italian", 11), rep("Polish", 6)))
+
+vow_clos <- inner_join(vowdur_cond, closdur_cond, by = c("speaker", "language"))
+
+vow_clos %>%
+  ggplot(aes(c2_phonationvoiced.x, c2_phonationvoiced.y)) +
+  geom_point(aes(colour = language)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Correlation between conditional means of vowel and closure duration by speker",
+    x = "Vowel duration (conditional means)",
+    y = "Closure duration (conditional means)"
+  )
+```
+
+```{r}
+cor.test(vow_clos$c2_phonationvoiced.x, vow_clos$c2_phonationvoiced.y)
+```
+
+There is a strong negative correlation (Pearson's r = -0.8) between the conditional means for vowel duration and those for closure duration.
+
 ## VOT
 
 ```{r vot-lm}
