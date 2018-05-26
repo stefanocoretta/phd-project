@@ -373,6 +373,13 @@ closure_cv %>%
 closure_cv %>%
   ggplot(aes(c2_phonation, cv)) +
   geom_boxplot() +
+  facet_grid(~ c2_place)
+```
+
+```{r}
+closure_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot() +
   facet_grid(~ language)
 ```
 
