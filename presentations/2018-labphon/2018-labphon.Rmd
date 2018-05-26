@@ -21,6 +21,28 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+library(lme4)
+```
+
+```{r read-data}
+speakers <- read_csv("./presentations/2018-labphon/datasets/speakers.csv")
+stimuli <- read_csv("./presentations/2018-labphon/datasets/stimuli.csv")
+
+duration <- list.files(
+  path = "./presentations/2018-labphon/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 # Background
@@ -76,3 +98,6 @@ Proposed accounts:
     * Tongue root from ultrasound tongue imaging
 * **Reproducibility**
     - <https://github.com/stefanocoretta/2018-labphon>
+
+# Results
+
