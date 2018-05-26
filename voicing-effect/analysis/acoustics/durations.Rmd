@@ -235,6 +235,16 @@ duration %>%
   facet_grid(~ language)
 ```
 
+```{r c1-rvofft-box-phonation}
+duration %>%
+  ggplot(aes(c2_phonation, c1_rvofft)) +
+  geom_boxplot() +
+  facet_grid(~ language) +
+  labs(
+    title = "Release to closure duration"
+  )
+```
+
 ## Word durations
 
 ```{r word-dur-density}
@@ -667,3 +677,23 @@ plot(allEffects(rr_lm))
 
 Including c2_phonation in the model does not improve the fit.
 The Release to Release interval duration is not affected by voicing of C.
+
+# Release to closure
+
+```{r rel-clos-lm}
+rel_clos_lm <- lmer(
+  c1_rvofft ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    sentence_duration +
+    c2_phonation:vowel +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = duration
+)
+
+summary(rel_clos_lm)
+```
+
+The estimate for Release to Closure is very similar to that of Closure duration (about 15.5 msec).
