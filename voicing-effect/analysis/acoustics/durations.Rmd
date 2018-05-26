@@ -226,28 +226,6 @@ duration %>%
   facet_grid(~ language)
 ```
 
-## Vowel duration ~ Closure
-
-```{r}
-vow_clos_lm <- lmer(
-  vowel_duration ~
-    closure_duration +
-    sentence_duration +
-    vowel +
-    c2_place +
-    (1|speaker) +
-    (1|item),
-  data = duration,
-  REML = FALSE
-)
-summary(vow_clos_lm)
-```
-
-```{r}
-plot(allEffects(vow_clos_lm))
-```
-
-
 ## Word durations
 
 ```{r word-dur-density}
@@ -469,7 +447,7 @@ summary(vowdur_pl)
 
 ## Closure duration
 
-```{r vowdur-lm}
+```{r closdur-lm}
 closdur_lm <- lmer(
   closure_duration ~
     c2_phonation +
@@ -520,6 +498,38 @@ cor.test(vow_clos$c2_phonationvoiced.x, vow_clos$c2_phonationvoiced.y)
 ```
 
 There is a strong negative correlation (Pearson's r = -0.8) between the conditional means for vowel duration and those for closure duration.
+
+## Vowel and closure duration
+
+```{r vow-clos-lm}
+vow_clos_lm <- lmer(
+  vowel_duration ~
+    closure_duration +
+    sentence_duration +
+    vowel +
+    c2_place +
+    (1|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+summary(vow_clos_lm)
+```
+
+```{r}
+plot(allEffects(vow_clos_lm))
+```
+
+Vowel duration is inversely correlated with closure duration.
+Language and voicing of C2 don't improve the model fit, nor an interaction with closure duration.
+
+```{r}
+as_tibble(effect("closure_duration", vow_clos_lm)) %>%
+  ggplot(aes(closure_duration, fit)) +
+  geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
+  geom_line()
+```
+
 
 ## VOT
 
