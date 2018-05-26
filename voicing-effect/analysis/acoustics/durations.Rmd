@@ -184,11 +184,20 @@ duration %>%
   geom_boxplot()
 ```
 
-```{r rr-box-lang}
+```{r rr-vow-box-lang}
 duration %>%
   group_by(speaker) %>%
   mutate(rel_rel = scale(rel_rel)) %>%
   ggplot(aes(vowel, rel_rel, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r rr-box-lang}
+duration %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(c2_phonation, rel_rel, fill = c2_phonation)) +
   geom_boxplot() +
   facet_grid(~ language)
 ```
