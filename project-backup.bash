@@ -5,10 +5,10 @@
 ## Push to share
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/ \
-    /Volumes/Phonology/Common/
+    /Volumes/Phonology/Common/stefano-phd
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/ \
-    /Volumes/Phonology/Common/
+    /Volumes/Phonology/Common/stefano-phd
 
 # Backup
 
