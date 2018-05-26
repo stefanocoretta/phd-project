@@ -24,6 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_light())
+library(rticulate)
 library(lme4)
 library(effects)
 cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
@@ -33,15 +34,44 @@ cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00",
 speakers <- read_csv("./presentations/2018-labphon/datasets/speakers.csv")
 stimuli <- read_csv("./presentations/2018-labphon/datasets/stimuli.csv")
 
-duration <- list.files(
+duration_raw <- list.files(
   path = "./presentations/2018-labphon/datasets/acoustics/",
   pattern = "*-durations.csv",
   full.names = TRUE
 ) %>%
-  map_df(~read_csv(., na = "--undefined--")) %>%
+  map_df(~read_csv(., na = "--undefined--"))
+
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+duration <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns, format = "wide")) %>%
+  select(-(X_1:Y_42)) %>%
+  filter(label == "closure_") %>%
+  mutate(word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
+  left_join(y = duration_raw) %>%
   filter(c1_phonation == "voiceless") %>%
+  droplevels() %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     language = recode(language, italian = "Italian", polish = "Polish"),
@@ -51,7 +81,17 @@ duration <- list.files(
       6 / sentence_duration
     )
   ) %>%
-  mutate_if(is.character, as.factor)
+  mutate_if(is.character, as.factor) %>%
+  # filter clear outlier
+  filter(TR_displacement_sm > 40) %>%
+  group_by(speaker) %>%
+  mutate(
+    vowel_duration_z = scale(vowel_duration),
+    tongue_root = -TR_displacement_sm,
+    tongue_root_z = scale(tongue_root)
+  ) %>%
+  ungroup() %>%
+  filter(tongue_root_z < 3)
 ```
 
 # Background
@@ -102,11 +142,19 @@ Proposed accounts:
 * **Frame sentence**
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
-* **Data**
+* **Measurements**
     * Durational data from acoustics
-    * Tongue root from ultrasound tongue imaging
+    * Tongue root position from ultrasound tongue imaging
 * **Reproducibility**
     - <https://github.com/stefanocoretta/2018-labphon>
+
+# Methods
+
+[image of acoustic annotation]
+
+# Methods
+
+[image of tongue root position]
 
 # Results: Vowel duration
 
@@ -225,7 +273,9 @@ as_tibble(effect("closure_duration", vow_clos_lm)) %>%
 
 # Results: Vowel and closure duration
 
-[figure of invariant interval]
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/trade-off.pdf}
+\end{figure}
 
 # Results: Release to Release duration
 
@@ -274,4 +324,58 @@ rr_lm_null <- lmer(
 
 anova(rr_lm_null, rr_lm)
 summary(rr_lm)
+```
+
+# Discussion: Durational trade-off
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{./graphics/trade-off-2.pdf}
+\end{figure}
+
+# Discussion: Vowel duration and tongue root position
+
+```{r tr-lm, echo=FALSE, include=FALSE}
+vow_tr_lm <- lmer(
+  vowel_duration ~
+    tongue_root +
+    c2_phonation +
+    vowel +
+    syl_rate +
+    (1+tongue_root|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+vow_tr_lm_null <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    vowel +
+    syl_rate +
+    (1+tongue_root|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+anova(vow_tr_lm_null, vow_tr_lm)
+summary(vow_tr_lm)
+```
+
+```{r vow-tr-plot, echo=FALSE, warning=FALSE}
+as_tibble(effect("tongue_root", vow_tr_lm)) %>%
+  ggplot(aes(tongue_root, fit)) +
+  geom_rug(
+    inherit.aes = FALSE,
+    data = duration,
+    mapping = aes(x = tongue_root),
+    alpha = 0.2
+  ) +
+  geom_ribbon(aes(ymax = upper, ymin = lower), fill = cbPalette[3], alpha = 0.2) +
+  geom_line(colour = cbPalette[3]) +
+  labs(
+    x = "Tongue root position (mm)",
+    y = "Vowel duration (ms)"
+  ) +
+  scale_color_manual(name = "Language", values = cbPalette[1:2])
 ```
