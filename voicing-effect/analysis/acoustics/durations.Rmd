@@ -342,6 +342,42 @@ duration %>%
   facet_grid(~ language)
 ```
 
+## Stability measure of closure timing
+
+Test with clousre duration and coefficient of variation (CV)
+
+```{r}
+closure_cv <- duration %>%
+  group_by(language, speaker, c2_place, c2_phonation) %>%
+  summarise(
+    sd = sd(closure_duration, na.rm = TRUE),
+    mean = mean(closure_duration, na.rm = TRUE),
+    cv = 100 * sd(closure_duration, na.rm = TRUE) / mean(closure_duration, na.rm = TRUE)
+  )
+```
+
+```{r}
+closure_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot() +
+  facet_grid(language ~ c2_place)
+```
+
+```{r}
+closure_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot()
+```
+
+```{r}
+closure_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+It looks like the CV for voiced consonants is higher (meaning there is more variation in those than in voiceless).
+
 # Analysis
 
 ## Vowel duration
