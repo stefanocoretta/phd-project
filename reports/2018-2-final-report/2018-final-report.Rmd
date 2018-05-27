@@ -126,7 +126,8 @@ duration %>%
     x = "Vowel",
     y = "Vowel duration (ms)"
   ) +
-  facet_grid(~ language)
+  facet_grid(~ language) +
+  theme(legend.position = "none")
 ```
 
 # C2 closure duration
@@ -199,4 +200,17 @@ Although the syllable and word have been proposed as the invariant interval with
 
 The data collected in this exploratory study bring new evidence in support to the trade-off account, by offering an invariant interval: the Release to Release interval (RR), i.e. the interval between the release of C1 and the release of C2 in CVCV words.
 
-
+```{r rr-box-lang, echo=FALSE, warning=FALSE}
+duration %>%
+  # group_by(speaker) %>%
+  # mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(c2_phonation, rel_rel, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language) +
+  scale_fill_manual(name = "C2 voicing", values = cbPalette) +
+  labs(
+    x = "C2 voicing",
+    y = "Release to Release duration (ms)"
+  ) +
+  theme(legend.position = "none")
+```
