@@ -40,6 +40,7 @@ duration <- list.files(
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     c1_vot = (voicing_start - c1_rel) * 1000,
+    vor = (c2_rel - v_onset) * 1000,
     syl_rate = ifelse(
       language == "Italian",
       8 / sentence_duration,
@@ -208,6 +209,25 @@ duration %>%
 ```
 
 The Release-Release interval duration does not seem to be affected by the voicing of C2.
+
+## VOR
+
+Vowel Onset to Release.
+
+```{r}
+duration %>%
+  ggplot(aes(c2_phonation, vor)) +
+  geom_boxplot()
+```
+
+```{r}
+duration %>%
+  group_by(speaker) %>%
+  mutate(vor = scale(vor)) %>%
+  ggplot(aes(c2_phonation, vor)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
 
 ## RVOT of C1
 
@@ -683,7 +703,44 @@ plot(allEffects(rr_lm))
 Including c2_phonation in the model does not improve the fit.
 The Release to Release interval duration is not affected by voicing of C.
 
-# Release to closure
+## VOR
+
+```{r vor-lm}
+vor_lm <- lmer(
+  vor ~
+    c2_phonation +
+    # language +
+    vowel +
+    c2_place +
+    syl_rate +
+    (1 + c2_phonation|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+summary(vor_lm)
+
+vor_lm_null <- lmer(
+  vor ~
+    # c2_phonation +
+    # language +
+    vowel +
+    c2_place +
+    syl_rate +
+    (1 + c2_phonation|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+anova(vor_lm_null, vor_lm)
+```
+
+```{r rr-lm-plot}
+plot(allEffects(vor_lm))
+```
+
+## Release to closure
 
 ```{r rel-clos-lm}
 rel_clos_lm <- lmer(
