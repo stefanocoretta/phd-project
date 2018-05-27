@@ -9,13 +9,194 @@ output:
     number_sections: yes
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_light())
+cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
+library(lme4)
+library(effects)
+library(rticulate)
+```
+
+```{r read-data, echo=FALSE, include=FALSE}
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+duration_raw <- list.files(
+  path = "./presentations/2018-labphon/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
+
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+duration <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound/",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  map_df(~read_aaa(., column_names = columns, format = "wide")) %>%
+  select(-(X_1:Y_42)) %>%
+  filter(label == "closure_") %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  left_join(y = duration_raw) %>%
+  filter(c1_phonation == "voiceless") %>%
+  droplevels() %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  # filter clear outlier
+  filter(TR_displacement_sm > 40) %>%
+  group_by(speaker) %>%
+  mutate(
+    vowel_duration_z = scale(vowel_duration),
+    tongue_root = -TR_displacement_sm,
+    tongue_root_z = scale(tongue_root)
+  ) %>%
+  ungroup() %>%
+  filter(tongue_root_z < 3)
 ```
 
 # Exploratory study on acoustic and articulatory properties of VC sequences in Italian and Polish
 
+The following sections report a selection of results from the exploratory study run during year 1 and 2.
+
 # Results
 
 ## Acoustic durations
+
+### Vowel duration
+
+As previously reported in @farnetani1986, @esposito2002, and @nowak2006, Italian and Polish show an effect of consonantal voicing on preceding vowel duration.
+Vowel are shorter when followed by voiceless stops, while they are longer when followed by voiced stops.\footnote{@farnetani1986 reported a ... ms effect in Italian, while @nowak2006 a ... ms effect in Polish.}
+
+```{r vow-voi-dur, echo=FALSE}
+duration %>%
+  ggplot(aes(language, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  scale_fill_manual(name = "C2 voicing", values = cbPalette) +
+  labs(
+    title = "Vowel duration before voiceless and voiced stops",
+    subtitle = "Data from 17 speakers (11 Italian, 6 Polish)",
+    x = "Language",
+    y = "Vowel duration (ms)"
+  )
+```
+
+According to linear mixed-effect models, vowels are about 15 ms longer when followed by voiced stops.
+Language does not have a significant effect on vowel duration, neither does an interaction between voicing and language.
+
+Moreover, the identity of the vowel as an effect on vowel duration, a well-known but still not fully understood phenomenon [].
+Other things being equal, /a/ is longer then /o/, which is longer than /u/.
+
+```{r vow-dur, echo=FALSE}
+duration %>%
+  ggplot(aes(vowel, vowel_duration, fill = vowel)) +
+  geom_boxplot() +
+  scale_fill_manual(name = "Vowel", values = cbPalette) +
+  labs(
+    title = "Effect of vowel identity on vowel duration",
+    x = "Vowel",
+    y = "Vowel duration (ms)"
+  ) +
+  facet_grid(~ language)
+```
+
+# C2 closure duration
+
+The closure duration of voiceless stops is 16 ms longer than that of voiced stops.
+
+```{r clos-dur, echo=FALSE}
+duration %>%
+  ggplot(aes(c2_place, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  scale_fill_manual(name = "C2 voicing", values = cbPalette) +
+  labs(
+    title = "Vowel duration before voiceless and voiced stops",
+    subtitle = "Data from 17 speakers (11 Italian, 6 Polish)",
+    x = "Language",
+    y = "Vowel duration (ms)"
+  ) +
+  facet_grid(~ language)
+```
+
+One of the accounts for explaining the voicing effect relies on the fact that vowel duration and closure duration are inversely correlated [].
+Vowel are shorter before voiceless stops, which have a longer closure, and, vice versa, vowels are longer before voiced stops, which have a shorter closure.
+
+The correlation holds independently of the voicing of the consonant, such that, within a word, longer vowel duration correlates with shorter closure duration.
+
+```{r vow-clos-lm, echo=FALSE, include=FALSE}
+vow_clos_lm <- lmer(
+  vowel_duration ~
+    closure_duration +
+    syl_rate +
+    vowel +
+    c2_place +
+    (1|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+summary(vow_clos_lm)
+```
+
+```{r vow-clos-plot, echo=FALSE, warning=FALSE}
+as_tibble(effect("closure_duration", vow_clos_lm)) %>%
+  ggplot(aes(closure_duration, fit)) +
+  geom_rug(
+    inherit.aes = FALSE,
+    data = duration,
+    mapping = aes(x = closure_duration),
+    alpha = 0.2
+  ) +
+  geom_ribbon(
+    aes(ymax = upper, ymin = lower),
+    fill = cbPalette[2],
+    alpha = 0.2
+  ) +
+  geom_line(colour = cbPalette[2]) +
+  labs(
+    x = "Closure duration (ms)",
+    y = "Vowel duration (ms)"
+  )
+```
+
+Based on this correlation, it has been claimed that the voicing effect is the product of a durational trade-off between the duration of the vowel and the duration of the closure of the following consonant.
+The trade-off would be brought about by the relative timing of the onset of closure.
+An earlier closure onset corresponds to a shorter vowel and a longer closure duration, while a later closure onset produces the opposite pattern, a longer vowel followed by a shorter closure.
+
+The durational trade-off account rests on the assumption that there is a non-specified interval within wich the trade-off is implemented.
+For the account to work, the said interval should not be affected by the voicing of the stop, in the sense that the duration of the interval should be invariant.
+To the best of my knowledge, previous studies failed to find such invariant interval.
+Although the syllable and word have been proposed as the invariant interval within which the trade-off happens, both units present problems when confronted with empirical data.
+
+The data collected in this exploratory study bring new evidence in support to the trade-off account, by offering an invariant interval: the Release to Release interval (RR), i.e. the interval between the release of C1 and the release of C2 in CVCV words.
+
 
