@@ -59,7 +59,7 @@ columns <- c(
 )
 
 duration <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound/",
+  path = "./presentations/2018-labphon/datasets/ultrasound/",
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%
