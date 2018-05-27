@@ -1,12 +1,18 @@
 ---
-title: 'Year 2: End of year report'
+title: 'Exploratory study on acoustic and articulatory properties of VC sequences in Italian and Polish'
 author: "Stefano Coretta"
-date: "18/05/2018"
+date: "05/06/2018"
 output: 
   pdf_document: 
+    citation_package: natbib
+    fig_height: 3.5
+    fig_width: 5
     highlight: tango
     latex_engine: xelatex
     number_sections: yes
+fontsize: 12pt
+bibliography: linguistics.bib
+biblio-style: unified.bst
 ---
 
 ```{r setup, echo=FALSE, include=FALSE}
@@ -84,18 +90,20 @@ duration <- list.files(
   filter(tongue_root_z < 3)
 ```
 
-# Exploratory study on acoustic and articulatory properties of VC sequences in Italian and Polish
-
-The following sections report a selection of results from the exploratory study run during year 1 and 2.
-
 # Results
 
-## Acoustic durations
+The following sections report on a selection of results from the exploratory study run during the period 2016-2018.
+The study was meant to...
+The acoustic data will be presented first, with a focus on vowel and consonant closure duration in C1VC2V words as a function of the voicing of C2.
+Evidence in support of a durational trade-off account of the so called 'voicing effect' will be offered.
+Next, the articulatory data concerning the position of the tongue root during the production of a VC sequence will be discussed.
+
+## Acoustic data
 
 ### Vowel duration
 
 As previously reported in @farnetani1986, @esposito2002, and @nowak2006, Italian and Polish show an effect of consonantal voicing on preceding vowel duration.
-Vowel are shorter when followed by voiceless stops, while they are longer when followed by voiced stops.\footnote{@farnetani1986 reported a ... ms effect in Italian, while @nowak2006 a ... ms effect in Polish.}
+Vowel are shorter when followed by voiceless stops, while they are longer when followed by voiced stops.\footnote{\citet{farnetani1986} reported a 35 ms effect in Italian, while \citet{nowak2006} a 4.5 ms effect in Polish.}
 
 ```{r vow-voi-dur, echo=FALSE}
 duration %>%
@@ -110,7 +118,7 @@ duration %>%
   )
 ```
 
-According to linear mixed-effect models, vowels are about 15 ms longer when followed by voiced stops.
+According to linear mixed-effect models (LMER), vowels are about 15 ms longer when followed by voiced stops.
 Language does not have a significant effect on vowel duration, neither does an interaction between voicing and language.
 
 Moreover, the identity of the vowel as an effect on vowel duration, a well-known but still not fully understood phenomenon [].
@@ -130,7 +138,7 @@ duration %>%
   theme(legend.position = "none")
 ```
 
-# C2 closure duration
+### C2 closure duration
 
 The closure duration of voiceless stops is 16 ms longer than that of voiced stops.
 
@@ -140,10 +148,9 @@ duration %>%
   geom_boxplot() +
   scale_fill_manual(name = "C2 voicing", values = cbPalette) +
   labs(
-    title = "Vowel duration before voiceless and voiced stops",
-    subtitle = "Data from 17 speakers (11 Italian, 6 Polish)",
-    x = "Language",
-    y = "Vowel duration (ms)"
+    title = "Closure duration before voiceless and voiced stops",
+    x = "C2 place of articulation",
+    y = "Closure duration (ms)"
   ) +
   facet_grid(~ language)
 ```
@@ -184,10 +191,13 @@ as_tibble(effect("closure_duration", vow_clos_lm)) %>%
   ) +
   geom_line(colour = cbPalette[2]) +
   labs(
+    title = "Correlation between vowel and closure durations",
     x = "Closure duration (ms)",
     y = "Vowel duration (ms)"
   )
 ```
+
+### Release to Release duration
 
 Based on this correlation, it has been claimed that the voicing effect is the product of a durational trade-off between the duration of the vowel and the duration of the closure of the following consonant.
 The trade-off would be brought about by the relative timing of the onset of closure.
@@ -198,7 +208,10 @@ For the account to work, the said interval should not be affected by the voicing
 To the best of my knowledge, previous studies failed to find such invariant interval.
 Although the syllable and word have been proposed as the invariant interval within which the trade-off happens, both units present problems when confronted with empirical data.
 
-The data collected in this exploratory study bring new evidence in support to the trade-off account, by offering an invariant interval: the Release to Release interval (RR), i.e. the interval between the release of C1 and the release of C2 in CVCV words.
+The data collected in this exploratory study brings new evidence in support to the trade-off account, by offering a suitable invariant interval: the Release to Release interval (RR), i.e. the interval between the release of C1 and the release of C2 in CVCV words.
+The RR duration is nor affected by the voicing of C2, such that the duration is theoretically the same in C1VC2V words where C2 is either voiceless of voiced (for example, *pata* vs. *pata*).
+According to an LMER, vowel identity and C2 place of articulation have an effect in Italian but not in Polish.
+Only in Italian, /u/ and velar stops have a shorter RR compared to /a, o/ and coronal consonants, with similar estimates (-11.5 ms).
 
 ```{r rr-box-lang, echo=FALSE, warning=FALSE}
 duration %>%
@@ -214,3 +227,122 @@ duration %>%
   ) +
   theme(legend.position = "none")
 ```
+
+```{r rr-lm, echo=FALSE, include=FALSE}
+rr_lm <- lmer(
+  rel_rel ~
+    vowel +
+    c2_place +
+    language +
+    c2_place:language +
+    vowel:language +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = duration, 
+  REML = FALSE
+)
+
+summary(rr_lm)
+```
+
+It thus appears that the durational difference of vowels as a function of the voicing of following consonants is a by-product of the invariance in duration of the interval between two consecutive releases.
+Such observation further reveals an interesting property about the production of stops in CVCV words, namely that the relative gestural timing of the stops is independent of the voicing category of those stops (voiceless vs. voiced).
+
+## Articulatory data
+
+### Tongue root position
+
+One of the known differences in supra-glottal articulation between voiced and voiceless stops concerns the position of the tongue root relative to the front-back axis of the oral tract.
+It has been observed that the tongue root is more advanced in voiced than in voiceless stops [@kent1969;@perkell1969;@westbury1983].
+This gesture has been interpreted as a mechanism to ensure vocal fold vibration during the closure of the stop.
+The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
+During the production of voiced obstruents, the supra-glottal pressure increases due to the immittance of air in the supra-glottal cavity.
+Such pressure increase can hinder the ability to sustain voicing during closure, to the point that voicing ceases if the supra-glottal pressure is higher than the sub-glottal pressure [@ohala2011].
+One of the possible articulatory solutions to counterbalance the increase in pressure during the closure of a voiced stop is to expand the pharyngeal cavity by advancing the root of the tongue [@rothenberg1967;@westbury1983].
+
+Tongue root advancement is used idiosyncratically by the Italian and Polish speakers recorded in this study, as it can be seen in the figure below.
+The position of the tongue root has been extracted from the ultrasound tongue data at the time of C2 closure onset.
+In some speakers, the tongue root is more advanced at closure in voiced stops than in voiceless stops (like in IT01, IT04, PL05).
+In other speakers, no difference in tongue root position can be observed (like in IT05, IT09, PL03).
+Language does not play a role in the effect of voicing on tongue root position.
+Furthermore, no link has been found within speakers between the magnitude of the tongue root position difference and that of the vowel duration difference.
+Some speakers have a big vowel durational difference, but not much difference in tongue root position, and vice versa.
+Based on this data, it looks like the voicing effect and tongue root advancement are two independent phenomena, by which their respective magnitudes are decoupled.
+
+```{r trp-box, echo=FALSE, warning=FALSE}
+duration %>%
+  ggplot(aes(c2_phonation, tongue_root_z, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_wrap(~speaker, ncol = 9) +
+  labs(
+    title = "Normalised tongue root position at C2 closure onset",
+    x = "C2 voicing",
+    y = "Tongue root position (z-scores)"
+  ) +
+  scale_fill_manual(name = "C2 voicing", values = cbPalette) +
+  theme(axis.text.x = element_blank())
+```
+
+Given that the difference in tongue root position (in those speakers who have one) can be observed already at closure onset, it is expected that the advancing gesture is initiated before closure is achieved.
+This implies that the onset of the advancing gesture (relative to the position of the tongue root at vowel onset) happens during the production of the vowel, prediction born out by the data recorded in this study, although the gesture is found both in vowels preceding voiced *and* voiceless stops.
+Independent of language and C2 voicing, the root of the tongue starts advancing at around 50% of the vowel duration, but the magnitude of the advancement is greater in vowels followed by voiced stops.
+It is not clear at this stage whether the advancing gesture found in vowels followed by voiceless stops is just a consequence of the body of the tongue raising towards the palate for the production of an oral occlusion.
+Probably comparison with sonorant consonants is required in order to confirm this possibility.
+However, the fact to keep in mind is that an enlarged cavity for voiced stops compared to voiceless stops is produced, independent of the position of the root at vowel offset relative to its position at vowel onset.
+
+### Vowel duration and tongue root position
+
+Although the effect of voicing on vowel duration and tongue root position are decoupled, vowel duration and tongue root position are instead positively correlated.
+Longer vowel durations correspond with a more advanced tongue root position, and vice versa, shorter vowel durations correspond with a less advanced tonge root.
+Such correlation exists independent of the voicing of C2, fact that is compatible with the observation that advancement is produced both in vowels followed by voiceless and voiced stops.
+
+```{r tr-lm, echo=FALSE, include=FALSE}
+vow_tr_lm <- lmer(
+  vowel_duration ~
+    tongue_root +
+    c2_phonation +
+    vowel +
+    syl_rate +
+    (1+tongue_root|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+vow_tr_lm_null <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    vowel +
+    syl_rate +
+    (1+tongue_root|speaker) +
+    (1|item),
+  data = duration,
+  REML = FALSE
+)
+
+anova(vow_tr_lm_null, vow_tr_lm)
+summary(vow_tr_lm)
+```
+
+```{r vow-tr-plot, echo=FALSE, warning=FALSE}
+as_tibble(effect("tongue_root", vow_tr_lm)) %>%
+  ggplot(aes(tongue_root, fit)) +
+  geom_rug(
+    inherit.aes = FALSE,
+    data = duration,
+    mapping = aes(x = tongue_root),
+    alpha = 0.2
+  ) +
+  geom_ribbon(aes(ymax = upper, ymin = lower), fill = cbPalette[2], alpha = 0.2) +
+  geom_line(colour = cbPalette[2]) +
+  labs(
+    title = "Correlation between tongue root position and vowel duration",
+    x = "Tongue root position (mm)",
+    y = "Vowel duration (ms)"
+  ) +
+  scale_color_manual(name = "Language", values = cbPalette)
+```
+
+
+
