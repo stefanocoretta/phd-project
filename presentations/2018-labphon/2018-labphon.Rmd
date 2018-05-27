@@ -291,7 +291,7 @@ duration %>%
   scale_fill_manual(name = "C2 voicing", values = cbPalette[1:2]) +
   labs(
     x = "C2 voicing",
-    y = "Release to Release duratio (z-scores)"
+    y = "Release to Release duration (z-scores)"
   ) +
   theme(legend.position = "none")
 ```
