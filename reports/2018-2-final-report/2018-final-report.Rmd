@@ -1,9 +1,9 @@
 ---
-title: 'Exploratory study on acoustic and articulatory properties of VC sequences in Italian and Polish'
+title: 'Exploratory study on the acoustic and articulatory properties of VC sequences in Italian and Polish'
 author: "Stefano Coretta"
 date: "05/06/2018"
-output: 
-  pdf_document: 
+output:
+  pdf_document:
     citation_package: natbib
     fig_height: 3.5
     fig_width: 5
@@ -93,18 +93,22 @@ duration <- list.files(
 
 # Results
 
-The following sections report on a selection of results from the exploratory study run during the period 2016-2018.
-The study was meant to...
-The acoustic data will be presented first, with a focus on vowel and consonant closure duration in C1VC2V words as a function of the voicing of C2.
-Evidence in support of a durational trade-off account of the so called 'voicing effect' will be offered.
-Next, the articulatory data concerning the position of the tongue root during the production of a VC sequence will be discussed.
+This short report discusses a selection of results from an exploratory study concerning the acoustic and articulatory properties of VC sequences in C**VC**V words in Italian and Polish.
+The aim of the study was to collect acoustic and articulatory data in relation to the so called 'voicing effect', by which vowels are longer before voiced stops than before voiceless stops.
+Synchronised acoustic, ultrasonic, and electroglottographic data was collected from 11 speakers of Italian (5 F, 6 M) and 6 speakers of Polish (3 F, 3 M).
+The data collection started in December 2016 and has been completed in May 2018.
+All of the data has been now processed for subsequent analysis, which is still ongoing but nearest completion.
+
+The results from the acoustic data will be presented first, with a focus on vowel and consonant closure duration in C1VC2V words as a function of the voicing of C2.
+Evidence in support of a durational trade-off account of the voicing effect will be offered.
+Next, the articulatory data concerning the position of the tongue root during the production of VC sequences will be discussed.
 
 ## Acoustic data
 
 ### Vowel duration
 
-As previously reported in @farnetani1986, @esposito2002, and @nowak2006, Italian and Polish show an effect of consonantal voicing on preceding vowel duration.
-Vowel are shorter when followed by voiceless stops, while they are longer when followed by voiced stops.\footnote{\citet{farnetani1986} reported a 35 ms effect in Italian, while \citet{nowak2006} a 4.5 ms effect in Polish.}
+In accord with @farnetani1986, @esposito2002, and @nowak2006, Italian and Polish show an effect of consonantal voicing on preceding vowel duration.
+Vowel are shorter when followed by voiceless stops, while they are longer when followed by voiced stops.
 
 ```{r vow-voi-dur, echo=FALSE}
 duration %>%
@@ -121,8 +125,7 @@ duration %>%
 
 According to linear mixed-effect models (LMER), vowels are about 15 ms longer when followed by voiced stops.
 Language does not have a significant effect on vowel duration, neither does an interaction between voicing and language.
-
-Moreover, the identity of the vowel as an effect on vowel duration, a well-known but still not fully understood phenomenon [].
+However, the identity of the vowel as an effect on vowel duration, a well-known but still poorly understood phenomenon [@esposito2002].
 Other things being equal, /a/ is longer then /o/, which is longer than /u/.
 
 ```{r vow-dur, echo=FALSE}
@@ -139,9 +142,16 @@ duration %>%
   theme(legend.position = "none")
 ```
 
+\citet{farnetani1986} reported a 35 ms effect of voicing on vowel duration in Italian, while \citet{nowak2006} gives a 4.5 ms effect for Polish.
+These estimates are different from the one found in this study (15), but several factors might have played a role in producing such difference.
+For example, \citet{farnetani1986} did not control for speech rate, while speech rate (measured as number of syllables per second) has been included in this analysis.
+Differences in the criteria for vowel onset and offset placement might have also contributed to difference in durational measurements.
+Even when adding language and an interaction between language and C2 voicing in the model (inclusion that does not improve model fit), the estimate for the voicing effect in Italian increases by 1.5 ms (16.5), but decreases of only 5 ms for Polish (11.5).
+In sum, the data from this study does not support a different effect of voicing on vowel duration in Italian and Polish.
+
 ### C2 closure duration
 
-The closure duration of voiceless stops is 16 ms longer than that of voiced stops.
+The closure duration of voiceless stops is 16 ms longer than that of voiced stops, a pattern known to apply cross-linguistically [@davis1989; @fowler1992].
 
 ```{r clos-dur, echo=FALSE}
 duration %>%
@@ -156,10 +166,10 @@ duration %>%
   facet_grid(~ language)
 ```
 
-One of the accounts for explaining the voicing effect relies on the fact that vowel duration and closure duration are inversely correlated [].
+One of the accounts for explaining the voicing effect relies on the fact that vowel duration and closure duration are inversely correlated [@slis1969].
 Vowel are shorter before voiceless stops, which have a longer closure, and, vice versa, vowels are longer before voiced stops, which have a shorter closure.
-
-The correlation holds independently of the voicing of the consonant, such that, within a word, longer vowel duration correlates with shorter closure duration.
+The correlation between vowel and closure duration holds independently of the voicing of the consonant, such that, within a word, longer vowel duration correlates with shorter closure duration [@sharf1962; @davis1989].
+The data of this study shows the same type of correlation, and the inclusion of C2 voicing does not improve the model fit (meaning that the correlation holds independent of C2 voicing).
 
 ```{r vow-clos-lm, echo=FALSE, include=FALSE}
 vow_clos_lm <- lmer(
@@ -200,18 +210,19 @@ as_tibble(effect("closure_duration", vow_clos_lm)) %>%
 
 ### Release to Release duration
 
-Based on this correlation, it has been claimed that the voicing effect is the product of a durational trade-off between the duration of the vowel and the duration of the closure of the following consonant.
+Based on the correlation between vowel and closure duration, it has been claimed that the voicing effect is the product of a durational trade-off between the duration of the vowel and the duration of the closure of the following consonant.
 The trade-off would be brought about by the relative timing of the onset of closure.
 An earlier closure onset corresponds to a shorter vowel and a longer closure duration, while a later closure onset produces the opposite pattern, a longer vowel followed by a shorter closure.
 
-The durational trade-off account rests on the assumption that there is a non-specified interval within wich the trade-off is implemented.
-For the account to work, the said interval should not be affected by the voicing of the stop, in the sense that the duration of the interval should be invariant.
+The durational trade-off account rests on the assumption that there is an interval within which the trade-off is implemented.
+For the account to work, said interval should not be affected by the voicing of the stop, in the sense that the duration of the interval should be invariant.
 To the best of my knowledge, previous studies failed to find such invariant interval.
 Although the syllable and word have been proposed as the invariant interval within which the trade-off happens, both units present problems when confronted with empirical data.
 
-The data collected in this exploratory study brings new evidence in support to the trade-off account, by offering a suitable invariant interval: the Release to Release interval (RR), i.e. the interval between the release of C1 and the release of C2 in CVCV words.
-The RR duration is nor affected by the voicing of C2, such that the duration is theoretically the same in C1VC2V words where C2 is either voiceless of voiced (for example, *pata* vs. *pata*).
-According to an LMER, vowel identity and C2 place of articulation have an effect in Italian but not in Polish.
+The data collected in this exploratory study brings new evidence in support of the trade-off account, by offering a suitable invariant interval: the Release to Release interval (RR), i.e. the interval between the release of C1 and the release of C2 in C1VC2V words.
+The RR duration is nor affected by the voicing of C2, such that the duration is theoretically the same in C1VC2V words, where C2 is either voiceless of voiced (for example, *pata* vs. *pata*).
+According to an LMER, voicing of C2 does not have an effect on RR duration.
+On the other hand, vowel identity and C2 place of articulation have an effect in Italian but not in Polish.
 Only in Italian, /u/ and velar stops have a shorter RR compared to /a, o/ and coronal consonants, with similar estimates (-11.5 ms).
 
 ```{r rr-box-lang, echo=FALSE, warning=FALSE}
@@ -240,14 +251,14 @@ rr_lm <- lmer(
     syl_rate +
     (1|speaker) +
     (1|item),
-  data = duration, 
+  data = duration,
   REML = FALSE
 )
 
 summary(rr_lm)
 ```
 
-It thus appears that the durational difference of vowels as a function of the voicing of following consonants is a by-product of the invariance in duration of the interval between two consecutive releases.
+It thus appears that the durational difference of vowels as a function of the voicing of following consonants is a by-product of the invariant duration of the interval between two consecutive releases.
 Such observation further reveals an interesting property about the production of stops in CVCV words, namely that the relative gestural timing of the stops is independent of the voicing category of those stops (voiceless vs. voiced).
 
 ## Articulatory data
@@ -344,6 +355,3 @@ as_tibble(effect("tongue_root", vow_tr_lm)) %>%
   ) +
   scale_color_manual(name = "Language", values = cbPalette)
 ```
-
-
-
