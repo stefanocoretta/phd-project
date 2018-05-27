@@ -27,7 +27,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-This paper reports a previously undocumented correlation between vowel duration and degree of tongue root advancement.
+This paper reports a correlation between vowel duration and degree of tongue root advancement.
+<!-- Don't say previously unreported coz you don't know :D -->
 In an exploratory study of the articulatory correlates of stop voicing, it has been found that tongue root advancement---a known mechanism that facilitates voicing during stop closure---can be implemented not only during the closure of a stop, but even during the production of the vowel preceding a stop.
 Moreover, vowel acoustic duration turned out to be linearly correlated with degree of tongue root advancement, such that longer vowels show greater tongue root advancement.
 
