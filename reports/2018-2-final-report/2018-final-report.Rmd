@@ -168,7 +168,7 @@ duration %>%
 
 One of the accounts for explaining the voicing effect relies on the fact that vowel duration and closure duration are inversely correlated [@slis1969].
 Vowel are shorter before voiceless stops, which have a longer closure, and, vice versa, vowels are longer before voiced stops, which have a shorter closure.
-The correlation between vowel and closure duration holds independently of the voicing of the consonant, such that, within a word, longer vowel duration correlates with shorter closure duration [@sharf1962; @davis1989].
+The correlation between vowel and closure duration holds independently of the voicing of the consonant, such that, within a word, longer vowel duration correlates with shorter closure duration [@davis1989].
 The data of this study shows the same type of correlation, and the inclusion of C2 voicing does not improve the model fit (meaning that the correlation holds independent of C2 voicing).
 
 ```{r vow-clos-lm, echo=FALSE, include=FALSE}
