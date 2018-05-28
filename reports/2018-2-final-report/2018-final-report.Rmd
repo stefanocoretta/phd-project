@@ -271,7 +271,7 @@ This gesture has been interpreted as a mechanism to ensure vocal fold vibration 
 The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
 During the production of voiced obstruents, the supra-glottal pressure increases due to the immittance of air in the supra-glottal cavity.
 Such pressure increase can hinder the ability to sustain voicing during closure, to the point that voicing ceases if the supra-glottal pressure is higher than the sub-glottal pressure [@ohala2011].
-One of the possible articulatory solutions to counterbalance the increase in pressure during the closure of a voiced stop is to expand the pharyngeal cavity by advancing the root of the tongue [@rothenberg1967;@westbury1983].
+One of the possible articulatory solutions to counterbalance the increase in pressure during the closure of a voiced stop is to expand the pharyngeal cavity by advancing the root of the tongue [@rothenberg1967; @westbury1983].
 
 Tongue root advancement is used idiosyncratically by the Italian and Polish speakers recorded in this study, as it can be seen in the figure below.
 The position of the tongue root has been extracted from the ultrasound tongue data at the time of C2 closure onset.
@@ -296,17 +296,18 @@ duration %>%
   theme(axis.text.x = element_blank())
 ```
 
-Given that the difference in tongue root position (in those speakers who have one) can be observed already at closure onset, it is expected that the advancing gesture is initiated before closure is achieved.
-This implies that the onset of the advancing gesture (relative to the position of the tongue root at vowel onset) happens during the production of the vowel, prediction born out by the data recorded in this study, although the gesture is found both in vowels preceding voiced *and* voiceless stops.
+Given that the difference in tongue root position (in those speakers who have one) can be observed already at consonant closure onset, it is expected that the advancing gesture of the root is initiated before closure is achieved.
+This implies that the onset of the advancing gesture (relative to the position of the tongue root at vowel onset) happens during the production of the vowel, prediction born out by the data recorded in this study.
+Crucially, though, the gesture is found both in vowels preceding voiced *and* voiceless stops.
 Independent of language and C2 voicing, the root of the tongue starts advancing at around 50% of the vowel duration, but the magnitude of the advancement is greater in vowels followed by voiced stops.
-It is not clear at this stage whether the advancing gesture found in vowels followed by voiceless stops is just a consequence of the body of the tongue raising towards the palate for the production of an oral occlusion.
-Probably comparison with sonorant consonants is required in order to confirm this possibility.
-However, the fact to keep in mind is that an enlarged cavity for voiced stops compared to voiceless stops is produced, independent of the position of the root at vowel offset relative to its position at vowel onset.
+It is not clear at this stage whether the advancing gesture found in vowels followed by voiceless stops is just a consequence of the body of the tongue raising towards the palate for the production of an oral occlusion (a non-purposive gesture, following the terminology in @rothenberg1967).
+A future experiment planned for Semester II of Year 3 will be used to disambiguate between a non-purposive vs. purposive advancement gesture.
+However, the relevant fact is that an enlarged cavity for voiced stops compared to voiceless stops is produced, independent of the observation that position of the root at vowel offset relative to its position at vowel onset is different both in the voiceless and voiced conditions.
 
 ### Vowel duration and tongue root position
 
-Although the effect of voicing on vowel duration and tongue root position are decoupled, vowel duration and tongue root position are instead positively correlated.
-Longer vowel durations correspond with a more advanced tongue root position, and vice versa, shorter vowel durations correspond with a less advanced tonge root.
+Although the effect of voicing on vowel duration and on tongue root position are decoupled, vowel duration and tongue root position themselves are instead positively correlated.
+Longer vowel durations correspond to a more advanced tongue root position, and vice versa, shorter vowel durations correspond to a less advanced tongue root.
 Such correlation exists independent of the voicing of C2, fact that is compatible with the observation that advancement is produced both in vowels followed by voiceless and voiced stops.
 
 ```{r tr-lm, echo=FALSE, include=FALSE}
