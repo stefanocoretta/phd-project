@@ -420,6 +420,31 @@ closure_cv %>%
 
 It looks like the CV for voiced consonants is higher (meaning there is more variation in those than in voiceless).
 
+## Stability measure of RR
+
+```{r}
+rr_cv <- duration %>%
+  group_by(language, speaker, c2_place, c2_phonation) %>%
+  summarise(
+    sd = sd(rel_rel, na.rm = TRUE),
+    mean = mean(rel_rel, na.rm = TRUE),
+    cv = 100 * sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE)
+  )
+```
+
+```{r}
+rr_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot() +
+  facet_grid(language ~ c2_place)
+```
+
+```{r}
+rr_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot()
+```
+
 # Analysis
 
 ## Vowel duration
