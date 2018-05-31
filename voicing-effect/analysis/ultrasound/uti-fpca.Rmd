@@ -14,6 +14,7 @@ library(tidymv)
 library(rticulate)
 library(itsadug)
 library(beepr)
+library(fda)
 ```
 
 # Data import
@@ -69,5 +70,81 @@ tongue %>%
   coord_fixed(ratio = 1) +
   facet_wrap(~vowel) +
   theme(legend.position = "none")
+```
+
+# FPCA
+
+```{r}
+it01 <- filter(tongue, speaker == "it01", label == "closure_") %>%
+  arrange(rec_date, fan_line) %>%
+  mutate(
+    contour = as.numeric(rec_date)
+  ) %>%
+  transform_coord(use_XY = TRUE)
+
+n_curves <- 59
+
+X <- split(it01$X, it01$contour)
+Y <- split(it01$Y, it01$contour)
+```
+
+```{r smoothing}
+n_knots = 8 # try many
+lambda = 1e-8 # try many; smoothness penalty
+
+#knots <- seq(0,mean_dur,length.out = n_knots)
+lfd_obj <- 3 # 2 + order of derivative expected to be used. We might need velocity, thus order = 1
+n_order <- 2 + lfd_obj  # a fixed relation about B-splines
+n_basis <- n_knots + n_order - 2 # a fixed relation about B-splines
+basis <- create.bspline.basis(c(min(it01$X), max(it01$Y)), n_basis, n_order) #, knots)
+
+fd_par <- fdPar(basis, lfd_obj, lambda)
+```
+
+```{r}
+i = 45
+# t_norm = (time_list[[i]] / duration[i]) * mean_dur # linear time normalisation
+curve_fd = smooth.basis(X[[i]], Y[[i]], fd_par)$fd
+
+# plot
+plot(
+  X[[i]],
+  Y[[i]],
+  col = "red",
+  las = 1,
+  main = paste('curve',i,', n_knots =',n_knots,'lambda =',lambda)
+)
+lines(curve_fd, lwd = 2)
+```
+
+```{r}
+y_coefs = matrix(nrow = n_basis, ncol = n_curves)
+
+for (i in 1:n_curves) {
+  y_coefs[,i] = c(smooth.basis(X[[i]],Y[[i]], fd_par)$fd$coefs)
+}
+y_fd = fd(coef = y_coefs, basisobj = basis)
+```
+
+```{r fpca}
+lambda_pca <- lambda
+pcafd_par  <- fdPar(basis, 2, lambda_pca) # here Lfdobj = 2 since we don't need derivatives of PC curves.
+y_pcafd <- pca.fd(y_fd, nharm = 2, pcafd_par) # compute first 2 PCs
+```
+
+```{r}
+plot.pca.fd(y_pcafd, nx = 40)
+```
+
+```{r}
+it01_contour <- it01 %>%
+  select(-X, -Y, -fan_line) %>%
+  unique()
+
+scores <- as.tibble(y_pcafd$scores) %>%
+  cbind(it01_contour)
+
+ggplot(scores, aes(V1, V2, colour = c2_place)) +
+  geom_point()
 ```
 
