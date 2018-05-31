@@ -63,10 +63,11 @@ tongue <- list.files(
 
 ```{r}
 tongue %>%
-  filter(speaker == "it01", vowel == "u", c2_place == "coronal", label == "closure_") %>%
+  filter(speaker == "it01", c2_place == "coronal", label == "closure_", X < 40) %>%
   ggplot(aes(X, Y, group = rec_date, colour = rec_date)) +
   geom_path() +
   coord_fixed(ratio = 1) +
+  facet_wrap(~vowel) +
   theme(legend.position = "none")
 ```
 
