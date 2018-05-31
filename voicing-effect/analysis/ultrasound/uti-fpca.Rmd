@@ -1,0 +1,72 @@
+---
+title: "UTI FPCA"
+author: "Stefano Coretta"
+date: "31/05/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_light())
+library(tidymv)
+library(rticulate)
+library(itsadug)
+library(beepr)
+```
+
+# Data import
+
+```{r read-data, message=FALSE}
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+
+tongue <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns) %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    vowel = factor(vowel, levels = c("a", "o", "u")),
+    c2_place = factor(c2_place, levels = c("coronal", "velar")),
+    speaker_phon = interaction(speaker, c2_phonation)
+  ) %>%
+  mutate_if(is.character, as.factor)
+```
+
+# Cartesian vs. Polar plotting
+
+```{r}
+tongue %>%
+  filter(speaker == "it01", vowel == "u", c2_place == "coronal", label == "closure_") %>%
+  ggplot(aes(X, Y, group = rec_date, colour = rec_date)) +
+  geom_path() +
+  coord_fixed(ratio = 1) +
+  theme(legend.position = "none")
+```
+
