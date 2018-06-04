@@ -2,7 +2,7 @@
 title: 'Longer vowel duration correlates with tongue root advancement in Italian and Polish: An ultrasound study'
 author: "Stefano Coretta"
 date: "The University of Manchester"
-institute: "LabPhon"
+institute: "LabPhon16, 19--22 June2018, Lisbon, Portugal"
 output:
   beamer_presentation:
     citation_package: natbib
@@ -106,7 +106,7 @@ The **voicing effect**
 
 \normalsize
 
-Still no consensus on source!
+Still **no consensus** on source!
 
 # Background
 
@@ -122,45 +122,50 @@ Proposed accounts:
     * misperception [@javkin1976]
     * enhancement [@kluender1988]
 
-* but problems [@maddieson1976;@fowler1992]
+* but **problems** [@maddieson1976;@fowler1992]
 
 # Background
 
 **This talk**:
 
-* support for *durational trade-off hypothesis*
+* Support for **durational trade-off hypothesis** of the voicing effect
 
-* link between *vowel duration* and *tongue root position*
+* Link between **vowel duration** and **tongue root position**
 
 # Methods
 
 * **Participants**: 11 Italians (5 F, 6 M), 6 Polish (3 F, 3 M)
 * **Targets**
-    * \textbf{C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}}
-    * C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/
+    * \textbf{C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{1}} (C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/)
     * *pata*, *pada*, *paka*, ..., *poto*, *podo*, ...
 * **Frame sentence**
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
 * **Measurements**
-    * Durational data from acoustics
-    * Tongue root position from ultrasound tongue imaging
+    * Durational data from acoustics [@boersma2016]
+    * Tongue root position from ultrasound tongue imaging [@articulate2011; @articulate2008]
 * **Reproducibility**
     - <https://github.com/stefanocoretta/2018-labphon>
 
 # Methods
 
-[image of acoustic annotation]
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{./graphics/praat-annotation.png}
+\end{figure}
 
 # Methods
 
-[image of tongue root position]
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{./graphics/trp.png}
+\end{figure}
 
 # Results: Vowel duration
 
 \centering
 
-```{r vowel-duration-plot, echo=FALSE}
+```{r vow-duration-plot, echo=FALSE}
 set.seed(7877)
 duration %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
@@ -199,8 +204,24 @@ vow_dur_lm_null <- lmer(
   data = duration
 )
 
-anova(vow_dur_lm_null, vow_dur_lm)
+vow_dur_anova <- anova(vow_dur_lm_null, vow_dur_lm)
 summary(vow_dur_lm)
+```
+
+# Results: Closure duration
+
+\centering
+
+```{r clos-duration-plot, echo=FALSE, warning=FALSE}
+set.seed(7877)
+duration %>%
+  ggplot(aes(vowel, closure_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.1) +
+  facet_grid(~ language) +
+  xlab("Vowel") +
+  ylab("Closure duration (ms)") +
+  scale_fill_manual(name = "C2 voicing", values = cbPalette)
 ```
 
 ```{r clos-dur-lm, echo=FALSE, include=FALSE}
@@ -230,7 +251,7 @@ clos_dur_lm_null <- lmer(
   data = duration
 )
 
-anova(clos_dur_lm_null, clos_dur_lm)
+clos_dur_anova <- anova(clos_dur_lm_null, clos_dur_lm)
 summary(clos_dur_lm)
 ```
 
@@ -271,10 +292,29 @@ as_tibble(effect("closure_duration", vow_clos_lm)) %>%
   scale_color_manual(name = "Language", values = cbPalette[1:2])
 ```
 
-# Results: Vowel and closure duration
+# Results: Interim summary
+
+In Italian and Polish:
+
+* Vowels are **15 ms longer** when followed by a voiced stop
+
+* Consonant closure is **16 ms shorter** if it is a voiced stop
+
+* Vowel duration is inversely correlated with closure duration
+
+Durational trade-off?
+
+# Results: Interim summary
 
 \begin{figure}
   \includegraphics[width=0.8\textwidth]{./graphics/trade-off.pdf}
+\end{figure}
+
+# Results: Release to Release duration
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{./graphics/rel-rel.png}
 \end{figure}
 
 # Results: Release to Release duration
@@ -379,3 +419,21 @@ as_tibble(effect("tongue_root", vow_tr_lm)) %>%
   ) +
   scale_color_manual(name = "Language", values = cbPalette[1:2])
 ```
+
+# Conclusions
+
+* Vowel duration and closure duration are **inversely correlated**
+
+* **Release to Release** invariance supports a durational trade-off account
+
+* Compatible with finding that **vowel duration and tongue root position** are correlated
+
+# The end
+
+\centering
+\Huge Thanks!
+
+\normalsize
+
+This project is funded by the School of Arts, Languages and Cultures at the University of Manchester.
+I would like to thank my supervisors, Ricardo Bermúdez-Otero and Patrycja Strycharczuk for the invaluable help and support, and all the members of the Phonetics Lab at the University of Manchester for the stimulating conversations about this project. All errors are my own.
