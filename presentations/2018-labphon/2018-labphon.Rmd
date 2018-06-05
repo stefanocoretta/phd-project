@@ -2,7 +2,7 @@
 title: 'Longer vowel duration correlates with tongue root advancement in Italian and Polish: An ultrasound study'
 author: "Stefano Coretta"
 date: "The University of Manchester"
-institute: "LabPhon16, 19--22 June2018, Lisbon, Portugal"
+institute: "LabPhon16, 19--22 June 2018, Lisbon, Portugal"
 output:
   beamer_presentation:
     citation_package: natbib
@@ -143,18 +143,18 @@ Proposed accounts:
     - *Mówię X teraz*, 'I say X now'
 * **Measurements**
     * Durational data from acoustics [@boersma2016]
-    * Tongue root position from ultrasound tongue imaging [@articulate2011; @articulate2008]
+    * Tongue root position (frontness) from ultrasound tongue imaging [@articulate2011; @articulate2008]
 * **Reproducibility**
     - <https://github.com/stefanocoretta/2018-labphon>
 
-# Methods
+# Methods: Acoustic landmarks
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{./graphics/praat-annotation.png}
 \end{figure}
 
-# Methods
+# Methods: Tongue root position
 
 \begin{figure}
   \centering
@@ -420,13 +420,24 @@ as_tibble(effect("tongue_root", vow_tr_lm)) %>%
   scale_color_manual(name = "Language", values = cbPalette[1:2])
 ```
 
+# Discussion: Vowel duration and tongue root position
+
+* Voiced stops have a more advanced tongue root
+
+    * **Aereodynamic Voicing Constraint** [@ohala2011]
+    * tongue root advancement [@rothenberg1967; @westbury1983]
+    * but no significant interaction between tongue root frontness and C2 voicing
+
+* Voiced stops have a shorter closure duration
+    * but no significant interaction between closure duration and voicing
+
 # Conclusions
 
 * Vowel duration and closure duration are **inversely correlated**
 
-* **Release to Release** invariance supports a durational trade-off account
+* Vowel duration and tongue root frontness are **directly correlated**
 
-* Compatible with finding that **vowel duration and tongue root position** are correlated
+* **Release to Release** invariance supports a durational trade-off account for the voicing effect
 
 # The end
 
