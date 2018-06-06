@@ -274,7 +274,7 @@ summary(vow_clos_lm)
 
 \centering
 
-```{r vow-clos-plot, echo=FALSE, warning=FALSE, fig.height=4}
+```{r vow-clos-plot, echo=FALSE, warning=FALSE, out.height="200pt"}
 as_tibble(effect("closure_duration", vow_clos_lm)) %>%
   ggplot(aes(closure_duration, fit)) +
   geom_point(
