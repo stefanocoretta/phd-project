@@ -210,6 +210,13 @@ duration %>%
 
 The Release-Release interval duration does not seem to be affected by the voicing of C2.
 
+```{r rr-box-lang}
+duration %>%
+  ggplot(aes(c2_phonation, rel_rel, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
 ## VOR
 
 Vowel Onset to Release.

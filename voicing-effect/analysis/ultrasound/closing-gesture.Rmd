@@ -38,6 +38,13 @@ columns <- c(
 speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
+duration <- list.files(
+  path = "voicing-effect/data/datasets/acoustics/",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--"))
+
 tongue <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound",
   pattern = "*-tongue-cart.tsv",
@@ -69,7 +76,11 @@ closing <- tongue %>%
   mutate(
     closing_duration = (closure - GONS) * 1000
   ) %>%
-  filter(closing_duration > 0)
+  filter(closing_duration > 0) %>%
+  left_join(y = duration) %>%
+  mutate(
+    rel_gon = (GONS - c1_rel) * 1000
+  )
 
 tongue_root <- tongue %>%
   filter(label %in% c("max_TT", "max_TD")) %>%
@@ -207,3 +218,99 @@ closing_velocity %>%
   geom_boxplot() +
   facet_wrap(~ speaker)
 ```
+
+# Timing of closing gesture onset
+
+```{r}
+closing %>%
+  ggplot(aes(rel_gon)) +
+  geom_density()
+```
+
+```{r}
+closing %>%
+  ggplot(aes(rel_gon, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+closing %>%
+  ggplot(aes(rel_gon, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r}
+closing %>%
+  ggplot(aes(rel_gon, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(. ~ language)
+```
+
+```{r}
+closing %>%
+  group_by(speaker) %>%
+  mutate(rel_gon = scale(rel_gon)) %>%
+  ggplot(aes(rel_gon, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(. ~ language)
+```
+
+```{r}
+closing %>%
+  group_by(speaker) %>%
+  mutate(rel_gon = scale(rel_gon)) %>%
+  ggplot(aes(rel_gon, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+closing %>%
+  group_by(speaker) %>%
+  mutate(rel_gon = scale(rel_gon)) %>%
+  ggplot(aes(rel_gon)) +
+  geom_density()
+```
+
+```{r}
+closing %>%
+  group_by(speaker) %>%
+  mutate(rel_gon = scale(rel_gon)) %>%
+  ggplot(aes(c2_phonation, rel_gon, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+closing %>%
+  group_by(speaker) %>%
+  mutate(rel_gon = scale(rel_gon)) %>%
+  filter(rel_gon < 3, rel_gon > -3) %>%
+  ggplot(aes(c2_phonation, rel_gon, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+closing %>%
+  ggplot(aes(c2_phonation, rel_gon, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r}
+rel_gon_lm <- lmer(
+  rel_gon ~
+    c2_phonation +
+    vowel *
+    c2_place +
+#    language +
+    (1 + c2_phonation|speaker) +
+    (1|item),
+  data = closing
+)
+summary(rel_gon_lm)
+```
+
+```{r}
+plot(allEffects(rel_gon_lm))
+```
+
