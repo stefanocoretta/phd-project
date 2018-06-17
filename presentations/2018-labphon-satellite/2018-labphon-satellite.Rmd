@@ -316,3 +316,8 @@ tracegram %>%
 
 \centering
 \Huge Thanks!
+
+\normalsize
+
+This project is funded by the School of Arts, Languages and Cultures at the University of Manchester.
+I would like to thank my supervisors, Ricardo Bermúdez-Otero and Patrycja Strycharczuk for the invaluable help and support, and all the members of the Phonetics Lab at the University of Manchester for the stimulating conversations about this project. All errors are my own.
