@@ -126,6 +126,14 @@ Proposed accounts:
 
 # Background
 
+* Aereodynamic Voicing Constraint [@ohala2011]
+    * $\Delta{}P < \theta$
+
+* **Tongue root advancement** [@rothenberg1967; @westbury1983]
+    * voiced stops are produced with advanced tongue root
+
+# Background
+
 **This talk**:
 
 * Support for **durational trade-off hypothesis** of the voicing effect
@@ -143,7 +151,7 @@ Proposed accounts:
     - *Mówię X teraz*, 'I say X now'
 * **Measurements**
     * Durational data from acoustics [@boersma2016]
-    * Tongue root position (frontness) from ultrasound tongue imaging [@articulate2011; @articulate2008]
+    * Tongue root position (advancement) from ultrasound tongue imaging [@articulate2011; @articulate2008]
 * **Reproducibility**
     - <https://github.com/stefanocoretta/2018-labphon>
 
@@ -374,11 +382,10 @@ summary(rr_lm)
 
 # Discussion: Vowel duration and tongue root position
 
-* **Tongue root advancement** [Aereodynamic Voicing Constraint, @ohala2011; @rothenberg1967; @westbury1983]
-
-* Advancing root during vowel in voiced **and** voiceless stops
+* Advancing root during vowel **in voiced and voiceless stops**
     * voiced stops have greater advancement at closure
-    * but no interaction between C2 voicing and tongue root position
+
+* But **no interaction** between C2 voicing and tongue root position on vowel duration
 
 # Discussion: Vowel duration and tongue root position
 
@@ -433,15 +440,15 @@ as_tibble(effect("tongue_root", vow_tr_lm)) %>%
 * Voiced stops have a shorter closure duration
     * but no interaction between C2 voicing and tongue root position
 
-* **Hypothesis**: Closure onset is timed later to allow for more tongue root advancement
+* **Hypothesis**: A later closure onset is (diachronically) selected in the context of voiced stops because it allows for more root advancement within closure (which facilitates voicing)
 
 # Conclusions
 
+* **Release to Release** invariance supports a durational trade-off account for the voicing effect
+
 * Vowel duration and closure duration are **inversely correlated**
 
-* Vowel duration and tongue root frontness are **directly correlated**
-
-* **Release to Release** invariance supports a durational trade-off account for the voicing effect
+* Vowel duration and tongue root position are **directly correlated**
 
 # The end
 
