@@ -149,11 +149,11 @@ Proposed accounts:
 * **Frame sentence**
     - *Dico X lentamente*, 'I say X slowly'
     - *Mówię X teraz*, 'I say X now'
+* **Reproducibility**
+    - <https://github.com/stefanocoretta/2018-labphon>
 * **Measurements**
     * Durational data from acoustics [@boersma2016]
     * Tongue root position (advancement) from ultrasound tongue imaging [@articulate2011; @articulate2008]
-* **Reproducibility**
-    - <https://github.com/stefanocoretta/2018-labphon>
 
 # Methods: Acoustic landmarks
 
@@ -302,7 +302,7 @@ as_tibble(effect("closure_duration", vow_clos_lm)) %>%
 
 # Results: Interim summary
 
-In Italian and Polish:
+According to LMERs, in Italian and Polish:
 
 * Vowels are **15 ms longer** when followed by a voiced stop
 
@@ -385,7 +385,8 @@ summary(rr_lm)
 * Advancing root during vowel **in voiced and voiceless stops**
     * voiced stops have greater advancement at closure onset
 
-* But **no interaction** between C2 voicing and tongue root position on vowel duration
+* Vowel duration correlates with tongue root position
+    * But **no interaction** between C2 voicing and tongue root position on vowel duration
 
 # Discussion: Vowel duration and tongue root position
 
@@ -441,7 +442,9 @@ as_tibble(effect("tongue_root", vow_tr_lm)) %>%
 
 * **Hypothesis**: A later closure onset is (diachronically) selected in the context of voiced stops because it allows for more root advancement within closure (which facilitates voicing)
 
-* Different possible scenarios regarding timing and speed of advancement gesture
+* Different possible scenarios regarding timing and velocity of advancement gesture
+    * same/different timing
+    * same/different velocity
 
 # Conclusions
 
