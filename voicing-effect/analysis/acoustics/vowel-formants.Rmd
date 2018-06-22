@@ -49,18 +49,18 @@ f1_dur <- vowels %>%
 # Exploration
 
 ```{r}
-formants %>%
+vowels %>%
   filter(language == "italian") %>%
-  ggplot(aes(time, f1, colour = c2_phonation)) +
-  geom_smooth() +
+  ggplot(aes(time.x, f1, colour = c2_phonation)) +
+  geom_smooth(method = "loess") +
   facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
-formants %>%
+vowels %>%
   filter(language == "italian") %>%
-  ggplot(aes(time, f2, colour = c2_phonation)) +
-  geom_smooth() +
+  ggplot(aes(time.x, f2, colour = c2_phonation)) +
+  geom_smooth(method = "loess") +
   facet_grid(c2_place ~ vowel)
 ```
 
@@ -82,9 +82,9 @@ formants %>%
 ```
 
 ```{r}
-formants %>%
+vowels %>%
   filter(language == "polish") %>%
-  ggplot(aes(x = time, colour = c2_phonation)) +
+  ggplot(aes(x = time.x, colour = c2_phonation)) +
   geom_smooth(aes(y = f1)) +
   geom_smooth(aes(y = f2)) +
   facet_grid(. ~ vowel)
@@ -92,13 +92,13 @@ formants %>%
 
 ```{r}
 for (i in 1:9) {
-  print(formants %>%
-  filter(time == i, language == "italian", vowel != "u") %>%
+  print(vowels %>%
+  filter(time.x == i, language == "italian", vowel != "u") %>%
   ggplot(aes(f2, f1, colour = c2_phonation)) +
   geom_point() +
   facet_grid(c2_place ~ vowel) +
-  scale_x_reverse(lim = c(max(formants$f2), min(formants$f2))) +
-  scale_y_reverse(lim = c(max(formants$f1), min(formants$f1)))
+  scale_x_reverse(lim = c(max(vowels$f2), min(vowels$f2))) +
+  scale_y_reverse(lim = c(max(vowels$f1), min(vowels$f1)))
   )
 }
 ```
