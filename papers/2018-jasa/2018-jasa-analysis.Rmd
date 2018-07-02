@@ -1,0 +1,190 @@
+---
+title: "2018 JASA analysis"
+author: "Stefano Coretta"
+date: "02/07/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+theme_set(theme_minimal())
+library(lme4)
+library(effects)
+```
+
+```{r read-data, include=FALSE, message=FALSE}
+speakers <- read_csv("./datasets/speakers.csv")
+stimuli <- read_csv("./datasets/stimuli.csv")
+
+durations <- list.files(
+  path = "./datasets",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  )
+```
+
+## Plotting
+
+```{r vowel-duration}
+durations %>%
+  ggplot(aes(vowel_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r vowel-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r vowel-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r vowel-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  ggplot(aes(vowel_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug() +
+  facet_grid(~ language)
+```
+
+```{r vowel-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(vowel_duration = scale(vowel_duration)) %>%
+  filter(vowel_duration < 2.5, vowel_duration > -2.5) %>%
+  ggplot(aes(vowel_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug() +
+  facet_grid(~ language)
+```
+
+```{r closure-duration}
+durations %>%
+  ggplot(aes(closure_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r closure-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(closure_duration = scale(closure_duration)) %>%
+  ggplot(aes(closure_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r closure-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(closure_duration = scale(closure_duration)) %>%
+  ggplot(aes(closure_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r closure-duration}
+durations %>%
+  group_by(speaker) %>%
+  mutate(closure_duration = scale(closure_duration)) %>%
+  ggplot(aes(closure_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug() +
+  facet_grid(~ language)
+```
+
+```{r}
+vowel_lm_full <- lmer(
+  vowel_duration ~
+    c2_phonation *
+    c2_place *
+    vowel *
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(vowel_lm_full)
+```
+
+```{r}
+vowel_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+    c2_place:vowel +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(vowel_lm)
+```
+
+```{r}
+plot(allEffects(vowel_lm))
+```
+
+```{r}
+closure_lm_full <- lmer(
+  closure_duration ~
+    c2_phonation *
+    c2_place *
+    vowel *
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(closure_lm_full)
+```
+
+```{r}
+vowel_closure_lm <- lmer(
+  vowel_duration ~
+    closure_duration *
+    c2_phonation +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(vowel_closure_lm)
+```
+
