@@ -2,27 +2,80 @@
 title: This is a title and this is too
 shorttitle: A subtitle goes on another line
 author:
-- name: Author's name
-  affiliation: Author's affiliation
-  email: e-mail\@uni.edu
+- name: Stefano Coretta
+  affiliation: The University of Manchester
+  email: stefano.coretta\@manchester.ac.uk
   thanks: other info
-- name: Second author's name
-  affiliation: Second author's affiliation
-output: jasaarticle::jasa_article
+output:
+  jasaarticle::jasa_article:
+    citation_package: natbib
 abstract: |
-  Put your abstract here. Abstracts are limited to 200 words for
-  regular articles and 100 words for Letters to the Editor. Please no
-  personal pronouns, also please do not use the words ``new'' and/or
-  ``novel'' in the abstract. An article usually includes an abstract, a
-  concise summary of the work covered at length in the main body of the
-  article.
+  Put your abstract here.
+bibliography: linguistics.bib
+header-includes:
+- \usepackage{cleveref}
+- \usepackage{ctable}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Your article.
+# Method
+
+## Speakers
+
+## Equipment
+
+The acquisition of the audio signal was achieved with the software Articulate Assistant Advanced™ (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7, with a sample rate of 22050 MHz (16-bit) in a proprietary format.
+A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
+
+## Materials
+
+The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
+The lexical stress of the target words was placed by speakers of both Italian and Polish on V\textsubscript{1}, as intended.
+The make-up of the target words was constrained by the design of the experiment, which included ultrasound tongue imaging (UTI).
+Front vowels are difficult to image with UTI, since their articulation involves tongue positions which are particularly far from the ultrasonic probe, hence reducing the visibility of the tongue contour.
+For this reason, only central and back vowels were included.
+Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
+A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
+The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' in Polish.
+These sentences were chosen in order to keep the placement of stress and emphasis similar across languages, so to ensure comparability of results.
+
+## Procedure
+
+The participant was asked to read the sentences with the target words which were sequentially presented on the computer screen.
+The order of the sentence stimuli was randomised for each participant.
+Each participant read the list of randomised sentence stimuli six times.
+Due to software constraints, the order of the list was kept the same across the six repetitions within each participant.
+Each speaker read a total of 72 sentences, with a grand total of 576 tokens (288 per language).
+The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
+
+## Data processing, measurements, and statistical analysis
+
+\ctable[caption = List of measurements as extracted from acoustics.,
+label = t:dur-measures,
+width=\textwidth,
+star
+]{ll>{\raggedright}p{9cm}}{}{
+\FL
+\textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
+vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the burst of /p/ (C1)            \NN
+vowel offset          & (V1 offset)        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
+consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
+closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
+consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
+consonant burst onset & (C2 burst)         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
+}
+
+The audio recordings were exported from AAA in `.wav` format for further processing.
+A forced aligned transcription was accomplished through the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
+The outcome of the automatic annotation was manually corrected when necessary, according to the criteria in \Cref{t:dur-measures}.
+The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014.
+The durations in milliseconds of the following intervals were extracted from the annotated acoustic landmarks with Praat scripting: vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 burst), and C1 release to C2 release duration (Rel-Rel duration).
+
+The durational measurements were analysed with linear mixed-effects models using `lme4` in R [@r-core-team2017; @bates2015].
+*P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor.
 
 \begin{acknowledgments}
 Thanks to...

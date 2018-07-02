@@ -1,0 +1,249 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	JASA LaTeX Template File
+%  For use in making articles using JASAnew.cls
+% July 26, 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Step 1:
+%% Uncomment the style that you want to use:
+
+%%%%%%% For Preprint
+%% For manuscript, 12pt, one column style
+
+%% Comment this out if you'd rather use another style:
+\documentclass[]{JASAnew}
+
+%%%%% Preprint Options %%%%%
+%% The track changes option allows you to mark changes
+%% and will produce a list of changes, their line number
+%% and page number at the end of the article.
+%\documentclass[preprint,trackchanges]{JASAnew}
+
+%% authaffil option will make affil immediately
+% follow author, otherwise authors are grouped, and affiliations
+% are stacked underneath all the authors.
+%\documentclass[preprint,authaffil]{JASAnew}
+
+%% NumberedRefs is used for numbered bibliography and citations.
+%% Default is Author-Year style.
+%% \documentclass[preprint,NumberedRefs]{JASAnew}
+
+%%%%%%% For Reprint
+%% For appearance of finished article; 2 columns, 10 pt fonts
+
+% \documentclass[reprint]{JASAnew}
+
+%%%%% Reprint Options %%%%%
+
+%% For testing to see if author has exceeded page length request, use 12pt option
+%\documentclass[reprint,12pt]{JASAnew}
+
+% authaffil option will make affil immediately
+% follow author, otherwise authors are grouped, and affiliations
+% are stacked underneath all the authors.
+%\documentclass[reprint,authaffil]{JASAnew}
+
+%% NumberedRefs is used for numbered bibliography and citations.
+%% Default is Author-Year style.
+% \documentclass[reprint,NumberedRefs]{JASAnew}
+
+%% TurnOnLineNumbers
+%% Make lines be numbered in reprint style:
+% \documentclass[reprint,TurnOnLineNumbers]{JASAnew}
+
+\usepackage{natbib}
+
+
+\usepackage{cleveref}
+\usepackage{ctable}
+
+\begin{document}
+%% the square bracket argument will send term to running head in
+%% preprint, or running foot in reprint style.
+
+\title[A subtitle goes on another line]{This is a title and this is too}
+
+% ie
+%\title[JASA/Sample JASA Article]{Sample JASA Article}
+
+%% repeat as needed
+
+\author{Stefano Coretta}
+% ie
+%\affiliation{Department1,  University1, City, State ZipCode, Country}
+\affiliation{The University of Manchester}
+%% for corresponding author
+\email{stefano.coretta@manchester.ac.uk}
+%% for additional information
+\thanks{other info}
+
+% ie
+% \author{Author Four}
+% \email{author.four@university.edu}
+% \thanks{Also at Another University, City, State ZipCode, Country.}
+
+%% For preprint only,
+%  optional, if you want want this message to appear in upper left corner of title page
+% \preprint{}
+
+%ie
+%\preprint{Author, JASA}
+
+% optional, if desired:
+%\date{\today}
+
+\begin{abstract}
+% Put your abstract here. Abstracts are limited to 200 words for
+% regular articles and 100 words for Letters to the Editor. Please no
+% personal pronouns, also please do not use the words ``new'' and/or
+% ``novel'' in the abstract. An article usually includes an abstract, a
+% concise summary of the work covered at length in the main body of the
+% article.
+Put your abstract here. Abstracts are limited to 200 words for regular
+articles and 100 words for Letters to the Editor. Please no personal
+pronouns, also please do not use the words
+\texttt{new\textquotesingle{}\textquotesingle{}\ and/or}novel'' in the
+abstract. An article usually includes an abstract, a concise summary of
+the work covered at length in the main body of the article.
+\end{abstract}
+
+%% pacs numbers not used
+
+\maketitle
+
+%  End of title page for Preprint option --------------------------------- %
+
+%% See preprint.tex/.pdf or reprint.tex/.pdf for many examples
+
+
+%  Body of the article
+\hypertarget{method}{%
+\section{Method}\label{method}}
+
+\hypertarget{speakers}{%
+\subsection{Speakers}\label{speakers}}
+
+\hypertarget{equipment}{%
+\subsection{Equipment}\label{equipment}}
+
+The acquisition of the audio signal was achieved with the software
+Articulate Assistant Advanced™ (AAA, v2.17.2) running on a
+Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7, with a
+sample rate of 22050 MHz (16-bit) in a proprietary format. A FocusRight
+Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were
+used for audio recording.
+
+\hypertarget{materials}{%
+\subsection{Materials}\label{materials}}
+
+The target stimuli were disyllabic words with
+C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
+structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o,
+u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} =
+V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.). The lexical
+stress of the target words was placed by speakers of both Italian and
+Polish on V\textsubscript{1}, as intended. The make-up of the target
+words was constrained by the design of the experiment, which included
+ultrasound tongue imaging (UTI). Front vowels are difficult to image
+with UTI, since their articulation involves tongue positions which are
+particularly far from the ultrasonic probe, hence reducing the
+visibility of the tongue contour. For this reason, only central and back
+vowels were included. Since one of the variables of interest in the
+exploratory study was the closing gesture of C\textsubscript{2}, only
+lingual consonants were used. A labial stop was chosen as the first
+consonant to reduce possible coarticulation with the following vowel
+(although see \citealt{vazquez-alvarez2007}). The target words were
+embedded in a frame sentence, \emph{Dico X lentamente} `I say X slowly'
+in Italian, and \emph{Mówię X teraz} `I say X now' in Polish. These
+sentences were chosen in order to keep the placement of stress and
+emphasis similar across languages, so to ensure comparability of
+results.
+
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
+
+The participant was asked to read the sentences with the target words
+which were sequentially presented on the computer screen. The order of
+the sentence stimuli was randomised for each participant. Each
+participant read the list of randomised sentence stimuli six times. Due
+to software constraints, the order of the list was kept the same across
+the six repetitions within each participant. Each speaker read a total
+of 72 sentences, with a grand total of 576 tokens (288 per language).
+The reading task lasted between 15 and 20 minutes, with optional short
+breaks between one repetition and the other.
+
+\hypertarget{data-processing-measurements-and-statistical-analysis}{%
+\subsection{Data processing, measurements, and statistical
+analysis}\label{data-processing-measurements-and-statistical-analysis}}
+
+\ctable[caption = List of measurements as extracted from acoustics.,
+label = t:dur-measures,
+width=\textwidth,
+star
+]{ll>{\raggedright}p{9cm}}{}{
+\FL
+\textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
+vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the burst of /p/ (C1)            \NN
+vowel offset          & (V1 offset)        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
+consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
+closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
+consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
+consonant burst onset & (C2 burst)         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
+}
+
+The audio recordings were exported from AAA in \texttt{.wav} format for
+further processing. A forced aligned transcription was accomplished
+through the SPeech Phonetisation Alignment and Syllabification software
+(SPPAS) \citep{bigi2015}. The outcome of the automatic annotation was
+manually corrected when necessary, according to the criteria in
+\Cref{t:dur-measures}. The releases of C1 and C2 were detected
+automatically by means of a Praat scripting implementation of the
+algorithm described in \citet{ananthapadmanabha2014}. The durations in
+milliseconds of the following intervals were extracted from the
+annotated acoustic landmarks with Praat scripting: vowel duration (V1
+onset to V1 offset), consonant closure duration (V1 offset to C2 burst),
+and C1 release to C2 release duration (Rel-Rel duration).
+
+The durational measurements were analysed with linear mixed-effects
+models using \texttt{lme4} in R \citep{r-core-team2017, bates2015}.
+\emph{P}-values were obtained with likelihood ratio tests comparing the
+full model with a nested model without the relevant predictor.
+
+\begin{acknowledgments}
+Thanks to...
+\end{acknowledgments}
+
+\appendix
+\section{Optional appendix}
+
+%% before appendix (optional) and bibliography:
+% \begin{acknowledgments}
+%This research was supported by  ...
+% \end{acknowledgments}
+
+% -------------------------------------------------------------------------------------------------------------------
+%   Appendix  (optional)
+
+%\appendix
+%\section{Appendix title}
+
+%If only one appendix, please use
+%\appendix*
+%\section{Appendix title}
+
+
+%=======================================================
+%IMPORTANT
+
+%Use \bibliography{<name of your .bib file>}+
+%to make your bibliography with BibTeX.
+
+%Once you have used BibTeX you
+%should open the resulting .bbl file and cut and paste the entire contents
+%into the end of your article.
+%=======================================================
+
+\bibliography{linguistics.bib}
+
+
+\end{document}
