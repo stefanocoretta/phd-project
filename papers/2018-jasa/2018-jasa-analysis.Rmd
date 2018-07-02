@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
+library(lmerTest)
 library(effects)
 ```
 
@@ -120,6 +121,8 @@ durations %>%
   facet_grid(~ language)
 ```
 
+# Lmer
+
 ```{r}
 vowel_lm_full <- lmer(
   vowel_duration ~
@@ -175,16 +178,79 @@ summary(closure_lm_full)
 ```
 
 ```{r}
+closure_lm <- lmer(
+  closure_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    language +
+    c2_place:language +
+    vowel:language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(closure_lm)
+```
+
+```{r}
+plot(allEffects(closure_lm))
+```
+
+
+```{r}
 vowel_closure_lm <- lmer(
   vowel_duration ~
-    closure_duration *
-    c2_phonation +
+    closure_duration +
+    syl_rate +
+    (1+closure_duration|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(vowel_closure_lm)
+```
+
+```{r}
+plot(allEffects(vowel_closure_lm))
+```
+
+```{r}
+rel_rel_lm_full <- lmer(
+  rel_rel ~
+    c2_phonation *
+    vowel *
+    c2_place *
+    language +
     syl_rate +
     (1|speaker) +
     (1|item),
   data = durations,
   REML = FALSE
 )
-summary(vowel_closure_lm)
+summary(rel_rel_lm_full)
+```
+
+```{r}
+rel_rel_lm <- lmer(
+  rel_rel ~
+    vowel +
+    c2_place +
+    language +
+    vowel:language +
+    c2_place:language +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations,
+  REML = FALSE
+)
+summary(rel_rel_lm)
+```
+
+```{r}
+plot(allEffects(rel_rel_lm))
 ```
 
