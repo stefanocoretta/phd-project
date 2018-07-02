@@ -19,7 +19,27 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lme4)
+library(effects)
 ```
+
+```{r read-data, include=FALSE, message=FALSE}
+speakers <- read_csv("./datasets/speakers.csv")
+stimuli <- read_csv("./datasets/stimuli.csv")
+
+durations <- list.files(path = "./datasets",
+                   pattern = "*-durations.csv",
+                   full.names = TRUE) %>%
+    map_df(~read_csv(., na = "--undefined--")) %>%
+    left_join(y = speakers) %>%
+    left_join(y = stimuli) %>%
+    mutate_if(is.character, as.factor) %>%
+    mutate(
+        c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+    )
+```
+
 
 # Method
 
