@@ -99,12 +99,7 @@
 % ``novel'' in the abstract. An article usually includes an abstract, a
 % concise summary of the work covered at length in the main body of the
 % article.
-Put your abstract here. Abstracts are limited to 200 words for regular
-articles and 100 words for Letters to the Editor. Please no personal
-pronouns, also please do not use the words
-\texttt{new\textquotesingle{}\textquotesingle{}\ and/or}novel'' in the
-abstract. An article usually includes an abstract, a concise summary of
-the work covered at length in the main body of the article.
+Put your abstract here.
 \end{abstract}
 
 %% pacs numbers not used
@@ -188,7 +183,7 @@ vowel offset          & (V1 offset)        & disappearance of the higher formant
 consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
 closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
 consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
-consonant burst onset & (C2 burst)         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
+consonant release & (C1/C2 release)         & automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
 }
 
 The audio recordings were exported from AAA in \texttt{.wav} format for
@@ -206,8 +201,60 @@ and C1 release to C2 release duration (Rel-Rel duration).
 
 The durational measurements were analysed with linear mixed-effects
 models using \texttt{lme4} in R \citep{r-core-team2017, bates2015}.
-\emph{P}-values were obtained with likelihood ratio tests comparing the
-full model with a nested model without the relevant predictor.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+Only the most relevant terms will be presented. For the others see
+tables and appendixes.
+
+\hypertarget{vowel-duration}{%
+\subsection{Vowel duration}\label{vowel-duration}}
+
+A linear mixed-effects model was fitted with the following terms: vowel
+duration as the outcome variable; fixed effects for C2 voicing, C2 place
+of articulation, vowel identity, language, and speech rate (as syllables
+per second); by-speaker and by-word random intercept with by-speaker
+random slopes for C2 voicing. All logical interactions were included.
+According to t-tests with Satterthwaite's approximation of degrees of
+freedom, the following terms and interactions were significant: C2
+voicing, C2 place of articulation, vowel identity, language, speech
+rate, the interaction between vowel and C2 voicing, and vowel and C2
+place. Vowels are 14 ms longer when followed by a voiced stop, although
+vowel identity enters in an interaction with C2 voicing. The effect of
+voicing seems to be greater for /a/ and smaller for /u/, with /o/ having
+an intermediate effect. Polish has on average shorter vowels than
+Italian (-25.5 ms), although the effect of voicing is estimated to be
+the same in both languages. /u/ is 13.5 ms shorter when followed by a
+velar stop. The effect of C2 place on /a/ and /o/ is smaller. Speech
+rate has a negative effect on vowel duration, such that faster rates
+correlate with shorter vowel durations.
+
+\hypertarget{consonant-closure-duration}{%
+\subsection{Consonant closure
+duration}\label{consonant-closure-duration}}
+
+The same maximally specified model as with vowel duration has been
+fitted to consonant closure durations as the outcome variable. The
+following terms and interactions were significant: C2 voicing, C2 place
+of articulation, vowel identity, language, and interactions between
+language and C2 place, language and vowel identity, C2 voicing and
+place, C2 voicing and vowel, and a three-way interaction between C2
+voicing, place and vowel identity. Stop closure is 15 ms shorter if the
+stop is voiced. Vowel identity has an effect on closure duration in
+voiced stops, but not in voiceless stops, and more so in voiced velar
+than in voiced coronal stops: closure after /a/ is the shortest, while
+after /u/ is the longest, with closure after /o/ in the middle.
+
+\hypertarget{release-to-release-interval-duration}{%
+\subsection{Release to Release interval
+duration}\label{release-to-release-interval-duration}}
+
+The duration of the interval between the release of C1 and the release
+of C2 is not affected by C2 voicing.
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
 
 \begin{acknowledgments}
 Thanks to...
