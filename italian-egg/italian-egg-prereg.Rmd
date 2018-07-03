@@ -1,0 +1,128 @@
+---
+title: "Pre-registration"
+author: "Stefano Coretta"
+date: "03/07/2018"
+output:
+  pdf_document:
+    citation_package: natbib
+    highlight: tango
+    latex_engine: xelatex
+    number_sections: yes
+bibliography: linguistics.bib
+biblio-style: unified.bst
+mainfont: FreeSans
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Study information
+
+## Title
+
+XXX
+
+## Authorship
+
+Stefano Coretta (The University of Manchester).
+
+## Research questions
+
+Vowel height has been shown to be correlated with vowel duration, such that high vowels are shorter than low vowels.
+Moreover, data from Italian showed that the duration of the C1 Release to Vowel Offset interval (RVoffT) in VCVC words is affected by vowel height in the same direction: higher vowels have a shorter RVoffT [@esposito2002].
+Less attention has been given to the duration of the voiced interval including the vowel.
+In the context of two flanking voiceless stops, it is possible to measure the duration of the portion with vocal fold vibration.
+This allows us to answer the following question:
+
+* Is the duration of the voicing interval between two voiceless stops affected by vowel height?
+
+## Hypotheses
+
+* H1: The duration of the voiced interval is shorter for high than for low vowels.
+* H2: RVoffT is shorter for high than for low vowels [replication of @esposito2002].
+
+# Sampling plan
+
+## Existing data
+
+**Registration prior to creation of data**: As of the date of submission of this research plan for preregistration, the data have not yet been collected, created, or realised.
+
+## Explanation of existing data
+
+NA.
+
+## Data collection procedures
+
+## Sample size
+
+30 participants, 43 words, 4 repetitions. Grand total: 5,160 observations.
+
+## Sample size rationale
+
+## Stopping rule
+
+Data collection will be terminated earlier if the 30 participants hasn't been reached by the end of September 2018.
+
+# Variables
+
+## Manipulated variables
+
+* Vowel height: high (/i, u/), mid-high (/e/), mid-low (/ɔ/), low (/a/).
+* Place of articulation of C1: labial, coronal, velar.
+* Place of articulation of C2: labial, coronal, velar.
+* Frame sentence: *Scrivete X sul foglio*, *Ha detto X sei volte*, *Sentivo X di nuovo*, *Ripete X da sempre*.
+
+See Other for the list of words.
+
+## Measured variables
+
+* Duration of voiced interval: from voice onset to voice offset as recorded by the electroglottograph.
+* Vowel duration: from onset to offset of higher formant structure.
+
+## Indices
+
+NA.
+
+# Design plan
+
+## Study type
+
+Experiment---A researcher randomly assigns treatments to study subjects, this includes field or lab experiments.
+This is also known as an intervention experiment and includes randomized controlled trials.
+
+## Blinding
+
+No blinding is involved in this study.
+
+## Study design
+
+## Randomisation
+
+# Analysis plan
+
+## Statistical models
+
+```{r eval=FALSE}
+library(lmerTest)
+
+voicing_lm <- lmer(
+  voicing_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    (1|speaker) +
+    (1|item),
+  REML = FALSE
+)
+
+vowel_lm <- lmer(
+  vowel_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    (1|speaker) +
+    (1|item),
+  REML = FALSE
+)
+```
