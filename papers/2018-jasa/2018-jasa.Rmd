@@ -54,6 +54,35 @@ durations_filtered <- durations %>%
   na.omit()
 ```
 
+# Introduction
+
+Almost 100 years of research have repeatedly shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
+Evidence for such so called 'voicing effect' has been found in a variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean [see @maddieson1976 for a more comprehensive, but still not exhaustive list].
+Despite of the plethora of evidence in support of the *existence* of the voicing effect, still after 100 years agreement hasn't been reached regarding the source of this effect.
+
+Several proposal have been put forward as to where to look for the possible cause of the voicing effect.
+@soskuthy2013 divides the most notable into two categories: production accounts, which ..., and perception accounts.
+Since the former will prove more relevant to the present study, the latter will not be discussed.
+Four main proposal within the production side of the accounts will be discussed in the following paragraphs.
+Moreover, even though it is amply recognised that different manner of articulation influences the size of effect, this paper focusses on stops.
+
+Two accounts relate the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
+@belasco1953 and @delattre1962 argued that the constant property is the articulatory force, such that this force is stable within the syllable.
+Since, as they go, voiceless stops require a greater articulatory force, less force is employed in the production of the vowel preceding the stop.
+Such reduced force of articulation results in a shorter vowel.
+Vice versa, voiced stops require less force, leaving the articulation of preceding vowels stronger.
+Vowels before weakly articulated stops can be long.
+The second theory, instead, argues that the relevant invariant property of speech is a constant durational interval within which segments of different duration results in different duration of other segments [@slis1969; @lehiste1970].
+Both the syllable and the words has been proposed as the fixed interval.
+The closure of voiced stops is shorter than that of voiceless stops.
+It follows that vowels followed by shorter closures (like in the case of voiced stops) are longer than vowels followed by longer closures (like in the case of voiceless stops).
+
+The other two accounts argue instead that the difference in vowel duration is brought about by differences in gestural timing regarding either the vocal folds (hence properties of phonation) or the consonant closing gesture (hence properties of supra-glottal articulation).
+<!-- explain -->
+
+<!-- say that none of these works with the aspiration effect -->
+
+<!-- say offer evidence for durational trade-off account and a way of reconciling the results from M&G -->
 
 # Method
 
