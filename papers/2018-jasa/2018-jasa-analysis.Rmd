@@ -12,6 +12,7 @@ theme_set(theme_minimal())
 library(lme4)
 library(lmerTest)
 library(effects)
+library(brms)
 ```
 
 ```{r read-data, include=FALSE, message=FALSE}
@@ -124,6 +125,36 @@ durations %>%
 # Lmer
 
 ```{r}
+durations_filtered <- durations %>%
+  group_by(speaker) %>%
+  mutate(
+    vowel_duration_z = scale(vowel_duration),
+    closure_duration_z = scale(closure_duration),
+    rel_rel_z = scale(rel_rel)
+  ) %>%
+  filter(
+    vowel_duration_z < 3, vowel_duration_z > -3,
+    closure_duration_z < 3, closure_duration_z > -3,
+    rel_rel_z < 3, rel_rel_z > -3
+  ) %>%
+  na.omit()
+```
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2)
+```
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(c2_phonation, rel_rel_z, fill = c2_phonation)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2)
+```
+
+```{r}
 vowel_lm_full <- lmer(
   vowel_duration ~
     c2_phonation *
@@ -133,7 +164,7 @@ vowel_lm_full <- lmer(
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations,
+  data = durations_filtered,
   REML = FALSE
 )
 summary(vowel_lm_full)
@@ -151,7 +182,7 @@ vowel_lm <- lmer(
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations,
+  data = durations_filtered,
   REML = FALSE
 )
 summary(vowel_lm)
@@ -171,7 +202,7 @@ closure_lm_full <- lmer(
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations,
+  data = durations_filtered,
   REML = FALSE
 )
 summary(closure_lm_full)
@@ -186,10 +217,13 @@ closure_lm <- lmer(
     language +
     c2_place:language +
     vowel:language +
+    c2_phonation:c2_place +
+    c2_phonation:vowel +
+    c2_phonation:c2_place:vowel +
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations,
+  data = durations_filtered,
   REML = FALSE
 )
 summary(closure_lm)
@@ -227,7 +261,7 @@ rel_rel_lm_full <- lmer(
     syl_rate +
     (1|speaker) +
     (1|item),
-  data = durations,
+  data = durations_filtered,
   REML = FALSE
 )
 summary(rel_rel_lm_full)
@@ -244,7 +278,7 @@ rel_rel_lm <- lmer(
     syl_rate +
     (1|speaker) +
     (1|item),
-  data = durations,
+  data = durations_filtered,
   REML = FALSE
 )
 summary(rel_rel_lm)
@@ -254,3 +288,91 @@ summary(rel_rel_lm)
 plot(allEffects(rel_rel_lm))
 ```
 
+```{r}
+rel_rel_2 <- lmer(
+  rel_rel ~
+    c2_phonation +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+rel_rel_2_null <- lmer(
+  rel_rel ~
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+anova(rel_rel_2_null, rel_rel_2)
+BIC(rel_rel_2)
+BIC(rel_rel_2_null)
+AIC(rel_rel_2)
+AIC(rel_rel_2_null)
+```
+
+
+# Bayes
+
+```{r}
+durations_z <- durations %>%
+  group_by(speaker) %>%
+  mutate(rel_rel_z = scale(rel_rel)) %>%
+  na.omit()
+```
+
+```{r}
+full <- brm(
+  rel_rel_z ~
+    c2_phonation +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_z,
+  save_all_pars = TRUE,
+  iter = 1000
+)
+
+null <- brm(
+  rel_rel_z ~
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_z,
+  save_all_pars = TRUE,
+  iter = 1000
+)
+
+bayes_factor(null, full)
+bayes_factor(full, null)
+```
+
+```{r}
+full_2 <- brm(
+  rel_rel ~
+    c2_phonation +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_z,
+  save_all_pars = TRUE,
+  iter = 1000
+)
+
+null_2 <- brm(
+  rel_rel ~
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_z,
+  save_all_pars = TRUE,
+  iter = 1000
+)
+
+bayes_factor(null_2, full_2)
+bayes_factor(full_2, null_2)
+```
