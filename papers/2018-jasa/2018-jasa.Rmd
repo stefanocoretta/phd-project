@@ -138,6 +138,7 @@ The releases of C1 and C2 were detected automatically by means of a Praat script
 The durations in milliseconds of the following intervals were extracted from the annotated acoustic landmarks with Praat scripting: vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 burst), and C1 release to C2 release duration (Rel-Rel duration).
 
 <!-- syllable rate as speech rate -->
+<!-- INCLUDE VERSION OF R AND PACKAGES -->
 
 The durational measurements were analysed with linear mixed-effects models using `lme4` in R [@r-core-team2017; @bates2015].
 <!-- *P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor. -->
@@ -149,6 +150,8 @@ The durational measurements were analysed with linear mixed-effects models using
 
 Only the most relevant terms will be presented.
 For the others see tables and appendixes.
+
+<!-- INCLUDE STANDARD ERROR! -->
 
 ## Vowel duration
 
