@@ -103,6 +103,9 @@ No blinding is involved in this study.
 
 ## Statistical models
 
+Two separate models will be fitted to independently assess effects on voicing interval duration and vowel duration.
+P-values ($\alpha$ = 0.05) will be obtained with the `lmerTest` package [@kuznetsova2017], which uses the Satterthwaite's method of approximation to degrees of freedom.
+
 ```{r eval=FALSE}
 library(lmerTest)
 
@@ -111,8 +114,8 @@ voicing_lm <- lmer(
     height +
     c2_place +
     height:c2_place +
-    (1|speaker) +
-    (1|item),
+    (1+height|speaker) +
+    (1+height|item),
   REML = FALSE
 )
 
@@ -121,8 +124,8 @@ vowel_lm <- lmer(
     height +
     c2_place +
     height:c2_place +
-    (1|speaker) +
-    (1|item),
+    (1+height|speaker) +
+    (1+height|item),
   REML = FALSE
 )
 ```
