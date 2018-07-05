@@ -66,6 +66,14 @@ durations %>%
 
 ```{r vowel-duration}
 durations %>%
+  mutate(vowel_duration = log(vowel_duration)) %>%
+  ggplot(aes(vowel_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r vowel-duration}
+durations %>%
   group_by(speaker) %>%
   mutate(vowel_duration = scale(vowel_duration)) %>%
   ggplot(aes(vowel_duration)) +
@@ -138,22 +146,52 @@ durations %>%
   facet_grid(~ language)
 ```
 
-```{r}
+```{r rel-rel-non-filtr}
 durations %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_violin() +
   geom_boxplot(width = 0.2)
 ```
 
-```{r}
+```{r rel-rel}
 durations_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_violin() +
   geom_boxplot(width = 0.2)
 ```
 
-```{r}
+```{r rel-rel-box}
 durations_filtered %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_boxplot()
+```
+
+```{r rel-rel-scaled}
+durations_filtered %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_boxplot()
+```
+
+```{r rel-rel-scaled-speaker}
+durations_filtered %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_boxplot() +
+  facet_wrap(~ speaker)
+```
+
+```{r rel-rel-density}
+durations_filtered %>%
+  ggplot(aes(rel_rel, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r rel-rel-density-log}
+durations_filtered %>%
+  mutate(rel_rel = log(rel_rel)) %>%
   ggplot(aes(rel_rel, fill = c2_phonation)) +
   geom_density(alpha = 0.5)
 ```
