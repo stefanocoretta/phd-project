@@ -39,6 +39,20 @@ durations <- list.files(
       6 / sentence_duration
     )
   )
+
+durations_filtered <- durations %>%
+  group_by(speaker) %>%
+  mutate(
+    vowel_duration_z = scale(vowel_duration),
+    closure_duration_z = scale(closure_duration),
+    rel_rel_z = scale(rel_rel)
+  ) %>%
+  filter(
+    vowel_duration_z < 3, vowel_duration_z > -3,
+    closure_duration_z < 3, closure_duration_z > -3,
+    rel_rel_z < 3, rel_rel_z > -3
+  ) %>%
+  na.omit()
 ```
 
 ## Plotting
@@ -122,22 +136,6 @@ durations %>%
   geom_density(alpha = 0.5) +
   geom_rug() +
   facet_grid(~ language)
-```
-
-```{r durations-filtered}
-durations_filtered <- durations %>%
-  group_by(speaker) %>%
-  mutate(
-    vowel_duration_z = scale(vowel_duration),
-    closure_duration_z = scale(closure_duration),
-    rel_rel_z = scale(rel_rel)
-  ) %>%
-  filter(
-    vowel_duration_z < 3, vowel_duration_z > -3,
-    closure_duration_z < 3, closure_duration_z > -3,
-    rel_rel_z < 3, rel_rel_z > -3
-  ) %>%
-  na.omit()
 ```
 
 ```{r}
