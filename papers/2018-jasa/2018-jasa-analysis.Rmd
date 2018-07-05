@@ -305,47 +305,26 @@ summary(closure_lm)
 plot(allEffects(closure_lm))
 ```
 
-```{r}
-rel_rel_lm_full <- lmer(
-  rel_rel ~
-    c2_phonation *
-    vowel *
-    c2_place *
-    language +
-    syl_rate +
-    (1+c2_phonation|speaker) +
-    (1+c2_phonation|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-summary(rel_rel_lm_full)
-```
-
-```{r}
+```{r rel-rel-bf}
 rel_rel_lm <- lmer(
   rel_rel ~
+    c2_phonation +
     vowel +
     c2_place +
     language +
-    vowel:language +
-    c2_place:language +
     syl_rate +
     (1|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
 )
-summary(rel_rel_lm)
-```
 
-```{r}
-plot(allEffects(rel_rel_lm))
-```
-
-```{r}
-rel_rel_2 <- lmer(
+rel_rel_lm_null <- lmer(
   rel_rel ~
-    c2_phonation +
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
     syl_rate +
     (1|speaker) +
     (1|item),
@@ -353,27 +332,8 @@ rel_rel_2 <- lmer(
   REML = FALSE
 )
 
-rel_rel_2_null <- lmer(
-  rel_rel ~
-    syl_rate +
-    (1|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-anova(rel_rel_2_null, rel_rel_2)
-BIC(rel_rel_2)
-BIC(rel_rel_2_null)
-AIC(rel_rel_2)
-AIC(rel_rel_2_null)
-
-BF_H1 <- exp((BIC(rel_rel_2_null) - BIC(rel_rel_2))/2)
-BF_H1
-BF_H0 <- 1/BF_H1
-BF_H0
+cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0):", exp((BIC(rel_rel_lm) - BIC(rel_rel_lm_null)) / 2))
 ```
-
 
 # Bayes
 
