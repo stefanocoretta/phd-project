@@ -111,6 +111,13 @@ durations %>%
   facet_grid(~ language)
 ```
 
+```{r}
+durations_filtered %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
 ```{r closure-duration}
 durations %>%
   ggplot(aes(closure_duration)) +
@@ -220,7 +227,7 @@ durations_filtered %>%
 
 # Lmer
 
-```{r}
+```{r vowel-lm-full}
 vowel_lm_full <- lmer(
   vowel_duration ~
     c2_phonation *
@@ -229,14 +236,14 @@ vowel_lm_full <- lmer(
     language +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1|item),
+    (1+c2_phonation|item),
   data = durations_filtered,
   REML = FALSE
 )
 summary(vowel_lm_full)
 ```
 
-```{r}
+```{r vowel-lm}
 vowel_lm <- lmer(
   vowel_duration ~
     c2_phonation +
@@ -247,18 +254,17 @@ vowel_lm <- lmer(
     language +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
+    (1+c2_phonation|item),
+  data = durations_filtered
 )
 summary(vowel_lm)
 ```
 
-```{r}
+```{r vowel-lm-plot}
 plot(allEffects(vowel_lm))
 ```
 
-```{r}
+```{r closure-lm-full}
 closure_lm_full <- lmer(
   closure_duration ~
     c2_phonation *
@@ -267,14 +273,14 @@ closure_lm_full <- lmer(
     language +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1|item),
+    (1+c2_phonation|item),
   data = durations_filtered,
   REML = FALSE
 )
 summary(closure_lm_full)
 ```
 
-```{r}
+```{r closure-lm}
 closure_lm <- lmer(
   closure_duration ~
     c2_phonation +
@@ -288,33 +294,15 @@ closure_lm <- lmer(
     c2_phonation:c2_place:vowel +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1|item),
+    (1+c2_phonation|item),
   data = durations_filtered,
   REML = FALSE
 )
 summary(closure_lm)
 ```
 
-```{r}
+```{r closure-lm-plot}
 plot(allEffects(closure_lm))
-```
-
-
-```{r}
-vowel_closure_lm <- lmer(
-  vowel_duration ~
-    closure_duration +
-    syl_rate +
-    (1+closure_duration|speaker) +
-    (1|item),
-  data = durations,
-  REML = FALSE
-)
-summary(vowel_closure_lm)
-```
-
-```{r}
-plot(allEffects(vowel_closure_lm))
 ```
 
 ```{r}
