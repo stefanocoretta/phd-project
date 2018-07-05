@@ -124,7 +124,7 @@ durations %>%
   facet_grid(~ language)
 ```
 
-```{r}
+```{r durations-filtered}
 durations_filtered <- durations %>%
   group_by(speaker) %>%
   mutate(
@@ -140,7 +140,12 @@ durations_filtered <- durations %>%
   na.omit()
 ```
 
-# Lmer
+```{r}
+durations %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2)
+```
 
 ```{r}
 durations_filtered %>%
@@ -151,10 +156,11 @@ durations_filtered %>%
 
 ```{r}
 durations_filtered %>%
-  ggplot(aes(c2_phonation, rel_rel_z, fill = c2_phonation)) +
-  geom_violin() +
-  geom_boxplot(width = 0.2)
+  ggplot(aes(rel_rel, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
 ```
+
+# Lmer
 
 ```{r}
 vowel_lm_full <- lmer(
