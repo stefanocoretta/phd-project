@@ -196,6 +196,28 @@ durations_filtered %>%
   geom_density(alpha = 0.5)
 ```
 
+```{r rel-rel-density-vowel}
+durations_filtered %>%
+  ggplot(aes(rel_rel, fill = vowel)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r rel-rel-box-vowel}
+durations_filtered %>%
+  ggplot(aes(vowel, rel_rel, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~language)
+```
+
+```{r rel-rel-box-vowel-2}
+durations_filtered %>%
+  group_by(speaker) %>%
+  mutate(rel_rel = scale(rel_rel)) %>%
+  ggplot(aes(vowel, rel_rel, fill = vowel)) +
+  geom_boxplot() +
+  facet_grid(~language)
+```
+
 # Lmer
 
 ```{r}
