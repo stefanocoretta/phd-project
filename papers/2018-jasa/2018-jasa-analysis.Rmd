@@ -13,6 +13,8 @@ library(lme4)
 library(lmerTest)
 library(effects)
 library(brms)
+library(BayesFactor)
+library(TOSTER)
 ```
 
 ```{r read-data, include=FALSE, message=FALSE}
@@ -259,8 +261,8 @@ rel_rel_lm_full <- lmer(
     c2_place *
     language +
     syl_rate +
-    (1|speaker) +
-    (1|item),
+    (1+c2_phonation|speaker) +
+    (1+c2_phonation|item),
   data = durations_filtered,
   REML = FALSE
 )
@@ -313,6 +315,11 @@ BIC(rel_rel_2)
 BIC(rel_rel_2_null)
 AIC(rel_rel_2)
 AIC(rel_rel_2_null)
+
+BF_H1 <- exp((BIC(rel_rel_2_null) - BIC(rel_rel_2))/2)
+BF_H1
+BF_H0 <- 1/BF_H1
+BF_H0
 ```
 
 
@@ -329,9 +336,11 @@ durations_z <- durations %>%
 full <- brm(
   rel_rel_z ~
     c2_phonation +
+    vowel +
+    c2_place +
     syl_rate +
-    (1|speaker) +
-    (1|item),
+    (1+c2_phonation|speaker) +
+    (1+c2_phonation|item),
   data = durations_z,
   save_all_pars = TRUE,
   iter = 1000
@@ -340,8 +349,10 @@ full <- brm(
 null <- brm(
   rel_rel_z ~
     syl_rate +
-    (1|speaker) +
-    (1|item),
+    vowel +
+    c2_place +
+    (1+c2_phonation|speaker) +
+    (1+c2_phonation|item),
   data = durations_z,
   save_all_pars = TRUE,
   iter = 1000
@@ -355,24 +366,81 @@ bayes_factor(full, null)
 full_2 <- brm(
   rel_rel ~
     c2_phonation +
+    vowel +
+    c2_place +
     syl_rate +
-    (1|speaker) +
-    (1|item),
-  data = durations_z,
+    (1+c2_phonation|speaker) +
+    (1+c2_phonation|item),
+  data = durations_filtered,
   save_all_pars = TRUE,
   iter = 1000
 )
 
 null_2 <- brm(
   rel_rel ~
+    vowel +
+    c2_place +
     syl_rate +
     (1|speaker) +
     (1|item),
-  data = durations_z,
+  data = durations_filtered,
   save_all_pars = TRUE,
   iter = 1000
 )
 
-bayes_factor(null_2, full_2)
 bayes_factor(full_2, null_2)
+bayes_factor(null_2, full_2)
 ```
+
+The following does not work.
+
+```{r eval=FALSE}
+full_BF <- lmBF(
+  rel_rel ~
+    c2_phonation +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+
+null_BF <- lmBF(
+  rel_rel ~
+    # c2_phonation +
+    syl_rate +
+    (1|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+
+full_BF / null_BF
+```
+
+
+```{r}
+priors <- c(
+  set_prior("normal(194, 40)", class = "Intercept")
+)
+
+full_brm <- brm(
+  rel_rel ~
+    c2_phonation,
+  data = durations_filtered,
+  prior = priors
+  save_all_pars = TRUE
+)
+
+BF_brms_savage = hypothesis(full_brm, hypothesis = "c2_phonationvoiced = 0")
+BF_brms_savage$hypothesis
+```
+
+
+# TOST
+
+```{r}
+TOSTtwo.raw(m1=196.1925,m2=191.3257,sd1=41.85775,sd2=37.37909,n1=534,n2=376,low_eqbound=-2, high_eqbound=2, alpha = 0.05, var.equal=FALSE)
+
+TOSTtwo.raw(m1=187.0956
+,m2=184.9379,sd1=41.85775,sd2=37.37909,n1=528,n2=375,low_eqbound=-5, high_eqbound=5, alpha = 0.05, var.equal=TRUE)
+```
+
