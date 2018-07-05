@@ -124,8 +124,6 @@ durations %>%
   facet_grid(~ language)
 ```
 
-# Lmer
-
 ```{r}
 durations_filtered <- durations %>%
   group_by(speaker) %>%
@@ -141,6 +139,8 @@ durations_filtered <- durations %>%
   ) %>%
   na.omit()
 ```
+
+# Lmer
 
 ```{r}
 durations_filtered %>%
@@ -426,7 +426,7 @@ full_brm <- brm(
   rel_rel ~
     c2_phonation,
   data = durations_filtered,
-  prior = priors
+  prior = priors,
   save_all_pars = TRUE
 )
 
