@@ -11,6 +11,7 @@ output:
 bibliography: linguistics.bib
 biblio-style: unified.bst
 mainfont: FreeSans
+fontsize: 11pt
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Title
 
-Vowel duration, voicing duration, and vowel height: Acoustic and articulatory data from Italian
+Vowel duration, voicing duration, and vowel height: Acoustic and articulatory data from Italian.
 
 ## Authorship
 
@@ -29,10 +30,10 @@ Stefano Coretta (The University of Manchester).
 
 ## Research questions
 
-Vowel height has been shown to be correlated with vowel duration, such that high vowels are shorter than low vowels.
-Moreover, data from Italian showed that the duration of the C1 Release to Vowel Offset interval (RVoffT) in VCVC words is affected by vowel height in the same direction: higher vowels have a shorter RVoffT [@esposito2002].
+Vowel height has been shown to correlate with vowel duration, such that high vowels are shorter than low vowels.
+Moreover, data from Italian shows that the duration of the C1 Release to Vowel Offset interval (RVoffT) in VCVC words is affected by vowel height in the same direction: higher vowels have a shorter RVoffT [@esposito2002].
 Less attention has been given to the duration of the voiced interval including the vowel.
-In the context of two flanking voiceless stops, it is possible to measure the duration of the portion with vocal fold vibration.
+In the context of two flanking voiceless stops, it is possible to measure the duration of the portion with voicing (vocal fold vibration) flanked by the voiceless stops.
 This allows us to answer the following question:
 
 * Q1: Is the duration of the voicing interval between two voiceless stops affected by vowel height?
@@ -67,10 +68,10 @@ Inclusion rule: Native speakers of Italian, from the VCO province (Italy), 18+ y
 
 ### Procedure
 
-The participants will be recorded while reading sentences with target words presented on a computer screen with PsychoPy [@peirce2009].
+The participants will be recorded while reading sentences with target words presented on a computer screen with PsychoPy [@peirce2009], in a quiet room in Verbania (Italy).
 Time-synchronised audio and electroglottographic data will be collected using a Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
 The acquisition of the signals will be controlled with Audacity running on a MacBook Pro (Retina, 13-inch, Mid 2014).
-The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2016].
+The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2018].
 
 ## Sample size
 
@@ -79,12 +80,12 @@ Grand total: 5,160 (= 1290 tokens per participants * 4 repetitions) observations
 
 ## Sample size rationale
 
-@brysbaert2018 suggest to have around 1600 observations per condition (40 participants, 40 stimuli).
+@brysbaert2018 suggest to have around 1600 observations per condition (e.g., 40 participants, 40 stimuli).
 Given the limited time available for this study, 30 participants seems a more reasonable target.
 
 ## Stopping rule
 
-Data collection will be terminated earlier if the 30 participants hasn't been reached by the end of September 2018.
+Data collection will be terminated earlier if the 30 participants target hasn't been reached by the end of September 2018.
 
 # Variables
 
