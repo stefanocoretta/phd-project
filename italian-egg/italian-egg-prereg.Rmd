@@ -1,5 +1,5 @@
 ---
-title: "Pre-registration"
+title: "Pre-registration of a study on vowel duration, voicing duration, and vowel height in Italian"
 author: "Stefano Coretta"
 date: "03/07/2018"
 output:
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Title
 
-XXX
+Vowel duration, voicing duration, and vowel height: Acoustic and articulatory data from Italian
 
 ## Authorship
 
@@ -35,12 +35,19 @@ Less attention has been given to the duration of the voiced interval including t
 In the context of two flanking voiceless stops, it is possible to measure the duration of the portion with vocal fold vibration.
 This allows us to answer the following question:
 
-* Is the duration of the voicing interval between two voiceless stops affected by vowel height?
+* Q1: Is the duration of the voicing interval between two voiceless stops affected by vowel height?
 
 ## Hypotheses
 
-* H1: The duration of the voiced interval is shorter for high than for low vowels.
-* H2: RVoffT is shorter for high than for low vowels [replication of @esposito2002].
+In relation to Q1, the following null and alternative hypotheses will be tested:
+
+* H1\textsubscript{0}: The duration of the voiced interval is not affected by vowel height.
+* H1\textsubscript{1}: The duration of the voiced interval is shorter for higher than for lower vowels.
+
+As a replication of @esposito2002, the following hypotheses will also be tested:
+
+* H2: Higher vowels are shorter than lower vowels.
+* H3: RVoffT is shorter for higher than for lower vowels.
 
 # Sampling plan
 
@@ -54,11 +61,26 @@ NA.
 
 ## Data collection procedures
 
+### Participants
+
+Inclusion rule: Native speakers of Italian, from the VCO province (Italy), 18+ yo, with no reported hearing or speaking disorders, with normal or corrected to normal vision.
+
+### Procedure
+
+The participants will be recorded while reading sentences with target words presented on a computer screen with PsychoPy [@peirce2009].
+Time-synchronised audio and electroglottographic data will be collected using a Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
+The acquisition of the signals will be controlled with Audacity running on a MacBook Pro (Retina, 13-inch, Mid 2014).
+The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2016].
+
 ## Sample size
 
-30 participants, 43 words, 4 repetitions. Grand total: 5,160 observations.
+30 participants, 43 words, 4 repetitions.
+Grand total: 5,160 (= 1290 tokens per participants * 4 repetitions) observations.
 
 ## Sample size rationale
+
+@brysbaert2018 suggest to have around 1600 observations per condition (40 participants, 40 stimuli).
+Given the limited time available for this study, 30 participants seems a more reasonable target.
 
 ## Stopping rule
 
@@ -73,12 +95,14 @@ Data collection will be terminated earlier if the 30 participants hasn't been re
 * Place of articulation of C2: labial, coronal, velar.
 * Frame sentence: *Scrivete X sul foglio*, *Ha detto X sei volte*, *Sentivo X di nuovo*, *Ripete X da sempre*.
 
-See Other for the list of words.
+See `Other` for a list of word stimuli.
 
 ## Measured variables
 
-* Duration of voiced interval: from voice onset to voice offset as recorded by the electroglottograph.
-* Vowel duration: from onset to offset of higher formant structure.
+* **Duration of voiced interval**: from voice onset to voice offset as recorded by the electroglottograph.
+* **Vowel duration**: from onset to offset of higher formant structure.
+* **Release to Vowel Offset**: from release of C1 to V1 offset.
+* **Speech rate**: calculated as syllables per second (`n of syllables / sentence duration`) [@plug2018].
 
 ## Indices
 
@@ -97,35 +121,125 @@ No blinding is involved in this study.
 
 ## Study design
 
+Repeated measures.
+
 ## Randomisation
+
+The sentence stimuli will be randomised within participant by means of the built-in randomisation procedure in PsychoPy [@peirce2009].
 
 # Analysis plan
 
 ## Statistical models
 
-Two separate models will be fitted to independently assess effects on voicing interval duration and vowel duration.
-P-values ($\alpha$ = 0.05) will be obtained with the `lmerTest` package [@kuznetsova2017], which uses the Satterthwaite's method of approximation to degrees of freedom.
+Separate models will be fitted in `R` to independently assess effects on vowel duration, voicing interval duration and RVoffT.
+*P*-values ($\alpha$ = 0.05) will be obtained with the `lmerTest` package [@kuznetsova2017], which uses the Satterthwaite's method of approximation to degrees of freedom.
 
 ```{r eval=FALSE}
+library(lme4)
 library(lmerTest)
-
-voicing_lm <- lmer(
-  voicing_duration ~
-    height +
-    c2_place +
-    height:c2_place +
-    (1+height|speaker) +
-    (1+height|item),
-  REML = FALSE
-)
 
 vowel_lm <- lmer(
   vowel_duration ~
     height +
     c2_place +
     height:c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1+height|item),
+  REML = FALSE
+)
+
+rvofft_lm <- lmer(
+  rvofft ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
     (1+height|speaker) +
     (1+height|item),
   REML = FALSE
 )
 ```
+
+Since for H1 we wish to be directly test both the null and the alternative hypothesis, BIC approximation of Bayes factors will be used instead of *p*-values [@wagenmakers2007].
+
+```{r eval=FALSE}
+voicing_lm_1 <- lme4::lmer(
+  voicing_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1+height|item),
+  REML = FALSE
+)
+
+voicing_lm_0 <- lme4::lmer(
+  voicing_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1+height|item),
+  REML = FALSE
+)
+
+bf_01 <- exp((BIC(voicing_lm_1) - BIC(voicing_lm_0)) / 2)
+```
+
+## Transformations
+
+NA.
+
+## Follow-up analyses
+
+NA.
+
+## Inference criteria
+
+*P*-values will be used for the effect of vowel height on vowel duration and RVoffT, with $\alpha$ = 0.05.
+*P*-values below 0.05 will be deemed significant.
+Bayes factors will be employed for the effect of vowel height on voicing interval duration, since we are interested in testing both the null and the alternative hypothesis.
+
+## Data exclusion
+
+Tokens in which the consonant closure is entirely voiced will be excluded.
+
+## Missing data
+
+NA.
+
+## Exploratory analysis
+
+An exploratory analysis will assess the effect of vowel identity and the interaction between vowel height and vowel backness on vowel duration, voicing duration, RVoffT.
+Also, the effects of vowel and place of articulation on voicing during closure will be examined.
+
+# Script (Optional)
+
+## Analysis scripts (Optional)
+
+See `Statistical models` section.
+
+# Other
+
+List of target words: * *peto* 'fart' and *caco* 'I shit' are not included in the list of target words due to their meaning.
+
+\begin{tabular}{lll}
+papo & tapo & capo  \\
+pepo & tepo & chepo \\
+pipo & tipo & chipo \\
+popo & topo & copo  \\
+pupo & tupo & cupo  \\
+pato & tato & cato  \\
+*    & teto & cheto \\
+pito & tito & chito \\
+poto & toto & coto  \\
+puto & tuto & cuto  \\
+paco & taco & *     \\
+peco & teco & checo \\
+pico & tico & chico \\
+poco & toco & coco  \\
+puco & tuco & cuco
+\end{tabular}
