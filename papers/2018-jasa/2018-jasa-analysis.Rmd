@@ -289,7 +289,7 @@ cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0):", exp((BIC(vowel_lm
 cat("Bayes factor in favor of H1 (`c2_phonationvoiced` != 0):", 1 / exp((BIC(vowel_lm_full) - BIC(vowel_lm_null)) / 2))
 ```
 
-```{r}
+```{r vowel-brm}
 vowel_brm <- brm(
   vowel_duration ~
     c2_phonation +
