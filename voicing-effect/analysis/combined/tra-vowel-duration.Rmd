@@ -67,7 +67,8 @@ tongue_root <- list.files(
     tra = -TR_displacement_sm,
     tra_z = scale(tra)
   ) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(item = factor(item))
 
 
 tongue <- list.files(
@@ -231,13 +232,13 @@ tongue_root_clean <- filter(tongue_root, tra_z < 3)
 
 ```{r tra-lm}
 tra_lm <- lmer(
-  vowel_duration ~
+  scale(vowel_duration) ~
     tra +
     c2_phonation +
     vowel +
-    sentence_duration +
+    scale(sentence_duration) +
     (1+tra|speaker) +
-    (1|item),
+    (1+tra|item),
 data = tongue_root_clean,
 REML = FALSE
 )
