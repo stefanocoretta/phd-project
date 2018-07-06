@@ -30,7 +30,13 @@ voicing <- list.files(
   left_join(y = words) %>%
   mutate_if(is.character, as.factor) %>%
   mutate(
-    index = as.factor(index)
+    index = as.factor(index),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
   )
 
 
