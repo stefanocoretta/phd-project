@@ -12,6 +12,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(lmerTest)
 library(effects)
+library(simr)
 ```
 
 # Read data
@@ -68,7 +69,7 @@ voicing_voiceless %>%
 
 ```{r}
 voicing_voiceless %>%
-  filter(language == "italian") %>%
+  filter(language == "Italian") %>%
   ggplot(aes(voiced_points, fill = vowel)) +
   geom_bar() +
   facet_grid(speaker ~ vowel) +
@@ -84,7 +85,7 @@ voicing_voiced %>%
 
 ```{r}
 voicing_voiced %>%
-  filter(language == "italian") %>%
+  filter(language == "Italian") %>%
   ggplot(aes(voiced_points, fill = vowel)) +
   geom_bar() +
   facet_grid(speaker ~ vowel)
@@ -204,6 +205,13 @@ voicing_voiceless %>%
 # Lmer
 
 ```{r voicing-lm}
+voicing_filtered <- voicing_voiceless %>%
+  filter(
+    voicing_duration < 250,
+    speaker != "it12"
+  ) %>%
+  na.omit()
+
 voicing_lm <- lmer(
   voicing_duration ~
     vowel +
@@ -211,7 +219,7 @@ voicing_lm <- lmer(
     vowel:language +
     (1+vowel|speaker) +
     (1|item),
-  data = filter(voicing_voiceless, voicing_duration < 250, speaker != "it12"),
+  data = voicing_filtered,
   REML = FALSE
 )
 summary(voicing_lm)
@@ -314,6 +322,14 @@ plot(allEffects(voicing_lm_4))
 ```
 
 # Power analysis
+
+```{r}
+fixef(voicing_lm)["vowelu"] <- 4
+
+powerSim(voicing_lm, test = fixed("vowelu", method = "z"), nsim = 50)
+```
+
+## Simulated data
 
 ```{r}
 set.seed(8788)
