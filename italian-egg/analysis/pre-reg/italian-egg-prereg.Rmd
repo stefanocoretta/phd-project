@@ -82,6 +82,7 @@ Grand total: 5,160 (= 1290 tokens per participants * 4 repetitions) observations
 
 @brysbaert2018 suggest to have around 1600 observations per condition (e.g., 40 participants, 40 stimuli).
 Given the limited time available for this study, 30 participants seems a more reasonable target.
+According to a power analysis with simulated data using `simr` [@green2016], 12 subjects * 100 tokens per subject are sufficient to detect a difference of 5 ms at 80% of power.
 
 ## Stopping rule
 

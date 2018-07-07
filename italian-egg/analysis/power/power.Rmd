@@ -1,0 +1,70 @@
+---
+title: "Power analysis"
+author: "Stefano Coretta"
+date: "07/07/2018"
+output:
+  pdf_document:
+    citation_package: natbib
+    highlight: tango
+    latex_engine: xelatex
+    number_sections: yes
+bibliography: linguistics.bib
+biblio-style: unified.bst
+mainfont: FreeSans
+fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lmerTest)
+library(simr)
+```
+
+```{r sim-data}
+set.seed(8788)
+
+durations <- NULL
+
+for (i in 1:30) {
+  durations <- c(durations, rnorm(50, 135, 30), rnorm(50, 135, 30) + 5)
+}
+
+sim_data <- tibble(
+  duration = durations,
+  height = rep(rep(c("high", "low"), each = 50), 30),
+  subject = rep(1:30, each = 100)
+) %>%
+  mutate(
+    height = factor(height),
+    subject = factor(subject)
+  )
+```
+
+```{r sim-data-plot}
+sim_data %>%
+  ggplot(aes(height, duration)) +
+  geom_boxplot() +
+  facet_wrap(~ subject)
+```
+
+
+```{r voicing-sim-lm}
+voicing_sim_lm <- lmer(
+  duration ~
+    height +
+    (1|subject),
+  data = sim_data
+)
+summary(voicing_sim_lm)
+```
+
+```{r sim, message=FALSE, warning=FALSE, cache=TRUE, include=FALSE}
+fixef(voicing_sim_lm)["heightlow"] <- 5
+
+sim <- powerCurve(voicing_sim_lm, along = "subject", seed = 8788)
+```
+
+```{r sim-plot}
+plot(sim)
+```
