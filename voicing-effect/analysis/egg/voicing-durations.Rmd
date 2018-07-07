@@ -329,6 +329,12 @@ fixef(voicing_lm)["vowelu"] <- 4
 powerSim(voicing_lm, test = fixed("vowelu", method = "z"), nsim = 50)
 ```
 
+```{r}
+fixef(voicing_lm)["vowelu"] <- 10
+
+powerSim(voicing_lm, test = fixed("vowelu", method = "z"), nsim = 50)
+```
+
 ## Simulated data
 
 ```{r}
