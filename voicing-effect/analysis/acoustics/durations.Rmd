@@ -427,7 +427,7 @@ closure_cv %>%
 
 It looks like the CV for voiced consonants is higher (meaning there is more variation in those than in voiceless).
 
-## Stability measure of RR
+## Stability measure (coefficient of variation) of RR and VOR
 
 ```{r}
 rr_cv <- duration %>%
@@ -451,6 +451,24 @@ rr_cv %>%
   ggplot(aes(c2_phonation, cv)) +
   geom_boxplot()
 ```
+
+```{r}
+vor_cv <- duration %>%
+  group_by(language, speaker, c2_place, c2_phonation) %>%
+  summarise(
+    sd = sd(vor, na.rm = TRUE),
+    mean = mean(vor, na.rm = TRUE),
+    cv = 100 * sd(vor, na.rm = TRUE) / mean(vor, na.rm = TRUE)
+  )
+```
+
+```{r}
+vor_cv %>%
+  ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot()
+```
+
+Release to Release coefficient of variation is lower than Vowel Onset to Release (i.e. it is more stable).
 
 # Analysis
 
