@@ -252,11 +252,11 @@ tokens per participant * 30 participants) observations.
 \citet{brysbaert2018} suggest to have around 1600 observations per
 condition (e.g., 40 participants, 40 stimuli). Given the limited time
 available for this study, 30 participants seems a more reasonable
-target. According to a power analysis with simulated data using
-\texttt{simr} \citep{green2016}, 12 subjects * 100 tokens per subject
-are sufficient to detect a difference of 5 ms at 80\% of
-power.\footnote{5 ms is probably the smallest meaningful difference detectable in practice, based on the estimated error of vowel annotation, which lies between 2 and 5 ms \citep{allen1978}.}
-See \texttt{power.Rmd} for the code.
+target. According to a power analysis with simulated data (mean and
+standard deviations based on a pilot study) using \texttt{simr}
+\citep{green2016}, 12 subjects * 100 tokens per subject are sufficient
+to detect a difference of 5 ms at 80\% of power. See \texttt{power.Rmd}
+for the code.
 
 \hypertarget{stopping-rule}{%
 \subsection{Stopping rule}\label{stopping-rule}}
@@ -273,14 +273,15 @@ hasn't been reached by the end of September 2018.
 \begin{itemize}
 \tightlist
 \item
-  Vowel height: high (/i, u/), mid-high (/e/), mid-low (/ɔ/), low (/a/).
+  \textbf{Vowel height}: high (/i, u/), mid-high (/e/), mid-low (/ɔ/),
+  low (/a/).
 \item
-  Place of articulation of C1: labial, coronal, velar.
+  \textbf{Place of articulation of C1}: labial, coronal, velar.
 \item
-  Place of articulation of C2: labial, coronal, velar.
+  \textbf{Place of articulation of C2}: labial, coronal, velar.
 \item
-  Frame sentence: \emph{Scrivete X sul foglio}, \emph{Ha detto X sei
-  volte}, \emph{Sentivo X di nuovo}, \emph{Ripete X da sempre}.
+  \textbf{Frame sentence}: \emph{Scrivete X sul foglio}, \emph{Ha detto
+  X sei volte}, \emph{Sentivo X di nuovo}, \emph{Ripete X da sempre}.
 \end{itemize}
 
 See \texttt{Other} for a list of word stimuli.

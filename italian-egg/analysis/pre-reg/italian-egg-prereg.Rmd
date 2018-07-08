@@ -85,7 +85,8 @@ Grand total: 5,160 (= 172 tokens per participant * 30 participants) observations
 
 @brysbaert2018 suggest to have around 1600 observations per condition (e.g., 40 participants, 40 stimuli).
 Given the limited time available for this study, 30 participants seems a more reasonable target.
-According to a power analysis with simulated data using `simr` [@green2016], 12 subjects * 100 tokens per subject are sufficient to detect a difference of 5 ms at 80% of power.\footnote{5 ms is probably the smallest meaningful difference detectable in practice, based on the estimated error of vowel annotation, which lies between 2 and 5 ms \citep{allen1978}.}
+According to a power analysis with simulated data (mean and standard deviations based on a pilot study) using `simr` [@green2016], 12 subjects * 100 tokens per subject are sufficient to detect a difference of 5 ms at 80% of power.
+<!-- \footnote{5 ms is probably the smallest meaningful difference detectable in practice, based on the estimated error of vowel annotation, which lies between 2 and 5 ms \citep{allen1978}.} -->
 See `power.Rmd` for the code.
 
 ## Stopping rule
@@ -96,10 +97,10 @@ Data collection will be terminated earlier if the 30 participants target hasn't 
 
 ## Manipulated variables
 
-* Vowel height: high (/i, u/), mid-high (/e/), mid-low (/ɔ/), low (/a/).
-* Place of articulation of C1: labial, coronal, velar.
-* Place of articulation of C2: labial, coronal, velar.
-* Frame sentence: *Scrivete X sul foglio*, *Ha detto X sei volte*, *Sentivo X di nuovo*, *Ripete X da sempre*.
+* **Vowel height**: high (/i, u/), mid-high (/e/), mid-low (/ɔ/), low (/a/).
+* **Place of articulation of C1**: labial, coronal, velar.
+* **Place of articulation of C2**: labial, coronal, velar.
+* **Frame sentence**: *Scrivete X sul foglio*, *Ha detto X sei volte*, *Sentivo X di nuovo*, *Ripete X da sempre*.
 
 See `Other` for a list of word stimuli.
 
@@ -222,7 +223,7 @@ NA.
 
 ## Inference criteria
 
-*P*-values will be used for the effect of vowel height on vowel duration and RVoffT, with $\alpha$ = 0.05.
+*P*-values will be used for the effect of vowel height on vowel duration, VOT, and RVoffT, with $\alpha$ = 0.05.
 *P*-values below 0.05 will be deemed significant.
 Bayes factors will be employed for the effect of vowel height on voicing interval duration, since I am interested in testing both the null and the alternative hypothesis.
 
