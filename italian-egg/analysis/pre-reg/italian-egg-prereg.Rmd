@@ -11,7 +11,7 @@ output:
     number_sections: yes
 bibliography: linguistics.bib
 biblio-style: unified.bst
-mainfont: FreeSans
+mainfont: DejaVu Sans
 fontsize: 11pt
 ---
 
