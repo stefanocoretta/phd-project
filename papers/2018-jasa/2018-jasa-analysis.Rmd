@@ -15,6 +15,7 @@ library(effects)
 library(brms)
 library(BayesFactor)
 library(TOSTER)
+library(simr)
 ```
 
 ```{r read-data, include=FALSE, message=FALSE}
@@ -514,5 +515,31 @@ TOSTtwo.raw(m1=196.1925,m2=191.3257,sd1=41.85775,sd2=37.37909,n1=534,n2=376,low_
 
 TOSTtwo.raw(m1=187.0956
 ,m2=184.9379,sd1=41.85775,sd2=37.37909,n1=528,n2=375,low_eqbound=-5, high_eqbound=5, alpha = 0.05, var.equal=TRUE)
+```
+
+# Power analysis
+
+```{r}
+vowel_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    c2_phonation:vowel +
+    c2_place:vowel +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+
+fixef(vowel_lm)["c2_phonationvoiced"] <- 10
+
+powerSim(vowel_lm, test = fixed("c2_phonationvoiced", method = "t"), nsim = 100)
+
+fixef(vowel_lm)["c2_phonationvoiced"] <- 5
+
+powerSim(vowel_lm, test = fixed("c2_phonationvoiced", method = "t"), nsim = 100)
 ```
 
