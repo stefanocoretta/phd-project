@@ -374,7 +374,7 @@ rel_rel_lm <- lmer(
     c2_place +
     language +
     syl_rate +
-    (1|speaker) +
+    (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
@@ -387,7 +387,7 @@ rel_rel_lm_null <- lmer(
     c2_place +
     language +
     syl_rate +
-    (1|speaker) +
+    (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
@@ -413,7 +413,7 @@ full <- brm(
     c2_place +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1+c2_phonation|item),
+    (1|item),
   data = durations_z,
   save_all_pars = TRUE,
   iter = 1000
@@ -425,7 +425,7 @@ null <- brm(
     vowel +
     c2_place +
     (1+c2_phonation|speaker) +
-    (1+c2_phonation|item),
+    (1|item),
   data = durations_z,
   save_all_pars = TRUE,
   iter = 1000
@@ -443,7 +443,7 @@ full_2 <- brm(
     c2_place +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1+c2_phonation|item),
+    (1|item),
   data = durations_filtered,
   save_all_pars = TRUE,
   iter = 1000
