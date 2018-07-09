@@ -122,7 +122,7 @@ Front vowels are difficult to image with UTI, since their articulation involves 
 For this reason, only central and back vowels were included.
 Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
-The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' in Polish.
+The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish.
 These sentences were chosen in order to keep the placement of stress and emphasis similar across languages, so to ensure comparability of results.
 
 ## Procedure
