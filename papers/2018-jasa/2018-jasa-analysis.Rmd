@@ -393,7 +393,7 @@ rel_rel_lm_null <- lmer(
   REML = FALSE
 )
 
-cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0):", exp((BIC(rel_rel_lm) - BIC(rel_rel_lm_null)) / 2))
+cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(rel_rel_lm) - BIC(rel_rel_lm_null)) / 2))
 ```
 
 # Bayes
@@ -603,3 +603,42 @@ rel_brm_0 <- brm(
 
 bayes_factor(rel_brm_0, rel_brm)
 ```
+
+# Speech rate as a confound for language
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(syl_rate, fill = language)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(language, syl_rate)) +
+  geom_boxplot()
+```
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(syl_rate, fill = language)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ speaker)
+```
+
+```{r}
+sr_lm <- lmer(
+  syl_rate ~
+    language +
+    (1|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+summary(sr_lm)
+```
+
+```{r}
+plot(allEffects(sr_lm))
+```
+
+
