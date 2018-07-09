@@ -147,7 +147,7 @@ The sentence stimuli will be randomised within participant by means of the built
 Separate models will be fitted in `R` to independently assess effects on vowel duration, voicing interval duration, VOT, and RVoffT.
 *P*-values ($\alpha$ = 0.05) will be obtained with the `lmerTest` package [@kuznetsova2017], which uses the Satterthwaite's method of approximation to degrees of freedom.
 
-```{r eval=FALSE}
+```{r lmer, eval=FALSE}
 library(lme4)
 library(lmerTest)
 
@@ -158,7 +158,7 @@ vowel_lm <- lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1+height|item),
+    (1|item),
   REML = FALSE
 )
 
@@ -169,7 +169,7 @@ vot_lm <- lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1+height|item),
+    (1|item),
   REML = FALSE
 )
 
@@ -180,14 +180,14 @@ rvofft_lm <- lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1+height|item),
+    (1|item),
   REML = FALSE
 )
 ```
 
 Since I wish to directly test both the null and the alternative hypothesis concerning the duration of the voiced interval (H1), BIC approximation of Bayes factors will be used instead of *p*-values [@wagenmakers2007].
 
-```{r eval=FALSE}
+```{r lmer-bf, eval=FALSE}
 voicing_lm_1 <- lme4::lmer(
   voicing_duration ~
     height +
@@ -195,7 +195,7 @@ voicing_lm_1 <- lme4::lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1+height|item),
+    (1|item),
   REML = FALSE
 )
 
@@ -206,7 +206,7 @@ voicing_lm_0 <- lme4::lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1+height|item),
+    (1|item),
   REML = FALSE
 )
 

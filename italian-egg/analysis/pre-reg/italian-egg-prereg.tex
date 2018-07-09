@@ -379,7 +379,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{item),}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
   \DataTypeTok{REML =} \OtherTok{FALSE}
 \NormalTok{)}
 
@@ -390,7 +390,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{item),}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
   \DataTypeTok{REML =} \OtherTok{FALSE}
 \NormalTok{)}
 
@@ -401,7 +401,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{item),}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
   \DataTypeTok{REML =} \OtherTok{FALSE}
 \NormalTok{)}
 \end{Highlighting}
@@ -421,7 +421,7 @@ approximation of Bayes factors will be used instead of \emph{p}-values
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{item),}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
   \DataTypeTok{REML =} \OtherTok{FALSE}
 \NormalTok{)}
 
@@ -432,7 +432,7 @@ approximation of Bayes factors will be used instead of \emph{p}-values
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{item),}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
   \DataTypeTok{REML =} \OtherTok{FALSE}
 \NormalTok{)}
 
@@ -454,8 +454,8 @@ NA.
 \subsection{Inference criteria}\label{inference-criteria}}
 
 \emph{P}-values will be used for the effect of vowel height on vowel
-duration and RVoffT, with \(\alpha\) = 0.05. \emph{P}-values below 0.05
-will be deemed significant. Bayes factors will be employed for the
+duration, VOT, and RVoffT, with \(\alpha\) = 0.05. \emph{P}-values below
+0.05 will be deemed significant. Bayes factors will be employed for the
 effect of vowel height on voicing interval duration, since I am
 interested in testing both the null and the alternative hypothesis.
 
