@@ -60,13 +60,31 @@ Almost 100 years of research have repeatedly shown that consonantal voicing has 
 Evidence for such so called 'voicing effect' has been found in a variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean [see @maddieson1976 for a more comprehensive, but still not exhaustive list].
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, still after 100 years agreement hasn't been reached regarding the source of this effect.
 
-Several proposal have been put forward as to where to look for the possible cause of the voicing effect.
-@soskuthy2013 divides the most notable into two categories: production accounts, which ..., and perception accounts.
-Since the former will prove more relevant to the present study, the latter will not be discussed.
-Four main proposal within the production side of the accounts will be discussed in the following paragraphs.
-Moreover, even though it is amply recognised that different manner of articulation influences the size of effect, this paper focusses on stops.
+<!-- most accounts place source in articulation \footnote{but see bla bla for perceptual and a discussion in soskuthy2013}, then say that a notavle one is durational trade-off but that is discarded by M&G and that it is not clear what the interval is. Then say that you will give data to support it and offer a way of reinterpreting the data in M&G -->
 
-Two accounts relate the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
+Several proposal have been put forward as to where to look for the possible cause of the voicing effect [see @maddieson1976 and @soskuthy2013 for an overview].
+Most of the proposed accounts place the source of the voicing effect in properties of speech production.\footnote{Two accounts that point to perceptual features are @javkin1976 and @kluender1988. To the best of my knowledge, @javkin1976's proposal remains empirically untested, while see @fowler1992 for arguments against @kluender1988}.
+One of these production accounts, which will be the focus of this study, relates the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
+@slis1969 and @lehiste1970, among others, argue that the relevant invariant property of speech is a constant durational interval within which segments of different duration results in different duration of other segments.
+Both the syllable/VC sequence (Lindblom) and the word (Lehiste, Slis) has been proposed as the fixed interval.
+<!-- maybe mention later -->
+The closure of voiced stops is shorter than that of voiceless stops.
+It follows that vowels followed by shorter closures (like in the case of voiced stops) are longer than vowels followed by longer closures (like in the case of voiceless stops).
+<!-- This account also fits with the finding that vowel duration is inversely correlated with consonant closure duration. -->
+
+They show that word duration is not affected by voicing of C2 but they dont' discuss the internal structure of the word.
+I will show that the Release to Release is invariant and that this is compatible with a gestural timing in which the C2 is right-edge aligned with C1/V.
+
+
+<!-- I remember a paper saying that word duration was different but I dont remember which -->
+
+<!-- @soskuthy2013 divides the most notable into two categories: production accounts, which place the source of durational difference in the articulatory system, and perception accounts, which instead point to properties of the perceptual/auditory system as the cause of the voicing effect. -->
+<!-- Since the present study focusses on production, the latter will not be discussed further [see @fowler1992 for arguments against perceptual accounts]. -->
+
+<!-- Four main proposal within the production side of the accounts will be discussed in the following paragraphs. -->
+<!-- Moreover, even though it is amply recognised that different manner of articulation influences the size of effect, this paper focusses on stops. -->
+
+<!-- Two accounts relate the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
 @belasco1953 and @delattre1962 argued that the constant property is the articulatory force, such that this force is stable within the syllable.
 Since, as they go, voiceless stops require a greater articulatory force, less force is employed in the production of the vowel preceding the stop.
 Such reduced force of articulation results in a shorter vowel.
@@ -77,7 +95,9 @@ Both the syllable and the words has been proposed as the fixed interval.
 The closure of voiced stops is shorter than that of voiceless stops.
 It follows that vowels followed by shorter closures (like in the case of voiced stops) are longer than vowels followed by longer closures (like in the case of voiceless stops).
 
-The other two accounts argue instead that the difference in vowel duration is brought about by differences in gestural timing regarding either the vocal folds (hence properties of phonation) or the consonant closing gesture (hence properties of supra-glottal articulation).
+The other two accounts argue instead that the difference in vowel duration is brought about by differences in gestural timing regarding either the vocal folds (hence properties of phonation) or the consonant closing gesture (hence properties of supra-glottal articulation). -->
+<!-- Chen finds no evidence of difference in glottal configuration -->
+<!-- According to the former account, the configuration of the larynx for the production of voicing during the closure of a stop consonant is different -->
 <!-- explain -->
 
 <!-- say that none of these works with the aspiration effect -->
@@ -169,7 +189,7 @@ Speech rate has a negative effect on vowel duration, such that faster rates corr
 
 The same maximally specified model as with vowel duration has been fitted to consonant closure durations as the outcome variable.
 The following terms and interactions were significant: C2 voicing, C2 place of articulation, vowel identity, language, and interactions between language and C2 place, language and vowel identity, C2 voicing and place, C2 voicing and vowel, and a three-way interaction between C2 voicing, place and vowel identity.
-Stop closure is 15 ms shorter if the stop is voiced.
+Stop closure is 15 ms shorter (se = ) if the stop is voiced.
 Vowel identity has an effect on closure duration in voiced stops, but not in voiceless stops, and more so in voiced velar than in voiced coronal stops: closure after /a/ is the shortest, while after /u/ is the longest, with closure after /o/ in the middle.
 
 ## Release to Release interval duration
