@@ -186,9 +186,11 @@ The durational measurements were analysed with linear mixed-effects models using
 *P*-values below the alpha level 0.05 were considered significant.
 The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009].
 <!-- *P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor. -->
+All `lmer` models were fitted using maximum likelihood estimation (`REML = FALSE`) and treatment contrasts for factors.
 Bayes factors were used to specifically test the null hypotheses that word and RR duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
 The BIC approximation was used to calculate the Bayes factors [@wagenmakers2007].
 The approximation is performed according to the equation in \ref{eq:bayes} [@wagenmakers2007, p. 796].
+Interpretation of the Bayes factors will follow the recommendations in @raftery1995 [p. 139].
 
 \begin{equation}
 \label{eq:bayes}
@@ -231,6 +233,14 @@ In general, closure duration is inversely correlated with vowel duration when co
 However the correlation is quite weak: a 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
 
 ## Word duration
+
+The following full and null models were fitted to test whether C2 voicing affects word duration.
+In the full model, I entered as fixed effects: C2 voicing, C2 place, vowel, speech rate, and language.
+The model also included by-speaker and by-word random intercepts, plus a by-speaker random slope for C2 voicing.
+The null model was the same as the full model, with the exclusion of the fixed effect of C2 voicing.
+The Bayes factor of the null model against the full model is 21.5.
+Thus, the null model (in which the effect of C2 voicing is 0) is 21.5 times more likely than the full model given the data.
+This indicates that there is strong evidence for word duration not being affected by C2 voicing.
 
 ## Release to Release interval duration
 
