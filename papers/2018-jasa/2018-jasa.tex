@@ -279,7 +279,8 @@ models using \texttt{lme4} v1.1-17 in R v3.5.0
 \citep{r-core-team2018, bates2015}. \emph{P}-values for the individual
 terms were obtained with \texttt{lmerTest} v3.0-1, which uses the
 Satterthwaite's approximation to degrees of freedom
-\citep{kuznetsova2017}. The estimates of the relevant effects are then
+\citep{kuznetsova2017}. \emph{P}-values below the alpha level 0.05 were
+considered significant. The estimates of the relevant effects are then
 calculated by refitting the models including only the significant terms
 \citep[step-down approach,][]{diggle2002, zuur2009}. Bayes factors were
 used to specifically test the null hypotheses that word and RR duration
@@ -311,19 +312,17 @@ duration as the outcome variable; fixed effects for C2 voicing, C2 place
 of articulation, vowel identity, language, and speech rate (as syllables
 per second); by-speaker and by-word random intercept with by-speaker
 random slopes for C2 voicing. All logical interactions were included.
-According to t-tests with Satterthwaite's approximation to degrees of
-freedom, the following terms and interactions were significant: C2
-voicing, C2 place of articulation, vowel identity, language, speech
-rate, the interaction between vowel and C2 voicing, and vowel and C2
-place. Vowels are 14 ms longer when followed by a voiced stop, although
-vowel identity enters in an interaction with C2 voicing. The effect of
-voicing seems to be greater for /a/ and smaller for /u/, with /o/ having
-an intermediate effect. Polish has on average shorter vowels than
-Italian (-25.5 ms), although the effect of voicing is estimated to be
-the same in both languages. /u/ is 13.5 ms shorter when followed by a
-velar stop. The effect of C2 place on /a/ and /o/ is smaller. Speech
-rate has a negative effect on vowel duration, such that faster rates
-correlate with shorter vowel durations.
+The following terms and interactions are significant: C2 voicing, vowel
+identity, language, speech rate, the interaction between C2 voicing and
+vowel, and C2 place and vowel. The vowels /a, o/ are 14 ms longer (se =
+3 ms) when followed by a voiced stop. The effect is smaller for /u/
+(around 6 ms; \(\hat{\beta}\) = -8 ms, se = 4 ms). Polish has on average
+shorter vowels than Italian (\(\hat{\beta}\) = -25.5 ms, se = 7.5 ms),
+although the effect of voicing is estimated to be the same in both
+languages (the interaction of language and C2 voicing is not
+significant). Speech rate has a negative effect on vowel duration, such
+that faster rates correlate with shorter vowel durations
+(\(\hat{\beta}\) = -15 ms, se = 1 ms).
 
 \hypertarget{consonant-closure-duration}{%
 \subsection{Consonant closure
@@ -340,6 +339,30 @@ if the stop is voiced. Vowel identity has an effect on closure duration
 in voiced stops, but not in voiceless stops, and more so in voiced velar
 than in voiced coronal stops: closure after /a/ is the shortest, while
 after /u/ is the longest, with closure after /o/ in the middle.
+
+\hypertarget{vowel-and-closure-duration}{%
+\subsection{Vowel and closure
+duration}\label{vowel-and-closure-duration}}
+
+The model with the following specification was fit to assess the
+correlation between vowel and closure durations: vowel duration as the
+outcome variable; fixed effects for closure duration, vowel identity, C2
+place of articulation, and speech rate; all interactions between closure
+duration, vowel, and C2 place; by-speaker and by-word random intercepts,
+and by-speaker random slope for closure duration. The results of terms
+which were included in the analysis of vowel duration in XXX will not be
+discussed here (see Supplementary material). Closure duration has a
+non-significant effect on vowel duration when the vowel is /a/
+(\(\hat{\beta}\) = -0.2 ms, se = 0.06 ms) and /o/ (\(\hat{\beta}\) =
+-0.25 ms, se = 0.06 ms), but it has a significant effect on the duration
+of /u/ (\(\hat{\beta}\) = -0.5 ms, se = 0.06 ms). In general, closure
+duration is inversely correlated with vowel duration when controlling
+for speech rate. However the correlation is quite weak: a 1 ms increase
+in closure duration corresponds to a 0.2--0.5 ms decrease in vowel
+duration.
+
+\hypertarget{word-duration}{%
+\subsection{Word duration}\label{word-duration}}
 
 \hypertarget{release-to-release-interval-duration}{%
 \subsection{Release to Release interval
