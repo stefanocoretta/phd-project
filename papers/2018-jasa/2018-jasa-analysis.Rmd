@@ -230,7 +230,7 @@ durations_filtered %>%
 
 ```{r vowel-lm-full}
 vowel_lm_full <- lmer(
-  log(vowel_duration) ~
+  vowel_duration ~
     c2_phonation *
     c2_place *
     vowel *
