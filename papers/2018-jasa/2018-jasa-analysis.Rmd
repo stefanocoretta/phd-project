@@ -426,7 +426,7 @@ word_lm_null <- lmer(
 cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
 
-```{r}
+```{r vow-clo-lm}
 vow_clo_lm_full <- lmer(
   vowel_duration ~
     closure_duration *
@@ -455,7 +455,7 @@ vow_clo_lm <- lme4::lmer(
 summary(vow_clo_lm)
 ```
 
-```{r}
+```{r vow-clo-lm-plot}
 plot(allEffects(vow_clo_lm))
 ```
 
