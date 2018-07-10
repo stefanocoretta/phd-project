@@ -255,7 +255,7 @@ vowel_lm <- lmer(
     language +
     syl_rate +
     (1+c2_phonation|speaker) +
-    (1+c2_phonation|item),
+    (1|item),
   data = durations_filtered
 )
 summary(vowel_lm)
