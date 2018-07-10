@@ -426,6 +426,40 @@ word_lm_null <- lmer(
 cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
 
+```{r}
+vow_clo_lm_full <- lmer(
+  vowel_duration ~
+    closure_duration *
+    vowel *
+    c2_place +
+    syl_rate +
+    (1+closure_duration|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+summary(vow_clo_lm_full)
+
+vow_clo_lm <- lme4::lmer(
+  vowel_duration ~
+    closure_duration *
+    vowel +
+    c2_place +
+    c2_place:vowel +
+    syl_rate +
+    (1+closure_duration|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+summary(vow_clo_lm)
+```
+
+```{r}
+plot(allEffects(vow_clo_lm))
+```
+
+
 # Bayes
 
 ```{r}
