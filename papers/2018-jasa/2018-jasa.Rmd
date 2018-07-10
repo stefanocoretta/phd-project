@@ -150,7 +150,7 @@ Due to software constraints, the order of the list was kept the same across the 
 Each speaker read a total of 72 sentences, with a grand total of 576 tokens (288 per language).
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
 
-## Data processing, measurements, and statistical analysis
+## Data processing and measurements
 
 \ctable[caption = List of measurements as extracted from acoustics.,
 label = t:dur-measures,
@@ -171,16 +171,30 @@ The audio recordings were exported from AAA in `.wav` format for further process
 A forced aligned transcription was accomplished through the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
 The outcome of the automatic annotation was manually corrected when necessary, according to the criteria in \Cref{t:dur-measures}.
 The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014.
-The durations in milliseconds of the following intervals were extracted from the annotated acoustic landmarks with Praat scripting: vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 burst), and C1 release to C2 release duration (Rel-Rel duration).
-
-<!-- syllable rate as speech rate -->
-<!-- INCLUDE VERSION OF R AND PACKAGES -->
-
-The durational measurements were analysed with linear mixed-effects models using `lme4` in R [@r-core-team2017; @bates2015].
-<!-- *P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor. -->
-<!-- say lmerTest -->
+The durations in milliseconds of the following intervals were extracted from the annotated acoustic landmarks with Praat scripting: sentence duration, word duration, vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 burst), and Release-to-Release duration (RR duration, C1 release to C2 release).
+Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018] for duration normalisation, and was calculated as the number of syllables divided by the duration of the sentence (8 syllables in Italian, 6 in Polish).
 
 <!-- show examples of segmentation -->
+
+## Statistical analysis
+
+<!-- INCLUDE VERSION OF R AND PACKAGES -->
+
+The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R v3.5.0 [@r-core-team2018; @bates2015].
+*P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom []@kuznetsova2017].
+The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009].
+<!-- *P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor. -->
+Bayes factors were used to specifically test the null hypotheses that word and RR duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
+The BIC approximation was used to calculate the Bayes factors [@wagenmakers2007].
+The approximation is performed according to the equation in \ref{eq:bayes} [@wagenmakers2007, p. 796].
+
+\begin{equation}
+\label{eq:bayes}
+BF_{01} \approx exp(\Delta{}BIC_{10}/2)
+\end{equation}
+
+where $\Delta{}BIC_{10} = BIC_1 - BIC_0$.
+Values of $BF_{01} > 1$ indicate a preference of H\textsubscript{0} over H\textsubscript{1}.
 
 # Results
 
@@ -207,6 +221,12 @@ The same maximally specified model as with vowel duration has been fitted to con
 The following terms and interactions were significant: C2 voicing, C2 place of articulation, vowel identity, language, and interactions between language and C2 place, language and vowel identity, C2 voicing and place, C2 voicing and vowel, and a three-way interaction between C2 voicing, place and vowel identity.
 Stop closure is 15 ms shorter (se = ) if the stop is voiced.
 Vowel identity has an effect on closure duration in voiced stops, but not in voiceless stops, and more so in voiced velar than in voiced coronal stops: closure after /a/ is the shortest, while after /u/ is the longest, with closure after /o/ in the middle.
+
+## Vowel and closure duration
+
+
+
+## Word duration
 
 ## Release to Release interval duration
 

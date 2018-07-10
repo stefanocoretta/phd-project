@@ -235,9 +235,9 @@ of 72 sentences, with a grand total of 576 tokens (288 per language).
 The reading task lasted between 15 and 20 minutes, with optional short
 breaks between one repetition and the other.
 
-\hypertarget{data-processing-measurements-and-statistical-analysis}{%
-\subsection{Data processing, measurements, and statistical
-analysis}\label{data-processing-measurements-and-statistical-analysis}}
+\hypertarget{data-processing-and-measurements}{%
+\subsection{Data processing and
+measurements}\label{data-processing-and-measurements}}
 
 \ctable[caption = List of measurements as extracted from acoustics.,
 label = t:dur-measures,
@@ -263,12 +263,39 @@ manually corrected when necessary, according to the criteria in
 automatically by means of a Praat scripting implementation of the
 algorithm described in \citet{ananthapadmanabha2014}. The durations in
 milliseconds of the following intervals were extracted from the
-annotated acoustic landmarks with Praat scripting: vowel duration (V1
-onset to V1 offset), consonant closure duration (V1 offset to C2 burst),
-and C1 release to C2 release duration (Rel-Rel duration).
+annotated acoustic landmarks with Praat scripting: sentence duration,
+word duration, vowel duration (V1 onset to V1 offset), consonant closure
+duration (V1 offset to C2 burst), and Release-to-Release duration (RR
+duration, C1 release to C2 release). Syllable rate (syllables per
+second) was used as a proxy to speech rate \citep{plug2018} for duration
+normalisation, and was calculated as the number of syllables divided by
+the duration of the sentence (8 syllables in Italian, 6 in Polish).
+
+\hypertarget{statistical-analysis}{%
+\subsection{Statistical analysis}\label{statistical-analysis}}
 
 The durational measurements were analysed with linear mixed-effects
-models using \texttt{lme4} in R \citep{r-core-team2017, bates2015}.
+models using \texttt{lme4} v1.1-17 in R v3.5.0
+\citep{r-core-team2018, bates2015}. \emph{P}-values for the individual
+terms were obtained with \texttt{lmerTest} v3.0-1, which uses the
+Satterthwaite's approximation to degrees of freedom
+\citep{kuznetsova2017}. The estimates of the relevant effects are then
+calculated by refitting the models including only the significant terms
+\citep[step-down approach,][]{diggle2002, zuur2009}. Bayes factors were
+used to specifically test the null hypotheses that word and RR duration
+are not affected by C2 voicing (i.e., the effect of C2 voicing on
+duration is \texttt{0}). The BIC approximation was used to calculate the
+Bayes factors \citep{wagenmakers2007}. The approximation is performed
+according to the equation in \ref{eq:bayes}
+\citep[p.~796]{wagenmakers2007}.
+
+\begin{equation}
+\label{eq:bayes}
+BF_{01} \approx exp(\Delta{}BIC_{10}/2)
+\end{equation}
+
+where \(\Delta{}BIC_{10} = BIC_1 - BIC_0\). Values of \(BF_{01} > 1\)
+indicate a preference of H\textsubscript{0} over H\textsubscript{1}.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
