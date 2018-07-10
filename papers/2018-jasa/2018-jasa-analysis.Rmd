@@ -242,9 +242,7 @@ vowel_lm_full <- lmer(
   REML = FALSE
 )
 summary(vowel_lm_full)
-```
 
-```{r vowel-lm}
 vowel_lm <- lmer(
   vowel_duration ~
     c2_phonation +
@@ -259,35 +257,6 @@ vowel_lm <- lmer(
   data = durations_filtered
 )
 summary(vowel_lm)
-
-vowel_lm_full <- lmer(
-  vowel_duration ~
-    c2_phonation +
-    c2_place +
-    vowel +
-    language +
-    syl_rate +
-    (1+c2_phonation|speaker) +
-    (1+c2_phonation|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vowel_lm_null <- lmer(
-  vowel_duration ~
-    # c2_phonation +
-    c2_place +
-    vowel +
-    language +
-    syl_rate +
-    (1|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0):", exp((BIC(vowel_lm_full) - BIC(vowel_lm_null)) / 2), "\n")
-cat("Bayes factor in favor of H1 (`c2_phonationvoiced` != 0):", 1 / exp((BIC(vowel_lm_full) - BIC(vowel_lm_null)) / 2))
 ```
 
 ```{r vowel-brm}
