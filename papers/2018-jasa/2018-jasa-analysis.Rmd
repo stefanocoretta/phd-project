@@ -331,7 +331,7 @@ plot(allEffects(closure_lm))
 ```
 
 ```{r rel-rel-bf}
-rel_rel_lm <- lmer(
+rel_rel_lm <- lme4::lmer(
   rel_rel ~
     c2_phonation +
     vowel +
@@ -344,7 +344,7 @@ rel_rel_lm <- lmer(
   REML = FALSE
 )
 
-rel_rel_lm_null <- lmer(
+rel_rel_lm_null <- lme4::lmer(
   rel_rel ~
     # c2_phonation +
     vowel +
@@ -361,7 +361,7 @@ cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(r
 ```
 
 ```{r word-bf}
-word_lm <- lmer(
+word_lm <- lme4::lmer(
   word_duration ~
     c2_phonation +
     vowel +
@@ -374,7 +374,7 @@ word_lm <- lmer(
   REML = FALSE
 )
 
-word_lm_null <- lmer(
+word_lm_null <- lme4::lmer(
   word_duration ~
     # c2_phonation +
     vowel +
