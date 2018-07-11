@@ -243,7 +243,7 @@ In the full model, I entered as fixed effects: C2 voicing, C2 place, vowel, spee
 The model also included by-speaker and by-word random intercepts, plus a by-speaker random slope for C2 voicing.
 The null model was the same as the full model, with the exclusion of the fixed effect of C2 voicing.
 The Bayes factor of the null model against the full model is 21.5.
-Thus, the null model (in which the effect of C2 voicing is 0) is 21.5 times more likely than the full model given the data.
+Thus, the null model (in which the effect of C2 voicing is 0) is 21.5 times more likely under the observed data than the full model.
 This indicates that there is strong evidence for word duration not being affected by C2 voicing.
 
 ## Release to Release interval duration
