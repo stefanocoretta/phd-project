@@ -238,8 +238,7 @@ vowel_lm_full <- lmer(
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations_filtered,
-  REML = FALSE
+  data = durations_filtered
 )
 summary(vowel_lm_full)
 
@@ -304,8 +303,7 @@ closure_lm_full <- lmer(
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations_filtered,
-  REML = FALSE
+  data = durations_filtered
 )
 summary(closure_lm_full)
 
@@ -323,8 +321,7 @@ closure_lm <- lmer(
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
-  data = durations_filtered,
-  REML = FALSE
+  data = durations_filtered
 )
 summary(closure_lm)
 ```
