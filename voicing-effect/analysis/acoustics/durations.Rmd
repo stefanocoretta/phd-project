@@ -16,7 +16,7 @@ library(effects)
 
 # Data import
 
-```{r read-data}
+```{r read-data, message=FALSE}
 speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
 stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
