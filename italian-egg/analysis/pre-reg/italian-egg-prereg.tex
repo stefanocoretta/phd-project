@@ -379,8 +379,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
-  \DataTypeTok{REML =} \OtherTok{FALSE}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item)}
 \NormalTok{)}
 
 \NormalTok{vot_lm <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{(}
@@ -390,8 +389,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
-  \DataTypeTok{REML =} \OtherTok{FALSE}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item)}
 \NormalTok{)}
 
 \NormalTok{rvofft_lm <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{(}
@@ -401,8 +399,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 \StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
-\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
-  \DataTypeTok{REML =} \OtherTok{FALSE}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -410,7 +407,7 @@ Satterthwaite's method of approximation to degrees of freedom.
 Since I wish to directly test both the null and the alternative
 hypothesis concerning the duration of the voiced interval (H1), BIC
 approximation of Bayes factors will be used instead of \emph{p}-values
-\citep{wagenmakers2007}.
+\citep{raftery1995, wagenmakers2007, jarosz2014}.
 
 \begin{Shaded}
 \begin{Highlighting}[]

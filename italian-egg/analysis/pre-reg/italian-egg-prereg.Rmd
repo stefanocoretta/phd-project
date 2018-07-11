@@ -158,8 +158,7 @@ vowel_lm <- lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1|item),
-  REML = FALSE
+    (1|item)
 )
 
 vot_lm <- lmer(
@@ -169,8 +168,7 @@ vot_lm <- lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1|item),
-  REML = FALSE
+    (1|item)
 )
 
 rvofft_lm <- lmer(
@@ -180,12 +178,11 @@ rvofft_lm <- lmer(
     height:c2_place +
     speech_rate +
     (1+height|speaker) +
-    (1|item),
-  REML = FALSE
+    (1|item)
 )
 ```
 
-Since I wish to directly test both the null and the alternative hypothesis concerning the duration of the voiced interval (H1), BIC approximation of Bayes factors will be used instead of *p*-values [@wagenmakers2007].
+Since I wish to directly test both the null and the alternative hypothesis concerning the duration of the voiced interval (H1), BIC approximation of Bayes factors will be used instead of *p*-values [@raftery1995; @wagenmakers2007; @jarosz2014].
 
 ```{r lmer-bf, eval=FALSE}
 voicing_lm_1 <- lme4::lmer(
