@@ -151,6 +151,8 @@ Due to software constraints, the order of the list was kept the same across the 
 Each speaker read a total of 72 sentences, with a grand total of 576 tokens (288 per language).
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
 
+<!-- say how many tokens used for analysis -->
+
 ## Data processing and measurements
 
 \ctable[caption = List of measurements as extracted from acoustics.,
