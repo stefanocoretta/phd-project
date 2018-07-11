@@ -109,7 +109,7 @@ See `Other` for a list of word stimuli.
 * From the acoustic signal:
     * **Vowel duration**: from onset to offset of higher formant structure.
     * **Release to Vowel Offset**: from release of C1 to V1 offset.
-    * **Speech rate**: calculated as syllables per second (`n of syllables / sentence duration`) [@plug2018].
+    * **Speech rate**: calculated as syllables per second [`n of syllables / sentence duration`, @plug2018].
 
 * From the EGG signal:
     * **Duration of voiced interval**: from voice onset to voice offset.
