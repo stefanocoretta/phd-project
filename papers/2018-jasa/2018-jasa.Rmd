@@ -192,7 +192,7 @@ The estimates of the relevant effects are then calculated by refitting the model
 <!-- All `lmer` models were fitted using maximum likelihood estimation (`REML = FALSE`) and treatment contrasts for factors. -->
 Bayes factors were used to specifically test the null hypotheses that word and RR duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
 For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using Maximum Likelihood estimation [@bates2015, p. 34].
-The BIC approximation was then used to obtain Bayes factors [@wagenmakers2007].
+The BIC approximation was then used to obtain Bayes factors [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
 The approximation is calculated according to the equation in \ref{eq:bayes} [@wagenmakers2007, p. 796].
 
 \begin{equation}

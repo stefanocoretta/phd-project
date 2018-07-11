@@ -182,7 +182,7 @@ rvofft_lm <- lmer(
 )
 ```
 
-Since I wish to directly test both the null and the alternative hypothesis concerning the duration of the voiced interval (H1), BIC approximation of Bayes factors will be used instead of *p*-values [@raftery1995; @wagenmakers2007; @jarosz2014].
+Since I wish to directly test both the null and the alternative hypothesis concerning the duration of the voiced interval (H1), BIC approximation of Bayes factors will be used instead of *p*-values [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
 
 ```{r lmer-bf, eval=FALSE}
 voicing_lm_1 <- lme4::lmer(
