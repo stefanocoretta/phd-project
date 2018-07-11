@@ -394,7 +394,8 @@ closure_cv <- duration %>%
   summarise(
     sd = sd(closure_duration, na.rm = TRUE),
     mean = mean(closure_duration, na.rm = TRUE),
-    cv = 100 * sd(closure_duration, na.rm = TRUE) / mean(closure_duration, na.rm = TRUE)
+    cv = 100 * sd(closure_duration, na.rm = TRUE) / mean(closure_duration, na.rm = TRUE),
+    cqv = (quantile(closure_duration, na.rm = TRUE, probs = 0.75) - quantile(closure_duration, na.rm = TRUE, probs = 0.25)) / (quantile(closure_duration, na.rm = TRUE, probs = 0.75) + quantile(closure_duration, na.rm = TRUE, probs = 0.25))
   )
 ```
 
@@ -408,6 +409,12 @@ closure_cv %>%
 ```{r}
 closure_cv %>%
   ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot()
+```
+
+```{r}
+closure_cv %>%
+  ggplot(aes(c2_phonation, cqv)) +
   geom_boxplot()
 ```
 
@@ -435,7 +442,8 @@ rr_cv <- duration %>%
   summarise(
     sd = sd(rel_rel, na.rm = TRUE),
     mean = mean(rel_rel, na.rm = TRUE),
-    cv = 100 * sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE)
+    cv = 100 * sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE),
+    cqv = (quantile(rel_rel, na.rm = TRUE, probs = 0.75) - quantile(rel_rel, na.rm = TRUE, probs = 0.25)) / (quantile(rel_rel, na.rm = TRUE, probs = 0.75) + quantile(rel_rel, na.rm = TRUE, probs = 0.25))
   )
 ```
 
@@ -449,6 +457,12 @@ rr_cv %>%
 ```{r}
 rr_cv %>%
   ggplot(aes(c2_phonation, cv)) +
+  geom_boxplot()
+```
+
+```{r}
+rr_cv %>%
+  ggplot(aes(c2_phonation, cqv)) +
   geom_boxplot()
 ```
 
