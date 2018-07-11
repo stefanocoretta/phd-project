@@ -276,30 +276,34 @@ the duration of the sentence (8 syllables in Italian, 6 in Polish).
 
 The durational measurements were analysed with linear mixed-effects
 models using \texttt{lme4} v1.1-17 in R v3.5.0
-\citep{r-core-team2018, bates2015}. \emph{P}-values for the individual
-terms were obtained with \texttt{lmerTest} v3.0-1, which uses the
-Satterthwaite's approximation to degrees of freedom
-\citep{kuznetsova2017}. \emph{P}-values below the alpha level 0.05 were
-considered significant. The estimates of the relevant effects are then
-calculated by refitting the models including only the significant terms
-\citep[step-down approach,][]{diggle2002, zuur2009}. All \texttt{lmer}
-models were fitted using maximum likelihood estimation
-(\texttt{REML\ =\ FALSE}) and treatment contrasts for factors. Bayes
-factors were used to specifically test the null hypotheses that word and
-RR duration are not affected by C2 voicing (i.e., the effect of C2
-voicing on duration is \texttt{0}). The BIC approximation was used to
-calculate the Bayes factors \citep{wagenmakers2007}. The approximation
-is performed according to the equation in \ref{eq:bayes}
-\citep[p.~796]{wagenmakers2007}. Interpretation of the Bayes factors
-will follow the recommendations in \citet[p.~139]{raftery1995}.
+\citep{r-core-team2018, bates2015}. All factors were coded as treatment
+contrasts. \emph{P}-values for the individual terms were obtained with
+\texttt{lmerTest} v3.0-1, which uses the Satterthwaite's approximation
+to degrees of freedom \citep{kuznetsova2017}. \emph{P}-values below the
+alpha level 0.05 were considered significant. The estimates of the
+relevant effects are then calculated by refitting the models including
+only the significant terms \citep[step-down
+approach,][pp.~121--122]{diggle2002, zuur2009}. Bayes factors were used
+to specifically test the null hypotheses that word and RR duration are
+not affected by C2 voicing (i.e., the effect of C2 voicing on duration
+is \texttt{0}). For each set of null/alternative hypotheses, a full
+model (with the predictor of interest) and a null model (excluding it)
+were fitted separately using Maximum Likelihood estimation
+\citep[p.~34]{bates2015}. The BIC approximation was then used to obtain
+Bayes factors \citep{wagenmakers2007}. The approximation is calculated
+according to the equation in \ref{eq:bayes}
+\citep[p.~796]{wagenmakers2007}.
 
 \begin{equation}
 \label{eq:bayes}
 BF_{01} \approx exp(\Delta{}BIC_{10}/2)
 \end{equation}
 
-where \(\Delta{}BIC_{10} = BIC_1 - BIC_0\). Values of \(BF_{01} > 1\)
-indicate a preference of H\textsubscript{0} over H\textsubscript{1}.
+where \(\Delta{}BIC_{10} = BIC_1 - BIC_0\), \(BIC_1\) is the BIC of the
+full model, and \(BIC_0\) is the BIC of the null model. Values of
+\(BF_{01} > 1\) indicate a preference of H\textsubscript{0} over
+H\textsubscript{1}. The interpretation of the Bayes factors follows the
+recommendations in \citet[p.~139]{raftery1995}.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
