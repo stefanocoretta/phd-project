@@ -213,12 +213,15 @@ For the others see tables and appendixes.
 
 ## Vowel duration
 
-A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing, C2 place of articulation, vowel identity, language, and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
-All logical interactions were included.
-The following terms and interactions are significant: C2 voicing, vowel identity, language, speech rate, the interaction between C2 voicing and vowel, and C2 place and vowel.
-The vowels /a, o/ are 14 ms longer (se = 3 ms) when followed by a voiced stop.
-The effect is smaller for /u/ (around 6 ms; $\hat{\beta}$ = -8 ms, se = 4 ms).
-Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -25.5 ms, se = 7.5 ms), although the effect of voicing is estimated to be the same in both languages (the interaction of language and C2 voicing is not significant).
+A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
+<!-- add footnote on C2 place not included -->
+All interactions were included.
+The following terms and interactions are significant: C2 voicing, vowel, language, speech rate.
+No interaction was significant.
+The vowel /a/ (when followed by voiceless stops) has a duration of 202.5 ms (se = 8.5 ms).
+The vowel /o/ is 9.5 ms shorter (se = 3 ms), while the vowel /u/ is 30.5 ms shorter (se = 3).
+Vowels are 11 ms longer (se = 3) when followed by a voiced stop.
+Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -28 ms, se = 8 ms), although the effect of voicing is estimated to be the same in both languages (the interaction of language and C2 voicing is not significant).
 Speech rate has a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -15 ms, se = 1 ms).
 
 ## Consonant closure duration
