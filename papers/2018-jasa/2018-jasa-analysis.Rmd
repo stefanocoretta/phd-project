@@ -258,36 +258,6 @@ summary(vowel_lm)
 plot(allEffects(vowel_lm))
 ```
 
-```{r vowel-brm}
-vowel_brm <- brm(
-  vowel_duration ~
-    c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    syl_rate +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  save_all_pars = TRUE
-)
-
-vowel_brm_null <- brm(
-  vowel_duration ~
-    # c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    syl_rate +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  save_all_pars = TRUE
-)
-
-bayes_factor(vowel_brm, vowel_brm_null)
-```
-
 ```{r closure-lm-full}
 closure_lm_full <- lmer(
   closure_duration ~
