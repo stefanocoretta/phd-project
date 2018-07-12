@@ -295,8 +295,7 @@ vow_clo_lm_full <- lmer(
     syl_rate +
     (1+closure_duration|speaker) +
     (1|item),
-  data = durations_filtered,
-  REML = FALSE
+  data = durations_filtered
 )
 summary(vow_clo_lm_full)
 
@@ -304,7 +303,6 @@ vow_clo_lm <- lme4::lmer(
   vowel_duration ~
     closure_duration *
     vowel +
-    closure_duration:vowel +
     syl_rate +
     (1+closure_duration|speaker) +
     (1|item),
