@@ -59,6 +59,7 @@ durations_filtered <- durations %>%
 Almost 100 years of research have repeatedly shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
 Evidence for such so called 'voicing effect' has been found in a variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean [see @maddieson1976 for a more comprehensive, but still not exhaustive list].
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, still after 100 years agreement hasn't been reached regarding the source of this effect.
+<!-- Place here catchy sentence that says what I found -->
 
 <!-- most accounts place source in articulation \footnote{but see bla bla for perceptual and a discussion in soskuthy2013}, then say that a notavle one is durational trade-off but that is discarded by M&G and that it is not clear what the interval is. Then say that you will give data to support it and offer a way of reinterpreting the data in M&G -->
 
@@ -74,24 +75,31 @@ It follows that vowels followed by shorter closures (like in the case of voiced 
 
 However, @chen1970 and @maddieson1976 criticise the compensatory temporal adjustment account on empirical grounds.
 @chen1970 shows that the duration of the syllable is affected by consonant voicing [compatible with findings in @jacewicz2009], contrary to Lindblom's expectations.
-@maddieson1976 reject any compensatory account based on data from a phenomenon parallel to the voicing effect, the aspiration effect, by which vowel tend to be longer when followed by aspirated stops than when followed by non-aspirated stops.
-They measured consonant duration and they found no compensatory pattern in relation to vowel duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and the vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
+@maddieson1976 reject any compensatory account based on data from a parallel of the voicing effect, the aspiration effect, by which vowel tend to be longer when followed by aspirated stops than when followed by non-aspirated stops.
+They find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
 
+## The present study
 
+An exploratory study of acoustic data from Italian and Polish was conducted to investigate the relationship between vowel duration and consonant voicing in two languages that reportedly differ in the magnitude of the voicing effect.
+<!-- add more references -->
+Italian has been unanimously reported as a voicing effect language [@caldognetto1979; @farnetani1986; @esposito2002].
+<!-- expand footnote, include means as reported in cited works -->
+The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms [with longer vowels followed by voiced consonants, @farnetani1986; @esposito2002].\footnote{These estimates should be taken as a gross approximation.
+There are several issues: number of speakers, different contexts, statistical modelling.}
+On the other hand, Polish is subject to conflicting results regarding the presence and magnitude of the effect.
+While @keating1984 reports no effect of voicing on vowel duration in data from 24 speakers, @nowak2006 finds that vowels followed by voiced stops are 4.5 ms longer in the 4 speakers recorded.
+Moreover, @malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim their results to be inconclusive.
 
 They show that word duration is not affected by voicing of C2 but they don't discuss the internal structure of the word.
 I will show that the Release to Release is invariant and that this is compatible with a gestural timing in which the C2 is right-edge aligned with C1/V.
 I will also offer an interpretation of @maddieson1976 that is compatible with a compensatory temporal adjustment account.
 
-
-<!-- I remember a paper saying that word duration was different but I dont remember which -->
+<!-- I remember a paper saying that word duration was different but I dont remember which, found it! -->
 
 <!-- @soskuthy2013 divides the most notable into two categories: production accounts, which place the source of durational difference in the articulatory system, and perception accounts, which instead point to properties of the perceptual/auditory system as the cause of the voicing effect. -->
 <!-- Since the present study focusses on production, the latter will not be discussed further [see @fowler1992 for arguments against perceptual accounts]. -->
-
 <!-- Four main proposal within the production side of the accounts will be discussed in the following paragraphs. -->
 <!-- Moreover, even though it is amply recognised that different manner of articulation influences the size of effect, this paper focusses on stops. -->
-
 <!-- Two accounts relate the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
 @belasco1953 and @delattre1962 argued that the constant property is the articulatory force, such that this force is stable within the syllable.
 Since, as they go, voiceless stops require a greater articulatory force, less force is employed in the production of the vowel preceding the stop.
@@ -107,7 +115,6 @@ The other two accounts argue instead that the difference in vowel duration is br
 <!-- Chen finds no evidence of difference in glottal configuration -->
 <!-- According to the former account, the configuration of the larynx for the production of voicing during the closure of a stop consonant is different -->
 <!-- explain -->
-
 <!-- say that none of these works with the aspiration effect -->
 
 <!-- say offer evidence for durational trade-off account and a way of reconciling the results from M&G -->
@@ -183,6 +190,7 @@ Syllable rate (syllables per second) was used as a proxy to speech rate [@plug20
 
 <!-- INCLUDE VERSION OF R AND PACKAGES -->
 
+Given the exploratory nature of the study, all statistical analyses reported here are to be considered data-driven or hypothesis-generating rather than hypothesis-driven [@kerr1998].
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R v3.5.0 [@r-core-team2018; @bates2015].
 All factors were coded as treatment contrasts.
 *P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom []@kuznetsova2017].
@@ -215,8 +223,8 @@ For the others see tables and appendixes.
 
 A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
 <!-- add footnote on C2 place not included -->
-All interactions were included.
-The following terms and interactions are significant: C2 voicing, vowel, language, speech rate.
+All possible interactions between C2 voicing, vowel, and language were included.
+The following terms are significant: C2 voicing, vowel, language, and speech rate.
 No interaction was significant.
 The vowel /a/ (when followed by voiceless stops) has a duration of 202.5 ms (se = 8.5 ms).
 The vowel /o/ is 9.5 ms shorter (se = 3 ms), while the vowel /u/ is 30.5 ms shorter (se = 3).
@@ -227,18 +235,18 @@ Speech rate has a negative effect on vowel duration, such that faster rates corr
 ## Consonant closure duration
 
 The same maximally specified model as with vowel duration has been fitted to consonant closure durations as the outcome variable.
-The following terms and interactions were significant: C2 voicing, C2 place of articulation, vowel identity, language, and interactions between language and C2 place, language and vowel identity, C2 voicing and place, C2 voicing and vowel, and a three-way interaction between C2 voicing, place and vowel identity.
-Stop closure is 15 ms shorter (se = ) if the stop is voiced.
-Vowel identity has an effect on closure duration in voiced stops, but not in voiceless stops, and more so in voiced velar than in voiced coronal stops: closure after /a/ is the shortest, while after /u/ is the longest, with closure after /o/ in the middle.
+Only C2 voicing and speech rate were significant.
+Stop closure is 13 ms shorter (se = 3 ms) if the stop is voiced.
+Finally, faster speech rates correlate with shorter closure durations ($\hat{\beta}$ = -8 ms, se = 1 ms).
 
 ## Vowel and closure duration
 
-The same model specification as for the vowel and closure duration models was used for assessing the correlation between vowel and closure duration.
-The results of terms which were included in the analysis of vowel duration in XXX will not be discussed here (see Supplementary material).
+The full model was specified with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate; an interaction between closure duration and vowel; by-speaker and by-word random intercepts, and by-speaker random slopes for C2 voicing.
 Closure duration has a significant effect on vowel duration when the vowel is /a/ ($\hat{\beta}$ = -0.2 ms, se = 0.06 ms).
-The effect with the vowel /o/ does not significantly differ from the effect with /a/, while with /u/ the effect is 1 ms stronger ($\hat{\beta}$ = -0.3 ms, se = 0.06 ms).
+The effect with the vowel /o/ does not significantly differ from the one with /a/, while with /u/ the effect is -0.5 ms ($\hat{\beta}$ = -0.3 ms, se = 0.06 ms).
 In general, then, closure duration is inversely correlated with vowel duration after controlling for speech rate.
-However the correlation is quite weak: a 1 ms increase in closure duration corresponds to a 0.2--0.3 ms decrease in vowel duration.
+However the correlation is quite weak.
+A 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
 
 ## Word duration
 
