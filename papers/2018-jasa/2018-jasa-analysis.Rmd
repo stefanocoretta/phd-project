@@ -287,34 +287,35 @@ summary(closure_lm)
 plot(allEffects(closure_lm))
 ```
 
-```{r rel-rel-bf}
-rel_rel_lm <- lme4::lmer(
-  rel_rel ~
-    c2_phonation +
+```{r vow-clo-lm}
+vow_clo_lm_full <- lmer(
+  vowel_duration ~
+    closure_duration *
     vowel +
-    c2_place +
-    language +
     syl_rate +
-    (1+c2_phonation|speaker) +
+    (1+closure_duration|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
 )
+summary(vow_clo_lm_full)
 
-rel_rel_lm_null <- lme4::lmer(
-  rel_rel ~
-    # c2_phonation +
+vow_clo_lm <- lme4::lmer(
+  vowel_duration ~
+    closure_duration *
     vowel +
-    c2_place +
-    language +
+    closure_duration:vowel +
     syl_rate +
-    (1+c2_phonation|speaker) +
+    (1+closure_duration|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
 )
+summary(vow_clo_lm)
+```
 
-cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(rel_rel_lm) - BIC(rel_rel_lm_null)) / 2))
+```{r vow-clo-lm-plot}
+plot(allEffects(vow_clo_lm))
 ```
 
 ```{r word-bf}
@@ -347,37 +348,35 @@ word_lm_null <- lme4::lmer(
 cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
 
-```{r vow-clo-lm}
-vow_clo_lm_full <- lmer(
-  vowel_duration ~
-    closure_duration *
+```{r rel-rel-bf}
+rel_rel_lm <- lme4::lmer(
+  rel_rel ~
+    c2_phonation +
     vowel +
+    c2_place +
+    language +
     syl_rate +
-    (1+closure_duration|speaker) +
+    (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
 )
-summary(vow_clo_lm_full)
 
-vow_clo_lm <- lme4::lmer(
-  vowel_duration ~
-    closure_duration *
+rel_rel_lm_null <- lme4::lmer(
+  rel_rel ~
+    # c2_phonation +
     vowel +
-    closure_duration:vowel +
+    c2_place +
+    language +
     syl_rate +
-    (1+closure_duration|speaker) +
+    (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
   REML = FALSE
 )
-summary(vow_clo_lm)
-```
 
-```{r vow-clo-lm-plot}
-plot(allEffects(vow_clo_lm))
+cat("Bayes factor in favor of H0 (`c2_phonationvoiced` = 0): BF01 =", exp((BIC(rel_rel_lm) - BIC(rel_rel_lm_null)) / 2))
 ```
-
 
 # Bayes
 
