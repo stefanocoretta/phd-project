@@ -233,11 +233,12 @@ Vowel identity has an effect on closure duration in voiced stops, but not in voi
 
 ## Vowel and closure duration
 
-The model with the following specification was fit to assess the correlation between vowel and closure durations: vowel duration as the outcome variable; fixed effects for closure duration, vowel identity, C2 place of articulation, and speech rate; all interactions between closure duration, vowel, and C2 place; by-speaker and by-word random intercepts, and by-speaker random slope for closure duration.
+The same model specification as for the vowel and closure duration models was used for assessing the correlation between vowel and closure duration.
 The results of terms which were included in the analysis of vowel duration in XXX will not be discussed here (see Supplementary material).
-Closure duration has a non-significant effect on vowel duration when the vowel is /a/ ($\hat{\beta}$ = -0.2 ms, se = 0.06 ms) and /o/ ($\hat{\beta}$ = -0.25 ms, se = 0.06 ms), but it has a significant effect on the duration of /u/ ($\hat{\beta}$ = -0.5 ms, se = 0.06 ms).
-In general, closure duration is inversely correlated with vowel duration when controlling for speech rate.
-However the correlation is quite weak: a 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
+Closure duration has a significant effect on vowel duration when the vowel is /a/ ($\hat{\beta}$ = -0.2 ms, se = 0.06 ms).
+The effect with the vowel /o/ does not significantly differ from the effect with /a/, while with /u/ the effect is 1 ms stronger ($\hat{\beta}$ = -0.3 ms, se = 0.06 ms).
+In general, then, closure duration is inversely correlated with vowel duration after controlling for speech rate.
+However the correlation is quite weak: a 1 ms increase in closure duration corresponds to a 0.2--0.3 ms decrease in vowel duration.
 
 ## Word duration
 
