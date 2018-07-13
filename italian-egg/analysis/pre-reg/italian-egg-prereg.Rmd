@@ -13,6 +13,8 @@ bibliography: linguistics.bib
 biblio-style: unified.bst
 mainfont: DejaVu Sans
 fontsize: 11pt
+header-includes:
+- \usepackage{cleveref}
 ---
 
 ```{r setup, include=FALSE}
@@ -31,17 +33,17 @@ Stefano Coretta (The University of Manchester).
 
 ## Research questions
 
-Vowel height has been shown to correlate with vowel duration, such that high vowels are shorter than low vowels.
-Moreover, data from Italian shows that the duration of the C1 Release to Vowel Offset interval (RVoffT) in VCVC words is affected by vowel height in the same direction: higher vowels have a shorter RVoffT [@esposito2002].
-Less attention has been given to the duration of the voiced interval including the vowel.
-In the context of two flanking voiceless stops, it is possible to measure the duration of the portion with voicing (vocal fold vibration) flanked by the voiceless stops.
+Vowel height has been shown to correlate with vowel duration, such that high vowels are shorter than low vowels [see @toivonen2015 and @esposito2002 and references therein].
+Moreover, data from Italian shows that the duration of the C1 Release to Vowel Offset interval (RVoffT) in VCV́C words is affected by vowel height in the same direction: higher vowels have a shorter RVoffT [@esposito2002].
+Less attention has been given to the duration of the voiced interval which includes the vowel.
+In the context of two flanking voiceless stops, like in *pata*, it is possible to measure the duration of the portion with voicing (vocal fold vibration) flanked by the voiceless stops.
 This allows us to answer the following question:
 
 * Q1: Is the duration of the voicing interval between two voiceless stops in CV́CV words affected by vowel height?
 
 ## Hypotheses
 
-In the following hypothesis and subsequent section, 'vowel' refers to the stressed vowel in CV́CV words.
+In the following hypotheses and subsequent section, 'vowel' refers to the stressed vowel in CV́CV words.
 In relation to Q1, the following null and alternative hypotheses will be tested:
 
 * H1\textsubscript{0}: The duration of the voiced interval is not affected by vowel height.
@@ -71,7 +73,7 @@ Inclusion rule: Native speakers of Italian, from the VCO province (Italy), 18+ y
 
 ### Procedure
 
-The participants will be recorded while reading sentences with CVCV target words (see `Other` for the list of target words and `Manipulated variables` for the list of frame sentences) presented on a computer screen with PsychoPy [@peirce2009], in a quiet room in Verbania (Italy).
+The participants will be recorded while reading sentences with CV́CV target words (see \Cref{s:other} for the list of target words and \Cref{s:manipulated} for the list of frame sentences) presented on a computer screen with PsychoPy [@peirce2009], in a quiet room in Verbania (Italy).
 Time-synchronised audio and electroglottographic data will be collected using a Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
 The acquisition of the signals will be controlled with Audacity running on a MacBook Pro (Retina, 13-inch, Mid 2014).
 The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2018].
@@ -79,7 +81,7 @@ The recordings will be subject to force alignment with SPPAS [@bigi2015] for ana
 ## Sample size
 
 30 participants, 43 words, 4 repetitions.
-Grand total: 5,160 (= 172 tokens per participant * 30 participants) observations.
+Grand total: 5,160 observations (= 172 tokens per participant * 30 participants).
 
 ## Sample size rationale
 
@@ -96,13 +98,14 @@ Data collection will be terminated earlier if the 30 participants target hasn't 
 # Variables
 
 ## Manipulated variables
+\label{s:manipulated}
 
 * **Vowel height**: high (/i, u/), mid-high (/e/), mid-low (/ɔ/), low (/a/).
 * **Place of articulation of C1**: labial, coronal, velar.
 * **Place of articulation of C2**: labial, coronal, velar.
 * **Frame sentence**: *Scrivete X sul foglio*, *Ha detto X sei volte*, *Sentivo X di nuovo*, *Ripete X da sempre*.
 
-See `Other` for a list of word stimuli.
+See \Cref{s:other} for a list of word stimuli.
 
 ## Measured variables
 
@@ -134,7 +137,7 @@ No blinding is involved in this study.
 
 ## Study design
 
-Repeated measures.
+Repeated measures, mixed design.
 
 ## Randomisation
 
@@ -143,8 +146,9 @@ The sentence stimuli will be randomised within participant by means of the built
 # Analysis plan
 
 ## Statistical models
+\label{s:stats}
 
-Separate models will be fitted in `R` to independently assess effects on vowel duration, voicing interval duration, VOT, and RVoffT.
+Separate models will be fitted in `R` [@r-core-team2018] to independently assess effects on vowel duration, voicing interval duration, VOT, and RVoffT.
 *P*-values ($\alpha$ = 0.05) will be obtained with the `lmerTest` package [@kuznetsova2017], which uses the Satterthwaite's method of approximation to degrees of freedom.
 
 ```{r lmer, eval=FALSE}
@@ -182,7 +186,7 @@ rvofft_lm <- lmer(
 )
 ```
 
-Since I wish to directly test both the null and the alternative hypothesis concerning the duration of the voiced interval (H1), BIC approximation of Bayes factors will be used instead of *p*-values [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
+Since I wish to directly test both the null and the alternative hypotheses concerning the duration of the voiced interval (H1), the BIC approximation of Bayes factors will be used instead of *p*-values [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
 
 ```{r lmer-bf, eval=FALSE}
 voicing_lm_1 <- lme4::lmer(
@@ -222,7 +226,8 @@ NA.
 
 *P*-values will be used for the effect of vowel height on vowel duration, VOT, and RVoffT, with $\alpha$ = 0.05.
 *P*-values below 0.05 will be deemed significant.
-Bayes factors will be employed for the effect of vowel height on voicing interval duration, since I am interested in testing both the null and the alternative hypothesis.
+Bayes factors will be employed for the effect of vowel height on voicing interval duration, since I am interested in testing both the null and the alternative hypotheses.
+The recommendations in \citet[139]{raftery1995} for the interpretation of the Bayes factors will be followed.
 
 ## Data exclusion
 
@@ -241,9 +246,10 @@ Also, the effects of vowel and place of articulation on voicing during closure w
 
 ## Analysis scripts (Optional)
 
-See `Statistical models` section.
+See \Cref{s:stats}.
 
 # Other
+\label{s:other}
 
 List of target words: * *peto* 'fart' and *caco* 'I shit' are not included in the list of target words due to their meaning.
 
