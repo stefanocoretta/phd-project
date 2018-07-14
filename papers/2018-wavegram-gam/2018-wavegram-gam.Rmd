@@ -1,0 +1,19 @@
+---
+title: "Wavegram GAM"
+author: "Stefano Coretta"
+date: "14/07/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Extraction of wavegram data
+
+The procedure for the extraction of the wavegram data was implemented in Praat [@boersma2018] and is a slight modification of the procedure described in @herbst2010.
+<!-- check smoothings-->
+The EGG signal is downsampled at ... and filtered with high-pass band filter (0-100 Hz, smoothing 100 Hz).
+<!-- say that algorithm is applied to 100/500 ms portion for each repetition of the vowel -->
+A glottal period is defined as the interval between two consecutive EGG minima.
+The normalised amplitude of the EGG signal of a glottal period is calculated relative to the maximum local amplitude at each sample.
