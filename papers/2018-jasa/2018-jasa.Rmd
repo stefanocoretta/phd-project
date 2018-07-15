@@ -270,18 +270,34 @@ The data suggests there is positive evidence that duration of the RR interval is
 # Discussion
 
 In this exploratory study of Italian and Polish acoustic data, I found that the duration of interval between the releases of two consecutive consonants is insensitive to the phonological voicing of the second consonant.
+The difference in vowel duration before voiceless vs. voiced stops derives from differences in placement of the closure onset within the fixed interval between the releases of C1 and C2.
 
 ## Gestural alignment
 
-<!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
-@marin2010 showed that coda consonants in American English are timed relative to the preceding vowel in such a way that the left-edge of the coda consonant is stable across contexts.
-On the other hand, onset consonants follow a C-centre pattern, by which is the mid-way distance between the left and the right edge of the consonant that is stable.
-To the best of my knowledge, no study has been done on the timing of onset consonants relative to the *preceding* (heterosyllabic) consonant.
-The data of this study are compatible with a right-edge alignment account.
-The right edge of the C2 consonant, i.e. the release, in Italian and Polish is invariantly timed relative to V1, such that difference in C2 closure duration do not affect the distance between V1 and the release of C2.
+According to the model of gestural coupling (ref ...), articulatory gestures can be timed according to two coupling modes: in-phase mode, by which two gestures start in synchrony, or anti-phase mode, in which one gesture starts when the preceding gesture has reached its target.
+These two modes of coupling can be applied to the gestural timing of segments within a syllable.
+@marin2010 showed that onset consonants in American English are in-phase with the vowel nucleus and anti-phase with each other in the case of onset clusters.
+Such phasing pattern establishes a stable relation between the centre of the consonant or consonant cluster and the following vowel.
+Independent of the number of onset consonants, the midpoint of the onset, the so-called 'C-centre', is maintained at a fixed distance from the vowel, such that increasing number of consonants in the onset does not change the C-center/vowel distance.
+On the other hand, coda consonants are timed anti-phase with the preceding vowel and between themselves.
+Stability in codas is seen in the lag between the vowel and the left-most edge of the coda, which is not affected by the number of coda consonants.
 
-A right-edge alignment account is compatible with findings by @raphael1975, @de-jong1991, and @celata2018.
-<!-- explain -->
+<!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
+<!-- @marin2010 showed that coda consonants in American English are timed relative to the preceding vowel in such a way that the left-edge of the coda consonant is stable across contexts. -->
+<!-- On the other hand, onset consonants follow a C-centre pattern, by which is the mid-way distance between the left and the right edge of the consonant that is stable. -->
+
+Onset consonants can thus be said to follow a C-centre organisation pattern, while coda consonants follow a left-edge organisation pattern.
+Of course, in both cases, the pattern is relative to the tautosyllabic vowel (the following vowel for onsets, the preceding vowel for codas)
+To the best of my knowledge, no study has reported the timing of onset consonants relative to the *preceding* (heterosyllabic) consonant.
+The results from this acoustic study on Italian and Polish are compatible with a right-edge organisation pattern for onset consonants.
+The release of C2 (which is the onset of the seconds in CVCV words), which can be thought as the acoustic parallel of the articulatory right edge of C2, is invariantly timed relative to V1 (which is the nucleus of the first syllable).
+
+A consequence of a right-edge organisation pattern is that differences in C2 closure duration do not affect the lag between V1 and the release of C2, as shown by the results of this study.
+The invariance of the lag between the release of C1 and that of C2 then can be seen to follow from the invariance in timing between, on the one hand, C1 (which is always /p/ in this study) and V1, and, on the other, between V1 and the right edge of C2.
+
+<!-- maybe footnote on circularity of argument of syllabic structure and gestural timing -->
+
+A right-edge organisation account is compatible with findings by @raphael1975, @de-jong1991, and @celata2018.
 @celata2018 show that vowels before tautosyllabic clusters have the same duration as before heterosyllabic clusters.
 However, vowels followed by geminates are shorter than when followed by singletons, although from a syllabic structure geminates correspond to heterosyllabic clusters and singletons to tautosyllabic clusters (i.e., V-final syllables followed by singletons and tautosyllabic clusters are open, while those followed by geminates and heterosyllabic clusters are closed).
 @celata2018 argue that these results corroborate a rhythmic account in which the relevant unit is the rhythmic syllable, i.e. the VC(C) sequence (independent of the traditional syllabic structure), which is kept constant.
