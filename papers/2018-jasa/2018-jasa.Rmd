@@ -196,7 +196,7 @@ Syllable rate (syllables per second) was used as a proxy to speech rate [@plug20
 
 Given the exploratory nature of the study, all statistical analyses reported here are to be considered data-driven or hypothesis-generating rather than hypothesis-driven [@kerr1998].
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R v3.5.0 [@r-core-team2018; @bates2015].
-All factors were coded as treatment contrasts.
+All factors were coded with treatment contrasts.
 *P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom []@kuznetsova2017].
 *P*-values below the alpha level 0.05 were considered significant.
 The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009, pp. 121–122].
