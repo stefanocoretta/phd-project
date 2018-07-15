@@ -226,6 +226,14 @@ acoustics %>%
     ggplot(aes(point, pitch, colour = voicing)) +
     geom_jitter(alpha = 0.5) +
     geom_smooth() +
+    facet_wrap(position ~ speaker)
+```
+
+```{r pitch, eval = FALSE}
+acoustics %>%
+    filter(pitch < 400) %>%
+    ggplot(aes(point, pitch, group = time, colour = voicing)) +
+    geom_line() +
     facet_wrap(~ speaker)
 ```
 
