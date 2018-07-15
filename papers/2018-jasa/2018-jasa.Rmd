@@ -273,6 +273,14 @@ In this exploratory study of Italian and Polish acoustic data, I found that the 
 The difference in vowel duration before voiceless vs. voiced stops derives from differences in placement of the closure onset within the fixed interval between the releases of C1 and C2.
 
 ## Gestural alignment
+\label{s:gestural}
+
+\begin{figure}
+  \centering
+  \includegraphics{img/gorganisation.pdf}
+  \caption{Gestural organisation patterns for onsets (a), codas (b), heterosyllabic onsets (c). See \Cref{s:gestural} for details. Based on \citet{marin2010}.}
+  \label{f:gorganisation}
+\end{figure}
 
 According to the model of gestural coupling (ref ...), articulatory gestures can be timed according to two coupling modes: in-phase mode, by which two gestures start in synchrony, or anti-phase mode, in which one gesture starts when the preceding gesture has reached its target.
 These two modes of coupling can be applied to the gestural timing of segments within a syllable.
