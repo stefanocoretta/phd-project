@@ -17,3 +17,12 @@ The EGG signal is downsampled at ... and filtered with high-pass band filter (0-
 <!-- say that algorithm is applied to 100/500 ms portion for each repetition of the vowel -->
 A glottal period is defined as the interval between two consecutive EGG minima.
 The normalised amplitude of the EGG signal of a glottal period is calculated relative to the maximum local amplitude at each sample.
+A time-series dataset is constructed with normalised amplitude measures from each sample within each glottal period along the interval duration of the vowel token.
+Such data is called here the 'wavegram data'.
+Wavegram data can be visualised as proposed by @herbst2010.
+
+# Statistical assessment of wavegram data
+
+The highly dimensional nature of wavegram data (amplitude $\times$ samples $\times$ time) lends itself well to generalised additive modelling [@hastie1986; @wood2006; @zuur2012].
+Generalised additive models (GAMs) use penalised smoothing splines to estimate non-linear effects.
+Smoothing splines employ a linear combination of basis functions to construct a function that reflects the models the data.
