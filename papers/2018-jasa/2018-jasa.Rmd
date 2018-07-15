@@ -12,6 +12,7 @@ output:
 abstract: |
   Put your abstract here.
 bibliography: linguistics.bib
+mainfont: "FreeSerif"
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
