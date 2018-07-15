@@ -296,6 +296,7 @@ A consequence of a right-edge organisation pattern is that differences in C2 clo
 The invariance of the lag between the release of C1 and that of C2 then can be seen to follow from the invariance in timing between, on the one hand, C1 (which is always /p/ in this study) and V1, and, on the other, between V1 and the right edge of C2.
 
 <!-- maybe footnote on circularity of argument of syllabic structure and gestural timing -->
+<!-- indeed we don't know much about how syllables are concatenanted? -->
 
 A right-edge organisation account is compatible with findings by @raphael1975, @de-jong1991, and @celata2018.
 @celata2018 show that vowels before tautosyllabic clusters have the same duration as before heterosyllabic clusters.
