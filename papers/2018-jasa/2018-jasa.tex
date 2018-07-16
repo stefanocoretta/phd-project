@@ -11,7 +11,7 @@
 %% For manuscript, 12pt, one column style
 
 %% Comment this out if you'd rather use another style:
-\documentclass[]{JASAnew}
+\documentclass[preprint]{JASAnew}
 
 %%%%% Preprint Options %%%%%
 %% The track changes option allows you to mark changes
@@ -317,7 +317,7 @@ reported here are to be considered data-driven or hypothesis-generating
 rather than hypothesis-driven \citep{kerr1998}. The durational
 measurements were analysed with linear mixed-effects models using
 \texttt{lme4} v1.1-17 in R v3.5.0 \citep{r-core-team2018, bates2015}.
-All factors were coded as treatment contrasts. \emph{P}-values for the
+All factors were coded with treatment contrasts. \emph{P}-values for the
 individual terms were obtained with \texttt{lmerTest} v3.0-1, which uses
 the Satterthwaite's approximation to degrees of freedom
 \citep{kuznetsova2017}. \emph{P}-values below the alpha level 0.05 were

@@ -16,6 +16,7 @@ mainfont: "FreeSerif"
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
+classoption: preprint
 ---
 
 ```{r setup, include=FALSE}
