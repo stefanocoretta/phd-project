@@ -422,7 +422,6 @@ approximation of Bayes factors will be used instead of \emph{p}-values
 \NormalTok{  voicing_duration }\OperatorTok{~}
 \StringTok{    }\NormalTok{height }\OperatorTok{+}
 \StringTok{    }\NormalTok{c2_place }\OperatorTok{+}
-\StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}
@@ -431,9 +430,8 @@ approximation of Bayes factors will be used instead of \emph{p}-values
 
 \NormalTok{voicing_lm_}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\NormalTok{lme4}\OperatorTok{::}\KeywordTok{lmer}\NormalTok{(}
 \NormalTok{  voicing_duration }\OperatorTok{~}
-\StringTok{    }\NormalTok{height }\OperatorTok{+}
+\StringTok{    }\CommentTok{# height +}
 \StringTok{    }\NormalTok{c2_place }\OperatorTok{+}
-\StringTok{    }\NormalTok{height}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
 \StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{height}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
 \StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{item),}

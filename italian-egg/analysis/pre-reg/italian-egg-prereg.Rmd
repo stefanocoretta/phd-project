@@ -193,7 +193,6 @@ voicing_lm_1 <- lme4::lmer(
   voicing_duration ~
     height +
     c2_place +
-    height:c2_place +
     speech_rate +
     (1+height|speaker) +
     (1|item),
@@ -202,9 +201,8 @@ voicing_lm_1 <- lme4::lmer(
 
 voicing_lm_0 <- lme4::lmer(
   voicing_duration ~
-    height +
+    # height +
     c2_place +
-    height:c2_place +
     speech_rate +
     (1+height|speaker) +
     (1|item),
