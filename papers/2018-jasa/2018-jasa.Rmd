@@ -9,6 +9,7 @@ author:
 output:
   jasaarticle::jasa_article:
     citation_package: natbib
+    fig_caption: yes
 abstract: |
   Put your abstract here.
 bibliography: linguistics.bib
@@ -20,8 +21,9 @@ classoption: preprint
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+theme_set(theme_minimal())
 library(lme4)
 library(effects)
 ```
@@ -30,16 +32,24 @@ library(effects)
 speakers <- read_csv("./datasets/speakers.csv")
 stimuli <- read_csv("./datasets/stimuli.csv")
 
-durations <- list.files(path = "./datasets",
-                   pattern = "*-durations.csv",
-                   full.names = TRUE) %>%
-    map_df(~read_csv(., na = "--undefined--")) %>%
-    left_join(y = speakers) %>%
-    left_join(y = stimuli) %>%
-    mutate_if(is.character, as.factor) %>%
-    mutate(
-        c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+durations <- list.files(
+  path = "./datasets",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
     )
+  )
 
 durations_filtered <- durations %>%
   group_by(speaker) %>%
@@ -226,6 +236,14 @@ For the others see tables and appendixes.
 
 ## Vowel duration
 
+```{r vowels-plot, echo=FALSE, include=TRUE, fig.cap = "Vowel duration in Italian and Polish.", cache=TRUE, dependson="read-data"}
+durations_filtered %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+
 A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
 <!-- add footnote on C2 place not included -->
 All possible interactions between C2 voicing, vowel, and language were included.
@@ -264,6 +282,14 @@ Thus, the null model (in which the effect of C2 voicing is 0) is 21.5 times more
 This indicates that there is strong evidence for word duration not being affected by C2 voicing.
 
 ## Release to Release interval (RR) duration
+
+```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", cache=TRUE, dependson="read-data"}
+durations_filtered %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.1, width = 0.15) +
+  facet_grid(~ language)
+```
 
 The models specifications for the RR duration were the same as for word duration.
 The Bayes factor of the null model against the full model for RR duration is 19, which means that the null model (without C2 voicing) is 19 times more likely than the full model.
