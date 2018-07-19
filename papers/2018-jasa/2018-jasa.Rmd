@@ -310,12 +310,12 @@ The difference in vowel duration before voiceless vs. voiced stops derives from 
   \label{f:gorganisation}
 \end{figure}
 
-According to the coupled oscillator model of syllabic structure (ref ...), articulatory gestures can be timed according to two coupling modes: in-phase (synchronous) mode, by which two gestures start in synchrony, or anti-phase (sequential) mode, in which one gesture starts when the preceding gesture has reached its target.
-@marin2010 showed that onset consonants in American English are in-phase with the vowel nucleus and anti-phase with each other in the case of onset clusters.
-Such phasing pattern establishes a stable relation between the centre of the consonant or consonant cluster and the following vowel.
-Independent of the number of onset consonants, the midpoint of the onset, the so-called 'C-centre', is maintained at a fixed distance from the vowel, such that increasing number of consonants in the onset does not change the C-center/vowel distance.
+According to the coupled oscillator model of syllabic structure (ref ...), articulatory gestures can be timed according to two coupling modes: in-phase (synchronous) mode, by which two gestures start in synchrony, or anti-phase (sequential) mode, in which one gesture starts when the preceding one has reached its target.
+@marin2010 showed that onset consonants in American English are in-phase with the vowel nucleus and anti-phase with each other.
+Such phasing pattern establishes a stable relationship between the centre of the consonant or consonant cluster and the following vowel.
+Independent of the number of onset consonants, the midpoint of the onset, the so-called 'C-centre', is maintained at a fixed distance from the vowel, such that increasing number of consonants in the onset does not change the C-center/vowel distance (\Cref{f:gorganisation}(a)).
 On the other hand, coda consonants are timed anti-phase with the preceding vowel and between themselves.
-Stability in codas is seen in the lag between the vowel and the left-most edge of the coda, which is not affected by the number of coda consonants.
+Stability in codas is seen in the lag between the vowel and the left-most edge of the coda, which is not affected by the number of coda consonants (\Cref{f:gorganisation}(b)).
 Other studies found further evidence for the synchronous and sequential coupling modes (ref from Marin 2014), although which of the two modes is used depends on the language and the consonants under study.
 
 <!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
@@ -324,11 +324,11 @@ Other studies found further evidence for the synchronous and sequential coupling
 
 Consonants can thus be said to follow either a C-centre organisation pattern or a left-edge organisation pattern.
 In both cases, of course, the pattern is relative to the tautosyllabic vowel (the following vowel for onsets, the preceding vowel for codas).
-To the best of my knowledge, no study has reported the timing of onset consonants relative to the *preceding* (heterosyllabic) consonant.
-The results from this acoustic study on Italian and Polish are compatible with a right-edge organisation pattern for onset consonants and preceding stressed vowels.
-The release of C2 (which is the onset of the seconds in CVCV words), which can be thought as the acoustic parallel of the articulatory right edge of C2, is invariantly timed relative to V1 (which is the nucleus of the first syllable).
+To the best of my knowledge, no study has reported the timing of onset consonants relative to the *preceding* (heterosyllabic) vowel.
+The results from this acoustic study on Italian and Polish are compatible with a right-edge organisation pattern for onset consonants and preceding stressed vowels \Cref{f:gorganisation}(c).
+The release of C2 (which is the onset of the second syllable in CVCV words)---which can be thought as the acoustic parallel of the articulatory right edge of C2---is invariantly timed relative to V1 (which is the nucleus of the first syllable).
 
-A consequence of a right-edge organisation pattern is that differences in C2 closure duration do not affect the lag between V1 and the release of C2, as shown by the results of this study.
+A consequence of a right-edge organisation pattern of C2 relative to V1 in CV́CV words is that differences in C2 closure duration do not affect the lag between V1 and the release of C2, as shown by the results of this study.
 The invariance of the lag between the release of C1 and that of C2 then can be seen to follow from the invariance in timing between, on the one hand, C1 (which is always /p/ in this study) and V1, and, on the other, between V1 and the right edge of C2.
 
 <!-- maybe footnote on circularity of argument of syllabic structure and gestural timing -->
@@ -337,20 +337,21 @@ The invariance of the lag between the release of C1 and that of C2 then can be s
 
 A right-edge organisation account is compatible with findings by @raphael1975, @de-jong1991, and @celata2018.
 @celata2018 show that vowels before tautosyllabic clusters have the same duration as before heterosyllabic clusters.
-However, vowels followed by geminates are shorter than when followed by singletons, although from a syllabic structure geminates correspond to heterosyllabic clusters and singletons to tautosyllabic clusters (i.e., V-final syllables followed by singletons and tautosyllabic clusters are open, while those followed by geminates and heterosyllabic clusters are closed).
+However, vowels followed by geminates are shorter than when followed by singletons, although from a syllabic structure point of view geminates correspond to heterosyllabic clusters and singletons to tautosyllabic clusters (i.e., V-final syllables followed by singletons and tautosyllabic clusters are open, while those followed by geminates and heterosyllabic clusters are closed).
 @celata2018 argue that these results corroborate a rhythmic account in which the relevant unit is the rhythmic syllable, i.e. the VC(C) sequence (independent of the traditional syllabic structure), which is kept constant.
 Such view reflects a gestural timing view in which the timing of the right edge of the consonant is held constant relative to the vowel.
 
 @de-jong1991 reports that the closing gesture of consonants following stressed vowels is quicker in voiceless consonants than in voiced ones, and that also it is timed earlier than that of voiced consonants.
-The difference in vowel duration are, according to @de-jong1991, driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture.
+<!-- turn sentence before around, say voiceless have earlier and shorter, while voiced have opposite -->
+The differences in vowel duration are, according to @de-jong1991, driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture.
 <!-- terminology in Hertrich 1997:523 -->
 The view proposed above reflects these findings.
 Moreover, the data in @de-jong1991 show that the final portion of the vocalic opening gesture is prolonged before voiced stops.
 This finding corresponds to what @raphael1975 reported based on electromyographic data.
 The electromyographic signal corresponding to the vocalic gesture reaches its plateaux at the same time in the voiceless and voiced context, but the plateaux is held for longer in the case of vowels followed by voiced stops, indicating that muscular activation is kept for longer.
 
-All of these studies taken together, plus the results from this study, bring evidence to the view that two factors contribute to the difference in vowel duration observed before consonants varying in their voicing specification.
-These two factors are (1) the right-edge alignment of coda consonants following stressed vowels relative to the latter, and (2) the differential timing of the closing gesture for voiceless vs. voiced stops.
+These studies taken together, plus the results from this study, bring evidence to the view that two factors contribute to the difference in vowel duration observed before consonants varying in their voicing specification.
+These two factors are: (1) the right-edge alignment of coda consonants following stressed vowels relative to the latter, and (2) the differential timing of the closing gesture onset for voiceless vs. voiced stops.
 These two factors together can be synthesised into a compensatory temporal adjustment account, in which the fixed interval is generated by factor (1) and the temporal adjustment is brought about by factor (2).
 
 <!-- of course this is limited to CVCV words and stressed vowels -->
@@ -360,15 +361,16 @@ These two factors together can be synthesised into a compensatory temporal adjus
 <!-- of course this is limited to CVCV words and stressed vowels -->
 
 <!-- better say that a possible interpretation is that the right edge alignemnt derives the invaraince of RR, but that it is difficult to say with this data -->
-It is difficult given the present data to disambiguate between two interpretations: either C2 is timed relative to a gestural epoch of V1 (possibly the gesture onset)---and the invariance of RR would follow from the fact that C1 is held constant--- or the motor plan for CVCV words is structured is such a way to directly keep the RR duration invariant.
+It is difficult given the present data to disambiguate between two interpretations: either C2 is timed relative to a gestural epoch of V1 (possibly the gesture onset)---and the invariance of RR would follow from the fact that C1 is held constant---or the motor plan for CVCV words is structured is such a way to directly keep the RR duration invariant.
 
 ## A reinterpretation of @maddieson1976
 
 Before concluding/Finally, I would like to offer a reinterpretation of the results in @maddieson1976.
-A major drawback of the analysis in @maddieson1976 is that the consonant duration in fact was measured from the closure of the relevant consonant to the release of the following consonant, due to difficulties in detecting the release of the consonant of interest (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
+A drawback of the analysis in @maddieson1976 is that the consonant duration was in fact measured from the closure of the relevant consonant to the release of the following consonant, due to difficulties in detecting the release of the consonant of interest (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
 This measure includes the burst and (eventual) aspiration of the consonant.
-@slis1969a, however, states that the inverse correlation between vowel duration and the following consonant raises when consonant *closure* duration is taken into account, and not entire *consonant* duration.
+@slis1969a, however, states that the inverse correlation between vowel duration and the following consonant raises when consonant *closure* duration is taken into account, and not the entire *consonant* duration.
 If the correlation exists between vowel and closure duration, the inclusion of burst/aspiration duration clearly alters this relationship.
+<!-- maybe briefly mention durvasula2012 -->
 
 \begin{acknowledgments}
 Thanks to...
