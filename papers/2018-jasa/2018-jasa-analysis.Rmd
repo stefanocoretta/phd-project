@@ -528,8 +528,6 @@ vowel_lm <- lmer(
     c2_phonation +
     c2_place +
     vowel +
-    c2_phonation:vowel +
-    c2_place:vowel +
     language +
     syl_rate +
     (1+c2_phonation|speaker) +
@@ -539,11 +537,11 @@ vowel_lm <- lmer(
 
 fixef(vowel_lm)["c2_phonationvoiced"] <- 10
 
-powerSim(vowel_lm, test = fixed("c2_phonationvoiced", method = "t"), nsim = 100)
+powerSim(vowel_lm, fixed("c2_phonationvoiced", "t"), nsim = 1000)
 
 fixef(vowel_lm)["c2_phonationvoiced"] <- 5
 
-powerSim(vowel_lm, test = fixed("c2_phonationvoiced", method = "t"), nsim = 100)
+powerSim(vowel_lm, fixed("c2_phonationvoiced", "t"), nsim = 1000)
 ```
 
 # BRMS
