@@ -17,6 +17,7 @@ mainfont: "FreeSerif"
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
+- \usepackage[caption=false]{subfig}
 classoption: preprint
 ---
 
@@ -28,7 +29,7 @@ library(lme4)
 library(effects)
 ```
 
-```{r read-data, include=FALSE, message=FALSE}
+```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
 speakers <- read_csv("./datasets/speakers.csv")
 stimuli <- read_csv("./datasets/stimuli.csv")
 
@@ -49,21 +50,37 @@ durations <- list.files(
       8 / sentence_duration,
       6 / sentence_duration
     )
-  )
+  ) %>%
+  filter(c1_phonation == "voiceless")
 
 durations_filtered <- durations %>%
   group_by(speaker) %>%
   mutate(
     vowel_duration_z = scale(vowel_duration),
-    closure_duration_z = scale(closure_duration),
-    rel_rel_z = scale(rel_rel)
+    closure_duration_z = scale(closure_duration)
   ) %>%
   filter(
     vowel_duration_z < 3, vowel_duration_z > -3,
-    closure_duration_z < 3, closure_duration_z > -3,
-    rel_rel_z < 3, rel_rel_z > -3
+    closure_duration_z < 3, closure_duration_z > -3
+  )
+
+word_filtered <- durations %>%
+    group_by(speaker) %>%
+  mutate(
+    word_duration_z = scale(word_duration)
   ) %>%
-  na.omit()
+  filter(
+    word_duration_z < 3, word_duration_z > -3
+  )
+
+rel_filtered <- durations %>%
+    group_by(speaker) %>%
+  mutate(
+    rel_rel_z = scale(rel_rel)
+  ) %>%
+  filter(
+    rel_rel_z < 3, rel_rel_z > -3
+  )
 ```
 
 # Introduction
@@ -111,27 +128,6 @@ I will also offer an interpretation of @maddieson1976 that is compatible with a 
 
 <!-- I remember a paper saying that word duration was different but I dont remember which, found it! -->
 
-<!-- @soskuthy2013 divides the most notable into two categories: production accounts, which place the source of durational difference in the articulatory system, and perception accounts, which instead point to properties of the perceptual/auditory system as the cause of the voicing effect. -->
-<!-- Since the present study focusses on production, the latter will not be discussed further [see @fowler1992 for arguments against perceptual accounts]. -->
-<!-- Four main proposal within the production side of the accounts will be discussed in the following paragraphs. -->
-<!-- Moreover, even though it is amply recognised that different manner of articulation influences the size of effect, this paper focusses on stops. -->
-<!-- Two accounts relate the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
-@belasco1953 and @delattre1962 argued that the constant property is the articulatory force, such that this force is stable within the syllable.
-Since, as they go, voiceless stops require a greater articulatory force, less force is employed in the production of the vowel preceding the stop.
-Such reduced force of articulation results in a shorter vowel.
-Vice versa, voiced stops require less force, leaving the articulation of preceding vowels stronger.
-Vowels before weakly articulated stops can be long.
-The second theory, instead, argues that the relevant invariant property of speech is a constant durational interval within which segments of different duration results in different duration of other segments [@slis1969; @lehiste1970].
-Both the syllable and the words has been proposed as the fixed interval.
-The closure of voiced stops is shorter than that of voiceless stops.
-It follows that vowels followed by shorter closures (like in the case of voiced stops) are longer than vowels followed by longer closures (like in the case of voiceless stops).
-
-The other two accounts argue instead that the difference in vowel duration is brought about by differences in gestural timing regarding either the vocal folds (hence properties of phonation) or the consonant closing gesture (hence properties of supra-glottal articulation). -->
-<!-- Chen finds no evidence of difference in glottal configuration -->
-<!-- According to the former account, the configuration of the larynx for the production of voicing during the closure of a stop consonant is different -->
-<!-- explain -->
-<!-- say that none of these works with the aspiration effect -->
-
 <!-- say offer evidence for durational trade-off account and a way of reconciling the results from M&G -->
 
 # Method
@@ -154,6 +150,8 @@ A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone w
 ## Materials
 \label{s:materials}
 
+<!-- be more explicit about bigger project! you just mention it here briefly to explain constraints -->
+
 The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
 <!-- footnote about /o/ notation -->
 The lexical stress of the target words was placed by speakers of both Italian and Polish on V\textsubscript{1}, as intended.
@@ -169,12 +167,11 @@ These sentences were chosen in order to keep the placement of stress and emphasi
 
 The participant was asked to read the sentences with the target words which were sequentially presented on the computer screen.
 The order of the sentence stimuli was randomised for each participant.
-Each participant read the list of randomised sentence stimuli six times.
+Each participant read the list of randomised sentence stimuli 6 times.
 Due to software constraints, the order of the list was kept the same across the six repetitions within each participant.
-Each speaker read a total of 72 sentences, with a grand total of 576 tokens (288 per language).
+Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to the ultrasound data collection).\footnote{IT01 and IT02 (the first two participants of this study) read also sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
+with a grand total of 1224 tokens (792 from Italian, 432 from Polish).
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
-
-<!-- say how many tokens used for analysis -->
 
 ## Data processing and measurements
 
@@ -198,22 +195,28 @@ A forced aligned transcription was accomplished through the SPeech Phonetisation
 The outcome of the automatic annotation was manually corrected when necessary, according to the criteria in \Cref{t:dur-measures}.
 The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014.
 The durations in milliseconds of the following intervals were extracted from the annotated acoustic landmarks with Praat scripting: sentence duration, word duration, vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 burst), and Release-to-Release duration (RR duration, C1 release to C2 release).
+\Cref{f:segmentation} shows an example of the segmentation of /pata/ (a) and /pada/ (b) from an Italian speaker.
 Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018] for duration normalisation, and was calculated as the number of syllables divided by the duration of the sentence (8 syllables in Italian, 6 in Polish).
 
-<!-- show examples of segmentation -->
+\begin{figure*}
+  \figline{
+    \fig{img/annotation-1.pdf}{0.5\textwidth}{(a)}
+    \fig{img/annotation-2.pdf}{0.5\textwidth}{(b)}
+  }
+  \caption{Segmentation example.}
+  \label{f:segmentation}
+\end{figure*}
 
 ## Statistical analysis
 
-<!-- INCLUDE VERSION OF R AND PACKAGES -->
+<!-- add power analysis? -->
 
-Given the exploratory nature of the study, all statistical analyses reported here are to be considered data-driven or hypothesis-generating rather than hypothesis-driven [@kerr1998].
+Given the exploratory nature of the study, all statistical analyses reported here are to be considered data-driven or hypothesis-generating rather than hypothesis-driven [@kerr1998; @gelman2013].
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R v3.5.0 [@r-core-team2018; @bates2015].
 All factors were coded with treatment contrasts.
-*P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom []@kuznetsova2017].
+*P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom [@kuznetsova2017; @luke2017].
 *P*-values below the alpha level 0.05 were considered significant.
 The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009, pp. 121–122].
-<!-- *P*-values were obtained with likelihood ratio tests comparing the full model with a nested model without the relevant predictor. -->
-<!-- All `lmer` models were fitted using maximum likelihood estimation (`REML = FALSE`) and treatment contrasts for factors. -->
 Bayes factors were used to specifically test the null hypotheses that word and RR duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
 For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using Maximum Likelihood estimation [@bates2015, p. 34].
 The BIC approximation was then used to obtain Bayes factors [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
@@ -227,6 +230,10 @@ BF_{01} \approx exp(\Delta{}BIC_{10}/2)
 where $\Delta{}BIC_{10} = BIC_1 - BIC_0$, $BIC_1$ is the BIC of the full model, and $BIC_0$ is the BIC of the null model.
 Values of $BF_{01} > 1$ indicate a preference of H\textsubscript{0} over H\textsubscript{1}.
 The interpretation of the Bayes factors follows the recommendations in @raftery1995 [p. 139].
+
+The extracted measurements were filtered before statistical analysis.
+Measures of vowel duration, closure duration, word duration, and RR duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset.
+This operation yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of RR duration.
 
 # Results
 
@@ -243,7 +250,6 @@ durations_filtered %>%
   geom_boxplot() +
   facet_grid(~ language)
 ```
-
 
 A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
 <!-- add footnote on C2 place not included -->
@@ -284,8 +290,8 @@ This indicates that there is strong evidence for word duration not being affecte
 
 ## Release to Release interval (RR) duration
 
-```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", cache=TRUE, dependson="read-data"}
-durations_filtered %>%
+```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", cache=TRUE, dependson="read-data", warning=FALSE}
+rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot() +
   geom_jitter(alpha = 0.1, width = 0.15) +
@@ -314,14 +320,12 @@ The difference in vowel duration before voiceless vs. voiced stops derives from 
 According to the coupled oscillator model of syllabic structure [@browman1988; @browman2000; @goldstein2006; @goldstein2014], articulatory gestures can be timed according to two coupling modes: in-phase (synchronous) mode, by which two gestures start in synchrony, or anti-phase (sequential) mode, in which one gesture starts when the preceding one has reached its target.
 @marin2010 showed that onset consonants in American English are in-phase with the vowel nucleus and anti-phase with each other.
 Such phasing pattern establishes a stable relationship between the centre of the consonant or consonant cluster and the following vowel.
-Independent of the number of onset consonants, the midpoint of the onset, the so-called 'C-centre', is maintained at a fixed distance from the vowel, such that increasing number of consonants in the onset does not change the C-center/vowel distance (\Cref{f:gorganisation}(a)).
+Independent of the number of onset consonants, the midpoint of the onset, the so-called 'C-centre', is maintained at a fixed distance from the vowel, such that increasing number of consonants in the onset does not change the C-centre/vowel distance (\Cref{f:gorganisation}(a)).
 On the other hand, coda consonants are timed anti-phase with the preceding vowel and between themselves.
 Stability in codas is seen in the lag between the vowel and the left-most edge of the coda, which is not affected by the number of coda consonants (\Cref{f:gorganisation}(b)).
 Other studies found further evidence for the synchronous and sequential coupling modes (see extensive review in @marin2010 and @marin2014), although the use of one mode over the other depends on the language and the consonants under study.
 
 <!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
-<!-- @marin2010 showed that coda consonants in American English are timed relative to the preceding vowel in such a way that the left-edge of the coda consonant is stable across contexts. -->
-<!-- On the other hand, onset consonants follow a C-centre pattern, by which is the mid-way distance between the left and the right edge of the consonant that is stable. -->
 
 Consonants can thus be said to follow either a C-centre organisation pattern or a left-edge organisation pattern.
 In both cases, of course, the pattern is relative to the tautosyllabic vowel (the following vowel for onsets, the preceding vowel for codas).
@@ -406,7 +410,6 @@ it02 & 26 & Male   & Italian & Friulian, English, Ladin-Venetan          & Udine
 it03 & 28 & Female & Italian & English, German                           & Verbania            & Verbania        & No  \NN
 it04 & 54 & Female & Italian & Calabrese                                 & Verbania            & Verbania        & No  \NN
 it05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
-it07 & 29 & Male   & Italian & English                                   & Tradate             & Cairate         & No  \NN
 it09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
 it11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
 it13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN

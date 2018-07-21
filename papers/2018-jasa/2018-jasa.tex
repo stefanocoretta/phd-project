@@ -60,6 +60,7 @@
 
 \usepackage{cleveref}
 \usepackage{ctable}
+\usepackage[caption=false]{subfig}
 
 \begin{document}
 %% the square bracket argument will send term to running head in
@@ -237,6 +238,8 @@ used for audio recording.
 \hypertarget{materials}{%
 \subsection{Materials}\label{materials}}
 
+\label{s:materials}
+
 The target stimuli were disyllabic words with
 C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
 structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o,
@@ -266,10 +269,14 @@ comparability of results.
 The participant was asked to read the sentences with the target words
 which were sequentially presented on the computer screen. The order of
 the sentence stimuli was randomised for each participant. Each
-participant read the list of randomised sentence stimuli six times. Due
-to software constraints, the order of the list was kept the same across
-the six repetitions within each participant. Each speaker read a total
-of 72 sentences, with a grand total of 576 tokens (288 per language).
+participant read the list of randomised sentence stimuli 6 times. Due to
+software constraints, the order of the list was kept the same across the
+six repetitions within each participant. Each speaker read a total of 12
+sentences for 6 times (with the exceptions of IT02, who repeated the 12
+sentences 5 times, and IT07, with whom words containing /u/ were not
+recorded due to technical difficulties relating to the ultrasound data
+collection).\footnote{IT01 and IT02 (the first two participants of this study) read also sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
+with a grand total of 1224 tokens (792 from Italian, 432 from Polish).
 The reading task lasted between 15 and 20 minutes, with optional short
 breaks between one repetition and the other.
 
@@ -304,33 +311,45 @@ milliseconds of the following intervals were extracted from the
 annotated acoustic landmarks with Praat scripting: sentence duration,
 word duration, vowel duration (V1 onset to V1 offset), consonant closure
 duration (V1 offset to C2 burst), and Release-to-Release duration (RR
-duration, C1 release to C2 release). Syllable rate (syllables per
-second) was used as a proxy to speech rate \citep{plug2018} for duration
-normalisation, and was calculated as the number of syllables divided by
-the duration of the sentence (8 syllables in Italian, 6 in Polish).
+duration, C1 release to C2 release). \Cref{f:segmentation} shows an
+example of the segmentation of /pata/ (a) and /pada/ (b) from an Italian
+speaker. Syllable rate (syllables per second) was used as a proxy to
+speech rate \citep{plug2018} for duration normalisation, and was
+calculated as the number of syllables divided by the duration of the
+sentence (8 syllables in Italian, 6 in Polish).
+
+\begin{figure*}
+  \figline{
+    \fig{img/annotation-1.pdf}{0.5\textwidth}{(a)}
+    \fig{img/annotation-2.pdf}{0.5\textwidth}{(b)}
+  }
+  \caption{Segmentation example.}
+  \label{f:segmentation}
+\end{figure*}
 
 \hypertarget{statistical-analysis}{%
 \subsection{Statistical analysis}\label{statistical-analysis}}
 
 Given the exploratory nature of the study, all statistical analyses
 reported here are to be considered data-driven or hypothesis-generating
-rather than hypothesis-driven \citep{kerr1998}. The durational
-measurements were analysed with linear mixed-effects models using
-\texttt{lme4} v1.1-17 in R v3.5.0 \citep{r-core-team2018, bates2015}.
-All factors were coded with treatment contrasts. \emph{P}-values for the
-individual terms were obtained with \texttt{lmerTest} v3.0-1, which uses
-the Satterthwaite's approximation to degrees of freedom
-\citep{kuznetsova2017}. \emph{P}-values below the alpha level 0.05 were
-considered significant. The estimates of the relevant effects are then
-calculated by refitting the models including only the significant terms
-\citep[step-down approach,][pp.~121--122]{diggle2002, zuur2009}. Bayes
-factors were used to specifically test the null hypotheses that word and
-RR duration are not affected by C2 voicing (i.e., the effect of C2
-voicing on duration is \texttt{0}). For each set of null/alternative
-hypotheses, a full model (with the predictor of interest) and a null
-model (excluding it) were fitted separately using Maximum Likelihood
-estimation \citep[p.~34]{bates2015}. The BIC approximation was then used
-to obtain Bayes factors
+rather than hypothesis-driven \citep{kerr1998, gelman2013}. The
+durational measurements were analysed with linear mixed-effects models
+using \texttt{lme4} v1.1-17 in R v3.5.0
+\citep{r-core-team2018, bates2015}. All factors were coded with
+treatment contrasts. \emph{P}-values for the individual terms were
+obtained with \texttt{lmerTest} v3.0-1, which uses the Satterthwaite's
+approximation to degrees of freedom \citep{kuznetsova2017, luke2017}.
+\emph{P}-values below the alpha level 0.05 were considered significant.
+The estimates of the relevant effects are then calculated by refitting
+the models including only the significant terms \citep[step-down
+approach,][pp.~121--122]{diggle2002, zuur2009}. Bayes factors were used
+to specifically test the null hypotheses that word and RR duration are
+not affected by C2 voicing (i.e., the effect of C2 voicing on duration
+is \texttt{0}). For each set of null/alternative hypotheses, a full
+model (with the predictor of interest) and a null model (excluding it)
+were fitted separately using Maximum Likelihood estimation
+\citep[p.~34]{bates2015}. The BIC approximation was then used to obtain
+Bayes factors
 \citep{raftery1995, raftery1999, wagenmakers2007, jarosz2014}. The
 approximation is calculated according to the equation in \ref{eq:bayes}
 \citep[p.~796]{wagenmakers2007}.
@@ -345,6 +364,13 @@ full model, and \(BIC_0\) is the BIC of the null model. Values of
 \(BF_{01} > 1\) indicate a preference of H\textsubscript{0} over
 H\textsubscript{1}. The interpretation of the Bayes factors follows the
 recommendations in \citet[p.~139]{raftery1995}.
+
+The extracted measurements were filtered before statistical analysis.
+Measures of vowel duration, closure duration, word duration, and RR
+duration that are 3 standard deviations lower or higher than the
+respective means were excluded from the final dataset. This operation
+yields a total of 920 tokens of vowel and closure durations, 1176 tokens
+of word duration, and 848 tokens of RR duration.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -474,7 +500,7 @@ stable relationship between the centre of the consonant or consonant
 cluster and the following vowel. Independent of the number of onset
 consonants, the midpoint of the onset, the so-called `C-centre', is
 maintained at a fixed distance from the vowel, such that increasing
-number of consonants in the onset does not change the C-center/vowel
+number of consonants in the onset does not change the C-centre/vowel
 distance (\Cref{f:gorganisation}(a)). On the other hand, coda consonants
 are timed anti-phase with the preceding vowel and between themselves.
 Stability in codas is seen in the lag between the vowel and the
@@ -561,21 +587,20 @@ stable when the stops precede a stressed vowel, although the vowels
 preceding the pre-stress stops have different durations
 \citep{davis1989}. According to the gestural interpretation given here,
 no differences in closure durations should correspond to no difference
-in vowel durations.
-
-It is difficult given the present data to disambiguate between two
-interpretations: either C2 is timed relative to a gestural epoch of V1
-(possibly the gesture onset)---and the invariance of RR would follow
-from the fact that C1 is held constant---or the motor plan for CV́CV
-words is structured is such a way to directly keep the RR duration
-invariant.
+in vowel durations. The constraints on experimental material brought
+about by the use of ultrasound tongue imaging have been already
+mentioned in \Cref{s:materials}. In the previous section I mention that
+the invariance of the RR duration could be a consequence of the timing
+of C2 rather than of a holistic CVC motor plan in which the RR interval
+is held constant. Disambiguating between these two interpretations is
+not possible based on the data from this study.
 
 \hypertarget{a-reinterpretation-of-maddieson1976}{%
 \subsection{\texorpdfstring{A reinterpretation of
 \citet{maddieson1976}}{A reinterpretation of @maddieson1976}}\label{a-reinterpretation-of-maddieson1976}}
 
-Before concluding/Finally, I would like to offer a reinterpretation of
-the results in \citet{maddieson1976}. A drawback of the analysis in
+Before concluding, I would like to offer a reinterpretation of the
+results in \citet{maddieson1976}. An issue with the analysis in
 \citet{maddieson1976} is that the consonant duration was in fact
 measured from the closure of the relevant consonant to the release of
 the following consonant, due to difficulties in detecting the release of
@@ -585,9 +610,21 @@ of /tʰ/ and the release of /k/). This measure includes the burst and
 (eventual) aspiration of the consonant. \citet{slis1969a}, however,
 states that the inverse correlation between vowel duration and the
 following consonant raises when consonant \emph{closure} duration is
-taken into account, and not the entire \emph{consonant} duration. If the
-correlation exists between vowel and closure duration, the inclusion of
-burst/aspiration duration clearly alters this relationship.
+taken into account, and not the entire \emph{consonant} duration.
+
+If the correlation exists between vowel and closure duration, the
+inclusion of burst/aspiration duration clearly alters this relationship.
+This is what I think is happening in \citet{maddieson1976}. Indeed, the
+data in \citet{durvasula2012} show that closure duration, appropriately
+measured, decreases from voiceless unaspirated \textgreater{} voiced
+\textgreater{} voiceless aspirated \textgreater{} voiced aspirated,
+which closely resembles the order of increasing vowel duration in
+\citet{maddieson1976}. This considered, I think the aspiration effect is
+indeed compatible with a compensatory temporal adjustment account. Such
+claim will need to be verified in future work.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
 
 \begin{acknowledgments}
 Thanks to...
@@ -611,7 +648,6 @@ it02 & 26 & Male   & Italian & Friulian, English, Ladin-Venetan          & Udine
 it03 & 28 & Female & Italian & English, German                           & Verbania            & Verbania        & No  \NN
 it04 & 54 & Female & Italian & Calabrese                                 & Verbania            & Verbania        & No  \NN
 it05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
-it07 & 29 & Male   & Italian & English                                   & Tradate             & Cairate         & No  \NN
 it09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
 it11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
 it13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN
