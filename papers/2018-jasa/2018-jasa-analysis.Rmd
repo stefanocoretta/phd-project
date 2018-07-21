@@ -46,15 +46,30 @@ durations_filtered <- durations %>%
   group_by(speaker) %>%
   mutate(
     vowel_duration_z = scale(vowel_duration),
-    closure_duration_z = scale(closure_duration),
-    rel_rel_z = scale(rel_rel)
+    closure_duration_z = scale(closure_duration)
   ) %>%
   filter(
     vowel_duration_z < 3, vowel_duration_z > -3,
-    closure_duration_z < 3, closure_duration_z > -3,
-    rel_rel_z < 3, rel_rel_z > -3
+    closure_duration_z < 3, closure_duration_z > -3
+  )
+
+word_filtered <- durations %>%
+    group_by(speaker) %>%
+  mutate(
+    word_duration_z = scale(word_duration)
   ) %>%
-  na.omit()
+  filter(
+    word_duration_z < 3, word_duration_z > -3
+  )
+
+rel_filtered <- durations %>%
+    group_by(speaker) %>%
+  mutate(
+    rel_rel_z = scale(rel_rel)
+  ) %>%
+  filter(
+    rel_rel_z < 3, rel_rel_z > -3
+  )
 ```
 
 ## Summaries
