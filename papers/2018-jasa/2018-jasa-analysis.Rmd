@@ -39,7 +39,8 @@ durations <- list.files(
       8 / sentence_duration,
       6 / sentence_duration
     )
-  )
+  ) %>%
+  filter(c1_phonation == "voiceless")
 
 durations_filtered <- durations %>%
   group_by(speaker) %>%
@@ -55,6 +56,13 @@ durations_filtered <- durations %>%
   ) %>%
   na.omit()
 ```
+
+## Summaries
+
+```{r tokens}
+durations %>% group_by(speaker) %>% summarise(n = n())
+```
+
 
 ## Plotting
 
