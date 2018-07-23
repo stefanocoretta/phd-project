@@ -39,7 +39,7 @@ vowels <- list.files(
   mutate_if(is.character, as.factor)
 
 f1_dur <- vowels %>%
-  group_by(speaker, vowel, file) %>%
+  group_by(speaker, vowel, item) %>%
   summarise(
     f1 = mean(f1),
     vowel_duration = mean(vowel_duration)
@@ -118,7 +118,7 @@ for (i in 1:9) {
 
 ```{r height-duration}
 vowels %>%
-  group_by(file) %>%
+  group_by(file, item) %>%
   summarise(
     f1 = mean(f1),
     vowel_duration = mean(vowel_duration)
@@ -134,7 +134,8 @@ f1_dur_lm <- lmer(
     f1 +
     vowel +
     f1:vowel +
-    (1|speaker),
+    (1|speaker) +
+    (1|item),
   data = f1_dur
 )
 summary(f1_dur_lm)
