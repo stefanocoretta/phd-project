@@ -241,6 +241,8 @@ Only the most relevant terms will be presented.
 For the others see tables and appendixes.
 
 <!-- INCLUDE STANDARD ERROR! -->
+<!-- include CI? -->
+<!-- include tables of lmer summary in appendix -->
 
 ## Vowel duration
 
@@ -251,8 +253,7 @@ durations_filtered %>%
   facet_grid(~ language)
 ```
 
-A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
-<!-- add footnote on C2 place not included -->
+A linear mixed-effects model was fitted with the following terms: vowel duration as the outcome variable; fixed effects for C2 voicing (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.\footnote{The place of articulation of C2 was not included in any of the models discussed. This decision is based on the visual inspection of the data, which suggests C2 place does not have major effects on the outcome variables. Preliminary models including the effect of C2 place and interactions with other terms showed the model fit indeed does not improve.}
 All possible interactions between C2 voicing, vowel, and language were included.
 The following terms are significant: C2 voicing, vowel, language, and speech rate.
 No interaction was significant.
@@ -310,6 +311,8 @@ The difference in vowel duration before voiceless vs. voiced stops derives from 
 ## Gestural alignment
 \label{s:gestural}
 
+<!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
+
 \begin{figure}
   \centering
   \includegraphics{img/gorganisation.pdf}
@@ -325,8 +328,6 @@ On the other hand, coda consonants are timed anti-phase with the preceding vowel
 Stability in codas is seen in the lag between the vowel and the left-most edge of the coda, which is not affected by the number of coda consonants (\Cref{f:gorganisation}(b)).
 Other studies found further evidence for the synchronous and sequential coupling modes (see extensive review in @marin2010 and @marin2014), although the use of one mode over the other depends on the language and the consonants under study.
 
-<!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
-
 Consonants can thus be said to follow either a C-centre organisation pattern or a left-edge organisation pattern.
 In both cases, of course, the pattern is relative to the tautosyllabic vowel (the following vowel for onsets, the preceding vowel for codas).
 To the best of my knowledge, no study has reported the timing of onset consonants relative to the *preceding* (heterosyllabic) vowel.
@@ -338,7 +339,7 @@ The invariance of the lag between the release of C1 and that of C2 then can be s
 
 <!-- maybe footnote on circularity of argument of syllabic structure and gestural timing -->
 <!-- also, all data so far is stressed vowels? -->
-<!-- indeed we don't know much about how syllables are concatenanted? -->
+<!-- indeed we don't know much about how syllables are concatenated? -->
 
 A right-edge organisation account is compatible with findings from electromyographic, x-ray microbeam, and ultrasonic data by, respectively, @raphael1975, @de-jong1991, and @celata2018.
 @celata2018 show that vowels before tautosyllabic clusters have the same duration as before heterosyllabic clusters.
@@ -347,8 +348,7 @@ However, vowels followed by geminates are shorter than when followed by singleto
 Such view reflects a gestural timing view in which the timing of the right edge of the consonant is held constant relative to the vowel.
 
 @de-jong1991 reports that the closing gesture of voiceless stops (following stressed vowels) is faster than that of voiced stops, and that also it is timed earlier with respect to the opening gesture of the stressed vowel.
-According to @de-jong1991, the differences in vowel duration are driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture.
-<!-- terminology in Hertrich 1997:523 -->
+According to @de-jong1991, the differences in vowel duration are driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture (also see \citealt{hertrich1997}).
 <!-- The view proposed above reflects these findings. -->
 Moreover, the data in @de-jong1991 show that the final portion of the vocalic opening gesture is prolonged before voiced stops.
 This finding corresponds to what @raphael1975 reported based on electromyographic data.
@@ -377,8 +377,7 @@ This measure includes the burst and (eventual) aspiration of the consonant.
 
 If the correlation exists between vowel and closure duration, the inclusion of burst/aspiration duration clearly alters this relationship.
 This is what I think is happening in @maddieson1976.
-Indeed, the data in @durvasula2012 show that closure duration, appropriately measured, decreases from voiceless unaspirated > voiced > voiceless aspirated > voiced aspirated, which closely resembles the order of increasing vowel duration in @maddieson1976.
-<!-- need footnote that explains Durvasula does not find negative correlation but this is because probably didn't control for speech rate, also aspiration effect is flimsy -->
+Indeed, the data in @durvasula2012 show that closure duration, appropriately measured, decreases from voiceless unaspirated > voiced > voiceless aspirated > voiced aspirated, which closely resembles the order of increasing vowel duration in @maddieson1976.\footnote{\citet{durvasula2012} does not find a negative correlation between vowel duration and consonant closure duration, but rather a (small) positive effect: vowel duration increases with closure duration when including an voicing and aspiration as fixed effects. However, it is likely that this result is a consequence of not controlling for speech rate. Moreover, the estimated effect of closure duration on vowel duration is in fact very small (0.15 ms, se = 0.03).}
 This considered, I think the aspiration effect is indeed compatible with a compensatory temporal adjustment account.
 Such claim will need to be verified in future work.
 

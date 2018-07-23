@@ -391,19 +391,20 @@ A linear mixed-effects model was fitted with the following terms: vowel
 duration as the outcome variable; fixed effects for C2 voicing
 (voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and
 speech rate (as syllables per second); by-speaker and by-word random
-intercept with by-speaker random slopes for C2 voicing. All possible
-interactions between C2 voicing, vowel, and language were included. The
-following terms are significant: C2 voicing, vowel, language, and speech
-rate. No interaction was significant. The vowel /a/ (when followed by
-voiceless stops) has a duration of 202.5 ms (se = 8.5 ms). The vowel /o/
-is 9.5 ms shorter (se = 3 ms), while the vowel /u/ is 30.5 ms shorter
-(se = 3). Vowels are 11 ms longer (se = 3) when followed by a voiced
-stop. Polish has on average shorter vowels than Italian (\(\hat{\beta}\)
-= -28 ms, se = 8 ms), although the effect of voicing is estimated to be
-the same in both languages (the interaction of language and C2 voicing
-is not significant). Speech rate has a negative effect on vowel
-duration, such that faster rates correlate with shorter vowel durations
-(\(\hat{\beta}\) = -15 ms, se = 1 ms).
+intercept with by-speaker random slopes for C2
+voicing.\footnote{The place of articulation of C2 was not included in any of the models discussed. This decision is based on the visual inspection of the data, which suggests C2 place does not have major effects on the outcome variables. Preliminary models including the effect of C2 place and interactions with other terms showed the model fit indeed does not improve.}
+All possible interactions between C2 voicing, vowel, and language were
+included. The following terms are significant: C2 voicing, vowel,
+language, and speech rate. No interaction was significant. The vowel /a/
+(when followed by voiceless stops) has a duration of 202.5 ms (se = 8.5
+ms). The vowel /o/ is 9.5 ms shorter (se = 3 ms), while the vowel /u/ is
+30.5 ms shorter (se = 3). Vowels are 11 ms longer (se = 3) when followed
+by a voiced stop. Polish has on average shorter vowels than Italian
+(\(\hat{\beta}\) = -28 ms, se = 8 ms), although the effect of voicing is
+estimated to be the same in both languages (the interaction of language
+and C2 voicing is not significant). Speech rate has a negative effect on
+vowel duration, such that faster rates correlate with shorter vowel
+durations (\(\hat{\beta}\) = -15 ms, se = 1 ms).
 
 \hypertarget{consonant-closure-duration}{%
 \subsection{Consonant closure
@@ -554,10 +555,11 @@ the consonant is held constant relative to the vowel.
 that also it is timed earlier with respect to the opening gesture of the
 stressed vowel. According to \citet{de-jong1991}, the differences in
 vowel duration are driven by the timing of the consonantal closing
-gesture relative to the vocalic opening gesture. Moreover, the data in
-\citet{de-jong1991} show that the final portion of the vocalic opening
-gesture is prolonged before voiced stops. This finding corresponds to
-what \citet{raphael1975} reported based on electromyographic data. The
+gesture relative to the vocalic opening gesture (also see
+\citealt{hertrich1997}). Moreover, the data in \citet{de-jong1991} show
+that the final portion of the vocalic opening gesture is prolonged
+before voiced stops. This finding corresponds to what
+\citet{raphael1975} reported based on electromyographic data. The
 electromyographic signal corresponding to the vocalic gesture reaches
 its plateaux at the same time in the voiceless and voiced context, but
 the plateaux is held for longer in the case of vowels followed by voiced
@@ -619,9 +621,10 @@ data in \citet{durvasula2012} show that closure duration, appropriately
 measured, decreases from voiceless unaspirated \textgreater{} voiced
 \textgreater{} voiceless aspirated \textgreater{} voiced aspirated,
 which closely resembles the order of increasing vowel duration in
-\citet{maddieson1976}. This considered, I think the aspiration effect is
-indeed compatible with a compensatory temporal adjustment account. Such
-claim will need to be verified in future work.
+\citet{maddieson1976}.\footnote{\citet{durvasula2012} does not find a negative correlation between vowel duration and consonant closure duration, but rather a (small) positive effect: vowel duration increases with closure duration when including an voicing and aspiration as fixed effects. However, it is likely that this result is a consequence of not controlling for speech rate. Moreover, the estimated effect of closure duration on vowel duration is in fact very small (0.15 ms, se = 0.03).}
+This considered, I think the aspiration effect is indeed compatible with
+a compensatory temporal adjustment account. Such claim will need to be
+verified in future work.
 
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
