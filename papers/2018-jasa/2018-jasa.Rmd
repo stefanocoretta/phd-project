@@ -243,6 +243,7 @@ For the others see tables and appendixes.
 <!-- INCLUDE STANDARD ERROR! -->
 <!-- include CI? -->
 <!-- include tables of lmer summary in appendix -->
+<!-- change results to full model, no sense in using a new model with significant predictors -->
 
 ## Vowel duration
 
