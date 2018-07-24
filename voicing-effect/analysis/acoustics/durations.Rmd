@@ -41,6 +41,7 @@ duration <- list.files(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     c1_vot = (voicing_start - c1_rel) * 1000,
     vor = (c2_rel - v_onset) * 1000,
+    language = recode(language, italian = "Italian", polish = "Polish"),
     syl_rate = ifelse(
       language == "Italian",
       8 / sentence_duration,
