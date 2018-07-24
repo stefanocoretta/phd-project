@@ -11,13 +11,14 @@ knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
+library(lmerTest)
 library(effects)
 library(rticulate)
 ```
 
 # Read data
 
-```{r read-data}
+```{r read-data, message=FALSE}
 columns <- c(
   "speaker",
   "seconds",
@@ -65,7 +66,13 @@ tongue_root <- list.files(
   mutate(
     vowel_duration_z = scale(vowel_duration),
     tra = -TR_displacement_sm,
-    tra_z = scale(tra)
+    tra_z = scale(tra),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
   ) %>%
   ungroup() %>%
   mutate(item = factor(item))
@@ -230,15 +237,17 @@ plot(allEffects(tra_lm_pl))
 tongue_root_clean <- filter(tongue_root, tra_z < 3)
 ```
 
+An interaction is not necessary.
+
 ```{r tra-lm}
 tra_lm <- lmer(
-  scale(vowel_duration) ~
-    tra +
+  vowel_duration ~
+    tra *
     c2_phonation +
     vowel +
-    scale(sentence_duration) +
+    syl_rate +
     (1+tra|speaker) +
-    (1+tra|item),
+    (1|item),
 data = tongue_root_clean,
 REML = FALSE
 )
@@ -248,9 +257,9 @@ summary(tra_lm)
 tra_lm_null <- lmer(
   vowel_duration ~
     tra +
-#    c2_phonation +
+    c2_phonation +
     vowel +
-    sentence_duration +
+    syl_rate +
     (1+tra|speaker) +
     (1|item),
 data = tongue_root_clean,
@@ -260,9 +269,28 @@ REML = FALSE
 anova(tra_lm_null, tra_lm)
 ```
 
-```{r tra-lm-effects}
-plot(allEffects(tra_lm))
+```{r}
+summary(tra_lm_null)
 ```
+
+```{r tra-lm-effects}
+plot(allEffects(tra_lm_null))
+```
+
+```{r}
+tra_lm_null <- lmer(
+  vowel_duration ~
+    tra +
+    c2_phonation +
+    vowel +
+    syl_rate +
+    (1+tra|speaker) +
+    (1|item),
+data = tongue_root_clean,
+REML = FALSE
+)
+```
+
 
 ```{r tra-lm-2}
 tra_lm_2 <- lmer(
@@ -316,7 +344,7 @@ tongue_root %>%
 
 ```{r it-tr-vowel-dur}
 tongue_root %>%
-  filter(language == "italian", tra_z > -2.7) %>%
+  filter(language == "Italian", tra_z > -2.7) %>%
   ggplot(aes(tra_z, vowel_duration_z)) +
   geom_point(alpha = 0.3, stroke = 0) +
   geom_smooth(method = "lm", aes(colour = vowel)) +
@@ -330,7 +358,7 @@ tongue_root %>%
 
 ```{r pl-tr-vowel-dur}
 tongue_root %>%
-  filter(language == "polish", tra_z > -3, tra_z < 3) %>%
+  filter(language == "Polish", tra_z > -3, tra_z < 3) %>%
   ggplot(aes(tra_z, vowel_duration_z)) +
   geom_point(alpha = 0.3, stroke = 0) +
   geom_smooth(method = "lm", aes(colour = vowel)) +
