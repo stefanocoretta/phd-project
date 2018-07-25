@@ -28,5 +28,15 @@ All `lmer` models were fitted using maximum likelihood estimation (`REML = FALSE
 On the other hand, onset consonants follow a C-centre pattern, by which is the mid-way distance between the left and the right edge of the consonant that is stable.
 
 On maddieson1976.
+
+I would like to offer a reinterpretation of the results in @maddieson1976.
+An issue with the analysis in @maddieson1976 is that the consonant duration was in fact measured from the closure of the relevant consonant to the release of the following consonant, due to difficulties in detecting the release of the consonant of interest (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
+This measure includes the burst and (eventual) aspiration of the consonant.
+@slis1969a, however, states that the inverse correlation between vowel duration and the following consonant raises when consonant *closure* duration is taken into account, and not the entire *consonant* duration.
+
+If the correlation exists between vowel and closure duration, the inclusion of burst/aspiration duration clearly alters this relationship.
+This is what I think is happening in @maddieson1976.
+Indeed, the data in @durvasula2012 show that closure duration, appropriately measured, decreases from voiceless unaspirated > voiced > voiceless aspirated > voiced aspirated, which closely resembles the order of increasing vowel duration in @maddieson1976.\footnote{\citet{durvasula2012} does not find a negative correlation between vowel duration and consonant closure duration, but rather a (small) positive effect: vowel duration increases with closure duration when including an voicing and aspiration as fixed effects. However, it is likely that this result is a consequence of not controlling for speech rate, so it will not be discussed here.}
+
 This considered, I think the aspiration effect is indeed compatible with a compensatory temporal adjustment account.
 Such claim will need to be verified in future work.
