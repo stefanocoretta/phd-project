@@ -19,6 +19,9 @@ header-includes:
 - \usepackage{ctable}
 - \usepackage[caption=false]{subfig}
 classoption: preprint
+params:
+  version: 0.9
+  version-date: ""
 ---
 
 ```{r setup, include=FALSE}
@@ -110,17 +113,19 @@ More recently, @jacewicz2009 further shows that the duration of monosyllabic wor
 Second, although @slis1969 results confirm that the word does not change in duration whether the stop following the stressed vowel is voiceless or voiced, it does not follow from this that compensation should necessarily happen on the stressed vowel.
 Indeed, it could also happen in the following unstressed vowel.
 
-To further muddy the waters, @maddieson1976 reject any compensatory account based on data from a parallel of the voicing effect, the aspiration effect, by which vowel tend to be longer when followed by aspirated stops than when followed by non-aspirated stops.
-They find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
+@maddieson1976 reject any compensatory account for the voicing effect based on data from Hindi on the so called 'aspiration effect', by which vowels tend to be longer when followed by aspirated stops than when followed by non-aspirated stops.
+Vowels before voiceless unaspirated stops are the shortest, followed by vowels before voiced unaspirated and voiceless aspirated stops, which have similar duration between each other, followed by vowels before voiced aspirated stops, which are the longest.
+@maddieson1976 find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
 
-I would like to offer a reinterpretation of the results in @maddieson1976.
-An issue with the analysis in @maddieson1976 is that the consonant duration was in fact measured from the closure of the relevant consonant to the release of the following consonant, due to difficulties in detecting the release of the consonant of interest (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
+However, an issue with the way consonant duration is measured in @maddieson1976 might actually turn the situation in favour of a compensatory account.
+Consonant duration was in fact measured from the closure of the relevant consonant to the release of the following consonant, due to difficulties in detecting the release of the consonant of interest (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
 This measure includes the burst and (eventual) aspiration of the consonant.
 @slis1969a, however, states that the inverse correlation between vowel duration and the following consonant raises when consonant *closure* duration is taken into account, and not the entire *consonant* duration.
-
 If the correlation exists between vowel and closure duration, the inclusion of burst/aspiration duration clearly alters this relationship.
-This is what I think is happening in @maddieson1976.
+
 Indeed, the data in @durvasula2012 show that closure duration, appropriately measured, decreases from voiceless unaspirated > voiced > voiceless aspirated > voiced aspirated, which closely resembles the order of increasing vowel duration in @maddieson1976.\footnote{\citet{durvasula2012} does not find a negative correlation between vowel duration and consonant closure duration, but rather a (small) positive effect: vowel duration increases with closure duration when including an voicing and aspiration as fixed effects. However, it is likely that this result is a consequence of not controlling for speech rate, so it will not be discussed here.}
+
+<!-- paragraph that summarises? -->
 
 ## The present study
 
