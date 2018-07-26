@@ -561,6 +561,7 @@ vowel_lm <- lmer(
 fixef(vowel_lm)["c2_phonationvoiced:languagePolish"] <- -10
 
 powerSim(vowel_lm, fixed("c2_phonationvoiced:languagePolish", "t"), nsim = 1000)
+#> 50.40% (47.25, 53.54)
 
 fixef(vowel_lm)["c2_phonationvoiced:languagePolish"] <- -13
 
