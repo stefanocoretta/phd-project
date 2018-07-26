@@ -393,16 +393,14 @@ treatment contrasts. \emph{P}-values for the individual terms were
 obtained with \texttt{lmerTest} v3.0-1, which uses the Satterthwaite's
 approximation to degrees of freedom \citep{kuznetsova2017, luke2017}.
 \emph{P}-values below the alpha level 0.05 were considered significant.
-The estimates of the relevant effects are then calculated by refitting
-the models including only the significant terms \citep[step-down
-approach,][pp.~121--122]{diggle2002, zuur2009}. Bayes factors were used
-to specifically test the null hypotheses that word and RR duration are
-not affected by C2 voicing (i.e., the effect of C2 voicing on duration
-is \texttt{0}). For each set of null/alternative hypotheses, a full
-model (with the predictor of interest) and a null model (excluding it)
-were fitted separately using Maximum Likelihood estimation
-\citep[p.~34]{bates2015}. The BIC approximation was then used to obtain
-Bayes factors
+
+Bayes factors were used to specifically test the null hypotheses that
+word and RR duration are not affected by C2 voicing (i.e., the effect of
+C2 voicing on duration is \texttt{0}). For each set of null/alternative
+hypotheses, a full model (with the predictor of interest) and a null
+model (excluding it) were fitted separately using Maximum Likelihood
+estimation \citep[p.~34]{bates2015}. The BIC approximation was then used
+to obtain Bayes factors
 \citep{raftery1995, raftery1999, wagenmakers2007, jarosz2014}. The
 approximation is calculated according to the equation in \ref{eq:bayes}
 \citep[p.~796]{wagenmakers2007}.
@@ -428,47 +426,64 @@ of word duration, and 848 tokens of RR duration.
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-Only the most relevant terms will be presented. For the others see
-tables and appendixes.
+The following sections report the results of the study in relation to
+the durations of vowels, consonant closure, word, and the Release to
+Release interval. When discussing the output of statistical modelling,
+only the relevant predictors and interactions will be presented. For the
+full output of the models and \emph{p}-values, see \Cref{a:stats}.
 
 \hypertarget{vowel-duration}{%
 \subsection{Vowel duration}\label{vowel-duration}}
 
 \begin{figure}
-\centering
-\includegraphics{2018-jasa_files/figure-latex/vowels-plot-1.pdf}
-\caption{Vowel duration in Italian and Polish.}
+\includegraphics{2018-jasa_files/figure-latex/vowels-plot-1} \caption{Vowel duration in Italian and Polish.}\label{f:vowels-plot}
 \end{figure}
 
-A linear mixed-effects model was fitted with the following terms: vowel
-duration as the outcome variable; fixed effects for C2 voicing
-(voiceless, voiced), vowel (a, o, u), language (Italian, Polish), and
-speech rate (as syllables per second); by-speaker and by-word random
-intercept with by-speaker random slopes for C2
-voicing.\footnote{The place of articulation of C2 was not included in any of the models discussed. This decision is based on the visual inspection of the data, which suggests C2 place does not have major effects on the outcome variables. Preliminary models including the effect of C2 place and interactions with other terms showed the model fit indeed does not improve.}
-All possible interactions between C2 voicing, vowel, and language were
-included. The following terms are significant: C2 voicing, vowel,
-language, and speech rate. No interaction was significant. The vowel /a/
-(when followed by voiceless stops) has a duration of 202.5 ms (se = 8.5
-ms). The vowel /o/ is 9.5 ms shorter (se = 3 ms), while the vowel /u/ is
-30.5 ms shorter (se = 3). Vowels are 11 ms longer (se = 3) when followed
-by a voiced stop. Polish has on average shorter vowels than Italian
-(\(\hat{\beta}\) = -28 ms, se = 8 ms), although the effect of voicing is
-estimated to be the same in both languages (the interaction of language
-and C2 voicing is not significant). Speech rate has a negative effect on
-vowel duration, such that faster rates correlate with shorter vowel
-durations (\(\hat{\beta}\) = -15 ms, se = 1 ms).
+\Cref{f:vowels-plot} shows boxplots and the raw data of vowel duration
+in Italian (on the left) and Polish (on the right) for the three vowels
+/a, o, u/. Vowel tend to be longer when followed by a voiced stop both
+in Italian and Polish. The effect appears to be greater in Italian than
+in Polish, especially for the vowels /a/ and /o/ There is no clear
+effect of C2 voicing in /u/ in Italian, but the effect is discernible in
+Polish /u/.
+
+A linear mixed-effects model with vowel duration as the outcome variable
+was fitted with the following predictors: fixed effects for C2 voicing
+(voiceless, voiced), C2 place of articulation (coronal, velar), vowel
+(a, o, u), language (Italian, Polish), and speech rate (as syllables per
+second); by-speaker and by-word random intercept with by-speaker random
+slopes for C2 voicing. All possible interactions between C2 voicing,
+vowel, and language were included. The following terms are significant
+according to \emph{t}-tests with Satterthwaite's approximation to
+degrees of freedom: C2 voicing, vowel, language, and speech rate. Only
+the interaction between C2 voicing and vowel is significant. Vowels are
+19 ms longer (se = 4.4) when followed by a voiced stop (C2 voicing). The
+effect of C2 voicing is smaller with /u/ (around 5 ms, \(\hat{\beta}\) =
+-14.4 ms, se = 6). Polish has on average shorter vowels than Italian
+(\(\hat{\beta}\) = -28 ms, se = 8), and the effect of voicing is
+estimated to be about 11 ms (although recall that the interaction
+between language and C2 voicing is deemed not significant). Speech rate
+has unsurprisingly a negative effect on vowel duration, such that faster
+rates correlate with shorter vowel durations (\(\hat{\beta}\) = -15 ms,
+se = 1).
 
 \hypertarget{consonant-closure-duration}{%
 \subsection{Consonant closure
 duration}\label{consonant-closure-duration}}
 
-The same maximally specified model as with vowel duration has been
-fitted to consonant closure durations as the outcome variable. Only C2
-voicing and speech rate were significant. Stop closure is 13 ms shorter
-(se = 3 ms) if the stop is voiced. Finally, faster speech rates
-correlate with shorter closure durations (\(\hat{\beta}\) = -8 ms, se =
-1 ms).
+\begin{figure}
+\includegraphics{2018-jasa_files/figure-latex/closure-plot-1} \caption{Stop closure duration in Italian and Polish.}\label{f:closure-plot}
+\end{figure}
+
+\Cref{f:closure-plot} illustrates stop closure durations with boxplots
+and individual raw data points. A pattern opposite to that with vowel
+duration can be noticed: Closure duration is shorter for voiced than for
+voiceless stops. The same model specification as with vowel duration has
+been fitted with consonant closure durations as the outcome variable. C2
+voicing, C2 place, and speech rate are significant. Stop closure is 16.5
+ms shorter (se = 3) if the stop is voiced and 3.5 ms longer (se = 1.5)
+if velar. Finally, faster speech rates correlate with shorter closure
+durations (\(\hat{\beta}\) = -8.5 ms, se = 1 ms).
 
 \hypertarget{vowel-and-closure-duration}{%
 \subsection{Vowel and closure
@@ -659,7 +674,16 @@ Thanks to...
 
 \appendix
 
-\section{Socio-linguistic information of participants}
+\hypertarget{output-of-statistical-models}{%
+\section{Output of statistical
+models}\label{output-of-statistical-models}}
+
+\label{a:stats}
+
+\hypertarget{socio-linguistic-information-of-participants}{%
+\section{Socio-linguistic information of
+participants}\label{socio-linguistic-information-of-participants}}
+
 \label{a:socioling}
 
 \ctable[caption = Participants' sociolinguistic information.,

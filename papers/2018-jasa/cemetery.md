@@ -48,3 +48,7 @@ Such claim will need to be verified in future work.
 While the data from the present study does not find an effect of consonant voicing on word duration as in @slis1969, a problem of that account is that they don't discuss the internal structure of the word.
 
 corresponds to a more elegant view, which is in turn compatible with current theories of gestural timing (which fits with current views on gestural timing [add references to C-centre]).
+
+# Method
+
+The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009, pp. 121–122].
