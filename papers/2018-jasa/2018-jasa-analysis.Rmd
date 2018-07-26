@@ -558,7 +558,7 @@ vowel_lm <- lmer(
   data = durations_filtered
 )
 
-fixef(vowel_lm)["c2_phonationvoiced:languagePolish"] <- -6
+fixef(vowel_lm)["c2_phonationvoiced:languagePolish"] <- -10
 
 powerSim(vowel_lm, fixed("c2_phonationvoiced:languagePolish", "t"), nsim = 1000)
 
@@ -570,6 +570,36 @@ lang_pc <- powerCurve(vowel_lm_2, fixed("c2_phonationvoiced:languagePolish", "t"
 
 plot(lang_pc)
 ```
+
+```{r}
+vowel_lm <- lmer(
+  vowel_duration ~
+    c2_phonation +
+    c2_place +
+    vowel +
+    language +
+    c2_phonation:language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+
+data_it <- subset(durations_filtered, language == "Italian")
+data_pl <- subset(durations_filtered, language == "Polish")
+
+xdata_it <- extend(data_it, along = "speaker", values = paste0("it", 1:40))
+xdata_pl <- extend(data_pl, along = "speaker", values = paste0("pl", 1:40))
+
+fixef(vowel_lm)["c2_phonationvoiced:languagePolish"] <- -10
+
+getData(vowel_lm) <- rbind(xdata_it, xdata_pl)
+getData(vowel_lm)$speaker <- as.factor(getData(vowel_lm)$speaker)
+
+lang_pc <- powerCurve(vowel_lm, fixed("c2_phonationvoiced:languagePolish", "t"), along = "speaker", nsim = 1000)
+plot(lang_pc)
+```
+
 
 # BRMS
 
