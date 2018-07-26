@@ -323,22 +323,34 @@ vow_clo_lm_full <- lmer(
 )
 summary(vow_clo_lm_full)
 
-vow_clo_lm <- lme4::lmer(
-  vowel_duration ~
-    closure_duration *
-    vowel +
-    syl_rate +
-    (1+closure_duration|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-summary(vow_clo_lm)
+# vow_clo_lm <- lme4::lmer(
+#   vowel_duration ~
+#     closure_duration *
+#     vowel +
+#     syl_rate +
+#     (1+closure_duration|speaker) +
+#     (1|item),
+#   data = durations_filtered,
+#   REML = FALSE
+# )
+# summary(vow_clo_lm)
 ```
 
 ```{r vow-clo-lm-plot}
-plot(allEffects(vow_clo_lm))
+plot(allEffects(vow_clo_lm_full))
 ```
+
+```{r vow-clo-plot}
+as_tibble(effect("closure_duration:vowel", vow_clo_lm_full)) %>%
+  ggplot(aes(closure_duration, fit)) +
+  geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
+  geom_line() +
+  geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
+  geom_rug(data = durations_filtered, aes(y = vowel_duration)) +
+  facet_grid(~ vowel) +
+  labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")
+```
+
 
 ```{r word-bf}
 word_lm <- lme4::lmer(

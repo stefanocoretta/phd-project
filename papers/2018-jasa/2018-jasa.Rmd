@@ -317,21 +317,74 @@ Finally, faster speech rates correlate with shorter closure durations ($\hat{\be
 
 ## Vowel and closure duration
 
-The full model was specified with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate; an interaction between closure duration and vowel; by-speaker and by-word random intercepts, and by-speaker random slopes for C2 voicing.
-Closure duration has a significant effect on vowel duration when the vowel is /a/ ($\hat{\beta}$ = -0.2 ms, se = 0.06 ms).
-The effect with the vowel /o/ does not significantly differ from the one with /a/, while with /u/ the effect is -0.5 ms ($\hat{\beta}$ = -0.3 ms, se = 0.06 ms).
-In general, then, closure duration is inversely correlated with vowel duration after controlling for speech rate.
-However the correlation is quite weak.
+```{r vow-clo-lm, include=FALSE}
+vow_clo_lm <- lmer(
+  vowel_duration ~
+    closure_duration *
+    vowel +
+    syl_rate +
+    (1+closure_duration|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+summary(vow_clo_lm)
+
+```{r vow-clo-plot, include=TRUE, fig.cap = "Linear regression of closure and vowel duration per vowel.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
+as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
+  ggplot(aes(closure_duration, fit)) +
+  geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
+  geom_line() +
+  geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
+  geom_rug(data = durations_filtered, aes(y = vowel_duration)) +
+  facet_grid(~ vowel) +
+  labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")
+```
+
+A model addressing the relationship between vowel and stop closure duration was fitted with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate; an interaction between closure duration and vowel; by-speaker and by-word random intercepts, and by-speaker random slopes for C2 voicing.
+Closure duration has a significant effect on vowel duration ($\hat{\beta}$ = -0.15 ms, se = 0.06 ms).
+The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.35 ms, se = 0.06 ms).
+In general, closure duration is inversely correlated with vowel duration.
+However such correlation is quite weak.
 A 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
 
 ## Word duration
 
-The following full and null models were fitted to test whether word duration is affected by C2 voicing.
-In the full model, I entered as fixed effects: C2 voicing, C2 place, vowel, speech rate, and language.
-The model also included by-speaker and by-word random intercepts, plus a by-speaker random slope for C2 voicing.
-The null model was the same as the full model, with the exclusion of the fixed effect of C2 voicing.
-The Bayes factor of the null model against the full model is 21.5.
-Thus, the null model (in which the effect of C2 voicing is 0) is 21.5 times more likely under the observed data than the full model.
+```{r word-bf}
+word_lm <- lme4::lmer(
+  word_duration ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+word_lm_null <- lme4::lmer(
+  word_duration ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+word_bf <- round(exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
+```
+
+The following full and null models were fitted to test for the effect of C2 voicing on word duration.
+The full model has the following fixed effects: C2 voicing, C2 place, vowel, speech rate, and language.
+The model also includes by-speaker and by-word random intercepts, and a by-speaker random slope for C2 voicing.
+The null model excludes the fixed effect of C2 voicing.
+The Bayes factor of the null model against the full model is `r word_bf`.
+Thus, the null model (in which the effect of C2 voicing is 0) is `r word_bf` times more likely under the observed data than the full model.
 This indicates that there is strong evidence for word duration not being affected by C2 voicing.
 
 ## Release to Release interval (RR) duration
@@ -344,8 +397,38 @@ rel_filtered %>%
   facet_grid(~ language)
 ```
 
-The models specifications for the RR duration were the same as for word duration.
-The Bayes factor of the null model against the full model for RR duration is 19, which means that the null model (without C2 voicing) is 19 times more likely than the full model.
+```{r rr-bf}
+rr_lm <- lme4::lmer(
+  rel_rel ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+rr_lm_null <- lme4::lmer(
+  rel_rel ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
+```
+
+The models specifications for the Release to Release duration are the same as for word duration.
+The Bayes factor of the null model against the full model is `r rr_bf`, which means that the null model (without C2 voicing) is `r rr_bf` times more likely than the full model.
 The data suggests there is positive evidence that duration of the RR interval is not affected by C2 voicing.
 
 # Discussion
