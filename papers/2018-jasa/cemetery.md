@@ -1,5 +1,7 @@
 # The cemetery of sentences
 
+## Introduction
+
 @soskuthy2013 divides the most notable into two categories: production accounts, which place the source of durational difference in the articulatory system, and perception accounts, which instead point to properties of the perceptual/auditory system as the cause of the voicing effect.
 Since the present study focusses on production, the latter will not be discussed further [see @fowler1992 for arguments against perceptual accounts].
 Four main proposal within the production side of the accounts will be discussed in the following paragraphs.
@@ -40,3 +42,9 @@ Indeed, the data in @durvasula2012 show that closure duration, appropriately mea
 
 This considered, I think the aspiration effect is indeed compatible with a compensatory temporal adjustment account.
 Such claim will need to be verified in future work.
+
+## The present study
+
+While the data from the present study does not find an effect of consonant voicing on word duration as in @slis1969, a problem of that account is that they don't discuss the internal structure of the word.
+
+corresponds to a more elegant view, which is in turn compatible with current theories of gestural timing (which fits with current views on gestural timing [add references to C-centre]).
