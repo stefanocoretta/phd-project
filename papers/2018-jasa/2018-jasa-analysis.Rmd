@@ -257,6 +257,7 @@ vowel_lm_full <- lmer(
     c2_phonation *
     vowel *
     language +
+    c2_place +
     syl_rate +
     (1+c2_phonation|speaker) +
     (1|item),
@@ -264,21 +265,21 @@ vowel_lm_full <- lmer(
 )
 summary(vowel_lm_full)
 
-vowel_lm <- lme4::lmer(
-  vowel_duration ~
-    c2_phonation +
-    vowel +
-    language +
-    syl_rate +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered
-)
-summary(vowel_lm)
+# vowel_lm <- lme4::lmer(
+#   vowel_duration ~
+#     c2_phonation +
+#     vowel +
+#     language +
+#     syl_rate +
+#     (1+c2_phonation|speaker) +
+#     (1|item),
+#   data = durations_filtered
+# )
+# summary(vowel_lm)
 ```
 
 ```{r vowel-lm-plot}
-plot(allEffects(vowel_lm))
+plot(allEffects(vowel_lm_full))
 ```
 
 ```{r closure-lm-full}
@@ -295,19 +296,19 @@ closure_lm_full <- lmer(
 )
 summary(closure_lm_full)
 
-closure_lm <- lme4::lmer(
-  closure_duration ~
-    c2_phonation +
-    syl_rate +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered
-)
-summary(closure_lm)
+# closure_lm <- lme4::lmer(
+#   closure_duration ~
+#     c2_phonation +
+#     syl_rate +
+#     (1+c2_phonation|speaker) +
+#     (1|item),
+#   data = durations_filtered
+# )
+# summary(closure_lm)
 ```
 
 ```{r closure-lm-plot}
-plot(allEffects(closure_lm))
+plot(allEffects(closure_lm_full)[[3]])
 ```
 
 ```{r vow-clo-lm}
