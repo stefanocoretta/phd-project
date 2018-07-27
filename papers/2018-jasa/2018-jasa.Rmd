@@ -101,7 +101,7 @@ Despite of the plethora of evidence in support of the *existence* of the voicing
 
 <!-- most accounts place source in articulation \footnote{but see bla bla for perceptual and a discussion in soskuthy2013}, then say that a notavle one is durational trade-off but that is discarded by M&G and that it is not clear what the interval is. Then say that you will give data to support it and offer a way of reinterpreting the data in M&G -->
 
-Several proposal have been put forward as to where to look for the possible cause of the voicing effect [see @maddieson1976 and @soskuthy2013 for an overview].
+Several proposal have been put forward as to where to look for the possible cause of the voicing effect [see @soskuthy2013 and @begus2017 for an overview].
 Most of the proposed accounts place the source of the voicing effect in properties of speech production.\footnote{Two accounts that point to perceptual features are \citet{javkin1976} and \citet{kluender1988}. To the best of my knowledge, \citet{javkin1976}'s proposal remains empirically untested, while see \citet{fowler1992} for arguments against \citet{kluender1988}.}
 One of these production accounts, which will be the focus of this study, relates the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
 @lindblom1967, @slis1969, and @lehiste1970 (among others) argue that the relevant invariant property of speech is a constant durational interval within which segments of different duration results in different duration of other segments.
@@ -119,7 +119,7 @@ More recently, @jacewicz2009 further shows that the duration of monosyllabic wor
 Second, although the results in @slis1969 confirm that the word does not change in duration whether the stop following the stressed vowel is voiceless or voiced, it does not follow from this fact that compensation should necessarily target the stressed vowel.
 Indeed, it is possible that, for example, the following unstressed vowel could be the target of the compensation.
 
-@maddieson1976 reject any compensatory account for the voicing effect based on data from Hindi on the so called 'aspiration effect', by which vowels tend to be longer when followed by aspirated stops than when followed by non-aspirated stops.
+@maddieson1976 reject any compensatory account for the voicing effect based on data from Hindi on the so called 'aspiration effect', by which vowels are longer when followed by aspirated stops than when followed by non-aspirated stops.
 Vowels before voiceless unaspirated stops are the shortest, followed by vowels before voiced unaspirated and voiceless aspirated stops, which have similar duration between each other, followed by vowels before voiced aspirated stops, which are the longest.
 @maddieson1976 find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
 
@@ -130,7 +130,11 @@ This measure includes the burst and (eventual) aspiration of the consonant.
 If the correlation exists between vowel and closure duration, the inclusion of burst/aspiration duration clearly alters this relationship.
 Indeed, the data in @durvasula2012 show that closure duration, appropriately measured, decreases from voiceless unaspirated > voiced > voiceless aspirated > voiced aspirated, which closely resembles the order of increasing vowel duration in @maddieson1976.\footnote{\citet{durvasula2012} does not find a negative correlation between vowel duration and consonant closure duration, but rather a (small) positive effect: vowel duration increases with closure duration when including an voicing and aspiration as fixed effects. However, it is likely that this result is a consequence of not controlling for speech rate, so it will not be discussed here.}
 
-To summarise, a compensatory temporal adjustment account of the voicing effect is possible after a careful review of the critiques advanced by @chen1970 and @maddieson1976, although issues about the actual implementation of the compensation still remain.
+More recently, @begus2017 investigated the effect of three phonation types on vowel durations in Georgian and finds that vowels are short when followed by voiceless aspirated stops, longer before ejective stops, and longest when followed by voiced stops.
+Crucially, stop closure duration follows a symmetrical pattern: Closure duration is short in voiced stops, longer in ejectives, and longest in voiceless aspirated stops.
+@begus2017 argues that these findings support a temporal compensation account, although not univocally.
+
+To summarise, a compensatory temporal adjustment account of the voicing effect remains possible after a careful review of the critiques advanced by @chen1970 and @maddieson1976, and in face of the results in @begus2017, although issues about the actual implementation of the compensation still persist.
 In conclusion, for the compensatory account to gain plausibility, an invariant interval within which compensation is implemented needs to be better defined, on the light of empirical data.
 <!-- we need to find a good candidate -->
 
