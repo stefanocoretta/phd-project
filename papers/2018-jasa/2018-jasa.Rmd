@@ -92,6 +92,8 @@ rel_filtered <- durations %>%
 
 # Introduction
 
+<!-- need to include Begus 2017 -->
+
 Almost 100 years of research have repeatedly shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
 Evidence for such so called 'voicing effect' has been found in a variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean [see @maddieson1976 for a more comprehensive, but still not exhaustive list].
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, still after 100 years agreement hasn't been reached regarding the source of this effect.
