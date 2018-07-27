@@ -168,7 +168,7 @@ The Italian speakers were from the North and Centre of Italy (8 speakers from No
 The Polish group had 2 speakers from Poznań and 4 speakers from Eastern Poland.
 For more information on the speakers, see \Cref{a:socioling}.
 Ethical clearance was obtained for this study from the University of Manchester (REF 2016-0099-76).
-The participants signed a written consent and received a monetary compensation.
+The participants signed a written consent and received a monetary compensation of £10.
 
 ## Equipment
 
@@ -179,6 +179,7 @@ A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone w
 \label{s:materials}
 
 <!-- be more explicit about bigger project! you just mention it here briefly to explain constraints -->
+<!-- say that some words are real -->
 
 The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
 <!-- footnote about /o/ notation -->
@@ -238,12 +239,15 @@ Syllable rate (syllables per second) was used as a proxy to speech rate [@plug20
 ## Statistical analysis
 
 <!-- add power analysis? -->
+<!-- say what reference levels were used, so that when reading results people know it's reference level -->
+<!-- reference to other packages I use :D -->
 
 Given the exploratory nature of the study, all statistical analyses reported here are to be considered data-driven or hypothesis-generating rather than hypothesis-driven [@kerr1998; @gelman2013].
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R v3.5.0 [@r-core-team2018; @bates2015].
 All factors were coded with treatment contrasts.
 *P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom [@kuznetsova2017; @luke2017].
 *P*-values below the alpha level 0.05 were considered significant.
+<!-- explain why lmertest becuase likelihod ratio has high type I errors luke2017 and other reference 2000 in kuznetsova  -->
 
 Bayes factors were used to specifically test the null hypotheses that word and RR duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
 For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using Maximum Likelihood estimation [@bates2015, p. 34].
@@ -273,6 +277,7 @@ For the full output of the models and *p*-values, see \Cref{a:stats}.
 <!-- include CI? -->
 <!-- include tables of lmer summary in appendix -->
 <!-- change results to full model, no sense in using a new model with significant predictors -->
+<!-- include raw sample means? -->
 
 ## Vowel duration
 
