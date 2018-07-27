@@ -180,16 +180,18 @@ A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone w
 
 <!-- be more explicit about bigger project! you just mention it here briefly to explain constraints -->
 <!-- say that some words are real -->
+<!-- maybe note on /u/ in italian is phonotactically not good -->
 
 The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
 <!-- footnote about /o/ notation -->
+Most are nonce words, although inevitably some combinations lead to real words both in Italian (4 words) and Polish (2 words, see \Cref{a:targets}).
 The lexical stress of the target words was placed by speakers of both Italian and Polish on V\textsubscript{1}, as intended.
 The make-up of the target words was constrained by the design of the experiment, which included ultrasound tongue imaging (UTI).
 Front vowels are difficult to image with UTI, since their articulation involves tongue positions which are particularly far from the ultrasonic probe, hence reducing the visibility of the tongue contour.
 For this reason, only central and back vowels were included.
 Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
-The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish.
+The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish, and presented according to the respective writing conventions.
 These sentences were chosen in order to keep the placement of stress and emphasis similar across languages, so to ensure comparability of results.
 
 ## Procedure
@@ -618,4 +620,21 @@ pl04 & 34 & Female & Polish  & Spanish, English, French                  & Warsa
 pl05 & 42 & Male   & Polish  & English, French                           & Przasnysz           & Warsaw        & No  \NN
 pl06 & 33 & Male   & Polish  & English                                   & Zgierz              & Zgierz          & Yes \NN
 pl07 & 32 & Female & Polish  & English, Russian                          & Bielsk Podlaski     & Bielsk Podlaski & Yes \LL
+}
+
+# Target words
+\label{a:targets}
+
+\ctable[caption = Target words.,
+label = t:targets,
+star,
+doinside = \footnotesize
+]{lllllll}{}{
+\FL
+Italian   &        &      & \hspace{0.5cm} & Polish &      &      \NN
+\cmidrule{1-3}\cmidrule{5-7}
+pata      & poto*  & putu & & pata   & poto & putu \NN
+pada      & podo   & pudu & & pada*  & podo & pudu \NN
+paca*     & poco*  & pucu & & paka*  & poko & puku \NN
+paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 }
