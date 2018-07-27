@@ -25,11 +25,15 @@ params:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, fig.lp="f:")
 library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
+library(lmerTest)
 library(effects)
+library(broom)
+library(broom.mixed)
+library(knitr)
 ```
 
 ```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
@@ -110,8 +114,8 @@ The proposal of the syllable or the word as the targets for compensation and enc
 First, Lindblom's -@lindblom1967 argument that the syllable is the interval within which compensation happens is not supported by the findings in @chen1970 and @jacewicz2009.
 @chen1970 rejects a syllable-based compensatory account on the light of the fact that the duration of the syllable is affected by consonant voicing.
 More recently, @jacewicz2009 further shows that the duration of monosyllabic words in American English does not change dependent on the voicing of the coda consonant.
-Second, although @slis1969 results confirm that the word does not change in duration whether the stop following the stressed vowel is voiceless or voiced, it does not follow from this that compensation should necessarily happen on the stressed vowel.
-Indeed, it could also happen in the following unstressed vowel.
+Second, although the results in @slis1969 confirm that the word does not change in duration whether the stop following the stressed vowel is voiceless or voiced, it does not follow from this fact that compensation should necessarily target the stressed vowel.
+Indeed, it is possible that, for example, the following unstressed vowel could be the target of the compensation.
 
 @maddieson1976 reject any compensatory account for the voicing effect based on data from Hindi on the so called 'aspiration effect', by which vowels tend to be longer when followed by aspirated stops than when followed by non-aspirated stops.
 Vowels before voiceless unaspirated stops are the shortest, followed by vowels before voiced unaspirated and voiceless aspirated stops, which have similar duration between each other, followed by vowels before voiced aspirated stops, which are the longest.
@@ -272,7 +276,21 @@ For the full output of the models and *p*-values, see \Cref{a:stats}.
 
 ## Vowel duration
 
-```{r vowels-plot, echo=FALSE, include=TRUE, fig.cap = "Vowel duration in Italian and Polish.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
+```{r vow-lm}
+vow_lm <- lmer(
+  vowel_duration ~
+    c2_phonation *
+    vowel *
+    language +
+    c2_place +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+```
+
+```{r vowels-plot, include=TRUE, fig.cap = "Vowel duration in Italian and Polish.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
@@ -297,6 +315,20 @@ Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -28 ms, se = 
 Speech rate has unsurprisingly a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -15 ms, se = 1).
 
 ## Consonant closure duration
+
+```{r clo-lm}
+clo_lm <- lmer(
+  closure_duration ~
+    c2_phonation *
+    vowel *
+    language +
+    c2_place +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+```
 
 ```{r closure-plot, echo=FALSE, include=TRUE, fig.cap = "Stop closure duration in Italian and Polish.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
@@ -389,14 +421,15 @@ The Bayes factor of the null model against the full model is `r word_bf`.
 Thus, the null model (in which the effect of C2 voicing is 0) is `r word_bf` times more likely under the observed data than the full model.
 This indicates that there is strong evidence for word duration not being affected by C2 voicing.
 
-## Release to Release interval (RR) duration
+## Release to Release interval duration
 
-```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", cache=TRUE, dependson="read-data", warning=FALSE}
+```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", fig.extra="", cache=TRUE, dependson="read-data", warning=FALSE}
 rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot() +
-  geom_jitter(alpha = 0.1, width = 0.15) +
-  facet_grid(~ language)
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  facet_grid(~ language) +
+  labs(x = "C2 voicing", y = "Release to Release duration (ms)")
 ```
 
 ```{r rr-bf}
@@ -429,14 +462,29 @@ rr_lm_null <- lme4::lmer(
 rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
 ```
 
+In \Cref{f:rr-plot}, boxplots show the durations of the Release to Release interval in words with a voiceless vs. a voiced C2 stop, in Italian (left side) and Polish (right side).
+It can be seen, also from the single data points, that the distributions and main statistics of the durations in the two conditions do not differ much within both languages.
 The models specifications for the Release to Release duration are the same as for word duration.
 The Bayes factor of the null model against the full model is `r rr_bf`, which means that the null model (without C2 voicing) is `r rr_bf` times more likely than the full model.
 The data suggests there is positive evidence that duration of the RR interval is not affected by C2 voicing.
 
 # Discussion
 
-In this exploratory study of Italian and Polish acoustic data, I found that the duration of interval between the releases of two consecutive consonants is insensitive to the phonological voicing of the second consonant.
-The difference in vowel duration before voiceless vs. voiced stops derives from differences in placement of the closure onset within the fixed interval between the releases of C1 and C2.
+The data and statistical analysis presented in the previous section indicate that the duration of interval between the releases of two consecutive consonants in CV́CV words (the Release to Release interval) is insensitive to the phonological voicing of the second consonant (C2).
+In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration before voiceless vs. voiced stops is the outcome of differences in stop closure duration.
+More specifically, the timing of the closure onset of C2 within the invariant Release to Release interval determines the duration of the preceding vowel.
+An earlier closure onset (like in the case of voiceless stops), relative to the onset of the preceding vowel, causes the vowel to be shorter.
+On the other hand, a later closure onset (like with voiced stops) produces a longer vowel.
+Hence, the voicing effect can be seen as a product of gestural timing, rather then a consequence of characteristics of voicing *per se*.
+
+A limitation of the compensatory temporal adjustment account, in the variant of @slis1969 and @lehiste1970, is the lack of a precise identification of the internal structure of the word as the unit within which the compensation happens.
+It is not clear, for example, why compensation should target the preceding stressed vowel, rather then the following unstressed vowel or any other segment in the word.
+The invariance of Release to Release interval allows us to formulate a better defined internal organisation of the word.
+Since the Release to Release interval contains (in a simplified view) just the vowel (broadly defined as a vocoid gesture) and the consonant closure, it follows by logic that differences in closure duration must affect the preceding vowel.
+
+The invariance of the Release to Release interval can be seen as the explanans of the voicing effect, and it gives the compensatory account a more logical consistency by narrowing the scope of the temporal adjustment action.
+On the other hand, the Release to Release invariance becomes in turn an explanandum and it thus requires to be motivated.
+In the following section, I offer a gestural organisation account that allows the invariance or such interval to follow from the relative timing of the articulatory gestures in a CV́C sequence.
 
 ## Gestural alignment
 \label{s:gestural}
@@ -498,6 +546,8 @@ The constraints on experimental material brought about by the use of ultrasound 
 In the previous section I mention that the invariance of the RR duration could be a consequence of the timing of C2 rather than of a holistic CVC motor plan in which the RR interval is held constant.
 Disambiguating between these two interpretations is not possible based on the data from this study.
 
+<!-- work should be done in aspiration effect, and gestural timing -->
+
 # Conclusion
 
 
@@ -511,7 +561,23 @@ Thanks to...
 # Output of statistical models
 \label{a:stats}
 
+## Vowel duration
 
+```{r vow-table}
+kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex")
+```
+
+## Closure duration
+
+```{r clo-table}
+kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex")
+```
+
+## Vowel and closure duration
+
+```{r vow-clo-table}
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex")
+```
 
 # Socio-linguistic information of participants
 \label{a:socioling}

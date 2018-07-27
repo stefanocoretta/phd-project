@@ -165,11 +165,12 @@ compensatory account on the light of the fact that the duration of the
 syllable is affected by consonant voicing. More recently,
 \citet{jacewicz2009} further shows that the duration of monosyllabic
 words in American English does not change dependent on the voicing of
-the coda consonant. Second, although \citet{slis1969} results confirm
-that the word does not change in duration whether the stop following the
-stressed vowel is voiceless or voiced, it does not follow from this that
-compensation should necessarily happen on the stressed vowel. Indeed, it
-could also happen in the following unstressed vowel.
+the coda consonant. Second, although the results in \citet{slis1969}
+confirm that the word does not change in duration whether the stop
+following the stressed vowel is voiceless or voiced, it does not follow
+from this fact that compensation should necessarily target the stressed
+vowel. Indeed, it is possible that, for example, the following
+unstressed vowel could be the target of the compensation.
 
 \citet{maddieson1976} reject any compensatory account for the voicing
 effect based on data from Hindi on the so called `aspiration effect', by
@@ -522,9 +523,9 @@ voicing is 0) is 24 times more likely under the observed data than the
 full model. This indicates that there is strong evidence for word
 duration not being affected by C2 voicing.
 
-\hypertarget{release-to-release-interval-rr-duration}{%
-\subsection{Release to Release interval (RR)
-duration}\label{release-to-release-interval-rr-duration}}
+\hypertarget{release-to-release-interval-duration}{%
+\subsection{Release to Release interval
+duration}\label{release-to-release-interval-duration}}
 
 \begin{figure}
 \centering
@@ -532,22 +533,58 @@ duration}\label{release-to-release-interval-rr-duration}}
 \caption{Release to Release interval duration.}
 \end{figure}
 
-The models specifications for the Release to Release duration are the
-same as for word duration. The Bayes factor of the null model against
-the full model is 23, which means that the null model (without C2
-voicing) is 23 times more likely than the full model. The data suggests
-there is positive evidence that duration of the RR interval is not
-affected by C2 voicing.
+In \Cref{f:rr-plot}, boxplots show the durations of the Release to
+Release interval in words with a voiceless vs.~a voiced C2 stop, in
+Italian (left side) and Polish (right side). It can be seen, also from
+the single data points, that the distributions and main statistics of
+the durations in the two conditions do not differ much within both
+languages. The models specifications for the Release to Release duration
+are the same as for word duration. The Bayes factor of the null model
+against the full model is 23, which means that the null model (without
+C2 voicing) is 23 times more likely than the full model. The data
+suggests there is positive evidence that duration of the RR interval is
+not affected by C2 voicing.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-In this exploratory study of Italian and Polish acoustic data, I found
-that the duration of interval between the releases of two consecutive
-consonants is insensitive to the phonological voicing of the second
-consonant. The difference in vowel duration before voiceless vs.~voiced
-stops derives from differences in placement of the closure onset within
-the fixed interval between the releases of C1 and C2.
+The data and statistical analysis presented in the previous section
+indicate that the duration of interval between the releases of two
+consecutive consonants in CV́CV words (the Release to Release interval)
+is insensitive to the phonological voicing of the second consonant (C2).
+In accordance with a compensatory temporal adjustment account
+\citep{slis1969, lehiste1970}, the difference in vowel duration before
+voiceless vs.~voiced stops is the outcome of differences in stop closure
+duration. More specifically, the timing of the closure onset of C2
+within the invariant Release to Release interval determines the duration
+of the preceding vowel. An earlier closure onset (like in the case of
+voiceless stops), relative to the onset of the preceding vowel, causes
+the vowel to be shorter. On the other hand, a later closure onset (like
+with voiced stops) produces a longer vowel. Hence, the voicing effect
+can be seen as a product of gestural timing, rather then a consequence
+of characteristics of voicing \emph{per se}.
+
+A limitation of the compensatory temporal adjustment account, in the
+variant of \citet{slis1969} and \citet{lehiste1970}, is the lack of a
+precise identification of the internal structure of the word as the unit
+within which the compensation happens. It is not clear, for example, why
+compensation should target the preceding stressed vowel, rather then the
+following unstressed vowel or any other segment in the word. The
+invariance of Release to Release interval allows us to formulate a
+better defined internal organisation of the word. Since the Release to
+Release interval contains (in a simplified view) just the vowel (broadly
+defined as a vocoid gesture) and the consonant closure, it follows by
+logic that differences in closure duration must affect the preceding
+vowel.
+
+The invariance of the Release to Release interval can be seen as the
+explanans of the voicing effect, and it gives the compensatory account a
+more logical consistency by narrowing the scope of the temporal
+adjustment action. On the other hand, the Release to Release invariance
+becomes in turn an explanandum and it thus requires to be motivated. In
+the following section, I offer a gestural organisation account that
+allows the invariance or such interval to follow from the relative
+timing of the articulatory gestures in a CV́C sequence.
 
 \hypertarget{gestural-alignment}{%
 \subsection{Gestural alignment}\label{gestural-alignment}}
@@ -683,6 +720,104 @@ Thanks to...
 models}\label{output-of-statistical-models}}
 
 \label{a:stats}
+
+\hypertarget{vowel-duration-1}{%
+\subsection{Vowel duration}\label{vowel-duration-1}}
+
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+term & estimate & std.error & df & statistic & p.value & conf.low & conf.high\\
+\hline
+(Intercept) & 202.528917 & 8.616933 & 134.794808 & 23.5035973 & 0.0000000 & 185.640039 & 219.417795\\
+\hline
+c2\_phonationvoiced & 18.966904 & 4.389761 & 12.778538 & 4.3207143 & 0.0008634 & 10.363130 & 27.570678\\
+\hline
+vowelo & -6.145680 & 3.951190 & 8.689972 & -1.5553998 & 0.1554715 & -13.889870 & 1.598510\\
+\hline
+vowelu & -26.303911 & 3.977221 & 8.919851 & -6.6136414 & 0.0001018 & -34.099120 & -18.508702\\
+\hline
+languagePolish & -24.219371 & 8.170758 & 21.723039 & -2.9641521 & 0.0072284 & -40.233763 & -8.204979\\
+\hline
+c2\_placevelar & -8.182743 & 1.698432 & 10.593830 & -4.8178210 & 0.0005982 & -11.511609 & -4.853877\\
+\hline
+syl\_rate & -15.292049 & 1.267915 & 775.748295 & -12.0607802 & 0.0000000 & -17.777117 & -12.806980\\
+\hline
+c2\_phonationvoiced:vowelo & -2.045301 & 5.866193 & 10.531442 & -0.3486590 & 0.7342154 & -13.542829 & 9.452226\\
+\hline
+c2\_phonationvoiced:vowelu & -14.453609 & 5.803968 & 10.097657 & -2.4902980 & 0.0317644 & -25.829177 & -3.078041\\
+\hline
+c2\_phonationvoiced:languagePolish & -7.992788 & 6.425248 & 14.252753 & -1.2439658 & 0.2335829 & -20.586042 & 4.600466\\
+\hline
+vowelo:languagePolish & -3.612061 & 5.738907 & 9.670434 & -0.6293987 & 0.5436697 & -14.860112 & 7.635991\\
+\hline
+vowelu:languagePolish & 1.614934 & 5.769530 & 9.877728 & 0.2799073 & 0.7853226 & -9.693138 & 12.923005\\
+\hline
+c2\_phonationvoiced:vowelo:languagePolish & -2.998725 & 8.362748 & 10.886233 & -0.3585813 & 0.7267653 & -19.389410 & 13.391959\\
+\hline
+c2\_phonationvoiced:vowelu:languagePolish & 7.960059 & 8.307697 & 10.604025 & 0.9581547 & 0.3593209 & -8.322728 & 24.242846\\
+\hline
+\end{tabular}
+
+\hypertarget{closure-duration}{%
+\subsection{Closure duration}\label{closure-duration}}
+
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+term & estimate & std.error & df & statistic & p.value & conf.low & conf.high\\
+\hline
+(Intercept) & 119.7337514 & 7.210037 & 128.274159 & 16.6065381 & 0.0000000 & 105.6023389 & 133.865164\\
+\hline
+c2\_phonationvoiced & -16.5824977 & 4.312883 & 17.814394 & -3.8448754 & 0.0012059 & -25.0355930 & -8.129402\\
+\hline
+vowelo & 3.6830341 & 3.495096 & 9.091761 & 1.0537719 & 0.3191857 & -3.1672287 & 10.533297\\
+\hline
+vowelu & -1.9897994 & 3.517354 & 9.324341 & -0.5657091 & 0.5849461 & -8.8836867 & 4.904088\\
+\hline
+languagePolish & -6.9400200 & 6.868824 & 22.044296 & -1.0103652 & 0.3232826 & -20.4026670 & 6.522627\\
+\hline
+c2\_placevelar & 3.4024021 & 1.497580 & 10.953220 & 2.2719327 & 0.0442536 & 0.4671982 & 6.337606\\
+\hline
+syl\_rate & -8.4277741 & 1.054956 & 557.647193 & -7.9887476 & 0.0000000 & -10.4954491 & -6.360099\\
+\hline
+c2\_phonationvoiced:vowelo & 1.1040419 & 5.173800 & 10.891574 & 0.2133909 & 0.8349639 & -9.0364202 & 11.244504\\
+\hline
+c2\_phonationvoiced:vowelu & 9.9881925 & 5.125735 & 10.498088 & 1.9486361 & 0.0785549 & -0.0580636 & 20.034448\\
+\hline
+c2\_phonationvoiced:languagePolish & 1.6759169 & 6.501882 & 20.014504 & 0.2577587 & 0.7992248 & -11.0675387 & 14.419372\\
+\hline
+vowelo:languagePolish & -0.2681229 & 5.067239 & 10.043957 & -0.0529130 & 0.9588388 & -10.1997284 & 9.663483\\
+\hline
+vowelu:languagePolish & 7.1431771 & 5.093169 & 10.250452 & 1.4025014 & 0.1903183 & -2.8392516 & 17.125606\\
+\hline
+c2\_phonationvoiced:vowelo:languagePolish & 1.5021777 & 7.370702 & 11.226859 & 0.2038039 & 0.8421540 & -12.9441321 & 15.948488\\
+\hline
+c2\_phonationvoiced:vowelu:languagePolish & -3.2087583 & 7.327860 & 10.969634 & -0.4378847 & 0.6699671 & -17.5711008 & 11.153584\\
+\hline
+\end{tabular}
+
+\hypertarget{vowel-and-closure-duration-1}{%
+\subsection{Vowel and closure
+duration}\label{vowel-and-closure-duration-1}}
+
+\begin{tabular}{l|r|r|r|r|r|r|r}
+\hline
+term & estimate & std.error & df & statistic & p.value & conf.low & conf.high\\
+\hline
+(Intercept) & 219.3142013 & 10.4476865 & 123.55118 & 20.9916522 & 0.0000000 & 198.8371120 & 239.7912906\\
+\hline
+closure\_duration & -0.1487231 & 0.0631999 & 50.38069 & -2.3532157 & 0.0225548 & -0.2725927 & -0.0248535\\
+\hline
+vowelo & -2.0461727 & 5.4701548 & 81.55299 & -0.3740612 & 0.7093296 & -12.7674790 & 8.6751337\\
+\hline
+vowelu & -5.0236415 & 5.5582191 & 86.79383 & -0.9038222 & 0.3685915 & -15.9175508 & 5.8702677\\
+\hline
+syl\_rate & -17.5363507 & 1.2855189 & 896.15290 & -13.6414571 & 0.0000000 & -20.0559214 & -15.0167800\\
+\hline
+closure\_duration:vowelo & -0.0973372 & 0.0614708 & 876.59709 & -1.5834712 & 0.1136748 & -0.2178178 & 0.0231433\\
+\hline
+closure\_duration:vowelu & -0.3500077 & 0.0618584 & 895.39206 & -5.6582079 & 0.0000000 & -0.4712479 & -0.2287675\\
+\hline
+\end{tabular}
 
 \hypertarget{socio-linguistic-information-of-participants}{%
 \section{Socio-linguistic information of

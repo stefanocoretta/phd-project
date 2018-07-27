@@ -713,4 +713,37 @@ summary(sr_lm)
 plot(allEffects(sr_lm))
 ```
 
+# Mean vowel and closure durations
+
+```{r}
+mean_duration <- group_by(durations_filtered, language, c2_phonation) %>% summarise(v.mean = mean(vowel_duration), c.mean = mean(closure_duration), sum = sum(v.mean + c.mean))
+mean_duration
+```
+
+```{r}
+select(mean_duration, -sum) %>% gather("segment", "mean", v.mean, c.mean) %>% unite("voicing", c2_phonation, segment) %>% spread(voicing, mean) %>% summarise(v.diff = round(voiced_v.mean - voiceless_v.mean), c.diff = round(voiceless_c.mean - voiced_c.mean))
+```
+
+```{r}
+med_duration <- group_by(durations_filtered, language, c2_phonation) %>% summarise(v.med = median(vowel_duration), c.med = median(closure_duration), sum = sum(v.med + c.med))
+med_duration
+```
+
+```{r}
+select(med_duration, -sum) %>% gather("segment", "med", v.med, c.med) %>% unite("voicing", c2_phonation, segment) %>% spread(voicing, med) %>% summarise(v.diff = round(voiced_v.med - voiceless_v.med), c.diff = round(voiceless_c.med - voiced_c.med))
+```
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(c2_phonation, vowel_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r}
+durations_filtered %>%
+  ggplot(aes(c2_phonation, closure_duration)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
 
