@@ -563,21 +563,27 @@ Thanks to...
 
 ## Vowel duration
 
+\scriptsize
 ```{r vow-table}
-kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex")
+kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex", booktabs = TRUE, digits = 4)
 ```
+\normalsize
 
 ## Closure duration
 
+\scriptsize
 ```{r clo-table}
-kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex")
+kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex", booktabs = TRUE, digits = 4)
 ```
+\normalsize
 
 ## Vowel and closure duration
 
+\scriptsize
 ```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex")
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect), format = "latex", booktabs = TRUE, digits = 4)
 ```
+\normalsize
 
 # Socio-linguistic information of participants
 \label{a:socioling}
