@@ -328,6 +328,7 @@ vow_clo_lm <- lmer(
   data = durations_filtered
 )
 summary(vow_clo_lm)
+```
 
 ```{r vow-clo-plot, include=TRUE, fig.cap = "Linear regression of closure and vowel duration per vowel.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
 as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
@@ -335,7 +336,7 @@ as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
   geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
   geom_line() +
   geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
-  geom_rug(data = durations_filtered, aes(y = vowel_duration)) +
+  geom_rug(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
   facet_grid(~ vowel) +
   labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")
 ```
@@ -346,6 +347,7 @@ The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.35 ms, 
 In general, closure duration is inversely correlated with vowel duration.
 However such correlation is quite weak.
 A 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
+\Cref{f:vow-clo-plot} shows for each of /a, o, u/ the individual data points and the regression lines with confidence intervals extracted from the linear model.
 
 ## Word duration
 
