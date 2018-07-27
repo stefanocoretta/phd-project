@@ -70,6 +70,26 @@ rel_filtered <- durations %>%
   filter(
     rel_rel_z < 3, rel_rel_z > -3
   )
+
+durations_2 <- list.files(
+  path = "./datasets",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  ) %>%
+  filter(speaker %in% c("it01", "it02"))
 ```
 
 ## Summaries
@@ -745,5 +765,14 @@ durations_filtered %>%
   ggplot(aes(c2_phonation, closure_duration)) +
   geom_boxplot() +
   facet_grid(~ language)
+```
+
+# Preceding consonant
+
+```{r}
+durations_2 %>%
+  ggplot(aes(c1_phonation, vowel_duration)) +
+  geom_boxplot() +
+  facet_grid(~ c2_phonation)
 ```
 
