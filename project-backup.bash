@@ -39,6 +39,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/italian-egg/data/ \
     /Volumes/Multimedia/ling-data-backup/phd-project/italian-egg/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/icelandic/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/icelandic/data
 
 ### Run
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
@@ -65,6 +68,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/italian-egg/data/ \
     /Volumes/Multimedia/ling-data-backup/phd-project/italian-egg/data
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/icelandic/data/ \
+    /Volumes/Multimedia/ling-data-backup/phd-project/icelandic/data
 
 ## Pull data folder from external HD
 
@@ -92,6 +98,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/italian-egg/data/ \
     ~/GitHub/phd-project/italian-egg/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/ling-data-backup/phd-project/icelandic/data/ \
+    ~/GitHub/phd-project/icelandic/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/voicing-effect/data/ \
@@ -117,6 +126,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Multimedia/ling-data-backup/phd-project/italian-egg/data/ \
     ~/GitHub/phd-project/italian-egg/data/
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Multimedia/ling-data-backup/phd-project/icelandic/data/ \
+    ~/GitHub/phd-project/icelandic/data/
 
 # DANGER
 
