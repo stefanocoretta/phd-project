@@ -9,7 +9,7 @@ files = Get number of strings
 for file from 1 to files
   selectObject: "Strings file_list"
   file$ = Get string: file
-  speaker$ = file$ - "_ann.TexGrid"
+  speaker$ = file$ - "_ann.TextGrid"
   Read from file: "'raw_dir$'/'file$'"
 
   points = Get number of points: 3
