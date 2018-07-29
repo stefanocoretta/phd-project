@@ -40,7 +40,7 @@ vowels <- list.files(path = "./voicing-effect/data/datasets/acoustics",
                    pattern = "*-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%
-  select(rec.date, vowel.duration) %>%
+  select(rec_date, vowel_duration) %>%
   unique()
 
 columns_2 <- c(
