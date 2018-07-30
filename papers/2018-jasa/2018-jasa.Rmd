@@ -551,15 +551,21 @@ These two factors together can be synthesised into a compensatory temporal adjus
 
 ## Limitations and future work
 
-The generalisations reported in this paper strictly apply to disyllabic words with stress on the first syllable.
+The generalisations reported in this paper strictly apply to disyllabic words with a stressed vowel in the first syllable.
 It is possible that the organisation pattern found in this context does not occur in sequences including an unstressed vowel.
 For example, it is known that the difference in closure duration between voiceless and voiced stops is not stable when the stops precede a stressed vowel, although the vowels preceding the pre-stress stops have different durations [@davis1989].
-According to the gestural interpretation given here, no differences in closure durations should correspond to no difference in vowel durations.
-The constraints on experimental material brought about by the use of ultrasound tongue imaging have been already mentioned in \Cref{s:materials}.
-In the previous section I mention that the invariance of the RR duration could be a consequence of the timing of C2 rather than of a holistic CVC motor plan in which the RR interval is held constant.
-Disambiguating between these two interpretations is not possible based on the data from this study.
+According to the gestural interpretation given here, the absence in differences of closure duration should correspond to no difference in vowel duration.
+Data from different contexts and different languages is thus needed to assess the generality of the claims put forward in this paper.
 
-<!-- work should be done in aspiration effect, and gestural timing -->
+The constraints on experimental material enforced by the use of ultrasound tongue imaging have been previously mentioned in \Cref{s:materials}.
+Given these constraints, temporal information from other vowels (like front vowels) and places of articulation is a desideratum.
+\Cref{s:gestural} discusses the interpretation of the Release to Release invariance in CV́CV words as a consequence of the timing of C2 rather than of a holistic CV́C motor plan in which the RR interval is held constant.
+Although beyond the scope of this paper, disambiguating between these two interpretations on articulatory grounds is fundamental for a general understanding of a theory of gestural organisation.
+
+The compensatory temporal adjustment account presented here extends to other durational effects discussed in the literature.
+In particular, the account bears predictions on the direction of the durational difference led by phonation types different from voicing, like aspiration and ejection.
+For example, the mix of results with regard to the effect of aspiration [@durvasula2012] suggests that the conditions for a temporal adjustment might differ across the contexts and languages studied.
+In light of the results in @begus2017, future studies will have to investigate the durational invariance of speech intervals in relation to a variety of phonation contrasts.
 
 # Conclusion
 
