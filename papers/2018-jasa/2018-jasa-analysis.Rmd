@@ -98,6 +98,25 @@ durations_2 <- list.files(
 durations %>% group_by(speaker) %>% summarise(n = n())
 ```
 
+```{r means}
+group_by(durations_filtered, language, c2_phonation) %>%
+  summarise(
+    vowel = mean(vowel_duration),
+    vowel_sd = sd(vowel_duration),
+    closure = mean(closure_duration),
+    closure_sd = sd(closure_duration),
+    word = mean(word_duration),
+    word_sd = sd(word_duration)
+  )
+```
+
+```{r means-rr}
+group_by(rel_filtered, language, c2_phonation) %>%
+  summarise(
+    rr = mean(rel_rel),
+    rr_sd = sd(rel_rel)
+  )
+```
 
 ## Plotting
 

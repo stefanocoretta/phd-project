@@ -315,8 +315,11 @@ durations_filtered %>%
 
 \Cref{f:vowels-plot} shows boxplots and the raw data of vowel duration in Italian (on the left) and Polish (on the right) for the three vowels /a, o, u/.
 Vowel tend to be longer when followed by a voiced stop both in Italian and Polish.
-The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/
+The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
 There is no clear effect of C2 voicing in /u/ in Italian, but the effect is discernible in Polish /u/.
+In Italian, vowels have a mean duration of 106 ms (sd = 27) before voiceless stops, and a mean duration of 118 ms (sd = 33) before voiced stops.
+Polish vowels are on average 75 ms long (sd = 16) when followed by a voiceless stop, and 83 ms long (sd = 19) if a voiced stop follows.
+The difference in vowel duration based on the raw means is 12 ms in Italian and 8 ms in Polish.
 
 A linear mixed-effects model with vowel duration as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), C2 place of articulation (coronal, velar), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercept with by-speaker random slopes for C2 voicing.
 All possible interactions between C2 voicing, vowel, and language were included.
@@ -355,6 +358,9 @@ durations_filtered %>%
 
 \Cref{f:closure-plot} illustrates stop closure durations with boxplots and individual raw data points.
 A pattern opposite to that with vowel duration can be noticed: Closure duration is shorter for voiced than for voiceless stops.
+The closure of voiceless stops in Italian is 77 ms long (sd = 20), while the voiced stops have a mean closure duration of 63 ms (sd = 15).
+In Polish, the closure duration is 69 ms (sd = 12) in voiceless stops and 58 ms (sd = 13) in voiced stops.
+The difference in closure duration based on the raw means is 14 ms in Italian and 11 ms in Polish.
 The same model specification as with vowel duration has been fitted with consonant closure durations as the outcome variable.
 C2 voicing, C2 place, and speech rate are significant.
 Stop closure is 16.5 ms shorter (se = 3) if the stop is voiced and 3.5 ms longer (se = 1.5) if velar.
@@ -425,7 +431,8 @@ word_lm_null <- lme4::lmer(
 
 word_bf <- round(exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
-
+Words with a voiceless stop are on average 397 ms long (sd = 81) in Italian and 356 ms long (sd = 39) in Polish.
+Words with a voiced stop have a mean duration of 396 ms (sd = 72) in Italian and 362 ms (sd = 39) in Polish.
 The following full and null models were fitted to test for the effect of C2 voicing on word duration.
 The full model has the following fixed effects: C2 voicing, C2 place, vowel, speech rate, and language.
 The model also includes by-speaker and by-word random intercepts, and a by-speaker random slope for C2 voicing.
@@ -477,6 +484,8 @@ rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
 
 In \Cref{f:rr-plot}, boxplots show the durations of the Release to Release interval in words with a voiceless vs. a voiced C2 stop, in Italian (left side) and Polish (right side).
 It can be seen, also from the single data points, that the distributions and main statistics of the durations in the two conditions do not differ much within both languages.
+In Italian, the mean duration of the Release to Release interval is 210 ms (sd = 44) if C2 is voiceless, and 209 ms (sd = 41) if C2 is voiced.
+In Polish, the means are respectively 173 (sd = 22) and 172 (sd = 21) ms.
 The models specifications for the Release to Release duration are the same as for word duration.
 The Bayes factor of the null model against the full model is `r rr_bf`, which means that the null model (without C2 voicing) is `r rr_bf` times more likely than the full model.
 The data suggests there is positive evidence that duration of the RR interval is not affected by C2 voicing.
