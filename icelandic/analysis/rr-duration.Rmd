@@ -1,0 +1,44 @@
+---
+title: "Icelandic data"
+author: "Stefano Coretta"
+date: "29/07/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+# Read data
+
+```{r read-data, message=FALSE}
+words <- read_csv("./icelandic/data/datasets/words.csv")
+
+is_durations <- read_csv("./icelandic/data/datasets/measurements.csv") %>%
+  inner_join(y = words) %>%
+  mutate(
+    aspiration = factor(aspiration, levels = c("non-aspirated", "aspirated")),
+    syllables = factor(syllables, levels = c("mono", "di")),
+    syl_rate = ifelse(
+      syllables == "mono",
+      5 / sentence_duration,
+      6 / sentence_duration
+    )
+  ) %>%
+  mutate_if(is.character, as.factor)
+```
+
+# Descriptive statistics
+
+```{r}
+is_durations %>%
+  filter(x_stop == "yes") %>%
+  ggplot(aes(aspiration, rr)) +
+  geom_boxplot() +
+  facet_grid(syllables ~ sequence)
+```
+
+
