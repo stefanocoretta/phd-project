@@ -93,16 +93,15 @@ rel_filtered <- durations %>%
 # Introduction
 \label{s:intro}
 
-Almost 100 years of research have repeatedly shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
-Evidence for such so called 'voicing effect' has been found in a variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean [see @maddieson1976 for a more comprehensive, but still not exhaustive list].
-Despite of the plethora of evidence in support of the *existence* of the voicing effect, still after 100 years agreement hasn't been reached regarding the source of this effect.
-<!-- Place here catchy sentence that says what I found -->
+<!-- it might be interesting to say that the VE applies even in cases when voicing is not actually present -->
 
-<!-- most accounts place source in articulation \footnote{but see bla bla for perceptual and a discussion in soskuthy2013}, then say that a notavle one is durational trade-off but that is discarded by M&G and that it is not clear what the interval is. Then say that you will give data to support it and offer a way of reinterpreting the data in M&G -->
+Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
+This so called 'voicing effect' has been found in a considerable variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).
+Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
 
-Several proposal have been put forward as to where to look for the possible cause of the voicing effect [see @soskuthy2013 and @begus2017 for an overview].
-Most of the proposed accounts place the source of the voicing effect in properties of speech production.\footnote{Two accounts that point to perceptual features are \citet{javkin1976} and \citet{kluender1988}. To the best of my knowledge, \citet{javkin1976}'s proposal remains empirically untested, while see \citet{fowler1992} for arguments against \citet{kluender1988}.}
-One of these production accounts, which will be the focus of this study, relates the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
+Several proposal have been put forward as to where to search for the possible source of the voicing effect [see @soskuthy2013 and @begus2017 for an overview].
+The majority of the proposed accounts place the source of the voicing effect in properties of speech production.\footnote{Two accounts that posit a perceptual cause are the ones by \citet{javkin1976} and \citet{kluender1988}. To the best of my knowledge, \citet{javkin1976}'s proposal remains to be empirically tested, while see \citet{fowler1992} for arguments against \citet{kluender1988}.}
+One notable production account, which will be the focus of this study, relates the voicing effect to some constant property of speech that is held constant across contexts while the local property of voiceless vs. voiced obstruents varies, thus creating a trade-off solution within the constant property.
 @lindblom1967, @slis1969, and @lehiste1970 (among others) argue that the relevant invariant property of speech is a constant durational interval within which segments of different duration results in different duration of other segments.
 Both the syllable/VC sequence [@lindblom1967] and the word [@slis1969a; @slis1969; @lehiste1970; @lehiste1970a] has been proposed as the fixed interval.
 <!-- maybe mention later -->
