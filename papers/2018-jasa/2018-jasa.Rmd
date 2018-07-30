@@ -443,7 +443,7 @@ This indicates that there is strong evidence for word duration not being affecte
 
 ## Release to Release interval duration
 
-```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", fig.extra="", cache=TRUE, dependson="read-data", warning=FALSE}
+```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", out.extra="", cache=TRUE, dependson="read-data", warning=FALSE}
 rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot() +

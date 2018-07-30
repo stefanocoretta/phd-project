@@ -13,3 +13,7 @@ lme4
 carData
 effects
 bindrcpp
+lmerTest
+broom
+broom.mixed
+knitr
