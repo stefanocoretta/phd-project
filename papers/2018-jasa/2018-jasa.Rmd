@@ -504,6 +504,12 @@ It is not clear, for example, why compensation should target the preceding stres
 The invariance of Release to Release interval allows us to formulate a better defined internal organisation of the word.
 Since the Release to Release interval contains (in a simplified view) just the vowel (broadly defined as a vocoid gesture) and the consonant closure, it follows by logic that differences in closure duration must affect the preceding vowel.
 
+\begin{figure}
+  \includegraphics{img/compensatory.pdf}
+  \caption{A schematic representation of the voicing effect as a compensatory temporal adjustment phenomenon. The schematic show the gestural unfolding of a CV́C sequence when C2 is voiceless (top panel), or voiced (bottom panel). Oral cavity aperture (on the *y*-axis, as the inverse of oral constriction) through time (on the *x*-axis) is represented with a changing black line that represents the movement trajectory of an articulator. Lower values represent a more constricted oral tract (a contoid configuration), while higher values indicate a more open oral tract (a vocoid configuration). The black bars below the time axis represent voicing (vocal fold vibration). Various landmarks and intervals are indicated in the schematic.}
+  \label{f:compensatory}
+\end{figure}
+
 The invariance of the Release to Release interval can be seen as the explanans of the voicing effect, and it gives the compensatory account a more logical consistency by narrowing the scope of the temporal adjustment action.
 On the other hand, the Release to Release invariance becomes in turn an explanandum and it thus requires to be motivated.
 In the following section, I offer a gestural organisation account that allows the invariance or such interval to follow from the relative timing of the articulatory gestures in a CV́C sequence.
