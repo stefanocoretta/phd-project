@@ -32,11 +32,11 @@ for file from 1 to files
       
       c2_time = Get time of point: 3, point + 1
       rr = (c2_time - c1_time) * 1000
+
+      out_line$ = "'speaker$','index','word$','sentence_duration','rr'"
+
+      appendFileLine: out$, out_line$
     endif
-
-    out_line$ = "'speaker$','index','word$','sentence_duration','rr'"
-
-    appendFileLine: out$, out_line$
 
   endfor
 

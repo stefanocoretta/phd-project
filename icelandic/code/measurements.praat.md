@@ -28,11 +28,11 @@ for file from 1 to files
     if point_label$ == "c1"
       index = index + 1
       <<<release loop>>>
+
+      out_line$ = "'speaker$','index','word$','sentence_duration','rr'"
+
+      appendFileLine: out$, out_line$
     endif
-
-    out_line$ = "'speaker$','index','word$','sentence_duration','rr'"
-
-    appendFileLine: out$, out_line$
 
   endfor
 
