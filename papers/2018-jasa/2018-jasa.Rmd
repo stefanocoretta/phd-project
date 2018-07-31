@@ -121,7 +121,7 @@ In Hindi, vowels before voiceless unaspirated stops are the shortest, followed b
 @maddieson1976 find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
 @maddieson1976 argue that a compensatory explanation for differences in vowel duration cannot be maintained.
 
-However, an reevaluation of the way consonant duration is measured in @maddieson1976 might actually turn their findings in favour of a compensatory account.
+However, a re-evaluation of the way consonant duration is measured in @maddieson1976 might actually turn their findings in favour of a compensatory account.
 Due to difficulties in detecting the release of the consonant of interest, consonant duration in @maddieson1976 is measured from the closure of the relevant consonant to the release of the following consonant, (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
 This measure includes the burst and (eventual) aspiration of the consonant following the target vowel.
 @slis1969a, however, states that the inverse correlation between vowel duration and the following consonant applies to *closure* duration, and not the entire *consonant* duration.
@@ -132,15 +132,21 @@ Nonetheless, \citet{durvasula2012} do not find a negative correlation between vo
 Vowel duration increases with closure duration when voicing and aspiration are taken into account.
 <!-- De Jong 1991 finds negative correlation -->
 However, as noted in @begus2017, it is likely that this result is a consequence of not controlling for speech rate.
-A small negative effect of closure duration can turn positive if the effect of speech rate (which is positive) is greater, given the cumulative nature of these effects \citep[2177]{begus2017}.
+A small negative effect of closure duration can turn positive if the effect of speech rate (which is positive) is greater, given the cumulative nature of these effects \citep[p. 2177]{begus2017}.
 
-More recently, @begus2017 investigated the effect of three phonation types on vowel durations in Georgian and finds that vowels are short when followed by voiceless aspirated stops, longer before ejective stops, and longest when followed by voiced stops.
+Further evidence for a compensatory account comes from the effect of a third type of consonants on vowel duration, namely ejectives.
+@begus2017 finds that in Georgian (which contrasts aspirated, voiced, and ejective consonants) and finds that vowels are short when followed by voiceless aspirated stops, longer before ejective stops, and longest when followed by voiced stops.
 Crucially, stop closure duration follows the reversed pattern: Closure duration is short in voiced stops, longer in ejectives, and longest in voiceless aspirated stops.
-@begus2017 argues that these findings support a temporal compensation account, although not univocally.
+Moreover, vowel duration is inversely correlated with closure duration across the three phonation types.
+@begus2017 argues that these findings support a temporal compensation account (although not univocally, see \citealt[Section V]{begus2017}).
 
-To summarise, a compensatory temporal adjustment account of the voicing effect remains possible after a careful review of the critiques advanced by @chen1970 and @maddieson1976, and in face of the results in @begus2017, although issues about the actual implementation of the compensation still persist.
-In conclusion, for the compensatory account to gain plausibility, an invariant interval within which compensation is implemented needs to be better defined, on the light of empirical data.
-<!-- we need to find a good candidate -->
+To summarise, a compensatory temporal adjustment account has been proposed to explain the voicing effect.
+According to such account, the difference in vowel duration before consonants varying in voicing (and possibly other phonation types) is the outcome of the compensation subsisting between vowel duration and closure duration.
+After a careful review of the critiques advanced by @chen1970 and @maddieson1976, and in face of the results in @slis1969 and @begus2017,
+a compensatory account gains credibility.
+However, issues about the actual implementation of the compensation mechanism still remain.
+In conclusion, while the compensatory temporal adjustment account is plausible on the light of the reviewed literature, we are left with the necessity of finding a constant speech interval within which compensation is logically implemented.
+<!-- the good candidate -->
 
 ## The present study
 
