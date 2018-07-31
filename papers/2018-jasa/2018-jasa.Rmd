@@ -25,7 +25,7 @@ params:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.lp="f:")
+knitr::opts_chunk$set(echo = FALSE, fig.lp = "f:")
 library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
@@ -312,7 +312,7 @@ vow_lm <- lmer(
 )
 ```
 
-```{r vowels-plot, include=TRUE, fig.cap = "Vowel duration in Italian and Polish.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
+```{r vowels-plot, include=TRUE, fig.cap = "Vowel duration in Italian and Polish.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
   geom_boxplot() +
@@ -355,7 +355,7 @@ clo_lm <- lmer(
 )
 ```
 
-```{r closure-plot, echo=FALSE, include=TRUE, fig.cap = "Stop closure duration in Italian and Polish.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
+```{r closure-plot, echo=FALSE, include=TRUE, fig.cap = "Stop closure duration in Italian and Polish.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
   ggplot(aes(vowel, closure_duration, fill = c2_phonation)) +
   geom_boxplot() +
@@ -390,7 +390,7 @@ vow_clo_lm <- lmer(
 summary(vow_clo_lm)
 ```
 
-```{r vow-clo-plot, include=TRUE, fig.cap = "Linear regression of closure and vowel duration per vowel.", fig.lp="f:", out.extra="", cache=TRUE, dependson="read-data"}
+```{r vow-clo-plot, include=TRUE, fig.cap = "Linear regression of closure and vowel duration per vowel.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
   ggplot(aes(closure_duration, fit)) +
   geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
@@ -452,7 +452,7 @@ This indicates that there is strong evidence for word duration not being affecte
 
 ## Release to Release interval duration
 
-```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", out.extra="", cache=TRUE, dependson="read-data", warning=FALSE}
+```{r rr-plot, include=TRUE, fig.cap="Release to Release interval duration.", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data", warning=FALSE}
 rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot() +
@@ -530,7 +530,7 @@ In the following section, I offer a gestural organisation account that allows th
 
 \begin{figure}
   \centering
-  \includegraphics{img/gorganisation.pdf}
+  \includegraphics[width=\linewidth]{img/gorganisation.pdf}
   \caption{Gestural organisation patterns for onsets (a), codas (b), heterosyllabic onsets (c). See \Cref{s:gestural} for details. Based on \citet{marin2010}.}
   \label{f:gorganisation}
 \end{figure}
