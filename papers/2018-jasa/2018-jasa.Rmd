@@ -154,6 +154,7 @@ In conclusion, while the compensatory temporal adjustment account is plausible o
 
 This paper reports on selected results from a broader exploratory study that investigates the relationship between vowel duration and consonant voicing from both and acoustic and articulatory perspective.
 Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.
+<!-- footnote on languoid? -->
 Given its exploratory nature, this study was not devised to test the compensatory account, but rather to collect articulatory and acoustic data on the voicing effect.\footnote{To the best of my knowledge, this is the first attempt to gather synchronised acoustic, tongue imaging and electroglottographic data in relation to the voicing effect.}
 Moreover, the design of the study has been constrained by the use of such articulatory techniques (see \Cref{s:method}).
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from the acoustics part of the study will be discussed.
