@@ -49,6 +49,10 @@ While the data from the present study does not find an effect of consonant voici
 
 corresponds to a more elegant view, which is in turn compatible with current theories of gestural timing (which fits with current views on gestural timing [add references to C-centre]).
 
+Several methodological concerns cast doubts on the magnitude of these estimates, such that they should be interpreted with caution.
+For example, low statistical power has been shown to lead to higher Type M error rates (inflated estimate magnitude, see \citealt{kirby2018, roettger2018}).
+Low power can be expected for the studies in \citealt{farnetani1986} and \citealt{esposito2002}, which analyse data from respectively 3 and 7 speakers.
+
 # Method
 
 The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009, pp. 121–122].
