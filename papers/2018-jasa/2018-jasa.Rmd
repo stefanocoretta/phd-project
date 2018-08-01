@@ -18,6 +18,7 @@ header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
 - \usepackage[caption=false]{subfig}
+- \usepackage{enumerate}
 classoption: preprint
 params:
   version: 0.9
@@ -499,11 +500,11 @@ The data suggests there is positive evidence that duration of the RR interval is
 
 Mixed-effects modelling and the analysis of Bayes factors suggest that:
 
-\begin{enumerate}
-\item Stressed vowels in C\textsubscript{1}V́C\textsubscript{2}V words in Italian and Polish are 19 ms longer (se = 4.4) when C2 is voiced.
-\item C2 closure is 16.5 ms shorter (se = 3) if the stop is voiced.
-\item Vowel duration negatively correlates with closure duration, such that shorter closures correspond to longer vowels.
-\item Both word duration and Release to Release duration are not affected by the underlying voicing specification of C2.
+\begin{enumerate}[(a)]
+  \item Stressed vowels in C\textsubscript{1}V́C\textsubscript{2}V words in Italian and Polish are 19 ms longer (se = 4.4) when C2 is voiced.
+  \item C2 closure is 16.5 ms shorter (se = 3) if the stop is voiced.
+  \item Vowel duration negatively correlates with closure duration, such that shorter closures correspond to longer vowels.
+  \item Both word duration and Release to Release duration are not affected by the underlying voicing specification of C2.
 \end{enumerate}
 
 # Discussion
