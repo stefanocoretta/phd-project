@@ -99,7 +99,7 @@ Almost a hundred years of research have consistently shown that consonantal voic
 This so called 'voicing effect' has been found in a considerable variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
 
-Several proposal have been put forward as to where to search for the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{@begus2017} for an overview).
+Several proposal have been put forward as to where to search for the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{begus2017} for an overview).
 The majority of the proposed accounts place the source of the voicing effect in properties of speech production.\footnote{Two accounts that posit a perceptual cause are the ones by \citet{javkin1976} and \citet{kluender1988}. To the best of my knowledge, \citet{javkin1976}'s proposal remains to be empirically tested, while see \citet{fowler1992} for arguments against \citet{kluender1988}.}
 A notable production account, which will be the focus of this study, is the compensatory temporal adjustment account [@lindblom1967; @slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
 According to this account, the voicing effect derives from the reorganisation of gestures within a unit of speech that is not affected by stop voicing.
@@ -150,21 +150,16 @@ In conclusion, while the compensatory temporal adjustment account is plausible o
 
 ## The present study
 
-<!-- be more explicit about bigger project! you just mention it here briefly to explain constraints -->
-
 This paper reports on selected results from a broader exploratory study that investigates the relationship between vowel duration and consonant voicing from both and acoustic and articulatory perspective.
-Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.
-<!-- footnote on languoid? -->
+Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.\footnote{As per \citet{cysouw2013}, the glossonyms \textit{Italian} and \textit{Polish} as used here refer, respectively, to the languoids Italian [\textsc{Glottocode}: \texttt{ital1282}] and Polish [\textsc{Glottocode}: \texttt{poli1260}].}
 Given its exploratory nature, this study was not devised to test the compensatory account, but rather to collect articulatory and acoustic data on the voicing effect.\footnote{To the best of my knowledge, this is the first attempt to gather synchronised acoustic, tongue imaging and electroglottographic data in relation to the voicing effect.}
 Moreover, the design of the study has been constrained by the use of such articulatory techniques (see \Cref{s:method}).
-Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from the acoustics part of the study will be discussed.
+Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
 Italian and Polish reportedly differ in the magnitude of the effect of stop voicing on vowel duration.
 <!-- add more references -->
 Italian has been unanimously reported as a voicing-effect language [@caldognetto1979; @farnetani1986; @esposito2002].
-<!-- expand footnote, include means as reported in cited works -->
-<!-- caldognetto 10 students, farnetani 3 educated speakers, 7 speakers-->
-The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms, with longer vowels followed by voiced consonants (based on 3 speakers from \citealt{farnetani1986} and 7 speakers from \citealt{esposito2002}; \citealt{caldognetto1979} does not report estimates.).
+The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms, with longer vowels followed by voiced consonants.\footnote{The mean differences are based on 3 speakers in \citealt{farnetani1986} and 7 speakers in \citealt{esposito2002}. \citealt{caldognetto1979} does not report estimates of vowel duration, but the study is based on 10 speakers.}
 On the other hand, the results regarding the presence and magnitude of the effect in Polish are mixed.
 While @keating1984 reports no effect of voicing on vowel duration in data from 24 speakers, @nowak2006 finds that vowels followed by voiced stops are 4.5 ms longer in the 4 speakers recorded.
 Moreover, @malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim their results are inconclusive on this matter.
@@ -179,47 +174,49 @@ I further propose that the constant duration of the Release to Release interval 
 
 ## Participants
 
-Seventeen subjects in total participated to this exploratory study.
-Eleven participants were native speakers of Italian (5 female, 6 male), while six were native speakers of Polish (3 female, 3 male).
-The Italian speakers were from the North and Centre of Italy (8 speakers from Northern Italy, 3 from Central Italy).
-The Polish group had 2 speakers from Poznań and 4 speakers from Eastern Poland.
-For more information on the speakers, see \Cref{a:socioling}.
-Ethical clearance was obtained for this study from the University of Manchester (REF 2016-0099-76).
+Seventeen subjects in total participated in this exploratory study.
+Eleven subjects are native speakers of Italian (5 female, 6 male), while six are native speakers of Polish (3 female, 3 male).
+The Italian speakers are from the North and Centre of Italy (8 speakers from Northern Italy, 3 from Central Italy).
+The Polish group has 2 speakers from Poznań and 4 speakers from Eastern Poland.
+For more information on the sociolinguistic details of the speakers, see \Cref{a:socioling}.
+Ethical clearance for this study was obtained from the University of Manchester (REF 2016-0099-76).
 The participants signed a written consent and received a monetary compensation of £10.
 
 ## Equipment
 
-The acquisition of the audio signal was achieved with the software Articulate Assistant Advanced™ (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7, with a sample rate of 22050 MHz (16-bit) in a proprietary format.
+The acquisition of the audio signal was achieved with the software Articulate Assistant Advanced™ (AAA, v2.17.2, \citealt{articulate2011}) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+Recordings were made at sample rate of 22050 MHz (16-bit), in a proprietary format (`.aa0`).
 A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
+The microphone was placed around at the level of the participant's mouth on one side, at a distance of 10 cm.\footnote{The microphone was clipped onto a metal headset wore by the participant, which is part of the ultrasound equipment.}
 
 ## Materials
 \label{s:materials}
 
-<!-- be more explicit about bigger project! you just mention it here briefly to explain constraints -->
-<!-- say that some words are real -->
 <!-- maybe note on /u/ in italian is phonotactically not good -->
 
-The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
-<!-- footnote about /o/ notation -->
-Most are nonce words, although inevitably some combinations lead to real words both in Italian (4 words) and Polish (2 words, see \Cref{a:targets}).
+The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).\footnote{Italian has both a mid-low [ɔ] and a mid-high [o] back vowel in its vowel inventory. These vowels are traditionally described as two distinct phonemes \citep{kramer2009}, although both their phonemic status and their phonetic substance are subject to a high degree of geographical and idiosyncratic variability \citet{renwick2016}. As a rule of thumb, stressed open syllables in Italian (like the ones used in this study) have [ɔː] (vowels in penultimate stressed open syllables are long) rather than [oː] \citet{renwick2016}. On the other hand, Polish has only a mid-low back vowel phoneme /ɔ/ \citep{gussmann2007}. For sake of typographical simplicity, the symbol /o/ will be used here for both languages.}
+Most are nonce words, although inevitably some combinations produce real words both in Italian (4 words) and Polish (2 words, see \Cref{a:targets}).
 The lexical stress of the target words was placed by speakers of both Italian and Polish on V\textsubscript{1}, as intended.
+
 The make-up of the target words was constrained by the design of the experiment, which included ultrasound tongue imaging (UTI).
 Front vowels are difficult to image with UTI, since their articulation involves tongue positions which are particularly far from the ultrasonic probe, hence reducing the visibility of the tongue contour.
 For this reason, only central and back vowels were included.
 Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
+
 The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish, and presented according to the respective writing conventions.
-These sentences were chosen in order to keep the placement of stress and emphasis similar across languages, so to ensure comparability of results.
+These sentences were chosen in order to keep the placement of stress and emphasis similar across languages.
 
 ## Procedure
 
 The participant was asked to read the sentences with the target words which were sequentially presented on the computer screen.
-The order of the sentence stimuli was randomised for each participant.
-Each participant read the list of randomised sentence stimuli 6 times.
+The order of the sentences was randomised for each participant.
+Participants read the list of randomised sentence stimuli 6 times.
 Due to software constraints, the order of the list was kept the same across the six repetitions within each participant.
-Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to the ultrasound data collection).\footnote{IT01 and IT02 (the first two participants of this study) read also sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
-with a grand total of 1224 tokens (792 from Italian, 432 from Polish).
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
+The total experiment time lasted around 45 minutes.
+Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to ultrasound data collection).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
+with a grand total of 1224 tokens (792 from Italian, 432 from Polish).
 
 ## Data processing and measurements
 
@@ -230,7 +227,7 @@ star
 ]{ll>{\raggedright}p{9cm}}{}{
 \FL
 \textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
-vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the burst of /p/ (C1)            \NN
+vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
 vowel offset          & (V1 offset)        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
 consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
 closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
@@ -238,13 +235,14 @@ consonant offset      & (C2 offset)        & appearance of higher formants of th
 consonant release & (C1/C2 release)         & automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
 }
 
-The audio recordings were exported from AAA in `.wav` format for further processing.
+The audio recordings were exported from AAA in `.wav` format at the same sample and bit rate for further processing.
 A forced aligned transcription was accomplished through the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
-The outcome of the automatic annotation was manually corrected when necessary, according to the criteria in \Cref{t:dur-measures}.
+The outcome of the automatic annotation was manually corrected, according to the criteria in \Cref{t:dur-measures}.
 The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014.
-The durations in milliseconds of the following intervals were extracted from the annotated acoustic landmarks with Praat scripting: sentence duration, word duration, vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 burst), and Release-to-Release duration (RR duration, C1 release to C2 release).
+The durations in milliseconds of the following intervals were extracted with Praat scripting from the annotated acoustic landmarks: word duration, vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 release), and Release to Release duration (C1 release to C2 release).
+Sentence duration was measured in seconds.
 \Cref{f:segmentation} shows an example of the segmentation of /pata/ (a) and /pada/ (b) from an Italian speaker.
-Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018] for duration normalisation, and was calculated as the number of syllables divided by the duration of the sentence (8 syllables in Italian, 6 in Polish).
+Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018], and was calculated as the number of syllables divided by the duration of the sentence in seconds (8 syllables in Italian, 6 in Polish).
 All further data processing and visualisation was done in R v3.5.0 [@r-core-team2018; @wickham2017].
 
 \begin{figure*}
@@ -260,15 +258,16 @@ All further data processing and visualisation was done in R v3.5.0 [@r-core-team
 
 <!-- add power analysis? -->
 
-Given the exploratory nature of the study, all statistical analyses reported here are to be considered data-driven/hypothesis-generating rather than confirmatory/hypothesis-driven [@kerr1998; @gelman2013; @roettger2018].
+Given the data-driven nature of the study, all statistical analyses reported here are to be considered exploratory (hypothesis-generating) rather than confirmatory (hypothesis-driven) [@kerr1998; @gelman2013; @roettger2018].
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R [@bates2015], and model estimates were extracted with the `effects` package v4.0-2 [@fox2003].
 All factors were coded with treatment contrasts and the following reference levels: voiceless (vs. voiced), /a/ (vs. /o/, /u/), coronal (vs. velar), Italian (vs. Polish).
+The models were fitted by Restricted Maximum Likelihood estimation (REML).
 The estimates in the results section refer to these reference levels unless interactions are discussed.
 *P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom [@kuznetsova2017; @luke2017].
 A result is considered significant if the *p*-value is below the alpha level ($\alpha = 0.05$).\footnote{\citet{luke2017} argues that the common approach of using likelihood ratio tests for statistical inference with mixed models leads to inflated Type I error rates. \citet[1501]{luke2017} also warns that `results should be interpreted with caution, regardless of the method adopted for obtaining \textit{p}-values'.}
 
 Bayes factors were used to specifically test the null hypotheses that word and RR duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
-For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using Maximum Likelihood estimation [@bates2015, p. 34].
+For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using the Maximum Likelihood estimation (ML) [@bates2015, p. 34].
 The BIC approximation was then used to obtain Bayes factors [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
 The approximation is calculated according to the equation in \ref{eq:bayes} [@wagenmakers2007, p. 796].
 
@@ -282,14 +281,14 @@ Values of $BF_{01} > 1$ indicate a preference of H\textsubscript{0} over H\texts
 The interpretation of the Bayes factors follows the recommendations in @raftery1995 [p. 139].
 
 The extracted measurements were filtered before statistical analysis.
-Measures of vowel duration, closure duration, word duration, and RR duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset (which generally corresponds to a data loss of around 2.5\%).
-This operation yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of RR duration.
+Measures of vowel duration, closure duration, word duration, and RR duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset.
+This operation (which generally corresponds to a loss of around 2.5\% of the data) yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of RR duration.
 
 # Results
 
 The following sections report the results of the study in relation to the durations of vowels, consonant closure, word, and the Release to Release interval.
 When discussing the output of statistical modelling, only the relevant predictors and interactions will be presented.
-To avoid the cluttering generated by model parameters and alleviate the reader, the full output of statistical models and respective *p*-values are included in \Cref{a:stats}.
+To avoid the cluttering generated by model parameters and alleviate the burden of reader, the full output of statistical models and respective *p*-values are included in \Cref{a:stats}.
 
 <!-- INCLUDE STANDARD ERROR! -->
 <!-- include CI? -->
