@@ -591,9 +591,9 @@ The interplay of these two aspects can be synthesised into a compensatory tempor
 
 ## Limitations and future work
 
-The generalisations reported in this paper strictly apply to disyllabic words with a stressed vowel in the first syllable.
+The generalisations put forward in this paper strictly apply to disyllabic words with a stressed vowel in the first syllable.
 It is possible that the organisation pattern found in this context does not occur in sequences including an unstressed vowel.
-For example, it is known that the difference in closure duration between voiceless and voiced stops is not stable when the stops precede a stressed vowel, although the vowels preceding the pre-stress stops have different durations [@davis1989].
+For example, it is known that the difference in closure duration between voiceless and voiced stops is not stable when the stops precede a stressed vowel, although vowels preceding pre-stress stops have slightly different durations [@davis1989].
 According to the gestural interpretation given here, the absence in differences of closure duration should correspond to no difference in vowel duration.
 Data from different contexts and different languages is thus needed to assess the generality of the claims put forward in this paper.
 
