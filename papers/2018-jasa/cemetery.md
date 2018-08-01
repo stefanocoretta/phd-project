@@ -56,3 +56,7 @@ Low power can be expected for the studies in \citealt{farnetani1986} and \citeal
 # Method
 
 The estimates of the relevant effects are then calculated by refitting the models including only the significant terms [step-down approach, @diggle2002; @zuur2009, pp. 121–122].
+
+# Discussion
+
+This fact is incompatible with although from a syllabic structure point of view geminates correspond to heterosyllabic clusters and singletons to tautosyllabic clusters (i.e., V-final syllables followed by singletons and tautosyllabic clusters are open, while those followed by geminates and heterosyllabic clusters are closed).
