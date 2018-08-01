@@ -498,7 +498,11 @@ The data suggests there is positive evidence that duration of the RR interval is
 
 ## Summary
 
-Mixed-effects modelling and the analysis of Bayes factors suggest that:
+Seventeen participants were recorded while reading CV́CV words embedded in a frame sentence.
+The stressed vowel was either /a, o, u/, and C2 was one of /t, d, k, g/.
+Of the seventeen participants, 11 are native speakers of Italian and 6 of Polish.
+Vowel, stop closure, word, and Release to Release vowel duration were measured from the acoustic signal.
+The analyses of the durational data suggest that:
 
 \begin{enumerate}[(a)]
   \item Stressed vowels in C\textsubscript{1}V́C\textsubscript{2}V words in Italian and Polish are 19 ms longer (se = 4.4) when C2 is voiced.
