@@ -538,7 +538,8 @@ In the following section, I offer a gestural organisation account that allows th
 ## Gestural alignment
 \label{s:gestural}
 
-<!-- need to introduce C-centre theory and say that although this is only acoustics, people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
+<!-- people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
+<!-- I might have to explicitly say that release = right-edge sort of -->
 
 \begin{figure}
   \centering
@@ -609,11 +610,19 @@ In light of the results in @begus2017, future studies will have to investigate t
 
 # Conclusion
 
+The results of an exploratory study on the effect of voicing on vowel duration bring support for a compensatory temporal adjustment account of such effect.
+Acoustic data from seventeen speakers of Italian and Polish show that the temporal distance between two consecutive stop releases is not affected by the voicing of the second stop in CV́CV words.
+The temporal invariance of the Release to Release interval, together with a difference in stop closure duration of voiceless and voiced stops, causes vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
+I proposed that the Release to Release invariance is a consequence of the gestural organisation of the CV́C sequence, in which the lag between the right-edge of the second consonant and the preceding stressed vowel is fixed.
 
 
-\begin{acknowledgments}
-Thanks to...
-\end{acknowledgments}
+<!-- \begin{acknowledgments}
+I am for ever in debt with Dr. Ricardo Bermúdez-Otero and Dr. Patrycja Strycharczuk for their immense support and patience in supervising this project.
+I also want to thank the audience at the 16th Laboratory Phonology conference (LabPhon16) for their invaluable feedback.
+Finally, thanks go to my colleagues at the Phonetics Laboratory of the University of Manchester, who witnessed and endured the slow development of this research that lead to this paper.
+Any remaining errors are my own.
+This project has been funded by the School of Arts, Languages, and Cultures Graduate School at the University of Manchester.
+\end{acknowledgments} -->
 
 \appendix
 
