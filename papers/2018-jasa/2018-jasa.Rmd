@@ -13,7 +13,6 @@ output:
 abstract: |
   Put your abstract here.
 bibliography: linguistics.bib
-mainfont: "FreeSerif"
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
@@ -216,8 +215,7 @@ Participants read the list of randomised sentence stimuli 6 times.
 Due to software constraints, the order of the list was kept the same across the six repetitions within each participant.
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
 The total experiment time lasted around 45 minutes.
-Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to ultrasound data collection).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
-with a grand total of 1224 tokens (792 from Italian, 432 from Polish).
+Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to ultrasound data collection), which yields to a grand total of 1224 tokens (792 from Italian, 432 from Polish).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
 
 ## Data processing and measurements
 
