@@ -23,7 +23,7 @@ header-includes:
 - \usepackage{ctable}
 - \usepackage[caption=false]{subfig}
 - \usepackage{enumerate}
-mainfont: "Times"
+mainfont: "Times New Roman"
 classoption: preprint
 params:
   version: 0.9
