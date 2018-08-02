@@ -65,6 +65,7 @@ vignettes/*.pdf
 *.fot
 *.cb
 *.cb2
+*.xdv
 
 ## Intermediate documents:
 *.dvi
