@@ -1,11 +1,10 @@
 ---
-title: This is a title and this is too
-shorttitle: A subtitle goes on another line
+title: "Voicing-related differences in vowel duration as compensatory temporal adjustment: An exploratory study of the voicing effect in Italian and Polish"
+shorttitle: Voicing-related differences in vowel duration as compensatory temporal adjustment
 author:
 - name: Stefano Coretta
-  affiliation: The University of Manchester
+  affiliation: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
   email: stefano.coretta\@manchester.ac.uk
-  thanks: other info
 output:
   jasaarticle::jasa_article:
     citation_package: natbib
