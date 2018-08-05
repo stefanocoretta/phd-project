@@ -1,0 +1,8 @@
+class,description,base,extension,derived_from,output_of,input_of
+raw,original audio,_44100,.wav,,,
+derived,downsampled audio,,.wav,original audio,Praat,
+derived,IPU TextGrid,,.TextGrid,,SPPAS,
+raw,annotation TextGrid,_ann,.TextGrid,IPU TextGrid,,measurements.praat
+raw,transcription text,,.txt,,,SPPAS
+raw,stimuli dataset,words,.csv,,,
+derived,measurements dataset,measurements,.csv,annotation TextGrid,measurements.praat,
