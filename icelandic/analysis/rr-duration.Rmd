@@ -36,9 +36,35 @@ is_durations <- read_csv("./icelandic/data/datasets/measurements.csv") %>%
 ```{r}
 is_durations %>%
   filter(x_stop == "yes") %>%
+  ggplot(aes(rr, fill = aspiration)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(syllables ~ sequence) +
+  geom_rug()
+```
+
+```{r}
+is_durations %>%
+  filter(x_stop == "yes") %>%
   ggplot(aes(aspiration, rr)) +
   geom_boxplot() +
   facet_grid(syllables ~ sequence)
 ```
 
+```{r}
+is_durations %>%
+  filter(x_stop == "yes") %>%
+  ggplot(aes(aspiration, rr)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.3, width = 0.3) +
+  facet_grid(syllables ~ sequence)
+```
+
+```{r}
+is_durations %>%
+  filter(x_stop == "yes", c1_manner == "stop") %>%
+  ggplot(aes(aspiration, rr)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.3, width = 0.3) +
+  facet_grid(syllables ~ sequence)
+```
 
