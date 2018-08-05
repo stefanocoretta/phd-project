@@ -1,0 +1,14 @@
+---
+title: "Vowel duration as a function of consonant gestural timing in Italian and Polish:
+  Evidence from acoustic, ultrasound tongue imaging, and electroglottography"
+author: "Stefano Coretta"
+date: "05/08/2018"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
