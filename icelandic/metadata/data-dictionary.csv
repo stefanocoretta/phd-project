@@ -1,0 +1,6 @@
+variable,variable_name,measurement_unit,allowed_variables,definition,description
+speaker ID,speaker,string,,The ID of the speaker,
+index,index,numeric,,The tokens index,
+word,word,string,,The word,
+sentence duration,sentence_duration,numeric,,The duration of the sentence in seconds,
+release to release duration,rr,numeric,,The duration of the interval between the release of C1 and C2 in milliseconds,
