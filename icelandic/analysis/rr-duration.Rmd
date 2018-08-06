@@ -22,6 +22,7 @@ is_durations <- read_csv("./icelandic/data/datasets/measurements.csv") %>%
   mutate(
     aspiration = factor(aspiration, levels = c("non-aspirated", "aspirated")),
     syllables = factor(syllables, levels = c("mono", "di")),
+    height = factor(height, levels = c("low", "mid", "high", "diphthong")),
     syl_rate = ifelse(
       syllables == "mono",
       5 / sentence_duration,
@@ -50,7 +51,81 @@ is_durations %>%
 
 # Descriptive statistics
 
-```{r}
+```{r rr-density}
+is_durations %>%
+  ggplot(aes(rr)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r rr-density-vow}
+is_durations %>%
+  ggplot(aes(rr, fill = vowel)) +
+  geom_density(alpha = 0.5) +
+  geom_rug() +
+  facet_grid(vowel ~ .)
+```
+
+```{r rr-box-vowel}
+is_durations %>%
+  ggplot(aes(vowel, rr, fill = vowel)) +
+  geom_boxplot()
+```
+
+```{r rr-box-height}
+is_durations %>%
+  ggplot(aes(height, rr, fill = height)) +
+  geom_boxplot()
+```
+
+```{r rr-box-frontness}
+is_durations %>%
+  ggplot(aes(frontness, rr, fill = frontness)) +
+  geom_boxplot()
+```
+
+```{r rr-box-roundness}
+is_durations %>%
+  ggplot(aes(roundness, rr, fill = roundness)) +
+  geom_boxplot()
+```
+
+```{r rr-box-place}
+is_durations %>%
+  ggplot(aes(place, rr, fill = place)) +
+  geom_boxplot()
+```
+
+```{r rr-box-c1}
+is_durations %>%
+  ggplot(aes(c1_manner, rr, fill = c1_manner)) +
+  geom_boxplot()
+```
+
+```{r rr-box-c1-x-stop}
+is_durations %>%
+  filter(x_stop == "yes") %>%
+  ggplot(aes(c1_manner, rr, fill = c1_manner)) +
+  geom_boxplot()
+```
+
+```{r rr-box-c1-x-stop-2}
+is_durations %>%
+  filter(x_stop == "yes", height != "diphthong") %>%
+  ggplot(aes(c1_manner, rr, fill = c1_manner)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.2, width = 0.3)
+```
+
+```{r rr-aspiration}
+is_durations %>%
+  filter(x_stop == "yes") %>%
+  ggplot(aes(rr, fill = aspiration)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r rr-aspiration-all}
 is_durations %>%
   filter(x_stop == "yes") %>%
   ggplot(aes(rr, fill = aspiration)) +
@@ -59,7 +134,7 @@ is_durations %>%
   geom_rug()
 ```
 
-```{r}
+```{r rr-box}
 is_durations %>%
   filter(x_stop == "yes") %>%
   ggplot(aes(aspiration, rr)) +
@@ -67,21 +142,21 @@ is_durations %>%
   facet_grid(syllables ~ sequence)
 ```
 
-```{r}
+```{r rr-box-jit}
 is_durations %>%
   filter(x_stop == "yes") %>%
-  ggplot(aes(aspiration, rr)) +
-  geom_boxplot() +
-  geom_jitter(alpha = 0.3, width = 0.3) +
+  ggplot(aes(aspiration, rr, fill = aspiration)) +
+  geom_boxplot(alpha = 0.6) +
+  geom_jitter(alpha = 0.2, width = 0.3) +
   facet_grid(syllables ~ sequence)
 ```
 
-```{r}
+```{r rr-stop}
 is_durations %>%
   filter(x_stop == "yes", c1_manner == "stop") %>%
-  ggplot(aes(aspiration, rr)) +
-  geom_boxplot() +
-  geom_jitter(alpha = 0.3, width = 0.3) +
+  ggplot(aes(aspiration, rr, fill = aspiration)) +
+  geom_boxplot(alpha = 0.6) +
+  geom_jitter(alpha = 0.2, width = 0.3) +
   facet_grid(syllables ~ sequence)
 ```
 
