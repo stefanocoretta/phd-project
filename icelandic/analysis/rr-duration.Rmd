@@ -31,6 +31,23 @@ is_durations <- read_csv("./icelandic/data/datasets/measurements.csv") %>%
   mutate_if(is.character, as.factor)
 ```
 
+# Summaries
+
+```{r count}
+is_durations %>%
+  ggplot(aes(sequence, fill = aspiration)) +
+  geom_bar(position = position_dodge()) +
+  facet_grid(syllables ~ .)
+```
+
+```{r count-x-stop}
+is_durations %>%
+  filter(x_stop == "yes") %>%
+  ggplot(aes(sequence, fill = aspiration)) +
+  geom_bar(position = position_dodge()) +
+  facet_grid(syllables ~ .)
+```
+
 # Descriptive statistics
 
 ```{r}
