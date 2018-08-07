@@ -160,3 +160,20 @@ is_durations %>%
   facet_grid(syllables ~ sequence)
 ```
 
+```{r rr-fricative}
+is_durations %>%
+  filter(x_stop == "yes", c1_manner == "fricative") %>%
+  ggplot(aes(aspiration, rr, fill = aspiration)) +
+  geom_boxplot(alpha = 0.6) +
+  geom_jitter(alpha = 0.2, width = 0.3) +
+  facet_grid(syllables ~ sequence)
+```
+
+```{r rr-null}
+is_durations %>%
+  filter(x_stop == "yes", c1_manner == "null") %>%
+  ggplot(aes(aspiration, rr, fill = aspiration)) +
+  geom_boxplot(alpha = 0.6) +
+  geom_jitter(alpha = 0.2, width = 0.3) +
+  facet_grid(syllables ~ sequence)
+```
