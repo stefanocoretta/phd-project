@@ -12,7 +12,12 @@ library(tidyverse)
 theme_set(theme_bw())
 library(rticulate)
 library(lme4)
+library(lmerTest)
 library(effects)
+library(fitdistrplus)
+library(simr)
+scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
+scale_colour_discrete <- function(...) scale_colour_brewer(..., type = "qual")
 ```
 
 # Data import
@@ -75,6 +80,27 @@ closing <- tongue %>%
   na.omit() %>%
   mutate(
     closing_duration = (closure - GONS) * 1000
+  ) %>%
+  filter(closing_duration > 0) %>%
+  left_join(y = duration) %>%
+  mutate(
+    rel_gon = (GONS - c1_rel) * 1000
+  )
+
+closing_2 <- tongue %>%
+  filter(label %in% c("max_TD", "max_TT", "GONS_TD", "GONS_TT")) %>%
+  select(-(TT_displacement_sm:TR_velocity_abs)) %>%
+  mutate(
+    label = ifelse(
+      label %in% c("GONS_TT", "GONS_TD"),
+      "GONS",
+      "max"
+    )
+  ) %>%
+  spread(label, seconds) %>%
+  na.omit() %>%
+  mutate(
+    closing_duration = (max - GONS) * 1000
   ) %>%
   filter(closing_duration > 0) %>%
   left_join(y = duration) %>%
@@ -171,7 +197,82 @@ summary(closing_lm)
 plot(allEffects(closing_lm))
 ```
 
-## TRA and closing gesture duration
+# Closing gesture duration from GONS to max
+
+```{r}
+closing_2 %>%
+  ggplot(aes(closing_duration)) +
+  geom_density()
+```
+
+```{r}
+closing_2 %>%
+  ggplot(aes(closing_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+closing_2 %>%
+  ggplot(aes(closing_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(. ~ c2_place)
+```
+
+```{r}
+closing_2 %>%
+  ggplot(aes(closing_duration, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(vowel ~ c2_place)
+```
+
+```{r}
+
+```
+
+
+```{r}
+closing_2 %>%
+  ggplot(aes(c2_phonation, closing_duration, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+closing_2 %>%
+  ggplot(aes(c2_phonation, closing_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r}
+closing_2_lm <- lmer(
+  closing_duration ~
+    c2_phonation *
+    vowel *
+    c2_place +
+    (1|speaker) +
+    (1|item),
+  data = closing_2
+)
+summary(closing_2_lm)
+```
+
+```{r}
+plot(allEffects(closing_2_lm))
+```
+
+```{r power}
+fixef(closing_2_lm)["c2_phonationvoiced"] <- 15
+
+powerSim(closing_2_lm, fixed("c2_phonationvoiced", "t"), nsim = 100)
+
+closing_2_lm_ex <- extend(closing_2_lm, along = "speaker", n = 40)
+
+power_1 <- powerCurve(closing_2_lm_ex, fixed("c2_phonationvoiced", "t"), along = "speaker", nsim = 20)
+plot(power_1)
+```
+
+
+# TRA and closing gesture duration
 
 ```{r}
 tongue_root %>%
