@@ -47,7 +47,8 @@ gestures <- list.files(
   mutate(nucleus = (NOFF - NONS) * 1000, word = word(prompt, 2)) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
-  mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")))
+  mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 ```{r}
