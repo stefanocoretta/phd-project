@@ -14,7 +14,7 @@ library(rticulate)
 library(lme4)
 library(lmerTest)
 library(effects)
-library(fitdistrplus)
+# library(fitdistrplus)
 library(simr)
 scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 scale_colour_discrete <- function(...) scale_colour_brewer(..., type = "qual")
@@ -22,7 +22,7 @@ scale_colour_discrete <- function(...) scale_colour_brewer(..., type = "qual")
 
 # Data import
 
-```{r data-import}
+```{r data-import, message=FALSE}
 columns <- c(
   "speaker",
   "seconds",
@@ -241,6 +241,17 @@ closing_2 %>%
   ggplot(aes(c2_phonation, closing_duration, fill = c2_phonation)) +
   geom_boxplot() +
   facet_grid(c2_place ~ vowel)
+```
+
+```{r}
+closing_2_lm <- lmer(
+  closing_duration ~
+    c2_phonation +
+    (1|speaker) +
+    (1|item),
+  data = closing_2
+)
+summary(closing_2_lm)
 ```
 
 ```{r}
