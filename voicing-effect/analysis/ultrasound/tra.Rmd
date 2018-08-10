@@ -76,7 +76,8 @@ tra_series <- list.files(
     speaker_phon = interaction(speaker, c2_phonation),
     speaker_contexts = interaction(speaker, c2_phonation, c2_place, vowel),
     place_vowel = interaction(c2_place, vowel),
-    place_vowel_phon = interaction(c2_place, vowel, c2_phonation)
+    place_vowel_phon = interaction(c2_place, vowel, c2_phonation),
+    vowel_phon = interaction(vowel, c2_phonation)
   ) %>%
   filter(rec_date != "28/07/2017 15:40:44", c1_phonation == "voiceless") %>%
   arrange(rec_date, seconds) %>%
@@ -88,6 +89,7 @@ contrasts(tra_series$c2_place) <- "contr.treatment"
 contrasts(tra_series$vowel) <- "contr.treatment"
 contrasts(tra_series$place_vowel) <- "contr.treatment"
 contrasts(tra_series$place_vowel_phon) <- "contr.treatment"
+contrasts(tra_series$vowel_phon) <- "contr.treatment"
 
 tra_difference <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound",
@@ -448,8 +450,16 @@ anova(tra_max_lm_null, tra_max_lm)
 ```{r}
 tra_series %>%
   ggplot(aes(proportion, tra_z, colour = c2_phonation, group = rec_date)) +
-  geom_line(alpha = 0.2)
+  geom_path(alpha = 0.2)
 ```
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, tra, colour = c2_phonation)) +
+  geom_smooth()
+```
+
+The general trend is that TR advances by 0.5 mm in voiceless and 1.5 mm in voiced but they start off at the same position.
 
 ```{r}
 tra_series %>%
@@ -459,7 +469,16 @@ tra_series %>%
 
 ```{r}
 tra_series %>%
-  ggplot(aes(proportion, tra_z, colour = c2_phonation, linetype = c2_phonation)) +
+  ggplot(aes(proportion, tra, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth(method = "auto") +
+  facet_wrap(~ speaker, ncol = 4, scales = "free")
+```
+
+There is a lot of beween-speaker variation.
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, tra, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth(method = "auto") +
   facet_wrap(~ speaker, ncol = 4)
 ```
@@ -473,8 +492,17 @@ tra_series %>%
 
 ```{r}
 tra_series %>%
-  ggplot(aes(proportion, tra_z, colour = c2_phonation, linetype = c2_phonation)) +
+  ggplot(aes(proportion, tra, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth() +
+  facet_grid(c2_place ~ vowel)
+```
+
+There is definitely an interaction with vowel and C2 place.
+
+```{r}
+tra_series %>%
+  ggplot(aes(proportion, tra, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth(method = "gam") +
   facet_grid(c2_place ~ vowel)
 ```
 
@@ -616,6 +644,46 @@ plot_smooths(
   c2_phonation,
   facet_terms = c2_place + vowel
 )
+```
+
+```{r tra-gam}
+tra_gam <- bam(
+  tra ~
+    place_vowel_phon +
+    s(proportion) +
+    s(proportion, by = place_vowel_phon) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+summary(tra_gam)
+```
+
+```{r}
+plot_smooths(tra_gam, proportion, voicing, place + vowel, split = list(place_vowel_phon = c("place", "vowel", "voicing")))
+```
+
+```{r}
+acf_resid(tra_gam, split_pred = list(tra_series$rec_date))
+```
+
+```{r tra-gam-2}
+tra_gam_2 <- bam(
+  tra ~
+    vowel_phon +
+    s(proportion) +
+    s(proportion, by = vowel_phon) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+summary(tra_gam_2)
+```
+
+```{r}
+plot_smooths(tra_gam_2, proportion, voicing, vowel, split = list(vowel_phon = c("vowel", "voicing")))
+```
+
+```{r}
+acf_resid(tra_gam_2, split_pred = list(tra_series$rec_date))
 ```
 
 # Using average curve distance
