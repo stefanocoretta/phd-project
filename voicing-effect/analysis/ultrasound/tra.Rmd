@@ -686,6 +686,29 @@ plot_smooths(tra_gam_2, proportion, voicing, vowel, split = list(vowel_phon = c(
 acf_resid(tra_gam_2, split_pred = list(tra_series$rec_date))
 ```
 
+```{r tra-gam-3}
+tra_gam_3 <- bam(
+  tra ~
+    vowel_phon +
+    s(proportion) +
+    s(proportion, by = vowel_phon) +
+    s(vowel_duration) +
+    ti(proportion, vowel_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+summary(tra_gam_3)
+```
+
+```{r}
+plot_smooths(tra_gam_3, proportion, voicing, vowel, split = list(vowel_phon = c("vowel", "voicing")), conditions = quos(vowel_duration == 200))
+```
+
+```{r}
+plot_smooth(tra_gam_3, "proportion", plot_all = "vowel_phon", cond = list(vowel_duration = 200), rm.ranef = T)
+```
+
+
 # Using average curve distance
 
 It does not work really.
