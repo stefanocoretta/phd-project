@@ -701,11 +701,40 @@ summary(tra_gam_3)
 ```
 
 ```{r}
-plot_smooths(tra_gam_3, proportion, voicing, vowel, split = list(vowel_phon = c("vowel", "voicing")), conditions = quos(vowel_duration == 200))
+plot_smooths(tra_gam_3, proportion, voicing, vowel, split = list(vowel_phon = c("vowel", "voicing")))
+```
+
+```{r}
+plot_smooth(tra_gam_3, "proportion", plot_all = "vowel_phon", cond = list(vowel_duration = 35), rm.ranef = T)
 ```
 
 ```{r}
 plot_smooth(tra_gam_3, "proportion", plot_all = "vowel_phon", cond = list(vowel_duration = 200), rm.ranef = T)
+```
+
+```{r}
+fvisgam(tra_gam_3, c("proportion", "vowel_duration"), rm.ranef = T, cond = list(vowel_phon = "a.voiceless"))
+fvisgam(tra_gam_3, c("proportion", "vowel_duration"), rm.ranef = T, cond = list(vowel_phon = "a.voiced"))
+```
+
+```{r tra-gam-4}
+tra_gam_4 <- bam(
+  tra ~
+    vowel +
+    s(proportion) +
+    s(proportion, by = vowel) +
+    s(vowel_duration) +
+    s(vowel_duration, by = vowel) +
+    ti(proportion, vowel_duration) +
+    ti(proportion, vowel_duration, by = vowel) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+summary(tra_gam_4)
+```
+
+```{r}
+fvisgam(tra_gam_3, c("proportion", "vowel_duration"), rm.ranef = T, cond = list(vowel = "a"))
 ```
 
 
