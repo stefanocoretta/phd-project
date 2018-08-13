@@ -66,7 +66,8 @@ tra_series <- list.files(
     vowel = ordered(vowel, levels = c("a", "o", "u")),
     c2_place = ordered(c2_place, levels = c("coronal", "velar")),
     proportion = (seconds - v_onset) / (v_offset - v_onset),
-    tra = -TR_displacement_sm
+    tra = -TR_displacement_sm,
+    item = as.factor(item)
   ) %>%
   group_by(speaker) %>%
   mutate(tra_z = scale(tra)) %>%
@@ -455,6 +456,14 @@ tra_series %>%
 
 ```{r}
 tra_series %>%
+  ggplot(aes(proportion, tra, colour = vowel_duration, group = rec_date)) +
+  geom_path(alpha = 0.5) +
+  facet_wrap(~ speaker, scales = "free") +
+  scale_color_distiller(type = "div", palette = "Spectral")
+```
+
+```{r}
+tra_series %>%
   ggplot(aes(proportion, tra, colour = c2_phonation)) +
   geom_smooth()
 ```
@@ -690,12 +699,15 @@ acf_resid(tra_gam_2, split_pred = list(tra_series$rec_date))
 tra_gam_3 <- bam(
   tra ~
     vowel_phon +
+    vowel_duration +
     s(proportion) +
     s(proportion, by = vowel_phon) +
     s(vowel_duration) +
     ti(proportion, vowel_duration) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series
+    s(proportion, speaker, bs = "fs", m = 1) +
+    s(proportion, item, bs = "fs", m = 1),
+  data = tra_series,
+  nthreads = 2
 )
 summary(tra_gam_3)
 ```
@@ -706,6 +718,10 @@ plot_smooths(tra_gam_3, proportion, voicing, vowel, split = list(vowel_phon = c(
 
 ```{r}
 plot_smooth(tra_gam_3, "proportion", plot_all = "vowel_phon", cond = list(vowel_duration = 35), rm.ranef = T)
+```
+
+```{r}
+plot_smooth(tra_gam_3, "proportion", plot_all = "vowel_phon", cond = list(vowel_duration = 100), rm.ranef = T)
 ```
 
 ```{r}
