@@ -84,7 +84,13 @@ closing <- tongue %>%
   filter(closing_duration > 0) %>%
   left_join(y = duration) %>%
   mutate(
-    rel_gon = (GONS - c1_rel) * 1000
+    rel_gon = (GONS - c1_rel) * 1000,
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
   )
 
 closing_2 <- tongue %>%
@@ -111,10 +117,18 @@ closing_2 <- tongue %>%
 tongue_root <- tongue %>%
   filter(label %in% c("max_TT", "max_TD")) %>%
   group_by(speaker) %>%
-  mutate(TRA = -scale(TR_displacement_sm)) %>%
+  mutate(TRA_z = -scale(TR_displacement_sm), TRA = -TR_displacement_sm) %>%
   ungroup() %>%
-  select(rec_date, TR_displacement_sm, TRA) %>%
+  select(rec_date, TR_displacement_sm, TRA, TRA_z) %>%
   inner_join(y = closing)
+
+tongue_root_2 <- tongue %>%
+  filter(label %in% c("max_TT", "max_TD")) %>%
+  group_by(speaker) %>%
+  mutate(TRA_z = -scale(TR_displacement_sm), TRA = -TR_displacement_sm) %>%
+  ungroup() %>%
+  select(rec_date, TR_displacement_sm, TRA, TRA_z) %>%
+  inner_join(y = closing_2)
 
 closing_velocity <- tongue %>%
   filter(label %in% c("peak1_TT", "peak1_TD"))
@@ -226,11 +240,6 @@ closing_2 %>%
 ```
 
 ```{r}
-
-```
-
-
-```{r}
 closing_2 %>%
   ggplot(aes(c2_phonation, closing_duration, fill = c2_phonation)) +
   geom_boxplot()
@@ -287,7 +296,7 @@ plot(power_1)
 
 ```{r}
 tongue_root %>%
-  filter(TRA < 3) %>%
+  # filter(TRA_z < 3) %>%
   ggplot(aes(TRA, closing_duration, colour = c2_phonation)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -295,14 +304,32 @@ tongue_root %>%
 ```
 
 ```{r}
+tongue_root %>%
+  filter(TRA < -20) %>%
+  ggplot(aes(TRA, closing_duration, colour = c2_phonation)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_grid(~ language, scales = "free")
+```
+
+```{r}
+tongue_root %>%
+  filter(TRA < -20) %>%
+  ggplot(aes(TRA, closing_duration, colour = c2_phonation)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r}
 tra_closing <- lmer(
   closing_duration ~
-    TRA +
-    vowel +
-    c2_phonation +
+    TRA *
+    vowel *
+    c2_phonation *
+    language +
     (1|speaker) +
     (1|item),
-  data = filter(tongue_root, TRA < 3),
+  data = filter(tongue_root, TRA_z < 3),
   REML = FALSE
 )
 summary(tra_closing)
@@ -312,6 +339,28 @@ summary(tra_closing)
 plot(allEffects(tra_closing))
 ```
 
+```{r}
+tra_closing_2 <- lmer(
+  closing_duration ~
+    TRA *
+    vowel *
+    c2_phonation *
+    language +
+    (1|speaker) +
+    (1|item),
+  data = filter(tongue_root_2, TRA_z < 3),
+  REML = FALSE
+)
+summary(tra_closing_2)
+```
+
+```{r}
+plot(allEffects(tra_closing_2))
+```
+
+If you include c2 voicing, TRA has a positive effect with a similar estimate to the previous lmer model.
+
+Tongue root position is positively correlated with closing gesture duration.
 
 # Closing gesture velocity
 
@@ -331,7 +380,7 @@ closing_velocity %>%
   facet_wrap(~ speaker)
 ```
 
-# Timing of closing gesture onset
+# Timing of closing gesture onset (from release to GONS)
 
 ```{r}
 closing %>%
@@ -411,10 +460,11 @@ closing %>%
 ```{r}
 rel_gon_lm <- lmer(
   rel_gon ~
-    c2_phonation +
+    c2_phonation *
     vowel *
-    c2_place +
-#    language +
+    c2_place *
+    language +
+    syl_rate +
     (1 + c2_phonation|speaker) +
     (1|item),
   data = closing
@@ -426,3 +476,16 @@ summary(rel_gon_lm)
 plot(allEffects(rel_gon_lm))
 ```
 
+```{r}
+rel_gon_lm_2 <- lmer(
+  rel_gon ~
+    c2_phonation +
+    syl_rate +
+    (1 + c2_phonation|speaker) +
+    (1|item),
+  data = closing
+)
+summary(rel_gon_lm_2)
+```
+
+It looks like there is no effect of voicing on the timing on the closing gesture onset.
