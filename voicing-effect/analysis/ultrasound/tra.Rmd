@@ -699,7 +699,6 @@ acf_resid(tra_gam_2, split_pred = list(tra_series$rec_date))
 tra_gam_3 <- bam(
   tra ~
     vowel_phon +
-    vowel_duration +
     s(proportion) +
     s(proportion, by = vowel_phon) +
     s(vowel_duration) +
