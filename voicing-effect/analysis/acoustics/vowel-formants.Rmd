@@ -18,24 +18,24 @@ library(effects)
 
 ```{r}
 speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
 
 durations <- list.files(
-  path = "voicing-effect/data/datasets/acoustics/",
+  path = "voicing-effect/data/datasets/acoustics",
   pattern = "*-durations.csv",
   full.names = TRUE
 ) %>%
   map_df(~read_csv(., na = "--undefined--"))
 
 vowels <- list.files(
-  path = "voicing-effect/data/datasets/acoustics/",
+  path = "voicing-effect/data/datasets/acoustics",
   pattern = "*-formants.csv",
   full.names = TRUE
 ) %>%
   map_df(~read_csv(., na = "--undefined--")) %>%
   left_join(y = durations, by = c("speaker", "file", "word")) %>%
   left_join(y = speakers) %>%
-  left_join(y = words) %>%
+  left_join(y = stimuli) %>%
   mutate_if(is.character, as.factor)
 
 f1_dur <- vowels %>%
