@@ -37,6 +37,16 @@ voicing <- list.files(
 ) %>%
   map_df(~read_csv(., na = "--undefined--"))
 
+gestures <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  separate(label, c("gesture", "part")) %>%
+  select(-(part:Y_42)) %>%
+  spread(gesture, seconds)
+
 # data for 7 time points per token: GONS, peak 1, peak 2, NONS, NOFF, MAX, closure
 kinematics <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound",
@@ -45,6 +55,9 @@ kinematics <- list.files(
 ) %>%
   read_aaa(., columns, format = "wide") %>%
   select(-(X_1:Y_42))
+
+by_token <- full_join(durations, voicing) %>%
+  full_join(y = gestures)
 
 #### Dynamic ####
 
