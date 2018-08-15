@@ -56,8 +56,16 @@ kinematics <- list.files(
   read_aaa(., columns, format = "wide") %>%
   select(-(X_1:Y_42))
 
-by_token <- full_join(durations, voicing) %>%
-  full_join(y = gestures)
+token_measures <- full_join(durations, voicing) %>%
+  full_join(y = gestures) %>%
+  mutate(
+    c1_vot = (voicing_start - c1_rel) * 1000,
+    vor = (c2_rel - v_onset) * 1000,
+    gons_clos = (closure - GONS) * 1000,
+    gons_max = (max - GONS) * 1000,
+    nucleus_duration = (NOFF - NONS) * 1000,
+    rel_gons = (GONS - c1_rel) * 1000
+  )
 
 #### Dynamic ####
 
