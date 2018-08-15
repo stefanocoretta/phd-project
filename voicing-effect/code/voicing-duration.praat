@@ -32,7 +32,7 @@ endform
 vuvDirectory$ = "../data/egg/derived/'speaker$'"
 recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
 resultsFile$ = "../data/datasets/egg/'speaker$'-voicing.csv"
-resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,voiced_points,sentence_duration"
+resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,voiced_points"
 writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
@@ -68,19 +68,19 @@ for vuv to numberOfVuv
             voicedEnd = Get end time of interval: 1, voiced
             voicing = (voicedEnd - voicedStart) * 1000
             stimulus$ = Get label of interval: 3, word + 1
-    
+
             sentenceInterval = Get interval at time: 4, vowelStart
             sentenceStart = Get start time of interval: 4, sentenceInterval
             sentenceEnd = Get end time of interval: 4, sentenceInterval
             sentenceDuration = sentenceEnd - sentenceStart
-    
+
             consonant_start = Get start time of interval: 2, segment + 2
             consonant_end = Get end time of interval: 2, segment + 2
             consonant_duration = consonant_end - consonant_start
             one_tenth = consonant_duration / 10
-    
+
             voiced_points = 0
-    
+
             for point from 1 to 5
               this_point = consonant_start + (one_tenth * point)
               vuv_interval = Get interval at time: 1, this_point
@@ -89,9 +89,9 @@ for vuv to numberOfVuv
                 voiced_points = voiced_points + 1
               endif
             endfor
-    
+
             resultLine$ = "'index','speaker$','palignTextGrid$','recDate$','stimulus$',
-                ...'voicedStart','voicedEnd','voicing','voiced_points','sentenceDuration'"
+                ...'voicedStart','voicedEnd','voicing','voiced_points'"
             appendFileLine: resultsFile$, resultLine$
         endif
     endfor

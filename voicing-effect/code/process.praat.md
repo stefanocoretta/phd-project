@@ -1145,7 +1145,7 @@ endform
 vuvDirectory$ = "../data/egg/derived/'speaker$'"
 recordings_dir$ = "../data/ultrasound/derived/'speaker$'/recordings"
 resultsFile$ = "../data/datasets/egg/'speaker$'-voicing.csv"
-resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,voiced_points,sentence_duration"
+resultsHeader$ = "index,speaker,file,rec_date,word,voicing_start,voicing_end,voicing_duration,voiced_points"
 writeFileLine: resultsFile$, resultsHeader$
 
 Create Strings as file list: "vuvList", "'vuvDirectory$'/*.TextGrid"
@@ -1213,7 +1213,7 @@ for word to numberOfWords
         endfor
 
         resultLine$ = "'index','speaker$','palignTextGrid$','recDate$','stimulus$',
-            ...'voicedStart','voicedEnd','voicing','voiced_points','sentenceDuration'"
+            ...'voicedStart','voicedEnd','voicing','voiced_points'"
         appendFileLine: resultsFile$, resultLine$
     endif
 endfor
