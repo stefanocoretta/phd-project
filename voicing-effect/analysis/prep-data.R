@@ -47,15 +47,6 @@ gestures <- list.files(
   select(-(part:Y_42)) %>%
   spread(gesture, seconds)
 
-# data for 7 time points per token: GONS, peak 1, peak 2, NONS, NOFF, MAX, closure
-kinematics <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound",
-  pattern = "*-tongue-cart.tsv",
-  full.names = TRUE
-) %>%
-  read_aaa(., columns, format = "wide") %>%
-  select(-(X_1:Y_42))
-
 token_measures <- full_join(durations, voicing) %>%
   full_join(y = gestures) %>%
   mutate(
@@ -66,6 +57,15 @@ token_measures <- full_join(durations, voicing) %>%
     nucleus_duration = (NOFF - NONS) * 1000,
     rel_gons = (GONS - c1_rel) * 1000
   )
+
+# data for 7 time points per token: GONS, peak 1, peak 2, NONS, NOFF, MAX, closure
+kinematics <- list.files(
+  path = "./voicing-effect/data/datasets/ultrasound",
+  pattern = "*-tongue-cart.tsv",
+  full.names = TRUE
+) %>%
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42))
 
 #### Dynamic ####
 
