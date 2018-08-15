@@ -69,6 +69,7 @@ kinematics <- list.files(
 
 #### Dynamic ####
 
+# time series: 9 points within vowel duration
 formants_series <- list.files(
   path = "voicing-effect/data/datasets/acoustics",
   pattern = "*-formants.csv",
@@ -91,6 +92,7 @@ wavegram <- list.files(
   map_df(~read_csv(.))
 
 # tongue contours at 7 time points per token: GONS, peak 1, peak 2, NONS, NOFF, MAX, closure
+# series: X position
 tongue_contours <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound",
   pattern = "*-tongue-cart.tsv",
@@ -98,10 +100,25 @@ tongue_contours <- list.files(
 ) %>%
   read_aaa(., columns)
 
+# time series: ultrasonic frame
 kinematics_series <- list.files(
   path = "./voicing-effect/data/datasets/ultrasound",
   pattern = "*-vowel-series.tsv",
   full.names = TRUE
 ) %>%
-  read_aaa(., columns, format = "wide")
+  read_aaa(., columns, format = "wide") %>%
+  select(-(X_1:Y_42)) %>%
+  left_join(y = token_measures) %>%
+  mutate(
+    proportion = (seconds - v_onset) / (v_offset - v_onset)
+  )
 
+#### Join ####
+
+token_measures <- token_measures %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
+
+kinematics_series <- kinematics_series %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli)
