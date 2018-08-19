@@ -1,0 +1,60 @@
+---
+title: "Tongue root"
+author: "Stefano Coretta"
+date: "19/08/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+theme_set(theme_minimal())
+data("kinematics_series", "kinematics", package = "coretta2018itapol")
+kinematics_series <- kinematics_series %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  )
+kine_s <- kinematics_series %>%
+  filter(TR_displacement_sm > 10, proportion < 1) %>%
+  mutate(trp = -TR_displacement_sm + max(TR_displacement_sm))
+```
+
+# Data visualisation
+
+```{r}
+kinematics_series %>%
+  ggplot(aes(proportion, -TR_displacement_sm)) +
+  geom_point(alpha = 0.1)
+```
+
+```{r}
+kine_s %>%
+  ggplot(aes(proportion, trp)) +
+  geom_point(alpha = 0.1)
+```
+
+```{r}
+kine_s %>%
+  ggplot(aes(proportion, trp, colour = c2_phonation)) +
+  geom_point(alpha = 0.1)
+```
+
+```{r}
+kine_s %>%
+  ggplot(aes(proportion, trp, colour = c2_phonation)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth()
+```
+
+```{r}
+kine_s %>%
+  ggplot(aes(proportion, trp, colour = c2_phonation)) +
+  geom_smooth()
+```
+
+```{r}
+kine_s %>%
+  ggplot(aes(proportion, trp, colour = c2_phonation)) +
+  geom_smooth() +
+  facet_grid(vowel ~ c2_place)
+```
