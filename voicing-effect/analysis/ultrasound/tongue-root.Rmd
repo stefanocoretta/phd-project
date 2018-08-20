@@ -11,6 +11,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 data("kinematics_series", "kinematics", package = "coretta2018itapol")
 kinematics_series <- kinematics_series %>%
+  filter(c1_phonation == "voiceless") %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   )
