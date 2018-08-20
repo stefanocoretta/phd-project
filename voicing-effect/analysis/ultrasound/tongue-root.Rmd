@@ -22,40 +22,42 @@ kine_s <- kinematics_series %>%
 
 # Data visualisation
 
-```{r}
+```{r trp-point}
 kinematics_series %>%
   ggplot(aes(proportion, -TR_displacement_sm)) +
   geom_point(alpha = 0.1)
 ```
 
-```{r}
+```{r points-filtered}
 kine_s %>%
   ggplot(aes(proportion, trp)) +
   geom_point(alpha = 0.1)
 ```
 
-```{r}
+```{r points-voicing}
 kine_s %>%
   ggplot(aes(proportion, trp, colour = c2_phonation)) +
   geom_point(alpha = 0.1)
 ```
 
-```{r}
+```{r smooth-voicing}
 kine_s %>%
   ggplot(aes(proportion, trp, colour = c2_phonation)) +
   geom_point(alpha = 0.1) +
   geom_smooth()
 ```
 
-```{r}
+```{r smooth-voicing-2}
 kine_s %>%
   ggplot(aes(proportion, trp, colour = c2_phonation)) +
   geom_smooth()
 ```
 
-```{r}
+The smooths show advancement of the tongue root of 1.5 mm in vowels followed by voiced stops and a 1 mm advancement in vowels followed by voiceless stops.
+
+```{r smooths}
 kine_s %>%
   ggplot(aes(proportion, trp, colour = c2_phonation)) +
-  geom_smooth() +
+  geom_smooth(method = "gam", formula = y ~ s(x, k = 10)) +
   facet_grid(vowel ~ c2_place)
 ```
