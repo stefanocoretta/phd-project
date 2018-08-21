@@ -9,6 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 theme_set(theme_minimal())
+library(itsadug)
+library(tidymv)
 data("kinematics_series", "kinematics", package = "coretta2018itapol")
 kinematics_series <- kinematics_series %>%
   filter(c1_phonation == "voiceless") %>%
@@ -17,7 +19,14 @@ kinematics_series <- kinematics_series %>%
   )
 kine_s <- kinematics_series %>%
   filter(TR_displacement_sm > 10, proportion < 1) %>%
-  mutate(trp = -TR_displacement_sm + max(TR_displacement_sm))
+  mutate(
+    trp = -TR_displacement_sm + max(TR_displacement_sm),
+    c2_phonation_o = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    place_vow_voi_o = as.ordered(interaction(c2_place, vowel, c2_phonation))
+  ) %>%
+  mutate_if(is.character, as.factor)
+contrasts(kine_s$c2_phonation_o) <-  "contr.treatment"
+contrasts(kine_s$place_vow_voi_o) <-  "contr.treatment"
 ```
 
 # Data visualisation
@@ -81,4 +90,97 @@ kine_s %>%
   facet_grid(vowel ~ c2_place) +
   scale_colour_distiller(type = "seq", palette = "YlGn") +
   theme_dark()
+```
+
+```{r trajectories-facet-scaled}
+kine_s %>%
+  group_by(speaker) %>%
+  mutate(trp = scale(trp)) %>%
+  ggplot(aes(proportion, trp, group = reorder(rec_date, vowel_duration), colour = vowel_duration)) +
+  geom_path(alpha = 0.5) +
+  facet_grid(vowel ~ c2_place) +
+  scale_colour_distiller(type = "seq", palette = "YlGn") +
+  theme_dark()
+```
+
+```{r trajectories-sylrate}
+kine_s %>%
+  ggplot(aes(proportion, trp, group = reorder(rec_date, syl_rate), colour = syl_rate)) +
+  geom_path(alpha = 0.5) +
+  scale_colour_distiller(type = "seq", palette = "PuRd") +
+  theme_dark()
+```
+
+# Significance testing
+
+```{r trp-gam}
+trp_gam  <- bam(
+  trp ~
+    place_vow_voi_o +
+    s(proportion) +
+    s(proportion, by = place_vow_voi_o) +
+    # s(vowel_duration) +
+    # ti(proportion, vowel_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = kine_s
+)
+```
+
+```{r}
+plot_smooths(trp_gam, proportion, voicing, facet_terms = place + vowel, split = list(place_vow_voi_o = c("place", "vowel", "voicing")))
+```
+
+```{r}
+acf_resid(trp_gam, split_pred = list(kine_s$rec_date))
+```
+
+```{r trp-gam-2}
+trp_gam_2  <- bam(
+  trp ~
+    s(proportion) +
+    s(vowel_duration) +
+    ti(proportion, vowel_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = kine_s
+)
+```
+
+```{r}
+fvisgam(trp_gam_2, c("proportion", "vowel_duration"), rm.ranef = TRUE)
+```
+
+```{r trp-gam-3}
+trp_gam_3  <- bam(
+  trp ~
+    c2_phonation_o +
+    s(proportion) +
+    s(proportion, by = c2_phonation_o) +
+    s(vowel_duration) +
+    ti(proportion, vowel_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = kine_s
+)
+```
+
+```{r}
+plot_smooths(trp_gam_3, proportion, c2_phonation_o) + scale_y_continuous(breaks = seq(15, 25, 1)) + scale_color_discrete() + scale_fill_discrete()
+```
+
+```{r trp-gam-4}
+trp_gam_4  <- bam(
+  trp ~
+    c2_phonation_o +
+    s(proportion) +
+    s(proportion, by = c2_phonation_o) +
+    s(vowel_duration) +
+    ti(proportion, vowel_duration) +
+    ti(proportion, vowel_duration, by = c2_phonation_o) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = kine_s
+)
+```
+
+```{r}
+fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiceless"), rm.ranef = TRUE, zlim = c(18.5, 23.5))
+fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiced"), rm.ranef = TRUE, zlim = c(18.5, 23.5))
 ```
