@@ -22,11 +22,13 @@ kine_s <- kinematics_series %>%
   mutate(
     trp = -TR_displacement_sm + max(TR_displacement_sm),
     c2_phonation_o = ordered(c2_phonation, levels = c("voiceless", "voiced")),
-    place_vow_voi_o = as.ordered(interaction(c2_place, vowel, c2_phonation))
+    place_vow_voi_o = as.ordered(interaction(c2_place, vowel, c2_phonation)),
+    language_voi_o = as.ordered(interaction(language, c2_phonation))
   ) %>%
   mutate_if(is.character, as.factor)
 contrasts(kine_s$c2_phonation_o) <-  "contr.treatment"
 contrasts(kine_s$place_vow_voi_o) <-  "contr.treatment"
+contrasts(kine_s$language_voi_o) <-  "contr.treatment"
 ```
 
 # Data visualisation
@@ -184,3 +186,19 @@ trp_gam_4  <- bam(
 fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiceless"), rm.ranef = TRUE, zlim = c(18.5, 23.5))
 fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiced"), rm.ranef = TRUE, zlim = c(18.5, 23.5))
 ```
+
+```{r trp-gam-5}
+trp_gam_5 <- gam(
+  trp ~
+    language_voi_o +
+    s(proportion) +
+    s(proportion, by = language_voi_o) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = kine_s
+)
+```
+
+```{r trp-gam-5-plot}
+plot_smooths(trp_gam_5, proportion, voicing, facet_terms = language, split = list(language_voi_o = c("language", "voicing"))) + scale_y_continuous(breaks = seq(12, 28, 2))
+```
+
