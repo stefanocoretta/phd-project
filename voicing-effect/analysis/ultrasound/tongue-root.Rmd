@@ -1,0 +1,186 @@
+---
+title: "Tongue root position"
+author: "Stefano Coretta"
+date: "22/08/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+theme_set(theme_minimal())
+library(lmerTest)
+library(effects)
+data("kinematics", package = "coretta2018itapol")
+kine_clos <- kinematics  %>%
+  filter(
+    c1_phonation == "voiceless",
+    label == "closure_"
+    ) %>%
+  group_by(speaker) %>%
+  mutate(
+    trp = -TR_displacement_sm + max(TR_displacement_sm),
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  ungroup() %>%
+  mutate_if(is.character, as.factor)
+
+# filtered kinematics
+kine_clos_f <- kine_clos %>%
+  filter(
+    TR_displacement_sm > 10
+  )
+```
+
+## Data visualisation
+
+### TRP
+
+```{r trp-density}
+kine_clos %>%
+  ggplot(aes(trp)) +
+  geom_density(fill = "royalblue", colour = NA) +
+  labs(caption = "Higher TRP = more advanced TR")
+```
+
+After filtering for outliers.
+
+```{r trp-density-2}
+kine_clos %>%
+  filter(TR_displacement_sm > 10) %>%
+  ggplot(aes(trp)) +
+  geom_density(fill = "royalblue", colour = NA) +
+  labs(caption = "Higher TRP = more advanced TR")
+```
+
+```{r trp-density-speakers}
+kine_clos_f %>%
+  ggplot(aes(trp)) +
+  geom_density(fill = "darkorchid", colour = NA) +
+  facet_wrap(~speaker) +
+  labs(caption = "Higher TRP = more advanced TR")
+```
+
+```{r trp-density-voicing}
+kine_clos_f %>%
+  ggplot(aes(trp, fill = c2_phonation)) +
+  geom_density(colour = NA, alpha = 0.5) +
+  labs(caption = "Higher TRP = more advanced TR")
+```
+
+```{r trp-violin}
+kine_clos_f %>%
+  ggplot(aes(c2_phonation, trp))  +
+  geom_violin() +
+  geom_boxplot(width = 0.3) +
+  scale_y_continuous(breaks = seq(0, 30, 2))
+```
+
+```{r trp-boxplot}
+kine_clos_f %>%
+  ggplot(aes(c2_phonation, trp))  +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  scale_y_continuous(breaks = seq(0, 30, 2))
+```
+
+```{r trp-boxplot-facet}
+kine_clos_f %>%
+  ggplot(aes(c2_phonation, trp, fill = vowel))  +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  scale_y_continuous(breaks = seq(0, 30, 2))  +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r trp-density-facet}
+kine_clos_f %>%
+  ggplot(aes(trp, fill = c2_phonation))  +
+  geom_density(alpha = 0.5, colour = NA) +
+  geom_rug() +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r trp-density-facet-it}
+kine_clos_f %>%
+  filter(language == "Italian") %>%
+  ggplot(aes(trp, fill = c2_phonation))  +
+  geom_density(alpha = 0.5, colour = NA) +
+  geom_rug() +
+  facet_grid(c2_place ~ vowel)
+```
+
+```{r trp-density-facet-pl}
+kine_clos_f %>%
+  filter(language == "Polish") %>%
+  ggplot(aes(trp, fill = c2_phonation)) +
+  geom_density(alpha = 0.5, colour = NA) +
+  geom_rug() +
+  facet_grid(c2_place ~ vowel)
+```
+
+### TRP and vowel duration
+
+```{r trp-vdur}
+kine_clos_f %>%
+  ggplot(aes(vowel_duration, trp)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+```{r trp-vdur-2}
+kine_clos_f %>%
+  ggplot(aes(vowel_duration, trp, colour = syl_rate)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+```{r trp-vdur-voicing}
+kine_clos_f %>%
+  ggplot(aes(vowel_duration, trp, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+```{r trp-vdur-voicing-facet}
+kine_clos_f %>%
+  ggplot(aes(vowel_duration, trp, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  facet_grid(c2_place ~ vowel)
+```
+
+Vowel has clearly an effect. C2 place not so much.
+
+```{r trp-vdur-voicing-facet}
+kine_clos_f %>%
+  ggplot(aes(vowel_duration, trp, colour = c2_phonation)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ speaker)
+```
+
+There is a lot of inter-speaker variation. Some speakers have a negative correlation, others have positive, a few possibly none.
+
+## Significance testing
+
+### TRP and vowel duration
+
+```{r trp-vow-lm}
+trp_vow_lm <- lmer(
+  trp ~
+    vowel_duration *
+    vowel *
+    c2_phonation +
+    syl_rate +
+    (1+vowel_duration|speaker) +
+    (1|item),
+  data = kine_clos_f
+)
+summary(trp_vow_lm)
+```
+
+```{r trp-vow-lm-plot}
+plot(allEffects(trp_vow_lm))
+```
+
