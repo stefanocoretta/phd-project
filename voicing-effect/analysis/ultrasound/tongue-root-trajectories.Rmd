@@ -1,5 +1,5 @@
 ---
-title: "Tongue root"
+title: "Tongue root trajectories"
 author: "Stefano Coretta"
 date: "19/08/2018"
 output: html_document
