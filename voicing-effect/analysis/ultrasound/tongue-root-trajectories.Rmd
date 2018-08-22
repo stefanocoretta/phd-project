@@ -19,12 +19,14 @@ kinematics_series <- kinematics_series %>%
   )
 kine_s <- kinematics_series %>%
   filter(TR_displacement_sm > 10, proportion < 1) %>%
+  group_by(speaker) %>%
   mutate(
     trp = -TR_displacement_sm + max(TR_displacement_sm),
     c2_phonation_o = ordered(c2_phonation, levels = c("voiceless", "voiced")),
     place_vow_voi_o = as.ordered(interaction(c2_place, vowel, c2_phonation)),
     language_voi_o = as.ordered(interaction(language, c2_phonation))
   ) %>%
+  ungroup() %>%
   mutate_if(is.character, as.factor)
 contrasts(kine_s$c2_phonation_o) <-  "contr.treatment"
 contrasts(kine_s$place_vow_voi_o) <-  "contr.treatment"
@@ -165,7 +167,7 @@ trp_gam_3  <- bam(
 ```
 
 ```{r trp-gam-3-plot}
-plot_smooths(trp_gam_3, proportion, c2_phonation_o) + scale_y_continuous(breaks = seq(15, 25, 1)) + scale_color_discrete() + scale_fill_discrete()
+plot_smooths(trp_gam_3, proportion, c2_phonation_o) + scale_y_continuous(breaks = seq(1, 30, 1)) + scale_color_discrete() + scale_fill_discrete()
 ```
 
 ```{r trp-gam-4}
@@ -183,8 +185,8 @@ trp_gam_4  <- bam(
 ```
 
 ```{r trp-gam-4-plot}
-fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiceless"), rm.ranef = TRUE, zlim = c(18.5, 23.5))
-fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiced"), rm.ranef = TRUE, zlim = c(18.5, 23.5))
+fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiceless"), rm.ranef = TRUE, zlim = c(5.4, 9.5))
+fvisgam(trp_gam_4, c("proportion", "vowel_duration"), cond = list(c2_phonation_o = "voiced"), rm.ranef = TRUE, zlim = c(5.4, 9.5))
 ```
 
 ```{r trp-gam-5}
@@ -199,6 +201,6 @@ trp_gam_5 <- gam(
 ```
 
 ```{r trp-gam-5-plot}
-plot_smooths(trp_gam_5, proportion, voicing, facet_terms = language, split = list(language_voi_o = c("language", "voicing"))) + scale_y_continuous(breaks = seq(12, 28, 2))
+plot_smooths(trp_gam_5, proportion, voicing, facet_terms = language, split = list(language_voi_o = c("language", "voicing"))) + scale_y_continuous(breaks = seq(1, 30, 1))
 ```
 
