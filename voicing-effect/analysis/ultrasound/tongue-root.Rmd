@@ -11,7 +11,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(lmerTest)
 library(effects)
-data("kinematics", package = "coretta2018itapol")
+data("kinematics", "kinematics_series", package = "coretta2018itapol")
 kine_clos <- kinematics  %>%
   filter(
     c1_phonation == "voiceless",
@@ -30,6 +30,22 @@ kine_clos_f <- kine_clos %>%
   filter(
     TR_displacement_sm > 10
   )
+
+kine_onset <- kinematics_series %>%
+  filter(c1_phonation == "voiceless") %>%
+  group_by(rec_date) %>%
+  filter(seconds == min(seconds)) %>%
+  ungroup() %>%
+  group_by(speaker) %>%
+  mutate(
+    trp = -TR_displacement_sm + max(TR_displacement_sm),
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  ungroup() %>%
+  mutate_if(is.character, as.factor)
+
+kine_onset_f <- kine_onset %>%
+  filter(trp < 30)
 ```
 
 ## Data visualisation
@@ -184,3 +200,34 @@ summary(trp_vow_lm)
 plot(allEffects(trp_vow_lm))
 ```
 
+### TRP at vowel onset
+
+```{r trp-onset-sylrate}
+kine_onset %>%
+  filter(trp < 30) %>%
+  ggplot(aes(syl_rate, trp)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r trp-onset-lm}
+trp_onset_lm <- lmer(
+  trp ~
+    vowel_duration *
+    vowel *
+    c2_phonation +
+    syl_rate +
+    (1+vowel_duration|speaker) +
+    (1|item),
+  data = kine_onset_f
+)
+summary(trp_onset_lm)
+```
+
+```{r trp-onset-lm-plot}
+plot(allEffects(trp_onset_lm))
+```
+
+Tongue root position at vowel onset (as the first UTI frame after vowel onset) is more front with higher speech rates. This could explain why tehre is more tongue root advancement at closure onset with higher speech rates. The tongue root starts at a more front position.
+
+To this effect, vowel duration plays the additional role of increasing tongue root advancement with longer durations.

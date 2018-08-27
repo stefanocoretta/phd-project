@@ -12,12 +12,12 @@ theme_set(theme_minimal())
 library(itsadug)
 library(tidymv)
 data("kinematics_series", "kinematics", package = "coretta2018itapol")
-kinematics_series <- kinematics_series %>%
+kinematics_s <- kinematics_series %>%
   filter(c1_phonation == "voiceless") %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   )
-kine_s <- kinematics_series %>%
+kine_s <- kinematics_s %>%
   filter(TR_displacement_sm > 10, proportion < 1) %>%
   group_by(speaker) %>%
   mutate(
@@ -40,7 +40,7 @@ length(table(kine_s$rec_date))
 ```
 
 ```{r trp-point}
-kinematics_series %>%
+kinematics_s %>%
   ggplot(aes(proportion, -TR_displacement_sm)) +
   geom_point(alpha = 0.1)
 ```
@@ -202,5 +202,30 @@ trp_gam_5 <- gam(
 
 ```{r trp-gam-5-plot}
 plot_smooths(trp_gam_5, proportion, voicing, facet_terms = language, split = list(language_voi_o = c("language", "voicing"))) + scale_y_continuous(breaks = seq(1, 30, 1))
+```
+
+```{r trp-gam-6}
+trp_gam_6 <- bam(
+  trp ~
+    s(proportion) +
+    s(syl_rate) +
+    s(vowel_duration) +
+    ti(proportion, syl_rate) +
+    ti(proportion, vowel_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = kine_s
+)
+summary(trp_gam_6)
+```
+
+```{r trp-gam-6-plot}
+fvisgam(trp_gam_6, c("proportion", "syl_rate"), rm.ranef = TRUE)
+```
+
+```{r trp-gam-6-plot-2}
+plot_smooth(trp_gam_6, "proportion", cond = list("syl_rate" = 4), col = "red", rm.ranef = TRUE)
+plot_smooth(trp_gam_6, "proportion", cond = list("syl_rate" = 5), col = "blue", rm.ranef = TRUE, add = TRUE)
+plot_smooth(trp_gam_6, "proportion", cond = list("syl_rate" = 6), col = "green", rm.ranef = TRUE, add = TRUE)
+plot_smooth(trp_gam_6, "proportion", cond = list("syl_rate" = 6.5), col = "orange", rm.ranef = TRUE, add = TRUE)
 ```
 
