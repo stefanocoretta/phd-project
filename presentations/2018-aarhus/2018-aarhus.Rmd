@@ -8,7 +8,118 @@ output: beamer_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+theme_set(theme_minimal())
+library(lme4)
+library(lmerTest)
+library(effects)
+library(broom)
+library(broom.mixed)
 ```
 
+```{r read-data, message=FALSE}
+speakers <- read_csv("./datasets/speakers.csv")
+stimuli <- read_csv("./datasets/stimuli.csv")
 
+durations <- list.files(
+  path = "./datasets",
+  pattern = "*-durations.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(., na = "--undefined--")) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    language = recode(language, italian = "Italian", polish = "Polish"),
+    syl_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    )
+  ) %>%
+  filter(c1_phonation == "voiceless")
 
+durations_filtered <- durations %>%
+  group_by(speaker) %>%
+  mutate(
+    vowel_duration_z = scale(vowel_duration),
+    closure_duration_z = scale(closure_duration)
+  ) %>%
+  filter(
+    vowel_duration_z < 3, vowel_duration_z > -3,
+    closure_duration_z < 3, closure_duration_z > -3
+  )
+
+word_filtered <- durations %>%
+    group_by(speaker) %>%
+  mutate(
+    word_duration_z = scale(word_duration)
+  ) %>%
+  filter(
+    word_duration_z < 3, word_duration_z > -3
+  )
+
+rel_filtered <- durations %>%
+    group_by(speaker) %>%
+  mutate(
+    rel_rel_z = scale(rel_rel)
+  ) %>%
+  filter(
+    rel_rel_z < 3, rel_rel_z > -3
+  )
+```
+
+```{r vowels-plot}
+durations_filtered %>%
+  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  geom_point(position = position_jitterdodge(), alpha = 0.1) +
+  facet_grid(~ language) +
+  labs(x = "Vowel", y = "Vowel duration (ms)") +
+  scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
+
+ggsave("./fig/vowel-plot.pdf", width = 7, height = 5)
+```
+
+```{r closure-plot}
+durations_filtered %>%
+  ggplot(aes(vowel, closure_duration, fill = c2_phonation)) +
+  geom_boxplot() +
+  geom_point(position = position_jitterdodge(), alpha = 0.1) +
+  facet_grid(~ language) +
+  labs(x = "Vowel", y = "Closure duration (ms)") +
+  scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
+
+ggsave("./fig/closure-plot.pdf", width = 7, height = 5)
+```
+
+```{r vow-clo-lm}
+vow_clo_lm <- lmer(
+  vowel_duration ~
+    closure_duration *
+    vowel +
+    syl_rate +
+    (1+closure_duration|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+summary(vow_clo_lm)
+```
+
+```{r vow-clo-plot}
+as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
+  ggplot(aes(closure_duration, fit)) +
+  geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
+  geom_line(aes(colour = vowel)) +
+  geom_ribbon(aes(ymax = upper, ymin = lower, fill = vowel), alpha = 0.2) +
+  geom_rug(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
+  facet_grid(~ vowel) +
+  labs(x = "Closure duration (ms)", y = "Vowel duration (ms)") +
+  theme(legend.position = "none") +
+  scale_fill_brewer(type = "qual", palette = "Dark2") +
+  scale_colour_brewer(type = "qual", palette = "Dark2")
+
+ggsave("./fig/vow-clo-plot.pdf", width = 7, height = 5)
+```
