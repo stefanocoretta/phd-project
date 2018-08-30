@@ -74,7 +74,7 @@ rel_filtered <- durations %>%
 ```{r vowels-plot}
 durations_filtered %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
-  geom_boxplot() +
+  geom_boxplot(alpha = 0.5) +
   geom_point(position = position_jitterdodge(), alpha = 0.1) +
   facet_grid(~ language) +
   labs(x = "Vowel", y = "Vowel duration (ms)") +
@@ -86,7 +86,7 @@ ggsave("./fig/vowel-plot.pdf", width = 7, height = 5)
 ```{r closure-plot}
 durations_filtered %>%
   ggplot(aes(vowel, closure_duration, fill = c2_phonation)) +
-  geom_boxplot() +
+  geom_boxplot(alpha = 0.5) +
   geom_point(position = position_jitterdodge(), alpha = 0.1) +
   facet_grid(~ language) +
   labs(x = "Vowel", y = "Closure duration (ms)") +
@@ -122,4 +122,29 @@ as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
   scale_colour_brewer(type = "qual", palette = "Dark2")
 
 ggsave("./fig/vow-clo-plot.pdf", width = 7, height = 5)
+```
+
+```{r rr-plot-1}
+ggplot(rel_filtered) +
+  geom_density(aes(rel_rel, fill = c2_phonation), colour = NA, alpha = 0.5) +
+  geom_rug(aes(rel_rel)) +
+  facet_grid(~ language) +
+  scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2") +
+  labs(
+    x = "Release to Release duration (ms)"
+  )
+
+ggsave("./fig/rr-plot-1.pdf", width = 7, height = 5)
+```
+
+```{r rr-plot-2}
+rel_filtered %>%
+  ggplot(aes(c2_phonation, rel_rel)) +
+  geom_boxplot(aes(fill = c2_phonation), alpha = 0.5) +
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  facet_grid(~ language) +
+  labs(x = "C2 voicing", y = "Release to Release duration (ms)") +
+  scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
+
+ggsave("./fig/rr-plot-2.pdf", width = 7, height = 5)
 ```
