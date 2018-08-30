@@ -71,6 +71,20 @@ rel_filtered <- durations %>%
   )
 ```
 
+```{r vow-lm}
+vow_lm <- lmer(
+  vowel_duration ~
+    c2_phonation *
+    vowel *
+    language +
+    c2_place +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+```
+
 ```{r vowels-plot}
 durations_filtered %>%
   ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
@@ -81,6 +95,20 @@ durations_filtered %>%
   scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
 
 ggsave("./fig/vowel-plot.pdf", width = 7, height = 5)
+```
+
+```{r clo-lm}
+clo_lm <- lmer(
+  closure_duration ~
+    c2_phonation *
+    vowel *
+    language +
+    c2_place +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
 ```
 
 ```{r closure-plot}
@@ -147,4 +175,34 @@ rel_filtered %>%
   scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
 
 ggsave("./fig/rr-plot-2.pdf", width = 7, height = 5)
+```
+
+```{r rr-bf}
+rr_lm <- lme4::lmer(
+  rel_rel ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+rr_lm_null <- lme4::lmer(
+  rel_rel ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    syl_rate +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
 ```
