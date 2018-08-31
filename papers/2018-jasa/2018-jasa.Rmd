@@ -101,7 +101,7 @@ rel_filtered <- durations %>%
 
 <!-- it might be interesting to say that the VE applies even in cases when voicing is not actually present -->
 
-Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
+Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones [@meyer1904; @heffner1937; @house1953; @belasco1953; @peterson1960; @halle1967; @chen1970; @klatt1973; @lisker1974; @raphael1975; @javkin1976; @maddieson1976; @farnetani1986; @kluender1988; @laeufer1992; @fowler1992; @hussein1994; @esposito2002; @lampp2004; @warren2005; @durvasula2012].
 This so called 'voicing effect' has been found in a considerable variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
 
@@ -222,6 +222,10 @@ Due to software constraints, the order of the list was kept the same across the 
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
 The total experiment time lasted around 45 minutes.
 Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to ultrasound data collection), which yields to a grand total of 1224 tokens (792 from Italian, 432 from Polish).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
+
+The experiment was carried out in two locations: in the sound attenuated booth of the Phonetics Laboratory at the University of Manchester, and in a quiet room in a field location in Italy (Verbania, Northern Italy).
+In both locations the equipment and procedures were the same.
+Data collection started in December 2016 and ended in March 2018.
 
 ## Data processing and measurements
 
@@ -574,12 +578,13 @@ The invariance of the lag between the release of C1 and that of C2 then can be s
 <!-- also, all data so far is stressed vowels? -->
 <!-- indeed we don't know much about how syllables are concatenated? -->
 
-A right-edge organisation account is compatible with findings from electromyographic, x-ray microbeam, and ultrasonic data by, respectively, @raphael1975, @de-jong1991, and @celata2018.
-@celata2018 show that vowels followed by single consonants are longer than when followed by geminates (for example, /ba.ta/ vs. /bat.ta/).
+A right-edge organisation account is compatible with findings from a variety of sources.
+@celata2018 show with ultrasound tongue imaging data that, in Italian, vowels followed by single consonants are longer than when followed by geminates (for example, /ba.ta/ vs. /bat.ta/).
 However, vowels followed by a tautosyllabic cluster have the same duration as vowels followed by a heterosyllabic cluster (/pa.tron/ vs. /bat.man/).
-@celata2018 argue that these results corroborate a rhythmic account in which the relevant unit is what they call the rhythmic syllable (i.e. the VC(C) sequence), and not the traditional syllable.
-The duration of the rhythmic syllable is constant across the phonological contexts, while that of the traditional syllable is not.
-This reflects a gestural timing view in which the timing of the right edge of the consonant is fixed relative to the vowel.
+@celata2018 argue that these results corroborate a rhythmic account in which the relevant unit is not the traditional syllable, but rather the the VC(C) sequence.
+The importance of the VC(C) sequence as relevant speech unit has been previously recognised in the work of @farnetani1986 (who called it the 'rhythmic syllable') and @steriade2012 (who uses the term 'vowel to vowel interval').
+The duration of the rhythmic syllable or interval is constant across the phonological contexts, while the duration of the traditional syllable is not.
+This reflects a gestural organisation in which the timing of the right edge of the consonant is fixed relative to the vowel.
 
 @de-jong1991 reports that the closing gesture of voiceless stops (following stressed vowels) is faster than that of voiced stops, and that also it is timed earlier with respect to the opening gesture of the stressed vowel.
 According to @de-jong1991, the differences in vowel duration are driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture (also see \citealt{hertrich1997}).
