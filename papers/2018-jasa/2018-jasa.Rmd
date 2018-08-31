@@ -293,6 +293,10 @@ The extracted measurements were filtered before statistical analysis.
 Measures of vowel duration, closure duration, word duration, and Release to Release duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset.
 This operation (which generally corresponds to a loss of around 2.5\% of the data) yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of Release to Release duration.
 
+## Reproducibility statement
+
+Following the recommendations in @berez-kroeker2018, the data and code used to produce the analyses discussed in this paper are available on the Open Science Framework at \url{https://osf.io/bfyhr/?view_only=391ef2dcc2834039a90f739ddb6f137a} [@coretta2018g].
+
 # Results
 
 <!-- I talk about voiceless and voiced, should I mention that I mean underlyingly voiceless and voiced? I added it now in the results summary and I I say it also in the discussion towards the end -->
@@ -582,7 +586,7 @@ A right-edge organisation account is compatible with findings from a variety of 
 @celata2018 show with ultrasound tongue imaging data that, in Italian, vowels followed by single consonants are longer than when followed by geminates (for example, /ba.ta/ vs. /bat.ta/).
 However, vowels followed by a tautosyllabic cluster have the same duration as vowels followed by a heterosyllabic cluster (/pa.tron/ vs. /bat.man/).
 @celata2018 argue that these results corroborate a rhythmic account in which the relevant unit is not the traditional syllable, but rather the the VC(C) sequence.
-The importance of the VC(C) sequence as relevant speech unit has been previously recognised in the work of @farnetani1986 (who called it the 'rhythmic syllable') and @steriade2012 (who uses the term 'vowel to vowel interval').
+The importance of the VC(C) sequence as relevant speech unit has been previously recognised in the work of @farnetani1986 (who called it the 'rhythmic syllable') and @steriade2012 (who uses the term 'vowel to vowel interval', see also \citealt{hirsch2014} and \citealt{lunden2017}).
 The duration of the rhythmic syllable or interval is constant across the phonological contexts, while the duration of the traditional syllable is not.
 This reflects a gestural organisation in which the timing of the right edge of the consonant is fixed relative to the vowel.
 
