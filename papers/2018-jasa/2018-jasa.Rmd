@@ -321,14 +321,13 @@ vow_lm <- lmer(
 )
 ```
 
-```{r vowels-plot, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (left) and Polish (right), for the vowels /a, o, u/ when followed by a voiceless (green) or voiced (orange) stop. ", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r vowels-plot, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
-  ggplot(aes(vowel, vowel_duration, fill = c2_phonation)) +
+  ggplot(aes(c2_phonation, vowel_duration)) +
   geom_boxplot(alpha = 0.5) +
-  geom_point(position = position_jitterdodge(), alpha = 0.1) +
-  facet_grid(~ language) +
-  labs(x = "Vowel", y = "Vowel duration (ms)") +
-  scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  facet_grid(language ~ vowel) +
+  labs(x = "C2 voicing", y = "Vowel duration (ms)")
 ```
 
 \Cref{f:vowels-plot} shows boxplots and raw data of vowel duration for the three vowels /a, o, u/ when followed by voiceless or voiced stops in Italian and Polish.
@@ -364,14 +363,13 @@ clo_lm <- lmer(
 )
 ```
 
-```{r closure-plot, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless (green) and voiced (orange) stops in Italian (left) and Polish (right) when preceded by the vowels /a, o, u/.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r closure-plot, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
-  ggplot(aes(vowel, closure_duration, fill = c2_phonation)) +
+  ggplot(aes(c2_phonation, closure_duration)) +
   geom_boxplot(alpha = 0.5) +
-  geom_point(position = position_jitterdodge(), alpha = 0.1) +
-  facet_grid(~ language) +
-  labs(x = "Vowel", y = "Closure duration (ms)") +
-  scale_fill_brewer(name = "C2 voicing", type = "qual", palette = "Dark2")
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  facet_grid(language ~ vowel) +
+  labs(x = "C2 voicing", y = "Vowel duration (ms)")
 ```
 
 \Cref{f:closure-plot} illustrates stop closure durations with boxplots and individual raw data points.
@@ -403,14 +401,11 @@ summary(vow_clo_lm)
 as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
   ggplot(aes(closure_duration, fit)) +
   geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
-  geom_line(aes(colour = vowel)) +
-  geom_ribbon(aes(ymax = upper, ymin = lower, fill = vowel), alpha = 0.2) +
+  geom_line() +
+  geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
   geom_rug(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
   facet_grid(~ vowel) +
-  labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")  +
-  scale_colour_brewer(type = "qual", palette = "Dark2") +
-  scale_fill_brewer(type = "qual", palette = "Dark2") +
-  theme(legend.position = "none")
+  labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")
 ```
 
 A model addressing the relationship between vowel and stop closure duration was fitted with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate; an interaction between closure duration and vowel; by-speaker and by-word random intercepts, and by-speaker random slopes for C2 voicing.
@@ -466,13 +461,12 @@ This indicates that there is strong evidence for a null effect of C2 voicing on 
 
 ```{r rr-plot, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the Release to Release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced.", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data", warning=FALSE}
 rel_filtered %>%
-  ggplot(aes(c2_phonation, rel_rel, fill = c2_phonation)) +
+  ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot(alpha = 0.5) +
   geom_jitter(alpha = 0.1, width = 0.3) +
   facet_grid(~ language) +
   labs(x = "C2 voicing", y = "Release to Release duration (ms)") +
-  theme(legend.position = "none") +
-  scale_fill_brewer(type = "qual", palette = "Dark2")
+  theme(legend.position = "none")
 ```
 
 ```{r rr-bf}
