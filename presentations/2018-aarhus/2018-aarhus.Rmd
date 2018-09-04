@@ -4,6 +4,8 @@ title: "Vowel duration as a function of consonant gestural timing in Italian and
 author: "Stefano Coretta"
 date: "05/08/2018"
 output: beamer_presentation
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -109,6 +111,21 @@ kine_clos <- kinematics  %>%
 kine_clos_f <- kine_clos %>%
   filter(
     TR_displacement_sm > 10
+  )
+
+wavegram <- list.files(
+  path = "./datasets",
+  pattern = "*-wavegram.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_csv(.)) %>%
+  left_join(y = speakers) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate_if(is.character, as.factor) %>%
+  group_by(date) %>%
+  mutate(
+    sequence_prop = sequence / max(sequence)
   )
 ```
 
@@ -320,4 +337,86 @@ as_tibble(effect("vowel_duration:vowel:c2_phonation", trp_vow_lm)) %>%
   theme(legend.position = "top")
 
 ggsave("./fig/trp-vow-plot.pdf", width = 7, height = 3)
+```
+
+```{r italian-gam}
+italian_gam <- bam(
+    amplitude ~
+        c2_phonation +
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = c2_phonation) + s(sample, by = c2_phonation) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = c2_phonation) +
+        s(sequence_prop, speaker, bs = "fs"),
+    data = filter(wavegram, language == "italian")
+)
+```
+
+```{r italian-gam-plot}
+png(filename = "./presentations/2018-aarhus/fig/it-voiceless-wavegram.png", height = 768, width = 1024)
+fvisgam(
+  italian_gam,
+  view = c("sequence_prop","sample"),
+  cond = list(c2_phonation = "voiceless"),
+  zlim = c(0, 1),
+  rm.ranef = TRUE,
+  main = "Wavegram of vowels followed by voiceless stops",
+  xlab = "Vowel proportion",
+  ylab = ""
+)
+dev.off()
+
+png(filename = "./presentations/2018-aarhus/fig/it-voiced-wavegram.png", height = 768, width = 1024)
+fvisgam(
+  italian_gam,
+  view = c("sequence_prop","sample"),
+  cond = list(c2_phonation = "voiced"),
+  zlim = c(0, 1),
+  rm.ranef = TRUE,
+  main = "Wavegram of vowels followed by voiced stops",
+  xlab = "Vowel proportion",
+  ylab = ""
+)
+dev.off()
+```
+
+```{r polish-gam}
+polish_gam <- bam(
+    amplitude ~
+        c2_phonation +
+        s(sequence_prop) + s(sample) +
+        s(sequence_prop, by = c2_phonation) + s(sample, by = c2_phonation) +
+        ti(sequence_prop, sample) +
+        ti(sequence_prop, sample, by = c2_phonation) +
+        s(sequence_prop, speaker, bs = "fs"),
+    data = filter(wavegram, language == "polish")
+)
+```
+
+```{r polish-gam-plot}
+png(filename = "./presentations/2018-aarhus/fig/pl-voiceless-wavegram.png", height = 768, width = 1024)
+fvisgam(
+  polish_gam,
+  view = c("sequence_prop","sample"),
+  cond = list(c2_phonation = "voiceless"),
+  zlim = c(0, 1),
+  rm.ranef = TRUE,
+  main = "Wavegram of vowels followed by voiceless stops",
+  xlab = "Vowel proportion",
+  ylab = ""
+)
+dev.off()
+
+png(filename = "./presentations/2018-aarhus/fig/pl-voiced-wavegram.png", height = 768, width = 1024)
+fvisgam(
+  polish_gam,
+  view = c("sequence_prop","sample"),
+  cond = list(c2_phonation = "voiced"),
+  zlim = c(0, 1),
+  rm.ranef = TRUE,
+  main = "Wavegram of vowels followed by voiced stops",
+  xlab = "Vowel proportion",
+  ylab = ""
+)
+dev.off()
 ```
