@@ -333,7 +333,7 @@ durations_filtered %>%
 \Cref{f:vowels-plot} shows boxplots and raw data of vowel duration for the three vowels /a, o, u/ when followed by voiceless or voiced stops in Italian and Polish.
 Vowel tend to be longer when followed by a voiced stop in both languages.
 The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
-There is no evident effect of C2 voicing in /u/ in Italian, but the effect is discernible in Polish /u/.
+There is no evident effect of C2 voicing in /u/ in Italian (as in \citealt{ferrero1978}), but the effect is discernible in Polish /u/.
 In Italian, vowels have a mean duration of 106 ms (sd = 27) before voiceless stops, and a mean duration of 118 ms (sd = 33) before voiced stops.
 Polish vowels are on average 75 ms long (sd = 16) when followed by a voiceless stop, and 83 ms long (sd = 19) if a voiced stop follows.
 The difference in vowel duration based on the raw means is 12 ms in Italian and 8 ms in Polish.
@@ -628,13 +628,13 @@ The temporal invariance of the Release to Release interval, together with a diff
 I proposed that the Release to Release invariance is a consequence of the gestural organisation of the CV́C sequence, in which the lag between the right-edge of the second consonant and the preceding stressed vowel is fixed.
 
 
-<!-- \begin{acknowledgments}
-I am for ever in debt with Dr. Ricardo Bermúdez-Otero and Dr. Patrycja Strycharczuk for their immense support and patience in supervising this project.
-I also want to thank the audience at the 16th Laboratory Phonology conference (LabPhon16) for their invaluable feedback.
-Finally, thanks go to my colleagues at the Phonetics Laboratory of the University of Manchester, who witnessed and endured the slow development of this research that lead to this paper.
+\begin{acknowledgments}
+I am grateful to Dr. Ricardo Bermúdez-Otero and Dr. Patrycja Strycharczuk for their immense support and patience in providing feedback on this project.
+I also want to thank the audience at the 16th Laboratory Phonology conference (LabPhon16) for their invaluable input.
+Thanks also go to my colleagues at the Phonetics Laboratory of the University of Manchester, who provided help in different ways.
 Any remaining errors are my own.
 This project has been funded by the School of Arts, Languages, and Cultures Graduate School at the University of Manchester.
-\end{acknowledgments} -->
+\end{acknowledgments}
 
 \appendix
 
