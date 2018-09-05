@@ -1,5 +1,5 @@
 ---
-title: "Voicing-related differences in vowel duration as compensatory temporal adjustment: An exploratory study of the voicing effect in Italian and Polish"
+title: "An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish"
 shorttitle: Voicing-related differences in vowel duration as compensatory temporal adjustment
 author:
 - name: Stefano Coretta
@@ -10,7 +10,7 @@ output:
     citation_package: natbib
     fig_caption: yes
 abstract: |
-  Over a century of phonetic research have established the cross-linguistic existence of the so called 'voicing effect', by which vowels tend to be shorter when followed by voiceless stops and longer when the following stop is voiced.
+  Over a century of phonetic research has established the cross-linguistic existence of the so called 'voicing effect', by which vowels tend to be shorter when followed by voiceless stops and longer when the following stop is voiced.
   However, no agreement is found among scholars regarding the source of this effect, and several causal accounts have been advanced.
   A notable one is the compensatory temporal adjustment account, according to which the duration of the vowel is inversely correlated with the stop closure duration (voiceless stops having longer closure durations than voiced stops).
   The compensatory account has been criticised due to lack of empirical support and its vagueness regarding the temporal interval within which compensation is implemented.
@@ -110,25 +110,25 @@ The majority of the proposed accounts place the source of the voicing effect in 
 A notable production account, which will be the focus of this study, is the compensatory temporal adjustment account [@lindblom1967; @slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
 According to this account, the voicing effect follows from the reorganisation of gestures within a unit of speech that is not affected by stop voicing.
 The duration of such unit is held constant across voicing contexts, while the duration of voiceless and voiced obstruents differs.
-It is well known that the closure of voiceless stops is longer than that of voiced stops [@lisker1957; @van-summers1987; @davis1989; @de-jong1991].
+The closure of voiceless stops is longer than that of voiced stops [@lisker1957; @van-summers1987; @davis1989; @de-jong1991].
 As a consequence, vowels followed by voiceless stops (which have a long closure) are shorter than vowels followed by voiced stops (which have a short closure).
 Advocates of the compensatory account propose two prosodic units as the scope of the temporal adjustment: the syllable (or, more neutrally, the VC sequence, \citealt{lindblom1967}), and the word [@slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
 However, the compensatory temporal adjustment account has been criticised in subsequent work.
 
 Empirical evidence and logic challenge the proposal that the syllable or the word have a constant duration and hence drive compensation.
-First, Lindblom's -@lindblom1967 argument that the duration of the syllable is constant is not supported by findings in @chen1970 and @jacewicz2009.
+First, Lindblom's \citeyear{lindblom1967} argument that the duration of the syllable is constant is not supported by the findings in @chen1970 and @jacewicz2009.
 @chen1970 rejects a syllable-based compensatory account on the light of the fact that the duration of the syllable is affected by consonant voicing.
 @jacewicz2009 further show that the duration of monosyllabic words in American English changes depending on the voicing of the coda consonant.
 Second, although the results in @slis1969 suggest that the duration of disyllabic words in Dutch is constant whether the second stop is voiceless or voiced, it does not follow from this fact that compensation should necessarily target the vowel preceding the stop.
 Indeed, it is logically possible that the following unstressed vowel could be the target of the compensation, therefore differences in preceding vowel duration still call for an explanation.
 
-The compensatory temporal adjustment account has been further challenged on the basis of the so called 'aspiration effect' [@maddieson1976], by which vowels are longer when followed by aspirated stops than when followed by non-aspirated stops.
+The compensatory temporal adjustment account has been further challenged on the basis of the so called 'aspiration effect' [@maddieson1976], by which vowels are longer when followed by aspirated stops than when followed by unaspirated stops.
 In Hindi, vowels before voiceless unaspirated stops are the shortest, followed by vowels before voiced unaspirated and voiceless aspirated stops, which have similar duration, followed by vowels before voiced aspirated stops, which are the longest.
 @maddieson1976 find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
 @maddieson1976 argue that a compensatory explanation for differences in vowel duration cannot be maintained.
 
 However, a re-evaluation of the way consonant duration is measured in @maddieson1976 might actually turn their findings in favour of a compensatory account.
-Due to difficulties in detecting the release of the consonant of interest, consonant duration in @maddieson1976 is measured from the closure of the relevant consonant to the release of the following, (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* was calculated as the interval between the closure of /tʰ/ and the release of /k/).
+Due to difficulties in detecting the release of the consonant of interest, consonant duration in @maddieson1976 is measured from the closure of the relevant consonant to the release of the following, (e.g., in *ab sāth kaho*, the duration of /tʰ/ in *sāth* is calculated as the interval between the closure of /tʰ/ and the release of /k/).
 This measure includes the burst and aspiration (if present) of the consonant following the target vowel.
 @slis1969a, however, state that the inverse correlation between vowel duration and the following consonant applies to *closure* duration, and not to the entire *consonant* duration.
 If a correlation exists between vowel and closure duration, the inclusion of burst and/or aspiration clearly alters this relationship.
@@ -157,7 +157,7 @@ In conclusion, while the compensatory temporal adjustment account is plausible o
 ## The present study
 
 This paper reports on selected results from a broader exploratory study that investigates the relationship between vowel duration and consonant voicing from both an acoustic and articulatory perspective.
-Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.\footnote{As per \citet{cysouw2013}, the glossonyms \textit{Italian} and \textit{Polish} as used here refer, respectively, to the languoids Italian [\textsc{Glottocode}: \texttt{ital1282}] and Polish [\textsc{Glottocode}: \texttt{poli1260}].}
+Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.\footnote{As per \citet{cysouw2013}, the glossonyms \textit{Italian} and \textit{Polish} as used here to refer, respectively, to the languoids Italian [\textsc{Glottocode}: \texttt{ital1282}] and Polish [\textsc{Glottocode}: \texttt{poli1260}].}
 Given its exploratory nature, this study was not devised to test the compensatory account, but rather to collect articulatory and acoustic data on the voicing effect.\footnote{To the best of my knowledge, this is the first attempt to gather synchronised acoustic, tongue imaging and electroglottographic data in relation to the voicing effect.}
 Moreover, the design of the study has been constrained by the use of such articulatory techniques (see \Cref{s:method}).
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
@@ -191,7 +191,7 @@ The participants signed a written consent and received a monetary compensation o
 ## Equipment
 
 The acquisition of the audio signal was achieved with the software Articulate Assistant Advanced™ (AAA, v2.17.2, \citealt{articulate2011}) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
-Audio recordings were sampled at 22050 MHz (16-bit), in a proprietary format (`.aa0`).
+Audio recordings were sampled at 22050 Hz (16-bit), in a proprietary format (`.aa0`).
 A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
 The microphone was placed at the level of the participant's mouth on one side, at a distance of about 10 cm.\footnote{The microphone was clipped onto a metal headset wore by the participant, which is part of the ultrasound equipment.}
 
@@ -244,7 +244,7 @@ consonant offset      & (C2 offset)        & appearance of higher formants of th
 consonant release & (C1/C2 release)         & automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
 }
 
-The audio recordings were exported from AAA in `.wav` format at the same sample and bit rate for further processing.
+The audio recordings were exported from AAA in the `.wav` format at the same sample and bit rate for further processing.
 A forced aligned transcription was accomplished through the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
 The outcome of the automatic annotation was manually corrected, according to the criteria in \Cref{t:dur-measures}.
 The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014.
@@ -259,7 +259,7 @@ All further data processing and visualisation was done in R v3.5.0 [@r-core-team
     \fig{img/annotation-1.pdf}{0.5\textwidth}{(a)}
     \fig{img/annotation-2.pdf}{0.5\textwidth}{(b)}
   }
-  \caption{Segmentation example.}
+  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by an Italian speaker.}
   \label{f:segmentation}
 \end{figure*}
 
@@ -505,14 +505,14 @@ In Italian, the mean duration of the Release to Release interval is 210 ms (sd =
 In Polish, the mean durations are respectively 173 (sd = 22) and 172 (sd = 21) ms.
 The specifications of the null and full models for the Release to Release duration are the same as for word duration.
 The Bayes factor of the null model against the full model is `r rr_bf`, which means that the null model (without C2 voicing) is `r rr_bf` times more likely than the model with C2 voicing as a predictor.
-The data suggests there is positive evidence that duration of the Release to Release interval is not affected by C2 voicing.
+The Bayes factor suggests there is positive evidence that duration of the Release to Release interval is not affected by C2 voicing.
 
 ## Summary
 
 Seventeen participants were recorded while reading CV́CV words embedded in a frame sentence.
 The stressed vowel was either /a, o, u/, and C2 was one of /t, d, k, g/.
 Of the seventeen participants, 11 are native speakers of Italian and 6 of Polish.
-Vowel, stop closure, word, and Release to Release interval duration were measured from the acoustic signal.
+The durations of the vowel, stop closure, word, and Release to Release interval were measured from the acoustic signal.
 The analyses of the durational data suggest that:
 
 \begin{enumerate}[(a)]
@@ -620,7 +620,7 @@ In particular, the account bears predictions on the direction of the durational 
 For example, the mix of results with regard to the effect of aspiration [@durvasula2012] suggests that the conditions for a temporal adjustment might differ across the contexts and languages studied.
 In light of the results in @begus2017, future studies will have to investigate the durational invariance of speech intervals in relation to a variety of phonation contrasts.
 
-# Conclusion
+# Conclusions
 
 The results of an exploratory study on the effect of voicing on vowel duration bring support for a compensatory temporal adjustment account of such effect.
 Acoustic data from seventeen speakers of Italian and Polish show that the temporal distance between two consecutive stop releases is not affected by the voicing of the second stop in CV́CV words.
@@ -692,7 +692,7 @@ pl07 & 32 & Female & Polish  & English, Russian                          & Biels
 
 See \Cref{t:targets}.
 
-\ctable[caption = Target words.,
+\ctable[caption = Target words. An asterisk indicates a real words.,
 label = t:targets,
 star,
 doinside = \footnotesize
