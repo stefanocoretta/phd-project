@@ -146,8 +146,11 @@ preceding vowel.
 Almost a hundred years of research have consistently shown that
 consonantal voicing has an effect on preceding vowel duration: vowels
 followed by voiced obstruents are longer than when followed by voiceless
-ones
-\citep{meyer1904, heffner1937, house1953, belasco1953, peterson1960, halle1967, chen1970, klatt1973, lisker1974, raphael1975, javkin1976, maddieson1976, farnetani1986, kluender1988, laeufer1992, fowler1992, hussein1994, esposito2002, lampp2004, warren2005, durvasula2012}.
+ones (\citealt{meyer1904}; \citealt{heffner1937}; \citealt{house1953};
+\citealt{belasco1953}; \citealt{peterson1960}; \citealt{halle1967};
+\citealt{chen1970}; \citealt{klatt1973}; \citealt{lisker1974};
+\citealt{laeufer1992}; \citealt{fowler1992}; \citealt{hussein1994};
+\citealt{lampp2004}; \citealt{warren2005}; \citealt{durvasula2012}).
 This so called `voicing effect' has been found in a considerable variety
 of languages, including (but not limited to) English, German, Hindi,
 Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a
@@ -405,19 +408,19 @@ collection started in December 2016 and ended in March 2018.
 \subsection{Data processing and
 measurements}\label{data-processing-and-measurements}
 
-\ctable[caption = List of measurements as extracted from acoustics.,
+\ctable[caption = Criteria for the identification of acoustics landmarks.,
 label = t:dur-measures,
 width=\textwidth,
 star
 ]{ll>{\raggedright}p{9cm}}{}{
 \FL
 \textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
-vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
-vowel offset          & (V1 offset)        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
-consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
-closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
-consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
-consonant release & (C1/C2 release)         & automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
+vowel onset           & (V1 onset)         & Appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
+vowel offset          & (V1 offset)        & Disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
+consonant onset       & (C2 onset)         & Corresponds to V1 offset                                                                    \NN
+closure onset         & (C2 closure onset) & Corresponds to V1 offset                                                                    \NN
+consonant offset      & (C2 offset)        & Appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
+consonant release & (C1/C2 release)         & Automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
 }
 
 The audio recordings were exported from AAA in the \texttt{.wav} format
@@ -427,19 +430,19 @@ Alignment and Syllabification software (SPPAS) \citep{bigi2015}. The
 outcome of the automatic annotation was manually corrected, according to
 the criteria in \Cref{t:dur-measures}. The releases of C1 and C2 were
 detected automatically by means of a Praat scripting implementation of
-the algorithm described in \citet{ananthapadmanabha2014}. The durations
-in milliseconds of the following intervals were extracted with Praat
-scripting from the annotated acoustic landmarks: word duration, vowel
-duration (V1 onset to V1 offset), consonant closure duration (V1 offset
-to C2 release), and Release to Release duration (C1 release to C2
-release). Sentence duration was measured in seconds.
-\Cref{f:segmentation} shows an example of the segmentation of /pata/ (a)
-and /pada/ (b) from an Italian speaker. Syllable rate (syllables per
-second) was used as a proxy to speech rate \citep{plug2018}, and was
-calculated as the number of syllables divided by the duration of the
-sentence in seconds (8 syllables in Italian, 6 in Polish). All further
-data processing and visualisation was done in R v3.5.0
-\citep{r-core-team2018, wickham2017}.
+the algorithm described in \citet{ananthapadmanabha2014}, and
+subsequently corrected if necessary. The durations in milliseconds of
+the following intervals were extracted with Praat scripting from the
+annotated acoustic landmarks: word duration, vowel duration (V1 onset to
+V1 offset), consonant closure duration (V1 offset to C2 release), and
+Release to Release duration (C1 release to C2 release). Sentence
+duration was measured in seconds. \Cref{f:segmentation} shows an example
+of the segmentation of /pata/ (a) and /pada/ (b) from an Italian
+speaker. Syllable rate (syllables per second) was used as a proxy to
+speech rate \citep{plug2018}, and was calculated as the number of
+syllables divided by the duration of the sentence in seconds (8
+syllables in Italian, 6 in Polish). All further data processing and
+visualisation was done in R v3.5.0 \citep{r-core-team2018, wickham2017}.
 
 \begin{figure*}
   \figline{
@@ -520,12 +523,14 @@ confidence intervals and \emph{p}-values) are given in \Cref{a:stats}.
 
 \subsection{Vowel duration}\label{vowel-duration}
 
+\label{s:vduration}
+
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-jasa_files/figure-latex/Figure2} \caption{Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop.}\label{f:Figure2}
 \end{figure}
 
-\Cref{f:vowels-plot} shows boxplots and raw data of vowel duration for
-the three vowels /a, o, u/ when followed by voiceless or voiced stops in
+\Cref{f:Figure2} shows boxplots and raw data of vowel duration for the
+three vowels /a, o, u/ when followed by voiceless or voiced stops in
 Italian and Polish. Vowel tend to be longer when followed by a voiced
 stop in both languages. The effect appears to be greater in Italian than
 in Polish, especially for the vowels /a/ and /o/. There is no evident
@@ -559,12 +564,14 @@ vowel durations (\(\hat{\beta}\) = -15 ms, se = 1).
 \subsection{Consonant closure
 duration}\label{consonant-closure-duration}
 
+\label{s:cduration}
+
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-jasa_files/figure-latex/Figure3} \caption{Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/.}\label{f:Figure3}
 \end{figure}
 
-\Cref{f:closure-plot} illustrates stop closure durations with boxplots
-and individual raw data points. A pattern opposite to that with vowel
+\Cref{f:Figure3} illustrates stop closure durations with boxplots and
+individual raw data points. A pattern opposite to that with vowel
 duration can be noticed: closure duration is shorter for voiced than for
 voiceless stops. The closure of voiceless stops in Italian is 77 ms long
 (sd = 20), while the voiced stops have a mean closure duration of 63 ms
@@ -581,6 +588,8 @@ durations (\(\hat{\beta}\) = -8.5 ms, se = 1 ms).
 \subsection{Vowel and closure
 duration}\label{vowel-and-closure-duration}
 
+\label{s:vcduration}
+
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-jasa_files/figure-latex/Figure4} \caption{Raw data and estimated regression lines of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish).}\label{f:Figure4}
 \end{figure}
@@ -596,8 +605,8 @@ is greater than with /a/ and /o/ (\(\hat{\beta}\) = -0.35 ms, se = 0.06
 ms). In general, closure duration is inversely proportional to vowel
 duration. However, such correlation is quite weak, as shown by the small
 estimates. A 1 ms increase in closure duration corresponds to a 0.2--0.5
-ms decrease in vowel duration. \Cref{f:vow-clo-plot} shows for each
-vowel /a, o, u/ the individual data points and the regression lines with
+ms decrease in vowel duration. \Cref{f:Figure4} shows for each vowel /a,
+o, u/ the individual data points and the regression lines with
 confidence intervals extracted from the mixed-effects model.
 
 \subsection{Word duration}\label{word-duration}
@@ -624,7 +633,7 @@ duration}\label{release-to-release-interval-duration}
 \includegraphics[width=\linewidth]{2018-jasa_files/figure-latex/Figure5} \caption{Raw data and boxplots of the duration in milliseconds of the Release to Release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced.}\label{f:Figure5}
 \end{figure}
 
-In \Cref{f:rr-plot}, boxplots and raw data points show the duration of
+In \Cref{f:Figure5}, boxplots and raw data points show the duration of
 the Release to Release interval in words with a voiceless vs.~a voiced
 C2 stop, in Italian and Polish. It can be seen that the distributions,
 medians, and quartiles of the durations in the voiceless and voiced
@@ -650,9 +659,9 @@ closure, word, and Release to Release interval were measured from the
 acoustic signal. The analyses of the durational data suggest that:
 
 \begin{enumerate}[(a)]
-  \item Stressed vowels in C\textsubscript{1}V́C\textsubscript{2}V words in Italian and Polish are 19 ms longer (se = 4.4) when C2 is voiced.
+  \item Stressed vowels in C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V words in Italian and Polish are 19 ms longer (se = 4.4) when C2 is voiced.
   \item C2 closure is 16.5 ms shorter (se = 3) if the stop is voiced.
-  \item Vowel duration negatively correlates with closure duration, such that shorter closures correspond to longer vowels.
+  \item V1 duration negatively correlates with closure duration, such that shorter closures correspond to longer vowels.
   \item Both word duration and Release to Release duration are not affected by the underlying voicing specification of C2.
 \end{enumerate}
 
@@ -764,7 +773,7 @@ longer than when followed by geminates (for example, /ba.ta/ vs.
 same duration as vowels followed by a heterosyllabic cluster (/pa.tron/
 vs. /bat.man/). \citet{celata2018} argue that these results corroborate
 a rhythmic account in which the relevant unit is not the traditional
-syllable, but rather the the VC(C) sequence. The importance of the VC(C)
+syllable, but rather the VC(C) sequence. The importance of the VC(C)
 sequence as relevant speech unit has been previously recognised in the
 work of \citet{farnetani1986} (who called it the `rhythmic syllable')
 and \citet{steriade2012} (who uses the term `vowel to vowel interval',
@@ -883,7 +892,7 @@ See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and
 
 \begin{table}
 
-\caption{\label{tab:vow-table}Summary of the linear mixed-effects model fitted to vowel duration.}
+\caption{\label{tab:vow-table}Summary of the linear mixed-effects model fitted to vowel duration (see \Cref{s:vduration}).}
 \centering
 \begin{tabular}[t]{lrrrrrrrl}
 \toprule
@@ -911,7 +920,7 @@ Voiced, /u/, Polish & 7.9601 & 8.3077 & -8.3227 & 24.2428 & 10.6040 & 0.9582 & 0
 
 \begin{table}
 
-\caption{\label{tab:clo-table}Summary of a linear mixed-effects model fitted to closure duration.}
+\caption{\label{tab:clo-table}Summary of the linear mixed-effects model fitted to closure duration (see \Cref{s:cduration}).}
 \centering
 \begin{tabular}[t]{lrrrrrrrl}
 \toprule
@@ -939,7 +948,7 @@ Voiced, /u/, Polish & -3.2088 & 7.3279 & -17.5711 & 11.1536 & 10.9696 & -0.4379 
 
 \begin{table}
 
-\caption{\label{tab:vow-clo-table}Summary of a linear mixed-effects model fitted to vowel duration with closure duration as predictor.}
+\caption{\label{tab:vow-clo-table}Summary of the linear mixed-effects model fitted to vowel duration with closure duration as predictor (see \Cref{s:vcduration}).}
 \centering
 \begin{tabular}[t]{lrrrrrrrl}
 \toprule
@@ -964,29 +973,29 @@ participants}\label{socio-linguistic-information-of-participants}
 
 See \Cref{t:socio}.
 
-\ctable[caption = Participants' sociolinguistic information.,
+\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad.,
 label = t:socio,
 width=\textwidth,
 star,
 doinside = \footnotesize
-]{llll>{\raggedright}p{5cm}lll}{}{
+]{llll>{\raggedright}p{5cm}l>{\raggedright}p{3.5cm}l}{}{
 \FL
 ID & Age & Sex    & Native L & Other Ls& City of birth & Spent most time in & > 6 mo \ML
-it01 & 29 & Male   & Italian & English, Spanish                          & Verbania            & Verbania        & Yes \NN
-it02 & 26 & Male   & Italian & Friulian, English, Ladin-Venetan          & Udine               & Tricesimo & Yes \NN
-it03 & 28 & Female & Italian & English, German                           & Verbania            & Verbania        & No  \NN
-it04 & 54 & Female & Italian & Calabrese                                 & Verbania            & Verbania        & No  \NN
-it05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
-it09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
-it11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
-it13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN
-it14 & 32 & Male & Italian & English, Spanish & Frosinone & Frosinone & Yes \NN
-pl02 & 32 & Female & Polish  & English, Norwegian, French, German, Dutch & Koło                & Poznań          & Yes \NN
-pl03 & 26 & Male   & Polish  & Russian, English, French, German          & Nowa Sol            & Poznań          & Yes \NN
-pl04 & 34 & Female & Polish  & Spanish, English, French                  & Warsaw              & Warsaw          & No  \NN
-pl05 & 42 & Male   & Polish  & English, French                           & Przasnysz           & Warsaw        & No  \NN
-pl06 & 33 & Male   & Polish  & English                                   & Zgierz              & Zgierz          & Yes \NN
-pl07 & 32 & Female & Polish  & English, Russian                          & Bielsk Podlaski     & Bielsk Podlaski & Yes \LL
+IT01 & 29 & Male   & Italian & English, Spanish                          & Verbania            & Verbania        & Yes \NN
+IT02 & 26 & Male   & Italian & Friulian, English, Ladin-Venetan          & Udine               & Tricesimo & Yes \NN
+IT03 & 28 & Female & Italian & English, German                           & Verbania            & Verbania        & No  \NN
+IT04 & 54 & Female & Italian & Calabrese                                 & Verbania            & Verbania        & No  \NN
+IT05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
+IT09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
+IT11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
+IT13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN
+IT14 & 32 & Male & Italian & English, Spanish & Frosinone & Frosinone & Yes \NN
+PL02 & 32 & Female & Polish  & English, Norwegian, French, German, Dutch & Koło                & Poznań          & Yes \NN
+PL03 & 26 & Male   & Polish  & Russian, English, French, German          & Nowa Sol            & Poznań          & Yes \NN
+PL04 & 34 & Female & Polish  & Spanish, English, French                  & Warsaw              & Warsaw          & No  \NN
+PL05 & 42 & Male   & Polish  & English, French                           & Przasnysz           & Warsaw        & No  \NN
+PL06 & 33 & Male   & Polish  & English                                   & Zgierz              & Zgierz          & Yes \NN
+PL07 & 32 & Female & Polish  & English, Russian                          & Bielsk Podlaski     & Bielsk Podlaski & Yes \LL
 }
 
 \section{Target words}\label{target-words}
