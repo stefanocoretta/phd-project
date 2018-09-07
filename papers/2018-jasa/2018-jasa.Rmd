@@ -26,8 +26,8 @@ header-includes:
 mainfont: "Times New Roman"
 classoption: preprint
 params:
-  version: 2.1
-  version-date: "2018/09/06"
+  version: 2.2
+  version-date: "2018/09/07"
 ---
 
 ```{r setup, include=FALSE}
