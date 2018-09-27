@@ -22,7 +22,28 @@ abstract: |
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Your article.
+# Introduction
+
+<!-- need to say that tongue comes from UTI -->
+Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA), which undoubtedly brought a conspicuous advancement for understanding the articulation of speech sounds.
+Some of the limitations of modelling tongue contours with SSANOVA is that separate models are needed for different phonetic contexts even within a single speaker, and secondly SSANOVA as implemented in most studies does not include random effects (which have been shown to be extremely important XXX).
+The general difficulty felt with SSANOVA and tongue contours has favoured alternative methods like Principal Component Analysis.
+
+On the other hand, developments in the statistical and programming world have seen the emergence of a highly flexible technique, Generalised Additive models (GAMs).
+GAMs have being increasingly adopted in linguistics as a means to model dynamic speech data.
+Indeed, @soskuthy2017 explicitly suggests the use of GAMs with tongue contours
+
+This paper introduces an implementation of GAMs with tongue contours using polar coordinates.
+The use of polar GAMs is illustrated with ultrasound tongue imaging data comparing voiceless and voiced stops.
+The R package `rticulate` has been developed to facilitate the use of the model, and it is briefly introduced here.
+
+## Ultrasound tongue imaging
+
+
+
+## Generalised Additive models
+
+
 
 \begin{acknowledgments}
 Thanks to...
