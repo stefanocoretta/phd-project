@@ -22,6 +22,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
+One of the known differences in supra-glottal articulation between voiced and voiceless consonants concerns the position of the tongue root along the front-back plane of the oral tract.
+It has been observed that the tongue root is in a more advanced position in voiced than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
+This gesture has been interpreted as a mechanism to ensure voicing during closure.
+The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
+During the production of voiced obstruents, the supra-glottal pressure quickly increases.
+Such pressure increase can hinder the ability to maintain voicing during closure, to the point that voicing can cease if the supra-glottal pressure is higher than the sub-glottal pressure [@ohala2011].
+An articulatory solution to counterbalance the increase in pressure is to expand the supra-glottal cavity by advancing the root of the tongue.
+The ability to lower the supra-glottal air pressure by advancing the tongue root is put to a different use in Korean, where it facilitates the maintenance of short lag VOT in tense stops [@ahn2016].
+
+
+
+
 
 
 \begin{acknowledgments}
