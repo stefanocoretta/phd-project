@@ -22,8 +22,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-One of the known differences in supra-glottal articulation between voiced and voiceless consonants concerns the position of the tongue root along the front-back plane of the oral tract.
-It has been observed that the tongue root is in a more advanced position in voiced than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
+One of the known differences in the supra-glottal articulation of voiced and voiceless consonants concerns the position of the tongue root relative to the antero-posterior plane.
+It has been observed that the tongue root is in a more front position in voiced stops than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
 This gesture has been interpreted as a mechanism to ensure voicing during closure.
 The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
 During the production of voiced obstruents, the supra-glottal pressure quickly increases.
