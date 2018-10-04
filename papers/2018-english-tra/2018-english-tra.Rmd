@@ -1,0 +1,32 @@
+---
+title: This is a title and this is too
+shorttitle: A subtitle goes on another line
+author:
+- name: Stefano Coretta
+  affiliation: The University of Manchester
+  email: stefano.coretta\@manchester.ac.uk
+  thanks: other info
+- name: Steven M. Lulich
+  affiliation: Indiana University
+output:
+  jasaarticle::jasa_article:
+    citation_package: natbib
+    fig_caption: yes
+abstract: |
+  The abstract.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+
+
+\begin{acknowledgments}
+Thanks to...
+\end{acknowledgments}
+
+\appendix
+\section{Optional appendix}
