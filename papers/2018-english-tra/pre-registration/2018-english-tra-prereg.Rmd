@@ -1,0 +1,177 @@
+---
+title: "Pre-registration of a study on tongue root advancement"
+author: "Stefano Coretta, Steven M. Lulich"
+date: "05/10/2018"
+output:
+  pdf_document:
+    citation_package: natbib
+    highlight: tango
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
+bibliography: linguistics.bib
+biblio-style: unified.bst
+mainfont: DejaVu Sans
+fontsize: 11pt
+header-includes:
+- \usepackage{cleveref}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Study information
+
+## Title
+
+
+
+## Authorship
+
+Stefano Coretta (The University of Manchester, UK), Steven M. Lulich (Indiana University, USA).
+
+## Research questions
+
+An exploratory study of articulatory properties of link between consonant voicing and vowel duration [@coretta2018f; @coretta2018d] showed that tongue root advancement is initiated during the production of vowels preceding both voiced and voiceless stops in Italian and Polish.
+@coretta2018d proposes that root advancement might have originally been a mechanical consequence of tongue body raising, then evolutionarily coopted for cavity enlargement in the context of voiced stops.
+
+The following research questions derive from the cooptation hypothesis:
+
+1. Is the time of the onset of the tongue root advancement gesture identical to that of the onset of the tongue body raising gesture?
+2. What is the relationship of timing and velocity of the advancing gesture in voiceless and voiced stop contexts?
+3. Do labial stops have tongue root advancement, both voiced and voiceless?
+<!-- maybe it should be tongue body lowering rather? -->
+
+## Hypotheses
+
+
+# Sampling plan
+
+## Existing data
+
+**Registration prior to creation of data**: As of the date of submission of this research plan for preregistration, the data have not yet been collected, created, or realised.
+
+## Explanation of existing data
+
+
+
+## Data collection procedures
+
+### Participants
+
+Inclusion rule: Native speakers of American English, 18+ yo, with no reported hearing or speaking disorders, with normal or corrected to normal vision.
+
+### Procedure
+
+
+
+## Sample size
+
+20 participants, 8 words, 10 repetitions.
+Grand total: 1600 observations.
+
+## Sample size rationale
+
+@brysbaert2018 suggest to have around 1600 observations per condition (e.g., 40 participants, 40 stimuli).
+
+
+## Stopping rule
+
+Data collection will be terminated if the 20 participants target is not reached by the October 29th 2018.
+
+# Variables
+
+## Manipulated variables
+\label{s:manipulated}
+
+
+## Measured variables
+
+
+## Indices
+
+NA.
+
+# Design plan
+
+## Study type
+
+Experiment---A researcher randomly assigns treatments to study subjects, this includes field or lab experiments.
+This is also known as an intervention experiment and includes randomized controlled trials.
+
+## Blinding
+
+No blinding is involved in this study.
+
+## Study design
+
+Repeated measures, mixed design.
+
+## Randomisation
+
+
+
+# Analysis plan
+
+## Statistical models
+\label{s:stats}
+
+
+
+## Transformations
+
+NA.
+
+## Follow-up analyses
+
+NA.
+
+## Inference criteria
+
+*P*-values will be used for the effect of vowel height on vowel duration, VOT, and RVoffT, with $\alpha$ = 0.05.
+*P*-values below 0.05 will be deemed significant.
+Bayes factors will be employed for the effect of vowel height on voicing interval duration, since I am interested in testing both the null and the alternative hypotheses.
+The recommendations in \citet[139]{raftery1995} for the interpretation of the Bayes factors will be followed.
+
+## Data exclusion
+
+Tokens in which the consonant closure is entirely voiced will be excluded.
+
+## Missing data
+
+NA.
+
+## Exploratory analysis
+
+An exploratory analysis will assess the effect of vowel identity and the interaction between vowel height and vowel backness on vowel duration, voicing duration, RVoffT.
+Also, the effects of vowel and place of articulation on voicing during closure will be examined.
+
+# Script (Optional)
+
+## Analysis scripts (Optional)
+
+See \Cref{s:stats}.
+
+# Other
+\label{s:other}
+
+List of target words: * *peto* 'fart' and *caco* 'I shit' are not included in the list of target words due to their meaning.
+
+\begin{tabular}{lll}
+papo & tapo & capo  \\
+pepo & tepo & chepo \\
+pipo & tipo & chipo \\
+popo & topo & copo  \\
+pupo & tupo & cupo  \\
+pato & tato & cato  \\
+*    & teto & cheto \\
+pito & tito & chito \\
+poto & toto & coto  \\
+puto & tuto & cuto  \\
+paco & taco & *     \\
+peco & teco & checo \\
+pico & tico & chico \\
+poco & toco & coco  \\
+puco & tuco & cuco
+\end{tabular}
