@@ -1,0 +1,213 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	JASA LaTeX Template File
+%  For use in making articles using JASAnew.cls
+% July 26, 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Step 1:
+%% Uncomment the style that you want to use:
+
+%%%%%%% For Preprint
+%% For manuscript, 12pt, one column style
+
+%% Comment this out if you'd rather use another style:
+\documentclass[]{JASAnew}
+
+%%%%% Preprint Options %%%%%
+%% The track changes option allows you to mark changes
+%% and will produce a list of changes, their line number
+%% and page number at the end of the article.
+%\documentclass[preprint,trackchanges]{JASAnew}
+
+%% authaffil option will make affil immediately
+% follow author, otherwise authors are grouped, and affiliations
+% are stacked underneath all the authors.
+%\documentclass[preprint,authaffil]{JASAnew}
+
+%% NumberedRefs is used for numbered bibliography and citations.
+%% Default is Author-Year style.
+%% \documentclass[preprint,NumberedRefs]{JASAnew}
+
+%%%%%%% For Reprint
+%% For appearance of finished article; 2 columns, 10 pt fonts
+
+% \documentclass[reprint]{JASAnew}
+
+%%%%% Reprint Options %%%%%
+
+%% For testing to see if author has exceeded page length request, use 12pt option
+%\documentclass[reprint,12pt]{JASAnew}
+
+% authaffil option will make affil immediately
+% follow author, otherwise authors are grouped, and affiliations
+% are stacked underneath all the authors.
+%\documentclass[reprint,authaffil]{JASAnew}
+
+%% NumberedRefs is used for numbered bibliography and citations.
+%% Default is Author-Year style.
+% \documentclass[reprint,NumberedRefs]{JASAnew}
+
+%% TurnOnLineNumbers
+%% Make lines be numbered in reprint style:
+% \documentclass[reprint,TurnOnLineNumbers]{JASAnew}
+
+\usepackage{fontspec}
+
+
+\usepackage{natbib}
+
+
+
+\begin{document}
+%% the square bracket argument will send term to running head in
+%% preprint, or running foot in reprint style.
+
+\title[A subtitle goes on another line]{This is a title and this is too}
+
+% ie
+%\title[JASA/Sample JASA Article]{Sample JASA Article}
+
+%% repeat as needed
+
+\author{Stefano Coretta}
+% ie
+%\affiliation{Department1,  University1, City, State ZipCode, Country}
+\affiliation{The University of Manchester}
+%% for corresponding author
+\email{stefano.coretta@manchester.ac.uk}
+%% for additional information
+\thanks{other info}
+\author{Steven M. Lulich}
+% ie
+%\affiliation{Department1,  University1, City, State ZipCode, Country}
+\affiliation{Indiana University}
+%% for corresponding author
+
+%% for additional information
+
+
+% ie
+% \author{Author Four}
+% \email{author.four@university.edu}
+% \thanks{Also at Another University, City, State ZipCode, Country.}
+
+%% For preprint only,
+%  optional, if you want want this message to appear in upper left corner of title page
+% \preprint{}
+
+%ie
+%\preprint{Author, JASA}
+
+% optional, if desired:
+%\date{\today}
+
+\begin{abstract}
+% Put your abstract here. Abstracts are limited to 200 words for
+% regular articles and 100 words for Letters to the Editor. Please no
+% personal pronouns, also please do not use the words ``new'' and/or
+% ``novel'' in the abstract. An article usually includes an abstract, a
+% concise summary of the work covered at length in the main body of the
+% article.
+The abstract.
+\end{abstract}
+
+%% pacs numbers not used
+
+\maketitle
+
+%  End of title page for Preprint option --------------------------------- %
+
+%% See preprint.tex/.pdf or reprint.tex/.pdf for many examples
+
+
+%  Body of the article
+\section{Introduction}\label{introduction}
+
+The position of the tongue root during the production of voiced stops
+plays a fundamental role in ensuring that voicing can be sustained. The
+realisation of vocal fold vibration (i.e.~voicing) requires a difference
+in air pressure between the cavities below and above the glottis.
+Specifically, the sub-glottal pressure needs to be higher than the
+supra-glottal pressure for voicing to be maintained. This property of
+voicing is formally known as the Aerodynamic Voicing Constraint
+\citep{ohala2011}. When the oral tract is completely occluded during the
+production of a stop closure, the supra-glottal pressure quickly
+increases, due to the incoming airstream from the lungs. Such pressure
+increase can hinder the ability to sustain vocal fold vibration during
+closure, to the point in which voicing ceases.
+
+An articulatory solution to counterbalance the increased pressure is to
+enlarge the supra-glottal cavity by advancing the root of the tongue. It
+has been repeatedly observed that the tongue root is in a more front
+position in voiced stops compared to voiceless stops
+\citep{kent1969, perkell1969, westbury1983}.
+
+However, the relationship between tongue root advancement and voicing is
+a complex one. First, tongue root advancement is not the only mechanism
+for \ldots{} and it is somewhat idiosyncratic. Second, tongue root
+advancement seems to be decoupled from the presence of actual vocal fold
+vibration. \citet{ahn2015}; \citet{ahn2016} find that \ldots{}
+
+In an exploratory study of the link between voicing and vowel duration,
+\citet{coretta2018f}; \citet{coretta2018d} finds that the advancing
+gesture of the tongue root is initiated at around 50\% into the duration
+of vowel in Italian and Polish. This finding agrees with
+\citet{rothenberg1967}, who argues that a ballistic forward movement of
+the tongue root would require between 70 and 90 milliseconds to reach
+completion. Given that stop closures are generally much shorter than
+that, it is natural that advancement is initiated during the vowel, so
+that an appreciable amount of advancement is obtained when closure is
+achieved. Moreover, the advancing gesture in the Italian and Polish data
+is present in vowels before both voiced and voiceless stops, which is
+unexpected given that tongue root advancement is generally considered to
+be a feature of voiced sounds. The presence of an advancing
+gesture---relative to the position of the root at the onset of the
+vowel---in voiceless stops could be a mechanical consequence of tongue
+body raising.
+
+The place of articulation of the consonant and the vowel type also have
+an effect on tongue root advancement. Voiced labial stops do not
+generally show tongue root advancement but rather tongue body lowering
+{[}{]}. Tongue body lowering, however, is also a general property of
+labial stops (whether voiced or not), such that during the production of
+labial stops, the tongue body lowers relative to the preceding and
+following vocalic segment, phenomenon known as the trough effect.
+
+\begin{acknowledgments}
+Thanks to...
+\end{acknowledgments}
+
+\appendix
+\section{Optional appendix}
+
+%% before appendix (optional) and bibliography:
+% \begin{acknowledgments}
+%This research was supported by  ...
+% \end{acknowledgments}
+
+% -------------------------------------------------------------------------------------------------------------------
+%   Appendix  (optional)
+
+%\appendix
+%\section{Appendix title}
+
+%If only one appendix, please use
+%\appendix*
+%\section{Appendix title}
+
+
+%=======================================================
+%IMPORTANT
+
+%Use \bibliography{<name of your .bib file>}+
+%to make your bibliography with BibTeX.
+
+%Once you have used BibTeX you
+%should open the resulting .bbl file and cut and paste the entire contents
+%into the end of your article.
+%=======================================================
+
+\bibliography{linguistics.bib}
+
+
+\end{document}
