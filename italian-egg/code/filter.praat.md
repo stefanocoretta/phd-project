@@ -26,7 +26,7 @@ for file from 1 to files
 
     audio_f = Filter (pass Hann band): 40, 10000, 100
 
-    Save as WAV file: "'derived$'/'file_name$'.wav"
+    Save as WAV file: "'derived$'/audio/'file_name$'.wav"
 
     removeObject: audio, audio_f
 
@@ -37,7 +37,7 @@ for file from 1 to files
 
     egg_f = Filter (pass Hann band): 40, 10000, 100
 
-    Save as WAV file: "'derived$'/'file_name$'_egg.wav"
+    Save as WAV file: "'derived$'/egg/'file_name$'_egg.wav"
 
     removeObject: egg, egg_f
 endfor
