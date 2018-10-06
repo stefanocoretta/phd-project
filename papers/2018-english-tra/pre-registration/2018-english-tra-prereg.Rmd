@@ -50,7 +50,7 @@ The following research questions derive from the cooptation hypothesis:
 
 ## Existing data
 
-**Registration prior to creation of data**: As of the date of submission of this research plan for preregistration, the data have not yet been collected, created, or realised.
+
 
 ## Explanation of existing data
 
@@ -64,7 +64,7 @@ Inclusion rule: Native speakers of American English, 18+ yo, with no reported he
 
 ### Procedure
 
-
+The words are embedded in the frame sentence *I say a X again*.
 
 ## Sample size
 
@@ -73,7 +73,7 @@ Grand total: 1600 observations.
 
 ## Sample size rationale
 
-@brysbaert2018 suggest to have around 1600 observations per condition (e.g., 40 participants, 40 stimuli).
+There is a general consensus in ultrasound tongue imaging studies that a number of participants between 10 and 20 is acceptable, given the time resources necessary for processing the data.
 
 
 ## Stopping rule
@@ -85,9 +85,27 @@ Data collection will be terminated if the 20 participants target is not reached 
 ## Manipulated variables
 \label{s:manipulated}
 
+* **Place of articulation**: velar (/k, g/), labial (/p, b/)
+* **Voicing**: voiceless (/k, p/), voiced (/g, b/)
+
+The word stimuli:
+
+\begin{tabular}{ll}
+pop & pob  \\
+caulk & cog \\
+popper & pobber \\
+cocker & cogger \\
+\end{tabular}
 
 ## Measured variables
 
+* **Tongue root displacement** (TRD)
+* **Tongue body displacement** (TBD)
+* **Gesture onset of tongue root advancement** (TR-GONS)
+* **Gesture onset of tongue body raising** (TB-GONS)
+* **Maximum displacement of tongue body raising** (TB-MAX)
+* **TB-MAX to TR/TB-GONS**
+* **TRA velocity**
 
 ## Indices
 
@@ -110,14 +128,16 @@ Repeated measures, mixed design.
 
 ## Randomisation
 
-
+The word stimuli will be randomised across each block and across speakers.
 
 # Analysis plan
 
 ## Statistical models
 \label{s:stats}
 
+Five statistical models will be fit to test the hypothesis in ...
 
+1. A generalised additive mixed model with tongue root
 
 ## Transformations
 
@@ -136,7 +156,6 @@ The recommendations in \citet[139]{raftery1995} for the interpretation of the Ba
 
 ## Data exclusion
 
-Tokens in which the consonant closure is entirely voiced will be excluded.
 
 ## Missing data
 
@@ -144,8 +163,7 @@ NA.
 
 ## Exploratory analysis
 
-An exploratory analysis will assess the effect of vowel identity and the interaction between vowel height and vowel backness on vowel duration, voicing duration, RVoffT.
-Also, the effects of vowel and place of articulation on voicing during closure will be examined.
+
 
 # Script (Optional)
 
@@ -155,23 +173,3 @@ See \Cref{s:stats}.
 
 # Other
 \label{s:other}
-
-List of target words: * *peto* 'fart' and *caco* 'I shit' are not included in the list of target words due to their meaning.
-
-\begin{tabular}{lll}
-papo & tapo & capo  \\
-pepo & tepo & chepo \\
-pipo & tipo & chipo \\
-popo & topo & copo  \\
-pupo & tupo & cupo  \\
-pato & tato & cato  \\
-*    & teto & cheto \\
-pito & tito & chito \\
-poto & toto & coto  \\
-puto & tuto & cuto  \\
-paco & taco & *     \\
-peco & teco & checo \\
-pico & tico & chico \\
-poco & toco & coco  \\
-puco & tuco & cuco
-\end{tabular}
