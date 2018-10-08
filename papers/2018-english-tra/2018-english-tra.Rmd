@@ -54,6 +54,34 @@ Voiced labial stops do not generally show tongue root advancement but rather ton
 Tongue body lowering, however, is also a general property of labial stops (whether voiced or not), such that during the production of labial stops, the tongue body lowers relative to the preceding and following vocalic segment, phenomenon known as the trough effect.
 <!-- and this interestingly fits within the evolutionary cooptation scenario -->
 
+# Methods
+
+## Participants
+
+20 native speakers of American English participated in the experiment.
+The participants received a monetary compensation of $10.
+
+## Equipment set-up
+
+The system set-up of the Speech Production Laboratory of the Department of Speech and Hearing Sciences at Indiana University, USA (@lulich2017; @charles2018).
+The ultrasonic data was collected with a Philips EPIQ 7G system using an xMatrix 117 x6-1 digital 3D/4D transducer ().
+Stabilisation of the ultrasonic transducer was ensured with the Articulate Instruments Ltd™ headset (\citeyear{articulate2008}).
+Synchronised audio was recorded with a SHURE KSM32 microphone, sampled at 48 kHz (16-bit).
+
+## Materials
+
+For this study we have chosen mono- and disyllabic nonce words as target words.
+The monosyllabic words are C\textsubscript{1}VC\textsubscript{2} words (*pop*, *pob*, *caulk* [kʰɒkʰ], *cog*).
+The disyllabic words have a C\textsubscript{1}VC\textsubscript{2}-*er* structure (*popper*, *pobber*, *cocker*, *cogger*).
+The place of articulation of C\textsubscript{1} and C\textsubscript{2} was kept constant within each word to facilitate measuring tongue displacement and locating gestural landmarks.
+Only one vowel (/ɒ/) was included in the study to keep the number of stimuli low, and hence the duration of the task short.
+Moreover, back low vowels like /ɒ/ are easier to image with ultrasound given the proximity of tongue to the transducer.
+<!-- possibly footnote we expect more TRA because the vowel is very retracted -->
+
+## Procedure
+
+
+
 
 
 

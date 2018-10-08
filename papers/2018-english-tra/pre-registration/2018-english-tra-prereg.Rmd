@@ -33,28 +33,33 @@ Stefano Coretta (The University of Manchester, UK), Steven M. Lulich (Indiana Un
 
 ## Research questions
 
-An exploratory study of articulatory properties of link between consonant voicing and vowel duration [@coretta2018f; @coretta2018d] showed that tongue root advancement is initiated during the production of vowels preceding both voiced and voiceless stops in Italian and Polish.
-@coretta2018d proposes that root advancement might have originally been a mechanical consequence of tongue body raising, then evolutionarily coopted for cavity enlargement in the context of voiced stops.
+An exploratory study of articulatory properties of link between consonant voicing and vowel duration [@coretta2018f; @coretta2018d] showed that tongue root advancement is initiated and executed during the production of vowels preceding both voiced and voiceless stops in Italian and Polish.\footnote{Tongue root displacement data was gathered from the stressed vowel in CV́CV words. C1 is /p/, C2 is either /t, d, k, g/, and V1 = V2 = /a, o, u/.}
+@coretta2018d proposes that root advancement might have originally been a mechanical consequence of tongue body (dorsum/tip) raising, then evolutionarily coopted for cavity enlargement in the context of voiced stops.
+
+It is also known that during the production of labial stops (both voiceless and voiced) the tongue body lowers [@vazquez-alvarez2007].
+A cooptation mechanism parallel to that of tongue root advancement might have operated with tongue body lowering in the context of voiced labial stops.
 
 The following research questions derive from the cooptation hypothesis:
 
-1. Is the time of the onset of the tongue root advancement gesture identical to that of the onset of the tongue body raising gesture?
-2. What is the relationship of timing and velocity of the advancing gesture in voiceless and voiced stop contexts?
-3. Do labial stops have tongue root advancement, both voiced and voiceless?
-<!-- maybe it should be tongue body lowering rather? -->
+1. Does the tongue root advances during vowels before voiceless and voiced velar stops?
+2. Does the tongue body lowers during vowels before voiceless and voiced labial stops?
+3. Are tongue root advancement and tongue body dorsum mechanically linked?
+4. What is the relationship of timing and velocity of the advancing gesture in vowels before voiceless and voiced velar stop contexts?
 
 ## Hypotheses
 
+The following specific hypotheses are tested:
+
+1. The tongue root advances during the production of vowels before voiceless and voiced velar stops.
+2. The tongue body lowers during the production of vowels before voiceless and voiced velar stops.
+3. Tongue root advancement and tongue dorsum raising are synchronous.
+4.
 
 # Sampling plan
 
 ## Existing data
 
-
-
 ## Explanation of existing data
-
-
 
 ## Data collection procedures
 
@@ -64,7 +69,10 @@ Inclusion rule: Native speakers of American English, 18+ yo, with no reported he
 
 ### Procedure
 
-The words are embedded in the frame sentence *I say a X again*.
+Ultrasound data will be collected with a Philips EPIQ 7G system using an xMatrix 117 x6-1 digital 3D/4D transducer.
+An Articulate Instrument headset will be used for probe stabilisation.
+Audio data will be recorded with a SHURE KSM32 microphone (sample rate 48 kHz, 16-bit).
+The participant will read the target words (\Cref{s:manipulated}) embedded in a frame sentence (*I said a "X" again*).
 
 ## Sample size
 
@@ -74,7 +82,6 @@ Grand total: 1600 observations.
 ## Sample size rationale
 
 There is a general consensus in ultrasound tongue imaging studies that a number of participants between 10 and 20 is acceptable, given the time resources necessary for processing the data.
-
 
 ## Stopping rule
 
@@ -99,12 +106,13 @@ cocker & cogger \\
 
 ## Measured variables
 
-* **Tongue root displacement** (TRD)
-* **Tongue body displacement** (TBD)
+* **Tongue root displacement** during the vowel (TRD)
+* **Tongue dorsum displacement** during the vowel (TDD)
+* **Tongue body displacement** during the vowel (TBD)
 * **Gesture onset of tongue root advancement** (TR-GONS)
-* **Gesture onset of tongue body raising** (TB-GONS)
-* **Maximum displacement of tongue body raising** (TB-MAX)
-* **TB-MAX to TR/TB-GONS**
+* **Gesture onset of tongue dorsum raising** (TD-GONS)
+* **Maximum displacement of tongue dorsum raising** (TD-MAX)
+* **TD-MAX to TR/TD-GONS**
 * **TRA velocity**
 
 ## Indices
