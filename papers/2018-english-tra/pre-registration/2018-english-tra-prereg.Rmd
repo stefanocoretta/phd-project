@@ -94,6 +94,7 @@ Data collection will be terminated if the 20 participants target is not reached 
 
 * **Place of articulation**: velar (/k, g/), labial (/p, b/)
 * **Voicing**: voiceless (/k, p/), voiced (/g, b/)
+* **Syllables**: monosyllabic, disyllabic
 
 The word stimuli:
 
@@ -106,14 +107,16 @@ cocker & cogger \\
 
 ## Measured variables
 
-* **Tongue root displacement** during the vowel (TRD)
-* **Tongue dorsum displacement** during the vowel (TDD)
-* **Tongue body displacement** during the vowel (TBD)
-* **Gesture onset of tongue root advancement** (TR-GONS)
-* **Gesture onset of tongue dorsum raising** (TD-GONS)
-* **Maximum displacement of tongue dorsum raising** (TD-MAX)
-* **TD-MAX to TR/TD-GONS**
-* **TRA velocity**
+* **Tongue root displacement** during the vowel (TRD): displacement of the tongue root along a vector line measured along the entire duration of the vowel (in mm)
+* **Tongue dorsum displacement** during the vowel (TDD): displacement of the tongue dorsum along a vector line measured along the entire duration of the vowel (in mm)
+* **Tongue body displacement** during the vowel (TBD): displacement of the tongue body along a vector line measured along the entire duration of the vowel (in mm)
+* **Gesture onset of tongue root advancement** (TR-GONS): difference between the time of maximum tongue dorsum displacement of C1 and the time of tongue root gesture onset during V1 (in ms)
+* **Gesture onset of tongue dorsum raising** (TD-GONS): difference between the time of maximum tongue dorsum displacement of C1 and the time of tongue root gesture onset during V1 (in ms)
+* **TR/TD GONS difference**: difference of TR-GONS and TD-GONS (in ms)
+* **TR velocity**: first derivative of tongue root displacement during the vowel
+* **Speech rate**: calculated as syllables per second [`n of syllables / sentence duration`, @plug2018]
+
+Tongue dynamic measures are obtained following the methods described in @strycharczuk2015.
 
 ## Indices
 
@@ -143,9 +146,45 @@ The word stimuli will be randomised across each block and across speakers.
 ## Statistical models
 \label{s:stats}
 
-Five statistical models will be fit to test the hypothesis in ...
+```{r tongue-root}
+bam(
+  trd ~
+    voicing_place +
+    s(proportion, bs = "cr") +
+    s(proportion, bs = "cr", by = voicing_place) +
+    s(proportion, speaker, bs = "fs", m = 1)
+)
+```
 
-1. A generalised additive mixed model with tongue root
+```{r tongue-body}
+bam(
+  tbd ~
+    voicing_place +
+    s(proportion, bs = "cr") +
+    s(proportion, bs = "cr", by = voicing_place) +
+    s(proportion, speaker, bs = "fs", m = 1)
+)
+```
+
+```{r gesture-timing}
+priors <- c(
+  set_prior("normal(0, ...)", class = "Intercept"),
+  set_prior("normal(0, ...)", class = "b", coef = "syllablesdisyllabic"),
+  set_prior("normal(0, ...)", class = "b", coef = "speech_rate"),
+  set_prior("normal(0, ...)", class = "sd"),
+  set_prior("normal(0, ...)", class = "sigma"),
+  set_prior("lkj(2)", class = "cor")
+)
+
+brms(
+  tr_td ~
+    syllables +
+    speech_rate +
+    (1|speaker) +
+    (1|word),
+  prior = priors
+)
+```
 
 ## Transformations
 
