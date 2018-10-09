@@ -3,11 +3,11 @@ title: This is a title and this is too
 shorttitle: A subtitle goes on another line
 author:
 - name: Stefano Coretta
-  affiliation: The University of Manchester
+  affiliation: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
   email: stefano.coretta\@manchester.ac.uk
   thanks: other info
 - name: Steven M. Lulich
-  affiliation: Indiana University
+  affiliation: Speech and Hearing Sciences, Indiana University, Bloomington, IN 47405, USA
 output:
   jasaarticle::jasa_article:
     citation_package: natbib
