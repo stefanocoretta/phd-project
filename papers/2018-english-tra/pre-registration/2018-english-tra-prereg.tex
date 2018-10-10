@@ -1,0 +1,420 @@
+\documentclass[11pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{DejaVu Sans}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Pre-registration of a study on tongue root advancement},
+            pdfauthor={Stefano Coretta},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{unified.bst}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Pre-registration of a study on tongue root advancement}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Stefano Coretta}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{05/10/2018}
+
+\usepackage{cleveref}
+
+\begin{document}
+\maketitle
+
+\section{Study information}\label{study-information}
+
+\subsection{Title}\label{title}
+
+\subsection{Authorship}\label{authorship}
+
+Stefano Coretta (The University of Manchester, UK), Steven M. Lulich
+(Indiana University, USA).
+
+\subsection{Research questions}\label{research-questions}
+
+An exploratory study of articulatory properties of link between
+consonant voicing and vowel duration \citep{coretta2018f, coretta2018d}
+showed that tongue root advancement is initiated and executed during the
+production of vowels preceding both voiced and voiceless stops in
+Italian and
+Polish.\footnote{Tongue root displacement data was gathered from the stressed vowel in CV́CV words. C1 is /p/, C2 is either /t, d, k, g/, and V1 = V2 = /a, o, u/.}
+\citet{coretta2018d} proposes that root advancement might have
+originally been a mechanical consequence of tongue body (dorsum/tip)
+raising, then evolutionarily coopted for cavity enlargement in the
+context of voiced stops.
+
+It is also known that during the production of labial stops (both
+voiceless and voiced) the tongue body lowers
+\citep{vazquez-alvarez2007}. A cooptation mechanism parallel to that of
+tongue root advancement might have operated with tongue body lowering in
+the context of voiced labial stops.
+
+The following research questions derive from the cooptation hypothesis:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Does the tongue root advances during vowels before voiceless and
+  voiced velar stops?
+\item
+  Does the tongue body lowers during vowels before voiceless and voiced
+  labial stops?
+\item
+  Are tongue root advancement and tongue body dorsum mechanically
+  linked?
+\item
+  What is the relationship of timing and velocity of the advancing
+  gesture in vowels before voiceless and voiced velar stop contexts?
+\end{enumerate}
+
+\subsection{Hypotheses}\label{hypotheses}
+
+The following specific hypotheses are tested:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The tongue root advances during the production of vowels before
+  voiceless and voiced velar stops.
+\item
+  The tongue body lowers during the production of vowels before
+  voiceless and voiced velar stops.
+\item
+  Tongue root advancement and tongue dorsum raising are synchronous.
+\item
+\end{enumerate}
+
+\section{Sampling plan}\label{sampling-plan}
+
+\subsection{Existing data}\label{existing-data}
+
+\subsection{Explanation of existing
+data}\label{explanation-of-existing-data}
+
+\subsection{Data collection
+procedures}\label{data-collection-procedures}
+
+\subsubsection{Participants}\label{participants}
+
+Inclusion rule: Native speakers of American English, 18+ yo, with no
+reported hearing or speaking disorders, with normal or corrected to
+normal vision.
+
+\subsubsection{Procedure}\label{procedure}
+
+Ultrasound data will be collected with a Philips EPIQ 7G system using an
+xMatrix 117 x6-1 digital 3D/4D transducer. An Articulate Instrument
+headset will be used for probe stabilisation. Audio data will be
+recorded with a SHURE KSM32 microphone (sample rate 48 kHz, 16-bit). The
+participant will read the target words (\Cref{s:manipulated}) embedded
+in a frame sentence (\emph{I said a ``X'' again}).
+
+\subsection{Sample size}\label{sample-size}
+
+20 participants, 8 words, 10 repetitions. Grand total: 1600
+observations.
+
+\subsection{Sample size rationale}\label{sample-size-rationale}
+
+There is a general consensus in ultrasound tongue imaging studies that a
+number of participants between 10 and 20 is acceptable, given the time
+resources necessary for processing the data.
+
+\subsection{Stopping rule}\label{stopping-rule}
+
+Data collection will be terminated if the 20 participants target is not
+reached by the October 29th 2018.
+
+\section{Variables}\label{variables}
+
+\subsection{Manipulated variables}\label{manipulated-variables}
+
+\label{s:manipulated}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Place of articulation}: velar (/k, g/), labial (/p, b/)
+\item
+  \textbf{Voicing}: voiceless (/k, p/), voiced (/g, b/)
+\item
+  \textbf{Syllables}: monosyllabic, disyllabic
+\end{itemize}
+
+The word stimuli:
+
+\begin{tabular}{ll}
+pop & pob  \\
+caulk & cog \\
+popper & pobber \\
+cocker & cogger \\
+\end{tabular}
+
+\subsection{Measured variables}\label{measured-variables}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tongue root displacement} during the vowel (TRD): displacement
+  of the tongue root along a vector line measured along the entire
+  duration of the vowel (in mm)
+\item
+  \textbf{Tongue dorsum displacement} during the vowel (TDD):
+  displacement of the tongue dorsum along a vector line measured along
+  the entire duration of the vowel (in mm)
+\item
+  \textbf{Tongue body displacement} during the vowel (TBD): displacement
+  of the tongue body along a vector line measured along the entire
+  duration of the vowel (in mm)
+\item
+  \textbf{Gesture onset of tongue root advancement} (TR-GONS):
+  difference between the time of maximum tongue dorsum displacement of
+  C1 and the time of tongue root gesture onset during V1 (in ms)
+\item
+  \textbf{Gesture onset of tongue dorsum raising} (TD-GONS): difference
+  between the time of maximum tongue dorsum displacement of C1 and the
+  time of tongue root gesture onset during V1 (in ms)
+\item
+  \textbf{TR/TD GONS difference}: difference of TR-GONS and TD-GONS (in
+  ms)
+\item
+  \textbf{TR velocity}: first derivative of tongue root displacement
+  during the vowel
+\item
+  \textbf{Speech rate}: calculated as syllables per second
+  \citep[\texttt{n\ of\ syllables\ /\ sentence\ duration},][]{plug2018}
+\end{itemize}
+
+Tongue dynamic measures are obtained following the methods described in
+\citet{strycharczuk2015}.
+
+\subsection{Indices}\label{indices}
+
+NA.
+
+\section{Design plan}\label{design-plan}
+
+\subsection{Study type}\label{study-type}
+
+Experiment---A researcher randomly assigns treatments to study subjects,
+this includes field or lab experiments. This is also known as an
+intervention experiment and includes randomized controlled trials.
+
+\subsection{Blinding}\label{blinding}
+
+No blinding is involved in this study.
+
+\subsection{Study design}\label{study-design}
+
+Repeated measures, mixed design.
+
+\subsection{Randomisation}\label{randomisation}
+
+The word stimuli will be randomised across each block and across
+speakers.
+
+\section{Analysis plan}\label{analysis-plan}
+
+\subsection{Statistical models}\label{statistical-models}
+
+\label{s:stats}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{bam}\NormalTok{(}
+\NormalTok{  trd }\OperatorTok{~}
+\StringTok{    }\NormalTok{voicing_place }\OperatorTok{+}
+\StringTok{    }\KeywordTok{s}\NormalTok{(proportion, }\DataTypeTok{bs =} \StringTok{"cr"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{s}\NormalTok{(proportion, }\DataTypeTok{bs =} \StringTok{"cr"}\NormalTok{, }\DataTypeTok{by =}\NormalTok{ voicing_place) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{s}\NormalTok{(proportion, speaker, }\DataTypeTok{bs =} \StringTok{"fs"}\NormalTok{, }\DataTypeTok{m =} \DecValTok{1}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{bam}\NormalTok{(}
+\NormalTok{  tbd }\OperatorTok{~}
+\StringTok{    }\NormalTok{voicing_place }\OperatorTok{+}
+\StringTok{    }\KeywordTok{s}\NormalTok{(proportion, }\DataTypeTok{bs =} \StringTok{"cr"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{s}\NormalTok{(proportion, }\DataTypeTok{bs =} \StringTok{"cr"}\NormalTok{, }\DataTypeTok{by =}\NormalTok{ voicing_place) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{s}\NormalTok{(proportion, speaker, }\DataTypeTok{bs =} \StringTok{"fs"}\NormalTok{, }\DataTypeTok{m =} \DecValTok{1}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{priors <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, ...)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"Intercept"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, ...)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"syllablesdisyllabic"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, ...)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"speech_rate"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, ...)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sd"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, ...)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sigma"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"lkj(2)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"cor"}\NormalTok{)}
+\NormalTok{)}
+
+\KeywordTok{brms}\NormalTok{(}
+\NormalTok{  tr_td }\OperatorTok{~}
+\StringTok{    }\NormalTok{syllables }\OperatorTok{+}
+\StringTok{    }\NormalTok{speech_rate }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{speaker) }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1}\OperatorTok{|}\NormalTok{word),}
+  \DataTypeTok{prior =}\NormalTok{ priors}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Transformations}\label{transformations}
+
+NA.
+
+\subsection{Follow-up analyses}\label{follow-up-analyses}
+
+NA.
+
+\subsection{Inference criteria}\label{inference-criteria}
+
+\emph{P}-values will be used for the effect of vowel height on vowel
+duration, VOT, and RVoffT, with \(\alpha\) = 0.05. \emph{P}-values below
+0.05 will be deemed significant. Bayes factors will be employed for the
+effect of vowel height on voicing interval duration, since I am
+interested in testing both the null and the alternative hypotheses. The
+recommendations in \citet[139]{raftery1995} for the interpretation of
+the Bayes factors will be followed.
+
+\subsection{Data exclusion}\label{data-exclusion}
+
+\subsection{Missing data}\label{missing-data}
+
+NA.
+
+\subsection{Exploratory analysis}\label{exploratory-analysis}
+
+\section{Script (Optional)}\label{script-optional}
+
+\subsection{Analysis scripts
+(Optional)}\label{analysis-scripts-optional}
+
+See \Cref{s:stats}.
+
+\section{Other}\label{other}
+
+\label{s:other}
+
+\bibliography{linguistics.bib}
+
+
+\end{document}

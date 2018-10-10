@@ -1,6 +1,6 @@
 ---
 title: "Pre-registration of a study on tongue root advancement"
-author: "Stefano Coretta, Steven M. Lulich"
+author: "Stefano Coretta"
 date: "05/10/2018"
 output:
   pdf_document:
