@@ -2,12 +2,10 @@
 title: This is a title and this is too
 shorttitle: A subtitle goes on another line
 author:
-- name: Author's name
-  affiliation: Author's affiliation
-  email: e-mail\@uni.edu
+- name: Stefano Coretta
+  affiliation: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
+  email: stefano.coretta\@manchester.ac.uk
   thanks: other info
-- name: Second author's name
-  affiliation: Second author's affiliation
 output: jasaarticle::jasa_article
 abstract: |
   Put your abstract here. Abstracts are limited to 200 words for
@@ -39,9 +37,29 @@ The R package `rticulate` has been developed to facilitate the use of the model,
 
 ## Ultrasound tongue imaging
 
-
+Ultrasound imaging is a non-invasive technique for obtaining an image of internal organs and tissue.
+Ultrasound imaging has been successfully used for imaging the mid-sagittal  section of the tongue surface [].
+Ultrasound tongue imaging employs a transducer placed in contact with the sub-mental triangle (the area under the chin).
+The transducer propagates ultrasonic waves that travel through the aperture of the mandible and get reflected by the air above the tongue surface.
+The reflection is then translated into an image which shows the approximate location of the tongue surface.
 
 ## Generalised Additive models
+
+Generalised additive modelling is a more general form of non-parametric modelling that allows fitting non-linear as well as linear effects.
+Generalised additive models, or GAMs, are built with smoothing splines.
+Smoothing splines are also at the heart of SSANOVA.
+In GAMs, however, smoothing splines maximise the fit to the data while being constrained by a smoothing penalty estimated from the data itself which prevents overfitting.
+GAMs are powerful and flexible models that can deal with non-linear data efficiently.
+Moreover, random effects can also be implemented in GAMs, as generalised additive mixed models (or GAMMs).
+
+Tongue contours as extracted from ultrasound imaging can be efficiently model using GAM(M)s.
+The random effects part of GAMMs also constitutes an improvement over traditional SSANOVA, which usually implements fixed effects only.
+
+## Polar coordinates
+
+
+
+# Polar GAM(M)s
 
 
 
