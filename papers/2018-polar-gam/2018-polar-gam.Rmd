@@ -57,9 +57,17 @@ The random effects part of GAMMs also constitutes an improvement over traditiona
 
 ## Polar coordinates
 
-
+@mielke2015 and @heyne2015a, @heyne2015 have shown the benefits of using polar coordinates of the tongue contours rather then cartesian coordinates.
+The contours tend to have increasing slope at the two ends, in certain cases tending to become almost completely vertical.
+The almost verticality of the contours has the effect of increasing the variance of the fitted contours (and hence increased confidence intervals), and is some cases it even generates uninterpretable curves.
+When tongue contours are expressed with polar coordinates, on the other hand, the variance is reduced and the fitted contours generally reflect more closely the underlying tongue shape.
+Mielke has implemented a series of R [@r-core-team2018] functions for fitting polar SSANOVAs to tongue contours in cartesian coordinates.
+Plotting is subsequently obtained by reconverting the coordinates to cartesian.
 
 # Polar GAM(M)s
+
+Having shown the benefits of using GAMMs with dynamic data and polar coordinates, polar GAMMs for modelling tongue contours is introduced here. Polar GAMMs are simply GAMMs fitted to tongue contours using polar coordinates.
+As with SSANOVA, the coordinates of the fitted contours are converted to cartesian coordinates for plotting.
 
 
 
