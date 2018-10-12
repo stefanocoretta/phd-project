@@ -1,0 +1,86 @@
+---
+title: "3D tongue"
+author: "Stefano Coretta"
+date: "12/10/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+library(mgcv)
+```
+
+```{r data, message=FALSE}
+read_tongue <- function(file) {
+  tibble <- read_csv(file, col_names = c("X", "Y", "Z")) %>%
+    mutate(file = substr(file, 26, 42))
+  
+  tibble <- mutate(tibble, index = seq(1, nrow(tibble)))
+  
+  return(tibble)
+}
+
+stimuli <- read_csv("italian-sz/data/stimuli.csv")
+
+tongue <- list.files(
+  path = "italian-sz/data/datasets",
+  pattern = "*.csv",
+  full.names = TRUE
+) %>%
+  map_df(~read_tongue(.)) %>%
+  left_join(y = stimuli) %>%
+  mutate_if(is.character, as.factor)
+```
+
+```{r gam}
+tongue_gam <- bam(
+  Z ~
+    s(X, Y),
+  data = tongue
+)
+```
+
+```{r gam-plot, warning=FALSE}
+vis.gam(tongue_gam, theta = -35, phi = 40, scale = FALSE, xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), color = "terrain")
+```
+
+```{r gam_2}
+tongue_gam_2 <- bam(
+  Z ~
+    s(X, Y, by = phone),
+  data = tongue
+)
+```
+
+```{r gam-2-plot, warning=FALSE}
+vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
+vis.gam(tongue_gam, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+```
+
+```{r gam_3}
+tongue_gam_3 <- bam(
+  Z ~
+    s(X, Y, by = phone) +
+    s(X, Y, file, bs = "fs", m = 1),
+  data = tongue
+)
+```
+
+```{r gam-3-plot, warning=FALSE}
+vis.gam(tongue_gam_3, theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
+vis.gam(tongue_gam_3, theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+```
+
+```{r gam-3-plot-2, warning=FALSE}
+vis.gam(tongue_gam_3, theta = -90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
+vis.gam(tongue_gam_3, theta = -90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+```
+
+```{r gam-3-plot-2, warning=FALSE}
+vis.gam(tongue_gam_3, theta = 90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
+vis.gam(tongue_gam_3, theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+```
+
+
