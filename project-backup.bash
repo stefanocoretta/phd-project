@@ -42,6 +42,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/icelandic/data/ \
     /Volumes/Seagate/language-data/phd-project/icelandic/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/italian-sz/data/ \
+    /Volumes/Seagate/language-data/phd-project/italian-sz/data
 
 ### Run
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
@@ -71,6 +74,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/icelandic/data/ \
     /Volumes/Seagate/language-data/phd-project/icelandic/data
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/italian-sz/data/ \
+    /Volumes/Seagate/language-data/phd-project/italian-sz/data
 
 ## Pull data folder from external HD
 
