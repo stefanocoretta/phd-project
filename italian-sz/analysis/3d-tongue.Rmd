@@ -72,8 +72,7 @@ tongue_gam_3 <- bam(
   Z ~
     phone +
     s(X, Y) +
-    s(X, Y, by = phone), # +
-    # s(X, Y, file, bs = "fs", m = 1),
+    s(X, Y, by = phone),
   data = tongue
 )
 ```
