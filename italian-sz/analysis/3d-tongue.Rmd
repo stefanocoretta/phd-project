@@ -31,7 +31,10 @@ tongue <- list.files(
 ) %>%
   map_df(~read_tongue(.)) %>%
   left_join(y = stimuli) %>%
+  mutate(phone = ordered(phone, levels = c("s", "z"))) %>%
   mutate_if(is.character, as.factor)
+
+contrasts(tongue$phone) <- "contr.treatment"
 ```
 
 ```{r gam}
@@ -56,31 +59,43 @@ tongue_gam_2 <- bam(
 
 ```{r gam-2-plot, warning=FALSE}
 vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
-vis.gam(tongue_gam, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+```
+
+```{r gam-2-plot, warning=FALSE}
+vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", se = 1.96)
+vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", se = 1.96)
 ```
 
 ```{r gam_3}
 tongue_gam_3 <- bam(
   Z ~
-    s(X, Y, by = phone) +
-    s(X, Y, file, bs = "fs", m = 1),
+    phone +
+    s(X, Y) +
+    s(X, Y, by = phone), # +
+    # s(X, Y, file, bs = "fs", m = 1),
   data = tongue
 )
 ```
 
 ```{r gam-3-plot, warning=FALSE}
-vis.gam(tongue_gam_3, theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
-vis.gam(tongue_gam_3, theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
+```
+
+```{r gam-3-plot, warning=FALSE}
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", se = 1.96, too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", se = 1.96, too.far = .05)
 ```
 
 ```{r gam-3-plot-2, warning=FALSE}
-vis.gam(tongue_gam_3, theta = -90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
-vis.gam(tongue_gam_3, theta = -90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
 ```
 
 ```{r gam-3-plot-2, warning=FALSE}
-vis.gam(tongue_gam_3, theta = 90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
-vis.gam(tongue_gam_3, theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
 ```
 
 
