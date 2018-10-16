@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 library(mgcv)
+library(itsadug)
+library(tidymv)
 library(akima)
 ```
 
@@ -33,7 +35,8 @@ tongue <- list.files(
   map_df(~read_tongue(.)) %>%
   left_join(y = stimuli) %>%
   mutate(phone = ordered(phone, levels = c("s", "z"))) %>%
-  mutate_if(is.character, as.factor)
+  mutate_if(is.character, as.factor) %>%
+  create_event_start("file")
 
 contrasts(tongue$phone) <- "contr.treatment"
 ```
@@ -98,6 +101,34 @@ vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, co
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
 
+```{r gam-ar}
+rho <- start_value_rho(tongue_gam_3)
+
+gam_ar <- bam(
+  Z ~
+    phone +
+    s(X, Y) +
+    s(X, Y, by = phone),
+  data = tongue,
+  AR.start = tongue$start.event,
+  rho = rho
+)
+```
+
+```{r acf-plot}
+acf_resid(gam_ar, split_pred = "AR.start")
+```
+
+```{r gam-ar-plot, warning=FALSE}
+vis.gam(gam_ar, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
+vis.gam(gam_ar, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
+```
+
+```{r gam-ar-plot, warning=FALSE}
+vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
+vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
+```
+
 ```{r}
 x_min <- 1.8
 x_max <- 11.8
@@ -106,7 +137,7 @@ y_max <- 9.9
 
 grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), phone = c("s", "z"), file = levels(tongue$file))
 
-predicted <- predict(tongue_gam_3, newdata = grid)
+predicted <- predict(gam_ar, newdata = grid)
 predicted_df <- cbind(grid, predicted) %>%
   dplyr::select(-file) %>%
   unique() %>%
