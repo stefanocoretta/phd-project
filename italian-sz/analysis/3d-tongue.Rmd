@@ -98,4 +98,42 @@ vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, co
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
 ```
 
+```{r}
+x_min <- 1.8
+x_max <- 11.8
+y_min <- 3.6
+y_max <- 9.9
+
+grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), phone = c("s", "z"), file = levels(tongue$file))
+
+predicted <- predict(tongue_gam_3, newdata = grid, exclude = "s(X,Y,file)")
+predicted_df <- cbind(grid, predicted) %>%
+  dplyr::select(-file) %>%
+  unique() %>%
+  spread(phone, predicted) %>%
+  mutate(
+    difference = s - z
+  )
+
+sum_diff <- sum(predicted_df$difference)
+volume_diff <- sum_diff * (x_max - x_min)/100 * (y_max - y_min)/100
+cat("The volume increase for [z] over [s] is", round(volume_diff, 2), "cm^3 (= ml)")
+```
+
+```{r}
+interp_data <- interp(tongue$X, tongue$Y, tongue$Z, xo = seq(x_min, x_max, length = 100), yo = seq(y_min, y_max, length = 100), duplicate = "mean")
+
+interp_m <- interp_data$z
+interp_m <- ifelse(!is.na(interp_m), 1, 0)
+
+predicted_df_2 <- predicted_df
+predicted_df_2$mask <- as.vector(t(interp_m))
+
+predicted_df_2 <- predicted_df_2 %>%
+  mutate(diff_2 = difference * mask)
+
+sum_diff_2 <- sum(predicted_df_2$diff_2)
+volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
+cat("The volume increase for [z] over [s] is", round(volume_diff_2, 2), "cm^3 (= ml)")
+```
 
