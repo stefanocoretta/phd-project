@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 library(mgcv)
+library(akima)
 ```
 
 ```{r data, message=FALSE}
@@ -78,23 +79,23 @@ tongue_gam_3 <- bam(
 ```
 
 ```{r gam-3-plot, warning=FALSE}
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .01)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
 
 ```{r gam-3-plot, warning=FALSE}
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", se = 1.96, too.far = .05)
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", se = 1.96, too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", se = 1.96, too.far = .01)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", se = 1.96, too.far = .01)
 ```
 
 ```{r gam-3-plot-2, warning=FALSE}
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .01)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
 
 ```{r gam-3-plot-2, warning=FALSE}
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
-vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .01)
+vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
 
 ```{r}
@@ -105,7 +106,7 @@ y_max <- 9.9
 
 grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), phone = c("s", "z"), file = levels(tongue$file))
 
-predicted <- predict(tongue_gam_3, newdata = grid, exclude = "s(X,Y,file)")
+predicted <- predict(tongue_gam_3, newdata = grid)
 predicted_df <- cbind(grid, predicted) %>%
   dplyr::select(-file) %>%
   unique() %>%
