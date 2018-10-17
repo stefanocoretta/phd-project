@@ -77,7 +77,44 @@ Predictors such as consonant or vowel type, or speech rate, can be specified in 
 The predicted polar coordinates that are returned by the model can then be converted to cartesian coordinates using the cartesian coordinate of the origin that defines the polar system.
 The polar origin is either known or estimated from the data, depending on the ultrasonic system used.
 
+To illustrate the use of polar GAMs, an example will given in the following sections.
+The main properties of the R package `rticulate` will also be discussed in relation to the experiment.
+
 ## Data collection and processing
+
+Synchronised audio and ultrasound tongue imaging data have been recorded from 11 speakers of Italian.
+An Articulate Instruments Ltd™ set-up was used for this study (\Cref{f:uti-setup}).
+The ultrasonic data was collected through a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
+A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
+A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
+The acquisition of the ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+Stabilisation of the ultrasonic transducer was ensured by using a headset produced by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
+
+Before the reading task, the participant's occlusal plane was obtained using a bite plate [@scobbie2011].
+The participants read nonce words embedded in the frame sentence *Dico \_\_\_ lentamente* 'I say \_\_\_ slowly'.
+The words follow the structure C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V\textsubscript{2}, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1}.
+Each speaker repeated the stimuli six times.
+
+Spline curves were fitted to the visible tongue contours using the AAA automatic tracking function.
+Manual correction was applied in those cases that showed clear tracking errors.
+The time of maximum tongue displacement within consonant closure was then calculated in AAA following the method in @strycharczuk2015, described in what follows.
+A fan-like frame consisting of 42 equidistant radial lines was used as the coordinate system.
+The origin of the 42 fan-lines coincides with the centre of the ultrasonic probe, such that each fan-line is parallel to the direction of the ultrasonic signal.
+Tongue displacement was thus calculated as the displacement of the fitted splines along the fan-line vectors.
+The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation.
+The vector search area was restricted to the portion of the splines corresponding to the tongue tip for coronal consonants, and to the portion corresponding to the tongue dorsum for velar consonants.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
