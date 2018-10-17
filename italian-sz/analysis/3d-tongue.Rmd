@@ -135,7 +135,8 @@ x_max <- 11.8
 y_min <- 3.6
 y_max <- 9.9
 
-grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), phone = c("s", "z"), file = levels(tongue$file))
+grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), file = levels(tongue$file))
+grid <- cbind(grid, phone = rep(rep(c("s", "z"), each = 10000), 5))
 
 predicted <- predict(gam_ar, newdata = grid)
 predicted_df <- cbind(grid, predicted) %>%
