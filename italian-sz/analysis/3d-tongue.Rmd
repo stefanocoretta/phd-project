@@ -230,7 +230,8 @@ plot_ly(colors = c("black", "orange")) %>%
     cmax = 1,
     cmin = 0,
     opacity = 0.8
-  )
+  ) %>%
+  layout(scene = list(aspectmode = "manual", aspectratio = list(x = 0.6, y = 1, z = 0.5)))
 ```
 
 # Midsagittal
