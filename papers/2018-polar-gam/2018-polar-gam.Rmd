@@ -1,11 +1,49 @@
 ---
 title: This is a title and this is too
 author: Stefano Coretta
-output: pdf_document
+output:
+  pdf_document:
+    citation_package: natbib
+bibliography: linguistics.bib
+header-includes:
+- \usepackage{cleveref}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+library(tidymv)
+library(rticulate)
+library(mgcv)
+```
+
+```{r read-data}
+stimuli <- read_csv("./papers/2018-polar-gam/datasets/stimuli.csv")
+
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+tongue_it01 <- read_aaa("./papers/2018-polar-gam/datasets/it01-tongue-cart.tsv", columns)  %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = stimuli) %>%
+  mutate(vowel_place = interaction(vowel, c2_place)) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 # Introduction
@@ -44,6 +82,8 @@ Tongue contours as extracted from ultrasound imaging can be efficiently model us
 The random effects part of GAMMs also constitutes an improvement over traditional SSANOVA, which usually implements fixed effects only.
 <!-- say that you can specify the individual contours which reduces the autocorrelation -->
 
+<!-- since GAMs have been described in linguistics already I will not do it here, rather see references... -->
+
 ## Polar coordinates
 
 @mielke2015 and @heyne2015a, @heyne2015 have shown the benefits of using polar coordinates of the tongue contours rather then cartesian coordinates.
@@ -67,10 +107,13 @@ The polar origin is either known or estimated from the data, depending on the ul
 
 To illustrate the use of polar GAMs, an example will given in the following sections.
 The main properties of the R package `rticulate` will also be discussed in relation to the experiment.
+The function `polar_gam()` accepts cartesian coordinates, which are converted into polar using a user specified origin or the origin estimated from the data.
+The GAM is fitted on the polar coordinates and the predicted values are converted back to cartesian using the same origin for plotting.
 
 ## Data collection and processing
 
 Synchronised audio and ultrasound tongue imaging data have been recorded from 11 speakers of Italian.
+<!-- maybe you want to use just 4 or 5 for illustrative purposes -->
 An Articulate Instruments Ltd™ set-up was used for this study (\Cref{f:uti-setup}).
 The ultrasonic data was collected through a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
 A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
@@ -92,7 +135,20 @@ Tongue displacement was thus calculated as the displacement of the fitted spline
 The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation.
 The vector search area was restricted to the portion of the splines corresponding to the tongue tip for coronal consonants, and to the portion corresponding to the tongue dorsum for velar consonants.
 
+The cartesian coordinates of the tongue contours were extracted from the ultrasonic data at the time of maximum tongue displacement (always within C2 closure).
+The contours were subsequently normalised within speaker by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
+The dataset is thus constituted by *x* and *y* coordinates of the tongue contours that define respectively the horizontal and vertical axis.
+The horizontal plane is parallel to the speaker's occlusal plane.
 
+## Fitting a polar GAM
+
+```{r coart-gam}
+coart_gam <- polar_gam(
+  Y ~
+    s(X, by = vowel_place),
+  data = tongue_it01
+)
+```
 
 
 
