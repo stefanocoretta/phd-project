@@ -17,6 +17,8 @@ library(akima)
 library(TTR)
 ```
 
+# Read data
+
 ```{r data, message=FALSE}
 read_tongue <- function(file) {
   tibble <- read_csv(file, col_names = c("X", "Y", "Z")) %>%
@@ -42,6 +44,8 @@ tongue <- list.files(
 
 contrasts(tongue$phone) <- "contr.treatment"
 ```
+
+# 3D tongue modelling with GAMs
 
 ```{r gam}
 tongue_gam <- bam(
@@ -131,6 +135,8 @@ vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = l
 vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
 ```
 
+# Volume increase
+
 ```{r}
 x_min <- 1.8
 x_max <- 11.8
@@ -171,6 +177,8 @@ volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 cat("The volume increase for [z] over [s] is", round(volume_diff_2, 2), "cm^3 (= ml)")
 ```
 
+# Token variation
+
 ```{r}
 files_interp <- NULL
 
@@ -206,7 +214,7 @@ dim(color2) <- dim(z_max_m)
 ```
 
 ```{r}
-plot_ly(colors = c("red", "blue")) %>%
+plot_ly(colors = c("black", "orange")) %>%
   add_surface(
     z = ~s_min_m,
     surfacecolor = color,
@@ -224,6 +232,8 @@ plot_ly(colors = c("red", "blue")) %>%
     opacity = 0.8
   )
 ```
+
+# Midsagittal
 
 ```{r}
 midsagittal <- cbind(grid, interp = files_interp) %>%
