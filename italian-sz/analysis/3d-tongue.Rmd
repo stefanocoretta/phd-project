@@ -84,7 +84,7 @@ vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = 
 
 ## Tongue GAM 3
 
-```{r tongue-gam-3, cache=TRUE, dependson="data"}
+```{r tongue-gam-3, cache=TRUE}
 tongue_gam_3 <- bam(
   Z ~
     phone +
