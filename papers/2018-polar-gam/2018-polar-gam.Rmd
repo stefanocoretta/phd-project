@@ -150,6 +150,9 @@ coart_gam <- polar_gam(
 )
 ```
 
+```{r}
+plot_polar_smooths(coart_gam, X, vowel, facet_terms = place, split = list(vowel_place = c("vowel", "place")))
+```
 
 
 
