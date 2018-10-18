@@ -84,7 +84,7 @@ vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = 
 
 ## Tongue GAM 3
 
-```{r tongue-gam_3}
+```{r tongue-gam-3, cache=TRUE, dependson="data"}
 tongue_gam_3 <- bam(
   Z ~
     phone +
@@ -116,7 +116,7 @@ vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, co
 
 ## Tongue GAM with AR1
 
-```{r gam-ar}
+```{r gam-ar, cache=TRUE, dependson="tongue-gam-3"}
 rho <- start_value_rho(tongue_gam_3)
 
 gam_ar <- bam(
@@ -152,6 +152,7 @@ x_max <- 11.8
 y_min <- 3.6
 y_max <- 9.9
 
+# File is needed in the grid for midsagittal data (it groups by file)
 grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), file = levels(tongue$file))
 grid <- cbind(grid, phone = rep(rep(c("s", "z"), each = 10000), 5))
 
