@@ -15,6 +15,7 @@ library(itsadug)
 library(tidymv)
 library(akima)
 library(TTR)
+library(plotly)
 ```
 
 # Read data
@@ -43,19 +44,13 @@ tongue <- list.files(
   create_event_start("file")
 
 contrasts(tongue$phone) <- "contr.treatment"
-
-midsagittal <- cbind(grid, interp = files_interp) %>%
-  filter(X > 6.8 & X < 6.9) %>%
-  na.omit() %>%
-  group_by(file) %>%
-  mutate(smoothed = WMA(interp))
 ```
 
 # 3D tongue modelling with GAMs
 
 ## Tongue GAM
 
-```{r tongue-gam}
+```{r tongue-gam, eval=FALSE}
 tongue_gam <- bam(
   Z ~
     s(X, Y),
@@ -63,13 +58,13 @@ tongue_gam <- bam(
 )
 ```
 
-```{r tongue-gam-plot, warning=FALSE}
+```{r tongue-gam-plot, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam, theta = -35, phi = 40, scale = FALSE, xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), color = "terrain")
 ```
 
 ## Tongue GAM 2
 
-```{r tongue-gam_2}
+```{r tongue-gam_2, eval=FALSE}
 tongue_gam_2 <- bam(
   Z ~
     s(X, Y, by = phone),
@@ -77,12 +72,12 @@ tongue_gam_2 <- bam(
 )
 ```
 
-```{r tongue-gam-2-plot, warning=FALSE}
+```{r tongue-gam-2-plot, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain")
 vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain")
 ```
 
-```{r tongue-gam-2-plot-2, warning=FALSE}
+```{r tongue-gam-2-plot-2, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", se = 1.96)
 vis.gam(tongue_gam_2, theta = -35, phi = 40, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", se = 1.96)
 ```
@@ -99,22 +94,22 @@ tongue_gam_3 <- bam(
 )
 ```
 
-```{r tongue-gam-3-plot, warning=FALSE}
+```{r tongue-gam-3-plot, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .01)
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
 
-```{r tongue-gam-3-plot-2, warning=FALSE}
+```{r tongue-gam-3-plot-2, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", se = 1.96, too.far = .01)
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -35, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", se = 1.96, too.far = .01)
 ```
 
-```{r tongue-gam-3-plot-3, warning=FALSE}
+```{r tongue-gam-3-plot-3, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .01)
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = -90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
 
-```{r tongue-gam-3-plot-4, warning=FALSE}
+```{r tongue-gam-3-plot-4, warning=FALSE, eval=FALSE}
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .01)
 vis.gam(tongue_gam_3, view = c("X", "Y"), theta = 90, phi = 0, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .01)
 ```
@@ -247,6 +242,15 @@ plot_ly(colors = c("black", "orange")) %>%
 ```
 
 # Midsagittal
+
+```{r prep-midsaggital}
+midsagittal <- cbind(grid, interp = files_interp) %>%
+  filter(X > 6.8 & X < 6.9) %>%
+  na.omit() %>%
+  group_by(file) %>%
+  mutate(smoothed = WMA(interp)) # smoothed with a weighted moving
+```
+
 
 ```{r contours, warning=FALSE}
 ggplot(midsagittal, aes(Y, interp, colour = phone, group = file)) +
