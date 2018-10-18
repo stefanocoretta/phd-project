@@ -169,3 +169,56 @@ volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 cat("The volume increase for [z] over [s] is", round(volume_diff_2, 2), "cm^3 (= ml)")
 ```
 
+```{r}
+files_interp <- NULL
+
+for (file in 1:length(levels(tongue$file))) {
+  file_data <- tongue[tongue$file == levels(tongue$file)[file],]
+  
+  file_interp_data <- interp(file_data$X, file_data$Y, file_data$Z, xo = seq(x_min, x_max, length = 100), yo = seq(y_min, y_max, length = 100))
+  
+  files_interp <- c(files_interp, as.vector(t(file_interp_data$z)))
+}
+
+tongue_interp <- cbind(grid, interp = files_interp) %>%
+  group_by(phone, X, Y) %>%
+  summarise(min = min(interp, na.rm = TRUE), max = max(interp, na.rm = TRUE)) %>%
+  mutate(
+    min = ifelse(min == Inf, NA, min),
+    max = ifelse(max == -Inf, NA, max)
+  )
+
+s_interp <- filter(tongue_interp, phone == "s")
+s_min_m <- matrix(s_interp$min, 100, 100)
+
+z_interp <- filter(tongue_interp, phone == "s")
+z_max_m <- matrix(z_interp$max, 100, 100)
+```
+
+```{r}
+color <- rep(0, length(s_min_m))
+dim(color) <- dim(s_min_m)
+
+color2 <- rep(1, length(z_max_m))
+dim(color2) <- dim(z_max_m)
+```
+
+```{r}
+plot_ly(colors = c("red", "blue")) %>%
+  add_surface(
+    z = ~s_min_m,
+    surfacecolor = color,
+    cauto = F,
+    cmax = 1,
+    cmin = 0,
+    opacity = 0.8
+  ) %>%
+  add_surface(
+    z = ~z_max_m,
+    surfacecolor = color2,
+    cauto = F,
+    cmax = 1,
+    cmin = 0,
+    opacity = 0.8
+  )
+```
