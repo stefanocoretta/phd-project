@@ -14,6 +14,7 @@ library(mgcv)
 library(itsadug)
 library(tidymv)
 library(akima)
+library(TTR)
 ```
 
 ```{r data, message=FALSE}
@@ -229,7 +230,7 @@ midsagittal <- cbind(grid, interp = files_interp) %>%
   filter(X > 6.8 & X < 6.9) %>%
   na.omit() %>%
   group_by(file) %>%
-  mutate(smoothed = SMA(interp))
+  mutate(smoothed = WMA(interp))
 ```
 
 ```{r warning=FALSE}
