@@ -263,6 +263,6 @@ ggplot(midsagittal, aes(Y, smoothed, colour = phone, group = file)) +
 ```
 
 ```{r contour-smooths, warning=FALSE}
-ggplot(midsagittal, aes(Y, interp, colour = phone)) +
+ggplot(midsagittal, aes(Y, interp, colour = phone, linetype = phone)) +
   geom_smooth(method = "loess")
 ```
