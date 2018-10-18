@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
+theme_set(theme_minimal())
 library(mgcv)
 library(itsadug)
 library(tidymv)
@@ -221,4 +222,32 @@ plot_ly(colors = c("red", "blue")) %>%
     cmin = 0,
     opacity = 0.8
   )
+```
+
+```{r}
+midsagittal <- cbind(grid, interp = files_interp) %>%
+  filter(X > 6.8 & X < 6.9) %>%
+  na.omit() %>%
+  group_by(file) %>%
+  mutate(smoothed = SMA(interp))
+```
+
+```{r warning=FALSE}
+ggplot(midsagittal, aes(Y, interp, colour = phone, group = file)) +
+  geom_path()
+```
+
+```{r warning=FALSE}
+ggplot(midsagittal, aes(Y, smoothed, colour = phone, group = file)) +
+  geom_path()
+```
+
+```{r warning=FALSE}
+ggplot(midsagittal, aes(Y, interp, colour = phone, group = file)) +
+  geom_point()
+```
+
+```{r warning=FALSE}
+ggplot(midsagittal, aes(Y, interp, colour = phone)) +
+  geom_smooth(method = "loess")
 ```
