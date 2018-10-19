@@ -187,6 +187,50 @@ volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 cat("The volume increase for [z] over [s] is", round(volume_diff_2, 2), "cm^3 (= ml)")
 ```
 
+```{r}
+predicted_se <- as_tibble(predict(gam_ar, newdata = grid, se = TRUE))
+
+predicted_df_se <- cbind(grid, predicted_se) %>%
+  dplyr::select(-file) %>%
+  unique() %>%
+  mutate(
+    CI_up = fit + se.fit * 1.96,
+    CI_lo = fit - se.fit * 1.96
+  )
+  
+predicted_ci_up <- dplyr::select(predicted_df_se, X, Y, CI_up, phone) %>%
+  spread(phone, CI_up) %>%
+  mutate(
+    CI_up_diff = s - z
+  ) %>%
+  dplyr::select(-s , -z)
+
+predicted_ci_lo <- dplyr::select(predicted_df_se, X, Y, CI_lo, phone) %>%
+  spread(phone, CI_lo) %>%
+  mutate(
+    CI_lo_diff = s - z
+  ) %>%
+  dplyr::select(-s , -z)
+
+predicted_ci <- full_join(predicted_ci_up, predicted_ci_lo)
+
+predicted_ci$mask <- as.vector(t(interp_m))
+
+predicted_ci_2 <- predicted_ci %>%
+  mutate(
+    CI_up_diff_2 = CI_up_diff * mask,
+    CI_lo_diff_2 = CI_lo_diff * mask
+    )
+
+sum_ci_up_diff_2 <- sum(predicted_ci_2$CI_up_diff_2)
+sum_ci_lo_diff_2 <- sum(predicted_ci_2$CI_lo_diff_2)
+volume_up_diff_2 <- sum_ci_up_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
+volume_lo_diff_2 <- sum_ci_lo_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
+cat("The volume increase for [z] over [s] is", round(volume_up_diff_2, 2), "cm^3 (= ml)\n")
+cat("The volume increase for [z] over [s] is", round(volume_lo_diff_2, 2), "cm^3 (= ml)")
+```
+
+
 # Token variation
 
 ```{r prep-token-variation}
