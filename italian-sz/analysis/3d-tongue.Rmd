@@ -255,7 +255,7 @@ tongue_interp <- cbind(grid, interp = files_interp) %>%
 s_interp <- filter(tongue_interp, phone == "s")
 s_min_m <- matrix(s_interp$min, 100, 100)
 
-z_interp <- filter(tongue_interp, phone == "s")
+z_interp <- filter(tongue_interp, phone == "z")
 z_max_m <- matrix(z_interp$max, 100, 100)
 
 color <- rep(0, length(s_min_m))
@@ -286,16 +286,89 @@ plot_ly(colors = c("black", "orange")) %>%
   layout(scene = list(aspectmode = "manual", aspectratio = list(x = 0.6, y = 1, z = 0.5)))
 ```
 
+```{r frankestein-volume}
+f_sum_diff <- sum(s_interp$min - z_interp$max, na.rm = TRUE)
+f_volume_diff <- f_sum_diff * (x_max - x_min)/100 * (y_max - y_min)/100
+cat("The volume increase for [z] over [s] is", round(f_volume_diff, 2), "cm^3 (= ml)")
+```
+
+```{r frankestein-volume-no-outlier}
+tongue_2 <- filter(tongue, file != "20181011121440_10") %>%
+  droplevels()
+
+files_interp_2 <- NULL
+
+for (file in 1:length(levels(tongue_2$file))) {
+  file_data_2 <- tongue[tongue$file == levels(tongue$file)[file],]
+  
+  file_interp_data_2 <- interp(file_data_2$X, file_data_2$Y, file_data_2$Z, xo = seq(x_min, x_max, length = 100), yo = seq(y_min, y_max, length = 100))
+  
+  files_interp_2 <- c(files_interp_2, as.vector(t(file_interp_data_2$z)))
+}
+
+grid_2 <- filter(grid, file != "20181011121440_10")
+
+tongue_interp_2 <- cbind(grid_2, interp = files_interp_2) %>%
+  group_by(phone, X, Y) %>%
+  summarise(min = min(interp, na.rm = TRUE), max = max(interp, na.rm = TRUE)) %>%
+  mutate(
+    min = ifelse(min == Inf, NA, min),
+    max = ifelse(max == -Inf, NA, max)
+  )
+
+s_interp_2 <- filter(tongue_interp_2, phone == "s")
+s_min_m_2 <- matrix(s_interp_2$min, 100, 100)
+
+z_interp_2 <- filter(tongue_interp_2, phone == "z")
+z_max_m_2 <- matrix(z_interp_2$max, 100, 100)
+
+f_sum_diff_2 <- sum(s_interp_2$min - z_interp_2$max, na.rm = TRUE)
+f_volume_diff_2 <- f_sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
+cat("The volume increase for [z] over [s] is", round(f_volume_diff_2, 2), "cm^3 (= ml)")
+```
+
+```{r plot-min-max}
+plot_ly(colors = c("black", "orange")) %>%
+  add_surface(
+    z = ~s_min_m_2,
+    surfacecolor = color,
+    cauto = F,
+    cmax = 1,
+    cmin = 0,
+    opacity = 1
+  ) %>%
+  add_surface(
+    z = ~z_max_m_2,
+    surfacecolor = color2,
+    cauto = F,
+    cmax = 1,
+    cmin = 0,
+    opacity = 1
+  ) %>%
+  layout(scene = list(aspectmode = "manual", aspectratio = list(x = 0.6, y = 1, z = 0.5)))
+```
+
 # Midsagittal
 
-```{r prep-midsaggital}
+```{r prep-saggital}
 midsagittal <- cbind(grid, interp = files_interp) %>%
   filter(X > 6.8 & X < 6.9) %>%
   na.omit() %>%
   group_by(file) %>%
   mutate(smoothed = WMA(interp)) # smoothed with a weighted moving
-```
 
+parasaggital_l <- cbind(grid, interp = files_interp) %>%
+  filter(X > 3 & X < 3.1) %>%
+  na.omit() %>%
+  group_by(file) %>%
+  mutate(smoothed = WMA(interp)) # smoothed with a weighted moving
+
+parasaggital_r <- cbind(grid, interp = files_interp) %>%
+  filter(X > 10.2 & X < 10.3) %>%
+  na.omit() %>%
+  group_by(file) %>%
+  mutate(smoothed = WMA(interp)) # smoothed with a weighted moving
+```
 
 ```{r contours, warning=FALSE}
 ggplot(midsagittal, aes(Y, interp, colour = phone, group = file)) +
@@ -310,4 +383,20 @@ ggplot(midsagittal, aes(Y, smoothed, colour = phone, group = file)) +
 ```{r contour-smooths, warning=FALSE}
 ggplot(midsagittal, aes(Y, interp, colour = phone, linetype = phone)) +
   geom_smooth(method = "loess")
+```
+
+
+```{r parasaggital-l-contours, warning=FALSE}
+ggplot(parasaggital_l, aes(Y, interp, colour = phone, group = file)) +
+  geom_path()
+```
+
+```{r parasaggital-l-smooth, warning=FALSE}
+ggplot(parasaggital_l, aes(Y, interp, colour = phone)) +
+  geom_smooth()
+```
+
+```{r parasaggital-r-contours, warning=FALSE}
+ggplot(parasaggital_r, aes(Y, interp, colour = phone, group = file)) +
+  geom_path()
 ```
