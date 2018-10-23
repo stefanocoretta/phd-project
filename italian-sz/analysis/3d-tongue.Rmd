@@ -147,10 +147,10 @@ vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = l
 # Volume increase
 
 ```{r volume-increase}
-x_min <- 1.8
-x_max <- 11.8
-y_min <- 3.6
-y_max <- 9.9
+x_min <- min(tongue$X)
+x_max <- max(tongue$X)
+y_min <- min(tongue$Y)
+y_max <- max(tongue$Y)
 
 # File is needed in the grid for midsagittal data (it groups by file)
 grid <- expand.grid(X = seq(x_min, x_max, length = 100), Y = seq(y_min, y_max, length = 100), file = levels(tongue$file))
@@ -187,7 +187,7 @@ volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 cat("The volume increase for [z] over [s] is", round(volume_diff_2, 2), "cm^3 (= ml)")
 ```
 
-```{r}
+```{r volume-increase-range}
 predicted_se <- as_tibble(predict(gam_ar, newdata = grid, se = TRUE))
 
 predicted_df_se <- cbind(grid, predicted_se) %>%
@@ -226,8 +226,7 @@ sum_ci_up_diff_2 <- sum(predicted_ci_2$CI_up_diff_2)
 sum_ci_lo_diff_2 <- sum(predicted_ci_2$CI_lo_diff_2)
 volume_up_diff_2 <- sum_ci_up_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 volume_lo_diff_2 <- sum_ci_lo_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
-cat("The volume increase for [z] over [s] is", round(volume_up_diff_2, 2), "cm^3 (= ml)\n")
-cat("The volume increase for [z] over [s] is", round(volume_lo_diff_2, 2), "cm^3 (= ml)")
+cat("The volume increase for [z] over [s] is between", round(volume_up_diff_2, 2), "and", round(volume_lo_diff_2, 2), "cm^3 (= ml)\n")
 ```
 
 
@@ -306,7 +305,7 @@ parasaggital_l <- cbind(grid, interp = files_interp) %>%
   filter(X > 3 & X < 3.1) %>%
   na.omit() %>%
   group_by(file) %>%
-  mutate(smoothed = WMA(interp)) # smoothed with a weighted moving
+  mutate(smoothed = WMA(interp, n = 9)) # smoothed with a weighted moving
 
 parasaggital_r <- cbind(grid, interp = files_interp) %>%
   filter(X > 10.2 & X < 10.3) %>%
