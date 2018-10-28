@@ -23,7 +23,7 @@ library(plotly)
 ```{r data, message=FALSE}
 read_tongue <- function(file) {
   tibble <- read_csv(file, col_names = c("X", "Y", "Z")) %>%
-    mutate(file = substr(file, 26, 42))
+    mutate(file = substr(file, 26, 43))
   
   tibble <- mutate(tibble, index = seq(1, nrow(tibble)))
   
