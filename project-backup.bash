@@ -31,8 +31,8 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/perceptual-pilot/data/ \
     /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english/data/ \
-    /Volumes/Seagate/language-data/phd-project/english/data
+    ~/GitHub/phd-project/english-pilot/data/ \
+    /Volumes/Seagate/language-data/phd-project/english-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/perceptual/data/ \
     /Volumes/Seagate/language-data/phd-project/perceptual/data
@@ -63,8 +63,8 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/perceptual-pilot/data/ \
     /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english/data/ \
-    /Volumes/Seagate/language-data/phd-project/english/data
+    ~/GitHub/phd-project/english-pilot/data/ \
+    /Volumes/Seagate/language-data/phd-project/english-pilot/data
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/perceptual/data/ \
     /Volumes/Seagate/language-data/phd-project/perceptual/data
@@ -96,8 +96,8 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data/ \
     ~/GitHub/phd-project/perceptual-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english/data/ \
-    ~/GitHub/phd-project/english/data
+    /Volumes/Seagate/language-data/phd-project/english-pilot/data/ \
+    ~/GitHub/phd-project/english-pilot/data
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/perceptual/data/ \
     ~/GitHub/phd-project/perceptual/data
@@ -124,8 +124,8 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data/ \
     ~/GitHub/phd-project/perceptual-pilot/data
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english/data/ \
-    ~/GitHub/phd-project/english/data/
+    /Volumes/Seagate/language-data/phd-project/english-pilot/data/ \
+    ~/GitHub/phd-project/english-pilot/data/
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/perceptual/data/ \
     ~/GitHub/phd-project/perceptual/data/
