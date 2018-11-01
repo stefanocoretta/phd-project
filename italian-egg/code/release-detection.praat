@@ -25,38 +25,52 @@
 # SOFTWARE.
 ######################################
 
-<<<get alignment>>>
+stereo$ = "../data/raw/stereo"
+audio$ = "../data/raw/audio"
 
-speech_intervals = Get number of intervals: 3
-sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
-textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
+Create Strings as file list: "tg_list", "'stereo$'/*-palign-corrected.TextGrid"
+tg_number = Get number of strings
 
-for speech_interval to speech_intervals
+for file from 1 to tg_number
 
-  selectObject: palign
-  speech_label$ = Get label of interval: 3, speech_interval
+    selectObject: "Strings tg_list"
+    file$ = Get string: file
+    Read from file: "'stereo$'/'file$'"
+    palign = selected("TextGrid")
+    speaker$ = file$ - "-palign-corrected.TextGrid"
 
-  if speech_label$ == "speech"
-    speech_start = Get start time of interval: 3, speech_interval
-    frame_interval = Get interval at time: 2, speech_start
-    frame_end = Get end time of interval: 2, frame_interval
-    c1_interval = Get interval at time: 1, frame_end
-    c2_interval = c1_interval + 2
-
-    c1_start = Get start time of interval: 1, c1_interval
-    c1_end = Get end time of interval: 1, c1_interval
-    c2_start = Get start time of interval: 1, c2_interval
-    c2_end = Get end time of interval: 1, c2_interval
-
-    @findRelease: c1_start, c1_end, "release_c1"
-
-    @findRelease: c2_start, c2_end, "release_c2"
-  endif
+    speech_intervals = Get number of intervals: 3
+    sound = Read from file: "'audio$'/'speaker$'.wav"
+    textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
+    
+    for speech_interval to speech_intervals
+    
+      selectObject: palign
+      speech_label$ = Get label of interval: 3, speech_interval
+    
+      if speech_label$ == "speech"
+        speech_start = Get start time of interval: 3, speech_interval
+        frame_interval = Get interval at time: 2, speech_start
+        frame_end = Get end time of interval: 2, frame_interval
+        c1_interval = Get interval at time: 1, frame_end
+        c2_interval = c1_interval + 2
+    
+        c1_start = Get start time of interval: 1, c1_interval
+        c1_end = Get end time of interval: 1, c1_interval
+        c2_start = Get start time of interval: 1, c2_interval
+        c2_end = Get end time of interval: 1, c2_interval
+    
+        @findRelease: c1_start, c1_end, "release_c1"
+    
+        @findRelease: c2_start, c2_end, "release_c2"
+      endif
+    
+    endfor
+    
+    selectObject: textgrid
+    Save as text file: "'audio$'/'speaker$'-rel.TextGrid"
 
 endfor
-
-selectObject: textgrid
-Save as text file: "'directory_alignment$'/'speaker$'-rel.TextGrid"
 
 ###################
 # Define findRelease procedure
@@ -77,16 +91,16 @@ procedure findRelease: .start_time, .end_time, .label$
   spectrum_hilbert = Copy: "hilbert"
   Formula: "if row=1 then Spectrum_original[2,col] else -Spectrum_original[1,col] fi"
   sound_hilbert = To Sound
-  samples = Get number of samples
+  .samples = Get number of samples
   Formula: "abs(self)"
   matrix = Down to Matrix
-  period = Get column distance
+  .period = Get column distance
 
   .m1_time = 0.006
   .m2_time = 0.016
   
   for .sample from 1 to .samples
-    .current = .sample * period
+    .current = .sample * .period
     selectObject: sound_hilbert
     .mean_before = Get mean: 1, .current - .m1_time - .m2_time, .current - .m1_time
     .mean_after = Get mean: 1, .current + .m1_time, .current + .m1_time + .m2_time
@@ -96,7 +110,7 @@ procedure findRelease: .start_time, .end_time, .label$
   
     if .plosion == undefined
       .plosion = 0
-    elif plosion < 3
+    elif .plosion < 3
       .plosion = 0
     endif
   

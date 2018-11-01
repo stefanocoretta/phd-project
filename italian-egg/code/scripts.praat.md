@@ -5,11 +5,29 @@ This script detects the release of C1 and C2. The algorythm is based on @avantha
 ```praat release-detection.praat
 <<<script header>>>
 
-<<<get alignment>>>
-
-<<<find release>>>
+<<<file loop>>>
 
 <<<findRelease>>>
+```
+
+```praat "file loop"
+stereo$ = "../data/raw/stereo"
+audio$ = "../data/raw/audio"
+
+Create Strings as file list: "tg_list", "'stereo$'/*-palign-corrected.TextGrid"
+tg_number = Get number of strings
+
+for file from 1 to tg_number
+
+    selectObject: "Strings tg_list"
+    file$ = Get string: file
+    Read from file: "'stereo$'/'file$'"
+    palign = selected("TextGrid")
+    speaker$ = file$ - "-palign-corrected.TextGrid"
+
+    <<<find release>>>
+
+endfor
 ```
 
 The following procedure defines the algorithm.
@@ -44,10 +62,10 @@ Rename: "original"
 spectrum_hilbert = Copy: "hilbert"
 Formula: "if row=1 then Spectrum_original[2,col] else -Spectrum_original[1,col] fi"
 sound_hilbert = To Sound
-samples = Get number of samples
+.samples = Get number of samples
 Formula: "abs(self)"
 matrix = Down to Matrix
-period = Get column distance
+.period = Get column distance
 ```
 
 We can now calculate the plosion index.
@@ -57,7 +75,7 @@ We can now calculate the plosion index.
 .m2_time = 0.016
 
 for .sample from 1 to .samples
-  .current = .sample * period
+  .current = .sample * .period
   selectObject: sound_hilbert
   .mean_before = Get mean: 1, .current - .m1_time - .m2_time, .current - .m1_time
   .mean_after = Get mean: 1, .current + .m1_time, .current + .m1_time + .m2_time
@@ -67,7 +85,7 @@ for .sample from 1 to .samples
 
   if .plosion == undefined
     .plosion = 0
-  elif plosion < 3
+  elif .plosion < 3
     .plosion = 0
   endif
 
@@ -92,7 +110,7 @@ We start by identifying the inverval that corresponds to C2.
 
 ```praat "find release"
 speech_intervals = Get number of intervals: 3
-sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
+sound = Read from file: "'audio$'/'speaker$'.wav"
 textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
 
 for speech_interval to speech_intervals
@@ -120,7 +138,7 @@ for speech_interval to speech_intervals
 endfor
 
 selectObject: textgrid
-Save as text file: "'directory_alignment$'/'speaker$'-rel.TextGrid"
+Save as text file: "'audio$'/'speaker$'-rel.TextGrid"
 ```
 
 # Script header
