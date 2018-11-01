@@ -1,58 +1,40 @@
-## Burst detection
+# Stop release detection
 
-This script detects the burst in the consonant following the target vowels (C2). The algorythm is based on @avanthapadmanabha2014.
+This script detects the release of C1 and C2. The algorythm is based on @avanthapadmanabha2014.
 
-### burst-detection.praat
-```praat
+```praat release-detection.praat
 <<<script header>>>
 
 <<<get alignment>>>
 
-<<<find consonant>>>
+<<<find release>>>
+
+<<<findRelease>>>
 ```
 
-We start by identifying the inverval that corresponds to C2.
+The following procedure defines the algorithm.
 
-### "find consonant"
-```praat
-speech_intervals = Get number of intervals: 3
-sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
-textgrid = To TextGrid: "burst","burst"
+```praat "findRelease"
+###################
+# Define findRelease procedure
+###################
 
-for speech_interval to speech_intervals
-    selectObject: palign
-    speech_label$ = Get label of interval: 3, speech_interval
-    if speech_label$ == "speech"
-        speech_start = Get start time of interval: 3, speech_interval
-        token_interval = Get interval at time: 2, speech_start
-        token_end = Get end time of interval: 2, token_interval
-        phone_interval = Get interval at time: 1, token_end
-        start_consonant = Get start time of interval: 1, phone_interval + 2
-        end_consonant = Get end time of interval: 1, phone_interval + 2
+procedure findRelease: .start_time, .end_time, .label$
+  selectObject: sound
 
-        selectObject: sound
-        sound_consonant = Extract part: start_consonant, end_consonant,
-            ..."rectangular", 1, "yes"
+  .sound_consonant = Extract part: .start_time, .end_time,
+    ..."rectangular", 1, "yes"
 
-        <<<filter>>>
+  <<<hilbert>>>
 
-        <<<plosion index>>>
+  <<<plosion index>>>
 
-        selectObject: textgrid
-        if burst <> undefined
-            Insert point: 1, burst, "burst"
-        endif
-    endif
-endfor
-
-selectObject: textgrid
-Save as text file: "'directory_alignment$'/'speaker$'-burst.TextGrid"
+endproc
 ```
 
-To calculate the plosion index, it is first necessary to filter the sound file.
+To calculate the plosion index, it is first necessary to create the hilbert transform of the sound.
 
-### "filter"
-```praat
+```praat "hilbert"
 Filter (pass Hann band): 400, 0, 100
 sound_band = selected("Sound")
 
@@ -70,34 +52,104 @@ period = Get column distance
 
 We can now calculate the plosion index.
 
-### "plosion index"
-```praat
-m1_time = 0.006
-m2_time = 0.016
+```praat "plosion index"
+.m1_time = 0.006
+.m2_time = 0.016
 
-for sample from 1 to samples
-    current = sample * period
-    selectObject: sound_hilbert
-    mean_before = Get mean: 1, current - m1_time - m2_time, current - m1_time
-    mean_after = Get mean: 1, current + m1_time, current + m1_time + m2_time
-    window_average = (mean_before + mean_after) / 2
-    current_value = Get value at time: 1, current, "Sinc70"
-    plosion = current_value / window_average
+for .sample from 1 to .samples
+  .current = .sample * period
+  selectObject: sound_hilbert
+  .mean_before = Get mean: 1, .current - .m1_time - .m2_time, .current - .m1_time
+  .mean_after = Get mean: 1, .current + .m1_time, .current + .m1_time + .m2_time
+  .window_average = (.mean_before + .mean_after) / 2
+  .current_value = Get value at time: 1, .current, "Sinc70"
+  .plosion = .current_value / .window_average
 
-    if plosion == undefined
-        plosion = 0
-    elif plosion < 3
-        plosion = 0
-    endif
+  if .plosion == undefined
+    .plosion = 0
+  elif plosion < 3
+    .plosion = 0
+  endif
 
-    selectObject: matrix
-    Set value: 1, sample, plosion
+  selectObject: matrix
+  Set value: 1, .sample, .plosion
 endfor
 
 To Sound
-Shift times by: start_consonant
+Shift times by: .start_time
 To PointProcess (extrema): 1, "yes", "no", "Sinc70"
-half_consonant = start_consonant + ((end_consonant - start_consonant) / 3) * 2
-Remove points between: start_consonant, half_consonant
-burst = Get time from index: 1
+# .half_consonant = .start_time + ((.end_time - .start_time) / 3) * 2
+# Remove points between: .start_time, .half_consonant
+.release = Get time from index: 1
+
+selectObject: textgrid
+if .release <> undefined
+  Insert point: 1, .release, .label$
+endif
+```
+
+We start by identifying the inverval that corresponds to C2.
+
+```praat "find release"
+speech_intervals = Get number of intervals: 3
+sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
+textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
+
+for speech_interval to speech_intervals
+
+  selectObject: palign
+  speech_label$ = Get label of interval: 3, speech_interval
+
+  if speech_label$ == "speech"
+    speech_start = Get start time of interval: 3, speech_interval
+    frame_interval = Get interval at time: 2, speech_start
+    frame_end = Get end time of interval: 2, frame_interval
+    c1_interval = Get interval at time: 1, frame_end
+    c2_interval = c1_interval + 2
+
+    c1_start = Get start time of interval: 1, c1_interval
+    c1_end = Get end time of interval: 1, c1_interval
+    c2_start = Get start time of interval: 1, c2_interval
+    c2_end = Get end time of interval: 1, c2_interval
+
+    @findRelease: c1_start, c1_end, "release_c1"
+
+    @findRelease: c2_start, c2_end, "release_c2"
+  endif
+
+endfor
+
+selectObject: textgrid
+Save as text file: "'directory_alignment$'/'speaker$'-rel.TextGrid"
+```
+
+# Script header
+
+```praat "script header"
+######################################
+# This is a script from the project 'Vowel duration and consonant voicing: An
+# articulatory study', Stefano Coretta
+######################################
+# MIT License
+#
+# Copyright (c) 2016-2018 Stefano Coretta
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+######################################
 ```
