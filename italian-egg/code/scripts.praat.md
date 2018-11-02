@@ -151,6 +151,8 @@ This script finds the onsent and offset of the voicing interval that includes V1
 <<<egg loop>>>
 
 appendInfoLine: "Done!"
+
+<<<smoothing>>>
 ```
 
 Each EGG file is smoothed with a weighted moving average and a VUV textgrid is created.
@@ -179,10 +181,15 @@ for file from 1 to tg_number
 
   <<<vuv>>>
 
-  <<<smoothing>>>
-
 endfor
 ```
+
+The following chunk contains the functions for extracting the VUV intervals.
+The EGG signal is smoothed using a weighted average filter, with width = 11.
+A PointProcess object is created which indicates the individual glottal periods.
+From this object, a TextGrid with voiced/unvoiced (VUV) intervals is obtained.
+Since the delay created by the smoothing is corrected by shifting the times in the EGG, the times of the TextGrid are extended by the same lag at the beginning of the TextGrid (so that the EGG file and the TextGrid start at 0).
+The TextGrid is written in `./data/raw/egg/`.
 
 ```praat "vuv"
 appendInfoLine: "'tab$'Smoothing..."
@@ -199,6 +206,10 @@ Extend time: time_lag, "Start"
 
 Write to text file: "'egg$'/'speaker$'-vuv.TextGrid"
 ```
+
+The following chunk defines the smoothing procedure.
+The EGG signal is smoothed by using the weighted average filter formula.
+This kind of smoothing filter creates a small delay in the signal, which is corrected by shifting the times of the signal.
 
 ```praat "smoothing"
 procedure smoothing : .width

@@ -60,26 +60,26 @@ for file from 1 to tg_number
   
   Write to text file: "'egg$'/'speaker$'-vuv.TextGrid"
 
-  procedure smoothing : .width
-      .weight = .width / 2 + 0.5
-  
-      .formula$ = "( "
-  
-      for .w to .weight - 1
-          .formula$ = .formula$ + string$(.w) + " * (self [col - " + string$(.w) + "] +
-              ...self [col - " + string$(.w) + "]) + "
-      endfor
-  
-      .formula$ = .formula$ + string$(.weight) + " * (self [col]) ) / " +
-          ...string$(.weight ^ 2)
-  
-      Formula: .formula$
-  
-      .sampling_period = Get sampling period
-      time_lag = (.width - 1) / 2 * .sampling_period
-      Shift times by: time_lag
-  endproc
-
 endfor
 
 appendInfoLine: "Done!"
+
+procedure smoothing : .width
+    .weight = .width / 2 + 0.5
+
+    .formula$ = "( "
+
+    for .w to .weight - 1
+        .formula$ = .formula$ + string$(.w) + " * (self [col - " + string$(.w) + "] +
+            ...self [col - " + string$(.w) + "]) + "
+    endfor
+
+    .formula$ = .formula$ + string$(.weight) + " * (self [col]) ) / " +
+        ...string$(.weight ^ 2)
+
+    Formula: .formula$
+
+    .sampling_period = Get sampling period
+    time_lag = (.width - 1) / 2 * .sampling_period
+    Shift times by: time_lag
+endproc
