@@ -33,42 +33,42 @@ tg_number = Get number of strings
 
 for file from 1 to tg_number
 
-    selectObject: "Strings tg_list"
-    file$ = Get string: file
-    Read from file: "'stereo$'/'file$'"
-    palign = selected("TextGrid")
-    speaker$ = file$ - "-palign-corrected.TextGrid"
+  selectObject: "Strings tg_list"
+  file$ = Get string: file
+  Read from file: "'stereo$'/'file$'"
+  palign = selected("TextGrid")
+  speaker$ = file$ - "-palign-corrected.TextGrid"
 
-    speech_intervals = Get number of intervals: 3
-    sound = Read from file: "'audio$'/'speaker$'.wav"
-    textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
-    
-    for speech_interval to speech_intervals
-    
-      selectObject: palign
-      speech_label$ = Get label of interval: 3, speech_interval
-    
-      if speech_label$ == "speech"
-        speech_start = Get start time of interval: 3, speech_interval
-        frame_interval = Get interval at time: 2, speech_start
-        frame_end = Get end time of interval: 2, frame_interval
-        c1_interval = Get interval at time: 1, frame_end
-        c2_interval = c1_interval + 2
-    
-        c1_start = Get start time of interval: 1, c1_interval
-        c1_end = Get end time of interval: 1, c1_interval
-        c2_start = Get start time of interval: 1, c2_interval
-        c2_end = Get end time of interval: 1, c2_interval
-    
-        @findRelease: c1_start, c1_end, "release_c1"
-    
-        @findRelease: c2_start, c2_end, "release_c2"
-      endif
-    
-    endfor
-    
-    selectObject: textgrid
-    Save as text file: "'audio$'/'speaker$'-rel.TextGrid"
+  speech_intervals = Get number of intervals: 3
+  sound = Read from file: "'audio$'/'speaker$'.wav"
+  textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
+  
+  for speech_interval to speech_intervals
+  
+    selectObject: palign
+    speech_label$ = Get label of interval: 3, speech_interval
+  
+    if speech_label$ == "speech"
+      speech_start = Get start time of interval: 3, speech_interval
+      frame_interval = Get interval at time: 2, speech_start
+      frame_end = Get end time of interval: 2, frame_interval
+      c1_interval = Get interval at time: 1, frame_end
+      c2_interval = c1_interval + 2
+  
+      c1_start = Get start time of interval: 1, c1_interval
+      c1_end = Get end time of interval: 1, c1_interval
+      c2_start = Get start time of interval: 1, c2_interval
+      c2_end = Get end time of interval: 1, c2_interval
+  
+      @findRelease: c1_start, c1_end, "release_c1"
+  
+      @findRelease: c2_start, c2_end, "release_c2"
+    endif
+  
+  endfor
+  
+  selectObject: textgrid
+  Save as text file: "'audio$'/'speaker$'-rel.TextGrid"
 
 endfor
 

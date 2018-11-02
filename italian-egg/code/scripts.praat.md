@@ -19,13 +19,13 @@ tg_number = Get number of strings
 
 for file from 1 to tg_number
 
-    selectObject: "Strings tg_list"
-    file$ = Get string: file
-    Read from file: "'stereo$'/'file$'"
-    palign = selected("TextGrid")
-    speaker$ = file$ - "-palign-corrected.TextGrid"
+  selectObject: "Strings tg_list"
+  file$ = Get string: file
+  Read from file: "'stereo$'/'file$'"
+  palign = selected("TextGrid")
+  speaker$ = file$ - "-palign-corrected.TextGrid"
 
-    <<<find release>>>
+  <<<find release>>>
 
 endfor
 ```
