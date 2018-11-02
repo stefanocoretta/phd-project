@@ -8,6 +8,8 @@ This script detects the release of C1 and C2. The algorythm is based on @avantha
 <<<file loop>>>
 
 <<<findRelease>>>
+
+appendInfoLine: "Done!"
 ```
 
 ```praat "file loop"
@@ -17,6 +19,8 @@ audio$ = "../data/raw/audio"
 Create Strings as file list: "tg_list", "'stereo$'/*-palign-corrected.TextGrid"
 tg_number = Get number of strings
 
+writeInfoLine: "Found 'tg_number' files.'newline$'Starting now...'newline$'"
+
 for file from 1 to tg_number
 
   selectObject: "Strings tg_list"
@@ -24,6 +28,8 @@ for file from 1 to tg_number
   Read from file: "'stereo$'/'file$'"
   palign = selected("TextGrid")
   speaker$ = file$ - "-palign-corrected.TextGrid"
+
+  appendInfoLine: "Processing 'speaker$'..."
 
   <<<find release>>>
 
@@ -96,8 +102,8 @@ endfor
 To Sound
 Shift times by: .start_time
 To PointProcess (extrema): 1, "yes", "no", "Sinc70"
-# .half_consonant = .start_time + ((.end_time - .start_time) / 3) * 2
-# Remove points between: .start_time, .half_consonant
+.half_consonant = .start_time + ((.end_time - .start_time) / 3) * 2
+Remove points between: .start_time, .half_consonant
 .release = Get time from index: 1
 
 selectObject: textgrid
@@ -111,7 +117,7 @@ We start by identifying the inverval that corresponds to C2.
 ```praat "find release"
 speech_intervals = Get number of intervals: 3
 sound = Read from file: "'audio$'/'speaker$'.wav"
-textgrid = To TextGrid: "release_c1, release_c2","release_c1, release_c2"
+textgrid = To TextGrid: "releases","releases"
 
 for speech_interval to speech_intervals
 
