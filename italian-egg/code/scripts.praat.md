@@ -195,6 +195,8 @@ noprogress To PointProcess (periodic, cc): 75, 600
 
 To TextGrid (vuv): 0.02, 0
 
+Extend time: time_lag, "Start"
+
 Write to text file: "'egg$'/'speaker$'-vuv.TextGrid"
 ```
 
@@ -215,8 +217,8 @@ procedure smoothing : .width
     Formula: .formula$
 
     .sampling_period = Get sampling period
-    .time_lag = (.width - 1) / 2 * .sampling_period
-    Shift times by: .time_lag
+    time_lag = (.width - 1) / 2 * .sampling_period
+    Shift times by: time_lag
 endproc
 ```
 

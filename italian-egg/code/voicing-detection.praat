@@ -56,6 +56,8 @@ for file from 1 to tg_number
   
   To TextGrid (vuv): 0.02, 0
   
+  Extend time: time_lag, "Start"
+  
   Write to text file: "'egg$'/'speaker$'-vuv.TextGrid"
 
   procedure smoothing : .width
@@ -74,8 +76,8 @@ for file from 1 to tg_number
       Formula: .formula$
   
       .sampling_period = Get sampling period
-      .time_lag = (.width - 1) / 2 * .sampling_period
-      Shift times by: .time_lag
+      time_lag = (.width - 1) / 2 * .sampling_period
+      Shift times by: time_lag
   endproc
 
 endfor
