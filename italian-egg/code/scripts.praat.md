@@ -141,6 +141,85 @@ selectObject: textgrid
 Save as text file: "'audio$'/'speaker$'-rel.TextGrid"
 ```
 
+# Voice onset/offset detection
+
+This script finds the onsent and offset of the voicing interval that includes V1.
+
+```praat voicing-detection.praat
+<<<script header>>>
+
+<<<egg loop>>>
+
+appendInfoLine: "Done!"
+```
+
+Each EGG file is smoothed with a weighted moving average and a VUV textgrid is created.
+
+```praat "egg loop"
+stereo$ = "../data/raw/stereo"
+egg$ = "../data/raw/egg"
+
+Create Strings as file list: "tg_list", "'stereo$'/*-palign-corrected.TextGrid"
+tg_number = Get number of strings
+
+writeInfoLine: "Found 'tg_number' files.'newline$'Starting now...'newline$'"
+
+for file from 1 to tg_number
+
+  selectObject: "Strings tg_list"
+  file$ = Get string: file
+
+  speaker$ = file$ - "-palign-corrected.TextGrid"
+  appendInfoLine: "Processing 'speaker$'..."
+
+  Read from file: "'stereo$'/'file$'"
+  palign = selected("TextGrid")
+  Read from file: "'egg$'/'speaker$'_egg.wav"
+  egg = selected("Sound")
+
+  <<<vuv>>>
+
+  <<<smoothing>>>
+
+endfor
+```
+
+```praat "vuv"
+appendInfoLine: "'tab$'Smoothing..."
+
+@smoothing: 11
+
+appendInfoLine: "'tab$'VUV..."
+
+noprogress To PointProcess (periodic, cc): 75, 600
+
+To TextGrid (vuv): 0.02, 0
+
+Write to text file: "'egg$'/'speaker$'-vuv.TextGrid"
+```
+
+```praat "smoothing"
+procedure smoothing : .width
+    .weight = .width / 2 + 0.5
+
+    .formula$ = "( "
+
+    for .w to .weight - 1
+        .formula$ = .formula$ + string$(.w) + " * (self [col - " + string$(.w) + "] +
+            ...self [col - " + string$(.w) + "]) + "
+    endfor
+
+    .formula$ = .formula$ + string$(.weight) + " * (self [col]) ) / " +
+        ...string$(.weight ^ 2)
+
+    Formula: .formula$
+
+    .sampling_period = Get sampling period
+    .time_lag = (.width - 1) / 2 * .sampling_period
+    Shift times by: .time_lag
+endproc
+```
+
 # Script header
 
 ```praat "script header"
