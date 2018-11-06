@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lmerTest)
 library(simr)
+library(brms)
+library(bayesplot)
 ```
 
 # Simulate data
@@ -20,7 +22,8 @@ set.seed(8788)
 gons <- NULL
 
 for (i in 1:30) {
-  gons <- c(gons, rnorm(10, 90, 70), rnorm(10, 90, 70) + 5)
+  b_speaker <- rnorm(1, 0, 55)
+  gons <- c(gons, rnorm(10, 90 + b_speaker, 70), rnorm(10, 90 + b_speaker, 70) + 5)
 }
 
 sim_data <- tibble(
@@ -100,3 +103,81 @@ gons_4_sim <- powerCurve(gons_4_lm, along = "subject", seed = 8788)
 ```{r sim-4-plot}
 plot(gons_4_sim)
 ```
+
+# Bayesian
+
+```{r sim-data-2}
+set.seed(8788)
+
+gons_diff <- NULL
+
+n_subjects <- 20
+mean_diff <- 5
+
+for (i in 1:n_subjects) {
+  b_speaker <- rnorm(1, 0, 55)
+  gons_diff <- c(gons_diff, rnorm(20, mean_diff + b_speaker, 70))
+}
+
+sim_data_2 <- tibble(
+  gons_diff,
+  subject = rep(1:n_subjects, each = 20),
+  word = rep(c("cock", "cog", "cocker", "cogger"), 5 * n_subjects)
+) %>%
+  mutate(
+    subject = factor(subject)
+  )
+```
+
+```{r plot-2}
+sim_data_2 %>%
+  ggplot(aes(gons_diff)) +
+  geom_density()
+```
+
+```{r plot-2-speakers}
+sim_data_2 %>%
+  ggplot(aes(gons_diff)) +
+  geom_density() +
+  facet_wrap(~ subject)
+```
+
+```{r diff-brm}
+priors <- c(
+  set_prior("normal(0, 50)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("normal(0, 50)", class = "sigma") # sigma is the standard deviation of the error term
+)
+
+diff_brm <- brm(
+  gons_diff ~
+    1 +
+    (1|subject) +
+    (1|word),
+  data = sim_data_2,
+  family = gaussian(),
+  prior = priors,
+  iter = 20000,
+  chains = 4,
+  control = list(adapt_delta = 0.999),
+  save_all_pars = TRUE
+)
+```
+
+```{r summary-brm}
+summary(diff_brm)
+```
+
+```{r intercept-interval}
+color_scheme_set("red")
+mcmc_intervals(as.array(diff_brm), pars = c("b_Intercept"), prob_outer = 0.95)
+```
+
+```{r intercept-area}
+mcmc_areas(as.array(diff_brm), pars = c("b_Intercept"))
+```
+
+```{r random-intervals}
+mcmc_intervals(as.array(diff_brm), pars = c("sd_subject__Intercept", "sd_word__Intercept", "sigma"))
+```
+
