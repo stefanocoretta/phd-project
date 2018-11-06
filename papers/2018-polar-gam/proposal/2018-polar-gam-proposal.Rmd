@@ -1,0 +1,28 @@
+---
+output:
+  pdf_document:
+    citation_package: natbib
+bibliography: linguistics.bib
+biblio-style: unified.bst
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\textbf{My title goes here}
+
+Ultrasound tongue imaging (UTI) is a non-invasive technique that enables researchers to study, more or less directly, the articulation of the tongue during speech at appreciably high resolution.
+The quantitative analysis of UTI data has represented a challenge for a long time.
+Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been mostly dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA), which undoubtedly brought a conspicuous advancement to our understanding of the articulation of speech sounds.
+@mielke2015 and @heyne2015a showed that fitting SSANOVA with tongue data in polar coordinates (rather than cartesian coordinates) produces more reliable results.
+However, SSANOVA comes with some limitations, e.g. separate models are fitted for different phonetic contexts even within a single speaker, and the model implementation used in most UTI studies does not include random effects.
+On the other hand, recent developments in the statistical and programming worlds have increasingly favoured the use of Generalised Additive Models (GAMs) and their mixed-effects counterpart [GAMMs, @wood2006], a highly flexible solution which extends standard generalised linear models for the modelling of non-linear effects with the inclusion of random effects.
+
+This paper will offer a review of GAMMs fitted to tongue contours in polar coordinates.
+An introduction to UTI and GAMMs will open the paper, followed by a general overview of polar tongue contours GAMMs.
+Polar GAMMs fitting, significance testing, and model plotting will be illustrated by means of an example pilot study that compares tongue contours of voiceless and voiced stops of 4 Italian speakers.
+A brief tutorial will show how to fit polar GAMMs with the R package `rticulate`, which has been developed by the author to streamline polar GAMM fitting in R using the `mgcv` package.
+While the paper will focus on model fitting in R, the overview provided will be relevant to a more general public.
+The paper will conclude by discussing the limitations of the current implementation of polar GAMMs (such as across-speaker normalisation) and its future directions.
