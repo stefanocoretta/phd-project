@@ -1,0 +1,102 @@
+---
+title: "Power analysis"
+author: "Stefano Coretta"
+date: "04/11/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lmerTest)
+library(simr)
+```
+
+# Simulate data
+
+```{r sim-data}
+set.seed(8788)
+
+gons <- NULL
+
+for (i in 1:30) {
+  gons <- c(gons, rnorm(10, 90, 70), rnorm(10, 90, 70) + 5)
+}
+
+sim_data <- tibble(
+  gons = gons,
+  part = rep(rep(c("root", "dorsum"), each = 10), 30),
+  subject = rep(1:30, each = 20)
+) %>%
+  mutate(
+    part = factor(part),
+    subject = factor(subject)
+  )
+```
+
+```{r plot}
+sim_data %>%
+  ggplot(aes(part, gons)) +
+  geom_boxplot() +
+  facet_wrap(~ subject)
+```
+
+```{r gons-lm}
+gons_sim_lm <- lmer(
+  gons ~
+    part +
+    (1|subject),
+  data = sim_data
+)
+summary(gons_sim_lm)
+```
+
+# Power analyses
+
+```{r sim-1, message=FALSE, warning=FALSE, cache=TRUE, include=FALSE}
+fixef(gons_sim_lm)["partroot"] <- 5
+
+gons_1_lm <- extend(gons_sim_lm, along = "subject", n = 40)
+
+gons_1_sim <- powerCurve(gons_1_lm, along = "subject", seed = 8788)
+```
+
+```{r sim-1-plot}
+plot(gons_1_sim)
+```
+
+```{r sim-2, message=FALSE, warning=FALSE, cache=TRUE, include=FALSE}
+fixef(gons_sim_lm)["partroot"] <- 10
+
+gons_2_lm <- extend(gons_sim_lm, along = "subject", n = 40)
+
+gons_2_sim <- powerCurve(gons_2_lm, along = "subject", seed = 8788)
+```
+
+```{r sim-2-plot}
+plot(gons_2_sim)
+```
+
+```{r sim-3, message=FALSE, warning=FALSE, cache=TRUE, include=FALSE}
+fixef(gons_sim_lm)["partroot"] <- 15
+
+gons_3_lm <- extend(gons_sim_lm, along = "subject", n = 40)
+
+gons_3_sim <- powerCurve(gons_3_lm, along = "subject", seed = 8788)
+```
+
+```{r sim-3-plot}
+plot(gons_3_sim)
+```
+
+```{r sim-4, message=FALSE, warning=FALSE, cache=TRUE, include=FALSE}
+fixef(gons_sim_lm)["partroot"] <- 20
+
+gons_4_lm <- extend(gons_sim_lm, along = "subject", n = 40)
+
+gons_4_sim <- powerCurve(gons_4_lm, along = "subject", seed = 8788)
+```
+
+```{r sim-4-plot}
+plot(gons_4_sim)
+```
