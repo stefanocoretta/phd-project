@@ -170,7 +170,7 @@ egg$ = "../data/raw/egg"
 Create Strings as file list: "tg_list", "'stereo$'/*-palign-corrected.TextGrid"
 tg_number = Get number of strings
 
-writeInfoLine: "Found 'tg_number' files.'newline$'Starting now...'newline$'"
+writeInfoLine: "Found 'tg_number' files.'newline$'Starting now!'newline$'"
 
 for file from 1 to tg_number
 
@@ -198,17 +198,26 @@ Since the delay created by the smoothing is corrected by shifting the times in t
 The TextGrid is written in `./data/raw/egg/`.
 
 ```praat "vuv"
-appendInfoLine: "'tab$'Smoothing..."
+appendInfoLine: "'tab$'Smoothing."
 
 @smoothing: 11
 
-appendInfoLine: "'tab$'VUV..."
+egg_smoothed = selected("Sound")
+
+Create Sound from formula: "silence", 1, 0, time_lag, 44100, "0"
+silence = selected("Sound")
+selectObject: egg_smoothed, silence
+Save as WAV file: "'egg$'/'speaker$'_egg_smoothed.wav"
+
+appendInfoLine: "'tab$'Getting VUV"
+
+selectObject: egg_smoothed
 
 noprogress To PointProcess (periodic, cc): 75, 600
 
 To TextGrid (vuv): 0.02, 0
 
-Extend time: time_lag, "Start"
+# Extend time: time_lag, "Start"
 
 Write to text file: "'egg$'/'speaker$'-vuv.TextGrid"
 ```
