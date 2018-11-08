@@ -115,8 +115,7 @@ n_subjects <- 20
 mean_diff <- 5
 
 for (i in 1:n_subjects) {
-  b_speaker <- rnorm(1, 0, 55)
-  gons_diff <- c(gons_diff, rnorm(20, mean_diff + b_speaker, 70))
+  gons_diff <- c(gons_diff, rnorm(20, mean_diff, 70))
 }
 
 sim_data_2 <- tibble(
@@ -170,7 +169,8 @@ summary(diff_brm)
 
 ```{r intercept-interval}
 color_scheme_set("red")
-mcmc_intervals(as.array(diff_brm), pars = c("b_Intercept"), prob_outer = 0.95)
+mcmc_intervals(as.array(diff_brm), pars = c("b_Intercept"), prob_outer = 0.95) +
+  theme_minimal()
 ```
 
 ```{r intercept-area}
@@ -181,3 +181,110 @@ mcmc_areas(as.array(diff_brm), pars = c("b_Intercept"))
 mcmc_intervals(as.array(diff_brm), pars = c("sd_subject__Intercept", "sd_word__Intercept", "sigma"))
 ```
 
+```{r sim-data-3}
+set.seed(8788)
+
+gons_diff <- NULL
+
+n_subjects <- 20
+mean_diff <- 0
+
+for (i in 1:n_subjects) {
+  gons_diff <- c(gons_diff, rnorm(20, mean_diff, 70))
+}
+
+sim_data_3 <- tibble(
+  gons_diff,
+  subject = rep(1:n_subjects, each = 20),
+  word = rep(c("cock", "cog", "cocker", "cogger"), 5 * n_subjects)
+) %>%
+  mutate(
+    subject = factor(subject)
+  )
+```
+
+```{r diff-brm-3}
+priors <- c(
+  set_prior("normal(0, 50)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("normal(0, 50)", class = "sigma") # sigma is the standard deviation of the error term
+)
+
+diff_brm_3 <- brm(
+  gons_diff ~
+    1 +
+    (1|subject) +
+    (1|word),
+  data = sim_data_3,
+  family = gaussian(),
+  prior = priors,
+  iter = 20000,
+  chains = 4,
+  control = list(adapt_delta = 0.999),
+  save_all_pars = TRUE
+)
+```
+
+```{r summary-brm-3}
+summary(diff_brm_3)
+```
+
+```{r intercept-interval-3}
+color_scheme_set("red")
+mcmc_intervals(as.array(diff_brm_3), pars = c("b_Intercept"), prob_outer = 0.95) +
+  theme_minimal()
+```
+
+```{r sim-data-3}
+set.seed(8788)
+
+gons_diff <- NULL
+
+n_subjects <- 10
+mean_diff <- 0
+
+for (i in 1:n_subjects) {
+  gons_diff <- c(gons_diff, rnorm(20, mean_diff, 70))
+}
+
+sim_data_4 <- tibble(
+  gons_diff,
+  subject = rep(1:n_subjects, each = 20),
+  word = rep(c("cock", "cog", "cocker", "cogger"), 5 * n_subjects)
+) %>%
+  mutate(
+    subject = factor(subject)
+  )
+```
+
+```{r diff-brm-4}
+priors <- c(
+  set_prior("normal(0, 50)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("normal(0, 50)", class = "sigma") # sigma is the standard deviation of the error term
+)
+
+diff_brm_4 <- brm(
+  gons_diff ~
+    1 +
+    (1|subject) +
+    (1|word),
+  data = sim_data_4,
+  family = gaussian(),
+  prior = priors,
+  iter = 20000,
+  chains = 4,
+  control = list(adapt_delta = 0.999),
+  save_all_pars = TRUE
+)
+```
+
+```{r summary-brm-4}
+summary(diff_brm_4)
+```
+
+```{r intercept-interval-4}
+color_scheme_set("red")
+mcmc_intervals(as.array(diff_brm_4), pars = c("b_Intercept"), prob_outer = 0.95) +
+  theme_minimal()
+```
