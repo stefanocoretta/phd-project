@@ -74,6 +74,8 @@ for file from 1 to tg_number
   selectObject: textgrid
   Save as text file: "'audio$'/'speaker$'-rel.TextGrid"
 
+  removeObject: palign, sound, textgrid
+
 endfor
 
 ###################
@@ -122,9 +124,9 @@ procedure findRelease: .start_time, .end_time, .label$
     Set value: 1, .sample, .plosion
   endfor
   
-  To Sound
+  matrix_sound = To Sound
   Shift times by: .start_time
-  To PointProcess (extrema): 1, "yes", "no", "Sinc70"
+  pointprocess = To PointProcess (extrema): 1, "yes", "no", "Sinc70"
   .half_consonant = .start_time + ((.end_time - .start_time) / 3) * 2
   Remove points between: .start_time, .half_consonant
   .release = Get time from index: 1
@@ -133,6 +135,8 @@ procedure findRelease: .start_time, .end_time, .label$
   if .release <> undefined
     Insert point: 1, .release, .label$
   endif
+
+  removeObject: .sound_consonant, sound_band, spectrum, spectrum_hilbert, sound_hilbert, matrix, pointprocess, matrix_sound
 
 endproc
 

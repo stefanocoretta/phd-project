@@ -33,6 +33,8 @@ for file from 1 to tg_number
 
   <<<find release>>>
 
+  removeObject: palign, sound, textgrid
+
 endfor
 ```
 
@@ -52,6 +54,8 @@ procedure findRelease: .start_time, .end_time, .label$
   <<<hilbert>>>
 
   <<<plosion index>>>
+
+  removeObject: .sound_consonant, sound_band, spectrum, spectrum_hilbert, sound_hilbert, matrix, pointprocess, matrix_sound
 
 endproc
 ```
@@ -99,9 +103,9 @@ for .sample from 1 to .samples
   Set value: 1, .sample, .plosion
 endfor
 
-To Sound
+matrix_sound = To Sound
 Shift times by: .start_time
-To PointProcess (extrema): 1, "yes", "no", "Sinc70"
+pointprocess = To PointProcess (extrema): 1, "yes", "no", "Sinc70"
 .half_consonant = .start_time + ((.end_time - .start_time) / 3) * 2
 Remove points between: .start_time, .half_consonant
 .release = Get time from index: 1
