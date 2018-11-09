@@ -9,7 +9,7 @@ This script detects the release of C1 and C2. The algorythm is based on @avantha
 
 <<<findRelease>>>
 
-appendInfoLine: "Done!"
+appendInfoLine: "newline$Done!"
 ```
 
 ```praat "file loop"
@@ -19,7 +19,7 @@ audio$ = "../data/raw/audio"
 Create Strings as file list: "tg_list", "'stereo$'/*-palign-corrected.TextGrid"
 tg_number = Get number of strings
 
-writeInfoLine: "Found 'tg_number' files.'newline$'Starting now...'newline$'"
+writeInfoLine: "'tg_number' files found.'newline$'Starting now.'newline$'"
 
 for file from 1 to tg_number
 
@@ -131,9 +131,18 @@ for speech_interval to speech_intervals
   if speech_label$ == "speech"
     speech_start = Get start time of interval: 3, speech_interval
     frame_interval = Get interval at time: 2, speech_start
-    frame_end = Get end time of interval: 2, frame_interval
-    c1_interval = Get interval at time: 1, frame_end
-    c2_interval = c1_interval + 2
+    word_1$ = Get label of interval: 2, frame_interval
+
+    if word_1$ == "ha"
+      frame_end = Get end time of interval: 2, frame_interval + 1
+      c1_interval = Get interval at time: 1, frame_end
+      c2_interval = c1_interval + 2
+    else
+      frame_end = Get end time of interval: 2, frame_interval
+      c1_interval = Get interval at time: 1, frame_end
+      c2_interval = c1_interval + 2
+    endif
+
 
     c1_start = Get start time of interval: 1, c1_interval
     c1_end = Get end time of interval: 1, c1_interval
