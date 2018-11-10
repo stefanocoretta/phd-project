@@ -261,6 +261,153 @@ procedure smoothing : .width
 endproc
 ```
 
+# Merge TextGrids
+
+This script merge the TextGrids with the IPUs, force-alignment, VUVs, and releases into one TextGrid, for each speaker.
+The TextGrids with IPUs and releases are merges as they are, while for the TextGrids with force-alignment and VUVs only the relevant intervals/points are copied in the merged textgrid
+
+```praat merge-textgrids.praat
+<<<script header>>>
+
+<<<textgrid loop>>>
+```
+
+The script searches for all the `.txt` files in `data/raw/stereo/` and then merges the TextGrids.
+
+```praat "textgrid loop"
+stereo$ = "../data/raw/stereo"
+audio$ = "../data/raw/audio"
+egg$ = "../data/raw/egg"
+
+txt_list = Create Strings as file list: "txt_list", "'stereo$'/*.txt"
+n_files = Get number of strings
+
+writeInfoLine: "'n_files' files found. Start processing.'newline$'"
+
+for file from 1 to n_files
+  selectObject: txt_list
+  file$ = Get string: file
+  speaker$ = file$ - ".txt"
+  appendInfoLine: "Processing 'speaker$'"
+
+  ipu = Read from file: "'audio$'/'speaker$'.TextGrid"
+
+  palign = Read from file: "'stereo$'/'speaker$'-palign-corrected.TextGrid"
+  vuv = Read from file: "'egg$'/'speaker$'-vuv-corrected.TextGrid"
+
+  <<<palign vuv loop>>>
+
+  releases = Read from file: "'audio$'/'speaker$'-rel-corrected.TextGrid"
+
+  selectObject: ipu, palign_2, vuv_2, releases
+  merged = Merge
+  Save as text file: "'stereo$'/'speaker$'-align.TextGrid"
+
+  removeObject: ipu, palign, palign_2, vuv, vuv_2, releases, merged
+
+endfor
+```
+
+```praat "palign vuv loop"
+selectObject: palign
+n_intervals = Get number of intervals: 3
+end_time = Get end time
+
+palign_2 = Create TextGrid: 0, end_time, "word segments", ""
+vuv_2 = Create TextGrid: 0, end_time, "vuv", ""
+
+for sentence from 1 to n_intervals
+
+  selectObject: palign
+  speech$ = Get label of interval: 3, sentence
+
+  if speech$ == "speech"
+
+    speech_start = Get start time of interval: 3, sentence
+    first_word = Get interval at time: 2, speech_start
+    first_word$ = Get label of interval: 2, first_word
+
+    if first_word$ == "#"
+      first_word = first_word + 1
+      appendInfoLine: "'tab$'Misaligned sentence at 'speech_start's"
+    endif
+
+    if first_word$ == "ha"
+      frame_end = Get end time of interval: 2, first_word + 1
+    else
+      frame_end = Get end time of interval: 2, first_word
+    endif
+
+    word_start = frame_end
+    word = Get interval at time: 2, word_start
+    word$ = Get label of interval: 2, word
+    word_end = Get end time of interval: 2, word
+
+    c1 = Get interval at time: 1, word_start
+    c1$ = Get label of interval: 1, c1
+
+    if c1$ == "e" or c1$ == "o"
+      c1 = c1 + 1
+      appendInfoLine: "'tab$'Misaligned word at 'speech_start's"
+    endif
+
+    c1_end = Get end time of interval: 1, c1
+    v1_end = Get end time of interval: 1, c1 + 1
+    v1$ = Get label of interval: 1, c1 + 1
+    c2_end = Get end time of interval: 1, c1 + 2
+    c2$ = Get label of interval: 1, c1 + 2
+    v2$ = Get label of interval: 1, c1 + 3
+
+    selectObject: palign_2
+    Insert boundary: 1, word_start
+    Insert boundary: 1, word_end
+    word_2 = Get interval at time: 1, word_start
+    Set interval text: 1, word_2, word$
+
+    Insert boundary: 2, word_start
+    Insert boundary: 2, c1_end
+    c1_2 = Get interval at time: 2, word_start
+    Set interval text: 2, c1_2, c1$
+
+    Insert boundary: 2, v1_end
+    v1_2 = Get interval at time: 2, c1_end
+    Set interval text: 2, v1_2, v1$
+
+    Insert boundary: 2, c2_end
+    c2_2 = Get interval at time: 2, v1_end
+    Set interval text: 2, c2_2, c2$
+
+    Insert boundary: 2, word_end
+    v2_2 = Get interval at time: 2, c2_end
+    Set interval text: 2, v2_2, v2$
+
+    <<<vuv loop>>>
+
+  endif
+
+endfor
+```
+
+```praat "vuv loop"
+selectObject: vuv
+
+v1_mid = (v1_end - c1_end) / 2
+
+vuv_i = Get interval at time: 1, v1_mid
+vuv_label$ = Get label of interval: 1, vuv_i
+
+if vuv_label$ == "V"
+  voice_start = Get start time of interval: 1, vuv_i
+  voice_end = Get end time of interval: 1, vuv_i
+
+  selectObject: vuv_2
+  Insert boundary: 1, voice_start
+  Insert boundary: 1, voice_end
+  voice = Get interval at time: 1, voice_start
+  Set interval text: 1, voice, "voicing"
+endif
+```
+
 # Script header
 
 ```praat "script header"
