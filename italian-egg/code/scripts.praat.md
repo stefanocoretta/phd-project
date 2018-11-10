@@ -391,7 +391,7 @@ endfor
 ```praat "vuv loop"
 selectObject: vuv
 
-v1_mid = (v1_end - c1_end) / 2
+v1_mid = c1_end + ((v1_end - c1_end) / 2)
 
 vuv_i = Get interval at time: 1, v1_mid
 vuv_label$ = Get label of interval: 1, vuv_i
