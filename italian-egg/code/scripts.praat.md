@@ -313,7 +313,7 @@ selectObject: palign
 n_intervals = Get number of intervals: 3
 end_time = Get end time
 
-palign_2 = Create TextGrid: 0, end_time, "word segments", ""
+palign_2 = Create TextGrid: 0, end_time, "sentence word segments", ""
 vuv_2 = Create TextGrid: 0, end_time, "vuv", ""
 
 for sentence from 1 to n_intervals
@@ -324,6 +324,7 @@ for sentence from 1 to n_intervals
   if speech$ == "speech"
 
     speech_start = Get start time of interval: 3, sentence
+    speech_end = Get end time of interval: 3, sentence
     first_word = Get interval at time: 2, speech_start
     first_word$ = Get label of interval: 2, first_word
 
@@ -359,27 +360,32 @@ for sentence from 1 to n_intervals
     v2$ = Get label of interval: 1, c1 + 3
 
     selectObject: palign_2
-    Insert boundary: 1, word_start
-    Insert boundary: 1, word_end
-    word_2 = Get interval at time: 1, word_start
-    Set interval text: 1, word_2, word$
+    Insert boundary: 1, speech_start
+    Insert boundary: 1, speech_end
+    sentence_2 = Get interval at time: 1, speech_start
+    Set interval text: 1, sentence_2, "sentence"
 
     Insert boundary: 2, word_start
-    Insert boundary: 2, c1_end
-    c1_2 = Get interval at time: 2, word_start
-    Set interval text: 2, c1_2, c1$
-
-    Insert boundary: 2, v1_end
-    v1_2 = Get interval at time: 2, c1_end
-    Set interval text: 2, v1_2, v1$
-
-    Insert boundary: 2, c2_end
-    c2_2 = Get interval at time: 2, v1_end
-    Set interval text: 2, c2_2, c2$
-
     Insert boundary: 2, word_end
-    v2_2 = Get interval at time: 2, c2_end
-    Set interval text: 2, v2_2, v2$
+    word_2 = Get interval at time: 2, word_start
+    Set interval text: 2, word_2, word$
+
+    Insert boundary: 3, word_start
+    Insert boundary: 3, c1_end
+    c1_2 = Get interval at time: 3, word_start
+    Set interval text: 3, c1_2, c1$
+
+    Insert boundary: 3, v1_end
+    v1_2 = Get interval at time: 3, c1_end
+    Set interval text: 3, v1_2, v1$
+
+    Insert boundary: 3, c2_end
+    c2_2 = Get interval at time: 3, v1_end
+    Set interval text: 3, c2_2, c2$
+
+    Insert boundary: 3, word_end
+    v2_2 = Get interval at time: 3, c2_end
+    Set interval text: 3, v2_2, v2$
 
     <<<vuv loop>>>
 
