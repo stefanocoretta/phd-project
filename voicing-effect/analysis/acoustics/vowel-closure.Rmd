@@ -1,0 +1,92 @@
+---
+title: "Vowel and closure duration"
+author: "Stefano Coretta"
+date: "11/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itapol)
+data("token_measures")
+
+token_measures <- token_measures %>%
+  filter(c1_phonation == "voiceless")
+```
+
+# Plotting
+
+```{r vow-dens}
+token_measures %>%
+  ggplot(aes(vowel_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r clos-dens}
+token_measures %>%
+  ggplot(aes(closure_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r sent-dens}
+token_measures %>%
+  ggplot(aes(sentence_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r vow-clos}
+token_measures %>%
+  ggplot(aes(closure_duration, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+There is a weak positive correlation, when not controlling for speech rate.
+
+```{r vow-rate}
+token_measures %>%
+  ggplot(aes(syl_rate, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+Speech rate (as syllable rate) is negatively correlated with vowel duration.
+
+```{r vow-rate-2}
+token_measures %>%
+  # filter(syl_rate > 4) %>%
+  ggplot(aes(syl_rate, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  facet_grid(~ language)
+```
+
+The correlation seem to come from Italian, while Polish does not really show any correlation.
+
+```{r vow-sent}
+token_measures %>%
+  ggplot(aes(sentence_duration, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+```{r vow-sent-2}
+token_measures %>%
+  ggplot(aes(sentence_duration, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  facet_grid(~ language)
+```
+
+```{r vow-sent-speaker}
+token_measures %>%
+  ggplot(aes(sentence_duration, vowel_duration)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~ speaker)
+```
