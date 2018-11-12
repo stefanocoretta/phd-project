@@ -389,6 +389,17 @@ for sentence from 1 to n_intervals
 
     <<<vuv loop>>>
 
+  elsif speech$ == ""
+
+    speech_start = Get start time of interval: 3, sentence
+    speech_end = Get end time of interval: 3, sentence
+
+    selectObject: palign_2
+    Insert boundary: 1, speech_start
+    Insert boundary: 1, speech_end
+    sentence_2 = Get interval at time: 1, speech_start
+    Set interval text: 1, sentence_2, ""
+
   endif
 
 endfor
