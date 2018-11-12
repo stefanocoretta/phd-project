@@ -100,6 +100,7 @@ for file from 1 to n_files
       Insert boundary: 1, speech_end
       sentence_2 = Get interval at time: 1, speech_start
       Set interval text: 1, sentence_2, "sentence"
+      Set interval text: 1, sentence_2 - 1, "#"
   
       Insert boundary: 2, word_start
       Insert boundary: 2, word_end
@@ -151,6 +152,7 @@ for file from 1 to n_files
       Insert boundary: 1, speech_end
       sentence_2 = Get interval at time: 1, speech_start
       Set interval text: 1, sentence_2, ""
+      Set interval text: 1, sentence_2 - 1, "#"
   
     endif
   
@@ -165,3 +167,5 @@ for file from 1 to n_files
   removeObject: ipu, palign, palign_2, vuv, vuv_2, releases, merged
 
 endfor
+
+appendInfoLine: "'newline$'Done!"

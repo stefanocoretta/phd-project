@@ -270,6 +270,8 @@ The TextGrids with IPUs and releases are merges as they are, while for the TextG
 <<<script header>>>
 
 <<<textgrid loop>>>
+
+appendInfoLine: "'newline$'Done!"
 ```
 
 The script searches for all the `.txt` files in `data/raw/stereo/` and then merges the TextGrids.
@@ -364,6 +366,7 @@ for sentence from 1 to n_intervals
     Insert boundary: 1, speech_end
     sentence_2 = Get interval at time: 1, speech_start
     Set interval text: 1, sentence_2, "sentence"
+    Set interval text: 1, sentence_2 - 1, "#"
 
     Insert boundary: 2, word_start
     Insert boundary: 2, word_end
@@ -399,6 +402,7 @@ for sentence from 1 to n_intervals
     Insert boundary: 1, speech_end
     sentence_2 = Get interval at time: 1, speech_start
     Set interval text: 1, sentence_2, ""
+    Set interval text: 1, sentence_2 - 1, "#"
 
   endif
 
@@ -458,7 +462,7 @@ for textgrid from 1 to n_files
 
   n_sentences = Get number of intervals: 3
 
-  for interval from 1 to n_sentences
+  for interval from 1 to n_sentences - 1
 
     selectObject: align
     interval$ = Get label of interval: 3, interval
@@ -519,9 +523,27 @@ for textgrid from 1 to n_files
 
       appendFileLine: result_file$, results$
 
+    elsif interval$ == ""
+
+      sentence_start = Get start time of interval: 3, interval
+      sentence_end = Get end time of interval: 3, interval
+      sentence_mid = sentence_start + ((sentence_end - sentence_start) / 2)
+
+      ipu_i = Get interval at time: 1, sentence_mid
+      ipu_i$ = Get label of interval: 1, ipu_i
+      sentence = Get interval at time: 2, sentence_mid
+      sentence$ = Get label of interval: 2, sentence
+      sentence$ = replace$(sentence$, """", "'", 2)
+
+      results$ = "'speaker$','ipu_i$','sentence$',--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--"
+
+      appendFileLine: result_file$, results$
+
     endif
 
   endfor
+
+  removeObject: align
 
 endfor
 ```
