@@ -33,3 +33,9 @@ v_c <- lm(
 )
 
 summary(v_c)
+
+
+
+boundary <- rnorm(500, 100, 30)
+noisy_boundary <- boundary + rnorm(500, 0, 2)
+t.test(boundary, noisy_boundary)
