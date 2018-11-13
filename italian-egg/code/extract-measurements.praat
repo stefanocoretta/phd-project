@@ -27,7 +27,7 @@
 
 stereo$ = "../data/raw/stereo"
 result_file$ = "../data/datasets/measurements.csv"
-header$ = "speaker,ipu,stimulus,sentence_ons,sentence_off,word_ons,word_off,c1_ons,c1_off,v1_ons,v1_off,c2_ons,c2_off,v2_ons,v2_off,voice_ons,voice_off,c1_rel,c2_rel"
+header$ = "speaker,ipu,stimulus,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,voice_ons,voice_off,c1_rel,c2_rel"
 
 writeFileLine: result_file$, header$
 
@@ -104,7 +104,7 @@ for textgrid from 1 to n_files
         c2_rel = undefined
       endif
 
-      results$ = "'speaker$','ipu_i$','sentence$','sentence_start','sentence_end','c1_start','v2_end','c1_start','v1_start','v1_start','v1_end','v1_end','c2_end','c2_end','v2_end','voice_start','voice_end','c1_rel','c2_rel'"
+      results$ = "'speaker$','ipu_i$','sentence$','sentence_start','sentence_end','c1_start','v2_end','v1_start','v1_end','c2_end','voice_start','voice_end','c1_rel','c2_rel'"
 
       appendFileLine: result_file$, results$
 
@@ -120,7 +120,7 @@ for textgrid from 1 to n_files
       sentence$ = Get label of interval: 2, sentence
       sentence$ = replace$(sentence$, """", "'", 2)
 
-      results$ = "'speaker$','ipu_i$','sentence$',--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--"
+      results$ = "'speaker$','ipu_i$','sentence$',--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--,--undefined--"
 
       appendFileLine: result_file$, results$
 
