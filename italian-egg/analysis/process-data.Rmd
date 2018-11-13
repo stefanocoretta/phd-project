@@ -1,0 +1,18 @@
+---
+title: "Process data"
+author: "Stefano Coretta"
+date: "13/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+library(speakr)
+```
+
+```{r}
+praat_run("./code/merge-textgrids.praat")
+praat_run("./code/extract-measurements.praat")
+```
+
