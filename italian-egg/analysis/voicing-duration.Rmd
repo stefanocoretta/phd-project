@@ -1,0 +1,238 @@
+---
+title: "Voicing duration and vowel height"
+author: "Stefano Coretta"
+date: "13/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itaegg)
+library(lme4)
+library(lmerTest)
+
+data("ita_egg")
+ita_egg <- ita_egg %>%
+  mutate(
+    vowel = factor(vowel, levels = c("i", "e", "a", "o", "u")),
+    height = factor(height, levels = c("low", "mid-low", "mid-high", "high"))
+  ) %>%
+  mutate_if(is.character, as.factor)
+```
+
+# Data checks
+
+```{r glimpse}
+glimpse(ita_egg)
+```
+
+There are a total of 3268 observations (172 sentences * 19 speakers).
+Measurements from 15 have not been taken because they contained speech errors/disfluencies.
+Depending on the measurement, there is from 5% to 20% of missing data.
+
+```{r voi-dur}
+ita_egg %>%
+  ggplot(aes(voice_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r voi-dur-box}
+ita_egg %>%
+  ggplot(aes(y = voice_duration)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_x_continuous(labels = NULL)
+```
+
+```{r vow-dur}
+ita_egg %>%
+  ggplot(aes(v1_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r vow-dur-box}
+ita_egg %>%
+  ggplot(aes(y = v1_duration)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_x_continuous(labels = NULL)
+```
+
+```{r speech-rate}
+ita_egg %>%
+  ggplot(aes(speech_rate)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r speech-rate-box}
+ita_egg %>%
+  ggplot(aes(y = speech_rate)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_x_continuous(labels = NULL)
+```
+
+```{r sent-dur}
+ita_egg %>%
+  ggplot(aes(sent_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+# Plots
+
+```{r vow-sent-dur}
+ita_egg %>%
+  ggplot(aes(v1_duration, voice_duration)) +
+  geom_point(alpha = 0.2)
+```
+
+```{r vow-sent-dur-2}
+ita_egg %>%
+  ggplot(aes(v1_duration, voice_duration)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth(method = "lm") +
+  coord_fixed()
+```
+
+Vowel duration and voicing duration are clearly correlated.
+
+```{r vow-height}
+ita_egg %>%
+  ggplot(aes(v1_duration, fill = height)) +
+  geom_density(alpha = 0.5, size = 0) +
+  geom_rug(aes(colour = height), alpha = 0.1)
+```
+
+```{r vow-height-box}
+ita_egg %>%
+  ggplot(aes(height, v1_duration, fill = height)) +
+  geom_boxplot()
+```
+
+```{r vow-height-box}
+ita_egg %>%
+  ggplot(aes(vowel, v1_duration, fill = height)) +
+  geom_boxplot()
+```
+
+```{r voi-height}
+ita_egg %>%
+  ggplot(aes(voice_duration, fill = height)) +
+  geom_density(alpha = 0.5, size = 0) +
+  geom_rug(aes(colour = height), alpha = 0.1)
+```
+
+```{r voi-height-box}
+ita_egg %>%
+  ggplot(aes(height, voice_duration, fill = height)) +
+  geom_boxplot()
+```
+
+```{r voi-vow-box}
+ita_egg %>%
+  ggplot(aes(vowel, voice_duration, fill = height)) +
+  geom_boxplot()
+```
+
+```{r vot-height}
+ita_egg %>%
+  ggplot(aes(vot, fill = height)) +
+  geom_density(alpha = 0.5, size = 0) +
+  geom_rug(aes(colour = height), alpha = 0.1)
+```
+
+```{r voi-height-box}
+ita_egg %>%
+  ggplot(aes(height, vot, fill = height)) +
+  geom_boxplot()
+```
+
+# Modelling
+
+```{r voice-lm}
+voice_lm_1 <- lme4::lmer(
+  voice_duration ~
+    height +
+    c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg,
+  REML = FALSE
+)
+
+voice_lm_0 <- lme4::lmer(
+  voice_duration ~
+    # height +
+    c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg,
+  REML = FALSE
+)
+```
+
+```{r voice-lm-bf}
+bf_01 <- exp((BIC(voice_lm_1) - BIC(voice_lm_0)) / 2)
+bf_01
+1/bf_01
+```
+
+```{r voice-lm-sum}
+summary(voice_lm_1)
+```
+
+```{r vowel-lm}
+vowel_lm <- lmer(
+  v1_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg,
+  control = lmerControl(optimizer = "Nelder_Mead")
+)
+# https://stats.stackexchange.com/a/243225/128897
+
+summary(vowel_lm)
+```
+
+```{r vot-lm}
+vot_lm <- lmer(
+  vot ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(vot_lm)
+```
+
+```{r rvoff-lm}
+rvoff_lm <- lmer(
+  rel_voff ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(rvoff_lm)
+```
