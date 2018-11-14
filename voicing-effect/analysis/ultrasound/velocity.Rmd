@@ -1,0 +1,99 @@
+---
+title: "Velocity"
+author: "Stefano Coretta"
+date: "14/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itapol)
+
+data("kinematics_series")
+
+kinematics_series <- kinematics_series %>%
+  filter(c1_phonation == "voiceless")
+
+velocity_tt <- kinematics_series %>%
+  filter(c2_place == "coronal") %>%
+  mutate(velocity = TT_velocity, velocity_abs = TT_velocity_abs)
+velocity_td <- kinematics_series %>%
+  filter(c2_place == "velar") %>%
+  mutate(velocity = TD_velocity, velocity_abs = TD_velocity_abs)
+
+velocity <- rbind(velocity_tt, velocity_td) %>%
+  mutate(
+    proportion = (seconds - v_onset) / (v_offset - v_onset),
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  filter(rec_date != "28/07/2017 15:40:44") # remove wrong token
+```
+
+# Plots
+
+```{r velocity}
+velocity %>%
+  ggplot(aes(proportion, velocity)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(~ c2_phonation)
+```
+
+```{r velocity}
+velocity %>%
+  ggplot(aes(proportion, velocity)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth() +
+  facet_grid(~ c2_phonation)
+```
+
+```{r velocity}
+velocity %>%
+  ggplot(aes(proportion, velocity, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth()
+```
+
+```{r velocity-abs}
+velocity %>%
+  ggplot(aes(proportion, velocity_abs)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth() +
+  facet_grid(~ c2_phonation)
+```
+
+```{r velocity-abs}
+velocity %>%
+  ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth()
+```
+
+```{r velocity-abs}
+velocity %>%
+  filter(proportion < 0.8) %>%
+  ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth()
+```
+
+```{r velocity-abs}
+velocity %>%
+  ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth() +
+  facet_grid(vowel ~ c2_place)
+```
+
+```{r velocity-abs}
+velocity %>%
+  filter(proportion < 0.8) %>%
+  ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
+  geom_smooth() +
+  facet_grid(vowel ~ c2_place)
+```
+
+```{r velocity-abs}
+velocity %>%
+  ggplot(aes(proportion, velocity_abs, colour = vowel, linetype = vowel)) +
+  geom_smooth(method = "loess") +
+  facet_grid(. ~ c2_place)
+```
