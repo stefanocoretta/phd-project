@@ -19,7 +19,8 @@ data("ita_egg")
 ita_egg <- ita_egg %>%
   mutate(
     vowel = factor(vowel, levels = c("i", "e", "a", "o", "u")),
-    height = factor(height, levels = c("low", "mid-low", "mid-high", "high"))
+    height = factor(height, levels = c("low", "mid-low", "mid-high", "high")),
+    vofft = (voice_off - c1_rel) * 1000
   ) %>%
   mutate_if(is.character, as.factor)
 ```
@@ -149,7 +150,7 @@ ita_egg %>%
   geom_rug(aes(colour = height), alpha = 0.1)
 ```
 
-```{r voi-height-box}
+```{r vot-height-box}
 ita_egg %>%
   ggplot(aes(height, vot, fill = height)) +
   geom_boxplot()
@@ -228,16 +229,32 @@ vot_lm <- lmer(
     c2_place +
     height:c2_place +
     speech_rate +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+# singularity problem: reduce random structure
+
+summary(vot_lm)
+```
+
+```{r vofft-lm}
+vofft_lm <- lmer(
+  vofft ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
     (1+height|speaker) +
     (1|word),
   data = ita_egg
 )
 
-summary(vot_lm)
+summary(vofft_lm)
 ```
 
-```{r rvoff-lm}
-rvoff_lm <- lmer(
+```{r rel-voff-lm}
+rel_voff_lm <- lmer(
   rel_voff ~
     height +
     c2_place +
@@ -248,5 +265,5 @@ rvoff_lm <- lmer(
   data = ita_egg
 )
 
-summary(rvoff_lm)
+summary(rel_voff_lm)
 ```
