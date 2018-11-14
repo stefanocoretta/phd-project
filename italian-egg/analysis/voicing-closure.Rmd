@@ -1,0 +1,83 @@
+---
+title: "Voicing during closure"
+author: "Stefano Coretta"
+date: "14/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itaegg)
+library(lme4)
+library(lmerTest)
+
+data("ita_egg")
+ita_egg <- ita_egg %>%
+  mutate(
+    vowel = factor(vowel, levels = c("i", "e", "a", "o", "u")),
+    height = factor(height, levels = c("low", "mid-low", "mid-high", "high")),
+    c1_place = factor(c1_place, levels = c("labial", "coronal", "velar")),
+    c2_place = factor(c2_place, levels = c("labial", "coronal", "velar"))
+  ) %>%
+  mutate_if(is.character, as.factor)
+```
+
+# Plots
+
+```{r voi-clo}
+ita_egg %>%
+  ggplot(aes(voi_clo)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r voi-clo-box}
+ita_egg %>%
+  ggplot(aes(y = voi_clo)) +
+  geom_boxplot() +
+  coord_flip() +
+  scale_x_continuous(labels = NULL)
+```
+
+```{r voi-clo-vow}
+ita_egg %>%
+  ggplot(aes(voi_clo, fill = vowel)) +
+  geom_density(alpha = 0.5, size = 0)
+```
+
+```{r voi-clo-vow-box}
+ita_egg %>%
+  ggplot(aes(vowel, voi_clo, fill = vowel)) +
+  geom_boxplot()
+```
+
+```{r voi-clo-height-box}
+ita_egg %>%
+  ggplot(aes(height, voi_clo, fill = height)) +
+  geom_boxplot()
+```
+
+```{r voi-clo-place-box}
+ita_egg %>%
+  ggplot(aes(vowel, voi_clo, fill = height)) +
+  geom_boxplot() +
+  facet_grid(c2_place ~ c1_place)
+```
+
+```{r voi-clo-place2-box}
+ita_egg %>%
+  ggplot(aes(vowel, voi_clo, fill = height)) +
+  geom_boxplot() +
+  facet_grid(c2_place ~ .)
+```
+
+```{r voi-clo-speaker}
+ita_egg %>%
+  ggplot(aes(voi_clo)) +
+  geom_density() +
+  facet_wrap(~ speaker)
+```
+

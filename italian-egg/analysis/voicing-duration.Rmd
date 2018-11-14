@@ -13,6 +13,7 @@ theme_set(theme_minimal())
 library(coretta2018itaegg)
 library(lme4)
 library(lmerTest)
+library(sjPlot)
 
 data("ita_egg")
 ita_egg <- ita_egg %>%
@@ -190,6 +191,10 @@ bf_01
 summary(voice_lm_1)
 ```
 
+```{r plot-voice-lm-1}
+plot_model(voice_lm_1, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:6))
+```
+
 ```{r vowel-lm}
 vowel_lm <- lmer(
   v1_duration ~
@@ -206,6 +211,15 @@ vowel_lm <- lmer(
 
 summary(vowel_lm)
 ```
+
+```{r plot-vowel-lm}
+plot_model(vowel_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:12))
+```
+
+Relative to the duration of low vowels (/a/), mid-high vowels (/e/) are 24ms shorter, and high vowels (/i/, /u/) are 36ms shorter.
+In comparison, voicing in mid-high vowels is 16ms shorter, and it is 27ms shorter in high vowels.
+There's seems to be a 10ms gap in shortnening between vowel and voicing duration (vowel shortening magnitude is greater).
+There seems not to be an interaction between height and vowel vs. voicing (the difference between the effect in midh-high and high is around 12 ms in both cases).
 
 ```{r vot-lm}
 vot_lm <- lmer(
