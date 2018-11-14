@@ -29,6 +29,14 @@ ita_egg <- ita_egg %>%
 
 # Plots
 
+```{r rr}
+ita_egg %>%
+  ggplot(aes(rel_rel)) +
+  geom_density() +
+  geom_rug()
+```
+
+
 ```{r rr-vow}
 ita_egg %>%
   ggplot(aes(rel_rel, fill = vowel)) +
@@ -73,3 +81,10 @@ ita_egg %>%
 ```
 
 Could it be that velar consonants had multiple releases and by chosing the first one the interval is longer?
+
+```{r rr-rate}
+ita_egg %>%
+  ggplot(aes(speech_rate,  rel_rel)) +
+  geom_point(alpha = 0.5)
+```
+
