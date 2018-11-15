@@ -11,6 +11,10 @@ knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(coretta2018itapol)
+library(mgcv)
+library(tidymv)
+library(akima)
+library(lmerTest)
 
 data("kinematics_series")
 
@@ -29,7 +33,21 @@ velocity <- rbind(velocity_tt, velocity_td) %>%
     proportion = (seconds - v_onset) / (v_offset - v_onset),
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
-  filter(rec_date != "28/07/2017 15:40:44") # remove wrong token
+  filter(rec_date != "28/07/2017 15:40:44") %>% # remove wrong token
+  mutate(
+    voicing = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    place_vow_voi = interaction(c2_place, vowel, c2_phonation),
+    place_vow_voi = as.ordered(place_vow_voi),
+    speaker_voi = interaction(speaker, c2_phonation),
+    speaker_voi = as.ordered(speaker_voi),
+    speech_rate_c = syl_rate - mean(syl_rate)
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  droplevels()
+
+contrasts(velocity$voicing) <- "contr.treatment"
+contrasts(velocity$place_vow_voi) <- "contr.treatment"
+contrasts(velocity$speaker_voi) <- "contr.treatment"
 ```
 
 # Plots
@@ -99,3 +117,94 @@ velocity %>%
 ```
 
 # Modelling
+
+```{r vel-gam}
+vel_gam <- bam(
+  velocity_abs ~
+    place_vow_voi +
+    s(proportion) +
+    s(proportion, by = place_vow_voi) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = velocity
+)
+```
+
+```{r vel-gam-summary}
+summary(vel_gam)
+```
+
+```{r vel-gam-plot}
+plot_smooths(vel_gam, proportion, comparison = voicing, facet_terms = place + vowel, split = list(place_vow_voi = c("place", "vowel", "voicing")))
+```
+
+```{r vel-gam-2}
+vel_gam_2 <- bam(
+  velocity_abs ~
+    voicing +
+    s(proportion) +
+    s(speech_rate_c) +
+    s(proportion, by = voicing) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = velocity
+)
+```
+
+```{r vel-gam-2-summary}
+summary(vel_gam_2)
+```
+
+```{r vel-gam-2-plot}
+plot_smooths(vel_gam_2, proportion, comparison = voicing)
+```
+
+## Interpolation
+
+```{r interpolate}
+vel_25 <- NULL
+
+for (traj in 1:length(levels(velocity$rec_date))) {
+  rec <- levels(velocity$rec_date)[traj]
+  
+  traj_xy <- velocity %>%
+    filter(rec_date == rec)
+  
+  interp_xy <- aspline(traj_xy$proportion, traj_xy$velocity_abs, 0.25)
+
+  vel_25 <- c(vel_25, interp_xy$y)
+}
+
+velocity_25 <- velocity %>%
+  group_by(rec_date) %>%
+  filter(seconds == min(seconds)) %>%
+  ungroup() %>%
+  unique() %>%
+  mutate(vel_25 = vel_25)
+```
+
+```{r}
+velocity_25 %>%
+  ggplot(aes(vel_25, fill = c2_phonation)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+velocity_25 %>%
+  ggplot(aes(c2_phonation, vel_25, fill = c2_phonation)) +
+  geom_boxplot()
+```
+
+```{r}
+vel_25_lm <- lmer(
+  vel_25 ~
+    c2_phonation *
+    c2_place *
+    vowel +
+    (1|speaker) +
+    (1|item),
+  data = velocity_25
+)
+
+summary(vel_25_lm)
+```
+
