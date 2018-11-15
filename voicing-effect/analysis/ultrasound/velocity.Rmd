@@ -41,7 +41,7 @@ velocity %>%
   facet_grid(~ c2_phonation)
 ```
 
-```{r velocity}
+```{r velocity-smooth}
 velocity %>%
   ggplot(aes(proportion, velocity)) +
   geom_point(alpha = 0.05) +
@@ -49,13 +49,13 @@ velocity %>%
   facet_grid(~ c2_phonation)
 ```
 
-```{r velocity}
+```{r velocity-smooth-2}
 velocity %>%
   ggplot(aes(proportion, velocity, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth()
 ```
 
-```{r velocity-abs}
+```{r velocity-abs-smooth}
 velocity %>%
   ggplot(aes(proportion, velocity_abs)) +
   geom_point(alpha = 0.05) +
@@ -63,27 +63,27 @@ velocity %>%
   facet_grid(~ c2_phonation)
 ```
 
-```{r velocity-abs}
+```{r velocity-abs-smooth-2}
 velocity %>%
   ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth()
 ```
 
-```{r velocity-abs}
+```{r velocity-abs-0.8}
 velocity %>%
   filter(proportion < 0.8) %>%
   ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth()
 ```
 
-```{r velocity-abs}
+```{r velocity-abs-place-vow}
 velocity %>%
   ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
   geom_smooth() +
   facet_grid(vowel ~ c2_place)
 ```
 
-```{r velocity-abs}
+```{r velocity-abs-place-vow-0.8}
 velocity %>%
   filter(proportion < 0.8) %>%
   ggplot(aes(proportion, velocity_abs, colour = c2_phonation, linetype = c2_phonation)) +
@@ -91,9 +91,11 @@ velocity %>%
   facet_grid(vowel ~ c2_place)
 ```
 
-```{r velocity-abs}
+```{r velocity-abs-vow}
 velocity %>%
   ggplot(aes(proportion, velocity_abs, colour = vowel, linetype = vowel)) +
   geom_smooth(method = "loess") +
   facet_grid(. ~ c2_place)
 ```
+
+# Modelling
