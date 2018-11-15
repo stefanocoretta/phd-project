@@ -1,0 +1,60 @@
+---
+title: "Release to release"
+author: "Stefano Coretta"
+date: "15/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+library(brms)
+library(bayesplot)
+library(coretta2018itapol)
+data("token_measures")
+
+token_measures <- token_measures %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate(
+    syl_rate_c = syl_rate - mean(syl_rate),
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  na.omit()
+```
+
+```{r rr-bm}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "b", coef = "c2_phonationvoiced"),
+  set_prior("normal(0, 50)", class = "b", coef = "vowelo"),
+  set_prior("normal(0, 50)", class = "b", coef = "vowelu"),
+  set_prior("normal(0, 50)", class = "b", coef = "c2_placevelar"),
+  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 100)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+rr_mb <- brm(
+  rel_rel ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    syl_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors,
+  cores = 2,
+  seed = 8788
+)
+```
+
+```{r}
+summary(rr_mb)
+```
+
+```{r}
+mcmc_intervals(as.array(rr_mb), pars = c("b_c2_phonationvoiced", "b_vowelo", "b_vowelu", "b_c2_placevelar", "b_syl_rate_c"))
+```
+
