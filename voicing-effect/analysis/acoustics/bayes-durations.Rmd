@@ -1,0 +1,179 @@
+---
+title: "Bayesian modelling of vowel duration"
+author: "Stefano Coretta"
+date: "15/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+library(brms)
+library(bayesplot)
+library(coretta2018itapol)
+data("token_measures")
+
+token_measures <- token_measures %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate(
+    syl_rate_c = syl_rate - mean(syl_rate),
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+  )
+```
+
+```{r}
+get_prior(vowel_duration ~ c2_phonation * language + vowel + c2_phonation:vowel + syl_rate_c + (1|speaker) + (1|item), data = token_measures)
+```
+
+
+```{r}
+priors <- c(
+  set_prior("normal(150, 50)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_phonationvoiced"),
+  set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:languagePolish"),
+  set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelo"),
+  set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelu"),
+  set_prior("normal(0, 25)", class = "b", coef = "languagePolish"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelo"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelu"),
+  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+vdur_bm <- brm(
+  vowel_duration ~
+    c2_phonation *
+    language +
+    vowel +
+    c2_phonation:vowel +
+    syl_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors,
+  cores = 2
+)
+```
+
+```{r}
+summary(vdur_bm)
+```
+
+```{r}
+mcmc_intervals(as.array(vdur_bm), pars = c("b_Intercept"))
+```
+
+```{r}
+mcmc_intervals(as.array(vdur_bm), pars = c("b_c2_phonationvoiced", "b_c2_phonationvoiced:languagePolish", "b_languagePolish", "b_vowelo", "b_vowelu"))
+```
+
+```{r}
+priors <- c(
+  set_prior("normal(150, 50)", class = "Intercept"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_phonationvoiced"),
+  set_prior("normal(0, 5)", class = "b", coef = "closure_duration:c2_phonationvoiced"),
+  set_prior("normal(0, 5)", class = "b", coef = "closure_duration:vowelo"),
+  set_prior("normal(0, 5)", class = "b", coef = "closure_duration:vowelu"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelo"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelu"),
+  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+vclos_bm <- brm(
+  vowel_duration ~
+    closure_duration *
+    c2_phonation +
+    vowel +
+    closure_duration:vowel +
+    syl_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors,
+  cores = 2
+)
+```
+
+```{r}
+summary(vclos_bm)
+```
+
+```{r}
+mcmc_intervals(as.array(vclos_bm), pars = c("b_closure_duration", "b_closure_duration:c2_phonationvoiced", "b_closure_duration:vowelo", "b_closure_duration:vowelu"), prob_outer = 0.89) + theme_minimal() + geom_vline(aes(xintercept = 0))
+```
+
+```{r}
+priors <- c(
+  set_prior("normal(150, 50)", class = "Intercept"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:syl_rate_c"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:vowelo"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:vowelu"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelo"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelu"),
+  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+vclos_bm_2 <- brm(
+  vowel_duration ~
+    closure_duration +
+    vowel +
+    closure_duration:vowel +
+    closure_duration:syl_rate_c +
+    syl_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors,
+  cores = 2
+)
+```
+
+```{r}
+summary(vclos_bm_2)
+```
+
+```{r}
+priors_3 <- c(
+  set_prior("normal(150, 50)", class = "Intercept"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:syl_rate_c"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:vowelo"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:vowelu"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelo"),
+  set_prior("normal(0, 25)", class = "b", coef = "vowelu"),
+  set_prior("normal(0, 25)", class = "b", coef = "languagePolish"),
+  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 2)", class = "b", coef = "closure_duration:languagePolish"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+vclos_bm_3 <- brm(
+  vowel_duration ~
+    closure_duration +
+    vowel +
+    closure_duration:vowel +
+    closure_duration:syl_rate_c +
+    syl_rate_c +
+    language +
+    closure_duration:language +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors,
+  cores = 2
+)
+```
+
+```{r}
+summary(vclos_bm_3)
+```
+
