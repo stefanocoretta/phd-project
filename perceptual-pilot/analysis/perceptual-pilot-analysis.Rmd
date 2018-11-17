@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(lme4)
+library(sjPlot)
 ```
 
 # Import data
@@ -27,9 +29,13 @@ pilot <- list.files(
     response = coalesce(key_resp_2.keys, key_resp_8.keys),
     response = factor(response, levels = c("t", "d")),
     burst = as.numeric(burst),
-    voicing = as.numeric(voicing)
+    voicing = as.numeric(voicing),
+    response_n = as.numeric(response) - 1
   ) %>%
   filter(!is.na(response))
+
+burst <- filter(pilot, condition == "burst")
+voicing <- filter(pilot, condition == "voicing")
 ```
 
 # Explore
@@ -48,4 +54,40 @@ pilot %>%
     ggplot(aes(voicing, as.numeric(response))) +
     geom_smooth(method = "loess", se = FALSE) +
   ylim(1, 2)
+```
+
+# Inference
+
+```{r}
+burst_lm <- glmer(
+  response_n ~
+    burst *
+    vowel +
+    (1|participant),
+  data = burst,
+  family = binomial
+)
+
+summary(burst_lm)
+```
+
+```{r}
+plot_model(burst_lm, "pred", terms = c("burst", "vowel"))
+```
+
+```{r}
+voicing_lm <- glmer(
+  response_n ~
+    voicing *
+    vowel +
+    (1|participant),
+  data = voicing,
+  family = binomial
+)
+
+summary(voicing_lm)
+```
+
+```{r}
+plot_model(voicing_lm, "pred", terms = c("voicing", "vowel"))
 ```
