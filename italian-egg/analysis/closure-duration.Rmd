@@ -1,0 +1,51 @@
+---
+title: "CLosure duration"
+author: "Stefano Coretta"
+date: "18/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itaegg)
+library(lme4)
+library(lmerTest)
+library(sjPlot)
+
+data("ita_egg")
+ita_egg <- ita_egg %>%
+  mutate(
+    vowel = factor(vowel, levels = c("i", "e", "a", "o", "u")),
+    height = factor(height, levels = c("low", "mid-low", "mid-high", "high")),
+    c1_place = factor(c1_place, levels = c("labial", "coronal", "velar")),
+    c2_place = factor(c2_place, levels = c("labial", "coronal", "velar")),
+    rel_rel = (c2_rel - c1_rel) * 1000,
+    c2_clos_duration = (c2_rel - c2_ons) * 1000
+  ) %>%
+  mutate_if(is.character, as.factor)
+```
+
+```{r}
+ita_egg %>%
+  ggplot(aes(c2_clos_duration)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r}
+ita_egg %>%
+  ggplot(aes(c2_place, c2_clos_duration)) +
+  geom_boxplot()
+```
+
+```{r}
+ita_egg %>%
+  ggplot(aes(vowel, c2_clos_duration, fill = height)) +
+  geom_boxplot() +
+  facet_grid(~ c2_place)
+```
