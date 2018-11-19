@@ -4,8 +4,7 @@ This file contains the documentation of the scripts in the `code` folder. The do
 
 ## Prepare files for force alignment in SPPAS
 
-### alignment-input.praat
-```praat
+```praat alignment-input.praat
 <<<script header>>>
 
 <<<get audio>>>
@@ -17,8 +16,7 @@ This file contains the documentation of the scripts in the `code` folder. The do
 
 The following chunk asks the user for the name of the project directory and the participant ID. Then it reads the audio files from the `audio` directory (whih contains the audio files exported from `AAA`). The directory `alignment` is created as well.
 
-### "get audio"
-```praat
+```praat "get audio"
 form Generate input for force alignment with SPPAS
     word project voicing-effect
     word speaker it01
@@ -44,8 +42,7 @@ endfor
 
 The following select all objects except the file list and concatenates the sound objects. SPASS needs a tier named `Orthography`, so we create one. Then, the script loops through the intervals in the TextGrid which correspond to the names of the files, it writes the prompt in the interval and in the text file for IPU detection.
 
-### "concatenate recoverably"
-```praat
+```praat "concatenate recoverably"
 select all
 minusObject: "Strings filelist"
 Concatenate recoverably
@@ -70,8 +67,7 @@ endfor
 
 Finally, we can save the concatenated sound file and the TextGrid with the file names. The latter will be used in the script `search-area.praat` to separate the concatenated TextGrid.
 
-### "write sppas"
-```praat
+```praat "write sppas"
 selectObject: "Sound chain"
 Save as WAV file: "'directory_alignment$'/'speaker$'.wav"
 
@@ -83,8 +79,7 @@ Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 
 ## Extract the search area for spline batch processing and kinematics in `AAA`
 
-### search-area.praat
-```praat
+```praat search-area.praat
 <<<script header>>>
 
 <<<get alignment>>>
@@ -96,8 +91,7 @@ Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 
 The user is prompt to indicate the project name, the participant ID and the language. Depending on the language selected, the appropriate speech segments are stored for subsequent extraction of the search area. Then the script read the TextGrid file with the force alingment (`ID-palign.TextGrid`). The number of intervals of the TextGrid file is saved in `intervals` and two new tiers are created (`ultrasound` and `kinematics`)
 
-### "get alignment"
-```praat
+```praat "get alignment"
 form Select folder with TextGrid
     word speaker it01
     comment Supported languages: it, pl
@@ -128,8 +122,7 @@ intervals = Get number of intervals: 1
 
 Now we can create intervals cointaing the search area for ultrasound and kinematics which will be used in `AAA` for spline batch processing and to find consonantal gestures moments. Then, `[ID]-search.TextGrid` is saved in the `alignment` folder.
 
-### "set search"
-```praat
+```praat "set search"
 Insert interval tier: 4, "ultrasound"
 Insert interval tier: 5, "kinematics"
 Insert interval tier: 6, "vowel"
@@ -183,8 +176,7 @@ Save as text file: "'directory_alignment$'/'speaker$'-search.TextGrid"
 
 Then, the script saves each search area to separate TextGrids in the `audio` folder. The file names are extracted from `[ID]-filenames.TextGrid`.
 
-### "extract search"
-```praat
+```praat "extract search"
 filenames = Read from file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 
 selectObject: palign
@@ -219,8 +211,7 @@ endfor
 
 The following chunk calls the header of the script, which is defined at the end of the documentation, and the main function.
 
-### sync-egg.praat
-```praat
+```praat sync-egg.praat
 <<<script header>>>
 
 <<<sync function>>>
@@ -228,8 +219,7 @@ The following chunk calls the header of the script, which is defined at the end 
 
 The script works by selecting all the files in the Object window after loading files.
 
-### "sync function"
-```praat
+```praat "sync function"
 <<<check objects>>>
 
 <<<read files>>>
@@ -239,8 +229,7 @@ The script works by selecting all the files in the Object window after loading f
 
 Before running, the script checks if the objects list is empty. If not, the script exits and prompts the user to clean the objects list.
 
-### "check objects"
-```praat
+```praat "check objects"
 select all
 number_selected = numberOfSelected ()
 if number_selected > 0
@@ -251,8 +240,7 @@ endif
 
 The form asks for the project name and the participant ID. A boolean is stored as well for enabling the debug mode. In the debug mode, all intermediate files produced by the script are kept in the Objects window. They are deleted otherwise.
 
-### "read files"
-```praat
+```praat "read files"
 form Syncronise EGG data
     word project voicing-effect
     word speaker it01
@@ -263,8 +251,7 @@ endform
 The file lists of the EGG and ultrasound `.wav` files are saved in `filelist_egg` and `filelist_us`.
 The number of files in the EGG folder is saved in `files`.
 
-### "read files"+=
-```praat
+```praat "read files"+=
 egg_directory$ = "../data/egg/raw"
 us_directory$ = "../data/ultrasound/derived"
 out_directory$ = "../data/egg/derived"
@@ -278,8 +265,7 @@ Create Strings as file list: "filelist_us", "'us_directory$'/'speaker$'/recordin
 
 For every file listed in `filelist_egg`, it reads the file.
 
-### "read files"+=
-```praat
+```praat "read files"+=
 for file from 1 to files
     select Strings filelist_egg
     file$ = Get string: file
@@ -290,8 +276,7 @@ endfor
 
 Every object is then selected, minus the two file lists. The Sounds are concatenated to `Sound chain`.
 
-### "read files"+=
-```praat
+```praat "read files"+=
 select all
 minusObject: "Strings filelist_egg"
 minusObject: "Strings filelist_us"
@@ -301,8 +286,7 @@ Concatenate
 While `Sound chain` is selected, the script inverts the signal (both the audio and the EGG signal are inverted during acquisition with the Laryngograph), and extracts all channels (the object is a stereo sound: channel 1 is the audio, channel 2 is the EGG signal). For cross-correlation to work, the two sound files must have the same sampling frequency.
 AAA records at a frequency of 22050 Hz. To ensure that the EGG audio is at the same sampling frequency, resampling is performed. `Sound chain_ch1_22050` is created from `Sound chain_ch1`.
 
-### "read files"+=
-```praat
+```praat "read files"+=
 Multiply: -1
 Extract all channels
 
@@ -312,8 +296,7 @@ Resample: 22050, 50
 
 The extraction of each simulus from the concatenated sound is achieved through the EGG signal. The function `To TextGrid (silences)` efficiently recognises the voiced streaches of the audio which roughly corresponds to the spoken stimuli. (*Warning*: this assumes that the EGG files don't contain spurious material.) The minimum duration for silence is set to 1 second to avoid voiceless segments being annotated as silence. The EGG signal is first pass filtered. The output is `TextGrid chain_ch2`. The number of intervals in the TextGrid is saved in the variable `intervals`.
 
-### "sync"
-```praat
+```praat "sync"
 selectObject: "Sound chain_ch2"
 Filter (pass Hann band): 40, 10000, 100
 
@@ -325,8 +308,7 @@ Insert interval tier: 2, "new"
 
 For each interval in the `TextGrid chain_ch2` wich is labelled `speech`, the start and end time of the interval are moved by -1.5 and 1 second respectively. This ensures that there is enough audio before and after the stimulus for cross-correlation. The original left and right boundaries are removed. The result is that the interval label is changed to `speechsilence`.
 
-### "sync"+=
-```praat
+```praat "sync"+=
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
     if label$ == "speech"
@@ -344,8 +326,7 @@ Remove tier: 1
 
 We can now get the number of intervals of the updated TextGrid and set the counter `index` to 1. The counter is used to read the ultrasound audio files, and in the names of the output files.
 
-### "sync"+=
-```praat
+```praat "sync"+=
 intervals = Get number of intervals: 1
 
 index = 1
@@ -354,8 +335,7 @@ index = 1
 
 For every interval in the TextGrid it is checked if the label is `speechsilence`. The intervals with this label correspond to the individual stimuli in the concatenated EGG sound files. If the label is `speechsilence`, the script gets the start and end time of that interval.
 
-### "sync"+=
-```praat
+```praat "sync"+=
 for interval from 1 to intervals
     label$ = Get label of interval: 1, interval
     if label$ == "speech"
@@ -366,8 +346,7 @@ for interval from 1 to intervals
 
 Then the resampled `Sound chain_ch1_22050` is selected and the portion from `start` to `end` is extracted. This portion corresponds to the TextGrid interval and, thus, to the stimulus. The sound is named `Sound chain_ch1_22050_part`.
 
-#### "sync"+=
-```praat
+```praat "sync"+=
         selectObject: "Sound chain_ch1_22050"
         Extract part: start, end, "rectangular", 1, "no"
 
@@ -375,8 +354,7 @@ Then the resampled `Sound chain_ch1_22050` is selected and the portion from `sta
 
 The counter `index` is now used to read the audio file from the ultrasound directory. Since the order of the stimuli is the same in both the EGG and unltrasound files, a counter that increases for every interval wth the `speechsilence` label is sufficient. The name of the file is saved after reading and the file remains selected.
 
-### "sync"+=
-```praat
+```praat "sync"+=
         selectObject: "Strings filelist_us"
         file_us$ = Get string: index
         Read from file: "'us_directory$'/'speaker$'/recordings/'file_us$'"
@@ -386,8 +364,7 @@ The counter `index` is now used to read the audio file from the ultrasound direc
 
 The extracted portion from the EGG audio channel is added to the selection. The cross-correlation between the EGG and ultrasound audio is performed. The time of maximum amplitude in the generated cross-correlated sound corresponds to the off-set between the two files.
 
-### "sync"+=
-```praat
+```praat "sync"+=
         plusObject: "Sound chain_ch1_22050_part"
 
         crosscorrelated = Cross-correlate: "peak 0.99", "zero"
@@ -397,8 +374,7 @@ The extracted portion from the EGG audio channel is added to the selection. The 
 
 The concatenated stereo sound (or the recombined stereo if the `invert egg signal` option is active) is selected and a portion is extracted. The portion starting point corresponds to the starting point of the TextGrid interval minus the off-set obtained from the correlation. If the offset is positive (when the audio is longer than the EGG audio), silence is added at the beginning of the EGG sound. If the offset is negative (the EGG sound is longer than the audio), the extra part is deleted from the beginning of the EGG sound to match the beginning of the audio. The end point is the same as the one of the interval. (The endpoint does not matter, since timing is calculated from the beginning of the file.) The sound is finally saved in the `sync` folder.
 
-### "sync"+=
-```praat
+```praat "sync"+=
         selectObject: "Sound chain"
 
         start = start - offset
@@ -409,8 +385,7 @@ The concatenated stereo sound (or the recombined stereo if the `invert egg signa
 
 If the debugging mode is off, all the intermediate files are removed. Otherwise they are kept for inspection. The index is increased by one and the TextGrid is selected for the next cycle of the for loop.
 
-### "sync"+=
-```praat
+```praat "sync"+=
         if debug_mode == 0
             removeObject: "Sound chain_ch1_22050_part", "Sound " + file_us_name$,
             ...crosscorrelated, "Sound chain_part"
@@ -426,8 +401,7 @@ endfor
 
 This script calculates the voiced and voiceless portions (VUV) in the synchronised EGG files based on the EGG signal.
 
-### extract-vuv.praat
-```praat
+```praat extract-vuv.praat
 <<<script header>>>
 
 <<<smoothing>>>
@@ -439,8 +413,7 @@ This script calculates the voiced and voiceless portions (VUV) in the synchronis
 
 We first read ask for the project name, the speaker ID, the lower and upper frequency for the filter, and the smooth width.
 
-### "get synced egg"
-```praat
+```praat "get synced egg"
 form Extract vuv
     word project voicing-effect
     word speaker it01
@@ -460,8 +433,7 @@ files = Get number of strings
 
 Now, for each file in `derived/egg`, we can calculate the boundaries of the voiced and voiceless intervals in the file and save them to a TextGrid file.
 
-### "vuv"
-```praat
+```praat "vuv"
 for file from 1 to files
     selectObject: "Strings filelist"
     file$ = Get string: file
@@ -478,8 +450,7 @@ removeObject: "Strings filelist"
 
 To calculate voiced and voicelss intervals, we can exploit the already available function `To TextGrid (vuv)`. The channel containing the EGG signal (channel 2) is extracted, filtered and smoothed. A PointProcess object is then created from the signal, and finally the `vuv` function is applied.
 
-#### "to vuv"
-```praat
+```praat "to vuv"
 Extract one channel: 2
 
 noprogress Filter (pass Hann band): lower, upper, 100
@@ -492,8 +463,7 @@ To TextGrid (vuv): 0.02, 0.001
 
 The resulting TextGrid is saved in the same synced EGG files folder.
 
-#### "save vuv"
-```praat
+```praat "save vuv"
 Write to text file: "'directory$'/'speaker$'/'filename$'-vuv.TextGrid"
 
 if debug_mode == 0
@@ -505,8 +475,7 @@ endif
 
 ## DEGG tracing
 
-### degg-tracing.praat
-```praat
+```praat degg-tracing.praat
 <<<script header>>>
 
 <<<smoothing>>>
@@ -518,8 +487,7 @@ endif
 
 First we get the file list and we start looping through the files.
 
-### "get files list"
-```praat
+```praat "get files list"
 form dEGG tracing
     word project voicing-effect
     word speaker it01
@@ -546,8 +514,7 @@ Read from the corrisponding TextGrid in `/data/ultrasound/derived/ID/recordings`
 Now, we can extract the same interval from channel 2 of the EGG file.
 Rename the ectracted part as `egg`, and execute the main function, which extracts the dEGG trace.
 
-### "file loop"
-```praat
+```praat "file loop"
 for file to files
     selectObject: "Strings filelist"
     file$ = Get string: file
@@ -581,8 +548,7 @@ for file to files
 endfor
 ```
 
-### "main function"
-```praat
+```praat "main function"
 <<<degg>>>
 
 <<<degg loop>>>
@@ -594,8 +560,7 @@ Create PointProcess (peaks) for EGG (`PointProcess egg_smooth`).
 Calculate dEGG and remove noise (Praat noise removal based on the first 0.25 seconds, renamed `degg_smooth`).
 Create PointProcess (peaks) of dEGG (`PointProcess degg_smooth`).
 
-### "degg"
-```praat
+```praat "degg"
 Filter (pass Hann band): lower, upper, 100
 @smoothing: smooth_width
 sampling_period = Get sampling period
@@ -630,8 +595,7 @@ Go to the second and third point and repeat.
 
 Trying egg_minimum_2 instead of degg_maximum_2 for cases when there is no degg_maximum_2.
 
-### "degg loop"
-```praat
+```praat "degg loop"
 selectObject: "PointProcess egg_smooth"
 egg_points = Get number of points
 mean_period = Get mean period: 0, 0, 0.0001, 0.02, 1.3
@@ -678,8 +642,7 @@ for point to egg_points - 2
 endfor
 ```
 
-### "smoothing"
-```praat
+```praat "smoothing"
 procedure smoothing : .width
     .weight = .width / 2 + 0.5
 
@@ -699,8 +662,7 @@ endproc
 
 ## Word DEGG tracing
 
-### degg-tracing-word.praat
-```praat
+```praat degg-tracing-word.praat
 <<<script header>>>
 
 <<<smoothing>>>
@@ -710,8 +672,7 @@ endproc
 <<<file loop word>>>
 ```
 
-### "get files list word"
-```praat
+```praat "get files list word"
 form dEGG tracing
     word project voicing-effect
     word speaker it01
@@ -733,8 +694,7 @@ Create Strings as file list: "filelist", "'directory$'/*.wav"
 files = Get number of strings
 ```
 
-### "file loop word"
-```praat
+```praat "file loop word"
 for file to files
     selectObject: "Strings filelist"
     file$ = Get string: file
@@ -761,8 +721,7 @@ endfor
 
 ## Get durations
 
-### get-durations.praat
-```praat
+```praat get-durations.praat
 <<<script header>>>
 
 form Get vowel duration
@@ -815,13 +774,13 @@ for interval to intervals
         v2_onset = Get end time of interval: 1, c1 + 2
         # v_duration = (end_vowel - start_vowel) * 1000
         # v2_duration = (end_target - end_consonant2) * 1000
-        sentence_interval = Get interval at time: 3, start_target
+        sentence_interval = Get interval at time: 3, word_onset
         sentence_onset = Get start time of interval: 3, sentence_interval
         sentence_offset = Get end time of interval: 3, sentence_interval
         # sentence_duration = end_sentence - start_sentence
 
         selectObject: bursts
-        burst_interval = Get nearest index from time: 1, end_vowel
+        burst_interval = Get nearest index from time: 1, c2_onset
         release = Get time of point: 1, burst_interval
         if release < c2_onset or release > sentence_offset
             release = undefined
@@ -851,12 +810,11 @@ for interval to intervals
         # Get times relative to the start of the individual audio chunk file
         word_onset = word_onset - file_start
         word_offset = word_offset - file_start
-        c1_onset = c1_onset - file_start
         v1_onset = v1_onset - file_start
         c2_onset = c2_onset - file_start
         v2_onset = v2_onset - file_start
-        c1_rel = c1_rel - file_start
-        c2_rel = c2_rel - file_start
+        c1_rel = release_c1 - file_start
+        c2_rel = release - file_start
         sentence_onset = sentence_onset - file_start
         sentence_offset = sentence_offset - file_start
 
@@ -867,7 +825,7 @@ for interval to intervals
 
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$',
           ...'sentence_onset','sentence_offset','word_onset','word_offset',
-          ...'v1_onset','c2_onset','v2_onset','c1_rel','c2_rel'
+          ...'v1_onset','c2_onset','v2_onset','c1_rel','c2_rel'"
 
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
@@ -880,8 +838,7 @@ removeObject: palign, bursts
 
 This script detects the burst in the consonant following the target vowels (C2). The algorythm is based on @avanthapadmanabha2014.
 
-### burst-detection.praat
-```praat
+```praat burst-detection.praat
 <<<script header>>>
 
 <<<get alignment>>>
@@ -891,8 +848,7 @@ This script detects the burst in the consonant following the target vowels (C2).
 
 We start by identifying the inverval that corresponds to C2.
 
-### "find consonant"
-```praat
+```praat "find consonant"
 speech_intervals = Get number of intervals: 3
 sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
 textgrid = To TextGrid: "burst","burst"
@@ -929,8 +885,7 @@ Save as text file: "'directory_alignment$'/'speaker$'-burst.TextGrid"
 
 To calculate the plosion index, it is first necessary to filter the sound file.
 
-### "filter"
-```praat
+```praat "filter"
 Filter (pass Hann band): 400, 0, 100
 sound_band = selected("Sound")
 
@@ -948,8 +903,7 @@ period = Get column distance
 
 We can now calculate the plosion index.
 
-### "plosion index"
-```praat
+```praat "plosion index"
 m1_time = 0.006
 m2_time = 0.016
 
@@ -984,9 +938,7 @@ burst = Get time from index: 1
 
 This script extracts several durations related to voicing. The main function `merge` is a loop that reads the TextGrids from the derived ultrasound and EGG folders and merges the tier with the gestures from the ultrasound and the tier with the voiced/unvoiced intervals from the EGG.
 
-
-### get-measurements.praat
-```praat
+```praat get-measurements.praat
 <<<script header>>>
 
 <<<read>>>
@@ -997,8 +949,7 @@ This script extracts several durations related to voicing. The main function `me
 
 This is the form that prompts the user to input the directories of the derived ultrasound (`directory_us`) and EGG (`directory_egg`) data, and the ID of the participant (`speaker`). Do not include the participant folder in the path because it will be automatically included in the main function.
 
-### "read"
-```praat
+```praat "read"
 form Get measurements
     word speaker it01
 endform
@@ -1020,8 +971,7 @@ Create Strings as file list: "filelist_egg", "'directory_egg_vuv$'/*.TextGrid"
 files_egg = Get number of strings
 ```
 
-### "merge"
-```praat
+```praat "merge"
 for file from 1 to files_us
     selectObject: "Strings filelist_us"
     file$ = Get string: file
@@ -1060,8 +1010,7 @@ endfor
 
 For the current TextGrid, get the number of points in the `gestures` point tier and, if `number_of_points > 0`, loop through the points. If the point is labelled `target_TT` or `target_TD`, get the time and save it to `target`. Else, write an empty value to `target`, and if the label is `max_TT` or `max_TD`, get the time and write it to `max`. Else, write an empty to `max`, and if the label is `release_TT` or `release_TD`, write the value to `release`. Else, write an empty to `release`.
 
-### "calculate"
-```praat
+```praat "calculate"
 number_of_points = Get number of points: 1
 
 target = undefined
@@ -1115,8 +1064,7 @@ appendFileLine: result_file$, result_line$
 
 The following is a procedure that returns the number of a tier in a TextGrid given the name of that tier. The value is returned to `getTierNumber.return`.
 
-### "get tier number"
-```praat
+```praat "get tier number"
 procedure getTierNumber: .tierName$
     .numberOfTiers = Get number of tiers
     .index = 1
@@ -1134,8 +1082,7 @@ endproc
 
 ## Get duration of voicing in vowels
 
-### voicing-duration.praat
-```praat
+```praat voicing-duration.praat
 <<<script header>>>
 
 <<<voicing setup>>>
@@ -1143,8 +1090,7 @@ endproc
 <<<voicing loop>>>
 ```
 
-### "voicing setup"
-```praat
+```praat "voicing setup"
 form Get duration of voicing
     word speaker it01
 endform
@@ -1160,8 +1106,7 @@ numberOfVuv = Get number of strings
 index = 0
 ```
 
-### "voicing loop"
-```praat
+```praat "voicing loop"
 for vuv to numberOfVuv
     selectObject: "Strings vuvList"
     vuvFile$ = Get string: vuv
@@ -1181,8 +1126,7 @@ for vuv to numberOfVuv
 endfor
 ```
 
-### "words loop"
-```praat
+```praat "words loop"
 for word to numberOfWords
     word$ = Get label of interval: 3, word
     if word$ == "dico" or word$ == "mowie"
@@ -1233,8 +1177,7 @@ I will probably have to make this more robust by using the closure duration rath
 
 This script extracts wavegram data from the EGG data.
 
-### wavegram.praat
-```praat
+```praat wavegram.praat
 <<<script header>>>
 
 <<<preamble>>>
@@ -1244,8 +1187,7 @@ This script extracts wavegram data from the EGG data.
 <<<smoothing>>>
 ```
 
-### "preamble"
-```praat
+```praat "preamble"
 form Wavegram
     word speaker it01
 endform
@@ -1266,8 +1208,7 @@ numberOfFiles = Get number of strings
 
 The preamble defines a few settings for filtering and smoothing, and the results file.
 
-### "main loop"
-```praat
+```praat "main loop"
 #### Files loop ####
 for file to numberOfFiles
     selectObject: fileList
@@ -1304,8 +1245,7 @@ endfor
 
 The main loop goes through each file, extracts the relevat portions using a vuv textgrid, and gets the numeric data.
 
-### "vowel loop"
-```praat
+```praat "vowel loop"
 #### Vowel loop ####
 <<<degg-wave>>>
 
@@ -1314,8 +1254,7 @@ The main loop goes through each file, extracts the relevat portions using a vuv 
 
 In this loop, each interval corresponding to an uttered vowel is extracted, the DEGG is calculated and the wavegram data is extracted from the DEGG.
 
-### "degg-wave"
-```praat
+```praat "degg-wave"
 eggSmooth = Filter (pass Hann band): lower, upper, 100
 @smoothing: smoothWidth
 sampling_period = Get sampling period
@@ -1342,8 +1281,7 @@ Remove points between: end, pp_end
 
 The raw EGG is filtered and smoothed using a triangular smooth, and from this the DEGG is calculated. Two PointProcess files are also created, which roughly mark each glottal period in the EGG and DEGG.
 
-### "period loop"
-```praat
+```praat "period loop"
 selectObject: eggPointProcess
 eggPoints = Get number of points
 meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
@@ -1368,8 +1306,7 @@ endfor
 
 Each glottal period is detected by finding the EGG minima. The interval between two consecutive EGG minima is a glottal period.
 
-### "wavegram"
-```praat
+```praat "wavegram"
 if period <= meanPeriod * 2
     selectObject: deggSmooth
     minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
@@ -1406,8 +1343,7 @@ For each glottal period, the normalised amplitude is calculated for each sample 
 
 ## Get formants and fundamental frequency
 
-### get-formants.praat
-```praat
+```praat get-formants.praat
 <<<script header>>>
 
 form Get formants and fundamental frequency
@@ -1428,8 +1364,7 @@ writeFileLine: result_file$, result_header$
 <<<files loop>>>
 ```
 
-### "files loop"
-```praat
+```praat "files loop"
 directory_audio$ = "../data/ultrasound/derived/'speaker$'/recordings"
 file_list = Create Strings as file list: "file_list", "'directory_audio$'/*.wav"
 number_of_files = Get number of strings
@@ -1447,8 +1382,7 @@ for file from 1 to number_of_files
 endfor
 ```
 
-### "vowel"
-```praat
+```praat "vowel"
 vowel$ = Get label of interval: 3, 2
 
 if vowel$ != ""
@@ -1485,15 +1419,13 @@ endif
 
 ## Create closure annotations
 
-### closure-annotation.praat
-```praat
+```praat closure-annotation.praat
 <<<script header>>>
 
 <<<speakers loop>>>
 ```
 
-### "speakers loop"
-```praat
+```praat "speakers loop"
 form Create closure annotations
     word project voicing-effect
     word speaker it01
@@ -1523,8 +1455,7 @@ number_of_files = Get number of strings
 
 The script loops through each directory in `./data/ultrasound/derived/` and reads the search area TextGrids in `./data/ultrasound/derived/[ID]/recordings/`.
 
-### "textgrids loop"
-```praat
+```praat "textgrids loop"
 for wav from 1 to number_of_files
   selectObject: file_list
   wav_file$ = Get string: wav
@@ -1552,8 +1483,7 @@ endfor
 
 This script detects the release in the consonant preceding the target vowel (C1). The algorythm is based on @avanthapadmanabha2014.
 
-### release-detection-c1.praat
-```praat
+```praat release-detection-c1.praat
 <<<script header>>>
 
 <<<get alignment>>>
@@ -1561,8 +1491,7 @@ This script detects the release in the consonant preceding the target vowel (C1)
 <<<find consonant c1>>>
 ```
 
-### "find consonant c1"
-```praat
+```praat "find consonant c1"
 speech_intervals = Get number of intervals: 3
 sound = Read from file: "'directory_alignment$'/'speaker$'.wav"
 textgrid = To TextGrid: "release_c1", "release_c1"
@@ -1603,8 +1532,7 @@ We do this by finding speech intervals, getting the second word and the first co
 
 ## Headers
 
-### "script header"
-```praat
+```praat "script header"
 ######################################
 # This is a script from the project 'Vowel duration and consonant voicing: An
 # articulatory study', Stefano Coretta

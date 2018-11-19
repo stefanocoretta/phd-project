@@ -45,8 +45,8 @@ directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
 result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
-header$ = "index,speaker,file,rec_date,word,time,word_duration,c1_duration,c1_closure,c1_rvot,c1_rvofft,vowel_duration,
-    ...closure_duration,rvot,c2_duration,v2_duration,sentence_duration,c1_rel,v_onset,v_offset,c2_rel,rel_rel"
+header$ = "index,speaker,file,rec_date,word,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
+
 writeFileLine: result_file$, header$
 
 bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
@@ -66,62 +66,68 @@ for interval to intervals
     if label$ == label_lang$
         index += 1
         word$ = Get label of interval: 2, interval + 1
-        start_target = Get start time of interval: 2, interval + 1
-        end_target = Get end time of interval: 2, interval + 1
-        word_duration = (end_target - start_target) * 1000
-        start_consonant = Get interval at time: 1, start_target
-        start_vowel = Get start time of interval: 1, start_consonant + 1
-        end_vowel = Get end time of interval: 1, start_consonant + 1
-        end_consonant2 = Get end time of interval: 1, start_consonant + 2
-        v_duration = (end_vowel - start_vowel) * 1000
-        v2_duration = (end_target - end_consonant2) * 1000
-        sentence_interval = Get interval at time: 3, start_target
-        start_sentence = Get start time of interval: 3, sentence_interval
-        end_sentence = Get end time of interval: 3, sentence_interval
-        sentence_duration = end_sentence - start_sentence
+        word_onset = Get start time of interval: 2, interval + 1
+        word_offset = Get end time of interval: 2, interval + 1
+        # word_duration = (end_target - start_target) * 1000
+        c1 = Get interval at time: 1, word_onset
+        v1_onset = Get start time of interval: 1, c1 + 1
+        c2_onset = Get end time of interval: 1, c1 + 1
+        v2_onset = Get end time of interval: 1, c1 + 2
+        # v_duration = (end_vowel - start_vowel) * 1000
+        # v2_duration = (end_target - end_consonant2) * 1000
+        sentence_interval = Get interval at time: 3, word_onset
+        sentence_onset = Get start time of interval: 3, sentence_interval
+        sentence_offset = Get end time of interval: 3, sentence_interval
+        # sentence_duration = end_sentence - start_sentence
 
         selectObject: bursts
-        burst_interval = Get nearest index from time: 1, end_vowel
-        burst = Get time of point: 1, burst_interval
-        if burst < end_vowel or burst > end_sentence
-            burst = undefined
+        burst_interval = Get nearest index from time: 1, c2_onset
+        release = Get time of point: 1, burst_interval
+        if release < c2_onset or release > sentence_offset
+            release = undefined
         endif
 
-        closure = (burst - end_vowel) * 1000
-        rvot = (end_consonant2 - burst) * 1000
-        consonant_duration = closure + rvot
+        # closure = (burst - end_vowel) * 1000
+        # rvot = (end_consonant2 - burst) * 1000
+        # consonant_duration = closure + rvot
 
         selectObject: release_c1_textgrid
-        release_c1_point = Get nearest index from time: 1, start_vowel
+        release_c1_point = Get nearest index from time: 1, v1_onset
         release_c1 = Get time of point: 1, release_c1_point
-        if release_c1 < start_target or release_c1 > end_sentence
+        if release_c1 < word_onset or release_c1 > sentence_offset
             release_c1 = undefined
         endif
 
-        c1_duration = (start_vowel - start_target) * 1000
-        c1_closure = (release_c1 - start_target) * 1000
-        c1_rvot = (start_vowel - release_c1) * 1000
-        c1_rvofft = (end_vowel - release_c1) * 1000
+        # c1_duration = (start_vowel - start_target) * 1000
+        # c1_closure = (release_c1 - start_target) * 1000
+        # c1_rvot = (start_vowel - release_c1) * 1000
+        # c1_rvofft = (end_vowel - release_c1) * 1000
 
         selectObject: fileNames
-        fileName = Get interval at time: 1, start_vowel
+        fileName = Get interval at time: 1, v1_onset
         fileName$ = Get label of interval: 1, fileName
         file_start = Get start time of interval: 1, fileName
 
-        v_onset = start_vowel - file_start
-        v_offset = end_vowel - file_start
+        # Get times relative to the start of the individual audio chunk file
+        word_onset = word_onset - file_start
+        word_offset = word_offset - file_start
+        v1_onset = v1_onset - file_start
+        c2_onset = c2_onset - file_start
+        v2_onset = v2_onset - file_start
         c1_rel = release_c1 - file_start
-        c2_rel = burst - file_start
+        c2_rel = release - file_start
+        sentence_onset = sentence_onset - file_start
+        sentence_offset = sentence_offset - file_start
 
-        rel_rel = (burst - release_c1) * 1000
+        # rel_rel = (burst - release_c1) * 1000
 
         Read Strings from raw text file: "../data/ultrasound/derived/'speaker$'/recordings/'fileName$'.txt"
         rec_date$ = Get string: 2
 
-        result_line$ = "'index','speaker$','fileName$','rec_date$','word$','start_target',
-            ...'word_duration','c1_duration','c1_closure','c1_rvot','c1_rvofft','v_duration','closure','rvot',
-            ...'consonant_duration','v2_duration','sentence_duration',
-            ...'c1_rel','v_onset','v_offset','c2_rel','rel_rel'"
+        result_line$ = "'index','speaker$','fileName$','rec_date$','word$',
+          ...'sentence_onset','sentence_offset','word_onset','word_offset',
+          ...'v1_onset','c2_onset','v2_onset','c1_rel','c2_rel'"
+
         appendFileLine: "'result_file$'", "'result_line$'"
     endif
 endfor
