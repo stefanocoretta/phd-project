@@ -1,0 +1,182 @@
+
+
+
+
+
+
+
+October 25, 2018
+
+Dr. Stefano Coretta
+Linguistics and English Language
+University of Manchester
+Oxford Road
+Manchester
+M13 9PL, United Kingdom
+
+Re: JASA 3500, An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish, by Stefano Coretta
+
+Dear Dr.Coretta,
+
+I have received two reviews of your manuscript submitted to the Journal of the Acostical Society ofAmerica; the reviews are enclosed. One of the Reviewers, #2, voices a number of concerns about your paper and does not recommend publication, at least not in its present form. Reviewer #1 recommends minor revisions.
+
+The reviews are very detailed, so I don't have to summarize them. I will only make some editorial comments and suggestions.
+
+Page 3, line 45
+"...account on the light..." > "...account in the light..." ?
+
+Page 15, line 258
+"Figure 3 illustrates stop closure durations..."
+The vertical axis in Figure 3 has the label "Vovel duration (ms)".
+
+Figure 4
+If the shaded area represents the error of the estimate, I would suggest saying so.
+
+Page 20, IV.DISCUSION
+Your explanation for your results is based on the asssumption that the Release to Release interval is invariant. I think this is an overstatement, since Figure 5 shows a fair amount of variability of this interval. Your argument seems to be based on the average values shown in the figure, but this is not what language users hear. The coupling patters shown in Figure 7 include the notion of "C centre". This was first introduced based on electropalatographic contact patterns, but because they show no acoustic effect of this centre, it is now based on the temporal midpoint of the vowel. Although it might be possibe to compute this point from the acoustic signal, such a computation appears to be complex, involving some kind of counter. Also, there is variability in the temporal aignments shown in Figure 7. 
+
+Page 24, line 360
+"To the best of my knowledge,...
+The editorial policy of the Journal does not encourge claims of priority, since they are virtually impossible to verify.
+
+Footnote 3
+Again, I would suggest leaving out claims of priority.
+
+References
+
+Celata et al, 2018, is a poster. If it is not generally available, it should be left out.
+
+Fox, @003 - "Journal".
+
+Goldstein and Pouplier, 2014, please provide page numbers.
+
+Hajek and Stevens, 2008, plese provide more details.
+
+Halle and Stevens, 1967, is an abstract, thus not very useful, and should be left out.  A standard reference for these ideas is Halle, Morris and  Stevens, Kenneth (1971). A note on laryngeal features. MIT Quarterly Progress Report 101. 198–213. It does not appear to be available online, so if your library was not on the MIT distribution list, it may be hard to find.
+
+Hirsch, 2014, please provide more details.
+
+Keating, 1984, is available here: https://escholarship.org/uc/item/2497n8jq
+
+Lamp and Reklis, 2004, appears to be an abstract, thus not very useful, and should be left out.
+
+Lehiste, 1970a, appears to be an abstract, thus not very useful, and should be left out.
+
+Lehiste ,1970b, is available here: https://linguistics.osu.edu/sites/linguistics.osu.edu/files/workingpapers/osu_wpl_04.pdf. The doi is identical to Lehste 1970a, and thus incorrect. The full title is OSU Working Papers in Linguistics.
+
+Lindblom, 1967, is available here: http://www.speech.kth.se/prod/publications/files/qpsr/1967/1967_8_4_001-029.pdf
+
+Madieson and Gandour, 1976, is availabe here: https://escholarship.org/uc/item/31f5j8m7
+
+Malisz and Kiessa, 2008, please add details.
+
+Plug and Smit, 2018, is this generally available?
+
+Warren and Jacks, 2005, appears to be an abstract, thus not very useful, and should be left out.
+ 
+After having examined the reviews and your paper, I will have to conclude that it is not suitable for publication.
+If you have any questions about the reviews, please don't hesitate to contact me. Thank you for submitting your manuscript to the Journal,
+Sincerely,
+
+Anders Lofqvist
+Associate Editor
+
+cc.	Reviewers
+	JASA publication staff
+
+
+Reviewer #1.
+
+I believe this manuscript presents original work of good scientific quality.   Although the possible reasons of durational differences in vowels depending on the presence of voice in the following context have been discussed for many years already, none of the so-far proposed explanations have been widely accepted as sufficient and valid enough. The results presented in the manuscript shed some new light on the topic based on the results of an empirical study for Italian and Polish.   It should be borne in mind though, that the generalization of the conclusions is limited by the speech material design and sample size. The latter is especially important for the Polish data, as the number of speakers is lower than for Italian (6 persons vs. 11), and the accounts reported earlier in the literature showed that even the existence of the voicing effect might be questioned for this language. On the other hand, the present work provides new data-driven evidence delivered by Polish speakers coming from different regions of the country for whom the phenomenon has been systematically observed.
+
+In general, the manuscript is a well-structured and well-balanced presentation of the material. I would like to make several minor points though, please see the summary below.   In line 161, the carrier sentences used for elicitation of the target words are mentioned. The carrier sentences differ in meaning between Italian and Polish ('I speak X slowly' vs. 'I speak X now'). Could you please specify whether there was any particular reason for not using the same frame for both languages? I am also wondering whether the difference could possibly influence the pronunciation, especially, could the speaking rate of the utterances be affected by using the word 'slowly' in Italian?   Among the approaches used to account for the voicing effect is the so called "coupled oscillator model" which is mentioned in the manuscript along with the citations of the work by Goldstein and colleagues (line 341 and further). I would be interested to learn whether/how the author finds the relevance of other related studies such as those by Michael L. O’Dell & Tommi Nieminen or Plínio A. Barbosa for the present work.  Cf. for example:  O’Dell, M. L., & Nieminen, T. (2009). Coupled oscillator model for speech timing: Overview and examples. In Prosody: Proc. 10th conference, Helsinki, Finland (pp. 179-190).  Barbosa, P. A. (2001). Generating duration from a cognitively plausible model of rhythm production. In EUROSPEECH: Seventh European Conference on Speech Communication and Technology, Scandinavia.  Barbosa, P. A. (2002). Explaining cross-linguistic rhythmic variability via a coupled-oscillator model of rhythm production. In Speech Prosody 2002, International Conference, Aix-en-Provence.   As a whole, the manuscript is written in good English. Certain minor issues can still be found, so the paper needs proofreading. Examples:  lines 55-58: the sentence is not quite clear, could you please reformulate?  line 61: 'two consonant' - should be: 'two consonants'  Also, please check the notation of statistical abbreviations for consistence. For example, 'standard error' values are reported either with 'se' or 'SE' through the manuscript (e.g., lines 251, 252 vs. Table II. III, IV headers, respectively).  In case if APA citation and formatting style is to be used, then it should be 'SE'. Similarly, in such case standard deviation would be denoted by 'SD' rather than 'sd' In general, the manuscript is a well-structured and well-balanced presentation of the material. I would like to make several minor points though, please see the summary below.   In line 161, the carrier sentences used for elicitation of the target words are mentioned. The carrier sentences differ in meaning between Italian and Polish ('I speak X slowly' vs. 'I speak X now'). Could you please specify whether there was any particular reason for not using the same frame for both languages? I am also wondering whether the difference could possibly influence the pronunciation, especially, could the speaking rate of the utterances be affected by using the word 'slowly' in Italian?   Among the approaches used to account for the voicing effect is the so called "coupled oscillator model" which is mentioned in the manuscript along with the citations of the work by Goldstein and colleagues (line 341 and further). I would be interested to learn whether/how the author finds the relevance of other related studies such as those by Michael L. O’Dell & Tommi Nieminen or Plínio A. Barbosa for the present work.  Cf. for example:  O’Dell, M. L., & Nieminen, T. (2009). Coupled oscillator model for speech timing: Overview and examples. In Prosody: Proc. 10th conference, Helsinki, Finland (pp. 179-190).  Barbosa, P. A. (2001). Generating duration from a cognitively plausible model of rhythm production. In EUROSPEECH: Seventh European Conference on Speech Communication and Technology, Scandinavia.  Barbosa, P. A. (2002). Explaining cross-linguistic rhythmic variability via a coupled-oscillator model of rhythm production. In Speech Prosody 2002, International Conference, Aix-en-Provence.   As a whole, the manuscript is written in good English. Certain minor issues can still be found, so the paper needs proofreading. Examples:  lines 55-58: the sentence is not quite clear, could you please reformulate?  line 61: 'two consonant' - should be: 'two consonants'  Also, please check the notation of statistical abbreviations for consistence. For example, 'standard error' values are reported either with 'se' or 'SE' through the manuscript (e.g., lines 251, 252 vs. Table II. III, IV headers, respectively). In case if APA citation and formatting style is to be used, then it should be 'SE'. Similarly, in such case standard deviation would be denoted by 'SD' rather than 'sd'
+
+Figure 6 (page 22) illustrates a schematic representation of the voicing effect as a compensatory temporal adjustment phenomenon as related to the invariance release-to-release interval. In my opinion, it would be useful to add a "closure" label to the design. Since the closure duration is expected to be reflected in the vowel duration, I think the closure section should be explicitly marked in the figure.   Table II (page 29, Appendix) is not quite clear in my opinion. The 'term' column includes the predictor names if I get it right (?), so perhaps it would be more straightforward to use 'Predictor' as the column header. The labels used inside of this column may also be slightly misleading, because only the name 'Polish' is used in some rows and no label for Italian is found. It can be presumed that the items for Italian are used as default but I think the table would be better readable if the naming convention was consistent for both languages.
+
+
+Reviewer #2.
+
+The manuscript addresses a topic of considerable scientific interest, namely the problem of the dependency of the vowel length on the laryngeal activity of the following obstruent. It also contains several critical elements both in the methodology and in the interpretation of the results. In view of these aspects, my recommendation is to reject the publication of the manuscript.  The main weakness of the manuscript lies in its overly exploratory and preliminary nature. The author seems to have focused the analysis only on a very limited subset of observable facts within the object of investigation. This subset is not sufficient to test the hypothesis of compensatory adjustment (as the author is well aware, line 106) or, even less, to provide evidence to a novel mode of gestural alignment.   To be more precise, the limitation of the study can be observed in at least four respects, which therefore represent four major flaws in the analysis.  1) Extension and size of the voicing effect, 2) Release-to-release as a temporal unit, 3) Phonological voicing vs. Phonetic implementation of voicing, 4) Gestural account without articulatory dynamic information.  1) Extension and size of the voicing effect The experiment focuses on the variation of the duration of the first vowel in disyllabic pseudo-words CV.CV, with lexical accent on the first syllable, in Italian and Polish. The first consonant (C1) is a voiceless bilabial stop while the second consonant (C2) could be alveolar/velar voiced/voiceless stop. The first and the second vowel are identical and they could be /a, o, i/. Some of the variables that can affect the dependent variable in various ways are:   a) type of laryngeal activity,  b) class of the segment C2,  c) syllabic structure,  d) prosodic conditions.  1.a Italian and Polish use mainly voicing to signal laryngeal contrasts. It is not explained the reason behind the choice of these specific languages. It would have been interesting to include in the sample languages with a different implementation of laryngeal contrasts. For instance, Beckman, Jessen, & Ringen (2013) distinguishes two types of languages: aspirating vs. true voice languages. The former group can also be divided in two types of aspirating languages, i.e. those that allow passive voicing in intersonorant lenis stops (e.g. German and English) as opposed to those that do not allow any voicing (such as Icelandic or Mandarin Chinese).    1.b This is a crucial point. In order to test the extension of the voicing effects on vowel duration, other classes of segments, in addition to the stops, should have been considered. In particular, the rich set of affricates and fricatives of Polish and Italian would have offered a wider and more systematic picture of the variation of vocal length. This would also have made it possible to observe the differential voicing effect in relation to coarticulation forces (Farnetani & Recasens, 1993; Recasens, 1984), completely absent in the manuscript. In the case of Italian, basing on the results of Farnetani & Kori (1986), the author could have analysed the effect of geminate obstruents on vowel duration. Finally, another factor that affects the size of the effect is the quality of the target vowel. Limiting the contrast to three vowels does not allow to evaluate the role played by this variable. In the analysis, in fact, a minor effect produced by the voicing of the following consonant on the /u/ emerges, however, this result is not acknowledged in the discussion.   1.c No effects of syllable composition are tested in the study. To prove the temporal solidity of the Release-to-Release unit it would have been necessary to vary the syllable organization, e.g. onset and coda of the first syllable as well as onset of the second syllable. Polish offers also a variety of word-medial clusters to investigate the interconnection among (proposed) constant temporal units, number and type of segments preceding/following the VC sequence, presence or absence of syllable boundaries.  1.d Finally, the voicing effect differs according to stress and focus position in different languages (de Jong, 2004). However, in this study the variability related to the position of the lexical accent is not observed.  To sum up, I am not suggesting that all possible sources of variation should have been taken into account, but considering only the variability in the place of articulation (alveolar/velar) and in the vowel quality (/a,o,u/) represents a very limited perspective. The study as it is does not provide new data that enhance understanding of the possible causes of the voicing effect. In addition, it completely overlooks the most relevant factors in the explanation of the anticipatory coarticulation in VC sequences.  2) Release-to-release as a temporal unit The existence of constant rhythmic units such as V-to-V intervals (similar to Release-to-Release) have long been recognized at least for Italian (see again Farnetani & Kori 1986). A more recent typological study carried out by Mairano (2011) suggests that Italian has very reduced temporal fluctuations in the V-to-V intervals (a review is contained in Celata & Mairano, 2014). The issue here was not to establish the rhythmic-temporal stability of the Release-to-Release or V-to-V interval, but rather to use it as a starting point for understanding how the language-internal phonological forces give shape to various degrees of temporal compensation that are a function of a complex interweaving of segmental and prosodic factors.   3) Phonological voicing vs. Phonetic implementation of voicing The author decides to observe the effect of the phonological voicing instead of conducting a phonetic analysis, but this may be an incorrect choice since, as Docherty claims, "many aspects of the realization of voicing timing are not predictable from the nature of the voicing category" (Docherty, 1992: 129).  From a cursory and non-systematic observation of the original acoustic data provided by the author, it can be observed that there are undoubtedly cases of voiced/voiceless stops produced with varying degrees of voicing. At least one intermediate category of partial voicing should have been identified and included in the analysis, as in Davidson (2016). As a case in point see IT14, "dico putu lentamente" (at around 10.26 sec) where the closure phase of the "voiceless" stop is mostly voiced.  I would add here that taking a categorical approach to voicing and manner of articulation could have led to an underestimation of the phonetic variability of the data. Other examples along this line are the many cases of lenition of stops realized as voiced fricatives or approximants, in particular by the speakers of the varieties of central Italian and in contexts of velars between closed back vowels (e.g. in the first token of IT13 "dico pogo lentamente" the velar stop is clearly an approximant). The variety of Central Italian spoken by IT13 and IT14 seems to be characterized by a lenition process of stops in intervocalic contexts (Hualde and Nadeu, 2011). This geographical variability should have been taken into account when analysing the data and interpreting the results. Moreover, the author does not report the many cases of lack of bursts and releases because the realizations were not stops (in IT13 the tokens labelled as "undefined" are 35 out of 72!).  4) Gestural account without articulatory dynamic information The least convincing part of the manuscript is the one in which a gestural interpretation of right alignment is proposed to account for the voicing effect on the duration of the vowel. It is unconvincing mostly because the dynamic articulatory information of EGG and UTI that are available is not used. The combination of these two sources of information would make it possible to provide an account more based on empirical evidence that can eventually clarify the temporal coordination between laryngeal and lingual activity. The arguments as well as the empirical evidence provided do not allow to identify a necessary relation between the presence of a stable temporal unit (in this case Release-to-Release) and a strategy according to which the production of the second consonant is always relative to the first vowel, used therefore as temporal reference.  Beckman, J., Jessen, M., and Ringen, C. (2013). Empirical evidence for laryngeal features: Aspirating vs. true voice languages1. J. Linguist. 49, 259-284. Celata, C., and Mairano, P. (2014). On the timing of V-to-V intervals in Italian: a review, and some new hypotheses. Rev. Filol. Románica 31, 37-53. Davidson, L. (2016). Variability in the implementation of voicing in American English obstruents. J. Phon. 54, 35-50. Docherty, G.J. (1992). The Timing of Voicing in British English Obstruents (Berlin, Boston: De Gruyter Mouton). Farnetani, E., and Kori, S. (1986). Effects of syllable and word structure on segmental durations in spoken Italian. Speech Commun. 5, 17-34. Farnetani, E., and Recasens, D. (1993). Anticipatory consonant-to-vowel coarticulation in the production of VCV sequences in Italian. Lang. Speech 36 ( Pt 2-3), 279-302. Hualde, J.I., and Nadeu, M. (2011). Lenition and Phonemic Overlap in Rome Italian. Phonetica 68, 215-242. de Jong, K. (2004). Stress, lexical focus, and segmental focus in English: patterns of variation in vowel duration. J. Phon. 32, 493-516. Mairano, P. (2011). Rhythm Typology: Acoustic and Perceptive Studies. PhD Dissertation. Università degli studi di Torino. Recasens, D. (1984). Vowel-to-vowel coarticulation in Catalan VCV sequences. J. Acoust. Soc. Am. 76, 1624-1635.
+
+
+Reviewer's Responses to Questions
+
+Is the manuscript of good scientific quality, free from errors, misconceptions or ambiguities; does it present original work; and does it contain sufficient new results, new applications or new developments of reasonable enough significance to warrant its publication in JASA? Please indicate in your report (in detailed comments, below) any points which are objectionable or which need attention. 
+
+Reviewer #1: I believe this manuscript presents original work of good scientific quality.
+
+Although the possible reasons of durational differences in vowels depending on the presence of voice in the following context have been discussed for many years already, none of the so-far proposed explanations have been widely accepted as sufficient and valid enough. The results presented in the manuscript shed some new light on the topic based on the results of an empirical study for Italian and Polish. 
+
+It should be borne in mind though, that the generalization of the conclusions is limited by the speech material design and sample size. The latter is especially important for the Polish data, as the number of speakers is lower than for Italian (6 persons vs. 11), and the accounts reported earlier in the literature showed that even the existence of the voicing effect might be questioned for this language. On the other hand, the present work provides new data-driven evidence delivered by Polish speakers coming from different regions of the country for whom the phenomenon has been systematically observed.
+
+Reviewer #2: The manuscript addresses a topic of considerable scientific interest, namely the problem of the dependency of the vowel length on the laryngeal activity of the following obstruent. It also contains several critical elements both in the methodology and in the interpretation of the results. In view of these aspects, my recommendation is to reject the publication of the manuscript. 
+The main weakness of the manuscript lies in its overly exploratory and preliminary nature. The author seems to have focused the analysis only on a very limited subset of observable facts within the object of investigation. This subset is not sufficient to test the hypothesis of compensatory adjustment (as the author is well aware, line 106) or, even less, to provide evidence to a novel mode of gestural alignment.
+
+--------------------
+
+Is JASA an appropriate journal in which to present this work? In this regard, please consider carefully the commitment of JASA to publish work that is within the scope of Acoustics. Does the content of the manuscript, including terminology and the references cited, meet this criterion?
+
+Reviewer #1: Yes. The focus of the manuscript is on the relationships between vowel duration and consonant voicing from an acoustic perspective (the study material comes from a database including also articulatory data but for the purpose of the present submission, only the acoustic evidence is investigated).
+
+Reviewer #2: The object of study analysed in the manuscript is fully within the scope of JASA's research. Also in this respect, the manuscript is adequate in terms of scientific terminology and references cited.
+
+--------------------
+
+Is the manuscript a clear, concise, reasonably self-contained presentation of the material, giving adequate references to related work? Is the English satisfactory? Please indicate needed changes in your report.
+
+Reviewer #1: In general, the manuscript is a well-structured and well-balanced presentation of the material. I would like to make several minor points though, please see the summary below.
+
+In line 161, the carrier sentences used for elicitation of the target words are mentioned. The carrier sentences differ in meaning between Italian and Polish ('I speak X slowly' vs. 'I speak X now'). Could you please specify whether there was any particular reason for not using the same frame for both languages? I am also wondering whether the difference could possibly influence the pronunciation, especially, could the speaking rate of the utterances be affected by using the word 'slowly' in Italian?
+
+Among the approaches used to account for the voicing effect is the so called "coupled oscillator model" which is mentioned in the manuscript along with the citations of the work by Goldstein and colleagues (line 341 and further). I would be interested to learn whether/how the author finds the relevance of other related studies such as those by Michael L. O’Dell & Tommi Nieminen or Plínio A. Barbosa for the present work. 
+Cf. for example:
+O’Dell, M. L., & Nieminen, T. (2009). Coupled oscillator model for speech timing: Overview and examples. In Prosody: Proc. 10th conference, Helsinki, Finland (pp. 179-190).
+Barbosa, P. A. (2001). Generating duration from a cognitively plausible model of rhythm production. In EUROSPEECH: Seventh European Conference on Speech Communication and Technology, Scandinavia.
+Barbosa, P. A. (2002). Explaining cross-linguistic rhythmic variability via a coupled-oscillator model of rhythm production. In Speech Prosody 2002, International Conference, Aix-en-Provence.
+
+As a whole, the manuscript is written in good English. Certain minor issues can still be found, so the paper needs proofreading. Examples:
+lines 55-58: the sentence is not quite clear, could you please reformulate?
+line 61: 'two consonant' - should be: 'two consonants'
+Also, please check the notation of statistical abbreviations for consistence. For example, 'standard error' values are reported either with 'se' or 'SE'  through the manuscript (e.g., lines 251, 252 vs. Table II. III, IV headers, respectively). 
+In case if APA citation and formatting style is to be used, then it should be 'SE'. Similarly, in such case standard deviation  would be denoted by 'SD' rather than 'sd'.
+
+Reviewer #2: From a formal and stylistic point of view, the manuscript is written in a very clear way, it is well structured and the presentation of the materials is self-contained. The reconstruction of the state of the art appears partial (unbalanced towards the compensatory temporal adjustment as an explanation for the voicing effect)  and similarly, the research framework of articulatory phonology is not extensively described.
+
+--------------------
+
+Are the tables and figures clear and relevant, and are the captions adequate? Are there either too many or too few? If any of the figures are in color, is the color essential for conveying the scientific point?
+
+Reviewer #1: The figures and tables are relevant, and adequately described in most cases. I have two technical comments: 
+
+Figure 6 (page 22) illustrates a schematic representation of the voicing effect as a compensatory temporal adjustment phenomenon as related to the invariance release-to-release interval. In my opinion, it would be useful to add a "closure" label to the design. Since the closure duration is expected to be reflected in the vowel duration, I think the closure section should be explicitly marked in the figure. 
+
+Table II (page 29, Appendix) is not quite clear in my opinion. The 'term' column includes the predictor names if I get it right (?), so perhaps it would be more straightforward to use 'Predictor' as the column header. The labels used inside of this column may also  be slightly misleading, because only the name 'Polish' is used in some rows and no label for Italian is found. It can be presumed that the items for Italian are used as default but I think the table would be better readable if the naming convention was consistent for both languages.
+
+Reviewer #2: The tables and graphs, and related captions, are all clear, self-explanatory and relevant to the text's argumentation. The only note is that in Fig. 3 the y-axis label is probably "Closure duration (ms)" and not "Vowel duration (ms)".
+
+--------------------
+
+If Supplementary material was submitted, is it relevant to the manuscript and should it be deposited in the Supplemental Depository for reference to the manuscript? 
+
+Reviewer #1: N/A
+
+Reviewer #2: Additional material submitted by the author consists of the dataset, the original audio files and the related Praat textgrids, as well as the codes used in R to perform the analysis. This material has proved very useful to evaluate the analysis and to reveal some of its problematic aspects.
+
+--------------------
+
+Does the paper make effective use of journal space, or are parts unnecessary, unimportant, or subject to condensation? If so, which?
+
+Reviewer #1: Yes. In my opinion, the contents and the structure of the paper are well planned for the effective use of journal space.
+
+Reviewer #2: Since I do not consider the manuscript to be suitable for publication in JASA, I do not think it is relevant to answer this question.
+
+--------------------
+
+Is the title appropriate and the abstract adequate for verbatim reproduction in abstract journals? IMPORTANT: The lead paragraph should advertise the main points of the article and must describe in terms accessible to the general reader the context and significance or the research problem studied and the importance of the results.
+
+Reviewer #1: Yes.
+
+Reviewer #2: Consider the answer given to the previous question
+
+__________________________________________________
+In compliance with data protection regulations, please contact the publication office if you would like to have your personal information removed from the database.
