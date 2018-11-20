@@ -45,7 +45,7 @@ directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
 result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
-header$ = "index,speaker,file,rec_date,word,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
+header$ = "index,speaker,file,rec_date,word,time,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
 
 writeFileLine: result_file$, header$
 
@@ -76,48 +76,64 @@ for interval to intervals
         # v_duration = (end_vowel - start_vowel) * 1000
         # v2_duration = (end_target - end_consonant2) * 1000
         sentence_interval = Get interval at time: 3, word_onset
+        sentence$ = Get label of interval: 3, sentence_interval
         sentence_onset = Get start time of interval: 3, sentence_interval
-        sentence_offset = Get end time of interval: 3, sentence_interval
-        # sentence_duration = end_sentence - start_sentence
 
-        selectObject: bursts
-        burst_interval = Get nearest index from time: 1, c2_onset
-        release = Get time of point: 1, burst_interval
-        if release < c2_onset or release > sentence_offset
-            release = undefined
+        if sentence$ <> ""
+          sentence_offset = Get end time of interval: 3, sentence_interval
+          # sentence_duration = end_sentence - start_sentence
+
+          selectObject: bursts
+          burst_interval = Get nearest index from time: 1, c2_onset
+          release = Get time of point: 1, burst_interval
+          if release < c2_onset or release > sentence_offset
+              release = undefined
+          endif
+
+          # closure = (burst - end_vowel) * 1000
+          # rvot = (end_consonant2 - burst) * 1000
+          # consonant_duration = closure + rvot
+
+          selectObject: release_c1_textgrid
+          release_c1_point = Get nearest index from time: 1, v1_onset
+          release_c1 = Get time of point: 1, release_c1_point
+          if release_c1 < word_onset or release_c1 > sentence_offset
+              release_c1 = undefined
+          endif
+
+          # c1_duration = (start_vowel - start_target) * 1000
+          # c1_closure = (release_c1 - start_target) * 1000
+          # c1_rvot = (start_vowel - release_c1) * 1000
+          # c1_rvofft = (end_vowel - release_c1) * 1000
+
+          selectObject: fileNames
+          fileName = Get interval at time: 1, v1_onset
+          fileName$ = Get label of interval: 1, fileName
+          file_start = Get start time of interval: 1, fileName
+
+          # Get times relative to the start of the individual audio chunk file
+          word_onset = word_onset - file_start
+          word_offset = word_offset - file_start
+          v1_onset = v1_onset - file_start
+          c2_onset = c2_onset - file_start
+          v2_onset = v2_onset - file_start
+          c1_rel = release_c1 - file_start
+          c2_rel = release - file_start
+          time = sentence_onset
+          sentence_onset = sentence_onset - file_start
+          sentence_offset = sentence_offset - file_start
+        else
+          word_onset = undefined
+          word_offset = undefined
+          v1_onset = undefined
+          c2_onset = undefined
+          v2_onset = undefined
+          c1_rel = undefined
+          c2_rel = undefined
+          time = sentence_onset
+          sentence_onset = undefined
+          sentence_offset = undefined
         endif
-
-        # closure = (burst - end_vowel) * 1000
-        # rvot = (end_consonant2 - burst) * 1000
-        # consonant_duration = closure + rvot
-
-        selectObject: release_c1_textgrid
-        release_c1_point = Get nearest index from time: 1, v1_onset
-        release_c1 = Get time of point: 1, release_c1_point
-        if release_c1 < word_onset or release_c1 > sentence_offset
-            release_c1 = undefined
-        endif
-
-        # c1_duration = (start_vowel - start_target) * 1000
-        # c1_closure = (release_c1 - start_target) * 1000
-        # c1_rvot = (start_vowel - release_c1) * 1000
-        # c1_rvofft = (end_vowel - release_c1) * 1000
-
-        selectObject: fileNames
-        fileName = Get interval at time: 1, v1_onset
-        fileName$ = Get label of interval: 1, fileName
-        file_start = Get start time of interval: 1, fileName
-
-        # Get times relative to the start of the individual audio chunk file
-        word_onset = word_onset - file_start
-        word_offset = word_offset - file_start
-        v1_onset = v1_onset - file_start
-        c2_onset = c2_onset - file_start
-        v2_onset = v2_onset - file_start
-        c1_rel = release_c1 - file_start
-        c2_rel = release - file_start
-        sentence_onset = sentence_onset - file_start
-        sentence_offset = sentence_offset - file_start
 
         # rel_rel = (burst - release_c1) * 1000
 
@@ -125,6 +141,7 @@ for interval to intervals
         rec_date$ = Get string: 2
 
         result_line$ = "'index','speaker$','fileName$','rec_date$','word$',
+          ...'time',
           ...'sentence_onset','sentence_offset','word_onset','word_offset',
           ...'v1_onset','c2_onset','v2_onset','c1_rel','c2_rel'"
 
