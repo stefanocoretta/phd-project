@@ -221,7 +221,7 @@ Participants read the list of randomised sentence stimuli 6 times.
 Due to software constraints, the order of the list was kept the same across the six repetitions within each participant.
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
 The total experiment time lasted around 45 minutes.
-Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times, and IT07, with whom words containing /u/ were not recorded due to technical difficulties relating to ultrasound data collection), which yields to a grand total of 1224 tokens (792 from Italian, 432 from Polish).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
+Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times), which yields to a grand total of 1212 tokens (792 from Italian, 420 from Polish).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
 
 The experiment was carried out in two locations: in the sound attenuated booth of the Phonetics Laboratory at the University of Manchester, and in a quiet room in a field location in Italy (Verbania, Northern Italy).
 In both locations the equipment and procedures were the same.
@@ -246,8 +246,14 @@ consonant release & (C1/C2 release)         & Automatic detection + manual corre
 
 The audio recordings were exported from AAA in the `.wav` format at the same sample and bit rate for further processing.
 A forced aligned transcription was accomplished through the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
-The outcome of the automatic annotation was manually corrected, according to the criteria in \Cref{t:dur-measures}.
+The outcome of the automatic annotation was manually corrected, according to the criteria in \Cref{t:dur-measures}, for the relevant boundaries (boundaries not used in the analyses have been left unchanged).
 The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014, and subsequently corrected if necessary.
+The identification of the stop release was not possible in 99 tokens (8%) of C1 and 265 tokens (22\%) of C2 out of 1212.
+This was due either to the absence of a clear burst in the waveform and spectrogram, or the realisation of voiced stops as voiced fricatives
+Most of the fricativised tokens come from the three speakers of Central Italian, IT12, IT13, and IT14, a variety of Italian known to show this phenomenon \citealt{hualde2011}.
+Moreover IT12 and IT14 produced several tokens of voiceless stops with voicing during closure (in some cases the closure is completely voiced).
+These tokens have been kept in the analysis, because (1) the actual presence or absence of voicing during closure does not bear on the compensatory account discussed here (which concerns supraglottal gestures) and laryngeal gestures can be implemented almost entirely independently from oral gestures, and (2) the voicing effect has been shown to exist even in whispered speech, where vocal fold vibration is entirely absent [@sharf1964].
+
 The durations in milliseconds of the following intervals were extracted with Praat scripting from the annotated acoustic landmarks: word duration, vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 release), and Release to Release duration (C1 release to C2 release).
 Sentence duration was measured in seconds.
 \Cref{f:segmentation} shows an example of the segmentation of /pata/ (a) and /pada/ (b) from an Italian speaker.
@@ -292,8 +298,8 @@ The interpretation of the Bayes factors follows the recommendations in @raftery1
 
 The extracted measurements were filtered before statistical analysis.
 Measures of vowel duration, closure duration, word duration, and Release to Release duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset (this procedure generally corresponds to a loss of around 2.5\% of the data).
-Two sentences included speech errors or mistakes and have been excluded.
-These operations yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of Release to Release duration.
+One sentence (sentence 48 of IT07, *Dico pada lentamente*) included a speech error and has been excluded.
+Further excluding missing measurements, these operations yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of Release to Release duration.
 
 While the study has been devised to compare Italian and Polish, the low number of Polish speaker (6, especially compared with the number of Italian speakers 11), makes statistical comparison difficult (see \citealt{kirby2018} and references therein for a discussion on statistical power).
 The raw mean differences, presented in conjunction with the estimates from statistical modelling, can still inform us on the cross-linguistic differences and thus they will contribute to the discussion of the results.
@@ -617,6 +623,7 @@ The generalisations put forward in this paper strictly apply to disyllabic words
 It is possible that the organisation pattern found in this context does not occur in sequences including an unstressed vowel.
 For example, it is known that the difference in closure duration between voiceless and voiced stops is not stable when the stops precede a stressed vowel, although vowels preceding pre-stress stops have slightly different durations [@davis1989].
 According to the gestural interpretation given here, the absence of differences in closure duration should correspond to no difference in vowel duration.
+Moreover, the magnitude of the effect is modulated by prosodic characteristics, like the number of syllables in the word, presence/absence of focus, and position within the sentence [@sharf1962, @klatt1973, @laeufer1992, @de-jong2004].
 Data from different contexts and different languages is thus needed to assess the generality of the claims put forward in this paper.
 
 The constraints on experimental material enforced by the use of ultrasound tongue imaging have been previously mentioned in \Cref{s:materials}.
@@ -686,6 +693,7 @@ IT04 & 54 & Female & Italian & Calabrese                                 & Verba
 IT05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
 IT09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
 IT11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
+IT12 & 26 & Male   & Italian & English                                   & Rome               & Rome           & Yes \NN
 IT13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN
 IT14 & 32 & Male & Italian & English, Spanish & Frosinone & Frosinone & Yes \NN
 PL02 & 32 & Female & Polish  & English, Norwegian, French, German, Dutch & Koło                & Poznań          & Yes \NN
