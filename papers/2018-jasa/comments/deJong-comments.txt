@@ -1,0 +1,49 @@
+Hi Stefano,
+
+Thanks for sending along the ms.  This is an interesting read, and a good start on part of the temporal modulation problem.  I’ve made lots of comments along the way, as I was reading it, and I’m attaching them below.  I think there are a couple of big suggestions at this juncture, I guess I would highlight.  The first part I’m thinking about concerns the degree to which you are conceiving of this study as being about a synchronic model or about something with a more diachronic aspect to it.  I.e., the word cause could either be ‘diachronic seed’ or it could be some model-internal contract about individual production patterns.  These are very different in their scope and the type of argumentation you’d need to do.  The diachronic account particularly fits in with my strong impression that the durational lengthening is very different in size and how it interacts with different tasks in different languages.  One thing you lose track of in the ms is the contrast in your data between Polish & Italian, which I think might be the most interesting part of a paper with the scope of this one.  
+
+I’m actually off at a conference right now, so I don’t have access to various mss.  However it strikes me that we have quite a bit of temporally-constrained data in a syllable repetition task reported in two studies from 2001.  I’ll try to track down copies of these once I get back home.  One is in JSLHR, and the other (I think) is a language & speech article.  (Crazy that I can’t remember what journal we sent it to …)
+
+Anyway, let me know if you have further questions, and keep me posted.
+
+Ken
+
+— comments —
+
+Abstract.   Be clear whether you’re talking diachronic source, or synchronic.  I.e., many people use the idea of ‘source’ in a model-internal way, assigning the effect as a fall-out of something else.  
+
+At end, note that ‘right’ and ‘left’ are probably better noted as ‘final’, ‘initial’ and so on.  
+
+The obvious question which pops up here is how the constant ‘phasing’ is actually done.  Phasing in gestural accounts requires tracking internal to the gestures.  I could have the wrong players here, but it seems to me that this could get pretty complex.  
+
+P. 1.  Starting w/ Lindblom, 67 is a good move.  You should be sure to talk about Lindblom ’83 and then Lindblom ’91 concerning the partial nature of the compensation.  
+
+PP 1 - 5 lay out the problem pretty well, vis-a-vis a broader range of laryngeal contrasts than is typical.  It seems to me that you should highlight the concept of gestural segregation more clearly.  What these types all have in common is that they are laryngeally-related airstream contrasts.  Thus, they can have temporal independence of the oral articulators.  
+
+P. 6.  Why Italian & Polish?  How is this pertinent to the question at hand.  In this regard, you should note earlier that the size of the effect varies a lot by language.  This is important to situate the choice as crucial to what the paper is trying to do. Also, I notice that you don’t do anything with the language differences (or lack thereof) in the paper, which means that the language specificity question gets lost.  I think this is a crucial factor to work through, as it probably relates to a larger model of phonologization.  
+
+P. 6.  Does Polish reported to have laryngeal neutralization, like Russian?
+
+P. 7.  There’ a topological problem with the paper.  It should be stated in terms of hypothetical tests, rather than just trying to work backwards from the results you found.  
+
+l. 151.  Where is stress intended?  I missed it.  
+
+Statistical analysis.  I’m not at all sure why this is ‘exploratory’ rather than Hypothesis testing.  You’ve a balanced design and a specific hypothesis.  So … this doesn’t seem to be the right approach.  Using Elmer modeling is alway a bit dicey when talking of exactly what the model is doing, so having confirmation with more straightforward statistics (or just doing the traditional analysis) is generally better in my estimation.  (I know people don’t agree with me on this, but yet there’s merit in the conservative approach.).  
+
+One particular question I have about the way these models are constructed is whether they support the sort of reasoning in repeated measures analyses, in which the particular reasoning the analyses address concerns the question of how consistent the effect is across subjects.  When subject gets treated as a random effect, giving everyone their own offsets, I’m not sure how this addresses the question of whether the effect interacts with subject such that you can’t say with any certainty that the individuals are consistent in the effect.  There’s probably some discussion of this in the literature, but I’m to at all sure what the outcome of this discussion is.  
+
+P. 15, note that the Polish effect is proportionally larger than the Italian effect, as the Italian vowels are much (much) longer.  Also, somewhere there should be commentary as to what is up with Italian /u/.  Two studies find the same weird effect.  
+
+Around l. 256, as there is a rate effect, and the language effect goes away, you probably need to say something about whether there’s a correlation of rate & language, and be really clear about how you indexed rate, and what this did to the language differences.  
+
+Section C (l. 268 ff).  Somewhere with respect to this section, you need to be clear about whether the duration of the consonant and the duration of the vowel share a measurement point.  Note that if they do, this will generate a spurious correlation, as any noise in the measurement will be negatively correlated for the two interval measures.  
+
+Frankly, I’ve no idea what to do with the ‘Bayes factor’.  This is pretty clearly implementing some sort of model d.f. penalty which counts strongly against adding factors.  I don’t know the literature well enough to critique this technique, but I have done enough model building to know that these penalty functions are subject to a lot criticism.  It’s not particularly a good idea to build an argument on the sole basis of this sort of test, especially without exploring why it is that the you can have incomplete compensation between the vowel & the consonant, and this causes you to end up with no effect on the longer interval anyway.  You should be able to find what happened to that interval that was taken from the vowel duration and not added to the closure duration.  Otherwise, I’m not really convinced that this negative effect isn’t just due to noise, and the vagaries of the statistical technique.  
+
+l. 325.  Be very careful about using the word ‘invariance’, because it conjures up a very large literature on the related concept of a one-to-one mapping between a phonological entity and a physical value.  Here, your only point is not that rel2rel doesn’t vary, but that you didn’t detect any effect of the vowel duration effect on the larger interval.  
+
+l.334.  Note here that your use of the term ‘gestural timing’ may not be what’s generally taken to be meant by this.  Gestural timing seems to me to be connected to the coordination literature and means something like ‘gestural phasing’.  However, we know that the voicing effect is strongly connected not just to gestural rephrasing, but also to gestural velocity profile, such that the durational stretching of the vowel is localized more heavily in the latter portions of the vowel.  Um … I guess you’d call this a stiffness effect, but I would assume that you will get dragged into these details when looking at the dynamics of the ultrasound data.  
+
+Fig. 6 doesn’t seem to say very much about the actual timing mechanisms involved (or posited).  You have the reflexes of gestures (the hills) floating about so that there’s no way of determining the overall timing relative to the next upcoming hill.  
+
+l. 356 and thereabouts.  This discussion reminds me of the same sort of issue with the compensatory account in general, and that is that compensatory mechanisms are never quite compensatory at this level of coordination.  I.e., it is not the case that the overall timing pattern is not affected by having more or less consonants in a cluster.  If you have more consonants, their durational signature generally doesn’t get absorbed by the neighboring segments, and so there’s a long-term effect.  I’m not sure what Pouplier et al say about this at this juncture, but this sort of finding is pretty pervasive,  as there have been many studies of temporal patterning of segment sequences.  
