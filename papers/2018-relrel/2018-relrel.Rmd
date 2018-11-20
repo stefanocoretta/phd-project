@@ -106,14 +106,14 @@ However, the compensatory temporal adjustment account has been criticised in sub
 
 Empirical evidence and logic challenge the proposal that the syllable or the word have a constant duration and hence drive compensation.
 First, Lindblom's \citeyear{lindblom1967} argument that the duration of the syllable is constant is not supported by the findings in @chen1970 and @jacewicz2009.
-@chen1970 rejects a syllable-based compensatory account on the light of the fact that the duration of the syllable is affected by consonant voicing.
+@chen1970 rejects a syllable-based compensatory account in the light of the fact that the duration of the syllable is affected by consonant voicing.
 @jacewicz2009 further show that the duration of monosyllabic words in American English changes depending on the voicing of the coda consonant.
 Second, although the results in @slis1969 suggest that the duration of disyllabic words in Dutch is constant whether the second stop is voiceless or voiced, it does not follow from this fact that compensation should necessarily target the vowel preceding the stop.
 Indeed, it is logically possible that the following unstressed vowel could be the target of the compensation, therefore differences in preceding vowel duration still call for an explanation.
 
 The compensatory temporal adjustment account has been further challenged on the basis of the so called 'aspiration effect' [@maddieson1976], by which vowels are longer when followed by aspirated stops than when followed by unaspirated stops.
 In Hindi, vowels before voiceless unaspirated stops are the shortest, followed by vowels before voiced unaspirated and voiceless aspirated stops, which have similar duration, followed by vowels before voiced aspirated stops, which are the longest.
-@maddieson1976 find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonant are different.
+@maddieson1976 find no compensatory pattern between vowel and consonant duration: the consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonants are different.
 @maddieson1976 argue that a compensatory explanation for differences in vowel duration cannot be maintained.
 
 However, a re-evaluation of the way consonant duration is measured in @maddieson1976 might actually turn their findings in favour of a compensatory account.
@@ -147,20 +147,24 @@ In conclusion, while the compensatory temporal adjustment account is plausible o
 
 This paper reports on selected results from a broader exploratory study that investigates the relationship between vowel duration and consonant voicing from both an acoustic and articulatory perspective.
 Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.\footnote{As per \citet{cysouw2013}, the glossonyms \textit{Italian} and \textit{Polish} as used here to refer, respectively, to the languoids Italian [\textsc{Glottocode}: \texttt{ital1282}] and Polish [\textsc{Glottocode}: \texttt{poli1260}].}
-Given its exploratory nature, this study was not devised to test the compensatory account, but rather to collect articulatory and acoustic data on the voicing effect.\footnote{To the best of my knowledge, this is the first attempt to gather synchronised acoustic, tongue imaging and electroglottographic data in relation to the voicing effect.}
+Given its exploratory nature, this study was not devised to test the compensatory account, but rather to collect articulatory and acoustic data on the voicing effect.
 Moreover, the design of the study has been constrained by the use of such articulatory techniques (see \Cref{s:method}).
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
-Italian and Polish reportedly differ in the magnitude of the effect of stop voicing on vowel duration.
-<!-- add more references -->
+Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration, while they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).
+\footnote{The distinction between voicing and aspirating varieties of Polish discussed in @cyran2011 is based on phonological considerations rather than empirical data on VOT duration.
+% Cite Waniek 2011
+}
+For this reason, these two language offer the opportunity to investigate differences that could reveal mechanisms underlying the voicing effect.
+Moreover, given that Italian and Polish share---on a general level---some features of the segmental and prosodic make-up of their phonological systems, the design of the experimental material and comparison of the results is facilitated.
+
 Italian has been unanimously reported as a voicing-effect language [@caldognetto1979; @farnetani1986; @esposito2002].
-The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms, with longer vowels followed by voiced consonants.\footnote{The mean differences are based on 3 speakers in \citealt{farnetani1986} and 7 speakers in \citealt{esposito2002}. \citealt{caldognetto1979} does not report estimates of vowel duration, but the study is based on 10 speakers.}
+The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms in these studies, with longer vowels followed by voiced consonants. The mean differences are based on 3 speakers in \citealt{farnetani1986} and 7 speakers in \citealt{esposito2002}. \citealt{caldognetto1979} does not report estimates of vowel duration, just the direction of the effect, but the study is based on 10 speakers.
 On the other hand, the results regarding the presence and magnitude of the effect in Polish are mixed.
 While @keating1984 reports no effect of voicing on vowel duration in data from 24 speakers, @nowak2006 finds that vowels followed by voiced stops are 4.5 ms longer in the 4 speakers recorded.
-Moreover, @malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim their results are inconclusive on this matter.
-<!-- Comparing Italian and Polish could reveal differences in the implementation of voicing, which could in turn indicate a possible source for the voicing effect. -->
+@malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim their results are inconclusive on this matter.
 
-The acoustic data from the exploratory study discussed here confirms the existence of a voicing effect in Italian and Polish, and suggests that the duration of the interval between two consecutive stop releases (the Release to Release interval) is not affected by the voicing of the second consonant in both languages.
+The acoustic data from the exploratory study discussed here suggests the existence of a voicing effect both in Italian and Polish, and that the duration of the interval between two consecutive stop releases (the Release to Release interval) is not affected by the voicing of the second consonant in both languages.
 This finding is compatible with a compensatory temporal adjustment account by which the timing of the stop closure onset within said interval determines the respective durations of vowel and closure.
 I further propose that the constant duration of the Release to Release interval is congruent with current views on gestural timing [@goldstein2014] and I discuss the insights such an account provides in relation to our understanding of the gestural organisation of speech.
 
@@ -169,7 +173,11 @@ I further propose that the constant duration of the Release to Release interval 
 
 ## Participants
 
-Seventeen subjects in total participated in this exploratory study.
+For this exploratory study, we set a target of 10 speakers per language.
+The stopping rule was to reach 10 speakers in both languages or to end data collection within 15 months from the start, due to resource and time limits.
+Participants were sought in Manchester, UK, and in Verbania, Italy.
+<!-- Recruitment proved to be difficult, and among potential participants, several decided not to participate after considering the experimental task too demanding. -->
+Seventeen subjects in total participated in this study.
 Eleven subjects are native speakers of Italian (5 female, 6 male), while six are native speakers of Polish (3 female, 3 male).
 The Italian speakers are from the North and Centre of Italy (8 speakers from Northern Italy, 3 from Central Italy).
 The Polish group has 2 speakers from Western Poland, 3 speakers from Central Poland, and 1 speaker from Eastern Poland.
@@ -199,8 +207,11 @@ For this reason, only central and back vowels were included.
 Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
 
-The target words were embedded in a frame sentence, *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish, and presented according to the respective writing conventions.
-These sentences were chosen in order to keep the placement of stress and emphasis similar across languages.
+The target words were embedded in a frame sentence.
+Controlling for meaning, segmental and prosodic make-up betweeen languages proved to be difficult.
+The frames are *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish, and presented according to the respective writing conventions.
+These sentences were chosen in order to keep the placement of focus similar across languages (on the target word).
+Possible influences of the semantic content of the frame sentence on duration estimates will be discussed in \Cref{s:discussion}
 
 ## Procedure
 
@@ -255,6 +266,7 @@ All further data processing and visualisation was done in R v3.5.0 [@r-core-team
 ## Statistical analysis
 
 <!-- add power analysis? -->
+<!-- NEED TO CITE KIRBY -->
 
 Given the data-driven nature of the study, all statistical analyses reported here are to be considered exploratory (hypothesis-generating) rather than confirmatory (hypothesis-driven) [@kerr1998; @gelman2013; @roettger2018].
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-17 in R [@bates2015], and model estimates were extracted with the `effects` package v4.0-2 [@fox2003].
@@ -276,11 +288,15 @@ BF_{01} \approx exp(\Delta{}BIC_{10}/2)
 
 where $\Delta{}BIC_{10} = BIC_1 - BIC_0$, $BIC_1$ is the BIC of the full model, and $BIC_0$ is the BIC of the null model.
 Values of $BF_{01} > 1$ indicate a preference of H\textsubscript{0} over H\textsubscript{1}.
-The interpretation of the Bayes factors follows the recommendations in @raftery1995 [p. 139].
+The interpretation of the Bayes factors follows the recommendations in @raftery1995 [p. 139]: 1--3 weak, 3--20 positive, 20--150 strong, > 150 very strong evidence.
 
 The extracted measurements were filtered before statistical analysis.
-Measures of vowel duration, closure duration, word duration, and Release to Release duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset.
-This operation (which generally corresponds to a loss of around 2.5\% of the data) yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of Release to Release duration.
+Measures of vowel duration, closure duration, word duration, and Release to Release duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset (this procedure generally corresponds to a loss of around 2.5\% of the data).
+Two sentences included speech errors or mistakes and have been excluded.
+These operations yields a total of 920 tokens of vowel and closure durations, 1176 tokens of word duration, and 848 tokens of Release to Release duration.
+
+While the study has been devised to compare Italian and Polish, the low number of Polish speaker (6, especially compared with the number of Italian speakers 11), makes statistical comparison difficult (see \citealt{kirby2018} and references therein for a discussion on statistical power).
+The raw mean differences, presented in conjunction with the estimates from statistical modelling, can still inform us on the cross-linguistic differences and thus they will contribute to the discussion of the results.
 
 ## Reproducibility statement
 
@@ -360,7 +376,7 @@ durations_filtered %>%
   geom_boxplot(alpha = 0.5) +
   geom_jitter(alpha = 0.1, width = 0.2) +
   facet_grid(language ~ vowel) +
-  labs(x = "C2 voicing", y = "Vowel duration (ms)")
+  labs(x = "C2 voicing", y = "C2 closure duration (ms)")
 ```
 
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and individual raw data points.
@@ -389,7 +405,7 @@ vow_clo_lm <- lmer(
 summary(vow_clo_lm)
 ```
 
-```{r Figure4, include=TRUE, fig.cap = "Raw data and estimated regression lines of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95% confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
   ggplot(aes(closure_duration, fit)) +
   geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
@@ -515,6 +531,7 @@ The analyses of the durational data suggest that:
 \end{enumerate}
 
 # Discussion
+\label{s:discussion}
 
 The data and statistical analyses of this exploratory study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the Release to Release interval) is insensitive to the phonological voicing of the second consonant (C2) in Italian and Polish.
 In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration before voiceless vs. voiced stops can be seen as the outcome of differences in stop closure duration.
