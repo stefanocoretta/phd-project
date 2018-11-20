@@ -174,6 +174,9 @@ I further propose that the constant duration of the Release to Release interval 
 ## Participants
 
 For this exploratory study, we set a target of 10 speakers per language.
+\footnote{
+This low number was chosen to keep the time necessary in processing the ultrasonic data, which requires longer times then what is common in acoustic studies, at a reasonable level.
+}
 The stopping rule was to reach 10 speakers in both languages or to end data collection within 15 months from the start, due to resource and time limits.
 Participants were sought in Manchester, UK, and in Verbania, Italy.
 <!-- Recruitment proved to be difficult, and among potential participants, several decided not to participate after considering the experimental task too demanding. -->
@@ -206,6 +209,10 @@ Front vowels are difficult to image with UTI, since their articulation involves 
 For this reason, only central and back vowels were included.
 Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
+The number of target words was kept low to reduce the time required for completing the task.
+\footnote{
+The ultrasonic equipment usually gets uncomfortable when wore for more than 20 minutes.
+}
 
 The target words were embedded in a frame sentence.
 Controlling for meaning, segmental and prosodic make-up betweeen languages proved to be difficult.
