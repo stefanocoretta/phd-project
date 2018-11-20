@@ -832,6 +832,10 @@ for interval to intervals
           time = sentence_onset
           sentence_onset = undefined
           sentence_offset = undefined
+
+          selectObject: fileNames
+          fileName = Get interval at time: 1, time
+          fileName$ = Get label of interval: 1, fileName
         endif
 
         # rel_rel = (burst - release_c1) * 1000
