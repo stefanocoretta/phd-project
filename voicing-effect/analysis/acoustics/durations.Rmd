@@ -12,6 +12,16 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
 library(effects)
+library(coretta2018itapol)
+data("token_measures")
+
+token_data <- token_measures %>%
+  filter(c1_phonation == "voiceless") %>%
+  mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor)
+
+scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
+scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 ```
 
 # Data import
@@ -824,3 +834,26 @@ summary(rel_clos_lm)
 ```
 
 The estimate for Release to Closure is very similar to that of Closure duration (about 15.5 msec).
+
+# Vowel to Vowel interval
+
+```{r vv}
+token_data %>%
+  ggplot(aes(v_v)) + geom_density() + geom_rug()
+```
+
+```{r vv-lang}
+token_data %>%
+  ggplot(aes(v_v)) + geom_density() + geom_rug() + facet_grid(~ language)
+```
+
+```{r vv-lang, warning=FALSE}
+token_data %>%
+  ggplot(aes(v_v, fill = c2_phonation)) +
+  geom_density(alpha = 0.7, size = 0) + geom_rug() + facet_grid(language ~ .) +
+  scale_fill_discrete(name = "C2 voicing") +
+  labs(
+    title = "Density plot of the V-to-V interval",
+    x = "V to V duration (V1 onset to V2 onset)"
+  )
+```
