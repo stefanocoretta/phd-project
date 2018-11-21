@@ -15,15 +15,15 @@ library(coretta2018itapol)
 data("token_measures")
 
 token_measures <- token_measures %>%
-  filter(c1_phonation == "voiceless") %>%
+  filter(c1_phonation == "voiceless", file != "it07-048") %>%
   mutate(
-    syl_rate_c = syl_rate - mean(syl_rate),
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
-  )
+  ) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 ```{r}
-get_prior(vowel_duration ~ c2_phonation * language + vowel + c2_phonation:vowel + syl_rate_c + (1|speaker) + (1|item), data = token_measures)
+get_prior(v1_duration ~ c2_phonation * language + vowel + c2_phonation:vowel + speech_rate_c + (1|speaker) + (1|item), data = token_measures)
 ```
 
 
