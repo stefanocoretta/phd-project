@@ -316,10 +316,10 @@ A linear mixed-effects model with vowel duration as the outcome variable was fit
 All possible interactions between C2 voicing, vowel, and language were included.
 The following terms are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom: C2 voicing, vowel, language, and speech rate.
 Only the interaction between C2 voicing and vowel is significant.
-Vowels are 19 ms longer (SE = 4.4) when followed by a voiced stop (C2 voicing).
-The effect of C2 voicing is smaller with /u/ (around 5 ms, $\hat{\beta}$ = -14.4 ms, SE = 6).
-Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -28 ms, SE = 8), and the effect of voicing is estimated to be about 11 ms (although note that the interaction between language and C2 voicing is not significant).
-Speech rate has a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -15 ms, SE = 1).
+Vowels are 16.28 ms longer (SE = 4.42) when followed by a voiced stop (C2 voicing).
+The effect of C2 voicing is smaller with /u/ (around 3 ms, $\hat{\beta}$ = -13.1 ms, SE = 5.56).
+Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -24.05 ms, SE = 7.83), and the effect of voicing is estimated to be about 10.55 ms (although note that the interaction between language and C2 voicing is not significant).
+Speech rate has a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -16.23 ms, SE = 1.26).
 
 ## Consonant closure duration
 \label{s:cduration}
