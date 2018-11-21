@@ -308,7 +308,7 @@ durations_filtered %>%
 Vowel tend to be longer when followed by a voiced stop in both languages.
 The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
 There is no evident effect of C2 voicing in /u/ in Italian (as in \citealt{ferrero1978}), but the effect is discernible in Polish /u/.
-In Italian, vowels have a mean duration of 106 ms (SD = 27) before voiceless stops, and a mean duration of 118 ms (SD = 33) before voiced stops.
+In Italian, vowels have a mean duration of 106 ms (SD = 27) before voiceless stops, and a mean duration of 118 ms (SD = 35) before voiced stops.
 Polish vowels are on average 75 ms long (SD = 16) when followed by a voiceless stop, and 83 ms long (SD = 19) if a voiced stop follows.
 The difference in vowel duration based on the raw means is 12 ms in Italian and 8 ms in Polish.
 
@@ -350,9 +350,9 @@ durations_filtered %>%
 
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and individual raw data points.
 A pattern opposite to that with vowel duration can be noticed: closure duration is shorter for voiced than for voiceless stops.
-The closure of voiceless stops in Italian is 77 ms long (SD = 20), while the voiced stops have a mean closure duration of 63 ms (SD = 15).
-In Polish, the closure duration is 69 ms (SD = 12) in voiceless stops and 58 ms (SD = 13) in voiced stops.
-The difference in closure duration based on the raw means is 14 ms in Italian and 11 ms in Polish.
+The closure of voiceless stops in Italian is 77 ms long (SD = 21), while the voiced stops have a mean closure duration of 64 ms (SD = 15).
+In Polish, the closure duration is 69 ms (SD = 13) in voiceless stops and 58 ms (SD = 13) in voiced stops.
+The difference in closure duration based on the raw means is 13 ms in Italian and 11 ms in Polish.
 The same model specification as with vowel duration has been fitted with consonant closure duration as the outcome variable.
 C2 voicing, C2 place, and speech rate are significant.
 Stop closure is 16.5 ms shorter (SE = 3) if the stop is voiced and 3.5 ms longer (SE = 1.5) if velar.
@@ -503,6 +503,12 @@ The analyses of the durational data suggest that:
 
 # Discussion
 \label{s:discussion}
+
+## Voicing effect in Italian and Polish
+
+
+
+## Compensatory temporal adjustment
 
 The data and statistical analyses of this exploratory study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the Release to Release interval) is insensitive to the phonological voicing of the second consonant (C2) in Italian and Polish.
 In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration before voiceless vs. voiced stops can be seen as the outcome of differences in stop closure duration.
