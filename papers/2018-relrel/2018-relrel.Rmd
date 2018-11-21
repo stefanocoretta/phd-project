@@ -93,6 +93,9 @@ rel_filtered <- durations %>%
 Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones (\citealt{meyer1904}; \citealt{heffner1937}; \citealt{house1953}; \citealt{belasco1953}; \citealt{peterson1960}; \citealt{halle1967}; \citealt{chen1970}; \citealt{klatt1973}; \citealt{lisker1974}; \citealt{laeufer1992}; \citealt{fowler1992}; \citealt{hussein1994}; \citealt{lampp2004}; \citealt{warren2005}; \citealt{durvasula2012}).
 This so called 'voicing effect' has been found in a considerable variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
+\footnote{
+Here, I take 'source' as a general term without any particular theoretical commitment to whether it should be intended as a strictly synchronic or diachronic cause.
+}
 
 Several proposals have been put forward in relation to the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{begus2017} for an overview).
 The majority of the proposed accounts place the source of the voicing effect in properties of speech production.\footnote{Two accounts that posit a perceptual cause are \citet{javkin1976} and \citet{kluender1988}. To the best of my knowledge, Javkin's (1976) proposal remains to be empirically tested, while see \citet{fowler1992} for arguments against \citet{kluender1988}.}
@@ -328,12 +331,12 @@ To avoid the visual cluttering of parameters tables and alleviate the burden of 
 
 ```{r vow-lm}
 vow_lm <- lmer(
-  vowel_duration ~
+  v1_duration ~
     c2_phonation *
     vowel *
     language +
     c2_place +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered
@@ -342,7 +345,7 @@ vow_lm <- lmer(
 
 ```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
-  ggplot(aes(c2_phonation, vowel_duration)) +
+  ggplot(aes(c2_phonation, v1_duration)) +
   geom_boxplot(alpha = 0.5) +
   geom_jitter(alpha = 0.1, width = 0.2) +
   facet_grid(language ~ vowel) +
@@ -371,12 +374,12 @@ Speech rate has a negative effect on vowel duration, such that faster rates corr
 
 ```{r clo-lm}
 clo_lm <- lmer(
-  closure_duration ~
+  c2_clos_duration ~
     c2_phonation *
     vowel *
     language +
     c2_place +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered
@@ -563,8 +566,10 @@ The invariance of the Release to Release interval allows us to refine the logist
 A limitation of this account, as proposed by @slis1969 and @lehiste1970, is the lack of a precise identification of the word-internal mechanics of compensation.
 As already discussed in \Cref{s:intro}, it is not clear, for example, why the adjustment should target the preceding stressed vowel, rather then the following unstressed vowel or any other segment in the word.
 Since the Release to Release interval includes just the vowel (broadly defined as a vocoid gesture) and the consonant closure, it follows that differences in closure duration must be reflected in differences in the duration of the preceding vowel.
+It is worth noting, though, that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out (for example, perceptual factor might play a role in the enhancement of the effect, see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}).
 
 On the one hand, the voicing effect can be re-interpreted as a by-product of gestural timing, rather then a consequence of intrinsic features of voicing *per se*, with a constant Release to Release interval as the explanans.
+
 On the other hand, the Release to Release invariance is in turn an explanandum.
 In the following section, I offer a gestural organisation account that allows the invariance of such interval to follow from the relative timing of the articulatory gestures in a CV́C sequence.
 
@@ -645,11 +650,10 @@ In light of the results in @begus2017, future studies will have to investigate t
 
 # Conclusions
 
-The results of an exploratory study on the effect of voicing on vowel duration bring support for a compensatory temporal adjustment account of such effect.
+The results of an exploratory study on the effect of voicing on vowel duration are congruent with a compensatory temporal adjustment account of such effect.
 Acoustic data from seventeen speakers of Italian and Polish show that the temporal distance between two consecutive stop releases is not affected by the voicing of the second stop in CV́CV words.
 The temporal invariance of the Release to Release interval, together with a difference in stop closure duration of voiceless and voiced stops, causes vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
 I proposed that the Release to Release invariance is a consequence of the gestural organisation of the CV́C sequence, in which the lag between the right-edge of the second consonant and the preceding stressed vowel is fixed.
-
 
 \begin{acknowledgments}
 I am grateful to Dr. Ricardo Bermúdez-Otero and Dr. Patrycja Strycharczuk for their immense support and patience in providing feedback on this project.
