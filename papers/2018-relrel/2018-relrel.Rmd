@@ -1,23 +1,31 @@
 ---
 title: "An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish"
+author: "Stefano Coretta"
 output:
   pdf_document:
     citation_package: natbib
     fig_caption: yes
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
 bibliography: linguistics.bib
+biblio-style: unified.bst
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
 - \usepackage[caption=false]{subfig}
 - \usepackage{enumerate}
+- \usepackage{lineno}
+- \linenumbers
 mainfont: "Charis SIL"
+fontsize: 12pt
 params:
   version: 1.0
   version-date: "2018/11/20"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.lp = "f:", fig.process = function(x) {
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.lp = "f:", fig.process = function(x) {
   x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
   if (file.rename(x, x2)) x2 else x
 })
@@ -32,57 +40,7 @@ library(knitr)
 ```
 
 ```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
-speakers <- read_csv("./datasets/speakers.csv")
-stimuli <- read_csv("./datasets/stimuli.csv")
-
-durations <- list.files(
-  path = "./datasets",
-  pattern = "*-durations.csv",
-  full.names = TRUE
-) %>%
-  map_df(~read_csv(., na = "--undefined--")) %>%
-  left_join(y = speakers) %>%
-  left_join(y = stimuli) %>%
-  mutate_if(is.character, as.factor) %>%
-  mutate(
-    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
-    language = recode(language, italian = "Italian", polish = "Polish"),
-    syl_rate = ifelse(
-      language == "Italian",
-      8 / sentence_duration,
-      6 / sentence_duration
-    )
-  ) %>%
-  filter(c1_phonation == "voiceless")
-
-durations_filtered <- durations %>%
-  group_by(speaker) %>%
-  mutate(
-    vowel_duration_z = scale(vowel_duration),
-    closure_duration_z = scale(closure_duration)
-  ) %>%
-  filter(
-    vowel_duration_z < 3, vowel_duration_z > -3,
-    closure_duration_z < 3, closure_duration_z > -3
-  )
-
-word_filtered <- durations %>%
-    group_by(speaker) %>%
-  mutate(
-    word_duration_z = scale(word_duration)
-  ) %>%
-  filter(
-    word_duration_z < 3, word_duration_z > -3
-  )
-
-rel_filtered <- durations %>%
-    group_by(speaker) %>%
-  mutate(
-    rel_rel_z = scale(rel_rel)
-  ) %>%
-  filter(
-    rel_rel_z < 3, rel_rel_z > -3
-  )
+load("./data/duration_data.Rdata")
 ```
 
 # Introduction
@@ -92,9 +50,7 @@ rel_filtered <- durations %>%
 
 Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones (\citealt{meyer1904}; \citealt{heffner1937}; \citealt{house1953}; \citealt{belasco1953}; \citealt{peterson1960}; \citealt{halle1967}; \citealt{chen1970}; \citealt{klatt1973}; \citealt{lisker1974}; \citealt{laeufer1992}; \citealt{fowler1992}; \citealt{hussein1994}; \citealt{lampp2004}; \citealt{warren2005}; \citealt{durvasula2012}).
 This so called 'voicing effect' has been found in a considerable variety of languages, including (but not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).
-Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
-\footnote{
-Here, I take 'source' as a general term without any particular theoretical commitment to whether it should be intended as a strictly synchronic or diachronic cause.
+Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.\footnote{Here, I take 'source' as a general term without any particular theoretical commitment to whether it should be intended as a strictly synchronic or diachronic cause.
 }
 
 Several proposals have been put forward in relation to the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{begus2017} for an overview).
@@ -154,8 +110,7 @@ Given its exploratory nature, this study was not devised to test the compensator
 Moreover, the design of the study has been constrained by the use of such articulatory techniques (see \Cref{s:method}).
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
-Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration, while they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).
-\footnote{The distinction between voicing and aspirating varieties of Polish discussed in @cyran2011 is based on phonological considerations rather than empirical data on VOT duration.
+Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration, while they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).\footnote{The distinction between voicing and aspirating varieties of Polish discussed in @cyran2011 is based on phonological considerations rather than empirical data on VOT duration.
 % Cite Waniek 2011
 }
 For this reason, these two language offer the opportunity to investigate differences that could reveal mechanisms underlying the voicing effect.
@@ -176,9 +131,7 @@ I further propose that the constant duration of the Release to Release interval 
 
 ## Participants
 
-For this exploratory study, we set a target of 10 speakers per language.
-\footnote{
-This low number was chosen to keep the time necessary in processing the ultrasonic data, which requires longer times then what is common in acoustic studies, at a reasonable level.
+For this exploratory study, we set a target of 10 speakers per language.\footnote{A low target number of participants was chosen since processing of ultrasound data takes longer than standard acoustic analysis.
 }
 The stopping rule was to reach 10 speakers in both languages or to end data collection within 15 months from the start, due to resource and time limits.
 Participants were sought in Manchester, UK, and in Verbania, Italy.
@@ -212,16 +165,14 @@ Front vowels are difficult to image with UTI, since their articulation involves 
 For this reason, only central and back vowels were included.
 Since one of the variables of interest in the exploratory study was the closing gesture of C\textsubscript{2}, only lingual consonants were used.
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel (although see \citealt{vazquez-alvarez2007}).
-The number of target words was kept low to reduce the time required for completing the task.
-\footnote{
-The ultrasonic equipment usually gets uncomfortable when wore for more than 20 minutes.
+The number of target words was kept low to reduce the time required for completing the task.\footnote{The ultrasonic equipment usually gets uncomfortable when wore for more than 20 minutes.
 }
 
 The target words were embedded in a frame sentence.
 Controlling for meaning, segmental and prosodic make-up betweeen languages proved to be difficult.
 The frames are *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish, and presented according to the respective writing conventions.
 These sentences were chosen in order to keep the placement of focus similar across languages (on the target word).
-Possible influences of the semantic content of the frame sentence on duration estimates will be discussed in \Cref{s:discussion}
+Possible influences of the semantic content of the frame sentence on duration estimates will be discussed in \Cref{s:discussion}.
 
 ## Procedure
 
@@ -270,14 +221,14 @@ Sentence duration was measured in seconds.
 Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018], and was calculated as the number of syllables divided by the duration of the sentence in seconds (8 syllables in Italian, 6 in Polish).
 All further data processing and visualisation was done in R v3.5.0 [@r-core-team2018; @wickham2017].
 
-\begin{figure*}
-  \figline{
-    \fig{img/Figure1a.pdf}{0.5\textwidth}{(a)}
-    \fig{img/Figure1b.pdf}{0.5\textwidth}{(b)}
-  }
-  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by an Italian speaker.}
-  \label{f:segmentation}
-\end{figure*}
+<!-- \begin{figure*} -->
+<!--   \figline{ -->
+<!--     \fig{img/Figure1a.pdf}{0.5\textwidth}{(a)} -->
+<!--     \fig{img/Figure1b.pdf}{0.5\textwidth}{(b)} -->
+<!--   } -->
+<!--   \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by an Italian speaker.} -->
+<!--   \label{f:segmentation} -->
+<!-- \end{figure*} -->
 
 ## Statistical analysis
 
@@ -294,7 +245,7 @@ A result is considered significant if the *p*-value is below the alpha level ($\
 
 Bayes factors were used to specifically test the null hypotheses that word and Release to Release duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
 For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using the Maximum Likelihood estimation (ML) [@bates2015, p. 34].
-The BIC approximation was then used to obtain Bayes factors [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
+The Bayes Information Criterion (BIC) approximation was then used to obtain Bayes factors [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
 The approximation is calculated according to the equation in \ref{eq:bayes} [@wagenmakers2007, p. 796].
 
 \begin{equation}
@@ -304,7 +255,7 @@ BF_{01} \approx exp(\Delta{}BIC_{10}/2)
 
 where $\Delta{}BIC_{10} = BIC_1 - BIC_0$, $BIC_1$ is the BIC of the full model, and $BIC_0$ is the BIC of the null model.
 Values of $BF_{01} > 1$ indicate a preference of H\textsubscript{0} over H\textsubscript{1}.
-The interpretation of the Bayes factors follows the recommendations in @raftery1995 [p. 139]: 1--3 weak, 3--20 positive, 20--150 strong, > 150 very strong evidence.
+The interpretation of the Bayes factors follows the recommendations in @raftery1995 [p. 139]: 1--3 = weak evidence, 3--20 = positive evidence, 20--150 = strong evidence, > 150 = very strong evidence.
 
 The extracted measurements were filtered before statistical analysis.
 Measures of vowel duration, closure duration, word duration, and Release to Release duration that are 3 standard deviations lower or higher than the respective means were excluded from the final dataset (this procedure generally corresponds to a loss of around 2.5\% of the data).
@@ -329,7 +280,7 @@ To avoid the visual cluttering of parameters tables and alleviate the burden of 
 ## Vowel duration
 \label{s:vduration}
 
-```{r vow-lm}
+```{r vow-lm, include=FALSE}
 vow_lm <- lmer(
   v1_duration ~
     c2_phonation *
@@ -341,6 +292,7 @@ vow_lm <- lmer(
     (1|item),
   data = durations_filtered
 )
+summary(vow_lm)
 ```
 
 ```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
@@ -356,23 +308,23 @@ durations_filtered %>%
 Vowel tend to be longer when followed by a voiced stop in both languages.
 The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
 There is no evident effect of C2 voicing in /u/ in Italian (as in \citealt{ferrero1978}), but the effect is discernible in Polish /u/.
-In Italian, vowels have a mean duration of 106 ms (sd = 27) before voiceless stops, and a mean duration of 118 ms (sd = 33) before voiced stops.
-Polish vowels are on average 75 ms long (sd = 16) when followed by a voiceless stop, and 83 ms long (sd = 19) if a voiced stop follows.
+In Italian, vowels have a mean duration of 106 ms (SD = 27) before voiceless stops, and a mean duration of 118 ms (SD = 33) before voiced stops.
+Polish vowels are on average 75 ms long (SD = 16) when followed by a voiceless stop, and 83 ms long (SD = 19) if a voiced stop follows.
 The difference in vowel duration based on the raw means is 12 ms in Italian and 8 ms in Polish.
 
 A linear mixed-effects model with vowel duration as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), C2 place of articulation (coronal, velar), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercepts with by-speaker random slopes for C2 voicing.
 All possible interactions between C2 voicing, vowel, and language were included.
 The following terms are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom: C2 voicing, vowel, language, and speech rate.
 Only the interaction between C2 voicing and vowel is significant.
-Vowels are 19 ms longer (se = 4.4) when followed by a voiced stop (C2 voicing).
-The effect of C2 voicing is smaller with /u/ (around 5 ms, $\hat{\beta}$ = -14.4 ms, se = 6).
-Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -28 ms, se = 8), and the effect of voicing is estimated to be about 11 ms (although note that the interaction between language and C2 voicing is not significant).
-Speech rate has a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -15 ms, se = 1).
+Vowels are 19 ms longer (SE = 4.4) when followed by a voiced stop (C2 voicing).
+The effect of C2 voicing is smaller with /u/ (around 5 ms, $\hat{\beta}$ = -14.4 ms, SE = 6).
+Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -28 ms, SE = 8), and the effect of voicing is estimated to be about 11 ms (although note that the interaction between language and C2 voicing is not significant).
+Speech rate has a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -15 ms, SE = 1).
 
 ## Consonant closure duration
 \label{s:cduration}
 
-```{r clo-lm}
+```{r clo-lm, include=FALSE}
 clo_lm <- lmer(
   c2_clos_duration ~
     c2_phonation *
@@ -384,11 +336,12 @@ clo_lm <- lmer(
     (1|item),
   data = durations_filtered
 )
+summary(clo_lm)
 ```
 
 ```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
-  ggplot(aes(c2_phonation, closure_duration)) +
+  ggplot(aes(c2_phonation, c2_clos_duration)) +
   geom_boxplot(alpha = 0.5) +
   geom_jitter(alpha = 0.1, width = 0.2) +
   facet_grid(language ~ vowel) +
@@ -397,44 +350,46 @@ durations_filtered %>%
 
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and individual raw data points.
 A pattern opposite to that with vowel duration can be noticed: closure duration is shorter for voiced than for voiceless stops.
-The closure of voiceless stops in Italian is 77 ms long (sd = 20), while the voiced stops have a mean closure duration of 63 ms (sd = 15).
-In Polish, the closure duration is 69 ms (sd = 12) in voiceless stops and 58 ms (sd = 13) in voiced stops.
+The closure of voiceless stops in Italian is 77 ms long (SD = 20), while the voiced stops have a mean closure duration of 63 ms (SD = 15).
+In Polish, the closure duration is 69 ms (SD = 12) in voiceless stops and 58 ms (SD = 13) in voiced stops.
 The difference in closure duration based on the raw means is 14 ms in Italian and 11 ms in Polish.
 The same model specification as with vowel duration has been fitted with consonant closure duration as the outcome variable.
 C2 voicing, C2 place, and speech rate are significant.
-Stop closure is 16.5 ms shorter (se = 3) if the stop is voiced and 3.5 ms longer (se = 1.5) if velar.
-Finally, faster speech rates correlate with shorter closure durations ($\hat{\beta}$ = -8.5 ms, se = 1 ms).
+Stop closure is 16.5 ms shorter (SE = 3) if the stop is voiced and 3.5 ms longer (SE = 1.5) if velar.
+Finally, faster speech rates correlate with shorter closure durations ($\hat{\beta}$ = -8.5 ms, SE = 1 ms).
 
 ## Vowel and closure duration
 \label{s:vcduration}
 
 ```{r vow-clo-lm, include=FALSE}
 vow_clo_lm <- lmer(
-  vowel_duration ~
-    closure_duration *
-    vowel +
-    syl_rate +
-    (1+closure_duration|speaker) +
+  v1_duration ~
+    c2_clos_duration *
+    vowel *
+    speech_rate_c +
+    (1|speaker) +
     (1|item),
   data = durations_filtered
 )
 summary(vow_clo_lm)
 ```
 
-```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95% confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
-as_tibble(effect("closure_duration:vowel", vow_clo_lm)) %>%
-  ggplot(aes(closure_duration, fit)) +
-  geom_point(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
+```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+as_tibble(effect("c2_clos_duration:vowel:speech_rate_c", vow_clo_lm)) %>%
+  filter(speech_rate_c == -3e-04) %>%
+  ggplot(aes(c2_clos_duration, fit)) +
+  geom_point(data = durations_filtered, aes(y = v1_duration), alpha = 0.1) +
   geom_line() +
   geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
-  geom_rug(data = durations_filtered, aes(y = vowel_duration), alpha = 0.1) +
+  geom_rug(data = durations_filtered, aes(y = v1_duration), alpha = 0.1) +
   facet_grid(~ vowel) +
+  coord_fixed() +
   labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")
 ```
 
 A model addressing the relationship between vowel and stop closure duration was fitted with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate; an interaction between closure duration and vowel; by-speaker and by-word random intercepts, and by-speaker random slopes for C2 voicing.
-Closure duration has a significant effect on vowel duration ($\hat{\beta}$ = -0.15 ms, se = 0.06 ms).
-The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.35 ms, se = 0.06 ms).
+Closure duration has a significant effect on vowel duration ($\hat{\beta}$ = -0.15 ms, SE = 0.06 ms).
+The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.35 ms, SE = 0.06 ms).
 In general, closure duration is inversely proportional to vowel duration.
 However, such correlation is quite weak, as shown by the small estimates.
 A 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
@@ -449,7 +404,7 @@ word_lm <- lme4::lmer(
     vowel +
     c2_place +
     language +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
@@ -462,7 +417,7 @@ word_lm_null <- lme4::lmer(
     vowel +
     c2_place +
     language +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
@@ -471,15 +426,15 @@ word_lm_null <- lme4::lmer(
 
 word_bf <- round(exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
-Words with a voiceless C2 are on average 397 ms long (sd = 81) in Italian and 356 ms long (sd = 39) in Polish.
-Words with a voiced stop have a mean duration of 396 ms (sd = 72) in Italian and 362 ms (sd = 39) in Polish.
+Words with a voiceless C2 are on average 397 ms long (SD = 81) in Italian and 356 ms long (SD = 39) in Polish.
+Words with a voiced stop have a mean duration of 396 ms (SD = 72) in Italian and 362 ms (SD = 39) in Polish.
 The following full and null models were fitted to test the effect of C2 voicing on word duration.
 The full model is made up of the following fixed effects: C2 voicing, C2 place, vowel, language, and speech rate.
 The model also includes by-speaker and by-word random intercepts, and a by-speaker random slope for C2 voicing.
 The null model is the same as the full model with the exclusion of the fixed effect of C2 voicing.
 The Bayes factor of the null against the full model is `r word_bf`.
 Thus, the null model (in which there is no effect of C2 voicing, $\beta$ = 0) is `r word_bf` times more likely under the observed data than the full model.
-This indicates that there is strong evidence for a null effect of C2 voicing on word duration.
+This indicates that there is positive evidence for a null effect of C2 voicing on word duration.
 
 ## Release to Release interval duration
 
@@ -500,7 +455,7 @@ rr_lm <- lme4::lmer(
     vowel +
     c2_place +
     language +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
@@ -513,7 +468,7 @@ rr_lm_null <- lme4::lmer(
     vowel +
     c2_place +
     language +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   data = durations_filtered,
@@ -525,11 +480,11 @@ rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
 
 In \Cref{f:Figure5}, boxplots and raw data points show the duration of the Release to Release interval in words with a voiceless vs. a voiced C2 stop, in Italian and Polish.
 It can be seen that the distributions, medians, and quartiles of the durations in the voiceless and voiced condition do not differ much in either language.
-In Italian, the mean duration of the Release to Release interval is 210 ms (sd = 44) if C2 is voiceless, and 209 ms (sd = 41) if voiced.
-In Polish, the mean durations are respectively 173 (sd = 22) and 172 (sd = 21) ms.
+In Italian, the mean duration of the Release to Release interval is 210 ms (SD = 44) if C2 is voiceless, and 209 ms (SD = 41) if voiced.
+In Polish, the mean durations are respectively 173 (SD = 22) and 172 (SD = 21) ms.
 The specifications of the null and full models for the Release to Release duration are the same as for word duration.
 The Bayes factor of the null model against the full model is `r rr_bf`, which means that the null model (without C2 voicing) is `r rr_bf` times more likely than the model with C2 voicing as a predictor.
-The Bayes factor suggests there is positive evidence that duration of the Release to Release interval is not affected by C2 voicing.
+The Bayes factor suggests there is strong evidence that duration of the Release to Release interval is not affected by C2 voicing.
 
 ## Summary
 
@@ -540,8 +495,8 @@ The durations of the vowel, stop closure, word, and Release to Release interval 
 The analyses of the durational data suggest that:
 
 \begin{enumerate}[(a)]
-  \item Stressed vowels in C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V words in Italian and Polish are 19 ms longer (se = 4.4) when C2 is voiced.
-  \item C2 closure is 16.5 ms shorter (se = 3) if the stop is voiced.
+  \item Stressed vowels in C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V words in Italian and Polish are 19 ms longer (SE = 4.4) when C2 is voiced.
+  \item C2 closure is 16.5 ms shorter (SE = 3) if the stop is voiced.
   \item V1 duration negatively correlates with closure duration, such that shorter closures correspond to longer vowels.
   \item Both word duration and Release to Release duration are not affected by the underlying voicing specification of C2.
 \end{enumerate}
@@ -568,7 +523,7 @@ As already discussed in \Cref{s:intro}, it is not clear, for example, why the ad
 Since the Release to Release interval includes just the vowel (broadly defined as a vocoid gesture) and the consonant closure, it follows that differences in closure duration must be reflected in differences in the duration of the preceding vowel.
 It is worth noting, though, that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out (for example, perceptual factor might play a role in the enhancement of the effect, see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}).
 
-On the one hand, the voicing effect can be re-interpreted as a by-product of gestural timing, rather then a consequence of intrinsic features of voicing *per se*, with a constant Release to Release interval as the explanans.
+On the one hand, the voicing effect can be re-interpreted as a by-product of gestural timing, rather then a consequence of intrinsic features of voicing *per SE*, with a constant Release to Release interval as the explanans.
 
 On the other hand, the Release to Release invariance is in turn an explanandum.
 In the following section, I offer a gestural organisation account that allows the invariance of such interval to follow from the relative timing of the articulatory gestures in a CV́C sequence.
@@ -635,7 +590,7 @@ The generalisations put forward in this paper strictly apply to disyllabic words
 It is possible that the organisation pattern found in this context does not occur in sequences including an unstressed vowel.
 For example, it is known that the difference in closure duration between voiceless and voiced stops is not stable when the stops precede a stressed vowel, although vowels preceding pre-stress stops have slightly different durations [@davis1989].
 According to the gestural interpretation given here, the absence of differences in closure duration should correspond to no difference in vowel duration.
-Moreover, the magnitude of the effect is modulated by prosodic characteristics, like the number of syllables in the word, presence/absence of focus, and position within the sentence [@sharf1962, @klatt1973, @laeufer1992, @de-jong2004].
+Moreover, the magnitude of the effect is modulated by prosodic characteristics, like the number of syllables in the word, presence/absence of focus, and position within the sentence [@sharf1962; @klatt1973; @laeufer1992; @de-jong2004].
 Data from different contexts and different languages is thus needed to assess the generality of the claims put forward in this paper.
 
 The constraints on experimental material enforced by the use of ultrasound tongue imaging have been previously mentioned in \Cref{s:materials}.
@@ -655,13 +610,14 @@ Acoustic data from seventeen speakers of Italian and Polish show that the tempor
 The temporal invariance of the Release to Release interval, together with a difference in stop closure duration of voiceless and voiced stops, causes vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
 I proposed that the Release to Release invariance is a consequence of the gestural organisation of the CV́C sequence, in which the lag between the right-edge of the second consonant and the preceding stressed vowel is fixed.
 
-\begin{acknowledgments}
+# Acknowledgements
+
 I am grateful to Dr. Ricardo Bermúdez-Otero and Dr. Patrycja Strycharczuk for their immense support and patience in providing feedback on this project.
 I also want to thank the audience at the 16th Laboratory Phonology conference (LabPhon16) for their invaluable input.
 Thanks also go to my colleagues at the Phonetics Laboratory of the University of Manchester, who provided help in different ways.
 Any remaining errors are my own.
 This project has been funded by the School of Arts, Languages, and Cultures Graduate School at the University of Manchester.
-\end{acknowledgments}
+
 
 \appendix
 
@@ -671,15 +627,15 @@ This project has been funded by the School of Arts, Languages, and Cultures Grad
 See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and \Cref{tab:vow-clo-table}.
 
 ```{r vow-table}
-kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Syl. rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(term, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration}).")
+kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration}).")
 ```
 
 ```{r clo-table}
-kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Syl. rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(term, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration}).")
+kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration}).")
 ```
 
 ```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Syl. rate", "C2 closure, /o/", "C2 closure, /u/")) %>% rename(Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(term, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration with closure duration as predictor (see \\Cref{s:vcduration}).")
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration with closure duration as predictor (see \\Cref{s:vcduration}).")
 ```
 
 # Socio-linguistic information of participants
@@ -720,7 +676,7 @@ PL07 & 32 & Female & Polish  & English, Russian                          & Biels
 
 See \Cref{t:targets}.
 
-\ctable[caption = Target words. An asterisk indicates a real words.,
+\ctable[caption = Target words. Asterisks indicate real words.,
 label = t:targets,
 star,
 doinside = \footnotesize
