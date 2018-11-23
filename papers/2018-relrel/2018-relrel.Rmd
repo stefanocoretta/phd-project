@@ -13,10 +13,10 @@ biblio-style: unified.bst
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
-- \usepackage[caption=false]{subfig}
 - \usepackage{enumerate}
 - \usepackage{lineno}
 - \linenumbers
+- \usepackage{subcaption}
 mainfont: "Charis SIL"
 fontsize: 12pt
 params:
@@ -41,6 +41,9 @@ library(knitr)
 
 ```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
 load("./data/duration_data.Rdata")
+round_2 <- function(...) {
+  round(..., digits = 2)
+}
 ```
 
 # Introduction
@@ -207,7 +210,8 @@ consonant release & (C1/C2 release)         & Automatic detection + manual corre
 
 The audio recordings were exported from AAA in the `.wav` format at the same sample and bit rate for further processing.
 A forced aligned transcription was accomplished through the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
-The outcome of the automatic annotation was manually corrected, according to the criteria in \Cref{t:dur-measures}, for the relevant boundaries (boundaries not used in the analyses have been left unchanged).
+The outcome of the automatic annotation was manually corrected for the relevant boundaries, according to the criteria in \Cref{t:dur-measures} based on @machac2009.
+Segmentation boundaries not used in the analyses have not been checked to speed up processing.
 The releases of C1 and C2 were detected automatically by means of a Praat scripting implementation of the algorithm described in @ananthapadmanabha2014, and subsequently corrected if necessary.
 The identification of the stop release was not possible in 99 tokens (8%) of C1 and 265 tokens (22\%) of C2 out of 1212.
 This was due either to the absence of a clear burst in the waveform and spectrogram, or the realisation of voiced stops as voiced fricatives
@@ -221,14 +225,21 @@ Sentence duration was measured in seconds.
 Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018], and was calculated as the number of syllables divided by the duration of the sentence in seconds (8 syllables in Italian, 6 in Polish).
 All further data processing and visualisation was done in R v3.5.0 [@r-core-team2018; @wickham2017].
 
-<!-- \begin{figure*} -->
-<!--   \figline{ -->
-<!--     \fig{img/Figure1a.pdf}{0.5\textwidth}{(a)} -->
-<!--     \fig{img/Figure1b.pdf}{0.5\textwidth}{(b)} -->
-<!--   } -->
-<!--   \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by an Italian speaker.} -->
-<!--   \label{f:segmentation} -->
-<!-- \end{figure*} -->
+\begin{figure*}
+  \centering
+  \begin{subfigure}[t]{0.5\textwidth}
+    \centering
+    \includegraphics[height=2.5in]{img/Figure1a.pdf}
+    \caption{/pata/}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[t]{0.5\textwidth}
+    \centering
+    \includegraphics[height=2.5in]{img/Figure1b.pdf}
+    \caption{/pada/}
+  \end{subfigure}
+  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file).}
+\end{figure*}
 
 ## Statistical analysis
 
@@ -265,9 +276,9 @@ Further excluding missing measurements, these operations yields a total of 920 t
 While the study has been devised to compare Italian and Polish, the low number of Polish speaker (6, especially compared with the number of Italian speakers 11), makes statistical comparison difficult (see \citealt{kirby2018} and references therein for a discussion on statistical power).
 The raw mean differences, presented in conjunction with the estimates from statistical modelling, can still inform us on the cross-linguistic differences and thus they will contribute to the discussion of the results.
 
-## Reproducibility statement
+## Open Science statement
 
-Following the recommendations in @berez-kroeker2018, the data and code used to produce the analyses discussed in this paper are available on the Open Science Framework at \url{https://osf.io/bfyhr/?view_only=391ef2dcc2834039a90f739ddb6f137a} [@coretta2018g].
+Following recommendations for Open Science in @cruwell2018 and @berez-kroeker2018 the data and code used to produce the analyses discussed in this paper are available on the Open Science Framework at \url{https://osf.io/bfyhr/?view_only=391ef2dcc2834039a90f739ddb6f137a} [@coretta2018g].
 
 # Results
 
@@ -304,13 +315,19 @@ durations_filtered %>%
   labs(x = "C2 voicing", y = "Vowel duration (ms)")
 ```
 
+```{r vow-descr}
+vow_descr <- durations_filtered %>%
+  group_by(language, c2_phonation) %>%
+  summarise(mean = mean(v1_duration, na.rm = TRUE), sd = sd(v1_duration, na.rm = TRUE))
+```
+
 \Cref{f:Figure2} shows boxplots and raw data of vowel duration for the three vowels /a, o, u/ when followed by voiceless or voiced stops in Italian and Polish.
 Vowel tend to be longer when followed by a voiced stop in both languages.
 The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
 There is no evident effect of C2 voicing in /u/ in Italian (as in \citealt{ferrero1978}), but the effect is discernible in Polish /u/.
-In Italian, vowels have a mean duration of 106 ms (SD = 27) before voiceless stops, and a mean duration of 118 ms (SD = 35) before voiced stops.
-Polish vowels are on average 75 ms long (SD = 16) when followed by a voiceless stop, and 83 ms long (SD = 19) if a voiced stop follows.
-The difference in vowel duration based on the raw means is 12 ms in Italian and 8 ms in Polish.
+In Italian, vowels have a mean duration of `r round_2(vow_descr[[1, 3]])` ms (SD = `r round_2(vow_descr[[1, 4]])`) before voiceless stops, and a mean duration of `r round_2(vow_descr[[2, 3]])` ms (SD = `r round_2(vow_descr[[2, 4]])`) before voiced stops.
+Polish vowels are on average `r round_2(vow_descr[[3, 3]])` ms long (SD = `r round_2(vow_descr[[3, 4]])`) when followed by a voiceless stop, and `r round_2(vow_descr[[4, 3]])` ms long (SD = `r round_2(vow_descr[[4, 4]])`) if a voiced stop follows.
+The difference in vowel duration based on the raw means is `r round_2(vow_descr[[2, 3]]) - round_2(vow_descr[[1, 3]])` ms in Italian and `r round_2(vow_descr[[4, 3]]) - round_2(vow_descr[[3, 3]])` ms in Polish.
 
 A linear mixed-effects model with vowel duration as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), C2 place of articulation (coronal, velar), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercepts with by-speaker random slopes for C2 voicing.
 All possible interactions between C2 voicing, vowel, and language were included.
@@ -348,11 +365,17 @@ durations_filtered %>%
   labs(x = "C2 voicing", y = "C2 closure duration (ms)")
 ```
 
+```{r clos-descr}
+clos_descr <- durations_filtered %>%
+  group_by(language, c2_phonation) %>%
+  summarise(mean = mean(c2_clos_duration, na.rm = TRUE), sd = sd(c2_clos_duration, na.rm = TRUE))
+```
+
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and individual raw data points.
 A pattern opposite to that with vowel duration can be noticed: closure duration is shorter for voiced than for voiceless stops.
-The closure of voiceless stops in Italian is 77 ms long (SD = 21), while the voiced stops have a mean closure duration of 64 ms (SD = 15).
-In Polish, the closure duration is 69 ms (SD = 13) in voiceless stops and 58 ms (SD = 13) in voiced stops.
-The difference in closure duration based on the raw means is 13 ms in Italian and 11 ms in Polish.
+The closure of voiceless stops in Italian is `r round_2(vow_descr[[1, 3]])` ms long (SD = `r round_2(vow_descr[[1, 4]])`), while the voiced stops have a mean closure duration of `r round_2(vow_descr[[2, 3]])` ms (SD = `r round_2(vow_descr[[2, 4]])`).
+In Polish, the closure duration is `r round_2(vow_descr[[3, 3]])` ms (SD = `r round_2(vow_descr[[3, 4]])`) in voiceless stops and `r round_2(vow_descr[[4, 3]])` ms (SD = `r round_2(vow_descr[[4, 4]])`) in voiced stops.
+The difference in closure duration based on the raw means is `r round_2(clos_descr[[1, 3]]) - round_2(clos_descr[[2, 3]])` ms in Italian and `r round_2(clos_descr[[3, 3]]) - round_2(clos_descr[[4, 3]])` ms in Polish.
 The same model specification as with vowel duration has been fitted with consonant closure duration as the outcome variable.
 C2 voicing, C2 place, and speech rate are significant.
 Stop closure is 16.5 ms shorter (SE = 3) if the stop is voiced and 3.5 ms longer (SE = 1.5) if velar.
@@ -542,7 +565,7 @@ In the following section, I offer a gestural organisation account that allows th
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{img/Figure7.pdf}
+  \includegraphics[width=\textwidth]{img/Figure7.pdf}
   \caption{Gestural organisation patterns for onsets (a), codas (b), heterosyllabic onsets (c). C = consonant, V = vowel, T = voiceless stop, D = voiced stop. See \Cref{s:gestural} for details. Based on \citet{marin2010}.}
   \label{f:gorganisation}
 \end{figure}

@@ -89,10 +89,10 @@ compensatory temporal adjustment in Italian and Polish}
   
 \usepackage{cleveref}
 \usepackage{ctable}
-\usepackage[caption=false]{subfig}
 \usepackage{enumerate}
 \usepackage{lineno}
 \linenumbers
+\usepackage{subcaption}
 
 \begin{document}
 \maketitle
@@ -418,11 +418,12 @@ The audio recordings were exported from AAA in the \texttt{.wav} format
 at the same sample and bit rate for further processing. A forced aligned
 transcription was accomplished through the SPeech Phonetisation
 Alignment and Syllabification software (SPPAS) \citep{bigi2015}. The
-outcome of the automatic annotation was manually corrected, according to
-the criteria in \Cref{t:dur-measures}, for the relevant boundaries
-(boundaries not used in the analyses have been left unchanged). The
-releases of C1 and C2 were detected automatically by means of a Praat
-scripting implementation of the algorithm described in
+outcome of the automatic annotation was manually corrected for the
+relevant boundaries, according to the criteria in \Cref{t:dur-measures}
+based on \citet{machac2009}. Segmentation boundaries not used in the
+analyses have not been checked to speed up processing. The releases of
+C1 and C2 were detected automatically by means of a Praat scripting
+implementation of the algorithm described in
 \citet{ananthapadmanabha2014}, and subsequently corrected if necessary.
 The identification of the stop release was not possible in 99 tokens
 (8\%) of C1 and 265 tokens (22\%) of C2 out of 1212. This was due either
@@ -452,6 +453,22 @@ calculated as the number of syllables divided by the duration of the
 sentence in seconds (8 syllables in Italian, 6 in Polish). All further
 data processing and visualisation was done in R v3.5.0
 \citep{r-core-team2018, wickham2017}.
+
+\begin{figure*}
+  \centering
+  \begin{subfigure}[t]{0.5\textwidth}
+    \centering
+    \includegraphics[height=2.5in]{img/Figure1a.pdf}
+    \caption{/pata/}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[t]{0.5\textwidth}
+    \centering
+    \includegraphics[height=2.5in]{img/Figure1b.pdf}
+    \caption{/pada/}
+  \end{subfigure}
+  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file).}
+\end{figure*}
 
 \hypertarget{statistical-analysis}{%
 \subsection{Statistical analysis}\label{statistical-analysis}}
@@ -519,12 +536,12 @@ with the estimates from statistical modelling, can still inform us on
 the cross-linguistic differences and thus they will contribute to the
 discussion of the results.
 
-\hypertarget{reproducibility-statement}{%
-\subsection{Reproducibility statement}\label{reproducibility-statement}}
+\hypertarget{open-science-statement}{%
+\subsection{Open Science statement}\label{open-science-statement}}
 
-Following the recommendations in \citet{berez-kroeker2018}, the data and
-code used to produce the analyses discussed in this paper are available
-on the Open Science Framework at
+Following recommendations for Open Science in \citet{cruwell2018} and
+\citet{berez-kroeker2018} the data and code used to produce the analyses
+discussed in this paper are available on the Open Science Framework at
 \url{https://osf.io/bfyhr/?view_only=391ef2dcc2834039a90f739ddb6f137a}
 \citep{coretta2018g}.
 
@@ -555,11 +572,12 @@ stop in both languages. The effect appears to be greater in Italian than
 in Polish, especially for the vowels /a/ and /o/. There is no evident
 effect of C2 voicing in /u/ in Italian (as in \citealt{ferrero1978}),
 but the effect is discernible in Polish /u/. In Italian, vowels have a
-mean duration of 106 ms (SD = 27) before voiceless stops, and a mean
-duration of 118 ms (SD = 35) before voiced stops. Polish vowels are on
-average 75 ms long (SD = 16) when followed by a voiceless stop, and 83
-ms long (SD = 19) if a voiced stop follows. The difference in vowel
-duration based on the raw means is 12 ms in Italian and 8 ms in Polish.
+mean duration of 106.16 ms (SD = 27.08) before voiceless stops, and a
+mean duration of 117.66 ms (SD = 34.63) before voiced stops. Polish
+vowels are on average 75.57 ms long (SD = 16.16) when followed by a
+voiceless stop, and 83.11 ms long (SD = 19.37) if a voiced stop follows.
+The difference in vowel duration based on the raw means is 11.5 ms in
+Italian and 7.54 ms in Polish.
 
 A linear mixed-effects model with vowel duration as the outcome variable
 was fitted with the following predictors: fixed effects for C2 voicing
@@ -594,17 +612,18 @@ duration}\label{consonant-closure-duration}}
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and
 individual raw data points. A pattern opposite to that with vowel
 duration can be noticed: closure duration is shorter for voiced than for
-voiceless stops. The closure of voiceless stops in Italian is 77 ms long
-(SD = 21), while the voiced stops have a mean closure duration of 64 ms
-(SD = 15). In Polish, the closure duration is 69 ms (SD = 13) in
-voiceless stops and 58 ms (SD = 13) in voiced stops. The difference in
-closure duration based on the raw means is 13 ms in Italian and 11 ms in
-Polish. The same model specification as with vowel duration has been
-fitted with consonant closure duration as the outcome variable. C2
-voicing, C2 place, and speech rate are significant. Stop closure is 16.5
-ms shorter (SE = 3) if the stop is voiced and 3.5 ms longer (SE = 1.5)
-if velar. Finally, faster speech rates correlate with shorter closure
-durations (\(\hat{\beta}\) = -8.5 ms, SE = 1 ms).
+voiceless stops. The closure of voiceless stops in Italian is 106.16 ms
+long (SD = 27.08), while the voiced stops have a mean closure duration
+of 117.66 ms (SD = 34.63). In Polish, the closure duration is 75.57 ms
+(SD = 16.16) in voiceless stops and 83.11 ms (SD = 19.37) in voiced
+stops. The difference in closure duration based on the raw means is
+13.33 ms in Italian and 10.87 ms in Polish. The same model specification
+as with vowel duration has been fitted with consonant closure duration
+as the outcome variable. C2 voicing, C2 place, and speech rate are
+significant. Stop closure is 16.5 ms shorter (SE = 3) if the stop is
+voiced and 3.5 ms longer (SE = 1.5) if velar. Finally, faster speech
+rates correlate with shorter closure durations (\(\hat{\beta}\) = -8.5
+ms, SE = 1 ms).
 
 \hypertarget{vowel-and-closure-duration}{%
 \subsection{Vowel and closure
@@ -758,7 +777,7 @@ relative timing of the articulatory gestures in a CV́C sequence.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{img/Figure7.pdf}
+  \includegraphics[width=\textwidth]{img/Figure7.pdf}
   \caption{Gestural organisation patterns for onsets (a), codas (b), heterosyllabic onsets (c). C = consonant, V = vowel, T = voiceless stop, D = voiced stop. See \Cref{s:gestural} for details. Based on \citet{marin2010}.}
   \label{f:gorganisation}
 \end{figure}
