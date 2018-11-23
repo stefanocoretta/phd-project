@@ -123,7 +123,8 @@ Italian has been unanimously reported as a voicing-effect language [@caldognetto
 The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms in these studies, with longer vowels followed by voiced consonants. The mean differences are based on 3 speakers in \citealt{farnetani1986} and 7 speakers in \citealt{esposito2002}. \citealt{caldognetto1979} does not report estimates of vowel duration, just the direction of the effect, but the study is based on 10 speakers.
 On the other hand, the results regarding the presence and magnitude of the effect in Polish are mixed.
 While @keating1984 reports no effect of voicing on vowel duration in data from 24 speakers, @nowak2006 finds that vowels followed by voiced stops are 4.5 ms longer in the 4 speakers recorded.
-@malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim their results are inconclusive on this matter.
+@malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim their results are inconclusive on this matter.\footnote{Note that while Polish neutralises the voicing contrast word-finally, it is maintained word-medially.}
+While they do not report estimates from the 40 speakers, a table with mean vowel durations from 4 speakers suggest a mean difference before voiceless vs. voiced stops of 3.5 ms.
 
 The acoustic data from the exploratory study discussed here suggests the existence of a voicing effect both in Italian and Polish, and that the duration of the interval between two consecutive stop releases (the Release to Release interval) is not affected by the voicing of the second consonant in both languages.
 This finding is compatible with a compensatory temporal adjustment account by which the timing of the stop closure onset within said interval determines the respective durations of vowel and closure.
@@ -324,7 +325,7 @@ vow_descr <- durations_filtered %>%
 \Cref{f:Figure2} shows boxplots and raw data of vowel duration for the three vowels /a, o, u/ when followed by voiceless or voiced stops in Italian and Polish.
 Vowel tend to be longer when followed by a voiced stop in both languages.
 The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
-There is no evident effect of C2 voicing in /u/ in Italian (as in \citealt{ferrero1978}), but the effect is discernible in Polish /u/.
+There is no evident effect of C2 voicing in /u/ in Italian, but the effect is discernible in Polish /u/.
 In Italian, vowels have a mean duration of `r round_2(vow_descr[[1, 3]])` ms (SD = `r round_2(vow_descr[[1, 4]])`) before voiceless stops, and a mean duration of `r round_2(vow_descr[[2, 3]])` ms (SD = `r round_2(vow_descr[[2, 4]])`) before voiced stops.
 Polish vowels are on average `r round_2(vow_descr[[3, 3]])` ms long (SD = `r round_2(vow_descr[[3, 4]])`) when followed by a voiceless stop, and `r round_2(vow_descr[[4, 3]])` ms long (SD = `r round_2(vow_descr[[4, 4]])`) if a voiced stop follows.
 The difference in vowel duration based on the raw means is `r round_2(vow_descr[[2, 3]]) - round_2(vow_descr[[1, 3]])` ms in Italian and `r round_2(vow_descr[[4, 3]]) - round_2(vow_descr[[3, 3]])` ms in Polish.
@@ -527,13 +528,40 @@ The analyses of the durational data suggest that:
 # Discussion
 \label{s:discussion}
 
+An exploratory study of articulatory and acoustic aspects of the effect of consonant voicing on vowel duration in Italian and Polish has been carried out to look for a possible source of such effect in production.
+Only the results from the acoustic part of the study have been presented in the previous section, since they bear on the arguments that follow.
+The following sections discuss, in turn, the results regarding the effect of voicing on vowel duration in Italian and Polish and how the finding that the duration of the interval between the two consecutive consonant releases in CV́CV words is compatible with a compensatory temporal adjustment account of the voicing effect.
+The section concludes by discussing the limitations of this study and further work.
+
 ## Voicing effect in Italian and Polish
 
+The results of vowel duration and C2 voicing indicate that vowels are longer when followed by voiced then when followed by voiceless stops both in Italian and Polish.
+The estimated effect is around 16 ms when C2 is voiced for Italian.
+This value is not too far from the estimates of previous work on this language [@caldognetto1979; @farnetani1986; @esposito2002], the range of which is between 22 and 24 ms (the higher estimates of these studies could be related to Type M (magnitude) errors due to low statistical power, see \citealt{kirby2018}).
+Furthermore, the effect of voicing on the duration of Italian /u/ is smaller than with /a/ and /o/ (about 3 vs 16 ms respectively).
+No effect of voicing on the duration of /u/ has been reported by \citealt{ferrero1978}.
+While it is not clear why the duration of this particular vowel should not be affected by C2 voicing, the data reported here indicate that the magnitude of the difference in closure duration when the preceding vowel is /u/ is smaller than with /a/ and /o/ (about 7 vs. 17 ms respectively).
+If vowel duration compensates for closure duration, then a smaller difference in closure duration will correspond to a small difference in vowel duration, as the estimates seem to suggest.
 
+The interpretation of the Polish patterns is complicated.
+Previous studies found either no effect or a small voicing effect in Polish (3.5--4.5 ms).
+In particular, @malisz2008 say that the effect seems to be very idiosyncratic in their data of 40 speakers.
+The estimated effect found in the 6 speakers reported here is 10.54 ms, while the difference based on the means of the raw vowel durations is 7.5 ms.
+Recall, however, that the interaction between language and C2 voicing (which gives the estimate of 10.54) is not significant (see the full model summary in \Cref{tab:vow-table}).
+It is likely, though, that the non-significance might be related to low power.
+Indeed, only 6 Polish speakers have been recorded, against 11 speakers of Italian.
+The raw mean difference of 7.5 ms in Polish---although still higher than what found in previous studies---might be more informative in this case.
+
+More specifically, when one compares the raw mean duration differences of vowels with the raw mean duration differences of consonant closures, a pattern can be seen.
+The mean differences of Italian vowels and closures (11.5 and 13.33, respectively) are bigger than those of Polish (7.54 and 10.87), although by a small amount (about 3 ms).
+It is plausible that the smaller effect of C2 voicing on preceding vowel duration in Polish is related to the smaller effect on closure duration, if we assume a temporal mechanism of compensation between the closure and the vowel.
+Of course, this argument rests on very small differences from a small sample, and will need to be tested with a bigger sample of Italian and Polish speakers.
+
+<!-- maybe discuss vowel closure compensation... -->
 
 ## Compensatory temporal adjustment
 
-The data and statistical analyses of this exploratory study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the Release to Release interval) is insensitive to the phonological voicing of the second consonant (C2) in Italian and Polish.
+The data and statistical analyses of this exploratory study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the Release to Release interval) is not affected to the phonological voicing of the second consonant (C2) in Italian and Polish.
 In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration before voiceless vs. voiced stops can be seen as the outcome of differences in stop closure duration.
 More specifically, the timing of the closure onset of C2 within the invariant Release to Release interval determines the duration of the preceding vowel.
 An earlier closure onset relative to the onset of the preceding vowel (like in the case of voiceless stops) causes the vowel to be shorter.
@@ -542,7 +570,7 @@ On the other hand, a later closure onset (like with voiced stops) produces a lon
 
 \begin{figure}
   \includegraphics{img/Figure6.pdf}
-  \caption{A schematic representation of the voicing effect as a compensatory temporal adjustment phenomenon. The schematic shows the gestural unfolding of a CV́C sequence when C2 is voiceless (top panel), or voiced (bottom panel). Oral cavity aperture (on the \textit{y}-axis, as the inverse of oral constriction) through time (on the \textit{x}-axis) is represented by the black line. Lower values represent a more constricted oral tract (a contoid configuration), while higher values indicate a more open oral tract (a vocoid configuration). The black bars below the time axis represent voicing (vocal fold vibration). Various landmarks and intervals are indicated in the schematic. Design based on \citet{esposito2002}.}
+  \caption{A schematic representation of the oral cavity cross-sectional area, as inferred from acoustics. Design based on \citet{esposito2002}. The top panel shows a CV́C sequence with a voiceless C2, the bottom panel with a voiced C2. Oral cavity aperture (on the \textit{y}-axis, as the inverse of oral constriction) through time (on the \textit{x}-axis) is represented by the black line. Lower values represent a more constricted oral tract (a contoid configuration), while higher values indicate a more open oral tract (a vocoid configuration). The black bars below the time axis represent voicing (vocal fold vibration). Various landmarks and intervals are indicated in the schematic.}
   \label{f:compensatory}
 \end{figure}
 
@@ -553,52 +581,6 @@ Since the Release to Release interval includes just the vowel (broadly defined a
 It is worth noting, though, that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out (for example, perceptual factor might play a role in the enhancement of the effect, see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}).
 
 On the one hand, the voicing effect can be re-interpreted as a by-product of gestural timing, rather then a consequence of intrinsic features of voicing *per SE*, with a constant Release to Release interval as the explanans.
-
-On the other hand, the Release to Release invariance is in turn an explanandum.
-In the following section, I offer a gestural organisation account that allows the invariance of such interval to follow from the relative timing of the articulatory gestures in a CV́C sequence.
-
-## Gestural alignment
-\label{s:gestural}
-
-<!-- people have shown to be links between articulation and acoustics in this sense (somebody cited somewhere) -->
-<!-- I might have to explicitly say that release = right-edge sort of -->
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{img/Figure7.pdf}
-  \caption{Gestural organisation patterns for onsets (a), codas (b), heterosyllabic onsets (c). C = consonant, V = vowel, T = voiceless stop, D = voiced stop. See \Cref{s:gestural} for details. Based on \citet{marin2010}.}
-  \label{f:gorganisation}
-\end{figure}
-
-According to the coupled oscillator model of syllabic structure [@browman1988; @browman2000; @goldstein2006; @goldstein2014], articulatory gestures can be timed according to two coupling modes: in-phase (synchronous) mode, by which two gestures start in synchrony, or anti-phase (sequential) mode, in which a gesture starts when the preceding one has reached its target.
-@marin2010 showed that onset consonants in American English are in-phase with respect to the vowel nucleus and anti-phase with each other.
-Such phasing pattern establishes a stable relationship between the centre of the consonant (or consonants in a cluster) and the following vowel.
-Independent of the number of onset consonants, the temporal midpoint of the onset (the so-called 'C-centre') is maintained at a fixed distance from the vowel, such that an increasing number of consonants in the onset does not change the distance between the vowel and the onset C-centre (\Cref{f:gorganisation}a).
-On the other hand, coda consonants are timed anti-phase with the preceding vowel and between themselves.
-Temporal stability in codas is found in the lag between the vowel and the left-most edge of the coda, which is not affected by the number of coda consonants (\Cref{f:gorganisation}b).
-Other studies found further evidence for the synchronous and sequential coupling modes (see extensive review in \citealt{marin2010} and \citealt{marin2014}), although the use of one mode over the other depends on the language and the consonants under study.
-
-Consonants can thus be said to follow either a C-centre or a left-edge organisation pattern.
-In both cases, of course, the pattern is relative to the tautosyllabic vowel (the following vowel for onsets, the preceding vowel for codas).
-To the best of my knowledge, no study has reported the timing of onset consonants relative to the *preceding* (heterosyllabic) vowel.
-The results from this acoustic study on Italian and Polish are compatible with a right-edge organisation pattern for onset consonants relative to the preceding stressed vowel (\Cref{f:gorganisation}c).
-In CV́CV words, the timing of the C2 release (the acoustic parallel of the articulatory right edge of C2) is fixed relative to V1.
-<!-- problem of what is the anchor in V1? also, what about phase and anti-phase? is right-edge a kind of anti-phase? -->
-
-A consequence of a right-edge organisation pattern of C2 relative to V1 in CV́CV words is that differences in C2 closure duration do not affect the lag between V1 and the release of C2, as shown by the results of this study.
-The invariance of the lag between the release of C1 and that of C2 then can be seen to follow from the invariance in timing between, on the one hand, C1 (which is always /p/ in this study) and V1, and, on the other, between V1 and the right edge of C2.
-
-<!-- maybe footnote on circularity of argument of syllabic structure and gestural timing -->
-<!-- also, all data so far is stressed vowels? -->
-<!-- indeed we don't know much about how syllables are concatenated? -->
-
-A right-edge organisation account is compatible with findings from a variety of sources.
-@celata2018 show with ultrasound tongue imaging data that, in Italian, vowels followed by single consonants are longer than when followed by geminates (for example, /ba.ta/ vs. /bat.ta/).
-However, vowels followed by a tautosyllabic cluster have the same duration as vowels followed by a heterosyllabic cluster (/pa.tron/ vs. /bat.man/).
-@celata2018 argue that these results corroborate a rhythmic account in which the relevant unit is not the traditional syllable, but rather the VC(C) sequence.
-The importance of the VC(C) sequence as relevant speech unit has been previously recognised in the work of @farnetani1986 (who called it the 'rhythmic syllable') and @steriade2012 (who uses the term 'vowel to vowel interval', see also \citealt{hirsch2014} and \citealt{lunden2017}).
-The duration of the rhythmic syllable or interval is constant across the phonological contexts, while the duration of the traditional syllable is not.
-This reflects a gestural organisation in which the timing of the right edge of the consonant is fixed relative to the vowel.
 
 @de-jong1991 reports that the closing gesture of voiceless stops (following stressed vowels) is faster than that of voiced stops, and that also it is timed earlier with respect to the opening gesture of the stressed vowel.
 According to @de-jong1991, the differences in vowel duration are driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture (also see \citealt{hertrich1997}).
