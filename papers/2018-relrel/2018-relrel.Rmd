@@ -19,6 +19,7 @@ header-includes:
 - \usepackage{subcaption}
 mainfont: "Charis SIL"
 fontsize: 12pt
+indent: true
 params:
   version: 1.0
   version-date: "2018/11/20"
