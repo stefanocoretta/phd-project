@@ -503,13 +503,15 @@ measurements were analysed with linear mixed-effects models using
 extracted with the \texttt{effects} package v4.0-3 \citep{fox2003}. All
 factors were coded with treatment contrasts and the following reference
 levels: voiceless (vs.~voiced), /a/ (vs.~/o/, /u/), coronal (vs.~velar),
-Italian (vs.~Polish). The models were fitted by Restricted Maximum
-Likelihood estimation (REML). The estimates in the results section refer
-to these reference levels unless interactions are discussed.
-\emph{P}-values for the individual terms were obtained with
-\texttt{lmerTest} v3.0-1, which uses the Satterthwaite's approximation
-to degrees of freedom \citep{kuznetsova2017, luke2017}. A result is
-considered significant if the \emph{p}-value is below the alpha level
+Italian (vs.~Polish). Speech rate (as syllables per second) has been
+centred so that the intercept estimates can be interpretable. The models
+were fitted by Restricted Maximum Likelihood estimation (REML). The
+estimates in the results section refer to these reference levels unless
+interactions are discussed. \emph{P}-values for the individual terms
+were obtained with \texttt{lmerTest} v3.0-1, which uses the
+Satterthwaite's approximation to degrees of freedom
+\citep{kuznetsova2017, luke2017}. A result is considered significant if
+the \emph{p}-value is below the alpha level
 (\(\alpha = 0.05\)).\footnote{\citet{luke2017} argues that the common approach of using likelihood ratio tests for statistical inference with mixed models leads to inflated Type I error rates. \citet[1501]{luke2017} also warns that `results should be interpreted with caution, regardless of the method adopted for obtaining \textit{p}-values'.}
 
 Bayes factors were used to specifically test the null hypotheses that
@@ -603,21 +605,22 @@ A linear mixed-effects model with vowel duration as the outcome variable
 was fitted with the following predictors: fixed effects for C2 voicing
 (voiceless, voiced), C2 place of articulation (coronal, velar), vowel
 (a, o, u), language (Italian, Polish), and speech rate (as syllables per
-second); by-speaker and by-word random intercepts with by-speaker random
-slopes for C2 voicing. All possible interactions between C2 voicing,
-vowel, and language were included. The following terms are significant
-according to \emph{t}-tests with Satterthwaite's approximation to
-degrees of freedom: C2 voicing, vowel, language, and speech rate. Only
-the interaction between C2 voicing and vowel is significant. Vowels are
-16.28 ms longer (SE = 4.42) when followed by a voiced stop (C2 voicing).
-The effect of C2 voicing is smaller with /u/ (around 3 ms,
-\(\hat{\beta}\) = -13.1 ms, SE = 5.56). Polish has on average shorter
-vowels than Italian (\(\hat{\beta}\) = -24.05 ms, SE = 7.83), and the
-effect of voicing is estimated to be about 10.55 ms (although note that
-the interaction between language and C2 voicing is not significant).
-Speech rate has a negative effect on vowel duration, such that faster
-rates correlate with shorter vowel durations (\(\hat{\beta}\) = -16.23
-ms, SE = 1.26).
+second, centred); by-speaker and by-word random intercepts with
+by-speaker random slopes for C2 voicing. All possible interactions
+between C2 voicing, vowel, and language were included. The following
+terms are significant according to \emph{t}-tests with Satterthwaite's
+approximation to degrees of freedom: C2 voicing, C2 place, vowel,
+language, and speech rate. Only the interaction between C2 voicing and
+vowel is significant. Vowels are 16.28 ms longer (SE = 4.42) when
+followed by a voiced stop (C2 voicing), and 8 ms shorter (SE = 1.63)
+when followed by a velar stop. The effect of C2 voicing is smaller with
+/u/ (around 3 ms, \(\hat{\beta}\) = -13.1 ms, SE = 5.56). Polish has on
+average shorter vowels than Italian (\(\hat{\beta}\) = -24.05 ms, SE =
+7.83), and the effect of voicing is estimated to be about 10.55 ms
+(although note that the interaction between language and C2 voicing is
+not significant). Speech rate has a negative effect on vowel duration,
+such that faster rates correlate with shorter vowel durations
+(\(\hat{\beta}\) = -16.23 ms, SE = 1.26).
 
 \hypertarget{consonant-closure-duration}{%
 \subsection{Consonant closure
@@ -658,35 +661,41 @@ duration}\label{vowel-and-closure-duration}}
 A model addressing the relationship between vowel and stop closure
 duration was fitted with the following terms and interactions: vowel
 duration as the outcome variable; as fixed effects, closure duration,
-vowel, speech rate; an interaction between closure duration and vowel;
-by-speaker and by-word random intercepts, and by-speaker random slopes
-for C2 voicing. Closure duration has a significant effect on vowel
-duration (\(\hat{\beta}\) = -0.15 ms, SE = 0.06 ms). The effect with /u/
-is greater than with /a/ and /o/ (\(\hat{\beta}\) = -0.35 ms, SE = 0.06
+vowel, speech rate (centred); all logical interactions between closure
+duration, vowel, and speech rate; by-speaker and by-word random
+intercepts. Closure duration has a significant effect on vowel duration
+(\(\hat{\beta}\) = -0.19 ms, SE = 0.06 ms). The effect with /u/ is
+greater than with /a/ and /o/ (\(\hat{\beta}\) = -0.23 ms, SE = 0.08
 ms). In general, closure duration is inversely proportional to vowel
 duration. However, such correlation is quite weak, as shown by the small
-estimates. A 1 ms increase in closure duration corresponds to a 0.2--0.5
-ms decrease in vowel duration. \Cref{f:Figure4} shows for each vowel /a,
-o, u/ the individual data points and the regression lines with
-confidence intervals extracted from the mixed-effects model.
+estimates. A 1 ms increase in closure duration corresponds to a
+0.2--0.45 ms decrease in vowel duration. These estimates can be
+interpreted in terms of percentages of compensation, which range between
+20 and 45\%. Faster speech rates elicit a bigger effect than lower
+speech rates, as indicated by the significant interaction between
+closure duration and speech rate (\(\hat{\beta}\) = -0.2 ms, SE = 0.06
+ms). The effect of the interaction is reduced when the vowel is /u/
+(\(\hat{\beta}\) = 0.17 ms, SE = 0.08 ms). \Cref{f:Figure4} shows for
+each vowel /a, o, u/ the individual data points and the regression lines
+with 95\% confidence intervals extracted from the mixed-effects model.
 
 \hypertarget{word-duration}{%
 \subsection{Word duration}\label{word-duration}}
 
-Words with a voiceless C2 are on average 397 ms long (SD = 81) in
-Italian and 356 ms long (SD = 39) in Polish. Words with a voiced stop
-have a mean duration of 396 ms (SD = 72) in Italian and 362 ms (SD = 39)
-in Polish. The following full and null models were fitted to test the
-effect of C2 voicing on word duration. The full model is made up of the
-following fixed effects: C2 voicing, C2 place, vowel, language, and
-speech rate. The model also includes by-speaker and by-word random
-intercepts, and a by-speaker random slope for C2 voicing. The null model
-is the same as the full model with the exclusion of the fixed effect of
-C2 voicing. The Bayes factor of the null against the full model is 19.
-Thus, the null model (in which there is no effect of C2 voicing,
-\(\beta\) = 0) is 19 times more likely under the observed data than the
-full model. This indicates that there is positive evidence for a null
-effect of C2 voicing on word duration.
+Words with a voiceless C2 are on average 393.72 ms long (SD = 79.05) in
+Italian and 387.72 ms long (SD = 73.45) in Polish. Words with a voiced
+stop have a mean duration of 357.07 ms (SD = 39.14) in Italian and
+361.87 ms (SD = 38.51) in Polish. The following full and null models
+were fitted to test the effect of C2 voicing on word duration. The full
+model is made up of the following fixed effects: C2 voicing, C2 place,
+vowel, language, and speech rate. The model also includes by-speaker and
+by-word random intercepts, and a by-speaker random slope for C2 voicing.
+The null model is the same as the full model with the exclusion of the
+fixed effect of C2 voicing. The Bayes factor of the null against the
+full model is 19. Thus, the null model (in which there is no effect of
+C2 voicing, \(\beta\) = 0) is 19 times more likely under the observed
+data than the full model. This indicates that there is positive evidence
+for a null effect of C2 voicing on word duration.
 
 \hypertarget{release-to-release-interval-duration}{%
 \subsection{Release to Release interval
@@ -701,16 +710,16 @@ the Release to Release interval in words with a voiceless vs.~a voiced
 C2 stop, in Italian and Polish. It can be seen that the distributions,
 medians, and quartiles of the durations in the voiceless and voiced
 condition do not differ much in either language. In Italian, the mean
-duration of the Release to Release interval is 210 ms (SD = 44) if C2 is
-voiceless, and 209 ms (SD = 41) if voiced. In Polish, the mean durations
-are respectively 173 (SD = 22) and 172 (SD = 21) ms. The specifications
-of the null and full models for the Release to Release duration are the
-same as for word duration. The Bayes factor of the null model against
-the full model is 21, which means that the null model (without C2
-voicing) is 21 times more likely than the model with C2 voicing as a
-predictor. The Bayes factor suggests there is strong evidence that
-duration of the Release to Release interval is not affected by C2
-voicing.
+duration of the Release to Release interval is 209.88 ms (SD = 43.84) if
+C2 is voiceless, and 208.6 ms (SD = 41.34) if voiced. In Polish, the
+mean durations are respectively 173.13 (SD = 22.44) and 172.67 (SD =
+20.47) ms. The specifications of the null and full models for the
+Release to Release duration are the same as for word duration. The Bayes
+factor of the null model against the full model is 21, which means that
+the null model (without C2 voicing) is 21 times more likely than the
+model with C2 voicing as a predictor. The Bayes factor suggests there is
+strong evidence that duration of the Release to Release interval is not
+affected by C2 voicing.
 
 \hypertarget{summary}{%
 \subsection{Summary}\label{summary}}

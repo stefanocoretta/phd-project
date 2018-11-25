@@ -260,6 +260,7 @@ All further data processing and visualisation was done in R v3.5.1 [@r-core-team
 Given the data-driven nature of the study, all statistical analyses reported here are to be considered exploratory (hypothesis-generating) rather than confirmatory (hypothesis-driven, \citealt{kerr1998, gelman2013, roettger2018}).
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-19 in R [@bates2015], and model estimates were extracted with the `effects` package v4.0-3 [@fox2003].
 All factors were coded with treatment contrasts and the following reference levels: voiceless (vs. voiced), /a/ (vs. /o/, /u/), coronal (vs. velar), Italian (vs. Polish).
+Speech rate (as syllables per second) has been centred so that the intercept estimates can be interpretable.
 The models were fitted by Restricted Maximum Likelihood estimation (REML).
 The estimates in the results section refer to these reference levels unless interactions are discussed.
 *P*-values for the individual terms were obtained with `lmerTest` v3.0-1, which uses the Satterthwaite's approximation to degrees of freedom [@kuznetsova2017; @luke2017].
@@ -340,11 +341,11 @@ In Italian, vowels have a mean duration of `r round_2(vow_descr[[1, 3]])` ms (SD
 Polish vowels are on average `r round_2(vow_descr[[3, 3]])` ms long (SD = `r round_2(vow_descr[[3, 4]])`) when followed by a voiceless stop, and `r round_2(vow_descr[[4, 3]])` ms long (SD = `r round_2(vow_descr[[4, 4]])`) if a voiced stop follows.
 The difference in vowel duration based on the raw means is `r round_2(vow_descr[[2, 3]]) - round_2(vow_descr[[1, 3]])` ms in Italian and `r round_2(vow_descr[[4, 3]]) - round_2(vow_descr[[3, 3]])` ms in Polish.
 
-A linear mixed-effects model with vowel duration as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), C2 place of articulation (coronal, velar), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second); by-speaker and by-word random intercepts with by-speaker random slopes for C2 voicing.
+A linear mixed-effects model with vowel duration as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), C2 place of articulation (coronal, velar), vowel (a, o, u), language (Italian, Polish), and speech rate (as syllables per second, centred); by-speaker and by-word random intercepts with by-speaker random slopes for C2 voicing.
 All possible interactions between C2 voicing, vowel, and language were included.
-The following terms are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom: C2 voicing, vowel, language, and speech rate.
+The following terms are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom: C2 voicing, C2 place, vowel, language, and speech rate.
 Only the interaction between C2 voicing and vowel is significant.
-Vowels are 16.28 ms longer (SE = 4.42) when followed by a voiced stop (C2 voicing).
+Vowels are 16.28 ms longer (SE = 4.42) when followed by a voiced stop (C2 voicing), and 8 ms shorter (SE = 1.63) when followed by a velar stop.
 The effect of C2 voicing is smaller with /u/ (around 3 ms, $\hat{\beta}$ = -13.1 ms, SE = 5.56).
 Polish has on average shorter vowels than Italian ($\hat{\beta}$ = -24.05 ms, SE = 7.83), and the effect of voicing is estimated to be about 10.55 ms (although note that the interaction between language and C2 voicing is not significant).
 Speech rate has a negative effect on vowel duration, such that faster rates correlate with shorter vowel durations ($\hat{\beta}$ = -16.23 ms, SE = 1.26).
@@ -421,13 +422,16 @@ as_tibble(effect("c2_clos_duration:vowel:speech_rate_c", vow_clo_lm)) %>%
   labs(x = "Closure duration (ms)", y = "Vowel duration (ms)")
 ```
 
-A model addressing the relationship between vowel and stop closure duration was fitted with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate; an interaction between closure duration and vowel; by-speaker and by-word random intercepts, and by-speaker random slopes for C2 voicing.
-Closure duration has a significant effect on vowel duration ($\hat{\beta}$ = -0.15 ms, SE = 0.06 ms).
-The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.35 ms, SE = 0.06 ms).
+A model addressing the relationship between vowel and stop closure duration was fitted with the following terms and interactions: vowel duration as the outcome variable; as fixed effects, closure duration, vowel, speech rate (centred); all logical interactions between closure duration, vowel, and speech rate; by-speaker and by-word random intercepts.
+Closure duration has a significant effect on vowel duration ($\hat{\beta}$ = -0.19 ms, SE = 0.06 ms).
+The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.23 ms, SE = 0.08 ms).
 In general, closure duration is inversely proportional to vowel duration.
 However, such correlation is quite weak, as shown by the small estimates.
-A 1 ms increase in closure duration corresponds to a 0.2--0.5 ms decrease in vowel duration.
-\Cref{f:Figure4} shows for each vowel /a, o, u/ the individual data points and the regression lines with confidence intervals extracted from the mixed-effects model.
+A 1 ms increase in closure duration corresponds to a 0.2--0.45 ms decrease in vowel duration.
+These estimates can be interpreted in terms of percentages of compensation, which range between 20 and 45\%.
+Faster speech rates elicit a bigger effect than lower speech rates, as indicated by the significant interaction between closure duration and speech rate ($\hat{\beta}$ = -0.2 ms, SE = 0.06 ms).
+The effect of the interaction is reduced when the vowel is /u/ ($\hat{\beta}$ = 0.17 ms, SE = 0.08 ms).
+\Cref{f:Figure4} shows for each vowel /a, o, u/ the individual data points and the regression lines with 95\% confidence intervals extracted from the mixed-effects model.
 
 ## Word duration
 
@@ -460,8 +464,15 @@ word_lm_null <- lme4::lmer(
 
 word_bf <- round(exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
-Words with a voiceless C2 are on average 397 ms long (SD = 81) in Italian and 356 ms long (SD = 39) in Polish.
-Words with a voiced stop have a mean duration of 396 ms (SD = 72) in Italian and 362 ms (SD = 39) in Polish.
+
+```{r word-descr}
+word_descr <- word_filtered %>%
+  group_by(language, c2_phonation) %>%
+  summarise(mean = mean(word_duration, na.rm = TRUE), sd = sd(word_duration, na.rm = TRUE))
+```
+
+Words with a voiceless C2 are on average `r round_2(word_descr[[1, 3]])` ms long (SD = `r round_2(word_descr[[1, 4]])`) in Italian and `r round_2(word_descr[[2, 3]])` ms long (SD = `r round_2(word_descr[[2, 4]])`) in Polish.
+Words with a voiced stop have a mean duration of `r round_2(word_descr[[3, 3]])` ms (SD = `r round_2(word_descr[[3, 4]])`) in Italian and `r round_2(word_descr[[4, 3]])` ms (SD = `r round_2(word_descr[[4, 4]])`) in Polish.
 The following full and null models were fitted to test the effect of C2 voicing on word duration.
 The full model is made up of the following fixed effects: C2 voicing, C2 place, vowel, language, and speech rate.
 The model also includes by-speaker and by-word random intercepts, and a by-speaker random slope for C2 voicing.
@@ -512,10 +523,16 @@ rr_lm_null <- lme4::lmer(
 rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
 ```
 
+```{r rr-descr}
+rr_descr <- word_filtered %>%
+  group_by(language, c2_phonation) %>%
+  summarise(mean = mean(rel_rel, na.rm = TRUE), sd = sd(rel_rel, na.rm = TRUE))
+```
+
 In \Cref{f:Figure5}, boxplots and raw data points show the duration of the Release to Release interval in words with a voiceless vs. a voiced C2 stop, in Italian and Polish.
 It can be seen that the distributions, medians, and quartiles of the durations in the voiceless and voiced condition do not differ much in either language.
-In Italian, the mean duration of the Release to Release interval is 210 ms (SD = 44) if C2 is voiceless, and 209 ms (SD = 41) if voiced.
-In Polish, the mean durations are respectively 173 (SD = 22) and 172 (SD = 21) ms.
+In Italian, the mean duration of the Release to Release interval is `r round_2(rr_descr[[1, 3]])` ms (SD = `r round_2(rr_descr[[1, 4]])`) if C2 is voiceless, and `r round_2(rr_descr[[2, 3]])` ms (SD = `r round_2(rr_descr[[2, 4]])`) if voiced.
+In Polish, the mean durations are respectively `r round_2(rr_descr[[3, 3]])` (SD = `r round_2(rr_descr[[3, 4]])`) and `r round_2(rr_descr[[4, 3]])` (SD = `r round_2(rr_descr[[4, 4]])`) ms.
 The specifications of the null and full models for the Release to Release duration are the same as for word duration.
 The Bayes factor of the null model against the full model is `r rr_bf`, which means that the null model (without C2 voicing) is `r rr_bf` times more likely than the model with C2 voicing as a predictor.
 The Bayes factor suggests there is strong evidence that duration of the Release to Release interval is not affected by C2 voicing.
