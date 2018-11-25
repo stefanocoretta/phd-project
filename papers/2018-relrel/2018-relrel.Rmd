@@ -107,15 +107,16 @@ According to such account, the difference in vowel duration before consonants va
 After a careful review of the critiques advanced by @chen1970 and @maddieson1976, and in face of the results in @slis1969, @de-jong1991 and @begus2017,
 a compensatory account gains credibility.
 However, issues about the actual implementation of the compensation mechanism still remain.
-In conclusion, while the compensatory temporal adjustment account is plausible on the light of the reviewed literature, we are left with the necessity of finding a constant speech interval within which compensation is logically implemented.
+In conclusion, while the compensatory temporal adjustment account is plausible on the light of the reviewed literature, we are still left with the necessity of identifying a speech interval the duration of which is not affected by the voicing of the post-vocalic consonant, and within which compensation can be logically implemented.
 <!-- add here what the good candidate is in this study? -->
+The results of the present study suggest that a good candidate for such interval is the interval between the release of the pre-vocalic consonant and the release of the post-vocalic consonant when considering stops.
 
 ## The present study
 
 This paper reports on selected results from a broader exploratory study that investigates the relationship between vowel duration and consonant voicing from both an acoustic and articulatory perspective.
 Synchronised recordings of audio, ultrasound tongue imaging, and electroglottography were carried out to enable a data-driven approach to the analysis of features related to the voicing effect in the context of disyllabic (CV́CV) words in Italian and Polish.\footnote{As per \citet{cysouw2013}, the glossonyms \textit{Italian} and \textit{Polish} as used here to refer, respectively, to the languoids Italian [\textsc{Glottocode}: \texttt{ital1282}] and Polish [\textsc{Glottocode}: \texttt{poli1260}].}
-Given its exploratory nature, this study was not devised to test the compensatory account, but rather to collect articulatory and acoustic data on the voicing effect.
-Moreover, the design of the study has been constrained by the use of such articulatory techniques (see \Cref{s:method}).
+This study, in its exploratory nature, was not designed to test the compensatory account, but rather to collect synchronised articulatory and acoustic data on the voicing effect.
+Moreover, the design of the study has been constrained by the use of ultrasound articulatory techniques (see \Cref{s:method}).
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
 Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration, while they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).\footnote{The distinction between voicing and aspirating varieties of Polish discussed in @cyran2011 is based on phonological considerations rather than empirical data on VOT duration.
@@ -178,7 +179,7 @@ The number of target words was kept low to reduce the time required for completi
 }
 
 The target words were embedded in a frame sentence.
-Controlling for meaning, segmental and prosodic make-up betweeen languages proved to be difficult.
+Controlling for meaning, segmental and prosodic make-up between languages proved to be difficult.
 The frames are *Dico X lentamente* 'I say X slowly' in Italian [following @hajek2008], and *Mówię X teraz* 'I say X now' in Polish, and presented according to the respective writing conventions.
 These sentences were chosen in order to keep the placement of focus similar across languages (on the target word).
 Possible influences of the semantic content of the frame sentence on duration estimates will be discussed in \Cref{s:discussion}.
@@ -191,9 +192,11 @@ Participants read the list of randomised sentence stimuli 6 times.
 Due to software constraints, the order of the list was kept the same across the six repetitions within each participant.
 The reading task lasted between 15 and 20 minutes, with optional short breaks between one repetition and the other.
 The total experiment time lasted around 45 minutes.
+Before the start of the experiment, the participants were spoken to in their mother tongue to try and reduce exposition to English prior to being recorded.
+Instruction were also given in the respective mother tongues.
 Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times), which yields to a grand total of 1212 tokens (792 from Italian, 420 from Polish).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
 
-The experiment was carried out in two locations: in the sound attenuated booth of the Phonetics Laboratory at the University of Manchester, and in a quiet room in a field location in Italy (Verbania, Northern Italy).
+The experiment was carried out in two locations: in the sound attenuated booth of the Phonetics Laboratory at the University of Manchester (directed by Dr. Patrycja Strycharczuk), and in a quiet room in a field location in Italy (Verbania, Northern Italy).
 In both locations the equipment and procedures were the same.
 Data collection started in December 2016 and ended in March 2018.
 
@@ -572,7 +575,7 @@ There seems to be an inverse relationship between vowel duration and closure dur
 
 The data and statistical analyses of this exploratory study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the Release to Release interval) is not affected to the phonological voicing of the second consonant (C2) in Italian and Polish.
 In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration before voiceless vs. voiced stops can be seen as the outcome of differences in stop closure duration.
-More specifically, the timing of the (acoustic) closure onset of C2 within the invariant Release to Release interval determines the duration of the preceding vowel.
+More specifically, the timing of the (acoustic) closure onset of C2 within the temporally stable Release to Release interval determines the duration of the preceding vowel.\footnote{The term 'temporal stability' (and 'temporally stable') as used here specifically means that the underlying statistical distribution of the interval duration is stable *across contexts of C2 voicing*. No specific statements is implied about the variance of the duration around the mean, across or within phonological contexts.}
 An earlier closure onset relative to the onset of the preceding vowel (like in the case of voiceless stops) causes the vowel to be shorter.
 On the other hand, a later closure onset (like with voiced stops) produces a longer vowel.
 \Cref{f:compensatory} illustrates this mechanism.
@@ -596,33 +599,41 @@ On the one hand, the voicing effect can be re-interpreted as a by-product of ges
 According to @de-jong1991, the differences in vowel duration are driven by the timing of the consonantal closing gesture relative to the vocalic opening gesture (also see \citealt{hertrich1997}).
 Moreover, the data in @de-jong1991 show that the final portion of the opening gesture is prolonged before voiced stops.
 
-This pattern fits the one reported in an electromyographic study by @raphael1975.
+<!-- This pattern fits the one reported in an electromyographic study by @raphael1975.
 The electromyographic signal corresponding to the vocalic gesture reaches its plateau at the same time relative to the preceding consonant in the voiceless and voiced context, but the plateau is held for longer in the case of vowels followed by voiced stops.
 This indicates that muscular activation in the vocalic gesture before voiced stops is held for longer.
-@raphael1975 further notes that the durational difference in muscular activation corresponds to the difference in the acoustic duration of vowels before voiceless vs. voiced stops (see also \citealt{warren2005}).
+@raphael1975 further notes that the durational difference in muscular activation corresponds to the difference in the acoustic duration of vowels before voiceless vs. voiced stops (see also \citealt{warren2005}). -->
 
-The results of the studies just discussed, together with the results from this study, bring support to a view in which two aspects of gestural organisation contribute to the difference in vowel duration observed before consonants varying in their voicing specification.
+<!-- The results of the studies just discussed, together with the results from this study, bring support to a view in which two aspects of gestural organisation contribute to the difference in vowel duration observed before consonants varying in their voicing specification.
 These aspects are: (1) the *right-edge alignment* of coda consonants following a stressed vowel relative to the latter, and (2) the *differential timing of the closing gesture onset* for voiceless vs. voiced stops.
-The interplay of these two aspects can be synthesised into a compensatory temporal adjustment account, which requires a temporally constant interval, produced by (1), and a temporal reorganisation, brought about by (2).
+The interplay of these two aspects can be synthesised into a compensatory temporal adjustment account, which requires a temporally constant interval, produced by (1), and a temporal reorganisation, brought about by (2). -->
 
 ## Limitations and future work
 
-The generalisations put forward in this paper strictly apply to disyllabic words with a stressed vowel in the first syllable.
-It is possible that the organisation pattern found in this context does not occur in sequences including an unstressed vowel.
+The generalisations put forward in this paper strictly apply to disyllabic words with a stressed vowel in the first syllable, flanked by single stops.
+First, it is possible that the pattern found in this context does not occur in sequences including an unstressed vowel.
 For example, it is known that the difference in closure duration between voiceless and voiced stops is not stable when the stops precede a stressed vowel, although vowels preceding pre-stress stops have slightly different durations [@davis1989].
-According to the gestural interpretation given here, the absence of differences in closure duration should correspond to no difference in vowel duration.
-Moreover, the magnitude of the effect is modulated by prosodic characteristics, like the number of syllables in the word, presence/absence of focus, and position within the sentence [@sharf1962; @klatt1973; @laeufer1992; @de-jong2004].
+According to the interpretation given here, the absence of differences in closure duration should correspond to the absence of differences in vowel duration.
+Second, it is known that the magnitude of the effect of voicing is modulated by other prosodic characteristics, like the number of syllables in the word, presence/absence of focus, and position within the sentence [@sharf1962; @klatt1973; @laeufer1992; @de-jong2004].
+Third, the constraints on experimental material enforced by the use of ultrasound tongue imaging have been previously mentioned in \Cref{s:materials}.
+Given these constraints, temporal information from other vowels (like front vowels), places and manners of articulation is a desideratum.
 Data from different contexts and different languages is thus needed to assess the generality of the claims put forward in this paper.
 
-The constraints on experimental material enforced by the use of ultrasound tongue imaging have been previously mentioned in \Cref{s:materials}.
-Given these constraints, temporal information from other vowels (like front vowels) and places of articulation is a desideratum.
-\Cref{s:gestural} discusses the interpretation of the Release to Release invariance in CV́CV words as a consequence of the timing of C2 rather than of a holistic CV́C motor plan in which the Release to Release interval is held constant.
-Although beyond the scope of this paper, disambiguating between these two interpretations on articulatory grounds is fundamental for a general understanding of a theory of gestural organisation (a promising venue of research might be the activation-spin model by \citealt{tilsen2013}).
+Another issue is the interaction of the temporal compensation and speech rate.
+The magnitude of compensation between vowel and closure duration found in @de-jong1991 and here is somewhat small (between 12\% and 40\%).
+Ideally, given the temporal stability of the Release to Release interval relative to C2 voicing, the compensation rates should approximate 100\%.
+However, it is possible that the correlation between vowel and closure duration is modulated in complex way by the individual effects of speech rate on the vowel and the closure.
+For example, @ko2018 finds that the vowel/closure ratio differs depending on speaking rate and that there is an interaction between the voicing of the consonant and speaking rate.
+When the consonant is voiceless, the vowel/closure ratio is smaller when speaking rate is slow, while slow speaking rate induces larger vowel/closure values when the consonant is voiced.
+Experimental work is required which addresses the differential effect of speaking rate on vowel and consonant closures, and how these interact with a possible compensatory mechanism.
+
+<!-- \Cref{s:gestural} discusses the interpretation of the Release to Release invariance in CV́CV words as a consequence of the timing of C2 rather than of a holistic CV́C motor plan in which the Release to Release interval is held constant.
+Although beyond the scope of this paper, disambiguating between these two interpretations on articulatory grounds is fundamental for a general understanding of a theory of gestural organisation (a promising venue of research might be the activation-spin model by \citealt{tilsen2013}). -->
 
 The compensatory temporal adjustment account presented here extends to other durational effects discussed in the literature.
 In particular, the account bears predictions on the direction of the durational difference led by phonation types different from voicing, like aspiration and ejection.
 For example, the mix of results with regard to the effect of aspiration [@durvasula2012] suggests that the conditions for a temporal adjustment might differ across the contexts and languages studied.
-In light of the results in @begus2017, future studies will have to investigate the durational invariance of speech intervals in relation to a variety of phonation contrasts.
+In light of the results in @begus2017, future studies will also have to investigate the durational invariance of speech intervals in relation to a variety of phonation contrasts.
 
 # Conclusions
 
@@ -656,7 +667,7 @@ kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mu
 ```
 
 ```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration with closure duration as predictor (see \\Cref{s:vcduration}).")
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration}).")
 ```
 
 # Socio-linguistic information of participants
