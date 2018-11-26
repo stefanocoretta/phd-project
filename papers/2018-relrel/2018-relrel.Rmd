@@ -9,8 +9,7 @@ output:
     latex_engine: xelatex
     number_sections: yes
 bibliography: linguistics.bib
-documentclass: glossa
-biblio-style: glossa.bst
+biblio-style: unified.bst
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
