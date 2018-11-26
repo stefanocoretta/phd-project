@@ -15,6 +15,9 @@ library(lme4)
 library(lmerTest)
 library(sjPlot)
 
+scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
+scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
+
 data("ita_egg")
 ita_egg <- ita_egg %>%
   mutate(
@@ -32,8 +35,8 @@ glimpse(ita_egg)
 ```
 
 There are a total of 3268 observations (172 sentences * 19 speakers).
-Measurements from 15 have not been taken because they contained speech errors/disfluencies.
-Depending on the measurement, there is from 5% to 20% of missing data.
+Measurements from 15 tokens have not been taken because they contained speech errors/disfluencies.
+Depending on the specific measurement, there is from 5% to 20% of missing data.
 
 ```{r voi-dur}
 ita_egg %>%
@@ -109,7 +112,7 @@ Vowel duration and voicing duration are clearly correlated.
 ita_egg %>%
   ggplot(aes(v1_duration, fill = height)) +
   geom_density(alpha = 0.5, size = 0) +
-  geom_rug(aes(colour = height), alpha = 0.1)
+  geom_rug(alpha = 0.1)
 ```
 
 ```{r vow-height-box}
@@ -128,7 +131,7 @@ ita_egg %>%
 ita_egg %>%
   ggplot(aes(voice_duration, fill = height)) +
   geom_density(alpha = 0.5, size = 0) +
-  geom_rug(aes(colour = height), alpha = 0.1)
+  geom_rug(alpha = 0.1)
 ```
 
 ```{r voi-height-box}
@@ -147,7 +150,7 @@ ita_egg %>%
 ita_egg %>%
   ggplot(aes(vot, fill = height)) +
   geom_density(alpha = 0.5, size = 0) +
-  geom_rug(aes(colour = height), alpha = 0.1)
+  geom_rug(alpha = 0.1)
 ```
 
 ```{r vot-height-box}
