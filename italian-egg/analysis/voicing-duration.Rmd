@@ -159,6 +159,13 @@ ita_egg %>%
   geom_boxplot()
 ```
 
+```{r}
+ita_egg %>%
+  ggplot(aes(c2_place, c2_clos_duration)) +
+  geom_boxplot()
+```
+
+
 # Modelling
 
 ```{r voice-lm}
