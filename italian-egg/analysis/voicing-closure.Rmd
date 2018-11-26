@@ -13,6 +13,7 @@ theme_set(theme_minimal())
 library(coretta2018itaegg)
 library(lme4)
 library(lmerTest)
+library(sjPlot)
 
 data("ita_egg")
 ita_egg <- ita_egg %>%
@@ -81,3 +82,27 @@ ita_egg %>%
   facet_wrap(~ speaker)
 ```
 
+```{r voi-clo-lm}
+voi_clo_lm <- lmer(
+  voi_clo ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg,
+  control = lmerControl(optimizer = "Nelder_Mead")
+)
+# https://stats.stackexchange.com/a/243225/128897
+
+summary(voi_clo_lm)
+```
+
+```{r plot-voi-clo-lm}
+plot_model(voi_clo_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:12))
+```
+
+```{r plot-voi-clo-lm-2}
+plot_model(voi_clo_lm, type = "pred", terms = "height")
+```

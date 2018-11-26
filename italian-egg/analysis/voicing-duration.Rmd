@@ -241,6 +241,11 @@ vot_lm <- lmer(
 summary(vot_lm)
 ```
 
+```{r vot-lm-plot}
+plot_model(vot_lm, type = "pred", terms = "height")
+```
+
+
 ```{r vofft-lm}
 vofft_lm <- lmer(
   vofft ~
