@@ -75,6 +75,15 @@ ita_egg %>%
 
 Could it be that velar consonants had multiple releases and by chosing the first one the interval is longer?
 
+```{r rr-place-c1-c2-box}
+ita_egg %>%
+  ggplot(aes(c2_place, rel_rel, fill = c2_place)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  facet_grid(~ c1_place)
+```
+
+
 ```{r rr-rate}
 ita_egg %>%
   ggplot(aes(speech_rate,  rel_rel)) +
@@ -94,3 +103,28 @@ ita_egg %>%
   geom_boxplot() +
   facet_grid(c2_place ~ c1_place)
 ```
+
+# Modelling
+
+```{r rr-place-lm}
+rr_place_lm <- lmer(
+  rel_rel ~
+    c1_place *
+    c2_place *
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(rr_place_lm)
+```
+
+```{r rr-place-lm-plot}
+plot_model(rr_place_lm, type = "pred", terms = c("c1_place", "c2_place"))
+```
+
+```{r rr-place-lm-plot-2}
+plot_model(rr_place_lm, type = "pred", terms = "speech_rate_c")
+```
+
