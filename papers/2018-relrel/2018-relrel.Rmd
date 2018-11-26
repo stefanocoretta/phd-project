@@ -47,6 +47,12 @@ round_2 <- function(...) {
 }
 ```
 
+  The compensatory account has been criticised due to lack of empirical support and its vagueness regarding the temporal interval within which compensation is implemented.
+  The results from this exploratory study of Italian and Polish suggest that the duration of the interval between two consecutive stop releases in CVCV words in these languages is not affected by the voicing of the second stop.
+  The durational difference of the first vowel then would follow from differences in closure durations of the following stop.
+  While other factors (like perceptual biases) could also play a role in the development of the voicing effect, the data discussed here shed new light on a possible production account of voicing-related differences in vowel durations.
+\end{abstract}
+
 # Introduction
 \label{s:intro}
 
@@ -55,8 +61,7 @@ round_2 <- function(...) {
 Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones (\citealt{meyer1904}; \citealt{heffner1937}; \citealt{house1953}; \citealt{belasco1953}; \citealt{peterson1960}; \citealt{halle1967}; \citealt{chen1970}; \citealt{klatt1973}; \citealt{lisker1974}; \citealt{laeufer1992}; \citealt{fowler1992}; \citealt{hussein1994}; \citealt{lampp2004}; \citealt{warren2005}; \citealt{durvasula2012}).
 This so called 'voicing effect' has been found in a considerable variety of languages.\footnote{One of the first attestations of the term `voicing effect' can be attributed to \citet{mitleb1982}. Probably, \citet{wells1990} introduced the term `pre-fortis clipping', which can also be found in the literature.}
 These include (but are not limited to) English, German, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).\footnote{A typological note: Most languages reported having a voicing effect come from the Indo-European family. Other languages come from the pool of widely studied languages. It is recommendable that future studies would look at other linguistic families, and underdocumented/underdescribed languages.}
-Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.\footnote{Here, `source' is intended as a general term without any particular theoretical commitment to whether it should be interpreted synchronically or diachronically.
-}
+Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
 
 Several proposals have been put forward in relation to the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{begus2017} for an overview).
 Some of the proposed accounts place the source of the voicing effect in properties of speech production.
@@ -65,7 +70,7 @@ According to this account, the voicing effect follows from the reorganisation of
 The duration of such unit is held constant across voicing contexts, while the duration of voiceless and voiced obstruents differs.
 The closure of voiceless stops is longer than that of voiced stops [@lisker1957; @van-summers1987; @davis1989; @de-jong1991].
 As a consequence, vowels followed by voiceless stops (which have a long closure) are shorter than vowels followed by voiced stops (which have a short closure).
-Advocates of the compensatory account propose two prosodic units as the scope of the temporal adjustment: the syllable (and, equivalently, the VC sequence ot vowel-to-vowel interval, \citealt{lindblom1967; farnetani1986}), and the word [@slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
+Advocates of the compensatory account propose two prosodic units as the scope of the temporal adjustment: the syllable (and, equivalently, the VC sequence ot vowel-to-vowel interval, \citealt{lindblom1967, farnetani1986}), and the word [@slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
 However, the compensatory temporal adjustment account has been criticised in subsequent work.
 
 Empirical evidence and logic challenge the proposal that the syllable or the word have a constant duration and hence drive compensation.
