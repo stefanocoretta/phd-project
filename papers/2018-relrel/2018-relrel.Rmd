@@ -9,7 +9,8 @@ output:
     latex_engine: xelatex
     number_sections: yes
 bibliography: linguistics.bib
-biblio-style: unified.bst
+documentclass: glossa
+biblio-style: glossa.bst
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
@@ -41,7 +42,7 @@ library(knitr)
 ```
 
 ```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
-load("./data/duration_data.Rdata")
+load("./datasets/duration_data.Rdata")
 round_2 <- function(...) {
   round(..., digits = 2)
 }
