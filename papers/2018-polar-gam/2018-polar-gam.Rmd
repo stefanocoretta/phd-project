@@ -4,6 +4,7 @@ author: Stefano Coretta
 output:
   pdf_document:
     citation_package: natbib
+    latex_engine: xelatex
 bibliography: linguistics.bib
 header-includes:
 - \usepackage{cleveref}
@@ -142,7 +143,7 @@ The horizontal plane is parallel to the speaker's occlusal plane.
 
 ## Fitting a polar GAM
 
-```{r coart-gam}
+```{r coart-gam, cache=TRUE}
 coart_gam <- polar_gam(
   Y ~
     s(X, by = vowel_place),
@@ -153,21 +154,3 @@ coart_gam <- polar_gam(
 ```{r}
 plot_polar_smooths(coart_gam, X, vowel, facet_terms = place, split = list(vowel_place = c("vowel", "place")))
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{acknowledgments}
-Thanks to...
-\end{acknowledgments}
-
-\appendix
-\section{Optional appendix}
