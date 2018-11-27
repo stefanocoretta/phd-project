@@ -659,15 +659,15 @@ This project has been funded by the School of Arts, Languages, and Cultures Grad
 See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and \Cref{tab:vow-clo-table}.
 
 ```{r vow-table}
-kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration})")
+kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 2, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration})")
 ```
 
 ```{r clo-table}
-kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration})")
+kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 2, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration})")
 ```
 
 ```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration})")
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration})")
 ```
 
 # Socio-linguistic information of participants
@@ -682,7 +682,7 @@ label = t:socio,
 width=\textwidth,
 star,
 doinside = \footnotesize
-]{llll>{\raggedright}p{5cm}l>{\raggedright}p{3.5cm}l}{}{
+]{llll>{\raggedright}p{3.5cm}l>{\raggedright}p{3cm}l}{}{
 \FL
 ID & Age & Sex    & Native L & Other Ls& City of birth & Spent most time in & > 6 mo \ML
 IT01 & 29 & Male   & Italian & English, Spanish                          & Verbania            & Verbania        & Yes \NN
