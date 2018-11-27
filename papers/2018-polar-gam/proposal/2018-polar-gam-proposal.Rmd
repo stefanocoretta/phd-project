@@ -13,11 +13,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 \begin{center}
-\textbf{Generalised additive (mixed) models with midsagittal tongue contours in polar coordinates for statistical testing}
+\textbf{Assessing midsaggital tongue contours in polar coordinates using generalised additive (mixed) models}
 \end{center}
 
 Ultrasound tongue imaging (UTI) is a non-invasive technique that enables researchers to study, more or less directly, the articulation of the tongue during speech at appreciably high resolution.
-On the other hand, the quantitative analysis of UTI data is a challenge.
+On the other hand, the quantitative analysis of UTI data remains more of a challenge.
 Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been mostly dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA).
 @mielke2015 and @heyne2015a further showed that fitting SSANOVA with tongue data in polar coordinates (rather than cartesian coordinates) produces more reliable results.
 SSANOVA of tongue contours undoubtedly advanced our understanding of tongue articulation and speech modelling.
@@ -29,6 +29,6 @@ This paper will offer a review of GAMMs fitted to tongue contours in polar coord
 An introduction to UTI and GAMMs will open the paper, followed by a general overview of polar tongue contours GAMMs.
 Polar GAMMs fitting, significance testing, and model plotting will be illustrated by means of an example pilot study that compares tongue contours of voiceless and voiced stops of 4 Italian speakers.
 A brief tutorial will show how to fit polar GAMMs with the R package `rticulate`, which has been developed by the author to streamline polar GAMM fitting in R using the `mgcv` package.
-While the paper will focus on model fitting in R, the overview provided will be relevant to a more general public.
+While the paper focusses on model fitting in R, the overview provided will be relevant to a more general public.
 An informal comparison between SSANOVA and polar GAMs will show that polar GAMs tend to be more conservative than SSANOVAs.
 The paper will conclude by discussing the limitations of the current implementation of polar GAMMs (such as across-speaker normalisation) and its future directions.
