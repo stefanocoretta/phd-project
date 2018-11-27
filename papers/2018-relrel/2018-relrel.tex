@@ -1,94 +1,59 @@
-\documentclass[12pt,]{article}
-\usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-    \setmainfont[]{Charis SIL}
-\fi
-% use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{unified.bst}
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
+% see http://info.semprag.org/basics for a full description of this template
+\documentclass[charis]{glossa}
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% possible options:
+% [times] for Times font (default if no option is chosen)
+% [cm] for Computer Modern font
+% [lucida] for Lucida font (not freely available)
+% [brill] open type font, freely downloadable for non-commercial use from http://www.brill.com/about/brill-fonts; requires xetex
+% [charis] for CharisSIL font, freely downloadable from http://software.sil.org/charis/
+% for the Brill an CharisSIL fonts, you have to use the XeLatex typesetting engine (not pdfLatex)
+% [biblatex] for using biblatex
+% [linguex] loads the linguex example package
+% !! a note on the use of linguex: in glossed examples, the third line of the example (the translation) needs to be prefixed with \glt. This is to allow a first line with the name of the language and the source of the example. See example (2) in the text for an illustration.
+% !! a note on the use of bibtex: for PhD dissertations to typeset correctly in the references list, the Address field needs to contain the city (for US cities in the format "Santa Cruz, CA")
 
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{An exploratory study of voicing-related differences in vowel duration as
+\title[]{An exploratory study of voicing-related differences in vowel duration as
 compensatory temporal adjustment in Italian and Polish}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
+
+% \author[Paul \& Vanden Wyngaerd]% short form of the author names for the running header. If no short author is given, no authors print in the headers.
+% {%as many authors as you like, each separated by \AND.
+%   \spauthor{Waltraud Paul\\
+%   \institute{CNRS, CRLAO}\\
+%   \small{105, Bd. Raspail, 75005 Paris\\
+%   waltraud.paul@ehess.fr}
+%   }
+%   \AND
+%   \spauthor{Guido Vanden Wyngaerd \\
+%   \institute{KU Leuven}\\
+%   \small{Warmoesberg 26, 1000 Brussel\\
+%   guido.vandenwyngaerd@kuleuven.be}
+%   }%
+% }
+
+\author[]{
+  }
+
+\usepackage{natbib}
+
+
 \usepackage{cleveref}
 \usepackage{ctable}
 \usepackage{enumerate}
 \usepackage{lineno}
 \linenumbers
-\usepackage{subcaption}
 
 \begin{document}
+
+\sffamily
 \maketitle
 
+
+
+
+\rmfamily
+
+%  Body of the article
 \begin{abstract}
   Over a century of phonetic research has established the cross-linguistic existence of the so called `voicing effect', by which vowels tend to be shorter when followed by voiceless stops and longer when the following stop is voiced.
   However, no agreement is found among scholars regarding the source of this effect, and several causal accounts have been advanced.
@@ -429,7 +394,7 @@ December 2016 and ended in March 2018.
 \subsection{Data processing and
 measurements}\label{data-processing-and-measurements}
 
-\ctable[caption = Criteria for the identification of acoustics landmarks.,
+\ctable[caption = Criteria for the identification of acoustics landmarks,
 label = t:dur-measures,
 width=\textwidth,
 star
@@ -484,22 +449,13 @@ by the duration of the sentence in seconds (8 syllables in Italian, 6 in
 Polish). All further data processing and visualisation was done in R
 v3.5.1 \citep{r-core-team2018, wickham2017}.
 
-\begin{figure*}
+\begin{figure}
   \centering
-  \begin{subfigure}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[height=2.5in]{img/Figure1a.pdf}
-    \caption{/pata/}
-  \end{subfigure}%
-  ~
-  \begin{subfigure}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[height=2.5in]{img/Figure1b.pdf}
-    \caption{/pada/}
-  \end{subfigure}
-  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file).}
+  \subfigure[/pata/]{\includegraphics[height=2.5in]{img/Figure1a.pdf}}
+  \subfigure[/pada/]{\includegraphics[height=2.5in]{img/Figure1b.pdf}}
+  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file)}
   \label{f:segmentation}
-\end{figure*}
+\end{figure}
 
 \subsection{Statistical analysis}\label{statistical-analysis}
 
@@ -594,7 +550,7 @@ confidence intervals and \emph{p}-values) are given in \Cref{a:stats}.
 \label{s:vduration}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure2} \caption{Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop.}\label{f:Figure2}
+\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure2} \caption{Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop}\label{f:Figure2}
 \end{figure}
 
 \Cref{f:Figure2} shows boxplots and raw data of vowel duration for the
@@ -637,7 +593,7 @@ duration}\label{consonant-closure-duration}
 \label{s:cduration}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure3} \caption{Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/.}\label{f:Figure3}
+\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure3} \caption{Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/}\label{f:Figure3}
 \end{figure}
 
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and
@@ -662,7 +618,7 @@ duration}\label{vowel-and-closure-duration}
 \label{s:vcduration}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure4} \caption{Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details).}\label{f:Figure4}
+\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure4} \caption{Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details)}\label{f:Figure4}
 \end{figure}
 
 A model addressing the relationship between vowel and stop closure
@@ -707,7 +663,7 @@ for a null effect of C2 voicing on word duration.
 duration}\label{release-to-release-interval-duration}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure5} \caption{Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced.}\label{f:Figure5}
+\includegraphics[width=\linewidth]{2018-relrel_files/figure-latex/Figure5} \caption{Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced}\label{f:Figure5}
 \end{figure}
 
 In \Cref{f:Figure5}, boxplots and raw data points show the duration of
@@ -960,7 +916,7 @@ See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and
 
 \begin{table}
 
-\caption{\label{tab:vow-table}Summary of the linear mixed-effects model fitted to vowel duration (see \Cref{s:vduration}).}
+\caption{\label{tab:vow-table}Summary of the linear mixed-effects model fitted to vowel duration (see \Cref{s:vduration})}
 \centering
 \begin{tabular}[t]{lrrrrrrrl}
 \toprule
@@ -988,7 +944,7 @@ Voiced, /u/, Polish & 6.3984 & 8.0285 & -9.3372 & 22.1340 & 11.1938 & 0.7970 & 0
 
 \begin{table}
 
-\caption{\label{tab:clo-table}Summary of the linear mixed-effects model fitted to closure duration (see \Cref{s:cduration}).}
+\caption{\label{tab:clo-table}Summary of the linear mixed-effects model fitted to closure duration (see \Cref{s:cduration})}
 \centering
 \begin{tabular}[t]{lrrrrrrrl}
 \toprule
@@ -1016,7 +972,7 @@ Voiced, /u/, Polish & -3.0766 & 6.7738 & -16.3530 & 10.1998 & 11.0085 & -0.4542 
 
 \begin{table}
 
-\caption{\label{tab:vow-clo-table}Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \Cref{s:vcduration}).}
+\caption{\label{tab:vow-clo-table}Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \Cref{s:vcduration})}
 \centering
 \begin{tabular}[t]{lrrrrrrrl}
 \toprule
@@ -1047,7 +1003,7 @@ participants}\label{socio-linguistic-information-of-participants}
 
 See \Cref{t:socio}.
 
-\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad.,
+\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad,
 label = t:socio,
 width=\textwidth,
 star,
@@ -1079,7 +1035,7 @@ PL07 & 32 & Female & Polish  & English, Russian                          & Biels
 
 See \Cref{t:targets}.
 
-\ctable[caption = Target words. Asterisks indicate real words.,
+\ctable[caption = Target words. Asterisks indicate real words,
 label = t:targets,
 star,
 doinside = \footnotesize
@@ -1093,7 +1049,7 @@ paca*     & poco*  & pucu & & paka*  & poko & puku \NN
 paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 }
 
-\bibliography{linguistics.bib}
+\bibliography{linguistics}
 
 
 \end{document}

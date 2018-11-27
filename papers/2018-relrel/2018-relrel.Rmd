@@ -1,24 +1,18 @@
 ---
 title: "An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish"
 output:
-  pdf_document:
+  glossaarticle::glossa_article:
     citation_package: natbib
     fig_caption: yes
-    keep_tex: yes
-    latex_engine: xelatex
-    number_sections: yes
-bibliography: linguistics.bib
-biblio-style: unified.bst
+bibliography: linguistics
+classoption:
+  - charis
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
 - \usepackage{enumerate}
 - \usepackage{lineno}
 - \linenumbers
-- \usepackage{subcaption}
-mainfont: "Charis SIL"
-fontsize: 12pt
-indent: true
 params:
   version: 1.0
   version-date: "2018/11/27"
@@ -217,7 +211,7 @@ Data collection started in December 2016 and ended in March 2018.
 
 ## Data processing and measurements
 
-\ctable[caption = Criteria for the identification of acoustics landmarks.,
+\ctable[caption = Criteria for the identification of acoustics landmarks,
 label = t:dur-measures,
 width=\textwidth,
 star
@@ -249,22 +243,13 @@ Sentence duration was measured in seconds.
 Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018a], and was calculated as the number of syllables divided by the duration of the sentence in seconds (8 syllables in Italian, 6 in Polish).
 All further data processing and visualisation was done in R v3.5.1 [@r-core-team2018; @wickham2017].
 
-\begin{figure*}
+\begin{figure}
   \centering
-  \begin{subfigure}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[height=2.5in]{img/Figure1a.pdf}
-    \caption{/pata/}
-  \end{subfigure}%
-  ~
-  \begin{subfigure}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[height=2.5in]{img/Figure1b.pdf}
-    \caption{/pada/}
-  \end{subfigure}
-  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file).}
+  \subfigure[/pata/]{\includegraphics[height=2.5in]{img/Figure1a.pdf}}
+  \subfigure[/pada/]{\includegraphics[height=2.5in]{img/Figure1b.pdf}}
+  \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file)}
   \label{f:segmentation}
-\end{figure*}
+\end{figure}
 
 ## Statistical analysis
 
@@ -334,7 +319,7 @@ vow_lm <- lmer(
 summary(vow_lm)
 ```
 
-```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
   ggplot(aes(c2_phonation, v1_duration)) +
   geom_boxplot(alpha = 0.5) +
@@ -384,7 +369,7 @@ clo_lm <- lmer(
 summary(clo_lm)
 ```
 
-```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 durations_filtered %>%
   ggplot(aes(c2_phonation, c2_clos_duration)) +
   geom_boxplot(alpha = 0.5) +
@@ -425,7 +410,7 @@ vow_clo_lm <- lmer(
 summary(vow_clo_lm)
 ```
 
-```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
 as_tibble(effect("c2_clos_duration:vowel:speech_rate_c", vow_clo_lm)) %>%
   filter(speech_rate_c == -3e-04) %>%
   ggplot(aes(c2_clos_duration, fit)) +
@@ -499,7 +484,7 @@ This indicates that there is positive evidence for a null effect of C2 voicing o
 
 ## Release to release interval duration
 
-```{r Figure5, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced.", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data", warning=FALSE}
+```{r Figure5, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data", warning=FALSE}
 rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot(alpha = 0.5) +
@@ -674,15 +659,15 @@ This project has been funded by the School of Arts, Languages, and Cultures Grad
 See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and \Cref{tab:vow-clo-table}.
 
 ```{r vow-table}
-kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration}).")
+kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration})")
 ```
 
 ```{r clo-table}
-kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration}).")
+kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 voi: voiced", "Vow: /o/", "Vow: /u/", "Lang: Polish", "C2 place: velar", "Speech rate", "Voiced, /o/", "Voiced, /u/", "Voiced, Polish", "/o/, Polish", "/u/, Polish", "Voiced, /o/, Polish", "Voiced, /u/, Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration})")
 ```
 
 ```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration}).")
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "C2 closure", "Vow: /o/", "Vow: /u/", "Speech rate", "C2 closure, /o/", "C2 closure, /u/", "C2 closure, sp. rate", "/o/, sp. rate", "/u/, sp. rate", "C2 clos, /o/, sp. rate", "C2 clos, /u/, sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, digits = 4, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration})")
 ```
 
 # Socio-linguistic information of participants
@@ -692,7 +677,7 @@ See \Cref{t:socio}.
 
 <!-- say why there are missing IDs -->
 
-\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad.,
+\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad,
 label = t:socio,
 width=\textwidth,
 star,
@@ -723,7 +708,7 @@ PL07 & 32 & Female & Polish  & English, Russian                          & Biels
 
 See \Cref{t:targets}.
 
-\ctable[caption = Target words. Asterisks indicate real words.,
+\ctable[caption = Target words. Asterisks indicate real words,
 label = t:targets,
 star,
 doinside = \footnotesize
