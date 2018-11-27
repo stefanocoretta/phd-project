@@ -1,6 +1,5 @@
 ---
 title: "An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish"
-author: "Stefano Coretta"
 output:
   pdf_document:
     citation_package: natbib
