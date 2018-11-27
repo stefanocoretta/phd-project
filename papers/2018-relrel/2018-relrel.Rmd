@@ -22,7 +22,7 @@ fontsize: 12pt
 indent: true
 params:
   version: 1.0
-  version-date: "2018/11/20"
+  version-date: "2018/11/27"
 ---
 
 ```{r setup, include=FALSE}
@@ -638,7 +638,7 @@ Data from different contexts and different languages is thus needed to assess th
 Another issue is the interaction of the temporal compensation and speech rate.
 The magnitude of compensation between vowel and closure duration found in @de-jong1991 and here is somewhat small (between 12\% and 40\%).
 Ideally, given the temporal stability of the release to release interval relative to C2 voicing, the compensation rates should approximate 100\%.
-However, it is possible that the correlation between vowel and closure duration is modulated in complex way by the individual effects of speech rate on the vowel and the closure.
+However, it is possible that the correlation between vowel and closure duration is modulated in complex ways by the individual effects of speech rate on the vowel and the closure.
 For example, @ko2018 finds that the vowel/closure ratio differs depending on speaking rate and that there is an interaction between the voicing of the consonant and speaking rate.
 When the consonant is voiceless, the vowel/closure ratio is smaller when speaking rate is slow, while slow speaking rate induces larger vowel/closure values when the consonant is voiced.
 Experimental work is required which addresses the differential effect of speaking rate on vowel and consonant closures, and how these interact with a possible compensatory mechanism.
@@ -656,7 +656,7 @@ In light of the results in @begus2017, future studies will also have to investig
 The results of an exploratory study on the effect of voicing on vowel duration are congruent with a compensatory temporal adjustment account of such effect.
 Acoustic data from seventeen speakers of Italian and Polish show that the temporal distance between two consecutive stop releases is not affected by the voicing of the second stop in CV́CV words.
 The temporal invariance of the release to release interval, together with a difference in stop closure duration of voiceless and voiced stops, causes vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
-I proposed that the release to release invariance is a consequence of the gestural organisation of the CV́C sequence, in which the lag between the right-edge of the second consonant and the preceding stressed vowel is fixed.
+Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval.
 
 # Acknowledgements
 
