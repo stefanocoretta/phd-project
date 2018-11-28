@@ -1,11 +1,12 @@
 ---
-title: This is a title and this is too
+title: Assessing midsaggital tongue contours in polar coordinates using generalised additive (mixed) models
 author: Stefano Coretta
 output:
   pdf_document:
     citation_package: natbib
     latex_engine: xelatex
 bibliography: linguistics.bib
+biblio-style: unified.bst
 header-includes:
 - \usepackage{cleveref}
 ---
@@ -14,12 +15,14 @@ header-includes:
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
+theme_set(theme_minimal())
 library(tidymv)
 library(rticulate)
 library(mgcv)
+library(itsadug)
 ```
 
-```{r read-data}
+```{r read-data, include=FALSE}
 stimuli <- read_csv("./papers/2018-polar-gam/datasets/stimuli.csv")
 
 columns <- c(
@@ -43,8 +46,11 @@ tongue_it01 <- read_aaa("./papers/2018-polar-gam/datasets/it01-tongue-cart.tsv",
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
   left_join(y = stimuli) %>%
-  mutate(vowel_place = interaction(vowel, c2_place)) %>%
+  filter(X < 40, c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
+  mutate(vc_voicing = interaction(vowel, c2_place, c2_phonation), vc_voicing = ordered(vc_voicing)) %>%
   mutate_if(is.character, as.factor)
+
+contrasts(tongue_it01$vc_voicing) <- "contr.treatment"
 ```
 
 # Introduction
@@ -65,7 +71,7 @@ The R package `rticulate` has been developed to facilitate the use of the model,
 ## Ultrasound tongue imaging
 
 Ultrasound imaging is a non-invasive technique for obtaining an image of internal organs and tissue.
-Ultrasound imaging has been successfully used for imaging the mid-sagittal  section of the tongue surface [].
+Ultrasound imaging has been successfully used for imaging the mid-sagittal section of the tongue surface [].
 Ultrasound tongue imaging employs a transducer placed in contact with the sub-mental triangle (the area under the chin).
 The transducer propagates ultrasonic waves that travel through the aperture of the mandible and get reflected by the air above the tongue surface.
 The reflection is then translated into an image which shows the approximate location of the tongue surface.
@@ -113,7 +119,7 @@ The GAM is fitted on the polar coordinates and the predicted values are converte
 
 ## Data collection and processing
 
-Synchronised audio and ultrasound tongue imaging data have been recorded from 11 speakers of Italian.
+Synchronised audio and ultrasound tongue imaging data have been recorded from 4 speakers of Italian.
 <!-- maybe you want to use just 4 or 5 for illustrative purposes -->
 An Articulate Instruments Ltd™ set-up was used for this study (\Cref{f:uti-setup}).
 The ultrasonic data was collected through a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
@@ -143,14 +149,74 @@ The horizontal plane is parallel to the speaker's occlusal plane.
 
 ## Fitting a polar GAM
 
-```{r coart-gam, cache=TRUE}
-coart_gam <- polar_gam(
+GAMMs can be fitted in R with the `gam()` function from package `mgcv` [@wood2011; @wood2017].
+`bam()` is a more efficient function when the datasets has several hundreds observations.
+The package `rticulate` has been developed as a wrapper of the `bam()` function to be used with tongue contours.
+The special function `polar_gam()` can fit any specified GAM model to tongue contours coordinates, using the same syntax of `mgcv`.
+The function accepts tongue contours either in cartesian or polar coordinates.
+In the first case, the coordinates are transformed into polar before fitting.
+The function `plot_polar_smooths()`, used for plotting the estimated contours, converts the coordinates back into cartesian.
+
+<!-- brief intro on GAM in R (smooths, reference smooths etc, but for a more detailed overview, see...) -->
+
+Due to differences in the placement of the probe and the speaker's anatomy, different portions of the tongue are likely to be imaged across speakers.
+For this reason, it is recommended to fit separate models for each participant, rather then aggregate all of the data in a single model.
+<!-- show the problem -->
+
+As means of illustration, the following paragraphs will show how to fit a polar GAM with data from one of the 4 Italian speakers.
+
+We can start from a simple model in which we test the effect of C2 place, vowel, and voicing on tongue contours.
+Modelling different contours for each combination of the three predictors can be achieved with the `by` argument in the difference smooth function and including the related parametric term.
+`vc_voicing` is an ordered factor which specifies for each contour the combination of C2 place, vowel, and voicing. The following code fits the specified model to the contour data of IT01. When running the code, the coordinates of the estimated origin used for the conversion to polar coordinates are returned.
+The author can optionally specify those manually, for example when the contours are not in a fan-like system (like the data exported from AAA).
+
+```{r it01-gam, cache=TRUE}
+it01_gam <- polar_gam(
   Y ~
-    s(X, by = vowel_place),
-  data = tongue_it01
+    # parametric term
+    vc_voicing +
+    # reference smooth
+    s(X) +
+    # difference smooth
+    s(X, by = vc_voicing),
+  data = tongue_it01,
+  method = "ML"
 )
 ```
 
-```{r}
-plot_polar_smooths(coart_gam, X, vowel, facet_terms = place, split = list(vowel_place = c("vowel", "place")))
+The function `plot_polar_smooths()` can be used to plot the estimated contours.
+The shaded areas around the estimated contours are 95\% confidence intervals.
+Note that, differently from SSANOVA, statistical significance can't be assessed from the overlapping (or lack thereof) of the confidence intervals.
+
+```{r it01-gam-plot, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
+plot_polar_smooths(
+  it01_gam,
+  X,
+  voicing,
+  facet_terms = c2_place + vowel,
+  # the following splits the factor interaction in the individual terms, so that
+  # they can called in the plotting arguments
+  split = list(vc_voicing = c("vowel", "c2_place", "voicing"))
+)
+```
+
+One way of assessing significance is to compare the ML score of the full model against one without the relevant predictor, using the function `compareML()` from the `itsadug` package.
+Both the parametric term and the difference smooth need to be removed in the null model.
+
+```{r it01-gam-0, cache=TRUE}
+it01_gam_0 <- polar_gam(
+  Y ~
+    # remove parametric term
+    vc_voicing +
+    # reference smooth
+    s(X),
+    # remove difference smooth
+    # s(X, by = vc_voicing),
+  data = tongue_it01,
+  method = "ML"
+)
+```
+
+```{r compare-it01}
+compareML(it01_gam_0, it01_gam)
 ```
