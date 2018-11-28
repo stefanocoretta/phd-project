@@ -18,10 +18,11 @@ library(sjPlot)
 data("ita_egg")
 ita_egg <- ita_egg %>%
   mutate(
-    vowel = factor(vowel, levels = c("i", "e", "a", "o", "u")),
+    vowel = factor(vowel, levels = c("a", "o", "e", "i", "u")),
     height = factor(height, levels = c("low", "mid-low", "mid-high", "high")),
     c1_place = factor(c1_place, levels = c("labial", "coronal", "velar")),
-    c2_place = factor(c2_place, levels = c("labial", "coronal", "velar"))
+    c2_place = factor(c2_place, levels = c("labial", "coronal", "velar")),
+    von_von = (v1_ons - voice_ons) * 1000
   ) %>%
   mutate_if(is.character, as.factor)
 ```
@@ -82,6 +83,26 @@ ita_egg %>%
   facet_wrap(~ speaker)
 ```
 
+```{r von-von-box}
+ita_egg %>%
+  ggplot(aes(vowel, von_von, fill = vowel)) +
+  geom_boxplot()
+```
+
+```{r von-von-box}
+ita_egg %>%
+  filter(von_von > 0) %>%
+  ggplot(aes(vowel, von_von, fill = vowel)) +
+  geom_boxplot()
+```
+
+```{r von-von-box}
+ita_egg %>%
+  filter(von_von > 0) %>%
+  ggplot(aes(height, von_von, fill = height)) +
+  geom_boxplot()
+```
+
 ```{r voi-clo-lm}
 voi_clo_lm <- lmer(
   voi_clo ~
@@ -103,6 +124,34 @@ summary(voi_clo_lm)
 plot_model(voi_clo_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:12))
 ```
 
+Mid-low vowels induce 8 ms voicing bleed, mid-high induce 4.5 ms, high, 7 ms.
+
 ```{r plot-voi-clo-lm-2}
 plot_model(voi_clo_lm, type = "pred", terms = "height")
+```
+
+```{r voi-clo-lm-2}
+voi_clo_lm_2 <- lmer(
+  voi_clo ~
+    vowel *
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(voi_clo_lm_2)
+```
+
+```{r voi-clo-lm}
+von_von_lm <- lmer(
+  von_von ~
+    height +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+# https://stats.stackexchange.com/a/243225/128897
+
+summary(von_von_lm)
 ```

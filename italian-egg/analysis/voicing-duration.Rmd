@@ -21,7 +21,7 @@ scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 data("ita_egg")
 ita_egg <- ita_egg %>%
   mutate(
-    vowel = factor(vowel, levels = c("i", "e", "a", "o", "u")),
+    vowel = factor(vowel, levels = c("a", "o", "e", "i", "u")),
     height = factor(height, levels = c("low", "mid-low", "mid-high", "high")),
     vofft = (voice_off - c1_rel) * 1000
   ) %>%
@@ -168,6 +168,10 @@ ita_egg %>%
 
 # Modelling
 
+## Hypothesis testing
+
+### Voicing duration
+
 ```{r voice-lm}
 voice_lm_1 <- lme4::lmer(
   voice_duration ~
@@ -206,6 +210,8 @@ summary(voice_lm_1)
 plot_model(voice_lm_1, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:6))
 ```
 
+### Vowel duration
+
 ```{r vowel-lm}
 vowel_lm <- lmer(
   v1_duration ~
@@ -227,10 +233,12 @@ summary(vowel_lm)
 plot_model(vowel_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:12))
 ```
 
-Relative to the duration of low vowels (/a/), mid-high vowels (/e/) are 24ms shorter, and high vowels (/i/, /u/) are 36ms shorter.
+Relative to the duration of low vowels (/a/), mid-high vowels (/e/) are 18.5 ms shorter, and high vowels (/i/, /u/) are 32 ms shorter.
 In comparison, voicing in mid-high vowels is 16ms shorter, and it is 27ms shorter in high vowels.
-There's seems to be a 10ms gap in shortnening between vowel and voicing duration (vowel shortening magnitude is greater).
+There's seems to be a gap in shortnening between vowel and voicing duration (vowel shortening magnitude is greater).
 There seems not to be an interaction between height and vowel vs. voicing (the difference between the effect in midh-high and high is around 12 ms in both cases).
+
+### VOT
 
 ```{r vot-lm}
 vot_lm <- lmer(
@@ -252,21 +260,7 @@ summary(vot_lm)
 plot_model(vot_lm, type = "pred", terms = "height")
 ```
 
-
-```{r vofft-lm}
-vofft_lm <- lmer(
-  vofft ~
-    height +
-    c2_place +
-    height:c2_place +
-    speech_rate +
-    (1+height|speaker) +
-    (1|word),
-  data = ita_egg
-)
-
-summary(vofft_lm)
-```
+### Release to vowel offset
 
 ```{r rel-voff-lm}
 rel_voff_lm <- lmer(
@@ -281,4 +275,70 @@ rel_voff_lm <- lmer(
 )
 
 summary(rel_voff_lm)
+```
+
+## Exploratory
+
+```{r voice-lm-2}
+voice_lm_2 <- lmer(
+  voice_duration ~
+    height *
+    speech_rate_c +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(voice_lm_2)
+```
+
+```{r vot-lm-2}
+vot_lm_2 <- lmer(
+  vot ~
+    height *
+    # c2_place +
+    # height:c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+# singularity problem: reduce random structure
+
+summary(vot_lm_2)
+```
+
+```{r vot-lm-2-plot}
+plot_model(vot_lm_2, type = "pred", terms = c("height", "speech_rate_c"))
+```
+
+```{r vot-lm-2}
+vot_lm_3 <- lmer(
+  vot ~
+    vowel *
+    # c2_place +
+    # height:c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+# singularity problem: reduce random structure
+
+summary(vot_lm_3)
+```
+
+```{r vofft-lm}
+vofft_lm <- lmer(
+  vofft ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(vofft_lm)
 ```
