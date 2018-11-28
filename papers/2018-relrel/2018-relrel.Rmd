@@ -154,12 +154,12 @@ This finding is compatible with a compensatory temporal adjustment account by wh
 
 ## Participants
 
-For this study, a target of 10 speakers per language was set.
-A low target number of participants was required to keep the time needed for processing the ultrasound data at manageable levels, since it generally requires more time than in more standard acoustic analysis.
+<!-- A target of 10 speakers per language was set for this study. -->
+<!-- A low target number of participants was required to keep the time needed for processing the ultrasound data at manageable levels, since it generally requires more time than in more standard acoustic analysis.
 The stopping rule for recruitment was to reach 10 speakers in both languages or to end data collection within 15 months from the start.
-This rule was chosen to comply with resources and time limits.
-Participants were sought in Manchester (UK), and in Verbania (Italy).
+This rule was chosen to comply with resources and time limits. -->
 <!-- Recruitment proved to be difficult, and among potential participants, several decided not to participate after considering the experimental task too demanding. -->
+Participants were sought in Manchester (UK), and in Verbania (Italy).
 Seventeen subjects in total participated in this study.
 Eleven subjects are native speakers of Italian (5 female, 6 male), while six are native speakers of Polish (3 female, 3 male).
 The Italian speakers are from the North and Centre of Italy (8 speakers from Northern Italy, 3 from Central Italy).
