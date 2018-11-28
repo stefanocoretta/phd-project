@@ -17,3 +17,4 @@ broom
 broom.mixed
 knitr
 bindrcpp
+kableExtra
