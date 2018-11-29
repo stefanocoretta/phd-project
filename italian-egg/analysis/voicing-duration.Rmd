@@ -244,8 +244,8 @@ There seems not to be an interaction between height and vowel vs. voicing (the d
 vot_lm <- lmer(
   vot ~
     height +
-    c2_place +
-    height:c2_place +
+    c1_place +
+    height:c1_place +
     speech_rate +
     (1|speaker) +
     (1|word),
@@ -266,10 +266,10 @@ plot_model(vot_lm, type = "pred", terms = "height")
 rel_voff_lm <- lmer(
   rel_voff ~
     height +
-    c2_place +
-    height:c2_place +
+    c1_place +
+    height:c1_place +
     speech_rate +
-    (1+height|speaker) +
+    (1|speaker) +
     (1|word),
   data = ita_egg
 )
@@ -278,6 +278,8 @@ summary(rel_voff_lm)
 ```
 
 ## Exploratory
+
+### Voicing duration
 
 ```{r voice-lm-2}
 voice_lm_2 <- lmer(
@@ -292,13 +294,16 @@ voice_lm_2 <- lmer(
 summary(voice_lm_2)
 ```
 
+### VOT
+
 ```{r vot-lm-2}
 vot_lm_2 <- lmer(
   vot ~
-    height *
-    # c2_place +
-    # height:c2_place +
+    height +
+    c1_place +
+    # height:c1_place +
     speech_rate_c +
+    height:speech_rate_c +
     (1|speaker) +
     (1|word),
   data = ita_egg
@@ -327,6 +332,8 @@ vot_lm_3 <- lmer(
 
 summary(vot_lm_3)
 ```
+
+### VOffT
 
 ```{r vofft-lm}
 vofft_lm <- lmer(
