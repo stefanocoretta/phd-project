@@ -339,8 +339,8 @@ summary(vot_lm_3)
 vofft_lm <- lmer(
   vofft ~
     height +
-    c2_place +
-    height:c2_place +
+    c1_place +
+    # height:c1_place +
     speech_rate +
     (1+height|speaker) +
     (1|word),
