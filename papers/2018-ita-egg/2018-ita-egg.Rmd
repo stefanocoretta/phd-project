@@ -16,3 +16,41 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# Methods
+
+## Participants
+
+<!-- mention sample rationale -->
+Participants for this study were recruited in the province of Verbano-Cusio-Ossola (VCO), Piedmont, Northern Italy.
+Inclusion in the study was dependent on the participant being a native speaker of Italian, of adult age (18 yo or older), with no reported hearing or speaking disorders, and normal or corrected to normal vision.
+The target sample size was set up to be 30, to be reached within a maximum of three months from the start of data collection.
+A total of 19 participants were recorded within the established timeframe.
+Fifteen were female and the mean age was 40 (range 18--59).
+Seventeen participants lived all or most of their lives in the VCO province.
+IT03 is from a neighbouring province (Varese), and the variety of Italian he speaks is indistinguishable from that of the VCO speakers.
+IT07 is from Sardinia, but she spent the 10 years ahead of recording in the VCO province.
+Her variety of Italian is different from the one of the other speakers, but excluding her data from the analyses produced negligible or no differences in the results, so they have been kept.
+Ethical clearance for this study was obtained from the University of Manchester (REF 2016-0099-76).
+The speakers were not paid for their participation.
+<!-- whichever comes first -->
+
+## Equipment
+
+Synchronised audio and electroglottographic signals were obtained with a Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
+The acquisition of the signals was controlled with Audacity (2.2.2) running on a MacBook Pro (13-inch, Mid 2014, ...) with macOS ... .
+The EGG electrodes were placed around the participant's neck with a velcro strap, at the height of the glottis, one on each side of the thyroid cartilage.
+Accuracy of the electrode vertical placement was assessed by checking the EGG unit placement monitor light (green indicates correct placement).
+The low frequency (LF) limit selector was set on 20 Hz.
+The microphone was clipped on the participants cloths, about 20 cm from their mouth.
+
+## Materials
+
+Target
+
+## Procedure
+
+## Data processing and measurements
+
+## Statistical analysis
+
+## Open Science statement
