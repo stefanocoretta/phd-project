@@ -45,9 +45,23 @@ The microphone was clipped on the participants cloths, about 20 cm from their mo
 
 ## Materials
 
-Target
+To test the influence of vowel height on vowel and voicing duration, a set of target words with a stressed vowel flanked by two voiceless tops.
+The words have a CVCV structure, with lexical stress on the first syllable, and where C\textsubscript{1} = /p, t, k/, V\textsubscript{1} = /a, e, ɔ, i, u/, C\textsubscript{2} = /p, t, k/, and V\textsubscript{2} = /o/.
+All possible combinations were used, except for *peto* and *caco* (which are bad words).
+The full list of target words is given in ...
+The traditional description of the Italian vocalic system includes both mid-low /ɛ, ɔ/ and a mid-high vowels /o, ɔ/.
+While these vowels are usually ascribed to different phonemes \citep{kramer2009}, their functional load and actual phonetic realisation are less straightforward \citep{renwick2016}.
+Although some minimal pairs exists both for the front and the back contrast, stressed open syllables in Italian tend to have the mid-high front vowel /e/ and the mid-low back vowel /ɔ/.
+Note also that penultimate stressed open syllables in Italian have a phonetically long vowel, for example /pɔko/ = [pɔːko] \citep{renwick2016}.
+
+These words were embedded in 4 frame sentences, adapted from \citet{renwick2016}: *Scrivete X sul foglio* 'Write (you pl.) X on the sheet', *Ha detto X sei volte* 'S/he said X six times', *Ripete X da sempre* 'S/he's being repeating X for ever', *Sentivo X di nuovo* 'I heard X again'.
+In all the sentences, the target word is preceded and followed by three syllables, where the second syllable is stressed.
+Using different frames reduces possible repetition effects, while allowing the acquisition of 4 word tokens per speaker.
+All word/frame combinations were used, generating a total of 43 words × 4 frames = 172 observations per speaker.
 
 ## Procedure
+
+
 
 ## Data processing and measurements
 
