@@ -1,0 +1,18 @@
+---
+title: 'Vowel duration, voicing duration, and vowel height: Acoustic and articulatory
+  data from Italian'
+author: "Stefano Coretta"
+date: "29/11/2018"
+output:
+  pdf_document:
+    citation_package: natbib
+    fig_caption: yes
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
