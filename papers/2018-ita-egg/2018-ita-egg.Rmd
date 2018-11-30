@@ -84,7 +84,12 @@ The audio recordings were downsampled to 22050 Hz (16-bit) for acoustical analys
 Noise removal with the Praat built-in function `Remove noise` \citep{boersma2018} was applied to the audio recordings of IT01, IT02, IT03, IT04, IT07, IT10, and IT12.
 An automatic time-aligned transcription was performed with the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}), and subsequently manually fixed according to the criteria in \citet{machac2009}.
 In particular, vowel onset and offset were placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
-Only the following boundaries were corrected to shorten processing time: sentence onset and offset, target word onset and offset, target word segment boundaries.
+Only the following relevant boundaries were corrected: sentence onset and offset, target word onset and offset, target word segment boundaries.
+
+The EGG signal was pass-band filtered (40 Hz--10 KHz) and smoothed using a weighted moving average with smooth width = 11 \citet{macerata2016}.
+The Praat built-in function `To TextGrid (vuv)` was used to detect voiced/voiceless (Voiced/UnVoiced) intervals.
+The onset and offset of the voicing of V2 was then corrected manually.
+The boundaries were placed at the signal minimum before/after the first/last visible glottal pulse.
 
 
 ## Statistical analysis
