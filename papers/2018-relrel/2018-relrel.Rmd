@@ -132,7 +132,7 @@ Moreover, the design of the study has been constrained by the use of ultrasound 
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
 Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration.
-On the other hand, they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).\footnote{Note that, while Polish neutralises the voicing contrast word-finally, it is maintained word-medially.}
+On the other hand, they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).\footnote{Note that, while Polish neutralises the voicing contrast word-finally, it is maintained word-medially \citep{strycharczuk2012a}.}
 <!-- Note tat the distinction between voicing and aspirating varieties of Polish discussed in \citet{cyran2011} is based on phonological arguments rather than empirical data of VOT duration, so it will not be considered here. -->
 <!-- Cite Waniek 2011 -->
 For this reason, these two languages offer the opportunity to investigate differences that could reveal mechanisms underlying the voicing effect.
