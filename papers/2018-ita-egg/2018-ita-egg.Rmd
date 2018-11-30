@@ -10,6 +10,16 @@ output:
     keep_tex: yes
     latex_engine: xelatex
     number_sections: yes
+bibliography: linguistics
+biblio-style: unified
+mainfont: Charis SIL
+fontsize: 12pt
+header-includes:
+- \usepackage{cleveref}
+- \usepackage{ctable}
+- \usepackage{enumerate}
+- \usepackage{lineno}
+- \linenumbers
 ---
 
 ```{r setup, include=FALSE}
@@ -61,9 +71,21 @@ All word/frame combinations were used, generating a total of 43 words × 4 frame
 
 ## Procedure
 
-
+Participants familiarised themselves with the materials prior to recording and
+practiced reading them aloud.
+The stimuli sentences were presented in a randomised order on the laptop screen used for recording, through the software PsychoPy v1.90.3 \citet{peirce2009}.
+The participants were given a change to take a break half the way through the task, which lasted 8--10 minutes.
+At the end of the speaking task, the participants filled a short sociolinguistic questionnaire.
+The whole experiment session lasted 30 minutes.
 
 ## Data processing and measurements
+
+The audio recordings were downsampled to 22050 Hz (16-bit) for acoustical analysis.
+Noise removal with the Praat built-in function `Remove noise` \citep{boersma2018} was applied to the audio recordings of IT01, IT02, IT03, IT04, IT07, IT10, and IT12.
+An automatic time-aligned transcription was performed with the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}), and subsequently manually fixed according to the criteria in \citet{machac2009}.
+In particular, vowel onset and offset were placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
+Only the following boundaries were corrected to shorten processing time: sentence onset and offset, target word onset and offset, target word segment boundaries.
+
 
 ## Statistical analysis
 

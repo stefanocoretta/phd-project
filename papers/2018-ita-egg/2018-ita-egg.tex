@@ -1,0 +1,202 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Vowel duration, voicing duration, and vowel height: Acoustic and articulatory data from Italian},
+            pdfauthor={Stefano Coretta},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{unified}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Vowel duration, voicing duration, and vowel height: Acoustic and
+articulatory data from Italian}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Stefano Coretta}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{29/11/2018}
+
+\usepackage{cleveref}
+\usepackage{ctable}
+\usepackage{enumerate}
+\usepackage{lineno}
+\linenumbers
+
+\begin{document}
+\maketitle
+
+\section{Methods}\label{methods}
+
+\subsection{Participants}\label{participants}
+
+Participants for this study were recruited in the province of
+Verbano-Cusio-Ossola (VCO), Piedmont, Northern Italy. Inclusion in the
+study was dependent on the participant being a native speaker of
+Italian, of adult age (18 yo or older), with no reported hearing or
+speaking disorders, and normal or corrected to normal vision. The target
+sample size was set up to be 30, to be reached within a maximum of three
+months from the start of data collection. A total of 19 participants
+were recorded within the established timeframe. Fifteen were female and
+the mean age was 40 (range 18--59). Seventeen participants lived all or
+most of their lives in the VCO province. IT03 is from a neighbouring
+province (Varese), and the variety of Italian he speaks is
+indistinguishable from that of the VCO speakers. IT07 is from Sardinia,
+but she spent the 10 years ahead of recording in the VCO province. Her
+variety of Italian is different from the one of the other speakers, but
+excluding her data from the analyses produced negligible or no
+differences in the results, so they have been kept. Ethical clearance
+for this study was obtained from the University of Manchester (REF
+2016-0099-76). The speakers were not paid for their participation.
+
+\subsection{Equipment}\label{equipment}
+
+Synchronised audio and electroglottographic signals were obtained with a
+Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier
+microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050
+Hz for analysis). The acquisition of the signals was controlled with
+Audacity (2.2.2) running on a MacBook Pro (13-inch, Mid 2014, \ldots{})
+with macOS \ldots{} . The EGG electrodes were placed around the
+participant's neck with a velcro strap, at the height of the glottis,
+one on each side of the thyroid cartilage. Accuracy of the electrode
+vertical placement was assessed by checking the EGG unit placement
+monitor light (green indicates correct placement). The low frequency
+(LF) limit selector was set on 20 Hz. The microphone was clipped on the
+participants cloths, about 20 cm from their mouth.
+
+\subsection{Materials}\label{materials}
+
+To test the influence of vowel height on vowel and voicing duration, a
+set of target words with a stressed vowel flanked by two voiceless tops.
+The words have a CVCV structure, with lexical stress on the first
+syllable, and where C\textsubscript{1} = /p, t, k/, V\textsubscript{1} =
+/a, e, ɔ, i, u/, C\textsubscript{2} = /p, t, k/, and V\textsubscript{2}
+= /o/. All possible combinations were used, except for \emph{peto} and
+\emph{caco} (which are bad words). The full list of target words is
+given in \ldots{} The traditional description of the Italian vocalic
+system includes both mid-low /ɛ, ɔ/ and a mid-high vowels /o, ɔ/. While
+these vowels are usually ascribed to different phonemes
+\citep{kramer2009}, their functional load and actual phonetic
+realisation are less straightforward \citep{renwick2016}. Although some
+minimal pairs exists both for the front and the back contrast, stressed
+open syllables in Italian tend to have the mid-high front vowel /e/ and
+the mid-low back vowel /ɔ/. Note also that penultimate stressed open
+syllables in Italian have a phonetically long vowel, for example /pɔko/
+= {[}pɔːko{]} \citep{renwick2016}.
+
+These words were embedded in 4 frame sentences, adapted from
+\citet{renwick2016}: \emph{Scrivete X sul foglio} `Write (you pl.) X on
+the sheet', \emph{Ha detto X sei volte} `S/he said X six times',
+\emph{Ripete X da sempre} `S/he's being repeating X for ever',
+\emph{Sentivo X di nuovo} `I heard X again'. In all the sentences, the
+target word is preceded and followed by three syllables, where the
+second syllable is stressed. Using different frames reduces possible
+repetition effects, while allowing the acquisition of 4 word tokens per
+speaker. All word/frame combinations were used, generating a total of 43
+words × 4 frames = 172 observations per speaker.
+
+\subsection{Procedure}\label{procedure}
+
+Participants familiarised themselves with the materials prior to
+recording and practiced reading them aloud. The stimuli sentences were
+presented in a randomised order on the laptop screen used for recording,
+through the software PsychoPy v1.90.3 \citet{peirce2009}. The
+participants were given a change to take a break half the way through
+the task, which lasted 8--10 minutes. At the end of the speaking task,
+the participants filled a short sociolinguistic questionnaire. The whole
+experiment session lasted 30 minutes.
+
+\subsection{Data processing and
+measurements}\label{data-processing-and-measurements}
+
+The audio recordings were downsampled to 22050 Hz (16-bit) for
+acoustical analysis. Noise removal with the Praat built-in function
+\texttt{Remove\ noise} \citep{boersma2018} was applied to the audio
+recordings of IT01, IT02, IT03, IT04, IT07, IT10, and IT12. An automatic
+time-aligned transcription was performed with the SPeech Phonetisation
+Alignment and Syllabification software (SPPAS, \citealt{bigi2015}), and
+subsequently manually fixed according to the criteria in
+\citet{machac2009}. In particular, vowel onset and offset were placed in
+correspondence of the appearance and disappearance of higher formant
+structure in the spectrogram. Only the following boundaries were
+corrected to shorten processing time: sentence onset and offset, target
+word onset and offset, target word segment boundaries.
+
+\subsection{Statistical analysis}\label{statistical-analysis}
+
+\subsection{Open Science statement}\label{open-science-statement}
+
+\bibliography{linguistics}
+
+
+\end{document}
