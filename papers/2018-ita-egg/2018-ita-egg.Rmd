@@ -20,11 +20,16 @@ header-includes:
 - \usepackage{enumerate}
 - \usepackage{lineno}
 - \linenumbers
+indent: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+# Introduction
+
+
 
 # Methods
 
@@ -82,15 +87,24 @@ The whole experiment session lasted 30 minutes.
 
 The audio recordings were downsampled to 22050 Hz (16-bit) for acoustical analysis.
 Noise removal with the Praat built-in function `Remove noise` \citep{boersma2018} was applied to the audio recordings of IT01, IT02, IT03, IT04, IT07, IT10, and IT12.
+<!-- did I pass band filtered also the audio? -->
 An automatic time-aligned transcription was performed with the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}), and subsequently manually fixed according to the criteria in \citet{machac2009}.
 In particular, vowel onset and offset were placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
 Only the following relevant boundaries were corrected: sentence onset and offset, target word onset and offset, target word segment boundaries.
+The stop releases of C1 and C2 were automatically detected with a Praat implementation of the algorithm described in \citet{ananthapadmanabha2014} and then manually corrected if necessary.
 
-The EGG signal was pass-band filtered (40 Hz--10 KHz) and smoothed using a weighted moving average with smooth width = 11 \citet{macerata2016}.
+The EGG signal was pass-band filtered (40 Hz--10 KHz) to remove hardware noise, and smoothed using a weighted moving average with smooth width = 11 \citep{macerata2016}.
 The Praat built-in function `To TextGrid (vuv)` was used to detect voiced/voiceless (Voiced/UnVoiced) intervals.
-The onset and offset of the voicing of V2 was then corrected manually.
+The onset and offset of the voicing of V1 was then corrected manually.
 The boundaries were placed at the signal minimum before/after the first/last visible glottal pulse.
 
+The following interval durations were measured with a custom Praat script:
+
+* **V1 duration**: from the onset to the offset of higher formant structure of V1.
+* **Duration of voiced interval of V1** (V1 voicing duration): from the voice onset to the voice offset of the voiced interval of V1.
+* **Voice Onset Time**: from the release of C1 to V2 voice onset.
+* **Release to Vowel Offset**: from release of C1 to V1 offset.
+* **Speech rate**: calculated as syllables per second (number of syllables / sentence duration, \citealt{plug2018a}).
 
 ## Statistical analysis
 

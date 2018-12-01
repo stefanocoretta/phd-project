@@ -41,12 +41,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -97,9 +91,11 @@ articulatory data from Italian}
 \begin{document}
 \maketitle
 
-\section{Methods}\label{methods}
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
 
-\subsection{Participants}\label{participants}
+\hypertarget{participants}{%
+\subsection{Participants}\label{participants}}
 
 Participants for this study were recruited in the province of
 Verbano-Cusio-Ossola (VCO), Piedmont, Northern Italy. Inclusion in the
@@ -120,7 +116,8 @@ differences in the results, so they have been kept. Ethical clearance
 for this study was obtained from the University of Manchester (REF
 2016-0099-76). The speakers were not paid for their participation.
 
-\subsection{Equipment}\label{equipment}
+\hypertarget{equipment}{%
+\subsection{Equipment}\label{equipment}}
 
 Synchronised audio and electroglottographic signals were obtained with a
 Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier
@@ -135,7 +132,8 @@ monitor light (green indicates correct placement). The low frequency
 (LF) limit selector was set on 20 Hz. The microphone was clipped on the
 participants cloths, about 20 cm from their mouth.
 
-\subsection{Materials}\label{materials}
+\hypertarget{materials}{%
+\subsection{Materials}\label{materials}}
 
 To test the influence of vowel height on vowel and voicing duration, a
 set of target words with a stressed vowel flanked by two voiceless tops.
@@ -166,7 +164,8 @@ repetition effects, while allowing the acquisition of 4 word tokens per
 speaker. All word/frame combinations were used, generating a total of 43
 words × 4 frames = 172 observations per speaker.
 
-\subsection{Procedure}\label{procedure}
+\hypertarget{procedure}{%
+\subsection{Procedure}\label{procedure}}
 
 Participants familiarised themselves with the materials prior to
 recording and practiced reading them aloud. The stimuli sentences were
@@ -177,8 +176,9 @@ the task, which lasted 8--10 minutes. At the end of the speaking task,
 the participants filled a short sociolinguistic questionnaire. The whole
 experiment session lasted 30 minutes.
 
+\hypertarget{data-processing-and-measurements}{%
 \subsection{Data processing and
-measurements}\label{data-processing-and-measurements}
+measurements}\label{data-processing-and-measurements}}
 
 The audio recordings were downsampled to 22050 Hz (16-bit) for
 acoustical analysis. Noise removal with the Praat built-in function
@@ -189,13 +189,45 @@ Alignment and Syllabification software (SPPAS, \citealt{bigi2015}), and
 subsequently manually fixed according to the criteria in
 \citet{machac2009}. In particular, vowel onset and offset were placed in
 correspondence of the appearance and disappearance of higher formant
-structure in the spectrogram. Only the following boundaries were
-corrected to shorten processing time: sentence onset and offset, target
-word onset and offset, target word segment boundaries.
+structure in the spectrogram. Only the following relevant boundaries
+were corrected: sentence onset and offset, target word onset and offset,
+target word segment boundaries. The stop releases of C1 and C2 were
+automatically detected with a Praat implementation of the algorithm
+described in \citet{ananthapadmanabha2014} and then manually corrected
+if necessary.
 
-\subsection{Statistical analysis}\label{statistical-analysis}
+The EGG signal was pass-band filtered (40 Hz--10 KHz) to remove hardware
+noise, and smoothed using a weighted moving average with smooth width =
+11 \citep{macerata2016}. The Praat built-in function
+\texttt{To\ TextGrid\ (vuv)} was used to detect voiced/voiceless
+(Voiced/UnVoiced) intervals. The onset and offset of the voicing of V1
+was then corrected manually. The boundaries were placed at the signal
+minimum before/after the first/last visible glottal pulse.
 
-\subsection{Open Science statement}\label{open-science-statement}
+The following interval durations were measured with a custom script:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{V1 duration}: from the onset to the offset of higher formant
+  structure of V1.
+\item
+  \textbf{Duration of voiced interval of V1} (V1 voicing duration): from
+  the voice onset to the voice offset of the voiced interval of V1.
+\item
+  \textbf{Voice Onset Time}: from the release of C1 to V2 voice onset.
+\item
+  \textbf{Release to Vowel Offset}: from release of C1 to V1 offset.
+\item
+  \textbf{Speech rate}: calculated as syllables per second (number of
+  syllables / sentence duration, \citealt{plug2018a}).
+\end{itemize}
+
+\hypertarget{statistical-analysis}{%
+\subsection{Statistical analysis}\label{statistical-analysis}}
+
+\hypertarget{open-science-statement}{%
+\subsection{Open Science statement}\label{open-science-statement}}
 
 \bibliography{linguistics}
 
