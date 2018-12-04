@@ -17,6 +17,10 @@ library(sjPlot)
 
 data("ita_egg")
 ita_egg <- ita_egg %>%
+  mutate(
+    vowel = factor(vowel, levels = c("a", "o", "e", "i", "u")),
+    height = factor(height, levels = c("low", "mid-low", "mid-high", "high"))
+  ) %>%
   mutate_if(is.character, as.factor)
 ```
 
@@ -128,3 +132,37 @@ plot_model(rr_place_lm, type = "pred", terms = c("c1_place", "c2_place"))
 plot_model(rr_place_lm, type = "pred", terms = "speech_rate_c")
 ```
 
+```{r rr-vow-place-lm}
+rr_vow_place_lm <- lmer(
+  rel_rel ~
+    c2_place *
+    vowel *
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(rr_vow_place_lm)
+```
+
+```{r rr-vow-lm}
+rr_vow_lm <- lmer(
+  rel_rel ~
+    vowel *
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg
+)
+
+summary(rr_vow_lm)
+```
+
+```{r rr-place-lm-plot}
+plot_model(rr_vow_lm, order.terms = 1:9)
+```
+
+```{r rr-place-lm-plot-2}
+plot_model(rr_vow_lm, type = "pred", terms = c("vowel"))
+```
