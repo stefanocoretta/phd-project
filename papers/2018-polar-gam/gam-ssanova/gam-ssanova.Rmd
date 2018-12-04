@@ -67,7 +67,7 @@ for (i in 1:length(origins)) {
   
   tongue <- sim_tongue(-origins[i])
   
-  polar <- polar_gam(
+  polar_rho <- polar_gam(
     Y ~
       phonation.ord +
       s(X, bs = "cr") +
@@ -77,14 +77,30 @@ for (i in 1:length(origins)) {
     method = "ML"
   )
   
+  rho <- start_value_rho(polar_rho)
+  
+  polar <- polar_gam(
+    Y ~
+      phonation.ord +
+      s(X, bs = "cr") +
+      s(X, by = phonation.ord, bs = "cr"),
+    origin = c(1, 0),
+    data = tongue,
+    method = "ML",
+    AR_start = tongue$start.event,
+    rho = rho
+  )
+  
   polar_null <- polar_gam(
     Y ~
       # phonation.ord +
       s(X, bs = "cr"),
-      # s(X, by = phonation.ord, bs = "cr"),
+      # s(X, by = phonation.ord, bs = "cr"),,
     origin = c(1, 0),
     data = tongue,
-    method = "ML"
+    method = "ML",
+    AR_start = tongue$start.event,
+    rho = rho
   )
   
   comp_ml <- compareML(polar_null, polar, print.output = FALSE)
