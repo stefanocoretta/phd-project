@@ -1,0 +1,97 @@
+---
+title: "Polar GAM vs. SSANOVA"
+author: "Stefano Coretta"
+date: "04/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(mgcv)
+library(itsadug)
+library(rticulate)
+```
+
+```{r sim-tongue}
+sim_tongue <- function(voiced) {
+  set.seed(787)
+  
+  x <- seq(0, 1, 1/41)
+  k <- 10
+  stdev <- 0.2
+  
+  origin.voiceless <- rnorm(50, mean = 0, sd = stdev)
+  y.voiceless <- NULL
+  
+  for (i in 1:50) {
+    y.voiceless.current <- 1 / (1 + exp(-k * (x + origin.voiceless[i])))
+    y.voiceless <- c(y.voiceless, y.voiceless.current)
+  }
+  
+  set.seed(787)
+  
+  origin.voiced <- rnorm(50, mean = voiced, sd = stdev)
+  y.voiced <- NULL
+  
+  for (i in 1:50) {
+    y.voiced.current <- 1 / (1 + exp(-k * (x + origin.voiced[i])))
+    y.voiced <- c(y.voiced, y.voiced.current)
+  }
+  
+  min.tongue <- min(y.voiceless)
+  
+  tongue <- tibble(
+    X = rep(x, 50 * 2),
+    Y = c(y.voiceless, y.voiced),
+    phonation = rep(c("voiceless", "voiced"), each = length(rep(x, 50))),
+    item = as.factor(rep(1:100, each = 42)),
+    start.event = rep(c(TRUE, rep(FALSE, 41)), 100)
+  ) %>%
+    mutate(
+        phonation.ord = ordered(phonation, levels = c("voiceless", "voiced"))
+    )
+  
+  contrasts(tongue$phonation.ord) <- "contr.treatment"
+  
+  return(tongue)
+}
+```
+
+```{r gam-loop}
+p_values <- NULL
+
+origins <- seq(0.005, 0.05, 0.0025)
+
+for (i in 1:length(origins)) {
+  
+  tongue <- sim_tongue(-origins[i])
+  
+  polar <- polar_gam(
+    Y ~
+      phonation.ord +
+      s(X, bs = "cr") +
+      s(X, by = phonation.ord, bs = "cr"),
+    origin = c(1, 0),
+    data = tongue,
+    method = "ML"
+  )
+  
+  polar_null <- polar_gam(
+    Y ~
+      # phonation.ord +
+      s(X, bs = "cr"),
+      # s(X, by = phonation.ord, bs = "cr"),
+    origin = c(1, 0),
+    data = tongue,
+    method = "ML"
+  )
+  
+  comp_ml <- compareML(polar_null, polar, print.output = FALSE)
+  
+  p <- as.numeric(as.character(comp_ml[["table"]][["p.value"]]))[2]
+  
+  p_values <- c(p_values, p)
+}
+```
+
