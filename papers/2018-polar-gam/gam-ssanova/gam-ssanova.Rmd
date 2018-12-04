@@ -14,8 +14,6 @@ library(itsadug)
 library(rticulate)
 ```
 
-# Sensitivity
-
 ```{r sim-tongue}
 sim_tongue <- function(voiced) {
   set.seed(787)
@@ -146,8 +144,4 @@ for (i in 1:length(origins)) {
 }
 
 ```
-
-# Polar GAMs
-
-## Type I error rate
 
