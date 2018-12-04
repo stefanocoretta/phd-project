@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+theme_set(theme_minimal())
 library(mgcv)
 library(itsadug)
 library(rticulate)
@@ -109,5 +110,38 @@ for (i in 1:length(origins)) {
   
   p_values <- c(p_values, p)
 }
+```
+
+```{r gam-p-plot}
+ggplot() +
+  geom_point(aes(origins, p_values, colour = p_values < 0.05)) +
+  geom_hline(yintercept = 0.05) +
+  theme(legend.position = "none")
+```
+
+```{r ssanova-loop}
+origins <- seq(0.005, 0.05, 0.0025)
+
+for (i in 1:length(origins)) {
+  tongue_df <- sim_tongue(-origins[i]) %>%
+  select(X, Y, phonation, item) %>%
+  mutate(
+    token = as.numeric(item),
+    phonation = factor(phonation, levels = c("voiceless", "voiced"))
+  ) %>%
+  select(-item) %>%
+  as.data.frame(.)
+
+  polar.ssanova(
+    tongue_df,
+    "phonation",
+    CI.fill = TRUE,
+    is.polar = FALSE,
+    flip = T,
+    origin = c(1, 0),
+    main = origins[i]
+  )
+}
+
 ```
 
