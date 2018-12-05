@@ -12,5 +12,86 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(coretta2018itapol)
 data("kinematics_series")
+library(mgcv)
+library(tidymv)
+library(itsadug)
+
+tra_series <- kinematics_series %>%
+  filter(c1_phonation == "voiceless", proportion > 0) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    trp = -TR_displacement_sm,
+    c2_phonation_o = ordered(c2_phonation,  levels = c("voiceless", "voiced"))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, proportion) %>%
+  create_event_start("rec_date")
+
+contrasts(tra_series$c2_phonation_o) <- "contr.treatment"
+```
+
+# Tongue root position
+
+```{r trp-language}
+tra_series %>%
+  ggplot(aes(proportion, trp, colour = c2_phonation)) +
+  geom_smooth() +
+  facet_grid(~ language)
+```
+
+```{r trp-speakers}
+tra_series %>%
+  ggplot(aes(proportion, trp, colour = c2_phonation)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(~ speaker, scales = "free")
+```
+
+```{r tra-gam}
+tra_gam <- bam(
+  trp ~
+    c2_phonation_o +
+    s(speech_rate_c) +
+    s(proportion) +
+    s(proportion, by = c2_phonation_o) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+
+rho <- start_value_rho(tra_gam)
+
+tra_gam_ar <- bam(
+  trp ~
+    c2_phonation_o +
+    s(speech_rate_c) +
+    s(proportion) +
+    s(proportion, by = c2_phonation_o) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start.event
+)
+
+tra_gam_ar_0 <- bam(
+  trp ~
+    # c2_phonation_o +
+    s(speech_rate_c) +
+    s(proportion) +
+    # s(proportion, by = c2_phonation_o) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start.event
+)
+
+compareML(tra_gam_ar_0, tra_gam_ar)
+```
+
+```{r tra-gam-plot}
+plot_smooths(tra_gam_ar, proportion, c2_phonation_o)
 ```
 
