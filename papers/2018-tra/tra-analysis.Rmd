@@ -1,0 +1,16 @@
+---
+title: "Tongue root position"
+author: "Stefano Coretta"
+date: "05/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itapol)
+data("kinematics_series")
+```
+
