@@ -4,11 +4,15 @@ author: Stefano Coretta
 output:
   pdf_document:
     citation_package: natbib
+    keep_tex: yes
     latex_engine: xelatex
+    number_sections: yes
 bibliography: linguistics.bib
 biblio-style: unified.bst
 header-includes:
 - \usepackage{cleveref}
+fontsize: 12pt
+indent: true
 ---
 
 ```{r setup, include=FALSE}
@@ -71,10 +75,17 @@ The R package `rticulate` has been developed to facilitate the use of the model,
 ## Ultrasound tongue imaging
 
 Ultrasound imaging is a non-invasive technique for obtaining an image of internal organs and tissue.
-Ultrasound imaging has been successfully used for imaging the mid-sagittal section of the tongue surface [].
-Ultrasound tongue imaging employs a transducer placed in contact with the sub-mental triangle (the area under the chin).
-The transducer propagates ultrasonic waves that travel through the aperture of the mandible and get reflected by the air above the tongue surface.
-The reflection is then translated into an image which shows the approximate location of the tongue surface.
+2D ultrasound imaging has been successfully used for imaging sections of the tongue surface (for a review and applications in field settings, see \citealt{gick2002}).
+To image the tongue, the transducer placed in contact with the sub-mental triangle (the area under the chin) aligned either with the mid-sagittal or the coronal plane.
+The ultrasonic waves propagate from the transducer in a radial fashion through the aperture of the mandible and get reflected when they hit the air above the tongue surface.
+This 'echo' is captured by the transducer and translated into an image like that in \Cref{f:uti}.
+
+\begin{figure}
+  \centering
+  \includegraphics{./img/uti.png}
+  \caption{An ultrasound image of the tongue}
+  \label{f:uti}
+\end{figure}
 
 ## Generalised Additive models
 
@@ -87,9 +98,8 @@ Moreover, random effects can also be implemented in GAMs, as generalised additiv
 
 Tongue contours as extracted from ultrasound imaging can be efficiently model using GAM(M)s.
 The random effects part of GAMMs also constitutes an improvement over traditional SSANOVA, which usually implements fixed effects only.
-<!-- say that you can specify the individual contours which reduces the autocorrelation -->
-
-<!-- since GAMs have been described in linguistics already I will not do it here, rather see references... -->
+Moreover, GAMMs can reduce autocorrelation, for example by allowing separate smooths to be fitted to the individual contours/trajectories, or by including a first-order autoregression model.
+For a technical introduction to GAM(M)s, see \citet{zuur2012} and \citet{wood2017}.
 
 ## Polar coordinates
 
@@ -154,10 +164,14 @@ GAMMs can be fitted in R with the `gam()` function from package `mgcv` [@wood201
 The package `rticulate` has been developed as a wrapper of the `bam()` function to be used with tongue contours.
 The special function `polar_gam()` can fit any specified GAM model to tongue contours coordinates, using the same syntax of `mgcv`.
 The function accepts tongue contours either in cartesian or polar coordinates.
-In the first case, the coordinates are transformed into polar before fitting.
+In the first case, the coordinates can be transformed into polar before fitting.
 The function `plot_polar_smooths()`, used for plotting the estimated contours, converts the coordinates back into cartesian.
 
-<!-- brief intro on GAM in R (smooths, reference smooths etc, but for a more detailed overview, see...) -->
+A GAM in R can be specified with a formula that uses the same syntax of `lme4`, a commonly used package for linear mixed-effects models.
+The `mgcv` package allows to specify smoothing spline terms with the function `s()`.
+This function takes the term along which a spline is created (for example, a time series, or *x*-coordinates).
+Within `s()` the user can choose, among other arguments, what kind of spline to use, and the grouping factor (namely, the factor with the levels to be compared).
+For a more in-depth introduction to GAM(M)s in R targeted to linguists, see \citet{soskuthy2017} and \citet{wieling2017}.
 
 Due to differences in the placement of the probe and the speaker's anatomy, different portions of the tongue are likely to be imaged across speakers.
 For this reason, it is recommended to fit separate models for each participant, rather then aggregate all of the data in a single model.
@@ -167,18 +181,17 @@ As means of illustration, the following paragraphs will show how to fit a polar 
 
 We can start from a simple model in which we test the effect of C2 place, vowel, and voicing on tongue contours.
 Modelling different contours for each combination of the three predictors can be achieved with the `by` argument in the difference smooth function and including the related parametric term.
-`vc_voicing` is an ordered factor which specifies for each contour the combination of C2 place, vowel, and voicing. The following code fits the specified model to the contour data of IT01. When running the code, the coordinates of the estimated origin used for the conversion to polar coordinates are returned.
-The author can optionally specify those manually, for example when the contours are not in a fan-like system (like the data exported from AAA).
+`vc_voicing` is an ordered factor which specifies for each contour the combination of C2 place, vowel, and voicing.
+The following code fits the specified model to the contour data of IT01.
+When running the code, the coordinates of the estimated origin used for the conversion to polar coordinates are returned.
+The author can optionally specify those manually, the contours are not in a fan-like system (like the data exported from AAA).
 
 ```{r it01-gam, cache=TRUE}
 it01_gam <- polar_gam(
   Y ~
-    # parametric term
-    vc_voicing +
-    # reference smooth
-    s(X) +
-    # difference smooth
-    s(X, by = vc_voicing),
+    vc_voicing +            # parametric term
+    s(X) +                  # reference smooth
+    s(X, by = vc_voicing),  # difference smooth
   data = tongue_it01,
   method = "ML"
 )
@@ -206,12 +219,9 @@ Both the parametric term and the difference smooth need to be removed in the nul
 ```{r it01-gam-0, cache=TRUE}
 it01_gam_0 <- polar_gam(
   Y ~
-    # remove parametric term
-    vc_voicing +
-    # reference smooth
-    s(X),
-    # remove difference smooth
-    # s(X, by = vc_voicing),
+    # vc_voicing +            # remove parametric term
+    s(X),                     # keep reference smooth
+    # s(X, by = vc_voicing),  # remove difference smooth
   data = tongue_it01,
   method = "ML"
 )
