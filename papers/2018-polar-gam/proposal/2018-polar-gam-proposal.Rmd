@@ -30,5 +30,5 @@ An introduction to UTI and GAMMs will open the paper, followed by a general over
 Polar GAMMs fitting, significance testing, and model plotting will be illustrated by means of an example pilot study that compares tongue contours of voiceless and voiced stops of 4 Italian speakers.
 A brief tutorial will show how to fit polar GAMMs with the R package `rticulate`, which has been developed by the author to streamline polar GAMM fitting in R using the `mgcv` package.
 While the paper focusses on model fitting in R, the overview provided will be relevant to a more general public.
-An informal comparison between SSANOVA and polar GAMs will show that polar GAMs tend to be more conservative than SSANOVAs.
+Among the advantages of polar GAMMs are higher flexibility in model specification, inclusion of random effects, and control over autocorrelation in the residuals.
 The paper will conclude by discussing the limitations of the current implementation of polar GAMMs (such as across-speaker normalisation) and its future directions.
