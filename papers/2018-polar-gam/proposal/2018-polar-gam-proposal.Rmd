@@ -21,7 +21,7 @@ On the other hand, the quantitative analysis of UTI data remains more of a chall
 Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been mostly dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA).
 @mielke2015 and @heyne2015a further showed that fitting SSANOVA with tongue data in polar coordinates (rather than cartesian coordinates) produces more reliable results.
 SSANOVA of tongue contours undoubtedly advanced our understanding of tongue articulation and speech modelling.
-However, SSANOVA comes with some limitations, e.g. separate models are fitted for different phonetic contexts even within a single speaker, and the model implementation does not include random effects.
+<!-- However, SSANOVA comes with some limitations, e.g. separate models are fitted for different phonetic contexts even within a single speaker, and the model implementation does not include random effects. -->
 On the other hand, developments in the statistical world have seen an increased use of Generalised Additive Models (GAMs) and their mixed-effects counterpart [GAMMs, @wood2006].
 This family of models is a highly flexible solution which extends standard generalised linear mixed models for the modelling of non-linear effects.
 
