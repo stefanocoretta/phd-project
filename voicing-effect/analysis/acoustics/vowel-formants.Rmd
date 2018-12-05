@@ -12,6 +12,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
 library(effects)
+library(sjPlot)
 ```
 
 # Data import
@@ -36,14 +37,20 @@ vowels <- list.files(
   left_join(y = durations, by = c("speaker", "file", "word")) %>%
   left_join(y = speakers) %>%
   left_join(y = stimuli) %>%
+  mutate(
+    v1_duration = (c2_ons - v1_ons) * 1000,
+    sentence_duration = sentence_off - sentence_ons,
+    speech_rate = ifelse(
+      language == "Italian",
+      8 / sentence_duration,
+      6 / sentence_duration
+    ),
+    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
+  ) %>%
   mutate_if(is.character, as.factor)
 
 f1_dur <- vowels %>%
-  group_by(speaker, vowel, item) %>%
-  summarise(
-    f1 = mean(f1),
-    vowel_duration = mean(vowel_duration)
-  )
+  filter(time.x == 5)
 ```
 
 # Exploration
@@ -130,10 +137,10 @@ vowels %>%
 
 ```{r}
 f1_dur_lm <- lmer(
-  vowel_duration ~
-    f1 +
+  v1_duration ~
+    f1 *
     vowel +
-    f1:vowel +
+    speech_rate_c +
     (1|speaker) +
     (1|item),
   data = f1_dur
@@ -143,5 +150,13 @@ summary(f1_dur_lm)
 
 ```{r}
 plot(allEffects(f1_dur_lm))
+```
+
+```{r}
+plot_model(f1_dur_lm, order.terms = 1:6)
+```
+
+```{r}
+plot_model(f1_dur_lm, type = "pred", terms = c("f1", "vowel"))
 ```
 
