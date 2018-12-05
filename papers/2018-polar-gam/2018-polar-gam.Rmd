@@ -52,22 +52,59 @@ tongue_it01 <- read_aaa("./papers/2018-polar-gam/datasets/it01-tongue-cart.tsv",
   left_join(y = stimuli) %>%
   filter(X < 40, c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(vc_voicing = interaction(vowel, c2_place, c2_phonation), vc_voicing = ordered(vc_voicing)) %>%
-  mutate_if(is.character, as.factor)
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
 
 contrasts(tongue_it01$vc_voicing) <- "contr.treatment"
+
+tongue_it02 <- read_aaa("./papers/2018-polar-gam/datasets/it02-tongue-cart.tsv", columns)  %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), fan_line > 5, fan_line < 40) %>%
+  mutate(vc_voicing = interaction(vowel, c2_place, c2_phonation), vc_voicing = ordered(vc_voicing)) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
+
+contrasts(tongue_it02$vc_voicing) <- "contr.treatment"
+
+tongue_it03 <- read_aaa("./papers/2018-polar-gam/datasets/it03-tongue-cart.tsv", columns)  %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), fan_line < 40) %>%
+  mutate(vc_voicing = interaction(vowel, c2_place, c2_phonation), vc_voicing = ordered(vc_voicing)) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
+
+contrasts(tongue_it03$vc_voicing) <- "contr.treatment"
+
+tongue_it04 <- read_aaa("./papers/2018-polar-gam/datasets/it04-tongue-cart.tsv", columns)  %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), fan_line < 38) %>%
+  mutate(vc_voicing = interaction(vowel, c2_place, c2_phonation), vc_voicing = ordered(vc_voicing)) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_event_start("rec_date")
+
+contrasts(tongue_it04$vc_voicing) <- "contr.treatment"
 ```
 
 # Introduction
 
 <!-- need to say that tongue comes from UTI -->
-Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA), which undoubtedly brought a conspicuous advancement for understanding the articulation of speech sounds.
-Some of the limitations of modelling tongue contours with SSANOVA is that separate models are needed for different phonetic contexts even within a single speaker, and secondly SSANOVA as implemented in most studies does not include random effects (which have been shown to be extremely important XXX).
-The general difficulty felt with SSANOVA and tongue contours has favoured alternative methods like Principal Component Analysis.
-
+Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours obtained with ultrasound imaging has been dominated by the use of Smoothing Splines Analysis of Variance (SS-ANOVA, \citealt{gu2013}).
+These models have greatly advanced our understanding of tongue articulation and speech modelling.
+<!-- Some of the limitations of modelling tongue contours with SS-ANOVA is that separate models are needed for different phonetic contexts even within a single speaker, and that SS-ANOVA as implemented in most studies does not include random effects (for the importance of random effects in ).
+The general difficulty felt with SS-ANOVA and tongue contours has favoured alternative methods like Principal Component Analysis. -->
 On the other hand, developments in the statistical and programming world have seen the emergence of a highly flexible technique, Generalised Additive models (GAMs).
 GAMs have being increasingly adopted in linguistics as a means to model dynamic speech data.
-Indeed, @soskuthy2017 explicitly suggests the use of GAMs with tongue contours
-
+<!-- Indeed, @soskuthy2017 explicitly suggests the use of GAMs with tongue contours. -->
 This paper introduces an implementation of GAMs with tongue contours using polar coordinates.
 The use of polar GAMs is illustrated with ultrasound tongue imaging data comparing voiceless and voiced stops.
 The R package `rticulate` has been developed to facilitate the use of the model, and it is briefly introduced here.
@@ -91,13 +128,13 @@ This 'echo' is captured by the transducer and translated into an image like that
 
 Generalised additive modelling is a more general form of non-parametric modelling that allows fitting non-linear as well as linear effects.
 Generalised additive models, or GAMs, are built with smoothing splines.
-Smoothing splines are also at the heart of SSANOVA.
+Smoothing splines are also at the heart of SS-ANOVA.
 In GAMs, however, smoothing splines maximise the fit to the data while being constrained by a smoothing penalty estimated from the data itself which prevents overfitting.
 GAMs are powerful and flexible models that can deal with non-linear data efficiently.
 Moreover, random effects can also be implemented in GAMs, as generalised additive mixed models (or GAMMs).
 
 Tongue contours as extracted from ultrasound imaging can be efficiently model using GAM(M)s.
-The random effects part of GAMMs also constitutes an improvement over traditional SSANOVA, which usually implements fixed effects only.
+The random effects part of GAMMs also constitutes an improvement over traditional SS-ANOVA, which usually implements fixed effects only.
 Moreover, GAMMs can reduce autocorrelation, for example by allowing separate smooths to be fitted to the individual contours/trajectories, or by including a first-order autoregression model.
 For a technical introduction to GAM(M)s, see \citet{zuur2012} and \citet{wood2017}.
 
@@ -109,13 +146,13 @@ The point is describes with a radius, which corresponds to the radial distance f
 Tongue contours, due to their shape, tend to have increasing slope at the left and right edges, in certain cases tending to become almost completely vertical.
 The almost verticality of the contours has the effect of increasing the variance of the fitted contours (and hence increased confidence intervals), and is some cases it even generates uninterpretable curves.
 When tongue contours are expressed with polar coordinates, on the other hand, the variance is reduced and the fitted contours generally reflect more closely the underlying tongue shape.
-Mielke has implemented a series of R [@r-core-team2018] functions for fitting polar SSANOVAs to tongue contours in cartesian coordinates.
+Mielke has implemented a series of R [@r-core-team2018] functions for fitting polar SS-ANOVAs to tongue contours in cartesian coordinates.
 Plotting is subsequently obtained by reconverting the coordinates to cartesian.
 
 # Polar GAM(M)s
 
 Having shown the benefits of using GAMMs with dynamic data and polar coordinates, polar GAMMs for modelling tongue contours are introduced here. Polar GAMMs are GAMMs fitted to tongue contours using polar coordinates.
-As with SSANOVA, the coordinates of the fitted contours are converted to cartesian coordinates for plotting.
+As with SS-ANOVA, the coordinates of the fitted contours are converted to cartesian coordinates for plotting.
 A polar GAM is constructed as follows: the radius coordinates is the outcome variable, a smooth term over the angular coordinates is the predictor.
 The smooth term enables modelling the non-linearities of the contours.
 Predictors such as consonant or vowel type, or speech rate, can be specified in the model.
@@ -199,7 +236,7 @@ it01_gam <- polar_gam(
 
 The function `plot_polar_smooths()` can be used to plot the estimated contours.
 The shaded areas around the estimated contours are 95\% confidence intervals.
-Note that, differently from SSANOVA, statistical significance can't be assessed from the overlapping (or lack thereof) of the confidence intervals.
+Note that, differently from SS-ANOVA, statistical significance can't be assessed from the overlapping (or lack thereof) of the confidence intervals.
 
 ```{r it01-gam-plot, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
 plot_polar_smooths(
@@ -210,7 +247,9 @@ plot_polar_smooths(
   # the following splits the factor interaction in the individual terms, so that
   # they can called in the plotting arguments
   split = list(vc_voicing = c("vowel", "c2_place", "voicing"))
-)
+) +
+  coord_fixed() +
+  theme(legend.position = "top")
 ```
 
 One way of assessing significance is to compare the ML score of the full model against one without the relevant predictor, using the function `compareML()` from the `itsadug` package.
@@ -229,4 +268,139 @@ it01_gam_0 <- polar_gam(
 
 ```{r compare-it01}
 compareML(it01_gam_0, it01_gam)
+```
+
+# Comparing tongue contours in voiceless and voiced stops
+
+Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
+
+```{r it01-gam-ar}
+it01_rho <- start_value_rho(it01_gam)
+
+it01_gam_ar <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it01,
+  method = "ML", 
+  rho = it01_rho,
+  AR_start = tongue_it01$start.event
+)
+
+it01_gam_ar_0 <- polar_gam(
+  Y ~
+    s(X),
+  data = tongue_it01,
+  method = "ML", 
+  rho = it01_rho,
+  AR_start = tongue_it01$start.event
+)
+
+compareML(it01_gam_ar_0, it01_gam_ar)
+```
+
+```{r it02-gam-ar}
+it02_gam <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it02,
+  method = "ML"
+)
+
+it02_rho <- start_value_rho(it02_gam)
+
+it02_gam_ar <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it02,
+  method = "ML", 
+  rho = it02_rho,
+  AR_start = tongue_it02$start.event
+)
+
+it02_gam_ar_0 <- polar_gam(
+  Y ~
+    s(X),
+  data = tongue_it02,
+  method = "ML", 
+  rho = it02_rho,
+  AR_start = tongue_it02$start.event
+)
+
+compareML(it02_gam_ar_0, it02_gam_ar)
+```
+
+```{r it03-gam-ar}
+it03_gam <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it03,
+  method = "ML"
+)
+
+it03_rho <- start_value_rho(it03_gam)
+
+it03_gam_ar <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it03,
+  method = "ML", 
+  rho = it03_rho,
+  AR_start = tongue_it03$start.event
+)
+
+it03_gam_ar_0 <- polar_gam(
+  Y ~
+    s(X),
+  data = tongue_it03,
+  method = "ML", 
+  rho = it03_rho,
+  AR_start = tongue_it03$start.event
+)
+
+compareML(it03_gam_ar_0, it03_gam_ar)
+```
+
+```{r it04-gam-ar}
+it04_gam <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it04,
+  method = "ML"
+)
+
+it04_rho <- start_value_rho(it04_gam)
+
+it04_gam_ar <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_it04,
+  method = "ML", 
+  rho = it04_rho,
+  AR_start = tongue_it04$start.event
+)
+
+it04_gam_ar_0 <- polar_gam(
+  Y ~
+    s(X),
+  data = tongue_it04,
+  method = "ML", 
+  rho = it04_rho,
+  AR_start = tongue_it04$start.event
+)
+
+compareML(it04_gam_ar_0, it04_gam_ar)
 ```
