@@ -12,9 +12,11 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(coretta2018itapol)
 data("kinematics_series")
+data("kinematics")
 library(mgcv)
 library(tidymv)
 library(itsadug)
+library(lme4)
 
 tra_series <- kinematics_series %>%
   filter(c1_phonation == "voiceless", proportion > 0) %>%
@@ -28,6 +30,14 @@ tra_series <- kinematics_series %>%
   create_event_start("rec_date")
 
 contrasts(tra_series$c2_phonation_o) <- "contr.treatment"
+
+kines <- kinematics %>%
+  filter(c1_phonation == "voiceless", label == "closure_", TR_displacement_sm > 10) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    trp = -TR_displacement_sm
+  ) %>%
+  mutate_if(is.character, as.factor)
 ```
 
 # Tongue root position
@@ -93,5 +103,32 @@ compareML(tra_gam_ar_0, tra_gam_ar)
 
 ```{r tra-gam-plot}
 plot_smooths(tra_gam_ar, proportion, c2_phonation_o)
+```
+
+# Tongue root at closure and vowel duration
+
+```{r}
+kines %>%
+  ggplot(aes(v1_duration, trp)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+tra_lm <- lmer(
+  v1_duration ~
+    trp +
+    c2_phonation +
+    speech_rate_c +
+    # trp:c2_phonation +
+    trp:speech_rate_c +
+    vowel +
+    (1|speaker) +
+    (1|item),
+  data = kines,
+  REML = FALSE
+)
+
+summary(tra_lm)
 ```
 
