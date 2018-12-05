@@ -270,11 +270,30 @@ it01_gam_0 <- polar_gam(
 compareML(it01_gam_0, it01_gam)
 ```
 
+To check which part of the contour differs among conditions, the method recomended in \citet{soskuthy2017} is to plot the difference smooth and check the confidence interval.
+The parts of confidence interval that don't include 0 indicate that the difference between contours in that part is significant.
+
+```{r diff-it01-a}
+plot_difference(
+  it01_gam,
+  X,
+  difference = list(vc_voicing = c("a.coronal.voiced", "a.coronal.voiceless"))
+) + scale_x_reverse()
+```
+
+```{r diff-it01-u}
+plot_difference(
+  it01_gam,
+  X,
+  difference = list(vc_voicing = c("u.coronal.voiced", "u.coronal.voiceless"))
+) + scale_x_reverse()
+```
+
 # Comparing tongue contours in voiceless and voiced stops
 
 Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
 
-```{r it01-gam-ar}
+```{r it01-gam-ar, cache=TRUE}
 it01_rho <- start_value_rho(it01_gam)
 
 it01_gam_ar <- polar_gam(
@@ -283,7 +302,7 @@ it01_gam_ar <- polar_gam(
     s(X) +
     s(X, by = vc_voicing),
   data = tongue_it01,
-  method = "ML", 
+  method = "ML",
   rho = it01_rho,
   AR_start = tongue_it01$start.event
 )
@@ -292,7 +311,7 @@ it01_gam_ar_0 <- polar_gam(
   Y ~
     s(X),
   data = tongue_it01,
-  method = "ML", 
+  method = "ML",
   rho = it01_rho,
   AR_start = tongue_it01$start.event
 )
@@ -300,7 +319,7 @@ it01_gam_ar_0 <- polar_gam(
 compareML(it01_gam_ar_0, it01_gam_ar)
 ```
 
-```{r it02-gam-ar}
+```{r it02-gam-ar, cache=TRUE}
 it02_gam <- polar_gam(
   Y ~
     vc_voicing +
@@ -318,7 +337,7 @@ it02_gam_ar <- polar_gam(
     s(X) +
     s(X, by = vc_voicing),
   data = tongue_it02,
-  method = "ML", 
+  method = "ML",
   rho = it02_rho,
   AR_start = tongue_it02$start.event
 )
@@ -327,7 +346,7 @@ it02_gam_ar_0 <- polar_gam(
   Y ~
     s(X),
   data = tongue_it02,
-  method = "ML", 
+  method = "ML",
   rho = it02_rho,
   AR_start = tongue_it02$start.event
 )
@@ -335,7 +354,7 @@ it02_gam_ar_0 <- polar_gam(
 compareML(it02_gam_ar_0, it02_gam_ar)
 ```
 
-```{r it03-gam-ar}
+```{r it03-gam-ar, cache=TRUE}
 it03_gam <- polar_gam(
   Y ~
     vc_voicing +
@@ -353,7 +372,7 @@ it03_gam_ar <- polar_gam(
     s(X) +
     s(X, by = vc_voicing),
   data = tongue_it03,
-  method = "ML", 
+  method = "ML",
   rho = it03_rho,
   AR_start = tongue_it03$start.event
 )
@@ -362,7 +381,7 @@ it03_gam_ar_0 <- polar_gam(
   Y ~
     s(X),
   data = tongue_it03,
-  method = "ML", 
+  method = "ML",
   rho = it03_rho,
   AR_start = tongue_it03$start.event
 )
@@ -370,7 +389,7 @@ it03_gam_ar_0 <- polar_gam(
 compareML(it03_gam_ar_0, it03_gam_ar)
 ```
 
-```{r it04-gam-ar}
+```{r it04-gam-ar, cache=TRUE}
 it04_gam <- polar_gam(
   Y ~
     vc_voicing +
@@ -388,7 +407,7 @@ it04_gam_ar <- polar_gam(
     s(X) +
     s(X, by = vc_voicing),
   data = tongue_it04,
-  method = "ML", 
+  method = "ML",
   rho = it04_rho,
   AR_start = tongue_it04$start.event
 )
@@ -397,7 +416,7 @@ it04_gam_ar_0 <- polar_gam(
   Y ~
     s(X),
   data = tongue_it04,
-  method = "ML", 
+  method = "ML",
   rho = it04_rho,
   AR_start = tongue_it04$start.event
 )
