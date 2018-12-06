@@ -17,6 +17,7 @@ library(mgcv)
 library(tidymv)
 library(itsadug)
 library(lme4)
+library(sjPlot)
 
 tra_series <- kinematics_series %>%
   filter(c1_phonation == "voiceless", proportion > 0) %>%
@@ -33,6 +34,14 @@ contrasts(tra_series$c2_phonation_o) <- "contr.treatment"
 
 kines <- kinematics %>%
   filter(c1_phonation == "voiceless", label == "closure_", TR_displacement_sm > 10) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    trp = -TR_displacement_sm
+  ) %>%
+  mutate_if(is.character, as.factor)
+
+kines_max <- kinematics %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), TR_displacement_sm > 10) %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     trp = -TR_displacement_sm
@@ -105,30 +114,160 @@ compareML(tra_gam_ar_0, tra_gam_ar)
 plot_smooths(tra_gam_ar, proportion, c2_phonation_o)
 ```
 
+```{r tra-gam-2}
+tra_gam_2 <- bam(
+  trp ~
+    s(v1_duration) +
+    s(proportion) +
+    ti(proportion, v1_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+
+rho <- start_value_rho(tra_gam_2)
+
+tra_gam_ar_2 <- bam(
+  trp ~
+    s(v1_duration) +
+    s(proportion) +
+    ti(proportion, v1_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start.event
+)
+
+tra_gam_ar_0_2 <- bam(
+  trp ~
+    s(v1_duration) +
+    s(proportion) +
+    # ti(proportion, v1_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start.event
+)
+
+compareML(tra_gam_ar_0_2, tra_gam_ar_2)
+```
+
+```{r tra-gam-2-plot}
+fvisgam(
+  tra_gam_ar_2,
+  view = c("proportion", "v1_duration"),
+  rm.ranef = TRUE
+)
+```
+
+```{r tra-gam-2-smooths}
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 50), rm.ranef = TRUE, col = "#000000", lwd = 3)
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 100), rm.ranef = TRUE, col = "#E69F00", add = TRUE, lwd = 3)
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 145), rm.ranef = TRUE, col = "#56B4E9", add = TRUE, lwd = 3)
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 200), rm.ranef = TRUE, col = "#009E73", add = TRUE, lwd = 3)
+```
+
 # Tongue root at closure and vowel duration
 
-```{r}
+```{r v1-dur-trp}
 kines %>%
   ggplot(aes(v1_duration, trp)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm")
 ```
 
-```{r}
+```{r tra-lm}
 tra_lm <- lmer(
   v1_duration ~
     trp +
-    c2_phonation +
     speech_rate_c +
-    # trp:c2_phonation +
     trp:speech_rate_c +
     vowel +
     (1|speaker) +
     (1|item),
-  data = kines,
-  REML = FALSE
+  data = kines
 )
-
+  
 summary(tra_lm)
 ```
 
+```{r tra-lm-est}
+plot_model(tra_lm, order.terms = 1:7)
+```
+
+```{r tra-lm-plot}
+plot_model(tra_lm, type = "pred", terms = c("trp", "c2_phonation"))
+```
+
+```{r tra-lm-plot-2}
+plot_model(tra_lm, type = "pred", terms = c("trp", "speech_rate_c", "c2_phonation"))
+```
+
+```{r tra-lm-2}
+tra_lm_2 <- lmer(
+  trp ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = kines
+)
+
+summary(tra_lm_2)
+```
+
+```{r tra-lm-3}
+tra_lm_3 <- lmer(
+  trp ~
+    v1_duration +
+    vowel +
+    c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = kines
+)
+
+summary(tra_lm_3)
+```
+
+```{r tra-lm-3-plot}
+plot_model(tra_lm_3, type = "pred", terms = c("v1_duration", "speech_rate_c"))
+```
+
+```{r tra-lm-4}
+tra_lm_4 <- lmer(
+  trp ~
+    v1_duration *
+    c2_phonation +
+    vowel +
+    c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = kines
+)
+
+summary(tra_lm_4)
+```
+
+```{r tra-max-lm}
+tra_max_lm <- lmer(
+  trp ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    (1|speaker) +
+    (1|item),
+  data = kines_max,
+  REML = FALSE
+)
+
+summary(tra_max_lm)
+```
+
+I think that getting TRP at maximum displacement might not be sensible. TR and consonant gesture might be secluded, and maximum displacement of consonant gesture might not coincide with maximum TRA.
+Including interaction `c2_phonation:language` suggest Italian and Polish behave similarly.
