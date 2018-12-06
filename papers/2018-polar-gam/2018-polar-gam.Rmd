@@ -292,6 +292,11 @@ plot_difference(
 # Comparing tongue contours in voiceless and voiced stops
 
 Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
+The plots in ... show that there is an appreciable degree of variation across speakers and phonological contexts.
+In some speakers and contexts, the tongue root (on the left of the tongue contour) is more advanced in the voiced stops than in the voiceless stops.
+The magnitude of the difference is about 2 millimetres, and it is more common when C2 is coronal and the vowel is /a/.
+\citet{kirkham2017} find that the tongue root in +ATR vowels is on average 4 millimetres more advanced than the respective -ATR vowels.
+Given this estimate, a 2 millimetres difference seems appropriate, or two very different vowels would end up before voiceless vs. voiced stops (cf. with phonologisation of ATR depending on voicing ...).
 
 ```{r it01-gam-ar, cache=TRUE}
 it01_rho <- start_value_rho(it01_gam)
@@ -422,4 +427,20 @@ it04_gam_ar_0 <- polar_gam(
 )
 
 compareML(it04_gam_ar_0, it04_gam_ar)
+```
+
+```{r}
+plot_polar_smooths(it01_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```
+
+```{r}
+plot_polar_smooths(it02_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```
+
+```{r}
+plot_polar_smooths(it03_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```
+
+```{r}
+plot_polar_smooths(it04_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
 ```
