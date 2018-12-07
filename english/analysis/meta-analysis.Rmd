@@ -34,7 +34,8 @@ The duration of vowels is bimodally distributed...
 
 ```{r}
 estimates %>%
-  ggplot(aes(v_duration, fill = word_pos)) + geom_density(alpha = 0.5)
+  ggplot(aes(v_duration, fill = word_pos)) + geom_density(alpha = 0.5) +
+  scale_fill_manual(values = cbbPalette)
 ```
 
 ```{r}
@@ -45,7 +46,7 @@ estimates %>%
 ```
 
 ```{r}
-get_prior(v_duration ~ voice * n_syl + word_position + (1|study), data = estimates)
+get_prior(v_duration ~ voice * n_syl + word_pos + (1|study), data = estimates)
 ```
 
 ```{r}
@@ -54,9 +55,9 @@ priors <- c(
   set_prior("normal(0, 50)", class = "b", coef = "n_syldi"),
   set_prior("normal(100, 50)", class = "b", coef = "voicevoiced"),
   set_prior("normal(0, 50)", class = "b", coef = "voicevoiced:n_syldi"),
-  set_prior("normal(0, 100)", class = "b", coef = "word_positionisolation"),
-  set_prior("normal(0, 100)", class = "b", coef = "word_positionmean"),
-  set_prior("normal(0, 100)", class = "b", coef = "word_positionmedial"),
+  set_prior("normal(0, 100)", class = "b", coef = "word_posisolation"),
+  set_prior("normal(0, 100)", class = "b", coef = "word_posmean"),
+  set_prior("normal(0, 100)", class = "b", coef = "word_posmedial"),
   set_prior("normal(0, 50)", class = "sd"),
   set_prior("cauchy(0, 50)", class = "sigma")
 )
@@ -65,11 +66,12 @@ ve_brm <- brm(
   v_duration ~
     voice *
     n_syl +
-    word_position +
+    word_pos +
     (1|study),
   data = estimates,
   prior = priors,
-  cores = 2
+  cores = 2,
+  seed = 8788
 )
 ```
 
@@ -78,7 +80,11 @@ summary(ve_brm)
 ```
 
 ```{r}
-pp_check(ve_brm, nsamples = 50)
+brms::pp_check(ve_brm, nsamples = 100)
+```
+
+```{r}
+mcmc_trace(as.array(ve_brm), pars = "b_voicevoiced")
 ```
 
 ```{r}
