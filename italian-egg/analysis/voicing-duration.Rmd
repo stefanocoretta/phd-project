@@ -280,6 +280,10 @@ rel_voff_lm <- lmer(
 summary(rel_voff_lm)
 ```
 
+```{r rel-voff-lm-plot}
+plot_model(rel_voff_lm, type = "pred", terms = c("height", "c1_place", "speech_rate_c"))
+```
+
 ## Exploratory
 
 ### Voicing duration

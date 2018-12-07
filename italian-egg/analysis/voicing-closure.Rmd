@@ -149,7 +149,9 @@ The following tests the amount of voicing preceding vowel onset.
 ```{r von-von-clo-lm}
 von_von_lm <- lmer(
   von_von ~
-    height +
+    height *
+    c1_place +
+    speech_rate_c +
     (1|speaker) +
     (1|word),
   data = ita_egg
@@ -158,3 +160,8 @@ von_von_lm <- lmer(
 
 summary(von_von_lm)
 ```
+
+```{r}
+plot_model(von_von_lm, type = "pred", terms = c("height", "c1_place"))
+```
+
