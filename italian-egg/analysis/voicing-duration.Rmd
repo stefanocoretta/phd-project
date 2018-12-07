@@ -170,6 +170,8 @@ ita_egg %>%
 
 ## Hypothesis testing
 
+**Note**: Centered speech rate has been used instead of uncentered (in pre-registration I use uncentered).
+
 ### Voicing duration
 
 ```{r voice-lm}
@@ -177,7 +179,7 @@ voice_lm_1 <- lme4::lmer(
   voice_duration ~
     height +
     c2_place +
-    speech_rate +
+    speech_rate_c +
     (1+height|speaker) +
     (1|word),
   data = ita_egg,
@@ -188,7 +190,7 @@ voice_lm_0 <- lme4::lmer(
   voice_duration ~
     # height +
     c2_place +
-    speech_rate +
+    speech_rate_c +
     (1+height|speaker) +
     (1|word),
   data = ita_egg,
@@ -218,7 +220,7 @@ vowel_lm <- lmer(
     height +
     c2_place +
     height:c2_place +
-    speech_rate +
+    speech_rate_c +
     (1|speaker) +
     (1|word),
   data = ita_egg,
@@ -233,9 +235,10 @@ summary(vowel_lm)
 plot_model(vowel_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:12))
 ```
 
-Relative to the duration of low vowels (/a/), mid-high vowels (/e/) are 18.5 ms shorter, and high vowels (/i/, /u/) are 32 ms shorter.
-In comparison, voicing in mid-high vowels is 16ms shorter, and it is 27ms shorter in high vowels.
-There's seems to be a gap in shortnening between vowel and voicing duration (vowel shortening magnitude is greater).
+Relative to the duration of low vowels (/a/), mid-low vowels are 13 ms shorter, mid-high vowels (/e/) are 18.5 ms shorter, and high vowels (/i/, /u/) are 32 ms shorter.
+In comparison, voicing in mid-low vowels is 3.5, in mid-high vowels is 16.5 ms shorter, and it is 27 ms shorter in high vowels.
+Low vowels are 98 ms long and voicing in low vowels is 126 ms.
+There's seems to be a small gap in shortnening between vowel and voicing duration (vowel shortening magnitude is slightly greater).
 There seems not to be an interaction between height and vowel vs. voicing (the difference between the effect in midh-high and high is around 12 ms in both cases).
 
 ### VOT
