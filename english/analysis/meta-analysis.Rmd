@@ -12,9 +12,10 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 ```
 
-```{r data}
+```{r data, message=FALSE}
 estimates <- read_csv("./english/data/estimates.csv") %>%
   mutate_if(is.character, as.factor) %>%
   mutate(
@@ -25,7 +26,26 @@ estimates <- read_csv("./english/data/estimates.csv") %>%
 ```
 
 ```{r}
-get_prior(duration ~ voice * n_syl + word_position + (1|study), data = estimates)
+estimates %>%
+  ggplot(aes(v_duration)) + geom_density()
+```
+
+The duration of vowels is bimodally distributed...
+
+```{r}
+estimates %>%
+  ggplot(aes(v_duration, fill = word_pos)) + geom_density(alpha = 0.5)
+```
+
+```{r}
+estimates %>%
+  ggplot(aes(v_duration, fill = word_pos, linetype = n_syl)) + geom_density(alpha = 0.8) +
+  facet_wrap(~study) +
+  scale_fill_manual(values = cbbPalette)
+```
+
+```{r}
+get_prior(v_duration ~ voice * n_syl + word_position + (1|study), data = estimates)
 ```
 
 ```{r}
@@ -42,7 +62,7 @@ priors <- c(
 )
 
 ve_brm <- brm(
-  duration ~
+  v_duration ~
     voice *
     n_syl +
     word_position +
