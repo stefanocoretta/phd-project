@@ -146,7 +146,7 @@ summary(voi_clo_lm_2)
 
 The following tests the amount of voicing preceding vowel onset.
 
-```{r von_von-clo-lm}
+```{r von-von-clo-lm}
 von_von_lm <- lmer(
   von_von ~
     height +

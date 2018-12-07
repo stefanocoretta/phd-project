@@ -249,7 +249,7 @@ vot_lm <- lmer(
     height +
     c1_place +
     height:c1_place +
-    speech_rate +
+    speech_rate_c +
     (1|speaker) +
     (1|word),
   data = ita_egg
@@ -271,7 +271,7 @@ rel_voff_lm <- lmer(
     height +
     c1_place +
     height:c1_place +
-    speech_rate +
+    speech_rate_c +
     (1|speaker) +
     (1|word),
   data = ita_egg
@@ -297,6 +297,10 @@ voice_lm_2 <- lmer(
 summary(voice_lm_2)
 ```
 
+```{r voice-lm-2-plot}
+plot_model(voice_lm_2, type = "pred", terms = c("height", "speech_rate_c"))
+```
+
 ### VOT
 
 ```{r vot-lm-2}
@@ -320,7 +324,7 @@ summary(vot_lm_2)
 plot_model(vot_lm_2, type = "pred", terms = c("height", "speech_rate_c"))
 ```
 
-```{r vot-lm-2}
+```{r vot-lm-3}
 vot_lm_3 <- lmer(
   vot ~
     vowel *
