@@ -125,6 +125,7 @@ plot_model(voi_clo_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, or
 ```
 
 Mid-low vowels induce 8 ms voicing bleed, mid-high induce 4.5 ms, high 7 ms.
+The gap between voicing and vowel duration is 9.5 in mid-low, 2 in mid-high, and 5 in high.
 
 ```{r plot-voi-clo-lm-2}
 plot_model(voi_clo_lm, type = "pred", terms = "height")
