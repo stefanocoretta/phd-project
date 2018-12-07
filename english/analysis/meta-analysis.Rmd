@@ -1,0 +1,70 @@
+---
+title: "Meta-analysis of the voicing effect in English"
+author: "Stefano Coretta"
+date: "07/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(brms)
+library(bayesplot)
+```
+
+```{r data}
+estimates <- read_csv("./english/data/estimates.csv") %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate(
+    voice = factor(voice, levels = c("voiceless", "voiced")),
+    n_syl = factor(n_syl, levels = c("mono", "di"))
+  ) %>%
+  na.omit()
+```
+
+```{r}
+get_prior(duration ~ voice * n_syl + word_position + (1|study), data = estimates)
+```
+
+```{r}
+priors <- c(
+  set_prior("normal(200, 100)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "b", coef = "n_syldi"),
+  set_prior("normal(100, 50)", class = "b", coef = "voicevoiced"),
+  set_prior("normal(0, 50)", class = "b", coef = "voicevoiced:n_syldi"),
+  set_prior("normal(0, 100)", class = "b", coef = "word_positionisolation"),
+  set_prior("normal(0, 100)", class = "b", coef = "word_positionmean"),
+  set_prior("normal(0, 100)", class = "b", coef = "word_positionmedial"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+ve_brm <- brm(
+  duration ~
+    voice *
+    n_syl +
+    word_position +
+    (1|study),
+  data = estimates,
+  prior = priors,
+  cores = 2
+)
+```
+
+```{r}
+summary(ve_brm)
+```
+
+```{r}
+pp_check(ve_brm, nsamples = 50)
+```
+
+```{r}
+mcmc_intervals(as.array(ve_brm), regex_pars = "b_")
+```
+
+```{r}
+mcmc_areas(as.array(ve_brm), regex_pars = "b_")
+```
