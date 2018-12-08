@@ -24,7 +24,8 @@ tra_series <- kinematics_series %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     trp = -TR_displacement_sm,
-    c2_phonation_o = ordered(c2_phonation,  levels = c("voiceless", "voiced"))
+    c2_phonation_o = ordered(c2_phonation,  levels = c("voiceless", "voiced")),
+    speaker_voicing = interaction(speaker, c2_phonation)
   ) %>%
   mutate_if(is.character, as.factor) %>%
   arrange(rec_date, proportion) %>%
@@ -47,6 +48,40 @@ kines_max <- kinematics %>%
     trp = -TR_displacement_sm
   ) %>%
   mutate_if(is.character, as.factor)
+
+kines_mean <- kines %>%
+  group_by(speaker) %>%
+  mutate(trp_z = scale(trp)) %>%
+  group_by(speaker, c2_phonation, language) %>%
+  summarise(trp_mean = mean(trp, na.rm = TRUE), trp_z_mean = mean(trp_z, na.rm = TRUE)) %>%
+  ungroup()
+
+trp_difference <- kines_mean %>%
+  group_by(speaker) %>%
+  mutate(difference = trp_mean - lag(trp_mean)) %>%
+  na.omit()
+```
+
+# Plots
+
+```{r trp-mean}
+kines_mean %>%
+  ggplot(aes(c2_phonation, trp_mean, colour = language)) +
+  geom_point() +
+  geom_line(aes(group = speaker))
+```
+
+```{r trp-z-mean}
+kines_mean %>%
+  ggplot(aes(c2_phonation, trp_z_mean, colour = language)) +
+  geom_point() +
+  geom_line(aes(group = speaker))
+```
+
+```{r trp-difference}
+trp_difference %>%
+  ggplot(aes(reorder(speaker, difference), difference, fill = language)) +
+  geom_bar(stat = "identity")
 ```
 
 # Tongue root position
@@ -61,7 +96,7 @@ tra_series %>%
 ```{r trp-speakers}
 tra_series %>%
   ggplot(aes(proportion, trp, colour = c2_phonation)) +
-  geom_smooth(method = "loess") +
+  geom_smooth(method = "loess", span = 1.5) +
   facet_wrap(~ speaker, scales = "free")
 ```
 
@@ -112,6 +147,17 @@ compareML(tra_gam_ar_0, tra_gam_ar)
 
 ```{r tra-gam-plot}
 plot_smooths(tra_gam_ar, proportion, c2_phonation_o)
+```
+
+```{r tra-gam-1}
+tra_gam_1 <- bam(
+  trp ~
+    s(speech_rate_c) +
+    s(proportion) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker_voicing, bs = "fs", m = 1),
+  data = tra_series
+)
 ```
 
 ```{r tra-gam-2}
@@ -177,6 +223,8 @@ kines %>%
   geom_smooth(method = "lm")
 ```
 
+## V1 duration ~ TRP
+
 ```{r tra-lm}
 tra_lm <- lmer(
   v1_duration ~
@@ -204,6 +252,8 @@ plot_model(tra_lm, type = "pred", terms = c("trp", "c2_phonation"))
 plot_model(tra_lm, type = "pred", terms = c("trp", "speech_rate_c", "c2_phonation"))
 ```
 
+## TRP ~ C2 voicing
+
 ```{r tra-lm-2}
 tra_lm_2 <- lmer(
   trp ~
@@ -218,6 +268,16 @@ tra_lm_2 <- lmer(
 
 summary(tra_lm_2)
 ```
+
+```{r tra-lm-2-plot}
+plot_model(tra_lm_2, show.values = TRUE, show.p = FALSE, order.terms = 1:6)
+```
+
+```{r tra-lm-2-pred-plot}
+plot_model(tra_lm_2, type = "pred", terms = c("c2_phonation"))
+```
+
+## TRP ~ V1 duration
 
 ```{r tra-lm-3}
 tra_lm_3 <- lmer(
@@ -237,6 +297,8 @@ summary(tra_lm_3)
 ```{r tra-lm-3-plot}
 plot_model(tra_lm_3, type = "pred", terms = c("v1_duration", "speech_rate_c"))
 ```
+
+## TRP ~ V1 duration and C2 voicing
 
 ```{r tra-lm-4}
 tra_lm_4 <- lmer(
