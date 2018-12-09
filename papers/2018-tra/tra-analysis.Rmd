@@ -80,6 +80,13 @@ kines_mean %>%
   geom_line(aes(group = speaker))
 ```
 
+```{r trp-mean-2}
+kines_mean %>%
+  ggplot(aes(c2_phonation, trp_mean, colour = language)) +
+  geom_jitter(position = position_jitter(width = 0.05, height = 0, seed = 8788)) +
+  geom_line(aes(group = speaker), position = position_jitter(width = 0.05, height = 0, seed = 8788))
+```
+
 ```{r trp-z-mean}
 kines_mean %>%
   ggplot(aes(c2_phonation, trp_z_mean, colour = language)) +
