@@ -53,12 +53,21 @@ kines_mean <- kines %>%
   group_by(speaker) %>%
   mutate(trp_z = scale(trp)) %>%
   group_by(speaker, c2_phonation, language) %>%
-  summarise(trp_mean = mean(trp, na.rm = TRUE), trp_z_mean = mean(trp_z, na.rm = TRUE)) %>%
+  summarise(
+    trp_mean = mean(trp, na.rm = TRUE),
+    trp_sd = sd(trp, na.rm = TRUE),
+    trp_z_mean = mean(trp_z, na.rm = TRUE),
+    trp_z_sd = sd(trp, na.rm = TRUE),
+    n = n()
+  ) %>%
   ungroup()
 
 trp_difference <- kines_mean %>%
   group_by(speaker) %>%
-  mutate(difference = trp_mean - lag(trp_mean)) %>%
+  mutate(
+    difference = trp_mean - lag(trp_mean),
+    difference_se = sqrt( ((trp_sd^2) / n) + ((lag(trp_sd)^2) / lag(n)) )
+    ) %>%
   na.omit()
 ```
 
@@ -80,8 +89,9 @@ kines_mean %>%
 
 ```{r trp-difference}
 trp_difference %>%
-  ggplot(aes(reorder(speaker, difference), difference, fill = language)) +
-  geom_bar(stat = "identity")
+  ggplot(aes(difference, reorder(speaker, difference), colour = language)) +
+  geom_errorbarh(aes(xmin = difference - difference_se, xmax = difference + difference_se), height = 0) +
+  geom_point(size = 4)
 ```
 
 # Tongue root position
