@@ -40,6 +40,12 @@ estimates %>%
 
 ```{r}
 estimates %>%
+  ggplot(aes(n_syl, v_duration, fill = voice)) +
+  geom_boxplot()
+```
+
+```{r}
+estimates %>%
   ggplot(aes(v_duration, fill = word_pos, linetype = n_syl)) + geom_density(alpha = 0.8) +
   facet_wrap(~study) +
   scale_fill_manual(values = cbbPalette)
