@@ -97,8 +97,15 @@ kines_mean %>%
 ```{r trp-difference}
 trp_difference %>%
   ggplot(aes(difference, reorder(speaker, difference), colour = language)) +
-  geom_errorbarh(aes(xmin = difference - difference_se, xmax = difference + difference_se), height = 0) +
-  geom_point(size = 4)
+  geom_errorbarh(aes(xmin = difference - difference_se, xmax = difference + difference_se, linetype = language), height = 0) +
+  geom_point(aes(shape = language), size = 4)
+```
+
+```{r trp-difference-dens}
+trp_difference %>%
+  ggplot(aes(difference)) +
+  geom_density() +
+  geom_rug()
 ```
 
 # Tongue root position
@@ -287,7 +294,7 @@ summary(tra_lm_2)
 ```
 
 ```{r tra-lm-2-plot}
-plot_model(tra_lm_2, show.values = TRUE, show.p = FALSE, order.terms = 1:6)
+plot_model(tra_lm_2, show.values = TRUE, show.p = FALSE, order.terms = 1:5)
 ```
 
 ```{r tra-lm-2-pred-plot}
