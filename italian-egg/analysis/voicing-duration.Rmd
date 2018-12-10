@@ -208,8 +208,12 @@ bf_01
 summary(voice_lm_1)
 ```
 
-```{r plot-voice-lm-1}
+```{r voice-lm-1-plot}
 plot_model(voice_lm_1, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:6))
+```
+
+```{r voice-lm-1-pred}
+plot_model(voice_lm_1, type = "pred", terms = "height")
 ```
 
 ### Vowel duration
@@ -231,8 +235,12 @@ vowel_lm <- lmer(
 summary(vowel_lm)
 ```
 
-```{r plot-vowel-lm}
+```{r vowel-lm-plot}
 plot_model(vowel_lm, show.values = TRUE, value.offset = .3, show.p = FALSE, order.terms = c(1:12))
+```
+
+```{r vowel-lm-pred}
+plot_model(vowel_lm, type = "pred", terms = "height")
 ```
 
 Relative to the duration of low vowels (/a/), mid-low vowels are 13 ms shorter, mid-high vowels (/e/) are 18.5 ms shorter, and high vowels (/i/, /u/) are 32 ms shorter.
