@@ -17,7 +17,7 @@ data("token_measures")
 token_measures <- token_measures %>%
   filter(c1_phonation == "voiceless") %>%
   mutate(
-    syl_rate_c = syl_rate - mean(syl_rate),
+    rel_rel = (c2_rel - c1_rel) * 1000,
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
   na.omit()
@@ -30,7 +30,7 @@ priors <- c(
   set_prior("normal(0, 50)", class = "b", coef = "vowelo"),
   set_prior("normal(0, 50)", class = "b", coef = "vowelu"),
   set_prior("normal(0, 50)", class = "b", coef = "c2_placevelar"),
-  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 100)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 100)", class = "sd"),
   set_prior("cauchy(0, 50)", class = "sigma")
 )
@@ -40,7 +40,7 @@ rr_mb <- brm(
     c2_phonation +
     vowel +
     c2_place +
-    syl_rate_c +
+    speech_rate_c +
     (1|speaker) +
     (1|item),
   data = token_measures,
@@ -55,7 +55,7 @@ summary(rr_mb)
 ```
 
 ```{r rr-bm-intervals}
-mcmc_intervals(as.array(rr_mb), pars = c("b_c2_phonationvoiced", "b_vowelo", "b_vowelu", "b_c2_placevelar", "b_syl_rate_c"))
+mcmc_intervals(as.array(rr_mb), pars = c("b_c2_phonationvoiced", "b_vowelo", "b_vowelu", "b_c2_placevelar", "b_speech_rate_c"))
 ```
 
 ```{r rr-bm-2}
@@ -70,7 +70,7 @@ priors_2 <- c(
   set_prior("normal(0, 20)", class = "b", coef = "c2_phonationvoiced:c2_placevelar"),
   set_prior("normal(0, 20)", class = "b", coef = "c2_phonationvoiced:vowelo:c2_placevelar"),
   set_prior("normal(0, 20)", class = "b", coef = "c2_phonationvoiced:vowelu:c2_placevelar"),
-  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 100)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 100)", class = "sd"),
   set_prior("cauchy(0, 50)", class = "sigma")
 )
@@ -80,12 +80,12 @@ rr_bm_2 <- brm(
     c2_phonation *
     vowel *
     c2_place +
-    syl_rate_c +
+    speech_rate_c +
     (1|speaker) +
     (1|item),
   data = token_measures,
   prior = priors_2,
-  cores = 2,
+  cores = 4,
   seed = 8788
 )
 ```
@@ -95,9 +95,18 @@ summary(rr_bm_2)
 ```
 
 ```{r rr-bm-2-intervals}
-mcmc_intervals(as.array(rr_bm_2), pars = c("b_c2_phonationvoiced", "b_vowelo", "b_vowelu", "b_c2_placevelar", "b_syl_rate_c"))
+mcmc_intervals(as.array(rr_bm_2), pars = c("b_c2_phonationvoiced", "b_vowelo", "b_vowelu", "b_c2_placevelar", "b_speech_rate_c"))
+```
+
+```{r rr-bm-2-intervals-1}
+mcmc_intervals(as.array(rr_bm_2), pars = c("b_c2_phonationvoiced"), prob = 0.6)
 ```
 
 ```{r rr-bm-2-intervals-2}
 mcmc_intervals(as.array(rr_bm_2), pars = c("b_c2_phonationvoiced:vowelo", "b_c2_phonationvoiced:vowelu", "b_c2_phonationvoiced:c2_placevelar", "b_c2_phonationvoiced:vowelo:c2_placevelar", "b_c2_phonationvoiced:vowelu:c2_placevelar"))
 ```
+
+```{r rr-bm-2-pp-check}
+pp_check(rr_bm_2, nsamples = 100)
+```
+
