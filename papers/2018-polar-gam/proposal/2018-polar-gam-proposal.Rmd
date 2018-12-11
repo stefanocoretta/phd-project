@@ -18,14 +18,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Ultrasound tongue imaging (UTI) is a non-invasive technique that enables researchers to study, more or less directly, the articulation of the tongue during speech at appreciably high resolution.
 However, the quantitative analysis of UTI data remains more of a challenge.
-Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been mostly dominated by the use of Smoothing Splines Analysis of Variance (SS-ANOVA).
-More recently, @mielke2015 and @heyne2015a showed that fitting SS-ANOVA with tongue data using polar coordinates (rather than cartesian coordinates) produces more reliable results, and this has now become a standard.
-The implementation of polar SS-ANOVA modelling of tongue contours has undoubtedly advanced our understanding of tongue articulation and speech.
-<!-- However, SS-ANOVA comes with some limitations, e.g. separate models are fitted for different phonetic contexts even within a single speaker, and the model implementation does not include random effects. -->
+Since the publication of the seminal paper by @davidson2006, statistical modelling of whole tongue contours has been mostly dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA).
+More recently, @mielke2015 and @heyne2015a showed that fitting SSANOVA with tongue data using polar coordinates (rather than cartesian coordinates) produces more reliable results, and this has now become a standard.
+The implementation of polar SSANOVA modelling of tongue contours has undoubtedly advanced our understanding of tongue articulation and speech.
+<!-- However, SSANOVA comes with some limitations, e.g. separate models are fitted for different phonetic contexts even within a single speaker, and the model implementation does not include random effects. -->
 On the other hand, a variety of research disciplines is witnessing an increased use of Generalised Additive Models (GAMs) and their mixed-effects counterpart [GAMMs, @wood2006], especially when dealing with complex data.
 This family of models is a highly flexible solution which extends standard generalised linear mixed regressions to model non-linear effects.
 
-This paper will offer a review of GAMMs fitted to tongue contours in polar coordinates, as an alternative to polar SS-ANOVA, given the increasing popularity of these models among linguists.
+This paper will offer a review of GAMMs fitted to tongue contours in polar coordinates, as an alternative to polar SSANOVA, given the increasing popularity of these models among linguists.
 An introduction to UTI and GAMMs opens the paper, followed by a general overview of polar tongue contours GAMMs.
 Polar GAMMs fitting, significance testing, and model plotting are illustrated by means of an example pilot study that compares tongue contours of voiceless and voiced stops of 4 Italian speakers.
 A brief tutorial shows how to fit polar GAMMs with the R package `rticulate`, which has been developed by the author to streamline polar GAMM fitting in R using the `mgcv` package.
