@@ -1,0 +1,22 @@
+---
+title: "Check stimuli frequency"
+author: "Stefano Coretta"
+date: "11/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+```
+
+```{r read-subtlex, message=FALSE}
+subtlex <- read_csv("./english/simuli/subtlex.csv")
+```
+
+```{r}
+check <- subtlex %>%
+  filter(Spelling %in% c("teep","teak", "teeb", "teab", "turp", "turb", "terp", "terb", "tarp", "tarb", "teek", "teak", "teeg", "teag", "turk", "terk", "turg", "terg", "tark", "targ", "teepus", "teapus", "teebus", "teabus", "turpus", "turbus", "terpus", "terbus", "tarpus", "tarbus", "teekus", "teakus", "teegus", "teagus", "turkus", "terkus", "turgus", "tergus", "tarkus", "targus"))
+```
+
