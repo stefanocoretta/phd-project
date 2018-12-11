@@ -202,30 +202,29 @@ The method introduce in this paper is based on Mielke's implementation applied t
 
 # Polar GAM(M)s
 
-Having shown the benefits of using GAMMs with dynamic data and polar coordinates, polar GAMMs for modelling tongue contours are introduced here. Polar GAMMs are GAMMs fitted to tongue contours using polar coordinates.
-As with SSANOVA, the coordinates of the fitted contours are converted to cartesian coordinates for plotting.
-A polar GAM is constructed as follows: the radius coordinates is the outcome variable, a smooth term over the angular coordinates is the predictor.
-The smooth term enables modelling the non-linearities of the contours.
-Predictors such as consonant or vowel type, or speech rate, can be specified in the model.
-The predicted polar coordinates that are returned by the model can then be converted to cartesian coordinates using the cartesian coordinate of the origin that defines the polar system.
-The polar origin is either known or estimated from the data, depending on the ultrasonic system used.
+GAMs fitted to tongue contours in polar coordinates are introduced here.
+A polar GAM is constructed as follows.
+The outcome variable of the model are the radial coordinates, while a smooth term over the angular coordinates is the predictor which takes care of modelling the curved shape of the contour.
+Other predictors, such as consonant or vowel type, speech rate, or random effects, can be also included.
+The model returns fitted smooths with polar coordinates as units.
+The predicted polar coordinates can be derived from the fitted smooths and converted into a cartesian coordinate system (centred on the origin of the polar system) for plotting.
+A simple example with data from one speaker will illustrate how to fit polar GAMs with the R package `rticulate`.
+The following section gives information on the ultrasonic system used for data collection and on how the data has been processed, before moving onto model fitting itself.
 
-To illustrate the use of polar GAMs, an example will given in the following sections.
-The main properties of the R package `rticulate` will also be discussed in relation to the experiment.
-The function `polar_gam()` accepts cartesian coordinates, which are converted into polar using a user specified origin or the origin estimated from the data.
-The GAM is fitted on the polar coordinates and the predicted values are converted back to cartesian using the same origin for plotting.
+<!-- The function `polar_gam()` accepts cartesian coordinates, which are converted into polar using a user specified origin or the origin estimated from the data.
+The polar origin is either known or estimated from the data, depending on the ultrasonic system used.
+The GAM is fitted on the polar coordinates and the predicted values are converted back to cartesian using the same origin for plotting. -->
 
 ## Data collection and processing
 \label{s:data}
 
-Synchronised audio and ultrasound tongue imaging data have been recorded from 4 speakers of Italian.
-<!-- maybe you want to use just 4 or 5 for illustrative purposes -->
-An Articulate Instruments Ltd™ set-up was used for this study (\Cref{f:uti-setup}).
+Synchronised audio and ultrasound tongue imaging data have been recorded from 4 speakers of Italian while reading a series of controlled sentences.
+An Articulate Instruments Ltd™ set-up was used for this study.
 The ultrasonic data was collected through a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).
 A synchronisation unit (P-Stretch) was plugged into the Echo Blaster unit and used for automatic audio/ultrasound synchronisation.
 A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
 The acquisition of the ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
-Stabilisation of the ultrasonic transducer was ensured by using a headset produced by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
+Stabilisation of the ultrasonic transducer was ensured by using the metallic headset produced by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
 
 Before the reading task, the participant's occlusal plane was obtained using a bite plate [@scobbie2011].
 The participants read nonce words embedded in the frame sentence *Dico \_\_\_ lentamente* 'I say \_\_\_ slowly'.
@@ -234,48 +233,49 @@ Each speaker repeated the stimuli six times.
 
 Spline curves were fitted to the visible tongue contours using the AAA automatic tracking function.
 Manual correction was applied in those cases that showed clear tracking errors.
-The time of maximum tongue displacement within consonant closure was then calculated in AAA following the method in @strycharczuk2015, described in what follows.
+The time of maximum tongue displacement within consonant closure was then calculated in AAA following the method in @strycharczuk2015.
 A fan-like frame consisting of 42 equidistant radial lines was used as the coordinate system.
 The origin of the 42 fan-lines coincides with the centre of the ultrasonic probe, such that each fan-line is parallel to the direction of the ultrasonic signal.
 Tongue displacement was thus calculated as the displacement of the fitted splines along the fan-line vectors.
-The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation.
-The vector search area was restricted to the portion of the splines corresponding to the tongue tip for coronal consonants, and to the portion corresponding to the tongue dorsum for velar consonants.
+The time of maximum tongue displacement was the time of greater displacement along the fan-line vector that showed the greatest standard deviation (as assessed manually).
+The vector standard deviation search area was restricted to the portion of the contour corresponding to the tongue tip for coronal consonants, and to the portion corresponding to the tongue dorsum for velar consonants.
 
 The cartesian coordinates of the tongue contours were extracted from the ultrasonic data at the time of maximum tongue displacement (always within C2 closure).
 The contours were subsequently normalised within speaker by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
-The dataset is thus constituted by *x* and *y* coordinates of the tongue contours that define respectively the horizontal and vertical axis.
+Each participants' dataset is thus constituted by *x* and *y* coordinates of the tongue contours that define respectively the horizontal and vertical axes.
 The horizontal plane is parallel to the speaker's occlusal plane.
 
 ## Fitting a polar GAM
 
-GAMMs can be fitted in R with the `gam()` function from package `mgcv` [@wood2011; @wood2017].
+GAMs can be fitted in R with the `gam()` function from package `mgcv` [@wood2011; @wood2017].
 `bam()` is a more efficient function when the datasets has several hundreds observations.
 The package `rticulate` has been developed as a wrapper of the `bam()` function to be used with tongue contours.
 The special function `polar_gam()` can fit any specified GAM model to tongue contours coordinates, using the same syntax of `mgcv`.
 The function accepts tongue contours either in cartesian or polar coordinates.
 In the first case, the coordinates can be transformed into polar before fitting.
-The function `plot_polar_smooths()`, used for plotting the estimated contours, converts the coordinates back into cartesian.
+If the data is in the AAA fan-like coordinate system, the origin is automatically estimated with the method in \citet{heyne2015a}.
+If the data is not exported from AAA, the user can specify the known coordinates of probe origin.
+The function `plot_polar_smooths()`, used for plotting the estimated contours, converts the coordinates back into cartesian using the same origin as with GAM fitting.
 
 A GAM in R can be specified with a formula that uses the same syntax of `lme4`, a commonly used package for linear mixed-effects models \citep{bates2015}.
 The `mgcv` package allows to specify smoothing spline terms with the function `s()`.
-This function takes the term along which a spline is created (for example, a time series, or *x*-coordinates).
-Within `s()` the user can choose, among other arguments, what kind of spline to use, and the grouping factor (namely, the factor with the levels to be compared).
-For a more in-depth introduction to GAM(M)s in R targeted to linguists, see \citet{soskuthy2017} and \citet{wieling2017}.
-
-Due to differences in the placement of the probe and the speaker's anatomy, different portions of the tongue are likely to be imaged across speakers.
-For this reason, it is recommended to fit separate models for each participant, rather then aggregate all of the data in a single model.
-<!-- show the problem -->
+This function takes the term along which a spline is created (for example, time in a time series, or *x*-coordinates in a cartesian system).
+Among the arguments of `s()`, the user can select the type of spline (the `bs` argument) and the grouping factor used for comparison (the `by` argument).
+For a more in-depth introduction to GAMs in R for linguistics, see \citet{soskuthy2017} and \citet{wieling2017}.
 
 As means of illustration, the following paragraphs will show how to fit a polar GAM with data from one of the 4 Italian speakers.
+<!-- show the problem -->
+Due to differences in the placement of the probe and in the speakers' anatomy, different portions of the tongue are likely to be imaged across speakers, so that scaling might not be possible (or wise).
+For this reason, it is recommended to fit separate models for each participant, rather than aggregate all of the data in a single model.
 
 We can start from a simple model in which we test the effect of C2 place, vowel, and voicing on tongue contours.
-Modelling different contours for each combination of the three predictors can be achieved with the `by` argument in the difference smooth function and including the related parametric term.
-`vc_voicing` is an ordered factor which specifies for each contour the combination of C2 place, vowel, and voicing.
+`vc_voicing` is an ordered factor that specifies the combination of C2 place, vowel, and voicing.
+Modelling different contours for each combination of the three predictors can be achieved by using `vc_voicing` with the `by` argument of the difference smooth, and by including `vc_voicing` as a parametric term.
 The following code fits the specified model to the contour data of IT01.
 When running the code, the coordinates of the estimated origin used for the conversion to polar coordinates are returned.
-The author can optionally specify those manually, the contours are not in a fan-like system (like the data exported from AAA).
+The model is fitted by Maximum Likelihood (ML) here to allow model comparison below).
 
-```{r it01-gam, cache=TRUE}
+```{r it01-gam, echo=TRUE, cache=TRUE}
 it01_gam <- polar_gam(
   Y ~
     vc_voicing +            # parametric term
@@ -289,6 +289,20 @@ it01_gam <- polar_gam(
 The function `plot_polar_smooths()` can be used to plot the estimated contours.
 The shaded areas around the estimated contours are 95\% confidence intervals.
 Note that, differently from SSANOVA, statistical significance can't be assessed from the overlapping (or lack thereof) of the confidence intervals.
+
+```{r it01-gam-plot-code, echo=TRUE, eval=FALSE}
+plot_polar_smooths(
+  it01_gam,
+  X,
+  voicing,
+  facet_terms = c2_place + vowel,
+  # the following splits the factor interaction in the individual terms,
+  # so that they can called in the plotting arguments
+  split = list(vc_voicing = c("vowel", "c2_place", "voicing"))
+) +
+  coord_fixed() +
+  theme(legend.position = "top")
+```
 
 ```{r it01-gam-plot, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
 plot_polar_smooths(
@@ -304,10 +318,10 @@ plot_polar_smooths(
   theme(legend.position = "top")
 ```
 
-One way of assessing significance is to compare the ML score of the full model against one without the relevant predictor, using the function `compareML()` from the `itsadug` package.
+One way to assess significance of model terms is to compare the ML score of the full model against one without the relevant predictor, using the function `compareML()` from the `itsadug` package.
 Both the parametric term and the difference smooth need to be removed in the null model.
 
-```{r it01-gam-0, cache=TRUE}
+```{r it01-gam-0, echo=TRUE, cache=TRUE}
 it01_gam_0 <- polar_gam(
   Y ~
     # vc_voicing +            # remove parametric term
@@ -318,11 +332,11 @@ it01_gam_0 <- polar_gam(
 )
 ```
 
-```{r compare-it01}
+```{r compare-it01, echo=TRUE}
 compareML(it01_gam_0, it01_gam)
 ```
 
-To check which part of the contour differs among conditions, the method recomended in \citet{soskuthy2017} is to plot the difference smooth and check the confidence interval.
+To check which part of the contour differs among conditions, the method recommended in \citet{soskuthy2017} is to plot the difference smooth and check the confidence interval.
 The parts of confidence interval that don't include 0 indicate that the difference between contours in that part is significant.
 
 ```{r diff-it01-a}
