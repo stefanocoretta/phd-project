@@ -391,11 +391,15 @@ acf_resid(it01_gam_ar, split_pred = "start.event")
 # Comparing tongue contours in voiceless and voiced stops
 
 Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
-The plots in ... show that there is an appreciable degree of variation across speakers and phonological contexts in relation to the differences in tongue shapes between voiceless and voiced stops.
-In some speakers and contexts, the tongue root (the left of the tongue contours) is more advanced in voiced stops than in voiceless stops.
-The magnitude of the difference is about 2 millimetres, and it is more common when C2 is coronal and the vowel is /a/.
-\citet{kirkham2017} find that the tongue root in +ATR vowels is on average 4 millimetres more advanced than the respective -ATR vowels.
-Given this estimate, a 2 millimetres difference seems appropriate, or two very different vowels would end up before voiceless vs. voiced stops (cf. with phonologisation of ATR depending on voicing ...).
+\Cref{f:tongues-it01} to \Cref{f:tongues-it04} show an appreciable degree of variation across speakers and phonological contexts in relation to the differences in tongue shapes between voiceless and voiced stops.
+In some speakers and contexts, the tongue root (the left of the tongue contours) is more advanced in voiced stops than in voiceless stops, especially in the context of a coronal C2 and /a/.
+Tongue root advancement is a well known mechanism employed to maintain intra-oral pressure below the threshold required for voicing \citep{ohala2011, kent1969, perkell1969, westbury1983, ahn2018}.
+
+The magnitude of the difference in tongue root position in the data reported here is about 2 millimetres.
+\citet{kirkham2017} find that the tongue root in +ATR vowels is on average 4 millimetres more advanced than the respective −ATR vowels.
+\citet{rothenberg1967} argues, based on modelling, that the tongue root can move forward by a maximum of about 5 mm mid-sagittally.
+This movement corresponds to an average volume increase of 18 cm\textsuperscript{2}.
+Given these estimates, it can be argued that a 2 mm change reasonably contributes to an appreciable volume increase, also considering that other volume expansion mechanisms can operate along with the advancement of the tongue root (like larynx lowering, slack oral walls, etc.).
 
 ```{r it01-gam-ar-2, cache=TRUE, message=FALSE, include=FALSE}
 it01_gam_ar_0 <- polar_gam(
