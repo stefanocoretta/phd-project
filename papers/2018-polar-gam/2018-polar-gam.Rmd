@@ -521,20 +521,24 @@ compareML(it04_gam_ar_0, it04_gam_ar)
 
 ```{r tongues-it01, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT01.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it01_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
-  theme(legend.position = "top")
+  theme(legend.position = "top") +
+  labs(x = "", y = "")
 ```
 
 ```{r tongues-it02, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT02.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it02_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
-  theme(legend.position = "top")
+  theme(legend.position = "top") +
+  labs(x = "", y = "")
 ```
 
 ```{r tongues-it03, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT03.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it03_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
-  theme(legend.position = "top")
+  theme(legend.position = "top") +
+  labs(x = "", y = "")
 ```
 
 ```{r tongues-it04, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT04.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it04_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
-  theme(legend.position = "top")
+  theme(legend.position = "top") +
+  labs(x = "", y = "")
 ```
