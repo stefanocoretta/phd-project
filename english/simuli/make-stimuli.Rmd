@@ -21,11 +21,19 @@ check <- subtlex %>%
 ```
 
 ```{r}
-frames <- c("I'll say {word} this Thursday", "You'll say {word} this Monday", "She'll say {word} this Sunday", "We'll say {word} this Friday", "They'll say {word} this Tuesday")
+frames <- c("I'll say '{word}' this Thursday", "You'll say '{word}' this Monday", "She'll say '{word}' this Sunday", "We'll say '{word}' this Friday", "They'll say '{word}' this Tuesday")
 words <- c("teep", "teeb", "turp", "turb", "tarp", "tarb", "teek", "teeg", "turk", "turg", "tark", "targ", "teepus", "teebus", "turpus", "turbus", "tarpus", "tarbus", "teekus", "teegus", "turkus", "turgus", "tarkus", "targus")
 
 for (frame in 1:length(frames)) {
-  cat(str_glue(frames[frame], word = words), sep = "\n")
+  cat(
+    paste(
+      str_glue(frames[frame], word = words),
+      paste(frames),
+      paste(words),
+      sep = ","
+    ),
+    sep = "\n"
+  )
 }
 ```
 
