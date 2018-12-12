@@ -1,5 +1,5 @@
 ---
-title: "Check stimuli frequency"
+title: "Make stimuli"
 author: "Stefano Coretta"
 date: "11/12/2018"
 output: html_document
