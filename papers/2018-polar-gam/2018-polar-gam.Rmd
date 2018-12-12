@@ -542,3 +542,15 @@ plot_polar_smooths(it04_gam_ar, X, voicing, facet_terms = c2_place + vowel, spli
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
+
+# Conclusions
+
+Generalised additive (mixed) models (GAMs) can be efficiently used to statistically assess differences in tongue contour shapes as obtained from ultrasound tongue imaging.
+This paper showed how GAMs can be fitted to tongue contours in polar coordinates in R with the specialised package `rticulate`.
+An example of how GAMs can help modelling differences in tongue contours has been illustrated with data from 4 speakers of Italian in which the mid-sagittal tongue contours of voiceless and voiced stops where compared.
+The same general advantages and issues noted in \citet{davidson2006} for SSANOVA apply to polar GAMs.
+In particular, while within-speaker normalisation can be achieved by rotation and offsetting of the data relative to a bite plate (as done here), across-speaker normalisation represents a bigger challenge.
+Since it can't be deduced with sufficient certainty from the ultrasonic image which part of the tongue is being actually imaged, it is not possible to define fixed anatomical landmarks across speakers that can be used in normalisation.
+For this reason it has been recommended here to fit separate models for each speaker.
+Future work will explore ways of allowing the user to use data aggregated from multiple speakers while accounting for the uncertainty in which parts of the tongue are imaged.
+To conclude, polar GAMs can also be extended to model whole tongue contours differences over time (in other words, how the sectional shape of the tongue changes over time) and 3D tongue surfaces.
