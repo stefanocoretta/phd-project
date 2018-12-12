@@ -391,13 +391,13 @@ acf_resid(it01_gam_ar, split_pred = "start.event")
 # Comparing tongue contours in voiceless and voiced stops
 
 Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
-The plots in ... show that there is an appreciable degree of variation across speakers and phonological contexts.
-In some speakers and contexts, the tongue root (on the left of the tongue contour) is more advanced in the voiced stops than in the voiceless stops.
+The plots in ... show that there is an appreciable degree of variation across speakers and phonological contexts in relation to the differences in tongue shapes between voiceless and voiced stops.
+In some speakers and contexts, the tongue root (the left of the tongue contours) is more advanced in voiced stops than in voiceless stops.
 The magnitude of the difference is about 2 millimetres, and it is more common when C2 is coronal and the vowel is /a/.
 \citet{kirkham2017} find that the tongue root in +ATR vowels is on average 4 millimetres more advanced than the respective -ATR vowels.
 Given this estimate, a 2 millimetres difference seems appropriate, or two very different vowels would end up before voiceless vs. voiced stops (cf. with phonologisation of ATR depending on voicing ...).
 
-```{r it01-gam-ar-2, cache=TRUE}
+```{r it01-gam-ar-2, cache=TRUE, message=FALSE, include=FALSE}
 it01_gam_ar_0 <- polar_gam(
   Y ~
     s(X),
@@ -410,7 +410,7 @@ it01_gam_ar_0 <- polar_gam(
 compareML(it01_gam_ar_0, it01_gam_ar)
 ```
 
-```{r it02-gam-ar, cache=TRUE}
+```{r it02-gam-ar, cache=TRUE, message=FALSE, include=FALSE}
 it02_gam <- polar_gam(
   Y ~
     vc_voicing +
@@ -445,7 +445,7 @@ it02_gam_ar_0 <- polar_gam(
 compareML(it02_gam_ar_0, it02_gam_ar)
 ```
 
-```{r it03-gam-ar, cache=TRUE}
+```{r it03-gam-ar, cache=TRUE, message=FALSE, include=FALSE}
 it03_gam <- polar_gam(
   Y ~
     vc_voicing +
@@ -480,7 +480,7 @@ it03_gam_ar_0 <- polar_gam(
 compareML(it03_gam_ar_0, it03_gam_ar)
 ```
 
-```{r it04-gam-ar, cache=TRUE}
+```{r it04-gam-ar, cache=TRUE, message=FALSE, include=FALSE}
 it04_gam <- polar_gam(
   Y ~
     vc_voicing +
@@ -515,18 +515,22 @@ it04_gam_ar_0 <- polar_gam(
 compareML(it04_gam_ar_0, it04_gam_ar)
 ```
 
-```{r}
-plot_polar_smooths(it01_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```{r tongues-it01, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT01.", fig.lp="f:", out.width=".8\\textwidth"}
+plot_polar_smooths(it01_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
+  theme(legend.position = "top")
 ```
 
-```{r}
-plot_polar_smooths(it02_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```{r tongues-it02, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT02.", fig.lp="f:", out.width=".8\\textwidth"}
+plot_polar_smooths(it02_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
+  theme(legend.position = "top")
 ```
 
-```{r}
-plot_polar_smooths(it03_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```{r tongues-it03, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT03.", fig.lp="f:", out.width=".8\\textwidth"}
+plot_polar_smooths(it03_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
+  theme(legend.position = "top")
 ```
 
-```{r}
-plot_polar_smooths(it04_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing")))
+```{r tongues-it04, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT04.", fig.lp="f:", out.width=".8\\textwidth"}
+plot_polar_smooths(it04_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
+  theme(legend.position = "top")
 ```

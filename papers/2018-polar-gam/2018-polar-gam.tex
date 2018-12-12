@@ -531,9 +531,10 @@ stops}\label{comparing-tongue-contours-in-voiceless-and-voiced-stops}}
 Mid-sagittal tongue contours at maximum tongue displacement of voiceless
 and voiced stops have been compared using polar GAMs. The plots in
 \ldots{} show that there is an appreciable degree of variation across
-speakers and phonological contexts. In some speakers and contexts, the
-tongue root (on the left of the tongue contour) is more advanced in the
-voiced stops than in the voiceless stops. The magnitude of the
+speakers and phonological contexts in relation to the differences in
+tongue shapes between voiceless and voiced stops. In some speakers and
+contexts, the tongue root (the left of the tongue contours) is more
+advanced in voiced stops than in voiceless stops. The magnitude of the
 difference is about 2 millimetres, and it is more common when C2 is
 coronal and the vowel is /a/. \citet{kirkham2017} find that the tongue
 root in +ATR vowels is on average 4 millimetres more advanced than the
@@ -542,111 +543,41 @@ seems appropriate, or two very different vowels would end up before
 voiceless vs.~voiced stops (cf.~with phonologisation of ATR depending on
 voicing \ldots{}).
 
-\begin{verbatim}
-## The origin is x = 14.3900999664996, y = -65.2314226131983.
-\end{verbatim}
+\begin{figure}
 
-\begin{verbatim}
-## it01_gam_ar_0: Y ~ s(X)
-## 
-## it01_gam_ar: Y ~ vc_voicing + s(X) + s(X, by = vc_voicing)
-## 
-## Chi-square test of ML scores
-## -----
-##           Model   Score Edf Difference     Df  p.value Sig.
-## 1 it01_gam_ar_0 5972.86   3                                
-## 2   it01_gam_ar 3293.08  36   2679.780 33.000  < 2e-16  ***
-## 
-## AIC difference: 5636.46, model it01_gam_ar has lower AIC.
-\end{verbatim}
+{\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/tongues-it01-1} 
 
-\begin{verbatim}
-## Warning in compareML(it01_gam_ar_0, it01_gam_ar): AIC might not be
-## reliable, as an AR1 model is included (rho1 = 0.894493, rho2 = 0.894493).
-\end{verbatim}
+}
 
-\begin{verbatim}
-## The origin is x = 22.3502276497439, y = -63.9479946349349.
-## The origin is x = 22.3502276497439, y = -63.9479946349349.
-## The origin is x = 22.3502276497439, y = -63.9479946349349.
-\end{verbatim}
+\caption{Tongue contours of voiceless and voiced stops in IT01.}\label{f:tongues-it01}
+\end{figure}
 
-\begin{verbatim}
-## it02_gam_ar_0: Y ~ s(X)
-## 
-## it02_gam_ar: Y ~ vc_voicing + s(X) + s(X, by = vc_voicing)
-## 
-## Chi-square test of ML scores
-## -----
-##           Model    Score Edf Difference     Df  p.value Sig.
-## 1 it02_gam_ar_0 4718.543   3                                
-## 2   it02_gam_ar 3394.247  36   1324.296 33.000  < 2e-16  ***
-## 
-## AIC difference: 2823.71, model it02_gam_ar has lower AIC.
-\end{verbatim}
+\begin{figure}
 
-\begin{verbatim}
-## Warning in compareML(it02_gam_ar_0, it02_gam_ar): AIC might not be
-## reliable, as an AR1 model is included (rho1 = 0.883642, rho2 = 0.883642).
-\end{verbatim}
+{\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/tongues-it02-1} 
 
-\begin{verbatim}
-## The origin is x = 18.8671533068358, y = -54.2069374500317.
-## The origin is x = 18.8671533068358, y = -54.2069374500317.
-## The origin is x = 18.8671533068358, y = -54.2069374500317.
-\end{verbatim}
+}
 
-\begin{verbatim}
-## it03_gam_ar_0: Y ~ s(X)
-## 
-## it03_gam_ar: Y ~ vc_voicing + s(X) + s(X, by = vc_voicing)
-## 
-## Chi-square test of ML scores
-## -----
-##           Model    Score Edf Difference     Df  p.value Sig.
-## 1 it03_gam_ar_0 3904.872   3                                
-## 2   it03_gam_ar 2205.682  36   1699.190 33.000  < 2e-16  ***
-## 
-## AIC difference: 3596.78, model it03_gam_ar has lower AIC.
-\end{verbatim}
+\caption{Tongue contours of voiceless and voiced stops in IT02.}\label{f:tongues-it02}
+\end{figure}
 
-\begin{verbatim}
-## Warning in compareML(it03_gam_ar_0, it03_gam_ar): AIC might not be
-## reliable, as an AR1 model is included (rho1 = 0.887306, rho2 = 0.887306).
-\end{verbatim}
+\begin{figure}
 
-\begin{verbatim}
-## The origin is x = 18.8671244233962, y = -54.207062619097.
-## The origin is x = 18.8671244233962, y = -54.207062619097.
-## The origin is x = 18.8671244233962, y = -54.207062619097.
-\end{verbatim}
+{\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/tongues-it03-1} 
 
-\begin{verbatim}
-## it04_gam_ar_0: Y ~ s(X)
-## 
-## it04_gam_ar: Y ~ vc_voicing + s(X) + s(X, by = vc_voicing)
-## 
-## Chi-square test of ML scores
-## -----
-##           Model    Score Edf Difference     Df  p.value Sig.
-## 1 it04_gam_ar_0 4557.608   3                                
-## 2   it04_gam_ar 3218.615  36   1338.993 33.000  < 2e-16  ***
-## 
-## AIC difference: 2930.64, model it04_gam_ar has lower AIC.
-\end{verbatim}
+}
 
-\begin{verbatim}
-## Warning in compareML(it04_gam_ar_0, it04_gam_ar): AIC might not be
-## reliable, as an AR1 model is included (rho1 = 0.924528, rho2 = 0.924528).
-\end{verbatim}
+\caption{Tongue contours of voiceless and voiced stops in IT03.}\label{f:tongues-it03}
+\end{figure}
 
-\begin{center}\includegraphics{2018-polar-gam_files/figure-latex/unnamed-chunk-1-1} \end{center}
+\begin{figure}
 
-\begin{center}\includegraphics{2018-polar-gam_files/figure-latex/unnamed-chunk-2-1} \end{center}
+{\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/tongues-it04-1} 
 
-\begin{center}\includegraphics{2018-polar-gam_files/figure-latex/unnamed-chunk-3-1} \end{center}
+}
 
-\begin{center}\includegraphics{2018-polar-gam_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\caption{Tongue contours of voiceless and voiced stops in IT04.}\label{f:tongues-it04}
+\end{figure}
 
 \bibliography{linguistics.bib}
 
