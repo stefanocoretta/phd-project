@@ -338,33 +338,37 @@ compareML(it01_gam_0, it01_gam)
 
 To check which part of the contour differs among conditions, the method recommended in \citet{soskuthy2017} is to plot the difference smooth and check the confidence interval.
 The parts of confidence interval that don't include 0 indicate that the difference between contours in that part is significant.
+\Cref{f:diff-it01} illustrates the use of difference smooths with the difference smooths of voiceless vs. voiced coronal stops when the vocalic context is /a/ or /u/.
+As per usual, the tongue tip is on the right-end side of each plot.
+The difference smooths indicate that there is a significant difference along the most anterior part of the tongue (the root and dorsum).
+Based on the predicted smooths sown in \Cref{f:it01-gam-plot}, we can argue that, in the context of coronal consonants, the root is more advanced in voiced relateive to voiceless stops (when the vowel is either /a/ or /u/), and that the dorsum is also somewhat retracted in voiced stops if the vowel is /u/.
 
-```{r diff-it01-a}
+```{r diff-it01, include=TRUE, fig.cap = "Difference smooth of voiceless vs. voiced stops in the context of /a/ (left) and /u/ (right).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
 plot_difference(
   it01_gam,
   X,
   difference = list(vc_voicing = c("a.coronal.voiced", "a.coronal.voiceless"))
-) + scale_x_reverse()
-```
+) +
+  scale_x_reverse() +
+  labs(title = "/a/")
 
-```{r diff-it01-u}
 plot_difference(
   it01_gam,
   X,
   difference = list(vc_voicing = c("u.coronal.voiced", "u.coronal.voiceless"))
-) + scale_x_reverse()
+) +
+  scale_x_reverse() +
+  labs(title = "/u/")
 ```
 
-# Comparing tongue contours in voiceless and voiced stops
+As mentioned in the introduction, autocorrelation in the data can produce unwanted patterns in the residuals, which in turn can affect the estimated smooths (and falsely increase certainty about them).
+A first-order autoregressive (AR1) model can be included to reduce autocorrelation at lag 1.
+\Cref{f:it01-acf} show the autocorrelations in the residuals without and with an AR1 model.
+The GAM model with the AR1 correction has lower values of autocorrelations.
+In this case, it is thus advisable to perform ML comparison and smooths plotting with models in which an AR1 model has been included.
+For a more in-depth treatment of issues related to autocorrelation, see \citet{soskuthy2017}.
 
-Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
-The plots in ... show that there is an appreciable degree of variation across speakers and phonological contexts.
-In some speakers and contexts, the tongue root (on the left of the tongue contour) is more advanced in the voiced stops than in the voiceless stops.
-The magnitude of the difference is about 2 millimetres, and it is more common when C2 is coronal and the vowel is /a/.
-\citet{kirkham2017} find that the tongue root in +ATR vowels is on average 4 millimetres more advanced than the respective -ATR vowels.
-Given this estimate, a 2 millimetres difference seems appropriate, or two very different vowels would end up before voiceless vs. voiced stops (cf. with phonologisation of ATR depending on voicing ...).
-
-```{r it01-gam-ar, cache=TRUE}
+```{r it01-gam-ar, cache=TRUE, message=FALSE}
 it01_rho <- start_value_rho(it01_gam)
 
 it01_gam_ar <- polar_gam(
@@ -377,7 +381,23 @@ it01_gam_ar <- polar_gam(
   rho = it01_rho,
   AR_start = tongue_it01$start.event
 )
+```
 
+```{r it01-acf, include=TRUE, fig.cap = "Autocorrelation plots of a model fitted without (left) and with (right) a first-order autoregressive model (AR1).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
+acf_resid(it01_gam, split_pred = list(tongue_it01$start.event))
+acf_resid(it01_gam_ar, split_pred = "start.event")
+```
+
+# Comparing tongue contours in voiceless and voiced stops
+
+Mid-sagittal tongue contours at maximum tongue displacement of voiceless and voiced stops have been compared using polar GAMs.
+The plots in ... show that there is an appreciable degree of variation across speakers and phonological contexts.
+In some speakers and contexts, the tongue root (on the left of the tongue contour) is more advanced in the voiced stops than in the voiceless stops.
+The magnitude of the difference is about 2 millimetres, and it is more common when C2 is coronal and the vowel is /a/.
+\citet{kirkham2017} find that the tongue root in +ATR vowels is on average 4 millimetres more advanced than the respective -ATR vowels.
+Given this estimate, a 2 millimetres difference seems appropriate, or two very different vowels would end up before voiceless vs. voiced stops (cf. with phonologisation of ATR depending on voicing ...).
+
+```{r it01-gam-ar-2, cache=TRUE}
 it01_gam_ar_0 <- polar_gam(
   Y ~
     s(X),
