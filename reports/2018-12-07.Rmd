@@ -2,7 +2,13 @@
 title: "17 December 2018"
 author: "Stefano Coretta"
 date: "12/12/2018"
-output: pdf_document
+output: 
+  pdf_document: 
+    fig_caption: yes
+    highlight: tango
+    latex_engine: xelatex
+    number_sections: yes
+fontsize: 12pt
 ---
 
 ```{r setup, include=FALSE}
@@ -19,6 +25,9 @@ library(coretta2018itaegg)
 library(lme4)
 library(lmerTest)
 library(sjPlot)
+
+scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
+scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 ```
 
 # 3D tongue surface of [s] and [z]
@@ -125,9 +134,9 @@ sum_diff_2 <- sum(predicted_df_2$diff_2)
 volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 ```
 
-The volume increase of [z] relative to [s] is `r round(volume_diff_2, 2)` cm^3.
+The volume increase of [z] relative to [s] is `r round(volume_diff_2, 2)` cm\textsuperscript{3}.
 This estimate is based on the predicted GAM data on a surface which corresponds to the actual imaged surface.
-If I remember correctly, Steven Lulich estimated that a volume increase of 20 cm^3 is ideal for maintainance of voicing in a voiced fricative.
+If I remember correctly, Steven Lulich estimated that a volume increase of 20 cm\textsuperscript{3} is ideal for maintainance of voicing in a voiced fricative.
 
 # Italian EGG: vowel and voicing duration
 
@@ -144,3 +153,26 @@ ita_egg <- ita_egg %>%
   mutate_if(is.character, as.factor)
 ```
 
+```{r vow-height-box, warning=FALSE}
+ita_egg %>%
+  ggplot(aes(height, v1_duration, fill = height)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05, width = 0.3) +
+  labs(
+    title = "Vowel duration by vowel height",
+    x = "Vowel height",
+    y = "V1 duration (ms)"
+  )
+```
+
+```{r voi-height-box, warning=FALSE}
+ita_egg %>%
+  ggplot(aes(height, voice_duration, fill = height)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05, width = 0.3) +
+  labs(
+    title = "Voicing duration by vowel height",
+    x = "Vowel height",
+    y = "V1 voicing duration (ms)"
+  )
+```
