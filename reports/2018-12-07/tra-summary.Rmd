@@ -1,0 +1,21 @@
+---
+title: "Summary of TRA paper"
+author: "Stefano Coretta"
+date: "13/12/2018"
+output:
+  pdf_document:
+    citation_package: natbib
+    fig_caption: yes
+    latex_engine: xelatex
+    number_sections: yes
+bibliography: linguistics.bib
+biblio-style: unified.bst
+fontsize: 11pt
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(echo = normalizePath("../../"))
+```
+
