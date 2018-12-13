@@ -22,3 +22,6 @@ Matrix
 lme4
 lmerTest
 sjPlot
+Rcpp
+brms
+bayesplot

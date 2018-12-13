@@ -23,7 +23,20 @@ estimates <- read_csv("./english/data/estimates.csv") %>%
     n_syl = factor(n_syl, levels = c("mono", "di"))
   ) %>%
   na.omit()
+
+davis1989 <- read_csv("./english/data/davis1989.csv") %>%
+  gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
+  separate(voice_stat, c("voice", "stat")) %>%
+  spread(stat, value) %>%
+  rename(v_duration =  "mean") %>%
+  mutate(
+    voice = factor(voice, levels = c("voiceless", "voiced")),
+    speaker = as.factor(speaker),
+    place = factor(place, levels = c("labial", "alveolar", "velar"))
+  )
 ```
+
+# Estimate of the voicing effect
 
 ```{r}
 estimates %>%
@@ -99,4 +112,54 @@ mcmc_intervals(as.array(ve_brm), regex_pars = "b_")
 
 ```{r}
 mcmc_areas(as.array(ve_brm), regex_pars = "b_")
+```
+
+# Estimate of voicing effect in unstressed vowels
+
+```{r unstr-priors}
+get_prior(
+  v_duration | se(sd) ~ voice + place + (1| speaker),
+  data = davis1989,
+  family = gaussian()
+)
+```
+
+```{r unstr-bm}
+priors <- c(
+  set_prior("normal(50, 25)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicevoiced"),
+  set_prior("normal(0, 20)", class = "b", coef = "placealveolar"),
+  set_prior("normal(0, 20)", class = "b", coef = "placevelar"),
+  set_prior("normal(0, 25)", class = "sd")
+)
+
+unstr_bm <- brm(
+  v_duration | se(sd) ~ voice + place + (1| speaker),
+  data = davis1989,
+  family = gaussian(),
+  prior = priors,
+  cores = 4,
+  seed = 1989,
+  control = list(adapt_delta = 0.99)
+)
+```
+
+```{r unstr-bm-summary}
+summary(unstr_bm)
+```
+
+```{r unstr-bm-pp}
+brms::pp_check(unstr_bm, nsamples = 100)
+```
+
+```{r unstr-bm-intervals}
+mcmc_intervals(as.array(unstr_bm), regex_pars = "b_")
+```
+
+```{r unstr-bm-intervals-2}
+mcmc_intervals(as.array(unstr_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_placevelar"))
+```
+
+```{r unstr-bm-areas}
+mcmc_areas(as.array(unstr_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_placevelar"))
 ```

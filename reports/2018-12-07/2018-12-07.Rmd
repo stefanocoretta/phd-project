@@ -8,7 +8,10 @@ output:
     highlight: tango
     latex_engine: xelatex
     number_sections: yes
+    citation_package: natbib
 fontsize: 12pt
+bibliography: linguistics
+biblio-style: unified
 ---
 
 ```{r setup, include=FALSE}
@@ -25,6 +28,8 @@ library(coretta2018itaegg)
 library(lme4)
 library(lmerTest)
 library(sjPlot)
+library(brms)
+library(bayesplot)
 
 scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
@@ -137,6 +142,60 @@ volume_diff_2 <- sum_diff_2 * (x_max - x_min)/100 * (y_max - y_min)/100
 The volume increase of [z] relative to [s] is `r round(volume_diff_2, 2)` cm\textsuperscript{3}.
 This estimate is based on the predicted GAM data on a surface which corresponds to the actual imaged surface.
 If I remember correctly, Steven Lulich estimated that a volume increase of 20 cm\textsuperscript{3} is ideal for maintainance of voicing in a voiced fricative.
+
+# A Bayesian analysis of the voicing effect in pre-stress vowels (/əˈCV/)
+
+```{r davis-data, message=FALSE}
+davis1989 <- read_csv("./english/data/davis1989.csv") %>%
+  gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
+  separate(voice_stat, c("voice", "stat")) %>%
+  spread(stat, value) %>%
+  rename(v_duration =  "mean") %>%
+  mutate(
+    voice = factor(voice, levels = c("voiceless", "voiced")),
+    speaker = as.factor(speaker),
+    place = factor(place, levels = c("labial", "alveolar", "velar"))
+  )
+```
+
+```{r unstr-bm, cache=TRUE}
+priors <- c(
+  set_prior("normal(50, 25)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicevoiced"),
+  set_prior("normal(0, 20)", class = "b", coef = "placealveolar"),
+  set_prior("normal(0, 20)", class = "b", coef = "placevelar"),
+  set_prior("normal(0, 25)", class = "sd")
+)
+
+unstr_bm <- brm(
+  v_duration | se(sd) ~ voice + place + (1| speaker),
+  data = davis1989,
+  family = gaussian(),
+  prior = priors,
+  cores = 4,
+  seed = 1989,
+  control = list(adapt_delta = 0.99)
+)
+```
+
+\citet{davis1989} report means and standard deviations of the duration of reduced unstressed vowels followed by a voiceless or a voiced stop (*atop*/*adopt*).
+We can use a Bayesian measurement error model which takes into account the standard deviation of the vowel durations (since we don't have the individual data points that make up the means).
+The data is based on three speakers, the consonant following the reduced vowel can be labial, alveolar, or velar.
+A model was fitted to vowel duration (and standard deviation) with the following predictors: C2 voicing (voiceless vs. voiced), C2 place of articulation (labial vs. alveolar vs. velar), and a by-speaker random intercept.
+The following weakly informative priors have been used: a normal distribution for the intercept with mean 50 and SD = 25, a normal distribution with mean 0 and SD = 20 for the estimates of C2 voicing and C2 place, and a normal distribution with mean 0 and SD = 25 for the by-speaker random intercept.
+
+```{r unstr-summary}
+summary(unstr_bm, prob = 0.9)
+```
+
+The estimated effect of voicing is 6.32 ms with a 90\% credible interval 1.37-11.22 ms.
+A credible interval idicates the range of values within which there is a given probability of finding the true estimate (a 90\% credible interval says in which range there is a 90\% probabilty that the true effect is contained within that interval).
+The following plot shows the posterior distributions of C2 voicing and place (the shaded areas are 90\% credible intervals).
+The posterior distribution of the predictor C2 voicing suggest a small positive effect of voicing on unstressed vowel duration.
+
+```{r unstr-bm-areas}
+mcmc_areas(as.array(unstr_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_placevelar"), prob = 0.9)
+```
 
 # Italian EGG: vowel and voicing duration
 
