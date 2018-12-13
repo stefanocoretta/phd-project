@@ -133,16 +133,15 @@ statistical modelling of whole tongue contours obtained with ultrasound
 imaging has been dominated by the use of Smoothing Splines Analysis of
 Variance (SSANOVA, \citealt{gu2013}). These models have greatly advanced
 our understanding of tongue articulation and speech modelling. On the
-other hand, a variety of research disciplines is witnessing an increased
-use of Generalised Additive Models (GAMs) and their mixed-effects
-counterpart (GAMMs, \citealt{wood2006}), especially when dealing with
-complex data. GAMs have being increasingly adopted in linguistics as a
-means to model dynamic speech data. This paper introduces an
-implementation of GAMs with tongue contours using polar coordinates. The
-use of polar GAMs is illustrated with ultrasound tongue imaging data
-comparing voiceless and voiced stops. The R package \texttt{rticulate}
-has been developed to facilitate the use of the model, and it is briefly
-introduced here.
+other hand, Generalised Additive Models (GAMs) and their mixed-effects
+counterpart (GAMMs, \citealt{wood2006}) are increasingly adopted in
+linguistics as a means to model complex data. This paper introduces an
+implementation of GAMs fitted to tongue contours using a polar
+coordinate system. The implementation of polar GAMs is illustrated with
+ultrasound tongue imaging data of an example study that compares
+voiceless and voiced stops. A brief tutorial shows how to fit polar GAMs
+with the R package \texttt{rticulate}, developed to facilitate the
+fitting procedure.
 
 \hypertarget{ultrasound-tongue-imaging}{%
 \subsection{Ultrasound tongue imaging}\label{ultrasound-tongue-imaging}}
@@ -150,15 +149,15 @@ introduced here.
 Ultrasound imaging is a non-invasive technique for obtaining an image of
 internal organs and other body tissues. 2D ultrasound imaging has been
 successfully used for imaging sections of the tongue surface (for a
-review and applications in field settings, see \citealt{gick2002} and
-\citealt{lulich2018}). An image of the (2D) tongue surface can be
-obtained by placing the transducer in contact with the sub-mental
-triangle (the area under the chin), aligned either with the mid-sagittal
-or the coronal plane. The ultrasonic waves propagate from the transducer
-in a radial fashion through the aperture of the mandible and get
-reflected when they hit the air above the tongue surface. This `echo' is
-captured by the transducer and translated into an image like the one
-shown in \Cref{f:uti}.
+review, see \citealt{gick2002} and \citealt{lulich2018}). An image of
+the (2D) tongue surface can be obtained by placing the transducer in
+contact with the sub-mental triangle (the area under the chin), aligned
+either with the mid-sagittal or the coronal plane. The ultrasonic waves
+propagate from the transducer in a radial fashion through the aperture
+of the mandible and get reflected when they hit the air above the tongue
+surface. This `echo' is captured by the transducer and translated into
+an image like the one shown in \Cref{f:uti} (for a technical
+description, see \citet{stone205}).
 
 \begin{figure}
   \centering
@@ -181,17 +180,19 @@ fitting GAMs, the smoothing splines try to maximise the fit to the data
 while being constrained by a smoothing penalty (usually estimated from
 the data itself). Such penalisation constitutes a guard against
 overfitting. GAMs are thus powerful and flexible models that can deal
-with non-linear data efficiently. Moreover, GAMs have a mixed-effect
-counterpart, Generalised Additive Mixed Models (GAMMs), in which random
-effects can be included (for a technical introduction to GAM(M)s, see
-\citet{zuur2012} and \citet{wood2017}). GAMs can offer relief from
-issues of autocorrelation between points of the contour (given that
-points close to each other are not independent from one another). For
-example, GAMs can fit separate smooths to individual contours, or a
-first-order autoregression model can be included which tries to account
-for the autocorrelation between each point in the contour and the one
-following it. Tongue contours obtained from ultrasound imaging lend
-themselves to be efficiently modelled using GAM(M)s.
+with non-linear data efficiently.
+
+Moreover, GAMs have a mixed-effect counterpart, Generalised Additive
+Mixed Models (GAMMs), in which random effects can be included (for a
+technical introduction to GAM(M)s, see \citealt{zuur2012} and
+\citealt{wood2017}). GAMs can offer relief from issues of
+autocorrelation between points of a tongue contour (given that points
+close to each other are not independent from one another). For example,
+GAMs can fit separate smooths to individual contours, or a first-order
+autoregression model can be included which tries to account for the
+autocorrelation between each point in the contour and the one following
+it. Tongue contours obtained from ultrasound imaging lend themselves to
+be efficiently modelled using GAM(M)s.
 
 \hypertarget{polar-coordinates}{%
 \subsection{Polar coordinates}\label{polar-coordinates}}
@@ -199,15 +200,15 @@ themselves to be efficiently modelled using GAM(M)s.
 \citet{mielke2015} and \citet{heyne2015a, heyne2015} have shown that
 using polar coordinates of tongue contours rather than cartesian
 coordinates brings several benefits, among which reduced variance at the
-contour edges. Points in a polar coordinate system are defined by pairs
-of radial and angular values. The point is describes with a radius,
-which corresponds to the radial distance from the origin, and the angle
-from the reference radius. Tongue contours, due to their shape, tend to
-have increasing slope at the left and right edges, in certain cases
-tending to become almost completely vertical. The almost verticality of
+edges of the tongue contour. Points in a polar coordinate system are
+defined by pairs of radial and angular values. A point is described by a
+radius, which corresponds to the radial distance from the origin, and by
+the angle from a reference radius. Tongue contours, due to their shape,
+tend to have increasing slope at the left and right edges, in certain
+cases tending to become almost completely vertical. The verticality of
 the contours has the effect of increasing the variance of the fitted
-contours (and hence increased confidence intervals), and in some cases
-it can even generate uninterpretable curves.
+contours (and hence the confidence intervals), and in some cases it can
+even generate uninterpretable curves.
 
 This issue is illustrated in \Cref{f:smooths}. The \emph{x} and \emph{y}
 axes are the \emph{x} and \emph{y} cartesian coordinates in millimeters.
@@ -219,14 +220,18 @@ one of three vowels (/a, o, u/). The tip of the tongue is on the
 right-end side of each panel. Focussing on the smooths, it can be
 noticed that the smooths in the contexts of the vowel /u/ diverge
 substantially from the true contours (as inferred by the points). In the
-contexts of velar consonants and the other two vowels, one could say
-that the back/root of the tongue is somewhat flatted out relative to the
-actual contours. These artefacts of smoothing happen because, especially
-in the right-edge of these particular contours, the slope of the curve
-increases in such a way that at times the curve bends under itself (see
-for example the context /ug/, when \emph{x} is between -30 and -20).
-Since those points on the bend share the \emph{x} value, the smooth just
-averages across the \emph{y} values of those points.
+contexts of velar consonants and the other two vowels, the back/root of
+the tongue is somewhat flattened out relative to the actual contours.
+These smoothing artefacts arise because, especially at the right-edge of
+these particular contours, the slope of the curve increases in such a
+way that the curve bends under itself (see for example the context /ug/,
+when \emph{x} is between -30 and -20). Since those points on the bend
+share the \emph{x} value, the smooth just averages across the \emph{y}
+values of those points. \Cref{f:paths} shows a more appropriate
+(artefact-free) way of representing individual tongue contours. In these
+plots, the points of each contour are connected sequentially by a line,
+rather than smoothed over. The parts in which the contours bend over
+themselves are kept as such and visualised correctly.
 
 \begin{figure}
 
@@ -236,11 +241,6 @@ averages across the \emph{y} values of those points.
 
 \caption{Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.}\label{f:smooths}
 \end{figure}
-
-\Cref{f:paths} shows a better way of representing individual tongue
-contours. In these plots, the points of each contour are connected
-sequentially by a line, rather than smoothed over. The parts in which
-the contours bends over are kept and visualised correctly
 
 \begin{figure}
 
@@ -252,16 +252,16 @@ the contours bends over are kept and visualised correctly
 \end{figure}
 
 These figures illustrate that using cartesian coordinates for modelling
-can introduce smoothing artefacts which in turn can negatively affect
-the model output. When tongue contours are expressed with polar
-coordinates, on the other hand, the variance is reduced and the fitted
-contours generally reflect more closely the underlying tongue shape.
-Mielke has implemented a series of R \citep{r-core-team2018} functions
-for fitting polar SSANOVAs to tongue contours. While model fitting is
-achieved using polar coordinates, plotting of the model output is
-subsequently obtained by reconverting the coordinates to cartesian. The
-method introduce in this paper is based on Mielke's implementation
-applied to GAMs.
+tongue contours can introduce smoothing artefacts which can in turn
+negatively affect the model output. When tongue contours are expressed
+with polar coordinates, on the other hand, the variance is reduced and
+the fitted contours generally reflect more closely the underlying tongue
+shape. Mielke has implemented a series of R \citep{r-core-team2018}
+functions for fitting polar SSANOVAs to tongue contours
+(\url{http://phon.chass.ncsu.edu/manual/tongue_ssanova.r}). While model
+fitting is achieved using polar coordinates, plotting is done by
+reconverting the coordinates to a cartesian system. This same procedure
+is used in the polar GAM modelling presented here.
 
 \hypertarget{polar-gamms}{%
 \section{Polar GAM(M)s}\label{polar-gamms}}
