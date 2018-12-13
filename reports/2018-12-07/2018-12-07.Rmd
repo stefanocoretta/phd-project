@@ -12,6 +12,7 @@ output:
 fontsize: 12pt
 bibliography: linguistics
 biblio-style: unified
+mainfont: Brill
 ---
 
 ```{r setup, include=FALSE}
