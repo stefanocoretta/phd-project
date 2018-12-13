@@ -41,3 +41,7 @@ The presence of advancement in voiceless stops could be a consequence of the upw
 \citet{ahn2018} also reports that, as a general pattern, tongue root advancement is found in lingual stops and not in labials.
 Finally, there is a conundrum: The tongue root is more advanced in longer vowels and at higher speech rates, but higher speech rates are correlated with shorter vowel durations.
 The solution to the conundrum is that the position of the tongue root *at vowel onset* is also affected by speech rate, such that higher speech rate correlates with a more advanced tongue root at vowel onset (so that, everything else being equal, a longer vowel will still have more tongue root advancement at offset).
+
+I should also probably talk about individual variation because there is a good deal of variation, and it is independent of language.
+In some speakers the tongue root advances during the vowel, in other it is statically advanced during the whole duration of the vowel when C2 is voiced.
+Yet in other speakers there are no appreciable differences in tongue root position, or the reversed patter can be seen.
