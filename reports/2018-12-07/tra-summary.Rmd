@@ -11,9 +11,33 @@ output:
 bibliography: linguistics.bib
 biblio-style: unified.bst
 fontsize: 11pt
+indent: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(echo = normalizePath("../../"))
 ```
+
+This paper will focus on the three-way relationship of voicing, tongue root position, and vowel duration.
+Two well known correlates of voicing in stops are enlargement of the oral cavity by advancement of the tongue root, and longer preceding vowels.
+I will show that tongue root position and preceding vowel duration enter in a direct relationship when several aspects are considered.
+The data indicates that:
+
+- The tongue root at closure onset (derived from acoustics) is more advanced in voiced stops than in voiceless stops.
+- The position of the tongue root is positively correlated with preceding vowel duration.
+  - There is no interaction between vowel duration and voicing on the effect of tongue root position (i.e., the correlation between tongue root position and vowel duration is present independent of C2 voicing).
+- Tongue root position is positively correlated with speech rate
+- The tongue root advances during the vowel relative to its position at vowel onset (derived from acoustics), independent of C2 voicing, but advancement is greater if C2 is voiced.
+- The tongue root has a bigger advancing movement during the vowel the longer the vowel duration.
+
+These results can be interpreted as a sign that longer vowel durations before voiced stops guarantee that, at the time of closure onset, the tongue root is in a position suitable for voicing.
+See \citet{rothenberg1967} for how a maximal ballistic movement of the tongue root would take between 60 and 90 ms to complete.
+A longer vowel ensures that the movement can be implemented so that by the time closure is made, there is an appreciable increase in supraglottal cavity volume.
+Understanding how exactly the movements of the tongue body/tip and root are orchestrated requires more articulatory data.
+
+The presence of advancement in voiceless stops could be a consequence of the upward movement of the tongue body/tip.
+\citet{westbury1983} too finds that there is tongue root advancement in voiceless stops (of a lesser degree than in voiced stops), and interestingly that there isn't much advancement with labial stops.
+\citet{ahn2018} also reports that, as a general pattern, tongue root advancement is found in lingual stops and not in labials.
+Finally, there is a conundrum: The tongue root is more advanced in longer vowels and at higher speech rates, but higher speech rates are correlated with shorter vowel durations.
+The solution to the conundrum is that the position of the tongue root *at vowel onset* is also affected by speech rate, such that higher speech rate correlates with a more advanced tongue root at vowel onset (so that, everything else being equal, a longer vowel will still have more tongue root advancement at offset).
