@@ -140,8 +140,8 @@ implementation of GAMs fitted to tongue contours using a polar
 coordinate system. The implementation of polar GAMs is illustrated with
 ultrasound tongue imaging data of an example study that compares
 voiceless and voiced stops. A brief tutorial shows how to fit polar GAMs
-with the R package \texttt{rticulate}, developed to facilitate the
-fitting procedure.
+with the R package rticulate, developed to facilitate the fitting
+procedure.
 
 \hypertarget{ultrasound-tongue-imaging}{%
 \subsection{Ultrasound tongue imaging}\label{ultrasound-tongue-imaging}}
@@ -157,7 +157,7 @@ propagate from the transducer in a radial fashion through the aperture
 of the mandible and get reflected when they hit the air above the tongue
 surface. This `echo' is captured by the transducer and translated into
 an image like the one shown in \Cref{f:uti} (for a technical
-description, see \citet{stone205}).
+description, see \citet{stone2005}).
 
 \begin{figure}
   \centering
@@ -271,15 +271,15 @@ A polar GAM is constructed as follows. The outcome variable of the model
 are the radial coordinates, while a smooth term over the angular
 coordinates is the predictor which takes care of modelling the curved
 shape of the contour. Other predictors, such as consonant or vowel type,
-speech rate, or random effects, can be also included. The model returns
-fitted smooths with polar coordinates as units. The predicted polar
-coordinates can be derived from the fitted smooths and converted into a
-cartesian coordinate system (centred on the origin of the polar system)
-for plotting. A simple example with data from one speaker will
-illustrate how to fit polar GAMs with the R package \texttt{rticulate}.
-The following section gives information on the ultrasonic system used
-for data collection and on how the data has been processed, before
-moving onto model fitting itself.
+speech rate, or random effects, can also be included. The model returns
+fitted smooths in polar coordinates. The predicted polar coordinates of
+the smooths can be derived from the model and converted into a cartesian
+coordinate system (centred on the origin of the polar system) for
+plotting. A simple example with data from one speaker will illustrate
+how to fit polar GAMs with the R package rticulate. The following
+section gives information on the ultrasonic system used for data
+collection and on how the data has been processed, before moving onto
+model fitting itself.
 
 \hypertarget{data-collection-and-processing}{%
 \subsection{Data collection and
@@ -305,8 +305,8 @@ metallic headset produced by Articulate Instruments Ltd™
 
 Before the reading task, the participant's occlusal plane was obtained
 using a bite plate \citep{scobbie2011}. The participants read nonce
-words embedded in the frame sentence \emph{Dico \_\_\_ lentamente} `I
-say \_\_\_ slowly'. The words follow the structure
+words embedded in the frame sentence \emph{Dico \_\_ lentamente} `I say
+\_\_ slowly'. The words follow the structure
 C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V\textsubscript{2},
 where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/,
 C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} =
@@ -323,11 +323,10 @@ ultrasonic probe, such that each fan-line is parallel to the direction
 of the ultrasonic signal. Tongue displacement was thus calculated as the
 displacement of the fitted splines along the fan-line vectors. The time
 of maximum tongue displacement was the time of greater displacement
-along the fan-line vector that showed the greatest standard deviation
-(as assessed manually). The vector standard deviation search area was
-restricted to the portion of the contour corresponding to the tongue tip
-for coronal consonants, and to the portion corresponding to the tongue
-dorsum for velar consonants.
+along the fan-line vector with the greatest standard deviation. The
+vector standard deviation search area was restricted to the portion of
+the contour corresponding to the tongue tip for coronal consonants, and
+to the portion corresponding to the tongue dorsum for velar consonants.
 
 The cartesian coordinates of the tongue contours were extracted from the
 ultrasonic data at the time of maximum tongue displacement (always
@@ -342,31 +341,31 @@ axes. The horizontal plane is parallel to the speaker's occlusal plane.
 \subsection{Fitting a polar GAM}\label{fitting-a-polar-gam}}
 
 GAMs can be fitted in R with the \texttt{gam()} function from package
-\texttt{mgcv} \citep{wood2011, wood2017}. \texttt{bam()} is a more
-efficient function when the datasets has several hundreds observations.
-The package \texttt{rticulate} has been developed as a wrapper of the
-\texttt{bam()} function to be used with tongue contours. The special
-function \texttt{polar\_gam()} can fit any specified GAM model to tongue
-contours coordinates, using the same syntax of \texttt{mgcv}. The
-function accepts tongue contours either in cartesian or polar
-coordinates. In the first case, the coordinates can be transformed into
-polar before fitting. If the data is in the AAA fan-like coordinate
-system, the origin is automatically estimated with the method in
-\citet{heyne2015a}. If the data is not exported from AAA, the user can
-specify the known coordinates of probe origin. The function
+mgcv \citep{wood2011, wood2017}. \texttt{bam()} is a more efficient
+function when the datasets has several hundreds observations. The
+package rticulate has been developed as a wrapper of the \texttt{bam()}
+function to be used with tongue contours. The special function
+\texttt{polar\_gam()} can fit any specified GAM model to tongue contours
+coordinates, using the same syntax of mgcv. The function accepts tongue
+contours either in cartesian or polar coordinates. In the first case,
+the coordinates can be transformed into polar before fitting. If the
+data is in the AAA fan-like coordinate system, the origin is
+automatically estimated with the method in \citet{heyne2015a}. If the
+data is not exported from AAA, the user can specify the known
+coordinates of the probe origin. The function
 \texttt{plot\_polar\_smooths()}, used for plotting the estimated
 contours, converts the coordinates back into cartesian using the same
 origin as with GAM fitting.
 
 A GAM in R can be specified with a formula that uses the same syntax of
-\texttt{lme4}, a commonly used package for linear mixed-effects models
-\citep{bates2015}. The \texttt{mgcv} package allows to specify smoothing
-spline terms with the function \texttt{s()}. This function takes the
-term along which a spline is created (for example, time in a time
-series, or \emph{x}-coordinates in a cartesian system). Among the
-arguments of \texttt{s()}, the user can select the type of spline (the
-\texttt{bs} argument) and the grouping factor used for comparison (the
-\texttt{by} argument). For a more in-depth introduction to GAMs in R for
+lme4, a commonly used package for linear mixed-effects models
+\citep{bates2015}. The mgcv package allows to specify smoothing spline
+terms with the function \texttt{s()}. This function takes the term along
+which a spline is created (for example, time in a time series, or
+\emph{x}-coordinates in a cartesian system). Among the arguments of
+\texttt{s()}, the user can select the type of spline (the \texttt{bs}
+argument) and the grouping factor used for comparison (the \texttt{by}
+argument). For a more in-depth introduction to GAMs in R for
 linguistics, see \citet{soskuthy2017} and \citet{wieling2017}.
 
 As means of illustration, the following paragraphs will show how to fit
@@ -387,7 +386,7 @@ predictors can be achieved by using \texttt{vc\_voicing} with the
 specified model to the contour data of IT01. When running the code, the
 coordinates of the estimated origin used for the conversion to polar
 coordinates are returned. The model is fitted by Maximum Likelihood (ML)
-here to allow model comparison below).
+here to allow model comparison below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -410,7 +409,8 @@ The function \texttt{plot\_polar\_smooths()} can be used to plot the
 estimated contours. The shaded areas around the estimated contours are
 95\% confidence intervals. Note that, differently from SSANOVA,
 statistical significance can't be assessed from the overlapping (or lack
-thereof) of the confidence intervals.
+thereof) of the confidence intervals. The output of
+\texttt{plot\_polar\_smooths()} is shown in \Cref{f:it01-gam-plot}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -439,9 +439,9 @@ thereof) of the confidence intervals.
 
 One way to assess significance of model terms is to compare the ML score
 of the full model against one without the relevant predictor, using the
-function \texttt{compareML()} from the \texttt{itsadug} package. Both
-the parametric term and the difference smooth need to be removed in the
-null model.
+function \texttt{compareML()} from the itsadug package. Both the
+parametric term and the difference smooth need to be removed in the null
+model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -482,18 +482,18 @@ null model.
 
 To check which part of the contour differs among conditions, the method
 recommended in \citet{soskuthy2017} is to plot the difference smooth and
-check the confidence interval. The parts of confidence interval that
+check the confidence interval. The parts of the confidence interval that
 don't include 0 indicate that the difference between contours in that
 part is significant. \Cref{f:diff-it01} illustrates the use of
 difference smooths with the difference smooths of voiceless vs.~voiced
 coronal stops when the vocalic context is /a/ or /u/. As per usual, the
 tongue tip is on the right-end side of each plot. The difference smooths
-indicate that there is a significant difference along the most anterior
-part of the tongue (the root and dorsum). Based on the predicted smooths
-sown in \Cref{f:it01-gam-plot}, we can argue that, in the context of
-coronal consonants, the root is more advanced in voiced relateive to
-voiceless stops (when the vowel is either /a/ or /u/), and that the
-dorsum is also somewhat retracted in voiced stops if the vowel is /u/.
+indicate that there is a significant difference along the posterior part
+of the tongue (the root and dorsum). Based on the predicted smooths sown
+in \Cref{f:it01-gam-plot}, we can argue that, in the context of coronal
+consonants, the root is more advanced in voiced relative to voiceless
+stops (when the vowel is either /a/ or /u/), and that the dorsum is also
+somewhat retracted in voiced stops if the vowel is /u/.
 
 \begin{figure}
 
@@ -509,11 +509,12 @@ produce unwanted patterns in the residuals, which in turn can affect the
 estimated smooths (and falsely increase certainty about them). A
 first-order autoregressive (AR1) model can be included to reduce
 autocorrelation at lag 1. \Cref{f:it01-acf} show the autocorrelations in
-the residuals without and with an AR1 model. The GAM model with the AR1
-correction has lower values of autocorrelations. In this case, it is
-thus advisable to perform ML comparison and smooths plotting with models
-in which an AR1 model has been included. For a more in-depth treatment
-of issues related to autocorrelation, see \citet{soskuthy2017}.
+the residuals without (left) and with (right) an AR1 model. The GAM
+model with the AR1 correction has lower autocorrelation values. In this
+case, it is thus advisable to perform ML comparison and smooths plotting
+with models in which an AR1 model has been included. For a more in-depth
+treatment of issues related to autocorrelation, see
+\citet{soskuthy2017}.
 
 \begin{figure}
 
@@ -547,10 +548,10 @@ than the respective −ATR vowels. \citet{rothenberg1967} argues, based on
 modelling, that the tongue root can move forward by a maximum of about 5
 mm mid-sagittally. This movement corresponds to an average volume
 increase of 18 cm\textsuperscript{2}. Given these estimates, it can be
-argued that a 2 mm change reasonably contributes to an appreciable
-volume increase, also considering that other volume expansion mechanisms
-can operate along with the advancement of the tongue root (like larynx
-lowering, slack oral walls, etc.).
+argued that a 2 mm change in the mid-sagittal plane contributes to an
+appreciable volume increase, also considering that other volume
+expansion mechanisms can operate along with the advancement of the
+tongue root (like larynx lowering, slack oral walls, etc.).
 
 \begin{figure}
 
@@ -595,24 +596,24 @@ Generalised additive (mixed) models (GAMs) can be efficiently used to
 statistically assess differences in tongue contour shapes as obtained
 from ultrasound tongue imaging. This paper showed how GAMs can be fitted
 to tongue contours in polar coordinates in R with the specialised
-package \texttt{rticulate}. An example of how GAMs can help modelling
-differences in tongue contours has been illustrated with data from 4
-speakers of Italian in which the mid-sagittal tongue contours of
-voiceless and voiced stops where compared. The same general advantages
-and issues noted in \citet{davidson2006} for SSANOVA apply to polar
-GAMs. In particular, while within-speaker normalisation can be achieved
-by rotation and offsetting of the data relative to a bite plate (as done
+package rticulate. An example of how GAMs can help modelling differences
+in tongue contours has been illustrated with data from 4 speakers of
+Italian in which the mid-sagittal tongue contours of voiceless and
+voiced stops where compared. The same general advantages and issues
+noted in \citet{davidson2006} for SSANOVA apply to polar GAMs. In
+particular, while within-speaker normalisation can be achieved by
+rotation and offsetting of the data relative to a bite plate (as done
 here), across-speaker normalisation represents a bigger challenge. Since
-it can't be deduced with sufficient certainty from the ultrasonic image
+we can't be deduced with sufficient certainty from the ultrasonic image
 which part of the tongue is being actually imaged, it is not possible to
 define fixed anatomical landmarks across speakers that can be used in
 normalisation. For this reason it has been recommended here to fit
 separate models for each speaker. Future work will explore ways of
 allowing the user to use data aggregated from multiple speakers while
 accounting for the uncertainty in which parts of the tongue are imaged.
-To conclude, polar GAMs can also be extended to model whole tongue
-contours differences over time (in other words, how the sectional shape
-of the tongue changes over time) and 3D tongue surfaces.
+Finally, polar GAMs can also be extended to model 3D tongue surfaces and
+whole tongue contours differences over time (in other words, how the
+sectional shape of the tongue changes over time).
 
 \bibliography{linguistics.bib}
 
