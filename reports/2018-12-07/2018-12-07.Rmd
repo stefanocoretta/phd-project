@@ -213,6 +213,16 @@ ita_egg <- ita_egg %>%
   mutate_if(is.character, as.factor)
 ```
 
+This section briefly reports the results from the EGG study on voicing duration and vowel height in Italian.
+The following figures show the duration of vowels by vowel height, and the duration of voicing coresponding to the vowel by vowel height.
+The stimuli (/ˈCVCo/) contained only voiceless stops, and voicing refers to the voicing of the vowel flanked by singleton voiceless stops.
+Vowel durations decrease with vowel height.
+The vowels are: low /a/, mid-low /ɔ/, mid-high /e/, high /u, i/.
+Voicing durations also decrease with vowel height, possibly with the exeption of the mid-low vowel (/ɔ/), which has a voicing duration similar to the low vowel (/a/).
+Two linear-mixed models have been fitted to vowel duration and voicing duration.
+The general pattern is that voicing duration decreases by a smaller degree than vowel duration with increasing vowel height.
+Also, non-low vowels have longer voicing during the closure of the consonant following the vowel, compared to the low vowel /a/.
+
 ```{r vow-height-box, warning=FALSE}
 ita_egg %>%
   ggplot(aes(height, v1_duration, fill = height)) +
@@ -236,3 +246,34 @@ ita_egg %>%
     y = "V1 voicing duration (ms)"
   )
 ```
+
+```{r vowel-lm}
+vowel_lm <- lmer(
+  v1_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|word),
+  data = ita_egg,
+  control = lmerControl(optimizer = "Nelder_Mead")
+)
+summary(vowel_lm)
+```
+
+```{r voice-lm, echo=TRUE}
+voice_lm_1 <- lmer(
+  voice_duration ~
+    height +
+    c2_place +
+    height:c2_place +
+    speech_rate_c +
+    (1+height|speaker) +
+    (1|word),
+  data = ita_egg,
+  REML = FALSE
+)
+summary(voice_lm_1)
+```
+
