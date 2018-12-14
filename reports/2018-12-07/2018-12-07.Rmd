@@ -88,7 +88,7 @@ gam_ar <- bam(
 
 I recorded myself in Bloomington with the 3D ultrasound machine while uttering five tokens of sustained [s] and five tokens of sustained [z].
 A single 3D frame has been extracted from each token.
-The following plots show the output of a 3D GAM fitted to the tongue surfaces of [s] and [z].
+The following plots show the output of a 3D GAM fitted to the tongue surfaces of [s] and [z] (tip on the right).
 
 ```{r gam-ar-plot-1, warning=FALSE}
 vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = list(phone = "s"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[s]", color = "terrain", too.far = .05)
