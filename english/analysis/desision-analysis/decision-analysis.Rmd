@@ -1,0 +1,17 @@
+---
+title: "Decision analysis"
+author: "Stefano Coretta"
+date: "14/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+library(simr)
+```
+
+```{r}
+
+```
