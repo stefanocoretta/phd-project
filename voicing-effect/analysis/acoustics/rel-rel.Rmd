@@ -45,7 +45,7 @@ rr_mb <- brm(
     (1|item),
   data = token_measures,
   prior = priors,
-  cores = 2,
+  cores = 4,
   seed = 8788
 )
 ```
