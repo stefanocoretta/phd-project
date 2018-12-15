@@ -256,6 +256,9 @@ Voicing durations also decrease with vowel height, possibly with the exeption of
 Two linear-mixed models have been fitted to vowel duration and voicing duration.
 The general pattern is that voicing duration decreases by a smaller degree than vowel duration with increasing vowel height.
 Also, non-low vowels have longer voicing during the closure of the consonant following the vowel, compared to the low vowel /a/.
+Longer voicing during closure in non-low vowels could be linked with differences in laryngeal configurations: for example, \citet{koenig2011} find that voice onset happens at higher intra-oral pressures when the vowel is high compared to when the vowel is low (they compared /i, ɪ/ vs. /ɑ/).
+These results indicate a certain temporal independence between supralaryngeal and laryngeal gestures at vowel offset: possibly, the speaker exercises more control over the phasing of the lingual gestures than the phasing of vocal fold vibration.
+I also have results on other measures which I will include in a next report.
 
 ```{r vow-height-box, warning=FALSE}
 ita_egg %>%
