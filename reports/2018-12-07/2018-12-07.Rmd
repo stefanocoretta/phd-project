@@ -132,7 +132,7 @@ vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = l
 vis.gam(gam_ar, view = c("X", "Y"), theta = 0, phi = 50, scale = FALSE, cond = list(phone = "z"), ticktype = "detailed", xlim = c(1, 13), ylim = c(3, 10), zlim = c(3, 8), main = "[z]", color = "terrain", too.far = .05)
 ```
 
-There is a shallower grove in [z] compared to [s], and some lowering/advancing of the tongue root.
+There is a deeper grove in [z] compared to [s], and some lowering/advancing of the tongue root.
 Note that the tongue data have not been rotated.
 
 ## Volume increase
