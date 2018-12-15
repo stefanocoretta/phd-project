@@ -1,7 +1,7 @@
 ---
 title: "17 December 2018"
 author: "Stefano Coretta"
-date: "12/12/2018"
+date: "17/12/2018"
 output: 
   pdf_document: 
     fig_caption: yes
@@ -35,6 +35,40 @@ library(bayesplot)
 scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 ```
+
+# Stimuli for English experiment
+
+| labial |        | velar |        |
+|--------|--------|-------|--------|
+| teep   | teepus | teek  | teekus |
+| teeb   | teebus | teeg  | teegus |
+| turp   | turpus | turk  | turkus |
+| turb   | turbus | turg  | turgus |
+| tarp   | tarpus | tark  | tarkus |
+| tarb   | tarbus | targ  | targus |
+
+Frame sentences:
+
+- I'll say 'X' this Thursday
+- You'll say 'X' this Monday
+- She'll say 'X' this Sunday
+- We'll say 'X' this Friday
+- They'll say 'X' this Tuesday
+
+## Check nonce words
+
+```{r read-subtlex, message=FALSE, cache=TRUE}
+subtlex <- read_csv("./english/simuli/subtlex.csv")
+```
+
+```{r check}
+subtlex %>%
+  filter(Spelling %in% c("teep","teak", "teeb", "teab", "turp", "turb", "terp", "terb", "tarp", "tarb", "teek", "teak", "teeg", "teag", "turk", "terk", "turg", "terg", "tark", "targ", "teepus", "teapus", "teebus", "teabus", "turpus", "turbus", "terpus", "terbus", "tarpus", "tarbus", "teekus", "teakus", "teegus", "teagus", "turkus", "terkus", "turgus", "tergus", "tarkus", "targus")) %>%
+  select(Spelling, FreqCount, `LogFreq(Zipf)`, `LogFreqBNC(Zipf)`) %>%
+  arrange(desc(FreqCount))
+```
+
+Out of 24 words stimuli, 10 appear in SUBTLEX-UK (either they are phonological matches or full matches). Two of these 10 have a log frequency > 2.5 (*Turk*, *teak*). Note that the spelling for these words would be *turk* and *teek* in the experiment.
 
 # 3D tongue surface of [s] and [z]
 
