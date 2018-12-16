@@ -55,15 +55,49 @@ rr_fit <- brm(
 )
 ```
 
-```{r}
-sim_data_2 <- filter(sim_data, speaker %in% c("s01", "s02"))
+```{r pred-data}
+sim_data_2 <- filter(sim_data, speaker %in% levels(sim_data$speaker)[1:30])
 
 pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, subset = 1, nsamples = 1)
 
-pred_data <- cbind(pred_rr = as.vector(pred_rr), sim_data_2)
+pred_data <- sim_data_2
+pred_data$rr <- as.vector(pred_rr)
 ```
 
-```{r}
-rr_fit_2 <- update(rr_fit, newdata = pred_data, recompile = FALSE)
+```{r rr-fit-2}
+rr_fit_2 <- update(rr_fit, newdata = pred_data, recompile = FALSE, sample_prior = "no")
+```
+
+```{r priors-3}
+priors_3 <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
+  set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
+  # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
+  set_prior("normal(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(15, 10)", class = "sigma")
+)
+```
+
+```{r rr-fit-3}
+rr_fit_3 <- brm(
+  rr ~
+    c2_voice +
+    syl +
+    c2_voice:syl +
+    # speech_rate_c +
+    (1 + c2_voice|speaker),
+  data = pred_data,
+  family = gaussian(),
+  prior = priors_3,
+  chains = 1,
+  control = list(adapt_delta = 0.99)
+)
+```
+
+```{r rr-fit-3-summary}
+summary(rr_fit_3)
 ```
 
