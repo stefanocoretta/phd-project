@@ -1,0 +1,61 @@
+---
+title: "Decision analysis"
+author: "Stefano Coretta"
+date: "16/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+theme_set(theme_minimal())
+library(brms)
+```
+
+```{r simd}
+set.seed(1991)
+
+items = 100
+
+rr <- NULL
+
+for (i in 1:30) {
+  rr <- c(rr, rnorm(items / 2, 200, 10), rnorm(items / 2, 200, 10) + rnorm(1, 0, 3))
+}
+
+simd <- tibble(
+  rr = rr,
+  c2_voice = rep(rep(c("voiceless", "voiced"), each = items / 2), 30),
+  speaker = rep(sprintf("s%02d", 1:30), each = items)
+) %>%
+  mutate(
+    c2_voice = factor(c2_voice, levels = c("voiceless", "voiced"))
+  )
+```
+
+```{r priors-1}
+priors_1 <- c(
+  set_prior("normal(200, 5)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_voicevoiced"),
+  # set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
+  # set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
+  # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
+  set_prior("normal(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 10)", class = "sigma")
+)
+```
+
+```{r rr-fit-1}
+rr_fit_1 <- brm(
+  rr ~
+    c2_voice +
+    (1 + c2_voice | speaker),
+  data = simd,
+  prior = priors_1,
+  family = gaussian(),
+  cores = 4,
+  control = list(adapt_delta = 0.99)
+)
+```
+
