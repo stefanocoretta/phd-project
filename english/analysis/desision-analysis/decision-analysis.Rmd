@@ -12,6 +12,58 @@ library(tidyverse)
 library(brms)
 ```
 
-```{r}
-
+```{r sim-data}
+sim_data <- expand.grid(
+  rr = 0, # brm needs data with response, even if it's discarded
+  repetition = 1:5,
+  c2_voice = c("voiceless", "voiced"),
+  word = c("lab.a", "vel.a", "lab.e", "vel.e", "lab.i", "vel.i"),
+  syl = c("di", "mono"),
+  speaker = sprintf("s%02d", 1:30)
+) %>%
+  mutate_if(is.character, as.factor)
 ```
+
+```{r priors}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(1.65, 2.8)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
+  set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
+  # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
+  set_prior("normal(0, 100)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(13.85, 2.1)", class = "sigma")
+)
+```
+
+```{r rr-fit}
+rr_fit <- brm(
+  rr ~
+    c2_voice +
+    syl +
+    c2_voice:syl +
+    # speech_rate_c +
+    (c2_voice|speaker) +
+    (1|word),
+  data = sim_data,
+  family = gaussian(),
+  prior = priors,
+  sample_prior = "only",
+  cores = 4,
+  chains = 1
+)
+```
+
+```{r}
+sim_data_2 <- filter(sim_data, speaker %in% c("s01", "s02"))
+
+pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, subset = 1, nsamples = 1)
+
+pred_data <- cbind(pred_rr = as.vector(pred_rr), sim_data_2)
+```
+
+```{r}
+rr_fit_2 <- update(rr_fit, newdata = pred_data, recompile = FALSE)
+```
+
