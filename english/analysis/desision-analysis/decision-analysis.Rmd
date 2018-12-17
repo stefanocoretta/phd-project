@@ -168,8 +168,16 @@ if (!file.exists("./english/analysis/desision-analysis/sim.Rdata")) {
 
     }
   }
+  
+  save(results, file = "./english/analysis/desision-analysis/sim.Rdata")
 } else {
   load("./english/analysis/desision-analysis/sim.Rdata")
 }
+```
+
+```{r}
+q_975 <- lapply(results, sapply, quantile, probs = .975)
+attained <- lapply(q_975, function(x) x < 5)
+attained <- lapply(attained, sum)
 ```
 
