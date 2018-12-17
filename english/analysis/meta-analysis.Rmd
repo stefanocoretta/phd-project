@@ -134,7 +134,7 @@ priors <- c(
 )
 
 unstr_bm <- brm(
-  v_duration | se(sd) ~ voice + place + (1| speaker),
+  v_duration | se(sd, sigma = TRUE) ~ voice + place + (1| speaker),
   data = davis1989,
   family = gaussian(),
   prior = priors,
