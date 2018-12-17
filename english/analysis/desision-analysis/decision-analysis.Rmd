@@ -13,6 +13,8 @@ library(brms)
 library(lme4)
 ```
 
+# Simulate data
+
 ```{r sim-data}
 sim_data <- expand.grid(
   rr = 0, # brm needs data with response, even if it's discarded
@@ -52,9 +54,12 @@ rr_fit <- brm(
   sample_prior = "only",
   cores = 4,
   chains = 4,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.99),
+  seed = 934
 )
 ```
+
+# Test loop
 
 ```{r pred-data}
 sim_data_2 <- filter(sim_data, speaker %in% levels(sim_data$speaker)[1:30])
@@ -104,5 +109,67 @@ rr_fit_3 <- brm(
 
 ```{r rr-fit-3-summary}
 summary(rr_fit_3)
+```
+
+# Simulation loop
+
+```{r}
+if (!file.exists("./english/analysis/desision-analysis/sim.Rdata")) {
+  priors_sim <- c(
+    set_prior("normal(200, 50)", class = "Intercept"),
+    set_prior("normal(0, 50)", class = "b", coef = "c2_voicevoiced"),
+    set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
+    set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
+    # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
+    set_prior("normal(0, 25)", class = "sd"),
+    set_prior("lkj(2)", class = "cor"),
+    set_prior("cauchy(0, 10)", class = "sigma")
+  )
+  
+  iterations <- 100
+  results <- vector("list", 6)
+  n_speak <- seq(5, 30, by = 5)
+  count <- 0
+  
+  for (speak in 1:6) {
+    count <- count + 1
+    
+    sim_data_2 <- filter(sim_data, speaker %in% levels(sim_data$speaker)[1:n_speak[speak]])
+    pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, nsamples = iterations)
+    
+    for (i in 1:iterations) {
+      pred_data <- sim_data_2
+      pred_data$rr <- as.vector(pred_rr[i])
+      
+      if (n_speak[speak] == 5 & i == 1) {
+        rr_fit_sim <- brm(
+          rr ~
+            c2_voice +
+            syl +
+            c2_voice:syl +
+            # speech_rate_c +
+            (1 + c2_voice|speaker),
+          data = pred_data,
+          family = gaussian(),
+          prior = priors_sim,
+          chains = 1,
+          control = list(adapt_delta = 0.99)
+        )
+      } else {
+        rr_fit_sim <- update(
+          rr_fit_sim,
+          newdata = pred_data,
+          recompile = FALSE,
+          save_ranef = FALSE
+        )
+      }
+      
+      results[[count]][[i]] <- fixef(rr_fit_sim, summary = F)[, 2]
+
+    }
+  }
+} else {
+  load("./english/analysis/desision-analysis/sim.Rdata")
+}
 ```
 
