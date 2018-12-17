@@ -20,7 +20,7 @@ token_measures <- token_measures %>%
     rel_rel = (c2_rel - c1_rel) * 1000,
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
-  na.omit()
+  filter(!is.na(rel_rel))
 ```
 
 ```{r rr-bm}
@@ -95,7 +95,8 @@ rr_bm_2 <- brm(
   data = token_measures,
   prior = priors_2,
   cores = 4,
-  seed = 8788
+  seed = 8788,
+  control = list(adapt_delta = 0.99)
 )
 ```
 
@@ -117,5 +118,37 @@ mcmc_intervals(as.array(rr_bm_2), pars = c("b_c2_phonationvoiced:vowelo", "b_c2_
 
 ```{r rr-bm-2-pp-check}
 pp_check(rr_bm_2, nsamples = 100)
+```
+
+```{r rr-bm-3}
+priors_3 <- c(
+  set_prior("normal(200, 25)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "b", coef = "c2_phonationvoiced"),
+  set_prior("normal(0, 50)", class = "b", coef = "speech_rate_c"),
+  set_prior("normal(0, 50)", class = "b", coef = "languagePolish"),
+  set_prior("normal(0, 50)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_bm_3 <- brm(
+  rel_rel ~
+    c2_phonation +
+    speech_rate_c +
+    language +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors_3,
+  cores = 4,
+  chains = 4,
+  iter = 4000,
+  warmup = 1000,
+  seed = 8788,
+  control = list(adapt_delta = 0.99)
+)
+```
+
+```{r}
+summary(rr_bm_3)
 ```
 
