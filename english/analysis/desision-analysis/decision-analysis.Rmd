@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 library(brms)
+library(lme4)
 ```
 
 ```{r sim-data}
@@ -32,7 +33,7 @@ priors <- c(
   set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
   # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 100)", class = "sd"),
-  set_prior("lkj(1)", class = "cor"),
+  set_prior("lkj(2)", class = "cor"),
   set_prior("cauchy(0, 10)", class = "sigma")
 )
 ```
@@ -64,11 +65,11 @@ pred_data <- sim_data_2
 pred_data$rr <- as.vector(pred_rr)
 ```
 
-```{r rr-fit-2}
+```{r rr-fit-2, eval=FALSE}
 rr_fit_2 <- update(rr_fit, newdata = pred_data, recompile = FALSE, sample_prior = "no")
 ```
 
-```{r}
+```{r plot-pred}
 ggplot(pred_data, aes(syl, rr, fill = c2_voice)) + geom_boxplot() + facet_wrap(~ speaker)
 ```
 
@@ -80,7 +81,7 @@ priors_3 <- c(
   set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
   # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 25)", class = "sd"),
-  set_prior("lkj(1)", class = "cor"),
+  set_prior("lkj(2)", class = "cor"),
   set_prior("cauchy(0, 10)", class = "sigma")
 )
 ```
@@ -103,5 +104,17 @@ rr_fit_3 <- brm(
 
 ```{r rr-fit-3-summary}
 summary(rr_fit_3)
+```
+
+```{r}
+rr_lm <- lmer(
+  rr ~
+    c2_voice *
+    syl +
+    (c2_voice | speaker),
+  data = pred_data
+)
+
+summary(rr_lm)
 ```
 
