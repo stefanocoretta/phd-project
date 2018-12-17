@@ -15,18 +15,19 @@ library(brms)
 ```{r simd}
 set.seed(1991)
 
-items = 100
+items <- 100
+speakers <- 20
 
 rr <- NULL
 
-for (i in 1:30) {
+for (i in 1:speakers) {
   rr <- c(rr, rnorm(items / 2, 200, 10), rnorm(items / 2, 200, 10) + rnorm(1, 0, 3))
 }
 
 simd <- tibble(
   rr = rr,
-  c2_voice = rep(rep(c("voiceless", "voiced"), each = items / 2), 30),
-  speaker = rep(sprintf("s%02d", 1:30), each = items)
+  c2_voice = rep(rep(c("voiceless", "voiced"), each = items / 2), speakers),
+  speaker = rep(sprintf("s%02d", 1:speakers), each = items)
 ) %>%
   mutate(
     c2_voice = factor(c2_voice, levels = c("voiceless", "voiced"))
@@ -57,5 +58,9 @@ rr_fit_1 <- brm(
   cores = 4,
   control = list(adapt_delta = 0.99)
 )
+```
+
+```{r}
+summary(rr_fit_1)
 ```
 
