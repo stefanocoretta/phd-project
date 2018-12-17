@@ -26,14 +26,14 @@ sim_data <- expand.grid(
 
 ```{r priors}
 priors <- c(
-  set_prior("normal(200, 50)", class = "Intercept"),
-  set_prior("normal(1.65, 2.8)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(200, 25)", class = "Intercept"),
+  set_prior("normal(0, 2.5)", class = "b", coef = "c2_voicevoiced"),
   set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
   set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
   # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 100)", class = "sd"),
-  set_prior("lkj(2)", class = "cor"),
-  set_prior("cauchy(13.85, 2.1)", class = "sigma")
+  set_prior("lkj(1)", class = "cor"),
+  set_prior("cauchy(0, 10)", class = "sigma")
 )
 ```
 
@@ -51,14 +51,14 @@ rr_fit <- brm(
   prior = priors,
   sample_prior = "only",
   cores = 4,
-  chains = 1
+  chains = 4
 )
 ```
 
 ```{r pred-data}
 sim_data_2 <- filter(sim_data, speaker %in% levels(sim_data$speaker)[1:30])
 
-pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, subset = 1, nsamples = 1)
+pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, subset = 50, nsamples = 1)
 
 pred_data <- sim_data_2
 pred_data$rr <- as.vector(pred_rr)
@@ -68,16 +68,20 @@ pred_data$rr <- as.vector(pred_rr)
 rr_fit_2 <- update(rr_fit, newdata = pred_data, recompile = FALSE, sample_prior = "no")
 ```
 
+```{r}
+ggplot(pred_data, aes(syl, rr, fill = c2_voice)) + geom_boxplot() + facet_wrap(~ speaker)
+```
+
 ```{r priors-3}
 priors_3 <- c(
   set_prior("normal(200, 50)", class = "Intercept"),
-  set_prior("normal(0, 20)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(0, 50)", class = "b", coef = "c2_voicevoiced"),
   set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
   set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
   # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 25)", class = "sd"),
-  set_prior("lkj(2)", class = "cor"),
-  set_prior("cauchy(15, 10)", class = "sigma")
+  set_prior("lkj(1)", class = "cor"),
+  set_prior("cauchy(0, 10)", class = "sigma")
 )
 ```
 
