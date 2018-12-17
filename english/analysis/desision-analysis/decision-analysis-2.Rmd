@@ -34,6 +34,10 @@ simd <- tibble(
   )
 ```
 
+```{r}
+ggplot(simd, aes(c2_voice, rr)) + geom_boxplot() + facet_wrap(~ speaker)
+```
+
 ```{r priors-1}
 priors_1 <- c(
   set_prior("normal(200, 5)", class = "Intercept"),
