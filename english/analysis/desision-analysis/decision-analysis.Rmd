@@ -18,7 +18,7 @@ sim_data <- expand.grid(
   rr = 0, # brm needs data with response, even if it's discarded
   repetition = 1:5,
   c2_voice = c("voiceless", "voiced"),
-  word = c("lab.a", "vel.a", "lab.e", "vel.e", "lab.i", "vel.i"),
+  # word = c("lab.a", "vel.a", "lab.e", "vel.e", "lab.i", "vel.i"),
   syl = c("di", "mono"),
   speaker = sprintf("s%02d", 1:30)
 ) %>%
@@ -45,21 +45,21 @@ rr_fit <- brm(
     syl +
     c2_voice:syl +
     # speech_rate_c +
-    (c2_voice|speaker) +
-    (1|word),
+    (c2_voice|speaker),
   data = sim_data,
   family = gaussian(),
   prior = priors,
   sample_prior = "only",
   cores = 4,
-  chains = 4
+  chains = 4,
+  control = list(adapt_delta = 0.99)
 )
 ```
 
 ```{r pred-data}
 sim_data_2 <- filter(sim_data, speaker %in% levels(sim_data$speaker)[1:30])
 
-pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, subset = 50, nsamples = 1)
+pred_rr <- predict(rr_fit, newdata = sim_data_2, sample_new_levels = "gaussian", summary = FALSE, nsamples = 1)
 
 pred_data <- sim_data_2
 pred_data$rr <- as.vector(pred_rr)
@@ -104,17 +104,5 @@ rr_fit_3 <- brm(
 
 ```{r rr-fit-3-summary}
 summary(rr_fit_3)
-```
-
-```{r}
-rr_lm <- lmer(
-  rr ~
-    c2_voice *
-    syl +
-    (c2_voice | speaker),
-  data = pred_data
-)
-
-summary(rr_lm)
 ```
 
