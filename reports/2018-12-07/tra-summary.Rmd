@@ -22,26 +22,35 @@ knitr::opts_knit$set(echo = normalizePath("../../"))
 This paper will focus on the three-way relationship of voicing, tongue root position, and vowel duration.
 Two well known correlates of voicing in stops are enlargement of the oral cavity by advancement of the tongue root, and longer preceding vowels.
 I will show that tongue root position and preceding vowel duration enter in a direct relationship when several aspects are considered.
+More specifically it will be shown that, when measuring tongue root position at the onset of consonant closure, the position of the tongue root is positively correlated with vowel duration.
+Disyllabic words of the form C1V1C2V2 were used.
+The target vowel is V1 and the target consonant is C2.
+
 The data indicates that:
 
-- The tongue root at closure onset (derived from acoustics) is more advanced in voiced stops than in voiceless stops.
-- The position of the tongue root is positively correlated with preceding vowel duration.
-  - There is no interaction between vowel duration and voicing on the effect of tongue root position (i.e., the correlation between tongue root position and vowel duration is present independent of C2 voicing).
-- Tongue root position is positively correlated with speech rate
-- The tongue root advances during the vowel relative to its position at vowel onset (derived from acoustics), independent of C2 voicing, but advancement is greater if C2 is voiced.
-- The tongue root has a bigger advancing movement during the vowel the longer the vowel duration.
+- The tongue root at C2 closure onset is more advanced in voiced stops than in voiceless stops.
+- The position of the tongue root at C2 closure onset is positively correlated with V1 duration, such that longer vowels have a more advanced tongue root at C2 closure.
+  - There is no significant interaction between V1 duration and C2 voicing on the effect of tongue root position (i.e., the correlation between tongue root position and vowel duration is independent of C2 voicing).
+- Tongue root position at C2 closure onset is positively correlated with speech rate, such that higher speech rates correspond to a more advanced tongue root at C2 closure onset.
+- When measuring tongue root position along the total duration of V1, the tongue root advances during V1 (relative to its position at V1 onset), independent of C2 voicing.
+  - The advancement gesture during V1 is greater if C2 is voiced, in other words the tongue root travels forward more if C2 if voiced.
+- In relation to the latter point, the amount of advancement during V1 is positively correlated with V1 duration, such that in a longer vowel the tongue root advances more (thus reaching a more advanced position at V1 offset = C2 closure onset).
 
-These results can be interpreted as a sign that longer vowel durations before voiced stops guarantee that, at the time of closure onset, the tongue root is in a position suitable for voicing.
-See \citet{rothenberg1967} for how a maximal ballistic movement of the tongue root would take between 60 and 90 ms to complete.
-A longer vowel ensures that the movement can be implemented so that by the time closure is made, there is an appreciable increase in supraglottal cavity volume.
-Understanding how exactly the movements of the tongue body/tip and root are orchestrated requires more articulatory data.
+The fact that the tongue root position at C2 closure onset is more advanced if C2 is voiced is linked to the fact that vowels followed by a voiced C2 are longer (and I show that longer vowels = more advanced tongue root).
+These results can be interpreted as a sign that longer vowel durations before voiced stops guarantee that, at the time of closure onset, the tongue root is in a position that can generate a trasnglottal pressure suitable for voicing.
+See \citet{rothenberg1967} for how a maximal ballistic movement of the tongue root would take between 60 and 90 ms to complete, so that it would not be feasible to advance the tongue root *during* closure.
+A longer V1 vowel ensures that the advancing movement can be implemented so that by the time C2 closure is made, there is an appreciable increase in supraglottal cavity volume for sustaining voicing during closure.
+Understanding how exactly the movements of the tongue body/tip and root are orchestrated requires more articulatory data, so it is not possible based on the available data.
+It can be proposed that longer vowel durations conspire with tongue root position to achieve a transglottal pressure condition during C2 closure that is suitable for voicing.
+This proposed pathway is one of the possible pathways for ensuring voicing during closure (pressure manipulation is not the only way in any case, for example vocal fold tension can be manipulated to lower the pressure threshold, rather then the pressure itself).
 
-The presence of advancement in voiceless stops could be a consequence of the upward movement of the tongue body/tip.
+**The problem of TRA in voiceless stops.** The presence of advancement in voiceless stops could be a consequence of the upward movement of the tongue body/tip.
 \citet{westbury1983} too finds that there is tongue root advancement in voiceless stops (of a lesser degree than in voiced stops), and interestingly that there isn't much advancement with labial stops.
 \citet{ahn2018} also reports that, as a general pattern, tongue root advancement is found in lingual stops and not in labials.
-Finally, there is a conundrum: The tongue root is more advanced in longer vowels and at higher speech rates, but higher speech rates are correlated with shorter vowel durations.
+
+**The conundrum of vowel duration and speech rate.** The tongue root is more advanced in longer vowels and at higher speech rates, but higher speech rates are correlated with shorter vowel durations.
 The solution to the conundrum is that the position of the tongue root *at vowel onset* is also affected by speech rate, such that higher speech rate correlates with a more advanced tongue root at vowel onset (so that, everything else being equal, a longer vowel will still have more tongue root advancement at offset).
 
-I should also probably talk about individual variation because there is a good deal of variation, and it is independent of language.
+I should also probably talk about individual variation somewhere in the discussion because there is a good deal of variation, and it is independent of language.
 In some speakers the tongue root advances during the vowel, in other it is statically advanced during the whole duration of the vowel when C2 is voiced.
 Yet in other speakers there are no appreciable differences in tongue root position, or the reversed patter can be seen.
