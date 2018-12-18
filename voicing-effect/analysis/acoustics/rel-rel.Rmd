@@ -144,7 +144,8 @@ rr_bm_3 <- brm(
   iter = 4000,
   warmup = 1000,
   seed = 8788,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.99),
+  file = "./voicing-effect/data/cache/rr_bm_3"
 )
 ```
 
