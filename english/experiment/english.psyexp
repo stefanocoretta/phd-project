@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<PsychoPy2experiment encoding="utf-8" version="1.90.3">
+  <Settings>
+    <Param name="Monitor" updates="None" val="retina" valType="str"/>
+    <Param name="color" updates="None" val="$[0,0,0]" valType="str"/>
+    <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
+    <Param name="Experiment info" updates="None" val="{u'participant': u''}" valType="code"/>
+    <Param name="JS libs" updates="None" val="packaged" valType="str"/>
+    <Param name="Units" updates="None" val="use prefs" valType="str"/>
+    <Param name="Save excel file" updates="None" val="False" valType="bool"/>
+    <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
+    <Param name="Save psydat file" updates="None" val="True" valType="bool"/>
+    <Param name="Window size (pixels)" updates="None" val="[1280, 800]" valType="code"/>
+    <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
+    <Param name="blendMode" updates="None" val="avg" valType="str"/>
+    <Param name="Use version" updates="None" val="" valType="str"/>
+    <Param name="HTML path" updates="None" val="html" valType="str"/>
+    <Param name="Save csv file" updates="None" val="False" valType="bool"/>
+    <Param name="OSF Project ID" updates="None" val="" valType="str"/>
+    <Param name="Save log file" updates="None" val="True" valType="bool"/>
+    <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
+    <Param name="Show mouse" updates="None" val="False" valType="bool"/>
+    <Param name="Data filename" updates="None" val="u'exp-data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
+    <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
+    <Param name="expName" updates="None" val="english" valType="str"/>
+    <Param name="logging level" updates="None" val="exp" valType="code"/>
+    <Param name="Screen" updates="None" val="1" valType="num"/>
+  </Settings>
+  <Routines>
+    <Routine name="introduction">
+      <TextComponent name="text_2">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_2" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="+" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_3">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_3" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="store" updates="constant" val="nothing" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="trial">
+      <TextComponent name="text">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="set every repeat" val="$sentence" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_2">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_2" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="1" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="end">
+      <TextComponent name="text_3">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_3" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="+" valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp_4">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_4" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="'y','n','left','right','space'" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="store" updates="constant" val="nothing" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <Routine name="introduction"/>
+    <LoopInitiator loopType="TrialHandler" name="trials">
+      <Param name="conditionsFile" updates="None" val="stimuli.csv" valType="str"/>
+      <Param name="name" updates="None" val="trials" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="[OrderedDict([(u'sentence', u&quot;I'll say 'teep' this Thursday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'teep')]), OrderedDict([(u'sentence', u&quot;I'll say 'teeb' this Thursday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teeb')]), OrderedDict([(u'sentence', u&quot;I'll say 'turp' this Thursday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'turp')]), OrderedDict([(u'sentence', u&quot;I'll say 'turb' this Thursday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turb')]), OrderedDict([(u'sentence', u&quot;I'll say 'tarp' this Thursday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'tarp')]), OrderedDict([(u'sentence', u&quot;I'll say 'tarb' this Thursday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tarb')]), OrderedDict([(u'sentence', u&quot;I'll say 'teek' this Thursday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teek')]), OrderedDict([(u'sentence', u&quot;I'll say 'teeg' this Thursday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teeg')]), OrderedDict([(u'sentence', u&quot;I'll say 'turk' this Thursday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turk')]), OrderedDict([(u'sentence', u&quot;I'll say 'turg' this Thursday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turg')]), OrderedDict([(u'sentence', u&quot;I'll say 'tark' this Thursday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tark')]), OrderedDict([(u'sentence', u&quot;I'll say 'targ' this Thursday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'targ')]), OrderedDict([(u'sentence', u&quot;I'll say 'teepus' this Thursday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teepus')]), OrderedDict([(u'sentence', u&quot;I'll say 'teebus' this Thursday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teebus')]), OrderedDict([(u'sentence', u&quot;I'll say 'turpus' this Thursday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turpus')]), OrderedDict([(u'sentence', u&quot;I'll say 'turbus' this Thursday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turbus')]), OrderedDict([(u'sentence', u&quot;I'll say 'tarpus' this Thursday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'tarpus')]), OrderedDict([(u'sentence', u&quot;I'll say 'tarbus' this Thursday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarbus')]), OrderedDict([(u'sentence', u&quot;I'll say 'teekus' this Thursday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teekus')]), OrderedDict([(u'sentence', u&quot;I'll say 'teegus' this Thursday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'teegus')]), OrderedDict([(u'sentence', u&quot;I'll say 'turkus' this Thursday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turkus')]), OrderedDict([(u'sentence', u&quot;I'll say 'turgus' this Thursday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'turgus')]), OrderedDict([(u'sentence', u&quot;I'll say 'tarkus' this Thursday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarkus')]), OrderedDict([(u'sentence', u&quot;I'll say 'targus' this Thursday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'targus')]), OrderedDict([(u'sentence', u&quot;You'll say 'teep' this Monday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'teep')]), OrderedDict([(u'sentence', u&quot;You'll say 'teeb' this Monday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teeb')]), OrderedDict([(u'sentence', u&quot;You'll say 'turp' this Monday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'turp')]), OrderedDict([(u'sentence', u&quot;You'll say 'turb' this Monday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turb')]), OrderedDict([(u'sentence', u&quot;You'll say 'tarp' this Monday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'tarp')]), OrderedDict([(u'sentence', u&quot;You'll say 'tarb' this Monday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tarb')]), OrderedDict([(u'sentence', u&quot;You'll say 'teek' this Monday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teek')]), OrderedDict([(u'sentence', u&quot;You'll say 'teeg' this Monday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teeg')]), OrderedDict([(u'sentence', u&quot;You'll say 'turk' this Monday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turk')]), OrderedDict([(u'sentence', u&quot;You'll say 'turg' this Monday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turg')]), OrderedDict([(u'sentence', u&quot;You'll say 'tark' this Monday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tark')]), OrderedDict([(u'sentence', u&quot;You'll say 'targ' this Monday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'targ')]), OrderedDict([(u'sentence', u&quot;You'll say 'teepus' this Monday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teepus')]), OrderedDict([(u'sentence', u&quot;You'll say 'teebus' this Monday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teebus')]), OrderedDict([(u'sentence', u&quot;You'll say 'turpus' this Monday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turpus')]), OrderedDict([(u'sentence', u&quot;You'll say 'turbus' this Monday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turbus')]), OrderedDict([(u'sentence', u&quot;You'll say 'tarpus' this Monday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'tarpus')]), OrderedDict([(u'sentence', u&quot;You'll say 'tarbus' this Monday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarbus')]), OrderedDict([(u'sentence', u&quot;You'll say 'teekus' this Monday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teekus')]), OrderedDict([(u'sentence', u&quot;You'll say 'teegus' this Monday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'teegus')]), OrderedDict([(u'sentence', u&quot;You'll say 'turkus' this Monday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turkus')]), OrderedDict([(u'sentence', u&quot;You'll say 'turgus' this Monday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'turgus')]), OrderedDict([(u'sentence', u&quot;You'll say 'tarkus' this Monday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarkus')]), OrderedDict([(u'sentence', u&quot;You'll say 'targus' this Monday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'targus')]), OrderedDict([(u'sentence', u&quot;She'll say 'teep' this Sunday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'teep')]), OrderedDict([(u'sentence', u&quot;She'll say 'teeb' this Sunday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teeb')]), OrderedDict([(u'sentence', u&quot;She'll say 'turp' this Sunday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'turp')]), OrderedDict([(u'sentence', u&quot;She'll say 'turb' this Sunday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turb')]), OrderedDict([(u'sentence', u&quot;She'll say 'tarp' this Sunday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'tarp')]), OrderedDict([(u'sentence', u&quot;She'll say 'tarb' this Sunday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tarb')]), OrderedDict([(u'sentence', u&quot;She'll say 'teek' this Sunday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teek')]), OrderedDict([(u'sentence', u&quot;She'll say 'teeg' this Sunday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teeg')]), OrderedDict([(u'sentence', u&quot;She'll say 'turk' this Sunday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turk')]), OrderedDict([(u'sentence', u&quot;She'll say 'turg' this Sunday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turg')]), OrderedDict([(u'sentence', u&quot;She'll say 'tark' this Sunday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tark')]), OrderedDict([(u'sentence', u&quot;She'll say 'targ' this Sunday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'targ')]), OrderedDict([(u'sentence', u&quot;She'll say 'teepus' this Sunday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teepus')]), OrderedDict([(u'sentence', u&quot;She'll say 'teebus' this Sunday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teebus')]), OrderedDict([(u'sentence', u&quot;She'll say 'turpus' this Sunday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turpus')]), OrderedDict([(u'sentence', u&quot;She'll say 'turbus' this Sunday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turbus')]), OrderedDict([(u'sentence', u&quot;She'll say 'tarpus' this Sunday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'tarpus')]), OrderedDict([(u'sentence', u&quot;She'll say 'tarbus' this Sunday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarbus')]), OrderedDict([(u'sentence', u&quot;She'll say 'teekus' this Sunday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teekus')]), OrderedDict([(u'sentence', u&quot;She'll say 'teegus' this Sunday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'teegus')]), OrderedDict([(u'sentence', u&quot;She'll say 'turkus' this Sunday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turkus')]), OrderedDict([(u'sentence', u&quot;She'll say 'turgus' this Sunday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'turgus')]), OrderedDict([(u'sentence', u&quot;She'll say 'tarkus' this Sunday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarkus')]), OrderedDict([(u'sentence', u&quot;She'll say 'targus' this Sunday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'targus')]), OrderedDict([(u'sentence', u&quot;We'll say 'teep' this Friday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'teep')]), OrderedDict([(u'sentence', u&quot;We'll say 'teeb' this Friday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teeb')]), OrderedDict([(u'sentence', u&quot;We'll say 'turp' this Friday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'turp')]), OrderedDict([(u'sentence', u&quot;We'll say 'turb' this Friday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turb')]), OrderedDict([(u'sentence', u&quot;We'll say 'tarp' this Friday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'tarp')]), OrderedDict([(u'sentence', u&quot;We'll say 'tarb' this Friday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tarb')]), OrderedDict([(u'sentence', u&quot;We'll say 'teek' this Friday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teek')]), OrderedDict([(u'sentence', u&quot;We'll say 'teeg' this Friday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teeg')]), OrderedDict([(u'sentence', u&quot;We'll say 'turk' this Friday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turk')]), OrderedDict([(u'sentence', u&quot;We'll say 'turg' this Friday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turg')]), OrderedDict([(u'sentence', u&quot;We'll say 'tark' this Friday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tark')]), OrderedDict([(u'sentence', u&quot;We'll say 'targ' this Friday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'targ')]), OrderedDict([(u'sentence', u&quot;We'll say 'teepus' this Friday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teepus')]), OrderedDict([(u'sentence', u&quot;We'll say 'teebus' this Friday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teebus')]), OrderedDict([(u'sentence', u&quot;We'll say 'turpus' this Friday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turpus')]), OrderedDict([(u'sentence', u&quot;We'll say 'turbus' this Friday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turbus')]), OrderedDict([(u'sentence', u&quot;We'll say 'tarpus' this Friday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'tarpus')]), OrderedDict([(u'sentence', u&quot;We'll say 'tarbus' this Friday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarbus')]), OrderedDict([(u'sentence', u&quot;We'll say 'teekus' this Friday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teekus')]), OrderedDict([(u'sentence', u&quot;We'll say 'teegus' this Friday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'teegus')]), OrderedDict([(u'sentence', u&quot;We'll say 'turkus' this Friday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turkus')]), OrderedDict([(u'sentence', u&quot;We'll say 'turgus' this Friday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'turgus')]), OrderedDict([(u'sentence', u&quot;We'll say 'tarkus' this Friday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarkus')]), OrderedDict([(u'sentence', u&quot;We'll say 'targus' this Friday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'targus')]), OrderedDict([(u'sentence', u&quot;They'll say 'teep' this Tuesday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'teep')]), OrderedDict([(u'sentence', u&quot;They'll say 'teeb' this Tuesday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teeb')]), OrderedDict([(u'sentence', u&quot;They'll say 'turp' this Tuesday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'turp')]), OrderedDict([(u'sentence', u&quot;They'll say 'turb' this Tuesday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turb')]), OrderedDict([(u'sentence', u&quot;They'll say 'tarp' this Tuesday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'tarp')]), OrderedDict([(u'sentence', u&quot;They'll say 'tarb' this Tuesday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tarb')]), OrderedDict([(u'sentence', u&quot;They'll say 'teek' this Tuesday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'teek')]), OrderedDict([(u'sentence', u&quot;They'll say 'teeg' this Tuesday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teeg')]), OrderedDict([(u'sentence', u&quot;They'll say 'turk' this Tuesday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'turk')]), OrderedDict([(u'sentence', u&quot;They'll say 'turg' this Tuesday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turg')]), OrderedDict([(u'sentence', u&quot;They'll say 'tark' this Tuesday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'tark')]), OrderedDict([(u'sentence', u&quot;They'll say 'targ' this Tuesday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'targ')]), OrderedDict([(u'sentence', u&quot;They'll say 'teepus' this Tuesday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'teepus')]), OrderedDict([(u'sentence', u&quot;They'll say 'teebus' this Tuesday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teebus')]), OrderedDict([(u'sentence', u&quot;They'll say 'turpus' this Tuesday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'turpus')]), OrderedDict([(u'sentence', u&quot;They'll say 'turbus' this Tuesday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turbus')]), OrderedDict([(u'sentence', u&quot;They'll say 'tarpus' this Tuesday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'tarpus')]), OrderedDict([(u'sentence', u&quot;They'll say 'tarbus' this Tuesday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarbus')]), OrderedDict([(u'sentence', u&quot;They'll say 'teekus' this Tuesday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'teekus')]), OrderedDict([(u'sentence', u&quot;They'll say 'teegus' this Tuesday&quot;), (u'frame', u&quot;They'll say '{word}' this Tuesday&quot;), (u'word', u'teegus')]), OrderedDict([(u'sentence', u&quot;They'll say 'turkus' this Tuesday&quot;), (u'frame', u&quot;I'll say '{word}' this Thursday&quot;), (u'word', u'turkus')]), OrderedDict([(u'sentence', u&quot;They'll say 'turgus' this Tuesday&quot;), (u'frame', u&quot;You'll say '{word}' this Monday&quot;), (u'word', u'turgus')]), OrderedDict([(u'sentence', u&quot;They'll say 'tarkus' this Tuesday&quot;), (u'frame', u&quot;She'll say '{word}' this Sunday&quot;), (u'word', u'tarkus')]), OrderedDict([(u'sentence', u&quot;They'll say 'targus' this Tuesday&quot;), (u'frame', u&quot;We'll say '{word}' this Friday&quot;), (u'word', u'targus')])]" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopTerminator name="trials"/>
+    <Routine name="end"/>
+  </Flow>
+</PsychoPy2experiment>
