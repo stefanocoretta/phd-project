@@ -12,6 +12,6 @@ tidymv
 rticulate
 nlme
 mgcv
-bindrcpp
 plotfunctions
 itsadug
+bindrcpp

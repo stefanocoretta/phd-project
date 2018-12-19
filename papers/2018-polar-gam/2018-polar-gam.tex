@@ -24,7 +24,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Assessing midsaggital tongue contours in polar coordinates using generalised additive (mixed) models},
+            pdftitle={Assessing mid-saggital tongue contours in polar coordinates using generalised additive (mixed) models},
             pdfauthor={Stefano Coretta},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -110,7 +110,7 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{Assessing midsaggital tongue contours in polar coordinates using
+  \title{Assessing mid-saggital tongue contours in polar coordinates using
 generalised additive (mixed) models}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
@@ -141,7 +141,11 @@ coordinate system. The implementation of polar GAMs is illustrated with
 ultrasound tongue imaging data of an example study that compares
 voiceless and voiced stops. A brief tutorial shows how to fit polar GAMs
 with the R package rticulate, developed to facilitate the fitting
-procedure.
+procedure. Among the advantages of polar GAMs over the current
+implementation of polar tongue SSANOVA is the possibility of modelling
+the effect of multiple predictors and that of controlling for
+autocorrelation in the residuals with the inclusion of autoregressive
+models.
 
 \hypertarget{ultrasound-tongue-imaging}{%
 \subsection{Ultrasound tongue imaging}\label{ultrasound-tongue-imaging}}
@@ -410,7 +414,11 @@ estimated contours. The shaded areas around the estimated contours are
 95\% confidence intervals. Note that, differently from SSANOVA,
 statistical significance can't be assessed from the overlapping (or lack
 thereof) of the confidence intervals. The output of
-\texttt{plot\_polar\_smooths()} is shown in \Cref{f:it01-gam-plot}.
+\texttt{plot\_polar\_smooths()} is shown in \Cref{f:it01-gam-plot}. For
+more details on fitting and plotting more complex models (for example
+models with multiple predictors or tensor product smooths), see the
+package vignette \texttt{polar-gams} (accessible with
+\texttt{vignette("polar-gams",\ package\ =\ "rticulate")}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -599,21 +607,28 @@ to tongue contours in polar coordinates in R with the specialised
 package rticulate. An example of how GAMs can help modelling differences
 in tongue contours has been illustrated with data from 4 speakers of
 Italian in which the mid-sagittal tongue contours of voiceless and
-voiced stops where compared. The same general advantages and issues
-noted in \citet{davidson2006} for SSANOVA apply to polar GAMs. In
-particular, while within-speaker normalisation can be achieved by
-rotation and offsetting of the data relative to a bite plate (as done
-here), across-speaker normalisation represents a bigger challenge. Since
-we can't be deduced with sufficient certainty from the ultrasonic image
+voiced stops where compared. The advantages of polar GAMs over the
+current implementation of polar tongue SSANOVA include: the ability to
+specify multiple predictors and random effects; control over the
+autocorrelation in the residuals which could otherwise make the model
+overconfident; separate methods for assessing statistical significance
+at the level of the predictor (with model comparison) and for
+identifying which part of the tongue differs significantly (by
+visualising the difference smooths). The same general issues noted in
+\citet{davidson2006} for SSANOVA apply to polar GAMs. In particular,
+while within-speaker normalisation can be achieved by rotation and
+offsetting of the data relative to a bite plate (as done here),
+across-speaker normalisation represents a bigger challenge. Since we
+can't be deduced with sufficient certainty from the ultrasonic image
 which part of the tongue is being actually imaged, it is not possible to
 define fixed anatomical landmarks across speakers that can be used in
 normalisation. For this reason it has been recommended here to fit
 separate models for each speaker. Future work will explore ways of
 allowing the user to use data aggregated from multiple speakers while
 accounting for the uncertainty in which parts of the tongue are imaged.
-Finally, polar GAMs can also be extended to model 3D tongue surfaces and
-whole tongue contours differences over time (in other words, how the
-sectional shape of the tongue changes over time).
+Finally, polar GAMs can also be readily extended to model 3D tongue
+surfaces and whole tongue contours differences over time (in other
+words, how the sectional shape of the tongue changes over time).
 
 \bibliography{linguistics.bib}
 
