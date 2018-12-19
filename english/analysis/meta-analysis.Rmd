@@ -34,6 +34,9 @@ davis1989 <- read_csv("./english/data/davis1989.csv") %>%
     speaker = as.factor(speaker),
     place = factor(place, levels = c("labial", "alveolar", "velar"))
   )
+
+davis1989_red <- filter(davis1989, v_context == "reduced")
+davis1989_unr <- filter(davis1989, v_context == "unreduced")
 ```
 
 # Estimate of the voicing effect
@@ -119,7 +122,7 @@ mcmc_areas(as.array(ve_brm), regex_pars = "b_")
 ```{r unstr-priors}
 get_prior(
   v_duration | se(sd) ~ voice + place + (1| speaker),
-  data = davis1989,
+  data = davis1989_red,
   family = gaussian()
 )
 ```
@@ -135,7 +138,7 @@ priors <- c(
 
 unstr_bm <- brm(
   v_duration | se(sd, sigma = TRUE) ~ voice + place + (1| speaker),
-  data = davis1989,
+  data = davis1989_red,
   family = gaussian(),
   prior = priors,
   cores = 4,
@@ -162,4 +165,40 @@ mcmc_intervals(as.array(unstr_bm), pars = c("b_voicevoiced", "b_placealveolar", 
 
 ```{r unstr-bm-areas}
 mcmc_areas(as.array(unstr_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_placevelar"))
+```
+
+```{r unred-priors}
+get_prior(
+  v_duration | se(sd) ~ voice + place + (1| speaker),
+  data = davis1989_unr,
+  family = gaussian()
+)
+```
+
+```{r unred-bm}
+priors_unr <- c(
+  set_prior("normal(70, 25)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicevoiced"),
+  set_prior("normal(0, 20)", class = "b", coef = "placealveolar"),
+  set_prior("normal(0, 20)", class = "b", coef = "placevelar"),
+  set_prior("normal(0, 25)", class = "sd")
+)
+
+unred_bm <- brm(
+  v_duration | se(sd, sigma = TRUE) ~ voice + place + (1| speaker),
+  data = davis1989_unr,
+  family = gaussian(),
+  prior = priors_unr,
+  cores = 4,
+  seed = 9891,
+  control = list(adapt_delta = 0.9999)
+)
+```
+
+```{r unred-bm-summary}
+summary(unred_bm)
+```
+
+```{r unred-bm-areas}
+mcmc_areas(as.array(unred_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_placevelar"))
 ```
