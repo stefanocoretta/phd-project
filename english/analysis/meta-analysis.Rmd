@@ -148,7 +148,7 @@ unstr_bm <- brm(
 ```
 
 ```{r unstr-bm-summary}
-summary(unstr_bm)
+summary(unstr_bm, prob = 0.9)
 ```
 
 ```{r unstr-bm-pp}
@@ -196,7 +196,7 @@ unred_bm <- brm(
 ```
 
 ```{r unred-bm-summary}
-summary(unred_bm)
+summary(unred_bm, prob = 0.9)
 ```
 
 ```{r unred-bm-areas}
