@@ -1,7 +1,7 @@
 ---
-title: "Pre-registration of a study on vowel duration, voicing duration, and vowel height in Italian"
+title: "Pre-registration for Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
-date: "03/07/2018"
+date: "20/12/2018"
 output:
   pdf_document:
     citation_package: natbib
@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Title
 
-Vowel duration, voicing duration, and vowel height: Acoustic and articulatory data from Italian.
+Compensatory aspects of the effect of voicing on vowel duration in English.
 
 ## Authorship
 
