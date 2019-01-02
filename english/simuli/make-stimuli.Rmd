@@ -20,9 +20,9 @@ check <- subtlex %>%
   filter(Spelling %in% c("teep","teak", "teeb", "teab", "turp", "turb", "terp", "terb", "tarp", "tarb", "teek", "teak", "teeg", "teag", "turk", "terk", "turg", "terg", "tark", "targ", "teepus", "teapus", "teebus", "teabus", "turpus", "turbus", "terpus", "terbus", "tarpus", "tarbus", "teekus", "teakus", "teegus", "teagus", "turkus", "terkus", "turgus", "tergus", "tarkus", "targus"))
 ```
 
-```{r create-stimiuli}
+```{r create-stimuli}
 frames <- c("I'll say '{word}' this Thursday", "You'll say '{word}' this Monday", "She'll say '{word}' this Sunday", "We'll say '{word}' this Friday", "They'll say '{word}' this Tuesday")
-words <- c("teep", "teeb", "turp", "turb", "tarp", "tarb", "teek", "teeg", "turk", "turg", "tark", "targ", "teepus", "teebus", "turpus", "turbus", "tarpus", "tarbus", "teekus", "teegus", "turkus", "turgus", "tarkus", "targus")
+words <- c("teep", "teeb", "terp", "terb", "tarp", "tarb", "teek", "teeg", "terk", "terg", "tark", "targ", "teepus", "teebus", "terpus", "terbus", "tarpus", "tarbus", "teekus", "teegus", "terkus", "tergus", "tarkus", "targus")
 
 write_lines("sentence,frame,word", "./english/simuli/stimuli.csv")
 
