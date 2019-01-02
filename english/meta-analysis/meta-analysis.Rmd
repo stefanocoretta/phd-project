@@ -16,7 +16,7 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"
 ```
 
 ```{r data, message=FALSE}
-estimates <- read_csv("./english/data/estimates.csv") %>%
+estimates <- read_csv("./english/meta-analysis/estimates.csv") %>%
   mutate_if(is.character, as.factor) %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
@@ -24,7 +24,7 @@ estimates <- read_csv("./english/data/estimates.csv") %>%
   ) %>%
   na.omit()
 
-davis1989 <- read_csv("./english/data/davis1989.csv") %>%
+davis1989 <- read_csv("./english/meta-analysis/davis1989.csv") %>%
   gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
   separate(voice_stat, c("voice", "stat")) %>%
   spread(stat, value) %>%
