@@ -33,27 +33,26 @@ Stefano Coretta (The University of Manchester).
 
 ## Research questions
 
-Vowel height has been shown to correlate with vowel duration, such that high vowels are shorter than low vowels [see @toivonen2015 and @esposito2002 and references therein].
-Moreover, data from Italian shows that the duration of the C1 Release to Vowel Offset interval (RVoffT) in VCV́C words is affected by vowel height in the same direction: higher vowels have a shorter RVoffT [@esposito2002].
-Less attention has been given to the duration of the voiced interval which includes the vowel.
-In the context of two flanking voiceless stops, like in *pata*, it is possible to measure the duration of the portion with voicing (vocal fold vibration) flanked by the voiceless stops.
-This allows us to answer the following question:
+Vowel in English (and many more languages) are longer when followed by voiced stops than when followed by voiceless stops \citep{heffner1937}.
+The origin of this 'voicing effect' is still object to debate.
+According to the compensatory temporal adjustment account, the difference in vowel duration is the consequence of the difference in stop closure durations \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
+Voiceless stops have longer closures than voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, so that vowels are longer when followed by the shorter closure durations of voiced stops.
 
-* Q1: Is the duration of the voicing interval between two voiceless stops in CV́CV words affected by vowel height?
+An exploratory study by Coretta (submitted) indicates that the duration of the interval between two consecutive stops releases is not affected by consonant voicing in CV́CV words in Italian and Polish.
+Coretta argues that the temporal stability of the release to release interval plus the difference in consonant closure durations drives differences in vowel durations by a mechanism of compensation between the duration of the vowel and that of the closure.
+
+This study sets out to test whether English exhibits the same temporal pattern found in Italian and Polish.
+The aim of the study is to answer the following questions:
+
+* Q1: Is the duration of the interval between two consecutive stop releases (the release to release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
+* Q2: Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of the V1, and (c) the place of C2?
 
 ## Hypotheses
 
-In the following hypotheses and subsequent section, 'vowel' refers to the stressed vowel in CV́CV words.
-In relation to Q1, the following null and alternative hypotheses will be tested:
+In relation to Q1, the following hypotheses will be tested:
 
-* H1\textsubscript{0}: The duration of the voiced interval is not affected by vowel height.
-* H1\textsubscript{1}: The duration of the voiced interval is shorter for higher than for lower vowels.
-
-As an extension of @esposito2002 (which is based on VCV́C words), the following hypotheses will also be tested:
-
-* H2: Higher vowels are shorter than lower vowels.
-* H3: VOT is shorter in higher than in lower vowels.
-* H4: RVoffT is shorter for higher than for lower vowels.
+* H1a: The duration of the release to release interval is not affected by C2 voicing in disyllabic words.
+* H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
 
 # Sampling plan
 
@@ -69,31 +68,30 @@ NA.
 
 ### Participants
 
-Inclusion rule: Native speakers of Italian, from the VCO province (Italy), 18+ yo, with no reported hearing or speaking disorders, with normal or corrected to normal vision.
+Inclusion rule: Native speakers of English from the Manchester area, 18+ yo, with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
 
 ### Procedure
 
-The participants will be recorded while reading sentences with CV́CV target words (see \Cref{s:other} for the list of target words and \Cref{s:manipulated} for the list of frame sentences) presented on a computer screen with PsychoPy [@peirce2009], in a quiet room in Verbania (Italy).
-Time-synchronised audio and electroglottographic data will be collected using a Glottal Enterprises EG2-PCX2 electroglottograph and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
-The acquisition of the signals will be controlled with Audacity running on a MacBook Pro (Retina, 13-inch, Mid 2014).
+The participants will be recorded while reading sentences with CV́CV target words (see \Cref{s:other} for the list of target words and \Cref{s:manipulated} for the list of frame sentences) presented on a computer screen with PsychoPy [@peirce2009], in a sound attenuated room in the Phonetics Laboratory at the University of Manchester.
+Each target word is combined with each frame sentence, and each word/frame combination will be read once.
+Acoustic recording will be obtained with a Zoom H4n Pro recorder and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
 The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2018].
 
 ## Sample size
 
-30 participants, 43 words, 4 repetitions.
-Grand total: 5,160 observations (= 172 tokens per participant * 30 participants).
+24 words, 5 repetitions (= 120 tokens per participant).
+For the number of participants, see the following section.
 
 ## Sample size rationale
 
-@brysbaert2018 suggest to have around 1600 observations per condition (e.g., 40 participants, 40 stimuli).
-Given the limited time available for this study, 30 participants seems a more reasonable target.
-According to a power analysis with simulated data (mean and standard deviations based on a pilot study) using `simr` [@green2016], 12 subjects * 100 tokens per subject are sufficient to detect a difference of 5 ms at 80% of power.
-<!-- \footnote{5 ms is probably the smallest meaningful difference detectable in practice, based on the estimated error of vowel annotation, which lies between 2 and 5 ms \citep{allen1978}.} -->
-See `power.Rmd` for the code.
+The approach of the region of practical equivalence (ROPE) will be used for determining the participant sample size \citep{kruschke2015, vasishth2018a}.
+This approach is based on establishing a region around 0 which could theoretically be interpreted as a 'no effect' region.
+Based on estimates from the literature on the just noticeable difference \citep{huggins1972, nooteboom1980}, the chosen ROPE width is 20 milliseconds (from -10 to +10 milliseconds).
 
 ## Stopping rule
 
-Data collection will be terminated earlier if the 30 participants target hasn't been reached by the end of September 2018.
+Data collection will stop when the width of the 95% credible interval of the effect of C2 voicing on the release to release duration is below 20 milliseconds.
+Unfortunately, due to time constraints, data collection will be terminated earlier if the ROPE target hasn't been reached by...
 
 # Variables
 
@@ -249,22 +247,21 @@ See \Cref{s:stats}.
 # Other
 \label{s:other}
 
-List of target words: * *peto* 'fart' and *caco* 'I shit' are not included in the list of target words due to their meaning.
+List of target words.
 
 \begin{tabular}{lll}
-papo & tapo & capo  \\
-pepo & tepo & chepo \\
-pipo & tipo & chipo \\
-popo & topo & copo  \\
-pupo & tupo & cupo  \\
-pato & tato & cato  \\
-*    & teto & cheto \\
-pito & tito & chito \\
-poto & toto & coto  \\
-puto & tuto & cuto  \\
-paco & taco & *     \\
-peco & teco & checo \\
-pico & tico & chico \\
-poco & toco & coco  \\
-puco & tuco & cuco
+teep & teepus \\
+teeb & teebus \\
+terp & terpus \\
+terb & terbus \\
+tarp & tarpus \\
+tarb & tarbus \\
+teek & teekus \\
+teeg & teegus \\
+terk & terkus \\
+terg & tergus \\
+tark & tarkus \\
+targ & targus \\
 \end{tabular}
+
+List of frame sentences: I'll say X this Thursday, You'll say X this Monday, She'll say X this Sunday, We'll say X this Friday, They'll say X this Tuesday.
