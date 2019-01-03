@@ -94,7 +94,7 @@ The recordings will be subject to force alignment with SPPAS [@bigi2015] for ana
 ## Sample size
 
 24 words, 5 repetitions (= 120 tokens per participant).
-For the number of participants, see the following section.
+We set a minimum of 20 participants with additional participants if needed (see following sections).
 
 ## Sample size rationale
 
@@ -104,8 +104,10 @@ Based on estimates from the literature on the just noticeable difference \citep{
 
 ## Stopping rule
 
-Data collection will stop when the width of the 95\% CI of the effect of C2 voicing will be less than 20 milliseconds.
-Unfortunately, due to time constraints, data collection will be terminated earlier if the ROPE target hasn't been reached by April 30th 2019.
+Data collection will stop either:
+
+(a) When the width of the 95\% CI of the effect of C2 voicing will be less than 20 milliseconds, or
+(b) If the ROPE target hasn't been reached by April 30th 2019, due to time constraints imposed on the project.
 
 # Variables
 
