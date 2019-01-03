@@ -71,9 +71,23 @@ NA.
 Inclusion rule: Native speakers of English from the Manchester area, 18+ yo, with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
 
 ### Procedure
+\label{s:procedure}
 
-The participants will be recorded while reading sentences with CV́CV target words (see \Cref{s:other} for the list of target words and \Cref{s:manipulated} for the list of frame sentences) presented on a computer screen with PsychoPy [@peirce2009], in a sound attenuated room in the Phonetics Laboratory at the University of Manchester.
-Each target word is combined with each frame sentence, and each word/frame combination will be read once.
+The participants will be recorded while reading sentences with CVC and CV́CVC target words presented on a computer screen with PsychoPy [@peirce2009], in a sound attenuated room in the Phonetics Laboratory at the University of Manchester.
+The test words are C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
+This structure leads to 24 possible combinations.
+
+\begin{tabular}{lll}
+teep & teepus & teek & teekus \\
+teeb & teebus & teeg & teegus \\
+terp & terpus & terk & terkus \\
+terb & terbus & terg & tergus \\
+tarp & tarpus & tark & tarkus \\
+tarb & tarbus & targ & targus \\
+\end{tabular}
+
+Each target word is combined with the following frame sentences: I'll say X this Thursday, You'll say X this Monday, She'll say X this Sunday, We'll say X this Friday, They'll say X this Tuesday.
+Each word/frame combination will be read once.
 Acoustic recording will be obtained with a Zoom H4n Pro recorder and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
 The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2018].
 
@@ -90,33 +104,29 @@ Based on estimates from the literature on the just noticeable difference \citep{
 
 ## Stopping rule
 
-Data collection will stop when the width of the 95% credible interval of the effect of C2 voicing on the release to release duration is below 20 milliseconds.
-Unfortunately, due to time constraints, data collection will be terminated earlier if the ROPE target hasn't been reached by...
+Data collection will stop when the width of the 95\% CI of the effect of C2 voicing will be less than 20 milliseconds.
+Unfortunately, due to time constraints, data collection will be terminated earlier if the ROPE target hasn't been reached by April 30th 2019.
 
 # Variables
 
 ## Manipulated variables
 \label{s:manipulated}
 
-* **Vowel height**: high (/i, u/), mid-high (/e/), mid-low (/ɔ/), low (/a/).
-* **Place of articulation of C1**: labial, coronal, velar.
-* **Place of articulation of C2**: labial, coronal, velar.
-* **Frame sentence**: *Scrivete X sul foglio*, *Ha detto X sei volte*, *Sentivo X di nuovo*, *Ripete X da sempre*.
+* **Vowel**: /iː/, /əː/, /ɑː/.
+* **Voicing of C2**: voiceless (/p, k/), voiced (/b, g/).
+* **Place of articulation of C2**: labial (/p, b/), velar (/k, g/).
+* **Number of syllables**: monosyllabic, disyllabic.
+* **Frame sentence**: I'll say X this Thursday, You'll say X this Monday, She'll say X this Sunday, We'll say X this Friday, They'll say X this Tuesday.
 
-See \Cref{s:other} for a list of word stimuli.
+See \Cref{s:procedure} for a list of word stimuli.
 
 ## Measured variables
 
 * From the acoustic signal:
-    * **Vowel duration**: from onset to offset of higher formant structure.
-    * **Release to Vowel Offset**: from release of C1 to V1 offset.
-    * **Speech rate**: calculated as syllables per second [`n of syllables / sentence duration`, @plug2018].
-
-* From the EGG signal:
-    * **Duration of voiced interval**: from voice onset to voice offset.
-
-* From both the acoustic and EGG signal
-    * **Voice Onset Time**: from the release of C1 to voice onset.
+    * **Duration of the release to release interval**: from the release of C1 to the release of C2.
+    * **V1 duration**: from appearance to disappearance of higher formant structure in the spectrogram in correspondence of V1 \citep{machac2009}.
+    * **C2 closure duration**: from disappearance of higher formant structure in the V1C2 sequence to the release of C2 \citep{machac2009}.
+    * **Speech rate**: calculated as number of syllables per second [`n of syllables in the sentence / sentence duration`, @plug2018].
 
 ## Indices
 
@@ -127,7 +137,7 @@ NA.
 ## Study type
 
 Experiment---A researcher randomly assigns treatments to study subjects, this includes field or lab experiments.
-This is also known as an intervention experiment and includes randomized controlled trials.
+This is also known as an intervention experiment and includes randomised controlled trials.
 
 ## Blinding
 
@@ -139,76 +149,13 @@ Repeated measures, mixed design.
 
 ## Randomisation
 
-The sentence stimuli will be randomised within participant by means of the built-in randomisation procedure in PsychoPy [@peirce2009].
+The sentence stimuli will be randomised within participant by means of the built-in randomisation procedure in PsychoPy \citep{peirce2009}.
 
 # Analysis plan
 
 ## Statistical models
 \label{s:stats}
 
-Separate models will be fitted in `R` [@r-core-team2018] to independently assess effects on vowel duration, voicing interval duration, VOT, and RVoffT.
-*P*-values ($\alpha$ = 0.05) will be obtained with the `lmerTest` package [@kuznetsova2017], which uses the Satterthwaite's method of approximation to degrees of freedom.
-
-```{r lmer, eval=FALSE}
-library(lme4)
-library(lmerTest)
-
-vowel_lm <- lmer(
-  vowel_duration ~
-    height +
-    c2_place +
-    height:c2_place +
-    speech_rate +
-    (1+height|speaker) +
-    (1|item)
-)
-
-vot_lm <- lmer(
-  vot ~
-    height +
-    c2_place +
-    height:c2_place +
-    speech_rate +
-    (1+height|speaker) +
-    (1|item)
-)
-
-rvofft_lm <- lmer(
-  rvofft ~
-    height +
-    c2_place +
-    height:c2_place +
-    speech_rate +
-    (1+height|speaker) +
-    (1|item)
-)
-```
-
-Since I wish to directly test both the null and the alternative hypotheses concerning the duration of the voiced interval (H1), the BIC approximation of Bayes factors will be used instead of *p*-values [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
-
-```{r lmer-bf, eval=FALSE}
-voicing_lm_1 <- lme4::lmer(
-  voicing_duration ~
-    height +
-    c2_place +
-    speech_rate +
-    (1+height|speaker) +
-    (1|item),
-  REML = FALSE
-)
-
-voicing_lm_0 <- lme4::lmer(
-  voicing_duration ~
-    # height +
-    c2_place +
-    speech_rate +
-    (1+height|speaker) +
-    (1|item),
-  REML = FALSE
-)
-
-bf_01 <- exp((BIC(voicing_lm_1) - BIC(voicing_lm_0)) / 2)
-```
 
 ## Transformations
 
@@ -220,14 +167,9 @@ NA.
 
 ## Inference criteria
 
-*P*-values will be used for the effect of vowel height on vowel duration, VOT, and RVoffT, with $\alpha$ = 0.05.
-*P*-values below 0.05 will be deemed significant.
-Bayes factors will be employed for the effect of vowel height on voicing interval duration, since I am interested in testing both the null and the alternative hypotheses.
-The recommendations in \citet[139]{raftery1995} for the interpretation of the Bayes factors will be followed.
 
 ## Data exclusion
 
-Tokens in which the consonant closure is entirely voiced will be excluded.
 
 ## Missing data
 
@@ -235,8 +177,6 @@ NA.
 
 ## Exploratory analysis
 
-An exploratory analysis will assess the effect of vowel identity and the interaction between vowel height and vowel backness on vowel duration, voicing duration, RVoffT.
-Also, the effects of vowel and place of articulation on voicing during closure will be examined.
 
 # Script (Optional)
 
@@ -247,21 +187,4 @@ See \Cref{s:stats}.
 # Other
 \label{s:other}
 
-List of target words.
-
-\begin{tabular}{lll}
-teep & teepus \\
-teeb & teebus \\
-terp & terpus \\
-terb & terbus \\
-tarp & tarpus \\
-tarb & tarbus \\
-teek & teekus \\
-teeg & teegus \\
-terk & terkus \\
-terg & tergus \\
-tark & tarkus \\
-targ & targus \\
-\end{tabular}
-
-List of frame sentences: I'll say X this Thursday, You'll say X this Monday, She'll say X this Sunday, We'll say X this Friday, They'll say X this Tuesday.
+NA.
