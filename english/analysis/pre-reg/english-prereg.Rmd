@@ -186,6 +186,15 @@ NA.
 
 See \Cref{s:stats}.
 
+```{r}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "n_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "c2_phonationvoiced:n_sylmono"),
+)
+```
+
 # Other
 \label{s:other}
 
