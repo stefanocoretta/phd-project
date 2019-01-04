@@ -186,7 +186,7 @@ For the random effects, a half Cauchy distribution (location = 0, scale = 25) fo
 For the residual standard deviation, a half Cauchy distribution with location 0 ms and scale 25.
 
 ```{r}
-priors_1 <- c(
+c(
   set_prior("normal(200, 50)", class = "Intercept"),
   set_prior("normal(0, 25)", class = "b", coef = "c2_voicevoiced"),
   set_prior("normal(50, 25)", class = "b", coef = "n_sylmono"),
@@ -209,13 +209,15 @@ NA.
 
 ## Inference criteria
 
+Bayesian posterior distributions, rather than point estimates, will be employed for inference.
 
 ## Data exclusion
 
+Residual data with mistakes and speech errors will be discarded.
 
 ## Missing data
 
-NA.
+Individual missing observations (due to excluded data or annotation difficulties) will be dropped.
 
 ## Exploratory analysis
 
