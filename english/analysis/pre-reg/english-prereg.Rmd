@@ -160,9 +160,12 @@ The sentence stimuli will be randomised within participant by means of the built
 
 Bayesian linear mixed models \citet{vasishth2018, mcelreath2015, kruschke2015} will be fitted with brms \citet{burkner2017, burkner2018} in R \citet{r-core-team2018}.
 
+### Release to release
+
 The following Bayesian regression model will be used to model the duration of the release to release interval.
-As fixed effects: C2 voicing, number of syllables, centred speech rate, interaction between C2 voicing and number of syllables.
-A by-speaker random intercept, and by-speaker random coefficient for C2 voicing.
+As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, interaction between C2 voicing and number of syllables.
+Factors are coded with treatment contrasts.
+A by-speaker and by-word random intercept, and by-speaker random coefficient for C2 voicing.
 
 ```{r}
 rr_1 <- brm(
@@ -171,7 +174,8 @@ rr_1 <- brm(
     n_syl +
     c2_voice:n_syl +
     speech_rate_c +
-    (1 + c2_voice | speaker),
+    (1 + c2_voice | speaker) +
+    (1 | word),
   family = gaussian()
 )
 ```
@@ -195,6 +199,23 @@ c(
   set_prior("cauchy(0, 25)", class = "sd"),
   set_prior("lkj(2)", class = "cor"),
   set_prior("cauchy(0, 25)", class = "sigma")
+)
+```
+
+A separate model will test the effect of vowel and C2 place on the duration of the release to release duration.
+As fixed effects: vowel (factor, levels = 'ar', 'er', 'ee'), C2 place (factor, levels = 'labial', 'velar'), centred speech rate, interaction between vowel and C2 place.
+Factors are coded with treatment contrasts.
+By-speaker and by-word random intercepts.
+
+```{r}
+rr_1 <- brm(
+  rr ~
+    vowel +
+    c2_place +
+    speech_rate_c +
+    (1 | speaker) +
+    (1 | word),
+  family = gaussian()
 )
 ```
 
