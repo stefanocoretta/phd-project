@@ -121,6 +121,37 @@ mcmc_intervals(as.array(rr_bm_2), pars = c("b_c2_phonationvoiced:vowelo", "b_c2_
 pp_check(rr_bm_2, nsamples = 100)
 ```
 
+```{r rr-bm-2a}
+priors_2a <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 50)", class = "b", coef = "vowelo"),
+  set_prior("normal(0, 50)", class = "b", coef = "vowelu"),
+  set_prior("normal(0, 50)", class = "b", coef = "c2_placevelar"),
+  set_prior("normal(0, 100)", class = "b", coef = "speech_rate_c"),
+  set_prior("normal(0, 100)", class = "sd"),
+  set_prior("cauchy(0, 50)", class = "sigma")
+)
+
+rr_bm_2a <- brm(
+  rel_rel ~
+    vowel +
+    c2_place +
+    speech_rate_c +
+    (1|speaker) +
+    (1|item),
+  data = token_measures,
+  prior = priors_2a,
+  cores = 4,
+  seed = 8788,
+  control = list(adapt_delta = 0.99),
+  file = "./voicing-effect/data/cache/rr_bm_2a"
+)
+```
+
+```{r rr-bm-2a}
+summary(rr_bm_2a)
+```
+
 ```{r rr-bm-3}
 priors_3 <- c(
   set_prior("normal(200, 25)", class = "Intercept"),
