@@ -54,11 +54,18 @@ In relation to Q1, the following hypotheses will be tested:
 * H1a: The duration of the release to release interval is not affected by C2 voicing in disyllabic words.
 * H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
 
-In relation to Q2, the hypotheses are;
+The exploratory study of Italian and Polish indicates that the intrinsic duration of the vowel and the consonant contribute to the duration of the release to release interval.
+More specifically, the release to release with a high vowel is shorter than that with a low vowel.
+It is well known that cross-linguistically high vowels tend to be shorter than low vowels \citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
+As for consonant place of articulation, if the consonant is velar the interval is shorter.
+The closure of velar stops is shorter than that of labial stops (see for example \citealt{sharf1962}).
+It is possible that some of the durational difference of the release to release interval seen in the exploratory study depends on intrinsic vowel and consonant duration.
+
+Considering the relation between intrinsic vowel and consonant duration and release to release, we can formulate the following hypotheses in relation to Q2 above:
 
 * H2a: The release to release interval is longer in monosyllabic than in disyllabic words.
 * H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /əː/, /iː/.
-* H2c: The duration of the release to release interval is not affected by C2 place of articulation.
+* H2c: The release to release interval is shorter when C2 is velar.
 
 # Sampling plan
 
