@@ -158,10 +158,50 @@ The sentence stimuli will be randomised within participant by means of the built
 ## Statistical models
 \label{s:stats}
 
+Bayesian linear mixed models \citet{vasishth2018, mcelreath2015, kruschke2015} will be fitted with brms \citet{burkner2017, burkner2018} in R \citet{r-core-team2018}.
+
+The following Bayesian regression model will be used to model the duration of the release to release interval.
+As fixed effects: C2 voicing, number of syllables, centred speech rate, interaction between C2 voicing and number of syllables.
+A by-speaker random intercept, and by-speaker random coefficient for C2 voicing.
+
+```{r}
+rr_1 <- brm(
+  rr ~
+    c2_voice +
+    n_syl +
+    c2_voice:n_syl +
+    speech_rate_c +
+    (1 + c2_voice | speaker),
+  family = gaussian()
+)
+```
+
+The following priors will be used.
+For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
+For the effect of C2 voicing, a weakly informative prior as a normal distribution with mean 0 ms and SD = 25, based on results from the exploratory study.
+For the effect of number of syllables, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citet{sharf1962, klatt1973}.
+The same prior was chosen for the interaction of C2 voicing and number of syllables, based on a similar range of reported differences in vowel duration in monosyllabic words (30-100 ms).
+For the effect of speech rate (centred), a normal distribution with mean -25 and SD = 10, based on results from the exploratory study.
+For the random effects, a half Cauchy distribution (location = 0, scale = 25) for the standard deviation and a LKJ(2) distribution for the correlation.
+For the residual standard deviation, a half Cauchy distribution with location 0 ms and scale 25.
+
+```{r}
+priors_1 <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "n_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "c2_voicevoiced:n_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+```
 
 ## Transformations
 
-NA.
+Speech rate will be centred to make the estimate of the intercept interpretable.
+Centring will be obtained with the standard formula (speech rate - mean speech rate).
 
 ## Follow-up analyses
 
@@ -185,15 +225,6 @@ NA.
 ## Analysis scripts (Optional)
 
 See \Cref{s:stats}.
-
-```{r}
-priors <- c(
-  set_prior("normal(200, 50)", class = "Intercept"),
-  set_prior("normal(0, 25)", class = "b", coef = "c2_voicevoiced"),
-  set_prior("normal(50, 25)", class = "b", coef = "n_sylmono"),
-  set_prior("normal(50, 25)", class = "b", coef = "c2_phonationvoiced:n_sylmono"),
-)
-```
 
 # Other
 \label{s:other}
