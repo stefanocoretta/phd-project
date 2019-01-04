@@ -96,7 +96,8 @@ rr_bm_2 <- brm(
   prior = priors_2,
   cores = 4,
   seed = 8788,
-  control = list(adapt_delta = 0.99)
+  control = list(adapt_delta = 0.99),
+  file = "./voicing-effect/data/cache/rr_bm_2"
 )
 ```
 
