@@ -45,7 +45,7 @@ This study sets out to test whether English exhibits the same temporal pattern f
 The aim of the study is to answer the following questions:
 
 * Q1: Is the duration of the interval between two consecutive stop releases (the release to release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
-* Q2: Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of the V1, and (c) the place of C2?
+* Q2: Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
 
 ## Hypotheses
 
@@ -53,6 +53,12 @@ In relation to Q1, the following hypotheses will be tested:
 
 * H1a: The duration of the release to release interval is not affected by C2 voicing in disyllabic words.
 * H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
+
+In relation to Q2, the hypotheses are;
+
+* H2a: The release to release interval is longer in monosyllabic than in disyllabic words.
+* H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /əː/, /iː/.
+* H2c: The duration of the release to release interval is not affected by C2 place of articulation.
 
 # Sampling plan
 
@@ -203,7 +209,7 @@ c(
 ```
 
 A separate model will test the effect of vowel and C2 place on the duration of the release to release duration.
-As fixed effects: vowel (factor, levels = 'ar', 'er', 'ee'), C2 place (factor, levels = 'labial', 'velar'), centred speech rate, interaction between vowel and C2 place.
+As fixed effects: vowel (factor, levels = 'ee', 'er', 'ar'), C2 place (factor, levels = 'labial', 'velar'), centred speech rate, interaction between vowel and C2 place.
 Factors are coded with treatment contrasts.
 By-speaker and by-word random intercepts.
 
@@ -216,6 +222,24 @@ rr_1 <- brm(
     (1 | speaker) +
     (1 | word),
   family = gaussian()
+)
+```
+
+The following priors will be used.
+For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
+For the effect of vowel, a weakly informative prior as a normal distribution with mean 0 ms and SD = 30, based on differences in vowel duration reported in \citet{heffner1937}, \citet{house1953}, and \citet{hertrich1997}.
+For the effect of C@ place of articulation, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citet{sharf1962, klatt1973}.
+The remaining priors are the same as the ones of the previous model.
+
+```{r}
+c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelar"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_placevelar"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
 )
 ```
 
