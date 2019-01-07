@@ -92,7 +92,7 @@ ve_brm <- brm(
     (1|study),
   data = estimates,
   prior = priors,
-  cores = 2,
+  cores = 4,
   seed = 8788
 )
 ```
