@@ -29,7 +29,7 @@ tra_series <- kinematics_series %>%
   ) %>%
   mutate_if(is.character, as.factor) %>%
   arrange(rec_date, proportion) %>%
-  create_event_start("rec_date")
+  create_start_event(rec_date)
 
 contrasts(tra_series$c2_phonation_o) <- "contr.treatment"
 
@@ -125,46 +125,53 @@ tra_series %>%
 ```
 
 ```{r tra-gam}
-tra_gam <- bam(
-  trp ~
-    c2_phonation_o +
-    s(speech_rate_c) +
-    s(proportion) +
-    s(proportion, by = c2_phonation_o) +
-    ti(proportion, speech_rate_c) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series
-)
-
-rho <- start_value_rho(tra_gam)
-
-tra_gam_ar <- bam(
-  trp ~
-    c2_phonation_o +
-    s(speech_rate_c) +
-    s(proportion) +
-    s(proportion, by = c2_phonation_o) +
-    ti(proportion, speech_rate_c) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series,
-  method = "ML",
-  rho = rho,
-  AR.start = tra_series$start.event
-)
-
-tra_gam_ar_0 <- bam(
-  trp ~
-    # c2_phonation_o +
-    s(speech_rate_c) +
-    s(proportion) +
-    # s(proportion, by = c2_phonation_o) +
-    ti(proportion, speech_rate_c) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series,
-  method = "ML",
-  rho = rho,
-  AR.start = tra_series$start.event
-)
+if (!file.exists("./voicing-effect/data/cache/tra-gam.Rdata")) {
+  tra_gam <- bam(
+    trp ~
+      c2_phonation_o +
+      s(speech_rate_c) +
+      s(proportion) +
+      s(proportion, by = c2_phonation_o) +
+      ti(proportion, speech_rate_c) +
+      s(proportion, speaker, bs = "fs", m = 1),
+    data = tra_series
+  )
+  
+  rho <- start_value_rho(tra_gam)
+  
+  tra_gam_ar <- bam(
+    trp ~
+      c2_phonation_o +
+      s(speech_rate_c) +
+      s(proportion) +
+      s(proportion, by = c2_phonation_o) +
+      ti(proportion, speech_rate_c) +
+      s(proportion, speaker, bs = "fs", m = 1),
+    data = tra_series,
+    method = "ML",
+    rho = rho,
+    AR.start = tra_series$start_event
+  )
+  
+  tra_gam_ar_0 <- bam(
+    trp ~
+      # c2_phonation_o +
+      s(speech_rate_c) +
+      s(proportion) +
+      # s(proportion, by = c2_phonation_o) +
+      ti(proportion, speech_rate_c) +
+      s(proportion, speaker, bs = "fs", m = 1),
+    data = tra_series,
+    method = "ML",
+    rho = rho,
+    AR.start = tra_series$start_event
+  )
+  
+  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./voicing-effect/data/cache/tra-gam.Rdata")
+  
+} else {
+  load("./voicing-effect/data/cache/tra-gam.Rdata")
+}
 
 compareML(tra_gam_ar_0, tra_gam_ar)
 ```
@@ -174,51 +181,64 @@ plot_smooths(tra_gam_ar, proportion, c2_phonation_o)
 ```
 
 ```{r tra-gam-1}
-tra_gam_1 <- bam(
-  trp ~
-    s(speech_rate_c) +
-    s(proportion) +
-    ti(proportion, speech_rate_c) +
-    s(proportion, speaker_voicing, bs = "fs", m = 1),
-  data = tra_series
-)
+if (!file.exists("./voicing-effect/data/cache/tra-gam-1.Rdata")) {
+  tra_gam_1 <- bam(
+    trp ~
+      s(speech_rate_c) +
+      s(proportion) +
+      ti(proportion, speech_rate_c) +
+      s(proportion, speaker_voicing, bs = "fs", m = 1),
+    data = tra_series
+  )
+  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./voicing-effect/data/cache/tra-gam-1.Rdata")
+  
+} else {
+  load("./voicing-effect/data/cache/tra-gam-1.Rdata")
+}
 ```
 
 ```{r tra-gam-2}
-tra_gam_2 <- bam(
-  trp ~
-    s(v1_duration) +
-    s(proportion) +
-    ti(proportion, v1_duration) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series
-)
-
-rho <- start_value_rho(tra_gam_2)
-
-tra_gam_ar_2 <- bam(
-  trp ~
-    s(v1_duration) +
-    s(proportion) +
-    ti(proportion, v1_duration) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series,
-  method = "ML",
-  rho = rho,
-  AR.start = tra_series$start.event
-)
-
-tra_gam_ar_0_2 <- bam(
-  trp ~
-    s(v1_duration) +
-    s(proportion) +
-    # ti(proportion, v1_duration) +
-    s(proportion, speaker, bs = "fs", m = 1),
-  data = tra_series,
-  method = "ML",
-  rho = rho,
-  AR.start = tra_series$start.event
-)
+if (!file.exists("./voicing-effect/data/cache/tra-gam-2.Rdata")) {
+  tra_gam_2 <- bam(
+    trp ~
+      s(v1_duration) +
+      s(proportion) +
+      ti(proportion, v1_duration) +
+      s(proportion, speaker, bs = "fs", m = 1),
+    data = tra_series
+  )
+  
+  rho <- start_value_rho(tra_gam_2)
+  
+  tra_gam_ar_2 <- bam(
+    trp ~
+      s(v1_duration) +
+      s(proportion) +
+      ti(proportion, v1_duration) +
+      s(proportion, speaker, bs = "fs", m = 1),
+    data = tra_series,
+    method = "ML",
+    rho = rho,
+    AR.start = tra_series$start_event
+  )
+  
+  tra_gam_ar_0_2 <- bam(
+    trp ~
+      s(v1_duration) +
+      s(proportion) +
+      # ti(proportion, v1_duration) +
+      s(proportion, speaker, bs = "fs", m = 1),
+    data = tra_series,
+    method = "ML",
+    rho = rho,
+    AR.start = tra_series$start_event
+  )
+  
+  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./voicing-effect/data/cache/tra-gam-2.Rdata")
+  
+} else {
+  load("./voicing-effect/data/cache/tra-gam-2.Rdata")
+}
 
 compareML(tra_gam_ar_0_2, tra_gam_ar_2)
 ```
@@ -244,8 +264,11 @@ plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 200), rm.ranef
 kines %>%
   ggplot(aes(v1_duration, trp)) +
   geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm") +
+  facet_grid(~ language)
 ```
+
+No apparent pattern from raw data.
 
 ## V1 duration ~ TRP
 
@@ -254,9 +277,9 @@ tra_lm <- lmer(
   v1_duration ~
     trp +
     speech_rate_c +
-    trp:speech_rate_c +
+    # trp:speech_rate_c +
     vowel +
-    (1|speaker) +
+    (1 + trp|speaker) +
     (1|item),
   data = kines
 )
@@ -265,15 +288,15 @@ summary(tra_lm)
 ```
 
 ```{r tra-lm-est}
-plot_model(tra_lm, order.terms = 1:7)
+plot_model(tra_lm, order.terms = 1:5)
 ```
 
 ```{r tra-lm-plot}
-plot_model(tra_lm, type = "pred", terms = c("trp", "c2_phonation"))
+plot_model(tra_lm, type = "pred", terms = c("trp"))
 ```
 
 ```{r tra-lm-plot-2}
-plot_model(tra_lm, type = "pred", terms = c("trp", "speech_rate_c", "c2_phonation"))
+plot_model(tra_lm, type = "pred", terms = c("trp", "speech_rate_c"))
 ```
 
 ## TRP ~ C2 voicing
@@ -282,10 +305,9 @@ plot_model(tra_lm, type = "pred", terms = c("trp", "speech_rate_c", "c2_phonatio
 tra_lm_2 <- lmer(
   trp ~
     c2_phonation +
-    vowel +
-    c2_place +
     speech_rate_c +
-    (1|speaker) +
+    vowel +
+    (1+c2_phonation|speaker) +
     (1|item),
   data = kines
 )
@@ -307,10 +329,10 @@ plot_model(tra_lm_2, type = "pred", terms = c("c2_phonation"))
 tra_lm_3 <- lmer(
   trp ~
     v1_duration +
+    speech_rate_c +
     vowel +
     c2_place +
-    speech_rate_c +
-    (1|speaker) +
+    (1+v1_duration|speaker) +
     (1|item),
   data = kines
 )
@@ -318,8 +340,16 @@ tra_lm_3 <- lmer(
 summary(tra_lm_3)
 ```
 
+```{r tra-lm-3-est}
+plot_model(tra_lm_3, order.terms = 1:5)
+```
+
+```{r tra-lm-3-est-2}
+plot_model(tra_lm_3, terms = "v1_duration")
+```
+
 ```{r tra-lm-3-plot}
-plot_model(tra_lm_3, type = "pred", terms = c("v1_duration", "speech_rate_c"))
+plot_model(tra_lm_3, type = "pred", terms = c("v1_duration"))
 ```
 
 ## TRP ~ V1 duration and C2 voicing
@@ -330,7 +360,6 @@ tra_lm_4 <- lmer(
     v1_duration *
     c2_phonation +
     vowel +
-    c2_place +
     speech_rate_c +
     (1|speaker) +
     (1|item),
@@ -339,6 +368,8 @@ tra_lm_4 <- lmer(
 
 summary(tra_lm_4)
 ```
+
+## TRP at max ~ C2 phonation
 
 ```{r tra-max-lm}
 tra_max_lm <- lmer(
