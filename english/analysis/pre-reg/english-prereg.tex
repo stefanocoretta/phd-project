@@ -1,0 +1,700 @@
+\documentclass[11pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{DejaVu Sans}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Pre-registration for Compensatory aspects of the effect of voicing on vowel duration in English},
+            pdfauthor={Stefano Coretta},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{unified.bst}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Pre-registration for Compensatory aspects of the effect of voicing on
+vowel duration in English}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Stefano Coretta}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{20/12/2018}
+
+\usepackage{cleveref}
+
+\begin{document}
+\maketitle
+
+\hypertarget{study-information}{%
+\section{Study information}\label{study-information}}
+
+\hypertarget{title}{%
+\subsection{Title}\label{title}}
+
+Compensatory aspects of the effect of voicing on vowel duration in
+English.
+
+\hypertarget{authorship}{%
+\subsection{Authorship}\label{authorship}}
+
+Stefano Coretta (The University of Manchester).
+
+\hypertarget{research-questions}{%
+\subsection{Research questions}\label{research-questions}}
+
+Vowel in English (and many more languages) are longer when followed by
+voiced stops than when followed by voiceless stops \citep{heffner1937}.
+The origin of this `voicing effect' is still object to debate. According
+to the compensatory temporal adjustment account, the difference in vowel
+duration is the consequence of the difference in stop closure durations
+\citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
+Voiceless stops have longer closures than voiced stops
+\citep{lisker1957, van-summers1987, davis1989, de-jong1991}, so that
+vowels are longer when followed by the shorter closure durations of
+voiced stops.
+
+An exploratory study by Coretta (submitted) indicates that the duration
+of the interval between two consecutive stops releases is not affected
+by consonant voicing in CV́CV words in Italian and Polish. Coretta argues
+that the temporal stability of the release to release interval plus the
+difference in consonant closure durations drives differences in vowel
+durations by a mechanism of compensation between the duration of the
+vowel and that of the closure.
+
+This study sets out to test whether English exhibits the same temporal
+pattern found in Italian and Polish. The aim of the study is to answer
+the following questions:
+
+\begin{itemize}
+\tightlist
+\item
+  Q1: Is the duration of the interval between two consecutive stop
+  releases (the release to release interval) in monosyllabic and
+  disyllabic words affected by the voicing of C2 in English?
+\item
+  Q2: Is the duration of the release to release interval affected by (a)
+  the number of syllables of the word, (b) the quality of V1, and (c)
+  the place of C2?
+\end{itemize}
+
+\hypertarget{hypotheses}{%
+\subsection{Hypotheses}\label{hypotheses}}
+
+In relation to Q1, the following hypotheses will be tested:
+
+\begin{itemize}
+\tightlist
+\item
+  H1a: The duration of the release to release interval is not affected
+  by C2 voicing in disyllabic words.
+\item
+  H1b: The release to release interval is longer in monosyllabic words
+  with a voiced C2 than in monosyllabic words with a voiceless C2.
+\end{itemize}
+
+The exploratory study of Italian and Polish indicates that the intrinsic
+duration of the vowel and the consonant contribute to the duration of
+the release to release interval. More specifically, the release to
+release with a high vowel is shorter than that with a low vowel. It is
+well known that cross-linguistically high vowels tend to be shorter than
+low vowels
+\citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
+As for consonant place of articulation, if the consonant is velar the
+interval is shorter. The closure of velar stops is shorter than that of
+labial stops (see for example \citealt{sharf1962}). It is possible that
+some of the durational difference of the release to release interval
+seen in the exploratory study depends on intrinsic vowel and consonant
+duration.
+
+Considering the relation between intrinsic vowel and consonant duration
+and release to release, we can formulate the following hypotheses in
+relation to Q2 above:
+
+\begin{itemize}
+\tightlist
+\item
+  H2a: The release to release interval is longer in monosyllabic than in
+  disyllabic words.
+\item
+  H2b: The duration of the release to release interval decreases
+  according to the hierarchy /ɑː/, /əː/, /iː/.
+\item
+  H2c: The release to release interval is shorter when C2 is velar.
+\end{itemize}
+
+\hypertarget{sampling-plan}{%
+\section{Sampling plan}\label{sampling-plan}}
+
+\hypertarget{existing-data}{%
+\subsection{Existing data}\label{existing-data}}
+
+\textbf{Registration prior to creation of data}: As of the date of
+submission of this research plan for preregistration, the data have not
+yet been collected, created, or realised.
+
+\hypertarget{explanation-of-existing-data}{%
+\subsection{Explanation of existing
+data}\label{explanation-of-existing-data}}
+
+NA.
+
+\hypertarget{data-collection-procedures}{%
+\subsection{Data collection
+procedures}\label{data-collection-procedures}}
+
+\hypertarget{participants}{%
+\subsubsection{Participants}\label{participants}}
+
+Inclusion rule: Native speakers of English from the Manchester area, 18+
+yo, with no reported hearing or speaking disorders, and with normal or
+corrected to normal vision.
+
+\hypertarget{procedure}{%
+\subsubsection{Procedure}\label{procedure}}
+
+\label{s:procedure}
+
+The participants will be recorded while reading sentences with CVC and
+CV́CVC target words presented on a computer screen with PsychoPy
+\citep{peirce2009}, in a sound attenuated room in the Phonetics
+Laboratory at the University of Manchester. The test words are
+C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}(VC) words, where
+C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/,
+C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/. This structure leads
+to 24 possible combinations.
+
+\begin{tabular}{llll}
+teep & teepus & teek & teekus \\
+teeb & teebus & teeg & teegus \\
+terp & terpus & terk & terkus \\
+terb & terbus & terg & tergus \\
+tarp & tarpus & tark & tarkus \\
+tarb & tarbus & targ & targus \\
+\end{tabular}
+
+Each target word is combined with the following frame sentences: I'll
+say X this Thursday, You'll say X this Monday, She'll say X this Sunday,
+We'll say X this Friday, They'll say X this Tuesday. Each word/frame
+combination will be read once. Acoustic recording will be obtained with
+a Zoom H4n Pro recorder and a RØDE Lavalier microphone, at a sample rate
+of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis). The
+recordings will be subject to force alignment with SPPAS
+\citep{bigi2015} for analysis in Praat \citep{boersma2018}.
+
+\hypertarget{sample-size}{%
+\subsection{Sample size}\label{sample-size}}
+
+24 words, 5 repetitions (= 120 tokens per participant). We set a minimum
+of 20 participants with additional participants if needed (see following
+sections).
+
+\hypertarget{sample-size-rationale}{%
+\subsection{Sample size rationale}\label{sample-size-rationale}}
+
+The approach of the region of practical equivalence (ROPE) will be used
+for determining the participant sample size
+\citep{kruschke2015, vasishth2018a}. This approach is based on
+establishing a region around 0 which could theoretically be interpreted
+as a `no effect' region. Based on estimates from the literature on the
+just noticeable difference \citep{huggins1972, nooteboom1980}, the
+chosen ROPE width is 20 milliseconds (from -10 to +10 milliseconds).
+
+\hypertarget{stopping-rule}{%
+\subsection{Stopping rule}\label{stopping-rule}}
+
+Data collection will stop either:
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  When the width of the 95\% CI of the effect of C2 voicing will be less
+  than 20 milliseconds, or
+\item
+  If the ROPE target hasn't been reached by April 30th 2019, due to time
+  constraints imposed on the project.
+\end{enumerate}
+
+\hypertarget{variables}{%
+\section{Variables}\label{variables}}
+
+\hypertarget{manipulated-variables}{%
+\subsection{Manipulated variables}\label{manipulated-variables}}
+
+\label{s:manipulated}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Vowel}: /iː/, /əː/, /ɑː/.
+\item
+  \textbf{Voicing of C2}: voiceless (/p, k/), voiced (/b, g/).
+\item
+  \textbf{Place of articulation of C2}: labial (/p, b/), velar (/k, g/).
+\item
+  \textbf{Number of syllables}: monosyllabic, disyllabic.
+\item
+  \textbf{Frame sentence}: I'll say X this Thursday, You'll say X this
+  Monday, She'll say X this Sunday, We'll say X this Friday, They'll say
+  X this Tuesday.
+\end{itemize}
+
+See \Cref{s:procedure} for a list of word stimuli.
+
+\hypertarget{measured-variables}{%
+\subsection{Measured variables}\label{measured-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  From the acoustic signal:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Duration of the release to release interval}: from the
+    release of C1 to the release of C2.
+  \item
+    \textbf{V1 duration}: from appearance to disappearance of higher
+    formant structure in the spectrogram in correspondence of V1
+    \citep{machac2009}.
+  \item
+    \textbf{C2 closure duration}: from disappearance of higher formant
+    structure in the V1C2 sequence to the release of C2
+    \citep{machac2009}.
+  \item
+    \textbf{Speech rate}: calculated as number of syllables per second
+    \citep[\texttt{n\ of\ syllables\ in\ the\ sentence\ /\ sentence\ duration},][]{plug2018}.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{indices}{%
+\subsection{Indices}\label{indices}}
+
+NA.
+
+\hypertarget{design-plan}{%
+\section{Design plan}\label{design-plan}}
+
+\hypertarget{study-type}{%
+\subsection{Study type}\label{study-type}}
+
+Experiment---A researcher randomly assigns treatments to study subjects,
+this includes field or lab experiments. This is also known as an
+intervention experiment and includes randomised controlled trials.
+
+\hypertarget{blinding}{%
+\subsection{Blinding}\label{blinding}}
+
+No blinding is involved in this study.
+
+\hypertarget{study-design}{%
+\subsection{Study design}\label{study-design}}
+
+Repeated measures, mixed design.
+
+\hypertarget{randomisation}{%
+\subsection{Randomisation}\label{randomisation}}
+
+The sentence stimuli will be randomised within participant by means of
+the built-in randomisation procedure in PsychoPy \citep{peirce2009}.
+
+\hypertarget{analysis-plan}{%
+\section{Analysis plan}\label{analysis-plan}}
+
+\hypertarget{statistical-models}{%
+\subsection{Statistical models}\label{statistical-models}}
+
+\label{s:stats}
+
+Bayesian linear mixed models
+\citep{vasishth2018, mcelreath2015, kruschke2015} will be fitted with
+brms \citep{burkner2017, burkner2018} in R \citep{r-core-team2018}.
+
+\hypertarget{release-to-release}{%
+\subsubsection{Release to release}\label{release-to-release}}
+
+The following Bayesian regression model will be used to model the
+duration of the release to release interval. As fixed effects: C2
+voicing (factor, levels = `voiceless', `voiced'), number of syllables
+(factor, levels = `disyllabic', `monosyllabic'), centred speech rate,
+interaction between C2 voicing and number of syllables. Factors are
+coded with treatment contrasts. A by-speaker and by-word random
+intercept, and by-speaker random coefficient for C2 voicing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rr_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{brm}\NormalTok{(}
+\NormalTok{  rr }\OperatorTok{~}
+\StringTok{    }\NormalTok{c2_voice }\OperatorTok{+}
+\StringTok{    }\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{speech_rate_c }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{c2_voice }\OperatorTok{|}\StringTok{ }\NormalTok{speaker) }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{word),}
+  \DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The following priors will be used. For the intercept of the release to
+release interval duration, a normal distribution with mean 200 ms and SD
+= 50, based on the posterior distribution of the intercept in the
+Italian/Polish exploratory study. For the effect of C2 voicing, a weakly
+informative prior as a normal distribution with mean 0 ms and SD = 25,
+based on results from the exploratory study. For the effect of number of
+syllables, a weakly informative prior as a normal distribution with mean
+50 ms and SD = 25, based on differences in vowel duration between mono-
+and disyllabic words, which range between 30 and 100 ms
+\citep{sharf1962, klatt1973}. The same prior was chosen for the
+interaction of C2 voicing and number of syllables, based on a similar
+range of reported differences in vowel duration in monosyllabic words
+(30-100 ms). For the effect of speech rate (centred), a normal
+distribution with mean -25 and SD = 10, based on results from the
+exploratory study. For the random effects, a half Cauchy distribution
+(location = 0, scale = 25) for the standard deviation and a LKJ(2)
+distribution for the correlation. For the residual standard deviation, a
+half Cauchy distribution with location 0 ms and scale 25.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(200, 50)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"Intercept"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(50, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(50, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(-25, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"speech_rate_c"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sd"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"lkj(2)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"cor"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sigma"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A separate model will test the effect of vowel and C2 place on the
+duration of the release to release duration. As fixed effects: vowel
+(factor, levels = `ee', `er', `ar'), C2 place (factor, levels =
+`labial', `velar'), centred speech rate, interaction between vowel and
+C2 place. Factors are coded with treatment contrasts. By-speaker and
+by-word random intercepts.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rr_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\KeywordTok{brm}\NormalTok{(}
+\NormalTok{  rr }\OperatorTok{~}
+\StringTok{    }\NormalTok{vowel }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_place }\OperatorTok{+}
+\StringTok{    }\NormalTok{speech_rate_c }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{speaker) }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{word),}
+  \DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The following priors will be used. For the intercept of the release to
+release interval duration, a normal distribution with mean 200 ms and SD
+= 50, based on the posterior distribution of the intercept in the
+Italian/Polish exploratory study. For the effect of vowel, a weakly
+informative prior as a normal distribution with mean 0 ms and SD = 30,
+based on differences in vowel duration reported in \citet{heffner1937},
+\citet{house1953}, and \citet{hertrich1997}. For the effect of C2 place
+of articulation, a weakly informative prior as a normal distribution
+with mean 0 ms and SD = 30, based on differences in closure durations
+between labial and velar stops, which range between 10 and 30 ms
+\citep{sharf1962}. The remaining priors are the same as the ones of the
+previous model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(200, 50)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"Intercept"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"voweler"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"vowelar"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_placevelar"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(-25, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"speech_rate_c"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sd"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sigma"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vowel-duration}{%
+\subsubsection{Vowel duration}\label{vowel-duration}}
+
+The following Bayesian regression model will be used to model the
+duration of stressed vowels. As fixed effects: C2 voicing (factor,
+levels = `voiceless', `voiced'), vowel (factor, levels = `ee', `er',
+`ar'), number of syllables (factor, levels = `disyllabic',
+`monosyllabic'), centred speech rate, all logical interactions between
+C2 voicing, vowel, and number of syllables. Factors are coded with
+treatment contrasts. A by-speaker and by-word random intercept, and
+by-speaker random coefficient for C2 voicing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vow_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{brm}\NormalTok{(}
+\NormalTok{  v1_duration }\OperatorTok{~}
+\StringTok{    }\NormalTok{c2_voice }\OperatorTok{+}
+\StringTok{    }\NormalTok{vowel }\OperatorTok{+}
+\StringTok{    }\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{vowel }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{vowel}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{vowel}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{speech_rate_c }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{c2_voice }\OperatorTok{|}\StringTok{ }\NormalTok{speaker) }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{word),}
+  \DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The following priors will be employed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(145, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"Intercept"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(50, 20)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"voweler"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"vowelar"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(50, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 20)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:voweler"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 20)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:vowelar"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(50, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"voweler:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"vowelar:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:voweler:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:vowelar:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(-25, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"speech_rate_c"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sd"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"lkj(2)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"cor"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sigma"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{consonant-duration}{%
+\subsubsection{Consonant duration}\label{consonant-duration}}
+
+The following Bayesian regression model will be used to model the
+duration of the closure of C2. As fixed effects: C2 voicing (factor,
+levels = `voiceless', `voiced'), vowel (factor, levels = `ee', `er',
+`ar'), number of syllables (factor, levels = `disyllabic',
+`monosyllabic'), centred speech rate, all logical interactions between
+C2 voicing, vowel, and number of syllables. Factors are coded with
+treatment contrasts. A by-speaker and by-word random intercept, and
+by-speaker random coefficient for C2 voicing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{c2_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\KeywordTok{brm}\NormalTok{(}
+\NormalTok{  c2_duration }\OperatorTok{~}
+\StringTok{    }\NormalTok{c2_voice }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_place }\OperatorTok{+}
+\StringTok{    }\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{c2_place }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{vowel}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{c2_voice}\OperatorTok{:}\NormalTok{c2_place}\OperatorTok{:}\NormalTok{n_syl }\OperatorTok{+}
+\StringTok{    }\NormalTok{speech_rate_c }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{c2_voice }\OperatorTok{|}\StringTok{ }\NormalTok{speaker) }\OperatorTok{+}
+\StringTok{    }\NormalTok{(}\DecValTok{1} \OperatorTok{|}\StringTok{ }\NormalTok{word),}
+  \DataTypeTok{family =} \KeywordTok{gaussian}\NormalTok{()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The following priors will be employed. The mean reported in
+\citet{sharf1962} and \citet{luce1985} indicate that stop closures in
+monosyllabic words are 10-30 ms shorter when the stop is voiced. A
+normal distribution with mean -20 ms and SD = 10 seems informative
+enough as a prior to the effect of C2 voicing on closure duration. The
+same studies indicate velar stops have a closure which is 10-20ms
+shorter in monosyllabic words, hence the prior
+\texttt{normal(mean\ =\ -15,\ SD\ =\ 10)}. Note that the estimates for
+C2 voicing and place refer to monosyllabic words, while the specified
+priors refer to disyllabic words.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(90, 20)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"Intercept"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(-20, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(-15, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_placevelar"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:c2_placevelar"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_placevelar:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_placevelar:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:c2_placevelar:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(0, 30)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"c2_voicevoiced:c2_placevelar:n_sylmono"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"normal(-25, 10)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"b"}\NormalTok{, }\DataTypeTok{coef =} \StringTok{"speech_rate_c"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sd"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"lkj(2)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"cor"}\NormalTok{),}
+  \KeywordTok{set_prior}\NormalTok{(}\StringTok{"cauchy(0, 25)"}\NormalTok{, }\DataTypeTok{class =} \StringTok{"sigma"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{transformations}{%
+\subsection{Transformations}\label{transformations}}
+
+Speech rate will be centred to make the estimate of the intercept
+interpretable. Centring will be obtained with the standard formula
+(speech rate - mean speech rate).
+
+\hypertarget{follow-up-analyses}{%
+\subsection{Follow-up analyses}\label{follow-up-analyses}}
+
+NA.
+
+\hypertarget{inference-criteria}{%
+\subsection{Inference criteria}\label{inference-criteria}}
+
+Bayesian posterior distributions, rather than point estimates, will be
+employed for inference.
+
+\hypertarget{data-exclusion}{%
+\subsection{Data exclusion}\label{data-exclusion}}
+
+Residual data with mistakes and speech errors will be discarded.
+
+\hypertarget{missing-data}{%
+\subsection{Missing data}\label{missing-data}}
+
+Individual missing observations (due to excluded data or annotation
+difficulties) will be dropped.
+
+\hypertarget{exploratory-analysis}{%
+\subsection{Exploratory analysis}\label{exploratory-analysis}}
+
+\hypertarget{script-optional}{%
+\section{Script (Optional)}\label{script-optional}}
+
+\hypertarget{analysis-scripts-optional}{%
+\subsection{Analysis scripts
+(Optional)}\label{analysis-scripts-optional}}
+
+See \Cref{s:stats}.
+
+\hypertarget{other}{%
+\section{Other}\label{other}}
+
+\label{s:other}
+
+NA.
+
+\bibliography{linguistics.bib}
+
+
+\end{document}

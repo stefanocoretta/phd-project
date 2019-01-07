@@ -18,7 +18,7 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 # Study information
@@ -90,7 +90,7 @@ The participants will be recorded while reading sentences with CVC and CV́CVC t
 The test words are C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
 This structure leads to 24 possible combinations.
 
-\begin{tabular}{lll}
+\begin{tabular}{llll}
 teep & teepus & teek & teekus \\
 teeb & teebus & teeg & teegus \\
 terp & terpus & terk & terkus \\
@@ -171,7 +171,7 @@ The sentence stimuli will be randomised within participant by means of the built
 ## Statistical models
 \label{s:stats}
 
-Bayesian linear mixed models \citet{vasishth2018, mcelreath2015, kruschke2015} will be fitted with brms \citet{burkner2017, burkner2018} in R \citet{r-core-team2018}.
+Bayesian linear mixed models \citep{vasishth2018, mcelreath2015, kruschke2015} will be fitted with brms \citep{burkner2017, burkner2018} in R \citep{r-core-team2018}.
 
 ### Release to release
 
@@ -196,7 +196,7 @@ rr_1 <- brm(
 The following priors will be used.
 For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
 For the effect of C2 voicing, a weakly informative prior as a normal distribution with mean 0 ms and SD = 25, based on results from the exploratory study.
-For the effect of number of syllables, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citet{sharf1962, klatt1973}.
+For the effect of number of syllables, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citep{sharf1962, klatt1973}.
 The same prior was chosen for the interaction of C2 voicing and number of syllables, based on a similar range of reported differences in vowel duration in monosyllabic words (30-100 ms).
 For the effect of speech rate (centred), a normal distribution with mean -25 and SD = 10, based on results from the exploratory study.
 For the random effects, a half Cauchy distribution (location = 0, scale = 25) for the standard deviation and a LKJ(2) distribution for the correlation.
@@ -221,7 +221,7 @@ Factors are coded with treatment contrasts.
 By-speaker and by-word random intercepts.
 
 ```{r}
-rr_1 <- brm(
+rr_2 <- brm(
   rr ~
     vowel +
     c2_place +
@@ -235,7 +235,7 @@ rr_1 <- brm(
 The following priors will be used.
 For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
 For the effect of vowel, a weakly informative prior as a normal distribution with mean 0 ms and SD = 30, based on differences in vowel duration reported in \citet{heffner1937}, \citet{house1953}, and \citet{hertrich1997}.
-For the effect of C@ place of articulation, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citet{sharf1962, klatt1973}.
+For the effect of C2 place of articulation, a weakly informative prior as a normal distribution with mean 0 ms and SD = 30, based on differences in closure durations between labial and velar stops, which range between 10 and 30 ms \citep{sharf1962}.
 The remaining priors are the same as the ones of the previous model.
 
 ```{r}
@@ -246,6 +246,102 @@ c(
   set_prior("normal(0, 30)", class = "b", coef = "c2_placevelar"),
   set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
   set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+```
+
+### Vowel duration
+
+The following Bayesian regression model will be used to model the duration of stressed vowels.
+As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), vowel (factor, levels = 'ee', 'er', 'ar'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, all logical interactions between C2 voicing, vowel, and number of syllables.
+Factors are coded with treatment contrasts.
+A by-speaker and by-word random intercept, and by-speaker random coefficient for C2 voicing.
+
+```{r}
+vow_1 <- brm(
+  v1_duration ~
+    c2_voice +
+    vowel +
+    n_syl +
+    c2_voice:vowel +
+    c2_voice:n_syl +
+    vowel:n_syl +
+    c2_voice:vowel:n_syl +
+    speech_rate_c +
+    (1 + c2_voice | speaker) +
+    (1 | word),
+  family = gaussian()
+)
+```
+
+The following priors will be employed.
+
+```{r}
+c(
+  set_prior("normal(145, 30)", class = "Intercept"),
+  set_prior("normal(50, 20)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelar"),
+  set_prior("normal(50, 25)", class = "b", coef = "n_sylmono"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_voicevoiced:voweler"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_voicevoiced:vowelar"),
+  set_prior("normal(50, 25)", class = "b", coef = "c2_voicevoiced:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelar:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:voweler:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:vowelar:n_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+```
+
+### Consonant duration
+
+The following Bayesian regression model will be used to model the duration of the closure of C2.
+As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), vowel (factor, levels = 'ee', 'er', 'ar'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, all logical interactions between C2 voicing, vowel, and number of syllables.
+Factors are coded with treatment contrasts.
+A by-speaker and by-word random intercept, and by-speaker random coefficient for C2 voicing.
+
+```{r}
+c2_1 <- brm(
+  c2_duration ~
+    c2_voice +
+    c2_place +
+    n_syl +
+    c2_voice:c2_place +
+    c2_voice:n_syl +
+    vowel:n_syl +
+    c2_voice:c2_place:n_syl +
+    speech_rate_c +
+    (1 + c2_voice | speaker) +
+    (1 | word),
+  family = gaussian()
+)
+```
+
+The following priors will be employed.
+The mean reported in \citet{sharf1962} and \citet{luce1985} indicate that stop closures in monosyllabic words are 10-30 ms shorter when the stop is voiced.
+A normal distribution with mean -20 ms and SD = 10 seems informative enough as a prior to the effect of C2 voicing on closure duration.
+The same studies indicate velar stops have a closure which is 10-20ms shorter in monosyllabic words, hence the prior `normal(mean = -15, SD = 10)`.
+Note that the estimates for C2 voicing and place refer to monosyllabic words, while the specified priors refer to disyllabic words.
+
+```{r}
+c(
+  set_prior("normal(90, 20)", class = "Intercept"),
+  set_prior("normal(-20, 10)", class = "b", coef = "c2_voicevoiced"),
+  set_prior("normal(-15, 10)", class = "b", coef = "c2_placevelar"),
+  set_prior("normal(0, 25)", class = "b", coef = "n_sylmono"),
+  set_prior("normal(0, 10)", class = "b", coef = "c2_voicevoiced:c2_placevelar"),
+  set_prior("normal(0, 10)", class = "b", coef = "c2_voicevoiced:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_placevelar:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_placevelar:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:c2_placevelar:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:c2_placevelar:n_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
   set_prior("cauchy(0, 25)", class = "sigma")
 )
 ```
