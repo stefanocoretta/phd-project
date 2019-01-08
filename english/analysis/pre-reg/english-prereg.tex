@@ -150,7 +150,7 @@ Stefano Coretta (The University of Manchester).
 \hypertarget{research-questions}{%
 \subsection{Research questions}\label{research-questions}}
 
-Vowel in English (and many more languages) are longer when followed by
+Vowels in English (and other languages) are longer when followed by
 voiced stops than when followed by voiceless stops \citep{heffner1937}.
 The origin of this `voicing effect' is still object to debate. According
 to the compensatory temporal adjustment account, the difference in vowel
@@ -161,13 +161,13 @@ Voiceless stops have longer closures than voiced stops
 vowels are longer when followed by the shorter closure durations of
 voiced stops.
 
-An exploratory study by Coretta (submitted) indicates that the duration
-of the interval between two consecutive stops releases is not affected
-by consonant voicing in CV́CV words in Italian and Polish. Coretta argues
-that the temporal stability of the release to release interval plus the
-difference in consonant closure durations drives differences in vowel
-durations by a mechanism of compensation between the duration of the
-vowel and that of the closure.
+An exploratory study discussed in \citet{coretta2018j} indicates that
+the duration of the interval between two consecutive stops releases is
+not affected by consonant voicing in CV́CV words in Italian and Polish.
+Coretta argues that the temporal stability of the release to release
+interval plus the difference in consonant closure durations drives the
+differences in vowel durations by a mechanism of compensation between
+the duration of the vowel and that of the closure.
 
 This study sets out to test whether English exhibits the same temporal
 pattern found in Italian and Polish. The aim of the study is to answer
@@ -185,7 +185,7 @@ the following questions:
   the place of C2?
 \end{itemize}
 
-A third question pertains differences between mono- and disyllabic
+A third question pertains to differences between mono- and disyllabic
 words:
 
 \begin{itemize}
@@ -221,7 +221,7 @@ As for consonant place of articulation, if the consonant is velar the
 interval is shorter. The closure of velar stops is shorter than that of
 labial stops (see for example \citealt{sharf1962}). It is possible that
 some of the durational difference of the release to release interval
-seen in the exploratory study depends on intrinsic vowel and consonant
+seen in the exploratory study depend on intrinsic vowel and consonant
 duration.
 
 Considering the relation between intrinsic vowel and consonant duration
@@ -393,9 +393,15 @@ See \Cref{s:procedure} for a list of word stimuli.
     \citep{machac2009}.
   \item
     \textbf{Speech rate}: calculated as number of syllables per second
-    \citep[\texttt{n\ of\ syllables\ in\ the\ sentence\ /\ sentence\ duration},][]{plug2018}.
+    (number of syllables in the sentence divided by the sentence
+    duration in seconds, \citealt{plug2018}).
   \end{itemize}
 \end{itemize}
+
+C1/C2 release detection will be performed with an automatic procedure in
+Praat based on \citet{ananthapadmanabha2014}. The output of the
+automatic force-alignment (see \Cref{s:procedure}) and the release
+detection algorithm will be checked and corrected manually if needed.
 
 \hypertarget{indices}{%
 \subsection{Indices}\label{indices}}
@@ -449,7 +455,7 @@ voicing (factor, levels = `voiceless', `voiced'), number of syllables
 (factor, levels = `disyllabic', `monosyllabic'), centred speech rate,
 interaction between C2 voicing and number of syllables. Factors are
 coded with treatment contrasts. A by-speaker and by-word random
-intercept, and by-speaker random coefficient for C2 voicing.
+intercept, and a by-speaker random coefficient for C2 voicing.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -475,7 +481,7 @@ based on results from the exploratory study. For the effect of number of
 syllables, a weakly informative prior as a normal distribution with mean
 50 ms and SD = 25, based on differences in vowel duration between mono-
 and disyllabic words, which range between 30 and 100 ms
-\citep{sharf1962, klatt1973}. The same prior was chosen for the
+\citep{sharf1962, klatt1973}. The same prior is chosen for the
 interaction of C2 voicing and number of syllables, based on a similar
 range of reported differences in vowel duration in monosyllabic words
 (30-100 ms). For the effect of speech rate (centred), a normal
@@ -552,13 +558,13 @@ previous model.
 \subsubsection{Vowel duration}\label{vowel-duration}}
 
 The following Bayesian regression model will be used to model the
-duration of stressed vowels. As fixed effects: C2 voicing (factor,
-levels = `voiceless', `voiced'), vowel (factor, levels = `ee', `er',
-`ar'), number of syllables (factor, levels = `disyllabic',
-`monosyllabic'), centred speech rate, all logical interactions between
-C2 voicing, vowel, and number of syllables. Factors are coded with
-treatment contrasts. A by-speaker and by-word random intercept, and
-by-speaker random coefficient for C2 voicing.
+duration of V1. As fixed effects: C2 voicing (factor, levels =
+`voiceless', `voiced'), vowel (factor, levels = `ee', `er', `ar'),
+number of syllables (factor, levels = `disyllabic', `monosyllabic'),
+centred speech rate, all logical interactions between C2 voicing, vowel,
+and number of syllables. Factors are coded with treatment contrasts. A
+by-speaker and by-word random intercept, and a by-speaker random
+coefficient for C2 voicing.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -579,7 +585,7 @@ by-speaker random coefficient for C2 voicing.
 \end{Highlighting}
 \end{Shaded}
 
-The following priors will be employed.
+The following priors will be used.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -615,7 +621,7 @@ levels = `voiceless', `voiced'), vowel (factor, levels = `ee', `er',
 `ar'), number of syllables (factor, levels = `disyllabic',
 `monosyllabic'), centred speech rate, all logical interactions between
 C2 voicing, vowel, and number of syllables. Factors are coded with
-treatment contrasts. A by-speaker and by-word random intercept, and
+treatment contrasts. A by-speaker and by-word random intercept, and a
 by-speaker random coefficient for C2 voicing.
 
 \begin{Shaded}
@@ -637,7 +643,7 @@ by-speaker random coefficient for C2 voicing.
 \end{Highlighting}
 \end{Shaded}
 
-The following priors will be used. The mean reported in
+The following priors will be used. The means reported in
 \citet{sharf1962} and \citet{luce1985} indicate that stop closures in
 monosyllabic words are 10-30 ms shorter when the stop is voiced. A
 normal distribution with mean -20 ms and SD = 10 seems informative

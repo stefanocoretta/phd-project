@@ -151,7 +151,10 @@ See \Cref{s:procedure} for a list of word stimuli.
     * **Duration of the release to release interval**: from the release of C1 to the release of C2.
     * **V1 duration**: from appearance to disappearance of higher formant structure in the spectrogram in correspondence of V1 \citep{machac2009}.
     * **C2 closure duration**: from disappearance of higher formant structure in the V1C2 sequence to the release of C2 \citep{machac2009}.
-    * **Speech rate**: calculated as number of syllables per second [`n of syllables in the sentence / sentence duration`, @plug2018].
+    * **Speech rate**: calculated as number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018}).
+
+C1/C2 release detection will be performed with an automatic procedure in Praat based on \citet{ananthapadmanabha2014}.
+The output of the automatic force-alignment (see \Cref{s:procedure}) and the release detection algorithm will be checked and corrected manually if needed.
 
 ## Indices
 
@@ -188,7 +191,7 @@ Bayesian linear mixed models \citep{vasishth2018, mcelreath2015, kruschke2015} w
 The following Bayesian regression model will be used to model the duration of the release to release interval.
 As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, interaction between C2 voicing and number of syllables.
 Factors are coded with treatment contrasts.
-A by-speaker and by-word random intercept, and by-speaker random coefficient for C2 voicing.
+A by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing.
 
 ```{r}
 rr_1 <- brm(
@@ -207,7 +210,7 @@ The following priors will be used.
 For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
 For the effect of C2 voicing, a weakly informative prior as a normal distribution with mean 0 ms and SD = 25, based on results from the exploratory study.
 For the effect of number of syllables, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citep{sharf1962, klatt1973}.
-The same prior was chosen for the interaction of C2 voicing and number of syllables, based on a similar range of reported differences in vowel duration in monosyllabic words (30-100 ms).
+The same prior is chosen for the interaction of C2 voicing and number of syllables, based on a similar range of reported differences in vowel duration in monosyllabic words (30-100 ms).
 For the effect of speech rate (centred), a normal distribution with mean -25 and SD = 10, based on results from the exploratory study.
 For the random effects, a half Cauchy distribution (location = 0, scale = 25) for the standard deviation and a LKJ(2) distribution for the correlation.
 For the residual standard deviation, a half Cauchy distribution with location 0 ms and scale 25.
@@ -262,10 +265,10 @@ c(
 
 ### Vowel duration
 
-The following Bayesian regression model will be used to model the duration of stressed vowels.
+The following Bayesian regression model will be used to model the duration of V1.
 As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), vowel (factor, levels = 'ee', 'er', 'ar'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, all logical interactions between C2 voicing, vowel, and number of syllables.
 Factors are coded with treatment contrasts.
-A by-speaker and by-word random intercept, and by-speaker random coefficient for C2 voicing.
+A by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing.
 
 ```{r}
 vow_1 <- brm(
@@ -284,7 +287,7 @@ vow_1 <- brm(
 )
 ```
 
-The following priors will be employed.
+The following priors will be used.
 
 ```{r}
 c(
@@ -313,7 +316,7 @@ c(
 The following Bayesian regression model will be used to model the duration of the closure of C2.
 As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), vowel (factor, levels = 'ee', 'er', 'ar'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, all logical interactions between C2 voicing, vowel, and number of syllables.
 Factors are coded with treatment contrasts.
-A by-speaker and by-word random intercept, and by-speaker random coefficient for C2 voicing.
+A by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing.
 
 ```{r}
 c2_1 <- brm(
@@ -333,7 +336,7 @@ c2_1 <- brm(
 ```
 
 The following priors will be used.
-The mean reported in \citet{sharf1962} and \citet{luce1985} indicate that stop closures in monosyllabic words are 10-30 ms shorter when the stop is voiced.
+The means reported in \citet{sharf1962} and \citet{luce1985} indicate that stop closures in monosyllabic words are 10-30 ms shorter when the stop is voiced.
 A normal distribution with mean -20 ms and SD = 10 seems informative enough as a prior to the effect of C2 voicing on closure duration.
 The same studies indicate velar stops have a closure which is 10-20ms shorter in monosyllabic words, hence the prior `normal(mean = -15, SD = 10)`.
 Note that the estimates for C2 voicing and place refer to monosyllabic words, while the specified priors refer to disyllabic words.
