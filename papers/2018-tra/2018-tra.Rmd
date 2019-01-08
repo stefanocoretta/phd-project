@@ -111,7 +111,7 @@ A labial stop was chosen as the first consonant to reduce possible coarticulatio
 Central/back vowels only were included in the target words for two reasons.
 First, high and mid front vowels tend to be difficult to image with ultrasound, given their greater distance from the ultrasonic probe when compared with back vowels.
 Second, high and mid front vowels usually produce less tongue displacement from and to a stop consonant.
-This characteristic can make it more difficult to identify gestural landmarks using the methodology discussed in \Cref{s:process-uti}.
+This characteristic can make it more difficult to identify gestural landmarks using the methodology discussed in \Cref{s:process}.
 Since the focus of the study was to explore differences in the closing gesture of voiceless and voiced stops, only lingual consonants have been included, since of course the closure of labial stops cannot be imaged with ultrasound.
 The sentence *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' for Polish functioned as frames for the test words.
 Speakers were instructed to read the sentences without pauses and to speak at a comfortable pace.
@@ -120,9 +120,9 @@ Speakers were instructed to read the sentences without pauses and to speak at a 
 
 The participants familiarised themselves with the sentence stimuli at the beginning of the session.
 Headset and probe were then fitted on the participant's head.
-A reference for the coordinate system was obtained by imaging the occlusal plane with a metallic bite plate inserted in the participant's mouth \citep{scobbie2011}.
+<!-- A reference for the coordinate system was obtained by imaging the occlusal plane with a metallic bite plate inserted in the participant's mouth \citep{scobbie2011}.
 The participant gently bites on the bite plate while pressing the tongue against it to keep it still.
-The trace of the metallic plate visible in the ultrasonic image was then used to rotate the tongue data (see \Cref{s:process-uti}).
+The trace of the metallic plate visible in the ultrasonic image was then used to rotate the tongue data (see \Cref{s:process}). -->
 <!-- add image -->
 The participant read the sentence stimuli, which were presented on the computer screen in a random order, while the audio and ultrasonic signals were acquired simultaneously.
 The random list of sentences was read 6 times consecutively (with the exception of IT02, who repeated the sentences 5 times only).
@@ -131,46 +131,20 @@ The participant could optionally take breaks between one repetition and the othe
 Sentences with hesitations or speech errors were immediately discarded and re-recorded.
 A total of 1212 tokens (792 from Italian, 420 from Polish) were obtained.
 
-## Data processing and analysis
+## Data processing and measurements
+\label{s:process}
 
-### Acoustic data
+The audio data was subject to force alignment using the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}).
+The outcome of the automatic alignment was then manually corrected, according to the recommendations in \citet{machac2009}.
+The onset and offset of V1 in the C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} test words were respectively placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
+Vowel duration was simply calculated as the duration of the V1 onset to V1 offset interval.
+<!-- include image -->
 
-The audio data was subject to force alignment using the SPeech Phonetisation Alignment and Syllabification software (SPPAS) [@bigi2015].
-The outcome of the automatic alignment was then manually corrected, according to the criteria in \Cref{t:dur-measures}, which were mainly based on properties of the the spectrogram.
-<!-- add reference -->
-The release C2 was detected automatically in Praat [@boersma2016] by means of the burst-detection algorithm described in @ananthapadmanabha2014.
-The durations of the following intervals were extracted from the annotated acoustic landmarks using a scripted procedure in Praat: vowel duration (V1 onset to V1 offset), consonant duration (V1 offset to V2 onset), and closure duration (V1 offset to C2 release).
-
-\ctable[caption = List of measurements extracted from the acoustic data.,
-label = t:dur-measures,
-width=\textwidth,
-star
-]{ll>{\raggedright}p{9cm}}{}{
-\FL
-\textbf{landmarks}               &                  & \textbf{criteria}                                                                                    \ML
-vowel onset           & (V1 onset)         & appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
-vowel offset          & (V1 offset)        & disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
-consonant onset       & (C2 onset)         & corresponds to V1 offset                                                                    \NN
-closure onset         & (C2 closure onset) & corresponds to V1 offset                                                                    \NN
-consonant offset      & (C2 offset)        & appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
-consonant release & (C2 release)         & automatic detection \citep{ananthapadmanabha2014}                                           \LL
-}
-
-### Ultrasonic data
-\label{s:process-uti}
-
-Mid-sagittal tongue contours were obtained from the ultrasonic data according to the following method.
+The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
 Smoothing splines were automatically fitted to the visible tongue contours in AAA.
 Manual correction was then applied in cases of clear tracking errors.
-The time of maximum tongue displacement within consonant closure was then calculated in AAA following the method described in @strycharczuk2015, which is based on the velocity of tongue displacement along a vector.
-To obtain the time of maximum displacement, a fan-like frame consisting of 42 equidistant radial lines is used as the coordinate system.
-The origin of the 42 fan-lines coincides with the centre of the ultrasonic transducer, such that each fan-line is parallel to the direction of the ultrasonic scan lines.
-Tongue displacement was thus calculated as the displacement of the fitted splines along the fan-line vectors.
-The time of maximum tongue displacement was the time of greater displacement along the vector that showed the greatest standard deviation of displacement.
-The fan-lines from which the relevant vector was chosen were restricted to the fan-lines corresponding to the tongue tip for coronal consonants, and to the fan-lines corresponding to the tongue dorsum for velar consonants.
-<!-- The displacement was calculated based on the movement of the splines along one of the 42 fan lines.
-Fan line selection in this study was achieved by finding the fan line within the relevant area of the tongue (tongue tip for coronal consonants and tongue dorsum for velar consonants) with the highest standard deviation of displacement.
--->
-
-The polar coordinates of the tongue contours were exported from two time points: the onset of C2 closure, and the time of maximum tongue displacement (which is always within C2 closure).
-The contours were normalised within speaker by applying offsetting and rotation relative to the participant’s occlusal plane [@scobbie2011].
+A fan-like frame consisting of 42 equidistant radial lines superimposed on the ultrasonic image was used as the coordinate system.
+The origin of the 42 fan-lines coincides with the (virtual) origin of the ultrasonic beams, such that each fan-line is parallel to the direction of the ultrasonic scan lines.
+Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector.
+For each participant, the fan-line with the highest standard deviation of displacement within the area corresponding to the speaker's tongue root was chosen as the tongue root displacement vector.
+<!-- add image -->
