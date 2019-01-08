@@ -20,6 +20,12 @@ token_data <- token_measures %>%
   mutate(c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))) %>%
   mutate_if(is.character, as.factor)
 
+c1_data <- token_measures %>%
+  filter(speaker %in% c("it01", "it02"), c2_phonation == "voiceless") %>%
+  mutate(c1_phonation = factor(c1_phonation, levels = c("voiceless", "voiced"))) %>%
+  mutate_if(is.character, as.factor) %>%
+  droplevels()
+
 scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 ```
@@ -856,4 +862,26 @@ token_data %>%
     title = "Density plot of the V-to-V interval",
     x = "V to V duration (V1 onset to V2 onset)"
   )
+```
+
+# RVoffT of voiceless/voiced C1
+
+```{r}
+c1_data %>%
+  group_by(speaker, c1_phonation) %>%
+  summarise(n = n(), na = sum(is.na(c1_rvoff)))
+```
+
+```{r rvofft-dens}
+c1_data %>%
+  ggplot(aes(c1_rvoff, fill = c1_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r rvofft-dens}
+c1_data %>%
+  ggplot(aes(c1_phonation, c1_rvoff, fill = c1_phonation)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.5, width = 0.2)
 ```
