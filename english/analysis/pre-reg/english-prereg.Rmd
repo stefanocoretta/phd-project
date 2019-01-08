@@ -1,7 +1,7 @@
 ---
 title: "Pre-registration for Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
-date: "20/12/2018"
+date: "08/01/2019"
 output:
   pdf_document:
     citation_package: natbib
@@ -57,6 +57,8 @@ In relation to Q1, the following hypotheses will be tested:
 
 * H1a: The duration of the release to release interval is not affected by C2 voicing in disyllabic words.
 * H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
+
+H1b is proposed based on \citet{jacewicz2009}, who report that monosyllabic words are longer when C2 is voiced in American English.
 
 The exploratory study of Italian and Polish indicates that the intrinsic duration of the vowel and the consonant contribute to the duration of the release to release interval.
 More specifically, the release to release with a high vowel is shorter than that with a low vowel.
