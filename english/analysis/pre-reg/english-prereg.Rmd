@@ -33,19 +33,23 @@ Stefano Coretta (The University of Manchester).
 
 ## Research questions
 
-Vowel in English (and many more languages) are longer when followed by voiced stops than when followed by voiceless stops \citep{heffner1937}.
+Vowels in English (and other languages) are longer when followed by voiced stops than when followed by voiceless stops \citep{heffner1937}.
 The origin of this 'voicing effect' is still object to debate.
 According to the compensatory temporal adjustment account, the difference in vowel duration is the consequence of the difference in stop closure durations \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
 Voiceless stops have longer closures than voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, so that vowels are longer when followed by the shorter closure durations of voiced stops.
 
-An exploratory study by Coretta (submitted) indicates that the duration of the interval between two consecutive stops releases is not affected by consonant voicing in CV́CV words in Italian and Polish.
-Coretta argues that the temporal stability of the release to release interval plus the difference in consonant closure durations drives differences in vowel durations by a mechanism of compensation between the duration of the vowel and that of the closure.
+An exploratory study discussed in \citet{coretta2018j} indicates that the duration of the interval between two consecutive stops releases is not affected by consonant voicing in CV́CV words in Italian and Polish.
+Coretta argues that the temporal stability of the release to release interval plus the difference in consonant closure durations drives the differences in vowel durations by a mechanism of compensation between the duration of the vowel and that of the closure.
 
 This study sets out to test whether English exhibits the same temporal pattern found in Italian and Polish.
 The aim of the study is to answer the following questions:
 
 * Q1: Is the duration of the interval between two consecutive stop releases (the release to release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
 * Q2: Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
+
+A third question pertains to differences between mono- and disyllabic words:
+
+* Q3: What is the estimated difference in the effect of voicing on vowel and stop closure duration between monosyllabic and disyllabic words?
 
 ## Hypotheses
 
@@ -59,13 +63,19 @@ More specifically, the release to release with a high vowel is shorter than that
 It is well known that cross-linguistically high vowels tend to be shorter than low vowels \citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
 As for consonant place of articulation, if the consonant is velar the interval is shorter.
 The closure of velar stops is shorter than that of labial stops (see for example \citealt{sharf1962}).
-It is possible that some of the durational difference of the release to release interval seen in the exploratory study depends on intrinsic vowel and consonant duration.
+It is possible that some of the durational difference of the release to release interval seen in the exploratory study depend on intrinsic vowel and consonant duration.
 
 Considering the relation between intrinsic vowel and consonant duration and release to release, we can formulate the following hypotheses in relation to Q2 above:
 
 * H2a: The release to release interval is longer in monosyllabic than in disyllabic words.
 * H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /əː/, /iː/.
 * H2c: The release to release interval is shorter when C2 is velar.
+
+As for Q3:
+
+* H3: The effect of voicing on vowel duration is greater in monosyllabic than in disyllabic words.
+
+There is no specific hypothesis concerning stop closures.
 
 # Sampling plan
 
@@ -297,7 +307,8 @@ c(
 )
 ```
 
-### Consonant duration
+### Closure duration
+\label{s:closure}
 
 The following Bayesian regression model will be used to model the duration of the closure of C2.
 As fixed effects: C2 voicing (factor, levels = 'voiceless', 'voiced'), vowel (factor, levels = 'ee', 'er', 'ar'), number of syllables (factor, levels = 'disyllabic', 'monosyllabic'), centred speech rate, all logical interactions between C2 voicing, vowel, and number of syllables.
@@ -321,7 +332,7 @@ c2_1 <- brm(
 )
 ```
 
-The following priors will be employed.
+The following priors will be used.
 The mean reported in \citet{sharf1962} and \citet{luce1985} indicate that stop closures in monosyllabic words are 10-30 ms shorter when the stop is voiced.
 A normal distribution with mean -20 ms and SD = 10 seems informative enough as a prior to the effect of C2 voicing on closure duration.
 The same studies indicate velar stops have a closure which is 10-20ms shorter in monosyllabic words, hence the prior `normal(mean = -15, SD = 10)`.
@@ -369,6 +380,7 @@ Individual missing observations (due to excluded data or annotation difficulties
 
 ## Exploratory analysis
 
+An exploratory analysis will look into differences in closure durations of voiceless and voiced stops in mono- and disyllabic words (see \Cref{s:closure}).
 
 # Script (Optional)
 
@@ -377,6 +389,5 @@ Individual missing observations (due to excluded data or annotation difficulties
 See \Cref{s:stats}.
 
 # Other
-\label{s:other}
 
 NA.

@@ -185,6 +185,16 @@ the following questions:
   the place of C2?
 \end{itemize}
 
+A third question pertains differences between mono- and disyllabic
+words:
+
+\begin{itemize}
+\tightlist
+\item
+  Q3: What is the estimated difference in the effect of voicing on vowel
+  and stop closure duration between monosyllabic and disyllabic words?
+\end{itemize}
+
 \hypertarget{hypotheses}{%
 \subsection{Hypotheses}\label{hypotheses}}
 
@@ -229,6 +239,17 @@ relation to Q2 above:
 \item
   H2c: The release to release interval is shorter when C2 is velar.
 \end{itemize}
+
+As for Q3:
+
+\begin{itemize}
+\tightlist
+\item
+  H3: The effect of voicing on vowel duration is greater in monosyllabic
+  than in disyllabic words.
+\end{itemize}
+
+There is no specific hypothesis concerning stop closures.
 
 \hypertarget{sampling-plan}{%
 \section{Sampling plan}\label{sampling-plan}}
@@ -583,8 +604,10 @@ The following priors will be employed.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{consonant-duration}{%
-\subsubsection{Consonant duration}\label{consonant-duration}}
+\hypertarget{closure-duration}{%
+\subsubsection{Closure duration}\label{closure-duration}}
+
+\label{s:closure}
 
 The following Bayesian regression model will be used to model the
 duration of the closure of C2. As fixed effects: C2 voicing (factor,
@@ -614,7 +637,7 @@ by-speaker random coefficient for C2 voicing.
 \end{Highlighting}
 \end{Shaded}
 
-The following priors will be employed. The mean reported in
+The following priors will be used. The mean reported in
 \citet{sharf1962} and \citet{luce1985} indicate that stop closures in
 monosyllabic words are 10-30 ms shorter when the stop is voiced. A
 normal distribution with mean -20 ms and SD = 10 seems informative
@@ -678,6 +701,10 @@ difficulties) will be dropped.
 \hypertarget{exploratory-analysis}{%
 \subsection{Exploratory analysis}\label{exploratory-analysis}}
 
+An exploratory analysis will look into differences in closure durations
+of voiceless and voiced stops in mono- and disyllabic words (see
+\Cref{s:closure}).
+
 \hypertarget{script-optional}{%
 \section{Script (Optional)}\label{script-optional}}
 
@@ -689,8 +716,6 @@ See \Cref{s:stats}.
 
 \hypertarget{other}{%
 \section{Other}\label{other}}
-
-\label{s:other}
 
 NA.
 
