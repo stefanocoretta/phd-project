@@ -24,22 +24,37 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction
 
 This paper reports a correlation between vowel duration and degree of tongue root advancement.
-<!-- Don't say previously unreported coz you don't know :D -->
 In an exploratory study of the articulatory correlates of stop voicing, it has been found that tongue root advancement---a known mechanism that facilitates voicing during stop closure---can be implemented not only during the closure of a stop, but even during the production of the vowel preceding a stop.
 Moreover, vowel acoustic duration turned out to be linearly correlated with degree of tongue root advancement, such that longer vowels show greater tongue root advancement.
 
-One of the known differences in supra-glottal articulation between voiced and voiceless stops concerns the position of the tongue root relative to the front-back axis of the oral tract.
-It has been observed that the tongue root is more advanced in voiced than in voiceless stops \citep{kent1969,perkell1969,westbury1983}.
-This gesture has been interpreted as a mechanism to ensure voicing can be maintained during the closure of the stop.
-The realisation of vocal fold vibration (i.e. voicing) requires the air pressure in the supra-glottal cavity to be lower than the air pressure below the glottis.
-During the production of voiced obstruents, the supra-glottal pressure increases due to the immittance of air in the supra-glottal cavity.
-Such pressure increase can hinder the ability to sustain voicing during closure, to the point that voicing ceases if the supra-glottal pressure is higher than the sub-glottal pressure [@ohala2011].
-<!-- mention the aerodynamic voicing constraint -->
-One of the possible articulatory solution to counterbalance the increase in pressure during the closure of a voiced stop is to expand the supra-glottal cavity by advancing the root of the tongue.
-<!-- maybe mention Rothenberg? -->
+It is well known that voiced stops (broadly defined) are almost universally accompanied by two phonetic correlates: advanced tongue root and preceding longer vowel durations.
 
-<!-- need to mention that VOT is typical of voiced consonants in English blah blah blah -->
-Tongue root advancement has also been reported as a mechanism for ensuring a short voice onset time [@ahn2016].
+## Tongue root position and voicing
+
+One of the differences in supra-glottal articulation between voiced and voiceless stops concerns the position of the tongue root relative to the antero-posterior axis of the oral tract.
+The realisation of vocal fold vibration (i.e. voicing) requires a difference in air pressure between the cavities below and above the glottis.
+Specifically, the sub-glottal pressure needs to be higher than the supra-glottal pressure for voicing to be maintained.
+This property of voicing is formally known as the Aerodynamic Voicing Constraint [@ohala2011].
+When the oral tract is completely occluded during the production of a stop closure, the supra-glottal pressure quickly increases, due to the incoming airstream from the lungs.
+Such pressure increase can hinder the ability to sustain vocal fold vibration during closure, to the point voicing ceases.
+
+An articulatory solution to counterbalance the increased pressure is to enlarge the supra-glottal cavity by advancing the root of the tongue.
+It has been repeatedly observed that the tongue root is in a more front position in voiced stops compared to voiceless stops \citep{kent1969, perkell1969, westbury1983}.
+\citet{rothenberg1967} calculates that the walls of the supraglottal cavity can absorb the incoming airflow for 20 to 30 ms by passive expansion, after which the sub- and supra-glottal pressures would equalise and voicing cease.
+\citet{rothenberg1967} thus argues that a passive expansion of the pharyngeal walls is not sufficient.
+
+According to \citet{rothenberg1967}, a complete ballistic forward gesture of the tongue root has a time constant of 70 to 90 ms.
+Given that stop closures are generally shorter than that, it is natural that advancement is initiated during the vowel, so that an appreciable amount of advancement is obtained when closure is achieved.
+Furthermore, \citet{westbury1983} finds that tongue root advancement is initiated before achievement of full closure and that there is a forward movement even in the context of voiceless stops.
+
+However, the relationship between tongue root advancement and voicing is a complex one.
+First, tongue root advancement is not the only mechanism for sustaining voicing during a stop \citep{rothenberg1967, westbury1983, ohala2011} and it has a certain level of idiosyncrasy \citep{ahn2016}.
+Other solutions include expansion of the lateral walls of the pharynx [], larynx lowering \citep{riordan1980}, opening of the velopharyngeal port \citep{yanagihara1966}, producing a retroflex occlusion \citep{sprouse2008}.
+Second, implementation of tongue root advancement can be decoupled from the presence of actual vocal fold vibration.
+In \citet{westbury1983}, advancement of the tongue root is found even in the context of voiceless stops, which is counterintuitive given that tongue root advancement is generally considered to be a feature of voiced stops.
+Similarly, \citet{ahn2015, ahn2016, ahn2018} find that the tongue root is more advanced in the phonologically voiced stops independent of whether they actually show vocal fold vibration or not.
+
+## Vowel duration and voicing
 
 An extensive number of studies show that, cross-linguistically, vowels tend to be longer when followed by voiced obstruents than when they are followed by voiceless obstruents [@house1953;@peterson1960;@chen1970;@klatt1973;@lisker1974;@farnetani1986;@fowler1992;@hussein1994;@esposito2002;@lampp2004;@durvasula2012].
 This phenomenon, know as the voicing effect, has been reported in a variety of languages,
@@ -48,7 +63,7 @@ A common stance in the literature is that the magnitude of the voicing effect di
 Although several attempts have been made to explain the voicing effect, an account that survives all empirical data is still lacking \citep{durvasula2012,soskuthy2013}.
 <!-- have to say that polish had mixed results -->
 
-To summarise, tongue root advancement, shorter VOT duration, and longer vowel durations are all correlates of voicing.
+To summarise, tongue root advancement and longer vowel durations are correlates of voicing.
 Moreover, tongue root advancement and shorter VOT show a link.
 In this paper, I will report the results from an exploratory study which fill the gap in this picture of correlation, by showing that tongue root advancement is also linked to longer vowel durations.
 
