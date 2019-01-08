@@ -78,7 +78,28 @@ The Polish speakers came from different parts of Poland (2 from the west, 3 from
 This study has been approved by the SALC Ethics committee of the University of Manchester (REF 2016-0099-76).
 The participants signed a written consent and received a monetary compensation of £10.
 
-## Equiment
+## Equipment
+
+\label{s:equipment}
+
+<!-- \begin{figure*}
+    \centering
+    \includegraphics[width=.7\textwidth]{../../graphics/uti-setup.pdf}
+    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}). The system is described in details in \Cref{s:equipment}.}
+    \label{f:uti-setup}
+\end{figure*} -->
+
+Simultaneous recordings of audio and ultrasound tongue imaging were obtained in the Phonetics Laboratory at the University of Manchester (UK) and in a quiet room in Verbania (Italy).
+An Articulate Instruments Ltd™ system was used for this study.
+The system is made of a TELEMED Echo Blaster 128 unit, an Articulate Instruments Ltd™ P-Stretch synchronisation unit, and a FocusRight Scarlett Solo pre-amplifier (see \Cref{f:uti-setup}).
+A TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz) and a Movo LV4-O2 Lavalier microphone were used respectively for the acquisition of ultrasonic and audio data.
+The ultrasonic probe was placed in contact with the sub-mental triangle, aligned with the mid-sagittal plane.
+A metallic headset designed by Articulate Instruments Ltd™ (\citeyear{articulate2008}) was used to hold the probe in a fixed position and inclination relative to the head.
+<!-- add figure -->
+The acquisition of the mid-sagittal ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+The synchronisation of the ultrasonic and audio signals was performed by AAA after recording by means of a synchronisation signal produced by the P-Stretch unit.
+The ranges of the ultrasonic settings were: 43-68 frames per second, 88-114 number of scan lines, 980-988 pixel per scan line, field of view 71-93°, pixel offset 109-263, depth 75-180 mm.
+The audio signal was sampled at 22050 Hz (16-bit).
 
 ## Materials
 
@@ -96,36 +117,19 @@ The sentence *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X ter
 Speakers were instructed to read the sentences without pauses and to speak at a comfortable pace.
 
 ## Procedure
-\label{s:equipment}
 
-<!-- \begin{figure*}
-    \centering
-    \includegraphics[width=.7\textwidth]{../../graphics/uti-setup.pdf}
-    \caption{Schematic representation of the equipment setup (\citealt{articulate2011}). The system is described in details in \Cref{s:equipment}.}
-    \label{f:uti-setup}
-\end{figure*} -->
-
-Simultaneous recordings of audio and ultrasound tongue imaging were obtained in the Phonetics Laboratory at the University of Manchester (UK) and in a quiet room in Verbania (Italy).
-An Articulate Instruments Ltd™ system was used for this study.
-The system is made of a TELEMED Echo Blaster 128 unit, an Articulate Instruments Ltd™ P-Stretch synchronisation unit, and a FocusRight Scarlett Solo pre-amplifier (see \Cref{f:uti-setup}).
-A TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz) and a Movo LV4-O2 Lavalier microphone were used respectively for the acquisition of ultrasonic and audio data.
-The ultrasonic probe was stabilised by means of a metallic headset designed by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
-<!-- add figure -->
-The probe was placed in contact with the sub-mental triangle, aligned with the mid-sagittal plane.
-The headset holds the transducer and it keeps it in a constant position and inclination relative to the sub-mental triangle, thus allowing head movements without the need for post-processing correction.
-The acquisition of the mid-sagittal ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
-The synchronisation of the ultrasonic and audio signals was performed by AAA after recording by means of a synchronisation signal produced by the P-Stretch unit.
-The ranges of the ultrasonic settings were: frames per second = 43-68, number of scan lines = 88–114, pixel per scan line = 980–988, field of view = 71–93°, pixel offset = 109–263, depth (mm) = 75–180.
-The audio signal was recorded at 22050 Hz (16-bit).
-
-The head set with the probe was fitted at the beginning of the experimental session.
-Then the hard palate was imaged by recording the participant swallowing water [@epstein2005].
-A between-speaker reference coordinate system was derived from imaging the occlusal plane, which corresponds to the trace of a metallic bite plate inserted in the mouth of the participant [@scobbie2011].
-The participant gently bites on the bite plate while pressing the tongue against it.
+The participants familiarised themselves with the sentence stimuli at the beginning of the session.
+Headset and probe were then fitted on the participant's head.
+A reference for the coordinate system was obtained by imaging the occlusal plane with a metallic bite plate inserted in the participant's mouth \citep{scobbie2011}.
+The participant gently bites on the bite plate while pressing the tongue against it to keep it still.
+The trace of the metallic plate visible in the ultrasonic image was then used to rotate the tongue data (see \Cref{s:process-uti}).
 <!-- add image -->
-The participant then started reading six repetitions of the sentences with the target words.
-These were presented on the screen in a randomised order across participants, although the order was kept the same for each repetition within participant due to design constraints of the AAA software.
-<!-- say grand total -->
+The participant read the sentence stimuli, which were presented on the computer screen in a random order, while the audio and ultrasonic signals were acquired simultaneously.
+The random list of sentences was read 6 times consecutively (with the exception of IT02, who repeated the sentences 5 times only).
+Due to software constraints, the order of the sentences within participant was kept the same for each of the six repetitions.
+The participant could optionally take breaks between one repetition and the other.
+Sentences with hesitations or speech errors were immediately discarded and re-recorded.
+A total of 1212 tokens (792 from Italian, 420 from Polish) were obtained.
 
 ## Data processing and analysis
 
