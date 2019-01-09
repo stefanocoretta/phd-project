@@ -345,7 +345,7 @@ All predictors and the V1 duration/vowel interaction are significant.
 V1 duration and tongue root position are positively correlated: The longer the vowel, the more advanced the tongue root is at V1 offset ($\hat{\beta}$ = 0.056 mm, SE = 0.015).
 The effect is stronger with /a/ than with /o/ and /u/.
 
-## Tongue rot position during V2 as a function of V1 duration
+## Tongue root position during V2 as a function of V1 duration
 
 ```{r tra-gam-2, include=FALSE, cache=TRUE}
 tra_gam_2 <- bam(
