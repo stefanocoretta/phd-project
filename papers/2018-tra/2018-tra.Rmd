@@ -239,6 +239,7 @@ Linear mixed-effects models were fitted with lme4 v1.1-19 \citep{bates2015}.
 Generalised additive mixed models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}.
 <!-- talk about factors, ordered factors, contrasts, thin regression splines, etc -->
 <!-- method = ML, AR model -->
+<!-- say model comparison with itsadug -->
 <!-- say that language and C2 place were not improving fit nor changing relevant estimates so not included -->
 
 ## Open Science statement
@@ -312,8 +313,8 @@ tra_gam_ar_0 <- bam(
 compareML(tra_gam_ar_0, tra_gam_ar)
 ```
 
-The position of the tongue root during the articulation of V1 was assessed with a generalised additive mixed model (GAMM).
-The GAMM was fitted to tongue root position with the following terms: C2 voicing as a parametric term; a smooth term over centred speech rate, a smooth term over V1 proportion with a by-C2 voicing difference smooth, a tensor product interaction over V1 proportion and centred speech rate; a factor random smooth over V1 proportion by speaker (m = 1).
+The position of the tongue root during the articulation of V1 was assessed with generalised additive mixed models (GAMM).
+A GAMM was fitted to tongue root position with the following terms: C2 voicing as a parametric term; a smooth term over centred speech rate, a smooth term over V1 proportion with a by-C2 voicing difference smooth, a tensor product interaction over V1 proportion and centred speech rate; a factor random smooth over V1 proportion by speaker (penalty order = 1).
 A chi-squared test on the ML scores of the full model and model excluding C2 voicing indicates C2 voicing significantly improves fit ($chi$(3) = 7.758, *p* = 0.001).
 \Cref{f:tra-gam} shows that the root advances during the production of the vowel, relative to its position at V1 onset.
 Such forward movement can be seen both in the context of a following voiced stop and in the one of a voiceless stop.
@@ -380,4 +381,22 @@ tra_gam_ar_0_2 <- bam(
   rho = rho,
   AR.start = tra_series$start_event
 )
+```
+
+The effect of V1 duration on tongue root position during V1 was modelled by fitting a GAMM with the following terms: tongue root position as the outcome variable, smooth terms over V1 duration and V1 proportion, a tensor product interaction over V1 proportion and V1 duration; a factor random smooth over V1 proportion by speaker (penalty order = 1).
+The full model with the tensor product interaction over V1 proportion and V1 duration has better fit according to model comparison with a model without the interaction ($chi$(3) = 12.559, *p* < 0.001).
+The general trend is that the forward movement of the root during the vowel is greater the longer the duration of the vowel (\Cref{f:tra-gam-2-plot}).
+Moreover, the trajectory curvature increases with vowel duration: Shorter vowels have a flatter trajectory of tongue root advancement.
+
+```{r tra-gam-2-plot, include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 145, 200))) %>%
+  filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
+  ggplot(aes(proportion, fit)) +
+  geom_smooth_ci(v1_duration, size = 1, ci_alpha = 0.05) +
+  labs(
+    x = "V1 proportion",
+    y = "Tongue root position (mm)"
+  ) +
+  scale_colour_discrete(name = "V1 duration (ms)") +
+  scale_linetype_discrete(name = "V1 duration (ms)")
 ```
