@@ -255,9 +255,9 @@ fvisgam(
 
 ```{r tra-gam-2-smooths}
 plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 50), rm.ranef = TRUE, col = "#000000", lwd = 3)
-plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 100), rm.ranef = TRUE, col = "#E69F00", add = TRUE, lwd = 3)
-plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 145), rm.ranef = TRUE, col = "#56B4E9", add = TRUE, lwd = 3)
-plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 200), rm.ranef = TRUE, col = "#009E73", add = TRUE, lwd = 3)
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 100), rm.ranef = TRUE, col = "#E69F00", add = TRUE, lwd = 3) # orange
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 145), rm.ranef = TRUE, col = "#56B4E9", add = TRUE, lwd = 3) # blue
+plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 200), rm.ranef = TRUE, col = "#009E73", add = TRUE, lwd = 3) # green
 ```
 
 # Tongue root at closure and vowel duration
