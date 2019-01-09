@@ -17,6 +17,7 @@ library(mgcv)
 library(tidymv)
 library(itsadug)
 library(lme4)
+library(lmerTest)
 library(sjPlot)
 
 tra_series <- kinematics_series %>%
@@ -37,7 +38,8 @@ kines <- kinematics %>%
   filter(c1_phonation == "voiceless", label == "closure_", TR_displacement_sm > 10) %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
-    trp = -TR_displacement_sm
+    trp = -TR_displacement_sm,
+    v1_duration_c = v1_duration - mean(v1_duration)
   ) %>%
   mutate_if(is.character, as.factor)
 
@@ -292,7 +294,7 @@ plot_model(tra_lm, order.terms = 1:5)
 ```
 
 ```{r tra-lm-plot}
-plot_model(tra_lm, type = "pred", terms = c("trp"))
+plot_model(tra_lm, type = "pred", terms = c("trp", "vowel"))
 ```
 
 ```{r tra-lm-plot-2}
@@ -307,7 +309,7 @@ tra_lm_2 <- lmer(
     c2_phonation +
     speech_rate_c +
     vowel +
-    (1+c2_phonation|speaker) +
+    (1|speaker) +
     (1|item),
   data = kines
 )
@@ -316,7 +318,7 @@ summary(tra_lm_2)
 ```
 
 ```{r tra-lm-2-plot}
-plot_model(tra_lm_2, show.values = TRUE, show.p = FALSE, order.terms = 1:5)
+plot_model(tra_lm_2, show.values = TRUE, show.p = FALSE, order.terms = 1:4)
 ```
 
 ```{r tra-lm-2-pred-plot}
@@ -328,11 +330,12 @@ plot_model(tra_lm_2, type = "pred", terms = c("c2_phonation"))
 ```{r tra-lm-3}
 tra_lm_3 <- lmer(
   trp ~
-    v1_duration +
+    v1_duration_c +
     speech_rate_c +
     vowel +
-    c2_place +
-    (1+v1_duration|speaker) +
+    v1_duration_c:vowel +
+    # c2_place +
+    (1+v1_duration_c|speaker) +
     (1|item),
   data = kines
 )
@@ -341,15 +344,15 @@ summary(tra_lm_3)
 ```
 
 ```{r tra-lm-3-est}
-plot_model(tra_lm_3, order.terms = 1:5)
+plot_model(tra_lm_3, order.terms = 1:7)
 ```
 
 ```{r tra-lm-3-est-2}
-plot_model(tra_lm_3, terms = "v1_duration")
+plot_model(tra_lm_3, terms = "v1_duration_c")
 ```
 
 ```{r tra-lm-3-plot}
-plot_model(tra_lm_3, type = "pred", terms = c("v1_duration"))
+plot_model(tra_lm_3, type = "pred", terms = c("v1_duration_c", "vowel"))
 ```
 
 ## TRP ~ V1 duration and C2 voicing
