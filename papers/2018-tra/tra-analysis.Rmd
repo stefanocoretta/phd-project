@@ -260,6 +260,19 @@ plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 145), rm.ranef
 plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 200), rm.ranef = TRUE, col = "#009E73", add = TRUE, lwd = 3) # green
 ```
 
+```{r}
+predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 145, 200))) %>%
+  filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
+  ggplot(aes(proportion, fit)) +
+  geom_smooth_ci(v1_duration, size = 1, ci_alpha = 0.05) +
+  labs(
+    x = "V1 proportion",
+    y = "Tongue root position (mm)"
+  ) +
+  scale_colour_discrete(name = "V1 duration (ms)") +
+  scale_linetype_discrete(name = "V1 duration (ms)")
+```
+
 # Tongue root at closure and vowel duration
 
 ```{r v1-dur-trp}
