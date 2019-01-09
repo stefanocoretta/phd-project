@@ -19,6 +19,70 @@ indent: true
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itapol)
+data("kinematics_series")
+data("kinematics")
+library(mgcv)
+library(tidymv)
+library(itsadug)
+library(lme4)
+library(lmerTest)
+library(sjPlot)
+
+tra_series <- kinematics_series %>%
+  filter(c1_phonation == "voiceless", proportion > 0) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    trp = -TR_displacement_sm,
+    c2_phonation_o = ordered(c2_phonation,  levels = c("voiceless", "voiced")),
+    speaker_voicing = interaction(speaker, c2_phonation)
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, proportion) %>%
+  create_start_event(rec_date)
+
+contrasts(tra_series$c2_phonation_o) <- "contr.treatment"
+
+kines <- kinematics %>%
+  filter(c1_phonation == "voiceless", label == "closure_", TR_displacement_sm > 10) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    trp = -TR_displacement_sm,
+    v1_duration_c = v1_duration - mean(v1_duration)
+  ) %>%
+  mutate_if(is.character, as.factor)
+
+kines_max <- kinematics %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), TR_displacement_sm > 10) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    trp = -TR_displacement_sm
+  ) %>%
+  mutate_if(is.character, as.factor)
+
+kines_mean <- kines %>%
+  group_by(speaker) %>%
+  mutate(trp_z = scale(trp)) %>%
+  group_by(speaker, c2_phonation, language) %>%
+  summarise(
+    trp_mean = mean(trp, na.rm = TRUE),
+    trp_sd = sd(trp, na.rm = TRUE),
+    trp_z_mean = mean(trp_z, na.rm = TRUE),
+    trp_z_sd = sd(trp, na.rm = TRUE),
+    n = n()
+  ) %>%
+  ungroup()
+
+trp_difference <- kines_mean %>%
+  group_by(speaker) %>%
+  mutate(
+    difference = trp_mean - lag(trp_mean),
+    difference_se = sqrt( ((trp_sd^2) / n) + ((lag(trp_sd)^2) / lag(n)) )
+    ) %>%
+  na.omit()
 ```
 
 # Introduction
@@ -150,13 +214,14 @@ The participant could optionally take breaks between one repetition and the othe
 Sentences with hesitations or speech errors were immediately discarded and re-recorded.
 A total of 1212 tokens (792 from Italian, 420 from Polish) were obtained.
 
-## Data processing and measurements
+## Data processing and statistical analysis
 \label{s:process}
 
 The audio data was subject to force alignment using the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}).
 The outcome of the automatic alignment was then manually corrected, according to the recommendations in \citet{machac2009}.
 The onset and offset of V1 in the C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} test words were respectively placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
 Vowel duration was simply calculated as the duration of the V1 onset to V1 offset interval.
+<!-- speech rate, centering -->
 <!-- include image -->
 
 The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
@@ -167,3 +232,152 @@ The origin of the 42 fan-lines coincides with the (virtual) origin of the ultras
 Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector.
 For each participant, the fan-line with the highest standard deviation of displacement within the area corresponding to the speaker's tongue root was chosen as the tongue root displacement vector.
 <!-- add image -->
+<!-- say how you got displacement over vowel proportion and closure onset -->
+
+Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
+Linear mixed-effects models were fitted with lme4 v1.1-19 \citep{bates2015}.
+Generalised additive mixed models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}.
+<!-- talk about factors, ordered factors, contrasts, thin regression splines, etc -->
+<!-- method = ML, AR model -->
+<!-- say that language and C2 place were not improving fit nor changing relevant estimates so not included -->
+
+## Open Science statement
+
+# Results
+
+## Tongue root position at C2 closure onset
+
+```{r tra-lm, include=FALSE, cache=TRUE}
+tra_lm <- lmer(
+  trp ~
+    c2_phonation +
+    speech_rate_c +
+    vowel +
+    (1|speaker) +
+    (1|item),
+  data = kines
+)
+
+summary(tra_lm)
+```
+
+A linear mixed-effects model with tongue root position as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), centred speech rate (as number of syllables per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random coefficient for C2 voicing led to singular fit, so was not included in the final model).
+The effects of C2 voicing and vowel are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom.
+The tongue root at C2 closure onset is 0.77 mm (SE = 0.35) more front when C2 is voiced, and it is 1.87 mm (SE = 0.42) more retracted if V1 is /o/.
+
+## Tongue root position during V1
+
+```{r tra-gam, include=FALSE, cache=TRUE}
+tra_gam <- bam(
+  trp ~
+    c2_phonation_o +
+    s(speech_rate_c) +
+    s(proportion) +
+    s(proportion, by = c2_phonation_o) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+
+rho <- start_value_rho(tra_gam)
+
+tra_gam_ar <- bam(
+  trp ~
+    c2_phonation_o +
+    s(speech_rate_c) +
+    s(proportion) +
+    s(proportion, by = c2_phonation_o) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start_event
+)
+
+tra_gam_ar_0 <- bam(
+  trp ~
+    # c2_phonation_o +
+    s(speech_rate_c) +
+    s(proportion) +
+    # s(proportion, by = c2_phonation_o) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start_event
+)
+
+compareML(tra_gam_ar_0, tra_gam_ar)
+```
+
+The position of the tongue root during the articulation of V1 was assessed with a generalised additive mixed model (GAMM).
+The GAMM was fitted to tongue root position with the following terms: C2 voicing as a parametric term; a smooth term over centred speech rate, a smooth term over V1 proportion with a by-C2 voicing difference smooth, a tensor product interaction over V1 proportion and centred speech rate; a factor random smooth over V1 proportion by speaker (m = 1).
+A chi-squared test on the ML scores of the full model and model excluding C2 voicing indicates C2 voicing significantly improves fit ($chi$(3) = 7.758, *p* = 0.001).
+\Cref{f:tra-gam} shows that the root advances during the production of the vowel, relative to its position at V1 onset.
+Such forward movement can be seen both in the context of a following voiced stop and in the one of a voiceless stop.
+However, the magnitude of the movement is greater in the former.
+At V1 offset, there is a difference in tongue root position of about 1 mm.
+
+## Correlation between tongue root position and V1 duration
+
+```{r tra-lm-2, include=FALSE, cache=TRUE}
+tra_lm_2 <- lmer(
+  trp ~
+    v1_duration_c +
+    speech_rate_c +
+    vowel +
+    v1_duration_c:vowel +
+    (1+v1_duration_c|speaker) +
+    (1|item),
+  data = kines
+)
+
+summary(tra_lm_2)
+```
+
+A second linear mixed regression was fitted to tongue root position to assess the effect of V1 duration on root position.
+The following terms were included: centred V1 duration (in milliseconds), centred speech rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation (coronal, velar); an interaction between centred V1 duration and vowel; by-speaker and by-word random intercept and a by-speaker random coefficient for V1 duration.
+All predictors and the V1 duration/vowel interaction are significant.
+V1 duration and tongue root position are positively correlated: The longer the vowel, the more advanced the tongue root is at V1 offset ($\hat{\beta}$ = 0.056 mm, SE = 0.015).
+The effect is stronger with /a/ than with /o/ and /u/.
+
+## Tongue rot position during V2 as a function of V1 duration
+
+```{r tra-gam-2, include=FALSE, cache=TRUE}
+tra_gam_2 <- bam(
+  trp ~
+    s(v1_duration) +
+    s(proportion) +
+    ti(proportion, v1_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series
+)
+
+rho <- start_value_rho(tra_gam_2)
+
+tra_gam_ar_2 <- bam(
+  trp ~
+    s(v1_duration) +
+    s(proportion) +
+    ti(proportion, v1_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start_event
+)
+
+tra_gam_ar_0_2 <- bam(
+  trp ~
+    s(v1_duration) +
+    s(proportion) +
+    # ti(proportion, v1_duration) +
+    s(proportion, speaker, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start_event
+)
+```
