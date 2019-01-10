@@ -140,21 +140,6 @@ The results from this exploratory study of Italian and Polish show that tongue r
 
 ## Participants
 
-<!-- \ctable[caption = Sociolinguistic information on participants. The right-most column indicates whether the participant spent more than 6 consecutive months abroad.,
-label = t:participants
-]{lllll}{}{
-\FL
-\textbf{id}   & \textbf{sex} & \textbf{age} & \textbf{city}     & \textbf{\textgreater} 6 mo \ML
-IT01 & m   & 28  & Verbania & yes               \NN
-IT02 & m   & 26  & Udine    & yes               \NN
-IT03 & f   & 27  & Verbania & no                \NN
-IT04 & f   & 54  & Verbania & no                \NN
-PL02 & f   & 32  & Poznań   & yes               \NN
-PL03 & m   & 26  & Poznań   & yes               \NN
-PL04 & f   & 34  & Warsaw   & no                \NN
-PL05 & m   & 34  & Przasnysz & no               \LL
-} -->
-
 Participants were recruited in Manchester (UK), and Verbania (Italy)
 Eleven native speakers of Italian (5 females, 6 males) and 6 native speakers of Polish (3 females, 3 males) participated in this study.
 Most speakers of Italian are originally from the North of Italy, while 3 are from Central Italy.
@@ -187,17 +172,15 @@ The audio signal was sampled at 22050 Hz (16-bit).
 
 ## Materials
 
-Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. *pata*, *pada*, *poto*, etc.), giving a total of 12 target words, used both for Italian and Polish.
-<!-- mention why you use these symbols for vowels coz it should be open o in Italian -->
-Most of these words were nonce words in both languages, with a few exceptions (see table).
-The words were presented using the respective writing conventions (see table).
+Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. *pata*, *pada*, *poto*, etc.), giving a total of 12 target words, used both for Italian and Polish.\footnote{Note that stressed vowels in open syllables in Italian are long \citep{renwick2016}. Moreover, /o/ is used here for typographical simplicity to indicate the mid-back vowels of Italian and Polish, although they do differ in quality. See \citet{kramer2009, renwick2016, gussmann2007}.}
+The resulting words are nonce words, with a few exceptions, and they were presented in the languages' respective writing conventions (see \Cref{a:targets}).
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel.\footnote{However, note that \citet{westbury1983} and \citet{vazquez-alvarez2007} report tongue body lowering in the context of labial stops.}
 Central/back vowels only were included in the target words for two reasons.
 First, high and mid front vowels tend to be difficult to image with ultrasound, given their greater distance from the ultrasonic probe when compared with back vowels.
 Second, high and mid front vowels usually produce less tongue displacement from and to a stop consonant.
 This characteristic can make it more difficult to identify gestural landmarks using the methodology discussed in \Cref{s:process}.
 Since the focus of the study was to explore differences in the closing gesture of voiceless and voiced stops, only lingual consonants have been included, since of course the closure of labial stops cannot be imaged with ultrasound.
-The sentence *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' for Polish functioned as frames for the test words.
+The sentence *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' for Polish functioned as frames for the test words.\footnote{Due to software constraints, the Polish frame sentence was presented on screen without diacritics. The speakers read them as if spelled correctly.}
 Speakers were instructed to read the sentences without pauses and to speak at a comfortable pace.
 
 ## Procedure
@@ -221,8 +204,8 @@ A total of 1212 tokens (792 from Italian, 420 from Polish) were obtained.
 The audio data was subject to force alignment using the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}).
 The outcome of the automatic alignment was then manually corrected, according to the recommendations in \citet{machac2009}.
 The onset and offset of V1 in the C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} test words were respectively placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
-Vowel duration was simply calculated as the duration of the V1 onset to V1 offset interval.
-<!-- speech rate, centering -->
+Vowel duration was calculated as the duration of the V1 onset to V1 offset interval.
+Speech rate is the number of syllables in the sentence (8 in Italian and 6 in Polish) divided by the duration of the sentence in seconds.
 <!-- include image -->
 
 The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
@@ -237,10 +220,15 @@ For each participant, the fan-line with the highest standard deviation of displa
 
 Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Linear mixed-effects models were fitted with lme4 v1.1-19 \citep{bates2015}.
+<!-- thin regression splines, etc -->
+Factor terms were coded with treatment contrasts (the reference level is the first listed for each factor): C2 voicing (voiceless, voiced), vowel (/a/, /o/, /u/).
+Speech rate was centred for inclusion in the statistical models, by subtracting the mean speech rate across all speakers from the calculated speech rate values.
+Centring ensures the intercepts are interpretable.
 Generalised additive mixed models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}.
-<!-- talk about factors, ordered factors, contrasts, thin regression splines, etc -->
-<!-- method = ML, AR model -->
-<!-- say model comparison with itsadug -->
+The smooths used thin plate regression splines as basis \citep{wood2003}.
+The ordered factor difference smooths method described in \citet{soskuthy2017, wieling2018} was used to model the effect of factor terms in GAMs.
+The models were fitted by maximum likelihood (ML) and autoregression in the residuals was controlled with a first-order autoregressive model.
+Significance testing of the relevant predictors was achieved by comparing the ML score of the full model with the score of a null model (in which the relevant predictor is dropped), using the `compareML()` function of the itsadug package \citep{van-rij2017}.
 <!-- say that language and C2 place were not improving fit nor changing relevant estimates so not included -->
 
 ## Open Science statement
@@ -425,3 +413,25 @@ It is well known that the closures of voiced stops are longer that those of voic
 As seen in this paper, the closure of voiced stops is initiated later (relative to the preceding consonant release) compared to the closure of voiceless stops.
 Given the temporal stability of the release to release interval, the delay in producing a full closure seen in the context of voiced stops has thus a double advantage: (1) A greater degree of tongue root advancement is achieved at closure onset, and (2) the stop closure is shorter.
 These two features cooperate in accordance with the aerodynamic voicing constraint.
+
+\appendix
+
+# Target words
+
+\label{a:targets}
+
+See \Cref{t:targets}.
+
+\ctable[caption = The list of Italian and Polish target words. An asterisk indicates a real word.,
+label = t:targets,
+star,
+doinside = \footnotesize
+]{lllllll}{}{
+\FL
+Italian   &        &      & \hspace{0.5cm} & Polish &      &      \NN
+\cmidrule{1-3}\cmidrule{5-7}
+pata      & poto*  & putu & & pata   & poto & putu \NN
+pada      & podo   & pudu & & pada*  & podo & pudu \NN
+paca*     & poco*  & pucu & & paka*  & poko & puku \NN
+paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
+}

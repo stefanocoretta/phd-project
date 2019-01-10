@@ -245,11 +245,12 @@ C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
 were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1}
 = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} =
 V\textsubscript{1} (e.g.~\emph{pata}, \emph{pada}, \emph{poto}, etc.),
-giving a total of 12 target words, used both for Italian and Polish.
-Most of these words were nonce words in both languages, with a few
-exceptions (see table). The words were presented using the respective
-writing conventions (see table). A labial stop was chosen as the first
-consonant to reduce possible coarticulation with the following
+giving a total of 12 target words, used both for Italian and
+Polish.\footnote{Note that stressed vowels in open syllables in Italian are long \citep{renwick2016}. Moreover, /o/ is used here for typographical simplicity to indicate the mid-back vowels of Italian and Polish, although they do differ in quality. See \citet{kramer2009, renwick2016, gussmann2007}.}
+The resulting words are nonce words, with a few exceptions, and they
+were presented in the languages' respective writing conventions (see
+\Cref{a:targets}). A labial stop was chosen as the first consonant to
+reduce possible coarticulation with the following
 vowel.\footnote{However, note that \citet{westbury1983} and \citet{vazquez-alvarez2007} report tongue body lowering in the context of labial stops.}
 Central/back vowels only were included in the target words for two
 reasons. First, high and mid front vowels tend to be difficult to image
@@ -263,8 +264,10 @@ voiceless and voiced stops, only lingual consonants have been included,
 since of course the closure of labial stops cannot be imaged with
 ultrasound. The sentence \emph{Dico X lentamente} `I say X slowly' in
 Italian, and \emph{Mówię X teraz} `I say X now' for Polish functioned as
-frames for the test words. Speakers were instructed to read the
-sentences without pauses and to speak at a comfortable pace.
+frames for the test
+words.\footnote{Due to software constraints, the Polish frame sentence was presented on screen without diacritics. The speakers read them as if spelled correctly.}
+Speakers were instructed to read the sentences without pauses and to
+speak at a comfortable pace.
 
 \hypertarget{procedure}{%
 \subsection{Procedure}\label{procedure}}
@@ -296,8 +299,10 @@ manually corrected, according to the recommendations in
 C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
 test words were respectively placed in correspondence of the appearance
 and disappearance of higher formant structure in the spectrogram. Vowel
-duration was simply calculated as the duration of the V1 onset to V1
-offset interval.
+duration was calculated as the duration of the V1 onset to V1 offset
+interval. Speech rate is the number of syllables in the sentence (8 in
+Italian and 6 in Polish) divided by the duration of the sentence in
+seconds.
 
 The displacement of the tongue root was obtained from the ultrasonic
 data according to the procedure used in \citet{kirkham2017}. Smoothing
@@ -315,8 +320,23 @@ was chosen as the tongue root displacement vector.
 
 Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Linear mixed-effects models were fitted with lme4 v1.1-19
-\citep{bates2015}. Generalised additive mixed models were fitted with
-mgcv v1.8-26 \citep{wood2011, wood2017}.
+\citep{bates2015}. Factor terms were coded with treatment contrasts (the
+reference level is the first listed for each factor): C2 voicing
+(voiceless, voiced), vowel (/a/, /o/, /u/). Speech rate was centred for
+inclusion in the statistical models, by subtracting the mean speech rate
+across all speakers from the calculated speech rate values. Centring
+ensures the intercepts are interpretable. Generalised additive mixed
+models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}. The
+smooths used thin plate regression splines as basis \citep{wood2003}.
+The ordered factor difference smooths method described in
+\citet{soskuthy2017, wieling2018} was used to model the effect of factor
+terms in GAMs. The models were fitted by maximum likelihood (ML) and
+autoregression in the residuals was controlled with a first-order
+autoregressive model. Significance testing of the relevant predictors
+was achieved by comparing the ML score of the full model with the score
+of a null model (in which the relevant predictor is dropped), using the
+\texttt{compareML()} function of the itsadug package
+\citep{van-rij2017}.
 
 \hypertarget{open-science-statement}{%
 \subsection{Open Science statement}\label{open-science-statement}}
@@ -375,9 +395,9 @@ position are positively correlated: The longer the vowel, the more
 advanced the tongue root is at V1 offset (\(\hat{\beta}\) = 0.056 mm, SE
 = 0.015). The effect is stronger with /a/ than with /o/ and /u/.
 
-\hypertarget{tongue-rot-position-during-v2-as-a-function-of-v1-duration}{%
-\subsection{Tongue rot position during V2 as a function of V1
-duration}\label{tongue-rot-position-during-v2-as-a-function-of-v1-duration}}
+\hypertarget{tongue-root-position-during-v2-as-a-function-of-v1-duration}{%
+\subsection{Tongue root position during V2 as a function of V1
+duration}\label{tongue-root-position-during-v2-as-a-function-of-v1-duration}}
 
 The effect of V1 duration on tongue root position during V1 was modelled
 by fitting a GAMM with the following terms: tongue root position as the
@@ -396,6 +416,79 @@ root advancement.
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-tra_files/figure-latex/tra-gam-2-plot-1} \caption{Fig caption}\label{f:tra-gam-2-plot}
 \end{figure}
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+The results from this exploratory study of voicing and vowel duration in
+Italian and Polish suggest there is a more direct relationship between
+tongue root and vowel duration. Unsurprisingly, the position of the
+tongue root at vowel offset if the following stop is voiced is more
+front than its position if the following stop is voiceless. This result
+is a replication of replicates the results in \ldots{} However, the data
+discussed here also suggest that tongue root position is positively
+correlated with vowel duration, such that longer vowels show a more
+advanced tongue root at vowel offset than shorter vowels. Said
+correlation exists independent of the voicing of the consonant following
+the vowel. When looking at the position of the tongue root during the
+vowel, it was found that the tongue root starts advancing during the
+articulation of the vowel. Vowels followed by voiced stops showed
+greater tongue root advancement at vowel offset then vowels followed by
+voiceless stops, in accordance with the static results. Moreover, a
+significant interaction between vowel duration and the trajectory shape
+was found: Shorter vowels have a flatter trajectory.
+
+If we take the release of the consonant preceding the vowel as a
+reference point, a delayed consonant closure could ensure that, by the
+time closure is made, an appreciable amount of tongue root advancement
+is achieved, so that the threshold for voicing cessation (such that
+transglottal pressure equalisation is reached) is raised (so that more
+time would be required for reaching it). This mechanism would ensure
+that voicing can be maintained during the stop closure.
+
+I would like to offer a dynamic system interpretation of the results of
+this study. \citet{coretta2018j} argues that the temporal distance
+between two consecutive stop releases in CVCV words of Italian and
+Polish is not affected by the voicing of consonant following the
+stressed vowel (the first vowel). The duration of the so-called release
+to release interval is stable across voicing contexts. Within this
+interval, the timing of the onset of the stop closure onset produces
+differences in the respective durations of vowel and stop closure. A
+later closure onset implies a longer vowel and a shorter closure, while
+vice versa an earlier closure onset generates a shorter vowel and a
+longer closure. It is well known that the closures of voiced stops are
+longer that those of voiceless stops. As seen in this paper, the closure
+of voiced stops is initiated later (relative to the preceding consonant
+release) compared to the closure of voiceless stops. Given the temporal
+stability of the release to release interval, the delay in producing a
+full closure seen in the context of voiced stops has thus a double
+advantage: (1) A greater degree of tongue root advancement is achieved
+at closure onset, and (2) the stop closure is shorter. These two
+features cooperate in accordance with the aerodynamic voicing
+constraint.
+
+\appendix
+
+\hypertarget{target-words}{%
+\section{Target words}\label{target-words}}
+
+\label{a:targets}
+
+See \Cref{t:targets}.
+
+\ctable[caption = The list of Italian and Polish target words. An asterisk indicates a real word.,
+label = t:targets,
+star,
+doinside = \footnotesize
+]{lllllll}{}{
+\FL
+Italian   &        &      & \hspace{0.5cm} & Polish &      &      \NN
+\cmidrule{1-3}\cmidrule{5-7}
+pata      & poto*  & putu & & pata   & poto & putu \NN
+pada      & podo   & pudu & & pada*  & podo & pudu \NN
+paca*     & poco*  & pucu & & paka*  & poko & puku \NN
+paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
+}
 
 \bibliography{linguistics}
 
