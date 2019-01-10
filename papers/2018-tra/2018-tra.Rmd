@@ -32,6 +32,7 @@ library(itsadug)
 library(lme4)
 library(lmerTest)
 library(sjPlot)
+library(effects)
 
 tra_series <- kinematics_series %>%
   filter(c1_phonation == "voiceless", proportion > 0) %>%
@@ -258,6 +259,19 @@ tra_lm <- lmer(
 summary(tra_lm)
 ```
 
+```{r trp-z-box, include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth"}
+kines %>%
+  group_by(speaker) %>%
+  mutate(trp_z = scale(trp)) %>%
+  ggplot(aes(c2_phonation, trp_z)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.2, position = position_jitter(width = 0.2, seed = 878)) +
+  labs(x = "C2 voicing", y = "Tongue root position (z-scores)")
+```
+
+\Cref{f:trp-z-box} shows raw data points and boxplots of the position of the tongue root at C2 closure onset when C2 is voiceless (left) and voiced (right).
+Since the actual value of tongue root posision (in mm) is not informative (it depends on the speaker's anatomy and on the probe location), scaled tongue root position is used here (note though that the raw data is used in statistical modelling).
+The trend is that, not surprisingly, the position of the tongue root is more advanced if C2 is voiced compared to its position when C2 is voiceless.
 A linear mixed-effects model with tongue root position as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), centred speech rate (as number of syllables per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random coefficient for C2 voicing led to singular fit, so was not included in the final model).
 The effects of C2 voicing and vowel are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom.
 The tongue root at C2 closure onset is 0.77 mm (SE = 0.35) more front when C2 is voiced, and it is 1.87 mm (SE = 0.42) more retracted if V1 is /o/.
@@ -332,6 +346,17 @@ tra_lm_2 <- lmer(
 )
 
 summary(tra_lm_2)
+```
+
+```{r}
+as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
+  ggplot(aes(v1_duration_c, fit)) +
+  geom_point(data = kines, aes(y = trp), alpha = 0.1) +
+  geom_line() +
+  geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
+  geom_rug(data = kines, aes(y = trp), alpha = 0.1) +
+  facet_grid(~ vowel) +
+  labs(x = "Vowel duration (ms)", y = "Tongue root position (ms)")
 ```
 
 A second linear mixed regression was fitted to tongue root position to assess the effect of V1 duration on root position.
