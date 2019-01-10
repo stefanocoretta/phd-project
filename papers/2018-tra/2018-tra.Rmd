@@ -206,30 +206,37 @@ The outcome of the automatic alignment was then manually corrected, according to
 The onset and offset of V1 in the C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} test words were respectively placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
 Vowel duration was calculated as the duration of the V1 onset to V1 offset interval.
 Speech rate is the number of syllables in the sentence (8 in Italian and 6 in Polish) divided by the duration of the sentence in seconds.
-<!-- include image -->
+<!-- add image -->
 
 The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
 Smoothing splines were automatically fitted to the visible tongue contours in AAA.
 Manual correction was then applied in cases of clear tracking errors.
 A fan-like frame consisting of 42 equidistant radial lines superimposed on the ultrasonic image was used as the coordinate system.
 The origin of the 42 fan-lines coincides with the (virtual) origin of the ultrasonic beams, such that each fan-line is parallel to the direction of the ultrasonic scan lines.
-Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector.
+Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector \citep{strycharczuk2015}.
 For each participant, the fan-line with the highest standard deviation of displacement within the area corresponding to the speaker's tongue root was chosen as the tongue root displacement vector.
+A Savitzky--Golay smoothing filter (second-order, frame length 75 ms) was applied to the raw displacement.
+Displacement values for analysis are taken from the smoothed displacement signal.
+Tongue root displacement was obtained from a static time point (the onset of the closure of C2) and along the duration of the vowel.
+The displacement values along the vowel duration were extracted at time points corresponding to real ultrasonic video frames.
+Given the average frame rate is 55 frames per second, values are sampled about every 20 ms.
 <!-- add image -->
-<!-- say how you got displacement over vowel proportion and closure onset -->
 
 Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Linear mixed-effects models were fitted with lme4 v1.1-19 \citep{bates2015}.
-<!-- thin regression splines, etc -->
 Factor terms were coded with treatment contrasts (the reference level is the first listed for each factor): C2 voicing (voiceless, voiced), vowel (/a/, /o/, /u/).
 Speech rate was centred for inclusion in the statistical models, by subtracting the mean speech rate across all speakers from the calculated speech rate values.
 Centring ensures the intercepts are interpretable.
+*t*-tests with Satterthwaite's approximation to degrees of freedom on the individual terms were used to obtain *p*-values using lmerTest v3.0-1 \citep{kuznetsova2017, luke2017}.
+An effect is considered significant if the *p*-value is below the alpha level ($\alpha = 0.05$).
 Generalised additive mixed models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}.
 The smooths used thin plate regression splines as basis \citep{wood2003}.
 The ordered factor difference smooths method described in \citet{soskuthy2017, wieling2018} was used to model the effect of factor terms in GAMs.
 The models were fitted by maximum likelihood (ML) and autoregression in the residuals was controlled with a first-order autoregressive model.
 Significance testing of the relevant predictors was achieved by comparing the ML score of the full model with the score of a null model (in which the relevant predictor is dropped), using the `compareML()` function of the itsadug package \citep{van-rij2017}.
-<!-- say that language and C2 place were not improving fit nor changing relevant estimates so not included -->
+A preliminary analysis indicated that including either language or C2 place of articulation as predictors produced respective *p*-values above the alpha level, without affecting the estimates of the other terms.
+For this reason, the models reported here do not include them and they will not be discussed.
+<!-- maybe mention here that in relation to language, the individual variation is such that no pattern linked to language is discernible. And cf. with individual variation in discussion session -->
 
 ## Open Science statement
 
