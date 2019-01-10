@@ -110,6 +110,39 @@ trp_difference %>%
   geom_rug()
 ```
 
+```{r trp-dens}
+kines %>%
+  ggplot(aes(trp, fill = c2_phonation)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r trp-box}
+kines %>%
+  ggplot(aes(c2_phonation, trp)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, alpha = 0.2) +
+  facet_grid(~ language)
+```
+
+```{r trp-z-box}
+kines %>%
+  group_by(speaker) %>%
+  mutate(trp_z = scale(trp)) %>%
+  ggplot(aes(c2_phonation, trp_z)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.2, position = position_jitter(width = 0.2, seed = 123))
+```
+
+```{r trp-z-box}
+kines %>%
+  group_by(speaker) %>%
+  mutate(trp_z = scale(trp)) %>%
+  ggplot(aes(vowel, trp_z, fill = c2_phonation)) +
+  geom_boxplot() +
+  geom_point(alpha = 0.2, position = position_jitterdodge(seed = 123))
+```
+
 # Tongue root position
 
 ```{r trp-language}
@@ -182,6 +215,13 @@ compareML(tra_gam_ar_0, tra_gam_ar)
 plot_smooths(tra_gam_ar, proportion, c2_phonation_o)
 ```
 
+```{r tra-gam-plot-2}
+predict_gam(tra_gam_ar, values = list(speech_rate_c = 0)) %>%
+  ggplot(aes(proportion, fit)) +
+  geom_smooth_ci(c2_phonation_o, size = 1) +
+  facet_wrap(~ speaker, scales = "free")
+```
+
 ```{r tra-gam-1}
 if (!file.exists("./voicing-effect/data/cache/tra-gam-1.Rdata")) {
   tra_gam_1 <- bam(
@@ -236,7 +276,7 @@ if (!file.exists("./voicing-effect/data/cache/tra-gam-2.Rdata")) {
     AR.start = tra_series$start_event
   )
   
-  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./voicing-effect/data/cache/tra-gam-2.Rdata")
+  save(tra_gam_2, tra_gam_ar_2, tra_gam_ar_0_2, file = "./voicing-effect/data/cache/tra-gam-2.Rdata")
   
 } else {
   load("./voicing-effect/data/cache/tra-gam-2.Rdata")
@@ -260,7 +300,7 @@ plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 145), rm.ranef
 plot_smooth(tra_gam_ar_2, "proportion", cond = list(v1_duration = 200), rm.ranef = TRUE, col = "#009E73", add = TRUE, lwd = 3) # green
 ```
 
-```{r}
+```{r tra-gam-2-plot-2}
 predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 145, 200))) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
