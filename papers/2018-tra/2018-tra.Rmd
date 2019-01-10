@@ -348,7 +348,7 @@ tra_lm_2 <- lmer(
 summary(tra_lm_2)
 ```
 
-```{r}
+```{r tra-lm-2-plot, include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth"}
 as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
   ggplot(aes(v1_duration_c, fit)) +
   geom_point(data = kines, aes(y = trp), alpha = 0.1) +
@@ -363,7 +363,7 @@ A second linear mixed regression was fitted to tongue root position to assess th
 The following terms were included: centred V1 duration (in milliseconds), centred speech rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation (coronal, velar); an interaction between centred V1 duration and vowel; by-speaker and by-word random intercept and a by-speaker random coefficient for V1 duration.
 All predictors and the V1 duration/vowel interaction are significant.
 V1 duration and tongue root position are positively correlated: The longer the vowel, the more advanced the tongue root is at V1 offset ($\hat{\beta}$ = 0.056 mm, SE = 0.015).
-The effect is stronger with /a/ than with /o/ and /u/.
+The effect is stronger with /a/ than with /o/ and /u/ (see \Cref{f:tra-lm-2-plot}).
 
 ## Tongue root position during V2 as a function of V1 duration
 

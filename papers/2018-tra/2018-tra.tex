@@ -313,10 +313,18 @@ the ultrasonic image was used as the coordinate system. The origin of
 the 42 fan-lines coincides with the (virtual) origin of the ultrasonic
 beams, such that each fan-line is parallel to the direction of the
 ultrasonic scan lines. Tongue root displacement was thus calculated as
-the displacement of the fitted spline along a selected vector. For each
-participant, the fan-line with the highest standard deviation of
-displacement within the area corresponding to the speaker's tongue root
-was chosen as the tongue root displacement vector.
+the displacement of the fitted spline along a selected vector
+\citep{strycharczuk2015}. For each participant, the fan-line with the
+highest standard deviation of displacement within the area corresponding
+to the speaker's tongue root was chosen as the tongue root displacement
+vector. A Savitzky--Golay smoothing filter (second-order, frame length
+75 ms) was applied to the raw displacement. Displacement values for
+analysis are taken from the smoothed displacement signal. Tongue root
+displacement was obtained from a static time point (the onset of the
+closure of C2) and along the duration of the vowel. The displacement
+values along the vowel duration were extracted at time points
+corresponding to real ultrasonic video frames. Given the average frame
+rate is 55 frames per second, values are sampled about every 20 ms.
 
 Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Linear mixed-effects models were fitted with lme4 v1.1-19
@@ -325,18 +333,26 @@ reference level is the first listed for each factor): C2 voicing
 (voiceless, voiced), vowel (/a/, /o/, /u/). Speech rate was centred for
 inclusion in the statistical models, by subtracting the mean speech rate
 across all speakers from the calculated speech rate values. Centring
-ensures the intercepts are interpretable. Generalised additive mixed
-models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}. The
-smooths used thin plate regression splines as basis \citep{wood2003}.
-The ordered factor difference smooths method described in
-\citet{soskuthy2017, wieling2018} was used to model the effect of factor
-terms in GAMs. The models were fitted by maximum likelihood (ML) and
-autoregression in the residuals was controlled with a first-order
-autoregressive model. Significance testing of the relevant predictors
-was achieved by comparing the ML score of the full model with the score
-of a null model (in which the relevant predictor is dropped), using the
-\texttt{compareML()} function of the itsadug package
-\citep{van-rij2017}.
+ensures the intercepts are interpretable. \emph{t}-tests with
+Satterthwaite's approximation to degrees of freedom on the individual
+terms were used to obtain \emph{p}-values using lmerTest v3.0-1
+\citep{kuznetsova2017, luke2017}. An effect is considered significant if
+the \emph{p}-value is below the alpha level (\(\alpha = 0.05\)).
+Generalised additive mixed models were fitted with mgcv v1.8-26
+\citep{wood2011, wood2017}. The smooths used thin plate regression
+splines as basis \citep{wood2003}. The ordered factor difference smooths
+method described in \citet{soskuthy2017, wieling2018} was used to model
+the effect of factor terms in GAMs. The models were fitted by maximum
+likelihood (ML) and autoregression in the residuals was controlled with
+a first-order autoregressive model. Significance testing of the relevant
+predictors was achieved by comparing the ML score of the full model with
+the score of a null model (in which the relevant predictor is dropped),
+using the \texttt{compareML()} function of the itsadug package
+\citep{van-rij2017}. A preliminary analysis indicated that including
+either language or C2 place of articulation as predictors produced
+respective \emph{p}-values above the alpha level, without affecting the
+estimates of the other terms. For this reason, the models reported here
+do not include them and they will not be discussed.
 
 \hypertarget{open-science-statement}{%
 \subsection{Open Science statement}\label{open-science-statement}}
@@ -348,11 +364,23 @@ of a null model (in which the relevant predictor is dropped), using the
 \subsection{Tongue root position at C2 closure
 onset}\label{tongue-root-position-at-c2-closure-onset}}
 
-A linear mixed-effects model with tongue root position as the outcome
-variable was fitted with the following predictors: fixed effects for C2
-voicing (voiceless, voiced), centred speech rate (as number of syllables
-per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word
-random intercepts (a by-speaker random coefficient for C2 voicing led to
+\begin{figure}
+\includegraphics[width=\linewidth]{2018-tra_files/figure-latex/trp-z-box-1} \caption{Fig caption}\label{f:trp-z-box}
+\end{figure}
+
+\Cref{f:trp-z-box} shows raw data points and boxplots of the position of
+the tongue root at C2 closure onset when C2 is voiceless (left) and
+voiced (right). Since the actual value of tongue root posision (in mm)
+is not informative (it depends on the speaker's anatomy and on the probe
+location), scaled tongue root position is used here (note though that
+the raw data is used in statistical modelling). The trend is that, not
+surprisingly, the position of the tongue root is more advanced if C2 is
+voiced compared to its position when C2 is voiceless. A linear
+mixed-effects model with tongue root position as the outcome variable
+was fitted with the following predictors: fixed effects for C2 voicing
+(voiceless, voiced), centred speech rate (as number of syllables per
+second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random
+intercepts (a by-speaker random coefficient for C2 voicing led to
 singular fit, so was not included in the final model). The effects of C2
 voicing and vowel are significant according to \emph{t}-tests with
 Satterthwaite's approximation to degrees of freedom. The tongue root at
@@ -383,6 +411,10 @@ is a difference in tongue root position of about 1 mm.
 \subsection{Correlation between tongue root position and V1
 duration}\label{correlation-between-tongue-root-position-and-v1-duration}}
 
+\begin{figure}
+\includegraphics[width=\linewidth]{2018-tra_files/figure-latex/tra-lm-2-plot-1} \caption{Fig caption}\label{f:tra-lm-2-plot}
+\end{figure}
+
 A second linear mixed regression was fitted to tongue root position to
 assess the effect of V1 duration on root position. The following terms
 were included: centred V1 duration (in milliseconds), centred speech
@@ -393,7 +425,8 @@ by-speaker random coefficient for V1 duration. All predictors and the V1
 duration/vowel interaction are significant. V1 duration and tongue root
 position are positively correlated: The longer the vowel, the more
 advanced the tongue root is at V1 offset (\(\hat{\beta}\) = 0.056 mm, SE
-= 0.015). The effect is stronger with /a/ than with /o/ and /u/.
+= 0.015). The effect is stronger with /a/ than with /o/ and /u/ (see
+\Cref{f:tra-lm-2-plot}).
 
 \hypertarget{tongue-root-position-during-v2-as-a-function-of-v1-duration}{%
 \subsection{Tongue root position during V2 as a function of V1
