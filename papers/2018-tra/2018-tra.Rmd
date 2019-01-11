@@ -236,8 +236,9 @@ The ordered factor difference smooths method described in \citet{soskuthy2017, w
 The models were fitted by maximum likelihood (ML) and autoregression in the residuals was controlled with a first-order autoregressive model.
 Significance testing of the relevant predictors was achieved by comparing the ML score of the full model with the score of a null model (in which the relevant predictor is dropped), using the `compareML()` function of the itsadug package \citep{van-rij2017}.
 A preliminary analysis indicated that including either language or C2 place of articulation as predictors produced respective *p*-values above the alpha level, without affecting the estimates of the other terms.
-For this reason, the models reported here do not include them and they will not be discussed.
-<!-- maybe mention here that in relation to language, the individual variation is such that no pattern linked to language is discernible. And cf. with individual variation in discussion session -->
+For this reason, these variables were not included in the models reported here and will not be discussed.
+Future research is warranted to ascertain language-related differences and possible effects of place of articulation.
+<!-- cf. with individual variation in discussion session -->
 
 ## Open Science statement
 
@@ -330,6 +331,19 @@ A chi-squared test on the ML scores of the full model and model excluding C2 voi
 Such forward movement can be seen both in the context of a following voiced stop and in the one of a voiceless stop.
 However, the magnitude of the movement is greater in the former.
 At V1 offset, there is a difference in tongue root position of about 1 mm.
+
+```{r tra-gam-plot, , include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache = true}
+predict_gam(tra_gam_ar, exclude_terms = list("s(proportion,speaker)", "s(speech_rate_c)", "ti(proportion,speech_rate_c)")) %>%
+  filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
+  ggplot(aes(proportion, fit)) +
+  geom_smooth_ci(c2_phonation_o, size = 1) +
+  labs(
+    x = "V1 proportion",
+    y = "Tongue root position (mm)"
+  ) +
+  scale_colour_discrete(name = "C2 voicing") +
+  scale_linetype_discrete(name = "C2 voicing")
+```
 
 ## Correlation between tongue root position and V1 duration
 
@@ -436,7 +450,6 @@ Moreover, a significant interaction between vowel duration and the trajectory sh
 If we take the release of the consonant preceding the vowel as a reference point, a delayed consonant closure could ensure that, by the time closure is made, an appreciable amount of tongue root advancement is achieved, so that the threshold for voicing cessation (such that transglottal pressure equalisation is reached) is raised (so that more time would be required for reaching it).
 This mechanism would ensure that voicing can be maintained during the stop closure.
 
-I would like to offer a dynamic system interpretation of the results of this study.
 \citet{coretta2018j} argues that the temporal distance between two consecutive stop releases in CVCV words of Italian and Polish is not affected by the voicing of consonant following the stressed vowel (the first vowel).
 The duration of the so-called release to release interval is stable across voicing contexts.
 Within this interval, the timing of the onset of the stop closure onset produces differences in the respective durations of vowel and stop closure.
@@ -445,6 +458,14 @@ It is well known that the closures of voiced stops are longer that those of voic
 As seen in this paper, the closure of voiced stops is initiated later (relative to the preceding consonant release) compared to the closure of voiceless stops.
 Given the temporal stability of the release to release interval, the delay in producing a full closure seen in the context of voiced stops has thus a double advantage: (1) A greater degree of tongue root advancement is achieved at closure onset, and (2) the stop closure is shorter.
 These two features cooperate in accordance with the aerodynamic voicing constraint.
+
+When comparing the effects of vowel duration and speech rate on tongue rot position, we face a paradox.
+Both variables have a positive effect on tongue root position: Longer vowels and higher speech rates imply a more advanced root.
+However, speech rate has a negative effect on vowel duration (and segments duration in general), such that higher speech rates are correlated with shorter vowel durations (this of course holds for this data too, see \citealt{coretta2018j}).
+If higher speech rates mean shorter vowels and shorter vowels mean less advanced root, we should also see less advancement with higher speech rates.
+But what we see is the opposite: With higher speech rates there is more root advancement.
+A way out would be for the tongue root to be already in a more advanced position at *vowel onset* when the speech rate is higher.
+Indeed, this is what a regression model on the vowel onset data suggests: Speech rate is positively correlated with tongue root position at vowel onset.
 
 \appendix
 
