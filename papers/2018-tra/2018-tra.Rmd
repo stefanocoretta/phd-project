@@ -243,6 +243,7 @@ Future research is warranted to ascertain language-related differences and possi
 ## Open Science statement
 
 # Results
+\label{s:results}
 
 ## Tongue root position at C2 closure onset
 
@@ -332,7 +333,7 @@ Such forward movement can be seen both in the context of a following voiced stop
 However, the magnitude of the movement is greater in the former.
 At V1 offset, there is a difference in tongue root position of about 1 mm.
 
-```{r tra-gam-plot, , include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache=true}
+```{r tra-gam-plot, , include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 predict_gam(tra_gam_ar, exclude_terms = list("s(proportion,speaker)", "s(speech_rate_c)", "ti(proportion,speech_rate_c)")) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
@@ -437,6 +438,7 @@ predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list
 ```
 
 # Discussion
+\label{s:discussion}
 
 The results from this exploratory study of voicing and vowel duration in Italian and Polish suggest there is a more direct relationship between tongue root and vowel duration.
 Unsurprisingly, the position of the tongue root at vowel offset if the following stop is voiced is more front than its position if the following stop is voiceless.
@@ -466,6 +468,57 @@ If higher speech rates mean shorter vowels and shorter vowels mean less advanced
 But what we see is the opposite: With higher speech rates there is more root advancement.
 A way out would be for the tongue root to be already in a more advanced position at *vowel onset* when the speech rate is higher.
 Indeed, this is what a regression model on the vowel onset data suggests: Speech rate is positively correlated with tongue root position at vowel onset.
+
+## Individual differences
+
+```{r trp-voicing-plot, include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.width=".49\\linewidth", fig.width=3, fig.height=3, fig.show="hold", fig.align="center"}
+kines_mean %>%
+  ggplot(aes(c2_phonation, trp_mean, linetype = language)) +
+  geom_point() +
+  geom_line(aes(group = speaker)) +
+  scale_linetype_discrete(name = "Language") +
+  labs(
+    x = "C2 voicing",
+    y = "Mean tongue root position (mm)"
+  )
+
+kines_mean %>%
+  ggplot(aes(c2_phonation, trp_z_mean, linetype = language)) +
+  geom_point() +
+  geom_line(aes(group = speaker)) +
+  scale_linetype_discrete(name = "Language") +
+  labs(
+    x = "C2 voicing",
+    y = "Mean tongue root position (z-scores)"
+  )
+```
+
+The results presented in \Cref{s:results} and discussed in \Cref{s:discussion} are general patterns that can be attributed to a population as inferred from the present sample.
+However, the data shows a great amount of individual differences.
+
+```{r tra-gam-s-ar}
+tra_gam_s_ar <- bam(
+  trp ~
+    s(speech_rate_c) +
+    s(proportion) +
+    ti(proportion, speech_rate_c) +
+    s(proportion, speaker_voicing, bs = "fs", m = 1),
+  data = tra_series,
+  method = "ML",
+  rho = rho,
+  AR.start = tra_series$start_event
+)
+```
+
+```{r tra-gam-s-ar-plot, include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.extra="width=\\linewidth", fig.height=6, cache=TRUE}
+predict_gam(tra_gam_s_ar, values = list(speech_rate_c = 0)) %>%
+  separate(speaker_voicing, c("speaker", "voicing")) %>%
+  mutate(voicing = factor(voicing, levels = c("voiceless", "voiced"))) %>%
+  ggplot(aes(proportion, fit)) +
+  geom_smooth_ci(voicing, size = 1) +
+  facet_wrap(~ speaker, scales = "free", ncol = 3)
+```
+
 
 \appendix
 

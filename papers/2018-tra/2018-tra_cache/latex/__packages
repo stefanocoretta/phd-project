@@ -19,3 +19,5 @@ lme4
 lmerTest
 sjPlot
 bindrcpp
+carData
+effects
