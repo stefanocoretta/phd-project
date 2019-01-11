@@ -495,6 +495,18 @@ kines_mean %>%
 
 The results presented in \Cref{s:results} and discussed in \Cref{s:discussion} are general patterns that can be attributed to a population as inferred from the present sample.
 However, the data shows a great amount of individual differences.
+\Cref{f:trp-voicing-plot} shows two slope plots of mean tongue root position depending on C2 voicing for each speaker.
+In each plot, the two means of each speaker are linked by a line that shows the difference (or lack thereof) in means.
+Solid lines are Italian speakers, while dashed lines are Polish speakers.
+The *y*-axis of left plot is raw mean positions in millimetres, while that of the right plot is the standardised values (z-scores).
+An upward-slanted slope line indicates that the mean tongue root position in the voiced condition is higher, while a downward-slanted slope means a decrease in mean root position.
+A flat slope suggests there is no difference in means between the voiceless and the voiced condition.
+These plots show that all three possibilities of slope direction are found in the data.
+The mean value of tongue root position with a voiced C2 relative to the voiceless mean is greater in some speakers, smaller in others, and very similar in yet other speakers.
+Moreover, no discernible pattern can be found between the two languages: Speakers of both languages show more or less the same range of variation.
+However, as we have seen in \Cref{s:results}, the estimated overall effect of C2 voicing is a more advanced tongue root.
+The right plot of \Cref{f:trp-voicing-plot} confirms this point visually.
+Two speaker show a declining slope (one is Italian and the other Polish), one has a virtually flat slope, while all the others have an increasing slope at varying degrees.
 
 ```{r tra-gam-s-ar}
 tra_gam_s_ar <- bam(
