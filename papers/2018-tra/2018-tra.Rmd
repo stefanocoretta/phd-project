@@ -508,6 +508,7 @@ However, as we have seen in \Cref{s:results}, the estimated overall effect of C2
 The right plot of \Cref{f:trp-voicing-plot} confirms this point visually.
 Two speaker show a declining slope (one is Italian and the other Polish), one has a virtually flat slope, while all the others have an increasing slope at varying degrees.
 <!-- say that the individual difference fits with Ahn 2018 -->
+<!-- add plot of by-speaker mean differences -->
 
 ```{r tra-gam-s-ar}
 tra_gam_s_ar <- bam(
