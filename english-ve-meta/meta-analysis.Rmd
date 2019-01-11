@@ -55,7 +55,9 @@ h37_bm <- brm(
   v_duration ~
     voice,
   data = h37,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/h37_bm.Rdata"
 )
 ```
 
@@ -72,7 +74,9 @@ hf53_bm <- brm(
   v_duration ~
     voice,
   data = hf53,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/hf53_bm.Rdata"
 )
 ```
 
@@ -89,7 +93,9 @@ pl60_bm <- brm(
   v_duration ~
     voice,
   data = pl60,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/pl60_bm.Rdata"
 )
 ```
 
@@ -106,7 +112,9 @@ s62_bm <- brm(
   v_duration ~
     voice,
   data = s62,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/s62_bm.Rdata"
 )
 ```
 
@@ -123,7 +131,9 @@ c70_bm <- brm(
   v_duration ~
     voice,
   data = c70,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/c70_bm.Rdata"
 )
 ```
 
@@ -140,7 +150,9 @@ k73_bm <- brm(
   v_duration ~
     voice,
   data = k73,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/k73_bm.Rdata"
 )
 ```
 
@@ -157,7 +169,9 @@ l92_bm <- brm(
   v_duration ~
     voice,
   data = l92,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/l92_bm.Rdata"
 )
 ```
 
@@ -174,11 +188,13 @@ k18_bm <- brm(
   v_duration ~
     voice,
   data = k18,
-  prior = priors
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/k18_bm.Rdata"
 )
 ```
 
-```{r}
+```{r estimated}
 estimated <- list()
 
 estimated[["h37"]] <- fixef(h37_bm)["voicevoiced",]
@@ -193,7 +209,7 @@ estimated[["k18"]] <- fixef(k18_bm)["voicevoiced",]
 estimated_tbl <- plyr::ldply(estimated, .id = "study")
 ```
 
-```{r}
+```{r meta-bm}
 priors <- c(
   prior(normal(0, 300), class = Intercept),
   prior(cauchy(0, 25), class = sd)
@@ -203,7 +219,25 @@ meta_bm <- brm(
   Estimate | se(`Est.Error`) ~ (1 | study),
   data = estimated_tbl,
   prior = priors,
-  control=list(adapt_delta = 0.999)
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_bm.Rdata"
+)
+```
+
+```{r meta-bm-2}
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_2 <- brm(
+  Estimate | se(`Est.Error`) ~ (1 | study),
+  data = filter(estimated_tbl, study != "c70"),
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_bm_2.Rdata"
 )
 ```
 
@@ -261,7 +295,7 @@ ve_brm <- brm(
   data = estimates,
   prior = priors,
   cores = 4,
-  seed = 8788
+  seed = 9899
 )
 ```
 
