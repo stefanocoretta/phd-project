@@ -7,16 +7,17 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = normalizePath("../../"))
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
 cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+options(mc.cores = parallel::detectCores())
 ```
 
 ```{r data, message=FALSE}
-estimates <- read_csv("./english/meta-analysis/estimates.csv") %>%
+estimates <- read_csv("./english-ve-meta/estimates.csv") %>%
   mutate_if(is.character, as.factor) %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
@@ -24,7 +25,7 @@ estimates <- read_csv("./english/meta-analysis/estimates.csv") %>%
   ) %>%
   na.omit()
 
-davis1989 <- read_csv("./english/meta-analysis/davis1989.csv") %>%
+davis1989 <- read_csv("./english-ve-meta/davis1989.csv") %>%
   gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
   separate(voice_stat, c("voice", "stat")) %>%
   spread(stat, value) %>%
@@ -37,6 +38,173 @@ davis1989 <- read_csv("./english/meta-analysis/davis1989.csv") %>%
 
 davis1989_red <- filter(davis1989, v_context == "reduced")
 davis1989_unr <- filter(davis1989, v_context == "unreduced")
+```
+
+# Obtain estimates from previous studies
+
+```{r heffner1937}
+h37 <- filter(estimates, study == "heffner1937")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+h37_bm <- brm(
+  v_duration ~
+    voice,
+  data = h37,
+  prior = priors
+)
+```
+
+```{r housefairbanks1953}
+hf53 <- filter(estimates, study == "housefairbanks1953")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+hf53_bm <- brm(
+  v_duration ~
+    voice,
+  data = hf53,
+  prior = priors
+)
+```
+
+```{r petersonlehiste1960}
+pl60 <- filter(estimates, study == "petersonlehiste1960")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+pl60_bm <- brm(
+  v_duration ~
+    voice,
+  data = pl60,
+  prior = priors
+)
+```
+
+```{r sharf1962}
+s62 <- filter(estimates, study == "sharf1962")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+s62_bm <- brm(
+  v_duration ~
+    voice,
+  data = s62,
+  prior = priors
+)
+```
+
+```{r chen1970}
+c70 <- filter(estimates, study == "chen1970")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+c70_bm <- brm(
+  v_duration ~
+    voice,
+  data = c70,
+  prior = priors
+)
+```
+
+```{r klatt1973}
+k73 <- filter(estimates, study == "klatt1973")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+k73_bm <- brm(
+  v_duration ~
+    voice,
+  data = k73,
+  prior = priors
+)
+```
+
+```{r laeufer1992}
+l92 <- filter(estimates, study == "laeufer1992")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+l92_bm <- brm(
+  v_duration ~
+    voice,
+  data = l92,
+  prior = priors
+)
+```
+
+```{r ko2018}
+k18 <- filter(estimates, study == "ko2018")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+k18_bm <- brm(
+  v_duration ~
+    voice,
+  data = k18,
+  prior = priors
+)
+```
+
+```{r}
+estimated <- list()
+
+estimated[["h37"]] <- fixef(h37_bm)["voicevoiced",]
+estimated[["hf53"]] <- fixef(hf53_bm)["voicevoiced",]
+estimated[["pl60"]] <- fixef(pl60_bm)["voicevoiced",]
+estimated[["s62"]] <- fixef(s62_bm)["voicevoiced",]
+estimated[["c70"]] <- fixef(c70_bm)["voicevoiced",]
+estimated[["k73"]] <- fixef(k73_bm)["voicevoiced",]
+estimated[["l92"]] <- fixef(l92_bm)["voicevoiced",]
+estimated[["k18"]] <- fixef(k18_bm)["voicevoiced",]
+
+estimated_tbl <- plyr::ldply(estimated, .id = "study")
+```
+
+```{r}
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm <- brm(
+  Estimate | se(`Est.Error`) ~ (1 | study),
+  data = estimated_tbl,
+  prior = priors,
+  control=list(adapt_delta = 0.999)
+)
 ```
 
 # Estimate of the voicing effect
