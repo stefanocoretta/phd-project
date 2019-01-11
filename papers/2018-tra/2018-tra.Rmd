@@ -332,7 +332,7 @@ Such forward movement can be seen both in the context of a following voiced stop
 However, the magnitude of the movement is greater in the former.
 At V1 offset, there is a difference in tongue root position of about 1 mm.
 
-```{r tra-gam-plot, , include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache = true}
+```{r tra-gam-plot, , include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache=true}
 predict_gam(tra_gam_ar, exclude_terms = list("s(proportion,speaker)", "s(speech_rate_c)", "ti(proportion,speech_rate_c)")) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
@@ -362,7 +362,7 @@ tra_lm_2 <- lmer(
 summary(tra_lm_2)
 ```
 
-```{r tra-lm-2-plot, include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r tra-lm-2-plot, include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.extra="width=\\linewidth"}
 as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
   ggplot(aes(v1_duration_c, fit)) +
   geom_point(data = kines, aes(y = trp), alpha = 0.1) +
@@ -423,7 +423,7 @@ The full model with the tensor product interaction over V1 proportion and V1 dur
 The general trend is that the forward movement of the root during the vowel is greater the longer the duration of the vowel (\Cref{f:tra-gam-2-plot}).
 Moreover, the trajectory curvature increases with vowel duration: Shorter vowels have a flatter trajectory of tongue root advancement.
 
-```{r tra-gam-2-plot, include=TRUE, fig.cap = "Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r tra-gam-2-plot, include=TRUE, fig.cap="Fig caption", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 145, 200))) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
