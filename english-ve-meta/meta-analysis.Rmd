@@ -57,7 +57,7 @@ h37_bm <- brm(
   data = h37,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/h37_bm.Rdata"
+  file = "./english-ve-meta/data/cache/h37_bm"
 )
 ```
 
@@ -76,7 +76,7 @@ hf53_bm <- brm(
   data = hf53,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/hf53_bm.Rdata"
+  file = "./english-ve-meta/data/cache/hf53_bm"
 )
 ```
 
@@ -95,7 +95,7 @@ pl60_bm <- brm(
   data = pl60,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/pl60_bm.Rdata"
+  file = "./english-ve-meta/data/cache/pl60_bm"
 )
 ```
 
@@ -114,7 +114,7 @@ s62_bm <- brm(
   data = s62,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/s62_bm.Rdata"
+  file = "./english-ve-meta/data/cache/s62_bm"
 )
 ```
 
@@ -133,7 +133,7 @@ c70_bm <- brm(
   data = c70,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/c70_bm.Rdata"
+  file = "./english-ve-meta/data/cache/c70_bm"
 )
 ```
 
@@ -152,7 +152,7 @@ k73_bm <- brm(
   data = k73,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/k73_bm.Rdata"
+  file = "./english-ve-meta/data/cache/k73_bm"
 )
 ```
 
@@ -171,7 +171,7 @@ l92_bm <- brm(
   data = l92,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/l92_bm.Rdata"
+  file = "./english-ve-meta/data/cache/l92_bm"
 )
 ```
 
@@ -190,7 +190,7 @@ k18_bm <- brm(
   data = k18,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/k18_bm.Rdata"
+  file = "./english-ve-meta/data/cache/k18_bm"
 )
 ```
 
@@ -211,7 +211,7 @@ estimated_tbl <- plyr::ldply(estimated, .id = "study")
 
 ```{r meta-bm}
 priors <- c(
-  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = Intercept),
   prior(cauchy(0, 25), class = sd)
 )
 
@@ -221,13 +221,13 @@ meta_bm <- brm(
   prior = priors,
   control = list(adapt_delta = 0.999),
   seed = 9899,
-  file = "./english-ve-meta/data/cache/meta_bm.Rdata"
+  file = "./english-ve-meta/data/cache/meta_bm"
 )
 ```
 
 ```{r meta-bm-2}
 priors <- c(
-  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = Intercept),
   prior(cauchy(0, 25), class = sd)
 )
 
@@ -237,8 +237,23 @@ meta_bm_2 <- brm(
   prior = priors,
   control = list(adapt_delta = 0.999),
   seed = 9899,
-  file = "./english-ve-meta/data/cache/meta_bm_2.Rdata"
+  file = "./english-ve-meta/data/cache/meta_bm_2"
 )
+```
+
+```{r estimated_v}
+estimated_v <- list()
+
+estimated_v[["h37"]] <- fixef(h37_bm)["Intercept",]
+estimated_v[["hf53"]] <- fixef(hf53_bm)["Intercept",]
+estimated_v[["pl60"]] <- fixef(pl60_bm)["Intercept",]
+estimated_v[["s62"]] <- fixef(s62_bm)["Intercept",]
+estimated_v[["c70"]] <- fixef(c70_bm)["Intercept",]
+estimated_v[["k73"]] <- fixef(k73_bm)["Intercept",]
+estimated_v[["l92"]] <- fixef(l92_bm)["Intercept",]
+estimated_v[["k18"]] <- fixef(k18_bm)["Intercept",]
+
+estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study")
 ```
 
 # Estimate of the voicing effect
