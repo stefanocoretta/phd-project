@@ -450,6 +450,8 @@ When looking at the position of the tongue root during the vowel, it was found t
 Vowels followed by voiced stops showed greater tongue root advancement at vowel offset then vowels followed by voiceless stops, in accordance with the static results.
 Moreover, a significant interaction between vowel duration and the trajectory shape was found: Shorter vowels have a flatter trajectory.
 
+<!-- talk about magnitude of difference 1.5 mm and kirkham2017 -->
+
 If we take the release of the consonant preceding the vowel as a reference point, a delayed consonant closure could ensure that, by the time closure is made, an appreciable amount of tongue root advancement is achieved, so that the threshold for voicing cessation (such that transglottal pressure equalisation is reached) is raised (so that more time would be required for reaching it).
 This mechanism would ensure that voicing can be maintained during the stop closure.
 
