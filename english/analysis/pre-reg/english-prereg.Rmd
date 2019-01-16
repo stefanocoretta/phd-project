@@ -1,7 +1,7 @@
 ---
 title: "Pre-registration for Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
-date: "08/01/2019"
+date: "16/01/2019"
 output:
   pdf_document:
     citation_package: natbib
@@ -34,9 +34,9 @@ Stefano Coretta (The University of Manchester).
 ## Research questions
 
 Vowels in English (and other languages) are longer when followed by voiced stops than when followed by voiceless stops \citep{heffner1937}.
-The origin of this 'voicing effect' is still object to debate.
+The origin of this 'voicing effect' is still object of debate.
 According to the compensatory temporal adjustment account, the difference in vowel duration is the consequence of the difference in stop closure durations \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
-Voiceless stops have longer closures than voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, so that vowels are longer when followed by the shorter closure durations of voiced stops.
+Voiceless stops have longer closures than voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, so that vowels are longer when followed by the shorter closure of voiced stops.
 
 An exploratory study discussed in \citet{coretta2018j} indicates that the duration of the interval between two consecutive stops releases is not affected by consonant voicing in CV́CV words in Italian and Polish.
 Coretta argues that the temporal stability of the release to release interval plus the difference in consonant closure durations drives the differences in vowel durations by a mechanism of compensation between the duration of the vowel and that of the closure.
@@ -77,7 +77,7 @@ As for Q3:
 
 * H3: The effect of voicing on vowel duration is greater in monosyllabic than in disyllabic words.
 
-There is no specific hypothesis concerning stop closures.
+There is no specific hypothesis concerning differences in voiceless vs. voiced stop closure duration between mono- and disyllabic words.
 
 # Sampling plan
 
@@ -94,6 +94,7 @@ NA.
 ### Participants
 
 Inclusion rule: Native speakers of English from the Manchester area, 18+ yo, with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
+The participants will sign a written consent and will receive a monetary compensation of £5.
 
 ### Procedure
 \label{s:procedure}
@@ -132,7 +133,7 @@ Based on estimates from the literature on the just noticeable difference \citep{
 Data collection will stop either:
 
 (a) When the width of the 95\% CI of the effect of C2 voicing will be less than 20 milliseconds, or
-(b) If the ROPE target hasn't been reached by April 30th 2019, due to time constraints imposed on the project.
+(b) If the ROPE target hasn't been reached by April 5th 2019, due to time constraints imposed on the project.
 
 # Variables
 
@@ -209,7 +210,7 @@ rr_1 <- brm(
 ```
 
 The following priors will be used.
-For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
+For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the data from the Italian/Polish exploratory study.
 For the effect of C2 voicing, a weakly informative prior as a normal distribution with mean 0 ms and SD = 25, based on results from the exploratory study.
 For the effect of number of syllables, a weakly informative prior as a normal distribution with mean 50 ms and SD = 25, based on differences in vowel duration between mono- and disyllabic words, which range between 30 and 100 ms \citep{sharf1962, klatt1973}.
 The same prior is chosen for the interaction of C2 voicing and number of syllables, based on a similar range of reported differences in vowel duration in monosyllabic words (30-100 ms).
@@ -248,7 +249,7 @@ rr_2 <- brm(
 ```
 
 The following priors will be used.
-For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, based on the posterior distribution of the intercept in the Italian/Polish exploratory study.
+For the intercept of the release to release interval duration, a normal distribution with mean 200 ms and SD = 50, as above.
 For the effect of vowel, a weakly informative prior as a normal distribution with mean 0 ms and SD = 30, based on differences in vowel duration reported in \citet{heffner1937}, \citet{house1953}, and \citet{hertrich1997}.
 For the effect of C2 place of articulation, a weakly informative prior as a normal distribution with mean 0 ms and SD = 30, based on differences in closure durations between labial and velar stops, which range between 10 and 30 ms \citep{sharf1962}.
 The remaining priors are the same as the ones of the previous model.
@@ -328,7 +329,7 @@ c2_1 <- brm(
     n_syl +
     c2_voice:c2_place +
     c2_voice:n_syl +
-    vowel:n_syl +
+    c2_place:n_syl +
     c2_voice:c2_place:n_syl +
     speech_rate_c +
     (1 + c2_voice | speaker) +
@@ -340,8 +341,8 @@ c2_1 <- brm(
 The following priors will be used.
 The means reported in \citet{sharf1962} and \citet{luce1985} indicate that stop closures in monosyllabic words are 10-30 ms shorter when the stop is voiced.
 A normal distribution with mean -20 ms and SD = 10 seems informative enough as a prior to the effect of C2 voicing on closure duration.
-The same studies indicate velar stops have a closure which is 10-20ms shorter in monosyllabic words, hence the prior `normal(mean = -15, SD = 10)`.
-Note that the estimates for C2 voicing and place refer to monosyllabic words, while the specified priors refer to disyllabic words.
+The same studies indicate velar stops have a closure which is 10-20 ms shorter in monosyllabic words, hence the prior `normal(mean = -15, SD = 10)` for the effect of C2 place.
+Note that the estimates for C2 voicing and place refer to monosyllabic words, while the specified priors refer to disyllabic words (the reference level of `n_syl`).
 
 ```{r}
 c(
@@ -349,11 +350,9 @@ c(
   set_prior("normal(-20, 10)", class = "b", coef = "c2_voicevoiced"),
   set_prior("normal(-15, 10)", class = "b", coef = "c2_placevelar"),
   set_prior("normal(0, 25)", class = "b", coef = "n_sylmono"),
-  set_prior("normal(0, 10)", class = "b", coef = "c2_voicevoiced:c2_placevelar"),
-  set_prior("normal(0, 10)", class = "b", coef = "c2_voicevoiced:n_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:c2_placevelar"),
+  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:n_sylmono"),
   set_prior("normal(0, 30)", class = "b", coef = "c2_placevelar:n_sylmono"),
-  set_prior("normal(0, 30)", class = "b", coef = "c2_placevelar:n_sylmono"),
-  set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:c2_placevelar:n_sylmono"),
   set_prior("normal(0, 30)", class = "b", coef = "c2_voicevoiced:c2_placevelar:n_sylmono"),
   set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
   set_prior("cauchy(0, 25)", class = "sd"),
@@ -364,7 +363,7 @@ c(
 
 ## Transformations
 
-Speech rate will be centred to make the estimate of the intercept interpretable.
+Speech rate will be centred to make the estimates of the intercepts interpretable.
 Centring will be obtained with the standard formula (speech rate - mean speech rate).
 
 ## Follow-up analyses
@@ -373,7 +372,7 @@ NA.
 
 ## Inference criteria
 
-Bayesian posterior distributions, rather than point estimates, will be employed for inference.
+Bayesian posterior distributions, rather than point estimates, will be used for inference.
 
 ## Data exclusion
 
