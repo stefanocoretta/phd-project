@@ -11,6 +11,7 @@ knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 library(brms)
 library(bayesplot)
+library(lmerTest)
 library(coretta2018itapol)
 data("token_measures")
 
@@ -18,7 +19,8 @@ token_measures <- token_measures %>%
   filter(c1_phonation == "voiceless") %>%
   mutate(
     rel_rel = (c2_rel - c1_rel) * 1000,
-    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    vor = (c2_rel - v1_ons) * 1000
   ) %>%
   filter(!is.na(rel_rel))
 ```
@@ -183,5 +185,39 @@ rr_bm_3 <- brm(
 
 ```{r}
 summary(rr_bm_3)
+```
+
+## VOR
+
+```{r}
+vor_lm <- lmer(
+  vor ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  REML = FALSE,
+  data = token_measures
+)
+
+summary(vor_lm)
+
+vor_lm_null <- lmer(
+  vor ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  REML = FALSE,
+  data = token_measures
+)
+
+exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2)
 ```
 
