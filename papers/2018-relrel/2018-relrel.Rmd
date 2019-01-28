@@ -132,11 +132,15 @@ Moreover, the design of the study has been constrained by the use of ultrasound 
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
 Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration.
-On the other hand, they are both classified as voicing languages (languages in which the laryngeal opposition in consonants is between voiceless unaspirated and voiced consonants, \citealt{beckman2013}).\footnote{Note that, while Polish neutralises the voicing contrast word-finally, it is maintained word-medially \citep{strycharczuk2012a}.}
-<!-- Note tat the distinction between voicing and aspirating varieties of Polish discussed in \citet{cyran2011} is based on phonological arguments rather than empirical data of VOT duration, so it will not be considered here. -->
-<!-- Cite Waniek 2011 -->
+On the other hand, they are both traditionally classified as 'true voicing' languages, in which the phonologically voiced stops are typically articulated with vocal fold vibration \citep{beckman2013}.\footnote{Polish neutralises the voicing contrast word-finally, although the contrast is maintained word-medially \citep{strycharczuk2012a}.}
 For this reason, these two languages offer the opportunity to investigate differences that could reveal mechanisms underlying the voicing effect.
 Moreover, given that Italian and Polish share---on a general level---some features of the segmental and prosodic make-up of their phonological systems, the design of the experimental material and comparison of the results were facilitated.
+
+Note that the distinction between voicing and aspirating varieties of Polish discussed in \citet{cyran2011} is based on phonological arguments rather than empirical data of VOT duration.
+\citet{waniek2011}, on the other hand, cautiously argues that a possible change in progress in Polish is affecting the VOT of voiceless stops in pre-stressed position.
+A reviewer points out that the non-clear status of Polish as a voicing language could interfere with the comparison.
+However, based on data from Italian, \citeauthor{kirby2016a} propose that the distinction between voicing and aspirating languages itself cannot be straightforwardly mapped onto phonetics, and they remind us that 'the production of laryngeal contrasts of all kinds are considerably more complex' than generally described in the phonological literature \citep[2409]{kirby2016a}.
+Moreover, since this study focusses on the effect of post-stressed stops on preceding vowel durations, we believe that the comparison between Italian and Polish is still feasible, even in the case Polish voiceless pre-stressed stops are articulated with longer VOT values.
 
 Italian has been unanimously reported as a voicing-effect language [@caldognetto1979; @farnetani1986; @esposito2002].
 The mean difference in vowel duration when followed by voiceless vs. voiced consonants ranges between 22 and 24 ms in these studies, with longer vowels followed by voiced consonants. The mean differences are based on 3 speakers in \citealt{farnetani1986} and 7 speakers in \citealt{esposito2002}. \citet{caldognetto1979} don't report estimates of vowel duration, just the direction of the effect, but the study is based on 10 speakers.
@@ -202,6 +206,7 @@ These sentences were chosen in order to maintain a similar intonation contour ac
 <!-- Possible influences of the semantic content of the frame sentence on duration estimates will be discussed in \Cref{s:discussion}. -->
 
 ## Procedure
+\label{s:procedure}
 
 The participant was asked to read the sentences with the target words which were presented on the computer screen.
 The order of the sentences was randomised for each participant.
@@ -634,6 +639,13 @@ However, it is possible that the correlation between vowel and closure duration 
 For example, @ko2018 finds that the vowel/closure ratio differs depending on speaking rate and that there is an interaction between the voicing of the consonant and speaking rate.
 When the consonant is voiceless, the vowel/closure ratio is smaller when speaking rate is slow, while slow speaking rate induces larger vowel/closure values when the consonant is voiced.
 Experimental work is required which addresses the differential effect of speaking rate on vowel and consonant closures, and how these interact with a possible compensatory mechanism.
+
+Some concern could be raised in relation to possible influences of English on the native productions of participants recorded in the English-speaking context of the University of Manchester Laboratory.
+However, as reported in \Cref{s:procedure}, conversations during the session prior to the experiment and instructions were in the participant's native language.
+\citet{antoniou2010} show that, in a situational language context study of Greek-English bilinguals, being exposed to the native language during the experiment elicited Greek native-like phonetic values even when the dominant language at the time of recording was English (the bilingual speakers acquired English as a second language, being Greek their first).
+A small effect of L2 could persist in proficient L2 speakers, as found by \citet{schwartz2015}.
+The five Polish speakers with a highly proficient level of English investigated in this study showed a 10 ms increase in VOT values compared to the quasi-monolingual base level.
+While previous studies focussed on VOT, future work should directly test the influence of English on the magnitude of the voicing effect of one's native language.
 
 <!-- \Cref{s:gestural} discusses the interpretation of the release to release invariance in CV́CV words as a consequence of the timing of C2 rather than of a holistic CV́C motor plan in which the release to release interval is held constant.
 Although beyond the scope of this paper, disambiguating between these two interpretations on articulatory grounds is fundamental for a general understanding of a theory of gestural organisation (a promising venue of research might be the activation-spin model by \citealt{tilsen2013}). -->
