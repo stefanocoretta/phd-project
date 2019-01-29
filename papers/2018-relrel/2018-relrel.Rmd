@@ -147,10 +147,17 @@ The mean difference in vowel duration when followed by voiceless vs. voiced cons
 
 The results regarding the presence and magnitude of the effect in Polish are instead mixed.
 \citet{slowiaczek1985} find that vowels followed by word-final underlyingly voiced stops are 10--15 ms longer in 5 Polish speakers, although \citet{jassem1989} did not replicate their results.
-Similarly, @keating1984 reports no effect of voicing on the duration of stressed vowels in disyllabic words from 24 speakers.
+Similarly, @keating1984 reports a difference of 2 ms in the duration of stressed vowels in disyllabic words from 24 speakers, which the author argues to be non-significant.
 On the other hand, @nowak2006 finds that vowels followed by voiced stops are 4.5 ms longer in the 4 speakers recorded.
 @malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim that their results are inconclusive on this matter.
 While they do not report estimates from the 40 speakers, a table with mean vowel durations from 4 suggests a mean difference before voiceless vs. voiced stops of 3.5 ms.
+
+The variety of results concerning the voicing effect in Polish could be related to differences in methodology.
+However, no clear pattern between studies which find a voicing effect and those which don't can be identified.
+For example, the studies reviewed here looked at either word-final or word-medial stops, controlled or read speech, speakers with a low or advanced proficiency in English.
+However, in all the individual cases both a positive and a negative result are reported depending on the study.
+What might be more relevant, though, is that the estimates of the difference in vowel duration are generally very low, between 3.5 and 15 ms.
+Given the small magnitude of the difference, it is likely that the failure to obtain significant *p*-values in some studies are due to low statistical power, rather than because of absence of the effect (as also hinted in \citealt{begus2017}, see arguments in \citealt{roettger2019} and \citealt{nicenboim2018a}).
 
 The acoustic data from the study discussed here suggests that (1) a voicing effect can be detected both in Italian and Polish, and that (2) the duration of the interval between two consecutive stop releases (the release to release interval) is not affected by the voicing of the second consonant in both languages.
 This finding is compatible with a compensatory temporal adjustment account by which the timing of the closure onset of the stop following the vowel within said interval determines the respective durations of vowel and closure.

@@ -113,6 +113,10 @@ The abstract now has "(like perceptual biases and laryngeal effects)".
 
 186-198 Does the author have any guesses why the results are so different for Polish? The review of the literature is sufficient, but it would be very beneficial to the reader if the author would evaluate methodology of the studies, especially since Polish has been mentioned as a case of non-existence of the voicing effect. Is experimental design equally balanced in all studies? If not, are there patterns of experimental design in studies that don’t report the voicing effect?
 
+\color{plum}
+Lines X discuss the possible reasons behind the diverse results. While no clear pattern can be seen between methodology and presence/absence of a significant voicing effect, the small reported estimates could indicate inability to detect small differences due to low statistical power.
+\color{black}
+
 Statistical analysis.
 
 The analysis is generally sound and clear. Unfortunately, the manuscript does not mention whether assumptions of the linear model are checked. Sometimes modeling durations can produce patterns in the residual plot, so it would be good to inform the reader that the residual plots look without patterns.
