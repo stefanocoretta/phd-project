@@ -87,13 +87,29 @@ In sum, a well-written paper with results that yield some new information for a 
 
 Major comment
 
-As already mentioned above, the paper should clearly state that the constant value of the release-to-release interval can be due to different mechanisms operating on the vowel duration differences and does not per se point to the compensatory lengthening explanation. If the author has additional evidence in favor of why compensatory lengthening is likely the main contributing factor, this should be stated as well. Furthermore, the author should discuss the hypothesis that laryngeal features influence vowel durations in greater detail. The few works that measure vowel duration before stops other than voiced vs. voiceless (Durvasula and Luo 2014, Beguš 2017) find evidence for the effect of laryngeal features. Because the present paper measures vowel duration before voiced and voiceless stops which also have different closure durations, the laryngeal effects and the closure effects are of course conflated. This should be addressed in the paper.
+As already mentioned above, the paper should clearly state that the constant value of the release-to-release interval can be due to different mechanisms operating on the vowel duration differences and does not per se point to the compensatory lengthening explanation. If the author has additional evidence in favor of why compensatory lengthening is likely the main contributing factor, this should be stated as well.
 
-Minor comments Abstract
+\color{plum}
+If I understand correctly, the reviewer is saying that the temporal stability of the release to release interval could be a consequence of the fact that vowels are lengthened when followed by voiced stops, so that the temporal distance between two consecutive releases in this context matches that in the context of a voiceless stop. However, there are reasons to argue that the temporal stability is a logical antecedent, as now discussed in lines X. It is anyway recognised that further work is needed to disambiguate between these two interpretations by looking at general properties of gestural phasing that might encompass temporal patterns other than the voicing effect.
+\color{black}
+
+Furthermore, the author should discuss the hypothesis that laryngeal features influence vowel durations in greater detail. The few works that measure vowel duration before stops other than voiced vs. voiceless (Durvasula and Luo 2014, Beguš 2017) find evidence for the effect of laryngeal features. Because the present paper measures vowel duration before voiced and voiceless stops which also have different closure durations, the laryngeal effects and the closure effects are of course conflated. This should be addressed in the paper.
+
+\color{plum}
+This point has been discussed in more details in lines X. The results on laryngeal effects reported in Beguš 2017 are discussed and compared with those from this study. Lines X in the Limitations and future work further stresses that a compensatory account is very likely not the only mechanism underlying the observed durational patterns, and that multiple causes can conspire to produces the difference in vowel/closure durations.
+\color{black}
+
+Minor comments
+
+Abstract
 
 “factors (like perceptual biases) could”
 
 To be fair to all proposals, I think at least the laryngeal effect hypothesis should be mentioned here.
+
+\color{plum}
+The abstract now has "(like perceptual biases and laryngeal effects)".
+\color{black}
 
 186-198 Does the author have any guesses why the results are so different for Polish? The review of the literature is sufficient, but it would be very beneficial to the reader if the author would evaluate methodology of the studies, especially since Polish has been mentioned as a case of non-existence of the voicing effect. Is experimental design equally balanced in all studies? If not, are there patterns of experimental design in studies that don’t report the voicing effect?
 
@@ -101,9 +117,19 @@ Statistical analysis.
 
 The analysis is generally sound and clear. Unfortunately, the manuscript does not mention whether assumptions of the linear model are checked. Sometimes modeling durations can produce patterns in the residual plot, so it would be good to inform the reader that the residual plots look without patterns.
 
+\color{plum}
+The residual and QQ plots of the models do not show patterns in the residuals (see `X`). Some of the residual plots show different blobs, this is related to idiosyncratic differences in mean durations between participants and it is not an issue (it is taken care of by the random effects). Line X added in the manuscript: "Inspection of residual plots and QQ plots of the models described below indicated absence of patterns in the residuals."
+\color{black}
+
 A short justification of why Bayes factors vs. the more standard AIC criterion is used.
 
-Release to release Why release to release? The author mentions in the Discussion section that release-torelease measurement is somewhat arbitrary. A broader discussion on why particularly this interval would be useful. Has the author tested any other measurements? Do the result change if, say, VOT is excluded from the interval?
+\color{plum}
+This has been now added as footnote X in the manuscript.
+\color{black}
+
+Release to release
+
+Why release to release? The author mentions in the Discussion section that release-torelease measurement is somewhat arbitrary. A broader discussion on why particularly this interval would be useful. Has the author tested any other measurements? Do the result change if, say, VOT is excluded from the interval?
 
 # 3
 

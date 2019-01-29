@@ -50,7 +50,7 @@ round_2 <- function(...) {
   The compensatory account has been criticised due to lack of empirical support and its vagueness regarding the temporal interval within which compensation is implemented.
   The results from an exploratory study of Italian and Polish suggest that the duration of the interval between two consecutive stop releases in CVCV words in these languages is not affected by the voicing of the second stop.
   The durational difference of the first vowel then would follow from differences in closure durations of the following stop.
-  While other factors (like perceptual biases) could also play a role in the development of the voicing effect, the data discussed here shed new light on a possible production account of voicing-related differences in vowel durations.
+  While other factors (like perceptual biases and laryngeal effects) could also play a role in the development of the voicing effect, the data discussed here shed new light on a possible production account of voicing-related differences in vowel durations.
 \end{abstract}
 
 # Introduction
@@ -281,7 +281,7 @@ A result is considered significant if the *p*-value is below the alpha level ($\
 The choice of not using likelihood ratio tests for statistical inference is based on \citet{luke2017} who argues that this approach can lead to inflated Type I error rates.
 In any case, \citet[1501]{luke2017} also warns that `results [from mixed-effects models] should be interpreted with caution, regardless of the method adopted for obtaining \textit{p}-values'.
 
-Bayes factors were used to test whether word and release to release duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).
+Bayes factors were used to test whether word and release to release duration are not affected by C2 voicing (i.e., the effect of C2 voicing on duration is `0`).\footnote{The choice of Bayes factors over other information criteria, like AIC, is a practical one. First, Bayes factors can be used to identify the realative strength of the evidence for each hypothesis. The higher the Bayes factor of H\textsubscript{01}, the stronger the evidence for H\textsubscript{0} according to the data. Second, a Bayes factor near 1 indicates that the data is compatible with both hypotheses (even when AIC indicates a preference of one over the other), in which case it is not possible to chose among them. Note that the AICs of the word duration and release to release duration models reported below are lower when C2 voicing is not included as a predictor than when it is included, although the difference in AIC between the null and full models is very small (below 2).}
 For each set of null/alternative hypotheses, a full model (with the predictor of interest) and a null model (excluding it) were fitted separately using the Maximum Likelihood estimation (ML, \citealt[34]{bates2015}).
 The Bayes Information Criterion (BIC) approximation was then used to obtain Bayes factors [@raftery1995; @raftery1999; @wagenmakers2007; @jarosz2014].
 The approximation is calculated according to the equation in \ref{eq:bayes} \citep[796]{wagenmakers2007}.
@@ -612,14 +612,28 @@ The invariance of the release to release interval allows us to refine the logist
 A limitation of this account, as proposed by @slis1969 and @lehiste1970, is the lack of a precise identification of the word-internal mechanics of compensation.
 As already discussed in \Cref{s:intro}, it is not clear why the adjustment should target the preceding stressed vowel, rather then the following unstressed vowel or any other segment in the word.
 Since the release to release interval includes just the vocoid gesture between the release of C1 and the onset of the closure of C2 and the consonant closure, it follows that differences in closure duration must be reflected in differences in the duration of the preceding vocoid.
-It is worth noting, though, that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out.
-For example, perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}), and other perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}.
 
 Under an account of temporal compensation, the voicing effect can be interpreted as a by-product of gestural phasing, rather then a consequence of intrinsic features of voicing *per se*.
 The temporal stability of the release to release interval across voicing contexts allows us to refine the compensatory mechanism by providing a temporal anchor.
 On the other hand, it is important to note that the release to release interval should not necessarily have a special status in such compensatory account, but rather can be used as a proxy to the understanding of a full gestural mechanism of compensation.
 Indeed, the temporal stability of this interval should be derivable from a theory of gestural phasing, rather than one that simply states that the interval is stable across voicing contexts.
-While beyond the scope of this paper, work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation that results in the temporal patterns observed in this study.
+
+It could be argued that the temporal stability of the release to release interval could be the result of lengthening vowels followed by voiced stops which have shorter closure durations (or, vice versa, of shortening vowels followed by voiceless stops), so that such stability would not necessarily follow from a compensatory mechanism.
+However, what it is claimed here is that the stability of the interval is a logical antecedent, while the different vowel/closure durations follow as a consequence of the differential timing of closure onset within the temporally stable interval.
+This interpretation seems more natural in light of accounts of gestural phasing like the one proposed by \citet{tilsen2013}.
+Under this account, the stability of the release to release interval could follow from the relative phasing of the two vowels in CVCV words (see Figure 6 in \citealt{tilsen2013}).
+While beyond the scope of this paper, work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and other durational phenomena.
+
+Finally, it is worth noting that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out.
+For example, perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}), and other perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}.
+Moreover, \citet{begus2017} finds that even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) is still a significant predictor.
+Beguš argues for a separate laryngeal effect, which operates in addition to the closure duration effect.
+In the present study, C2 voicing (voiceless, voiced) and its interactions are not significant when included in the model with vowel duration as outcome and, among other terms, C2 closure duration as predictor, discussed in section \Cref{s:vcduration}.\footnote{Multicollinearity is not an issue here, since the VIFs were all below 3 \citep{zuur2010}.}
+
+Even when multicollinearity between predictors is minimal, statistical significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
+For example, it is possible that, through time, different phonation categories (like ejective, voiceless, and voiced stops) can develop different closure duration sub-distributions \citep{soskuthy2013}.
+This can result in the ability for the phonation predictor to capture variance in vowel durations, even if the original mechanism directly involved closure durations only (this kind of reasoning is compatible with exemplar theories of speech perception and production, see among others \citealt{johnson1997, soskuthy2018, ambridge2018, todd2018}).
+Since opposite results have been obtained in relation to the significance of C2 phonation in addition to C2 closure durations, these results need to be replicated in future studies, although to ascertain whether they are artefacts of statistical procedures or if they reflect an underlying state of affairs might still prove difficult (cf. the correlation vs. causation problem).
 
 ## Limitations and future work
 
@@ -654,6 +668,8 @@ The compensatory temporal adjustment account presented here extends to other dur
 In particular, the account bears predictions on the direction of the durational difference led by phonation types different from voicing, like aspiration and ejection.
 For example, the mix of results with regard to the effect of aspiration [@durvasula2012] suggests that the conditions for a temporal adjustment might differ across the contexts and languages studied.
 In light of the results in @begus2017, future studies will also have to investigate the durational invariance of speech intervals in relation to a variety of phonation contrasts.
+
+<!-- hybrid account, in which you get compensation because of different closure durations because of different articulations, and so on. multiple mechanisms might conspire, as also noted by Begus, so compensatory is not uniquely supported-->
 
 # Conclusions
 
