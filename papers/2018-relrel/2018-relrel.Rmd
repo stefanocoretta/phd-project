@@ -593,7 +593,27 @@ The mean differences of Italian vowels and closures (11.5 and 13.33, respectivel
 It is plausible that the smaller effect of C2 voicing on preceding vowel duration in Polish is related to the smaller effect on closure duration, if we assume a temporal mechanism of compensation between the closure and the vowel.
 These patterns will need to be confirmed with a more balanced sample of Italian and Polish speakers.
 
-<!-- maybe discuss vowel closure compensation... -->
+```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson = "vow-lm"}
+vow_coef <- as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
+  rename("intercept" = `(Intercept)`, "ve" = c2_phonationvoiced) %>%
+  mutate(language = ifelse(str_detect(speaker, "^it"), "Italian", "Polish"), speaker = toupper(speaker)) %>%
+    ggplot(aes(ve, reorder(speaker, ve), colour = language)) +
+  geom_point(size = 3) +
+  geom_errorbarh(aes(xmin = ve - 4.422, xmax = ve + 4.422)) +
+  scale_colour_manual(values = c("black", "gray")) +
+  labs(
+    y = "Speaker",
+    x = "Voicing effect (ms)"
+  )
+```
+
+Finally, while the estimated differences in vowel durations can be interpreted in reference to Italian and Polish as two independent linguistic objects, the patterns observed in the individual speakers does not indicate a systematic relation between magnitude of the effect and language.
+\Cref{f:Figure6} shows the random coefficients of the effect of C2 voicing on vowel duration for the individual speakers, extracted from the mixed-effect model presented in \Cref{s:vduration}.
+Black indicates Italian speakers, while grey is for Polish speakers.
+As it can be seen, speakers of both languages are scattered along the values of the voicing effect.
+These results are in agreement with the idiosyncrasy found for the voicing effect of Polish in \citet{malisz2008}.
+While large-scale studies could reveal clear language-level patterns, the data discussed here point to a scenario in which the speaker's individual behaviour is substantial.
+Future studies could thus look into the respective role of individual-level and community-level factors and how these contribute to the magnitude of the durational differences across speakers and languages.
 
 ## Compensatory temporal adjustment
 \label{s:comp}
