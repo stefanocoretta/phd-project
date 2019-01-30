@@ -96,7 +96,7 @@ If I understand correctly, the reviewer is saying that the temporal stability of
 Furthermore, the author should discuss the hypothesis that laryngeal features influence vowel durations in greater detail. The few works that measure vowel duration before stops other than voiced vs. voiceless (Durvasula and Luo 2014, Beguš 2017) find evidence for the effect of laryngeal features. Because the present paper measures vowel duration before voiced and voiceless stops which also have different closure durations, the laryngeal effects and the closure effects are of course conflated. This should be addressed in the paper.
 
 \color{plum}
-This point has been discussed in more details in lines X. The results on laryngeal effects reported in Beguš 2017 are discussed and compared with those from this study. Lines X in the Limitations and future work further stresses that a compensatory account is very likely not the only mechanism underlying the observed durational patterns, and that multiple causes can conspire to produces the difference in vowel/closure durations.
+This point has been discussed in more details in lines X. The results on laryngeal effects reported in Beguš 2017 are discussed and compared with those from this study. Lines X in the conclusion section stresses that a compensatory account is likely not the only mechanism underlying the observed durational patterns, and that multiple causes can conspire to produces the difference in vowel/closure durations.
 \color{black}
 
 Minor comments
@@ -162,10 +162,21 @@ What are your suggestions for improving the paper? (optional if your publication
 I have no recommendations concerning the scientific aspect of the submitted paper: this is a very well-written and well-presented study. The paper needs proofreading, and some minor language aspects are mentioned in the following point.
 
 Specific line-by-line comments on details of the paper. Begin each comment with a page number, example number or paragraph/line from top or bottom, as appropriate.:
+
 p. 5, line 150 – plausible on the light of --> plausible in the light of
+
 p. 7, line 223 – Hawlett-Packard --> Hewlett-Packard
+
 p. 8, continuation of footnote 6 – for sake of --> for the sake of
+
 p. 9, line 267 – which yields to a grand total --> which yields a grant total
+
 p. 9, footnote 7 – I am not sure this footnote is necessary or relevant for the paper
+
 p. 13, line 370 – Vowel tend to be --> Vowels tend to be
+
 p. 20, line 473 – voiced then when --> voiced than when
+
+\color{plum}
+These typos have been corrected, plus a few other instances of 'then' for 'than'. Footnote 7 has been removed.
+\color{black}

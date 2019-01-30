@@ -119,7 +119,7 @@ According to such account, the difference in vowel duration before consonants va
 After reviewing the critiques advanced by @chen1970 and @maddieson1976, and in face of the results in @slis1969, @de-jong1991 and @begus2017,
 a temporal compensation mechanism gains credibility.
 However, issues about the actual implementation of the compensation mechanism still remain.
-While compensatory temporal adjustments are plausible on the light of the reviewed literature, we are still left with the necessity of identifying a speech interval the duration of which is not affected by the voicing of the post-vocalic consonant, and within which compensation can be logically implemented.
+While compensatory temporal adjustments are plausible in light of the reviewed literature, we are still left with the necessity of identifying a speech interval the duration of which is not affected by the voicing of the post-vocalic consonant, and within which compensation can be logically implemented.
 <!-- add here what the good candidate is in this study? -->
 <!-- The results of the present study suggest that a good candidate for such interval is the interval between the release of the pre-vocalic consonant and the release of the post-vocalic consonant when considering stops. -->
 
@@ -184,7 +184,7 @@ The participants signed a written consent and received a monetary compensation o
 
 ## Equipment
 
-The acquisition of the audio signal was achieved with the software Articulate Assistant Advanced™ (AAA, v2.17.2, \citealt{articulate2011}) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+The acquisition of the audio signal was achieved with the software Articulate Assistant Advanced™ (AAA, v2.17.2, \citealt{articulate2011}) running on a Hewlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
 Audio recordings were sampled at 22050 Hz (16-bit) and saved in a proprietary format (`.aa0`).
 A FocusRight Scarlett Solo pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio recording.
 The microphone was placed at the level of the participant's mouth on one side, at a distance of about 10 cm.
@@ -195,7 +195,7 @@ The microphone was clipped onto a metal headset worn by the participant, which w
 
 <!-- maybe note on /u/ in italian is phonotactically not good -->
 
-The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).\footnote{Italian has both a mid-low [ɔ] and a mid-high [o] back vowel in its vowel inventory. These vowels are traditionally described as two distinct phonemes \citep{kramer2009}, although both their phonemic status and their phonetic substance are subject to a high degree of geographical and idiosyncratic variability \citep{renwick2016}. As a rule of thumb, stressed open syllables in Italian (like the ones used in this study) have [ɔː] (vowels in penultimate stressed open syllables are long) rather than [oː] \citep{renwick2016}. On the other hand, Polish has only a mid-low back vowel phoneme /ɔ/ \citep{gussmann2007}. For sake of typographical simplicity, the symbol /o/ will be used here for both languages.}
+The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).\footnote{Italian has both a mid-low [ɔ] and a mid-high [o] back vowel in its vowel inventory. These vowels are traditionally described as two distinct phonemes \citep{kramer2009}, although both their phonemic status and their phonetic substance are subject to a high degree of geographical and idiosyncratic variability \citep{renwick2016}. As a rule of thumb, stressed open syllables in Italian (like the ones used in this study) have [ɔː] (vowels in penultimate stressed open syllables are long) rather than [oː] \citep{renwick2016}. On the other hand, Polish has only a mid-low back vowel phoneme /ɔ/ \citep{gussmann2007}. For the sake of typographical simplicity, the symbol /o/ will be used here for both languages.}
 Most are nonce words, although inevitably some combinations produce real words both in Italian (4 words) and Polish (2 words, see \Cref{a:targets}).
 The lexical stress of the target words was placed by speakers of both Italian and Polish on V\textsubscript{1}, as intended.
 
@@ -223,7 +223,8 @@ The reading task lasted between 15 and 20 minutes, with optional short breaks be
 The total session time was around 45 minutes.
 Before the start of the experiment, the participants were spoken to in their mother tongue to try and reduce exposition to English prior to being recorded.
 Instructions were also given in their respective mother tongues.
-Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times), which yields to a grand total of 1212 tokens (792 from Italian, 420 from Polish).\footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.}
+Each speaker read a total of 12 sentences for 6 times (with the exceptions of IT02, who repeated the 12 sentences 5 times), which yields a grand total of 1212 tokens (792 from Italian, 420 from Polish).
+<!-- \footnote{IT01 and IT02 (the first two participants of this study) also read sentences with words starting with /b/, which were later excluded from the experimental design. The data from /b/-initial words are not included in the analysis reported in this paper.} -->
 
 The experiment was carried out in two locations: in the sound attenuated booth of the Phonetics Laboratory at the University of Manchester, and in a quiet room in a field location in Italy (Verbania, Northern Italy).
 In both locations the equipment and procedures were the same.
@@ -354,7 +355,7 @@ vow_descr <- durations_filtered %>%
 ```
 
 \Cref{f:Figure2} shows boxplots and raw data of vowel duration for the three vowels /a, o, u/ when followed by voiceless or voiced stops in Italian and Polish.
-Vowel tend to be longer when followed by a voiced stop in both languages.
+Vowels tend to be longer when followed by a voiced stop in both languages.
 The effect appears to be greater in Italian than in Polish, especially for the vowels /a/ and /o/.
 There is no evident effect of C2 voicing in /u/ in Italian, but the effect is discernible in Polish /u/.
 In Italian, vowels have a mean duration of `r round_2(vow_descr[[1, 3]])` ms (SD = `r round_2(vow_descr[[1, 4]])`) before voiceless stops, and a mean duration of `r round_2(vow_descr[[2, 3]])` ms (SD = `r round_2(vow_descr[[2, 4]])`) before voiced stops.
@@ -567,7 +568,7 @@ The section concludes by discussing the limitations and open issues of this stud
 
 ## Voicing effect in Italian and Polish
 
-The results of vowel duration and C2 voicing indicate that vowels are longer when followed by voiced then when followed by voiceless stops both in Italian and Polish.
+The results of vowel duration and C2 voicing indicate that vowels are longer when followed by voiced than when followed by voiceless stops both in Italian and Polish.
 The estimated effect is around 16 ms when C2 is voiced for Italian.
 This value is not too far from the estimates of previous works on this language [@caldognetto1979; @farnetani1986; @esposito2002], the range of which is between 22 and 24 ms.
 The higher estimates of these studies compared to the one here could be related to differences in experimental design, or Type M (magnitude) errors due to low statistical power in previous studies (see \citealt{kirby2018}).
@@ -595,6 +596,7 @@ These patterns will need to be confirmed with a more balanced sample of Italian 
 <!-- maybe discuss vowel closure compensation... -->
 
 ## Compensatory temporal adjustment
+\label{s:comp}
 
 Vowels followed by voiced stops are long, while vowels followed by voiceless stops are short.
 The closure duration of voiced stops is short compared to that of voiceless stops.
@@ -618,10 +620,10 @@ No specific statement is implied about the variance of the duration around the m
 
 The invariance of the release to release interval allows us to refine the logistics of the compensatory account by narrowing the scope of the temporal adjustment action.
 A limitation of this account, as proposed by @slis1969 and @lehiste1970, is the lack of a precise identification of the word-internal mechanics of compensation.
-As already discussed in \Cref{s:intro}, it is not clear why the adjustment should target the preceding stressed vowel, rather then the following unstressed vowel or any other segment in the word.
+As already discussed in \Cref{s:intro}, it is not clear why the adjustment should target the preceding stressed vowel, rather than the following unstressed vowel or any other segment in the word.
 Since the release to release interval includes just the vocoid gesture between the release of C1 and the onset of the closure of C2 and the consonant closure, it follows that differences in closure duration must be reflected in differences in the duration of the preceding vocoid.
 
-Under an account of temporal compensation, the voicing effect can be interpreted as a by-product of gestural phasing, rather then a consequence of intrinsic features of voicing *per se*.
+Under an account of temporal compensation, the voicing effect can be interpreted as a by-product of gestural phasing, rather than a consequence of intrinsic features of voicing *per se*.
 The temporal stability of the release to release interval across voicing contexts allows us to refine the compensatory mechanism by providing a temporal anchor.
 On the other hand, it is important to note that the release to release interval should not necessarily have a special status in such compensatory account, but rather can be used as a proxy to the understanding of a full gestural mechanism of compensation.
 Indeed, the temporal stability of this interval should be derivable from a theory of gestural phasing, rather than one that simply states that the interval is stable across voicing contexts.
@@ -630,7 +632,8 @@ It could be argued that the temporal stability of the release to release interva
 However, what it is claimed here is that the stability of the interval is a logical antecedent, while the different vowel/closure durations follow as a consequence of the differential timing of closure onset within the temporally stable interval.
 This interpretation seems more natural in light of accounts of gestural phasing like the one proposed by \citet{tilsen2013}.
 Under this account, the stability of the release to release interval could follow from the relative phasing of the two vowels in CVCV words (see Figure 6 in \citealt{tilsen2013}).
-While beyond the scope of this paper, work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and other durational phenomena.
+The stability of the temporal distance between vowels in Italian is preliminarily supported by acoustic data \citet{celata2014}.
+While beyond the scope of this paper, articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and other durational phenomena.
 
 Finally, it is worth noting that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out.
 For example, perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}), and other perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}.
@@ -677,14 +680,18 @@ In particular, the account bears predictions on the direction of the durational 
 For example, the mix of results with regard to the effect of aspiration [@durvasula2012] suggests that the conditions for a temporal adjustment might differ across the contexts and languages studied.
 In light of the results in @begus2017, future studies will also have to investigate the durational invariance of speech intervals in relation to a variety of phonation contrasts.
 
-<!-- hybrid account, in which you get compensation because of different closure durations because of different articulations, and so on. multiple mechanisms might conspire, as also noted by Begus, so compensatory is not uniquely supported-->
-
 # Conclusions
 
 The results of an exploratory study on the effect of voicing on vowel duration are congruent with a compensatory temporal adjustment account of such effect.
 Acoustic data from seventeen speakers of Italian and Polish show that the temporal distance between two consecutive stop releases is not affected by the voicing of the second stop in CV́CV words.
 The temporal invariance of the release to release interval, together with a difference in stop closure duration of voiceless and voiced stops, causes vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
-Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval.
+
+<!-- hybrid account, in which you get compensation because of different closure durations because of different articulations, and so on. multiple mechanisms might conspire, as also noted by Begus, so compensatory is not uniquely supported-->
+As discussed in \Cref{s:comp}, the temporal patterns reported here do not univocally exclude other possible sources for the duration differential.
+Multiple mechanisms (both articulatory and perceptual) could conspire together to produce the observed patterns.
+Such pluralist view has already been proposed, for example, for incomplete neutralisation in \citealt{winter2011} (for a review of explanatory pluralism in the cognitive sciences, see \citealt{dale2009} and references therein).
+A hybrid account which synthesises aspects of multiple accounts is probably warranted, given the diversity of results obtained so far.
+Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval, and in relation to other attributes of consonant effects on vowel duration.
 
 # Acknowledgements
 
