@@ -63,3 +63,32 @@ vow_coef %>%
   )
 ```
 
+```{r vow-coef-plot-2}
+vow_coef %>%
+  ggplot(aes(ve, reorder(speaker, ve), colour = language)) +
+  geom_point(size = 3) +
+  geom_errorbarh(aes(xmin = ve - 4.422, xmax = ve + 4.422)) +
+  scale_colour_manual(values = c("black", "gray")) +
+  labs(
+    y = "Speaker",
+    x = "Voicing effect (ms)"
+  )
+```
+
+# Exclude IT02
+
+```{r vow-lm-2}
+vow_lm_2 <- lmer(
+  v1_duration ~
+    c2_phonation *
+    vowel *
+    language +
+    c2_place +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = filter(durations_filtered, speaker != "it02")
+)
+
+summary(vow_lm_2)
+```
