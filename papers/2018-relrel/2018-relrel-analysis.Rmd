@@ -1,0 +1,65 @@
+---
+title: "2018-relrel-analysis"
+author: "Stefano Coretta"
+date: "30/01/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.lp = "f:", fig.process = function(x) {
+  x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
+  if (file.rename(x, x2)) x2 else x
+})
+library(tidyverse)
+theme_set(theme_minimal())
+library(lme4)
+library(lmerTest)
+library(effects)
+library(broom)
+library(broom.mixed)
+library(knitr)
+library(kableExtra)
+```
+
+```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
+load("./datasets/duration_data.Rdata")
+round_2 <- function(...) {
+  round(..., digits = 2)
+}
+```
+
+# Individual variation
+
+```{r vow-lm}
+vow_lm <- lmer(
+  v1_duration ~
+    c2_phonation *
+    vowel *
+    language +
+    c2_place +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered
+)
+
+summary(vow_lm)
+```
+
+```{r vow-coef}
+vow_coef <- as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
+  rename("intercept" = `(Intercept)`, "ve" = c2_phonationvoiced) %>%
+  mutate(language = ifelse(str_detect(speaker, "^it"), "Italian", "Polish"), speaker = toupper(speaker))
+```
+
+```{r vow-coef-plot}
+vow_coef %>%
+  ggplot(aes(reorder(speaker, ve), ve, fill = language)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("black", "gray")) +
+  labs(
+    x = "Speaker",
+    y = "Voicing effect (ms)"
+  )
+```
+
