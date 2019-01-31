@@ -112,7 +112,7 @@ However, Beguš shows with a cross-annotator analysis that this was not the case
 Moreover, I would like to add that, if misplacement of the V-C boundary is due to random error (which is a neutral assumption to make), the measured displacement from the `actual' boundary will approximately follow a normal distribution with mean 0, so that negative and positive misplacements would cancel each other out.
 <!-- Such statistical argument, however, follows only when boundary misplacement is indeed random, and it is not biased towards one side or the other. -->
 <!-- ask Begus about coefficient -->
-@begus2017 argues that these findings support temporal compensation (although not univocally, see \citealt[Section V]{begus2017}).
+@begus2017 argues that these findings support temporal compensation (although not univocally, see \citealt[Section V]{begus2017}, and \Cref{s:comp} of this paper).
 
 To summarise, a mechanism of compensatory temporal adjustment has been proposed as the pathway to the emergence of the voicing effect.
 According to such account, the difference in vowel duration before consonants varying in voicing (and possibly other phonation types) is the outcome of a compensation between vowel and closure duration.
@@ -258,7 +258,7 @@ This was due either to the absence of a clear burst in the waveform and spectrog
 Most of the fricativised tokens come from three speakers of Central Italian, IT12, IT13, and IT14, a variety of Italian known to show processes of lenition \citep{hualde2011}.
 
 Moreover IT12 and IT14 produced several tokens of voiceless stops with voicing during closure (in some cases the closure was completely voiced).
-These tokens have been used in the analyses, because (1) the actual presence or absence of voicing during closure does not bear on the compensatory account discussed here (which concerns supraglottal gestures) and laryngeal gestures can be implemented almost entirely independently from oral gestures, and (2) the voicing effect has been shown to exist even in whispered speech, where vocal fold vibration is entirely absent [@sharf1964].\footnote{A reviewer makes interesting phonological remarks. The presence of lenition and voicing of voiceless stops in some varieties of Italian and its absence in Polish could be related to differences in prosodic structure and laryngeal phonology between these languages, namely the absence of a feature [voice] in Italian and the absence of true trochees in Polish. This hypothesis is compatible with work by \citet{schwartz2018, schwartz2016}, to which the reader is referred.}
+These tokens have been used in the analyses, because (1) the actual presence or absence of voicing during closure does not bear on the compensatory account discussed here (which concerns supraglottal gestures) and laryngeal gestures can be implemented almost entirely independently from oral gestures, and (2) the voicing effect has been shown to exist even in whispered speech, where vocal fold vibration is entirely absent [@sharf1964].\footnote{A reviewer makes interesting phonological remarks. The presence of lenition and voicing of voiceless stops in some varieties of Italian and its absence in Polish could be related to differences in laryngeal phonology and prosodic structure between these languages, namely the absence of a feature [voice] in Italian and the absence of true trochees in Polish. This hypothesis is compatible with work by \citet{schwartz2018} and \citet{schwartz2016}, to which the reader is referred.}
 
 The durations in milliseconds of the following intervals were extracted with a series of custom Praat scripts from the annotated acoustic landmarks: word duration, vowel duration (V1 onset to V1 offset), consonant closure duration (V1 offset to C2 release), and release to release duration (C1 release to C2 release).
 Sentence duration was measured in seconds.
@@ -325,7 +325,7 @@ The full output of statistical models (including confidence intervals and *p*-va
 ## Vowel duration
 \label{s:vduration}
 
-```{r vow-lm, include=FALSE, cache=TRUE, dependson="read-data"}
+```{r vow-lm, include=FALSE, cache=TRUE}
 vow_lm <- lmer(
   v1_duration ~
     c2_phonation *
@@ -340,7 +340,7 @@ vow_lm <- lmer(
 summary(vow_lm)
 ```
 
-```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 durations_filtered %>%
   ggplot(aes(c2_phonation, v1_duration)) +
   geom_boxplot(alpha = 0.5) +
@@ -349,7 +349,7 @@ durations_filtered %>%
   labs(x = "C2 voicing", y = "Vowel duration (ms)")
 ```
 
-```{r vow-descr, cache=TRUE, dependson="read-data"}
+```{r vow-descr, cache=TRUE}
 vow_descr <- durations_filtered %>%
   group_by(language, c2_phonation) %>%
   summarise(mean = mean(v1_duration, na.rm = TRUE), sd = sd(v1_duration, na.rm = TRUE))
@@ -375,7 +375,7 @@ Speech rate has a negative effect on vowel duration, such that faster rates corr
 ## Consonant closure duration
 \label{s:cduration}
 
-```{r clo-lm, include=FALSE, cache=TRUE, dependson="read-data"}
+```{r clo-lm, include=FALSE, cache=TRUE}
 clo_lm <- lmer(
   c2_clos_duration ~
     c2_phonation *
@@ -390,7 +390,7 @@ clo_lm <- lmer(
 summary(clo_lm)
 ```
 
-```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 durations_filtered %>%
   ggplot(aes(c2_phonation, c2_clos_duration)) +
   geom_boxplot(alpha = 0.5) +
@@ -399,7 +399,7 @@ durations_filtered %>%
   labs(x = "C2 voicing", y = "C2 closure duration (ms)")
 ```
 
-```{r clos-descr, cache=TRUE, dependson="read-data"}
+```{r clos-descr, cache=TRUE}
 clos_descr <- durations_filtered %>%
   group_by(language, c2_phonation) %>%
   summarise(mean = mean(c2_clos_duration, na.rm = TRUE), sd = sd(c2_clos_duration, na.rm = TRUE))
@@ -418,7 +418,7 @@ Finally, faster speech rates correlate with shorter closure durations ($\hat{\be
 ## Vowel and closure duration
 \label{s:vcduration}
 
-```{r vow-clo-lm, include=FALSE, cache=TRUE, dependson="read-data"}
+```{r vow-clo-lm, include=FALSE, cache=TRUE}
 vow_clo_lm <- lmer(
   v1_duration ~
     c2_clos_duration *
@@ -431,7 +431,7 @@ vow_clo_lm <- lmer(
 summary(vow_clo_lm)
 ```
 
-```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data"}
+```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 as_tibble(effect("c2_clos_duration:vowel:speech_rate_c", vow_clo_lm)) %>%
   filter(speech_rate_c == -3e-04) %>%
   ggplot(aes(c2_clos_duration, fit)) +
@@ -457,7 +457,7 @@ The effect of the interaction is reduced when the vowel is /u/ ($\hat{\beta}$ = 
 
 ## Word duration
 
-```{r word-bf, cache=TRUE, dependson="read-data"}
+```{r word-bf, cache=TRUE}
 word_lm <- lme4::lmer(
   word_duration ~
     c2_phonation +
@@ -487,7 +487,7 @@ word_lm_null <- lme4::lmer(
 word_bf <- round(exp((BIC(word_lm) - BIC(word_lm_null)) / 2))
 ```
 
-```{r word-descr, cache=TRUE, dependson="read-data"}
+```{r word-descr, cache=TRUE}
 word_descr <- word_filtered %>%
   group_by(language, c2_phonation) %>%
   summarise(mean = mean(word_duration, na.rm = TRUE), sd = sd(word_duration, na.rm = TRUE))
@@ -505,7 +505,7 @@ This indicates that there is positive evidence for a null effect of C2 voicing o
 
 ## Release to release interval duration
 
-```{r Figure5, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced", out.extra="width=\\linewidth", cache=TRUE, dependson="read-data", warning=FALSE}
+```{r Figure5, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE}
 rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot(alpha = 0.5) +
@@ -515,7 +515,7 @@ rel_filtered %>%
   theme(legend.position = "none")
 ```
 
-```{r rr-bf, cache=TRUE, dependson="read-data"}
+```{r rr-bf, cache=TRUE}
 rr_lm <- lme4::lmer(
   rel_rel ~
     c2_phonation +
@@ -545,7 +545,7 @@ rr_lm_null <- lme4::lmer(
 rr_bf <- round(exp((BIC(rr_lm) - BIC(rr_lm_null)) / 2))
 ```
 
-```{r rr-descr, cache=TRUE, dependson="read-data"}
+```{r rr-descr, cache=TRUE}
 rr_descr <- word_filtered %>%
   group_by(language, c2_phonation) %>%
   summarise(mean = mean(rel_rel, na.rm = TRUE), sd = sd(rel_rel, na.rm = TRUE))
@@ -594,8 +594,8 @@ The mean differences of Italian vowels and closures (11.5 and 13.33, respectivel
 It is plausible that the smaller effect of C2 voicing on preceding vowel duration in Polish is related to the smaller effect on closure duration, if we assume a temporal mechanism of compensation between the closure and the vowel.
 These patterns will need to be confirmed with a more balanced sample of Italian and Polish speakers.
 
-```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dependson = "vow-lm"}
-vow_coef <- as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
+```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE}
+as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
   rename("intercept" = `(Intercept)`, "ve" = c2_phonationvoiced) %>%
   mutate(language = ifelse(str_detect(speaker, "^it"), "Italian", "Polish"), speaker = toupper(speaker)) %>%
     ggplot(aes(ve, reorder(speaker, ve), colour = language)) +
@@ -608,8 +608,8 @@ vow_coef <- as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
   )
 ```
 
-Finally, while the estimated differences in vowel durations can be interpreted in reference to Italian and Polish as two independent linguistic objects, the patterns observed in the individual speakers does not indicate a systematic relation between magnitude of the effect and language.
-\Cref{f:Figure6} shows the random coefficients of the effect of C2 voicing on vowel duration for the individual speakers, extracted from the mixed-effect model presented in \Cref{s:vduration}.
+On the other hand, while the estimated differences in vowel durations can be interpreted in reference to Italian and Polish as two independent linguistic objects, the patterns observed in the individual speakers does not indicate a systematic relation between magnitude of the effect and language.
+\Cref{f:Figure6} shows the random coefficients of the effect of C2 voicing on vowel duration for the individual speakers, extracted from the mixed-effects model presented in \Cref{s:vduration}.
 Black indicates Italian speakers, while grey is for Polish speakers.
 As it can be seen, speakers of both languages are scattered along the values of the voicing effect.
 These results are in agreement with the idiosyncrasy found for the voicing effect of Polish in \citet{malisz2008}.
@@ -658,9 +658,9 @@ While beyond the scope of this paper, articulatory work on the gestural coordina
 
 Finally, it is worth noting that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out.
 For example, perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}), and other perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}.
-Moreover, \citet{begus2017} finds that even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) is still a significant predictor.
+Moreover, \citet{begus2017} finds that even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) in Georgian is still a significant predictor.
 Beguš argues for a separate laryngeal effect, which operates in addition to the closure duration effect.
-In the present study, C2 voicing (voiceless, voiced) and its interactions are not significant when included in the model with vowel duration as outcome and, among other terms, C2 closure duration as predictor, discussed in section \Cref{s:vcduration}.\footnote{Multicollinearity is not an issue here, since the VIFs were all below 3 \citep{zuur2010}.}
+In the present study, C2 voicing (voiceless, voiced) and its interactions are not significant when included in the model discussed in section \Cref{s:vcduration}, which has vowel duration as outcome and C2 closure duration as one of the predictors.\footnote{Multicollinearity is not an issue here, since the VIFs are all below 3 \citep{zuur2010}.}
 
 Even when multicollinearity between predictors is minimal, statistical significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
 For example, it is possible that, through time, different phonation categories (like ejective, voiceless, and voiced stops) can develop different closure duration sub-distributions \citep{soskuthy2013}.
@@ -690,7 +690,7 @@ Some concern could be raised in relation to possible influences of English on th
 However, as reported in \Cref{s:procedure}, conversations during the session prior to the experiment and instructions were in the participant's native language.
 \citet{antoniou2010} show that, in a situational language context study of Greek-English bilinguals, being exposed to the native language during the experiment elicited Greek native-like phonetic values even when the dominant language at the time of recording was English (the bilingual speakers acquired English as a second language, being Greek their first).
 A small effect of L2 could persist in proficient L2 speakers, as found by \citet{schwartz2015}.
-The five Polish speakers with a highly proficient level of English investigated in this study showed a 10 ms increase in VOT values compared to the quasi-monolingual base level.
+The five Polish speakers with a highly proficient level of English investigated in that study showed a 10 ms increase in VOT values compared to the quasi-monolingual base level.
 While previous studies focussed on VOT, future work should directly test the influence of English on the magnitude of the voicing effect of one's native language.
 
 <!-- \Cref{s:gestural} discusses the interpretation of the release to release invariance in CV́CV words as a consequence of the timing of C2 rather than of a holistic CV́C motor plan in which the release to release interval is held constant.
@@ -703,9 +703,9 @@ In light of the results in @begus2017, future studies will also have to investig
 
 # Conclusions
 
-The results of an exploratory study on the effect of voicing on vowel duration are congruent with a compensatory temporal adjustment account of such effect.
+The results of this exploratory study of the effect of voicing on vowel duration are congruent with a compensatory temporal adjustment account of such effect.
 Acoustic data from seventeen speakers of Italian and Polish show that the temporal distance between two consecutive stop releases is not affected by the voicing of the second stop in CV́CV words.
-The temporal invariance of the release to release interval, together with a difference in stop closure duration of voiceless and voiced stops, causes vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
+The temporal invariance of the release to release interval, together with a difference in stop closure duration of voiceless and voiced stops, can cause vowels to be shorter when followed by voiceless stops (which have a long closure) and longer when followed by voiced stops (the closure of which is short).
 
 <!-- hybrid account, in which you get compensation because of different closure durations because of different articulations, and so on. multiple mechanisms might conspire, as also noted by Begus, so compensatory is not uniquely supported-->
 As discussed in \Cref{s:comp}, the temporal patterns reported here do not univocally exclude other possible sources for the duration differential.
