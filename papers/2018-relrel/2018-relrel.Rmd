@@ -265,7 +265,7 @@ The durations in milliseconds of the following intervals were extracted with a s
 Sentence duration was measured in seconds.
 \Cref{f:segmentation} shows an example of the segmentation of /pata/ (a) and /pada/ (b) from an Italian speaker.
 Syllable rate (syllables per second) was used as a proxy to speech rate [@plug2018a], and was calculated as the number of syllables divided by the duration of the sentence in seconds (8 syllables in Italian, 6 in Polish).
-All further data processing and visualisation was done in R v3.5.1 [@r-core-team2018; @wickham2017].
+All further data processing and visualisation was done in R v3.5.2 [@r-core-team2018; @wickham2017].
 
 \begin{figure}
   \centering
@@ -281,7 +281,7 @@ All further data processing and visualisation was done in R v3.5.1 [@r-core-team
 <!-- NEED TO CITE KIRBY -->
 
 Given the data-driven nature of the study, all statistical analyses reported here are to be considered exploratory (hypothesis-generating) rather than confirmatory (hypothesis-driven, \citealt{kerr1998, gelman2013, roettger2018}).
-The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-19 in R [@bates2015], and model estimates were extracted with the `effects` package v4.0-3 [@fox2003].
+The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-19 in R [@bates2015], and model estimates were extracted with the `effects` package v4.1-0 [@fox2003].
 All factors were coded with treatment contrasts and the following reference levels: voiceless (vs. voiced), /a/ (vs. /o/, /u/), coronal (vs. velar), Italian (vs. Polish).
 Speech rate has been centred when included in the models to make the intercept estimates more interpretable.
 The models were fitted by Restricted Maximum Likelihood estimation (REML).
