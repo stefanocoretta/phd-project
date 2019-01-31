@@ -25,6 +25,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.lp = "f:", fig.process 
   x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
   if (file.rename(x, x2)) x2 else x
 })
+library(usdm)
 library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
@@ -749,6 +750,25 @@ kable_styling(font_size = 8)
 ```{r vow-clo-table}
 kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Closure dur.", "Vowel = /o/", "Vowel = /u/", "Speech rate", "Closure × /o/", "Closure × /u/", "C2 closure × sp. rate", "/o/ × sp. rate", "/u/ × sp. rate", "Closure × /o/ × sp. rate", "Closure × /u/ × sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration})") %>%
 kable_styling(font_size = 8)
+```
+
+```{r vif, include=FALSE, eval=FALSE}
+# Check multicollinearity by VIF
+
+durations_filtered %>%
+  select(v2_duration, c2_clos_duration, speech_rate, c2_phonation) %>%
+  mutate(c2_phonation = as.numeric(c2_phonation) - 1) %>%
+  as.data.frame(.) %>%
+  vif(.)
+```
+
+```{r lmer-check, include=FALSE, eval=FALSE}
+qqnorm(resid(vow_lm))
+plot(vow_lm)
+qqnorm(resid(clo_lm))
+plot(clo_lm)
+qqnorm(resid(vow_clo_lm))
+plot(vow_clo_lm)
 ```
 
 # Socio-linguistic information of participants

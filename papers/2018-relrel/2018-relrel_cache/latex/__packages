@@ -1,4 +1,7 @@
 base
+sp
+raster
+usdm
 tidyverse
 ggplot2
 tibble
@@ -16,5 +19,5 @@ effects
 broom
 broom.mixed
 knitr
-bindrcpp
 kableExtra
+bindrcpp
