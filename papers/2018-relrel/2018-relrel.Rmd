@@ -16,8 +16,8 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 params:
-  version: 1.1
-  version-date: "2018/12/18"
+  version: 2.0
+  version-date: "2019/01/31"
 ---
 
 ```{r setup, include=FALSE}
@@ -37,7 +37,7 @@ library(knitr)
 library(kableExtra)
 ```
 
-```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
+```{r read-data, include=FALSE, message=FALSE}
 load("./datasets/duration_data.Rdata")
 round_2 <- function(...) {
   round(..., digits = 2)
