@@ -651,21 +651,20 @@ On the other hand, it is important to note that the release to release interval 
 Indeed, the temporal stability of this interval should be derivable from a theory of gestural phasing, rather than one that simply states that the interval is stable across voicing contexts.
 
 The non-exclusivity of the release to release interval is also shown by the fact that excluding the VOT from it still indicates that C2 voicing is not affecting the interval duration.
-The duration of this vowel onset to release interval (the release to release minus VOT) is stable across voicing contexts (Bayes factor = 9).
-However, the duration of release to release interval duration has relatively more cohesion than that of the vowel onset to release interval, as indicated by two measures of relative dispersion (the coefficient of variation CV and the coefficient of quartile variation CQV, see \citealt{bonett2006}).\footnote{The CV of the release to release duration is 0.203, while that of the vowel onset to release duration is 0.232. The CQV is 0.127 for the release to release and 0.136 for the vowel onset to release. Lower values mean less dispersion/more cohesion.}
-The difficulty in identifying a clear-cut time point corresponding to vowel onset could explain the relative higher dispersion of the vowel onset to release interval duration.
-For these reasons, the release to release interval is probably a better measure of temporal stability than the vowel onset to release, given its inherent higher cohesion.
-
+The duration of the vowel onset to release interval (the release to release minus VOT) is stable across voicing contexts (Bayes factor = 9).
+However, the duration of release to release interval has relatively more cohesion than that of the vowel onset to release interval, as indicated by two measures of relative dispersion (the coefficient of variation CV and the coefficient of quartile variation CQV, see \citealt{bonett2006}).\footnote{The CV of the release to release duration is 0.203, while that of the vowel onset to release duration is 0.232. The CQV is 0.127 for the release to release and 0.136 for the vowel onset to release. Lower values mean less dispersion/more cohesion.}
 On the other hand, the duration of the interval between the vowel onset of V1 to the vowel onset of V2 does change depending on C2 voicing (the interval it's around 20 ms longer if C2 is voiceless).
 This fact is simply a consequence of including the VOT of C2 in the measure.
 Voiceless stops have longer VOT values, which increases the duration of the interval.
+The difficulty in identifying a clear-cut time point corresponding to vowel onset could explain the relative higher dispersion of the vowel onset to release interval duration.
+For these reasons, the release to release interval is probably a better measure of temporal stability than the vowel onset to release, given its inherent higher cohesion.
 
 It could be argued that the temporal stability of the release to release interval could be the result of lengthening vowels followed by voiced stops which have shorter closure durations (or, vice versa, of shortening vowels followed by voiceless stops), so that such stability would not necessarily follow from a compensatory mechanism.
 However, what it is claimed here is that the stability of the interval is a logical antecedent, while the different vowel/closure durations follow as a consequence of the differential timing of closure onset within the temporally stable interval.
 This interpretation seems more natural in light of accounts of gestural phasing like the one proposed by \citet{tilsen2013}.
 Under this account, the stability of the release to release interval could follow from the relative phasing of the vowels in CVCV words (see Figure 6 in \citealt{tilsen2013}).
-The stability of the temporal distance between vowels in Italian is preliminarily supported by acoustic data \citet{celata2014}.
-While beyond the scope of this paper, articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and other durational phenomena.
+The stability of the temporal distance between vowels in Italian is preliminarily supported by the acoustic data in \citet{celata2014}.
+While beyond the scope of this paper, articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and in other durational phenomena.
 
 Finally, it is worth noting that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out.
 For example, perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}), and other perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}.
