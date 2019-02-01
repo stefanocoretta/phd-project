@@ -23,6 +23,8 @@ library(kableExtra)
 
 ```{r read-data, cache=TRUE, include=FALSE, message=FALSE}
 load("./datasets/duration_data.Rdata")
+durations_filtered <- durations_filtered %>%
+  mutate(vor = (c2_rel - v1_ons) * 1000)
 round_2 <- function(...) {
   round(..., digits = 2)
 }
@@ -91,4 +93,83 @@ vow_lm_2 <- lmer(
 )
 
 summary(vow_lm_2)
+```
+
+# VOR
+
+```{r variation}
+durations_filtered %>%
+  summarise(
+    vor_cv = sd(vor, na.rm = TRUE) / mean(vor, na.rm = TRUE),
+    rr_cv = sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE),
+    vor_cqv = (quantile(vor, na.rm = TRUE, probs = 0.75) -
+        quantile(vor, na.rm = TRUE, probs = 0.25)) /
+      (quantile(vor, na.rm = TRUE, probs = 0.75) +
+         quantile(vor, na.rm = TRUE, probs = 0.25)),
+    rr_cqv = (quantile(rel_rel, na.rm = TRUE, probs = 0.75) -
+        quantile(rel_rel, na.rm = TRUE, probs = 0.25)) /
+      (quantile(rel_rel, na.rm = TRUE, probs = 0.75) +
+         quantile(rel_rel, na.rm = TRUE, probs = 0.25))
+  )
+```
+
+```{r vor-bf}
+vor_lm <- lme4::lmer(
+  vor ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vor_lm_null <- lme4::lmer(
+  vor ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vor_bf <- round(exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2))
+```
+
+```{r vv-bf}
+vv_lm <- lme4::lmer(
+  v_v ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vv_lm_null <- lme4::lmer(
+  v_v ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vv_bf_01 <- exp((BIC(vv_lm) - BIC(vv_lm_null)) / 2)
+vv_bf_10 <- 1 / vv_bf_01
 ```
