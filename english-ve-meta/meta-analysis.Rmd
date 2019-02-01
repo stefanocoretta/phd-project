@@ -197,12 +197,11 @@ k18 <- filter(stressed, study == "ko2018")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
-  prior(normal(0, 100), class = b, coef = voicevoiced),
-  prior(cauchy(0, 25), class = sigma)
+  prior(normal(0, 100), class = b, coef = voicevoiced)
 )
 
 k18_bm <- brm(
-  v_duration ~
+  v_duration | se(sd) ~
     voice,
   data = k18,
   prior = priors,
@@ -259,6 +258,8 @@ meta_bm <- brm(
   seed = 9899,
   file = "./english-ve-meta/data/cache/meta_bm"
 )
+
+summary(meta_bm)
 ```
 
 ```{r meta-bm-2}
