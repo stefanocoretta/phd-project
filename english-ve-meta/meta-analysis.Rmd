@@ -278,6 +278,24 @@ meta_bm_2 <- brm(
 )
 ```
 
+```{r meta-bm-3}
+priors <- c(
+  prior(normal(0, 100), class = Intercept),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_3 <- brm(
+  Estimate | se(`Est.Error`) ~ (1 | study),
+  data = filter(estimated_tbl, study %in% c("pl60", "k73", "d89")),
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_bm_3"
+)
+
+summary(meta_bm_3)
+```
+
 ```{r}
 get_prior(v_duration ~ voice * n_syl + word_pos + (1|study), data = stressed)
 ```
