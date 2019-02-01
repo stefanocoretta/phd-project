@@ -227,6 +227,24 @@ estimated[["k18"]] <- fixef(k18_bm)["voicevoiced",]
 estimated_tbl <- plyr::ldply(estimated, .id = "study")
 ```
 
+```{r estimated_v}
+estimated_v <- list()
+
+estimated_v[["h37"]] <- fixef(h37_bm)["Intercept",]
+estimated_v[["hf53"]] <- fixef(hf53_bm)["Intercept",]
+estimated_v[["pl60"]] <- fixef(pl60_bm)["Intercept",]
+estimated_v[["s62"]] <- fixef(s62_bm)["Intercept",]
+estimated_v[["c70"]] <- fixef(c70_bm)["Intercept",]
+estimated_v[["k73"]] <- fixef(k73_bm)["Intercept",]
+estimated_v[["d89"]] <- fixef(d89_bm)["Intercept",]
+estimated_v[["l92"]] <- fixef(l92_bm)["Intercept",]
+estimated_v[["k18"]] <- fixef(k18_bm)["Intercept",]
+
+estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study")
+```
+
+# Meta-analysis
+
 ```{r meta-bm}
 priors <- c(
   prior(normal(0, 100), class = Intercept),
@@ -257,50 +275,6 @@ meta_bm_2 <- brm(
   seed = 9899,
   file = "./english-ve-meta/data/cache/meta_bm_2"
 )
-```
-
-```{r estimated_v}
-estimated_v <- list()
-
-estimated_v[["h37"]] <- fixef(h37_bm)["Intercept",]
-estimated_v[["hf53"]] <- fixef(hf53_bm)["Intercept",]
-estimated_v[["pl60"]] <- fixef(pl60_bm)["Intercept",]
-estimated_v[["s62"]] <- fixef(s62_bm)["Intercept",]
-estimated_v[["c70"]] <- fixef(c70_bm)["Intercept",]
-estimated_v[["k73"]] <- fixef(k73_bm)["Intercept",]
-estimated_v[["d89"]] <- fixef(d89_bm)["Intercept",]
-estimated_v[["l92"]] <- fixef(l92_bm)["Intercept",]
-estimated_v[["k18"]] <- fixef(k18_bm)["Intercept",]
-
-estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study")
-```
-
-# Estimate of the voicing effect
-
-```{r}
-estimates %>%
-  ggplot(aes(v_duration)) + geom_density()
-```
-
-The duration of vowels is bimodally distributed...
-
-```{r}
-estimates %>%
-  ggplot(aes(v_duration, fill = word_pos)) + geom_density(alpha = 0.5) +
-  scale_fill_manual(values = cbbPalette)
-```
-
-```{r}
-estimates %>%
-  ggplot(aes(n_syl, v_duration, fill = voice)) +
-  geom_boxplot()
-```
-
-```{r}
-estimates %>%
-  ggplot(aes(v_duration, fill = word_pos, linetype = n_syl)) + geom_density(alpha = 0.8) +
-  facet_wrap(~study) +
-  scale_fill_manual(values = cbbPalette)
 ```
 
 ```{r}
