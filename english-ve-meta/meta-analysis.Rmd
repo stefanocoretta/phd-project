@@ -22,8 +22,7 @@ estimates <- read_csv("./english-ve-meta/estimates.csv") %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
     n_syl = factor(n_syl, levels = c("mono", "di"))
-  ) %>%
-  na.omit()
+  )
 
 davis1989 <- read_csv("./english-ve-meta/davis1989.csv") %>%
   gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
@@ -156,6 +155,24 @@ k73_bm <- brm(
 )
 ```
 
+```{r davis1989}
+d89 <- filter(estimates, study == "davis1989")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+d89_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = d89,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/d89_bm"
+)
+```
+
 ```{r laeufer1992}
 l92 <- filter(estimates, study == "laeufer1992")
 
@@ -203,6 +220,7 @@ estimated[["pl60"]] <- fixef(pl60_bm)["voicevoiced",]
 estimated[["s62"]] <- fixef(s62_bm)["voicevoiced",]
 estimated[["c70"]] <- fixef(c70_bm)["voicevoiced",]
 estimated[["k73"]] <- fixef(k73_bm)["voicevoiced",]
+estimated[["d89"]] <- fixef(d89_bm)["voicevoiced",]
 estimated[["l92"]] <- fixef(l92_bm)["voicevoiced",]
 estimated[["k18"]] <- fixef(k18_bm)["voicevoiced",]
 
@@ -250,6 +268,7 @@ estimated_v[["pl60"]] <- fixef(pl60_bm)["Intercept",]
 estimated_v[["s62"]] <- fixef(s62_bm)["Intercept",]
 estimated_v[["c70"]] <- fixef(c70_bm)["Intercept",]
 estimated_v[["k73"]] <- fixef(k73_bm)["Intercept",]
+estimated_v[["d89"]] <- fixef(d89_bm)["Intercept",]
 estimated_v[["l92"]] <- fixef(l92_bm)["Intercept",]
 estimated_v[["k18"]] <- fixef(k18_bm)["Intercept",]
 
