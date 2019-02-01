@@ -16,8 +16,8 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 params:
-  version: 2.0
-  version-date: "2019/01/31"
+  version: 2.1
+  version-date: "2019/02/01"
 ---
 
 ```{r setup, include=FALSE}
@@ -39,6 +39,8 @@ library(kableExtra)
 
 ```{r read-data, include=FALSE, message=FALSE}
 load("./datasets/duration_data.Rdata")
+durations_filtered <- durations_filtered %>%
+  mutate(vor = (c2_rel - v1_ons) * 1000)
 round_2 <- function(...) {
   round(..., digits = 2)
 }
@@ -761,7 +763,7 @@ kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>
 kable_styling(font_size = 8)
 ```
 
-```{r vif, include=FALSE, eval=FALSE}
+```{r vif, include=FALSE}
 # Check multicollinearity by VIF
 
 durations_filtered %>%
@@ -771,13 +773,96 @@ durations_filtered %>%
   vif(.)
 ```
 
-```{r lmer-check, include=FALSE, eval=FALSE}
+```{r lmer-check, include=FALSE}
 qqnorm(resid(vow_lm))
 plot(vow_lm)
 qqnorm(resid(clo_lm))
 plot(clo_lm)
 qqnorm(resid(vow_clo_lm))
 plot(vow_clo_lm)
+```
+
+```{r variation, include=FALSE}
+# Coefficient of variation CV and coefficient of quartile variation CQV
+# for vowel onset to vowel onset interval (VV) and release to release
+# interval (RR)
+
+durations_filtered %>%
+  summarise(
+    vor_cv = sd(vor, na.rm = TRUE) / mean(vor, na.rm = TRUE),
+    rr_cv = sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE),
+    vor_cqv = (quantile(vor, na.rm = TRUE, probs = 0.75) -
+        quantile(vor, na.rm = TRUE, probs = 0.25)) /
+      (quantile(vor, na.rm = TRUE, probs = 0.75) +
+         quantile(vor, na.rm = TRUE, probs = 0.25)),
+    rr_cqv = (quantile(rel_rel, na.rm = TRUE, probs = 0.75) -
+        quantile(rel_rel, na.rm = TRUE, probs = 0.25)) /
+      (quantile(rel_rel, na.rm = TRUE, probs = 0.75) +
+         quantile(rel_rel, na.rm = TRUE, probs = 0.25))
+  )
+```
+
+```{r vor-bf, include=FALSE}
+vor_lm <- lme4::lmer(
+  vor ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vor_lm_null <- lme4::lmer(
+  vor ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vor_bf <- round(exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2))
+```
+
+```{r vv-bf, include=FALSE}
+vv_lm <- lme4::lmer(
+  v_v ~
+    c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+vv_lm_null <- lme4::lmer(
+  v_v ~
+    # c2_phonation +
+    vowel +
+    c2_place +
+    language +
+    speech_rate_c +
+    (1+c2_phonation|speaker) +
+    (1|item),
+  data = durations_filtered,
+  REML = FALSE
+)
+
+# Bayes factor of null model vs. full
+vv_bf_01 <- exp((BIC(vv_lm) - BIC(vv_lm_null)) / 2)
+# Bayes factor of full model vs. null
+vv_bf_10 <- 1 / vv_bf_01
 ```
 
 # Socio-linguistic information of participants
