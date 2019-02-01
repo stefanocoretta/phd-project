@@ -17,14 +17,14 @@ options(mc.cores = parallel::detectCores())
 ```
 
 ```{r data, message=FALSE}
-estimates <- read_csv("./english-ve-meta/estimates.csv") %>%
+stressed <- read_csv("./english-ve-meta/stressed.csv") %>%
   mutate_if(is.character, as.factor) %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
     n_syl = factor(n_syl, levels = c("mono", "di"))
   )
 
-davis1989 <- read_csv("./english-ve-meta/davis1989.csv") %>%
+unstressed <- read_csv("./english-ve-meta/unstressed.csv") %>%
   gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
   separate(voice_stat, c("voice", "stat")) %>%
   spread(stat, value) %>%
@@ -35,14 +35,14 @@ davis1989 <- read_csv("./english-ve-meta/davis1989.csv") %>%
     place = factor(place, levels = c("labial", "alveolar", "velar"))
   )
 
-davis1989_red <- filter(davis1989, v_context == "reduced")
-davis1989_unr <- filter(davis1989, v_context == "unreduced")
+unstressed_red <- filter(unstressed, v_context == "reduced")
+unstressed_unr <- filter(unstressed, v_context == "unreduced")
 ```
 
 # Obtain estimates from previous studies
 
 ```{r heffner1937}
-h37 <- filter(estimates, study == "heffner1937")
+h37 <- filter(stressed, study == "heffner1937")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -61,7 +61,7 @@ h37_bm <- brm(
 ```
 
 ```{r housefairbanks1953}
-hf53 <- filter(estimates, study == "housefairbanks1953")
+hf53 <- filter(stressed, study == "housefairbanks1953")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -80,7 +80,7 @@ hf53_bm <- brm(
 ```
 
 ```{r petersonlehiste1960}
-pl60 <- filter(estimates, study == "petersonlehiste1960")
+pl60 <- filter(stressed, study == "petersonlehiste1960")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -99,7 +99,7 @@ pl60_bm <- brm(
 ```
 
 ```{r sharf1962}
-s62 <- filter(estimates, study == "sharf1962")
+s62 <- filter(stressed, study == "sharf1962")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -118,7 +118,7 @@ s62_bm <- brm(
 ```
 
 ```{r chen1970}
-c70 <- filter(estimates, study == "chen1970")
+c70 <- filter(stressed, study == "chen1970")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -137,7 +137,7 @@ c70_bm <- brm(
 ```
 
 ```{r klatt1973}
-k73 <- filter(estimates, study == "klatt1973")
+k73 <- filter(stressed, study == "klatt1973")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -156,7 +156,7 @@ k73_bm <- brm(
 ```
 
 ```{r davis1989}
-d89 <- filter(estimates, study == "davis1989")
+d89 <- filter(stressed, study == "davis1989")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -174,7 +174,7 @@ d89_bm <- brm(
 ```
 
 ```{r laeufer1992}
-l92 <- filter(estimates, study == "laeufer1992")
+l92 <- filter(stressed, study == "laeufer1992")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -193,7 +193,7 @@ l92_bm <- brm(
 ```
 
 ```{r ko2018}
-k18 <- filter(estimates, study == "ko2018")
+k18 <- filter(stressed, study == "ko2018")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
@@ -278,7 +278,7 @@ meta_bm_2 <- brm(
 ```
 
 ```{r}
-get_prior(v_duration ~ voice * n_syl + word_pos + (1|study), data = estimates)
+get_prior(v_duration ~ voice * n_syl + word_pos + (1|study), data = stressed)
 ```
 
 ```{r}
@@ -300,7 +300,7 @@ ve_brm <- brm(
     n_syl +
     word_pos +
     (1|study),
-  data = estimates,
+  data = stressed,
   prior = priors,
   cores = 4,
   seed = 9899
@@ -332,7 +332,7 @@ mcmc_areas(as.array(ve_brm), regex_pars = "b_")
 ```{r unstr-priors}
 get_prior(
   v_duration | se(sd) ~ voice + place + (1| speaker),
-  data = davis1989_red,
+  data = unstressed_red,
   family = gaussian()
 )
 ```
@@ -348,7 +348,7 @@ priors <- c(
 
 unstr_bm <- brm(
   v_duration | se(sd, sigma = TRUE) ~ voice + place + (1| speaker),
-  data = davis1989_red,
+  data = unstressed_red,
   family = gaussian(),
   prior = priors,
   cores = 4,
@@ -380,7 +380,7 @@ mcmc_areas(as.array(unstr_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_p
 ```{r unred-priors}
 get_prior(
   v_duration | se(sd) ~ voice + place + (1| speaker),
-  data = davis1989_unr,
+  data = unstressed_unr,
   family = gaussian()
 )
 ```
@@ -396,7 +396,7 @@ priors_unr <- c(
 
 unred_bm <- brm(
   v_duration | se(sd, sigma = TRUE) ~ voice + place + (1| speaker),
-  data = davis1989_unr,
+  data = unstressed_unr,
   family = gaussian(),
   prior = priors_unr,
   cores = 4,
