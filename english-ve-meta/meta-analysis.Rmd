@@ -353,6 +353,25 @@ meta_bm_3 <- brm(
 summary(meta_bm_3)
 ```
 
+```{r meta-bm-4}
+priors <- c(
+  prior(normal(0, 100), class = Intercept),
+  prior(normal(0, 50), class = b, coef = syl_posnonMfinal),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_4 <- brm(
+  Estimate | se(`Est.Error`) ~ syl_pos + (1 | study),
+  data = estimated_tbl,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_bm_4"
+)
+
+summary(meta_bm_4)
+```
+
 # Plot estimates
 
 ```{r}
@@ -411,7 +430,7 @@ bind_rows(estimated_tbl, studies_shrink) %>%
     linetype = "Source"
   ) +
   coord_flip() +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
 ```
 
 ```{r}
@@ -421,6 +440,30 @@ estimated_v_tbl %>%
   # geom_vline(aes(xintercept = 94.90), colour = "blue", linetype = "dashed") +
   geom_point() +
   geom_errorbarh(aes(xmin = Q2.5, xmax = Q97.5), height = 0.2)
+```
+
+```{r}
+post_syl <- c(posterior_samples(meta_bm_4, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_4, pars = "b_syl_posnonMfinal")
+
+post_syl <- bind_cols(post_syl, posterior_samples(meta_bm_4, pars = "b_Intercept")) %>%
+  gather("coef", "posterior")
+
+post_syl %>%
+  ggplot(aes(posterior, fill = coef)) +
+  geom_density(colour = NA, alpha = 0.8) +
+  scale_fill_manual(
+    values = c("skyblue3", "orange3"),
+    labels = c("monosyllabic", "disyllabic")
+  ) +
+  scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
+  labs(
+    title = "Meta-analytical estimate of the voicing effect",
+    x = "Difference in vowel duration (ms)",
+    fill = "Word type",
+    y = element_blank()
+  ) +
+  theme(legend.position = "top")
 ```
 
 # Estimate of voicing effect in unstressed vowels
