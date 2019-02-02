@@ -37,6 +37,8 @@ unstressed <- read_csv("./english-ve-meta/unstressed.csv") %>%
 
 unstressed_red <- filter(unstressed, v_context == "reduced")
 unstressed_unr <- filter(unstressed, v_context == "unreduced")
+
+studies <- stressed %>% select(study, n_syl:word_pos) %>% unique()
 ```
 
 # Obtain estimates from previous studies
@@ -213,15 +215,15 @@ k18_bm <- brm(
 ```{r estimated}
 estimated <- list()
 
-estimated[["h37"]] <- fixef(h37_bm)["voicevoiced",]
-estimated[["hf53"]] <- fixef(hf53_bm)["voicevoiced",]
-estimated[["pl60"]] <- fixef(pl60_bm)["voicevoiced",]
-estimated[["s62"]] <- fixef(s62_bm)["voicevoiced",]
-estimated[["c70"]] <- fixef(c70_bm)["voicevoiced",]
-estimated[["k73"]] <- fixef(k73_bm)["voicevoiced",]
-estimated[["d89"]] <- fixef(d89_bm)["voicevoiced",]
-estimated[["l92"]] <- fixef(l92_bm)["voicevoiced",]
-estimated[["k18"]] <- fixef(k18_bm)["voicevoiced",]
+estimated[["heffner1937"]] <- fixef(h37_bm)["voicevoiced",]
+estimated[["housefairbanks1953"]] <- fixef(hf53_bm)["voicevoiced",]
+estimated[["petersonlehiste1960"]] <- fixef(pl60_bm)["voicevoiced",]
+estimated[["sharf1962"]] <- fixef(s62_bm)["voicevoiced",]
+estimated[["chen1970"]] <- fixef(c70_bm)["voicevoiced",]
+estimated[["klatt1973"]] <- fixef(k73_bm)["voicevoiced",]
+estimated[["davis1989"]] <- fixef(d89_bm)["voicevoiced",]
+estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
+estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
 
 estimated_tbl <- plyr::ldply(estimated, .id = "study")
 ```
@@ -229,15 +231,15 @@ estimated_tbl <- plyr::ldply(estimated, .id = "study")
 ```{r estimated_v}
 estimated_v <- list()
 
-estimated_v[["h37"]] <- fixef(h37_bm)["Intercept",]
-estimated_v[["hf53"]] <- fixef(hf53_bm)["Intercept",]
-estimated_v[["pl60"]] <- fixef(pl60_bm)["Intercept",]
-estimated_v[["s62"]] <- fixef(s62_bm)["Intercept",]
-estimated_v[["c70"]] <- fixef(c70_bm)["Intercept",]
-estimated_v[["k73"]] <- fixef(k73_bm)["Intercept",]
-estimated_v[["d89"]] <- fixef(d89_bm)["Intercept",]
-estimated_v[["l92"]] <- fixef(l92_bm)["Intercept",]
-estimated_v[["k18"]] <- fixef(k18_bm)["Intercept",]
+estimated_v[["heffner1937"]] <- fixef(h37_bm)["Intercept",]
+estimated_v[["housefairbanks1953"]] <- fixef(hf53_bm)["Intercept",]
+estimated_v[["petersonlehiste1960"]] <- fixef(pl60_bm)["Intercept",]
+estimated_v[["sharf1962"]] <- fixef(s62_bm)["Intercept",]
+estimated_v[["chen1970"]] <- fixef(c70_bm)["Intercept",]
+estimated_v[["klatt1973"]] <- fixef(k73_bm)["Intercept",]
+estimated_v[["davis1989"]] <- fixef(d89_bm)["Intercept",]
+estimated_v[["laeufer1992"]] <- fixef(l92_bm)["Intercept",]
+estimated_v[["ko2018"]] <- fixef(k18_bm)["Intercept",]
 
 estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study")
 ```
@@ -270,7 +272,7 @@ priors <- c(
 
 meta_bm_2 <- brm(
   Estimate | se(`Est.Error`) ~ (1 | study),
-  data = filter(estimated_tbl, study != "c70"),
+  data = filter(estimated_tbl, study != "chen1970"),
   prior = priors,
   control = list(adapt_delta = 0.999),
   seed = 9899,
@@ -286,7 +288,7 @@ priors <- c(
 
 meta_bm_3 <- brm(
   Estimate | se(`Est.Error`) ~ (1 | study),
-  data = filter(estimated_tbl, study %in% c("pl60", "k73", "d89")),
+  data = filter(estimated_tbl, study %in% c("petersonlehiste60", "klatt73", "davis89")),
   prior = priors,
   control = list(adapt_delta = 0.999),
   seed = 9899,
