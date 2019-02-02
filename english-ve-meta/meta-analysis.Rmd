@@ -18,11 +18,12 @@ options(mc.cores = parallel::detectCores())
 
 ```{r data, message=FALSE}
 stressed <- read_csv("./english-ve-meta/stressed.csv") %>%
-  mutate_if(is.character, as.factor) %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
-    n_syl = factor(n_syl, levels = c("mono", "di"))
-  )
+    n_syl = factor(n_syl, levels = c("mono", "di")),
+    word_pos_2 = ifelse(word_pos == "medial", "medial", "final")
+  ) %>%
+  mutate_if(is.character, as.factor)
 
 unstressed <- read_csv("./english-ve-meta/unstressed.csv") %>%
   gather("voice_stat", "value", voiced_mean:voiceless_sd) %>%
@@ -300,52 +301,6 @@ summary(meta_bm_3)
 
 ```{r}
 get_prior(v_duration ~ voice * n_syl + word_pos + (1|study), data = stressed)
-```
-
-```{r}
-priors <- c(
-  set_prior("normal(200, 100)", class = "Intercept"),
-  set_prior("normal(0, 50)", class = "b", coef = "n_syldi"),
-  set_prior("normal(100, 50)", class = "b", coef = "voicevoiced"),
-  set_prior("normal(0, 50)", class = "b", coef = "voicevoiced:n_syldi"),
-  set_prior("normal(0, 100)", class = "b", coef = "word_posisolation"),
-  set_prior("normal(0, 100)", class = "b", coef = "word_posmean"),
-  set_prior("normal(0, 100)", class = "b", coef = "word_posmedial"),
-  set_prior("normal(0, 50)", class = "sd"),
-  set_prior("cauchy(0, 50)", class = "sigma")
-)
-
-ve_brm <- brm(
-  v_duration ~
-    voice *
-    n_syl +
-    word_pos +
-    (1|study),
-  data = stressed,
-  prior = priors,
-  cores = 4,
-  seed = 9899
-)
-```
-
-```{r}
-summary(ve_brm)
-```
-
-```{r}
-brms::pp_check(ve_brm, nsamples = 100)
-```
-
-```{r}
-mcmc_trace(as.array(ve_brm), pars = "b_voicevoiced")
-```
-
-```{r}
-mcmc_intervals(as.array(ve_brm), regex_pars = "b_")
-```
-
-```{r}
-mcmc_areas(as.array(ve_brm), regex_pars = "b_")
 ```
 
 # Estimate of voicing effect in unstressed vowels
