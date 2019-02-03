@@ -21,8 +21,7 @@ stressed <- read_csv("./english-ve-meta/stressed.csv") %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
     n_syl = factor(n_syl, levels = c("mono", "di")),
-    word_pos_2 = ifelse(word_pos == "medial", "medial", "final"),
-    year = str_sub(study, str_length(study) - 3, str_length(study))
+    word_pos_2 = ifelse(word_pos == "medial", "medial", "final")
   ) %>%
   mutate_if(is.character, as.factor)
 
@@ -40,8 +39,9 @@ unstressed <- read_csv("./english-ve-meta/unstressed.csv") %>%
 unstressed_red <- filter(unstressed, v_context == "reduced")
 unstressed_unr <- filter(unstressed, v_context == "unreduced")
 
-studies <- stressed %>% select(study, n_syl:word_pos) %>% unique() %>%
-  mutate(word_pos_2 = ifelse(word_pos == "medial", "medial", "final"))
+studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
+  filter(study != "hussein1994") %>% # Hussein 1994 is not included in the analysis
+  droplevels()
 ```
 
 # Obtain estimates from previous studies
@@ -243,22 +243,21 @@ k18_bm <- brm(
 ```{r estimated}
 estimated <- list()
 
+estimated[["chen1970"]] <- fixef(c70_bm)["voicevoiced",]
+estimated[["davis1989"]] <- fixef(d89_bm)["voicevoiced",]
 estimated[["heffner1937"]] <- fixef(h37_bm)["voicevoiced",]
 estimated[["housefairbanks1953"]] <- fixef(hf53_bm)["voicevoiced",]
+estimated[["klatt1973_di"]] <- fixef(k73_di_bm)["voicevoiced",]
+estimated[["klatt1973_mono"]] <- fixef(k73_mono_bm)["voicevoiced",]
+estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
+estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
 estimated[["petersonlehiste1960"]] <- fixef(pl60_bm)["voicevoiced",]
 estimated[["sharf1962_di"]] <- fixef(s62_di_bm)["voicevoiced",]
 estimated[["sharf1962_mono"]] <- fixef(s62_mono_bm)["voicevoiced",]
-estimated[["chen1970"]] <- fixef(c70_bm)["voicevoiced",]
-estimated[["klatt1973_di"]] <- fixef(k73_di_bm)["voicevoiced",]
-estimated[["klatt1973_mono"]] <- fixef(k73_mono_bm)["voicevoiced",]
-estimated[["davis1989"]] <- fixef(d89_bm)["voicevoiced",]
-estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
-estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
 
 estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
   mutate(
-    year = str_sub(study, str_length(study) - 3, str_length(study)),
-    source = "original"
+    source = factor("original", levels = c("original", "meta-analysis"))
   ) %>%
   left_join(y = studies)
 ```
@@ -266,20 +265,23 @@ estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
 ```{r estimated_v}
 estimated_v <- list()
 
+estimated_v[["chen1970"]] <- fixef(c70_bm)["Intercept",]
+estimated_v[["davis1989"]] <- fixef(d89_bm)["Intercept",]
 estimated_v[["heffner1937"]] <- fixef(h37_bm)["Intercept",]
 estimated_v[["housefairbanks1953"]] <- fixef(hf53_bm)["Intercept",]
+estimated_v[["klatt1973_di"]] <- fixef(k73_di_bm)["Intercept",]
+estimated_v[["klatt1973_mono"]] <- fixef(k73_mono_bm)["Intercept",]
+estimated_v[["ko2018"]] <- fixef(k18_bm)["Intercept",]
+estimated_v[["laeufer1992"]] <- fixef(l92_bm)["Intercept",]
 estimated_v[["petersonlehiste1960"]] <- fixef(pl60_bm)["Intercept",]
 estimated_v[["sharf1962_di"]] <- fixef(s62_di_bm)["Intercept",]
 estimated_v[["sharf1962_mono"]] <- fixef(s62_mono_bm)["Intercept",]
-estimated_v[["chen1970"]] <- fixef(c70_bm)["Intercept",]
-estimated_v[["klatt1973_di"]] <- fixef(k73_di_bm)["Intercept",]
-estimated_v[["klatt1973_mono"]] <- fixef(k73_mono_bm)["Intercept",]
-estimated_v[["davis1989"]] <- fixef(d89_bm)["Intercept",]
-estimated_v[["laeufer1992"]] <- fixef(l92_bm)["Intercept",]
-estimated_v[["ko2018"]] <- fixef(k18_bm)["Intercept",]
 
 estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study") %>%
-  mutate(year = str_sub(study, str_length(study) - 3, str_length(study)))
+  mutate(
+    source = factor("original", levels = c("original", "meta-analysis"))
+  ) %>%
+  left_join(y = studies)
 ```
 
 # Meta-analysis
@@ -302,22 +304,19 @@ meta_bm <- brm(
 summary(meta_bm)
 ```
 
-```{r studies-shrink}
-# Code from Nicenboim et al. 2018
+```{r studies-shrunk}
+# Code adapted from Nicenboim et al. 2018
 
-post_study <- c(posterior_samples(meta_bm, pars = "b_Intercept")) +
-  posterior_samples(meta_bm, pars = "r_study")
-
-studies_shrink <- post_study %>%
+studies_shrunk <- (c(posterior_samples(meta_bm, pars = "b_Intercept")) +
+  posterior_samples(meta_bm, pars = "r_study")) %>%
   summarise_all(funs(list(c(mean(.), quantile(., probs = c(.025, 0.975)))))) %>%
   unnest %>%
   transpose %>%
   setNames(c("Estimate", "Q2.5", "Q97.5")) %>%
   map_df(unlist) %>%
   mutate(
-    study = sort(estimated_tbl$study),
-    year = str_sub(study, str_length(study) - 3, str_length(study)),
-    source = "meta-analysis"
+    study = estimated_tbl$study,
+    source = factor("meta-analysis", levels = c("original", "meta-analysis"))
   ) %>%
   left_join(y = studies)
 ```
@@ -375,11 +374,20 @@ meta_bm_4 <- brm(
 summary(meta_bm_4)
 ```
 
+```{r post-syl}
+post_syl <- (c(posterior_samples(meta_bm_4, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_4, pars = "b_syl_posnonMfinal")) %>%
+  bind_cols(posterior_samples(meta_bm_4, pars = "b_Intercept")) %>%
+  gather("coef", "posterior")
+```
+
 # Plot estimates
 
-```{r}
+# Voicing effect
+
+```{r original-plot}
 estimated_tbl %>%
-  ggplot(aes(Estimate, reorder(study, Estimate), colour = syl_pos, linetype = word_pos_2)) +
+  ggplot(aes(Estimate, reorder(study_ref, Estimate), colour = syl_pos, linetype = word_pos_2)) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
   geom_vline(aes(xintercept = 35.20), colour = "skyblue4", linetype = "dashed") +
   geom_vline(aes(xintercept = 87.99), colour = "skyblue4", linetype = "dashed") +
@@ -395,9 +403,9 @@ estimated_tbl %>%
   )
 ```
 
-```{r}
-studies_shrink %>%
-  ggplot(aes(Estimate, reorder(study, Estimate), colour = syl_pos, linetype = word_pos_2)) +
+```{r shrunk-plot}
+studies_shrunk %>%
+  ggplot(aes(Estimate, reorder(study_ref, Estimate), colour = syl_pos, linetype = word_pos_2)) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
   geom_vline(aes(xintercept = 35.20), colour = "skyblue4", linetype = "dashed") +
   geom_vline(aes(xintercept = 87.99), colour = "skyblue4", linetype = "dashed") +
@@ -413,9 +421,9 @@ studies_shrink %>%
   )
 ```
 
-```{r}
-bind_rows(estimated_tbl, studies_shrink) %>%
-  ggplot(aes(reorder(study, Estimate), Estimate, linetype = source, colour = syl_pos)) +
+```{r origin-shrunk-plot}
+bind_rows(estimated_tbl, studies_shrunk) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, linetype = source, colour = syl_pos)) +
   geom_hline(aes(yintercept = 0), colour = "grey") +
   geom_hline(aes(yintercept = 35.20), colour = "skyblue4", linetype = "dashed") +
   geom_hline(aes(yintercept = 87.99), colour = "skyblue4", linetype = "dashed") +
@@ -424,7 +432,6 @@ bind_rows(estimated_tbl, studies_shrink) %>%
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_color_brewer(type = "qual", palette = 2) +
   scale_linetype_discrete(breaks = c("original", "meta-analysis")) +
-  scale_x_discrete(labels = c("Davis (1989)", "Klatt (1973) disyllabic", "Sharf (1962) disyllabic", "Ko (2018)", "Sharf (1962) monosyllabic", "Klatt (1973) monosyllabic", "Heffner (1937)", "Laeufer (1992)", "House & Fairbanks (1953)", "Peterson & Lehiste (1960)", "Chen (1970)")) +
   scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
   labs(
     y = "Difference in vowel duration (ms)",
@@ -436,22 +443,16 @@ bind_rows(estimated_tbl, studies_shrink) %>%
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
 ```
 
-```{r}
+```{r original-v-plot}
 estimated_v_tbl %>%
-  ggplot(aes(Estimate, reorder(study, Estimate))) +
-  # geom_vline(aes(xintercept = 34.73), colour = "blue", linetype = "dashed") +
-  # geom_vline(aes(xintercept = 94.90), colour = "blue", linetype = "dashed") +
+  ggplot(aes(Estimate, reorder(study_ref, Estimate))) +
   geom_point() +
   geom_errorbarh(aes(xmin = Q2.5, xmax = Q97.5), height = 0.2)
 ```
 
-```{r}
-post_syl <- c(posterior_samples(meta_bm_4, pars = "b_Intercept")) +
-  posterior_samples(meta_bm_4, pars = "b_syl_posnonMfinal")
+## Voicing effect by word type (mono- vs. disyllabic)
 
-post_syl <- bind_cols(post_syl, posterior_samples(meta_bm_4, pars = "b_Intercept")) %>%
-  gather("coef", "posterior")
-
+```{r syl-plot}
 post_syl %>%
   ggplot(aes(posterior, fill = coef)) +
   geom_vline(aes(xintercept = 0)) +
