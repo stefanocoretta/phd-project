@@ -427,6 +427,7 @@ studies_shrunk %>%
 
 ```{r origin-shrunk-plot}
 bind_rows(estimated_tbl, studies_shrunk) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
   ggplot(aes(reorder(study_ref, Estimate), Estimate, linetype = source, colour = syl_pos)) +
   geom_hline(aes(yintercept = 0), colour = "grey") +
   geom_hline(aes(yintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
