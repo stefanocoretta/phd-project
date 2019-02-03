@@ -387,7 +387,7 @@ post_syl <- (c(posterior_samples(meta_bm_4, pars = "b_Intercept")) +
 
 # Plot estimates
 
-# Voicing effect
+## Voicing effect
 
 ```{r original-plot}
 estimated_tbl %>%
