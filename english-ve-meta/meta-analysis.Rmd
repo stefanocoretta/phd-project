@@ -301,6 +301,10 @@ meta_bm <- brm(
   file = "./english-ve-meta/data/cache/meta_bm"
 )
 
+meta_bm_est <- fixef(meta_bm)["Intercept","Estimate"]
+meta_bm_q2.5 <- fixef(meta_bm)["Intercept","Q2.5"]
+meta_bm_q97.5 <- fixef(meta_bm)["Intercept","Q97.5"]
+
 summary(meta_bm)
 ```
 
@@ -389,9 +393,9 @@ post_syl <- (c(posterior_samples(meta_bm_4, pars = "b_Intercept")) +
 estimated_tbl %>%
   ggplot(aes(Estimate, reorder(study_ref, Estimate), colour = syl_pos, linetype = word_pos_2)) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
-  geom_vline(aes(xintercept = 35.20), colour = "skyblue4", linetype = "dashed") +
-  geom_vline(aes(xintercept = 87.99), colour = "skyblue4", linetype = "dashed") +
-  geom_vline(aes(xintercept = 61.35), colour = "skyblue4") +
+  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_est), colour = "skyblue4") +
   geom_point(size = 2) +
   geom_errorbarh(aes(xmin = Q2.5, xmax = Q97.5), height = 0) +
   scale_color_brewer(type = "qual", palette = 2) +
@@ -407,9 +411,9 @@ estimated_tbl %>%
 studies_shrunk %>%
   ggplot(aes(Estimate, reorder(study_ref, Estimate), colour = syl_pos, linetype = word_pos_2)) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
-  geom_vline(aes(xintercept = 35.20), colour = "skyblue4", linetype = "dashed") +
-  geom_vline(aes(xintercept = 87.99), colour = "skyblue4", linetype = "dashed") +
-  geom_vline(aes(xintercept = 61.35), colour = "skyblue4") +
+  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_est), colour = "skyblue4") +
   geom_point(size = 2) +
   geom_errorbarh(aes(xmin = Q2.5, xmax = Q97.5), height = 0) +
   scale_color_brewer(type = "qual", palette = 2) +
@@ -425,9 +429,9 @@ studies_shrunk %>%
 bind_rows(estimated_tbl, studies_shrunk) %>%
   ggplot(aes(reorder(study_ref, Estimate), Estimate, linetype = source, colour = syl_pos)) +
   geom_hline(aes(yintercept = 0), colour = "grey") +
-  geom_hline(aes(yintercept = 35.20), colour = "skyblue4", linetype = "dashed") +
-  geom_hline(aes(yintercept = 87.99), colour = "skyblue4", linetype = "dashed") +
-  geom_hline(aes(yintercept = 61.35), colour = "skyblue4") +
+  geom_hline(aes(yintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_est), colour = "skyblue4") +
   geom_point(size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_color_brewer(type = "qual", palette = 2) +
