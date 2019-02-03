@@ -428,22 +428,21 @@ studies_shrunk %>%
 ```{r origin-shrunk-plot}
 bind_rows(estimated_tbl, studies_shrunk) %>%
   mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
-  ggplot(aes(reorder(study_ref, Estimate), Estimate, linetype = source, colour = syl_pos)) +
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
   geom_hline(aes(yintercept = 0), colour = "grey") +
   geom_hline(aes(yintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
   geom_hline(aes(yintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
   geom_hline(aes(yintercept = meta_bm_est), colour = "skyblue4") +
   geom_point(size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
-  scale_color_brewer(type = "qual", palette = "Dark2") +
-  scale_linetype_discrete(breaks = c("original", "meta-analysis")) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
   scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
   labs(
     title = "Estimated voicing effect from the original source\nand from the meta-analysis",
     y = "Difference in vowel duration (ms)",
     x = "Study",
-    colour = "Syllable position",
-    linetype = "Source"
+    linetype = "Syllable position",
+    colour = "Source"
   ) +
   coord_flip() +
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
