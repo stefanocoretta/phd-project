@@ -1,7 +1,7 @@
 ---
 title: "Pre-registration for Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
-date: "16/01/2019"
+date: "04/02/2019"
 output:
   pdf_document:
     citation_package: natbib
@@ -116,6 +116,7 @@ Each target word is combined with the following frame sentences: I'll say X this
 Each word/frame combination will be read once.
 Acoustic recording will be obtained with a Zoom H4n Pro recorder and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit; downsampled to 22050 Hz for analysis).
 The recordings will be subject to force alignment with SPPAS [@bigi2015] for analysis in Praat [@boersma2018].
+Data collection will begin on the 19th of February 2019.
 
 ## Sample size
 
