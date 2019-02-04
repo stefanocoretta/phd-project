@@ -1,0 +1,116 @@
+---
+title: '2019-02-04'
+author: "Stefano Coretta"
+date: "03/02/2019"
+output:
+  pdf_document:
+    citation_package: natbib
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
+bibliography: linguistics
+biblio-style: unified
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, out.width = "5in", out.height = "3.5in", fig.align = "center")
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(bayesplot)
+library(tidyverse)
+theme_set(theme_minimal())
+library(brms)
+```
+
+```{r read}
+load("./english-ve-meta/data/cache/cache_1.RData")
+
+meta_bm_est <- fixef(meta_bm)["Intercept","Estimate"]
+meta_bm_q2.5 <- fixef(meta_bm)["Intercept","Q2.5"]
+meta_bm_q97.5 <- fixef(meta_bm)["Intercept","Q97.5"]
+
+meta_bm_intercept <- mcmc_areas_data(as.array(meta_bm), pars = "b_Intercept")
+```
+
+# Bayesian meta-analysis of the voicing effect in English (stressed vowels)
+
+A Bayesian meta-analysis of the English voicing effect has been performed on 9 studies, following the procedures in \citet{nicenboim2018a}.
+The posterior distributions of each study have been obtained by fitting a Bayesian linear model to the summary data (means) provided in the respective papers.
+Only two studies, \citet{davis1989} and \citet{ko2018}, reported measures of dispersion along with measures of central tendency.
+A measurement error model was used to obtain the posterior distributions from these studies.
+In two cases, \citet{sharf1962} and \citet{klatt1973}, the authors tested both monosyllabic and disyllabic words, so two separate distributions were calculated for each word type.
+This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English.
+A data set with the mean estimates and estimated standard errors from this 11 posterior distributions has been used to fit a Bayesian error model, which had the mean estimate as outcome, and the intercept and a by-study random intercept as predictors.
+
+The effect estimated by the meta-analysis (the intercept of the mean estimate) is +58.28 ms (Est. error = 12.99) when C2 is voiced, with the 95% credible intervals (CI) between 33.31 and 84.63.
+The following plot shows the posterior distribution of the estimated voicing effect.
+The darker area represents the 50% CI, while the dark think line is the median.
+
+```{r ve-est-post}
+meta_bm_intercept %>%
+  filter(interval != "point") %>%
+  ggplot(aes(x, density, group = interval)) +
+  geom_area(alpha = 0.5) +
+  geom_area(data = filter(meta_bm_intercept, interval == "point")) +
+  scale_x_continuous(breaks = seq(0, 100, 10)) +
+  labs(
+    x = "Difference in vowel duration (ms)",
+    y = "Density",
+    title = "Posterior distribution of the voicing effect in English",
+    subtitle = "The darker area indicates the 50% credible interval, while the thick line is the median."
+  )
+```
+
+In the following funnel plot, the mean estimate (the points) of the voicing effect with 95% CIs (the horizontal segments) is shown for each of the 11 studies.
+For each study, the plot gives both the original estimate (as obtained from the original data summary of the study) and the estimate calculated by the random effects in the meta-analytical model.
+The vertical lines indicate the meta-analytical mean estimate (the thick line) and the 95% CI (the dashed lines).
+Note how the studies in which the target vowel was in a non-final syllable have a smaller estimate.
+
+```{r origin-shrunk, out.width="6in", out.height="4.5in"}
+bind_rows(estimated_tbl, studies_shrunk) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
+  geom_hline(aes(yintercept = 0), colour = "grey") +
+  geom_hline(aes(yintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_est), colour = "skyblue4") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
+  scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  labs(
+    title = "By-study estimates of the voicing effect",
+    subtitle = "The estimate from the original study and from the output of the\nby-study intercept of the meta-analysis are shown.",
+    y = "Difference in vowel duration (ms)",
+    x = "Study",
+    linetype = "Syllable position",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
+In a follow-up analysis, the within-word position of the syllable with the test vowel has been included as a predictor.
+The following figure shows the posterior distributions of the voicing effect in word final and non-final syllables respectively.
+According to the meta-analytical model, the effect of voicing is +70.69 ms (SE = 12.36, 95% CI = 47.03:95.61) in word-final syllables, and +25.46 ($\hat{\beta{}}$ = -45.23, SE = 19.50, 95% CI = -84.36:-5.38) in non-final syllables.
+
+```{r syl-plot}
+post_syl %>%
+  ggplot(aes(posterior, fill = coef)) +
+  geom_vline(aes(xintercept = 0)) +
+  geom_density(colour = NA, alpha = 0.7) +
+  scale_fill_brewer(
+    type = "qual", palette = "Paired",
+    labels = c("final", "non-final")
+  ) +
+  scale_x_continuous(breaks = seq(-60, 100, 20)) +
+  labs(
+    title = "Meta-analytical posterior distributions of the voicing effect",
+    x = "Difference in vowel duration (ms)",
+    fill = "Syllable position",
+    y = element_blank()
+  ) +
+  theme(legend.position = "top")
+```
+
+\nocite{chen1970, peterson1960, house1953, laeufer1992, heffner1937, klatt1973, sharf1962, ko2018, davis1989}
