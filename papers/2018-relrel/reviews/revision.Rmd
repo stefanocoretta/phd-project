@@ -23,8 +23,8 @@ General comments
 Page 6, line 171 regarding Polish as a voicing language: Polish VOTs for /ptk/ are longish in many cases, and for some speakers might be described as semi-aspirated. I've witnessed this many times myself. For one relatively recent published description, see e.g. Waniek-Klimczak (2011). I think the values in Keating's PhD are also a bit longer then true short-lag.
 
 \color{plum}
-Lines X mention the concern about the contested status of Polish as a true voicing language.
-Line X has been reworded so that now reads 'On the other hand, they [Italian and Polish] are both traditionally classified as 'true voicing' languages, in which the phonologically voiced stops are typically articulated with vocal fold vibration'.
+Lines 168--192 mention the concern about the contested status of Polish as a true voicing language.
+Line 168 has been reworded so that now reads 'On the other hand, the typical realisation of phonological voiced stops in these languages are similar (but see Huszthy 2016 and Schwartz & Arndt 2018 for a phonological and phonetic discussion on laryngeal aspects of Italian and Polish respectively)'.
 The main point here is that while actual voicing during closure of lenis stops in aspirating languages is optional, voicing during the closure of phonologically voiced stops in both Italian and Polish is robust.
 Further theoretical reasons are also given on how the phonological distinction between voicing and aspirating languages is not clear-cut in face of empirical data, although a thorough discussion would be beyond the scope of the paper.
 \color{black}
@@ -32,8 +32,8 @@ Further theoretical reasons are also given on how the phonological distinction b
 Page 7, lines 213-215. Since the recording locations were Italy and Manchester, I suppose the Polish participants were recorded in the UK? If so, how long have they been in the UK? The >6 month column is quite vague.  From the table in the appendix, it appears as though all but two of the Polish speakers have lived abroad (i.e. have been out of the country for more than 6 months), and all of them have some knowledge of English. Since English has probably the most robust 'voicing effect' around, and it seems that the Polish participants are quite proficient in English, with regard to the voicing effect I think it is difficult to claim that the sample of Polish participants for this study is representative. There needs to be more information about the participants. How often do they use English/Polish? What is their education level? Do they use English in their professional lives? What about the language in which the recording sessions were conducted? Unless they were conducted in Polish (i.e. with a native Polish speaker giving instructions in Polish to the participants), I think it's almost certainly the case that these speakers' L1 Polish has been affected by English. I don't think this disqualifies the paper. It's just that the possibility of L2 influence on L1 needs to be acknowledged in the text, as well as in the discussion. For information on the effects of language mode with bilingual participants, see Grosjean (2004). If the recording sessions were indeed carried out entirely in Italian and Polish, Antoniou et al. (2010) is a study that may be used to argue that the data in the paper may indeed be representative of the L1s. For other work on L2-induced effects on L1 pronunciation, see Chang (2012, in press), Schwartz et al. (2015a, 2015b), Herd et al. (2015).
 
 \color{plum}
-As mentioned in lines X [Procedure], the participants were spoken in their native language prior to the experiment, and instructions/equipment fitting was conducted in the native language as well.
-Lines X mention the concern of L2 influence in light of the results in Antoniou et al. (2010) and Schwartz 2015b, suggested by the reviewer.
+As mentioned in lines 291--293, the participants were spoken in their native language prior to the experiment, and instructions/equipment fitting was conducted in the native language as well.
+Lines 708--723 discuss the possible L2 influence in light of the results in Antoniou et al. (2010) and Schwartz 2015b, suggested by the reviewer.
 \color{black}
 
 Phonological comments
@@ -43,13 +43,13 @@ Page 10, line 289. Isn't it in an interesting question why Italian has lenition 
 Page 10, lines 291-298. This is interesting, and completely goes against the predictions of Laryngeal Realism (stated explicitly I believe by Beckman et al. 2013), that intervocalic voicing should be absent from voice languages, since it would mean "adding" a feature [voice] in a weak prosodic position. Perhaps there is no feature [voice]? See Schwartz & Arndt (2018) for an account of the phonology of voicing languages in which there is no feature [voice], and some perceptual evidence in favor of that account.
 
 \color{plum}
-Thanks to the reviewers for pointing these out. In my humble opinion, a long discussion of these phonological remarks, while of high relevance for formal arguments of laryngeal phonology, is beyond the scope of this paper, but given their general theoretical value, they have been included as footnote X.
+Thanks to the reviewers for pointing these out. In my humble opinion, a long discussion of these phonological remarks, while of high relevance for formal arguments of laryngeal phonology, is beyond the scope of this paper, but given their general theoretical value, they have been included as footnote 7, p. 11.
 \color{black}
 
 Pages 20-21. It seems to me that the results of these studies suggest that Italian and Polish behave somewhat differently with regard to the voicing effect. The mean differences are greater in Italian than they are in Polish (16 ms vs. 7.5 ms as stated in 4.1). Do you think it is indeed the case that Polish and Italian differ systematically? If the difference between the languages is in fact systemic, I think phonology needs to have something to say about it. For discussion of this issue, particularly with regard to Polish, see Schwartz (2016). Essentially the claim in that paper is that Polish does not really have trochees (see Newlin-Lukowicz 2012 for phonetic evidence that is compatible with this claim).  For Schwartz, true trochees show a recursive structure, which puts the second C in a CVCV in an inherently weaker position. Perhaps language-specific differences between Polish and Italian are due to prosodic differences in the structure of CVCV sequences? This might explain the earlier comment about why Italian shows lenition but Polish doesn’t?
 
 \color{plum}
-While there is an apparent systematic difference in the magnitude of the voicing effect between Italian and Polish, the behaviour of the individual speakers is quite idiosyncratic and does not pattern with their native language (as revealed by the by-speaker random coefficients extracted from the mixed-effects models). Moreover, the statistical results indicated that language is not a significant predictor (although this could be due to low statistical power, as addressed in Section 4.1). Lines X now offer an overview of the individual differences found in relation to the voicing effect and how these individual variation does not seem to support clear across-language patterns.
+While there is an apparent systematic difference in the magnitude of the voicing effect between Italian and Polish, the behaviour of the individual speakers is quite idiosyncratic and does not pattern with their native language (as revealed by the by-speaker random coefficients extracted from the mixed-effects models). Moreover, the statistical results indicated that language is not a significant predictor (although this could be due to low statistical power, as addressed in Section 4.1). Lines 544--559 now offer an overview of the individual differences found in relation to the voicing effect and how these individual variation does not seem to support clear across-language patterns.
 \color{black}
 
 References
@@ -97,13 +97,13 @@ Major comment
 As already mentioned above, the paper should clearly state that the constant value of the release-to-release interval can be due to different mechanisms operating on the vowel duration differences and does not per se point to the compensatory lengthening explanation. If the author has additional evidence in favor of why compensatory lengthening is likely the main contributing factor, this should be stated as well.
 
 \color{plum}
-If I understand correctly, the reviewer is saying that the temporal stability of the release to release interval could be a consequence of the fact that vowels are lengthened when followed by voiced stops, so that the temporal distance between two consecutive releases in this context matches that in the context of a voiceless stop. However, there are reasons to argue that the temporal stability is a logical antecedent, as now discussed in lines X. It is anyway recognised that further work is needed to disambiguate between these two interpretations by looking at general properties of gestural phasing that might encompass temporal patterns other than the voicing effect.
+If I understand correctly, the reviewer is saying that the temporal stability of the release to release interval could be a consequence of the fact that vowels are lengthened when followed by voiced stops, so that the temporal distance between two consecutive releases in this context matches that in the context of a voiceless stop. However, there are reasons to argue that the temporal stability is a logical antecedent, as now discussed in lines 625--642. It is anyway recognised that further work is needed to disambiguate between these two interpretations by looking at general properties of gestural phasing that might encompass temporal patterns other than the voicing effect.
 \color{black}
 
 Furthermore, the author should discuss the hypothesis that laryngeal features influence vowel durations in greater detail. The few works that measure vowel duration before stops other than voiced vs. voiceless (Durvasula and Luo 2014, Beguš 2017) find evidence for the effect of laryngeal features. Because the present paper measures vowel duration before voiced and voiceless stops which also have different closure durations, the laryngeal effects and the closure effects are of course conflated. This should be addressed in the paper.
 
 \color{plum}
-This point has been discussed in more details in lines X. The results on laryngeal effects reported in Beguš 2017 are discussed and compared with those from this study. Lines X in the conclusion section stresses that a compensatory account is likely not the only mechanism underlying the observed durational patterns, and that multiple causes can conspire to produces the difference in vowel/closure durations.
+This point has been discussed in more details in lines 648--672. The results on laryngeal effects reported in Beguš 2017 are discussed and compared with those from this study. Lines 743--755 in the conclusion section stresses that a compensatory account is likely not the only mechanism underlying the observed durational patterns, and that multiple causes can conspire to produces the difference in vowel/closure durations.
 \color{black}
 
 Minor comments
@@ -121,7 +121,7 @@ The abstract now has "(like perceptual biases and laryngeal effects)".
 186-198 Does the author have any guesses why the results are so different for Polish? The review of the literature is sufficient, but it would be very beneficial to the reader if the author would evaluate methodology of the studies, especially since Polish has been mentioned as a case of non-existence of the voicing effect. Is experimental design equally balanced in all studies? If not, are there patterns of experimental design in studies that don’t report the voicing effect?
 
 \color{plum}
-Lines X discuss the possible reasons behind the diverse results. While no clear pattern can be seen between methodology and presence/absence of a significant voicing effect, the small reported estimates could indicate inability to detect small differences due to low statistical power.
+Lines 214--226 discuss the possible reasons behind the diverse results. While no clear pattern can be seen between methodology and presence/absence of a significant voicing effect, the small reported estimates could indicate inability to detect small differences due to low statistical power.
 \color{black}
 
 Statistical analysis.
@@ -129,18 +129,22 @@ Statistical analysis.
 The analysis is generally sound and clear. Unfortunately, the manuscript does not mention whether assumptions of the linear model are checked. Sometimes modeling durations can produce patterns in the residual plot, so it would be good to inform the reader that the residual plots look without patterns.
 
 \color{plum}
-The residual and QQ plots of the models do not show patterns in the residuals (see `X`). Some of the residual plots show different blobs, this is related to idiosyncratic differences in mean durations between participants and it is not an issue (it is taken care of by the random effects). Line X added in the manuscript: "Inspection of residual plots and QQ plots of the models described below indicated absence of patterns in the residuals."
+The residual and QQ plots of the models do not show patterns in the residuals (see supplementary material). Some of the residual plots show different blobs, this is related to idiosyncratic differences in mean durations between participants and it is not an issue (it is taken care of by the random effects). Line 360 added in the manuscript: "Inspection of residual plots and QQ plots of the models described below indicated absence of patterns in the residuals."
 \color{black}
 
 A short justification of why Bayes factors vs. the more standard AIC criterion is used.
 
 \color{plum}
-This has been now added as footnote X in the manuscript.
+This has been now added as footnote 8, p. 13 in the manuscript.
 \color{black}
 
 Release to release
 
 Why release to release? The author mentions in the Discussion section that release-torelease measurement is somewhat arbitrary. A broader discussion on why particularly this interval would be useful. Has the author tested any other measurements? Do the result change if, say, VOT is excluded from the interval?
+
+\color{plum}
+Lines 607--624 offer an overview of the results when VOT is excluded and when the vowel onset to vowel onset interval is used instead of the release to release interval.
+\color{black}
 
 # 3
 
