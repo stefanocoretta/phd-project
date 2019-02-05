@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../"))
 library(tidyverse)
+library(ggrepel)
 theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
@@ -182,25 +183,35 @@ k73_mono_bm <- brm(
 )
 ```
 
-```{r davis1989}
-l85 <- filter(stressed, study == "luce1985")
+```{r luce1985}
+l85_medial <- filter(stressed, study == "luce1985_medial")
+l85_final <- filter(stressed, study == "luce1985_final")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
   prior(normal(0, 100), class = b, coef = voicevoiced)
 )
 
-l85_bm <- brm(
+l85_medial_bm <- brm(
   v_duration | se(sd) ~
     voice,
-  data = l85,
+  data = l85_medial,
   prior = priors,
   seed = 9899,
-  file = "./english-ve-meta/data/cache/l85_bm"
+  file = "./english-ve-meta/data/cache/l85_medial_bm"
+)
+
+l85_final_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = l85_final,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/l85_final_bm"
 )
 ```
 
-```{r luce1985}
+```{r davis1989}
 d89 <- filter(stressed, study == "davis1989")
 
 priors <- c(
@@ -258,6 +269,8 @@ k18_bm <- brm(
 ```{r estimated}
 estimated <- list()
 
+# These are in allpahbetical order so that joining below does not complain
+# about different levels
 estimated[["chen1970"]] <- fixef(c70_bm)["voicevoiced",]
 estimated[["davis1989"]] <- fixef(d89_bm)["voicevoiced",]
 estimated[["heffner1937"]] <- fixef(h37_bm)["voicevoiced",]
@@ -266,13 +279,16 @@ estimated[["klatt1973_di"]] <- fixef(k73_di_bm)["voicevoiced",]
 estimated[["klatt1973_mono"]] <- fixef(k73_mono_bm)["voicevoiced",]
 estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
 estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
+estimated[["luce1985_final"]] <- fixef(l85_final_bm)["voicevoiced",]
+estimated[["luce1985_medial"]] <- fixef(l85_medial_bm)["voicevoiced",]
 estimated[["petersonlehiste1960"]] <- fixef(pl60_bm)["voicevoiced",]
 estimated[["sharf1962_di"]] <- fixef(s62_di_bm)["voicevoiced",]
 estimated[["sharf1962_mono"]] <- fixef(s62_mono_bm)["voicevoiced",]
 
 estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
   mutate(
-    source = factor("original", levels = c("original", "meta-analysis"))
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
   ) %>%
   left_join(y = studies)
 ```
@@ -288,14 +304,16 @@ estimated_v[["klatt1973_di"]] <- fixef(k73_di_bm)["Intercept",]
 estimated_v[["klatt1973_mono"]] <- fixef(k73_mono_bm)["Intercept",]
 estimated_v[["ko2018"]] <- fixef(k18_bm)["Intercept",]
 estimated_v[["laeufer1992"]] <- fixef(l92_bm)["Intercept",]
-estimated_v[["luce1985"]] <- fixef(l85_bm)["Intercept",]
+estimated_v[["luce1985_final"]] <- fixef(l85_final_bm)["Intercept",]
+estimated_v[["luce1985_medial"]] <- fixef(l85_medial_bm)["Intercept",]
 estimated_v[["petersonlehiste1960"]] <- fixef(pl60_bm)["Intercept",]
 estimated_v[["sharf1962_di"]] <- fixef(s62_di_bm)["Intercept",]
 estimated_v[["sharf1962_mono"]] <- fixef(s62_mono_bm)["Intercept",]
 
 estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study") %>%
   mutate(
-    source = factor("original", levels = c("original", "meta-analysis"))
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
   ) %>%
   left_join(y = studies)
 ```
@@ -329,10 +347,14 @@ summary(meta_bm)
 
 studies_shrunk <- (c(posterior_samples(meta_bm, pars = "b_Intercept")) +
   posterior_samples(meta_bm, pars = "r_study")) %>%
-  summarise_all(funs(list(c(mean(.), quantile(., probs = c(.025, 0.975)))))) %>%
-  unnest %>%
-  transpose %>%
-  setNames(c("Estimate", "Q2.5", "Q97.5")) %>%
+  summarise_all(funs(list(c(
+    mean(.),
+    quantile(., probs = c(.025, 0.975)),
+    sd(.)
+  )))) %>%
+  unnest() %>%
+  transpose() %>%
+  setNames(c("Estimate", "Q2.5", "Q97.5", "Est.Error")) %>%
   map_df(unlist) %>%
   mutate(
     study = estimated_tbl$study,
@@ -462,6 +484,30 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   ) +
   coord_flip() +
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
+```{r funnel-plot}
+estimated_tbl %>%
+  mutate(precision = 1/Est.Error) %>%
+  ggplot(aes(Estimate, precision, label = study_ref)) +
+  geom_vline(aes(xintercept = 0), colour = "grey") +
+  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_est), colour = "skyblue4") +
+  geom_point() +
+  geom_text_repel()
+```
+
+```{r funnel-plot-2}
+studies_shrunk %>%
+  mutate(precision = 1/Est.Error) %>%
+  ggplot(aes(Estimate, precision, label = study_ref)) +
+  geom_vline(aes(xintercept = 0), colour = "grey") +
+  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_est), colour = "skyblue4") +
+  geom_point() +
+  geom_text_repel()
 ```
 
 ```{r original-v-plot}
