@@ -183,6 +183,24 @@ k73_mono_bm <- brm(
 ```
 
 ```{r davis1989}
+l85 <- filter(stressed, study == "luce1985")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+l85_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = l85,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/l85_bm"
+)
+```
+
+```{r luce1985}
 d89 <- filter(stressed, study == "davis1989")
 
 priors <- c(
@@ -270,6 +288,7 @@ estimated_v[["klatt1973_di"]] <- fixef(k73_di_bm)["Intercept",]
 estimated_v[["klatt1973_mono"]] <- fixef(k73_mono_bm)["Intercept",]
 estimated_v[["ko2018"]] <- fixef(k18_bm)["Intercept",]
 estimated_v[["laeufer1992"]] <- fixef(l92_bm)["Intercept",]
+estimated_v[["luce1985"]] <- fixef(l85_bm)["Intercept",]
 estimated_v[["petersonlehiste1960"]] <- fixef(pl60_bm)["Intercept",]
 estimated_v[["sharf1962_di"]] <- fixef(s62_di_bm)["Intercept",]
 estimated_v[["sharf1962_mono"]] <- fixef(s62_mono_bm)["Intercept",]
