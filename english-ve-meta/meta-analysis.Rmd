@@ -219,11 +219,8 @@ l92_bm <- brm(
 )
 ```
 
-I suspect that the values reported as standard deviations are actually variances.
-
 ```{r ko2018}
-k18 <- filter(stressed, study == "ko2018") %>%
-  mutate(sd = sqrt(sd)) # to get sd from variance
+k18 <- filter(stressed, study == "ko2018")
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
