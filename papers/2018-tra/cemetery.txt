@@ -1,0 +1,3 @@
+\footnote{While \citet{keating1984} finds no statistical difference in vowel durations before voiceless vs. voiced stops, \citet{nowak2006} reports a 4.5 ms effect and the data in \citet{malisz2008} suggest an effect of 3.5 ms. \citet{begus2017} argues that the null finding in \citet{keating1984} could be due to low statistical power.}
+
+The existence of the voicing effect is supported by abundant empirical evidence, although no agreement has been reached regarding its causes \citep{durvasula2012, soskuthy2013}.
