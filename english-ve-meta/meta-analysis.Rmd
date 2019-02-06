@@ -85,6 +85,25 @@ hf53_bm <- brm(
 )
 ```
 
+```{r zimmerman1958}
+z58 <- filter(stressed, study == "zimmerman1958")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+z58_bm <- brm(
+  v_duration ~
+    voice,
+  data = z58,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/z58_bm"
+)
+```
+
 ```{r petersonlehiste1960}
 pl60 <- filter(stressed, study == "petersonlehiste1960")
 
@@ -180,6 +199,25 @@ k73_mono_bm <- brm(
   seed = 9899,
   file = "./english-ve-meta/data/cache/k73_mono_bm",
   control = list(adapt_delta = 0.999)
+)
+```
+
+```{r mack1982}
+m82 <- filter(stressed, study == "mack1982")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+m82_bm <- brm(
+  v_duration ~
+    voice,
+  data = m82,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/m82_bm"
 )
 ```
 
@@ -281,9 +319,11 @@ estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
 estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
 estimated[["luce1985_final"]] <- fixef(l85_final_bm)["voicevoiced",]
 estimated[["luce1985_medial"]] <- fixef(l85_medial_bm)["voicevoiced",]
+estimated[["mack1982"]] <- fixef(m82_bm)["voicevoiced",]
 estimated[["petersonlehiste1960"]] <- fixef(pl60_bm)["voicevoiced",]
 estimated[["sharf1962_di"]] <- fixef(s62_di_bm)["voicevoiced",]
 estimated[["sharf1962_mono"]] <- fixef(s62_mono_bm)["voicevoiced",]
+estimated[["zimmerman1958"]] <- fixef(z58_bm)["voicevoiced",]
 
 estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
   mutate(
@@ -306,9 +346,11 @@ estimated_v[["ko2018"]] <- fixef(k18_bm)["Intercept",]
 estimated_v[["laeufer1992"]] <- fixef(l92_bm)["Intercept",]
 estimated_v[["luce1985_final"]] <- fixef(l85_final_bm)["Intercept",]
 estimated_v[["luce1985_medial"]] <- fixef(l85_medial_bm)["Intercept",]
+estimated_v[["mack1982"]] <- fixef(m82_bm)["Intercept",]
 estimated_v[["petersonlehiste1960"]] <- fixef(pl60_bm)["Intercept",]
 estimated_v[["sharf1962_di"]] <- fixef(s62_di_bm)["Intercept",]
 estimated_v[["sharf1962_mono"]] <- fixef(s62_mono_bm)["Intercept",]
+estimated_v[["zimmerman1958"]] <- fixef(z58_bm)["Intercept",]
 
 estimated_v_tbl <- plyr::ldply(estimated_v, .id = "study") %>%
   mutate(
