@@ -536,7 +536,7 @@ estimated_tbl %>%
   geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
   geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
   geom_vline(aes(xintercept = meta_bm_est), colour = "skyblue4") +
-  geom_point() +
+  geom_point(aes(shape = syl_pos)) +
   geom_text_repel()
 ```
 
