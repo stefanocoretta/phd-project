@@ -117,13 +117,16 @@ Finally, tongue root adjustments seem to target more specifically lingual conson
 
 However, the relation between tongue root advancement and voicing is a complex one.
 First, tongue root advancement is not the only mechanism for sustaining voicing during a stop \citep{rothenberg1967, westbury1983, ohala2011} and it has a certain degree of idiosyncrasy \citep{ahn2016}.
-It is well known that the closures of voiced stops are longer than those of voiceless stops \citep{lisker1957, umeda1977, van-summers1987, davis1989, de-jong1991}.
+A wide-spread difference between voiceless and voiced stops concerns their respective closure durations.
+The closure of voiced stops are generally longer than those of voiceless stops \citep{lisker1957, umeda1977, van-summers1987, davis1989, de-jong1991}.
+A shorter closure favours maintenance of vocal fold vibration by ensuring that the pressure build-up in the oral cavity does not equalise the sub-glottal and supra-glottal pressures (at which point voicing would cease).
 <!-- lateral pharyngeal walls -->
-Other solutions include larynx lowering \citep{riordan1980}, opening of the velopharyngeal port \citep{yanagihara1966}, and producing a retroflex occlusion \citep{sprouse2008}.
+Other solutions which help sustaining voicing during closure include larynx lowering \citep{riordan1980}, opening of the velopharyngeal port \citep{yanagihara1966}, and producing a retroflex occlusion \citep{sprouse2008}.
 
 Second, implementation of tongue root advancement can be decoupled from the actual presence of vocal fold vibration.
-In \citet{westbury1983}, advancement of the tongue root is found in some productions of voiceless stops, which is counterintuitive given that tongue root advancement is generally considered to be a feature of voiced stops.
-Similarly, \citet{ahn2015, ahn2016, ahn2018} find that the tongue root is more advanced in the phonologically voiced stops independent of whether they actually show vocal fold vibration or not.
+In \citet{westbury1983}, advancement of the tongue root is found in some productions of voiceless stops.
+This is counterintuitive, since tongue root advancement is generally considered to be a feature of voiced stops which require voicing-related pressure adjustments.
+Moreover, \citet{ahn2015, ahn2016, ahn2018} looked at utterance-initial stops and found that the tongue root is more advanced in the phonologically voiced stops independent of whether they actually show vocal fold vibration or not.
 
 To summarise, tongue root advancement is a common articulatory solution employed to counterbalance the increase in supra-glottal pressure and maintaining voicing during the production of at least lingual voiced stops.
 While this gesture is not exclusive of voiced stops and it can be implemented even in the absence of vocal fold vibration, tongue root advancement seems to be a robust correlate of (phonological) voicing.
@@ -137,8 +140,8 @@ including (but not limited to) English, German, Hindi, Russian, Arabic, Korean, 
 The latter two offer a good opportunity for the study of ..., given their reported differences in magnitude/presence of the voicing effect and their relative comparability.
 While Italian has been consistently reported as a voicing-effect language \citep{caldognetto1979, farnetani1986, esposito2002}, some studies found an effect in Polish \citet{slowiaczek1985, nowak2006, malisz2008, coretta2018j} but others did not \citep{keating1984, jassem1989}.
 
-\citet{coretta2018j} discusses the acoustic data of this study, and argues the stressed vowels of disyllabic (CV́CV) words in Italian and Polish are 16 ms longer (SE = 4.4) when followed by voiced stops.
-The high degree of intra-speaker variation and statistical modelling also indicate that these languages behave similarly regarding the voicing effect.
+\citet{coretta2018j} discusses the acoustic data of this study, and argues that the stressed vowels of disyllabic (CV́CV) words in Italian and Polish are 16 ms longer (SE = 4.4) when followed by a voiced stop.
+The high degree of intra-speaker variation and backed up by statistical modelling also indicates that these languages possibly behave similarly regarding the voicing effect.
 Moreover, \citet{coretta2018j} shows that the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
 The duration of the release to release interval is stable across voicing contexts.
 Within this interval, the timing of the onset of the stop closure produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
