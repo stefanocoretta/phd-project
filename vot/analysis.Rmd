@@ -23,3 +23,16 @@ vot %>%
   plot_ly(x = ~coronal, y = ~dorsal, z = ~labial, type = "scatter3d", size = 1, color = ~vot.category)
 ```
 
+```{r}
+vot %>%
+  mutate(
+    vot.category = factor(vot.category, levels = c("lead", "short.lag", "long.lag")),
+    poa.broad = factor(poa.broad, levels = c("dorsal", "coronal", "labial"))
+    ) %>%
+  unite("lang", language, dialect) %>%
+  ggplot(aes(poa.broad, vot.mu, group = lang)) +
+  geom_point(alpha = 0.1) +
+  geom_line(alpha = 0.5) +
+  facet_grid(~ vot.category)
+```
+
