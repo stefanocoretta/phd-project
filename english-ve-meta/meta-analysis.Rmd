@@ -405,6 +405,75 @@ studies_shrunk <- (c(posterior_samples(meta_bm, pars = "b_Intercept")) +
   left_join(y = studies)
 ```
 
+```{r meta-bm-1}
+estimated_tbl_final <- filter(estimated_tbl, syl_pos == "final")
+
+priors <- c(
+  prior(normal(0, 100), class = Intercept),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_1 <- brm(
+  Estimate | se(`Est.Error`) ~ (1 | study),
+  data = estimated_tbl_final,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_bm_1"
+)
+
+meta_bm_1_est <- fixef(meta_bm)["Intercept","Estimate"]
+meta_bm_1_q2.5 <- fixef(meta_bm)["Intercept","Q2.5"]
+meta_bm_1_q97.5 <- fixef(meta_bm)["Intercept","Q97.5"]
+
+summary(meta_bm_1)
+```
+
+```{r studies-shrunk-1}
+# Code adapted from Nicenboim et al. 2018
+
+studies_shrunk_1 <- (c(posterior_samples(meta_bm_1, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_1, pars = "r_study")) %>%
+  summarise_all(funs(list(c(
+    mean(.),
+    quantile(., probs = c(.025, 0.975)),
+    sd(.)
+  )))) %>%
+  unnest() %>%
+  transpose() %>%
+  setNames(c("Estimate", "Q2.5", "Q97.5", "Est.Error")) %>%
+  map_df(unlist) %>%
+  mutate(
+    study = estimated_tbl_final$study,
+    source = factor("meta-analysis", levels = c("original", "meta-analysis"))
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r meta-bm-medial}
+estimated_tbl_medial <- filter(estimated_tbl, syl_pos == "non-final")
+
+priors <- c(
+  prior(normal(0, 100), class = Intercept),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_medial <- brm(
+  Estimate | se(`Est.Error`) ~ (1 | study),
+  data = estimated_tbl_medial,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_bm_medial"
+)
+
+meta_bm_medial_est <- fixef(meta_bm)["Intercept","Estimate"]
+meta_bm_medial_q2.5 <- fixef(meta_bm)["Intercept","Q2.5"]
+meta_bm_medial_q97.5 <- fixef(meta_bm)["Intercept","Q97.5"]
+
+summary(meta_bm_medial)
+```
+
 ```{r meta-bm-2}
 priors <- c(
   prior(normal(0, 100), class = Intercept),
@@ -528,6 +597,28 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
 ```
 
+```{r origin-shrunk-1-plot}
+bind_rows(estimated_tbl_final, studies_shrunk_1) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source)) +
+  geom_hline(aes(yintercept = 0), colour = "grey") +
+  geom_hline(aes(yintercept = meta_bm_1_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_1_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_1_est), colour = "skyblue4") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
+  scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  labs(
+    title = "Estimated voicing effect from the original source\nand from the meta-analysis",
+    y = "Difference in vowel duration (ms)",
+    x = "Study",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
 ```{r funnel-plot}
 estimated_tbl %>%
   mutate(precision = 1/Est.Error) %>%
@@ -579,6 +670,14 @@ post_syl %>%
     y = element_blank()
   ) +
   theme(legend.position = "top")
+```
+
+```{r}
+posterior_samples(meta_bm_medial, pars = "b_Intercept") %>%
+  ggplot(aes(b_Intercept)) +
+  geom_vline(aes(xintercept = 0)) +
+  geom_density(colour = NA, fill = "skyblue4", alpha = 0.5, bw = 2) +
+  scale_x_continuous(breaks = seq(-30, 80, 10), limits = c(-30, 80))
 ```
 
 # Estimate of voicing effect in unstressed vowels
