@@ -1,0 +1,25 @@
+---
+title: "VOT analysis"
+author: "Stefano Coretta"
+date: "07/02/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(plotly)
+```
+
+```{r}
+vot <- read_csv("./vot/ChodroffGoldenWilson2019_vot_avg.csv")
+```
+
+```{r}
+vot %>%
+  spread(poa.broad, vot.mu) %>%
+  plot_ly(x = ~coronal, y = ~dorsal, z = ~labial, type = "scatter3d", size = 1, color = ~vot.category)
+```
+
