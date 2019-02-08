@@ -1,0 +1,88 @@
+---
+title: "Multivariate"
+author: "Stefano Coretta"
+date: "08/02/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+library(coretta2018itapol)
+data("token_measures")
+library(mgcv)
+library(lme4)
+library(ggeffects)
+library(plotly)
+
+token_measures <- token_measures %>%
+  mutate_if(is.character, as.factor)
+```
+
+```{r}
+token_measures %>%
+  plot_ly(x = ~v1_duration, y = ~c2_clos_duration, z = ~speech_rate, type = "scatter3d", opacity = 0.5, size = 0.1, color = ~c2_phonation)
+```
+
+```{r}
+mv_gam <- gam(
+  list(
+    v1_duration ~ s(speech_rate),
+    c2_clos_duration ~ s(speech_rate)
+  ),
+  data = token_measures,
+  family = mvn(d = 2)
+)
+```
+
+```{r}
+summary(mv_gam)
+```
+
+```{r}
+vcs_gam <- bam(
+  speech_rate ~
+    s(v1_duration) +
+    s(c2_clos_duration) +
+    ti(v1_duration, c2_clos_duration) +
+    s(v1_duration, speaker, bs = "fs", m = 1) +
+    s(c2_clos_duration, speaker, bs = "fs", m = 1),
+  data = token_measures
+)
+```
+
+```{r}
+vis.gam(vcs_gam, theta = 120, phi = 30)
+```
+
+```{r}
+vcs_lm <- lmer(
+  speech_rate ~
+    v1_duration *
+    c2_clos_duration +
+    (1|speaker),
+  data = token_measures
+)
+```
+
+```{r}
+v_min <- min(token_measures$v1_duration, na.rm = TRUE)
+v_max <- max(token_measures$v1_duration, na.rm = TRUE)
+c_min <- min(token_measures$c2_clos_duration, na.rm = TRUE)
+c_max <- max(token_measures$c2_clos_duration, na.rm = TRUE)
+
+pred_grid <- expand.grid(
+  v1_duration = seq(v_min, v_max, length.out = 100),
+  c2_clos_duration = seq(c_min, c_max, length.out = 100)
+  )
+
+pred_sr <- predict(vcs_lm, newdata = pred_grid, re.form = NA)
+
+pred <- cbind(pred_grid, sr = pred_sr)
+```
+
+```{r}
+plot_ly(pred, x = ~v1_duration, y = ~c2_clos_duration, z = ~sr, type = "mesh3d", opacity = 0.5)
+```
+
