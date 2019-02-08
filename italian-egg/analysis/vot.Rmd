@@ -1,0 +1,21 @@
+---
+title: "VOT"
+author: "Stefano Coretta"
+date: "08/02/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(coretta2018itaegg)
+data("ita_egg")
+library(tidyverse)
+```
+
+```{r}
+ita_egg %>%
+  ggplot(aes(c2_place, vot)) +
+  geom_boxplot()
+```
+
