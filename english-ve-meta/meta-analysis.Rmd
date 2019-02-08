@@ -509,11 +509,28 @@ meta_bm_1 <- brm(
   file = "./english-ve-meta/data/cache/meta_bm_1"
 )
 
-meta_bm_1_est <- fixef(meta_bm)["Intercept","Estimate"]
-meta_bm_1_q2.5 <- fixef(meta_bm)["Intercept","Q2.5"]
-meta_bm_1_q97.5 <- fixef(meta_bm)["Intercept","Q97.5"]
+meta_bm_1_est <- fixef(meta_bm_1)["Intercept","Estimate"]
+meta_bm_1_q2.5 <- fixef(meta_bm_1)["Intercept","Q2.5"]
+meta_bm_1_q97.5 <- fixef(meta_bm_1)["Intercept","Q97.5"]
 
 summary(meta_bm_1)
+```
+
+```{r post-final-plot, warning=FALSE}
+posterior_samples(meta_bm_1, pars = "b_Intercept") %>%
+  ggplot(aes(b_Intercept)) +
+  geom_vline(aes(xintercept = meta_bm_1_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_1_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_density(colour = NA, fill = "skyblue4", alpha = 0.5, bw = 2) +
+  scale_x_continuous(breaks = seq(40, 120, 10), limits = c(40, 120)) +
+  labs(
+    title = "Posterior distribution of the meta-analystical estimate of the English voicing effect",
+    subtitle = "The dashed vertical lines indicate the 95% credible interval.",
+    x = "Difference in vowel duration (ms)",
+    y = element_blank()
+  ) +
+  theme(panel.grid.minor = element_blank()) +
+  scale_y_continuous(labels = NULL)
 ```
 
 ```{r studies-shrunk-1}
@@ -540,7 +557,7 @@ studies_shrunk_1 <- (c(posterior_samples(meta_bm_1, pars = "b_Intercept")) +
 ```{r origin-shrunk-1-plot}
 bind_rows(estimated_tbl_final, studies_shrunk_1) %>%
   mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
-  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source)) +
+  ggplot(aes(reorder(study_ref_2, Estimate), Estimate, colour = source)) +
   geom_hline(aes(yintercept = 0), colour = "grey") +
   geom_hline(aes(yintercept = meta_bm_1_q2.5), colour = "skyblue4", linetype = "dashed") +
   geom_hline(aes(yintercept = meta_bm_1_q97.5), colour = "skyblue4", linetype = "dashed") +
@@ -557,6 +574,18 @@ bind_rows(estimated_tbl_final, studies_shrunk_1) %>%
   ) +
   coord_flip() +
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
+```{r funnel-plot}
+estimated_tbl_final %>%
+  mutate(precision = 1/Est.Error) %>%
+  ggplot(aes(Estimate, precision, label = study_ref_2)) +
+  geom_vline(aes(xintercept = 0), colour = "grey") +
+  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_est), colour = "skyblue4") +
+  geom_point() +
+  geom_text_repel()
 ```
 
 ## Syllable position: non-final
