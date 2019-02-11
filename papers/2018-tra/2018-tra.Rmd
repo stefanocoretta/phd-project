@@ -12,6 +12,7 @@ output:
 bibliography: linguistics
 biblio-style: unified
 fontsize: 12pt
+mainfont: Brill
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
@@ -89,8 +90,8 @@ trp_difference <- kines_mean %>%
 
 # Introduction
 
-It is well known that voiced stops (stops generally articulated with simultaneous vibration of the vocal folds) are almost universally accompanied by two phonetic correlates: advanced tongue root and preceding longer vowel durations \citep{westbury1983, lisker1974, fowler1992}.
-While a lot of work has been done on each of these topic separately, less is known about their relation.
+It is well known that voiced stops (as the abstract category of stops generally articulated with concurrent vibration of the vocal folds) are almost universally accompanied by two phonetic correlates: advanced tongue root and preceding longer vowel durations \citep{westbury1983, lisker1974, fowler1992}.
+While a lot of work has been done on each of these aspects separately, less is known about their relation.
 In this exploratory study of the articulatory correlates of stop voicing, it is found that tongue root advancement---a mechanism known to facilitate voicing during stop closure---is initiated during the production of the vowel preceding a stop.
 This replicates previous work on tongue root position.
 Moreover, the results of this study indicate that the acoustic duration of the vowel is positively correlated with tongue root position, such that longer vowel durations correspond to greater tongue root advancement.
@@ -107,29 +108,30 @@ Such pressure increase can hinder the ability to sustain vocal fold vibration du
 
 An articulatory solution to counterbalance the increased pressure is to enlarge the supra-glottal cavity by advancing the root of the tongue.
 It has been repeatedly observed that the tongue root is in a more front position in voiced stops compared to voiceless stops \citep{kent1969, perkell1969, westbury1983}.
+<!-- active vs. passive expansion, purposive vs. non purposive -->
 \citet{rothenberg1967} calculates that the walls of the oral tract can absorb the incoming airflow for 20 to 30 ms by passive expansion, after which the sub- and supra-glottal pressures would equalise and voicing cease.
 Based on these estimates, a passive expansion of the pharyngeal walls is thus not sufficient to maintain voicing during the closure of a stop.
 
 Reaching a complete ballistic forward gesture would require the tongue root about 70 to 90 ms \citep{rothenberg1967}.
-Given that voiced stop closures are on average shorter than that (the mean duration is about 64 ms in \citet{luce1985}), it is natural that the movement is initiated during the production of the vowel, so that an appreciable amount of advancement is obtained when closure is achieved.
-Furthermore, \citet{westbury1983} finds that tongue root advancement is initiated before the achievement of full closure and that there is a forward movement even in some cases of voiceless stops, although the rate and magnitude of the advancement were consistently higher in voiced stops.
-Finally, tongue root adjustments seem to target more specifically lingual consonants, while the tongue body is more involved in labials consonants \citet{perkell1969, westbury1983}.
+Given that voiced stop closures are on average shorter than that (the mean duration is about 64 ms in \citealt{luce1985}), it is expected that the movement could be initiated during the production of the vowel, so that an appreciable amount of advancement is obtained when closure is achieved.
+Furthermore, \citet{westbury1983} finds that tongue root advancement is initiated before the achievement of full closure and that there is a forward movement even in some cases of voiceless stops, although the rate and magnitude of the advancement are consistently higher in voiced stops.
+Finally, tongue root adjustments seem to target more specifically lingual consonants, while the tongue body is more involved in labials \citep{perkell1969, westbury1983}.
 
 However, the relation between tongue root advancement and voicing is a complex one.
-First, tongue root advancement is not the only mechanism for sustaining voicing during a stop \citep{rothenberg1967, westbury1983, ohala2011} and it has a certain degree of idiosyncrasy \citep{ahn2016}.
-A wide-spread difference between voiceless and voiced stops concerns their respective closure durations.
-The closure of voiced stops are generally longer than those of voiceless stops \citep{lisker1957, umeda1977, van-summers1987, davis1989, de-jong1991}.
-A shorter closure favours maintenance of vocal fold vibration by ensuring that the pressure build-up in the oral cavity does not equalise the sub-glottal and supra-glottal pressures (at which point voicing would cease).
+First, tongue root advancement has a certain degree of idiosyncrasy \citep{ahn2018} and it is not the only mechanism for sustaining voicing during a stop \citep{rothenberg1967, westbury1983, ohala2011}.
+For example, a cross-lingusitically common difference between voiceless and voiced stops concerns their respective closure durations.
+The closure of voiced stops is generally longer than that of voiceless stops \citep{lisker1957, umeda1977, van-summers1987, davis1989, de-jong1991}.
+A shorter closure favours maintenance of vocal fold vibration by ensuring that the pressure build-up in the oral cavity does not equalise the sub-glottal and supra-glottal pressures (at which point voicing would stop).
 <!-- lateral pharyngeal walls -->
-Other solutions which help sustaining voicing during closure include larynx lowering \citep{riordan1980}, opening of the velopharyngeal port \citep{yanagihara1966}, and producing a retroflex occlusion \citep{sprouse2008}.
+Other solutions which can help sustaining voicing during closure include larynx lowering \citep{riordan1980}, opening of the velopharyngeal port \citep{yanagihara1966}, and producing a retroflex occlusion \citep{sprouse2008}.
 
 Second, implementation of tongue root advancement can be decoupled from the actual presence of vocal fold vibration.
 In \citet{westbury1983}, advancement of the tongue root is found in some productions of voiceless stops.
 This is counterintuitive, since tongue root advancement is generally considered to be a feature of voiced stops which require voicing-related pressure adjustments.
-Moreover, \citet{ahn2015, ahn2016, ahn2018} looked at utterance-initial stops and found that the tongue root is more advanced in the phonologically voiced stops independent of whether they actually show vocal fold vibration or not.
+Moreover, \citet{ahn2015, ahn2018} and \citet{ahn2016} looked at utterance-initial stops and found that the tongue root is more advanced in the phonologically voiced stops independent of whether they are implemented with vocal fold vibration or not.
 
 To summarise, tongue root advancement is a common articulatory solution employed to counterbalance the increase in supra-glottal pressure and maintaining voicing during the production of at least lingual voiced stops.
-While this gesture is not exclusive of voiced stops and it can be implemented even in the absence of vocal fold vibration, tongue root advancement seems to be a robust correlate of (phonological) voicing.
+While this gesture is not exclusive of voiced stops and it can be implemented even in the absence of vocal fold vibration, tongue root advancement seems to be a robust correlate of voicing (as an abstract category).
 
 ## Vowel duration and voicing
 
@@ -137,23 +139,23 @@ The results discussed here are part of a larger study which focusses on the effe
 A great number of studies showed that, cross-linguistically, vowels tend to be longer when followed by voiced obstruents than when they are followed by voiceless ones \citep{house1953, peterson1960, chen1970, klatt1973, lisker1974, farnetani1986, fowler1992, hussein1994, esposito2002, lampp2004, durvasula2012}.
 This so-called 'voicing effect' has been reported in a variety of languages,
 including (but not limited to) English, German, Hindi, Russian, Arabic, Korean, Italian, and Polish (see \citealt{maddieson1976} and \citealt{begus2017} for a more comprehensive list).
-The latter two offer a good opportunity for the study of ..., given their reported differences in magnitude/presence of the voicing effect and their relative comparability.
-While Italian has been consistently reported as a voicing-effect language \citep{caldognetto1979, farnetani1986, esposito2002}, some studies found an effect in Polish \citet{slowiaczek1985, nowak2006, malisz2008, coretta2018j} but others did not \citep{keating1984, jassem1989}.
+The latter two offer an opportunity to study of the articulatory aspects of the voicing effect, given their reported differences in magnitude/presence of the effect and their relative ease of comparison.
+While Italian has been consistently reported as a voicing-effect language \citep{caldognetto1979, farnetani1986, esposito2002}, some studies found an effect in Polish \citep{slowiaczek1985, nowak2006, malisz2008, coretta2018j} but others did not \citep{keating1984, jassem1989}.
 
 \citet{coretta2018j} discusses the acoustic data of this study, and argues that the stressed vowels of disyllabic (CV́CV) words in Italian and Polish are 16 ms longer (SE = 4.4) when followed by a voiced stop.
-The high degree of intra-speaker variation and backed up by statistical modelling also indicates that these languages possibly behave similarly regarding the voicing effect.
-Moreover, \citet{coretta2018j} shows that the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
+The high degree of intra-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.
+Finally, \citet{coretta2018j} shows that the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
 The duration of the release to release interval is stable across voicing contexts.
 Within this interval, the timing of the onset of the stop closure produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
-A later closure onset results in a long vowel and a short closure, while an earlier closure onset generates a short vowel and a long closure.
+A later closure onset results in a long vowel and a short closure, while an earlier closure onset corresponds to a short vowel and a long closure.
 Since the closure of voiceless stops is longer than that of voiced stops, it follows that vowels are shorter when followed by the former than when followed by the latter.
 
 ## This study
 
-In sum, tongue root advancement and longer vowel durations are two correlates of voicing.
-Previous studies have shown that voicing can be maintained by advancing the tongue root during the production of voiced stops and that vowels followed by voiced stops tend to be longer than vowels followed by voiceless stops.
-The acoustic data from this exploratory study discussed in \citet{coretta2018j} revealed that the duration of the stop closure bears on the duration of the preceding vowel.
-The articulatory part of this study adds to this idea by offering new insights on mechanisms involving the root of the tongue and its relation with vowel duration, and on how these interact with stop closure duration.
+In sum, tongue root advancement and longer vowel durations are two common correlates of voicing.
+Previous studies have shown that closure voicing can be maintained by advancing the tongue root during the production of voiced stops (which is possibly initiated earlier than the closure onset) and that vowels followed by voiced stops tend to be longer than vowels followed by voiceless stops.
+The acoustic data from this exploratory study, discussed in \citet{coretta2018j}, revealed that the duration of the stop closure bears on the duration of the preceding vowel.
+This paper introduces the results from the articulatory part of the study in \citet{coretta2018j}, and offers new insights on how the mechanisms involving the tongue root and its relation with vowel duration interact with stop closure duration.
 
 # Methodology
 
@@ -177,9 +179,9 @@ The participants signed a written consent and received a monetary compensation o
     \label{f:uti-setup}
 \end{figure*} -->
 
-Simultaneous recordings of audio and ultrasound tongue imaging were obtained in the Phonetics Laboratory at the University of Manchester (UK) and in a quiet room in Verbania (Italy).
+Simultaneous recordings of audio and ultrasound tongue imaging were obtained in the Phonetics Laboratory at the University of Manchester (UK) or in a quiet room in Verbania (Italy).
 An Articulate Instruments Ltd™ system was used for this study.
-The system is made of a TELEMED Echo Blaster 128 unit, an Articulate Instruments Ltd™ P-Stretch synchronisation unit, and a FocusRight Scarlett Solo pre-amplifier (see \Cref{f:uti-setup}).
+The system is made of a TELEMED Echo Blaster 128 unit, an Articulate Instruments Ltd™ P-Stretch synchronisation unit, and a FocusRight Scarlett Solo pre-amplifier.
 A TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz) and a Movo LV4-O2 Lavalier microphone were used respectively for the acquisition of ultrasonic and audio data.
 The ultrasonic probe was placed in contact with the sub-mental triangle, aligned with the mid-sagittal plane.
 A metallic headset designed by Articulate Instruments Ltd™ (\citeyear{articulate2008}) was used to hold the probe in a fixed position and inclination relative to the head.
@@ -191,14 +193,14 @@ The audio signal was sampled at 22050 Hz (16-bit).
 
 ## Materials
 
-Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. *pata*, *pada*, *poto*, etc.), giving a total of 12 target words, used both for Italian and Polish.\footnote{Note that stressed vowels in open syllables in Italian are long \citep{renwick2016}. Moreover, /o/ is used here for typographical simplicity to indicate the mid-back vowels of Italian and Polish, although they do differ in quality. See \citet{kramer2009, renwick2016, gussmann2007}.}
+Disyllabic words of the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used as targets, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. *pata*, *pada*, *poto*, etc.), giving a total of 12 target words, used both for Italian and Polish.\footnote{Note that stressed vowels in open syllables in Italian are long \citep{renwick2016}. Moreover, /o/ is used here for typographical simplicity to indicate the mid-back vowels of Italian and Polish, although they do differ in quality. See \citet{kramer2009}, \citet{renwick2016}, and \citet{gussmann2007}.}
 The resulting words are nonce words, with a few exceptions, and they were presented in the languages' respective writing conventions (see \Cref{a:targets}).
 A labial stop was chosen as the first consonant to reduce possible coarticulation with the following vowel.\footnote{However, note that \citet{westbury1983} and \citet{vazquez-alvarez2007} report tongue body lowering in the context of labial stops.}
 Central/back vowels only were included in the target words for two reasons.
 First, high and mid front vowels tend to be difficult to image with ultrasound, given their greater distance from the ultrasonic probe when compared with back vowels.
 Second, high and mid front vowels usually produce less tongue displacement from and to a stop consonant.
 This characteristic can make it more difficult to identify gestural landmarks using the methodology discussed in \Cref{s:process}.
-Since the focus of the study was to explore differences in the closing gesture of voiceless and voiced stops, only lingual consonants have been included, since of course the closure of labial stops cannot be imaged with ultrasound.
+Since the focus of the study was to explore differences in the closing gesture of voiceless and voiced stops, only lingual consonants have been included (the closure of labial stops cannot of course be imaged with ultrasound).
 The sentence *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' for Polish functioned as frames for the test words.\footnote{Due to software constraints, the Polish frame sentence was presented on screen without diacritics. The speakers read them as if spelled correctly.}
 Speakers were instructed to read the sentences without pauses and to speak at a comfortable pace.
 
@@ -224,7 +226,7 @@ The audio data was subject to force alignment using the SPeech Phonetisation Ali
 The outcome of the automatic alignment was then manually corrected, according to the recommendations in \citet{machac2009}.
 The onset and offset of V1 in the C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} test words were respectively placed in correspondence of the appearance and disappearance of higher formant structure in the spectrogram.
 Vowel duration was calculated as the duration of the V1 onset to V1 offset interval.
-Speech rate is the number of syllables in the sentence (8 in Italian and 6 in Polish) divided by the duration of the sentence in seconds.
+Speech rate was measured as the number of syllables in the sentence (8 in Italian and 6 in Polish) divided by the duration of the sentence in seconds.
 <!-- add image -->
 
 The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
@@ -250,7 +252,7 @@ Centring ensures the intercepts are interpretable.
 An effect is considered significant if the *p*-value is below the alpha level ($\alpha = 0.05$).
 Generalised additive mixed models were fitted with mgcv v1.8-26 \citep{wood2011, wood2017}.
 The smooths used thin plate regression splines as basis \citep{wood2003}.
-The ordered factor difference smooths method described in \citet{soskuthy2017, wieling2018} was used to model the effect of factor terms in GAMs.
+The ordered factor difference smooths method described in \citet{soskuthy2017} and \citet{wieling2018} was used to model the effect of factor terms in GAMs.
 The models were fitted by maximum likelihood (ML) and autoregression in the residuals was controlled with a first-order autoregressive model.
 
 Significance testing of the relevant predictors was achieved by comparing the ML score of the full model with the score of a null model (in which the relevant predictor is dropped), using the `compareML()` function of the itsadug package \citep{van-rij2017}.
