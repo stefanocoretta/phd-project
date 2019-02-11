@@ -135,7 +135,7 @@ Moreover, the design of the study has been constrained by the use of ultrasound 
 Since the tongue imaging and electroglottographic data don't bear on the main argument put forward here, only the results from acoustics will be discussed.
 
 Italian and Polish reportedly differ in the magnitude (or presence) of the effect of stop voicing on vowel duration.
-On the other hand, the typical realisation of phonological voiced stops in these languages are similar (but see \citealt{huszthy2016} and \citealt{schwartz2018} for a phonological and phonetic discussion on laryngeal aspects of Italian and Polish respectively).\footnote{Polish neutralises the voicing contrast word-finally, although the contrast is maintained word-medially \citep{strycharczuk2012a}.}
+On the other hand, the typical realisation of phonological voiced stops in these languages are similar (but see \citealt{huszthy2016} and \citealt{schwartz2018} for a phonological and phonetic discussion on laryngeal aspects of Italian and Polish respectively).\footnote{Polish neutralises the voicing contrast word-finally, although the contrast is maintained word-medially \citep{gussmann2007}.}
 \citet{cyran2011} argues for a distinction between voicing and aspirating varieties of Polish, based on phonological arguments.
 \citet{waniek2011}, on the other hand, cautiously argues that a possible change in progress in Polish is affecting the VOT values of voiceless stops in pre-stressed position.
 
@@ -154,6 +154,7 @@ Similarly, @keating1984 reports a difference of 2 ms in the duration of stressed
 On the other hand, @nowak2006 finds that vowels followed by voiced stops are 4.5 ms longer in the 4 speakers recorded.
 @malisz2008 argue based on data from 40 speakers that the magnitude of the voicing effect in Polish is highly idiosyncratic, and claim that their results are inconclusive on this matter.
 While they do not report estimates from the 40 speakers, a table with mean vowel durations from 4 suggests a mean difference before voiceless vs. voiced stops of 3.5 ms.
+Finally, \citet{strycharczuk2012a} reports a non-significant effect in 6 speakers in pre-sonorant word-final position.
 
 The variety of results concerning the voicing effect in Polish could be related to differences in methodology.
 However, no clear pattern between studies which find a voicing effect and those which don't can be identified.
@@ -597,7 +598,7 @@ The mean differences of Italian vowels and closures (11.5 and 13.33, respectivel
 It is plausible that the smaller effect of C2 voicing on preceding vowel duration in Polish is related to the smaller effect on closure duration, if we assume a temporal mechanism of compensation between the closure and the vowel.
 These patterns will need to be confirmed with a more balanced sample of Italian and Polish speakers.
 
-```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE}
+```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE}
 as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
   rename("intercept" = `(Intercept)`, "ve" = c2_phonationvoiced) %>%
   mutate(language = ifelse(str_detect(speaker, "^it"), "Italian", "Polish"), speaker = toupper(speaker)) %>%
