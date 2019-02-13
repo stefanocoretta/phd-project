@@ -1,0 +1,71 @@
+---
+title: "EGG analysis"
+author: "Stefano Coretta"
+date: "13/02/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(itsadug)
+library(tidymv)
+library(coretta2018itapol)
+data("wavegram")
+```
+
+# Data
+
+```{r import}
+wavegram <- wavegram %>%
+  # there are words starting with /b/, and one observation of negative amplitude
+  filter(c1_phonation == "voiceless", amplitude > 0) %>%
+  group_by(date) %>%
+  mutate(
+    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
+    c2_phonation_o = ordered(c2_phonation, levels = c("voiceless", "voiced")),
+    lang_voice = interaction(language, c2_phonation),
+    lang_voice_o = ordered(lang_voice, levels = c("Italian.voiceless", "Italian.voiced", "Polish.voiceless", "Polish.voiced")),
+    sequence_prop = sequence / max(sequence)
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  droplevels()
+
+contrasts(wavegram$c2_phonation_o) <- "contr.treatment"
+contrasts(wavegram$lang_voice_o) <- "contr.treatment"
+```
+
+# Data check
+
+```{r speakers}
+levels(wavegram$speaker)
+```
+
+```{r ranges}
+range(wavegram$sample)
+range(wavegram$amplitude)
+```
+
+# Modelling
+
+```{r wave-gam}
+if (file.exists("./voicing-effect/data/cache/wave_gam.Rds")) {
+  load("./voicing-effect/data/cache/wave_gam.Rds")
+} else {
+  wave_gam <- bam(
+    amplitude ~
+      lang_voice_o +
+      s(sequence_prop) +
+      s(sample) +
+      s(sequence_prop, by = lang_voice_o) +
+      s(sample, by = lang_voice_o) +
+      ti(sequence_prop, sample) +
+      ti(sequence_prop, sample, by = lang_voice_o),
+    data = wavegram
+  )
+  save(wave_gam, file = "./voicing-effect/data/cache/wave_gam.Rds")
+}
+```
+
