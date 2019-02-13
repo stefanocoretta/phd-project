@@ -207,6 +207,38 @@ tongue_pl05 <- read_aaa("./papers/2018-polar-gam/datasets/pl05-tongue-cart.tsv",
   create_start_event(rec_date)
 
 contrasts(tongue_pl05$vc_voicing) <- "contr.treatment"
+
+tongue_pl06 <- read_aaa("./papers/2018-polar-gam/datasets/pl06-tongue-cart.tsv", columns)  %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), X < 26, Y > -30) %>%
+  mutate(
+    vc_voicing = interaction(vowel, c2_place, c2_phonation),
+    vc_voicing = ordered(vc_voicing),
+    c2 = factor(c2, levels = c("t", "d", "k", "g"))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_start_event(rec_date)
+
+contrasts(tongue_pl06$vc_voicing) <- "contr.treatment"
+
+tongue_pl07 <- read_aaa("./papers/2018-polar-gam/datasets/pl07-tongue-cart.tsv", columns)  %>%
+  na.omit() %>%
+  mutate(word = word(prompt, 2)) %>%
+  left_join(y = stimuli) %>%
+  filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), Y > -26) %>%
+  mutate(
+    vc_voicing = interaction(vowel, c2_place, c2_phonation),
+    vc_voicing = ordered(vc_voicing),
+    c2 = factor(c2, levels = c("t", "d", "k", "g"))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(rec_date, fan_line) %>%
+  create_start_event(rec_date)
+
+contrasts(tongue_pl07$vc_voicing) <- "contr.treatment"
 ```
 
 # Introduction
@@ -826,6 +858,82 @@ pl05_gam_ar_0 <- polar_gam(
 compareML(pl05_gam_ar_0, pl05_gam_ar)
 ```
 
+```{r pl06-gam-ar, cache=TRUE, message=FALSE, include=FALSE}
+pl06_gam <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_pl06,
+  method = "ML",
+  fan_lines = c(16, 19)
+)
+
+pl06_rho <- start_value_rho(pl06_gam)
+
+pl06_gam_ar <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_pl06,
+  method = "ML",
+  rho = pl06_rho,
+  AR_start = tongue_pl06$start_event,
+  fan_lines = c(16, 19)
+)
+
+pl06_gam_ar_0 <- polar_gam(
+  Y ~
+    s(X),
+  data = tongue_pl06,
+  method = "ML",
+  rho = pl06_rho,
+  AR_start = tongue_pl06$start_event,
+  fan_lines = c(16, 19)
+)
+
+compareML(pl06_gam_ar_0, pl06_gam_ar)
+```
+
+```{r pl07-gam-ar, cache=TRUE, message=FALSE, include=FALSE}
+pl07_gam <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_pl07,
+  method = "ML",
+  fan_lines = c(16, 19)
+)
+
+pl07_rho <- start_value_rho(pl07_gam)
+
+pl07_gam_ar <- polar_gam(
+  Y ~
+    vc_voicing +
+    s(X) +
+    s(X, by = vc_voicing),
+  data = tongue_pl07,
+  method = "ML",
+  rho = pl07_rho,
+  AR_start = tongue_pl07$start_event,
+  fan_lines = c(16, 19)
+)
+
+pl07_gam_ar_0 <- polar_gam(
+  Y ~
+    s(X),
+  data = tongue_pl07,
+  method = "ML",
+  rho = pl07_rho,
+  AR_start = tongue_pl07$start_event,
+  fan_lines = c(16, 19)
+)
+
+compareML(pl07_gam_ar_0, pl07_gam_ar)
+```
+
 ```{r tongues-it01, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT01.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it01_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
@@ -882,6 +990,18 @@ plot_polar_smooths(pl04_gam_ar, X, voicing, facet_terms = c2_place + vowel, spli
 
 ```{r tongues-pl05, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL05.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl05_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
+  theme(legend.position = "top") +
+  labs(x = "", y = "")
+```
+
+```{r tongues-pl06, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL06.", fig.lp="f:", out.width=".8\\textwidth"}
+plot_polar_smooths(pl06_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
+  theme(legend.position = "top") +
+  labs(x = "", y = "")
+```
+
+```{r tongues-pl07, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL07.", fig.lp="f:", out.width=".8\\textwidth"}
+plot_polar_smooths(pl07_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
