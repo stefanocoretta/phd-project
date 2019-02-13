@@ -13,6 +13,9 @@ bibliography: linguistics
 biblio-style: unified
 fontsize: 12pt
 mainfont: Brill
+mainfontoptions:
+- StylisticSet=20
+- Numbers=Lining
 header-includes:
 - \let\tnote\relax
 - \usepackage{cleveref}
@@ -717,10 +720,10 @@ See \Cref{tab:tra-lm-table} and \Cref{tab:tra-lm-2-table}.
 
 ```{r tra-lm-table}
 kable(tidy(tra_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to tongue root position at vowel offset (see \\Cref{s:tra-lm})") %>%
-kable_styling(font_size = 8)
+kable_styling(font_size = 10)
 ```
 
 ```{r tra-lm-2-table}
 kable(tidy(tra_lm_2, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "V1 duration (centr.)", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/", "V1 duration × /o/", "V1 duration × /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \\Cref{s:trp-vdur})") %>%
-kable_styling(font_size = 8)
+kable_styling(font_size = 10)
 ```
