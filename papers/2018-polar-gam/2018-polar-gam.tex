@@ -292,18 +292,18 @@ processing}\label{data-collection-and-processing}}
 \label{s:data}
 
 Synchronised audio and ultrasound tongue imaging data have been recorded
-from 4 speakers of Italian while reading a series of controlled
-sentences. An Articulate Instruments Ltd™ set-up was used for this
-study. The ultrasonic data was collected through a TELEMED Echo Blaster
-128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm
-radius, 2-4 MHz). A synchronisation unit (P-Stretch) was plugged into
-the Echo Blaster unit and used for automatic audio/ultrasound
-synchronisation. A FocusRight Scarlett Solo pre-amplifier and a Movo
-LV4-O2 Lavalier microphone were used for audio recording. The
-acquisition of the ultrasonic and audio signals was achieved with the
-software Articulate Assistant Advanced (AAA, v2.17.2) running on a
-Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
-Stabilisation of the ultrasonic transducer was ensured by using the
+from 11 speakers of Italian and 6 speakers of Polish while reading a
+series of controlled sentences. An Articulate Instruments Ltd™ set-up
+was used for this study. The ultrasonic data was collected through a
+TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic
+transducer (20mm radius, 2-4 MHz). A synchronisation unit (P-Stretch)
+was plugged into the Echo Blaster unit and used for automatic
+audio/ultrasound synchronisation. A FocusRight Scarlett Solo
+pre-amplifier and a Movo LV4-O2 Lavalier microphone were used for audio
+recording. The acquisition of the ultrasonic and audio signals was
+achieved with the software Articulate Assistant Advanced (AAA, v2.17.2)
+running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows
+7. Stabilisation of the ultrasonic transducer was ensured by using the
 metallic headset produced by Articulate Instruments Ltd™
 (\citeyear{articulate2008}).
 
@@ -373,7 +373,7 @@ argument). For a more in-depth introduction to GAMs in R for
 linguistics, see \citet{soskuthy2017} and \citet{wieling2017}.
 
 As means of illustration, the following paragraphs will show how to fit
-a polar GAM with data from one of the 4 Italian speakers. Due to
+a polar GAM with data from one of the Italian speakers. Due to
 differences in the placement of the probe and in the speakers' anatomy,
 different portions of the tongue are likely to be imaged across
 speakers, so that scaling might not be possible (or wise). For this
@@ -533,33 +533,65 @@ treatment of issues related to autocorrelation, see
 \caption{Autocorrelation plots of a model fitted without (left) and with (right) a first-order autoregressive model (AR1).}\label{f:it01-acf}
 \end{figure}
 
-\hypertarget{comparing-tongue-contours-in-voiceless-and-voiced-stops}{%
-\section{Comparing tongue contours in voiceless and voiced
-stops}\label{comparing-tongue-contours-in-voiceless-and-voiced-stops}}
+\hypertarget{comparing-tongue-root-position-in-voiceless-and-voiced-stops}{%
+\section{Comparing tongue root position in voiceless and voiced
+stops}\label{comparing-tongue-root-position-in-voiceless-and-voiced-stops}}
+
+Tongue root advancement is a well-known mechanism employed to keep
+intra-oral pressure below the threshold required for voicing
+\citep{ohala2011, kent1969, perkell1969, westbury1983, ahn2018}. Among
+the languages reported to show tongue root position differences between
+phonation categories in stops there are English
+\citep{westbury1983, ahn2018}, Brazilian Portuguese \citep{ahn2018}, and
+Hindi \citet{ahn2016a}. Tongue root advancement is one of several
+mechanisms employed by speakers to enlarge the oral cavity during the
+production of a stop closure. The decrease in pressure that follows from
+such expansion ensures that voicing can be maintained during the
+closure.
 
 Mid-sagittal tongue contours at maximum tongue displacement of voiceless
-and voiced stops have been compared using polar GAMs.
-\Cref{f:tongues-it01} to \Cref{f:tongues-it04} show an appreciable
-degree of variation across speakers and phonological contexts in
-relation to the differences in tongue shapes between voiceless and
-voiced stops. In some speakers and contexts, the tongue root (the left
-of the tongue contours) is more advanced in voiced stops than in
-voiceless stops, especially in the context of a coronal C2 and /a/.
-Tongue root advancement is a well known mechanism employed to maintain
-intra-oral pressure below the threshold required for voicing
-\citep{ohala2011, kent1969, perkell1969, westbury1983, ahn2018}.
+and voiced stops have been compared using polar GAMs. To exemplify how
+polar GAMs can be used to model articulatory differences within and
+between speakers, data from 6 speakers of Italian and 6 speakers of
+Polish will be discussed. Note that the 6 Italian speakers are
+representative of the general trends found in the entire sample of 11
+speakers. \Cref{f:tongues-it01} to \Cref{f:tongues-pl07} show an
+appreciable degree of variation across speakers and phonological
+contexts in relation to the differences in tongue shapes between
+voiceless and voiced stops (IT07 and Pl05 both miss data from /u/ due to
+the poor quality of the ultrasonic image for this vowel). In some
+speakers and contexts, the tongue root (the left part of the tongue
+contours) is more advanced in voiced stops than in voiceless stops.
 
-The magnitude of the difference in tongue root position in the data
-reported here is about 2 millimetres. \citet{kirkham2017} find that the
-tongue root in +ATR vowels is on average 4 millimetres more advanced
-than the respective −ATR vowels. \citet{rothenberg1967} argues, based on
-modelling, that the tongue root can move forward by a maximum of about 5
-mm mid-sagittally. This movement corresponds to an average volume
-increase of 18 cm\textsuperscript{2}. Given these estimates, it can be
-argued that a 2 mm change in the mid-sagittal plane contributes to an
-appreciable volume increase, also considering that other volume
-expansion mechanisms can operate along with the advancement of the
-tongue root (like larynx lowering, slack oral walls, etc.).
+In particular, IT01, IT02, PL05, and PL06 show a robust pattern in which
+the tongue root in voiced stops is more advanced than in voiceless stops
+in most vowel/place contexts. The other speakers, however, either don't
+have any tongue root advancement (like Pl03), or they have advancement
+in only some of the phonological contexts (like PL07). Moreover, IT11
+has the opposite patter, especially with velar stops, and voiced stops
+have a retracted tongue root compared to voiceless stops. IT04 is a
+clear example of tongue body lowering (another cavity expansion
+mechanism), as it can be seen in coronal stops. This level of
+idiosyncrasy (both within and between speakers) is not surprising, and
+it qualitatively resembles the degree of variability found, for example,
+in \citet{ahn2018} for English and Brasilian Portuguese. Finally, no
+clear patterns can be discerned between speakers of Italian and Polish
+that could point to cross-linguistic differences.
+
+As for the magnitude of the difference in tongue root position, such
+difference is about 2 mm in the data reported here. \citet{kirkham2017}
+find that the tongue root in +ATR vowels is on average 4 mm more
+advanced than the respective −ATR vowels. \citet{rothenberg1967} argues,
+based on modelling, that the tongue root can move forward by a maximum
+of about 5 mm mid-sagittally. This movement corresponds to an average
+volume increase of 18 cm\textsuperscript{2}. Given these estimates, it
+can be argued that a 2 mm change in root position along the mid-sagittal
+plane contributes to an appreciable oral cavity volume increase.
+Considering that other volume expansion mechanisms can operate along
+with the advancement of the tongue root (like larynx lowering, tongue
+body lowering, etc.), the tongue root driven volume increase found here,
+although at first sight small, seems to be sufficient to allow voicing
+to be maintained during the closure of voiced stops.
 
 \begin{figure}
 
