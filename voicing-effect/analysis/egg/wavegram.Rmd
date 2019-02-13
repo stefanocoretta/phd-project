@@ -12,20 +12,14 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(itsadug)
 library(tidymv)
+library(coretta2018itapol)
+data("wavegram")
 ```
 
 # Data import
 
 ```{r import}
-languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
-
-wavegram <- list.files(path = "./voicing-effect/data/datasets/egg",
-                 pattern = "*-wavegram.csv",
-                 full.names = TRUE) %>%
-  map_df(~read_csv(.)) %>%
-  left_join(y = languages) %>%
-  left_join(y = words) %>%
+wavegram <- wavegram %>%
   filter(c1_phonation == "voiceless") %>%
   mutate_if(is.character, as.factor) %>%
   group_by(date) %>%
