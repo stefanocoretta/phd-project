@@ -21,3 +21,7 @@ sjPlot
 carData
 effects
 bindrcpp
+broom
+broom.mixed
+knitr
+kableExtra

@@ -14,8 +14,11 @@ biblio-style: unified
 fontsize: 12pt
 mainfont: Brill
 header-includes:
+- \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
+- \usepackage{lineno}
+- \linenumbers
 indent: true
 ---
 
@@ -34,6 +37,10 @@ library(lme4)
 library(lmerTest)
 library(sjPlot)
 library(effects)
+library(broom)
+library(broom.mixed)
+library(knitr)
+library(kableExtra)
 
 tra_series <- kinematics_series %>%
   filter(c1_phonation == "voiceless", proportion > 0) %>%
@@ -271,6 +278,7 @@ Following recent practices which encourage scientific transparency \citep{cruwel
 \label{s:results}
 
 ## Tongue root position at C2 closure onset
+\label{s:tra-lm}
 
 ```{r tra-lm, include=FALSE, cache=TRUE}
 tra_lm <- lmer(
@@ -299,7 +307,7 @@ kines %>%
 \Cref{f:trp-z-box} shows raw data points and boxplots of the position of the tongue root at C2 closure onset when C2 is voiceless (left) and voiced (right).
 Since the position of the tongue root in millimetres depends on the speaker's anatomy and on the probe location, scaled tongue root position is used in this plot (note though that the unscaled data is used in statistical modelling).
 As a trend, the position of the tongue root is more advanced if C2 is voiced compared to its position when C2 is voiceless.
-A linear mixed-effects model with tongue root position as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), centred speech rate (as number of syllables per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random coefficient for C2 voicing led to singular fit, so was not included in the final model).
+A linear mixed-effects model with tongue root position as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), centred speech rate (as number of syllables per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random coefficient for C2 voicing led to singular fit, so it was not included in the final model).
 The effects of C2 voicing and vowel are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom.
 The tongue root at C2 closure onset is 0.77 mm (SE = 0.35) more front when C2 is voiced, and it is 1.87 mm (SE = 0.42) more retracted if V1 is /o/.
 
@@ -382,7 +390,7 @@ tra_lm_2 <- lmer(
     speech_rate_c +
     vowel +
     v1_duration_c:vowel +
-    (1+v1_duration_c|speaker) +
+    (1|speaker) +
     (1|item),
   data = kines
 )
@@ -402,9 +410,9 @@ as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
 ```
 
 A second linear mixed regression was fitted to tongue root position to assess the effect of V1 duration on root position.
-The following terms were included: centred V1 duration (in milliseconds), centred speech rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation (coronal, velar); an interaction between centred V1 duration and vowel; by-speaker and by-word random intercept and a by-speaker random coefficient for V1 duration.
+The following terms were included: centred V1 duration (in milliseconds), centred speech rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation (coronal, velar); an interaction between centred V1 duration and vowel; by-speaker and by-word random intercept (a by-speaker random coefficient for V1 duration led to non-convergence, so it was not included in the final model).
 All predictors and the V1 duration/vowel interaction are significant.
-V1 duration and tongue root position are positively correlated: The longer the vowel, the more advanced the tongue root is at V1 offset ($\hat{\beta}$ = 0.056 mm, SE = 0.015).
+V1 duration and tongue root position are positively correlated: The longer the vowel, the more advanced the tongue root is at V1 offset ($\hat{\beta}$ = 0.065 mm, SE = 0.007).
 The effect is stronger with /a/ than with /o/ and /u/ (see \Cref{f:tra-lm-2-plot}).
 
 ## Tongue root position during V2 as a function of V1 duration
@@ -523,8 +531,8 @@ The 95% confidence interval for the difference is approximately within the range
 Figure 1 in \citet{kirkham2017} suggests that the tongue root of one of the Twi speakers recorded is about 4 mm more front in /e/ (a +ATR vowel) than in /ɛ/ (a -ATR vowel).
 Given that a difference of 4 mm in root position can produce a substantially distinct acoustic output in vowels (like the two different phonemes of Twi), it makes sense to expect that differences in tongue root position as driven by consonantal factors should be of some magnitude smaller, like the once found in this study.
 <!-- \footnote{Thanks to Sam Kirkham for bringing this point to my attention.} -->
-Moreover, the data presented here indicates that for every millisecond increase in vowel duration there is a 0.056 mm increase in tongue root advancement (see \Cref{s:trp-vdur}).
-If a maximal ballistic forward movement of the tongue root takes between 70 and 90 ms \citep{rothenberg1967}, we can calculate the maximum displacement plausible to be between 3.9 to 5 mm (0.056 mm times 70–90 ms).
+Moreover, the data presented here indicates that for every millisecond increase in vowel duration there is a 0.065 mm increase in tongue root advancement (see \Cref{s:trp-vdur}).
+If a maximal ballistic forward movement of the tongue root takes between 70 and 90 ms \citep{rothenberg1967}, we can calculate the maximum displacement plausible to be between 4.55 to 5.85 mm (0.065 mm times 70–90 ms).
 These values are in agreement with the maximum root displacement of 5 mm estimated by Rothenberg.
 
 The results of this study also shed some light on timing aspects of tongue root advancement.
@@ -702,3 +710,17 @@ pada      & podo   & pudu & & pada*  & podo & pudu \NN
 paca*     & poco*  & pucu & & paka*  & poko & puku \NN
 paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 }
+
+# Output of statistical models
+
+See \Cref{tab:tra-lm-table} and \Cref{tab:tra-lm-2-table}.
+
+```{r tra-lm-table}
+kable(tidy(tra_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to tongue root position at vowel offset (see \\Cref{s:tra-lm})") %>%
+kable_styling(font_size = 8)
+```
+
+```{r tra-lm-2-table}
+kable(tidy(tra_lm_2, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "V1 duration (centr.)", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/", "V1 duration × /o/", "V1 duration × /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \\Cref{s:trp-vdur})") %>%
+kable_styling(font_size = 8)
+```

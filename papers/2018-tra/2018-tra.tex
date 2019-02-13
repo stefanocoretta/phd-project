@@ -81,8 +81,26 @@ study of the relation between voicing and vowel duration}
     \date{}
     \predate{}\postdate{}
   
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\let\tnote\relax
 \usepackage{cleveref}
 \usepackage{ctable}
+\usepackage{lineno}
+\linenumbers
 
 \begin{document}
 \maketitle
@@ -440,6 +458,8 @@ code are available on the Open Science Framework.
 \subsection{Tongue root position at C2 closure
 onset}\label{tongue-root-position-at-c2-closure-onset}}
 
+\label{s:tra-lm}
+
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-tra_files/figure-latex/trp-z-box-1} \caption{Raw data and boxplots of tongue root position in voiceless and voiced stops at closure onset. Higher values indicate advancement.}\label{f:trp-z-box}
 \end{figure}
@@ -456,8 +476,8 @@ position as the outcome variable was fitted with the following
 predictors: fixed effects for C2 voicing (voiceless, voiced), centred
 speech rate (as number of syllables per second, centred), vowel (/a/,
 /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random
-coefficient for C2 voicing led to singular fit, so was not included in
-the final model). The effects of C2 voicing and vowel are significant
+coefficient for C2 voicing led to singular fit, so it was not included
+in the final model). The effects of C2 voicing and vowel are significant
 according to \emph{t}-tests with Satterthwaite's approximation to
 degrees of freedom. The tongue root at C2 closure onset is 0.77 mm (SE =
 0.35) more front when C2 is voiced, and it is 1.87 mm (SE = 0.42) more
@@ -505,12 +525,13 @@ assess the effect of V1 duration on root position. The following terms
 were included: centred V1 duration (in milliseconds), centred speech
 rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2
 place of articulation (coronal, velar); an interaction between centred
-V1 duration and vowel; by-speaker and by-word random intercept and a
-by-speaker random coefficient for V1 duration. All predictors and the V1
+V1 duration and vowel; by-speaker and by-word random intercept (a
+by-speaker random coefficient for V1 duration led to non-convergence, so
+it was not included in the final model). All predictors and the V1
 duration/vowel interaction are significant. V1 duration and tongue root
 position are positively correlated: The longer the vowel, the more
-advanced the tongue root is at V1 offset (\(\hat{\beta}\) = 0.056 mm, SE
-= 0.015). The effect is stronger with /a/ than with /o/ and /u/ (see
+advanced the tongue root is at V1 offset (\(\hat{\beta}\) = 0.065 mm, SE
+= 0.007). The effect is stronger with /a/ than with /o/ and /u/ (see
 \Cref{f:tra-lm-2-plot}).
 
 \hypertarget{tongue-root-position-during-v2-as-a-function-of-v1-duration}{%
@@ -662,13 +683,13 @@ acoustic output in vowels (like the two different phonemes of Twi), it
 makes sense to expect that differences in tongue root position as driven
 by consonantal factors should be of some magnitude smaller, like the
 once found in this study. Moreover, the data presented here indicates
-that for every millisecond increase in vowel duration there is a 0.056
+that for every millisecond increase in vowel duration there is a 0.065
 mm increase in tongue root advancement (see \Cref{s:trp-vdur}). If a
 maximal ballistic forward movement of the tongue root takes between 70
 and 90 ms \citep{rothenberg1967}, we can calculate the maximum
-displacement plausible to be between 3.9 to 5 mm (0.056 mm times 70--90
-ms). These values are in agreement with the maximum root displacement of
-5 mm estimated by Rothenberg.
+displacement plausible to be between 4.55 to 5.85 mm (0.065 mm times
+70--90 ms). These values are in agreement with the maximum root
+displacement of 5 mm estimated by Rothenberg.
 
 The results of this study also shed some light on timing aspects of
 tongue root advancement. As mentioned in the previous section, the
@@ -847,6 +868,50 @@ pada      & podo   & pudu & & pada*  & podo & pudu \NN
 paca*     & poco*  & pucu & & paka*  & poko & puku \NN
 paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 }
+
+\hypertarget{output-of-statistical-models}{%
+\section{Output of statistical
+models}\label{output-of-statistical-models}}
+
+See \Cref{tab:tra-lm-table} and \Cref{tab:tra-lm-2-table}.
+
+\begin{table}[t]
+
+\caption{\label{tab:tra-lm-table}Summary of the linear mixed-effects model fitted to tongue root position at vowel offset (see \Cref{s:tra-lm})}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}{lrrrrrrrl}
+\toprule
+Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
+\midrule
+Intercept & -62.14 & 1.81 & -65.69 & -58.59 & 17.12 & -34.31 & 0.00 & *\\
+Voicing = voiced & 0.77 & 0.35 & 0.09 & 1.45 & 19.39 & 2.21 & 0.04 & *\\
+Speech rate (centr.) & 0.41 & 0.28 & -0.14 & 0.96 & 1168.11 & 1.47 & 0.14 & \\
+Vowel = /o/ & -1.87 & 0.42 & -2.71 & -1.04 & 19.29 & -4.41 & 0.00 & *\\
+Vowel = /u/ & 0.09 & 0.43 & -0.75 & 0.92 & 19.70 & 0.20 & 0.84 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+
+\caption{\label{tab:tra-lm-2-table}Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \Cref{s:trp-vdur})}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}{lrrrrrrrl}
+\toprule
+Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
+\midrule
+Intercept & -62.58 & 1.78 & -66.07 & -59.09 & 17.09 & -35.12 & 0.00 & *\\
+V1 duration (centr.) & 0.07 & 0.01 & 0.05 & 0.08 & 955.64 & 8.86 & 0.00 & *\\
+Speech rate (centr.) & 1.24 & 0.29 & 0.67 & 1.81 & 1169.69 & 4.28 & 0.00 & *\\
+Vowel = /o/ & -1.30 & 0.46 & -2.20 & -0.40 & 18.38 & -2.83 & 0.01 & *\\
+Vowel = /u/ & 1.59 & 0.50 & 0.60 & 2.58 & 25.83 & 3.14 & 0.00 & *\\
+V1 duration × /o/ & -0.03 & 0.01 & -0.05 & -0.01 & 736.23 & -3.85 & 0.00 & *\\
+V1 duration × /u/ & -0.02 & 0.01 & -0.04 & -0.01 & 751.25 & -2.53 & 0.01 & *\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \bibliography{linguistics}
 
