@@ -64,9 +64,34 @@ if (file.exists("./voicing-effect/data/cache/wave_gam.Rds")) {
       s(sample, by = lang_voice_o) +
       ti(sequence_prop, sample) +
       ti(sequence_prop, sample, by = lang_voice_o),
-    data = wavegram
+    data = wavegram,
+    method = "ML"
   )
   save(wave_gam, file = "./voicing-effect/data/cache/wave_gam.Rds")
 }
+```
+
+```{r wave-gam-0}
+if (file.exists("./voicing-effect/data/cache/wave_gam_0.Rds")) {
+  load("./voicing-effect/data/cache/wave_gam_0.Rds")
+} else {
+  wave_gam_0 <- bam(
+    amplitude ~
+      # lang_voice_o +
+      s(sequence_prop) +
+      s(sample) +
+      # s(sequence_prop, by = lang_voice_o) +
+      # s(sample, by = lang_voice_o) +
+      ti(sequence_prop, sample),# +
+      # ti(sequence_prop, sample, by = lang_voice_o),
+    data = wavegram,
+    method = "ML"
+  )
+  save(wave_gam_0, file = "./voicing-effect/data/cache/wave_gam_0.Rds")
+}
+```
+
+```{r wave-gam-ml}
+compareML(wave_gam_0, wave_gam)
 ```
 
