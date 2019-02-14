@@ -23,12 +23,13 @@ wavegram <- wavegram %>%
   # there are words starting with /b/, and one observation of negative amplitude
   filter(c1_phonation == "voiceless", amplitude > 0) %>%
   group_by(date) %>%
+  mutate(sequence_prop = sequence / max(sequence)) %>%
+  ungroup() %>%
   mutate(
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     c2_phonation_o = ordered(c2_phonation, levels = c("voiceless", "voiced")),
     lang_voice = interaction(language, c2_phonation),
-    lang_voice_o = ordered(lang_voice, levels = c("Italian.voiceless", "Italian.voiced", "Polish.voiceless", "Polish.voiced")),
-    sequence_prop = sequence / max(sequence)
+    lang_voice_o = ordered(lang_voice, levels = c("Italian.voiceless", "Italian.voiced", "Polish.voiceless", "Polish.voiced"))
   ) %>%
   mutate_if(is.character, as.factor) %>%
   droplevels()
