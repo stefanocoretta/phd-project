@@ -95,3 +95,18 @@ if (file.exists("./voicing-effect/data/cache/wave_gam_0.Rds")) {
 compareML(wave_gam_0, wave_gam)
 ```
 
+```{r wave-pred}
+wave_pred <- predict_gam(wave_gam) %>%
+  separate(lang_voice_o, c("language", "voicing"), remove = FALSE) %>%
+  mutate(voicing = factor(voicing, levels = c("voiceless", "voiced")))
+```
+
+```{r}
+wave_pred %>%
+  ggplot(aes(sequence_prop, sample, fill = fit, z = fit)) +
+  geom_raster(interpolate = TRUE) +
+  geom_contour(colour = "grey") +
+  facet_grid(language ~ voicing) +
+  scale_fill_gradientn(colours = terrain.colors(10))
+```
+
