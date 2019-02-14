@@ -14,6 +14,7 @@ library(itsadug)
 library(tidymv)
 library(coretta2018itapol)
 data("wavegram")
+library(plotly)
 ```
 
 # Data
@@ -32,7 +33,8 @@ wavegram <- wavegram %>%
     lang_voice_o = ordered(lang_voice, levels = c("Italian.voiceless", "Italian.voiced", "Polish.voiceless", "Polish.voiced"))
   ) %>%
   mutate_if(is.character, as.factor) %>%
-  droplevels()
+  droplevels() %>%
+  create_start_event(sequence)
 
 contrasts(wavegram$c2_phonation_o) <- "contr.treatment"
 contrasts(wavegram$lang_voice_o) <- "contr.treatment"
@@ -71,11 +73,35 @@ if (file.exists("./voicing-effect/data/cache/wave_gam.Rds")) {
 }
 ```
 
-```{r wave-gam-0}
-if (file.exists("./voicing-effect/data/cache/wave_gam_0.Rds")) {
-  load("./voicing-effect/data/cache/wave_gam_0.Rds")
+```{r wave-gam-ar}
+rho = start_value_rho(wave_gam)
+
+if (file.exists("./voicing-effect/data/cache/wave_gam_ar.Rds")) {
+  load("./voicing-effect/data/cache/wave_gam_ar.Rds")
 } else {
-  wave_gam_0 <- bam(
+  wave_gam_ar <- bam(
+    amplitude ~
+      lang_voice_o +
+      s(sequence_prop) +
+      s(sample) +
+      s(sequence_prop, by = lang_voice_o) +
+      s(sample, by = lang_voice_o) +
+      ti(sequence_prop, sample) +
+      ti(sequence_prop, sample, by = lang_voice_o),
+    data = wavegram,
+    method = "ML",
+    rho = rho,
+    AR.start = wavegram$start_event
+  )
+  save(wave_gam_ar, file = "./voicing-effect/data/cache/wave_gam_ar.Rds")
+}
+```
+
+```{r wave-gam-ar-0}
+if (file.exists("./voicing-effect/data/cache/wave_gam_ar_0.Rds")) {
+  load("./voicing-effect/data/cache/wave_gam_ar_0.Rds")
+} else {
+  wave_gam_ar_0 <- bam(
     amplitude ~
       # lang_voice_o +
       s(sequence_prop) +
@@ -87,21 +113,21 @@ if (file.exists("./voicing-effect/data/cache/wave_gam_0.Rds")) {
     data = wavegram,
     method = "ML"
   )
-  save(wave_gam_0, file = "./voicing-effect/data/cache/wave_gam_0.Rds")
+  save(wave_gam_ar_0, file = "./voicing-effect/data/cache/wave_gam_ar_0.Rds")
 }
 ```
 
 ```{r wave-gam-ml}
-compareML(wave_gam_0, wave_gam)
+compareML(wave_gam_ar_0, wave_gam_ar)
 ```
 
 ```{r wave-pred}
-wave_pred <- predict_gam(wave_gam) %>%
+wave_pred <- predict_gam(wave_gam_ar) %>%
   separate(lang_voice_o, c("language", "voicing"), remove = FALSE) %>%
   mutate(voicing = factor(voicing, levels = c("voiceless", "voiced")))
 ```
 
-```{r}
+```{r wave-pred-raster}
 wave_pred %>%
   ggplot(aes(sequence_prop, sample, fill = fit, z = fit)) +
   geom_raster(interpolate = TRUE) +
@@ -110,3 +136,16 @@ wave_pred %>%
   scale_fill_gradientn(colours = terrain.colors(10))
 ```
 
+```{r wave-pred-it-3d}
+wave_pred %>%
+  filter(language == "Italian") %>%
+  plot_ly(x = ~sequence_prop, y = ~sample, z = ~fit, marker = list(size = 3)) %>%
+  add_markers(color = ~factor(voicing), colors = c("orange1", "green4"))
+```
+
+```{r wave-pred-pl-3d}
+wave_pred %>%
+  filter(language == "Polish") %>%
+  plot_ly(x = ~sequence_prop, y = ~sample, z = ~fit, marker = list(size = 3)) %>%
+  add_markers(color = ~factor(voicing), colors = c("orange1", "green4"))
+```
