@@ -1,5 +1,63 @@
 #!/bin/bash
 
+# Backup
+
+## Push data folder to external HD
+
+### Test
+
+subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+
+for dirs in ${subdirs[*]}
+do
+  echo ==== $dirs
+  rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+      ~/GitHub/phd-project/$dirs/data/ \
+      /Volumes/Seagate/language-data/phd-project/$dirs/data
+  echo
+done
+
+### Run
+
+subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+
+for dirs in ${subdirs[*]}
+do
+  echo ==== $dirs
+  rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+      ~/GitHub/phd-project/$dirs/data/ \
+      /Volumes/Seagate/language-data/phd-project/$dirs/data
+  echo
+done
+
+## Pull data folder from external HD
+
+### Test
+
+subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+
+for dirs in ${subdirs[*]}
+do
+  echo ==== $dirs
+  rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+      /Volumes/Seagate/language-data/phd-project/$dirs/data \
+      ~/GitHub/phd-project/$dirs/data/
+  echo
+done
+
+### Run
+
+subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+
+for dirs in ${subdirs[*]}
+do
+  echo ==== $dirs
+  rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+      /Volumes/Seagate/language-data/phd-project/$dirs/data \
+      ~/GitHub/phd-project/$dirs/data/
+  echo
+done
+
 # Share
 
 ## Push to share
@@ -9,168 +67,6 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/ \
     /Volumes/Phonology/Common/stefano-phd
-
-# Backup
-
-## Push data folder to external HD
-
-### Test
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/voicing-effect/data/ \
-    /Volumes/Seagate/language-data/phd-project/voicing-effect/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/tracegram-prepilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/tracegram-prepilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/tracegram-pilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/tracegram-pilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/lombard/data/ \
-    /Volumes/Seagate/language-data/phd-project/lombard/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/perceptual-pilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english-pilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/english-pilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/perceptual/data/ \
-    /Volumes/Seagate/language-data/phd-project/perceptual/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/italian-egg/data/ \
-    /Volumes/Seagate/language-data/phd-project/italian-egg/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/icelandic/data/ \
-    /Volumes/Seagate/language-data/phd-project/icelandic/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/italian-sz/data/ \
-    /Volumes/Seagate/language-data/phd-project/italian-sz/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english/data/ \
-    /Volumes/Seagate/language-data/phd-project/english/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english-ve-meta/data/ \
-    /Volumes/Seagate/language-data/phd-project/english-ve-meta/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/american-english/data/ \
-    /Volumes/Seagate/language-data/phd-project/american-english/data
-
-### Run
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/voicing-effect/data/ \
-    /Volumes/Seagate/language-data/phd-project/voicing-effect/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/tracegram-prepilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/tracegram-prepilot/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/tracegram-pilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/tracegram-pilot/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/lombard/data/ \
-    /Volumes/Seagate/language-data/phd-project/lombard/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/perceptual-pilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english-pilot/data/ \
-    /Volumes/Seagate/language-data/phd-project/english-pilot/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/perceptual/data/ \
-    /Volumes/Seagate/language-data/phd-project/perceptual/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/italian-egg/data/ \
-    /Volumes/Seagate/language-data/phd-project/italian-egg/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/icelandic/data/ \
-    /Volumes/Seagate/language-data/phd-project/icelandic/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/italian-sz/data/ \
-    /Volumes/Seagate/language-data/phd-project/italian-sz/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english/data/ \
-    /Volumes/Seagate/language-data/phd-project/english/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/english-ve-meta/data/ \
-    /Volumes/Seagate/language-data/phd-project/english-ve-meta/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/american-english/data/ \
-    /Volumes/Seagate/language-data/phd-project/american-english/data
-
-## Pull data folder from external HD
-
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/voicing-effect/data/ \
-    ~/GitHub/phd-project/voicing-effect/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/tracegram-prepilot/data/ \
-    ~/GitHub/phd-project/tracegram-prepilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/tracegram-pilot/data/ \
-    ~/GitHub/phd-project/tracegram-pilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/lombard/data/ \
-    ~/GitHub/phd-project/lombard/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data/ \
-    ~/GitHub/phd-project/perceptual-pilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english-pilot/data/ \
-    ~/GitHub/phd-project/english-pilot/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/perceptual/data/ \
-    ~/GitHub/phd-project/perceptual/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/italian-egg/data/ \
-    ~/GitHub/phd-project/italian-egg/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/icelandic/data/ \
-    ~/GitHub/phd-project/icelandic/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english/data/ \
-    ~/GitHub/phd-project/english/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english-ve-meta/data/ \
-    ~/GitHub/phd-project/english-ve-meta/data
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/american-english/data/ \
-    ~/GitHub/phd-project/american-english/data
-
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/voicing-effect/data/ \
-    ~/GitHub/phd-project/voicing-effect/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/tracegram-prepilot/data/ \
-    ~/GitHub/phd-project/tracegram-prepilot/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/tracegram-pilot/data/ \
-    ~/GitHub/phd-project/tracegram-pilot/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/lombard/data/ \
-    ~/GitHub/phd-project/lombard/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/perceptual-pilot/data/ \
-    ~/GitHub/phd-project/perceptual-pilot/data
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english-pilot/data/ \
-    ~/GitHub/phd-project/english-pilot/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/perceptual/data/ \
-    ~/GitHub/phd-project/perceptual/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/italian-egg/data/ \
-    ~/GitHub/phd-project/italian-egg/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/icelandic/data/ \
-    ~/GitHub/phd-project/icelandic/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english/data/ \
-    ~/GitHub/phd-project/english/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/english-ve-meta/data/ \
-    ~/GitHub/phd-project/english-ve-meta/data/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Seagate/language-data/phd-project/american-english/data/ \
-    ~/GitHub/phd-project/american-english/data
 
 # DANGER
 
