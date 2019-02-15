@@ -51,6 +51,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/english-ve-meta/data/ \
     /Volumes/Seagate/language-data/phd-project/english-ve-meta/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/american-english/data/ \
+    /Volumes/Seagate/language-data/phd-project/american-english/data
 
 ### Run
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
@@ -89,6 +92,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     ~/GitHub/phd-project/english-ve-meta/data/ \
     /Volumes/Seagate/language-data/phd-project/english-ve-meta/data
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    ~/GitHub/phd-project/american-english/data/ \
+    /Volumes/Seagate/language-data/phd-project/american-english/data
 
 ## Pull data folder from external HD
 
@@ -125,6 +131,9 @@ rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/english-ve-meta/data/ \
     ~/GitHub/phd-project/english-ve-meta/data
+rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Seagate/language-data/phd-project/american-english/data/ \
+    ~/GitHub/phd-project/american-english/data
 
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/voicing-effect/data/ \
@@ -159,6 +168,9 @@ rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
 rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
     /Volumes/Seagate/language-data/phd-project/english-ve-meta/data/ \
     ~/GitHub/phd-project/english-ve-meta/data/
+rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
+    /Volumes/Seagate/language-data/phd-project/american-english/data/ \
+    ~/GitHub/phd-project/american-english/data
 
 # DANGER
 
