@@ -26,7 +26,7 @@
 ######################################
 
 stereo$ = "../data/raw/stereo"
-mono$ = "../data/raw/mono"
+audio$ = "../data/raw/audio"
 Create Strings as file list: "file_list", "'stereo$'/*.wav"
 files = Get number of strings
 
@@ -34,24 +34,24 @@ for file from 1 to files
   selectObject: "Strings file_list"
   file$ = Get string: file
   participant$ = file$ - "-stereo.wav"
-  mono_file$ = "'mono$'/'participant$'-mono.wav"
+  mono_file$ = "'audio$'/'participant$'.wav"
 
   if fileReadable(mono_file$)
-    appendInfoLine: "Skipping 'participant$'-mono.wav..."
+    appendInfoLine: "Skipping 'participant$'.wav..."
   else
 
-    sound = Read from file: "'stereo$'/'file$'"
+    stereo = Read from file: "'stereo$'/'file$'"
     file_name$ = selected$("Sound")
 
     # Audio is in channel 1
-    audio = Extract one channel: 1
+    ch_1 = Extract one channel: 1
 
     # Downsample
-    audio_ds = Resample: 22050, 50
+    ch_1_22050 = Resample: 22050, 50
 
     Save as WAV file: mono_file$
 
-    removeObject: sound, audio, audio_ds
+    removeObject: stereo, ch_1, ch_1_22050
 
   endif
 
