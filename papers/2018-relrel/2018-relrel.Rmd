@@ -53,7 +53,7 @@ round_2 <- function(...) {
   The compensatory account has been criticised due to lack of empirical support and its vagueness regarding the temporal interval within which compensation is implemented.
   The results from an exploratory study of Italian and Polish suggest that the duration of the interval between two consecutive stop releases in CVCV words in these languages is not affected by the voicing of the second stop.
   The durational difference of the first vowel then would follow from differences in closure durations of the following stop.
-  While other factors (like perceptual biases and laryngeal effects) could also play a role in the development of the voicing effect, the data discussed here shed new light on a possible production account of voicing-related differences in vowel durations.
+  While other factors (like perceptual biases and laryngeal effects) could also play a role in the development of the voicing effect, the data discussed here sheds new light on a possible production account of voicing-related differences in vowel durations.
 \end{abstract}
 
 # Introduction
@@ -63,7 +63,7 @@ round_2 <- function(...) {
 
 Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones (\citealt{meyer1904}; \citealt{heffner1937}; \citealt{house1953}; \citealt{belasco1953}; \citealt{peterson1960}; \citealt{halle1967}; \citealt{chen1970}; \citealt{klatt1973}; \citealt{lisker1974}; \citealt{laeufer1992}; \citealt{fowler1992}; \citealt{hussein1994}; \citealt{lampp2004}; \citealt{warren2005}; \citealt{durvasula2012}).
 This so called 'voicing effect' has been found in a considerable variety of languages.\footnote{One of the first attestations of the term `voicing effect' can be attributed to \citet{mitleb1982}. Another term used to refer to the same phenomenon is `pre-fortis clipping', probably introduced by \citet{wells1990}.}
-These include (but are not limited to) English, German, French, Spanish, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).\footnote{A typological note: Most languages reported having a voicing effect come from the Indo-European family. Others are from a pool of widely studied languages. It is thus of vital importance that future studies look at other language families and underdocumented/underdescribed languages.}
+These include (but are not limited to) English, German, French, Spanish, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).\footnote{A typological note. Most languages reported having a voicing effect come from the Indo-European family. Others are from a pool of widely studied languages. It is thus of vital importance that future studies look at other language families and underdocumented/underdescribed languages.}
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
 
 Several proposals have been put forward in relation to the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{begus2017} for an overview).
@@ -316,7 +316,7 @@ After excluding missing measurements, these operations yield a total of 920 toke
 
 ## Open Science statement
 
-Following recommendations for Open Science in @cruwell2018 and @berez-kroeker2018 the data and code used to produce the analyses discussed in this paper are available on the Open Science Framework at \url{http://bit.ly/2FItZe1}.
+Following recommendations for Open Science in @cruwell2018 and @berez-kroeker2018, the data and code used to produce the analyses discussed in this paper are available on the Open Science Framework at \url{http://bit.ly/2FItZe1}.
 
 # Results
 
@@ -576,7 +576,7 @@ The section concludes by discussing the limitations and open issues of this stud
 The results of vowel duration and C2 voicing indicate that vowels are longer when followed by voiced than when followed by voiceless stops both in Italian and Polish.
 The estimated effect is around 16 ms when C2 is voiced for Italian.
 This value is not too far from the estimates of previous works on this language [@caldognetto1979; @farnetani1986; @esposito2002], the range of which is between 22 and 24 ms.
-The higher estimates of these studies compared to the one here could be related to differences in experimental design, or Type M (magnitude) errors due to low statistical power in previous studies (see \citealt{kirby2018}).
+The higher estimates of these studies compared to the one here could be related to differences in experimental design, or Type M (magnitude) errors due to low statistical power (see \citealt{kirby2018}).
 The estimate of the effect of voicing on C2 closure duration is around -18 ms.
 Crucially, the effect of voicing on vowel and closure duration have very similar magnitudes and opposite signs.
 These results suggest a compensatory mechanism between vowel and closure duration.
@@ -616,7 +616,7 @@ On the other hand, while the estimated differences in vowel durations can be int
 \Cref{f:Figure6} shows the random coefficients of the effect of C2 voicing on vowel duration for the individual speakers, extracted from the mixed-effects model presented in \Cref{s:vduration}.
 Black indicates Italian speakers, while grey is for Polish speakers.
 As it can be seen, speakers of both languages are scattered along the values of the voicing effect.
-These results are in agreement with the idiosyncrasy found for the voicing effect of Polish in \citet{malisz2008}.
+These results are in agreement with the idiosyncrasy of the voicing effect of Polish found in \citet{malisz2008}.
 While large-scale studies could reveal clear language-level patterns, the data discussed here point to a scenario in which the speaker's individual behaviour is substantial.
 Future studies could thus look into the respective role of individual-level and community-level factors and how these contribute to the magnitude of the durational differences across speakers and languages.
 
@@ -730,6 +730,7 @@ Future work will need to investigate further aspects of the patterns found in th
 # Acknowledgements
 
 I am grateful to Ricardo Bermúdez-Otero and Patrycja Strycharczuk for their immense support and patience in providing feedback on this project.
+Thanks to the editor of Glossa and two anonymous reviewers for their feedback, which significantly improved the manuscript.
 I also want to thank the audience at the 16th Laboratory Phonology conference (LabPhon16) for their input, and Kenneth de Jong for comments on an early draft of this paper.
 Thanks also go to my colleagues at the Phonetics Laboratory of the University of Manchester, who provided help in different ways.
 Any remaining errors are my own.
