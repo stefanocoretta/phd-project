@@ -26,15 +26,17 @@
 ######################################
 
 stereo$ = "../data/raw/stereo"
-audio$ = "../data/raw/audio"
+mono$ = "../data/raw/mono"
 Create Strings as file list: "file_list", "'stereo$'/*.wav"
 files = Get number of strings
+
+createDirectory: mono$
 
 for file from 1 to files
   selectObject: "Strings file_list"
   file$ = Get string: file
   participant$ = file$ - "-stereo.wav"
-  mono_file$ = "'audio$'/'participant$'.wav"
+  mono_file$ = "'mono$'/'participant$'.wav"
 
   if fileReadable(mono_file$)
     appendInfoLine: "Skipping 'participant$'.wav..."
