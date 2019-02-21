@@ -16,7 +16,7 @@ V/Users/stefano/GitHub/phd-project/english/experiment/english.psyexp
 p7
 sS'dataFileName'
 p8
-V/Users/stefano/GitHub/phd-project/english/experiment/exp-data/en001_english_2019_Feb_19_1056
+V/Users/stefano/GitHub/phd-project/english/experiment/exp-data/en01_english_2019_Feb_19_1056
 p9
 sS'runtimeInfo'
 p10
@@ -78,7 +78,7 @@ p35
 c__builtin__
 unicode
 p36
-Ven001
+Ven01
 p37
 tp38
 Rp39
