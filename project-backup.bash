@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# directory  = copy both directory and content
+# directory/ = copy only content
+
 # Backup
 
 ## Push data folder to external HD
