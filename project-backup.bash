@@ -40,8 +40,8 @@ for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-      /Volumes/Seagate/language-data/phd-project/$dirs/data \
-      ~/GitHub/phd-project/$dirs/data/
+      /Volumes/Seagate/language-data/phd-project/$dirs/data/ \
+      ~/GitHub/phd-project/$dirs/data
   echo
 done
 
@@ -53,8 +53,8 @@ for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-      /Volumes/Seagate/language-data/phd-project/$dirs/data \
-      ~/GitHub/phd-project/$dirs/data/
+      /Volumes/Seagate/language-data/phd-project/$dirs/data/ \
+      ~/GitHub/phd-project/$dirs/data
   echo
 done
 
