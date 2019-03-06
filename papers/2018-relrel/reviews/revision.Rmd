@@ -11,6 +11,7 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Thanks to the Glossa Editor and to the reviewers for their helpful feedback. As per request, the following paragraphs give details about the recommended changes. The author's responses to these changes are in light purple.
 
 # 1
 
