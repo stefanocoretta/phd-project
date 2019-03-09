@@ -1,0 +1,9 @@
+description,directory,file_name,extension,derived_from,output_of,input_of
+Stereo audio file,./english/data/raw/stereo/,ID-stereo,.wav,,,
+Mono audio file (silenced),./english/data/raw/mono/,ID,.wav,Stereo audio file,,
+Sentences TextGrid,./english/data/raw/mono/,ID,.TextGrid,Original Sentences TextGrid,,
+Original Sentences TextGrid,./english/data/raw/mono/,ID-original,.TextGrid,,,
+Phone alignment TextGrid,./english/data/raw/mono/,ID-palign,.TextGrid,,,
+Corrected Phone alignment TextGrid,./english/data/raw/mono/,ID-palign-corrected,.TextGrid,Phone alignment TextGrid,,
+Annotation TextGrid,./english/data/raw/mono/,ID-annotation,.TextGrid,Corrected Phone alignment TextGrid; Sentences TextGrid,make-textgrid.praat,
+Corrected Annotation TextGrid,./english/data/raw/mono/,ID-annotation-corrected,.TextGrid,Annotation TextGrid,,
