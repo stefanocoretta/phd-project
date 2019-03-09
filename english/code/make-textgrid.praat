@@ -46,6 +46,12 @@ for file from 1 to files
   appendInfoLine: "'newline$'Processing speaker 'speaker$'."
   appendInfo: ""
 
+  if fileReadable("'mono_dir$'/'speaker$'-annotation.TextGrid")
+    appendInfoLine: "Found annotation file for 'speaker$'. Skipping to the next speaker."
+    appendInfo: ""
+    goto next
+  endif
+
   sound = Read from file: "'mono_dir$'/'file_name$'"
   # The new tg:
   textgrid = To TextGrid: "sentence, word, phones, release", "release"
@@ -133,6 +139,9 @@ for file from 1 to files
   selectObject: textgrid
   Save as text file: "'mono_dir$'/'speaker$'-annotation.TextGrid"
 
+  removeObject: sound, textgrid, palign, sentences
+
+  label next
 endfor
 
 procedure detect: start_time, end_time
@@ -184,7 +193,7 @@ procedure detect: start_time, end_time
   plosion_pp = To PointProcess (extrema): 1, "yes", "no", "Sinc70"
   
   # To reduce detection error when there is noise in the first part of the consonant
-  Remove points between: start_time, start_time + 15
+  Remove points between: start_time, start_time + 0.015
   # The time of the burst onset
   burst_onset = Get time from index: 1
 
@@ -192,4 +201,7 @@ procedure detect: start_time, end_time
   if burst_onset <> undefined
       Insert point: release_tier, burst_onset, "release"
   endif
+
+  removeObject: sound_consonant, sound_filt, spectrum, spectrum_hilbert, sound_hilbert, matrix,
+    ...plosion_sound, plosion_pp
 endproc
