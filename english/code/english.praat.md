@@ -3,6 +3,46 @@ title: "Scripts of the English sub-project"
 author: "Stefano Coretta"
 ---
 
+# Convert and resample stereo files
+
+```praat convert.praat
+<<<script header>>>
+
+stereo$ = "../data/raw/stereo"
+mono$ = "../data/raw/mono"
+Create Strings as file list: "file_list", "'stereo$'/*.wav"
+files = Get number of strings
+
+createDirectory: mono$
+
+for file from 1 to files
+  selectObject: "Strings file_list"
+  file$ = Get string: file
+  participant$ = file$ - "-stereo.wav"
+  mono_file$ = "'mono$'/'participant$'.wav"
+
+  if fileReadable(mono_file$)
+    appendInfoLine: "Skipping 'participant$'.wav..."
+  else
+
+    stereo = Read from file: "'stereo$'/'file$'"
+    file_name$ = selected$("Sound")
+
+    # Audio is in channel 1
+    ch_1 = Extract one channel: 1
+
+    # Downsample
+    ch_1_22050 = Resample: 22050, 50
+
+    Save as WAV file: mono_file$
+
+    removeObject: stereo, ch_1, ch_1_22050
+
+  endif
+
+endfor
+```
+
 # Detect burst onset in C1 and C2 and create a merged TextGrid
 
 This script detects the burst onset of C1 (/t/) and C2 and creates a new TextGrid with sentences, words, phones, and releases. The algorythm for the detection of the burst onset is based on @avanthapadmanabha2014. Note that the alrgorythm can find bursts, rather than releases. In the case of a non-audible release, the algorythm will not return a time point (which is the intended outcome).
