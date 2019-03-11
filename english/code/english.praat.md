@@ -211,6 +211,75 @@ Remove points between: start_time, start_time + 0.015
 burst_onset = Get time from index: 1
 ```
 
+# Correct burst onset
+
+This script facilitates the manual correction of burst onset detection by zooming to the relevant intervals in a loop.
+
+```praat correct-burst.praat
+<<<script header>>>
+
+<<<open textgrid>>>
+
+<<<consonants loop>>>
+```
+
+We first ask the user to chose which participant will be processed, and the corresponding sound and annotation TextGrid are loaded.
+
+```praat "open textgrid"
+form Select participant
+  word speaker en01
+endform
+
+mono_dir$ = "../data/raw/mono"
+
+sound = Read from file: "'mono_dir$'/'speaker$'.wav"
+annotation = Read from file: "'mono_dir$'/'speaker$'-annotation.TextGrid"
+
+selectObject: sound, annotation
+```
+
+Now we can loop through the consonants, which are on tier 3.
+
+```praat "consonants loop"
+cons_tier = 3
+
+selectObject: annotation
+consonants_num = Get number of intervals: cons_tier
+
+for i from 1 to consonants_num - 3
+  selectObject: annotation
+  consonant$ = Get label of interval: cons_tier, i
+  if consonant$ <> ""
+    c_start = Get start time of interval: cons_tier, i
+    c_end = Get end time of interval: cons_tier, i
+
+    selectObject: sound, annotation
+    View & Edit
+    editor: annotation
+      Select: c_start, c_end
+      Zoom to selection
+      pauseScript: "Annotate then continue"
+      Close
+    endeditor
+
+    selectObject: annotation
+    c_start = Get start time of interval: cons_tier, i + 2
+    c_end = Get end time of interval: cons_tier, i + 2
+
+    selectObject: sound, annotation
+    View & Edit
+    editor: annotation
+      Select: c_start, c_end
+      Zoom to selection
+      pauseScript: "Annotate then continue"
+      Close
+    endeditor
+
+    i += 3
+  endif
+endfor
+```
+
 # Script header
 
 ```praat "script header"
