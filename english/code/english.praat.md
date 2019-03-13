@@ -327,6 +327,87 @@ for i from 1 to consonants_num - 3
 endfor
 ```
 
+# Get measurements
+
+This is the script that extracts the duration measurements from the corrected annotation TextGrids.
+
+```praat get-measurements.praat
+<<<script header>>>
+
+<<<initialise results>>>
+
+<<<speakers loop>>>
+```
+
+```praat "initialise results"
+mono_dir$ = "../data/raw/mono"
+results_dir$ = "../data/datasets"
+results_file$ = "'results_dir$'/english-durations.csv"
+results_header$ = "speaker,sentence,sentence_ons,sentence_off,c1_rel,c2_rel"
+writeFileLine: results_file$, results_header$
+
+file_list = Create Strings as file list: "file_list", "'mono_dir$'/*-annotation-corrected.TextGrid"
+textgrid_num = Get number of strings
+```
+
+```praat "speakers loop"
+sentence_tier = 1
+phones_tier = 3
+release_tier = 4
+
+for speaker from 1 to textgrid_num
+  selectObject: file_list
+  annotation$ = Get string: speaker
+
+  annotation = Read from file: "'mono_dir$'/'annotation$'"
+  speaker$ = annotation$ - "-annotation-corrected.TextGrid"
+  phones_num = Get number of intervals: phones_tier
+
+  <<<annotation loop>>>
+
+  removeObject: annotation
+
+endfor
+```
+
+```praat "annotation loop"
+for phone from 1 to phones_num - 3
+  label$ = Get label of interval: phones_tier, phone
+
+  if label$ != ""
+    c1_start = Get start time of interval: phones_tier, phone
+    c1_end = Get end time of interval: phones_tier, phone
+    sentence = Get interval at time: sentence_tier, c1_start
+    sentence$ = Get label of interval: sentence_tier, sentence
+    sentence_start = Get start time of interval: sentence_tier, sentence
+    sentence_end = Get end time of interval: sentence_tier, sentence
+
+    c1_rel_i = Get nearest index from time: release_tier, c1_start
+    c1_rel = Get time of point: release_tier, c1_rel_i
+    if c1_rel < c1_start or c1_rel > c1_end
+      c1_rel = undefined
+    endif
+
+    c2 = phone + 2
+
+    c2_start = Get start time of interval: phones_tier, c2
+    c2_end = Get end time of interval: phones_tier, c2
+
+    c2_rel_i = Get nearest index from time: release_tier, c2_start
+    c2_rel = Get time of point: release_tier, c2_rel_i
+    if c2_rel < c2_start or c2_rel > c2_end
+      c2_rel = undefined
+    endif
+
+    results_line$ = "'speaker$','sentence$','sentence_start','sentence_end','c1_rel','c2_rel'"
+    appendFileLine: results_file$, results_line$
+
+    phone += 3
+  endif
+
+endfor
+```
+
 # Script header
 
 ```praat "script header"
