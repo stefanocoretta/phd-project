@@ -29,7 +29,7 @@ eng_durations = read_csv("english/data/datasets/english-durations.csv", na = "--
 eng_durations %>%
   ggplot(aes(rel_rel, fill = voicing)) +
   geom_density(alpha = 0.5) +
-  facet_grid(num_syl ~ .)
+  facet_grid(num_syl ~ place)
 ```
 
 ```{r rr-box}
