@@ -272,6 +272,10 @@ endform
 
 mono_dir$ = "../data/raw/mono"
 
+if fileReadable("'mono_dir$'/'speaker$'-annotation-corrected.TextGrid")
+  pauseScript: "Corrected annotation found. Continue anyway?"
+endif
+
 sound = Read from file: "'mono_dir$'/'speaker$'.wav"
 annotation = Read from file: "'mono_dir$'/'speaker$'-annotation.TextGrid"
 
@@ -314,6 +318,9 @@ for i from 1 to consonants_num - 3
       pauseScript: "Annotate then continue"
       Close
     endeditor
+
+    selectObject: annotation
+    Save as text file: "'mono_dir$'/'speaker$'-annotation-corrected.TextGrid"
 
     i += 3
   endif
