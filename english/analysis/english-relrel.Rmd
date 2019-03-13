@@ -1,0 +1,40 @@
+---
+title: "English Release-to-Release"
+author: "Stefano Coretta"
+date: "13/03/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+```{r read-data}
+stimuli = read_csv("english/data/datasets/stimuli.csv")
+
+eng_durations = read_csv("english/data/datasets/english-durations.csv", na = "--undefined--") %>%
+  left_join(y = stimuli) %>%
+  mutate(
+    sentence_duration = sentence_off - sentence_ons,
+    rel_rel = (c2_rel - c1_rel) * 1000,
+    voicing = factor(voicing, levels = c("voiceless", "voiced")),
+    num_syl = factor(num_syl, levels = c("di", "mono"))
+  )
+```
+
+```{r rr-dens}
+eng_durations %>%
+  ggplot(aes(rel_rel, fill = voicing)) +
+  geom_density(alpha = 0.5) +
+  facet_grid(num_syl ~ .)
+```
+
+```{r rr-box}
+eng_durations %>%
+  ggplot(aes(num_syl, rel_rel, fill = voicing)) +
+  geom_boxplot()
+```
+
