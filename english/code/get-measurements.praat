@@ -35,7 +35,7 @@
 mono_dir$ = "../data/raw/mono"
 results_dir$ = "../data/datasets"
 results_file$ = "'results_dir$'/english-durations.csv"
-results_header$ = "speaker,sentence,sentence_ons,sentence_off,c1_rel,c2_rel"
+results_header$ = "speaker,sentence,sentence_ons,sentence_off,c1_rel,c2_rel,v1_ons,v1_off"
 writeFileLine: results_file$, results_header$
 
 file_list = Create Strings as file list: "file_list", "'mono_dir$'/*-annotation-corrected.TextGrid"
@@ -70,6 +70,11 @@ for speaker from 1 to textgrid_num
         c1_rel = undefined
       endif
   
+      v1 = phone + 1
+  
+      v1_start = Get start time of interval: phones_tier, v1
+      v1_end = Get end time of interval: phones_tier, v1
+  
       c2 = phone + 2
   
       c2_start = Get start time of interval: phones_tier, c2
@@ -81,7 +86,8 @@ for speaker from 1 to textgrid_num
         c2_rel = undefined
       endif
   
-      results_line$ = "'speaker$','sentence$','sentence_start','sentence_end','c1_rel','c2_rel'"
+      results_line$ = "'speaker$','sentence$','sentence_start','sentence_end',
+        ...'c1_rel','c2_rel','v1_start','v1_end'"
       appendFileLine: results_file$, results_line$
   
       phone += 3
