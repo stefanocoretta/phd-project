@@ -10,9 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(brms)
 ```
 
-```{r read-data}
+# Prepare data
+
+```{r read-data, message=FALSE}
 stimuli = read_csv("english/data/datasets/stimuli.csv")
 
 eng_durations = read_csv("english/data/datasets/english-durations.csv", na = "--undefined--") %>%
@@ -21,7 +24,9 @@ eng_durations = read_csv("english/data/datasets/english-durations.csv", na = "--
     sentence_duration = sentence_off - sentence_ons,
     rel_rel = (c2_rel - c1_rel) * 1000,
     voicing = factor(voicing, levels = c("voiceless", "voiced")),
-    num_syl = factor(num_syl, levels = c("di", "mono"))
+    num_syl = factor(num_syl, levels = c("di", "mono")),
+    speech_rate = ifelse(num_syl == "mono", 6 / sentence_duration, 7 / sentence_duration),
+    speech_rate_c = speech_rate - mean(speech_rate)
   )
 ```
 
@@ -36,5 +41,33 @@ eng_durations %>%
 eng_durations %>%
   ggplot(aes(num_syl, rel_rel, fill = voicing)) +
   geom_boxplot()
+```
+
+# Bayesian modelling
+
+```{r rr-1}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_1 <- brm(
+  rel_rel ~
+    voicing +
+    num_syl +
+    voicing:num_syl +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations,
+  cores = 4
+)
 ```
 
