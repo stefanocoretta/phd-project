@@ -11,24 +11,11 @@ knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
+library(coretta2019eng)
+data("eng_durations")
 ```
 
-# Prepare data
-
-```{r read-data, message=FALSE}
-stimuli = read_csv("english/data/datasets/stimuli.csv")
-
-eng_durations = read_csv("english/data/datasets/english-durations.csv", na = "--undefined--") %>%
-  left_join(y = stimuli) %>%
-  mutate(
-    sentence_duration = sentence_off - sentence_ons,
-    rel_rel = (c2_rel - c1_rel) * 1000,
-    voicing = factor(voicing, levels = c("voiceless", "voiced")),
-    num_syl = factor(num_syl, levels = c("di", "mono")),
-    speech_rate = ifelse(num_syl == "mono", 6 / sentence_duration, 7 / sentence_duration),
-    speech_rate_c = speech_rate - mean(speech_rate)
-  )
-```
+# Plot data
 
 ```{r rr-dens}
 eng_durations %>%
