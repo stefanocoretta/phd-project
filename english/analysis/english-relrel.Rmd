@@ -11,12 +11,13 @@ knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
+library(bayesplot)
 library(coretta2019eng)
 data("eng_durations")
 ```
 
 ```{r remove-na}
-eng_durations <- na.omit(eng_durations)
+eng_durations_2 <- na.omit(eng_durations)
 ```
 
 # Plot data
@@ -74,8 +75,98 @@ rr_1 <- brm(
     (1 + voicing | speaker) +
     (1 | word),
   family = gaussian(),
-  data = eng_durations,
-  cores = 4
+  data = eng_durations_2,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./english/data/cache/rr_1"
 )
+```
+
+```{r rr-1-sum}
+summary(rr_1, prob = 0.89)
+```
+
+```{r rr-1-pp-check}
+pp_check(rr_1, nsamples = 50)
+```
+
+```{r rr-1-int}
+mcmc_intervals(as.array(rr_1), regex_pars = "^b_[^I]", prob = 0.99, prob_outer = 0.8)
+```
+
+```{r rr-2}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_2 <- brm(
+  rel_rel ~
+    vowel +
+    place +
+    speech_rate_c +
+    (1 | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_2,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./english/data/cache/rr_2"
+)
+```
+
+```{r rr-2-sum}
+summary(rr_2, prob = 0.89)
+```
+
+# Exploratory
+
+```{r rr-3}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_3 <- brm(
+  rel_rel ~
+    voicing +
+    num_syl +
+    voicing:num_syl +
+    vowel +
+    place +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_2,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./english/data/cache/rr_3"
+)
+```
+
+```{r rr-3-sum}
+summary(rr_3, prob = 0.89)
+```
+
+```{r rr-3-int}
+mcmc_intervals(as.array(rr_3), regex_pars = "^b_[^I]", prob = 0.99, prob_outer = 0.8)
 ```
 
