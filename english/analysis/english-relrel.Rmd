@@ -15,19 +15,40 @@ library(coretta2019eng)
 data("eng_durations")
 ```
 
+```{r remove-na}
+eng_durations <- na.omit(eng_durations)
+```
+
 # Plot data
 
-```{r rr-dens}
+```{r rr}
 eng_durations %>%
   ggplot(aes(rel_rel, fill = voicing)) +
-  geom_density(alpha = 0.5) +
-  facet_grid(num_syl ~ place)
+  geom_density(alpha = 0.5, color = NA) +
+  facet_grid(num_syl ~ .) +
+  scale_x_continuous(breaks = seq(100, 450, 50))
 ```
 
 ```{r rr-box}
 eng_durations %>%
   ggplot(aes(num_syl, rel_rel, fill = voicing)) +
   geom_boxplot()
+```
+
+```{r rr-vowel}
+eng_durations %>%
+  ggplot(aes(rel_rel, fill = vowel)) +
+  geom_density(alpha = 0.5, color = NA) +
+  facet_grid(num_syl ~ .) +
+  scale_x_continuous(breaks = seq(100, 450, 50))
+```
+
+```{r rr-place}
+eng_durations %>%
+  ggplot(aes(rel_rel, fill = place)) +
+  geom_density(alpha = 0.5, color = NA) +
+  facet_grid(num_syl ~ .) +
+  scale_x_continuous(breaks = seq(100, 450, 50))
 ```
 
 # Bayesian modelling
