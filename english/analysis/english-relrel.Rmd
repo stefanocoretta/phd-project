@@ -12,6 +12,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
+library(tidybayes)
 library(coretta2019eng)
 data("eng_durations")
 ```
@@ -21,6 +22,12 @@ eng_durations_rr <- na.omit(eng_durations)
 ```
 
 # Plot data
+
+```{r rr-dens}
+eng_durations %>%
+  ggplot(aes(rel_rel)) +
+  geom_density()
+```
 
 ```{r rr}
 eng_durations %>%
@@ -178,3 +185,35 @@ pp_check(rr_3, nsamples = 50)
 mcmc_intervals(as.array(rr_3), regex_pars = "^b_[^I]", prob = 0.99, prob_outer = 0.8)
 ```
 
+```{r rr-3-areas}
+mcmc_areas(as.array(rr_3), regex_pars = "^b_[^I]", prob = 0.5)
+```
+
+```{r rr-3-draws}
+rr_3_draws <- rr_3 %>%
+  gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`)
+```
+
+```{r rr-3-draws-interval}
+rr_3_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(.variable, levels = c("b_voicingvoiced:num_sylmono", "b_num_sylmono", "b_voicingvoiced"))) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.15), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-15, 25, 5)) +
+  scale_color_brewer()
+```
+
+```{r rr-3-draws-halfeye}
+rr_3_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(.variable, levels = c("b_voicingvoiced:num_sylmono", "b_num_sylmono", "b_voicingvoiced"))) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  geom_halfeyeh(fill = "#9ecae1") +
+  stat_intervalh(position = position_nudge(y = -0.15)) +
+  scale_x_continuous(breaks = seq(-15, 25, 5)) +
+  scale_color_brewer()
+```
