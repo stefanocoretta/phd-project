@@ -84,7 +84,7 @@ rr_1 <- brm(
 ```
 
 ```{r rr-1-sum}
-summary(rr_1, prob = 0.89)
+summary(rr_1, prob = 0.95)
 ```
 
 ```{r rr-1-pp-check}
@@ -123,7 +123,7 @@ rr_2 <- brm(
 ```
 
 ```{r rr-2-sum}
-summary(rr_2, prob = 0.89)
+summary(rr_2, prob = 0.95)
 ```
 
 # Exploratory
@@ -163,7 +163,7 @@ rr_3 <- brm(
 ```
 
 ```{r rr-3-sum}
-summary(rr_3, prob = 0.89)
+summary(rr_3, prob = 0.95)
 ```
 
 ```{r rr-3-int}
