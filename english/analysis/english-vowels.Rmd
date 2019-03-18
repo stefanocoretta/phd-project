@@ -86,7 +86,7 @@ eng_durations %>%
 
 # Bayesian analysis
 
-```{r}
+```{r vow-1}
 priors <- c(
   set_prior("normal(145, 30)", class = "Intercept"),
   set_prior("normal(50, 20)", class = "b", coef = "voicingvoiced"),
@@ -126,17 +126,17 @@ vow_1 <- brm(
 )
 ```
 
-```{r}
+```{r vow-1-sum}
 summary(vow_1, prob = 0.95)
 ```
 
-```{r}
+```{r vow-1-check}
 pp_check(vow_1, nsamples = 50)
 ```
 
 # Exploratory
 
-```{r}
+```{r vow-2}
 priors <- c(
   set_prior("normal(145, 30)", class = "Intercept"),
   set_prior("normal(50, 20)", class = "b", coef = "voicingvoiced"),
@@ -167,7 +167,7 @@ vow_2 <- brm(
 )
 ```
 
-```{r}
+```{r vow-2-sum}
 summary(vow_2, prob = 0.95)
 ```
 
