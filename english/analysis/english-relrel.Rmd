@@ -54,6 +54,8 @@ eng_durations %>%
 
 # Bayesian modelling
 
+## Phonation
+
 ```{r rr-1}
 priors <- c(
   set_prior("normal(200, 50)", class = "Intercept"),
@@ -94,6 +96,8 @@ pp_check(rr_1, nsamples = 50)
 ```{r rr-1-int}
 mcmc_intervals(as.array(rr_1), regex_pars = "^b_[^I]", prob = 0.99, prob_outer = 0.8)
 ```
+
+## Vowel, place
 
 ```{r rr-2}
 priors <- c(
