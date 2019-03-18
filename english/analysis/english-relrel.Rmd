@@ -166,6 +166,10 @@ rr_3 <- brm(
 summary(rr_3, prob = 0.95)
 ```
 
+```{r rr-3-pp-check}
+pp_check(rr_3, nsamples = 50)
+```
+
 ```{r rr-3-int}
 mcmc_intervals(as.array(rr_3), regex_pars = "^b_[^I]", prob = 0.99, prob_outer = 0.8)
 ```
