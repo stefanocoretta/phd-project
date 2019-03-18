@@ -1,0 +1,173 @@
+---
+title: "English vowel duration"
+author: "Stefano Coretta"
+date: "18/03/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(brms)
+library(bayesplot)
+library(coretta2019eng)
+data("eng_durations")
+```
+
+# Plot data
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration)) +
+  geom_density(fill = "blue", alpha = 0.5, colour = NA)
+```
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration, fill = vowel)) +
+  geom_density(alpha = 0.5, colour = NA)
+```
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration, fill = place)) +
+  geom_density(alpha = 0.5, colour = NA)
+```
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration, fill = num_syl)) +
+  geom_density(alpha = 0.5, colour = NA)
+```
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration, fill = voicing)) +
+  geom_density(alpha = 0.5, colour = NA)
+```
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration, fill = voicing)) +
+  geom_density(alpha = 0.5, colour = NA) +
+  facet_grid(num_syl ~ .)
+```
+
+```{r v-dens}
+eng_durations %>%
+  ggplot(aes(v1_duration, fill = voicing)) +
+  geom_density(alpha = 0.5, colour = NA) +
+  facet_grid(num_syl ~ place)
+```
+
+```{r v-jitter}
+eng_durations %>%
+  ggplot(aes(voicing, v1_duration)) +
+  geom_jitter(width = 0.2, alpha = 0.2) +
+  scale_y_continuous(breaks = seq(0, 300, 50))
+```
+
+```{r v-box}
+eng_durations %>%
+  ggplot(aes(voicing, v1_duration)) +
+  geom_boxplot() +
+  scale_y_continuous(breaks = seq(0, 300, 50))
+```
+
+```{r v-box}
+eng_durations %>%
+  ggplot(aes(voicing, v1_duration)) +
+  geom_boxplot() +
+  facet_grid(. ~ num_syl) +
+  scale_y_continuous(breaks = seq(0, 300, 50))
+```
+
+# Bayesian analysis
+
+```{r}
+priors <- c(
+  set_prior("normal(145, 30)", class = "Intercept"),
+  set_prior("normal(50, 20)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicingvoiced:voweler"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicingvoiced:vowelee"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:voweler:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:vowelee:num_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+vow_1 <- brm(
+  v1_duration ~
+    voicing +
+    vowel +
+    num_syl +
+    voicing:vowel +
+    voicing:num_syl +
+    vowel:num_syl +
+    voicing:vowel:num_syl +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations,
+  prior = priors,
+  file = "./english/data/cache/vow_1",
+  cores = 4
+)
+```
+
+```{r}
+summary(vow_1, prob = 0.95)
+```
+
+```{r}
+pp_check(vow_1, nsamples = 50)
+```
+
+# Exploratory
+
+```{r}
+priors <- c(
+  set_prior("normal(145, 30)", class = "Intercept"),
+  set_prior("normal(50, 20)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+vow_2 <- brm(
+  v1_duration ~
+    voicing +
+    vowel +
+    num_syl +
+    voicing:num_syl +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations,
+  prior = priors,
+  file = "./english/data/cache/vow_2",
+  cores = 4
+)
+```
+
+```{r}
+summary(vow_2, prob = 0.95)
+```
+
