@@ -12,6 +12,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
+library(tidymv)
 library(coretta2019eng)
 data("eng_durations")
 ```
@@ -58,7 +59,26 @@ clos_1 <- brm(
 )
 ```
 
+```{r clos-1-check}
+pp_check(clos_1, nsamples = 50)
+```
+
 ```{r clos-1-sum}
 summary(clos_1, prob = 0.95)
 ```
 
+```{r clos-1-draws}
+clos_1_draws <- clos_1 %>%
+  gather_draws(`b_.*`, regex = TRUE) %>%
+  filter(.variable != "b_Intercept")
+```
+
+```{r clos-1-intervals}
+clos_1_draws %>%
+  filter(.variable %in% c("b_voicingvoiced", "b_num_sylmono", "b_voicingvoiced:num_sylmono")) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(.width = c(0.66, 0.98)) +
+  scale_color_brewer()
+```
