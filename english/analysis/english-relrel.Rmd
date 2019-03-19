@@ -13,6 +13,7 @@ theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
 library(tidybayes)
+library(broom.mixed)
 library(coretta2019eng)
 data("eng_durations")
 ```
@@ -192,6 +193,9 @@ mcmc_areas(as.array(rr_3), regex_pars = "^b_[^I]", prob = 0.5)
 ```{r rr-3-draws}
 rr_3_draws <- rr_3 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`)
+
+rr_3_draws_2 <- rr_3 %>%
+  gather_draws(b_voweler, b_vowelee, b_placelabial)
 ```
 
 ```{r rr-3-draws-interval}
@@ -216,4 +220,80 @@ rr_3_draws %>%
   stat_intervalh(position = position_nudge(y = -0.15)) +
   scale_x_continuous(breaks = seq(-15, 25, 5)) +
   scale_color_brewer()
+```
+
+```{r rr-3-draws-interval-2}
+rr_3_draws_2 %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.15), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-50, 25, 5)) +
+  scale_color_brewer()
+```
+
+```{r rr-3-fixed}
+rr_3_fixed <- tidy(rr_3, effects = "fixed", conf.level = 0.95, fix.intercept = FALSE) %>%
+  mutate(
+    ci_width = abs(conf.low - conf.high),
+    is_rope = ifelse(ci_width <= 20, "*", "")
+  )
+```
+
+## Plot predicted posterior distributions
+
+```{r rr-3-post}
+rr_3_post <- posterior_samples(rr_3, pars = "b_Intercept") %>%
+  bind_cols(
+    (c(posterior_samples(rr_3, pars = "b_Intercept")) +
+    posterior_samples(rr_3, pars = "b_voicingvoiced", exact_match = TRUE))
+  ) %>%
+  bind_cols(
+    (c(posterior_samples(rr_3, pars = "b_Intercept")) +
+    posterior_samples(rr_3, pars = "b_num_sylmono", exact_match = TRUE))
+  ) %>%
+  bind_cols(
+    (c(posterior_samples(rr_3, pars = "b_Intercept")) +
+    posterior_samples(rr_3, pars = "b_voicingvoiced", exact_match = TRUE) +
+    posterior_samples(rr_3, pars = "b_num_sylmono", exact_match = TRUE) +
+    posterior_samples(rr_3, pars = "b_voicingvoiced:num_sylmono", exact_match = TRUE))
+  ) %>%
+  rename(
+    di_voiceless = b_Intercept,
+    di_voiced = b_voicingvoiced,
+    mono_voiceless = b_num_sylmono,
+    mono_voiced = b_voicingvoiced1
+  ) %>%
+  gather(context, rr_duration) %>%
+  mutate(context = factor(context, levels = c("di_voiceless", "di_voiced", "mono_voiceless", "mono_voiced")))
+```
+
+```{r rr-post-dens}
+rr_3_post %>%
+  ggplot(aes(rr_duration, fill = context)) +
+  geom_density(alpha = 0.5, colour = NA) +
+  theme(legend.position = "top")
+```
+
+```{r rr-post-dens-2}
+rr_3_post %>%
+  ggplot(aes(rr_duration, fill = context)) +
+  geom_density(alpha = 0.5, colour = NA, bw = 3) +
+  theme(legend.position = "top")
+```
+
+```{r rr-post-box}
+rr_3_post %>%
+  ggplot(aes(context, rr_duration)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2, outlier.alpha = 0.1) +
+  scale_y_continuous(breaks = seq(240, 340, 10))
+```
+
+```{r rr-post-box-2}
+rr_3_post %>%
+  ggplot(aes(context, rr_duration)) +
+  geom_violin(bw = 3) +
+  geom_boxplot(width = 0.2, outlier.alpha = 0.1) +
+  scale_y_continuous(breaks = seq(240, 340, 10))
 ```
