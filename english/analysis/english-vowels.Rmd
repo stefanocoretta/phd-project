@@ -15,6 +15,9 @@ library(bayesplot)
 library(tidybayes)
 library(coretta2019eng)
 data("eng_durations")
+
+scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
+scale_colour_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 ```
 
 # Plot data
@@ -149,6 +152,42 @@ vow_1_draws %>%
   stat_intervalh() +
   stat_pointintervalh(.width = c(0.66, 0.98)) +
   scale_color_brewer()
+```
+
+## Plot predicted posterior distributions
+
+```{r vow-1-post}
+vow_1_post <- posterior_samples(vow_1, pars = "b_") %>%
+  mutate(
+    di_ar_voiceless = b_Intercept,
+    di_ar_voiced = b_Intercept + b_voicingvoiced,
+    mono_ar_voiceless = b_Intercept + b_num_sylmono,
+    mono_ar_voiced = b_Intercept + b_num_sylmono + b_voicingvoiced,
+    di_er_voiceless = b_Intercept + b_voweler,
+    di_er_voiced = b_Intercept + b_voicingvoiced + b_voweler + `b_voicingvoiced:voweler`,
+    mono_er_voiceless = b_Intercept + b_num_sylmono + b_voweler + `b_voweler:num_sylmono`,
+    mono_er_voiced = b_Intercept + b_num_sylmono + b_voicingvoiced + b_voweler + `b_voicingvoiced:voweler` + `b_voweler:num_sylmono` + `b_voicingvoiced:voweler:num_sylmono`,
+    di_ee_voiceless = b_Intercept + b_vowelee,
+    di_ee_voiced = b_Intercept + b_voicingvoiced + b_vowelee + `b_voicingvoiced:vowelee`,
+    mono_ee_voiceless = b_Intercept + b_num_sylmono + b_vowelee + `b_vowelee:num_sylmono`,
+    mono_ee_voiced = b_Intercept + b_num_sylmono + b_voicingvoiced + b_vowelee + `b_voicingvoiced:vowelee` + `b_vowelee:num_sylmono` + `b_voicingvoiced:vowelee:num_sylmono`
+  ) %>%
+  select(di_ar_voiceless:mono_ee_voiced) %>%
+  gather(context, vow_duration) %>%
+  separate(context, c("num_syl", "vowel", "voicing")) %>%
+  mutate(
+    voicing = factor(voicing, levels = c("voiceless", "voiced")),
+    vowel = factor(vowel, levels = c("ar", "er", "ee"))
+  )
+```
+
+```{r vow-post-dens}
+vow_1_post %>%
+  ggplot(aes(vow_duration, fill = voicing)) +
+  geom_density(alpha = 0.8, colour = NA, bw = 2.5) +
+  theme(legend.position = "top") +
+  facet_grid(vowel ~ num_syl) +
+  scale_x_continuous(breaks = seq(50, 200, 25))
 ```
 
 # Exploratory
