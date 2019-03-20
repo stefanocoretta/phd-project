@@ -12,6 +12,7 @@ coretta2018itapol
 nlme
 mgcv
 tidymv
+patchwork
 plotfunctions
 itsadug
 Matrix
@@ -20,7 +21,6 @@ lmerTest
 sjPlot
 carData
 effects
-bindrcpp
 broom
 broom.mixed
 knitr
