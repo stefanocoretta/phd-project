@@ -18,5 +18,14 @@ library(tidyverse)
 theme_set(theme_minimal())
 ```
 
-Lorem ipsum.
+# Introduction
 
+Consonants and vowels are known to excise a reciprocal influence in a variety of ways.
+One such way is the well-established tendency for vowels to be longer when followed by voiced stops and shorter when followed by voiceless stops.
+This so-called 'voicing effect' has been long recognised in a plethora of languages across different linguistic families.
+English is possibly by far the most investigated language in relation to the voicing effect.
+Several hypotheses have been proposed as to the origin of this phenomenon, however no one particular hypothesis has gained unequivocal consensus.
+
+\citet{coretta2018j} proposes to seek the source of the voicing effect in a compensatory mechanism between vowel and consonant closure duration.
+In an exploratory study of acoustic segmental durations in Italian and Polish, Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
+For example, the duration of the release-to-release interval in /pata/ is non-significantly different from that in /pada/.
