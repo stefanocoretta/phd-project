@@ -1,0 +1,22 @@
+---
+title: "Compensatory aspects of the effect of voicing on vowel duration in English"
+author: "Stefano Coretta"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    citation_package: natbib
+bibliography: linguistics
+biblio-style: unified
+mainfont: Times New Roman
+fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+Lorem ipsum.
+
