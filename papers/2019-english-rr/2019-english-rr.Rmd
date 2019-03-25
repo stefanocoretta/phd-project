@@ -29,3 +29,61 @@ Several hypotheses have been proposed as to the origin of this phenomenon, howev
 \citet{coretta2018j} proposes to seek the source of the voicing effect in a compensatory mechanism between vowel and consonant closure duration.
 In an exploratory study of acoustic segmental durations in Italian and Polish, Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
 For example, the duration of the release-to-release interval in /pata/ is non-significantly different from that in /pada/.
+
+# Methods
+
+The research design and data analyses of this study has been pre-registered at the Open Science Framework.
+
+## Participants
+
+The participants of this study were 15 native speakers of British English, who were born and brought up in the Greater Manchester area.
+All the speakers were undergraduate students at the University of Manchester with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
+The participants signed a written consent form and received £5 for participation.
+
+Sample size and stopping rule were determined prior to data collection by the Region Of Practical Equivalence (ROPE) method \citet{kruschke2015, vasisht2018a}.
+A 'no-effect' region of values around 0 is first identified.
+The null region (the ROPE) can be thought of as the Bayesian 95% credible interval from a distribution, the values within which can be interpreted as a null effect.
+For this study, a ROPE between −10 and +10 ms has been chosen.
+The width of 20 ms is based on the estimates of the just noticeable difference in \citet{huggins1972} and \citet{nooteboom1980}.
+
+<!-- explain why 20 ms -->
+
+Once a ROPE width is set, the goal is to collect data until the width of the 95% credible interval of the tested effect is equal to or less than the ROPE width (in this study, 20 ms).
+Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on April 5th 2019, independent of the the ROPE condition.
+
+## Equipment
+
+Audio recordings were obtained in a sound-attenuated room in the Phonetics Laboratory of the University of Manchester, with a Zoom H4n Pro recorder and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit, downsampled to 22050 Hz for analysis).
+The Lavalier microphone was clipped on the participants cloths, about 20 cm under their mouth, displaced a few centimetres on one side.
+
+## Materials
+
+The test words were C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
+This structure specification generates 24 test words, shown in \Cref{t:words}.
+Each word was embedded in the following frame sentences: *I'll say X this Thursday*, *You'll say X this Monday*, *She'll say X this Sunday*, *We'll say X this Friday*, *They'll say X this Tuesday*.
+Each word + frame combination was included once in the stimuli list, so that each speaker would read 120 sentence stimuli (24 words × 5 frames).
+
+## Procedure
+
+The participants were first debriefed on the experimental procedure.
+Prior to recording, the participants familiarised themselves with the materials by reading them aloud and were instructed not to insert pauses anywhere within the sentence stimuli and to try and keep a similar intonation contour for the total duration of the experiment.
+They were also given the change to take any number of breaks at any point during recording.
+Misreadings or speech errors were corrected by letting the participant repeat the stimulus.
+The reading task took around 6 to 10 minutes.
+
+## Data processing and measurements
+
+The audio recordings were downsampled to 22050 Hz for analysis.
+A forced-aligned transcription was obtained with the SPeech Phonetisation Alignment and Syllabification software (SPPAS, \citealt{bigi2015}).
+The automatic annotation was corrected by the author according to the principles of phonetic segmentation detailed in \citet{machac2009}.
+A custom Praat script was written to automatically detect the burst onset of the consonants in the test words, using the algorithm in \citet{ananthapadmanabha2014}.
+The output was checked and manually corrected by the author when necessary.
+
+The following measures were obtained:
+
+* Duration of the release-to-release interval: from the release of C1 to the release of C2.
+* V1 duration: from appearance to disappearance of higher formant structure in the spectrogram in correspondence of V1 \citep{machac2009}.
+* C2 closure duration: from disappearance of higher formant structure in the V1C2 sequence to the release of C2 \citep{machac2009}.
+* Speech rate: calculated as number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018}).
+
+## Statistical analysis
