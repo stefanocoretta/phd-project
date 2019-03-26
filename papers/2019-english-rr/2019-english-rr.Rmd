@@ -87,3 +87,8 @@ The following measures were obtained:
 * Speech rate: calculated as number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018}).
 
 ## Statistical analysis
+
+All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
+Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
+All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).
+Speech rate has been centred when included in the models so that the intercept can be interpreted as the mean intercept at mean speech rate.
