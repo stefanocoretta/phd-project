@@ -1,0 +1,35 @@
+---
+title: "Bayesian meta-analysis of the voicing effect in English"
+author: "Author"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    citation_package: natbib
+bibliography: linguistics
+biblio-style: unified
+mainfont: Lato
+fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("./"))
+library(tidyverse)
+theme_set(theme_minimal())
+load("./english-ve-meta/data/cache/cache_1.RData")
+```
+
+A Bayesian meta-analysis of the English voicing effect has been run on the basis of 11 estimated posterior distributions extracted from 9 different publications, following the procedures discussed in \citet{nicenboim2018a}.
+The studies were selected by scraping the first 100 results on Google Scholar with the keywords "vowel duration voicing English".
+Other studies not in the results which were known to the author were also included.
+The posterior distributions of each study have been obtained by fitting a Bayesian linear model to the summary data (the mean of the effect of voicing on vowel duration) provided by the respective publications.
+
+Only two studies, \citet{davis1989} and \citet{ko2018}, reported measures of dispersion along with the means.
+Measurement error models were used to obtain the posterior distributions from these studies.
+The measurement error term in such models allows fitting to include information on the dispersion of the mean effect, and hence of the uncertainty that comes with it.
+
+Since two publications, \citet{sharf1962} and \citet{klatt1973}, tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
+This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English (7 estimated posteriors from 7 publications plus 2 each from 2 publications).
+
+A data set with the mean estimates and estimated standard errors from these 11 posterior distributions has then been used to fit a furthe Bayesian measurement error model.
+In this model, the mean estimates with the estimated standard errors were included as the outcome, while a by-study random intercept was the only predictor.
