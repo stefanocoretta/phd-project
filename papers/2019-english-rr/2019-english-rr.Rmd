@@ -21,14 +21,32 @@ theme_set(theme_minimal())
 # Introduction
 
 Consonants and vowels are known to excise a reciprocal influence in a variety of ways.
-One such way is the well-established tendency for vowels to be longer when followed by voiced stops and shorter when followed by voiceless stops.
+One such way is the well-established tendency for vowels to have shorter durations when followed by voiceless stops and longer durations when followed by voiced stops.
 This so-called 'voicing effect' has been long recognised in a plethora of languages across different linguistic families.
 English is possibly by far the most investigated language in relation to the voicing effect.
 Several hypotheses have been proposed as to the origin of this phenomenon, however no one particular hypothesis has gained unequivocal consensus.
 
 \citet{coretta2018j} proposes to seek the source of the voicing effect in a compensatory mechanism between vowel and consonant closure duration.
-In an exploratory study of acoustic segmental durations in Italian and Polish, Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
-For example, the duration of the release-to-release interval in /pata/ is non-significantly different from that in /pada/.
+In an exploratory study of acoustic durations in 17 Italian and Polish speakers, Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
+In particular, Coretta investigated disyllabic words of the form CV́CV (with lexical stress on the first syllable), where the second consonant was either voiceless or voiced.
+The results of that study suggest that, for example, the duration of the release-to-release interval in a word like /pata/ is non-significantly different from that in /pada/.
+
+\citet{coretta2018j} argues that the temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect, which states that vowels are shorter when followed by voiceless stops because the latter have long closure durations, and vice versa with voiced stops, which have shorter closure durations \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
+Coretta also reviews some of the shortcomings of the compensatory account and concludes that the release-to-release invariance offers a resolution to those.
+In particular, previous versions of the account are not clear on within which speech interval the compensation is implemented.
+Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969a, slis1969, lehiste1970, lehiste1970a} have been proposed but subsequently criticised on empirical grounds \citet{chen1970, jacewicz2009, maddieson1976}.
+
+Given the temporal stability of the release-to-release interval and the differential closure duration in voiceless vs. voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, it follows that the timing of the consonant closure onset within that interval will decide on the respective durations of vowel and consonant closure.
+\citet{coretta2018j} thus proposes that the source of the voicing effect can be seen in the temporal stability of the release-to-release interval in relation to the voicing of the second consonant and the effect of voicing on closure duration.
+Other properties of speech production and perception can of course further contribute to the emergence and enhancement of the voicing effect (see \citealt{begus2017} for an overview).
+
+English is generally the language given as an example in which the voicing effect has a big magnitude.
+This fact is normally attributed to phonologisation of the voicing effect in this language.
+Indeed, previous studies on English report a difference in vowel duration before voiceless vs. voiced stops which ranges between 20 and 150 ms.
+A Bayesian meta-analysis of the English voicing effect (See Supplemental materials) indicates that 95% credible interval for the effect of voicing in monosyllabic words is between 55 and 100 ms.
+This means that, based on the data, the true effect lies within that interval at a probability of 95%, on in other words we can be 95% sure that the effect is between 55-100 ms.
+
+
 
 # Methods
 
