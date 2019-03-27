@@ -12,24 +12,348 @@ fontsize: 11pt
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = normalizePath("./"))
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
-load("./english-ve-meta/data/cache/cache_1.RData")
+library(brms)
 ```
+
+```{r data}
+stressed <- read_csv("./papers/2019-english-rr/data/stressed.csv") %>%
+  mutate(
+    voice = factor(voice, levels = c("voiceless", "voiced")),
+    n_syl = factor(n_syl, levels = c("mono", "di")),
+    word_pos_2 = ifelse(word_pos == "medial", "medial", "final")
+  ) %>%
+  mutate_if(is.character, as.factor)
+
+studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
+  filter(study != "hussein1994") %>% # Hussein 1994 is not included in the analysis
+  droplevels()
+```
+
 
 A Bayesian meta-analysis of the English voicing effect has been run on the basis of 11 estimated posterior distributions extracted from 9 different publications, following the procedures discussed in \citet{nicenboim2018a}.
 The studies were selected by scraping the first 100 results on Google Scholar with the keywords "vowel duration voicing English".
-Other studies not in the results which were known to the author were also included.
-The posterior distributions of each study have been obtained by fitting a Bayesian linear model to the summary data (the mean of the effect of voicing on vowel duration) provided by the respective publications.
-
-Only two studies, \citet{davis1989} and \citet{ko2018}, reported measures of dispersion along with the means.
-Measurement error models were used to obtain the posterior distributions from these studies.
-The measurement error term in such models allows fitting to include information on the dispersion of the mean effect, and hence of the uncertainty that comes with it.
+Other studies which were known to the author but not among the Google Scholar results were also included.
 
 Since two publications, \citet{sharf1962} and \citet{klatt1973}, tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
 This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English (7 estimated posteriors from 7 publications plus 2 each from 2 publications).
 
-A data set with the mean estimates and estimated standard errors from these 11 posterior distributions has then been used to fit a furthe Bayesian measurement error model.
+The posterior distributions of each study have been obtained by fitting a Bayesian linear model to the summary data (the means of vowel duration before voiceless and voiced stops) provided by the respective publications.
+These models had the mean vowel durations as outcome and consonant voicing (voiceless vs. voiced) as the only predictor.
+Three studies, \citet{luce1985}, \citet{davis1989}, and \citet{ko2018}, reported measures of dispersion along with the means.
+Measurement error models were used to obtain the posterior distributions from these studies.
+The measurement error term in such models allows fitting to include information of the dispersion of the mean vowel durations, and hence of the uncertainty that comes with them.
+All the models for estimating the posterior of the individual studies were fitted with the following priors: a normal distribution with mean = 0 ms and SD = 300 for the intercept, and a normal distribution with mean = 0 ms and SD = 100 for the effect of consonant voicing.
+The simple models (without an error term) also included a prior for the residual variance as a half Cauchy distribution with location = 0 ms and scale = 25.
+
+A data set with the mean estimates and estimated standard errors from these 11 posterior distributions has then been used to fit a further Bayesian measurement error model.
 In this model, the mean estimates with the estimated standard errors were included as the outcome, while a by-study random intercept was the only predictor.
+
+```{r heffner1937}
+h37 <- filter(stressed, study == "heffner1937")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+h37_bm <- brm(
+  v_duration ~
+    voice,
+  data = h37,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/h37_bm"
+)
+```
+
+```{r housefairbanks1953}
+hf53 <- filter(stressed, study == "housefairbanks1953")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+hf53_bm <- brm(
+  v_duration ~
+    voice,
+  data = hf53,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/hf53_bm"
+)
+```
+
+```{r zimmerman1958}
+z58 <- filter(stressed, study == "zimmerman1958")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+z58_bm <- brm(
+  v_duration ~
+    voice,
+  data = z58,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/z58_bm"
+)
+```
+
+```{r petersonlehiste1960}
+pl60 <- filter(stressed, study == "petersonlehiste1960")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+pl60_bm <- brm(
+  v_duration ~
+    voice,
+  data = pl60,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/pl60_bm"
+)
+```
+
+```{r sharf1962}
+s62_di <- filter(stressed, study == "sharf1962_di")
+s62_mono <- filter(stressed, study == "sharf1962_mono")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+s62_di_bm <- brm(
+  v_duration ~
+    voice,
+  data = s62_di,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/s62_di_bm"
+)
+
+s62_mono_bm <- brm(
+  v_duration ~
+    voice,
+  data = s62_mono,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/s62_mono_bm"
+)
+```
+
+```{r chen1970}
+c70 <- filter(stressed, study == "chen1970")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+c70_bm <- brm(
+  v_duration ~
+    voice,
+  data = c70,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/c70_bm"
+)
+```
+
+```{r klatt1973}
+k73_di <- filter(stressed, study == "klatt1973_di")
+k73_mono <- filter(stressed, study == "klatt1973_mono")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+k73_di_bm <- brm(
+  v_duration ~
+    voice,
+  data = k73_di,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/k73_di_bm",
+  control = list(adapt_delta = 0.999)
+)
+
+k73_mono_bm <- brm(
+  v_duration ~
+    voice,
+  data = k73_mono,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/k73_mono_bm",
+  control = list(adapt_delta = 0.999)
+)
+```
+
+```{r mack1982}
+m82 <- filter(stressed, study == "mack1982")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+m82_bm <- brm(
+  v_duration ~
+    voice,
+  data = m82,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/m82_bm"
+)
+```
+
+```{r luce1985}
+l85_medial <- filter(stressed, study == "luce1985_medial")
+l85_final <- filter(stressed, study == "luce1985_final")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+l85_medial_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = l85_medial,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/l85_medial_bm"
+)
+
+l85_final_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = l85_final,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/l85_final_bm"
+)
+```
+
+```{r davis1989}
+d89 <- filter(stressed, study == "davis1989")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+d89_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = d89,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/d89_bm"
+)
+```
+
+```{r laeufer1992}
+l92 <- filter(stressed, study == "laeufer1992")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+l92_bm <- brm(
+  v_duration ~
+    voice,
+  data = l92,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/l92_bm"
+)
+```
+
+```{r ko2018}
+k18 <- filter(stressed, study == "ko2018")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+k18_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = k18,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/k18_bm"
+)
+```
+
+```{r estimated}
+estimated <- list()
+
+# These are in alphabetical order so that joining below does not complain
+# about different levels
+
+estimated[["chen1970"]] <- fixef(c70_bm)["voicevoiced",]
+estimated[["davis1989"]] <- fixef(d89_bm)["voicevoiced",]
+estimated[["heffner1937"]] <- fixef(h37_bm)["voicevoiced",]
+estimated[["housefairbanks1953"]] <- fixef(hf53_bm)["voicevoiced",]
+estimated[["klatt1973_di"]] <- fixef(k73_di_bm)["voicevoiced",]
+estimated[["klatt1973_mono"]] <- fixef(k73_mono_bm)["voicevoiced",]
+estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
+estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
+estimated[["luce1985_final"]] <- fixef(l85_final_bm)["voicevoiced",]
+estimated[["luce1985_medial"]] <- fixef(l85_medial_bm)["voicevoiced",]
+estimated[["mack1982"]] <- fixef(m82_bm)["voicevoiced",]
+estimated[["petersonlehiste1960"]] <- fixef(pl60_bm)["voicevoiced",]
+estimated[["sharf1962_di"]] <- fixef(s62_di_bm)["voicevoiced",]
+estimated[["sharf1962_mono"]] <- fixef(s62_mono_bm)["voicevoiced",]
+estimated[["zimmerman1958"]] <- fixef(z58_bm)["voicevoiced",]
+
+estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
+  mutate(
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r meta-bm-syl}
+priors <- c(
+  prior(normal(0, 100), class = Intercept),
+  prior(normal(0, 50), class = b, coef = syl_posnonMfinal),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_syl <- brm(
+  Estimate | se(`Est.Error`) ~ syl_pos + (1 | study),
+  data = estimated_tbl,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/meta_bm_syl"
+)
+
+summary(meta_bm_syl)
+```
