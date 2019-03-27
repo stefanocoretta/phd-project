@@ -24,6 +24,10 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(coretta2019eng)
+data("eng_durations")
+library(brms)
+eng_durations_rr <- na.omit(eng_durations)
 ```
 
 # Introduction
@@ -78,7 +82,7 @@ To summarise, the following research questions and respective hypotheses were fo
   * H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
 * Q2: Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
   * H2a: The release to release interval is longer in monosyllabic than in disyllabic words.
-  * H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /əː/, /iː/.
+  * H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /ɜː/, /iː/.
   * H2c: The release to release interval is shorter when C2 is velar.
 * Q3: What is the estimated difference in the effect of voicing on vowel and stop closure duration between monosyllabic and disyllabic words?
   * H3: The effect of voicing on vowel duration is greater in monosyllabic than in disyllabic words.
@@ -145,5 +149,55 @@ The following measures were obtained:
 
 All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
+A Gaussian (normal) distribution was used in all the models.
 All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).
 Speech rate has been centred when included in the models so that the intercept can be interpreted as the mean intercept at mean speech rate.
+
+# Results
+
+## Release-to-release duration
+
+```{r rr-1}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_1 <- brm(
+  rel_rel ~
+    voicing +
+    num_syl +
+    voicing:num_syl +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_rr,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./papers/2019-english-rr/data/cache/rr_1"
+)
+```
+
+A Bayesian regression model was fit to model the duration of the release-to-release interval.
+The following terms were included as fixed effects: C2 voicing (voiceless, voiced), number of syllables (disyllabic, monosyllabic), centred speech rate, an interaction between C2 voicing and number of syllables.
+A by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing were entered as random effects.
+The following priors have been used.
+Two weakly informative priors based on the results from \citet{coretta2018j} were chosen for the intercept and the effect of C2 voicing.
+The former prior was a normal distribution with mean 200 ms and SD = 50, while the latter a normal distribution with mean 0 ms and SD = 25.
+The same prior was specified for the effect of number of syllables and the interaction between C2 voicing and number of syllables.
+This weakly informative prior was a normal distribution with mean 50 ms and SD = 25, and it is based on differences in vowel duration in mono- vs. disyllabic words and in monosyllabic words before voiceless vs. voiced stops, which range in both cases between 30 and 100 ms (see \citealt{sharf1962} and \citealt{klatt1973} for the difference in vowel duration in mono- vs. disyllabic words).
+The prior for the effect of centred speech rate was a normal distribution with mean -25 ms and SD = 10, and was based again on results from \citet{coretta2018j}.
+For the random effects, a half Cauchy distribution (location = 0, scale = 25) was used for the standard deviation (also used for the residual standard deviation) and a LKJ(2) distribution for the correlation.
+
+The posterior distribution of the estimated effect of C2 voicing on the release-to-release duration has a 95% credible interval (95% CI) between -23.86 and 15.45 ms (the mean is -4.43 ms, estimated error = 10.03).
+The 95% CI of the estimated interaction between C2 voicing and number of syllables is between -8.41 and 41.41 ms (the mean is 16.53 ms, est.e. = 12.72).
+The difference in duration of the release-to-release interval between monosyllabic and disyllabic words is between -1.58 and 36.53 ms (95% CI, with a mean of 17.34, est.e. 9.76).
+Speech rate has a strong negative effect on the release-to-release duration with 95% CI [-40.14, -32.13].
