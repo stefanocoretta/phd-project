@@ -354,6 +354,21 @@ meta_bm_syl <- brm(
   seed = 9899,
   file = "./papers/2019-english-rr/data/cache/meta_bm_syl"
 )
+```
 
+The following is the summary of the meta-analytical model.
+
+```{r}
 summary(meta_bm_syl)
 ```
+
+The 95% credible interval (CI) of the model intercept posterior (which corresponds to the estimated voicing effect in word-final syllables) is between 56.39 and 96.43 ms.
+The mean of the posterior distribution is 75.83 ms (estimated error = 10.01).
+Given the posterior and based on the surveyed studies, it is safe to infer that the true effect of voicing in word-final syllables in English is very likely less than 100 ms.
+
+The posterior mean of the coefficient when the target syllable is in penultimate position is -49.14 ms (est.e = 19.10).
+Note that the estimated error is double compared to that of the intercept, which increases uncertainty.
+On average, we can argue that the mean voicing effect in penultimate syllables is about 50 ms less than the mean effect in monosyllabic words.
+The mean of the voicing effect in disyllabic words can thus be estimated to be around 25 ms.
+\Cref{f:} shows the full posterior distributions of the voicing effect in the word-final and penultimate contexts.
+Note how the calculated posterior distribution in penultimate position has greater dispersion that the other.
