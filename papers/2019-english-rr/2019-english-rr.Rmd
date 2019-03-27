@@ -42,7 +42,7 @@ The results of that study suggest that, for example, the duration of the release
 \citet{coretta2018j} argues that the temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect, which states that vowels are shorter when followed by voiceless stops because the latter have long closure durations, and vice versa with voiced stops, which have shorter closure durations \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
 Coretta also reviews some of the shortcomings of the compensatory account and concludes that the release-to-release invariance offers a resolution to those.
 In particular, previous versions of the account are not clear on within which speech interval the compensation is implemented.
-Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969a, slis1969, lehiste1970, lehiste1970a} have been proposed but subsequently criticised on empirical grounds \citet{chen1970, jacewicz2009, maddieson1976}.
+Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969a, slis1969, lehiste1970, lehiste1970a} have been proposed but subsequently criticised on empirical grounds \citep{chen1970, jacewicz2009, maddieson1976}.
 
 Given the temporal stability of the release-to-release interval and the differential closure duration in voiceless vs. voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, it follows that the timing of the consonant closure onset within that interval will decide on the respective durations of vowel and consonant closure.
 \citet{coretta2018j} thus proposes that the source of the voicing effect can be seen in the temporal stability of the release-to-release interval in relation to the voicing of the second consonant and the effect of voicing on closure duration.
@@ -93,7 +93,7 @@ The participants of this study were 15 native speakers of British English, who w
 All the speakers were undergraduate students at the University of Manchester with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
 The participants signed a written consent form and received £5 for participation.
 
-Sample size and stopping rule were determined prior to data collection by the Region Of Practical Equivalence (ROPE) method \citet{kruschke2015, vasisht2018a}.
+Sample size and stopping rule were determined prior to data collection by the Region Of Practical Equivalence (ROPE) method \citep{kruschke2015, vasishth2018a}.
 A 'no-effect' region of values around 0 is first identified.
 The null region (the ROPE) can be thought of as the Bayesian 95% credible interval from a distribution, the values within which can be interpreted as a null effect.
 For this study, a ROPE between −10 and +10 ms has been chosen.
