@@ -41,6 +41,8 @@ Other studies which were known to the author but not among the Google Scholar re
 Since two publications, \citet{sharf1962} and \citet{klatt1973}, tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
 This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English (7 estimated posteriors from 7 publications plus 2 each from 2 publications).
 
+<!-- give more details about the contexts of the studies -->
+
 The posterior distributions of each study have been obtained by fitting a Bayesian linear model to the summary data (the means of vowel duration before voiceless and voiced stops) provided by the respective publications.
 These models had the mean vowel durations as outcome and consonant voicing (voiceless vs. voiced) as the only predictor.
 Three studies, \citet{luce1985}, \citet{davis1989}, and \citet{ko2018}, reported measures of dispersion along with the means.
