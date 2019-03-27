@@ -3,12 +3,20 @@ title: "Compensatory aspects of the effect of voicing on vowel duration in Engli
 author: "Stefano Coretta"
 output:
   pdf_document:
-    latex_engine: xelatex
     citation_package: natbib
+    latex_engine: xelatex
+    number_sections: yes
 bibliography: linguistics
 biblio-style: unified
-mainfont: Times New Roman
-fontsize: 11pt
+mainfont: Tinos
+fontsize: 12pt
+indent: true
+header-includes:
+- \usepackage{cleveref}
+- \usepackage{ctable}
+- \usepackage{enumerate}
+- \usepackage{lineno}
+- \linenumbers
 ---
 
 ```{r setup, include=FALSE}
