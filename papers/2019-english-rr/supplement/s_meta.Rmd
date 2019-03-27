@@ -20,7 +20,7 @@ library(brms)
 ```
 
 ```{r data}
-stressed <- read_csv("./papers/2019-english-rr/data/stressed.csv") %>%
+stressed <- read_csv("./papers/2019-english-rr/datasets/stressed.csv") %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
     n_syl = factor(n_syl, levels = c("mono", "di")),
