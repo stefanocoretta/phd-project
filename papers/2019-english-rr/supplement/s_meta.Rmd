@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = FALSE, include = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 library(tidyverse)
 theme_set(theme_minimal())
+library(ggrepel)
 library(brms)
 ```
 
@@ -370,7 +371,7 @@ meta_bm_syl_q97.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.975))
 
 The following is the summary of the meta-analytical model.
 
-```{r}
+```{r meta-summary}
 summary(meta_bm_syl)
 ```
 
@@ -411,6 +412,11 @@ post_syl %>%
   theme(legend.position = "top")
 ```
 
+\Cref{f:} shows the mean estimate (the points) of the voicing effect with 95% CIs (the horizontal segments) for each of the 11 studies.
+For each study, the plot gives both the original estimate (as obtained from the raw data summary of the study) and the estimate shrunk by the random effects in the meta-analytical model.
+The vertical lines indicate the meta-analytical 95% CI of the voicing effect in final (solid) and penultimate syllable position (dashed).
+Original estimates further away from the meta-analytical mean effect and those with greater uncertainty (wider errors) show greater shrinkage to the mean.
+
 ```{r studies-shrunk}
 # Code adapted from Nicenboim et al. 2018
 
@@ -428,7 +434,7 @@ studies_shrunk <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
     `r_study[klatt1973_di,Intercept]` = `r_study[klatt1973_di,Intercept]` + b_syl_posnonMfinal
   ) %>%
   select(-b_syl_posnonMfinal) %>%
-  summarise_all(funs(list(c(
+  summarise_all(list(~list(c(
     mean(.),
     quantile(., probs = c(.025, 0.975)),
     sd(.)
@@ -458,8 +464,10 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
   scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  scale_linetype_discrete(labels = c("final", "penultimate")) +
   labs(
     title = "Estimated voicing effect from the original source\nand from the meta-analysis",
+    caption = "The vertical lines indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (solid) and penultimate (dashed) position.",
     y = "Difference in vowel duration (ms)",
     x = "Study",
     linetype = "Syllable position",
@@ -467,4 +475,27 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   ) +
   coord_flip() +
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
+A funnel plot can be used to visually check whether the sample suffers from publication bias.
+In \Cref{f:}, the x-axis corresponds to the original estimated difference in vowel duration, while the y-axis is a measure of precision (calculated as 1 divided by the estimated error of the difference).
+When there is no bias, the points with lower precision should be more spread out and symmetrical placed around the meta-analytical mean, while points with higher precision should cluster around the mean.
+This ideal situation is clearly not the case for the final syllable context.
+There seems to be a bias towards bigger effects (which also happen to have lower precision).
+
+```{r funnel-plot}
+estimated_tbl %>%
+  mutate(precision = 1/Est.Error) %>%
+  ggplot(aes(Estimate, precision, label = study)) +
+  geom_vline(aes(xintercept = 0), colour = "grey") +
+  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4") +
+  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4") +
+  geom_vline(aes(xintercept = meta_bm_syl_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_vline(aes(xintercept = meta_bm_syl_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_point(aes(shape = syl_pos)) +
+  geom_text_repel(force = 20, seed = 1234) +
+  scale_shape_discrete(labels = c("final", "penultimate")) +
+  labs(
+    shape = "Syllable position"
+  )
 ```
