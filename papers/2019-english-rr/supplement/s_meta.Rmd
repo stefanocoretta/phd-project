@@ -356,6 +356,16 @@ meta_bm_syl <- brm(
   seed = 9899,
   file = "./papers/2019-english-rr/data/cache/meta_bm_syl"
 )
+
+meta_bm_est <- fixef(meta_bm_syl)["Intercept","Estimate"]
+meta_bm_q2.5 <- fixef(meta_bm_syl)["Intercept","Q2.5"]
+meta_bm_q97.5 <- fixef(meta_bm_syl)["Intercept","Q97.5"]
+
+post_nonfi <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_syl, pars = "b_syl_posnonMfinal"))
+
+meta_bm_syl_q2.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.025))
+meta_bm_syl_q97.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.975))
 ```
 
 The following is the summary of the meta-analytical model.
@@ -374,3 +384,87 @@ On average, we can argue that the mean voicing effect in penultimate syllables i
 The mean of the voicing effect in disyllabic words can thus be estimated to be around 25 ms.
 \Cref{f:} shows the full posterior distributions of the voicing effect in the word-final and penultimate contexts.
 Note how the calculated posterior distribution in penultimate position has greater dispersion that the other.
+
+```{r post-syl}
+post_syl <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_syl, pars = "b_syl_posnonMfinal")) %>%
+  bind_cols(posterior_samples(meta_bm_syl, pars = "b_Intercept")) %>%
+  gather("coef", "posterior")
+```
+
+```{r syl-plot, include=TRUE, fig.cap = "", fig.lp="f:", out.extra="width=\\linewidth"}
+post_syl %>%
+  ggplot(aes(posterior, fill = coef)) +
+  geom_vline(aes(xintercept = 0)) +
+  geom_density(colour = NA, alpha = 0.8) +
+  scale_fill_brewer(
+    type = "qual", palette = "Paired",
+    labels = c("final", "penultimate")
+  ) +
+  scale_x_continuous(breaks = seq(-60, 100, 20)) +
+  labs(
+    title = "Meta-analytical posterior distributions of the voicing effect",
+    x = "Difference in vowel duration (ms)",
+    fill = "Syllable position",
+    y = element_blank()
+  ) +
+  theme(legend.position = "top")
+```
+
+```{r studies-shrunk}
+# Code adapted from Nicenboim et al. 2018
+
+# We need this since the model includes `num_syl`
+post_nonf <- posterior_samples(meta_bm_syl, pars = "b_syl_posnonMfinal")
+
+studies_shrunk <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_syl, pars = "r_study")) %>%
+  bind_cols(post_nonf) %>%
+  # The following mutate sums the random coefficients of the studies with
+  # `num_syl` == "non-final" to the posterior samples of the non_syl term
+  mutate(
+    `r_study[davis1989,Intercept]` = `r_study[davis1989,Intercept]` + b_syl_posnonMfinal,
+    `r_study[sharf1962_di,Intercept]` = `r_study[sharf1962_di,Intercept]` + b_syl_posnonMfinal,
+    `r_study[klatt1973_di,Intercept]` = `r_study[klatt1973_di,Intercept]` + b_syl_posnonMfinal
+  ) %>%
+  select(-b_syl_posnonMfinal) %>%
+  summarise_all(funs(list(c(
+    mean(.),
+    quantile(., probs = c(.025, 0.975)),
+    sd(.)
+  )))) %>%
+  unnest() %>%
+  transpose() %>%
+  setNames(c("Estimate", "Q2.5", "Q97.5", "Est.Error")) %>%
+  map_df(unlist) %>%
+  mutate(
+    study = estimated_tbl$study,
+    source = factor("meta-analysis", levels = c("original", "meta-analysis"))
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r origin-shrunk-plot}
+bind_rows(estimated_tbl, studies_shrunk) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
+  geom_hline(aes(yintercept = 0), colour = "grey") +
+  geom_hline(aes(yintercept = meta_bm_q2.5), colour = "skyblue4") +
+  geom_hline(aes(yintercept = meta_bm_q97.5), colour = "skyblue4") +
+  # geom_hline(aes(yintercept = meta_bm_est), colour = "skyblue4") +
+  geom_hline(aes(yintercept = meta_bm_syl_q2.5), colour = "skyblue4", linetype = "dashed") +
+  geom_hline(aes(yintercept = meta_bm_syl_q97.5), colour = "skyblue4", linetype = "dashed") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
+  scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  labs(
+    title = "Estimated voicing effect from the original source\nand from the meta-analysis",
+    y = "Difference in vowel duration (ms)",
+    x = "Study",
+    linetype = "Syllable position",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
