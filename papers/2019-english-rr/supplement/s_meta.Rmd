@@ -1,6 +1,6 @@
 ---
 title: "Bayesian meta-analysis of the voicing effect in English"
-author: "Author"
+author: "Stefano Coretta"
 output:
   pdf_document:
     latex_engine: xelatex
@@ -9,6 +9,11 @@ bibliography: linguistics
 biblio-style: unified
 mainfont: Lato
 fontsize: 11pt
+indent: true
+header-includes:
+- \usepackage{cleveref}
+- \usepackage{ctable}
+- \usepackage{enumerate}
 ---
 
 ```{r setup, include=FALSE}
@@ -450,7 +455,7 @@ studies_shrunk <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
   left_join(y = studies)
 ```
 
-```{r origin-shrunk-plot}
+```{r origin-shrunk-plot, include=TRUE, fig.cap = "", fig.lp="f:", out.extra="width=\\linewidth"}
 bind_rows(estimated_tbl, studies_shrunk) %>%
   mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
   ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
@@ -483,7 +488,7 @@ When there is no bias, the points with lower precision should be more spread out
 This ideal situation is clearly not the case for the final syllable context.
 There seems to be a bias towards bigger effects (which also happen to have lower precision).
 
-```{r funnel-plot}
+```{r funnel-plot, include=TRUE, fig.cap = "", fig.lp="f:", out.extra="width=\\linewidth"}
 estimated_tbl %>%
   mutate(precision = 1/Est.Error) %>%
   ggplot(aes(Estimate, precision, label = study)) +
