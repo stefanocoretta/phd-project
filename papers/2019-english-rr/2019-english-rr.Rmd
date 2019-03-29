@@ -150,7 +150,7 @@ The following measures were obtained:
 All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
 A Gaussian (normal) distribution was used in all the models.
-All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).
+All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel factor are reversed compared to that in the pre-registration, and this was done to match the height order in \citet{coretta2018j}, from low to high. Changing the order of the levels of course does not affect the results.}
 Speech rate has been centred when included in the models so that the intercept can be interpreted as the mean intercept at mean speech rate.
 
 <!-- explain Bayesian briefly -->
@@ -240,9 +240,9 @@ For the effects of vowel (/ɜː/, /iː/) and place of articulation (labial), the
 This prior was based on duration differences depending on vowel height \citep{heffner1937, house1953, hertrich1997} and labial place \citet{sharf1962}, which range between 10 and 30 ms.
 
 The random effects structure was the same as with the first model.
-The posterior distribution of the effect of the vowel /ɜː/ shows that this vowel tends to a somewhat negative effect, with a 95% CI between ˗21.90 and 4.87 ms (mean = ˗8.58 ms, est.e. = 6.9).
-The vowel /iː/ has a more robust negative effect on release-to-release duration, with a 95% CI between ˗50.10 and ˗22.26 (mean = ˗36.94 ms, est.e. = 6.96).
-Less clear is the effect of C2 place of articulation (labial stop): the mean of the posterior is 2.46 ms (est.e. = 5.68), and the 95% CI is [˗9.15, 13.28].
+The posterior distribution of the effect of the vowel /ɜː/ shows that this vowel tends to a somewhat negative effect, with a 95% CI between −21.90 and 4.87 ms (mean = −8.58 ms, est.e. = 6.9).
+The vowel /iː/ has a more robust negative effect on release-to-release duration, with a 95% CI between −50.10 and −22.26 (mean = −36.94 ms, est.e. = 6.96).
+Less clear is the effect of C2 place of articulation (labial stop): the mean of the posterior is 2.46 ms (est.e. = 5.68), and the 95% CI is [−9.15, 13.28].
 
 The credible intervals of the effects in the models reported above have widths which are greater than the chosen ROPE width of 20 ms.
 <!-- maybe give a mean here and point to summary -->
@@ -287,9 +287,63 @@ rr_3 <- brm(
 
 Including all the relevant terms in the model (C2 voicing and place, vowel, number of syllables in interaction with C2 voicing) has indeed reduced the credible intervals substantially.
 Note that inferences from this model should be treated with caution, since the model was not pre-registered.
-The posterior distribution of the C2 voicing effect on release-to-release duration is tighter (95% CI = [˗10.45, 5.65]) while the mean (˗2.43 ms, est.e. = 4.06) is close to that of model 1 (˗4.43 ms, only a 2 ms difference).
+The posterior distribution of the C2 voicing effect on release-to-release duration is tighter (95% CI = [−10.45, 5.65]) while the mean (−2.43 ms, est.e. = 4.06) is close to that of model 1 (−4.43 ms, only a 2 ms difference).
 The estimated effect of syllable number is now more robustly positive (95% CI = [9.17, 22.48]), with a mean (16.03 ms, est.e. = 3.32) similar to that in model 1.
 <!-- interaction -->
 The effects of vowel and place or articulation have similar means, but the credible intervals are smaller.
-The release-to-release is on average 10.05 ms (est.e. = 2.95, 95% CI = [˗15.92, ˗4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (est.e. = 2.99, 95% CI = [˗45.03, ˗32.76]) shorter if the vowel is /iː/.
-C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, est.e. = 2.39, 95% CI = [˗2.29, 7.28]).
+The release-to-release is on average 10.05 ms (est.e. = 2.95, 95% CI = [−15.92, −4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (est.e. = 2.99, 95% CI = [−45.03, −32.76]) shorter if the vowel is /iː/.
+C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, est.e. = 2.39, 95% CI = [−2.29, 7.28]).
+
+## Vowel duration
+
+```{r vow-1}
+priors <- c(
+  set_prior("normal(145, 30)", class = "Intercept"),
+  set_prior("normal(50, 20)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicingvoiced:voweler"),
+  set_prior("normal(0, 20)", class = "b", coef = "voicingvoiced:vowelee"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:voweler:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:vowelee:num_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+vow_1 <- brm(
+  v1_duration ~
+    voicing +
+    vowel +
+    num_syl +
+    voicing:vowel +
+    voicing:num_syl +
+    vowel:num_syl +
+    voicing:vowel:num_syl +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations,
+  prior = priors,
+  file = "./papers/2019-english-rr/data/cache/vow_1",
+  cores = 4
+)
+```
+
+A Bayesian regression model was fitted to test vowel duration (the outcome variable in the model).
+The following terms were entered: C2 voicing (voiceless vs. voiced), vowel ((/ɑː/, /ɜː/, /iː/)), number of syllables (disyllabic, monosyllabic), centred speech rate, all possible interactions between C2 voicing, vowel, and number of syllables.
+The same random structure as in the previous models was used (a by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing).
+
+The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 113.15--137.06 ms (mean = 125.16 ms, est.e. = 6.02).
+The vowel /ɜː/ is 9.19 ms shorter (est.e. = 5.29) with CI = [−19.24, 1.49], while /iː/ is 36.97 ms shorter (est.e. = 5.14, 95% CI = [−46.99, −26.76]).
+C2 voicing as a smaller but robust positive effect on vowel duration in disyllabic words.
+The posterior distribution of the effect of voicing has mean = 13.47 (est.e. = 5.14) and 95% CI = [3.80, 24.36].
+The magnitude of the voicing effect in disyllabic vs. monosyllabic words is modulated by the identity of the vowel.
+The posterior distribution for the interaction C2 voicing/number of syllables when the vowel is /ɑː/ has mean 4.07 ms (est.e. = 6.6) and 95% CI [−8.94, 17.30], indicating the possibility for a very small increase of the effect from disyllabic to monosyllabic words.
+The three-way interaction C2 voicing/vowel/number of syllables indicates that the effect of voicing with monosyllabic /iː/-words increases by 14.5 ms (est.e. = 9.43, CI = [−4.27, 33.41]).
