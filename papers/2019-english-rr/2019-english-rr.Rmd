@@ -153,6 +153,10 @@ A Gaussian (normal) distribution was used in all the models.
 All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).
 Speech rate has been centred when included in the models so that the intercept can be interpreted as the mean intercept at mean speech rate.
 
+<!-- explain Bayesian briefly -->
+<!-- say that normal prior with SD means that values between mean + 2*SD and mean - 2*SD are possible at different probabilities -->
+<!-- explain why you use 95% CI -->
+
 # Results
 
 ## Release-to-release duration
@@ -201,3 +205,91 @@ The posterior distribution of the estimated effect of C2 voicing on the release-
 The 95% CI of the estimated interaction between C2 voicing and number of syllables is between -8.41 and 41.41 ms (the mean is 16.53 ms, est.e. = 12.72).
 The difference in duration of the release-to-release interval between monosyllabic and disyllabic words is between -1.58 and 36.53 ms (95% CI, with a mean of 17.34, est.e. 9.76).
 Speech rate has a strong negative effect on the release-to-release duration with 95% CI [-40.14, -32.13].
+
+```{r rr-2}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_2 <- brm(
+  rel_rel ~
+    vowel +
+    place +
+    speech_rate_c +
+    (1 | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_rr,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./papers/2019-english-rr/data/cache/rr_2"
+)
+```
+
+A second Bayesian regression was fitted with the release-to-release duration as the outcome variable to test the effects of vowel and C2 place of articulation, which were entered as terms in the model without interactions.
+Centred speech rate was also included.
+The relevant priors from the first model were kept.
+For the effects of vowel (/ɜː/, /iː/) and place of articulation (labial), the very weakly informative prior was a normal distribution with mean = 0 ms and SD = 30.
+This prior was based on duration differences depending on vowel height \citep{heffner1937, house1953, hertrich1997} and labial place \citet{sharf1962}, which range between 10 and 30 ms.
+
+The random effects structure was the same as with the first model.
+The posterior distribution of the effect of the vowel /ɜː/ shows that this vowel tends to a somewhat negative effect, with a 95% CI between ˗21.90 and 4.87 ms (mean = ˗8.58 ms, est.e. = 6.9).
+The vowel /iː/ has a more robust negative effect on release-to-release duration, with a 95% CI between ˗50.10 and ˗22.26 (mean = ˗36.94 ms, est.e. = 6.96).
+Less clear is the effect of C2 place of articulation (labial stop): the mean of the posterior is 2.46 ms (est.e. = 5.68), and the 95% CI is [˗9.15, 13.28].
+
+The credible intervals of the effects in the models reported above have widths which are greater than the chosen ROPE width of 20 ms.
+<!-- maybe give a mean here and point to summary -->
+The large credible intervals indicate that the estimated posterior distributions of the effects have a somewhat high degree of uncertainty with them.
+The uncertainty has been possibly brought about by not controlling for vowel and number of syllables in respectively the first and second model.
+An exploratory model was thus fitted to the data, in which all the terms from the two models above were included together.
+The same priors of the two separate models were used in the combined model.
+
+```{r rr-3}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_3 <- brm(
+  rel_rel ~
+    voicing +
+    num_syl +
+    voicing:num_syl +
+    vowel +
+    place +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_rr,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./papers/2019-english-rr/data/cache/rr_3"
+)
+```
+
+Including all the relevant terms in the model (C2 voicing and place, vowel, number of syllables in interaction with C2 voicing) has indeed reduced the credible intervals substantially.
+Note that inferences from this model should be treated with caution, since the model was not pre-registered.
+The posterior distribution of the C2 voicing effect on release-to-release duration is tighter (95% CI = [˗10.45, 5.65]) while the mean (˗2.43 ms, est.e. = 4.06) is close to that of model 1 (˗4.43 ms, only a 2 ms difference).
+The estimated effect of syllable number is now more robustly positive (95% CI = [9.17, 22.48]), with a mean (16.03 ms, est.e. = 3.32) similar to that in model 1.
+<!-- interaction -->
+The effects of vowel and place or articulation have similar means, but the credible intervals are smaller.
+The release-to-release is on average 10.05 ms (est.e. = 2.95, 95% CI = [˗15.92, ˗4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (est.e. = 2.99, 95% CI = [˗45.03, ˗32.76]) shorter if the vowel is /iː/.
+C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, est.e. = 2.39, 95% CI = [˗2.29, 7.28]).
