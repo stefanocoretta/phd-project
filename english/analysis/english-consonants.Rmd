@@ -13,6 +13,8 @@ theme_set(theme_minimal())
 library(brms)
 library(bayesplot)
 library(tidymv)
+library(tidybayes)
+library(broom.mixed)
 library(coretta2019eng)
 data("eng_durations")
 
@@ -30,7 +32,7 @@ eng_clos <- na.omit(eng_durations)
 priors <- c(
   set_prior("normal(90, 20)", class = "Intercept"),
   set_prior("normal(-20, 10)", class = "b", coef = "voicingvoiced"),
-  set_prior("normal(-15, 10)", class = "b", coef = "placelabial"),
+  set_prior("normal(15, 10)", class = "b", coef = "placelabial"),
   set_prior("normal(0, 25)", class = "b", coef = "num_sylmono"),
   set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:placelabial"),
   set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:num_sylmono"),
@@ -78,7 +80,7 @@ clos_1_draws <- clos_1 %>%
 
 ```{r clos-1-intervals}
 clos_1_draws %>%
-  filter(.variable %in% c("b_voicingvoiced", "b_num_sylmono", "b_voicingvoiced:num_sylmono")) %>%
+  filter(.variable %in% c("b_voicingvoiced", "b_num_sylmono", "b_voicingvoiced:num_sylmono", "b_placelabial")) %>%
   ggplot(aes(.value, .variable)) +
   geom_vline(xintercept = 0) +
   stat_intervalh() +
