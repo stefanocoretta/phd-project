@@ -238,6 +238,7 @@ rr_3_fixed <- tidy(rr_3, effects = "fixed", conf.level = 0.95, fix.intercept = F
     ci_width = abs(conf.low - conf.high),
     is_rope = ifelse(ci_width <= 20, "*", "")
   )
+rr_3_fixed
 ```
 
 ## Plot predicted posterior distributions
