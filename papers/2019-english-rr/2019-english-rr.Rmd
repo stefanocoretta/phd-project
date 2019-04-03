@@ -340,6 +340,8 @@ A Bayesian regression model was fitted to test vowel duration (the outcome varia
 The following terms were entered: C2 voicing (voiceless vs. voiced), vowel ((/ɑː/, /ɜː/, /iː/)), number of syllables (disyllabic, monosyllabic), centred speech rate, all possible interactions between C2 voicing, vowel, and number of syllables.
 The same random structure as in the previous models was used (a by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing).
 
+<!-- priors -->
+
 The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 113.15--137.06 ms (mean = 125.16 ms, est.e. = 6.02).
 The vowel /ɜː/ is 9.19 ms shorter (est.e. = 5.29) with CI = [−19.24, 1.49], while /iː/ is 36.97 ms shorter (est.e. = 5.14, 95% CI = [−46.99, −26.76]).
 C2 voicing as a smaller but robust positive effect on vowel duration in disyllabic words.
@@ -347,3 +349,50 @@ The posterior distribution of the effect of voicing has mean = 13.47 (est.e. = 5
 The magnitude of the voicing effect in disyllabic vs. monosyllabic words is modulated by the identity of the vowel.
 The posterior distribution for the interaction C2 voicing/number of syllables when the vowel is /ɑː/ has mean 4.07 ms (est.e. = 6.6) and 95% CI [−8.94, 17.30], indicating the possibility for a very small increase of the effect from disyllabic to monosyllabic words.
 The three-way interaction C2 voicing/vowel/number of syllables indicates that the effect of voicing with monosyllabic /iː/-words increases by 14.5 ms (est.e. = 9.43, CI = [−4.27, 33.41]).
+
+## Consonant closure duration
+
+```{r clos-1}
+priors <- c(
+  set_prior("normal(90, 20)", class = "Intercept"),
+  set_prior("normal(-20, 10)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(15, 10)", class = "b", coef = "placelabial"),
+  set_prior("normal(0, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:placelabial"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voicingvoiced:placelabial:num_sylmono"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+clos_1 <- brm(
+  c2_clos_duration ~
+    voicing +
+    place +
+    num_syl +
+    voicing:place +
+    voicing:num_syl +
+    place:num_syl +
+    voicing:place:num_syl +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_clos,
+  prior = priors,
+  cores = 4,
+  file = "./english/data/cache/clos_1"
+)
+```
+
+To test various effects on C2 closure duration, a model was fit with closure duration as the outcome variable and the following predictors: C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial), number of syllables (disyllabic, monosyllabic), all interactions between these predictor terms, and centred speech rate.
+The random effects were again a by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing.
+
+As priors, a normal distribution with mean 90 ms (SD = 20) was used for the intercept, based on \citet{sharf1962} and \citet{luce1985}.
+The means reported in \citet{sharf1962} and \citet{luce1985} also indicate that the closure of the stop in monosyllabic words is 10-30 ms shorter when the stop is voiced.
+A normal distribution with mean -20 ms (SD = 10) was chosen as the prior of the effect of C2 voicing on closure duration.
+The same studies indicate that labial stops have a closure which is 10-20 ms longer than the closure of velar stops.
+For the effect of C2 place, a normal distribution with mean 15 ms (SD = 10) was used.
