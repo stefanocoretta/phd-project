@@ -72,6 +72,15 @@ pp_check(clos_1, nsamples = 50)
 summary(clos_1, prob = 0.95)
 ```
 
+```{r vow-1-fixed}
+clos_1_fixed <- tidy(clos_1, effects = "fixed", conf.level = 0.95, fix.intercept = FALSE) %>%
+  mutate(
+    ci_width = abs(conf.low - conf.high),
+    is_rope = ifelse(ci_width <= 20, "*", "")
+  )
+clos_1_fixed
+```
+
 ```{r clos-1-draws}
 clos_1_draws <- clos_1 %>%
   gather_draws(`b_.*`, regex = TRUE) %>%

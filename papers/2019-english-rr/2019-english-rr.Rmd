@@ -396,3 +396,9 @@ The means reported in \citet{sharf1962} and \citet{luce1985} also indicate that 
 A normal distribution with mean -20 ms (SD = 10) was chosen as the prior of the effect of C2 voicing on closure duration.
 The same studies indicate that labial stops have a closure which is 10-20 ms longer than the closure of velar stops.
 For the effect of C2 place, a normal distribution with mean 15 ms (SD = 10) was used.
+
+The posterior distribution of the intercept for closure duration (corresponding to the duration of voiceless velar stops in disyllabic words) has mean 74.62 ms (est.e. = 2.85) and 95% CI = [69.17, 80.42].
+The effect of C2 voicing on closure duration is estimated to be between −26.76 and −14.57 ms (95% CI).
+The posterior mean of this effect is −20.83 ms (est.e. = 3.09).
+A very small positive effect of place of articulation (labial) is suggested by the 95% CI from −0.30 to 10.63 ms (mean = 5.1 ms, est.e. = 2.73).
+A possibly even smaller effect of number of syllables or no effect at all can be inferred from the posterior distribution which has mean 2.81 ms and estimated error 2.84 (95% CI = [−2.70, 8.19]).
