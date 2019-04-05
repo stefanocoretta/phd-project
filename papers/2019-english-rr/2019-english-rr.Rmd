@@ -340,7 +340,12 @@ A Bayesian regression model was fitted to test vowel duration (the outcome varia
 The following terms were entered: C2 voicing (voiceless vs. voiced), vowel ((/ɑː/, /ɜː/, /iː/)), number of syllables (disyllabic, monosyllabic), centred speech rate, all possible interactions between C2 voicing, vowel, and number of syllables.
 The same random structure as in the previous models was used (a by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing).
 
-For the prior of the intercept of vowel duration we used a normal distribution with mean 145 ms and standard deviation 30.
+For the prior of the intercept of vowel duration we used a normal distribution with mean 145 ms and standard deviation 30 \citep{heffner1937, house1953, peterson1960, sharf1962, chen1970, klatt1973, davis1989, laeufer1992, ko2018}.
+A normal distribution with mean 50 ms and standard deviation 20 was used as the prior for the effect of voicing on vowel duration (based on the above studies).
+A normal prior with mean 50 and standard deviation 25 was chosen instead for the effect of number of syllables and the interaction C2 voicing/number of syllables.
+For the effects of vowel, vowel/number of syllables interaction, and the three-way interaction vowel/number of syllables/C2 voicing, a normal distribution with mean 0 and standard deviation 30, based on differences reported in the previous studies.
+A slightly more informative prior was used for the interaction between C2 voicing and vowel (mean = 0, SD = 20).
+The same priors as in the previous model were included for the random structure.
 
 The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 113.15--137.06 ms (mean = 125.16 ms, est.e. = 6.02).
 The vowel /ɜː/ is 9.19 ms shorter (est.e. = 5.29) with CI = [−19.24, 1.49], while /iː/ is 36.97 ms shorter (est.e. = 5.14, 95% CI = [−46.99, −26.76]).
