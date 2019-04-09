@@ -17,12 +17,15 @@ indent: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.align = "center")
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center", fig.lp = "f:", fig.process = function(x) {
+  x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
+  if (file.rename(x, x2)) x2 else x
+})
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
 library(tidymv)
-library(rticulate)
+library(rticulate) # install from https://github.com/stefanocoretta/rticulate
 library(mgcv)
 library(itsadug)
 ```
@@ -335,7 +338,7 @@ Since those points on the bend share the same *x* value, the smooth just average
 In these plots, the points of each contour are connected sequentially by a line, rather than smoothed over.
 The parts in which the contours bend over themselves are kept as such and visualised correctly.
 
-```{r smooths, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure01, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
 tongue_it01 %>%
   ggplot(aes(X, Y)) +
   geom_point(alpha = 0.05) +
@@ -345,7 +348,7 @@ tongue_it01 %>%
   theme(legend.position = "none")
 ```
 
-```{r paths, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure02, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
 tongue_it01 %>%
   ggplot(aes(X, Y)) +
   geom_path(aes(group = rec_date, colour = vowel), alpha = 0.5) +
@@ -465,7 +468,7 @@ plot_polar_smooths(
   theme(legend.position = "top")
 ```
 
-```{r it01-gam-plot, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure03, include=TRUE, fig.cap = "Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.", fig.lp="f:", out.extra="width=\\linewidth"}
 plot_polar_smooths(
   it01_gam,
   X,
@@ -504,7 +507,7 @@ As per usual, the tongue tip is on the right-end side of each plot.
 The difference smooths indicate that there is a significant difference along the posterior part of the tongue (the root and dorsum).
 Based on the predicted smooths sown in \Cref{f:it01-gam-plot}, we can argue that, in the context of coronal consonants, the root is more advanced in voiced relative to voiceless stops (when the vowel is either /a/ or /u/), and that the dorsum is also somewhat retracted in voiced stops if the vowel is /u/.
 
-```{r diff-it01, include=TRUE, fig.cap = "Difference smooth of voiceless vs. voiced stops in the context of /a/ (left) and /u/ (right).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
+```{r Figure04, include=TRUE, fig.cap = "Difference smooth of voiceless vs. voiced stops in the context of /a/ (left) and /u/ (right).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
 plot_difference(
   it01_gam,
   X,
@@ -544,7 +547,7 @@ it01_gam_ar <- polar_gam(
 )
 ```
 
-```{r it01-acf, include=TRUE, fig.cap = "Autocorrelation plots of a model fitted without (left) and with (right) a first-order autoregressive model (AR1).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
+```{r Figure05, include=TRUE, fig.cap = "Autocorrelation plots of a model fitted without (left) and with (right) a first-order autoregressive model (AR1).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
 acf_resid(it01_gam, split_pred = list(tongue_it01$start_event))
 acf_resid(it01_gam_ar, split_pred = "AR.start")
 ```
@@ -980,73 +983,73 @@ pl07_gam_ar_0 <- polar_gam(
 compareML(pl07_gam_ar_0, pl07_gam_ar)
 ```
 
-```{r tongues-it01, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT01.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure06, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT01.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it01_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-it02, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT02.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure07, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT02.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it02_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-it03, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT03.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure08, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT03.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it03_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-it04, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT04.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure09, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT04.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it04_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-it07, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT07.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure10, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT07.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it07_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-it11, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT11.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure11, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in IT11.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(it11_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-pl02, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL02.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure12, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL02.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl02_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-pl03, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL03.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure13, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL03.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl03_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-pl04, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL04.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure14, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL04.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl04_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-pl05, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL05.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure15, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL05.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl05_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-pl06, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL06.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure16, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL06.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl06_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
 ```
 
-```{r tongues-pl07, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL07.", fig.lp="f:", out.width=".8\\textwidth"}
+```{r Figure17, include=TRUE, fig.cap = "Tongue contours of voiceless and voiced stops in PL07.", fig.lp="f:", out.width=".8\\textwidth"}
 plot_polar_smooths(pl07_gam_ar, X, voicing, facet_terms = c2_place + vowel, split = list(vc_voicing = c("vowel", "c2_place", "voicing"))) +
   theme(legend.position = "top") +
   labs(x = "", y = "")
@@ -1064,3 +1067,7 @@ Since we can't be deduced with sufficient certainty from the ultrasonic image wh
 For this reason it has been recommended here to fit separate models for each speaker.
 Future work will explore ways of allowing the user to use data aggregated from multiple speakers while accounting for the uncertainty in which parts of the tongue are imaged.
 Finally, polar GAMs can also be readily extended to model 3D tongue surfaces and whole tongue contours differences over time (in other words, how the sectional shape of the tongue changes over time).
+
+# Data Accessibility Statement
+
+The data and code used in this paper can be viewed and downloaded at the Open Science Framework link <https://osf.io/q7hyz/?view_only=f9d9f865619848f4bc575bc86cb07282>.
