@@ -1,4 +1,4 @@
-\documentclass[12pt,]{article}
+\documentclass[11pt,]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -13,6 +13,7 @@
     \usepackage{fontspec}
   \fi
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{Charis SIL}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -24,8 +25,6 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Assessing mid-saggital tongue contours in polar coordinates using generalised additive (mixed) models},
-            pdfauthor={Stefano Coretta},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -102,7 +101,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -110,20 +109,46 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{Assessing mid-saggital tongue contours in polar coordinates using
-generalised additive (mixed) models}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Stefano Coretta}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
+  \title{}
+    \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+    \author{}
+    \preauthor{}\postauthor{}
     \date{}
     \predate{}\postdate{}
   
 \usepackage{cleveref}
 
 \begin{document}
-\maketitle
+
+\large
+
+TITLE: Assessing mid-saggital tongue contours in polar coordinates using
+generalised additive (mixed) models
+
+\vspace{1cm}
+
+AUTHOR: Stefano Coretta
+
+\vspace{1cm}
+
+AFFILIATION: Linguistics and English Language, University of Manchester,
+Oxford Road, Manchester, M13 9PL, United Kingdom
+
+\vspace{1cm}
+
+EMAIL ADDRESS:
+\href{mailto:stefano.coretta@manchester.ac.uk}{\nolinkurl{stefano.coretta@manchester.ac.uk}}
+
+\normalsize
+
+\pagebreak
+
+\begin{abstract}
+My abstract
+\end{abstract}
+
+\textbf{Keywords}:
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -161,7 +186,7 @@ propagate from the transducer in a radial fashion through the aperture
 of the mandible and get reflected when they hit the air above the tongue
 surface. This `echo' is captured by the transducer and translated into
 an image like the one shown in \Cref{f:uti} (for a technical
-description, see \citet{stone2005}).
+description, see \citealt{stone2005}).
 
 \begin{figure}
   \centering
@@ -226,12 +251,12 @@ noticed that the smooths in the contexts of the vowel /u/ diverge
 substantially from the true contours (as inferred by the points). In the
 contexts of velar consonants and the other two vowels, the back/root of
 the tongue is somewhat flattened out relative to the actual contours.
-These smoothing artefacts arise because, especially at the right-edge of
+These smoothing artefacts arise because, especially at the left-edge of
 these particular contours, the slope of the curve increases in such a
 way that the curve bends under itself (see for example the context /ug/,
 when \emph{x} is between -30 and -20). Since those points on the bend
-share the \emph{x} value, the smooth just averages across the \emph{y}
-values of those points. \Cref{f:paths} shows a more appropriate
+share the same \emph{x} value, the smooth just averages across the
+\emph{y} values of those points. \Cref{f:paths} shows a more appropriate
 (artefact-free) way of representing individual tongue contours. In these
 plots, the points of each contour are connected sequentially by a line,
 rather than smoothed over. The parts in which the contours bend over
@@ -310,7 +335,8 @@ metallic headset produced by Articulate Instruments Ltd™
 Before the reading task, the participant's occlusal plane was obtained
 using a bite plate \citep{scobbie2011}. The participants read nonce
 words embedded in the frame sentence \emph{Dico \_\_ lentamente} `I say
-\_\_ slowly'. The words follow the structure
+\_\_ slowly' (Italian) and \emph{Mówię \_\_ teraz} `I say \_\_ now'
+(Polish). The words follow the structure
 C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V\textsubscript{2},
 where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/,
 C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} =
@@ -346,10 +372,10 @@ axes. The horizontal plane is parallel to the speaker's occlusal plane.
 
 GAMs can be fitted in R with the \texttt{gam()} function from package
 mgcv \citep{wood2011, wood2017}. \texttt{bam()} is a more efficient
-function when the datasets has several hundreds observations. The
-package rticulate has been developed as a wrapper of the \texttt{bam()}
-function to be used with tongue contours. The special function
-\texttt{polar\_gam()} can fit any specified GAM model to tongue contours
+function when the dataset has several hundreds observations. The package
+rticulate has been developed as a wrapper of the \texttt{bam()} function
+to be used with tongue contours. The special function
+\texttt{polar\_gam()} can fit a variety of GAM models to tongue contours
 coordinates, using the same syntax of mgcv. The function accepts tongue
 contours either in cartesian or polar coordinates. In the first case,
 the coordinates can be transformed into polar before fitting. If the
@@ -427,8 +453,8 @@ package vignette \texttt{polar-gams} (accessible with
 \NormalTok{  X,}
 \NormalTok{  voicing,}
   \DataTypeTok{facet_terms =}\NormalTok{ c2_place }\OperatorTok{+}\StringTok{ }\NormalTok{vowel,}
-  \CommentTok{# the following splits the factor interaction in the individual terms,}
-  \CommentTok{# so that they can called in the plotting arguments}
+  \CommentTok{# the following splits the factor interaction into the individual terms,}
+  \CommentTok{# so that they can be called in the plotting arguments}
   \DataTypeTok{split =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{vc_voicing =} \KeywordTok{c}\NormalTok{(}\StringTok{"vowel"}\NormalTok{, }\StringTok{"c2_place"}\NormalTok{, }\StringTok{"voicing"}\NormalTok{))}
 \NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{coord_fixed}\NormalTok{() }\OperatorTok{+}
@@ -447,9 +473,9 @@ package vignette \texttt{polar-gams} (accessible with
 
 One way to assess significance of model terms is to compare the ML score
 of the full model against one without the relevant predictor, using the
-function \texttt{compareML()} from the itsadug package. Both the
-parametric term and the difference smooth need to be removed in the null
-model.
+function \texttt{compareML()} from the itsadug package
+\citep{van-rij2017}. Both the parametric term and the difference smooth
+need to be removed in the null model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -543,7 +569,7 @@ intra-oral pressure below the threshold required for voicing
 the languages reported to show tongue root position differences between
 phonation categories in stops there are English
 \citep{westbury1983, ahn2018}, Brazilian Portuguese \citep{ahn2018}, and
-Hindi \citet{ahn2016a}. Tongue root advancement is one of several
+Hindi \citep{ahn2016a}. Tongue root advancement is one of several
 mechanisms employed by speakers to enlarge the oral cavity during the
 production of a stop closure. The decrease in pressure that follows from
 such expansion ensures that voicing can be maintained during the
@@ -568,9 +594,9 @@ the tongue root in voiced stops is more advanced than in voiceless stops
 in most vowel/place contexts. The other speakers, however, either don't
 have any tongue root advancement (like Pl03), or they have advancement
 in only some of the phonological contexts (like PL07). Moreover, IT11
-has the opposite patter, especially with velar stops, and voiced stops
-have a retracted tongue root compared to voiceless stops. IT04 is a
-clear example of tongue body lowering (another cavity expansion
+has the opposite patter, especially with velar stops, such that voiced
+stops have a retracted tongue root compared to voiceless stops. IT04 is
+a clear example of tongue body lowering (another cavity expansion
 mechanism), as it can be seen in coronal stops. This level of
 idiosyncrasy (both within and between speakers) is not surprising, and
 it qualitatively resembles the degree of variability found, for example,
@@ -709,15 +735,15 @@ statistically assess differences in tongue contour shapes as obtained
 from ultrasound tongue imaging. This paper showed how GAMs can be fitted
 to tongue contours in polar coordinates in R with the specialised
 package rticulate. An example of how GAMs can help modelling differences
-in tongue contours has been illustrated with data from 4 speakers of
-Italian in which the mid-sagittal tongue contours of voiceless and
-voiced stops where compared. The advantages of polar GAMs over the
-current implementation of polar tongue SSANOVA include: the ability to
-specify multiple predictors and random effects; control over the
-autocorrelation in the residuals which could otherwise make the model
-overconfident; separate methods for assessing statistical significance
-at the level of the predictor (with model comparison) and for
-identifying which part of the tongue differs significantly (by
+in tongue contours has been illustrated with data from 12 speakers of
+Italian and Polish in which the mid-sagittal tongue contours of
+voiceless and voiced stops where compared. The advantages of polar GAMs
+over the current implementation of polar tongue SSANOVA include: the
+ability to specify multiple predictors and random effects; control over
+the autocorrelation in the residuals which could otherwise make the
+model overconfident; separate methods for assessing statistical
+significance at the level of the predictor (with model comparison) and
+for identifying which part of the tongue differs significantly (by
 visualising the difference smooths). The same general issues noted in
 \citet{davidson2006} for SSANOVA apply to polar GAMs. In particular,
 while within-speaker normalisation can be achieved by rotation and

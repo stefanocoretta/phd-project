@@ -1,6 +1,4 @@
 ---
-title: Assessing mid-saggital tongue contours in polar coordinates using generalised additive (mixed) models
-author: Stefano Coretta
 output:
   pdf_document:
     citation_package: natbib
@@ -11,9 +9,10 @@ output:
     number_sections: yes
 bibliography: linguistics.bib
 biblio-style: unified.bst
+mainfont: Charis SIL
+fontsize: 11pt
 header-includes:
 - \usepackage{cleveref}
-fontsize: 12pt
 indent: true
 ---
 
@@ -241,6 +240,32 @@ tongue_pl07 <- read_aaa("./papers/2018-polar-gam/datasets/pl07-tongue-cart.tsv",
 contrasts(tongue_pl07$vc_voicing) <- "contr.treatment"
 ```
 
+\large
+
+TITLE: Assessing mid-saggital tongue contours in polar coordinates using generalised additive (mixed) models
+
+\vspace{1cm}
+
+AUTHOR: Stefano Coretta
+
+\vspace{1cm}
+
+AFFILIATION: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
+
+\vspace{1cm}
+
+EMAIL ADDRESS: stefano.coretta@manchester.ac.uk
+
+\normalsize
+
+\pagebreak
+
+\begin{abstract}
+My abstract
+\end{abstract}
+
+**Keywords**:
+
 # Introduction
 
 <!-- need to say that tongue comes from UTI -->
@@ -260,7 +285,7 @@ Ultrasound imaging is a non-invasive technique for obtaining an image of interna
 2D ultrasound imaging has been successfully used for imaging sections of the tongue surface (for a review, see \citealt{gick2002} and \citealt{lulich2018}).
 An image of the (2D) tongue surface can be obtained by placing the transducer in contact with the sub-mental triangle (the area under the chin), aligned either with the mid-sagittal or the coronal plane.
 The ultrasonic waves propagate from the transducer in a radial fashion through the aperture of the mandible and get reflected when they hit the air above the tongue surface.
-This 'echo' is captured by the transducer and translated into an image like the one shown in \Cref{f:uti} (for a technical description, see \citet{stone2005}).
+This 'echo' is captured by the transducer and translated into an image like the one shown in \Cref{f:uti} (for a technical description, see \citealt{stone2005}).
 
 \begin{figure}
   \centering
@@ -297,8 +322,8 @@ These contours refer to the mid-sagittal shape of the tongue during the closure 
 The tip of the tongue is on the right-end side of each panel.
 Focussing on the smooths, it can be noticed that the smooths in the contexts of the vowel /u/ diverge substantially from the true contours (as inferred by the points).
 In the contexts of velar consonants and the other two vowels, the back/root of the tongue is somewhat flattened out relative to the actual contours.
-These smoothing artefacts arise because, especially at the right-edge of these particular contours, the slope of the curve increases in such a way that the curve bends under itself (see for example the context /ug/, when *x* is between -30 and -20).
-Since those points on the bend share the *x* value, the smooth just averages across the *y* values of those points.
+These smoothing artefacts arise because, especially at the left-edge of these particular contours, the slope of the curve increases in such a way that the curve bends under itself (see for example the context /ug/, when *x* is between -30 and -20).
+Since those points on the bend share the same *x* value, the smooth just averages across the *y* values of those points.
 \Cref{f:paths} shows a more appropriate (artefact-free) way of representing individual tongue contours.
 In these plots, the points of each contour are connected sequentially by a line, rather than smoothed over.
 The parts in which the contours bend over themselves are kept as such and visualised correctly.
@@ -354,7 +379,7 @@ The acquisition of the ultrasonic and audio signals was achieved with the softwa
 Stabilisation of the ultrasonic transducer was ensured by using the metallic headset produced by Articulate Instruments Ltd™ (\citeyear{articulate2008}).
 
 Before the reading task, the participant's occlusal plane was obtained using a bite plate [@scobbie2011].
-The participants read nonce words embedded in the frame sentence *Dico \_\_ lentamente* 'I say \_\_ slowly'.
+The participants read nonce words embedded in the frame sentence *Dico \_\_ lentamente* 'I say \_\_ slowly' (Italian) and *Mówię \_\_ teraz* 'I say \_\_ now' (Polish).
 The words follow the structure C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}V\textsubscript{2}, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1}.
 Each speaker repeated the stimuli six times.
 
@@ -375,9 +400,9 @@ The horizontal plane is parallel to the speaker's occlusal plane.
 ## Fitting a polar GAM
 
 GAMs can be fitted in R with the `gam()` function from package mgcv [@wood2011; @wood2017].
-`bam()` is a more efficient function when the datasets has several hundreds observations.
+`bam()` is a more efficient function when the dataset has several hundreds observations.
 The package rticulate has been developed as a wrapper of the `bam()` function to be used with tongue contours.
-The special function `polar_gam()` can fit any specified GAM model to tongue contours coordinates, using the same syntax of mgcv.
+The special function `polar_gam()` can fit a variety of GAM models to tongue contours coordinates, using the same syntax of mgcv.
 The function accepts tongue contours either in cartesian or polar coordinates.
 In the first case, the coordinates can be transformed into polar before fitting.
 If the data is in the AAA fan-like coordinate system, the origin is automatically estimated with the method in \citet{heyne2015a}.
@@ -425,8 +450,8 @@ plot_polar_smooths(
   X,
   voicing,
   facet_terms = c2_place + vowel,
-  # the following splits the factor interaction in the individual terms,
-  # so that they can called in the plotting arguments
+  # the following splits the factor interaction into the individual terms,
+  # so that they can be called in the plotting arguments
   split = list(vc_voicing = c("vowel", "c2_place", "voicing"))
 ) +
   coord_fixed() +
@@ -447,7 +472,7 @@ plot_polar_smooths(
   theme(legend.position = "top")
 ```
 
-One way to assess significance of model terms is to compare the ML score of the full model against one without the relevant predictor, using the function `compareML()` from the itsadug package.
+One way to assess significance of model terms is to compare the ML score of the full model against one without the relevant predictor, using the function `compareML()` from the itsadug package \citep{van-rij2017}.
 Both the parametric term and the difference smooth need to be removed in the null model.
 
 ```{r it01-gam-0, echo=TRUE, cache=TRUE}
@@ -520,7 +545,7 @@ acf_resid(it01_gam_ar, split_pred = "AR.start")
 # Comparing tongue root position in voiceless and voiced stops
 
 Tongue root advancement is a well-known mechanism employed to keep intra-oral pressure below the threshold required for voicing \citep{ohala2011, kent1969, perkell1969, westbury1983, ahn2018}.
-Among the languages reported to show tongue root position differences between phonation categories in stops there are English \citep{westbury1983, ahn2018}, Brazilian Portuguese \citep{ahn2018}, and Hindi \citet{ahn2016a}.
+Among the languages reported to show tongue root position differences between phonation categories in stops there are English \citep{westbury1983, ahn2018}, Brazilian Portuguese \citep{ahn2018}, and Hindi \citep{ahn2016a}.
 Tongue root advancement is one of several mechanisms employed by speakers to enlarge the oral cavity during the production of a stop closure.
 The decrease in pressure that follows from such expansion ensures that voicing can be maintained during the closure.
 
@@ -532,7 +557,7 @@ In some speakers and contexts, the tongue root (the left part of the tongue cont
 
 In particular, IT01, IT02, PL05, and PL06 show a robust pattern in which the tongue root in voiced stops is more advanced than in voiceless stops in most vowel/place contexts.
 The other speakers, however, either don't have any tongue root advancement (like Pl03), or they have advancement in only some of the phonological contexts (like PL07).
-Moreover, IT11 has the opposite patter, especially with velar stops, and voiced stops have a retracted tongue root compared to voiceless stops.
+Moreover, IT11 has the opposite patter, especially with velar stops, such that voiced stops have a retracted tongue root compared to voiceless stops.
 IT04 is a clear example of tongue body lowering (another cavity expansion mechanism), as it can be seen in coronal stops.
 This level of idiosyncrasy (both within and between speakers) is not surprising, and it qualitatively resembles the degree of variability found, for example, in \citet{ahn2018} for English and Brasilian Portuguese.
 Finally, no clear patterns can be discerned between speakers of Italian and Polish that could point to cross-linguistic differences.
@@ -1024,7 +1049,7 @@ plot_polar_smooths(pl07_gam_ar, X, voicing, facet_terms = c2_place + vowel, spli
 
 Generalised additive (mixed) models (GAMs) can be efficiently used to statistically assess differences in tongue contour shapes as obtained from ultrasound tongue imaging.
 This paper showed how GAMs can be fitted to tongue contours in polar coordinates in R with the specialised package rticulate.
-An example of how GAMs can help modelling differences in tongue contours has been illustrated with data from 4 speakers of Italian in which the mid-sagittal tongue contours of voiceless and voiced stops where compared.
+An example of how GAMs can help modelling differences in tongue contours has been illustrated with data from 12 speakers of Italian and Polish in which the mid-sagittal tongue contours of voiceless and voiced stops where compared.
 The advantages of polar GAMs over the current implementation of polar tongue SSANOVA include: the ability to specify multiple predictors and random effects; control over the autocorrelation in the residuals which could otherwise make the model overconfident; separate methods for assessing statistical significance at the level of the predictor (with model comparison) and for identifying which part of the tongue differs significantly (by visualising the difference smooths).
 The same general issues noted in \citet{davidson2006} for SSANOVA apply to polar GAMs.
 In particular, while within-speaker normalisation can be achieved by rotation and offsetting of the data relative to a bite plate (as done here), across-speaker normalisation represents a bigger challenge.
