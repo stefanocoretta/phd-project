@@ -261,10 +261,17 @@ EMAIL ADDRESS: stefano.coretta@manchester.ac.uk
 \pagebreak
 
 \begin{abstract}
-My abstract
+Statistical modelling of whole tongue contours has been mostly dominated by the use of Smoothing Splines Analysis of Variance (SSANOVA), although the quantitative analysis of UTI data remains a challenge.
+Recently, a variety of research disciplines witnessed an increased use of Generalised Additive Models (GAMs) and their mixed-effects counterpart.
+This family of models is a highly flexible solution which extends standard generalised linear mixed regressions to model non-linear effects.
+This paper offers a review of GAMs fitted to tongue contours in polar coordinates, as an alternative to polar SSANOVA, given the increasing popularity of these models among linguists.
+Polar GAMs fitting, significance testing, and model plotting are illustrated by means of an example study that compares tongue contours of voiceless and voiced stops of 12 speakers of Italian and Polish.
+A brief tutorial illustrates fitting and plotting of polar GAMs with the R package rticulate.
+The series of polar GAMs indicates a high degree of idiosyncrasy in tongue root position in voiceless and voiced stops, within and across speakers.
+Limitations of the current implementation of polar GAMs (such as across-speaker normalisation) and future directions are also briefly discussed.
 \end{abstract}
 
-**Keywords**:
+**Keywords**: ultrasound tongue imaging, generalised additive models, tongue root
 
 # Introduction
 
