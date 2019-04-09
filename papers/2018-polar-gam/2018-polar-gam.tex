@@ -247,10 +247,10 @@ the contours has the effect of increasing the variance of the fitted
 contours (and hence the confidence intervals), and in some cases it can
 even generate uninterpretable curves.
 
-This issue is illustrated in \Cref{f:smooths}. The \emph{x} and \emph{y}
-axes are the \emph{x} and \emph{y} cartesian coordinates in millimeters.
-The plot shows LOESS smooths superimposed on the points of the
-individual tongue contours of an Italian speaker (IT01, see
+This issue is illustrated in \Cref{f:Figure01}. The \emph{x} and
+\emph{y} axes are the \emph{x} and \emph{y} cartesian coordinates in
+millimeters. The plot shows LOESS smooths superimposed on the points of
+the individual tongue contours of an Italian speaker (IT01, see
 \Cref{s:data}). These contours refer to the mid-sagittal shape of the
 tongue during the closure of four consonants (/t, d, k, g/) preceded by
 one of three vowels (/a, o, u/). The tip of the tongue is on the
@@ -264,11 +264,12 @@ these particular contours, the slope of the curve increases in such a
 way that the curve bends under itself (see for example the context /ug/,
 when \emph{x} is between -30 and -20). Since those points on the bend
 share the same \emph{x} value, the smooth just averages across the
-\emph{y} values of those points. \Cref{f:paths} shows a more appropriate
-(artefact-free) way of representing individual tongue contours. In these
-plots, the points of each contour are connected sequentially by a line,
-rather than smoothed over. The parts in which the contours bend over
-themselves are kept as such and visualised correctly.
+\emph{y} values of those points. \Cref{f:Figure02} shows a more
+appropriate (artefact-free) way of representing individual tongue
+contours. In these plots, the points of each contour are connected
+sequentially by a line, rather than smoothed over. The parts in which
+the contours bend over themselves are kept as such and visualised
+correctly.
 
 \begin{figure}
 
@@ -448,10 +449,10 @@ estimated contours. The shaded areas around the estimated contours are
 95\% confidence intervals. Note that, differently from SSANOVA,
 statistical significance can't be assessed from the overlapping (or lack
 thereof) of the confidence intervals. The output of
-\texttt{plot\_polar\_smooths()} is shown in \Cref{f:it01-gam-plot}. For
-more details on fitting and plotting more complex models (for example
-models with multiple predictors or tensor product smooths), see the
-package vignette \texttt{polar-gams} (accessible with
+\texttt{plot\_polar\_smooths()} is shown in \Cref{f:Figure3}. For more
+details on fitting and plotting more complex models (for example models
+with multiple predictors or tensor product smooths), see the package
+vignette \texttt{polar-gams} (accessible with
 \texttt{vignette("polar-gams",\ package\ =\ "rticulate")}).
 
 \begin{Shaded}
@@ -526,13 +527,13 @@ To check which part of the contour differs among conditions, the method
 recommended in \citet{soskuthy2017} is to plot the difference smooth and
 check the confidence interval. The parts of the confidence interval that
 don't include 0 indicate that the difference between contours in that
-part is significant. \Cref{f:diff-it01} illustrates the use of
-difference smooths with the difference smooths of voiceless vs.~voiced
-coronal stops when the vocalic context is /a/ or /u/. As per usual, the
-tongue tip is on the right-end side of each plot. The difference smooths
+part is significant. \Cref{f:Figure4} illustrates the use of difference
+smooths with the difference smooths of voiceless vs.~voiced coronal
+stops when the vocalic context is /a/ or /u/. As per usual, the tongue
+tip is on the right-end side of each plot. The difference smooths
 indicate that there is a significant difference along the posterior part
 of the tongue (the root and dorsum). Based on the predicted smooths sown
-in \Cref{f:it01-gam-plot}, we can argue that, in the context of coronal
+in \Cref{f:Figure3}, we can argue that, in the context of coronal
 consonants, the root is more advanced in voiced relative to voiceless
 stops (when the vowel is either /a/ or /u/), and that the dorsum is also
 somewhat retracted in voiced stops if the vowel is /u/.
@@ -550,7 +551,7 @@ As mentioned in the introduction, autocorrelation in the data can
 produce unwanted patterns in the residuals, which in turn can affect the
 estimated smooths (and falsely increase certainty about them). A
 first-order autoregressive (AR1) model can be included to reduce
-autocorrelation at lag 1. \Cref{f:it01-acf} show the autocorrelations in
+autocorrelation at lag 1. \Cref{f:Figure05} show the autocorrelations in
 the residuals without (left) and with (right) an AR1 model. The GAM
 model with the AR1 correction has lower autocorrelation values. In this
 case, it is thus advisable to perform ML comparison and smooths plotting
@@ -589,13 +590,13 @@ polar GAMs can be used to model articulatory differences within and
 between speakers, data from 6 speakers of Italian and 6 speakers of
 Polish will be discussed. Note that the 6 Italian speakers are
 representative of the general trends found in the entire sample of 11
-speakers. \Cref{f:tongues-it01} to \Cref{f:tongues-pl07} show an
-appreciable degree of variation across speakers and phonological
-contexts in relation to the differences in tongue shapes between
-voiceless and voiced stops (IT07 and Pl05 both miss data from /u/ due to
-the poor quality of the ultrasonic image for this vowel). In some
-speakers and contexts, the tongue root (the left part of the tongue
-contours) is more advanced in voiced stops than in voiceless stops.
+speakers. \Cref{f:Figure06} to \Cref{f:Figure17} show an appreciable
+degree of variation across speakers and phonological contexts in
+relation to the differences in tongue shapes between voiceless and
+voiced stops (IT07 and Pl05 both miss data from /u/ due to the poor
+quality of the ultrasonic image for this vowel). In some speakers and
+contexts, the tongue root (the left part of the tongue contours) is more
+advanced in voiced stops than in voiceless stops.
 
 In particular, IT01, IT02, PL05, and PL06 show a robust pattern in which
 the tongue root in voiced stops is more advanced than in voiceless stops
