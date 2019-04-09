@@ -13,6 +13,8 @@ mainfont: Charis SIL
 fontsize: 11pt
 header-includes:
 - \usepackage{cleveref}
+- \usepackage{lineno}
+- \linenumbers
 indent: true
 ---
 
@@ -24,14 +26,16 @@ knitr::opts_chunk$set(echo = FALSE, fig.align = "center", fig.lp = "f:", fig.pro
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal())
-library(tidymv)
+library(tidymv) # install from https://github.com/stefanocoretta/tidymv
 library(rticulate) # install from https://github.com/stefanocoretta/rticulate
 library(mgcv)
 library(itsadug)
 ```
 
 ```{r read-data, include=FALSE}
-stimuli <- read_csv("./papers/2018-polar-gam/datasets/stimuli.csv")
+stimuli_it <- read_csv("./papers/2018-polar-gam/datasets/stimuli-it.csv")
+
+stimuli_pl <- read_csv("./papers/2018-polar-gam/datasets/stimuli-pl.csv")
 
 columns <- c(
   "speaker",
@@ -53,7 +57,7 @@ columns <- c(
 tongue_it01 <- read_aaa("./papers/2018-polar-gam/datasets/it01-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_it) %>%
   filter(X < 40, c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -69,7 +73,7 @@ contrasts(tongue_it01$vc_voicing) <- "contr.treatment"
 tongue_it02 <- read_aaa("./papers/2018-polar-gam/datasets/it02-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_it) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), fan_line > 5, fan_line < 40) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -85,7 +89,7 @@ contrasts(tongue_it02$vc_voicing) <- "contr.treatment"
 tongue_it03 <- read_aaa("./papers/2018-polar-gam/datasets/it03-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_it) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), fan_line < 40) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -101,7 +105,7 @@ contrasts(tongue_it03$vc_voicing) <- "contr.treatment"
 tongue_it04 <- read_aaa("./papers/2018-polar-gam/datasets/it04-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_it) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), fan_line < 38) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -117,7 +121,7 @@ contrasts(tongue_it04$vc_voicing) <- "contr.treatment"
 tongue_it07 <- read_aaa("./papers/2018-polar-gam/datasets/it07-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_it) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -133,7 +137,7 @@ contrasts(tongue_it07$vc_voicing) <- "contr.treatment"
 tongue_it11 <- read_aaa("./papers/2018-polar-gam/datasets/it11-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_it) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -149,7 +153,7 @@ contrasts(tongue_it11$vc_voicing) <- "contr.treatment"
 tongue_pl02 <- read_aaa("./papers/2018-polar-gam/datasets/pl02-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_pl) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -165,7 +169,7 @@ contrasts(tongue_pl02$vc_voicing) <- "contr.treatment"
 tongue_pl03 <- read_aaa("./papers/2018-polar-gam/datasets/pl03-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_pl) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -181,7 +185,7 @@ contrasts(tongue_pl03$vc_voicing) <- "contr.treatment"
 tongue_pl04 <- read_aaa("./papers/2018-polar-gam/datasets/pl04-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_pl) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -197,7 +201,7 @@ contrasts(tongue_pl04$vc_voicing) <- "contr.treatment"
 tongue_pl05 <- read_aaa("./papers/2018-polar-gam/datasets/pl05-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_pl) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD")) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -213,7 +217,7 @@ contrasts(tongue_pl05$vc_voicing) <- "contr.treatment"
 tongue_pl06 <- read_aaa("./papers/2018-polar-gam/datasets/pl06-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_pl) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), X < 26, Y > -30) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -229,7 +233,7 @@ contrasts(tongue_pl06$vc_voicing) <- "contr.treatment"
 tongue_pl07 <- read_aaa("./papers/2018-polar-gam/datasets/pl07-tongue-cart.tsv", columns)  %>%
   na.omit() %>%
   mutate(word = word(prompt, 2)) %>%
-  left_join(y = stimuli) %>%
+  left_join(y = stimuli_pl) %>%
   filter(c1_phonation == "voiceless", label %in% c("max_TT", "max_TD"), Y > -26) %>%
   mutate(
     vc_voicing = interaction(vowel, c2_place, c2_phonation),
@@ -451,7 +455,7 @@ it01_gam <- polar_gam(
 The function `plot_polar_smooths()` can be used to plot the estimated contours.
 The shaded areas around the estimated contours are 95\% confidence intervals.
 Note that, differently from SSANOVA, statistical significance can't be assessed from the overlapping (or lack thereof) of the confidence intervals.
-The output of `plot_polar_smooths()` is shown in \Cref{f:Figure3}.
+The output of `plot_polar_smooths()` is shown in \Cref{f:Figure03}.
 For more details on fitting and plotting more complex models (for example models with multiple predictors or tensor product smooths), see the package vignette `polar-gams` (accessible with `vignette("polar-gams", package = "rticulate")`).
 
 ```{r it01-gam-plot-code, echo=TRUE, eval=FALSE}
@@ -502,10 +506,10 @@ compareML(it01_gam_0, it01_gam)
 
 To check which part of the contour differs among conditions, the method recommended in \citet{soskuthy2017} is to plot the difference smooth and check the confidence interval.
 The parts of the confidence interval that don't include 0 indicate that the difference between contours in that part is significant.
-\Cref{f:Figure4} illustrates the use of difference smooths with the difference smooths of voiceless vs. voiced coronal stops when the vocalic context is /a/ or /u/.
+\Cref{f:Figure04} illustrates the use of difference smooths with the difference smooths of voiceless vs. voiced coronal stops when the vocalic context is /a/ or /u/.
 As per usual, the tongue tip is on the right-end side of each plot.
 The difference smooths indicate that there is a significant difference along the posterior part of the tongue (the root and dorsum).
-Based on the predicted smooths sown in \Cref{f:Figure3}, we can argue that, in the context of coronal consonants, the root is more advanced in voiced relative to voiceless stops (when the vowel is either /a/ or /u/), and that the dorsum is also somewhat retracted in voiced stops if the vowel is /u/.
+Based on the predicted smooths sown in \Cref{f:Figure03}, we can argue that, in the context of coronal consonants, the root is more advanced in voiced relative to voiceless stops (when the vowel is either /a/ or /u/), and that the dorsum is also somewhat retracted in voiced stops if the vowel is /u/.
 
 ```{r Figure04, include=TRUE, fig.cap = "Difference smooth of voiceless vs. voiced stops in the context of /a/ (left) and /u/ (right).", fig.show="hold",fig.lp="f:", out.width=".7\\linewidth", out.height="5cm"}
 plot_difference(

@@ -118,6 +118,8 @@
     \predate{}\postdate{}
   
 \usepackage{cleveref}
+\usepackage{lineno}
+\linenumbers
 
 \begin{document}
 
@@ -441,7 +443,7 @@ here to allow model comparison below.
 \end{Shaded}
 
 \begin{verbatim}
-## The origin is x = 14.3900999664996, y = -65.2314226131983.
+## The origin is x = 14.3901068810439, y = -65.2314851170583.
 \end{verbatim}
 
 The function \texttt{plot\_polar\_smooths()} can be used to plot the
@@ -449,7 +451,7 @@ estimated contours. The shaded areas around the estimated contours are
 95\% confidence intervals. Note that, differently from SSANOVA,
 statistical significance can't be assessed from the overlapping (or lack
 thereof) of the confidence intervals. The output of
-\texttt{plot\_polar\_smooths()} is shown in \Cref{f:Figure3}. For more
+\texttt{plot\_polar\_smooths()} is shown in \Cref{f:Figure03}. For more
 details on fitting and plotting more complex models (for example models
 with multiple predictors or tensor product smooths), see the package
 vignette \texttt{polar-gams} (accessible with
@@ -500,7 +502,7 @@ need to be removed in the null model.
 \end{Shaded}
 
 \begin{verbatim}
-## The origin is x = 14.3900999664996, y = -65.2314226131983.
+## The origin is x = 14.3901068810439, y = -65.2314851170583.
 \end{verbatim}
 
 \begin{Shaded}
@@ -516,24 +518,24 @@ need to be removed in the null model.
 ## 
 ## Chi-square test of ML scores
 ## -----
-##        Model     Score Edf Difference     Df  p.value Sig.
-## 1 it01_gam_0 12395.227   3                                
-## 2   it01_gam  7423.356  36   4971.871 33.000  < 2e-16  ***
+##        Model    Score Edf Difference     Df  p.value Sig.
+## 1 it01_gam_0 7085.662   3                                
+## 2   it01_gam 4417.403  36   2668.260 33.000  < 2e-16  ***
 ## 
-## AIC difference: 10258.65, model it01_gam has lower AIC.
+## AIC difference: 5603.15, model it01_gam has lower AIC.
 \end{verbatim}
 
 To check which part of the contour differs among conditions, the method
 recommended in \citet{soskuthy2017} is to plot the difference smooth and
 check the confidence interval. The parts of the confidence interval that
 don't include 0 indicate that the difference between contours in that
-part is significant. \Cref{f:Figure4} illustrates the use of difference
+part is significant. \Cref{f:Figure04} illustrates the use of difference
 smooths with the difference smooths of voiceless vs.~voiced coronal
 stops when the vocalic context is /a/ or /u/. As per usual, the tongue
 tip is on the right-end side of each plot. The difference smooths
 indicate that there is a significant difference along the posterior part
 of the tongue (the root and dorsum). Based on the predicted smooths sown
-in \Cref{f:Figure3}, we can argue that, in the context of coronal
+in \Cref{f:Figure03}, we can argue that, in the context of coronal
 consonants, the root is more advanced in voiced relative to voiceless
 stops (when the vowel is either /a/ or /u/), and that the dorsum is also
 somewhat retracted in voiced stops if the vowel is /u/.
