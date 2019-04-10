@@ -149,12 +149,26 @@ The following measures were obtained:
 
 All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
-A Gaussian (normal) distribution was used in all the models.
+A Gaussian (normal) distribution was used in all the models as the response distribution.
 All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel factor are reversed compared to that in the pre-registration, and this was done to match the height order in \citet{coretta2018j}, from low to high. Changing the order of the levels of course does not affect the results.}
-Speech rate has been centred when included in the models so that the intercept can be interpreted as the mean intercept at mean speech rate.
+When reporting the results, the estimates refer to the reference levels of each predictor, unless otherwise stated.
+Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
 
-<!-- explain Bayesian briefly -->
-<!-- say that normal prior with SD means that values between mean + 2*SD and mean - 2*SD are possible at different probabilities -->
+The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in a context of commonly low-powered studies \citep{munafo2017, roettger2019}.
+For an introduction to Bayesian statistics in phonetics, see \citet{vasishth2018, nicenboim2018a}, while for a general introduction see \citet{etz2018, mcelreath2015, kruschke2015}, and reference therein.
+While a thorough discussion of Bayesian methods would be beyond the scope of this paper, it is relevant to give the less familiar reader the tools for interpreting analyses and results.
+
+More weight will be given here on the estimated distributions of the sought effects, rather than on point estimates (as in frequentist regression models).
+The estimated distribution of an effect (or parameter) is the posterior distribution of that effect (or parameter).
+The posterior distribution is an approximation of the parameter distribution, and it takes into account the specified prior, i.e. the theoretical probability of the parameter as known or derived by the researcher.
+This characteristics is at the heart of Bayesian modelling, which includes prior knowledge into the estimation of parameter values.
+For each relevant term in the models, the 95% credible intervals (CI) should be taken as a summary of the posterior distribution, and inference should be based on the posterior rather than on the point estimate (the posterior mean).
+A 95% CI can be interpreted as the 95% probability that a parameter lies within the interval range.
+For example, if the 95% CI is between 10 and 30 ms, there is a 95% probability that the true parameter value is between 10 and 30 ms.
+
+In each model, a prior is specified for each of the parameters to be estimated. The priors are in the form of particular distributions, like the normal or the Cauchy distributions.
+A prior defines the prior knowledge of where the parameter might lie within a range of values.
+For example, a prior as a normal distribution with mean 200 ms and standard deviation 50 indicates the researcher's belief that the parameter lies between 100 and 300 ms with 95% probability (i.e., the mean minus twice the standard deviation, and the mean plus twice the standard deviation).
 <!-- explain why you use 95% CI -->
 
 # Results
@@ -287,9 +301,10 @@ rr_3 <- brm(
 
 Including all the relevant terms in the model (C2 voicing and place, vowel, number of syllables in interaction with C2 voicing) has indeed reduced the credible intervals substantially.
 Note that inferences from this model should be treated with caution, since the model was not pre-registered.
-The posterior distribution of the C2 voicing effect on release-to-release duration is tighter (95% CI = [−10.45, 5.65]) while the mean (−2.43 ms, est.e. = 4.06) is close to that of model 1 (−4.43 ms, only a 2 ms difference).
+The posterior distribution of the C2 voicing effect on release-to-release duration is tighter than that of model 1 (95% CI = [−10.45, 5.65]) while the mean (−2.43 ms, est.e. = 4.06) is virtually unchanged (−4.43 ms, only a 2 ms difference).
 The estimated effect of syllable number is now more robustly positive (95% CI = [9.17, 22.48]), with a mean (16.03 ms, est.e. = 3.32) similar to that in model 1.
-<!-- interaction -->
+The posterior distribution of the interaction between number of syllables and C2 voicing (95% CI = [2.65, 20.98]) suggests a positive and medium-sized coefficient (mean = 11.67 ms, est.e. = 4.71).
+This result indicates that the duration of the release-to-release is greater in monosyllabic words with voiced C2 than in monosyllabic words with voiceless C2.
 The effects of vowel and place or articulation have similar means, but the credible intervals are smaller.
 The release-to-release is on average 10.05 ms (est.e. = 2.95, 95% CI = [−15.92, −4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (est.e. = 2.99, 95% CI = [−45.03, −32.76]) shorter if the vowel is /iː/.
 C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, est.e. = 2.39, 95% CI = [−2.29, 7.28]).
@@ -350,10 +365,15 @@ The same priors as in the previous model were included for the random structure.
 The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 113.15--137.06 ms (mean = 125.16 ms, est.e. = 6.02).
 The vowel /ɜː/ is 9.19 ms shorter (est.e. = 5.29) with CI = [−19.24, 1.49], while /iː/ is 36.97 ms shorter (est.e. = 5.14, 95% CI = [−46.99, −26.76]).
 C2 voicing as a smaller but robust positive effect on vowel duration in disyllabic words.
-The posterior distribution of the effect of voicing has mean = 13.47 (est.e. = 5.14) and 95% CI = [3.80, 24.36].
+The posterior distribution of the effect of voicing on /ɑː/ has mean 13.47 ms (est.e. = 5.14) and 95% CI = [3.80, 24.36].
+The posterior of the interaction of voicing with vowel when the vowel is /ɜː/ is quite spread out, with 95% CI between −13.77 and 13.40 ms.
+This can indicate that /ɑː/ and /ɜː/ behave similarly for what concern voicing-driven difference in duration, or that, if non-null, the interaction coefficient is very small.
+On the other hand, the effect of voicing is on average 6.75 ms greater (est.e. = 6.76, 95% CI = [−7.45, 19.55]) with the vowel /iː/.
 The magnitude of the voicing effect in disyllabic vs. monosyllabic words is modulated by the identity of the vowel.
-The posterior distribution for the interaction C2 voicing/number of syllables when the vowel is /ɑː/ has mean 4.07 ms (est.e. = 6.6) and 95% CI [−8.94, 17.30], indicating the possibility for a very small increase of the effect from disyllabic to monosyllabic words.
-The three-way interaction C2 voicing/vowel/number of syllables indicates that the effect of voicing with monosyllabic /iː/-words increases by 14.5 ms (est.e. = 9.43, CI = [−4.27, 33.41]).
+The posterior distribution for the interaction C2 voicing/number of syllables when the vowel is /ɑː/ has mean 4.07 ms (est.e. = 6.6) and 95% CI [−8.94, 17.30], indicating the possibility for a very small increase of the effect from disyllabic to monosyllabic /ɑː/-words.
+The three-way interaction C2 voicing/vowel/number of syllables indicates that the effect of voicing with monosyllabic /ɜː/-words is very similar to that of monosyllabic /ɑː/-words (mean = −2.66, est.e. = 9,44, 95% CI = [−21.57, 16.23]), while in monosyllabic /iː/-words it increases by 14.5 ms (est.e. = 9.43, CI = [−4.27, 33.41]).
+Note that the credible intervals of some of the effect are quite large, so that a large range of values are possible.
+The posterior means of such effects should be treated with more caution.
 
 ## Consonant closure duration
 
