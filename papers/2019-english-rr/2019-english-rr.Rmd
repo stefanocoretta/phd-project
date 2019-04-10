@@ -27,6 +27,7 @@ theme_set(theme_minimal())
 library(coretta2019eng)
 data("eng_durations")
 library(brms)
+library(tidybayes)
 eng_durations_rr <- na.omit(eng_durations)
 ```
 
@@ -151,7 +152,6 @@ All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
 A Gaussian (normal) distribution was used in all the models as the response distribution.
 All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel factor are reversed compared to that in the pre-registration, and this was done to match the height order in \citet{coretta2018j}, from low to high. Changing the order of the levels of course does not affect the results.}
-When reporting the results, the estimates refer to the reference levels of each predictor, unless otherwise stated.
 Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
 
 The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in a context of commonly low-powered studies \citep{munafo2017, roettger2019}.
@@ -301,6 +301,7 @@ rr_3 <- brm(
 
 Including all the relevant terms in the model (C2 voicing and place, vowel, number of syllables in interaction with C2 voicing) has indeed reduced the credible intervals substantially.
 Note that inferences from this model should be treated with caution, since the model was not pre-registered.
+\Cref{f:rr-3-intervals} shows a variety of crebile intervals for the model terms.
 The posterior distribution of the C2 voicing effect on release-to-release duration is tighter than that of model 1 (95% CI = [−10.45, 5.65]) while the mean (−2.43 ms, est.e. = 4.06) is virtually unchanged (−4.43 ms, only a 2 ms difference).
 The estimated effect of syllable number is now more robustly positive (95% CI = [9.17, 22.48]), with a mean (16.03 ms, est.e. = 3.32) similar to that in model 1.
 The posterior distribution of the interaction between number of syllables and C2 voicing (95% CI = [2.65, 20.98]) suggests a positive and medium-sized coefficient (mean = 11.67 ms, est.e. = 4.71).
@@ -308,6 +309,31 @@ This result indicates that the duration of the release-to-release is greater in 
 The effects of vowel and place or articulation have similar means, but the credible intervals are smaller.
 The release-to-release is on average 10.05 ms (est.e. = 2.95, 95% CI = [−15.92, −4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (est.e. = 2.99, 95% CI = [−45.03, −32.76]) shorter if the vowel is /iː/.
 C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, est.e. = 2.39, 95% CI = [−2.29, 7.28]).
+
+
+```{r rr-3-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on release-to-release duration (model 3). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
+rr_3_draws <- rr_3 %>%
+  gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_voweler, b_vowelee, b_placelabial)
+
+rr_3_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(
+    .variable,
+    levels = c("b_placelabial", "b_vowelee", "b_voweler", "b_voicingvoiced:num_sylmono", "b_num_sylmono", "b_voicingvoiced")
+  )) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.2), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-50, 25, 5)) +
+  scale_y_discrete(labels = c("Place = labial", "Vowel = /i/", "Vowel = //", "voiced × disyl.", "Num.syl. = disyl.", "C2 voicing = voiced")) +
+  scale_color_brewer() +
+  labs(
+    x = "Estimate in milliseconds",
+    y = element_blank()
+  ) +
+  theme(panel.grid.minor = element_blank())
+```
 
 ## Vowel duration
 
