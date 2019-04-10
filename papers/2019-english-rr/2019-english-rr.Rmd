@@ -34,7 +34,7 @@ eng_durations_rr <- na.omit(eng_durations)
 
 # Introduction
 
-Consonants and vowels are known to excise a reciprocal influence in a variety of ways.
+Consonants and vowels are known to exert a reciprocal influence on each other in a variety of ways.
 One such way is the well-established tendency for vowels to have shorter durations when followed by voiceless stops and longer durations when followed by voiced stops.
 This so-called 'voicing effect' has been long recognised in a plethora of languages across different linguistic families.
 English is possibly by far the most investigated language in relation to the voicing effect.
