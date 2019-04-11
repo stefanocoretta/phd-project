@@ -74,8 +74,9 @@ The data in \citet{coretta2018j} suggest that the intrinsic duration of vowels a
 In particular, release-to-release intervals containing a high vowel have shorter durations than those with a low vowel in \citet{coretta2018j}.
 This is not surprising, given that a well known cross-linguistic tendency is that high vowels are shorter than low vowels \citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
 As for the consonant place of articulation, the interval is shorter in Italian and Polish if the second consonant is velar compared to when it is coronal.
-The closure of velar stops is shorter than that of other stops (see for example \citealt{sharf1962}).
-It can thus be expected that intervals with a velar stop in English will be shorter than intervals with consonants of other places of articulation.
+The closure of velar stops is shorter than that of other stops.
+For example, \citeauthor{sharf1962}'s data \citeyear{sharf1962} on closure duration in English suggests that the closure of labial stops (60-90 ms) is about 10 ms longer than that of velar stops (55-75 ms).
+It can thus be expected that intervals with a velar stop in English will be about 10 ms shorter than intervals with labial consonants.
 
 To summarise, the following research questions and respective hypotheses were formulated:
 
@@ -503,3 +504,5 @@ clos_1_draws %>%
   ) +
   theme(panel.grid.minor = element_blank())
 ```
+
+# Discussion
