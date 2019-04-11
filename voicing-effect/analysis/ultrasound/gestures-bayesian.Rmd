@@ -19,11 +19,14 @@ library(coretta2018itapol)
 data("token_measures")
 
 gestures <- token_measures %>%
+  filter(c1_phonation == "voiceless", !is.na(c1_rel), !is.na(GONS), !is.na(max), GONS > 0, max > 0) %>%
   mutate(
-    syl_rate_c = syl_rate - mean(syl_rate),
+    speech_rate_c = speech_rate - mean(speech_rate),
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
     c2_place = factor(c2_place, levels = c("coronal", "velar")),
-    vowel = factor(vowel, levels = c("a", "o", "u"))
+    vowel = factor(vowel, levels = c("a", "o", "u")),
+    gons_max = (max - GONS) * 1000,
+    rel_gons = (GONS - c1_rel) * 1000
   ) %>%
   mutate_if(is_character, as_factor)
 ```
