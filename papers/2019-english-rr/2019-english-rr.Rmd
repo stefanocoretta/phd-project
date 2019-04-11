@@ -506,3 +506,20 @@ clos_1_draws %>%
 ```
 
 # Discussion
+
+The first question asked whether the voicing of C2 in disyllabic and monosyllabic words in English influence the duration of the release-to-release interval.
+\citet{coretta2018j} showed that the release-to-release interval duration is not affected by C2 voicing in disyllabic words of Italian and Polish.
+The hypotheses were that, in English, the interval is not affected in disyllabic words, like in Italian and Polish, but it is in monosyllabic words.
+The results of this study indicate that the release-to-release duration of disyllabic words in English is very similar whether C2 is voiceless (like *tarpus*) or voiced (*tarbus*).
+A Bayesian regression model fitted to the release-to-release duration (model 3) suggests a null or very small effect of C2 voicing on the interval duration, with a 95% probability that the true effect is between −10 and +5 ms.
+At lower levels of probability, the posterior distribution of the effect indicates an effect between −5 and 0 ms (50% probability).
+In sum, if the voicing of C2 is conditioning the duration of the release-to-release interval, this influence is very small (around 2.5 ms).
+
+On the other hand, the interval in monosyllabic words is longer when C2 is voiced (for example, *tarb*) vs. when it is voiceless (*tarp*).
+The interaction term between number of syllables in the word and C2 voicing is positive, between +2.5 and +21 ms (at 95% probability), which means that the effect of C2 voicing increases by 2.5 to 21 ms in monosyllabic words relative to that in disyllabic words.
+This result is compatible with Hypothesis 1b that the release-to-release interval is longer in monosyllabic words with a voiced C2.
+
+The possible very small negative effect of C2 voicing in disyllabic words could be related to an annotation bias which affects the identification of stop releases.
+English voiceless stops are generally followed by aspiration, and the related glottal friction could mask the exact location of the release burst.
+If the release of the post-vocalic voiceless stops is annotated later than the actual release (by mistaking peaks in aspiration for the release burst), this could lead to longer release-to-release durations when C2 is voiceless compared to when it is voiced.
+Such annotation bias could explain the (indeed quite small) negative effect of voicing on the interval duration.
