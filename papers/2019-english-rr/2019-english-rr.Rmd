@@ -12,6 +12,7 @@ biblio-style: unified
 mainfont: Tinos
 fontsize: 12pt
 indent: true
+papersize: a4
 header-includes:
 - \usepackage{cleveref}
 - \usepackage{ctable}
