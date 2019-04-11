@@ -23,6 +23,9 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 indent: true
+params:
+  version: 1.9
+  version-date: "2019/04/11"
 ---
 
 ```{r setup, include=FALSE}
@@ -99,6 +102,10 @@ trp_difference <- kines_mean %>%
   na.omit()
 ```
 
+\begin{abstract}
+My abstract.
+\end{abstract}
+
 # Introduction
 
 It is well known that voiced stops are almost universally characterised by two phonetic correlates: advanced tongue root and increased duration of the preceding vowel \citep{westbury1983, lisker1974, fowler1992}.
@@ -170,10 +177,14 @@ Since the closure of voiceless stops is longer than that of voiced stops, it fol
 
 ## This study
 
-In sum, tongue root advancement and longer vowel durations are two common correlates of voicing.
-Previous studies have shown that closure voicing can be maintained by advancing the tongue root during the production of voiced stops (which is possibly initiated earlier than the closure onset) and that vowels followed by voiced stops tend to be longer than vowels followed by voiceless stops.
-The acoustic data from this exploratory study, discussed in \citet{coretta2018j}, revealed that the duration of the stop closure bears on the duration of the preceding vowel.
-This paper introduces the results from the articulatory part of the study in \citet{coretta2018j}, and offers new insights on how the mechanisms involving the tongue root and its relation with vowel duration interact with stop closure duration.
+Previous research has established that tongue root advancement and longer vowel durations are two common correlates of voicing.
+In particular, voicing during closure can be maintained by advancing the tongue root during the production of voiced stops (which is possibly initiated earlier than the closure onset) and that vowels followed by voiced stops tend to be longer than vowels followed by voiceless stops.
+The acoustic data in \citet{coretta2018j} further revealed that the duration of the stop closure bears on the duration of the preceding vowel, by means of a kind of compensatory mechanism.
+
+The results from the articulatory part of \citet{coretta2018j}, which will be discussed in the following sections, offer new insights on the link between closure and vowel duration.
+We will see that the relative timing of the closure also modulates the degree of tongue root advancement found at closure onset, thus creating a three-way network of relations with vowel duration and tongue root position.
+More specifically, the timing of the closure onset within the release-to-release interval decides the duration of the vowel, the duration of the closure, and the degree of tongue root advancement.
+Finally, it will be argued that a later closure onset as in the case of voiced stops has the double advantage of producing both a short closure duration and greater tongue root advancement, features both known to comply with the Aerodynamic Voicing Constraint.
 
 # Methodology
 
