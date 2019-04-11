@@ -217,6 +217,7 @@ This weakly informative prior was a normal distribution with mean 50 ms and SD =
 The prior for the effect of centred speech rate was a normal distribution with mean -25 ms and SD = 10, and was based again on results from \citet{coretta2018j}.
 For the random effects, a half Cauchy distribution (location = 0, scale = 25) was used for the standard deviation (also used for the residual standard deviation) and a LKJ(2) distribution for the correlation.
 
+<!-- talk about precision -->
 The posterior distribution of the estimated effect of C2 voicing on the release-to-release duration has a 95% credible interval (95% CI) between -23.86 and 15.45 ms (the mean is -4.43 ms, estimated error = 10.03).
 The 95% CI of the estimated interaction between C2 voicing and number of syllables is between -8.41 and 41.41 ms ($\bar{\theta}$ = 16.53 ms, SD = 12.72).
 The difference in duration of the release-to-release interval between monosyllabic and disyllabic words is between -1.58 and 36.53 ms (95% CI, $\bar{\theta}$ = 17.34, SD = 9.76).
@@ -324,6 +325,7 @@ rr_3_draws %>%
     levels = c("b_placelabial", "b_vowelee", "b_voweler", "b_voicingvoiced:num_sylmono", "b_num_sylmono", "b_voicingvoiced")
   )) %>%
   ggplot(aes(.value, .variable)) +
+  annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
   geom_vline(xintercept = 0) +
   stat_intervalh() +
   stat_pointintervalh(position = position_nudge(y = -0.2), .width = c(0.66, 0.98)) +
@@ -414,6 +416,7 @@ vow_1_draws %>%
     levels = c("b_voicingvoiced:vowelee:num_sylmono", "b_voicingvoiced:voweler:num_sylmono", "b_vowelee:num_sylmono", "b_voweler:num_sylmono", "b_voicingvoiced:vowelee", "b_voicingvoiced:voweler", "b_vowelee", "b_voweler", "b_voicingvoiced:num_sylmono", "b_num_sylmono", "b_voicingvoiced")
   )) %>%
   ggplot(aes(.value, .variable)) +
+  annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
   geom_vline(xintercept = 0) +
   stat_intervalh() +
   stat_pointintervalh(position = position_nudge(y = -0.4), .width = c(0.66, 0.98)) +
@@ -492,6 +495,7 @@ clos_1_draws %>%
     levels = c("b_voicingvoiced:placelabial:num_sylmono", "b_placelabial:num_sylmono", "b_voicingvoiced:placelabial", "b_placelabial", "b_voicingvoiced:num_sylmono", "b_num_sylmono", "b_voicingvoiced")
   )) %>%
   ggplot(aes(.value, .variable)) +
+  annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
   geom_vline(xintercept = 0) +
   stat_intervalh() +
   stat_pointintervalh(position = position_nudge(y = -0.4), .width = c(0.66, 0.98)) +
@@ -511,15 +515,29 @@ The first question asked whether the voicing of C2 in disyllabic and monosyllabi
 \citet{coretta2018j} showed that the release-to-release interval duration is not affected by C2 voicing in disyllabic words of Italian and Polish.
 The hypotheses were that, in English, the interval is not affected in disyllabic words, like in Italian and Polish, but it is in monosyllabic words.
 The results of this study indicate that the release-to-release duration of disyllabic words in English is very similar whether C2 is voiceless (like *tarpus*) or voiced (*tarbus*).
-A Bayesian regression model fitted to the release-to-release duration (model 3) suggests a null or very small effect of C2 voicing on the interval duration, with a 95% probability that the true effect is between −10 and +5 ms.
-At lower levels of probability, the posterior distribution of the effect indicates an effect between −5 and 0 ms (50% probability).
-In sum, if the voicing of C2 is conditioning the duration of the release-to-release interval, this influence is very small (around 2.5 ms).
 
-On the other hand, the interval in monosyllabic words is longer when C2 is voiced (for example, *tarb*) vs. when it is voiceless (*tarp*).
-The interaction term between number of syllables in the word and C2 voicing is positive, between +2.5 and +21 ms (at 95% probability), which means that the effect of C2 voicing increases by 2.5 to 21 ms in monosyllabic words relative to that in disyllabic words.
-This result is compatible with Hypothesis 1b that the release-to-release interval is longer in monosyllabic words with a voiced C2.
+A Bayesian regression model was fitted to the release-to-release duration (model 3).
+In this model, the stipulated precision based on the ROPE width of 20 ms was reached for all the relevant terms.
+The results of model 3 suggest a null effect of C2 voicing on the interval duration in disyllabic words (hypothesis 1a), with a 95% probability that the true effect is between −10 and +5 ms (within the ROPE).
+At lower levels of probability, the posterior distribution of the effect indicates an effect between −5 and 0 ms (50% probability).
+If the voicing of C2 is conditioning the duration of the release-to-release interval, this effect is very small and negative (around −2.5 ms).
 
 The possible very small negative effect of C2 voicing in disyllabic words could be related to an annotation bias which affects the identification of stop releases.
 English voiceless stops are generally followed by aspiration, and the related glottal friction could mask the exact location of the release burst.
 If the release of the post-vocalic voiceless stops is annotated later than the actual release (by mistaking peaks in aspiration for the release burst), this could lead to longer release-to-release durations when C2 is voiceless compared to when it is voiced.
-Such annotation bias could explain the (indeed quite small) negative effect of voicing on the interval duration.
+Such annotation bias could explain the (indeed quite small) negative effect of voicing on the interval duration, and why it is in the opposite direction of the one predicted for monosyllabic words (i.e. *longer* release-to-release when C2 is voiced).
+
+On the other hand, the interval in monosyllabic words is longer when C2 is voiced (for example, *tarb*) vs. when it is voiceless (*tarp*).
+The interaction term between number of syllables in the word and C2 voicing is positive, between +2.5 and +21 ms (at 95% probability), which means that the effect of C2 voicing increases by 2.5 to 21 ms in monosyllabic words relative to the effect in disyllabic words.
+This result is compatible with Hypothesis 1b that the release-to-release interval is longer in monosyllabic words with a voiced C2.
+
+The second question was about other effects on the release-to-release duration.
+As expected by hypothesis 2a, the release to release interval is longer in monosyllabic than in disyllabic words.
+At 95% probability, the effect of number of syllables (from di- to mono-syllabic) is between 9 and 22.5 ms.
+As for hypothesis 2b, the results are more robust for /iː/ than for /ɜː/.
+When the vowel is /iː/, the release-to-release interval is 33 to 45 ms shorter compared with an interval with /ɑː/.
+The posterior distribution of the effect when the vowel is /ɜː/ substantially overlaps with the ROPE, although it tends towards the negative side.
+If there is an effect with this vowel compared to /ɑː/, it is negative and possibly around −10 ms.
+Finally, hypothesis 2c is not inequivocably corroborated.
+The posterior distribution of the effect of C2 place of articulation (labial) has very high precision (9.5 ms) and it is between 0 and 5 ms (at somewhat less than 80% probability).
+However, it lies within the ROPE and it is very close to 0.
