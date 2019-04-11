@@ -10,10 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(root.dir = normalizePath("../../../"))
 
 library(tidyverse)
+theme_set(theme_minimal())
 scale_fill_discrete <- function(...) scale_fill_brewer(..., type = "qual")
 scale_colour_discrete <- function(...) scale_colour_brewer(..., type = "qual")
 library(brms)
 library(bayesplot)
+library(tidybayes)
 
 library(coretta2018itapol)
 data("token_measures")
@@ -29,13 +31,15 @@ gestures <- token_measures %>%
     rel_gons = (GONS - c1_rel) * 1000
   ) %>%
   mutate_if(is_character, as_factor)
+
+gest_gmax <- filter(gestures, gons_max > 10)
 ```
 
 # GONS to MAX
 
 ```{r gons-max-bm}
 priors <- c(
-  set_prior("normal(150, 50)", class = "Intercept"),
+  set_prior("normal(130, 75)", class = "Intercept"),
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced"),
   set_prior("normal(0, 10)", class = "b", coef = "vowelo"),
   set_prior("normal(0, 10)", class = "b", coef = "vowelu"),
@@ -43,9 +47,9 @@ priors <- c(
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelo"),
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelu"),
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:c2_placevelar"),
-  set_prior("normal(0, 50)", class = "b", coef = "syl_rate_c"),
-  set_prior("normal(0,200)", class = "sd"),
-  set_prior("normal(0,50)", class = "sigma")
+  set_prior("normal(0, 50)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
 )
 
 gons_max_bm <- brm(
@@ -55,12 +59,13 @@ gons_max_bm <- brm(
     vowel +
     c2_phonation:c2_place +
     c2_phonation:vowel +
-    syl_rate_c +
+    speech_rate_c +
     (1|speaker) +
     (1|item),
   prior = priors,
-  data = gestures,
-  cores = 2
+  data = gest_gmax,
+  cores = 4,
+  file = "./voicing-effect/data/cache/gons_max_bm"
 )
 ```
 
@@ -69,14 +74,35 @@ summary(gons_max_bm)
 ```
 
 ```{r gos-max-intervals}
-mcmc_intervals(as.array(gons_max_bm), pars = c("b_c2_phonationvoiced", "b_c2_placevelar", "b_vowelo", "b_vowelu"))
+gons_max_draws <- gons_max_bm %>%
+  gather_draws(b_c2_phonationvoiced, b_c2_placevelar, b_vowelo, b_vowelu)
+
+gons_max_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(
+    .variable,
+    levels = c("b_vowelu", "b_vowelo", "b_c2_placevelar", "b_c2_phonationvoiced")
+  )) %>%
+  ggplot(aes(.value, .variable)) +
+  # annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.2), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-50, 25, 5)) +
+  scale_y_discrete(labels = c("Vowel = /u/", "Vowel = /o/", "Place = velar", "Voicing = voiced")) +
+  scale_color_brewer() +
+  labs(
+    x = "Difference in GONS to MAX (ms)",
+    y = element_blank()
+  ) +
+  theme(panel.grid.minor = element_blank())
 ```
 
 # C1 release to GONS
 
 ```{r rel-gons-bm}
 priors <- c(
-  set_prior("normal(150, 50)", class = "Intercept"),
+  set_prior("normal(0, 200)", class = "Intercept"),
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced"),
   set_prior("normal(0, 10)", class = "b", coef = "vowelo"),
   set_prior("normal(0, 10)", class = "b", coef = "vowelu"),
@@ -84,9 +110,9 @@ priors <- c(
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelo"),
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelu"),
   set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:c2_placevelar"),
-  set_prior("normal(0, 50)", class = "b", coef = "syl_rate_c"),
-  set_prior("normal(0,200)", class = "sd"),
-  set_prior("normal(0,50)", class = "sigma")
+  set_prior("normal(0, 50)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("cauchy(0, 25)", class = "sigma")
 )
 
 rel_gons_bm <- brm(
@@ -96,12 +122,13 @@ rel_gons_bm <- brm(
     vowel +
     c2_phonation:c2_place +
     c2_phonation:vowel +
-    syl_rate_c +
+    speech_rate_c +
     (1|speaker) +
     (1|item),
   prior = priors,
   data = gestures,
-  cores = 2
+  cores = 4,
+  file = "./voicing-effect/data/cache/rel_gons_bm"
 )
 ```
 
@@ -110,6 +137,27 @@ summary(rel_gons_bm)
 ```
 
 ```{r rel-gons-intervals}
-mcmc_intervals(as.array(rel_gons_bm), pars = c("b_c2_phonationvoiced", "b_c2_placevelar", "b_vowelo", "b_vowelu"))
+rel_gons_draws <- rel_gons_bm %>%
+  gather_draws(b_c2_phonationvoiced, b_c2_placevelar, b_vowelo, b_vowelu)
+
+rel_gons_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(
+    .variable,
+    levels = c("b_vowelu", "b_vowelo", "b_c2_placevelar", "b_c2_phonationvoiced")
+  )) %>%
+  ggplot(aes(.value, .variable)) +
+  # annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.2), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-50, 25, 5)) +
+  scale_y_discrete(labels = c("Vowel = /u/", "Vowel = /o/", "Place = velar", "Voicing = voiced")) +
+  scale_color_brewer() +
+  labs(
+    x = "Difference in release to GONS (ms)",
+    y = element_blank()
+  ) +
+  theme(panel.grid.minor = element_blank())
 ```
 
