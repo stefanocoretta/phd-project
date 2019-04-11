@@ -145,7 +145,7 @@ The following measures were obtained:
 * Duration of the release-to-release interval: from the release of C1 to the release of C2.
 * V1 duration: from appearance to disappearance of higher formant structure in the spectrogram in correspondence of V1 \citep{machac2009}.
 * C2 closure duration: from disappearance of higher formant structure in the V1C2 sequence to the release of C2 \citep{machac2009}.
-* Speech rate: calculated as number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018}).
+* Speech rate: calculated as number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018a}).
 
 ## Statistical analysis
 
