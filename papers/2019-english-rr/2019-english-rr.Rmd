@@ -19,6 +19,9 @@ header-includes:
 - \usepackage{enumerate}
 - \usepackage{lineno}
 - \linenumbers
+params:
+  version: 0.9
+  version-date: "2019/02/01"
 ---
 
 ```{r setup, include=FALSE}
