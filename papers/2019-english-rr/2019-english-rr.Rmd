@@ -488,7 +488,7 @@ A very small positive effect of place of articulation (labial) is suggested by t
 A possibly even smaller effect of number of syllables or no effect at all can be inferred from the posterior distribution which has mean 2.81 ms and estimated error 2.84 (95% CI = [−2.70, 8.19]).
 See \Cref{f:clos-1-intervals} for the credible intervals of the effects on closure duration.
 
-```{r clos-1-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on vowel duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r clos-1-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on closure duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
 clos_1_draws <- clos_1 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_placelabial, `b_voicingvoiced:placelabial`, `b_placelabial:num_sylmono`, `b_voicingvoiced:placelabial:num_sylmono`)
 
@@ -514,6 +514,8 @@ clos_1_draws %>%
 ```
 
 # Discussion
+
+## Release-to-release interval
 
 The first question asked whether the voicing of C2 in disyllabic and monosyllabic words in English influence the duration of the release-to-release interval.
 \citet{coretta2018j} showed that the release-to-release interval duration is not affected by C2 voicing in disyllabic words of Italian and Polish.
@@ -546,6 +548,8 @@ Finally, hypothesis 2c is not unequivocally corroborated.
 The posterior distribution of the effect of C2 place of articulation (labial) has very high precision (9.5 ms) and it is between 0 and 5 ms (at somewhat less than 80% probability).
 However, it lies within the ROPE and it is very close to 0.
 
+## Vowel and closure duration
+
 Question 3 addresses the effect of voicing on vowel and closure duration, and the possible differences between disyllabic and monosyllabic words.
 Starting from vowel duration, the effect of voicing is estimated to lie between 4 and 25 ms.
 This range is very similar to that reported by \citet{coretta2018j} for Italian and Polish disyllabic words (95% confidence intervals [8, 25], monosyllabic words were not tested).
@@ -566,3 +570,17 @@ However, the vowel /iː/ followed by a voiceless stop is also about 16 ms shorte
 While it is not clear why the vowel is that much shorter in that context, it is possible that the simultaneous increase (by the voicing effect) and decrease (by vowel identity) of vowel duration in that context is a statistical product.
 As for the vowel /ɜː/, it can be inferred from the posterior of the interaction that this vowel behaves similarly to /ɑː/.
 Research on the duration of English tense vowels and on a possible process of /iː/ shortening is needed to shed light on the observed patterns.
+
+There was no specific hypothesis concerning closure durations.
+C2 voicing has a robust negative effect on closure duration, so that voiced closures are 14.6-26.8 ms shorter than voiceless closures.
+The effects of number of syllables, place, and interactions all have credible intervals that are narrower than 20 ms (the ROPE width) but they lie entirely within the ROPE around 0.
+If these variables do have an effect on closure duration, the present analysis suggests that the means of these effects are between 0 and 5 ms.
+These values are smaller than what the results in \citet{sharf1962}, which indicate a difference of 15 ms between velar and labial closure durations.
+
+## General discussion
+
+\citet{coretta2018j} proposes that the voicing-related adjustments in the relative timing of the closure onset within an isochronous speech interval (acoustically identified as the release-to-release interval) is the diachronic precursor of the widespread effect of voicing on vowel duration.\footnote{Note that isochrony here is intended as pertaining the context of voiceless vs. voices stops only. It is not implied that the interval is isochronous in absolute terms.}
+Given that the duration of the release-to-release interval in Italian and Polish disyllabic words is not affected by the voicing of the post-vocalic consonant, the relative durations of vowel and closure depend on when the closure is achieved within that interval.
+A later closure onset implies a longer vowel and a shorter closure, while, vice versa, an earlier closure onset produces a shorter vowel and a longer closure.
+
+The current study shows that also the release-to-release interval of English disyllabic words with either a voiceless or a voiced stop is isochronous.
