@@ -23,6 +23,7 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(ggrepel)
 library(brms)
+library(tidybayes)
 ```
 
 ```{r data}
@@ -42,7 +43,7 @@ studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
 
 A Bayesian meta-analysis of the English voicing effect has been run on the basis of 11 estimated posterior distributions extracted from 9 different publications, following the procedures discussed in \citet{nicenboim2018a}.
 The studies were selected by scraping the first 100 results on Google Scholar with the keywords "vowel duration voicing English".
-Other studies which were known to the author but not among the Google Scholar results were also included.
+Other studies which were known to the author but not present among the Google Scholar results were also included.
 
 Since two publications, \citet{sharf1962} and \citet{klatt1973}, tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
 This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English (7 estimated posteriors from 7 publications plus 2 each from 2 publications).
@@ -59,6 +60,7 @@ The simple models (without an error term) also included a prior for the residual
 
 A data set with the mean estimates and estimated standard errors from these 11 posterior distributions has then been used to fit a further Bayesian measurement error model.
 In this model, the mean estimates with the estimated standard errors were included as the outcome, while a by-study random intercept was the only predictor.
+The models were fitted in R with brms using Markov Chain Monte Carlo simulations, with 4 chains, 2000 iterations of which 1000 for warm-up.
 
 ```{r heffner1937}
 h37 <- filter(stressed, study == "heffner1937")
@@ -372,24 +374,55 @@ post_nonfi <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
 
 meta_bm_syl_q2.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.025))
 meta_bm_syl_q97.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.975))
+meta_bm_syl_q50 <- (meta_bm_syl_q2.5 + meta_bm_syl_q97.5) / 2
 ```
 
-The following is the summary of the meta-analytical model.
+The following lines are the summary of the meta-analytical model obtained with the `summary()` function in R.
+The population-level effects are the ones of interest.
 
-```{r meta-summary}
+```{r meta-summary, include=TRUE}
 summary(meta_bm_syl)
 ```
 
-The 95% credible interval (CI) of the model intercept posterior (which corresponds to the estimated voicing effect in word-final syllables) is between 56.39 and 96.43 ms.
-The mean of the posterior distribution is 75.83 ms (estimated error = 10.01).
-Given the posterior and based on the surveyed studies, it is safe to infer that the true effect of voicing in word-final syllables in English is very likely less than 100 ms.
+\Cref{f:intervals} shows a variety of credible intervals of the estimates from the model.
+The blue-coloured bars represent (from darker to lighter blue) the 50%, 80%, and 95% credible intervals (CIs).
+THe black lines are the 66% (thick) and 98% (thin) CIs.
 
-The posterior mean of the coefficient when the target syllable is in penultimate position is -49.14 ms (est.e = 19.10).
-Note that the estimated error is double compared to that of the intercept, which increases uncertainty.
-On average, we can argue that the mean voicing effect in penultimate syllables is about 50 ms less than the mean effect in monosyllabic words.
-The mean of the voicing effect in disyllabic words can thus be estimated to be around 25 ms.
-\Cref{f:} shows the full posterior distributions of the voicing effect in the word-final and penultimate contexts.
-Note how the calculated posterior distribution in penultimate position has greater dispersion that the other.
+```{r intervals, include=TRUE, fig.cap = "", fig.lp="f:", out.extra="width=\\linewidth"}
+meta_draws <- meta_bm_syl %>%
+  gather_draws(b_syl_posnonMfinal, b_Intercept)
+
+meta_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(.variable, levels = c("b_syl_posnonMfinal", "b_Intercept"))) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.1), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-100, 100, 25)) +
+  scale_y_discrete(labels = c("Final vs. penultimate", "Final")) +
+  scale_color_brewer() +
+  labs(
+    x = "Meta-analytical estimate (ms)",
+    y = element_blank()
+  ) +
+  theme(panel.grid.minor = element_blank())
+```
+
+The 95% credible interval (CI) of the model intercept (which corresponds to the estimated voicing effect in word-final syllables) is between 56.39 and 96.43 ms.
+This means that there is a 95% probability that the true effect lies between about 56 and 96 ms.
+The mean of the posterior distribution is 75.83 ms (SD = 10.01).
+Given the 95% CI of the meta-analytical posterior distribution, it can be inferred that the true effect of voicing in word-final syllables in English is positive and between 50 and 100 ms.
+However, note that the meta-anlytical estimate might suffer from publication bias (cf. below).
+
+The posterior mean of the coefficient when the target syllable is in penultimate position is -49.14 ms (SD = 19.10, 95% CI = [-85.69, -8.98]).
+Note that the estimated error is double compared to that of the intercept, which means the there is greater uncertainty in this than the other estimate.
+We can argue that, on average, the mean voicing effect in penultimate syllables is about 50 ms smaller than the mean effect in monosyllabic words in the surveyed studies.
+The mean of the voicing effect in disyllabic words can thus be estimated to be around 25 ms (about 75 - 50 ms).
+
+A visual representation of the meta-analytical distributions is given in \Cref{f:syl-plot}.
+The plot shows the full posterior distributions of the voicing effect in the word-final and penultimate contexts.
+Note how the posterior distribution in penultimate position is wider than the other.
 
 ```{r post-syl}
 post_syl <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
@@ -417,7 +450,7 @@ post_syl %>%
   theme(legend.position = "top")
 ```
 
-\Cref{f:} shows the mean estimate (the points) of the voicing effect with 95% CIs (the horizontal segments) for each of the 11 studies.
+\Cref{f:origin-shrunk-plot} shows the mean estimates (the points) of the voicing effect with 95% CIs (the horizontal segments) for each of the 11 studies.
 For each study, the plot gives both the original estimate (as obtained from the raw data summary of the study) and the estimate shrunk by the random effects in the meta-analytical model.
 The vertical lines indicate the meta-analytical 95% CI of the voicing effect in final (solid) and penultimate syllable position (dashed).
 Original estimates further away from the meta-analytical mean effect and those with greater uncertainty (wider errors) show greater shrinkage to the mean.
@@ -460,11 +493,9 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
   ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
   geom_hline(aes(yintercept = 0), colour = "grey") +
-  geom_hline(aes(yintercept = meta_bm_q2.5), colour = "skyblue4") +
-  geom_hline(aes(yintercept = meta_bm_q97.5), colour = "skyblue4") +
-  # geom_hline(aes(yintercept = meta_bm_est), colour = "skyblue4") +
-  geom_hline(aes(yintercept = meta_bm_syl_q2.5), colour = "skyblue4", linetype = "dashed") +
-  geom_hline(aes(yintercept = meta_bm_syl_q97.5), colour = "skyblue4", linetype = "dashed") +
+  scale_x_discrete() +
+  annotate("rect", xmin = 3.5, xmax = Inf, ymin = meta_bm_q2.5, ymax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  annotate("rect", xmin = -Inf, xmax = 3.5, ymin = meta_bm_syl_q2.5, ymax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
   geom_point(size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
@@ -472,7 +503,7 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   scale_linetype_discrete(labels = c("final", "penultimate")) +
   labs(
     title = "Estimated voicing effect from the original source\nand from the meta-analysis",
-    caption = "The vertical lines indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (solid) and penultimate (dashed) position.",
+    caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (light blue) and penultimate (dark blue) position.",
     y = "Difference in vowel duration (ms)",
     x = "Study",
     linetype = "Syllable position",
@@ -482,25 +513,31 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
 ```
 
-A funnel plot can be used to visually check whether the sample suffers from publication bias.
-In \Cref{f:}, the x-axis corresponds to the original estimated difference in vowel duration, while the y-axis is a measure of precision (calculated as 1 divided by the estimated error of the difference).
-When there is no bias, the points with lower precision should be more spread out and symmetrical placed around the meta-analytical mean, while points with higher precision should cluster around the mean.
+\Cref{f:funnel-plot} is a funnel plot, which can be used to visually check whether the sample suffers from publication bias.
+In this plot, the x-axis corresponds to the original estimated difference in vowel duration, while the y-axis is a measure of precision (calculated as 1 divided by the estimated error of the difference).
+The meta-analytical means are indicated by the thick and dashed vertical lines for syllable-final and penultimate postion respectively.
+The shaded areas indicate the 95% CI of the meta-analytical posterior of the voicing effect in final (light blue) and penultimate (dark blue) position.
+When there is no bias, the points with lower precision should be more spread out and symmetrically placed around the meta-analytical mean, while points with higher precision should cluster around the mean.
 This ideal situation is clearly not the case for the final syllable context.
 There seems to be a bias towards bigger effects (which also happen to have lower precision).
+This indicates that the estimate probably suffers from publication bias (i.e. bias towards publicating positive and significant results).
+It is not possible to assess bias with the effect in penultimate syllable position given the low number of studies.
 
 ```{r funnel-plot, include=TRUE, fig.cap = "", fig.lp="f:", out.extra="width=\\linewidth"}
 estimated_tbl %>%
   mutate(precision = 1/Est.Error) %>%
   ggplot(aes(Estimate, precision, label = study)) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
-  geom_vline(aes(xintercept = meta_bm_q2.5), colour = "skyblue4") +
-  geom_vline(aes(xintercept = meta_bm_q97.5), colour = "skyblue4") +
-  geom_vline(aes(xintercept = meta_bm_syl_q2.5), colour = "skyblue4", linetype = "dashed") +
-  geom_vline(aes(xintercept = meta_bm_syl_q97.5), colour = "skyblue4", linetype = "dashed") +
-  geom_point(aes(shape = syl_pos)) +
-  geom_text_repel(force = 20, seed = 1234) +
+    geom_vline(aes(xintercept = meta_bm_est)) +
+  geom_vline(aes(xintercept = meta_bm_syl_q50), linetype = "dashed") +
+  annotate("rect", ymin = -Inf, ymax = Inf, xmin = meta_bm_q2.5, xmax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  annotate("rect", ymin = -Inf, ymax = Inf, xmin = meta_bm_syl_q2.5, xmax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  geom_point(aes(shape = syl_pos), size = 3) +
+  # geom_text_repel(force = 20, seed = 1234) +
   scale_shape_discrete(labels = c("final", "penultimate")) +
+  scale_x_continuous(breaks = seq(-25, 150, 25)) +
   labs(
+    x = "Difference in vowel duration (ms)",
     shape = "Syllable position"
   )
 ```
