@@ -31,6 +31,7 @@ params:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.lp = "f:")
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
+options(knitr.kable.NA = "")
 library(tidyverse)
 theme_set(theme_minimal())
 library(coretta2018itapol) # https://github.com/stefanocoretta/coretta2018itapol
@@ -335,7 +336,7 @@ kines %>%
 Since the position of the tongue root in millimetres depends on the speaker's anatomy and on the probe location, scaled tongue root position is used in this plot (note though that the unscaled data is used in statistical modelling).
 As a trend, the position of the tongue root is more advanced if C2 is voiced compared to its position when C2 is voiceless.
 
-A linear mixed-effects model with tongue root position as the outcome variable was fitted with the following predictors: fixed effects for C2 voicing (voiceless, voiced), centred speech rate (as number of syllables per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random coefficient for C2 voicing led to singular fit, so it was not included in the final model).
+A linear mixed-effects model with tongue root position as the outcome variable was fitted with the following predictors (\Cref{tab:tra-lm-table}): fixed effects for C2 voicing (voiceless, voiced), centred speech rate (as number of syllables per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word random intercepts (a by-speaker random coefficient for C2 voicing led to singular fit, so it was not included in the final model).
 The effects of C2 voicing and vowel are significant according to *t*-tests with Satterthwaite's approximation to degrees of freedom.
 The tongue root at C2 closure onset is 0.77 mm (SE = 0.35) more front when C2 is voiced, and it is 1.87 mm (SE = 0.42) more retracted if V1 is /o/.
 
@@ -388,7 +389,7 @@ compareML(tra_gam_ar_0, tra_gam_ar)
 ```
 
 The position of the tongue root during the articulation of V1 was assessed with generalised additive mixed models (GAMM).
-A GAMM was fitted to tongue root position with the following terms: C2 voicing as a parametric term; a smooth term over centred speech rate, a smooth term over V1 proportion with a by-C2 voicing difference smooth, a tensor product interaction over V1 proportion and centred speech rate; a factor random smooth over V1 proportion by speaker (penalty order = 1).
+A GAMM was fitted to tongue root position with the following terms (\Cref{tab:tra-gam-ar-table}): C2 voicing as a parametric term; a smooth term over centred speech rate, a smooth term over V1 proportion with a by-C2 voicing difference smooth, a tensor product interaction over V1 proportion and centred speech rate; a factor random smooth over V1 proportion by speaker (penalty order = 1).
 A chi-squared test on the ML scores of the full model and a model excluding C2 voicing indicates that C2 voicing significantly improves fit ($\chi$(3) = 7.758, *p* = 0.001).
 \Cref{f:tra-gam-plot} shows that the root advances during the production of the vowel, relative to its position at V1 onset.
 This forward movement is observed both in the context of a following voiced stop and in that of a following voiceless stop.
@@ -442,13 +443,14 @@ as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
   labs(x = "Vowel duration (ms)", y = "Tongue root position (ms)")
 ```
 
-A second linear mixed regression was fitted to tongue root position to assess the effect of V1 duration on root position.
+A second linear mixed regression was fitted to tongue root position to assess the effect of V1 duration on root position (\Cref{tab:tra-lm-2-table}).
 The following terms were included: centred V1 duration (in milliseconds), centred speech rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation (coronal, velar); an interaction between centred V1 duration and vowel; by-speaker and by-word random intercept (a by-speaker random coefficient for V1 duration led to non-convergence, so it was not included in the final model).
 All predictors and the V1 duration/vowel interaction are significant.
 V1 duration and tongue root position are positively correlated: The longer the vowel, the more advanced the tongue root is at V1 offset ($\hat{\beta}$ = 0.065 mm, SE = 0.007).
 The effect is stronger with /a/ than with /o/ and /u/ (see \Cref{f:tra-lm-2-plot}).
 
-## Tongue root position during V2 as a function of V1 duration
+## Tongue root position during V1 as a function of V1 duration
+\label{s:trp-v1-dur}
 
 ```{r tra-gam-2, include=FALSE, cache=TRUE}
 tra_gam_2 <- bam(
@@ -487,7 +489,7 @@ tra_gam_ar_0_2 <- bam(
 )
 ```
 
-The effect of V1 duration on tongue root position during V1 was modelled by fitting a GAMM with the following terms: tongue root position as the outcome variable, smooth terms over V1 duration and V1 proportion, a tensor product interaction over V1 proportion and V1 duration; a factor random smooth over V1 proportion by speaker (penalty order = 1).
+The effect of V1 duration on tongue root position during V1 was modelled by fitting a GAMM with the following terms (\Cref{tab:tra-gam-ar-2-table}): tongue root position as the outcome variable, smooth terms over V1 duration and V1 proportion, a tensor product interaction over V1 proportion and V1 duration; a factor random smooth over V1 proportion by speaker (penalty order = 1).
 The full model with the tensor product interaction over V1 proportion and V1 duration has better fit according to model comparison with a model without the interaction ($\chi$(3) = 12.559, *p* < 0.001).
 \Cref{f:tra-gam-2-plot} shows the estimated root trajectories at four values of vowel duration.
 The general trend is that the forward movement of the root during the vowel is greater the longer the duration of the vowel (\Cref{f:tra-gam-2-plot}).
@@ -746,14 +748,48 @@ paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 
 # Output of statistical models
 
-See \Cref{tab:tra-lm-table} and \Cref{tab:tra-lm-2-table}.
+See \Cref{tab:tra-lm-table}, \Cref{tab:tra-gam-ar-table}, \Cref{tab:tra-lm-2-table}, \Cref{tab:tra-gam-ar-2-table}.
 
 ```{r tra-lm-table}
 kable(tidy(tra_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to tongue root position at vowel offset (see \\Cref{s:tra-lm})") %>%
 kable_styling(font_size = 10)
 ```
 
+```{r tra-gam-ar-table}
+kable(
+  tidy(tra_gam_ar, parametric = TRUE) %>%
+  bind_rows(tidy(tra_gam_ar)) %>%
+    mutate(term = c("Intercept", "Voicing = voiced", "s(Speech rate (centr.))", "s(Proportion)", "s(Proportion): voiced", "ti(Proportion, Speech Rate (c.))", "s(Proportion, Speaker)")) %>%
+    rename(Predictor = term, Estimate = estimate, SE = std.error, `p-value` = p.value, EDF = edf, Ref.DF = ref.df, Statistic = statistic) %>%
+    select(Predictor, Estimate, SE, EDF, Ref.DF, Statistic, `p-value`) %>%
+    mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")),
+  format = "latex",
+  booktabs = TRUE,
+  linesep = "",
+  digits = 2,
+  caption = "Summary of the GAM model fitted to tongue root position during V1 (see \\Cref{s:trp-v1})"
+) %>%
+kable_styling(font_size = 10)
+```
+
 ```{r tra-lm-2-table}
 kable(tidy(tra_lm_2, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "V1 duration (centr.)", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/", "V1 duration × /o/", "V1 duration × /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \\Cref{s:trp-vdur})") %>%
+kable_styling(font_size = 10)
+```
+
+```{r tra-gam-ar-2-table}
+kable(
+  tidy(tra_gam_ar_2, parametric = TRUE) %>%
+  bind_rows(tidy(tra_gam_ar_2)) %>%
+    mutate(term = c("Intercept", "s(V1 duration)", "s(Proportion)", "ti(Proportion, V1 duration)", "s(Proportion, Speaker)")) %>%
+    rename(Predictor = term, Estimate = estimate, SE = std.error, `p-value` = p.value, EDF = edf, Ref.DF = ref.df, Statistic = statistic) %>%
+    select(Predictor, Estimate, SE, EDF, Ref.DF, Statistic, `p-value`) %>%
+    mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")),
+  format = "latex",
+  booktabs = TRUE,
+  linesep = "",
+  digits = 2,
+  caption = "Summary of the GAM model fitted to tongue root position during V1 as a function of V1 duration (see \\Cref{s:trp-v1-dur})"
+) %>%
 kable_styling(font_size = 10)
 ```

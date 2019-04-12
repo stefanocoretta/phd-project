@@ -503,10 +503,11 @@ tongue root is more advanced if C2 is voiced compared to its position
 when C2 is voiceless.
 
 A linear mixed-effects model with tongue root position as the outcome
-variable was fitted with the following predictors: fixed effects for C2
-voicing (voiceless, voiced), centred speech rate (as number of syllables
-per second, centred), vowel (/a/, /o/, /u/); by-speaker and by-word
-random intercepts (a by-speaker random coefficient for C2 voicing led to
+variable was fitted with the following predictors
+(\Cref{tab:tra-lm-table}): fixed effects for C2 voicing (voiceless,
+voiced), centred speech rate (as number of syllables per second,
+centred), vowel (/a/, /o/, /u/); by-speaker and by-word random
+intercepts (a by-speaker random coefficient for C2 voicing led to
 singular fit, so it was not included in the final model). The effects of
 C2 voicing and vowel are significant according to \emph{t}-tests with
 Satterthwaite's approximation to degrees of freedom. The tongue root at
@@ -521,20 +522,21 @@ V1}\label{tongue-root-position-during-v1}}
 
 The position of the tongue root during the articulation of V1 was
 assessed with generalised additive mixed models (GAMM). A GAMM was
-fitted to tongue root position with the following terms: C2 voicing as a
-parametric term; a smooth term over centred speech rate, a smooth term
-over V1 proportion with a by-C2 voicing difference smooth, a tensor
-product interaction over V1 proportion and centred speech rate; a factor
-random smooth over V1 proportion by speaker (penalty order = 1). A
-chi-squared test on the ML scores of the full model and a model
-excluding C2 voicing indicates that C2 voicing significantly improves
-fit (\(\chi\)(3) = 7.758, \emph{p} = 0.001). \Cref{f:tra-gam-plot} shows
-that the root advances during the production of the vowel, relative to
-its position at V1 onset. This forward movement is observed both in the
-context of a following voiced stop and in that of a following voiceless
-stop. However, the magnitude of the movement is greater in the former.
-At V1 offset (= C2 closure onset), the graph suggests a difference in
-tongue root position of about 1 mm.
+fitted to tongue root position with the following terms
+(\Cref{tab:tra-gam-ar-table}): C2 voicing as a parametric term; a smooth
+term over centred speech rate, a smooth term over V1 proportion with a
+by-C2 voicing difference smooth, a tensor product interaction over V1
+proportion and centred speech rate; a factor random smooth over V1
+proportion by speaker (penalty order = 1). A chi-squared test on the ML
+scores of the full model and a model excluding C2 voicing indicates that
+C2 voicing significantly improves fit (\(\chi\)(3) = 7.758, \emph{p} =
+0.001). \Cref{f:tra-gam-plot} shows that the root advances during the
+production of the vowel, relative to its position at V1 onset. This
+forward movement is observed both in the context of a following voiced
+stop and in that of a following voiceless stop. However, the magnitude
+of the movement is greater in the former. At V1 offset (= C2 closure
+onset), the graph suggests a difference in tongue root position of about
+1 mm.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-tra_files/figure-latex/tra-gam-plot-1} \caption{Predicted tongue root position (top figure) during vowels preceding voiceless and voiced stops, with 95\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see text for details).}\label{f:tra-gam-plot}
@@ -551,37 +553,40 @@ duration}\label{correlation-between-tongue-root-position-and-v1-duration}}
 \end{figure}
 
 A second linear mixed regression was fitted to tongue root position to
-assess the effect of V1 duration on root position. The following terms
-were included: centred V1 duration (in milliseconds), centred speech
-rate (as number of syllables per second), vowel (/a/, /o/, /u/), C2
-place of articulation (coronal, velar); an interaction between centred
-V1 duration and vowel; by-speaker and by-word random intercept (a
-by-speaker random coefficient for V1 duration led to non-convergence, so
-it was not included in the final model). All predictors and the V1
-duration/vowel interaction are significant. V1 duration and tongue root
-position are positively correlated: The longer the vowel, the more
-advanced the tongue root is at V1 offset (\(\hat{\beta}\) = 0.065 mm, SE
-= 0.007). The effect is stronger with /a/ than with /o/ and /u/ (see
-\Cref{f:tra-lm-2-plot}).
+assess the effect of V1 duration on root position
+(\Cref{tab:tra-lm-2-table}). The following terms were included: centred
+V1 duration (in milliseconds), centred speech rate (as number of
+syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation
+(coronal, velar); an interaction between centred V1 duration and vowel;
+by-speaker and by-word random intercept (a by-speaker random coefficient
+for V1 duration led to non-convergence, so it was not included in the
+final model). All predictors and the V1 duration/vowel interaction are
+significant. V1 duration and tongue root position are positively
+correlated: The longer the vowel, the more advanced the tongue root is
+at V1 offset (\(\hat{\beta}\) = 0.065 mm, SE = 0.007). The effect is
+stronger with /a/ than with /o/ and /u/ (see \Cref{f:tra-lm-2-plot}).
 
-\hypertarget{tongue-root-position-during-v2-as-a-function-of-v1-duration}{%
-\subsection{Tongue root position during V2 as a function of V1
-duration}\label{tongue-root-position-during-v2-as-a-function-of-v1-duration}}
+\hypertarget{tongue-root-position-during-v1-as-a-function-of-v1-duration}{%
+\subsection{Tongue root position during V1 as a function of V1
+duration}\label{tongue-root-position-during-v1-as-a-function-of-v1-duration}}
+
+\label{s:trp-v1-dur}
 
 The effect of V1 duration on tongue root position during V1 was modelled
-by fitting a GAMM with the following terms: tongue root position as the
-outcome variable, smooth terms over V1 duration and V1 proportion, a
-tensor product interaction over V1 proportion and V1 duration; a factor
-random smooth over V1 proportion by speaker (penalty order = 1). The
-full model with the tensor product interaction over V1 proportion and V1
-duration has better fit according to model comparison with a model
-without the interaction (\(\chi\)(3) = 12.559, \emph{p} \textless{}
-0.001). \Cref{f:tra-gam-2-plot} shows the estimated root trajectories at
-four values of vowel duration. The general trend is that the forward
-movement of the root during the vowel is greater the longer the duration
-of the vowel (\Cref{f:tra-gam-2-plot}). Moreover, the trajectory
-curvature increases with vowel duration: Shorter vowels have a flatter
-trajectory of tongue root advancement.
+by fitting a GAMM with the following terms
+(\Cref{tab:tra-gam-ar-2-table}): tongue root position as the outcome
+variable, smooth terms over V1 duration and V1 proportion, a tensor
+product interaction over V1 proportion and V1 duration; a factor random
+smooth over V1 proportion by speaker (penalty order = 1). The full model
+with the tensor product interaction over V1 proportion and V1 duration
+has better fit according to model comparison with a model without the
+interaction (\(\chi\)(3) = 12.559, \emph{p} \textless{} 0.001).
+\Cref{f:tra-gam-2-plot} shows the estimated root trajectories at four
+values of vowel duration. The general trend is that the forward movement
+of the root during the vowel is greater the longer the duration of the
+vowel (\Cref{f:tra-gam-2-plot}). Moreover, the trajectory curvature
+increases with vowel duration: Shorter vowels have a flatter trajectory
+of tongue root advancement.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{2018-tra_files/figure-latex/tra-gam-2-plot-1} \caption{Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\% confidence intervals. Predictions from a GAMM (see text for details).}\label{f:tra-gam-2-plot}
@@ -905,7 +910,8 @@ paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 \section{Output of statistical
 models}\label{output-of-statistical-models}}
 
-See \Cref{tab:tra-lm-table} and \Cref{tab:tra-lm-2-table}.
+See \Cref{tab:tra-lm-table}, \Cref{tab:tra-gam-ar-table},
+\Cref{tab:tra-lm-2-table}, \Cref{tab:tra-gam-ar-2-table}.
 
 \begin{table}[t]
 
@@ -927,6 +933,26 @@ Vowel = /u/ & 0.09 & 0.43 & -0.75 & 0.92 & 19.70 & 0.20 & 0.84 & \\
 
 \begin{table}[t]
 
+\caption{\label{tab:tra-gam-ar-table}Summary of the GAM model fitted to tongue root position during V1 (see \Cref{s:trp-v1})}
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}{lrrrrrrl}
+\toprule
+Predictor & Estimate & SE & EDF & Ref.DF & Statistic & p-value & < α\\
+\midrule
+Intercept & -63.33 & 1.76 &  &  & -36.06 & 0.00 & *\\
+Voicing = voiced & 0.33 & 0.14 &  &  & 2.31 & 0.02 & *\\
+s(Speech rate (centr.)) &  &  & 7.53 & 8.52 & 4.48 & 0.00 & *\\
+s(Proportion) &  &  & 3.69 & 4.36 & 10.44 & 0.00 & *\\
+s(Proportion): voiced &  &  & 1.01 & 1.02 & 10.04 & 0.00 & *\\
+ti(Proportion, Speech Rate (c.)) &  &  & 2.13 & 2.77 & 2.90 & 0.04 & *\\
+s(Proportion, Speaker) &  &  & 62.28 & 152.00 & 57.34 & 0.00 & *\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+
 \caption{\label{tab:tra-lm-2-table}Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \Cref{s:trp-vdur})}
 \centering
 \fontsize{10}{12}\selectfont
@@ -941,6 +967,24 @@ Vowel = /o/ & -1.30 & 0.46 & -2.20 & -0.40 & 18.38 & -2.83 & 0.01 & *\\
 Vowel = /u/ & 1.59 & 0.50 & 0.60 & 2.58 & 25.83 & 3.14 & 0.00 & *\\
 V1 duration × /o/ & -0.03 & 0.01 & -0.05 & -0.01 & 736.23 & -3.85 & 0.00 & *\\
 V1 duration × /u/ & -0.02 & 0.01 & -0.04 & -0.01 & 751.25 & -2.53 & 0.01 & *\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+
+\caption{\label{tab:tra-gam-ar-2-table}Summary of the GAM model fitted to tongue root position during V1 as a function of V1 duration (see \Cref{s:trp-v1-dur})}
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}{lrrrrrrl}
+\toprule
+Predictor & Estimate & SE & EDF & Ref.DF & Statistic & p-value & < α\\
+\midrule
+Intercept & -63.06 & 1.74 &  &  & -36.25 & 0 & *\\
+s(V1 duration) &  &  & 8.24 & 8.85 & 7.71 & 0 & *\\
+s(Proportion) &  &  & 3.96 & 4.71 & 17.99 & 0 & *\\
+ti(Proportion, V1 duration) &  &  & 2.86 & 3.32 & 8.98 & 0 & *\\
+s(Proportion, Speaker) &  &  & 59.96 & 152.00 & 65.74 & 0 & *\\
 \bottomrule
 \end{tabular}
 \end{table}
