@@ -1,6 +1,6 @@
 ---
 title: |
-  Vowel duration and tongue root advancement: Results from an exploratory study of the relation between voicing and vowel duration
+  Longer vowel duration correlates with greater tongue root displacement: Acoustic and articulatory data from Italian and Polish
 author: Stefano Coretta
 output:
   pdf_document:
@@ -104,7 +104,13 @@ trp_difference <- kines_mean %>%
 ```
 
 \begin{abstract}
-My abstract.
+Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
+The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
+Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint.
+In this paper, it is argued that vowel duration and tongue root advancement enter in a direct statistical relation.
+Drawing from acoustic and ultrasound tongue imaging data from 17 speakers of Italian and Polish, it is shown that tongue root advancement is initiated during the vowel, and that vowel duration and tongue root position at vowel offset are positively correlated.
+Longer vowel durations correspond to greater tongue root advancement.
+It is further proposed that the later closure onset of voiced stops within a temporally stable interval is responsible for both greater root advancement and shorter closure durations in the context of voiced stops.
 \end{abstract}
 
 # Introduction
@@ -751,7 +757,7 @@ paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
 See \Cref{tab:tra-lm-table}, \Cref{tab:tra-gam-ar-table}, \Cref{tab:tra-lm-2-table}, \Cref{tab:tra-gam-ar-2-table}.
 
 ```{r tra-lm-table}
-kable(tidy(tra_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to tongue root position at vowel offset (see \\Cref{s:tra-lm})") %>%
+kable(tidy(tra_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 4, caption = "Summary of the linear mixed-effects model fitted to tongue root position at vowel offset (see \\Cref{s:tra-lm})") %>%
 kable_styling(font_size = 10)
 ```
 
@@ -766,14 +772,14 @@ kable(
   format = "latex",
   booktabs = TRUE,
   linesep = "",
-  digits = 2,
+  digits = 4,
   caption = "Summary of the GAM model fitted to tongue root position during V1 (see \\Cref{s:trp-v1})"
 ) %>%
 kable_styling(font_size = 10)
 ```
 
 ```{r tra-lm-2-table}
-kable(tidy(tra_lm_2, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "V1 duration (centr.)", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/", "V1 duration × /o/", "V1 duration × /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \\Cref{s:trp-vdur})") %>%
+kable(tidy(tra_lm_2, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "V1 duration (centr.)", "Speech rate (centr.)", "Vowel = /o/", "Vowel = /u/", "V1 duration × /o/", "V1 duration × /u/")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 4, caption = "Summary of the linear mixed-effects model for testing the correlation between tongue root position and V1 duration  (see \\Cref{s:trp-vdur})") %>%
 kable_styling(font_size = 10)
 ```
 
@@ -788,7 +794,7 @@ kable(
   format = "latex",
   booktabs = TRUE,
   linesep = "",
-  digits = 2,
+  digits = 4,
   caption = "Summary of the GAM model fitted to tongue root position during V1 as a function of V1 duration (see \\Cref{s:trp-v1-dur})"
 ) %>%
 kable_styling(font_size = 10)

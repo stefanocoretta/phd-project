@@ -25,7 +25,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Vowel duration and tongue root advancement: Results from an exploratory study of the relation between voicing and vowel duration},
+            pdftitle={Longer vowel duration correlates with greater tongue root displacement: Acoustic and articulatory data from Italian and Polish},
             pdfauthor={Stefano Coretta},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -71,8 +71,8 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{Vowel duration and tongue root advancement: Results from an exploratory
-study of the relation between voicing and vowel duration}
+  \title{Longer vowel duration correlates with greater tongue root displacement:
+Acoustic and articulatory data from Italian and Polish}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
     \author{Stefano Coretta}
@@ -106,7 +106,13 @@ study of the relation between voicing and vowel duration}
 \maketitle
 
 \begin{abstract}
-My abstract.
+Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
+The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
+Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint.
+In this paper, it is argued that vowel duration and tongue root advancement enter in a direct statistical relation.
+Drawing from acoustic and ultrasound tongue imaging data from 17 speakers of Italian and Polish, it is shown that tongue root advancement is initiated during the vowel, and that vowel duration and tongue root position at vowel offset are positively correlated.
+Longer vowel durations correspond to greater tongue root advancement.
+It is further proposed that the later closure onset of voiced stops within a temporally stable interval is responsible for both greater root advancement and shorter closure durations in the context of voiced stops.
 \end{abstract}
 
 \hypertarget{introduction}{%
@@ -922,11 +928,11 @@ See \Cref{tab:tra-lm-table}, \Cref{tab:tra-gam-ar-table},
 \toprule
 Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
 \midrule
-Intercept & -62.14 & 1.81 & -65.69 & -58.59 & 17.12 & -34.31 & 0.00 & *\\
-Voicing = voiced & 0.77 & 0.35 & 0.09 & 1.45 & 19.39 & 2.21 & 0.04 & *\\
-Speech rate (centr.) & 0.41 & 0.28 & -0.14 & 0.96 & 1168.11 & 1.47 & 0.14 & \\
-Vowel = /o/ & -1.87 & 0.42 & -2.71 & -1.04 & 19.29 & -4.41 & 0.00 & *\\
-Vowel = /u/ & 0.09 & 0.43 & -0.75 & 0.92 & 19.70 & 0.20 & 0.84 & \\
+Intercept & -62.1396 & 1.8113 & -65.6898 & -58.5895 & 17.1188 & -34.3058 & 0.0000 & *\\
+Voicing = voiced & 0.7689 & 0.3473 & 0.0881 & 1.4497 & 19.3947 & 2.2137 & 0.0390 & *\\
+Speech rate (centr.) & 0.4114 & 0.2793 & -0.1360 & 0.9588 & 1168.1100 & 1.4732 & 0.1410 & \\
+Vowel = /o/ & -1.8742 & 0.4249 & -2.7069 & -1.0414 & 19.2874 & -4.4112 & 0.0003 & *\\
+Vowel = /u/ & 0.0865 & 0.4270 & -0.7503 & 0.9233 & 19.6974 & 0.2027 & 0.8415 & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -940,13 +946,13 @@ Vowel = /u/ & 0.09 & 0.43 & -0.75 & 0.92 & 19.70 & 0.20 & 0.84 & \\
 \toprule
 Predictor & Estimate & SE & EDF & Ref.DF & Statistic & p-value & < α\\
 \midrule
-Intercept & -63.33 & 1.76 &  &  & -36.06 & 0.00 & *\\
-Voicing = voiced & 0.33 & 0.14 &  &  & 2.31 & 0.02 & *\\
-s(Speech rate (centr.)) &  &  & 7.53 & 8.52 & 4.48 & 0.00 & *\\
-s(Proportion) &  &  & 3.69 & 4.36 & 10.44 & 0.00 & *\\
-s(Proportion): voiced &  &  & 1.01 & 1.02 & 10.04 & 0.00 & *\\
-ti(Proportion, Speech Rate (c.)) &  &  & 2.13 & 2.77 & 2.90 & 0.04 & *\\
-s(Proportion, Speaker) &  &  & 62.28 & 152.00 & 57.34 & 0.00 & *\\
+Intercept & -63.3328 & 1.7562 &  &  & -36.0623 & 0.0000 & *\\
+Voicing = voiced & 0.3311 & 0.1432 &  &  & 2.3122 & 0.0208 & *\\
+s(Speech rate (centr.)) &  &  & 7.5311 & 8.5159 & 4.4779 & 0.0000 & *\\
+s(Proportion) &  &  & 3.6915 & 4.3646 & 10.4427 & 0.0000 & *\\
+s(Proportion): voiced &  &  & 1.0122 & 1.0236 & 10.0413 & 0.0015 & *\\
+ti(Proportion, Speech Rate (c.)) &  &  & 2.1335 & 2.7679 & 2.9005 & 0.0429 & *\\
+s(Proportion, Speaker) &  &  & 62.2821 & 152.0000 & 57.3445 & 0.0000 & *\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -960,13 +966,13 @@ s(Proportion, Speaker) &  &  & 62.28 & 152.00 & 57.34 & 0.00 & *\\
 \toprule
 Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
 \midrule
-Intercept & -62.58 & 1.78 & -66.07 & -59.09 & 17.09 & -35.12 & 0.00 & *\\
-V1 duration (centr.) & 0.07 & 0.01 & 0.05 & 0.08 & 955.64 & 8.86 & 0.00 & *\\
-Speech rate (centr.) & 1.24 & 0.29 & 0.67 & 1.81 & 1169.69 & 4.28 & 0.00 & *\\
-Vowel = /o/ & -1.30 & 0.46 & -2.20 & -0.40 & 18.38 & -2.83 & 0.01 & *\\
-Vowel = /u/ & 1.59 & 0.50 & 0.60 & 2.58 & 25.83 & 3.14 & 0.00 & *\\
-V1 duration × /o/ & -0.03 & 0.01 & -0.05 & -0.01 & 736.23 & -3.85 & 0.00 & *\\
-V1 duration × /u/ & -0.02 & 0.01 & -0.04 & -0.01 & 751.25 & -2.53 & 0.01 & *\\
+Intercept & -62.5793 & 1.7818 & -66.0716 & -59.0870 & 17.0874 & -35.1212 & 0.0000 & *\\
+V1 duration (centr.) & 0.0651 & 0.0073 & 0.0507 & 0.0795 & 955.6436 & 8.8558 & 0.0000 & *\\
+Speech rate (centr.) & 1.2412 & 0.2903 & 0.6722 & 1.8102 & 1169.6885 & 4.2755 & 0.0000 & *\\
+Vowel = /o/ & -1.3031 & 0.4597 & -2.2040 & -0.4021 & 18.3761 & -2.8348 & 0.0108 & *\\
+Vowel = /u/ & 1.5863 & 0.5049 & 0.5967 & 2.5759 & 25.8255 & 3.1419 & 0.0042 & *\\
+V1 duration × /o/ & -0.0303 & 0.0079 & -0.0457 & -0.0149 & 736.2314 & -3.8504 & 0.0001 & *\\
+V1 duration × /u/ & -0.0227 & 0.0090 & -0.0403 & -0.0052 & 751.2493 & -2.5345 & 0.0115 & *\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -980,11 +986,11 @@ V1 duration × /u/ & -0.02 & 0.01 & -0.04 & -0.01 & 751.25 & -2.53 & 0.01 & *\\
 \toprule
 Predictor & Estimate & SE & EDF & Ref.DF & Statistic & p-value & < α\\
 \midrule
-Intercept & -63.06 & 1.74 &  &  & -36.25 & 0 & *\\
-s(V1 duration) &  &  & 8.24 & 8.85 & 7.71 & 0 & *\\
-s(Proportion) &  &  & 3.96 & 4.71 & 17.99 & 0 & *\\
-ti(Proportion, V1 duration) &  &  & 2.86 & 3.32 & 8.98 & 0 & *\\
-s(Proportion, Speaker) &  &  & 59.96 & 152.00 & 65.74 & 0 & *\\
+Intercept & -63.0628 & 1.7397 &  &  & -36.2487 & 0 & *\\
+s(V1 duration) &  &  & 8.2416 & 8.8458 & 7.7094 & 0 & *\\
+s(Proportion) &  &  & 3.9640 & 4.7069 & 17.9941 & 0 & *\\
+ti(Proportion, V1 duration) &  &  & 2.8557 & 3.3236 & 8.9785 & 0 & *\\
+s(Proportion, Speaker) &  &  & 59.9588 & 152.0000 & 65.7394 & 0 & *\\
 \bottomrule
 \end{tabular}
 \end{table}
