@@ -545,3 +545,24 @@ If there is an effect with this vowel compared to /ɑː/, it is negative and pos
 Finally, hypothesis 2c is not unequivocally corroborated.
 The posterior distribution of the effect of C2 place of articulation (labial) has very high precision (9.5 ms) and it is between 0 and 5 ms (at somewhat less than 80% probability).
 However, it lies within the ROPE and it is very close to 0.
+
+Question 3 addresses the effect of voicing on vowel and closure duration, and the possible differences between disyllabic and monosyllabic words.
+Starting from vowel duration, the effect of voicing is estimated to lie between 4 and 25 ms.
+This range is very similar to that reported by \citet{coretta2018j} for Italian and Polish disyllabic words (95% confidence intervals [8, 25], monosyllabic words were not tested).
+Note however that the posterior mean (13.5 ms) is lower than the values reported by \citet{sharf1962}, \citet{klatt1973}, and \citet{davis1989} for disyllabic words, which range around 25 ms.
+The number of syllables produce a similar effect to that of voicing, whereby vowels increase in duration by 5 to 25 ms in monosyllabic words.
+This relation correspond to what previously reported in the literature.
+
+It was expected that the voicing effect on vowels would be stronger in monosyllabic than in disyllabic words (hypothesis 3).
+The wide credible intervals of the posterior distributions from the Bayesian model 4, which are larger than the ROPE, make interpretation difficult.
+It can be said that, at 80% probability, the difference in voicing effect between mono- and disyllabic words is between −5 and +12.5 ms.
+The distribution is skewed towards the positive side, and this is compatible with results from previous studies.
+Based on what the posterior distribution indicates, and with the caveat that more data is needed to reach a sensible estimate precision and reduce uncertainty, we can argue for an effect increase in monosyllabic words by a factor of 1.5 to 2.
+
+The three-way interaction between C2 voicing, vowel, and number of syllables reveals that in monosyllabic words with the vowel /iː/ the effect is indeed larger.
+The model estimates an increase in the effect of about 14.5 ms ([−4.27, 33.41]).
+Note that, although the credible interval is again very wide (38 ms), it overlaps less extensively with the ROPE around 0, thus somewhat more clearly suggesting a positive effect.
+However, the vowel /iː/ followed by a voiceless stop is also about 16 ms shorter in monosyllabic words than the same vowel in disyllabic words.
+While it is not clear why the vowel is that much shorter in that context, it is possible that the simultaneous increase (by the voicing effect) and decrease (by vowel identity) of vowel duration in that context is a statistical product.
+As for the vowel /ɜː/, it can be inferred from the posterior of the interaction that this vowel behaves similarly to /ɑː/.
+Research on the duration of English tense vowels and on a possible process of /iː/ shortening is needed to shed light on the observed patterns.
