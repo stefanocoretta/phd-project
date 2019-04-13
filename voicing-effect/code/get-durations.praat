@@ -45,7 +45,7 @@ directory_palign$ = "../data/ultrasound/raw/corrected-palign"
 
 result_file$ = "../data/datasets/acoustics/'speaker$'-durations.csv"
 
-header$ = "index,speaker,file,rec_date,word,time,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
+header$ = "index,speaker,file,rec_date,ipu_prompt,word,time,sentence_ons,sentence_off,word_ons,word_off,v1_ons,c2_ons,v2_ons,c1_rel,c2_rel"
 
 writeFileLine: result_file$, header$
 
@@ -53,8 +53,9 @@ bursts = Read from file: "'directory$'/'speaker$'-burst.TextGrid"
 
 release_c1_textgrid = Read from file: "'directory$'/'speaker$'-release-c1.TextGrid"
 
-palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
+sentences = Read from file: "'directory$'/'speaker$'.TextGrid"
 
+palign = Read from file: "'directory_palign$'/'speaker$'-palign.TextGrid"
 intervals = Get number of intervals: 2
 
 fileNames = Read from file: "'directory$'/'speaker$'-filenames.TextGrid"
@@ -106,6 +107,10 @@ for interval to intervals
           # c1_rvot = (start_vowel - release_c1) * 1000
           # c1_rvofft = (end_vowel - release_c1) * 1000
 
+          selectObject: sentences
+          prompt = Get interval at time: 2, v1_onset
+          prompt$ = Get label of interval: 2, prompt
+
           selectObject: fileNames
           fileName = Get interval at time: 1, v1_onset
           fileName$ = Get label of interval: 1, fileName
@@ -144,7 +149,7 @@ for interval to intervals
         Read Strings from raw text file: "../data/ultrasound/derived/'speaker$'/recordings/'fileName$'.txt"
         rec_date$ = Get string: 2
 
-        result_line$ = "'index','speaker$','fileName$','rec_date$','word$',
+        result_line$ = "'index','speaker$','fileName$','rec_date$','prompt$','word$',
           ...'time',
           ...'sentence_onset','sentence_offset','word_onset','word_offset',
           ...'v1_onset','c2_onset','v2_onset','c1_rel','c2_rel'"
