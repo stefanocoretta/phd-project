@@ -1408,8 +1408,17 @@ for file from 1 to number_of_files
 endfor
 ```
 
+There are a few cases in which the `[ID].TextGrid` with the search intervals is empty, so we check that there are more than 1 interval.
+If the TextGrid is not empty, we get the vowel label, calculate the duration and the tenth of the duration, and finally extract formants and fundamental frequency.
+
 ```praat "vowel"
-vowel$ = Get label of interval: 3, 2
+vowel_intervals = Get number of intervals: 3
+
+if vowel_intervals > 1
+  vowel$ = Get label of interval: 3, 2
+else
+  vowel$ = ""
+endif
 
 if vowel$ != ""
   vowel_start = Get start time of interval: 3, 2

@@ -52,7 +52,13 @@ for file from 1 to number_of_files
   palign = Read from file: "'directory_audio$'/'file_bare$'-palign.TextGrid"
   search = Read from file: "'directory_audio$'/'file_bare$'.TextGrid"
 
-  vowel$ = Get label of interval: 3, 2
+  vowel_intervals = Get number of intervals: 3
+  
+  if vowel_intervals > 1
+    vowel$ = Get label of interval: 3, 2
+  else
+    vowel$ = ""
+  endif
   
   if vowel$ != ""
     vowel_start = Get start time of interval: 3, 2
