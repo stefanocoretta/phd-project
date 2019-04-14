@@ -107,7 +107,7 @@ for (i in 1:length(speakers)) {
 }
 ```
 
-1. **Get durations**
+1. **Get durations and formants**
     1. Run `get-durations.praat`: the output is written in the `results` folder
    
 ```{r get-durations}
@@ -126,6 +126,21 @@ for (i in 1:length(speakers)) {
         "voicing-effect",
         speakers[i],
         languages[i]
+    )
+}
+```
+
+```{r get-formants}
+sex <- c(
+  "m", "m", "f", "f", "f", "m", "f", "m", "m", "f", "m",
+  "f", "m", "f", "m", "m", "f"
+)
+
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/get-formants.praat",
+        speakers[i],
+        sex[i]
     )
 }
 ```
