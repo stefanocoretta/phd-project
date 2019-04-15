@@ -584,3 +584,31 @@ Given that the duration of the release-to-release interval in Italian and Polish
 A later closure onset implies a longer vowel and a shorter closure, while, vice versa, an earlier closure onset produces a shorter vowel and a longer closure.
 
 The current study shows that also the release-to-release interval of English disyllabic words with either a voiceless or a voiced stop is isochronous.
+While future research will have to investigate the source of the isochrony of the interval (which probably lies in the temporal organisation of articulatory gestures), the same pathway proposed in the context of the Italian and Polish data can be envisaged for English, and possibly cross-linguistically in general.
+
+A complication arises from the pattern observed with English monosyllabic words, in which the release-to-release interval is not isochronous and is instead affected by C2 voicing.
+Words with a voiced C2 have longer release-to-release intervals (by about 5-17.5 ms at 80% probability).
+If compensatory mechanism expounded in this paper is based on the premise that the interval within which compensation happens must be isochronous.
+Since English monosyllabic words don't show isochrony, we either have to abandon a compensatory account or explain a mechanism by which the release-to-release interval in monosyllabic words are characterised by both compensation and absence of isochrony.
+
+A possible solution could be cautiously put forward from principles of Evolutionary Phonology \citet{blevins2004, blevins2006}.
+Most of present-day English monosyllabic words harken back to disyllabic words in Old English and Proto-Germanic.
+<!-- citation needed -->
+It is possible that a mechanism of compensation was in action in what were disyllabic words which, through vowel reduction and loss which affected different diachronic stages of Germanic and English, became monosyllabic.
+Speculative, a voicing effect could thus be reconstructed for Proto-Germanic itself.
+This hypothesis is compliant with a general principle of historical linguistics by which if a feature is present in a majority of daughter languages (which is the case for the voicing effect), it is sensible to reconstruct such feature for the ancestor proto-language.
+Furthermore, given that in almost all the investigated Indo-European languages the duration of vowels is modulated by the voicing of a following stop, we could even stretch this principle to argue that the voicing effect can be reconstructed even from Proto-Indo-European.
+
+Once the second vowel has gone from the production of disyllabic words and isochrony can be dispensed, perceptual biases (as proposed by perceptual accounts of the voicing effect like \citealt{javkin1976} and \citealt{kluender1988}) can operate.
+The duration of the remaining vowel is free to be modified further to enhance the perceptual difference of voiceless vs. voiced stops by cues of vowel duration \citet{lisker1974, lisker1986, stevens1989}.
+
+Why, then, monosyllabic words have lost isochrony?
+The following section offers an articulatory account which could answer this question.
+
+### Release-to-release isochorony as a consequence of gestural phasing
+
+As already argued in \citet{coretta2018j}, the release-to-release interval in itself is not special.
+The compensatory temporal adjustment account can be understood as an account of vowel acoustic duration, hence the scope of compensation can be defined in terms of acoustic intervals.
+The interval that was found to be temporally stable across voicing context in \citet{coretta2018j} is the release-to-release interval.
+However, it is desirable to derive the isochrony of this acoustic interval from properties of articulatory coordination.
+While a fully fledged theory of gestural phasing is beyond the scope of this study, I offer here a tentative account of the underlying gestural coordination from which the release-to-release isochrony can be derived.
