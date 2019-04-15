@@ -16,6 +16,9 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 indent: true
+params:
+  version: 1.0
+  version-date: "2019/04/15"
 ---
 
 ```{r setup, include=FALSE}
