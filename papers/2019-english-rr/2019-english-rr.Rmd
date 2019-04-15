@@ -612,3 +612,18 @@ The compensatory temporal adjustment account can be understood as an account of 
 The interval that was found to be temporally stable across voicing context in \citet{coretta2018j} is the release-to-release interval.
 However, it is desirable to derive the isochrony of this acoustic interval from properties of articulatory coordination.
 While a fully fledged theory of gestural phasing is beyond the scope of this study, I offer here a tentative account of the underlying gestural coordination from which the release-to-release isochrony can be derived.
+
+\citet{fowler1983} builds on Öhman's \citeyear{ohman1966, ohman1966} idea that the speech stream is composed by a series of continuous vocalic gestures interspersed with oral constriction (consonantal) gestures.
+Fowler proposes that the vocalic gestures of a VCV sequence are characterised by a cyclic pattern of production, so that the temporal distance between the two vowels is constant and not affected by the number of intervening consonants.
+The coupled oscillators model from Articulatory Phonology [...] also argues that onset consonant gestures are generally produced in-phase with the following vowel (meaning that the initiation of the vocalic and consonantal gesture is synchronous).
+This mechanism generates the so-called C-centre effects, by which the acoustic duration of the in-phase vowel depends on the number of onset consonants.
+
+\citet{van-summers1987} and \citet{de-jong1991} further show that the consonantal closing gesture of voiceless stops has greater velocity than that of voiced stops.
+If the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel and the latter is at a stable temporal distance from the preceding vowel, a later complete oral closure will be achieved in the latter case without affecting the time of the consonantal release.
+<!-- include image -->
+
+We can now turn back to the issue of the absence of isochrony in monosyllabic words.
+When the second vowel in disyllabic CVCV words is deleted via diachronic change, the second consonant loses its anchor vowel (V2) and becomes affiliated with the preceding vowel instead.
+<!-- maybe mention Tilsen here -->
+Coda consonants are anti-phase with the preceding vocalic nucleus and among themselves, meaning that each gesture is executed in sequence.
+The cyclicity of vowel production does not apply in this case, since that there is only one vowel, and the vocalic gesture is free to be stretched or compressed.
