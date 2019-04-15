@@ -12,6 +12,8 @@ theme_set(theme_minimal())
 library(brms)
 ```
 
+# Old sims
+
 ```{r simd}
 set.seed(1991)
 
@@ -74,7 +76,7 @@ summary(rr_fit_1)
 set.seed(1991)
 
 items <- 100
-speakers <- 500
+speakers <- 60
 
 rr <- NULL
 
@@ -104,5 +106,9 @@ rr_fit_1 <- brm(
   sample_prior = "only",
   data = simd
 )
+```
+
+```{r}
+summary(rr_fit_1)
 ```
 
