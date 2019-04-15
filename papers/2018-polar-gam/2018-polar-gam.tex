@@ -200,7 +200,7 @@ description, see \citealt{stone2005}).
 
 \begin{figure}
   \centering
-  \includegraphics{./img/uti.png}
+  \includegraphics{./img/Figure01-uti.png}
   \caption{An ultrasound image showing a mid-sagittal view of the tongue. The white curved stripe in the image indicates where the ultrasonic waves have been reflected by the air above the tongue. The tongue surface corresponds to the lower edge of the white stripe. In this image, the tongue tip is located on the right. The green curve approximates the location of the palate.}
   \label{f:uti}
 \end{figure}
@@ -249,7 +249,7 @@ the contours has the effect of increasing the variance of the fitted
 contours (and hence the confidence intervals), and in some cases it can
 even generate uninterpretable curves.
 
-This issue is illustrated in \Cref{f:Figure01}. The \emph{x} and
+This issue is illustrated in \Cref{f:Figure02}. The \emph{x} and
 \emph{y} axes are the \emph{x} and \emph{y} cartesian coordinates in
 millimeters. The plot shows LOESS smooths superimposed on the points of
 the individual tongue contours of an Italian speaker (IT01, see
@@ -266,7 +266,7 @@ these particular contours, the slope of the curve increases in such a
 way that the curve bends under itself (see for example the context /ug/,
 when \emph{x} is between -30 and -20). Since those points on the bend
 share the same \emph{x} value, the smooth just averages across the
-\emph{y} values of those points. \Cref{f:Figure02} shows a more
+\emph{y} values of those points. \Cref{f:Figure03} shows a more
 appropriate (artefact-free) way of representing individual tongue
 contours. In these plots, the points of each contour are connected
 sequentially by a line, rather than smoothed over. The parts in which
@@ -275,20 +275,20 @@ correctly.
 
 \begin{figure}
 
-{\centering \includegraphics[width=\linewidth]{2018-polar-gam_files/figure-latex/Figure01} 
-
-}
-
-\caption{Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.}\label{f:Figure01}
-\end{figure}
-
-\begin{figure}
-
 {\centering \includegraphics[width=\linewidth]{2018-polar-gam_files/figure-latex/Figure02} 
 
 }
 
 \caption{Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.}\label{f:Figure02}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=\linewidth]{2018-polar-gam_files/figure-latex/Figure03} 
+
+}
+
+\caption{Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.}\label{f:Figure03}
 \end{figure}
 
 These figures illustrate that using cartesian coordinates for modelling
@@ -451,7 +451,7 @@ estimated contours. The shaded areas around the estimated contours are
 95\% confidence intervals. Note that, differently from SSANOVA,
 statistical significance can't be assessed from the overlapping (or lack
 thereof) of the confidence intervals. The output of
-\texttt{plot\_polar\_smooths()} is shown in \Cref{f:Figure03}. For more
+\texttt{plot\_polar\_smooths()} is shown in \Cref{f:Figure04}. For more
 details on fitting and plotting more complex models (for example models
 with multiple predictors or tensor product smooths), see the package
 vignette \texttt{polar-gams} (accessible with
@@ -475,11 +475,11 @@ vignette \texttt{polar-gams} (accessible with
 
 \begin{figure}
 
-{\centering \includegraphics[width=\linewidth]{2018-polar-gam_files/figure-latex/Figure03} 
+{\centering \includegraphics[width=\linewidth]{2018-polar-gam_files/figure-latex/Figure04} 
 
 }
 
-\caption{Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.}\label{f:Figure03}
+\caption{Estimated tongue contours of IT01 depending on C2 place, vowel and C2 voicing.}\label{f:Figure04}
 \end{figure}
 
 One way to assess significance of model terms is to compare the ML score
@@ -529,31 +529,31 @@ To check which part of the contour differs among conditions, the method
 recommended in \citet{soskuthy2017} is to plot the difference smooth and
 check the confidence interval. The parts of the confidence interval that
 don't include 0 indicate that the difference between contours in that
-part is significant. \Cref{f:Figure04} illustrates the use of difference
+part is significant. \Cref{f:Figure05} illustrates the use of difference
 smooths with the difference smooths of voiceless vs.~voiced coronal
 stops when the vocalic context is /a/ or /u/. As per usual, the tongue
 tip is on the right-end side of each plot. The difference smooths
 indicate that there is a significant difference along the posterior part
 of the tongue (the root and dorsum). Based on the predicted smooths sown
-in \Cref{f:Figure03}, we can argue that, in the context of coronal
+in \Cref{f:Figure04}, we can argue that, in the context of coronal
 consonants, the root is more advanced in voiced relative to voiceless
 stops (when the vowel is either /a/ or /u/), and that the dorsum is also
 somewhat retracted in voiced stops if the vowel is /u/.
 
 \begin{figure}
 
-{\centering \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure04} \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure04} 
+{\centering \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure05} \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure05} 
 
 }
 
-\caption{Difference smooth of voiceless vs. voiced stops in the context of /a/ (left) and /u/ (right).}\label{f:Figure04}
+\caption{Difference smooth of voiceless vs. voiced stops in the context of /a/ (left) and /u/ (right).}\label{f:Figure05}
 \end{figure}
 
 As mentioned in the introduction, autocorrelation in the data can
 produce unwanted patterns in the residuals, which in turn can affect the
 estimated smooths (and falsely increase certainty about them). A
 first-order autoregressive (AR1) model can be included to reduce
-autocorrelation at lag 1. \Cref{f:Figure05} show the autocorrelations in
+autocorrelation at lag 1. \Cref{f:Figure06} show the autocorrelations in
 the residuals without (left) and with (right) an AR1 model. The GAM
 model with the AR1 correction has lower autocorrelation values. In this
 case, it is thus advisable to perform ML comparison and smooths plotting
@@ -563,11 +563,11 @@ treatment of issues related to autocorrelation, see
 
 \begin{figure}
 
-{\centering \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure05} \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure05} 
+{\centering \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure06} \includegraphics[width=.7\linewidth,height=5cm]{2018-polar-gam_files/figure-latex/Figure06} 
 
 }
 
-\caption{Autocorrelation plots of a model fitted without (left) and with (right) a first-order autoregressive model (AR1).}\label{f:Figure05}
+\caption{Autocorrelation plots of a model fitted without (left) and with (right) a first-order autoregressive model (AR1).}\label{f:Figure06}
 \end{figure}
 
 \hypertarget{comparing-tongue-root-position-in-voiceless-and-voiced-stops}{%
@@ -592,7 +592,7 @@ polar GAMs can be used to model articulatory differences within and
 between speakers, data from 6 speakers of Italian and 6 speakers of
 Polish will be discussed. Note that the 6 Italian speakers are
 representative of the general trends found in the entire sample of 11
-speakers. \Cref{f:Figure06} to \Cref{f:Figure17} show an appreciable
+speakers. \Cref{f:Figure07} to \Cref{f:Figure18} show an appreciable
 degree of variation across speakers and phonological contexts in
 relation to the differences in tongue shapes between voiceless and
 voiced stops (IT07 and Pl05 both miss data from /u/ due to the poor
@@ -632,20 +632,11 @@ to be maintained during the closure of voiced stops.
 
 \begin{figure}
 
-{\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/Figure06} 
-
-}
-
-\caption{Tongue contours of voiceless and voiced stops in IT01.}\label{f:Figure06}
-\end{figure}
-
-\begin{figure}
-
 {\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/Figure07} 
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in IT02.}\label{f:Figure07}
+\caption{Tongue contours of voiceless and voiced stops in IT01.}\label{f:Figure07}
 \end{figure}
 
 \begin{figure}
@@ -654,7 +645,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in IT03.}\label{f:Figure08}
+\caption{Tongue contours of voiceless and voiced stops in IT02.}\label{f:Figure08}
 \end{figure}
 
 \begin{figure}
@@ -663,7 +654,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in IT04.}\label{f:Figure09}
+\caption{Tongue contours of voiceless and voiced stops in IT03.}\label{f:Figure09}
 \end{figure}
 
 \begin{figure}
@@ -672,7 +663,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in IT07.}\label{f:Figure10}
+\caption{Tongue contours of voiceless and voiced stops in IT04.}\label{f:Figure10}
 \end{figure}
 
 \begin{figure}
@@ -681,7 +672,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in IT11.}\label{f:Figure11}
+\caption{Tongue contours of voiceless and voiced stops in IT07.}\label{f:Figure11}
 \end{figure}
 
 \begin{figure}
@@ -690,7 +681,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in PL02.}\label{f:Figure12}
+\caption{Tongue contours of voiceless and voiced stops in IT11.}\label{f:Figure12}
 \end{figure}
 
 \begin{figure}
@@ -699,7 +690,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in PL03.}\label{f:Figure13}
+\caption{Tongue contours of voiceless and voiced stops in PL02.}\label{f:Figure13}
 \end{figure}
 
 \begin{figure}
@@ -708,7 +699,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in PL04.}\label{f:Figure14}
+\caption{Tongue contours of voiceless and voiced stops in PL03.}\label{f:Figure14}
 \end{figure}
 
 \begin{figure}
@@ -717,7 +708,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in PL05.}\label{f:Figure15}
+\caption{Tongue contours of voiceless and voiced stops in PL04.}\label{f:Figure15}
 \end{figure}
 
 \begin{figure}
@@ -726,7 +717,7 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in PL06.}\label{f:Figure16}
+\caption{Tongue contours of voiceless and voiced stops in PL05.}\label{f:Figure16}
 \end{figure}
 
 \begin{figure}
@@ -735,7 +726,16 @@ to be maintained during the closure of voiced stops.
 
 }
 
-\caption{Tongue contours of voiceless and voiced stops in PL07.}\label{f:Figure17}
+\caption{Tongue contours of voiceless and voiced stops in PL06.}\label{f:Figure17}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=.8\textwidth]{2018-polar-gam_files/figure-latex/Figure18} 
+
+}
+
+\caption{Tongue contours of voiceless and voiced stops in PL07.}\label{f:Figure18}
 \end{figure}
 
 \hypertarget{conclusions}{%
