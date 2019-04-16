@@ -623,6 +623,8 @@ In the former study, it was found that vowels followed by a singleton stop (for 
 This pattern can be easily derived if the cluster /dr/ follows a C-centre alignment, and if we assume that the distance between the vowels is the same in the two contexts (/la.ta/ and /la.dra/).
 \citet{celata2014} show that the duration of consonant or consonant cluster is negatively correlated with the preceding vowel (although the magnitude of the correlation is low to moderate, see \citealt{begus2017} and \citealt{coretta2018j} on how speech rate could mask statistical relations).
 
+<!-- talk about Zmarich but they looked at nucleus onset not gestural onset -->
+
 \citet{van-summers1987} and \citet{de-jong1991} show that the consonantal closing gesture of voiceless stops has greater velocity than that of voiced stops.
 If the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel and the latter is at a stable temporal distance from the preceding vowel, a later complete oral closure will be achieved in the latter case without affecting the time of the consonantal release.
 <!-- include image -->
