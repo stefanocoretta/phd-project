@@ -156,9 +156,15 @@ The following measures were obtained:
 
 All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
+Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warmup.
 A Gaussian (normal) distribution was used in all the models as the response distribution.
+The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
+However, the deviations from a Gaussian distribution are minimal so that using a Gaussian distribution is still acceptable.
+It is desirable that future studies would specifically investigate the distributional properties of speech segment durations.
+
 All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel factor are reversed compared to that in the pre-registration, and this was done to match the height order in \citet{coretta2018j}, from low to high. Changing the order of the levels of course does not affect the results.}
 Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
+Model convergence was reached in all the models reported here ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
 
 The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in a context of commonly low-powered studies \citep{munafo2017, roettger2019}.
 For an introduction to Bayesian statistics in phonetics, see \citet{vasishth2018, nicenboim2018a}, while for a general introduction see \citet{etz2018, mcelreath2015, kruschke2015}, and reference therein.
