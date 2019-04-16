@@ -313,3 +313,47 @@ rr_3_post %>%
   geom_boxplot(width = 0.2, outlier.alpha = 0.1) +
   scale_y_continuous(breaks = seq(240, 340, 10))
 ```
+
+# Log-normal
+
+```{r rr-4}
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_4 <- brm(
+  rel_rel ~
+    voicing +
+    num_syl +
+    voicing:num_syl +
+    vowel +
+    place +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = lognormal(),
+  data = eng_durations_rr,
+  prior = priors,
+  cores = 4,
+  seed = 1234,
+  file = "./english/data/cache/rr_4"
+)
+```
+
+```{r rr-4-sum}
+summary(rr_4, prob = 0.95)
+```
+
+```{r rr-4-pp-check}
+pp_check(rr_4, nsamples = 50)
+```
