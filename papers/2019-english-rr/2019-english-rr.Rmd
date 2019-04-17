@@ -14,6 +14,7 @@ fontsize: 12pt
 indent: true
 papersize: a4
 header-includes:
+- \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
 - \usepackage{enumerate}
@@ -33,6 +34,9 @@ library(coretta2019eng)
 data("eng_durations")
 library(brms)
 library(tidybayes)
+library(broom.mixed)
+library(knitr)
+library(kableExtra)
 eng_durations_rr <- na.omit(eng_durations)
 ```
 
@@ -159,8 +163,8 @@ Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
 Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warmup.
 A Gaussian (normal) distribution was used in all the models as the response distribution.
 The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
-However, the deviations from a Gaussian distribution are minimal so that using a Gaussian distribution is still acceptable.
-It is desirable that future studies would specifically investigate the distributional properties of speech segment durations.
+Previous work has shown that speech units durations do, as a general trend, follow a log-normal distribution \citep{rosen2005, ratnikova2017}.
+However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results, so that using a Gaussian distribution is still acceptable.
 
 All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel factor are reversed compared to that in the pre-registration, and this was done to match the height order in \citet{coretta2018j}, from low to high. Changing the order of the levels of course does not affect the results.}
 Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
@@ -186,6 +190,7 @@ For example, a prior as a normal distribution with mean 200 ms and standard devi
 # Results
 
 ## Release-to-release duration
+\label{s:rr}
 
 ```{r rr-1}
 priors <- c(
@@ -227,6 +232,13 @@ This weakly informative prior was a normal distribution with mean 50 ms and SD =
 The prior for the effect of centred speech rate was a normal distribution with mean -25 ms and SD = 10, and was based again on results from \citet{coretta2018j}.
 For the random effects, a half Cauchy distribution (location = 0, scale = 25) was used for the standard deviation (also used for the residual standard deviation) and a LKJ(2) distribution for the correlation.
 
+```{r rr-1-table}
+rr_1_tidy <- tidy(rr_1, effect = "fixed", conf.int = TRUE) %>% select(-effect, -component) %>% mutate(term = c("Intercept", "Voicing = voiced", "Num. syll. = monosyllabic", "Speech rate (cntr.)", "voiced × monosyll.")) %>% rename(Predictor = term, Mean = estimate, SD = std.error, Q2.5 = conf.low, Q97.5 = conf.high) %>% mutate(`CI width` = abs(Q2.5 - `Q97.5`))
+
+kable(rr_1_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the Bayesian regression fitted to release-to-release duration (model 1, see \\Cref{s:rr})") %>%
+kable_styling(font_size = 8)
+```
+
 <!-- talk about precision -->
 The posterior distribution of the estimated effect of C2 voicing on the release-to-release duration has a 95% credible interval (95% CI) between -23.86 and 15.45 ms (the mean is -4.43 ms, estimated error = 10.03).
 The 95% CI of the estimated interaction between C2 voicing and number of syllables is between -8.41 and 41.41 ms ($\bar{\theta}$ = 16.53 ms, SD = 12.72).
@@ -265,6 +277,13 @@ Centred speech rate was also included.
 The relevant priors from the first model were kept.
 For the effects of vowel (/ɜː/, /iː/) and place of articulation (labial), the very weakly informative prior was a normal distribution with mean = 0 ms and SD = 30.
 This prior was based on duration differences depending on vowel height \citep{heffner1937, house1953, hertrich1997} and labial place \citet{sharf1962}, which range between 10 and 30 ms.
+
+```{r rr-2-table}
+rr_2_tidy <- tidy(rr_2, effect = "fixed", conf.int = TRUE) %>% select(-effect, -component) %>% mutate(term = c("Intercept", "Vowel = /ɜː/", "Vowel = /iː/", "C2 place = labial", "Speech rate (cntr.)")) %>% rename(Predictor = term, Mean = estimate, SD = std.error, Q2.5 = conf.low, Q97.5 = conf.high) %>% mutate(`CI width` = abs(Q2.5 - `Q97.5`))
+
+kable(rr_2_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the Bayesian regression fitted to release-to-release duration (model 2, see \\Cref{s:rr})") %>%
+kable_styling(font_size = 8)
+```
 
 The random effects structure was the same as with the first model.
 The posterior distribution of the effect of the vowel /ɜː/ shows that this vowel tends to a somewhat negative effect, with a 95% CI between −21.90 and 4.87 ms ($\bar{\theta}$ = −8.58 ms, SD = 6.9).
@@ -323,6 +342,12 @@ The effects of vowel and place or articulation have similar means, but the credi
 The release-to-release is on average 10.05 ms (SD = 2.95, 95% CI = [−15.92, −4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (SD = 2.99, 95% CI = [−45.03, −32.76]) shorter if the vowel is /iː/.
 C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, SD = 2.39, 95% CI = [−2.29, 7.28]).
 
+```{r rr-3-table}
+rr_3_tidy <- tidy(rr_3, effect = "fixed", conf.int = TRUE) %>% select(-effect, -component) %>% mutate(term = c("Intercept", "Voicing = voiced", "Num. syll. = monosyllabic", "Vowel = /ɜː/", "Vowel = /iː/", "C2 place = labial", "Speech rate (cntr.)", "voiced × monosyll.")) %>% rename(Predictor = term, Mean = estimate, SD = std.error, Q2.5 = conf.low, Q97.5 = conf.high) %>% mutate(`CI width` = abs(Q2.5 - `Q97.5`))
+
+kable(rr_3_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the Bayesian regression fitted to release-to-release duration and predictors from model 1 and 2 (model 3, see \\Cref{s:rr})") %>%
+kable_styling(font_size = 8)
+```
 
 ```{r rr-3-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on release-to-release duration (model 3). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
 rr_3_draws <- rr_3 %>%
