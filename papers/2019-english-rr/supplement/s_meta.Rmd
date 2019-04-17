@@ -11,6 +11,7 @@ mainfont: Lato
 fontsize: 12pt
 indent: true
 header-includes:
+- \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
 - \usepackage{enumerate}
@@ -24,6 +25,8 @@ theme_set(theme_minimal())
 library(ggrepel)
 library(brms)
 library(tidybayes)
+library(knitr)
+library(kableExtra)
 ```
 
 ```{r data}
@@ -56,7 +59,7 @@ The measurement error term in such models allows fitting to include information 
 All the models for estimating the posterior of the individual studies were fitted with the following priors: a normal distribution with mean = 0 ms and SD = 300 for the intercept, and a normal distribution with mean = 0 ms and SD = 100 for the effect of consonant voicing.
 The simple models (without an error term) also included a prior for the residual variance as a half Cauchy distribution with location = 0 ms and scale = 25.
 
-A data set with the mean estimates and estimated standard errors from these 11 posterior distributions has then been used to fit a further Bayesian measurement error model.
+A data set with the mean estimates and estimated standard errors from these 11 posterior distributions (\Cref{tab:est}) has then been used to fit a further Bayesian measurement error model.
 In this model, the mean estimates with the estimated standard errors were included as the outcome, while a by-study random intercept was the only predictor.
 The models were fitted in R with brms using Markov Chain Monte Carlo simulations, with 4 chains, 2000 iterations of which 1000 for warm-up.
 
@@ -345,6 +348,16 @@ estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
     study = factor(study)
   ) %>%
   left_join(y = studies)
+```
+
+```{r est, include=TRUE}
+est <- estimated_tbl %>%
+  arrange(year) %>%
+  select(study_ref_2, Estimate, Est.Error, Q2.5, Q97.5, syl_pos, n_speakers) %>%
+  rename(Study = study_ref_2, `Syllable position` = syl_pos, `N. speakers` = n_speakers)
+
+kable(est, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Bayesian estimates of the voicing effect in indvidual studies.") %>%
+kable_styling(font_size = 8)
 ```
 
 ```{r meta-bm-syl}
