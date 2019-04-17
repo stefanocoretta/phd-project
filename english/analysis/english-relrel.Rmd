@@ -354,6 +354,11 @@ rr_4 <- brm(
 summary(rr_4, prob = 0.95)
 ```
 
+```{r rr-4-ms}
+as_tibble(fixef(rr_4)[-1,] * exp(fixef(rr_4))[1], rownames = "term") %>%
+  mutate(ci_width = abs(Q2.5 - Q97.5))
+```
+
 ```{r rr-4-pp-check}
 pp_check(rr_4, nsamples = 50)
 ```
