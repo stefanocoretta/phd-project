@@ -616,6 +616,8 @@ However, it lies within the ROPE and it is very close to 0.
 
 ## Vowel and closure duration
 
+<!-- mention that difference could be because speech rate was different as indicated by shorter vowels here -->
+
 Question 3 addresses the effect of voicing on vowel and closure duration, and the possible differences between disyllabic and monosyllabic words.
 Starting from vowel duration, the effect of voicing is estimated to lie between 4 and 25 ms.
 This range is very similar to that reported by \citet{coretta2018j} for Italian and Polish disyllabic words (95% confidence intervals [8, 25], monosyllabic words were not tested).
