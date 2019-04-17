@@ -45,8 +45,7 @@ eng_durations_rr <- na.omit(eng_durations)
 Consonants and vowels are known to exert a reciprocal influence in a variety of ways.
 One such way is the well-established tendency for vowels to have shorter durations when followed by voiceless stops and longer durations when followed by voiced stops.
 This so-called 'voicing effect' has been long recognised in a plethora of languages across different linguistic families \citet{maddieson1976, begus2017}.
-English is possibly by far the most investigated language in relation to the voicing effect \citep{meyer1904, heffner1937, house1953, belasco1953, peterson1960, halle1967, chen1970, klatt1973, lisker1974, laeufer1992, fowler1992, hussein1994, lampp2004, warren2005, durvasula2012, ko2018}.
-Several hypotheses have been proposed as to the origin of this phenomenon \citep{begus2017}, from articulatory mechanisms to perceptual biases, however no one particular account has gained unequivocal consensus.
+Several hypotheses have been proposed as to the origin of this phenomenon, from articulatory mechanisms to perceptual biases, however no one particular account has gained unequivocal consensus.
 
 \citet{coretta2018j} proposes that the diachronic pathway to the voicing effect derives from a compensatory mechanism between vowel and consonant closure duration.
 In an exploratory study of acoustic durations in Italian and Polish, Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
@@ -65,7 +64,8 @@ Given the temporal stability of the release-to-release interval and the differen
 Naturally, other properties of speech production and perception can further contribute to the emergence and enhancement of the voicing effect, and these are not mutually exclusive with a compensatory account.
 <!-- Sanker's paper -->
 
-English is generally regarded the language in which the voicing effect has the greatest magnitude relative to the magnitude of the effect in other languages.
+English is possibly by far the most investigated language in relation to the voicing effect \citep{meyer1904, heffner1937, house1953, belasco1953, peterson1960, halle1967, chen1970, klatt1973, lisker1974, laeufer1992, fowler1992, hussein1994, lampp2004, warren2005, durvasula2012, ko2018}.
+English is also generally regarded as the language in which the voicing effect has the greatest magnitude relative to the magnitude of the effect in other languages.
 This special status of English is traditionally attributed to the phonologisation of the voicing effect in this language \citet{sharf1964, de-jong2004}.
 Vowel duration and the vowel-to-consonant duration ratio are considered to be among the most stable cues to consonantal voicing \citet{peterson1960, raphael1972, port1982}.
 \citet{kluender1988} proposed that the difference in vowel duration before voiceless vs. voiced stops could have been enhanced and exploited to cue the voicing opposition.
@@ -77,38 +77,43 @@ This means that, based on the surveyed data, the effect lies within that interva
 On the other hand, the meta-analytical estimate of the voicing effect for disyllabic words is lower, at about 25 ms (around 50 ms less than in monosyllabic words).
 This estimate is closer to the values reported for Italian, and note that the Italian values pertain to the effect of disyllabic words.
 
-It is possible that the alleged differences in magnitude between English and other languages are a product of the different contexts under examination \citet{laeufer1992}.
+It is possible that the alleged differences in magnitude between English and other languages are a product of the different contexts under examination \citep{laeufer1992}.
 \citet{ko2018} is a more recent investigation of the voicing effect in English monosyllabic words and the reported difference in vowel duration in this study are substantially lower (35 ms).
 The Bayesian meta-analysis (see Supplement) further suggests a potential for publication bias, which means that the meta-analytical estimate (75 ms) could be an overestimation.
 Finally, the surveyed studies have a very low number of participants (mean = 3.4, SD = 2.5), which can lead to so-called Type M errors (estimate magnitude errors) and overestimation of effect \citep{kirby2018, roettger2019}.
+In sum, it is generally assumed that the voicing-driven difference in vowel duration is greater in English than in other languages, although it should be stressed that the empirical foundation of this conception is not entirely straightforward.
 
 ## Research hypotheses
 
-The principal aim of this study is to test whether the same temporal stability observed for the release-to-release interval in Italian and Polish disyllabic words can be observed in English.
+One of the aims of this study is to test whether the same temporal stability observed for the release-to-release interval in Italian and Polish disyllabic words is repliated in English.
 \citet{jacewicz2009} report that monosyllabic words in American English are longer when the second consonant is voiced.
 Based on this finding, it is expected that the duration of the release-to-release interval will differ in monosyllabic words depending on C2 voicing.
 More specifically, the release-to-release duration should be longer when C2 is voiced.
-\citet{jacewicz2009} attribute the difference in word duration to the difference in vowel duration before voiceless vs. voiced stops.
-Thus, we can expect the magnitude of the difference in release-to-release duration to be close to the difference in vowel duration.
+\citet{jacewicz2009} attribute the difference in monosyllabic word duration to the difference in vowel duration before voiceless vs. voiced stops.
+Thus, we can expect the magnitude of the difference in release-to-release duration in monosyllabic words to be close to the difference in vowel duration.
+This hypothesis also fits with the reported greater effect of voicing on vowel duration in monosyllabic than disyllabic words.
 
 The data in \citet{coretta2018j} suggest that the intrinsic duration of vowels and consonants can contribute to the duration of the release-to-release interval.
 In particular, release-to-release intervals containing a high vowel have shorter durations than those with a low vowel in \citet{coretta2018j}.
-This is not surprising, given that a well known cross-linguistic tendency is that high vowels are shorter than low vowels \citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
-As for the consonant place of articulation, the interval is shorter in Italian and Polish if the second consonant is velar compared to when it is coronal.
-The closure of velar stops is shorter than that of other stops.
+This is not surprising, given the well known cross-linguistic tendency of high vowels to be shorter than low vowels \citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
+As for the consonant place of articulation, the release-to-release interval is shorter in Italian and Polish when the second consonant is velar compared to when it is coronal.
+This could be a consequence of the fact that the closure of velar stops is shorter than that of other stops.
 For example, \citeauthor{sharf1962}'s data \citeyear{sharf1962} on closure duration in English suggests that the closure of labial stops (60-90 ms) is about 10 ms longer than that of velar stops (55-75 ms).
-It can thus be expected that intervals with a velar stop in English will be about 10 ms shorter than intervals with labial consonants.
+It can be expected that release-to-release intervals with a velar stop in English will be about 10 ms shorter than intervals with a labial stop.
 
-To summarise, the following research questions and respective hypotheses were formulated:
+A second set of objectives concerns the effect of voicing on vowel and closure durations.
+A conceptual replication of previous studies' effect sizes is sought, with special attention to differences between monosyllabic and disyllabic words.
 
-* Q1: Is the duration of the interval between two consecutive stop releases (the release to release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
+The following research questions and respective hypotheses were formulated:
+
+1. Is the duration of the interval between two consecutive stop releases (the release to release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
   * H1a: The duration of the release to release interval is not affected by C2 voicing in disyllabic words.
   * H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
-* Q2: Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
+2. Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
   * H2a: The release to release interval is longer in monosyllabic than in disyllabic words.
   * H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /ɜː/, /iː/.
   * H2c: The release to release interval is shorter when C2 is velar.
-* Q3: What is the estimated difference in the effect of voicing on vowel and stop closure duration between monosyllabic and disyllabic words?
+3. What is the estimated difference in the effect of voicing on vowel and stop closure duration between monosyllabic and disyllabic words?
   * H3: The effect of voicing on vowel duration is greater in monosyllabic than in disyllabic words.
 
 # Methods
