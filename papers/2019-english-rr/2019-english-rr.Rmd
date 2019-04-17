@@ -185,7 +185,8 @@ For example, if the 95% CI is between 10 and 30 ms, there is a 95% probability t
 In each model, a prior is specified for each of the parameters to be estimated. The priors are in the form of particular distributions, like the normal or the Cauchy distributions.
 A prior defines the prior knowledge of where the parameter might lie within a range of values.
 For example, a prior as a normal distribution with mean 200 ms and standard deviation 50 indicates the researcher's belief that the parameter lies between 100 and 300 ms with 95% probability (i.e., the mean minus twice the standard deviation, and the mean plus twice the standard deviation).
-<!-- explain why you use 95% CI -->
+A possible concern is that the priors might have too much of an influence on the results.
+A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betancourt2018} indicates that the resulting posteriors are highly informed by the observed data and don't heavily rely on prior specifications.
 
 # Results
 
@@ -349,7 +350,7 @@ kable(rr_3_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, ca
 kable_styling(font_size = 8)
 ```
 
-```{r rr-3-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on release-to-release duration (model 3). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r rr-3-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on release-to-release duration (model 3). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
 rr_3_draws <- rr_3 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_voweler, b_vowelee, b_placelabial)
 
@@ -362,8 +363,8 @@ rr_3_draws %>%
   ggplot(aes(.value, .variable)) +
   annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
   geom_vline(xintercept = 0) +
-  stat_intervalh() +
-  stat_pointintervalh(position = position_nudge(y = -0.2), .width = c(0.66, 0.98)) +
+  geom_halfeyeh(fill = "#9ecae1", .width = c(0.66, 0.98), fatten_point = 1) +
+  stat_intervalh(position = position_nudge(y = -0.2), size = 3) +
   scale_x_continuous(breaks = seq(-50, 25, 5)) +
   scale_y_discrete(labels = c("Place = labial", "Vowel = /iː/", "Vowel = /ɜː/", "voiced × monosyl.", "Num.syl. = monosyl.", "C2 voicing = voiced")) +
   scale_color_brewer() +
@@ -375,6 +376,7 @@ rr_3_draws %>%
 ```
 
 ## Vowel duration
+\label{s:vow}
 
 ```{r vow-1}
 priors <- c(
@@ -417,7 +419,7 @@ vow_1 <- brm(
 ```
 
 A Bayesian regression model was fitted to test vowel duration (the outcome variable in the model).
-The following terms were entered: C2 voicing (voiceless vs. voiced), vowel ((/ɑː/, /ɜː/, /iː/)), number of syllables (disyllabic, monosyllabic), centred speech rate, all possible interactions between C2 voicing, vowel, and number of syllables.
+The following terms were entered: C2 voicing (voiceless vs. voiced), vowel (/ɑː/, /ɜː/, /iː/), number of syllables (disyllabic, monosyllabic), centred speech rate, all possible interactions between C2 voicing, vowel, and number of syllables.
 The same random structure as in the previous models was used (a by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing).
 
 For the prior of the intercept of vowel duration we used a normal distribution with mean 145 ms and standard deviation 30 \citep{heffner1937, house1953, peterson1960, sharf1962, chen1970, klatt1973, davis1989, laeufer1992, ko2018}.
@@ -426,6 +428,13 @@ A normal prior with mean 50 and standard deviation 25 was chosen instead for the
 For the effects of vowel, vowel/number of syllables interaction, and the three-way interaction vowel/number of syllables/C2 voicing, a normal distribution with mean 0 and standard deviation 30, based on differences reported in the previous studies.
 A slightly more informative prior was used for the interaction between C2 voicing and vowel (mean = 0, SD = 20).
 The same priors as in the previous model were included for the random structure.
+
+```{r vow-1-table}
+vow_1_tidy <- tidy(vow_1, effect = "fixed", conf.int = TRUE) %>% select(-effect, -component) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /ɜː/", "Vowel = /iː/", "Num. syll. = monosyllabic", "Speech rate (cntr.)", "voiced × /ɜː/", "voiced × /iː/", "voiced × monosyll.", "/ɜː/ × monosyll.", "/iː/ × monosyll.", "voiced × /ɜː/ × monosyll.", "voiced × /iː/ × monosyll.")) %>% rename(Predictor = term, Mean = estimate, SD = std.error, Q2.5 = conf.low, Q97.5 = conf.high) %>% mutate(`CI width` = abs(Q2.5 - `Q97.5`))
+
+kable(vow_1_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the Bayesian regression fitted to vowel duration (model 4, see \\Cref{s:vow})") %>%
+kable_styling(font_size = 8)
+```
 
 The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 113.15--137.06 ms ($\bar{\theta}$ = 125.16 ms, SD = 6.02).
 The vowel /ɜː/ is 9.19 ms shorter (SD = 5.29) with CI = [−19.24, 1.49], while /iː/ is 36.97 ms shorter (SD = 5.14, 95% CI = [−46.99, −26.76]).
@@ -440,7 +449,7 @@ The three-way interaction C2 voicing/vowel/number of syllables indicates that th
 Note that the credible intervals of some of the effect are quite large, so that a large range of values are possible.
 The posterior means of such effects should be treated with more caution.
 
-```{r vow-1-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on vowel duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r vow-1-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on vowel duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
 vow_1_draws <- vow_1 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_voweler, b_vowelee, `b_voicingvoiced:voweler`, `b_voicingvoiced:vowelee`, `b_voweler:num_sylmono`, `b_vowelee:num_sylmono`, `b_voicingvoiced:voweler:num_sylmono`, `b_voicingvoiced:vowelee:num_sylmono`)
 
@@ -453,8 +462,8 @@ vow_1_draws %>%
   ggplot(aes(.value, .variable)) +
   annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
   geom_vline(xintercept = 0) +
-  stat_intervalh() +
-  stat_pointintervalh(position = position_nudge(y = -0.4), .width = c(0.66, 0.98)) +
+  geom_halfeyeh(fill = "#9ecae1", .width = c(0.66, 0.98), fatten_point = 1) +
+  stat_intervalh(position = position_nudge(y = -0.2), size = 2) +
   scale_x_continuous(breaks = seq(-50, 40, 5)) +
   scale_y_discrete(labels = c("voiced × /iː/ × monosyl.", "voiced × /ɜː/ × monosyl.", "/iː/ × monosyl.", "/ɜː/ × monosyl.", "voiced × /iː/", "voiced × /ɜː/", "Vowel = /iː/", "Vowel = /ɜː/", "voiced × monosyl.", "Num.syl. = monosyl.", "C2 voicing = voiced")) +
   scale_color_brewer() +
@@ -466,6 +475,7 @@ vow_1_draws %>%
 ```
 
 ## Consonant closure duration
+\label{s:clos}
 
 ```{r clos-1}
 priors <- c(
@@ -512,6 +522,13 @@ A normal distribution with mean -20 ms (SD = 10) was chosen as the prior of the 
 The same studies indicate that labial stops have a closure which is 10-20 ms longer than the closure of velar stops.
 For the effect of C2 place, a normal distribution with mean 15 ms (SD = 10) was used.
 
+```{r clos-1-table}
+clos_1_tidy <- tidy(clos_1, effect = "fixed", conf.int = TRUE) %>% select(-effect, -component) %>% mutate(term = c("Intercept", "Voicing = voiced", "C2 place = labial", "Num. syll. = monosyllabic", "Speech rate (cntr.)", "voiced × labial", "voiced × monosyll.", "labial × monosyll.", "voiced × labial × monosyll.")) %>% rename(Predictor = term, Mean = estimate, SD = std.error, Q2.5 = conf.low, Q97.5 = conf.high) %>% mutate(`CI width` = abs(Q2.5 - `Q97.5`))
+
+kable(clos_1_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the Bayesian regression fitted to closure duration (model 5, see \\Cref{s:clos})") %>%
+kable_styling(font_size = 8)
+```
+
 The posterior distribution of the intercept for closure duration (corresponding to the duration of voiceless velar stops in disyllabic words) has mean 74.62 ms (SD = 2.85) and 95% CI = [69.17, 80.42].
 The effect of C2 voicing on closure duration is estimated to be between −26.76 and −14.57 ms (95% CI).
 The posterior mean of this effect is −20.83 ms (SD = 3.09).
@@ -519,7 +536,7 @@ A very small positive effect of place of articulation (labial) is suggested by t
 A possibly even smaller effect of number of syllables or no effect at all can be inferred from the posterior distribution which has mean 2.81 ms and estimated error 2.84 (95% CI = [−2.70, 8.19]).
 See \Cref{f:clos-1-intervals} for the credible intervals of the effects on closure duration.
 
-```{r clos-1-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on closure duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r clos-1-intervals, include=TRUE, fig.cap="Bayesian credible intervals of the effects on closure duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
 clos_1_draws <- clos_1 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_placelabial, `b_voicingvoiced:placelabial`, `b_placelabial:num_sylmono`, `b_voicingvoiced:placelabial:num_sylmono`)
 
@@ -532,8 +549,8 @@ clos_1_draws %>%
   ggplot(aes(.value, .variable)) +
   annotate("rect", xmin = -10, xmax = 10, ymin = -Inf, ymax = Inf, alpha = 0.5) +
   geom_vline(xintercept = 0) +
-  stat_intervalh() +
-  stat_pointintervalh(position = position_nudge(y = -0.4), .width = c(0.66, 0.98)) +
+  geom_halfeyeh(fill = "#9ecae1", .width = c(0.66, 0.98), fatten_point = 1) +
+  stat_intervalh(position = position_nudge(y = -0.2), size = 2) +
   scale_x_continuous(breaks = seq(-50, 40, 5)) +
   scale_y_discrete(labels = c("voiced × labial × monosyl.", "labial × monosyl.", "voiced × labial", "C2 place = labial", "voiced × monosyl.", "Num.syl. = monosyl.", "C2 voicing = voiced")) +
   scale_color_brewer() +
