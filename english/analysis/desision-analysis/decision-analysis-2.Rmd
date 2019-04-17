@@ -90,11 +90,23 @@ simd <- tibble(
   speaker = rep(sprintf("s%02d", 1:speakers), each = items)
 ) %>%
   mutate(
-    c2_voice = factor(c2_voice, levels = c("voiceless", "voiced"))
+    c2_voice = factor(c2_voice, levels = c("voiceless", "voiced")),
+    speaker = as.factor(speaker)
   )
 ```
 
 ```{r}
+priors_1 <- c(
+  set_prior("normal(200, 5)", class = "Intercept"),
+  set_prior("normal(0, 20)", class = "b", coef = "c2_voicevoiced"),
+  # set_prior("normal(50, 25)", class = "b", coef = "sylmono"),
+  # set_prior("normal(50, 15)", class = "b", coef = "c2_voicevoiced:sylmono"),
+  # set_prior("normal(-23.8, 2.1)", class = "b", coef = "speech_rate_c"),
+  set_prior("normal(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 10)", class = "sigma")
+)
+
 rr_fit_1 <- brm(
   rr ~
     c2_voice +
@@ -103,12 +115,23 @@ rr_fit_1 <- brm(
   family = gaussian(),
   cores = 4,
   control = list(adapt_delta = 0.99),
-  sample_prior = "only",
-  data = simd
+  data = simd,
+  chains = 1,
+  iter = 500,
+  warmup = 200
 )
 ```
 
 ```{r}
 summary(rr_fit_1)
+```
+
+```{r}
+simd_2 <- simd %>%
+  filter(speaker %in% sample(levels(simd$speaker), 10))
+
+rr_new <- update(rr_fit_1, newdata = simd_2)
+
+summary(rr_new)
 ```
 
