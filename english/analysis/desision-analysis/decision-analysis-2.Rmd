@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 theme_set(theme_minimal())
 library(brms)
+library(simr)
 ```
 
 # Old sims
@@ -133,5 +134,45 @@ simd_2 <- simd %>%
 rr_new <- update(rr_fit_1, newdata = simd_2)
 
 summary(rr_new)
+```
+
+# Extend dataset
+
+```{r}
+eng_x <- extend(eng_durations_rr, along = "speaker", n = 60)
+
+priors <- c(
+  set_prior("normal(200, 50)", class = "Intercept"),
+  set_prior("normal(0, 25)", class = "b", coef = "voicingvoiced"),
+  set_prior("normal(50, 25)", class = "b", coef = "num_sylmono"),
+  set_prior("normal(50, 25)", class = "b", coef = "voicingvoiced:num_sylmono"),
+  set_prior("normal(0, 30)", class = "b", coef = "voweler"),
+  set_prior("normal(0, 30)", class = "b", coef = "vowelee"),
+  set_prior("normal(0, 30)", class = "b", coef = "placelabial"),
+  set_prior("normal(-25, 10)", class = "b", coef = "speech_rate_c"),
+  set_prior("cauchy(0, 25)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 25)", class = "sigma")
+)
+
+rr_3 <- brm(
+  rel_rel ~
+    voicing +
+    num_syl +
+    voicing:num_syl +
+    vowel +
+    place +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  prior = priors,
+  control = list(adapt_delta = 0.99),
+  data = eng_x,
+  chains = 1
+)
+```
+
+```{r}
+summary(rr_3)
 ```
 
