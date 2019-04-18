@@ -121,24 +121,29 @@ The following research questions and respective hypotheses were formulated:
 
 # Methods
 
-The research design and data analyses of this study has been pre-registered at the Open Science Framework.
+The following subsections describe the experimental and statistical methods.
+The research design and data analyses of this study were pre-registered at the Open Science Framework prior to data collection (\url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}).
+The data and analyses scripts of this paper are also available on the Open Science Framework.
+<!-- include url and data citation -->
+
+## Sample size and stopping rule
+
+Sample size and a stopping rule were determined prior to data collection with the method of the Region Of Practical Equivalence (ROPE) \citep{kruschke2015, vasishth2018a}.
+A 'no-effect' region of values around 0 is first identified.
+This null region (the ROPE) can be thought of as a Bayesian 95% credible interval of a distribution, the values within which can be interpreted as a negligible or null effect.
+For this study, a ROPE between −10 and +10 ms has been chosen.
+The width of 20 ms is based on the estimates of the just noticeable difference in \citet{huggins1972} and \citet{nooteboom1980}.
+Differences in release-to-release durations below 10 ms (either positive or negative) will be interpreted as compatible with a null effect.
+
+Once a ROPE width is set, the goal is to collect data for sequential testing until the width of the 95% credible interval of the tested effect is equal to or less than the ROPE width (in this study, 20 ms).
+An initial minimum of 20 participants was chosen.
+Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on April 5th 2019, independent of the the ROPE condition.
 
 ## Participants
 
-The participants of this study were 15 native speakers of British English, who were born and brought up in the Greater Manchester area.
-All the speakers were undergraduate students at the University of Manchester with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
+The participants of this study were 15 native speakers of British English, who were born and raised in the Greater Manchester area.
+The speakers were all undergraduate students at the University of Manchester with no reported hearing or speaking disorders, and with normal or corrected to normal vision.
 The participants signed a written consent form and received £5 for participation.
-
-Sample size and stopping rule were determined prior to data collection by the Region Of Practical Equivalence (ROPE) method \citep{kruschke2015, vasishth2018a}.
-A 'no-effect' region of values around 0 is first identified.
-The null region (the ROPE) can be thought of as the Bayesian 95% credible interval from a distribution, the values within which can be interpreted as a null effect.
-For this study, a ROPE between −10 and +10 ms has been chosen.
-The width of 20 ms is based on the estimates of the just noticeable difference in \citet{huggins1972} and \citet{nooteboom1980}.
-
-<!-- explain why 20 ms -->
-
-Once a ROPE width is set, the goal is to collect data until the width of the 95% credible interval of the tested effect is equal to or less than the ROPE width (in this study, 20 ms).
-Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on April 5th 2019, independent of the the ROPE condition.
 
 ## Equipment
 
@@ -149,18 +154,35 @@ The Lavalier microphone was clipped on the participants cloths, about 20 cm unde
 
 <!-- explain why only velars and labials and why diagonal vowels -->
 
-The test words were C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
+\ctable[caption = Test C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}(VC) words.,
+label = t:words,
+star,
+doinside = \footnotesize
+]{llll}{}{
+\FL
+teep & teepus & teek & teekus \\
+teeb & teebus & teeg & teegus \\
+terp & terpus & terk & terkus \\
+terb & terbus & terg & tergus \\
+tarp & tarpus & tark & tarkus \\
+tarb & tarbus & targ & targus \\
+}
+
+The test words were C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
 This structure specification generates 24 test words, shown in \Cref{t:words}.
 Each word was embedded in the following frame sentences: *I'll say X this Thursday*, *You'll say X this Monday*, *She'll say X this Sunday*, *We'll say X this Friday*, *They'll say X this Tuesday*.
 Each word + frame combination was included once in the stimuli list, so that each speaker would read 120 sentence stimuli (24 words × 5 frames).
+A total of 1800 observations have been recorded (120 stimuli × 15 speakers).
 
 ## Procedure
 
 The participants were first debriefed on the experimental procedure.
-Prior to recording, the participants familiarised themselves with the materials by reading them aloud and were instructed not to insert pauses anywhere within the sentence stimuli and to try and keep a similar intonation contour for the total duration of the experiment.
-They were also given the change to take any number of breaks at any point during recording.
-Misreadings or speech errors were corrected by letting the participant repeat the stimulus.
-The reading task took around 6 to 10 minutes.
+Prior to recording, the participants familiarised themselves with the materials by reading them aloud.
+The were instructed not to insert pauses anywhere within the sentence stimuli and to  keep a similar intonation contour for the total duration of the experiment.
+They were also given the chance to take any number of breaks at any point during recording.
+Misreadings or speech errors were corrected by asking the participant to repeat the stimulus.
+The reading task took around 6 to 10 minutes, while the total experiment session lasted about 25 minutes.
+Data collection started on February 19th 2019 and ended on April 5th 2019.
 
 ## Data processing and measurements
 
@@ -175,39 +197,39 @@ The following measures were obtained:
 * Duration of the release-to-release interval: from the release of C1 to the release of C2.
 * V1 duration: from appearance to disappearance of higher formant structure in the spectrogram in correspondence of V1 \citep{machac2009}.
 * C2 closure duration: from disappearance of higher formant structure in the V1C2 sequence to the release of C2 \citep{machac2009}.
-* Speech rate: calculated as number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018a}).
+* Speech rate: calculated as the number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018a}).
 
 ## Statistical analysis
 
-All statistical analyses were performed in R v3.5.2 \citep{r-core-team2018}.
+Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
-Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warmup.
+Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warm-up.
 A Gaussian (normal) distribution was used in all the models as the response distribution.
 The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
-Previous work has shown that speech units durations do, as a general trend, follow a log-normal distribution \citep{rosen2005, ratnikova2017}.
-However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results, so that using a Gaussian distribution is still acceptable.
+Previous work has shown that speech units durations do follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}.
+However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
 
-All factors were coded using treatment contrasts with the first level as the reference level: number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel factor are reversed compared to that in the pre-registration, and this was done to match the height order in \citet{coretta2018j}, from low to high. Changing the order of the levels of course does not affect the results.}
+All factors were coded using treatment contrasts (the first level in this list was set as the reference level): number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel and place factors are reversed compared to that in the pre-registration. This was done to match the vowel height order in \citet{coretta2018j}, from low to high, and to keep a back-to-front order for place for espositional purposes. Changing the order of the levels of course does not affect the results.}
 Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
 Model convergence was reached in all the models reported here ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
 
-The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in a context of commonly low-powered studies \citep{munafo2017, roettger2019}.
-For an introduction to Bayesian statistics in phonetics, see \citet{vasishth2018, nicenboim2018a}, while for a general introduction see \citet{etz2018, mcelreath2015, kruschke2015}, and reference therein.
-While a thorough discussion of Bayesian methods would be beyond the scope of this paper, it is relevant to give the less familiar reader the tools for interpreting analyses and results.
+The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in the context of commonly low-powered studies \citep{munafo2017, roettger2019}.
+For an introduction to Bayesian statistics in phonetics, see \citet{vasishth2018}, and \citet{nicenboim2018a}, while for a general introduction see \citet{etz2018}, \citet{mcelreath2015}, \citet{kruschke2015}, and references therein.
+While a thorough discussion of Bayesian methods would be beyond the scope of this paper, it is relevant to provide the less familiar reader with the basic tools for interpreting analyses and results.
 
 More weight will be given here on the estimated distributions of the sought effects, rather than on point estimates (as in frequentist regression models).
 The estimated distribution of an effect (or parameter) is the posterior distribution of that effect (or parameter).
-The posterior distribution is an approximation of the parameter distribution, and it takes into account the specified prior, i.e. the theoretical probability of the parameter as known or derived by the researcher.
-This characteristics is at the heart of Bayesian modelling, which includes prior knowledge into the estimation of parameter values.
+The posterior distribution is an approximation of the parameter distribution, and it takes into account the specified prior for that parameter, i.e. the theoretical probability of the parameter as known or derived by the researcher.
+The inclusion of priors in the analysis is at the heart of Bayesian modelling, which relies on prior knowledge for the estimation of parameter values.
 For each relevant term in the models, the 95% credible intervals (CI) should be taken as a summary of the posterior distribution, and inference should be based on the posterior rather than on the point estimate (the posterior mean, represented here with $\bar{\theta}$).
-A 95% CI can be interpreted as the 95% probability that a parameter lies within the interval range.
-For example, if the 95% CI is between 10 and 30 ms, there is a 95% probability that the true parameter value is between 10 and 30 ms.
+A 95% CI can be interpreted as the 95% probability that a parameter lies within that interval range.
+For example, if the 95% CI is between 10 and 30 ms, there is a 95% probability that the true parameter value is between 10 and 30 ms, with extreme values being less likely than values in the centre of the interval.
 
-In each model, a prior is specified for each of the parameters to be estimated. The priors are in the form of particular distributions, like the normal or the Cauchy distributions.
+In each model, priors are specified for each of the parameters to be estimated. The priors are in the form of particular distributions, like the Gaussian (normal) or the Cauchy distribution.
 A prior defines the prior knowledge of where the parameter might lie within a range of values.
 For example, a prior as a normal distribution with mean 200 ms and standard deviation 50 indicates the researcher's belief that the parameter lies between 100 and 300 ms with 95% probability (i.e., the mean minus twice the standard deviation, and the mean plus twice the standard deviation).
 A possible concern is that the priors might have too much of an influence on the results.
-A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betancourt2018} indicates that the resulting posteriors are highly informed by the observed data and don't heavily rely on prior specifications.
+A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betancourt2018} indicates that the models discussed in this study are highly informed by the observed data and don't heavily rely on prior specifications.
 
 # Results
 
