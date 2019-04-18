@@ -38,7 +38,7 @@ library(coretta2018itapol) # https://github.com/stefanocoretta/coretta2018itapol
 data("kinematics_series")
 data("kinematics")
 library(mgcv)
-library(tidymv) # https://github.com/thomasp85/patchwork
+library(tidymv) # https://github.com/stefanocoretta/tidymv
 library(patchwork) # https://github.com/thomasp85/patchwork
 library(itsadug)
 library(lme4)
