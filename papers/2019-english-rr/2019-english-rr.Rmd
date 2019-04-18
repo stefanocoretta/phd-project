@@ -103,6 +103,9 @@ It can be expected that release-to-release intervals with a velar stop in Englis
 
 A second set of objectives concerns the effect of voicing on vowel and closure durations.
 A conceptual replication of previous studies' effect sizes is sought, with special attention to differences between monosyllabic and disyllabic words.
+Only a few studies directly compare the effect in different syllabic positions (for example, \citet{sharf1962} and \citet{klatt1973}).
+The reported effects are in the range of 50-55 ms in word-final (closed-syllable) position and 20-25 in word-medial (open-syllable) position.
+The Bayesian meta-analysis of the voicing effect indicates a mean difference of 50 ms (75 vs. 25 ms), so that we are uncertain on where the actual difference lies.
 
 The following research questions and respective hypotheses were formulated:
 
