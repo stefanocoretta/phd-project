@@ -123,7 +123,7 @@ The following research questions and respective hypotheses were formulated:
 
 The following subsections describe the experimental and statistical methods.
 The research design and data analyses of this study were pre-registered at the Open Science Framework prior to data collection (\url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}).
-The data and analyses scripts of this paper are also available on the Open Science Framework.
+The research compendium of this paper containing data and analyses scripts is also available on the Open Science Framework.
 <!-- include url and data citation -->
 
 ## Sample size and stopping rule
@@ -205,13 +205,8 @@ Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
 Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warm-up.
 A Gaussian (normal) distribution was used in all the models as the response distribution.
-The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
-Previous work has shown that speech units durations do follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}.
-However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
-
 All factors were coded using treatment contrasts (the first level in this list was set as the reference level): number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel and place factors are reversed compared to that in the pre-registration. This was done to match the vowel height order in \citet{coretta2018j}, from low to high, and to keep a back-to-front order for place for espositional purposes. Changing the order of the levels of course does not affect the results.}
 Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
-Model convergence was reached in all the models reported here ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
 
 The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in the context of commonly low-powered studies \citep{munafo2017, roettger2019}.
 For an introduction to Bayesian statistics in phonetics, see \citet{vasishth2018}, and \citet{nicenboim2018a}, while for a general introduction see \citet{etz2018}, \citet{mcelreath2015}, \citet{kruschke2015}, and references therein.
@@ -232,6 +227,14 @@ A possible concern is that the priors might have too much of an influence on the
 A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betancourt2018} indicates that the models discussed in this study are highly informed by the observed data and don't heavily rely on prior specifications.
 
 # Results
+
+This section reports the results of the Bayesian models, grouped by outcome variable (release-to-release, vowel duration, closure duration).
+For each model, a description of the model structure and priors is given, followed by the presentation of the posterior distributions of the relevant terms.
+The full R code used for analysis is available as part of the paper's research compendium.
+Model convergence was reached in all the reported models ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
+The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
+Previous work has shown that speech units durations do follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}.
+However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
 
 ## Release-to-release duration
 \label{s:rr}
