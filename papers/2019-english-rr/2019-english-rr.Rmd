@@ -743,38 +743,35 @@ Further evidence for a vowel-based rhythmic gestural implementation comes from w
 These studies investigate the relation between vowel duration and syllable structure in Italian.
 In the first study, it was found that vowels followed by a singleton stop (for example in /la.ta/) are longer than vowels followed by a tautosyllabic cluster (/la.dra/).
 This pattern can easily be derived from the C-centre alignment of the cluster /dr/, and if we assume that the distance between the vowels is the same in the two contexts (/la.ta/ and /la.dra/).
-\citet{celata2014} also show that the duration of the consonant/consonant cluster is negatively correlated with the duration of the preceding vowel (although the magnitude of the correlation is low to moderate, for a discussion on how speech rate could mask statistical correlations see \citealt{begus2017} and \citealt{coretta2018j}).
+\citet{celata2014} also show that the duration of the consonant/consonant cluster is negatively correlated with the duration of the preceding vowel, although the magnitude of the correlation is low to moderate.
+For a discussion on how speech rate could mask statistical correlations see \citealt{begus2017} and \citealt{coretta2018j}.
+
 
 <!-- Zmarich found that V1 nucleus onset to V2 nucleus onset is not isochronous in mima vs mimma in Italian -->
 
 Turning now to the voicing contrast, \citet{van-summers1987} and \citet{de-jong1991} show that the closing gesture of voiceless stops has greater velocity than that of voiced stops.
 Assuming that the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel (as per the C-centre effect), full oral closure will be achieved earlier in voiceless than voiced stops relative to the beginning of the vocalic gesture.
 Now, if the latter is at a stable temporal distance from the gesture of the preceding vowel, it follows that the acoustic duration of the preceding vowel will be longer because of the later closure of voiced stops, while the time of the release is the same in voiceless and voiced stops.
+The articulatory apparatus just discussed could be implemented, for example, according to the mechanisms of the selection-coordination theory proposed in \citet{tilsen2013, tilsen2016} (the reader is referred to Tilsen's work for the details).
 <!-- include image -->
 
 ### Disyllabic vs. monosyllabic words
 
-A complication of the scenario just discussed arises from the pattern observed with English monosyllabic words, in which the release-to-release interval is not isochronous and is instead affected by C2 voicing.
+A complication for the diachronic pathway of the voicing effect discussed here arises from the pattern observed with English monosyllabic words.
+In this context, the release-to-release interval is not isochronous and is instead affected by C2 voicing.
 Words with a voiced C2 have longer release-to-release intervals (by about 5-17.5 ms at 80% probability).
-If compensatory mechanism expounded in this paper is based on the premise that the interval within which compensation happens must be isochronous.
-Since English monosyllabic words don't show isochrony, we either have to abandon a compensatory account or explain a mechanism by which the release-to-release interval in monosyllabic words are characterised by both compensation and absence of isochrony.
+The compensatory mechanism set forth in this paper is based on the premise that the interval within which compensation happens must be isochronous.
+Since English monosyllabic words don't show voicing-wise isochrony, we either have to abandon a compensatory account or find a mechanism that can explain why the release-to-release interval in monosyllabic words is characterised by both absence of isochrony and compensation of segment durations.
 
-A possible solution could be cautiously put forward from principles of Evolutionary Phonology \citet{blevins2004, blevins2006}.
-Most of present-day English monosyllabic words harken back to disyllabic words in Old English and Proto-Germanic.
+A possible solution to the dilemma could be cautiously put forward from principles of Evolutionary Phonology \citet{blevins2004, blevins2006}.
+Most of present-day English monosyllabic words are diachronically related to disyllabic words in Old English and Proto-Germanic, which through vowel reduction and loss became monosyllabic in English (and other Germanic languages).
 <!-- citation needed -->
-It is possible that a mechanism of compensation was in action in what were disyllabic words which, through vowel reduction and loss which affected different diachronic stages of Germanic and English, became monosyllabic.
-Speculative, a voicing effect could thus be reconstructed for Proto-Germanic itself.
-This hypothesis is compliant with a general principle of historical linguistics by which if a feature is present in a majority of daughter languages (which is the case for the voicing effect), it is sensible to reconstruct such feature for the ancestor proto-language.
-Furthermore, given that in almost all the investigated Indo-European languages the duration of vowels is modulated by the voicing of a following stop, we could even stretch this principle to argue that the voicing effect can be reconstructed even from Proto-Indo-European.
+It is possible that a mechanism of compensation was in action at the diachronic stage in which present-day monosyllabic words were disyllabic.
+It can be speculated that a voicing effect should be reconstructed for Proto-Germanic itself.
+This hypothesis is compliant with a general principle of historical linguistics by which if a feature is present in the majority of daughter languages (which is the case for the voicing effect), it is sensible to reconstruct such feature for the ancestor proto-language.
+Furthermore, given that in almost all the investigated Indo-European languages the duration of vowels is modulated by the voicing of a following stop, we could even extend this principle to argue that the voicing effect could be reconstructed even from Proto-Indo-European.
 
-Once the second vowel has gone from the production of disyllabic words and isochrony can be dispensed, perceptual biases (as proposed by perceptual accounts of the voicing effect like \citealt{javkin1976} and \citealt{kluender1988}) can operate.
-The duration of the remaining vowel is free to be modified further to enhance the perceptual difference of voiceless vs. voiced stops by cues of vowel duration \citet{lisker1974, lisker1986, stevens1989}.
-
-Why, then, monosyllabic words have lost isochrony?
-The following section offers an articulatory account which could answer this question.
-
-We can now turn back to the issue of the absence of isochrony in monosyllabic words.
-When the second vowel in disyllabic CVCV words is deleted via diachronic change, the second consonant loses its anchor vowel (V2) and shifts its affiliation to the preceding vowel instead, in other words, it becomes a coda consonant.
-The shift could be brought about by described in terms of Tilsen's \citeyear{tilsen2013, tilsen2016} selection--coordination theory.
-Coda consonants are anti-phase with the preceding vocalic nucleus and among themselves, meaning that each gesture is executed in sequence.
-The cyclicity of vowel production does not apply in this case, since that there is only one vowel, and the vocalic gesture is free to be stretched or compressed.
+Once the second vowel in disyllabic CVCV words is deleted via diachronic change, the second consonant loses its anchor vowel (V2) and shifts its affiliation to the preceding vowel instead, in other words, it becomes a coda consonant.
+Coda consonants are produced anti-phase with the preceding vocalic nucleus and among themselves, meaning that each gesture is executed in sequence.
+At this point, disruption of V-to-V isochrony is no longer an issue, and certain perceptual biases (as proposed by perceptual accounts of the voicing effect like \citealt{javkin1976} and \citealt{kluender1988}) are able to come into action, by stretching or compressing the vocalic gesture.
+The duration of the vowel of monosyllabic words is then free to be modulated in order to enhance the perceptual difference of voiceless vs. voiced stops \citep{lisker1974, lisker1986, stevens1989}.
