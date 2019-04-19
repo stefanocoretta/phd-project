@@ -713,14 +713,48 @@ More studies like \citet{ko2018} are needed to settle the issue of the diverging
 ## General discussion
 \label{s:gen-disc}
 
-\citet{coretta2018j} proposes that the voicing-related adjustments in the relative timing of the closure onset within an isochronous speech interval (acoustically identified as the release-to-release interval) is the diachronic precursor of the widespread effect of voicing on vowel duration.\footnote{Note that isochrony here is intended as pertaining the context of voiceless vs. voices stops only. It is not implied that the interval is isochronous in absolute terms.}
+\citet{coretta2018j} proposes that the voicing-related adjustments in the relative timing of the closure onset within an isochronous speech interval (acoustically identified as the release-to-release interval) is the diachronic precursor of the cross-linguistically widespread effect of voicing on vowel duration.\footnote{Note that isochrony here is intended as pertaining the context of voiceless vs. voices stops only. It is not implied that the interval must be isochronous in all phonological contexts.}
 Given that the duration of the release-to-release interval in Italian and Polish disyllabic words is not affected by the voicing of the post-vocalic consonant, the relative durations of vowel and closure depend on when the closure is achieved within that interval.
 A later closure onset implies a longer vowel and a shorter closure, while, vice versa, an earlier closure onset produces a shorter vowel and a longer closure.
+Vowels are shorter when followed by a voiceless stops because the closure of voiceless stop is achieved earlier than that of voiced stops, and vice versa.
 
-The current study shows that also the release-to-release interval of English disyllabic words with either a voiceless or a voiced stop is isochronous.
-While future research will have to investigate the source of the isochrony of the interval (which probably lies in the temporal organisation of articulatory gestures), the same pathway proposed in the context of the Italian and Polish data can be envisaged for English, and possibly cross-linguistically in general.
+The present study showed that also the release-to-release interval of English disyllabic words with either a voiceless or a voiced stop is isochronous.
+The voicing status of the second consonant of the interval does not affect its duration.
+The same pathway of temporal compensation proposed in the context of the Italian and Polish data can be envisaged for English, and possibly more generally in a cross-linguistic point of view.
+While future research will have to focus on investigating the source of the isochrony of the interval, an articulatory mechanism of gestural phasing is proposed here as the basis of the acoustic patterns.
 
-A complication arises from the pattern observed with English monosyllabic words, in which the release-to-release interval is not isochronous and is instead affected by C2 voicing.
+### Release-to-release isochorony as a consequence of gestural phasing
+
+As already argued in \citet{coretta2018j}, the release-to-release interval in itself is not special.
+The compensatory temporal adjustment account can be understood in relation to the acoustic duration of vowels, hence the scope of compensation can (but does not need to) be defined in terms of acoustic intervals.
+The interval found to be temporally stable across voicing context is the release-to-release interval.
+However, it is desirable to derive the isochrony of this acoustic interval from properties of articulatory coordination.
+While a full theory of gestural phasing is beyond the scope of this study, I offer here a tentative account of the underlying gestural coordination from which the release-to-release isochrony can be derived.
+
+\citet{ohman1966, ohman1967} proposed that the the speech stream is composed by a series of continuous vocalic gestures interrupted by gestures of oral constriction (consonants).
+\citet{fowler1983} further argued that the vocalic gestures of a VCV sequence are characterised by a cyclic pattern of production, so that the temporal distance between the two vowels is constant, and it is not affected by the number of intervening consonants.
+
+The task-dynamic model \citep{saltzman2008} of Articulatory Phonology \citep{ohala1986a, browman1988, browman1992}, based on the coupled oscillators model \citep{odell2008}, extends the cyclicity argument by assuming that any two gestures can be implemented according to two modes: Either in synchrony or sequentially.
+These modes of gestural phasing (in-phase and anti-phase) can account for a variety of patterns of articulatory timing.
+Relevant to our discussion is that onset consonant are generally produced in-phase with the following vowel, meaning that the vocalic and consonantal gestures are initiated together.
+This mechanism gives rise to the so-called C-centre effects observed with onsets, by which the acoustic duration of the vowel depends on the number of onset consonants \citep{browman1988, marin2010, hermes2013, marin2014}.
+
+Further evidence for a vowel-based rhythmic gestural implementation comes from work by \citet{farnetani1986} and \citet{celata2014}.
+These studies investigate the relation between vowel duration and syllable structure in Italian.
+In the first study, it was found that vowels followed by a singleton stop (for example in /la.ta/) are longer than vowels followed by a tautosyllabic cluster (/la.dra/).
+This pattern can easily be derived from the C-centre alignment of the cluster /dr/, and if we assume that the distance between the vowels is the same in the two contexts (/la.ta/ and /la.dra/).
+\citet{celata2014} also show that the duration of the consonant/consonant cluster is negatively correlated with the duration of the preceding vowel (although the magnitude of the correlation is low to moderate, for a discussion on how speech rate could mask statistical correlations see \citealt{begus2017} and \citealt{coretta2018j}).
+
+<!-- Zmarich found that V1 nucleus onset to V2 nucleus onset is not isochronous in mima vs mimma in Italian -->
+
+Turning now to the voicing contrast, \citet{van-summers1987} and \citet{de-jong1991} show that the closing gesture of voiceless stops has greater velocity than that of voiced stops.
+Assuming that the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel (as per the C-centre effect), full oral closure will be achieved earlier in voiceless than voiced stops relative to the beginning of the vocalic gesture.
+Now, if the latter is at a stable temporal distance from the gesture of the preceding vowel, it follows that the acoustic duration of the preceding vowel will be longer because of the later closure of voiced stops, while the time of the release is the same in voiceless and voiced stops.
+<!-- include image -->
+
+### Disyllabic vs. monosyllabic words
+
+A complication of the scenario just discussed arises from the pattern observed with English monosyllabic words, in which the release-to-release interval is not isochronous and is instead affected by C2 voicing.
 Words with a voiced C2 have longer release-to-release intervals (by about 5-17.5 ms at 80% probability).
 If compensatory mechanism expounded in this paper is based on the premise that the interval within which compensation happens must be isochronous.
 Since English monosyllabic words don't show isochrony, we either have to abandon a compensatory account or explain a mechanism by which the release-to-release interval in monosyllabic words are characterised by both compensation and absence of isochrony.
@@ -738,30 +772,6 @@ The duration of the remaining vowel is free to be modified further to enhance th
 
 Why, then, monosyllabic words have lost isochrony?
 The following section offers an articulatory account which could answer this question.
-
-### Release-to-release isochorony as a consequence of gestural phasing
-
-As already argued in \citet{coretta2018j}, the release-to-release interval in itself is not special.
-The compensatory temporal adjustment account can be understood as an account of vowel acoustic duration, hence the scope of compensation can be defined in terms of acoustic intervals.
-The interval that was found to be temporally stable across voicing context in \citet{coretta2018j} is the release-to-release interval.
-However, it is desirable to derive the isochrony of this acoustic interval from properties of articulatory coordination.
-While a fully fledged theory of gestural phasing is beyond the scope of this study, I offer here a tentative account of the underlying gestural coordination from which the release-to-release isochrony can be derived.
-
-\citet{fowler1983} builds on Öhman's \citeyear{ohman1966, ohman1966} idea that the speech stream is composed by a series of continuous vocalic gestures interspersed with oral constriction (consonantal) gestures.
-Fowler proposes that the vocalic gestures of a VCV sequence are characterised by a cyclic pattern of production, so that the temporal distance between the two vowels is constant and it is not affected by the number of intervening consonants.
-The task dynamic model \citep{saltzman2008} of Articulatory Phonology \citep{ohala1986a, browman1988, browman1992}, based on the coupled oscillators model \citep{odell2008}, also argues that onset consonant gestures are generally produced in-phase with the following vowel (meaning that the initiation of the vocalic and consonantal gesture is synchronous).
-This mechanism generates the so-called C-centre effects, by which the acoustic duration of the in-phase vowel depends on the number of onset consonants, while coda consonants, which are anti-phase with the preceding vowel, do not have an effect on vowel duration.
-
-Furthermore, results which are compatible with a vowel-based rhythmic gestural implementation come from work by \citet{farnetani1986} and \citet{celata2014}, which investigate vowel duration and syllable structure in Italian.
-In the former study, it was found that vowels followed by a singleton stop (for example /la.ta/) are longer than vowels followed by a tautosyllabic cluster (/la.dra/).
-This pattern can be easily derived if the cluster /dr/ follows a C-centre alignment, and if we assume that the distance between the vowels is the same in the two contexts (/la.ta/ and /la.dra/).
-\citet{celata2014} show that the duration of consonant or consonant cluster is negatively correlated with the preceding vowel (although the magnitude of the correlation is low to moderate, see \citealt{begus2017} and \citealt{coretta2018j} on how speech rate could mask statistical relations).
-
-<!-- talk about Zmarich but they looked at nucleus onset not gestural onset -->
-
-\citet{van-summers1987} and \citet{de-jong1991} show that the consonantal closing gesture of voiceless stops has greater velocity than that of voiced stops.
-If the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel and the latter is at a stable temporal distance from the preceding vowel, a later complete oral closure will be achieved in the latter case without affecting the time of the consonantal release.
-<!-- include image -->
 
 We can now turn back to the issue of the absence of isochrony in monosyllabic words.
 When the second vowel in disyllabic CVCV words is deleted via diachronic change, the second consonant loses its anchor vowel (V2) and shifts its affiliation to the preceding vowel instead, in other words, it becomes a coda consonant.
