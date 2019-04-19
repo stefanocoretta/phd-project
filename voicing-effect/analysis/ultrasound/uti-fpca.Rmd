@@ -133,7 +133,7 @@ fd_par <- fdPar(basis, lfd_obj, lambda)
 ```
 
 ```{r}
-i = 50
+i = 2
 # t_norm = (time_list[[i]] / duration[i]) * mean_dur # linear time normalisation
 curve_fd = smooth.basis(X[[i]], Y[[i]], fd_par)$fd
 
@@ -160,7 +160,7 @@ y_fd = fd(coef = y_coefs, basisobj = basis)
 ```{r fpca}
 lambda_pca <- lambda
 pcafd_par  <- fdPar(basis, 2, lambda_pca) # here Lfdobj = 2 since we don't need derivatives of PC curves.
-y_pcafd <- pca.fd(y_fd, nharm = 4, pcafd_par) # compute first 2 PCs
+y_pcafd <- pca.fd(y_fd, nharm = 4, pcafd_par) # compute first 4 PCs
 ```
 
 ```{r}
@@ -179,6 +179,10 @@ scores <- as.tibble(y_pcafd$scores) %>%
 
 ```{r}
 ggplot(scores, aes(V1, V3, colour = c2_place, shape = vowel)) +
+  geom_point()
+ggplot(scores, aes(V1, V2, colour = c2_place, shape = vowel)) +
+  geom_point()
+ggplot(scores, aes(V2, V3, colour = c2_place, shape = vowel)) +
   geom_point()
 ```
 
