@@ -42,6 +42,7 @@ eng_clos <- na.omit(eng_durations)
 ```
 
 # Introduction
+\label{s:intro}
 
 Consonants and vowels are known to exert a reciprocal influence in a variety of ways.
 One such way is the well-established tendency for vowels to have shorter durations when followed by voiceless stops and longer durations when followed by voiced stops.
@@ -695,13 +696,19 @@ However, the vowel /iː/ followed by a voiceless stop is also about 16 ms shorte
 While it is not clear why the vowel is shorter in that context, it is possible that the estimated simultaneous increase (by the voicing effect) and decrease (by vowel identity) of vowel duration in that context by the same amount (16 ms) is the product of statistical modelling, making it difficult to draw any certain conclusion.
 Research on the duration of English tense vowels and on a possible process of /iː/ shortening is needed to shed light on the observed patterns.
 
-
-
 Turning now to consonants, there was no specific hypothesis concerning the effect of voicing on closure durations.
 C2 voicing has a robust negative effect on closure duration, so that voiced closures are 14.6-26.8 ms shorter than voiceless closures.
 The effects of number of syllables, place, and interactions all have credible intervals that are narrower than 20 ms (the ROPE width) but they lie entirely within the ROPE around 0.
 If these variables do have an effect on closure duration, the present analysis suggests that the means of these effects are between 0 and 5 ms.
 These values are smaller than what the results in \citet{sharf1962}, which indicate a difference of 15 ms between velar and labial closure durations.
+
+As a general trend, the differences in vowel and closure duration found in this study are smaller than those known from the literature, and considerably so in the case of vowels.
+A possible reason for this discrepancy could be sought in problems arising from Type M errors (as briefly discussed in \Cref{s:intro}), and in differences of speech rate, as evidenced by comparing average segment durations.
+While the model's intercept of vowel duration in this study is approximately 125 ms (SD = 5.89), the mean vowel duration in the studies surveyed in the meta-analysis (Supplement A) is 150 ms (SD = 36).
+The longer durations can indicate lower speech rates in older studies, so that the effect of voicing could be grater, assuming a linear increase of the effect.
+However, the ratio between vowel duration and the effect of voicing differs (a third in this study vs. half in previous work).
+Ko's findings \citeyear{ko2018} support the idea that the voicing effect (and the vowel-to-consonant ratio) are not stable across speaking rates, with the consequence that differences are enhanced at decreased speaking rates.
+More studies like \citet{ko2018} are needed to settle the issue of the diverging results.
 
 ## General discussion
 \label{s:gen-disc}
