@@ -41,46 +41,52 @@ eng_durations_rr <- na.omit(eng_durations)
 eng_clos <- na.omit(eng_durations)
 ```
 
+\begin{abstract}
+It will come.
+\end{abstract}
+
 # Introduction
 \label{s:intro}
 
 Consonants and vowels are known to exert a reciprocal influence in a variety of ways.
 One such way is the well-established tendency for vowels to have shorter durations when followed by voiceless stops and longer durations when followed by voiced stops.
-This so-called 'voicing effect' has been long recognised in a plethora of languages across different linguistic families \citet{maddieson1976, begus2017}.
+This so-called 'voicing effect' has been long recognised in a wide range of languages across different linguistic families \citep{maddieson1976, begus2017}.
 Several hypotheses have been proposed as to the origin of this phenomenon, from articulatory mechanisms to perceptual biases, however no one particular account has gained unequivocal consensus.
 
-\citet{coretta2018j} proposes that the diachronic pathway to the voicing effect derives from a compensatory mechanism between vowel and consonant closure duration.
-In an exploratory study of acoustic durations in Italian and Polish, Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
+In an exploratory study of acoustic durations in Italian and Polish, \citet{coretta2018j} proposes that the diachronic pathway to the voicing effect derives from a compensatory mechanism between vowel and consonant closure duration.
+Coretta finds that the duration of the interval between two consecutive consonant releases is not affected by the voicing status of the second consonants.
 In particular, disyllabic words of the form CV́CV (with lexical stress on the first syllable) were investigated.
 The consonant following the stressed vowel was either voiceless (for example, /pata/) or voiced (/pada/).
 The results of that study suggest that the duration of the release-to-release interval in words like /pata/ is not significantly different from that in words like /pada/.
 
-\citet{coretta2018j} argues that the temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
+\citet{coretta2018j} argues that the temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969, slis1969a, lehiste1970a, lehiste1970}.
 This account states that vowels are shorter when followed by voiceless stops because the latter have longer closure durations, and vice versa with voiced stops, which have shorter closure durations.
 \citet{coretta2018j} also reviews some of the shortcomings of the compensatory account and concludes that the release-to-release stability offers a resolution.
-In particular, previous versions of the account don't clearly identify a speech interval within which compensation is implemented.
-Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969a, slis1969, lehiste1970, lehiste1970a} have been proposed as such intervals, but these have been subsequently criticised on empirical grounds \citep{chen1970, jacewicz2009, maddieson1976}.
+In particular, previous versions of the account fail to clearly identify a speech interval within which compensation is implemented.
+Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969, slis1969a, lehiste1970a, lehiste1970} have been proposed as such intervals, but these have been subsequently criticised on empirical grounds \citep{chen1970, jacewicz2009, maddieson1976}.
 
 Given the temporal stability of the release-to-release interval and the differential closure duration in voiceless vs. voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}, it follows that the timing of the consonant closure onset within that interval will decide on the respective durations of vowel and consonant closure.
 \citet{coretta2018j} thus proposes that the source of the voicing effect can be seen in the temporal stability of the release-to-release interval in relation to the voicing of the second consonant and in the effect of voicing on closure duration.
 Naturally, other properties of speech production and perception can further contribute to the emergence and enhancement of the voicing effect, and these are not mutually exclusive with a compensatory account.
 <!-- Sanker's paper -->
 
-English is possibly by far the most investigated language in relation to the voicing effect \citep{meyer1904, heffner1937, house1953, belasco1953, peterson1960, halle1967, chen1970, klatt1973, lisker1974, laeufer1992, fowler1992, hussein1994, lampp2004, warren2005, durvasula2012, ko2018}.
-English is also generally regarded as the language in which the voicing effect has the greatest magnitude relative to the magnitude of the effect in other languages.
-This special status of English is traditionally attributed to the phonologisation of the voicing effect in this language \citet{sharf1964, de-jong2004}.
-Vowel duration and the vowel-to-consonant duration ratio are considered to be among the most stable cues to consonantal voicing \citet{peterson1960, raphael1972, port1982}.
+English is one of the most investigated language in relation to the voicing effect \citep{meyer1904, heffner1937, house1953, belasco1953, peterson1960, halle1967, chen1970, klatt1973, lisker1974, laeufer1992, fowler1992, hussein1994, lampp2004, warren2005, durvasula2012, ko2018}.
+English is also the language in which the voicing effect has the greatest magnitude relative to the magnitude of the effect in other languages.
+This special status of English is traditionally attributed to the phonologisation of the voicing effect in this language \citep{sharf1964, de-jong2004}.
+Vowel duration and the vowel-to-consonant duration ratio are considered to be among the most stable cues to consonantal voicing \citep{peterson1960, raphael1972, port1982}.
 \citet{kluender1988} proposed that the difference in vowel duration before voiceless vs. voiced stops could have been enhanced and exploited to cue the voicing opposition.
 This could explain the greater effect of English compared for example with Italian, in which voicing is most robustly cued by vocal fold vibration during closure \citep{pape2014}.
 
 Indeed, previous studies on English report a difference in vowel duration before voiceless vs. voiced stops which ranges between 20 and 150 ms, while the values for the effect in Italian are lower, between 15 and 25 ms \citep{caldognetto1979, farnetani1986, esposito2002, coretta2018j}.
-A Bayesian meta-analysis voicing effect (see Supplement A) returned a 95% credible interval for the effect of voicing in English monosyllabic words between 55 and 95 ms, with a meta-analytical mean of 75 ms.
-This means that, based on the surveyed data, the effect lies within that interval at a probability of 95%, in other words, we can have 95% confidence that the effect is between 55-95 ms.
+A Bayesian meta-analysis of the voicing effect (see Supplement A) returned a 95% credible interval for the effect of voicing in English monosyllabic words between 55 and 95 ms, with a meta-analytical mean of 75 ms.
+This means that, based on the surveyed data, the effect lies within that interval at a probability of 95%.
+In other words, we can have 95% confidence that the effect is between 55-95 ms.
 On the other hand, the meta-analytical estimate of the voicing effect for disyllabic words is lower, at about 25 ms (around 50 ms less than in monosyllabic words).
-This estimate is closer to the values reported for Italian, and note that the Italian values pertain to the effect of disyllabic words.
+This estimate is closer to the values reported for Italian.
+Note also that the Italian values pertain to the effect of disyllabic words.
 
-It is possible that the alleged differences in magnitude between English and other languages are a product of the different contexts under examination \citep{laeufer1992}.
-\citet{ko2018} is a more recent investigation of the voicing effect in English monosyllabic words and the reported difference in vowel duration in this study are substantially lower (35 ms).
+However, it is possible that the alleged differences in magnitude between English and other languages are a product of the different contexts under examination \citep{laeufer1992}.
+\citet{ko2018}, in a more recent investigation of the voicing effect in English monosyllabic words, finds substantially lower difference in vowel duration (35 ms).
 The Bayesian meta-analysis (see Supplement A) further suggests a potential for publication bias, which means that the meta-analytical estimate (75 ms) could be an overestimation.
 Finally, the surveyed studies have a very low number of participants (mean = 3.4, SD = 2.5), which can lead to so-called Type M errors (estimate magnitude errors) and overestimation of effect \citep{kirby2018, roettger2019}.
 In sum, it is generally assumed that the voicing-driven difference in vowel duration is greater in English than in other languages, although it should be stressed that the empirical foundation of this conception is not entirely straightforward.
@@ -88,8 +94,8 @@ In sum, it is generally assumed that the voicing-driven difference in vowel dura
 ## Research hypotheses
 \label{s:hypo}
 
-One of the aims of this study is to test whether the same temporal stability observed for the release-to-release interval in Italian and Polish disyllabic words is repliated in English.
-\citet{jacewicz2009} report that monosyllabic words in American English are longer when the second consonant is voiced.
+One of the aims of this study is to test whether the same temporal stability observed for the release-to-release interval in Italian and Polish disyllabic words can also be observed in English.
+\citet{jacewicz2009} report that, in American English, monosyllabic words are longer when the second consonant is voiced.
 Based on this finding, it is expected that the duration of the release-to-release interval will differ in monosyllabic words depending on C2 voicing.
 More specifically, the release-to-release duration should be longer when C2 is voiced.
 \citet{jacewicz2009} attribute the difference in monosyllabic word duration to the difference in vowel duration before voiceless vs. voiced stops.
@@ -101,24 +107,24 @@ In particular, release-to-release intervals containing a high vowel have shorter
 This is not surprising, given the well known cross-linguistic tendency of high vowels to be shorter than low vowels \citep{hertrich1997, esposito2002, mortensen2013, toivonen2015, kawahara2017}.
 As for the consonant place of articulation, the release-to-release interval is shorter in Italian and Polish when the second consonant is velar compared to when it is coronal.
 This could be a consequence of the fact that the closure of velar stops is shorter than that of other stops.
-For example, \citeauthor{sharf1962}'s data \citeyear{sharf1962} on closure duration in English suggests that the closure of labial stops (60-90 ms) is about 10 ms longer than that of velar stops (55-75 ms).
+For example, \citeauthor{sharf1962}'s (\citeyear{sharf1962}) data on closure duration in English suggests that the closure of labial stops (60-90 ms) is about 10 ms longer than that of velar stops (55-75 ms).
 It can be expected that release-to-release intervals with a velar stop in English will be about 10 ms shorter than intervals with a labial stop.
 
 A second set of objectives concerns the effect of voicing on vowel and closure durations.
 A conceptual replication of previous studies' effect sizes is sought, with special attention to differences between monosyllabic and disyllabic words.
 Only a few studies directly compare the effect in different syllabic positions (for example, \citet{sharf1962} and \citet{klatt1973}).
 The reported effects are in the range of 50-55 ms in word-final (closed-syllable) position and 20-25 in word-medial (open-syllable) position.
-The Bayesian meta-analysis of the voicing effect indicates a mean difference of 50 ms (75 vs. 25 ms), so that we are uncertain on where the actual difference lies.
+The Bayesian meta-analysis of the voicing effect indicates a mean difference of 50 ms (75 ms in word-final position vs. 25 ms word-medially).
 
 The following research questions and respective hypotheses were formulated:
 
-1. Is the duration of the interval between two consecutive stop releases (the release to release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
-  * H1a: The duration of the release to release interval is not affected by C2 voicing in disyllabic words.
-  * H1b: The release to release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
-2. Is the duration of the release to release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
-  * H2a: The release to release interval is longer in monosyllabic than in disyllabic words.
-  * H2b: The duration of the release to release interval decreases according to the hierarchy /ɑː/, /ɜː/, /iː/.
-  * H2c: The release to release interval is shorter when C2 is velar.
+1. Is the duration of the interval between two consecutive stop releases (the release-to-release interval) in monosyllabic and disyllabic words affected by the voicing of C2 in English?
+  * H1a: The duration of the release-to-release interval is not affected by C2 voicing in disyllabic words.
+  * H1b: The release-to-release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
+2. Is the duration of the release-to-release interval affected by (a) the number of syllables of the word, (b) the quality of V1, and (c) the place of C2?
+  * H2a: The release-to-release interval is longer in monosyllabic than in disyllabic words.
+  * H2b: The duration of the release-to-release interval decreases according to the hierarchy /ɑː/, /ɜː/, /iː/.
+  * H2c: The release-to-release interval is shorter when C2 is velar.
 3. What is the estimated difference in the effect of voicing on vowel and stop closure duration between monosyllabic and disyllabic words?
   * H3: The effect of voicing on vowel duration is greater in monosyllabic than in disyllabic words.
 
@@ -127,7 +133,7 @@ The following research questions and respective hypotheses were formulated:
 The following subsections describe the experimental and statistical methods.
 The research design and data analyses of this study were pre-registered at the Open Science Framework prior to data collection (\url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}).
 <!-- explain why pre-registration -->
-The research compendium of this paper containing data and analyses scripts is also available on the Open Science Framework.
+The research compendium of this paper containing data and analysis scripts is also available on the Open Science Framework.
 <!-- include url and data citation -->
 
 ## Sample size and stopping rule
@@ -142,7 +148,7 @@ Differences in release-to-release durations below 10 ms (either positive or nega
 Once a ROPE width is set, the goal is to collect data for sequential testing until the width of the 95% credible interval of the tested effect is equal to or less than the ROPE width (in this study, 20 ms).
 In other words, the objective is about the precision of the estimates, rather than whether a difference can be detected or not (like in standard frequentist power analyses).
 An initial minimum of 20 participants was chosen.
-Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on April 5th 2019, independent of the the ROPE condition.
+Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on 5 April 2019, independent of the the ROPE condition.
 
 ## Participants
 
@@ -153,7 +159,7 @@ The participants signed a written consent form and received £5 for participatio
 ## Equipment
 
 Audio recordings were obtained in a sound-attenuated room in the Phonetics Laboratory of the University of Manchester, with a Zoom H4n Pro recorder and a RØDE Lavalier microphone, at a sample rate of 44100 Hz (16-bit, downsampled to 22050 Hz for analysis).
-The Lavalier microphone was clipped on the participants cloths, about 20 cm under their mouth, displaced a few centimetres on one side.
+The Lavalier microphone was clipped on the participants clothes, about 20 cm from the mouth, displaced a few centimetres to one side.
 
 ## Materials
 
@@ -173,21 +179,21 @@ tarp & tarpus & tark & tarkus \\
 tarb & tarbus & targ & targus \\
 }
 
-The test words were C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, əː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
+The test words were C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, ɜː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
 This structure specification generates 24 test words, shown in \Cref{t:words}.
 Each word was embedded in the following frame sentences: *I'll say X this Thursday*, *You'll say X this Monday*, *She'll say X this Sunday*, *We'll say X this Friday*, *They'll say X this Tuesday*.
-Each word + frame combination was included once in the stimuli list, so that each speaker would read 120 sentence stimuli (24 words × 5 frames).
-A total of 1800 observations have been recorded (120 stimuli × 15 speakers).
+Each word + frame combination was included once in the stimuli list, so that each speaker read a total of 120 sentence stimuli (24 words × 5 frames).
+A total of 1800 observations were recorded (120 stimuli × 15 speakers).
 
 ## Procedure
 
-The participants were first debriefed on the experimental procedure.
-Prior to recording, the participants familiarised themselves with the materials by reading them aloud.
-The were instructed not to insert pauses anywhere within the sentence stimuli and to  keep a similar intonation contour for the total duration of the experiment.
+The experimental procedure was first explained to the participants prior to recording.
+The participants also familiarised themselves with the materials by reading them aloud.
+They were instructed not to insert pauses anywhere within the sentence stimuli and to  keep a similar intonation contour for the total duration of the experiment.
 They were also given the chance to take any number of breaks at any point during recording.
 Misreadings or speech errors were corrected by asking the participant to repeat the stimulus.
 The reading task took around 6 to 10 minutes, while the total experiment session lasted about 25 minutes.
-Data collection started on February 19th 2019 and ended on April 5th 2019.
+Data collection started on 19 February 2019 and ended on 5 April 2019.
 
 ## Data processing and measurements
 
@@ -210,8 +216,8 @@ Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
 Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
 Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warm-up.
 A Gaussian (normal) distribution was used in all the models as the response distribution.
-All factors were coded using treatment contrasts (the first level in this list was set as the reference level): number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel and place factors are reversed compared to that in the pre-registration. This was done to match the vowel height order in \citet{coretta2018j}, from low to high, and to keep a back-to-front order for place for espositional purposes. Changing the order of the levels of course does not affect the results.}
-Speech rate has been centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
+All factors were coded using treatment contrasts (the first level in this list was set as the reference level): number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel and place factors are reversed compared to that in the pre-registration. This was done to match the vowel height order in \citet{coretta2018j}, from low to high, and to keep a back-to-front order for place for expositional purposes. Changing the order of the levels of course does not affect the results.}
+Speech rate was centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
 A seed (1234) was set in all models to ensure reproducibility of the output.
 
 The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in the context of commonly low-powered studies \citep{munafo2017, roettger2019}.
@@ -237,11 +243,11 @@ A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betanc
 This section reports the results of the Bayesian models, grouped by outcome variable (release-to-release, vowel duration, closure duration).
 A description of the model structure and priors is given for each model, followed by the presentation of the posterior distributions of the relevant terms.
 The full R code used for analysis is available as part of the paper's research compendium.
-Each model is assigned a number (1 through 5), and the text will refer to these.
+Each model is assigned a number (1 to 5), and the text refers to these.
 
 Model convergence was reached in all the reported models ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
 The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
-Previous work has shown that speech units durations do follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}.
+Previous work has shown that speech-units duration does follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}.
 However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
 
 
@@ -280,7 +286,7 @@ rr_1 <- brm(
 A Bayesian regression was fit to model the duration of the release-to-release interval.
 The following terms were included as fixed effects: C2 voicing (voiceless, voiced), number of syllables (disyllabic, monosyllabic), centred speech rate, an interaction between C2 voicing and number of syllables.
 A by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing were entered as random effects.
-The following priors have been used.
+The following priors were used.
 Two weakly informative priors based on the results from \citet{coretta2018j} were chosen for the intercept and the effect of C2 voicing.
 The former prior is a normal distribution with mean 200 ms and SD = 50, while the latter a normal distribution with mean 0 ms and SD = 25.
 A weakly informative priors as a normal distribution with mean 50 ms and SD = 25 was specified for the effect of number of syllable.
@@ -352,7 +358,7 @@ Less clear is the effect of C2 place of articulation (velar vs. labial stop): Th
 
 The credible intervals of the effects in the models reported above have widths which are greater than the chosen ROPE width of 20 ms.
 The large credible intervals indicate that the estimated posterior distributions of the effects have a somewhat high degree of uncertainty with them.
-The uncertainty has been possibly brought about by not controlling for vowel and number of syllables in respectively the first and second model.
+This uncertainty is potentially due to not controlling for vowel and number of syllables in the first and second model respectively.
 An exploratory model (model 3) was thus fitted to the data, in which all the terms from the two models above were included.
 The same priors of the two separate models were used in the combined model.
 
@@ -396,7 +402,7 @@ The posterior distribution of the C2 voicing effect on release-to-release durati
 The estimated effect of syllable number is now more robustly positive (95% CI = [9.17, 22.48]), with a mean (16.03 ms, SD = 3.32) similar to that in model 1.
 The posterior distribution of the interaction between number of syllables and C2 voicing (95% CI = [2.65, 20.98]) suggests a positive and medium-sized coefficient ($\bar{\theta}$ = 11.67 ms, SD = 4.71).
 This result indicates that the duration of the release-to-release is greater in monosyllabic words with voiced C2 than in monosyllabic words with voiceless C2.
-The effects of vowel and place or articulation have similar means, but the credible intervals are smaller.
+The effects of vowel and place of articulation have similar means, but the credible intervals are smaller.
 The release-to-release is on average 10.05 ms (SD = 2.95, 95% CI = [−15.92, −4.24]) shorter if the vowel is /ɜː/ and 39.3 ms (SD = 2.99, 95% CI = [−45.03, −32.76]) shorter if the vowel is /iː/.
 C2 place of articulation (labial) has a negligible positive mean effect (2.6 ms, SD = 2.39, 95% CI = [−2.29, 7.28]).
 
@@ -479,10 +485,10 @@ A Bayesian regression model was fitted to test vowel duration (model 4).
 The following terms were entered: C2 voicing (voiceless vs. voiced), vowel (/ɑː/, /ɜː/, /iː/), number of syllables (disyllabic, monosyllabic), centred speech rate, all possible interactions between C2 voicing, vowel, and number of syllables.
 The same random structure as in the previous models was used (a by-speaker and by-word random intercept, and a by-speaker random coefficient for C2 voicing).
 
-For the prior of the intercept of vowel duration we used a normal distribution with mean 145 ms and standard deviation 30 \citep{heffner1937, house1953, peterson1960, sharf1962, chen1970, klatt1973, davis1989, laeufer1992, ko2018}.
+For the prior of the intercept of vowel duration, a normal distribution with mean 145 ms and standard deviation 30 was used \citep{heffner1937, house1953, peterson1960, sharf1962, chen1970, klatt1973, davis1989, laeufer1992, ko2018}.
 A normal distribution with mean 50 ms and standard deviation 20 was used as the prior for the effect of voicing on vowel duration (based on the above studies).
 A normal prior with mean 50 and standard deviation 25 was chosen instead for the effect of number of syllables and the interaction C2 voicing/number of syllables.
-For the effects of vowel, vowel/number of syllables interaction, and the three-way interaction vowel/number of syllables/C2 voicing, a normal distribution with mean 0 and standard deviation 30, based on differences reported in the studies above.
+For the effects of vowel, vowel/number of syllables interaction, and the three-way interaction vowel/number of syllables/C2 voicing, the prior was a normal distribution with mean 0 and standard deviation 30, based on differences reported in the studies above.
 A slightly more informative prior was used for the interaction between C2 voicing and vowel (mean = 0, SD = 20).
 The same priors as in the previous models were included for the random effects.
 
@@ -628,11 +634,11 @@ clos_5_draws %>%
 # Discussion
 
 This study set out to investigate whether the results from \citet{coretta2018j} could be replicated for English and extended to other contexts.
-It was expected that the release-to-release interval is not affected by C2 voicing in disyllabic words but it is in monosyllabic words.
-Moreover, a conceptual replication of studies on the effect of consonant voicing on vowel and closure durations, with a focus in comparing the effect in mono- vs. disyllabic words, was sought.
+It was expected that the release-to-release interval would not be affected by C2 voicing in disyllabic words but it is in monosyllabic words.
+Moreover, a conceptual replication of studies on the effect of consonant voicing on vowel and closure durations was sought, with a focus on comparing the effect in mono- vs. disyllabic words.
 This section discusses in turn the results in relation to the release-to-release interval duration (\Cref{s:rr-disc}) and to vowel and closure durations (\Cref{s:vc-disc}) by comparing them with the hypotheses of this study.
 \Cref{s:gen-disc} synthesised these findings and proposes a diachronic pathway to the emergence of the voicing-driven durational differential (the voicing effect) based on a mechanism of temporal adjustments of gestural phasing.
-Finally, an articulatory footing of the temporal properties of the release-to-release interval in mono- and disyllabic words is offered, with a discussion of limitations and future work.
+Finally, an articulatory grounding of the temporal properties of the release-to-release interval in mono- and disyllabic words is offered, with a discussion of limitations and future work.
 
 ## Release-to-release interval
 \label{s:rr-disc}
@@ -657,7 +663,7 @@ The interaction term between number of syllables in the word and C2 voicing is p
 This result is compatible with hypothesis 1b that the release-to-release interval is longer in monosyllabic words with a voiced C2 than in monosyllabic words with a voiceless C2.
 
 The second question posed at the beginning of the paper was about other effects on the release-to-release duration.
-As expected by hypothesis 2a, the release to release interval is longer in monosyllabic than in disyllabic words.
+As expected by hypothesis 2a, the release-to-release interval is longer in monosyllabic than in disyllabic words.
 At 95% probability, the effect of number of syllables (from di- to monosyllabic) is between 9 and 22.5 ms.
 As for hypothesis 2b, the results are more robust for /iː/ than for /ɜː/.
 When the vowel is /iː/, the release-to-release interval is 33 to 45 ms shorter compared with an interval with /ɑː/.
@@ -679,7 +685,7 @@ When compared to the values in previous studies that investigated disyllabic wor
 However, note that the posterior distribution of the effect in the current study is entirely contained in the meta-analytical posterior distribution of the effect in the other studies, which roughly ranges between −15 and +65 ms (see Supplement A).
 Thus, we can assume that the deviation of this study from previous ones is not substantial.
 As for the effect of number of syllables on vowel duration, a similar effect to that of voicing was found, whereby vowel durations increase by 5 to 25 ms in monosyllabic words compared to disyllabic words.
-This relation corresponds to what previously reported in the literature.
+This relation corresponds to what has previously been reported in the literature.
 
 It was expected that the voicing effect on vowels would be stronger in monosyllabic than in disyllabic words (hypothesis 3).
 The credible intervals of the posterior distributions from model 4, which are larger than the ROPE, make interpretation less straightforward.
@@ -703,9 +709,9 @@ If these variables do have an effect on closure duration, the present analysis s
 These values are smaller than what the results in \citet{sharf1962}, which indicate a difference of 15 ms between velar and labial closure durations.
 
 As a general trend, the differences in vowel and closure duration found in this study are smaller than those known from the literature, and considerably so in the case of vowels.
-A possible reason for this discrepancy could be sought in problems arising from Type M errors (as briefly discussed in \Cref{s:intro}), and in differences of speech rate, as evidenced by comparing average segment durations.
+A possible reason for this discrepancy could be found in problems arising from Type M errors (as briefly discussed in \Cref{s:intro}), and in differences of speech rate, as evidenced by comparing average segment durations.
 While the model's intercept of vowel duration in this study is approximately 125 ms (SD = 5.89), the mean vowel duration in the studies surveyed in the meta-analysis (Supplement A) is 150 ms (SD = 36).
-The longer durations can indicate lower speech rates in older studies, so that the effect of voicing could be grater, assuming a linear increase of the effect.
+These longer durations may indicate lower speech rates in older studies and so the effect of voicing may have been greater than at higher speech rates, assuming a linear increase of the effect.
 However, the ratio between vowel duration and the effect of voicing differs (a third in this study vs. half in previous work).
 Ko's findings \citeyear{ko2018} support the idea that the voicing effect (and the vowel-to-consonant ratio) are not stable across speaking rates, with the consequence that differences are enhanced at decreased speaking rates.
 More studies like \citet{ko2018} are needed to settle the issue of the diverging results.
@@ -726,10 +732,10 @@ While future research will have to focus on investigating the source of the isoc
 ### Release-to-release isochorony as a consequence of gestural phasing
 
 As already argued in \citet{coretta2018j}, the release-to-release interval in itself is not special.
-The compensatory temporal adjustment account can be understood in relation to the acoustic duration of vowels, hence the scope of compensation can (but does not need to) be defined in terms of acoustic intervals.
+The compensatory temporal adjustment account can be understood in relation to the acoustic duration of vowels, hence the scope of compensation can (but need not) be defined in terms of acoustic intervals.
 The interval found to be temporally stable across voicing context is the release-to-release interval.
 However, it is desirable to derive the isochrony of this acoustic interval from properties of articulatory coordination.
-While a full theory of gestural phasing is beyond the scope of this study, I offer here a tentative account of the underlying gestural coordination from which the release-to-release isochrony can be derived.
+While a full theory of gestural phasing is beyond the scope of this study, here I offer a tentative account of the underlying gestural coordination from which the release-to-release isochrony can be derived.
 
 \citet{ohman1966, ohman1967} proposed that the the speech stream is composed by a series of continuous vocalic gestures interrupted by gestures of oral constriction (consonants).
 \citet{fowler1983} further argued that the vocalic gestures of a VCV sequence are characterised by a cyclic pattern of production, so that the temporal distance between the two vowels is constant, and it is not affected by the number of intervening consonants.
@@ -744,7 +750,7 @@ These studies investigate the relation between vowel duration and syllable struc
 In the first study, it was found that vowels followed by a singleton stop (for example in /la.ta/) are longer than vowels followed by a tautosyllabic cluster (/la.dra/).
 This pattern can easily be derived from the C-centre alignment of the cluster /dr/, and if we assume that the distance between the vowels is the same in the two contexts (/la.ta/ and /la.dra/).
 \citet{celata2014} also show that the duration of the consonant/consonant cluster is negatively correlated with the duration of the preceding vowel, although the magnitude of the correlation is low to moderate.
-For a discussion on how speech rate could mask statistical correlations see \citealt{begus2017} and \citealt{coretta2018j}.
+For a discussion on how speech rate could mask statistical correlations see \citet{begus2017} and \citet{coretta2018j}.
 
 
 <!-- Zmarich found that V1 nucleus onset to V2 nucleus onset is not isochronous in mima vs mimma in Italian -->
@@ -763,15 +769,20 @@ Words with a voiced C2 have longer release-to-release intervals (by about 5-17.5
 The compensatory mechanism set forth in this paper is based on the premise that the interval within which compensation happens must be isochronous.
 Since English monosyllabic words don't show voicing-wise isochrony, we either have to abandon a compensatory account or find a mechanism that can explain why the release-to-release interval in monosyllabic words is characterised by both absence of isochrony and compensation of segment durations.
 
-A possible solution to the dilemma could be cautiously put forward from principles of Evolutionary Phonology \citet{blevins2004, blevins2006}.
-Most of present-day English monosyllabic words are diachronically related to disyllabic words in Old English and Proto-Germanic, which through vowel reduction and loss became monosyllabic in English (and other Germanic languages).
+A possible solution to the dilemma could be cautiously put forward from principles of Evolutionary Phonology \citep{blevins2004, blevins2006}.
+Most of present-day English monosyllabic words are diachronically related to disyllabic words in Old English and Proto-Germanic which, through vowel reduction and loss, became monosyllabic in English (and other Germanic languages).
 <!-- citation needed -->
 It is possible that a mechanism of compensation was in action at the diachronic stage in which present-day monosyllabic words were disyllabic.
 It can be speculated that a voicing effect should be reconstructed for Proto-Germanic itself.
-This hypothesis is compliant with a general principle of historical linguistics by which if a feature is present in the majority of daughter languages (which is the case for the voicing effect), it is sensible to reconstruct such feature for the ancestor proto-language.
+This hypothesis is consistent with a general principle of historical linguistics by which if a feature is present in the majority of daughter languages (which is the case for the voicing effect), it is sensible to reconstruct such feature for the ancestor proto-language.
 Furthermore, given that in almost all the investigated Indo-European languages the duration of vowels is modulated by the voicing of a following stop, we could even extend this principle to argue that the voicing effect could be reconstructed even from Proto-Indo-European.
 
-Once the second vowel in disyllabic CVCV words is deleted via diachronic change, the second consonant loses its anchor vowel (V2) and shifts its affiliation to the preceding vowel instead, in other words, it becomes a coda consonant.
+Once the second vowel in disyllabic CVCV words is deleted via diachronic change, the second consonant loses its anchor vowel (V2) and shifts its affiliation to the preceding vowel instead.
+In other words, it becomes a coda consonant.
 Coda consonants are produced anti-phase with the preceding vocalic nucleus and among themselves, meaning that each gesture is executed in sequence.
 At this point, disruption of V-to-V isochrony is no longer an issue, and certain perceptual biases (as proposed by perceptual accounts of the voicing effect like \citealt{javkin1976} and \citealt{kluender1988}) are able to come into action, by stretching or compressing the vocalic gesture.
 The duration of the vowel of monosyllabic words is then free to be modulated in order to enhance the perceptual difference of voiceless vs. voiced stops \citep{lisker1974, lisker1986, stevens1989}.
+
+# Conclusion
+
+TBA.
