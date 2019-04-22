@@ -28,7 +28,10 @@ gestures <- token_measures %>%
     c2_place = factor(c2_place, levels = c("coronal", "velar")),
     vowel = factor(vowel, levels = c("a", "o", "u")),
     gons_max = (max - GONS) * 1000,
-    rel_gons = (GONS - c1_rel) * 1000
+    rel_gons = (GONS - c1_rel) * 1000,
+    mid = (NOFF - NONS) + NONS,
+    rel_mid = (mid - c1_rel) * 1000,
+    rel_noff = (NOFF - c1_rel) * 1000
   ) %>%
   mutate_if(is_character, as_factor)
 
