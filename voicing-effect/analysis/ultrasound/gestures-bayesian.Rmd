@@ -29,6 +29,7 @@ gestures <- token_measures %>%
     vowel = factor(vowel, levels = c("a", "o", "u")),
     gons_max = (max - GONS) * 1000,
     rel_gons = (GONS - c1_rel) * 1000,
+    closing = (NONS - GONS) * 1000,
     mid = (NOFF - NONS) + NONS,
     rel_mid = (mid - c1_rel) * 1000,
     rel_noff = (NOFF - c1_rel) * 1000
@@ -164,3 +165,38 @@ rel_gons_draws %>%
   theme(panel.grid.minor = element_blank())
 ```
 
+# Closing gesture duration (GONS to NONS)
+
+```{r}
+gestures %>%
+  ggplot(aes(closing)) +
+  geom_density() +
+  geom_rug(alpha = 0.1)
+```
+
+Negative values are not possible (by definition, the gestural onset should always be earlier than the nucleus onset). This just means that the data is bad.
+
+```{r}
+gestures %>%
+  filter(closing > 35) %>%
+  ggplot(aes(closing)) +
+  geom_density() +
+  geom_rug(alpha = 0.1)
+```
+
+```{r}
+gestures %>%
+  filter(closing > 35) %>%
+  ggplot(aes(closing, fill = c2_phonation)) +
+  geom_density(alpha = 0.5, colour = NA) +
+  geom_rug(alpha = 0.1)
+```
+
+```{r}
+gestures %>%
+  filter(closing > 35) %>%
+  ggplot(aes(closing, fill = c2_phonation)) +
+  geom_density(alpha = 0.5, colour = NA) +
+  geom_rug(alpha = 0.1) +
+  facet_grid(~ c2_place)
+```
