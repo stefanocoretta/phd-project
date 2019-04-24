@@ -1,8 +1,7 @@
-# Documentation of data processing
 
-This file contains the documentation of the scripts in the `code` folder. The documentation has been written in literate markdown. To produce the scripts form the source file (`process.praat.md`), use the `lmt` package (written in Go by Dave MacFarlane, at https://github.com/driusan/lmt).
+This file contains the documentation of the scripts in the `code` folder of this project. The documentation has been written in literate markdown. To produce the scripts form the source file (`process.praat.md`), use the `lmt` package (written in Go by Dave MacFarlane, at https://github.com/driusan/lmt).
 
-## Prepare files for force alignment in SPPAS
+# Prepare files for force alignment in SPPAS
 
 ```praat alignment-input.praat
 <<<script header>>>
@@ -77,7 +76,7 @@ Remove tier: 1
 Save as text file: "'directory_alignment$'/'speaker$'-filenames.TextGrid"
 ```
 
-## Extract the search area for spline batch processing and kinematics in `AAA`
+# Extract the search area for spline batch processing and kinematics in `AAA`
 
 ```praat search-area.praat
 <<<script header>>>
@@ -207,7 +206,7 @@ for interval from 1 to intervals
 endfor
 ```
 
-## Synchronise EGG data with `AAA` audio data
+# Synchronise EGG data with `AAA` audio data
 
 The following chunk calls the header of the script, which is defined at the end of the documentation, and the main function.
 
@@ -397,7 +396,7 @@ If the debugging mode is off, all the intermediate files are removed. Otherwise 
 endfor
 ```
 
-## Extract VUV intervals
+# Extract VUV intervals
 
 This script calculates the voiced and voiceless portions (VUV) in the synchronised EGG files based on the EGG signal.
 
@@ -473,7 +472,7 @@ if debug_mode == 0
 endif
 ```
 
-## DEGG tracing
+# DEGG tracing
 
 ```praat degg-tracing.praat
 <<<script header>>>
@@ -660,7 +659,7 @@ procedure smoothing : .width
 endproc
 ```
 
-## Word DEGG tracing
+# Word DEGG tracing
 
 ```praat degg-tracing-word.praat
 <<<script header>>>
@@ -719,7 +718,7 @@ for file to files
 endfor
 ```
 
-## Get durations
+# Get durations
 
 ```praat get-durations.praat
 <<<script header>>>
@@ -860,7 +859,7 @@ endfor
 removeObject: palign, bursts
 ```
 
-## Burst detection
+# Burst detection
 
 This script detects the burst in the consonant following the target vowels (C2). The algorythm is based on @avanthapadmanabha2014.
 
@@ -960,7 +959,7 @@ Remove points between: start_consonant, half_consonant
 burst = Get time from index: 1
 ```
 
-## Get measurements
+# Get measurements
 
 This script extracts several durations related to voicing. The main function `merge` is a loop that reads the TextGrids from the derived ultrasound and EGG folders and merges the tier with the gestures from the ultrasound and the tier with the voiced/unvoiced intervals from the EGG.
 
@@ -1086,7 +1085,7 @@ result_line$ = "'speaker$','stimulus$','target','max','release',
 appendFileLine: result_file$, result_line$
 ```
 
-## Get the number of a tier based on the name
+# Get the number of a tier based on the name
 
 The following is a procedure that returns the number of a tier in a TextGrid given the name of that tier. The value is returned to `getTierNumber.return`.
 
@@ -1106,7 +1105,7 @@ procedure getTierNumber: .tierName$
 endproc
 ```
 
-## Get duration of voicing in vowels
+# Get duration of voicing in vowels
 
 ```praat voicing-duration.praat
 <<<script header>>>
@@ -1199,7 +1198,7 @@ endfor
 Voicing during the consonant is extracted by means of 5 points distributed between the start and 50% of the consonant (including burst and pre-formant voicing).
 I will probably have to make this more robust by using the closure duration rather than the consonant duration.
 
-## Wavegram analysis
+# Wavegram analysis
 
 This script extracts wavegram data from the EGG data.
 
@@ -1367,7 +1366,7 @@ endif
 
 For each glottal period, the normalised amplitude is calculated for each sample within the period. Normalisation of amplitude and sample time is achieved through unity-based rescaling (range 0-1).
 
-## Get formants and fundamental frequency
+# Get formants and fundamental frequency
 
 ```praat get-formants.praat
 <<<script header>>>
@@ -1452,7 +1451,7 @@ if vowel$ != ""
 endif
 ```
 
-## Create closure annotations
+# Create closure annotations
 
 ```praat closure-annotation.praat
 <<<script header>>>
@@ -1514,7 +1513,7 @@ for wav from 1 to number_of_files
 endfor
 ```
 
-## Get release of C1
+# Get release of C1
 
 This script detects the release in the consonant preceding the target vowel (C1). The algorythm is based on @avanthapadmanabha2014.
 
@@ -1565,7 +1564,7 @@ Save as text file: "'directory_alignment$'/'speaker$'-release-c1.TextGrid"
 We start by identifying the inverval that corresponds to C1.
 We do this by finding speech intervals, getting the second word and the first consonant of the second word (the C1 of the target word).
 
-## Headers
+# Headers
 
 ```praat "script header"
 ######################################
@@ -1574,7 +1573,7 @@ We do this by finding speech intervals, getting the second word and the first co
 ######################################
 # MIT License
 #
-# Copyright (c) 2016-2018 Stefano Coretta
+# Copyright (c) 2016 Stefano Coretta
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
