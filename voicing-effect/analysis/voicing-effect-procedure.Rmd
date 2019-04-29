@@ -151,8 +151,9 @@ for (i in 1:length(speakers)) {
 1. **Synchronise** EGG with `sync-egg.praat`: the output is written in `data/egg/derived/[ID]/`
 1. **Extract vuv** (Voiced/UnVoiced) with `extract-vuv.praat`: the output is written in the same folder as above
 1. **Calculate dEGG tracegrams** with `degg-tracing.praat`: the results are written in `data/datasets/egg/`
+1. **Extract wavegram data** with `wavegram.praat`.
 
-```{r sync-vuv-degg}
+```{r sync-vuv-degg-wavegram}
 speakers <- c(
   "it01", "it02", "it03", "it07", "it09", "it11", "it12", "it13", "it14",
   "pl02", "pl03", "pl04", "pl05", "pl06", "pl07"
@@ -187,6 +188,13 @@ for (i in 1:length(speakers)) {
         40,
         10000,
         11
+    )
+}
+
+for (i in 1:length(speakers)) {
+    praat_run(
+        "./voicing-effect/code/wavegram.praat",
+        speakers[i]
     )
 }
 
