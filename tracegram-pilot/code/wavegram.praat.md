@@ -2,8 +2,7 @@
 
 This script extracts wavegram data from the EGG data.
 
-## wavegram.praat
-```praat
+```praat wavegram.praat
 <<<preamble>>>
 
 <<<main loop>>>
@@ -11,8 +10,7 @@ This script extracts wavegram data from the EGG data.
 <<<smoothing>>>
 ```
 
-## "preamble"
-```praat
+```praat "preamble"
 lower = 40
 upper = 10000
 smoothWidth = 11
@@ -29,8 +27,7 @@ numberOfFiles = Get number of strings
 The preamble defines a few settings for filtering and smoothing, and the results file.
 The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems.
 
-## "main loop"
-```praat
+```praat "main loop"
 #### Files loop ####
 for file from 1 to numberOfFiles
     selectObject: fileList
@@ -51,8 +48,7 @@ endfor
 
 The main loop goes through each file, extracts the relevat portions using a vuv textgrid, and gets the numeric data.
 
-## "vowel loop"
-```praat
+```praat "vowel loop"
 #### Vowel loop ####
 token = 0
 for interval to numberOfIntervals
@@ -82,8 +78,7 @@ endfor
 
 In this loop, each interval corresponding to an uttered vowel is extracted, the DEGG is calculated and the wavegram data is extracted from the DEGG.
 
-## "degg"
-```praat
+```praat "degg"
 eggSmooth = Filter (pass Hann band): lower, upper, 100
 @smoothing: smoothWidth
 sampling_period = Get sampling period
@@ -104,8 +99,7 @@ deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes",
 
 The raw EGG is filtered and smoothed using a triangular smooth, and from this the DEGG is calculated. Two PointProcess files are also created, which roughly mark each glottal period in the EGG and DEGG.
 
-## "period loop"
-```praat
+```praat "period loop"
 selectObject: eggPointProcess
 eggPoints = Get number of points
 meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
@@ -130,8 +124,7 @@ endfor
 
 Each glottal period is detected by finding the EGG minima. The interval between two consecutive EGG minima is a glottal period.
 
-## "wavegram"
-```praat
+```praat "wavegram"
 if period <= meanPeriod * 2
     selectObject: deggSmooth
     minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
@@ -154,8 +147,10 @@ if period <= meanPeriod * 2
         sampleNorm = (sample - sampleStart) /
             ...(sampleEnd - sampleStart)
 
-        # At sample rate 44100 Hz, each period has around 400 samples
-        sample = sample + 2
+          # At sample rate 44100 Hz, each period has around 400 samples.
+          # Extract data from every 10 samples (around 40 samples per cycle)
+          # to reduce data size.
+          sample = sample + 10
 
         resultLine$ = "'fileBareName$','token','timeNorm','sequence','sampleNorm','amplitudeNorm'"
 
@@ -166,8 +161,7 @@ endif
 
 For each glottal period, the normalised amplitude is calculated for each sample within the period. Normalisation of amplitude and sample time is achieved through unity-based rescaling (range 0-1).
 
-## "smoothing"
-```praat
+```praat "smoothing"
 procedure smoothing : .width
     .weight = .width / 2 + 0.5
 
