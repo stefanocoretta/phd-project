@@ -121,7 +121,7 @@ italian_gam <- bam(
         ti(sequence_prop, sample) +
         ti(sequence_prop, sample, by = c2_phonation) +
         s(sequence_prop, speaker, bs = "fs"),
-    data = filter(wavegram, language == "italian")
+    data = filter(wavegram, language == "Italian")
 )
 ```
 
@@ -159,7 +159,7 @@ polish_gam <- bam(
         ti(sequence_prop, sample) +
         ti(sequence_prop, sample, by = c2_phonation) +
         s(sequence_prop, speaker, bs = "fs"),
-    data = filter(wavegram, language == "polish")
+    data = filter(wavegram, language == "Polish")
 )
 ```
 
