@@ -16,7 +16,7 @@ results$ = "../data/datasets"
 createDirectory(results$)
 data$ = "../data/raw"
 resultsHeader$ = "file,token,time,egg_minimum,degg_maximum,degg_minimum"
-resultsFile$ = "'results$'/results.csv"
+resultsFile$ = "'results$'/tracegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
 numberOfFiles = Get number of strings
