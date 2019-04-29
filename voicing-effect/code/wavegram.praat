@@ -128,10 +128,12 @@ for file to numberOfFiles
                     sampleNorm = (sample - sampleStart) /
                         ...(sampleEnd - sampleStart)
             
-                    # At sample rate 44100 Hz, each period has around 400 samples
-                    sample = sample + 2
+                    # At sample rate 44100 Hz, each period has around 400 samples.
+                    # Extract data from every 10 samples (around 40 samples per cycle)
+                    # to reduce data size.
+                    sample = sample + 10
             
-                    resultLine$ = "'speaker$','filename$','date$','stimulus$','egg_minimum_1','timeNorm','sequence','sampleNorm','amplitudeNorm'"
+                    resultLine$ = "'speaker$','filename$','date$','stimulus$','eggMinimum1','timeNorm','sequence','sampleNorm','amplitudeNorm'"
             
                     appendFileLine: resultsFile$, resultLine$
                 endwhile
