@@ -14,9 +14,9 @@ This script extracts wavegram data from the EGG data.
 lower = 40
 upper = 10000
 smoothWidth = 11
-results$ = "../results"
+results$ = "../data/datasets"
 createDirectory(results$)
-data$ = "../data"
+data$ = "../data/raw"
 resultsHeader$ = "file,token,time,sequence,sample,amplitude"
 resultsFile$ = "'results$'/wavegram.csv"
 writeFileLine: resultsFile$, resultsHeader$
