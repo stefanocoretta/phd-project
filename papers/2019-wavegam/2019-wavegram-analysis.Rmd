@@ -1,0 +1,93 @@
+---
+title: "Wavegram analysis"
+author: "Stefano Coretta"
+date: "29/04/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(itsadug)
+library(tidymv)
+library(coretta2018itapol)
+data("wavegram")
+```
+
+# Prepare data
+
+```{r prep}
+wave <- wavegram %>%
+  filter(!(file %in% c("it09-036", "pl02-094", "pl06-044"))) %>%
+  mutate(
+    lang_voice = ordered(interaction(language, c2_phonation), levels = c("Italian.voiceless", "Italian.voiced", "Polish.voiceless", "Polish.voiced"))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(date, sequence, sample) %>%
+  create_start_event(date)
+
+contrasts(wave$lang_voice) <- "contr.treatment"
+```
+
+# Run model
+
+```{r wavegam}
+wavegam <- bam(
+  amplitude ~
+    lang_voice +
+    s(sequence_prop) + s(sample) +
+    s(sequence_prop, by = lang_voice) + s(sample, by = lang_voice) +
+    ti(sequence_prop, sample) +
+    ti(sequence_prop, sample, by = lang_voice) +
+    s(sequence_prop, speaker, bs = "fs"),
+  data = wave
+)
+```
+
+```{r wavegam-acf}
+acf_resid(wavegam, split_pred = list(wave$date))
+```
+
+```{r wavegam-ar}
+rho <- start_value_rho(wavegam)
+
+wavegam_ar <- bam(
+  amplitude ~
+    lang_voice +
+    s(sequence_prop) + s(sample) +
+    s(sequence_prop, by = lang_voice) + s(sample, by = lang_voice) +
+    ti(sequence_prop, sample) +
+    ti(sequence_prop, sample, by = lang_voice) +
+    s(sequence_prop, speaker, bs = "fs"),
+  data = wave,
+  rho = rho,
+  AR.start = wave$start_event
+)
+```
+
+```{r wavegam-ar-acf}
+acf_resid(wavegam_ar, split_pred = "AR.start")
+```
+
+```{r wavegam-ar-acf}
+summary(wavegam_ar)
+```
+
+# Plot model
+
+```{r wavegram-ar-pred}
+wavegam_ar_pred <- predict_gam(wavegam_ar, exclude_terms = "s(sequence_prop,speaker)") %>%
+  filter(speaker == "it01") %>%
+  select(-speaker)
+```
+
+```{r surface}
+wavegam_ar_pred %>%
+  ggplot(aes(sequence_prop, sample, z = fit)) +
+  geom_raster(aes(fill = fit)) +
+  geom_contour(colour = "white") +
+  facet_wrap(~ lang_voice)
+```
+
