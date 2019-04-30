@@ -41,7 +41,8 @@ wavegam <- bam(
     s(sequence_prop, by = lang_voice) + s(sample, by = lang_voice) +
     ti(sequence_prop, sample) +
     ti(sequence_prop, sample, by = lang_voice) +
-    s(sequence_prop, speaker, bs = "fs"),
+    s(sequence_prop, speaker, bs = "fs") +
+    s(sample, speaker, bs = "fs"),
   data = wave
 )
 ```
@@ -60,7 +61,8 @@ wavegam_ar <- bam(
     s(sequence_prop, by = lang_voice) + s(sample, by = lang_voice) +
     ti(sequence_prop, sample) +
     ti(sequence_prop, sample, by = lang_voice) +
-    s(sequence_prop, speaker, bs = "fs"),
+    s(sequence_prop, speaker, bs = "fs") +
+    s(sample, speaker, bs = "fs"),
   data = wave,
   rho = rho,
   AR.start = wave$start_event
@@ -78,7 +80,7 @@ summary(wavegam_ar)
 # Plot model
 
 ```{r wavegram-ar-pred}
-wavegam_ar_pred <- predict_gam(wavegam_ar, exclude_terms = "s(sequence_prop,speaker)") %>%
+wavegam_ar_pred <- predict_gam(wavegam_ar, exclude_terms = c("s(sequence_prop,speaker)", "s(sample,speaker)")) %>%
   filter(speaker == "it01") %>%
   select(-speaker)
 ```
@@ -88,6 +90,7 @@ wavegam_ar_pred %>%
   ggplot(aes(sequence_prop, sample, z = fit)) +
   geom_raster(aes(fill = fit)) +
   geom_contour(colour = "white") +
-  facet_wrap(~ lang_voice)
+  facet_wrap(~ lang_voice) +
+  scale_x_continuous(breaks = seq(0, 1, 0.1))
 ```
 
