@@ -12,11 +12,88 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(itsadug)
 library(tidymv)
+library(coretta2017egg)
+data("wavegram_p")
 library(coretta2018itapol)
 data("wavegram")
 ```
 
-# Prepare data
+# Pilot study
+
+```{r pilot-prep}
+wave_p <- wavegram_p %>%
+  unite("observation", speaker, phonation, token, remove = FALSE) %>%
+  mutate(
+    phonation_o = ordered(phonation, levels = c("modal", "breathy"))
+  ) %>%
+  mutate_if(is.character, as.factor) %>%
+  arrange(speaker, phonation, token, sequence, sample) %>%
+  create_start_event(token) %>%
+  filter(sequence < 8)
+```
+
+# Run model
+
+```{r wavegam-p}
+wavegam_p <- bam(
+  amplitude ~
+    phonation_o +
+    s(sequence, k = 8) + s(sample) +
+    s(sequence, k = 8, by = phonation_o) + s(sample, by = phonation_o) +
+    ti(sequence, sample, k = 8) +
+    ti(sequence, sample, k = 8, by = phonation_o) +
+    s(sequence, speaker, k = 8, bs = "fs", m = 1),
+  data = wave_p
+)
+```
+
+```{r wavegam-p-acf}
+acf_resid(wavegam_p, list(wave_p$observation))
+```
+
+```{r wavegam-p-ar}
+rho = start_value_rho(wavegam_p)
+
+wavegam_p_ar <- bam(
+  amplitude ~
+    phonation_o +
+    s(sequence, k = 8) + s(sample) +
+    s(sequence, k = 8, by = phonation_o) + s(sample, by = phonation_o) +
+    ti(sequence, sample, k = 8) +
+    ti(sequence, sample, k = 8, by = phonation_o) +
+    s(sequence, speaker, k = 8, bs = "fs", m = 1),
+  data = wave_p,
+  rho = rho,
+  AR.start = wave_p$start_event
+)
+```
+
+```{r wavegam-p-ar-acf}
+acf_resid(wavegam_p_ar, "AR.start")
+```
+
+```{r wavegam-p-ar-summary}
+summary(wavegam_p_ar)
+```
+
+## Plot model
+
+```{r wavegam-p-ar-pred}
+wavegam_p_ar_pred <- predict_gam(wavegam_p_ar, exclude_terms = c("s(sequence,speaker)", "s(sample,speaker)")) %>%
+  filter(speaker == "01") %>%
+  select(-speaker)
+```
+
+```{r surface-p}
+wavegam_p_ar_pred %>%
+  ggplot(aes(sequence, sample, z = fit)) +
+  geom_raster(aes(fill = fit)) +
+  geom_contour(colour = "white") +
+  facet_grid(~ phonation_o) +
+  scale_fill_distiller(palette = "RdYlBu")
+```
+
+# Italian and Polish
 
 ```{r prep}
 wave <- wavegram %>%
@@ -31,7 +108,7 @@ wave <- wavegram %>%
 contrasts(wave$lang_voice) <- "contr.treatment"
 ```
 
-# Run model
+## Run model
 
 ```{r wavegam}
 wavegam <- bam(
@@ -41,8 +118,7 @@ wavegam <- bam(
     s(sequence_prop, by = lang_voice) + s(sample, by = lang_voice) +
     ti(sequence_prop, sample) +
     ti(sequence_prop, sample, by = lang_voice) +
-    s(sequence_prop, speaker, bs = "fs") +
-    s(sample, speaker, bs = "fs"),
+    s(sequence_prop, speaker, bs = "fs", m = 1),
   data = wave
 )
 ```
@@ -61,8 +137,7 @@ wavegam_ar <- bam(
     s(sequence_prop, by = lang_voice) + s(sample, by = lang_voice) +
     ti(sequence_prop, sample) +
     ti(sequence_prop, sample, by = lang_voice) +
-    s(sequence_prop, speaker, bs = "fs") +
-    s(sample, speaker, bs = "fs"),
+    s(sequence_prop, speaker, bs = "fs", m = 1),
   data = wave,
   rho = rho,
   AR.start = wave$start_event
@@ -73,13 +148,13 @@ wavegam_ar <- bam(
 acf_resid(wavegam_ar, split_pred = "AR.start")
 ```
 
-```{r wavegam-ar-acf}
+```{r wavegam-ar-summary}
 summary(wavegam_ar)
 ```
 
-# Plot model
+## Plot model
 
-```{r wavegram-ar-pred}
+```{r wavegam-ar-pred}
 wavegam_ar_pred <- predict_gam(wavegam_ar, exclude_terms = c("s(sequence_prop,speaker)", "s(sample,speaker)")) %>%
   filter(speaker == "it01") %>%
   select(-speaker)
@@ -91,6 +166,7 @@ wavegam_ar_pred %>%
   geom_raster(aes(fill = fit)) +
   geom_contour(colour = "white") +
   facet_wrap(~ lang_voice) +
-  scale_x_continuous(breaks = seq(0, 1, 0.1))
+  scale_x_continuous(breaks = seq(0, 1, 0.1)) +
+  scale_fill_distiller(palette = "RdYlBu")
 ```
 
