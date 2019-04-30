@@ -36,7 +36,7 @@ From each glottal cycle, the relative amplitude of the dEGG signal was extracted
 
 A generalised additive mixed model (GAMM) was fitted to the data to statistically assess differences in vocal fold activity between modal and breathy voicing.
 The following terms were included: the amplitude of the dEGG signal as the outcome variable, a factor with language and phonation as a parametric term, a smooth over the normalised time of the beginning of the glottal cycle (as the proportion of the time relative to the entire token duration) and one over the normalised time of the sample within the glottal cycle (as the proportion of the time relative to the duration of the glottal cycle), two difference smooth over normalised time of the glottal cycle onset and normalised sample time using a by-variable with the language/phonation factor, a tensor product interaction between normalised cycle time and normalised sample time and the same tensor product interaction with a language/phonation by-variable.
-Finally, by-speaker differences were modelled with two by-speaker factor smooth over normalised cycle time and over normalised sample time.
+Finally, by-speaker differences were modelled with a by-speaker factor smooth over normalised cycle time.
 A first-order autoregressive (AR1) model was included to deal with the relatively high auto-correlation in the residuals.
 
 \Cref{f:xxx} shows the modelled wavegrams of the modal and breathy tokens.
