@@ -3,17 +3,28 @@ title: "A new method for modelling electroglottographic data"
 author: "Stefano Coretta"
 output:
   pdf_document:
-    latex_engine: xelatex
     citation_package: natbib
+    fig_caption: yes
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
 bibliography: linguistics
 biblio-style: unified
 mainfont: Lato
 fontsize: 12pt
+papersize: a4
+indent: true
+header-includes:
+- \usepackage{cleveref}
+params:
+  version: 0.1
+  version-date: "2019/04/30"
 ---
 
 ```{r setup, include=FALSE}
+library(here)
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = normalizePath("../../"))
+knitr::opts_knit$set(root.dir = here())
 library(tidyverse)
 theme_set(theme_minimal())
 library(coretta2017egg)
@@ -30,7 +41,7 @@ The acquisition of the signals was controlled with Audacity running on a MacBook
 The placement of the electrodes strap was checked with the height indicator on the EGG unit.
 Each participant uttered 10 consecutive tokens of a sustained /a/ in modal voice, followed by 10 tokens of a sustained breathy /a/.
 All subsequent data processing was performed in Praat \citep{boersma2018}.
-The onset and offset of each token were detected with an automatic procedure which finds voiced and unvoiced intervals (To TextGrid (vuv)).
+The onset and offset of each token were detected with an automatic procedure which finds voiced and unvoiced intervals (`To TextGrid (vuv)`).
 The dEGG wavegram data was extracted from the first 8 glottal cycles of a 500 ms window centred around the mid-point of each token.
 From each glottal cycle, the relative amplitude of the dEGG signal was extracted every 10 samples.
 
@@ -44,3 +55,24 @@ Since the tokens were produced with sustained phonation, no appreciable change w
 However, the comparison of the wavegram of modal voice with that of breathy voice reveals clear differences.
 As a general trend, the dEGG maximum is achieved later within the glottal cycle in breathy voicing relative to modal voicing.
 This is compatible with the lower CQ values observed in breathy voicing.
+Moreover, differences in velocity of closing and opening movements of the folds are signalled by the relative widths of the red-coloured (around the dEGG maximum) and the blue-coloured bands (around the dEGG minimum).
+While in modal voicing the blue band is wider, the red band is in breathy voice, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
+
+# Wavegram of vowels followed by voiceless vs. voiced stops
+
+This section further illustrates the use of wavegram GAMs by discussing a dynamic analysis of changes in vocal folds activity during the production of vowels followed by voiceless vs. voiced stops in Italian and Polish.
+EGG data was obtained from 9 Italian speakers and 6 Polish speakers.
+<!-- experimental info on material -->
+The procedures for data processing and analysis were the same as with the pilot study, with the exception that data was extracted from every glottal cycle within the whole duration of the vowel.
+The vowel onset and offset were identified as the appearance and disappearance of higher formant structure respectively \citep{machac2009}.
+
+\Cref{f:xxx} shows the modelled wavegrams of vowels followed by voiceless (left) and voiced stops (right), in Italian (top) and Polish (bottom).
+The wavegrams indicate that vocal folds activity changes towards the end of the vowel if the following consonant is voiceless, both in Italian and Polish.
+The glottal activity along the second half of vowels followed by voiced stops is, on the other hand, more stable.
+Moreover, the change in activity is initiated earlier in Italian (at around 60% into the vowel) than in Polish (at about 80%).
+
+Another difference between the two languages concerns the initial voiceless stop (/p/).
+The change observed between 50 and 70% into the glottal cycle at the beginning of the vowel, which indicates a transition from a more spread glottis, is more extreme in Polish than in Italian.
+This means that phonation at vowel onset is slightly breathier in the former.
+Such difference is compatible with the finding that Polish voiceless stops have on average a longer VOT than Italian stops.
+<!-- include reference!!! -->

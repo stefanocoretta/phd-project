@@ -1,0 +1,176 @@
+\documentclass[12pt,a4paper,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{Lato}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={A new method for modelling electroglottographic data},
+            pdfauthor={Stefano Coretta},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{unified}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{A new method for modelling electroglottographic data}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Stefano Coretta}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{cleveref}
+
+\begin{document}
+\maketitle
+
+\hypertarget{pilot-study}{%
+\section{Pilot study}\label{pilot-study}}
+
+Synchronised audio and electroglottographic (EGG) data were obtained
+from 5 trained phoneticians, who were asked to produce sustained tokens
+of /a/ with modal and breathy voice. The data was collected using a
+Glottal Enterprises EG2-PCX2 electroglottograph and a Movo LV4-O2
+Lavalier microphone, at a sample rate of 44100 Hz (16-bit). The
+acquisition of the signals was controlled with Audacity running on a
+MacBook Pro (Retina, 13-inch, Mid 2014). The placement of the electrodes
+strap was checked with the height indicator on the EGG unit. Each
+participant uttered 10 consecutive tokens of a sustained /a/ in modal
+voice, followed by 10 tokens of a sustained breathy /a/. All subsequent
+data processing was performed in Praat \citep{boersma2018}. The onset
+and offset of each token were detected with an automatic procedure which
+finds voiced and unvoiced intervals (\texttt{To\ TextGrid\ (vuv)}). The
+dEGG wavegram data was extracted from the first 8 glottal cycles of a
+500 ms window centred around the mid-point of each token. From each
+glottal cycle, the relative amplitude of the dEGG signal was extracted
+every 10 samples.
+
+A generalised additive mixed model (GAMM) was fitted to the data to
+statistically assess differences in vocal fold activity between modal
+and breathy voicing. The following terms were included: the amplitude of
+the dEGG signal as the outcome variable, a factor with language and
+phonation as a parametric term, a smooth over the normalised time of the
+beginning of the glottal cycle (as the proportion of the time relative
+to the entire token duration) and one over the normalised time of the
+sample within the glottal cycle (as the proportion of the time relative
+to the duration of the glottal cycle), two difference smooth over
+normalised time of the glottal cycle onset and normalised sample time
+using a by-variable with the language/phonation factor, a tensor product
+interaction between normalised cycle time and normalised sample time and
+the same tensor product interaction with a language/phonation
+by-variable. Finally, by-speaker differences were modelled with a
+by-speaker factor smooth over normalised cycle time. A first-order
+autoregressive (AR1) model was included to deal with the relatively high
+auto-correlation in the residuals.
+
+\Cref{f:xxx} shows the modelled wavegrams of the modal and breathy
+tokens. Since the tokens were produced with sustained phonation, no
+appreciable change within each wavegram can be observed. However, the
+comparison of the wavegram of modal voice with that of breathy voice
+reveals clear differences. As a general trend, the dEGG maximum is
+achieved later within the glottal cycle in breathy voicing relative to
+modal voicing. This is compatible with the lower CQ values observed in
+breathy voicing. Moreover, differences in velocity of closing and
+opening movements of the folds are signalled by the relative widths of
+the red-coloured (around the dEGG maximum) and the blue-coloured bands
+(around the dEGG minimum). While in modal voicing the blue band is
+wider, the red band is in breathy voice, indicating that the velocity
+into and out of the beginning of the closed phase is slower in breathy
+voicing.
+
+\hypertarget{wavegram-of-vowels-followed-by-voiceless-vs.-voiced-stops}{%
+\section{Wavegram of vowels followed by voiceless vs.~voiced
+stops}\label{wavegram-of-vowels-followed-by-voiceless-vs.-voiced-stops}}
+
+This section further illustrates the use of wavegram GAMs by discussing
+a dynamic analysis of changes in vocal folds activity during the
+production of vowels followed by voiceless vs.~voiced stops in Italian
+and Polish. EGG data was obtained from 9 Italian speakers and 6 Polish
+speakers. The procedures for data processing and analysis were the same
+as with the pilot study, with the exception that data was extracted from
+every glottal cycle within the whole duration of the vowel. The vowel
+onset and offset were identified as the appearance and disappearance of
+higher formant structure respectively \citep{machac2009}.
+
+\Cref{f:xxx} shows the modelled wavegrams of vowels followed by
+voiceless (left) and voiced stops (right), in Italian (top) and Polish
+(bottom). The wavegrams indicate that vocal folds activity changes
+towards the end of the vowel if the following consonant is voiceless,
+both in Italian and Polish. The glottal activity along the second half
+of vowels followed by voiced stops is, on the other hand, more stable.
+Moreover, the change in activity is initiated earlier in Italian (at
+around 60\% into the vowel) than in Polish (at about 80\%).
+
+Another difference between the two languages concerns the initial
+voiceless stop (/p/). The change observed between 50 and 70\% into the
+glottal cycle at the beginning of the vowel, which indicates a
+transition from a more spread glottis, is more extreme in Polish than in
+Italian. This means that phonation at vowel onset is slightly breathier
+in the former. Such difference is compatible with the finding that
+Polish voiceless stops have on average a longer VOT than Italian stops.
+
+\bibliography{linguistics}
+
+
+\end{document}
