@@ -164,6 +164,7 @@ The research compendium of this paper containing data and analysis scripts is al
 <!-- include url and data citation -->
 
 ## Sample size and stopping rule
+\label{s:sample-size}
 
 Sample size and a stopping rule were determined prior to data collection with the method of the Region Of Practical Equivalence (ROPE) \citep{kruschke2015, vasishth2018a}.
 A 'no-effect' region of values around 0 is first identified.
@@ -239,19 +240,14 @@ The following measures were obtained:
 
 ## Statistical analysis
 
-Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
-Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
-Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warm-up.
-A Gaussian (normal) distribution was used in all the models as the response distribution.
-All factors were coded using treatment contrasts (the first level in this list was set as the reference level): number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).\footnote{Note that the order of the levels in the vowel and place factors are reversed compared to that in the pre-registration. This was done to match the vowel height order in \citet{coretta2018j}, from low to high, and to keep a back-to-front order for place for expositional purposes. Changing the order of the levels of course does not affect the results.}
-Speech rate was centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
-A seed (1234) was set in all models to ensure reproducibility of the output.
-
-The choice of Bayesian over frequentist statistics stems from the misplaced reliance on *p*-values in the context of commonly low-powered studies \citep{munafo2017, roettger2019}.
+The choice of Bayesian over frequentist statistics stems from a recent discussion of the problems associated with the reliance of *p*-values in statistical inference \citep{wagenmakers2007, munafo2017, kirby2018, roettger2019}.
+Bayesian statistics also offers a straightforward framework for investigating the absence of differences across conditions (a 'null effect') based on the ROPE (\Cref{s:sample-size}), as it is the case in this study.
+Another favourable aspect of Bayesian methods is that more focus is given to the distributions of the enquired effects, rather than on point estimates (which are heavily influenced by matters of statistical power, see a discussion of Type S-M errors in \citealt{kirby2018}) and an arbitrary significance cut-off point.
+Finally, Bayesian inference is centred around an incremental procedure of reallocation of credibility between natural states and on evidence based on observed data \citep{kruschke2015}, rather than on a series of hypothetical replications of the experiment \citep{wagenmakers2007}.\footnote{I am not advocating here agains \textit{p}-values in absolute terms, and \textit{p}-values are still useful in that they provide us with a practical solution in situations that involve, for example, decision-making.}
 For an introduction to Bayesian statistics in phonetics, see \citet{vasishth2018}, and \citet{nicenboim2018a}, while for a general introduction see \citet{etz2018}, \citet{mcelreath2015}, \citet{kruschke2015}, and references therein.
 While a thorough discussion of Bayesian methods would be beyond the scope of this paper, it is relevant to provide the less familiar reader with the basic tools for interpreting analyses and results.
 
-More weight will be given here to the estimated distributions of the sought effects, rather than on point estimates (as in frequentist regression models).
+Particular weight will be given to the estimated distributions of the sought effects in presenting the results of this study.
 The estimated distribution of an effect (or parameter) is the posterior distribution of that effect (or parameter).
 The posterior distribution is an approximation of the parameter distribution, and it takes into account the specified prior for that parameter, i.e. the theoretical probability of the parameter as known or derived by the researcher.
 The inclusion of priors in the analysis is at the heart of Bayesian modelling, which relies on prior knowledge for the estimation of parameter values.
@@ -262,7 +258,18 @@ For example, if the 95% CI is between 10 and 30 ms, there is a 95% probability t
 In each model, priors are specified for each of the parameters to be estimated. The priors are in the form of particular distributions, like the Gaussian (normal) or the Cauchy distribution.
 A prior defines the prior knowledge of where the parameter might lie within a range of values.
 For example, a prior as a normal distribution with mean 200 ms and standard deviation 50 indicates the researcher's belief that the parameter lies between 100 and 300 ms with 95% probability (i.e., the mean minus twice the standard deviation, and the mean plus twice the standard deviation).
-A possible concern is that the priors might have too much of an influence on the results.
+
+Statistical analysis was performed in R v3.5.2 \citep{r-core-team2018}.
+Bayesian regression models were fit with brms \citep{burkner2017, burkner2018}.
+Each model was run with four MCMC chains and 2000 iterations per chain, of which 1000 for warm-up.
+A Gaussian (normal) distribution was used in all the models as the response distribution.
+All factors were coded using treatment contrasts (the first level in this list was set as the reference level): number of syllables (disyllabic, monosyllabic), vowel (/ɑː/, /ɜː/, /iː/), C2 voicing (voiceless, voiced), C2 place of articulation (velar, labial).
+<!-- \footnote{Note that the order of the levels in the vowel and place factors are reversed compared to that in the pre-registration. This was done to match the vowel height order in \citet{coretta2018j}, from low to high, and to keep a back-to-front order for place for expositional purposes. Changing the order of the levels of course does not affect the results.} -->
+Speech rate was centred when included in the models so that the intercept could be interpreted as the intercept at mean speech rate.
+A seed (1234) was set in all models to ensure reproducibility of the output.
+The priors used in the models reported here will be discussed along with the results in the following section to ease exposition.
+
+A concern that could be raised is that the priors might have too much influence on the posterior distributions.
 A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betancourt2018} indicates that the models discussed in this study are highly informed by the observed data and don't heavily rely on prior specifications.
 
 # Results
