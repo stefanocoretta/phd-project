@@ -33,6 +33,45 @@ library(coretta2018itapol)
 data("wavegram")
 ```
 
+# Electroglottography
+
+The position of the vocal folds within the oral tract makes investigation about them difficult.
+Direct observation of the activity of the larynx via invasive methods, like laryngoscopy and ..., brings with it a series of practical drawback.
+Among other methods for obtaining information about glottal activity is electroglottography [...].
+Electroglottography, or EGG, \citep{fabre1957} is a technique that measures the degree of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
+A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage (\Cref{f:egg-setup}).
+Impedance of this current is modulated by the VFCA, and greater vocal folds contact creates less impedance.
+The amplitude of is inversely correlated with VFCA and impedance, so that higher amplitude values indicate a greater contact area \citep{titze1990}.
+The EGG unit registers the current impedance and converts it to relative amplitude values.
+The time-developing amplitude signal thus provides information of the changes in VFCA, i.e. on properties of vocal folds vibration (voicing).
+
+\begin{figure}
+  \includegraphics{./img/degg-signal.pdf}
+  \caption{The electroglottographic signal (EGG) with corresponding first derivative (dEGG).}
+  \label{f:egg}
+\end{figure}
+
+An example EGG signal is provided in \Cref{f:egg}.
+A glottal cycle can be described in terms of two phases \citep{childers1985, hampala2016}: (a) a contacting phase, in which the vocal folds are approaching each other, (c) a de-contacting phase, in which the vocal folds move apart from each other.
+Transversal to this two-phase description, the glottal cycle can be described in terms of whether the glottis is occluded or not.
+So the cycle can be divided into (1) a closed phase, in which the glottis is completely closed and glottal flow is 0 (in some contexts this phase could be absent, like in breathy voicing), and (2) an open phase, in which there is no complete occlusive contact between the vocal folds.
+The timing of these phases can be approximated from the EGG signal, as demonstrated by both experimental and modelling work.
+<!-- cited in Hampala 2016 -->
+<!-- point the reader to Hampala for figure on movements of the vocal folds -->
+
+Two important landmarks of glottal movement are the closing instant (the timepoint of glottal complete closure) and the opening instant (the moment in which the glottis first opens).
+These points delimit the open and closed phases of a glottal cycle.
+The ratio of the closed phase relative to the total cycle duration, the closed quotient, has been used as an index of phonation mode.
+Modal voice has higher CQ values than breathy voice, and lower values than creaky voice.
+One method for the detection of the closing and opening instants is based on the first derivative of the EGG signal (dEGG, see \Cref{f:egg}).
+\citet{herbst2017} showed that this method returns values that are just a surrogate of the actual articulatory closing and opening instants, due to the complex anatomy of the vocal folds, and recommends to call this EGG-based closed quotient the 'contact quotient'.
+
+As an alternative to the possibly biased contact quotient, \citet{herbst2010} propose a visualisation method, the wavegram, which does not reduce the EGG signal to a single value, but rather uses information from the whole signal to qualitatively assess vocal folds activity.
+<!-- explain wavegram -->
+
+One limitation of the wavegram method is its qualitative nature.
+However, wavegram data can be flexibly modelled using generalised additive models (GAMs, ...).
+
 # Pilot study
 
 Synchronised audio and electroglottographic (EGG) data were obtained from 5 trained phoneticians, who were asked to produce sustained tokens of /a/ with modal and breathy voice.
