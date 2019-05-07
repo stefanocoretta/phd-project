@@ -24,8 +24,8 @@ header-includes:
 - \linenumbers
 indent: true
 params:
-  version: 1.9
-  version-date: "2019/04/11"
+  version: 1.10
+  version-date: "2019/05/07"
 ---
 
 ```{r setup, include=FALSE}
@@ -306,7 +306,7 @@ Future research is warranted to ascertain language-related differences and possi
 
 ## Open Science statement
 
-Following recent practices which encourage scientific transparency \citep{cruwell2018, berez-kroeker2018, roettger2019}, data and analysis code are available on the Open Science Framework.
+Following recent practices which encourage scientific transparency \citep{cruwell2018, berez-kroeker2018, roettger2019}, data and analysis code are available on the Open Science Framework \citep{coretta2019}.
 
 # Results
 \label{s:results}
