@@ -677,7 +677,8 @@ This study set out to investigate whether the results from \citet{coretta2018j} 
 It was expected that the release-to-release interval would not be affected by C2 voicing in disyllabic words but it would in monosyllabic words.
 Moreover, a conceptual replication of studies on the effect of consonant voicing on vowel and closure durations was sought, with a focus on comparing the effect in mono- vs. disyllabic words.
 This section discusses in turn the results in relation to the release-to-release interval duration (\Cref{s:rr-disc}) and to vowel and closure durations (\Cref{s:vc-disc}) by comparing them with the hypotheses of this study.
-\Cref{s:gen-disc} synthesises and links these findings back to the articulatory grounding of the temporal properties of the release-to-release interval in mono- and disyllabic words expounded in \Cref{s:intro}, and discusses limitations and future work.
+\Cref{s:gen-disc} synthesises and links these findings back to the articulatory grounding of the temporal properties of the release-to-release interval in mono- and disyllabic words (\Cref{s:intro}).
+Limitations and future work are also discussed.
 
 ## Release-to-release interval
 \label{s:rr-disc}
@@ -685,11 +686,11 @@ This section discusses in turn the results in relation to the release-to-release
 The first question (see \Cref{s:hypo}) asked whether the voicing of C2 in disyllabic and monosyllabic words in English influences the duration of the release-to-release interval.
 \citet{coretta2018j} showed that the release-to-release interval duration is not affected by C2 voicing in disyllabic words of Italian and Polish.
 The hypotheses were that, in English, the interval is not affected in disyllabic words, like in Italian and Polish, but that it is in monosyllabic words.
-In sum, the results of this study indicate that the release-to-release duration of disyllabic words in English is very similar independent from whether C2 is voiceless (like in /tɑːpəs/) and or voiced C2 (/tɑːbəs/).
+In sum, the results of this study indicate that the release-to-release duration of disyllabic words in English is very similar independent of whether C2 is voiceless (like in /tɑːpəs/) or voiced C2 (/tɑːbəs/).
 On the other hand, the release-to-release in monosyllabic words is longer if C2 is voiced (like in /tɑːb/ vs. /tɑːp/).
 
 A Bayesian regression model was fitted to the release-to-release duration (model 3).
-The results suggest a null effect of C2 voicing on the interval duration in disyllabic words (hypothesis 1a), with a 95% probability that the true effect is between −10 and +5 ms.
+The results suggest a negligible effect of C2 voicing on the interval duration in disyllabic words (hypothesis 1a), with a 95% probability that the true effect is between −10 and +5 ms.
 At lower levels of probability, the posterior distribution indicates an effect between −6 and 1 ms (60% probability).
 If the voicing of C2 is conditioning the duration of the release-to-release interval, this effect is very small.
 
@@ -767,7 +768,7 @@ A later VC boundary implies a longer vowel and a shorter closure, while, vice ve
 Behind the differential timing of the VC boundary within the release-to-release interval, several other accounts can be envisaged, like accounts relating to laryngeal and supraglottal adjustments \citep{halle1967, begus2017, coretta2019c}.
 
 The absence of temporal stability in monosyllabic words needs to be reconciled with the presence of the voicing effect in this context.
-A possible solution to the incongruence could be sought in diachrony \citep{blevins2004, blevins2006}, by speculating that the release-to-release interval was temporally stable even in monosyllabic words in earlier historical stages.
+A possible solution to the incongruence could be sought in diachrony \citep{blevins2004, blevins2006}, by speculating that the release-to-release interval was temporally stable even in monosyllabic words in earlier historical stages, via two possible scenarios.
 When a monosyllabic word historically derives from a disyllabic word, it could be further conjectured that the monosyllabic word has simply inherited the isochrony of the release-to-release interval and, with it, the voicing effect from its disyllabic predecessor.
 Alternatively, the emergence of the voicing effect in monosyllabic words could just be a direct consequence of mechanisms of VC boundary timing, as mentioned above.
 
