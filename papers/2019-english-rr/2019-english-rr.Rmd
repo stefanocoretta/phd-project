@@ -2,11 +2,12 @@
 title: "Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
 output:
-  pdf_document:
+  pdf_document: 
     citation_package: natbib
+    dev: cairo_pdf
+    keep_tex: yes
     latex_engine: xelatex
     number_sections: yes
-    dev: cairo_pdf
 bibliography: linguistics
 biblio-style: unified
 mainfont: Tinos
@@ -21,8 +22,8 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 params:
-  version: 0.10
-  version-date: "2019/05/02"
+  version: 0.11
+  version-date: "2019/05/09"
 ---
 
 ```{r setup, include=FALSE}
