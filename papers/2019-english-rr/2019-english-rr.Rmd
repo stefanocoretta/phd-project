@@ -764,18 +764,18 @@ More studies like \citet{ko2018} are needed to settle the issue of the diverging
 \citet{coretta2018j} proposes that the voicing-related adjustments in the relative timing of the closure onset within an isochronous speech interval (acoustically identified as the release-to-release interval) is the diachronic precursor of the cross-linguistically widespread effect of voicing on vowel duration.\footnote{Note that isochrony here is intended as pertaining the context of voiceless vs. voices stops only.}
 Given that the duration of the release-to-release interval in Italian, Polish, and English disyllabic words is not affected by the voicing of the post-vocalic consonant, the relative durations of vowel and closure are thought to depend on the timing of the VC boundary within that interval.
 A later VC boundary implies a longer vowel and a shorter closure, while, vice versa, an earlier boundary produces a shorter vowel and a longer closure.
-Behind the differential timing of the VC boundary within the release-to-release interval, several other accounts can be envisaged, like accounts relating to laryngeal and supraglottal adjustments \citep{halle1967, begus2017} + [coretta trp].
+Behind the differential timing of the VC boundary within the release-to-release interval, several other accounts can be envisaged, like accounts relating to laryngeal and supraglottal adjustments \citep{halle1967, begus2017, coretta2019c}.
 
-The absence of temporal stability in monosyllabic words needs to be reconciled with the presence of the voicing effect, of even greater magnitude, in this context.
+The absence of temporal stability in monosyllabic words needs to be reconciled with the presence of the voicing effect in this context.
 A possible solution to the incongruence could be sought in diachrony \citep{blevins2004, blevins2006}, by speculating that the release-to-release interval was temporally stable even in monosyllabic words in earlier historical stages.
-When a monosyllabic word historically derives from disyllabic words, it could be further conjectured that monosyllabic words have simply inherited the isochrony of the release-to-release interval and, with it, the voicing effect from their disyllabic predecessors.
+When a monosyllabic word historically derives from a disyllabic word, it could be further conjectured that the monosyllabic word has simply inherited the isochrony of the release-to-release interval and, with it, the voicing effect from its disyllabic predecessor.
 Alternatively, the emergence of the voicing effect in monosyllabic words could just be a direct consequence of mechanisms of VC boundary timing, as mentioned above.
 
 Independent on the pathway to the voicing effect, subsequent perceptual biases, like the ones proposed by the perceptual accounts by \citet{javkin1976} and \citet{kluender1988}, can further contribute to the enhancement of the effect of voicing, for example as a means to enhance the perceptual difference of voiceless vs. voiced stops \citep{lisker1974, lisker1986, stevens1989}.
 In the case of disyllabic words, movements of the VC boundary within the isochronous interval will logically affect both vowel duration and closure duration.
 On the other hand, the absence of a temporal articulatory anchor in monosyllabic words would allow articulatory stretching or compression to operate independently on the vocalic and the consonantal gestures.
-While differences in the magnitude of the voicing effect should be replicated in future studies, the potentially greater effect of voicing in monosyllabic words could be ascribed to the mechanisms affecting the VC boundary discussed above.
-That the timing of the closing gestures of voiceless and voiced stops differs in monosyllabic words is further suggested by articulatory work in \citet{raphael1972} and \citet{de-jong1991}.
+The articulatory studies in \citet{raphael1972} and \citet{de-jong1991} do suggest that the vocalic gesture is executed for a prolonged time when the following consonant is voiced.
+While differences in the magnitude of the voicing effect should be replicated in future studies, the potentially greater effect of voicing in monosyllabic words could be ascribed to the mechanisms affecting the VC boundary (articulatory and/or perceptual).
 
 # Conclusion
 
