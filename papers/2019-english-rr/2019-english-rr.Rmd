@@ -776,8 +776,23 @@ Independent on the pathway to the voicing effect, subsequent perceptual biases, 
 In the case of disyllabic words, movements of the VC boundary within the isochronous interval will logically affect both vowel duration and closure duration.
 On the other hand, the absence of a temporal articulatory anchor in monosyllabic words would allow articulatory stretching or compression to operate independently on the vocalic and the consonantal gestures.
 The articulatory studies in \citet{raphael1972} and \citet{de-jong1991} do suggest that the vocalic gesture is executed for a prolonged time when the following consonant is voiced.
-While differences in the magnitude of the voicing effect should be replicated in future studies, the potentially greater effect of voicing in monosyllabic words could be ascribed to the mechanisms affecting the VC boundary (articulatory and/or perceptual).
+While differences in the magnitude of the voicing effect should be replicated in future studies, the potentially greater effect of voicing in monosyllabic words could be ascribed to unconstrained mechanisms affecting the VC boundary (articulatory and/or perceptual).
 
 # Conclusion
 
-TBA.
+This paper set out to investigate temporal properties of the so-called 'voicing effect', by which vowels are shorter when followed by voiceless stops and longer when followed by voiced stops.
+\citet{coretta2018j} proposes that the voicing effect emerges via a mechanism of relative timing of the VC boundary within a temporally stable interval.
+Such interval was argued to be the interval between two consecutive releases, as evidenced by acoustic data from Italian and Polish disyllabic words.
+The temporal stability of the release-to-release in relation to consonantal voicing is thought to derive from two properties of gestural phasing, namely the isochrony of the distance between the vowels in a VCV sequence, and in-phase alignment of onset consonants and the following vowel.
+On the other hand, the lack of an articulatory anchor (a second vowel) in monosyllabic words would allow the release-to-release duration to be affected by C2 voicing and differ in the monosyllabic context.
+
+This study adds to the current status of knowledge on temporal aspects of the voicing effect by showing that the release-to-release interval is not affected by C2 voicing in English disyllabic words, as in Italian and Polish, and that, instead, it is longer in monosyllabic words when C2 is voiced.
+While the timing of the VC boundary within the release-to-release in disyllabic words affects both vowel and closure durations in a logically dependent way, vowel and closure durations can be modulated more independently in monosyllabic words.
+The less constrained operation of production and perceptual mechanisms affecting the timing of the VC boundary was argued to be the reason for the seemingly greater effect of voicing reported for monosyllabic words.
+The data in this study, and the cumulative evidence from previous studies as evinced by a Bayesian meta-analysis, however, do not equivocally provide support for a difference in the effect between mono- and disyllabic words, and future work is necessary to shed light on the matter.
+
+To conclude, the results of this study suggest some directions of research.
+Future studies should further investigate the articulatory temporal patterns of vocalic and consonantal gestures in disyllabic words.
+In particular, a complete assessment of the isochrony (or lack thereof) of consecutive vocalic gestures should include a variety of oppositions, involving voicing, place of articulation, number of consonants, syllabic affiliation, and prosodic contexts.
+Moreover, work is needed to shed light on the timing of the consonant closing gesture relative to the articulatory gesture of the preceding vowel in voiceless vs. voiced stops.
+Finally, the scenario of emergence of the voicing effect offered here should be examined in in relation to other consonantal effects on vowel duration, like other laryngeal effects and effects of manner of articulation.
