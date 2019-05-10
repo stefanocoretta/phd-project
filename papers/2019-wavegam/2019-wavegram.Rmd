@@ -23,14 +23,18 @@ params:
 
 ```{r setup, include=FALSE}
 library(here)
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
 knitr::opts_knit$set(root.dir = here())
 library(tidyverse)
 theme_set(theme_minimal())
-library(coretta2017egg)
-data("wavegram_p")
-library(coretta2018itapol)
-data("wavegram")
+# library(coretta2017egg)
+# data("wavegram_p")
+# library(coretta2018itapol)
+# data("wavegram")
+```
+
+```{r load-data}
+load("./papers/2019-wavegam/data/cache/wavegam.Rdata")
 ```
 
 # Electroglottography
@@ -66,13 +70,35 @@ Modal voice has higher CQ values than breathy voice, and lower values than creak
 One method for the detection of the closing and opening instants is based on the first derivative of the EGG signal (dEGG, see \Cref{f:egg}).
 \citet{herbst2017} showed that this method returns values that are just a surrogate of the actual articulatory closing and opening instants, due to the complex anatomy of the vocal folds, and recommends to call this EGG-based closed quotient the 'contact quotient'.
 
-As an alternative to the possibly biased contact quotient, \citet{herbst2010} propose a visualisation method, the wavegram, which does not reduce the EGG signal to a single value, but rather uses information from the whole signal to qualitatively assess vocal folds activity.
-<!-- explain wavegram -->
+As an alternative to contact quotient, \citet{herbst2010} propose a visualisation method, the wavegram, which does not reduce the EGG signal to a single value, but rather uses information from the whole signal to qualitatively assess vocal folds activity.
+A wavegram is a 3D representation of the EGG signal developing in time.
+Its structure is similar to that of a classical phonetic spectrogram.
+On the *x*-axis, the indexes of individual glottal cycles are laid out sequentially.
+The *y*-axis is the time within each glottal cycle, normalised between 0 and 1.
+Finally, the amplitude of the signal normalised between 0 and 1 within each glottal cycle (the third dimension) is represented by different colour intensities.
+Differences in intensity along the *x*-axis indicate changes in glottal activity.
+The procedure for constructing a wavegram is given in \Cref{f:wavegram}.
+A wavegram can be produced for the EGG signal and for any transformation, like the dEGG.
 
-One limitation of the wavegram method is its qualitative nature.
-However, wavegram data can be flexibly modelled using generalised additive models (GAMs, ...).
+\begin{figure}
+  \includegraphics{./img/wavegram.png}
+  \caption{The wavegram. Created by Christian T. Herbst under a CC BY-SA 3.0 license.}
+  \label{f:wavegram}
+\end{figure}
+
+A possible limitation of the wavegram method is that it is intended for a qualitative analysis based on visual inspection.
+However, wavegram data can be modelled using generalised additive models (GAMs, \citealt{hastie1986, zuur2012, wood2017}).
+GAMs are a family of generalised models which can fit non-linear effects by additive combinations of smoothing splines.
+The flexibility of GAMs allows researchers to generate a fitted wavegram based on data from multiple repetitions of a single speaker and from multiple speakers.
+Random effects can also be included to account for idiosyncratic differences.
+Moreover, the potential of overfitting due to the flexibility of GAMs is reduced by a smoothing penalty parameter, which constraints the maximum number of basis functions used to construct the smoothing splines.
+This paper introduces wavegram GAMs as a way to quantitatively assess wavegram data.
+First, the results from a pilot study which informally evaluates the proposed method are presented (\Cref{s:pilot}).
+\Cref{s:voicing} illustrates how to conduct a wavegram GAM analysis of dEGG wavegram data through a practical example which compares the wavegrams of vowels followed by voiceless and voiced stops.
+Finally, \Cref{s:limits} discusses limitations of the current implementation of the method and future directions.
 
 # Pilot study
+\label{s:pilot}
 
 Synchronised audio and electroglottographic (EGG) data were obtained from 5 trained phoneticians, who were asked to produce sustained tokens of /a/ with modal and breathy voice.
 The data was collected using a Glottal Enterprises EG2-PCX2 electroglottograph and a Movo LV4-O2 Lavalier microphone, at a sample rate of 44100 Hz (16-bit).
@@ -89,7 +115,7 @@ The following terms were included: the amplitude of the dEGG signal as the outco
 Finally, by-speaker differences were modelled with a by-speaker factor smooth over normalised cycle time.
 A first-order autoregressive (AR1) model was included to deal with the relatively high auto-correlation in the residuals.
 
-\Cref{f:xxx} shows the modelled wavegrams of the modal and breathy tokens.
+\Cref{f:surface-p} shows the modelled wavegrams of the modal and breathy tokens.
 Since the tokens were produced with sustained phonation, no appreciable change within each wavegram can be observed.
 However, the comparison of the wavegram of modal voice with that of breathy voice reveals clear differences.
 As a general trend, the dEGG maximum is achieved later within the glottal cycle in breathy voicing relative to modal voicing.
@@ -97,7 +123,23 @@ This is compatible with the lower CQ values observed in breathy voicing.
 Moreover, differences in velocity of closing and opening movements of the folds are signalled by the relative widths of the red-coloured (around the dEGG maximum) and the blue-coloured bands (around the dEGG minimum).
 While in modal voicing the blue band is wider, the red band is in breathy voice, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
 
+```{r surface-p, include=TRUE, fig.cap = "Fitted wavegram of modal and breathy phonation (\\Cref{s:pilot}).", fig.lp="f:", out.extra="width=\\linewidth"}
+wavegam_p_ar_pred %>%
+  ggplot(aes(sequence, sample, z = fit)) +
+  geom_raster(aes(fill = fit)) +
+  geom_contour(colour = "white") +
+  facet_grid(~ phonation_o) +
+  scale_fill_distiller(palette = "RdYlBu") +
+  labs(
+    x = "Glottal cycle index",
+    y = "Normalised cycle duration",
+    fill = "Normalised dEGG\namplitude"
+  ) +
+  theme(panel.grid = element_blank())
+```
+
 # Wavegram of vowels followed by voiceless vs. voiced stops
+\label{s:voicing}
 
 This section further illustrates the use of wavegram GAMs by discussing a dynamic analysis of changes in vocal folds activity during the production of vowels followed by voiceless vs. voiced stops in Italian and Polish.
 EGG data was obtained from 9 Italian speakers and 6 Polish speakers.
@@ -105,7 +147,30 @@ EGG data was obtained from 9 Italian speakers and 6 Polish speakers.
 The procedures for data processing and analysis were the same as with the pilot study, with the exception that data was extracted from every glottal cycle within the whole duration of the vowel.
 The vowel onset and offset were identified as the appearance and disappearance of higher formant structure respectively \citep{machac2009}.
 
-\Cref{f:xxx} shows the modelled wavegrams of vowels followed by voiceless (left) and voiced stops (right), in Italian (top) and Polish (bottom).
+```{r surface, include=TRUE, fig.cap = "Fitted wavegram of vowels followed by voiceless and voiced stops in Italian and Polish (\\Cref{s:voicing}).", fig.lp="f:", out.extra="width=\\linewidth"}
+contexts <- c(
+  `Italian.voiceless` = "Italian (voiceless)",
+  `Italian.voiced` = "Italian (voiced)",
+  `Polish.voiceless` = "Polish (voiceless)",
+  `Polish.voiced` = "Polish (voiced)"
+)
+
+wavegam_ar_pred %>%
+  ggplot(aes(sequence_prop, sample, z = fit)) +
+  geom_raster(aes(fill = fit)) +
+  geom_contour(colour = "white") +
+  facet_wrap(~ lang_voice, labeller = as_labeller(contexts)) +
+  scale_x_continuous(breaks = seq(0, 1, 0.2)) +
+  scale_fill_distiller(palette = "RdYlBu") +
+  labs(
+    x = "Normalised vowel duration",
+    y = "Normalised cycle duration",
+    fill = "Normalised dEGG\namplitude"
+  ) +
+  theme(panel.grid = element_blank())
+```
+
+\Cref{f:surface} shows the modelled wavegrams of vowels followed by voiceless (left) and voiced stops (right), in Italian (top) and Polish (bottom).
 The wavegrams indicate that vocal folds activity changes towards the end of the vowel if the following consonant is voiceless, both in Italian and Polish.
 The glottal activity along the second half of vowels followed by voiced stops is, on the other hand, more stable.
 Moreover, the change in activity is initiated earlier in Italian (at around 60% into the vowel) than in Polish (at about 80%).
