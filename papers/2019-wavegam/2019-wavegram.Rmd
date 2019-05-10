@@ -17,7 +17,7 @@ indent: true
 header-includes:
 - \usepackage{cleveref}
 params:
-  version: 0.1
+  version: 0.1.9000
   version-date: "2019/04/30"
 ---
 
