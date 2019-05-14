@@ -109,34 +109,42 @@ Finally, \Cref{s:limits} discusses limitations of the current implementation of 
 # Pilot study
 \label{s:pilot}
 
-Synchronised audio and electroglottographic (EGG) data were obtained from 5 trained phoneticians, who were asked to produce sustained tokens of /a/ with modal and breathy voice.
+Synchronised audio and EGG data were obtained from 5 trained phoneticians, who were asked to produce sustained tokens of /a/ with modal and breathy voice.
 The data was collected using a Glottal Enterprises EG2-PCX2 electroglottograph and a Movo LV4-O2 Lavalier microphone, at a sample rate of 44100 Hz (16-bit).
 The acquisition of the signals was controlled with Audacity running on a MacBook Pro (Retina, 13-inch, Mid 2014).
 The placement of the electrodes strap was checked with the height indicator on the EGG unit.
 Each participant uttered 10 consecutive tokens of a sustained /a/ in modal voice, followed by 10 tokens of a sustained breathy /a/.
 All subsequent data processing was performed in Praat \citep{boersma2018}.
 The onset and offset of each token were detected with an automatic procedure which finds voiced and unvoiced intervals (`To TextGrid (vuv)`).
-The dEGG wavegram data was extracted from the first 8 glottal cycles of a 500 ms window centred around the mid-point of each token.
+The dEGG wavegram data was extracted from the first 8 glottal cycles of a 500 ms window, centred around the mid-point of each token.
+A glottal cycle was arbitrarily defined as the interval between two consecutive EGG minima (cf. with \citealt{herbst2010} for an alternative algorythm).
 From each glottal cycle, the relative amplitude of the dEGG signal was extracted every 10 samples.
 
-A generalised additive mixed model (GAMM) was fitted to the data to statistically assess differences in vocal fold activity between modal and breathy voicing.
-The following terms were included: the amplitude of the dEGG signal as the outcome variable, a factor with language and phonation as a parametric term, a smooth over the normalised time of the beginning of the glottal cycle (as the proportion of the time relative to the entire token duration) and one over the normalised time of the sample within the glottal cycle (as the proportion of the time relative to the duration of the glottal cycle), two difference smooth over normalised time of the glottal cycle onset and normalised sample time using a by-variable with the language/phonation factor, a tensor product interaction between normalised cycle time and normalised sample time and the same tensor product interaction with a language/phonation by-variable.
-Finally, by-speaker differences were modelled with a by-speaker factor smooth over normalised cycle time.
+A generalised additive mixed model (GAMM) was fitted to the data to statistically assess differences in vocal fold activity between modal and breathy voicing (see \citealt{soskuthy2017} and \citealt{wieling2018} for a practical introduction to fitting GAMs in R).
+The following terms were included: the amplitude of the dEGG signal as the outcome variable, an interaction factor with language and phonation as a parametric term, a smooth over the normalised time of the beginning of the glottal cycle (as the proportion of the time relative to the entire token duration) and one over the normalised time of the sample within the glottal cycle (as the proportion of the time relative to the duration of the glottal cycle), two difference smooths over normalised time of the glottal cycle onset and normalised sample time using a by-variable with the language/phonation factor, a tensor product interaction between normalised cycle time and normalised sample time, and the same tensor product interaction with a language/phonation by-variable.
+Finally, inter-speaker differences were modelled with a by-speaker factor smooth over normalised cycle time.
 A first-order autoregressive (AR1) model was included to deal with the relatively high auto-correlation in the residuals.
 
-\Cref{f:surface-p} shows the modelled wavegrams of the modal and breathy tokens.
+\Cref{f:surface-p} shows the modelled wavegrams of modal and breathy tokens.
 Since the tokens were produced with sustained phonation, no appreciable change within each wavegram can be observed.
-However, the comparison of the wavegram of modal voice with that of breathy voice reveals clear differences.
-As a general trend, the dEGG maximum is achieved later within the glottal cycle in breathy voicing relative to modal voicing.
-This is compatible with the lower CQ values observed in breathy voicing.
-Moreover, differences in velocity of closing and opening movements of the folds are signalled by the relative widths of the red-coloured (around the dEGG maximum) and the blue-coloured bands (around the dEGG minimum).
-While in modal voicing the blue band is wider, the red band is in breathy voice, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
+However, the comparison of the wavegram of modal voice with that of breathy voice reveals differences between the two phonation types.
+As a general trend, the dEGG maximum and dEGG minimum are achieved later within the glottal cycle in breathy voicing relative to modal voicing.
+Moreover, differences in velocity of closing and opening movements of the vocal folds are signalled by the relative widths of the red-coloured bands (around the dEGG maximum) and the blue-coloured bands (around the dEGG minimum).
+While in modal voicing the blue band is wider, the red band is in breathy voicing, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
+According to the approximate significance of the smooth terms, phonation has an effect on the shape of the wavegram as expected (*F*(14.681) = 3.187, Ref.EDF = 19.027, *p* < 0.001).
 
-```{r surface-p, include=TRUE, fig.cap = "Fitted wavegram of modal and breathy phonation (\\Cref{s:pilot}).", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r surface-p, include=TRUE, fig.cap = "Fitted wavegram of modal and breathy phonation (\\Cref{s:pilot}). The horizontal lines represent the dEGG maximum (solid line) and minimum (dashed line).", fig.lp="f:", out.extra="width=\\linewidth"}
+lines <- tibble(
+  intercept = c(0.31, 0.35, 0.77, 0.875),
+  phonation_o = ordered(c("modal", "breathy", "modal", "breathy"), levels = c("modal", "breathy")),
+  line = c("solid", "solid", "dashed", "dashed")
+)
+
 wavegam_p_ar_pred %>%
   ggplot(aes(sequence, sample, z = fit)) +
   geom_raster(aes(fill = fit)) +
   geom_contour(colour = "white") +
+  geom_hline(data = lines, aes(yintercept = intercept), linetype = lines$line) +
   facet_grid(~ phonation_o) +
   scale_fill_distiller(palette = "RdYlBu") +
   labs(
