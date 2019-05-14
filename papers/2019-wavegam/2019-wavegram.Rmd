@@ -2,12 +2,9 @@
 title: "A new method for modelling electroglottographic data"
 author: "Stefano Coretta"
 output:
-  pdf_document:
+  lingr::lingr_article:
     citation_package: natbib
     fig_caption: yes
-    keep_tex: yes
-    latex_engine: xelatex
-    number_sections: yes
 bibliography: linguistics
 biblio-style: unified
 mainfont: Lato
@@ -16,8 +13,9 @@ papersize: a4
 indent: true
 header-includes:
 - \usepackage{cleveref}
-version: 0.1.9000
-version-date: "2019/04/30"
+params:
+  version: 0.1.9000
+  version-date: "2019/04/30"
 ---
 
 ```{r setup, include=FALSE}
