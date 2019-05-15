@@ -206,19 +206,22 @@ and breathy voicing (see \citealt{soskuthy2017} and
 \citealt{wieling2018} for a practical introduction to fitting GAMs in
 R). The following terms were included: the amplitude of the dEGG signal
 as the outcome variable, an interaction factor with language and
-phonation as a parametric term, a smooth over the normalised time of the
-beginning of the glottal cycle (as the proportion of the time relative
-to the entire token duration) and one over the normalised time of the
-sample within the glottal cycle (as the proportion of the time relative
-to the duration of the glottal cycle), two difference smooths over
-normalised time of the glottal cycle onset and normalised sample time
-using a by-variable with the language/phonation factor, a tensor product
-interaction between normalised cycle time and normalised sample time,
-and the same tensor product interaction with a language/phonation
-by-variable. Finally, inter-speaker differences were modelled with a
-by-speaker factor smooth over normalised cycle time. A first-order
-autoregressive (AR1) model was included to deal with the relatively high
-auto-correlation in the residuals.
+phonation as a parametric term, a smooth over the glottal cycle index to
+model average changes of the dEGG signal across glottal cycles, and a
+smooth over the normalised time of the sample within the glottal cycle
+(as the proportion of the time relative to the duration of the glottal
+cycle) to model average changes of the dEGG signal within the glottal
+cycle; two difference smooths over normalised time of the glottal cycle
+onset and normalised sample time using a by-variable with the
+language/phonation factor; a tensor product interaction between
+normalised cycle time and normalised sample time to model changes of
+glottal activity through time, and the same tensor product interaction
+with a language/phonation by-variable to model phonation-driven
+differences in changes of glottal activity. Finally, inter-speaker
+differences were modelled with a by-speaker factor smooth over
+normalised cycle time. A first-order autoregressive (AR1) model was
+included to deal with the relatively high auto-correlation in the
+residuals.
 
 \Cref{f:surface-p} shows the modelled wavegrams of modal and breathy
 tokens. Since the tokens were produced with sustained phonation, no
@@ -241,9 +244,10 @@ effect on the shape of the wavegram as expected (\emph{F}(14.681) =
 \includegraphics[width=\linewidth]{2019-wavegram_files/figure-latex/surface-p-1} \caption{Fitted wavegram of modal and breathy phonation (\Cref{s:pilot}). The horizontal lines represent the dEGG maximum (solid line) and minimum (dashed line).}\label{f:surface-p}
 \end{figure}
 
-\hypertarget{wavegram-of-vowels-followed-by-voiceless-vs.-voiced-stops}{%
-\section{Wavegram of vowels followed by voiceless vs.~voiced
-stops}\label{wavegram-of-vowels-followed-by-voiceless-vs.-voiced-stops}}
+\hypertarget{wavegram-gam-analysis-of-vowels-followed-by-voiceless-vs.-voiced-stops}{%
+\section{Wavegram GAM analysis of vowels followed by voiceless
+vs.~voiced
+stops}\label{wavegram-gam-analysis-of-vowels-followed-by-voiceless-vs.-voiced-stops}}
 
 \label{s:voicing}
 
@@ -251,27 +255,47 @@ This section further illustrates the use of wavegram GAMs by discussing
 a dynamic analysis of changes in vocal folds activity during the
 production of vowels followed by voiceless vs.~voiced stops in Italian
 and Polish. EGG data was obtained from 9 Italian speakers and 6 Polish
-speakers. The procedures for data processing and analysis were the same
-as with the pilot study, with the exception that data was extracted from
-every glottal cycle within the whole duration of the vowel. The vowel
-onset and offset were identified as the appearance and disappearance of
-higher formant structure respectively \citep{machac2009}.
+speakers. A detailed description of the experimental materials and
+procedures is given in \citet{coretta2018j}. Trochaic words with the
+form
+C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
+were used, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o,
+u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} =
+V\textsubscript{1} (e.g.~/pata/, /pada/, /poto/, etc.). Processing and
+analysis of the EGG data were the same as with the pilot study
+\Cref{s:pilot}, with the exception that data was extracted from every
+glottal cycle within the whole duration of the first vowel of the word
+stimuli. Vowel duration was then normalised between 0 and 1 for
+analysis. The vocalic onset and offset were identified as the appearance
+and disappearance of higher formant structure respectively
+\citep{machac2009}.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{2019-wavegram_files/figure-latex/surface-1} \caption{Fitted wavegram of vowels followed by voiceless and voiced stops in Italian and Polish (\Cref{s:voicing}).}\label{f:surface}
 \end{figure}
 
-\Cref{f:surface} shows the modelled wavegrams of vowels followed by
-voiceless (left) and voiced stops (right), in Italian (top) and Polish
-(bottom). The wavegrams indicate that vocal folds activity changes
-towards the end of the vowel if the following consonant is voiceless,
-both in Italian and Polish. The glottal activity along the second half
-of vowels followed by voiced stops is, on the other hand, more stable.
-Moreover, the change in activity is initiated earlier in Italian (at
-around 60\% into the vowel) than in Polish (at about 80\%). What the
-wavegrams show is that glottal opening increases towards the end of the
-vowel, in anticipation of the open glottis typical of voiceless stops
-(and consonants more in general).
+The same GAM specification as in the pilot study was used to model
+changes in glottal activity. Normalised vowel duration was used instead
+of glottal cycle index. \Cref{f:surface} shows the modelled wavegrams of
+vowels followed by voiceless (left) and voiced stops (right), in Italian
+(top) and Polish (bottom). The pilot study showed that a widening of the
+wavegram dEGG maximum band (red) with concomitant shrinkage of the dEGG
+minimum band (blue) signals increased glottal opening. The change in
+band width corresponds to changes in velocity of the execution of the
+contacting and decontacting movements. The wavegrams in \Cref{f:surface}
+thus indicate that glottal opening increases towards the end of the
+vowel. The magnitude of the change, however, is greater in vowels
+followed by voiceless stops (left panels) than those followed by voiced
+stops. The earlier and greater glottal spreading in vowels followed by
+voiceless stops could could be implemented in anticipation of the open
+glottis required in the production of voiceless stops.
+
+The wavegrams indicate that vocal folds activity changes towards the end
+of the vowel if the following consonant is voiceless, both in Italian
+and Polish. However, the change in activity before voiceless stops is
+initiated earlier in Italian (at around 65\% into the vowel) than in
+Polish (at about 80\%). The approximate time of the change onset is
+represented by the vertical dashed lines in the plot.
 
 Another difference between the two languages concerns the initial
 voiceless stop (/p/). The change observed between 50 and 70\% into the
