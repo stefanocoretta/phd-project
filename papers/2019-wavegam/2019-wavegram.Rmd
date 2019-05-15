@@ -1,5 +1,5 @@
 ---
-title: "A new method for modelling electroglottographic data"
+title: "Modelling electroglottographic data with wavegrams and generalised additive mixed models"
 author: "Stefano Coretta"
 output:
   lingr::lingr_article:
@@ -133,7 +133,7 @@ Moreover, differences in velocity of closing and opening movements of the vocal 
 While in modal voicing the blue band is wider, the red band is in breathy voicing, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
 According to the approximate significance of the smooth terms, phonation has an effect on the shape of the wavegram as expected (*F*(14.681) = 3.187, Ref.EDF = 19.027, *p* < 0.001).
 
-```{r surface-p, include=TRUE, fig.cap = "Fitted wavegram of modal and breathy phonation (\\Cref{s:pilot}). The horizontal lines represent the dEGG maximum (solid line) and minimum (dashed line).", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r surface-p, include=TRUE, fig.cap = "Fitted wavegram of modal and breathy phonation (Section 2). The horizontal lines represent the dEGG maximum (solid line) and minimum (dashed line).", fig.lp="f:", out.extra="width=\\linewidth"}
 lines <- tibble(
   intercept = c(0.31, 0.35, 0.77, 0.875),
   phonation_o = ordered(c("modal", "breathy", "modal", "breathy"), levels = c("modal", "breathy")),
@@ -162,11 +162,11 @@ This section further illustrates the use of wavegram GAMs by discussing a dynami
 EGG data was obtained from 9 Italian speakers and 6 Polish speakers.
 A detailed description of the experimental materials and procedures is given in \citet{coretta2018j}.
 Trochaic words with the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
-Processing and analysis of the EGG data were the same as with the pilot study \Cref{s:pilot}, with the exception that data was extracted from every glottal cycle within the whole duration of the first vowel of the word stimuli.
-Vowel duration was then normalised between 0 and 1 for analysis.
+Processing and analysis of the EGG data were the same as with the pilot study (\Cref{s:pilot}), with the exception that data was extracted from every glottal cycle within the whole duration of the first vowel of the word stimuli.
 The vocalic onset and offset were identified as the appearance and disappearance of higher formant structure respectively \citep{machac2009}.
+Vowel duration was then normalised between 0 and 1 for analysis.
 
-```{r surface, include=TRUE, fig.cap = "Fitted wavegram of vowels followed by voiceless and voiced stops in Italian and Polish (\\Cref{s:voicing}).", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r surface, include=TRUE, fig.cap = "Fitted wavegram of vowels followed by voiceless and voiced stops in Italian and Polish (Section 3).", fig.lp="f:", out.extra="width=\\linewidth"}
 contexts <- c(
   `Italian.voiceless` = "Italian (voiceless)",
   `Italian.voiced` = "Italian (voiced)",
@@ -198,26 +198,29 @@ wavegam_ar_pred %>%
 The same GAM specification as in the pilot study was used to model changes in glottal activity.
 Normalised vowel duration was used instead of glottal cycle index.
 \Cref{f:surface} shows the modelled wavegrams of vowels followed by voiceless (left) and voiced stops (right), in Italian (top) and Polish (bottom).
-The pilot study showed that a widening of the wavegram dEGG maximum band (red) with concomitant shrinkage of the dEGG minimum band (blue) signals increased glottal opening.
+The pilot study showed that a widening of the wavegram dEGG maximum band (red) with concomitant shrinkage of the dEGG minimum band (blue) signals greater glottal opening.
 The change in band width corresponds to changes in velocity of the execution of the contacting and decontacting movements.
-The wavegrams in \Cref{f:surface} thus indicate that glottal opening increases towards the end of the vowel.
+An interesting aspect of modelled glottal activity concerns the first half of the vowels.
+The change in the wavegram indicates a process of decreasing glottal opening (from a breathier to a more modal phonation).
+The greater glottal spread observed at vowel onset could be related to the residual glottal spread of the preceding voiceless stop /p/.
+This means that the phonation at vowel onset is breathier and becomes more modal during the production of the vowel, stabilising itself at about 20% of the vowel duration.
+
+Focusing now on the second half of the vowel, the wavegrams in \Cref{f:surface} show a pattern that is symmetrical to that observed in the first half.
+Namely, glottal opening increases towards the end of the vowel.
 The magnitude of the change, however, is greater in vowels followed by voiceless stops (left panels) than those followed by voiced stops.
-The earlier and greater glottal spreading in vowels followed by voiceless stops could could be implemented in anticipation of the open glottis required in the production of voiceless stops.
+The earlier and greater glottal spreading in vowels followed by voiceless stops could be implemented in anticipation of the open glottis required in the production of voiceless stops.
 
-The wavegrams indicate that vocal folds activity changes towards the end of the vowel if the following consonant is voiceless, both in Italian and Polish.
-However, the change in activity before voiceless stops is initiated earlier in Italian (at around 65% into the vowel) than in Polish (at about 80%).
-The approximate time of the change onset is represented by the vertical dashed lines in the plot.
+The wavegrams of vowels followed by voiceless stops also suggest an effect of language (the GAM terms with a by-language factor return *p*-values below 0.001).
+The change in activity before voiceless stops is initiated earlier in Italian (at around 65% into the vowel) than in Polish (at about 80%).
+The approximate time of the change onset is represented by the vertical dashed lines in \Cref{f:surface}.
+On the other hand, activity in vowels followed by voiced stops is similar in the two languages.
 
-Another difference between the two languages concerns the initial voiceless stop (/p/).
-The change observed between 50 and 70% into the glottal cycle at the beginning of the vowel, which indicates a transition from a more spread glottis, is more extreme in Polish than in Italian.
-This means that phonation at vowel onset is slightly breathier in the former.
-Such difference is compatible with the finding that Polish voiceless stops have on average a longer VOT than Italian stops.
-<!-- include reference!!! -->
+The observed greater increase in glottal opening during the production of vowels followed by voiceless stops in Italian is compatible with the reported presence of pre-aspiration (breathy or voiceless) in Italian geminate stops \citep{stevens2004, stevens2004a, stevens2010, stevens2010b, stevens2014a}.
+Increased glottal spreading during vocal fold vibration can be interpreted as a precursor of voiceless pre-aspiration.
+An enough opened glottis can generate enough glottal airflow so as to equalise sub-glottal and supra-glottal pressure, at which point vocal fold vibration cannot be supported any longer \citep{berg1958, rothenberg1967, ohala2011}.
+The outcome is voiceless glottal frication, or, in other words, voiceless pre-aspiration.
 
-The observation of increased glottal opening in the production of vowels followed by voiceless stops in Italian is further compatible with the reported presence of pre-aspiration (breathy or voiceless) in Italian geminate stops \citep{stevens2004, stevens2004a, stevens2010, stevens2010b, stevens2014a}.
-Increased glottal spreading during vocal fold vibration is the logical precursor of voiceless pre-aspiration.
 The fact that voiceless pre-aspiration is not fully developed in Italian singleton voiceless stops offers interesting insights concerning the duration of voiceless stops and the emergence of pre-aspiration.
-
 It is known that voiceless stops have longer closure durations than voiced stops.
 \citet{lisker1974} argues that, in English voiceless stops, closure occurs not long after the spreading gesture is initiated in order to avoid the emergence of full pre-aspiration.
 There are, however, varieties of English with pre-aspiration in stops and fricatives \citep{gordeeva2007, nance2013, hejna2015a}.
@@ -228,4 +231,4 @@ One of the common conceptions is that pre-aspiration arises when closure duratio
 \citet{stevens2014} further present experimental evidence from Italian that pre-aspiration and closure shorting are independent.
 Moreover, the presence of pre-aspiration increased the total duration of the VC sequence.
 
-What can be learnt from this is that, once breathyness/pre-aspiration arises, there are two possible scenarios: according to one possible path, as noted by \citet{lisker1974}, pre-aspiration is prevented by achieving stop closure earlier (thus increasing the stop closure duration); according to the other path, pre-aspiration can be enhanced, with subsequent closure shortening, as in the arguments by \citet{nichasaide1985} and \citet{stevens2014}.
+What can be learnt from this is that, once breathiness/pre-aspiration arises, there are two possible scenarios: according to one possible path, as noted by \citet{lisker1974}, pre-aspiration is prevented by achieving stop closure earlier (thus increasing the stop closure duration); according to the other path, pre-aspiration can be enhanced, with subsequent closure shortening, as in the arguments by \citet{nichasaide1985} and \citet{stevens2014}.
