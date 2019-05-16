@@ -228,7 +228,7 @@ Individual search interval TextGrid chunks are saved in the `recordings` folder 
 ######################################
 # MIT License
 #
-# Copyright (c) 2016-2018 Stefano Coretta
+# Copyright (c) 2016 Stefano Coretta
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
