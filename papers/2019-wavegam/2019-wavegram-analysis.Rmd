@@ -12,9 +12,9 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(itsadug)
 library(tidymv)
-library(coretta2017egg)
+library(coretta2017egg) # https://github.com/stefanocoretta/coretta2017egg
 data("wavegram_p")
-library(coretta2018itapol)
+library(coretta2018itapol) # https://github.com/stefanocoretta/coretta2018itapol
 data("wavegram")
 ```
 
