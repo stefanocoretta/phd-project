@@ -12,6 +12,8 @@ This script extracts the wavegram data of the dEGG signal.
 <<<smoothing>>>
 ```
 
+The preamble defines a few settings for filtering and smoothing, and the results file.
+
 ```praat "preamble w"
 lower = 40
 upper = 10000
@@ -26,8 +28,8 @@ fileList = Create Strings as file list: "fileList", data$
 numberOfFiles = Get number of strings
 ```
 
-The preamble defines a few settings for filtering and smoothing, and the results file.
-The literature uses a band pass filter of 40 Hz - 10 kHz, but I will not use it here because it creates problems.
+Each file is read and the voiced/unvoiced intervals in the EGG channel are detected with `To TextGrid (vuv)`.
+The signal is pass-band filtered before detection to remove hardware high-frequency noise.
 
 ```praat "main loop w"
 #### Files loop ####
@@ -48,7 +50,8 @@ for file from 1 to numberOfFiles
 endfor
 ```
 
-The main loop goes through each file, extracts the relevat portions using a vuv textgrid, and gets the numeric data.
+The script loops through each vowel in the signal and extracts measurements from a 500 ms window around the midpoint (relative to the voicing interval).
+The loop first calculates the derivative of the EGG signal (the dEGG) and then loops through the each glottal cycle to find the time of dEGG maximum and minimum.
 
 ```praat "vowel loop w"
 #### Vowel loop ####
@@ -78,7 +81,12 @@ for interval to numberOfIntervals
 endfor
 ```
 
-In this loop, each interval corresponding to an uttered vowel is extracted, the DEGG is calculated and the wavegram data is extracted from the DEGG.
+The following chunk defines the dEGG calculation procedure.
+Before calculating the dEGG, the EGG signal is smoothed with a moving average function with smooth width 11 (time lags are adjusted by shifting the raw time by the lag).
+A PointProcess object is created, which will be used for the detection of the start of the glottal cycles.
+The calculated dEGG is smoothed again with the same moving average and time lag fix.
+The peaks in the dEGG signal are detected with `To point process (periodic, peaks)`.
+These correspond to dEGG maxima.
 
 ```praat "degg w"
 eggSmooth = Filter (pass Hann band): lower, upper, 100
@@ -99,7 +107,8 @@ Shift times by: time_lag
 deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
 ```
 
-The raw EGG is filtered and smoothed using a triangular smooth, and from this the DEGG is calculated. Two PointProcess files are also created, which roughly mark each glottal period in the EGG and DEGG.
+The EGG PointProcess object is looped through, and the time of each EGG minimum is obtained.
+The glottal period (glottal cycle duration) is calculated as the time between two consecutive EGG minima.
 
 ```praat "period loop"
 selectObject: eggPointProcess
@@ -124,7 +133,9 @@ for point to eggPoints - 2
 endfor
 ```
 
-Each glottal period is detected by finding the EGG minima. The interval between two consecutive EGG minima is a glottal period.
+For each glottal cycle, the normalised amplitude of the dEGG signal is extracted every 10 samples (with a sampling frequency of 44100 Hz we can obtain around 40 samples per cycle).
+Normalisation of amplitude and sample time is achieved through unity-based rescaling (range 0-1).
+If the glottal period duration is greater than twice the duration of the average period, that period is not analysed.
 
 ```praat "wavegram"
 if period <= meanPeriod * 2
@@ -160,8 +171,6 @@ if period <= meanPeriod * 2
     endwhile
 endif
 ```
-
-For each glottal period, the normalised amplitude is calculated for each sample within the period. Normalisation of amplitude and sample time is achieved through unity-based rescaling (range 0-1).
 
 # Tracegram of modal and breathy phonated vowels
 
@@ -316,7 +325,7 @@ for point to eggPoints - 2
 endfor
 ```
 
-The folling code defines the moving average smoothing function.
+The following code defines the moving average smoothing function.
 
 ```praat "smoothing"
 procedure smoothing : .width
