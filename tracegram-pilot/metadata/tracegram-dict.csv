@@ -1,0 +1,7 @@
+variable,variable_name,measurement_unit,allowed_variables,definition,description
+file name,file,string,,The name of the audio file (.wav),
+token ID,token,integer,1 to 10,The index of the vowel token,
+normalised time,time,number,0 to 1,Normalised time of glottal cycle onset within the vowel,
+time of EGG minimum (s),egg_minimum,number,> 0,The time of the EGG minimum within the audio file,
+normalised time of dEGG maximum,degg_maximum,number,0 to 1,Normalised time of the dEGG maximum within the local glottal cycle,
+normalised time of dEGG minimum,degg_minimum,number,0 to 1,Normalised time of the dEGG minimum within the local glottal cycle,
