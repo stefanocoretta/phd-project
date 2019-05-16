@@ -129,8 +129,8 @@ A first-order autoregressive (AR1) model was included to deal with the relativel
 Since the tokens were produced with sustained phonation, no appreciable change within each wavegram can be observed.
 However, the comparison of the wavegram of modal voice with that of breathy voice reveals differences between the two phonation types.
 As a general trend, the dEGG maximum and dEGG minimum are achieved later within the glottal cycle in breathy voicing relative to modal voicing.
-Moreover, differences in velocity of closing and opening movements of the vocal folds are signalled by the relative widths of the red-coloured bands (around the dEGG maximum) and the blue-coloured bands (around the dEGG minimum).
-While in modal voicing the blue band is wider, the red band is in breathy voicing, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
+Moreover, differences in velocity of closing and opening movements of the vocal folds are signalled by the relative widths of the purple-coloured bands (around the dEGG maximum) and the green-coloured bands (around the dEGG minimum).
+While in modal voicing the green band is wider, the purple band is in breathy voicing, indicating that the velocity into and out of the beginning of the closed phase is slower in breathy voicing.
 According to the approximate significance of the smooth terms, phonation has an effect on the shape of the wavegram as expected (*F*(14.681) = 3.187, Ref.EDF = 19.027, *p* < 0.001).
 
 ```{r surface-p, include=TRUE, fig.cap = "Fitted wavegram of modal and breathy phonation (Section 2). The horizontal lines represent the dEGG maximum (solid line) and minimum (dashed line).", fig.lp="f:", out.extra="width=\\linewidth"}
@@ -146,7 +146,7 @@ wavegam_p_ar_pred %>%
   geom_contour(colour = "white", size = 0.1) +
   geom_hline(data = lines, aes(yintercept = intercept), linetype = lines$line) +
   facet_grid(~ phonation_o) +
-  scale_fill_distiller(palette = "RdYlBu") +
+  scale_fill_distiller(palette = "PRGn") +
   labs(
     x = "Glottal cycle index",
     y = "Normalised cycle duration",
@@ -186,7 +186,7 @@ wavegam_ar_pred %>%
   geom_vline(data = lines, aes(xintercept = intercept), linetype = "dashed", alpha = 0.5) +
   facet_wrap(~ lang_voice, labeller = as_labeller(contexts)) +
   scale_x_continuous(breaks = seq(0, 1, 0.2)) +
-  scale_fill_distiller(palette = "RdYlBu") +
+  scale_fill_distiller(palette = "PRGn") +
   labs(
     x = "Normalised vowel duration",
     y = "Normalised cycle duration",
@@ -198,7 +198,7 @@ wavegam_ar_pred %>%
 The same GAM specification as in the pilot study was used to model changes in glottal activity.
 Normalised vowel duration was used instead of glottal cycle index.
 \Cref{f:surface} shows the modelled wavegrams of vowels followed by voiceless (left) and voiced stops (right), in Italian (top) and Polish (bottom).
-The pilot study showed that a widening of the wavegram dEGG maximum band (red) with concomitant shrinkage of the dEGG minimum band (blue) signals greater glottal opening.
+The pilot study showed that a widening of the wavegram dEGG maximum band (purple) with concomitant shrinkage of the dEGG minimum band (green) signals greater glottal opening.
 The change in band width corresponds to changes in velocity of the execution of the contacting and decontacting movements.
 An interesting aspect of modelled glottal activity concerns the first half of the vowels.
 The change in the wavegram indicates a process of decreasing glottal opening (from a breathier to a more modal phonation).
