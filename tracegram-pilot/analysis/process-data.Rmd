@@ -1,0 +1,24 @@
+---
+title: "Process EGG data"
+author: "Stefano Coretta"
+date: "16/05/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../../"))
+library(tidyverse)
+library(speakr)
+```
+
+## Tangle and wave code
+
+```{r tangle}
+lmt("./tracegram-pilot/code/process-egg.praat.md")
+```
+
+```{r wave}
+system("pandoc -f gfm -o ./tracegram-pilot/code/process-egg.pdf ./tracegram-pilot/code/process-egg.praat.md -N --syntax-definition=/Users/stefano/.pandoc/pandoc-praat/praat.xml --highlight-style=/Users/stefano/.pandoc/flamenco.theme --metadata-file=./tracegram-pilot/code/process-egg.yaml")
+```
+
