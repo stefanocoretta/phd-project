@@ -25,6 +25,7 @@
 # SOFTWARE.
 ######################################
 
+#### Preamble t ####
 lower = 40
 upper = 10000
 smoothWidth = 11
@@ -37,6 +38,7 @@ writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
 numberOfFiles = Get number of strings
 
+#### Main loop t ####
 for file to numberOfFiles
   selectObject: fileList
   fileName$ = Get string: file
@@ -49,6 +51,7 @@ for file to numberOfFiles
   textGrid = To TextGrid (vuv): 0.02, 0.001
   numberOfIntervals = Get number of intervals: 1
 
+  #### Vowel loop t ####
   token = 0
   for interval to numberOfIntervals
     selectObject: textGrid
@@ -66,6 +69,7 @@ for file to numberOfFiles
       selection = Extract part: selectionStart, selectionEnd, "rectangular",
         ...1, "yes"
   
+      #### dEGG t ####
       eggSmooth = Filter (pass Hann band): lower, upper, 100
       @smoothing: smoothWidth
       sampling_period = Get sampling period
@@ -83,6 +87,7 @@ for file to numberOfFiles
       Shift times by: time_lag
       deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
   
+      #### Tracing loop ####
       selectObject: eggPointProcess
       eggPoints = Get number of points
       meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
@@ -126,6 +131,7 @@ for file to numberOfFiles
   endfor
 endfor
 
+#### Smoothing ####
 procedure smoothing : .width
   .weight = .width / 2 + 0.5
 

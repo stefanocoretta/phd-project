@@ -25,6 +25,7 @@
 # SOFTWARE.
 ######################################
 
+#### Preamble w ####
 lower = 40
 upper = 10000
 smoothWidth = 11
@@ -37,7 +38,7 @@ writeFileLine: resultsFile$, resultsHeader$
 fileList = Create Strings as file list: "fileList", data$
 numberOfFiles = Get number of strings
 
-#### Files loop ####
+#### Main loop w ####
 for file from 1 to numberOfFiles
     selectObject: fileList
     fileName$ = Get string: file
@@ -51,7 +52,7 @@ for file from 1 to numberOfFiles
     textGrid = To TextGrid (vuv): 0.02, 0.001
     numberOfIntervals = Get number of intervals: 1
 
-    #### Vowel loop ####
+    #### Vowel loop w ####
     token = 0
     for interval to numberOfIntervals
         selectObject: textGrid
@@ -69,6 +70,7 @@ for file from 1 to numberOfFiles
             selection = Extract part: selectionStart, selectionEnd, "rectangular",
                 ...1, "yes"
     
+            #### dEGG w ####
             eggSmooth = Filter (pass Hann band): lower, upper, 100
             @smoothing: smoothWidth
             sampling_period = Get sampling period
@@ -86,6 +88,7 @@ for file from 1 to numberOfFiles
             Shift times by: time_lag
             deggPointProcess = noprogress To PointProcess (periodic, peaks): 75, 600, "yes", "no"
     
+            #### Period loop ####
             selectObject: eggPointProcess
             eggPoints = Get number of points
             meanPeriod = Get mean period: 0, 0, 0.0001, 0.02, 1.3
@@ -102,6 +105,7 @@ for file from 1 to numberOfFiles
                 eggMinimum2 = Get time of minimum: point2, point3, "Sinc70"
                 period = eggMinimum2 - eggMinimum1
             
+                #### Wavegram ####
                 if period <= meanPeriod * 2
                     selectObject: deggSmooth
                     minAmplitude = Get minimum: eggMinimum1, eggMinimum2, "Sinc70"
@@ -143,6 +147,7 @@ for file from 1 to numberOfFiles
     endfor
 endfor
 
+#### Smoothing ####
 procedure smoothing : .width
   .weight = .width / 2 + 0.5
 
