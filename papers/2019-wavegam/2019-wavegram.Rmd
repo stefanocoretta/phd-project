@@ -104,7 +104,7 @@ Moreover, the potential for overfitting is reduced by a smoothing penalty parame
 This paper introduces wavegram GAMs as a way to quantitatively assess wavegram data.
 First, results from a pilot study which informally evaluates the proposed method are presented (\Cref{s:pilot}).
 \Cref{s:voicing} illustrates how to conduct a wavegram GAM analysis of dEGG data through a practical example in which the wavegrams of vowels followed by voiceless and voiced stops are compared.
-Finally, \Cref{s:limits} discusses limitations of the current implementation of the method and future directions.
+Finally, \Cref{s:conclusion} concludes and discusses limitations of the current implementation of the method and future directions.
 
 # Pilot study
 \label{s:pilot}
@@ -117,7 +117,7 @@ Each participant uttered 10 consecutive tokens of a sustained /a/ in modal voice
 All subsequent data processing was performed in Praat \citep{boersma2018}.
 The onset and offset of each token were detected with an automatic procedure which finds voiced and unvoiced intervals (`To TextGrid (vuv)`).
 The dEGG wavegram data was extracted from the first 8 glottal cycles of a 500 ms window, centred around the mid-point of each token.
-A glottal cycle was arbitrarily defined as the interval between two consecutive EGG minima (cf. with \citealt{herbst2010} for an alternative algorythm).
+A glottal cycle was arbitrarily defined as the interval between two consecutive EGG minima (see \citealt{herbst2010} for an alternative algorithm).
 From each glottal cycle, the relative amplitude of the dEGG signal was extracted every 10 samples.
 
 A generalised additive mixed model (GAMM) was fitted to the data to statistically assess differences in vocal fold activity between modal and breathy voicing (see \citealt{soskuthy2017} and \citealt{wieling2018} for a practical introduction to fitting GAMs in R).
@@ -205,10 +205,12 @@ The change in the wavegram indicates a process of decreasing glottal opening (fr
 The greater glottal spread observed at vowel onset could be related to the residual glottal spread of the preceding voiceless stop /p/.
 This means that the phonation at vowel onset is breathier and becomes more modal during the production of the vowel, stabilising itself at about 20% of the vowel duration.
 
-Focusing now on the second half of the vowel, the wavegrams in \Cref{f:surface} show a pattern that is symmetrical to that observed in the first half.
+Focusing now on the second half of the vowel, the wavegrams in \Cref{f:surface} show a pattern that is symmetrical to that observed in the first half \citep{halle1967a}.
 Namely, glottal opening increases towards the end of the vowel.
-The magnitude of the change, however, is greater in vowels followed by voiceless stops (left panels) than those followed by voiced stops.
-The earlier and greater glottal spreading in vowels followed by voiceless stops could be implemented in anticipation of the open glottis required in the production of voiceless stops.
+The magnitude and timing of the change, however, differs in the voiceless and voiced contexts.
+The change is greater and is implemented earlier in vowels followed by voiceless stops (left panels) than those followed by voiced stops (right panels).
+The earlier and greater glottal spreading in vowels followed by voiceless stops could be implemented in anticipation of the open glottis required in the production of voiceless stops as a mechanism to cease vocal fold vibration.
+In the case of voiced stops, \citet{halle1967a} propose that increased glottal width can facilitate voicing while the oral tract is constricted (cf. \citealt{westbury1983}, who claims that decreased glottal width favours voicing).
 
 The wavegrams of vowels followed by voiceless stops also suggest an effect of language (the GAM terms with a by-language factor return *p*-values below 0.001).
 The change in activity before voiceless stops is initiated earlier in Italian (at around 65% into the vowel) than in Polish (at about 80%).
@@ -245,3 +247,18 @@ In such case, pre-aspiration could ultimately develop into normative pre-aspirat
 In the alternative scenario, on the other hand, pre-aspiration is prevented from arising.
 This can be achieved by shifiting the timing of the stop closure towards the onset of the glottal spreading gesture, while keeping the timing of the latter unchanged.
 As a consequence, stop closure duration is increased, resulting in the know pattern of the differential closure durations of voiceless vs. voiced stops.
+
+# Conclusion
+\label{s:conclusion}
+
+This paper introduced a method for modelling glottal activity as obtained from wavegram data \citep{herbst2010} using generalised additive (mixed) models \citep{hastie1986, zuur2012, wood2017}.
+A pilot study of the wavegram GAM method showed that the modelled wavegrams are affected by the global changes in glottal activity depending on the phonation mode of voicing.
+In particular, the ability of the model to distinguish between modal and breathy voicing was tested, and the results indicated that breathy voicing corresponds to delayed dEGG maxima and minima within the glottal cycle and decreased velocities of the contacting phase (with concomitant increased velocity of the decontacting phase).
+Building on the results of the pilot study, a second study was run to investigate glottal activity in vowels followed by either a voiceless or a voiced stop in Italian and Polish.
+The results suggest a change of glottal activity during the second half of the vowel in anticipation of the glottal configuration of the following stop (in accordance with \citealt{halle1967a}).
+The change corresponds to increasing glottal width in both contexts.
+However the increase is greater and implemented earlier in the voiceless than in the voiced context.
+
+Moreover, the change in glottal activity in vowels followed by voiceless stops starts earlier in Italian than in Polish.
+It was argued that the earlier and grater increase in glottal width in Italian is compatible with reports of pre-aspiration in some varieties of the language \citep{ni-chasaide1993, stevens2014a}.
+It was further speculated that once an appreciable degree of glottal spreading is implemented during the vowel, either spreading can result in voiceless pre-aspiration with subsequent stop closure shortening, or voiceless pre-aspiration can be avoided by anticipating oral closure while keeping the glottal gesture (with the consequence of increased closure duration).
