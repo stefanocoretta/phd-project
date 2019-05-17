@@ -262,3 +262,10 @@ However the increase is greater and implemented earlier in the voiceless than in
 Moreover, the change in glottal activity in vowels followed by voiceless stops starts earlier in Italian than in Polish.
 It was argued that the earlier and grater increase in glottal width in Italian is compatible with reports of pre-aspiration in some varieties of the language \citep{ni-chasaide1993, stevens2014a}.
 It was further speculated that once an appreciable degree of glottal spreading is implemented during the vowel, either spreading can result in voiceless pre-aspiration with subsequent stop closure shortening, or voiceless pre-aspiration can be avoided by anticipating oral closure while keeping the glottal gesture (with the consequence of increased closure duration).
+
+A limitation of the proposed wavegram GAM analysis is that, while the model can statistically assess global differences in the wavegram, more localised variation still needs to be assessed qualitatively.
+For example, while the modelled wavegrams show differences in timing of change in glottal activity, there is no straightforward way of obtaining a unique and robust measure of such timing, and statements about this differences rely on visual inspection of the modelled wavegram.
+A wavegram GAM analysis, however, is still useful in providing a method to model data from multiple repetitions and multiple speakers in a flexible way.
+Future work will have to investigate different phonation types (like creaky voice) and phonetic contexts.
+More positive tests should be conducted to assess the reliability of the method.
+Finally, ways to obtain quantitative data on timing and degree of changes in glottal activity will be necessary to further the applicability of the method.
