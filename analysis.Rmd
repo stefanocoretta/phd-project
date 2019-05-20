@@ -43,13 +43,14 @@ plot_obs_range <- function(se, obs_n, max_width, divide = 1, by = 1, min_width =
 ```
 
 ```{r rr}
-plot_obs_range(4.06, 1800, 20, 120)
-plot_obs_range(4.06, 1800, 20, 120, min_width = 5) +
+plot_obs_range(4.06, 1800, 20, min_width = 5)
+plot_obs_range(4.06, 1800, 20, divide = 120, min_width = 5) +
   scale_y_continuous(breaks = seq(0, 200, 25))
 ```
 
 ```{r rel-gons}
-plot_obs_range(6.68, 850, 15, 144, min_width = 5) +
+plot_obs_range(6.68, 850, 15, min_width = 5)
+plot_obs_range(6.68, 850, 15, divide = 144, min_width = 5) +
   scale_y_continuous(breaks = seq(0, 200, 25))
 ```
 
