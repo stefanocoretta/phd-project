@@ -8,8 +8,9 @@
 *.pyc
 Rplots.pdf
 
-# Data folder
+# Data and analysis cache folders
 data/
+cache/
 
 ########
 # R
