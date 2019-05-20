@@ -9,27 +9,27 @@
 
 ### Test
 
-subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+subdirs='coretta2018itapol/data-raw/data phd-project/tracegram-prepilot/data phd-project/tracegram-pilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/italian-egg/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/data phd-project/english-ve-meta/data phd-project/american-english/data'
 
 for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-      ~/GitHub/phd-project/$dirs/data/ \
-      /Volumes/Seagate/language-data/phd-project/$dirs/data
+      ~/GitHub/$dirs/ \
+      /Volumes/Seagate/language-data/phd-project/$dirs
   echo
 done
 
 ### Run
 
-subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+subdirs='coretta2018itapol/data-raw/data phd-project/tracegram-prepilot/data phd-project/tracegram-pilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/italian-egg/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/data phd-project/english-ve-meta/data phd-project/american-english/data'
 
 for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-      ~/GitHub/phd-project/$dirs/data/ \
-      /Volumes/Seagate/language-data/phd-project/$dirs/data
+      ~/GitHub/$dirs/ \
+      /Volumes/Seagate/language-data/phd-project/$dirs
   echo
 done
 
@@ -37,56 +37,50 @@ done
 
 ### Test
 
-subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+subdirs='coretta2018itapol/data-raw/data phd-project/tracegram-prepilot/data phd-project/tracegram-pilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/italian-egg/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/data phd-project/english-ve-meta/data phd-project/american-english/data'
 
 for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-      /Volumes/Seagate/language-data/phd-project/$dirs/data/ \
-      ~/GitHub/phd-project/$dirs/data
+      /Volumes/Seagate/language-data/phd-project/$dirs/ \
+      ~/GitHub/$dirs
   echo
 done
 
 ### Run
 
-subdirs='voicing-effect tracegram-prepilot tracegram-pilot lombard perceptual-pilot english-pilot perceptual italian-egg icelandic italian-sz english english-ve-meta american-english'
+subdirs='coretta2018itapol/data-raw/data phd-project/tracegram-prepilot/data phd-project/tracegram-pilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/italian-egg/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/data phd-project/english-ve-meta/data phd-project/american-english/data'
 
 for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-      /Volumes/Seagate/language-data/phd-project/$dirs/data/ \
-      ~/GitHub/phd-project/$dirs/data
+      /Volumes/Seagate/language-data/phd-project/$dirs/ \
+      ~/GitHub/$dirs
   echo
 done
 
 # Share
 
 ## Push to share
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/ \
-    /Volumes/Phonology/Common/stefano-phd
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    ~/GitHub/phd-project/ \
-    /Volumes/Phonology/Common/stefano-phd
 
-# DANGER
+subdirs='phd-project coretta2018itapol coretta2017egg coretta2018itaegg coretta2019eng'
 
-## Pull from share
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Phonology/Common/ \
-    ~/Documents/GitHub/phd-project/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    /Volumes/Phonology/Common/ \
-    ~/Documents/GitHub/phd-project/
+for dirs in ${subdirs[*]}
+do
+  echo ==== $dirs
+  rsync -anv --no-whole-file --delete --exclude '*.DS_Store' --exclude '.Rproj.user' \
+    ~/GitHub/$dirs/ \
+    /Volumes/Phonology/Common/stefano-phd/$dirs
+done
 
-## Push to external HD
-rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-    --exclude '.Rproj.user' --exclude '.git' \
-    ~/Documents/GitHub/phd-project/ \
-    /Volumes/Multimedia/phd-project/
-rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-    --exclude '.Rproj.user' --exclude '.git' \
-    ~/Documents/GitHub/phd-project/ \
-    /Volumes/Multimedia/phd-project/
+subdirs='phd-project coretta2018itapol coretta2017egg coretta2018itaegg coretta2019eng'
+
+for dirs in ${subdirs[*]}
+do
+  echo ==== $dirs
+  rsync -avz --no-whole-file --delete --exclude '*.DS_Store' --exclude '.Rproj.user' \
+    ~/GitHub/$dirs/ \
+    /Volumes/Phonology/Common/stefano-phd/$dirs
+done
