@@ -89,7 +89,7 @@ rr_1 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./english/data/cache/rr_1"
+  file = "./english/analysis/cache/rr_1"
 )
 ```
 
@@ -130,7 +130,7 @@ rr_2 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./english/data/cache/rr_2"
+  file = "./english/analysis/cache/rr_2"
 )
 ```
 
@@ -170,7 +170,7 @@ rr_3 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./english/data/cache/rr_3"
+  file = "./english/analysis/cache/rr_3"
 )
 ```
 
@@ -346,7 +346,7 @@ rr_4 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./english/data/cache/rr_4"
+  file = "./english/analysis/cache/rr_4"
 )
 ```
 

@@ -126,7 +126,7 @@ vow_1 <- brm(
   family = gaussian(),
   data = eng_durations,
   prior = priors,
-  file = "./english/data/cache/vow_1",
+  file = "./english/analysis/cache/vow_1",
   cores = 4
 )
 ```
@@ -242,7 +242,7 @@ vow_2 <- brm(
   family = gaussian(),
   data = eng_durations,
   prior = priors,
-  file = "./english/data/cache/vow_2",
+  file = "./english/analysis/cache/vow_2",
   cores = 4
 )
 ```
