@@ -2,7 +2,7 @@
 title: "Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
 output:
-  pdf_document: 
+  pdf_document:
     citation_package: natbib
     dev: cairo_pdf
     keep_tex: yes
@@ -22,12 +22,12 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 params:
-  version: 0.11
+  version: 0.11.9000
   version-date: "2019/05/09"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(tidyverse)
 theme_set(theme_minimal(base_family = "Arial Unicode MS"))
@@ -319,7 +319,7 @@ rr_1 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./papers/2019-english-rr/data/cache/rr_1"
+  file = "./papers/2019-english-rr/data/cache/model_1_rr"
 )
 ```
 
@@ -372,7 +372,7 @@ rr_2 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./papers/2019-english-rr/data/cache/rr_2"
+  file = "./papers/2019-english-rr/data/cache/model_2_rr"
 )
 ```
 
@@ -432,7 +432,7 @@ rr_3 <- brm(
   prior = priors,
   cores = 4,
   seed = 1234,
-  file = "./papers/2019-english-rr/data/cache/rr_3"
+  file = "./papers/2019-english-rr/data/cache/model_3_rr"
 )
 ```
 
@@ -516,7 +516,7 @@ vow_4 <- brm(
   family = gaussian(),
   data = eng_durations,
   prior = priors,
-  file = "./papers/2019-english-rr/data/cache/vow_4",
+  file = "./papers/2019-english-rr/data/cache/model_4_vow",
   cores = 4
 )
 ```
@@ -542,19 +542,19 @@ kable_styling(font_size = 8)
 \Cref{tab:vow-4-table} reports the summary of model 4, while \Cref{f:vow-4-intervals} shows the posterior distributions and credible intervals.
 The precision target was reached in the non-interacting predictors (permitting a few milliseconds above 20), with the exeption of the intercept.
 All the interactions terms have CI widths above 25 ms.
-The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 113.15--137.06 ms ($\bar{\theta}$ = 125.16 ms, SD = 6.02).
-The vowel /ɜː/ is 9.19 ms shorter (SD = 5.29) with CI = [−19.24, 1.49], while /iː/ is 36.97 ms shorter (SD = 5.14, 95% CI = [−46.99, −26.76]).
+The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 112.94--136.77 ms ($\bar{\theta}$ = 124.91 ms, SD = 5.96).
+The vowel /ɜː/ is 9.03 ms shorter (SD = 5.16) with CI = [−19.08, 1.63], while /iː/ is 36.77 ms shorter (SD = 5, 95% CI = [−46.42, −26.67]).
 C2 voicing has a small but robust positive effect on vowel duration in disyllabic words.
-The posterior distribution of the effect of voicing on /ɑː/ has mean 13.47 ms (SD = 5.14) and 95% CI = [3.80, 24.36].
-The posterior of the interaction of voicing with vowel when the vowel is /ɜː/ is quite spread out around 0, with the 95% CI between −13.77 and 13.40 ms.
+The posterior distribution of the effect of voicing on /ɑː/ has mean 13.65 ms (SD = 5.16) and 95% CI = [3.73, 24.09].
+The posterior of the interaction of voicing with vowel when the vowel is /ɜː/ is quite spread out around 0, with the 95% CI between −13.70 and 13.94 ms.
 This indicates that /ɑː/ and /ɜː/ are similar in their behaviour of voicing-driven durational differences.
-On the other hand, the effect of voicing is on average 6.75 ms greater (SD = 6.76, 95% CI = [−7.45, 19.55]) when the vowel is /iː/.
+On the other hand, the effect of voicing is on average 6.73 ms greater (SD = 6.59, 95% CI = [−6.54, 19.26]) when the vowel is /iː/.
 
 The magnitude of the voicing effect in disyllabic vs. monosyllabic words is modulated by the identity of the vowel.
-The posterior distribution for the interaction C2 voicing/number of syllables when the vowel is /ɑː/ has mean 4.07 ms (SD = 6.6) and 95% CI [−8.94, 17.30].
+The posterior distribution for the interaction C2 voicing/number of syllables when the vowel is /ɑː/ has mean 4.03 ms (SD = 6.7) and 95% CI [−8.98, 17.69].
 This distribution indicates the possibility for a very small increase of the effect from disyllabic to monosyllabic words with /ɑː/.
-The three-way interaction C2 voicing/vowel/number of syllables suggests that the effect of voicing in monosyllabic words with /ɜː/ is very similar to that of monosyllabic /ɑː/-words ($\bar{\theta}$ = −2.66, SD = 9,44, 95% CI = [−21.57, 16.23]).
-On the other hand, the effect increases by 14.5 ms (SD = 9.43, CI = [−4.27, 33.41]) in monosyllabic words with /iː/ relative to disyllabic /iː/-words.
+The three-way interaction C2 voicing/vowel/number of syllables suggests that the effect of voicing in monosyllabic words with /ɜː/ is very similar to that of monosyllabic /ɑː/-words ($\bar{\theta}$ = −2.94, SD = 9.46, 95% CI = [−21.37, 15.77]).
+On the other hand, the effect increases by 14.46 ms (SD = 9.18, CI = [−3.59, 31.99]) in monosyllabic words with /iː/ relative to disyllabic /iː/-words.
 Note that the credible intervals of these interaction effect are quite large, so that a wide range of values are probable at 95% confidence.
 
 ```{r vow-4-intervals, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on vowel duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
@@ -617,7 +617,7 @@ clos_5 <- brm(
   data = eng_clos,
   prior = priors,
   cores = 4,
-  file = "./papers/2019-english-rr/data/cache/clos_5"
+  file = "./papers/2019-english-rr/data/cache/model_5_clos"
 )
 ```
 
@@ -640,11 +640,11 @@ kable_styling(font_size = 8)
 The summary of model 5 is shown in \Cref{tab:clos-5-table}.
 See \Cref{f:clos-5-intervals} for the posteriors and credible intervals of the effects.
 The 96% CI width of all the terms, with the exception of the three-way interaction (voicing/place/number of syllables), is below 20 ms (the precision goal has been reached).
-The posterior distribution of the intercept for closure duration (corresponding to the duration of voiceless velar stops in disyllabic words) has mean 74.62 ms (SD = 2.85) and 95% CI = [69.17, 80.42].
-The effect of C2 voicing on closure duration is certainly negative, between −26.76 and −14.57 ms (95% CI).
-The posterior mean of this effect is −20.83 ms (SD = 3.09).
-A very small positive effect of place of articulation (labial) is suggested by the 95% CI from −0.30 to 10.63 ms ($\bar{\theta}$ = 5.1 ms, SD = 2.73).
-A possibly even smaller effect of number of syllables or no effect at all can be inferred from the posterior distribution which has mean 2.81 ms and SD 2.84 (95% CI = [−2.70, 8.19]).
+The posterior distribution of the intercept for closure duration (corresponding to the duration of voiceless velar stops in disyllabic words) has mean 74.75 ms (SD = 2.86) and 95% CI = [69.07, 80.59].
+The effect of C2 voicing on closure duration is certainly negative, between −26.77 and −14.74 ms (95% CI).
+The posterior mean of this effect is −20.79 ms (SD = 3.06).
+A very small positive effect of place of articulation (labial) is suggested by the 95% CI from −0.03 to 10.76 ms ($\bar{\theta}$ = 5.19 ms, SD = 2.77).
+A possibly even smaller effect of number of syllables or no effect at all can be inferred from the posterior distribution which has mean 2.98 ms and SD 2.9 (95% CI = [−2.8, 8.77]).
 Note that the 95% CIs of the posterior distributions of all the effects, with the exception for the effect of voicing, are within the ROPE around 0.
 
 ```{r clos-5-intervals, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on closure duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
