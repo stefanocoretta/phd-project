@@ -7,12 +7,13 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
 library(brms)
 library(bayesplot)
 library(coretta2018itapol)
 data("token_measures")
+seed <- 9375
 
 token_measures <- token_measures %>%
   filter(c1_phonation == "voiceless", file != "it07-048") %>%
@@ -22,52 +23,63 @@ token_measures <- token_measures %>%
   mutate_if(is.character, as.factor)
 ```
 
-```{r}
-get_prior(v1_duration ~ c2_phonation * language + vowel + c2_phonation:vowel + speech_rate_c + (1|speaker) + (1|item), data = token_measures)
-```
+# Vowel duration
 
-
-```{r}
+```{r vdur_bm}
 priors <- c(
   set_prior("normal(150, 50)", class = "Intercept"),
-  set_prior("normal(0, 20)", class = "b", coef = "c2_phonationvoiced"),
-  set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:languagePolish"),
-  set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelo"),
-  set_prior("normal(0, 10)", class = "b", coef = "c2_phonationvoiced:vowelu"),
-  set_prior("normal(0, 25)", class = "b", coef = "languagePolish"),
+  set_prior("normal(0, 50)", class = "b", coef = "c2_phonationvoiced"),
   set_prior("normal(0, 25)", class = "b", coef = "vowelo"),
   set_prior("normal(0, 25)", class = "b", coef = "vowelu"),
-  set_prior("normal(0, 100)", class = "b", coef = "syl_rate_c"),
+  set_prior("normal(0, 25)", class = "b", coef = "languagePolish"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_placevelar"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_phonationvoiced:languagePolish"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_phonationvoiced:vowelo"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_phonationvoiced:vowelu"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_phonationvoiced:vowelo:languagePolish"),
+  set_prior("normal(0, 25)", class = "b", coef = "c2_phonationvoiced:vowelu:languagePolish"),
+  set_prior("normal(0, 100)", class = "b", coef = "speech_rate_c"),
   set_prior("normal(0, 50)", class = "sd"),
-  set_prior("cauchy(0, 50)", class = "sigma")
+  set_prior("cauchy(0, 50)", class = "sigma"),
+  set_prior("lkj(2)", class = "cor")
 )
 
 vdur_bm <- brm(
-  vowel_duration ~
-    c2_phonation *
-    language +
+  v1_duration ~
+    c2_phonation +
     vowel +
+    language +
+    c2_place +
     c2_phonation:vowel +
-    syl_rate_c +
-    (1|speaker) +
+    c2_phonation:language +
+    c2_phonation:vowel:language +
+    speech_rate_c +
+    (1 + c2_phonation|speaker) +
     (1|item),
   data = token_measures,
   prior = priors,
-  cores = 2
+  cores = 4,
+  file = "./italian-polish/analysis/cache/vdur_bm"
 )
 ```
 
-```{r}
+```{r vdur-bm-summary}
 summary(vdur_bm)
 ```
 
-```{r}
+```{r vdur-bm-interval-intercept}
 mcmc_intervals(as.array(vdur_bm), pars = c("b_Intercept"))
 ```
 
-```{r}
-mcmc_intervals(as.array(vdur_bm), pars = c("b_c2_phonationvoiced", "b_c2_phonationvoiced:languagePolish", "b_languagePolish", "b_vowelo", "b_vowelu"))
+```{r vdur-bm-intervals}
+mcmc_intervals(as.array(vdur_bm), pars = c("b_c2_phonationvoiced", "b_c2_phonationvoiced:languagePolish", "b_languagePolish", "b_vowelo", "b_vowelu", "b_c2_phonationvoiced:vowelo", "b_c2_phonationvoiced:vowelu", "b_c2_phonationvoiced:vowelo:languagePolish", "b_c2_phonationvoiced:vowelu:languagePolish", "b_c2_placevelar"))
 ```
+
+```{r vdur-bm-areas}
+mcmc_areas(as.array(vdur_bm), pars = c("b_c2_phonationvoiced", "b_c2_phonationvoiced:languagePolish", "b_languagePolish", "b_vowelo", "b_vowelu", "b_c2_phonationvoiced:vowelo", "b_c2_phonationvoiced:vowelu", "b_c2_phonationvoiced:vowelo:languagePolish", "b_c2_phonationvoiced:vowelu:languagePolish", "b_c2_placevelar"))
+```
+
+# Vowel and closure durations
 
 ```{r}
 priors <- c(
@@ -95,7 +107,8 @@ vclos_bm <- brm(
     (1|item),
   data = token_measures,
   prior = priors,
-  cores = 2
+  cores = 2,
+  seed = seed
 )
 ```
 
