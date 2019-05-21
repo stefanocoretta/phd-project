@@ -33,8 +33,8 @@ options(contrasts = rep("contr.treatment", 2))
 `tongues` contains splines coordinates at maximum displacement, `tongues_clos` has splines coordinates at acoustic closure, and `vowels` has durational data.
 
 ```{r data}
-languages <- read_csv("voicing-effect/stimuli/languages.csv")
-words <- read_csv("voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("italian-polish/stimuli/languages.csv")
+words <- read_csv("italian-polish/stimuli/nonce.csv")
 
 columns <- c(
     "speaker",

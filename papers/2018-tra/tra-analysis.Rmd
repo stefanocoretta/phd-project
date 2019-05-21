@@ -160,7 +160,7 @@ tra_series %>%
 ```
 
 ```{r tra-gam}
-if (!file.exists("./voicing-effect/data/cache/tra-gam.Rdata")) {
+if (!file.exists("./italian-polish/data/cache/tra-gam.Rdata")) {
   tra_gam <- bam(
     trp ~
       c2_phonation_o +
@@ -202,10 +202,10 @@ if (!file.exists("./voicing-effect/data/cache/tra-gam.Rdata")) {
     AR.start = tra_series$start_event
   )
   
-  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./voicing-effect/data/cache/tra-gam.Rdata")
+  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./italian-polish/data/cache/tra-gam.Rdata")
   
 } else {
-  load("./voicing-effect/data/cache/tra-gam.Rdata")
+  load("./italian-polish/data/cache/tra-gam.Rdata")
 }
 
 compareML(tra_gam_ar_0, tra_gam_ar)
@@ -223,7 +223,7 @@ predict_gam(tra_gam_ar, values = list(speech_rate_c = 0)) %>%
 ```
 
 ```{r tra-gam-1}
-if (!file.exists("./voicing-effect/data/cache/tra-gam-1.Rdata")) {
+if (!file.exists("./italian-polish/data/cache/tra-gam-1.Rdata")) {
   tra_gam_1 <- bam(
     trp ~
       s(speech_rate_c) +
@@ -232,15 +232,15 @@ if (!file.exists("./voicing-effect/data/cache/tra-gam-1.Rdata")) {
       s(proportion, speaker_voicing, bs = "fs", m = 1),
     data = tra_series
   )
-  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./voicing-effect/data/cache/tra-gam-1.Rdata")
+  save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./italian-polish/data/cache/tra-gam-1.Rdata")
   
 } else {
-  load("./voicing-effect/data/cache/tra-gam-1.Rdata")
+  load("./italian-polish/data/cache/tra-gam-1.Rdata")
 }
 ```
 
 ```{r tra-gam-2}
-if (!file.exists("./voicing-effect/data/cache/tra-gam-2.Rdata")) {
+if (!file.exists("./italian-polish/data/cache/tra-gam-2.Rdata")) {
   tra_gam_2 <- bam(
     trp ~
       s(v1_duration) +
@@ -276,10 +276,10 @@ if (!file.exists("./voicing-effect/data/cache/tra-gam-2.Rdata")) {
     AR.start = tra_series$start_event
   )
   
-  save(tra_gam_2, tra_gam_ar_2, tra_gam_ar_0_2, file = "./voicing-effect/data/cache/tra-gam-2.Rdata")
+  save(tra_gam_2, tra_gam_ar_2, tra_gam_ar_0_2, file = "./italian-polish/data/cache/tra-gam-2.Rdata")
   
 } else {
-  load("./voicing-effect/data/cache/tra-gam-2.Rdata")
+  load("./italian-polish/data/cache/tra-gam-2.Rdata")
 }
 
 compareML(tra_gam_ar_0_2, tra_gam_ar_2)

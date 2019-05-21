@@ -30,8 +30,8 @@ options(contrasts = rep ("contr.treatment", 2))
 # Import data
 
 ```{r tongues}
-languages <- read_csv("voicing-effect/stimuli/languages.csv")
-words <- read_csv("voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("italian-polish/stimuli/languages.csv")
+words <- read_csv("italian-polish/stimuli/nonce.csv")
 
 columns <- c(
     "speaker",
@@ -48,7 +48,7 @@ columns <- c(
 )
 
 aaa.files <- list.files(
-    path = "./voicing-effect/results/ultrasound",
+    path = "./italian-polish/results/ultrasound",
     pattern = "*-tongue-cart.tsv",
     full.names = TRUE
 )
@@ -89,7 +89,7 @@ max_pl_34 <- max %>%
     filter(speaker %in% c("pl03", "pl04"))
 
 aaa_files_clos <- list.files(
-    path = "./voicing-effect/results/ultrasound",
+    path = "./italian-polish/results/ultrasound",
     pattern = "*-tongue-clos-cart.tsv",
     full.names = TRUE
 )
@@ -119,10 +119,10 @@ tongues_clos <- read_aaa(
 ```
 
 ```{r vowels}
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./italian-polish/stimuli/languages.csv")
+words <- read_csv("./italian-polish/stimuli/nonce.csv")
 
-vowels <- list.files(path = "voicing-effect/results/durations",
+vowels <- list.files(path = "italian-polish/results/durations",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%

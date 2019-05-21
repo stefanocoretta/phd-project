@@ -29,8 +29,8 @@ library(itsadug)
 # Data
 
 ```{r read}
-languages <- read_csv("voicing-effect/stimuli/languages.csv")
-words <- read_csv("voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("italian-polish/stimuli/languages.csv")
+words <- read_csv("italian-polish/stimuli/nonce.csv")
 
 num.splines <- 42
 first.columns <- c(
@@ -53,17 +53,17 @@ columns <- c(first.columns,
                     )
              )
 
-splines.raw <- list.files(path = "./voicing-effect/results/cached",
+splines.raw <- list.files(path = "./italian-polish/results/cached",
                    pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.closure.raw <- list.files(path = "./voicing-effect/results/cached",
+splines.closure.raw <- list.files(path = "./italian-polish/results/cached",
                    pattern = "*-closure.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.phantom.raw <- list.files(path = "./voicing-effect/results/cached",
+splines.phantom.raw <- list.files(path = "./italian-polish/results/cached",
                    pattern = "*-phantom.csv",
                    full.names = TRUE) %>%
     map_df(~read_tsv(., col_names = columns, na = "*"))
