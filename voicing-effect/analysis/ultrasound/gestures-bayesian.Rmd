@@ -69,7 +69,7 @@ gons_max_bm <- brm(
   prior = priors,
   data = gest_gmax,
   cores = 4,
-  file = "./voicing-effect/data/cache/gons_max_bm"
+  file = "./italian-polish/data/cache/gons_max_bm"
 )
 ```
 
@@ -132,7 +132,7 @@ rel_gons_bm <- brm(
   prior = priors,
   data = gestures,
   cores = 4,
-  file = "./voicing-effect/data/cache/rel_gons_bm"
+  file = "./italian-polish/data/cache/rel_gons_bm"
 )
 ```
 

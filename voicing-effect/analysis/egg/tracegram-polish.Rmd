@@ -19,10 +19,10 @@ theme_set(theme_bw())
 # Data import
 
 ```{r import}
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./italian-polish/stimuli/languages.csv")
+words <- read_csv("./italian-polish/stimuli/nonce.csv")
 
-degg_pl <- list.files(path = "./voicing-effect/results/egg",
+degg_pl <- list.files(path = "./italian-polish/results/egg",
                    pattern = "*-degg-tracing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.)) %>%

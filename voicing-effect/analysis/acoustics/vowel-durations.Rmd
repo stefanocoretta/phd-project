@@ -33,13 +33,13 @@ The text in this file is outdated. More data is now now available and the result
 Let's read the files.
 
 ```{r read-files}
-vowels <- list.files(path = "voicing-effect/data/datasets/acoustics/",
+vowels <- list.files(path = "italian-polish/data/datasets/acoustics/",
                    pattern = "*-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--"))
 
-languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+languages <- read_csv("./italian-polish/data/datasets/speakers.csv")
+words <- read_csv("./italian-polish/data/datasets/stimuli.csv")
 
 
 vowels <- left_join(vowels, languages) %>%
@@ -50,7 +50,7 @@ vowels <- left_join(vowels, languages) %>%
 vowels.it <- filter(vowels, language == "italian")
 vowels.pl <- filter(vowels, language == "polish")
 
-voicing <- list.files(path = "voicing-effect/data/datasets/egg",
+voicing <- list.files(path = "italian-polish/data/datasets/egg",
                    pattern = "*-voicing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%

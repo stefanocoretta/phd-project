@@ -33,10 +33,10 @@ columns <- c(
     "TR_velocity_abs"
 )
 
-languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+languages <- read_csv("./italian-polish/data/datasets/speakers.csv")
+words <- read_csv("./italian-polish/data/datasets/stimuli.csv")
 
-vowels <- list.files(path = "./voicing-effect/data/datasets/acoustics",
+vowels <- list.files(path = "./italian-polish/data/datasets/acoustics",
                    pattern = "*-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%
@@ -58,7 +58,7 @@ columns_2 <- c(
 )
 
 closure <- list.files(
-    path = "./voicing-effect/data/datasets/ultrasound",
+    path = "./italian-polish/data/datasets/ultrasound",
     pattern = "*-tongue-clos-cart.tsv",
     full.names = TRUE
     ) %>%
@@ -67,7 +67,7 @@ closure <- list.files(
     unique()
 
 gons <- list.files(
-    path = "./voicing-effect/data/datasets/ultrasound",
+    path = "./italian-polish/data/datasets/ultrasound",
     pattern = "*-closing-gons.tsv",
     full.names = TRUE
     ) %>%

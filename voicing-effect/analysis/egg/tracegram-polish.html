@@ -153,10 +153,10 @@ $(document).ready(function () {
 
 <div id="data-import" class="section level1">
 <h1><span class="header-section-number">1</span> Data import</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">languages &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./voicing-effect/stimuli/languages.csv&quot;</span>)
-words &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./voicing-effect/stimuli/nonce.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">languages &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./italian-polish/stimuli/languages.csv&quot;</span>)
+words &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./italian-polish/stimuli/nonce.csv&quot;</span>)
 
-degg_pl &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;./voicing-effect/results/egg&quot;</span>,
+degg_pl &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;./italian-polish/results/egg&quot;</span>,
                    <span class="dt">pattern =</span> <span class="st">&quot;*-degg-tracing.csv&quot;</span>,
                    <span class="dt">full.names =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">map_df</span>(<span class="op">~</span><span class="kw">read_csv</span>(.)) <span class="op">%&gt;%</span>

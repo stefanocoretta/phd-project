@@ -39,11 +39,11 @@ columns <- c(
   "TR_velocity_abs"
 )
 
-speakers <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-stimuli <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+speakers <- read_csv("./italian-polish/data/datasets/speakers.csv")
+stimuli <- read_csv("./italian-polish/data/datasets/stimuli.csv")
 
 duration <- list.files(
-  path = "voicing-effect/data/datasets/acoustics/",
+  path = "italian-polish/data/datasets/acoustics/",
   pattern = "*-durations.csv",
   full.names = TRUE
 ) %>%
@@ -51,7 +51,7 @@ duration <- list.files(
   select(-speaker)
 
 tra_series <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound",
+  path = "./italian-polish/data/datasets/ultrasound",
   pattern = "*-vowel-series.tsv",
   full.names = TRUE
 ) %>%
@@ -93,7 +93,7 @@ contrasts(tra_series$place_vowel_phon) <- "contr.treatment"
 contrasts(tra_series$vowel_phon) <- "contr.treatment"
 
 tra_difference <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound",
+  path = "./italian-polish/data/datasets/ultrasound",
   pattern = "*-vowel-series.tsv",
   full.names = TRUE
 ) %>%
@@ -125,7 +125,7 @@ tra_difference <- list.files(
   
 
 tongue_root <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound/",
+  path = "./italian-polish/data/datasets/ultrasound/",
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%
@@ -147,7 +147,7 @@ tongue_root <- list.files(
   ungroup()
 
 tongue_root_max <- list.files(
-  path = "./voicing-effect/data/datasets/ultrasound/",
+  path = "./italian-polish/data/datasets/ultrasound/",
   pattern = "*-tongue-cart.tsv",
   full.names = TRUE
 ) %>%

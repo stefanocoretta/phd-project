@@ -57,25 +57,25 @@ columns <- c(first.columns,
 We can now read in the file.
 
 ```{r read}
-splines.raw <- list.files(path = "./voicing-effect/data/datasets/cached/",
+splines.raw <- list.files(path = "./italian-polish/data/datasets/cached/",
                    pattern = "*-aaa.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.closure.raw <- list.files(path = "./voicing-effect/data/datasets/cached/",
+splines.closure.raw <- list.files(path = "./italian-polish/data/datasets/cached/",
                    pattern = "*-closure.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
-splines.phantom.raw <- list.files(path = "./voicing-effect/data/datasets/cached/",
+splines.phantom.raw <- list.files(path = "./italian-polish/data/datasets/cached/",
                    pattern = "*-phantom.csv",
                    full.names = TRUE) %>%
     map_df(~read.delim(., col.names = columns, na.strings = "*"))
 
 rm(num.splines, first.columns, columns)
 
-languages <- read_csv("./voicing-effect/data/datasets/speakers.csv")
-words <- read_csv("./voicing-effect/data/datasets/stimuli.csv")
+languages <- read_csv("./italian-polish/data/datasets/speakers.csv")
+words <- read_csv("./italian-polish/data/datasets/stimuli.csv")
 ```
 
 The following code applies tidy formatting to the data frame. It uses functions from the `tidyr` library.

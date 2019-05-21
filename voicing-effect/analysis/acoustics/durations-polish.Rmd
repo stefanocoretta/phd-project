@@ -17,10 +17,10 @@ library(effects)
 # Import data
 
 ```{r read-data}
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./italian-polish/stimuli/languages.csv")
+words <- read_csv("./italian-polish/stimuli/nonce.csv")
 
-vowels <- list.files(path = "voicing-effect/results/durations",
+vowels <- list.files(path = "italian-polish/results/durations",
                    pattern = "*-vowel-durations.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(., na = "--undefined--")) %>%

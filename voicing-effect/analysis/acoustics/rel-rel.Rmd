@@ -99,7 +99,7 @@ rr_bm_2 <- brm(
   cores = 4,
   seed = 8788,
   control = list(adapt_delta = 0.99),
-  file = "./voicing-effect/data/cache/rr_bm_2"
+  file = "./italian-polish/data/cache/rr_bm_2"
 )
 ```
 
@@ -146,7 +146,7 @@ rr_bm_2a <- brm(
   cores = 4,
   seed = 8788,
   control = list(adapt_delta = 0.99),
-  file = "./voicing-effect/data/cache/rr_bm_2a"
+  file = "./italian-polish/data/cache/rr_bm_2a"
 )
 ```
 
@@ -179,7 +179,7 @@ rr_bm_3 <- brm(
   warmup = 1000,
   seed = 8788,
   control = list(adapt_delta = 0.99),
-  file = "./voicing-effect/data/cache/rr_bm_3"
+  file = "./italian-polish/data/cache/rr_bm_3"
 )
 ```
 

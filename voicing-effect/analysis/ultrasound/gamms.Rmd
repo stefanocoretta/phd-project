@@ -32,24 +32,24 @@ columns <- c(
     "TD.velocity.abs"
 )
 
-languages <- read_csv("voicing-effect/stimuli/languages.csv")
-words <- read_csv("voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("italian-polish/stimuli/languages.csv")
+words <- read_csv("italian-polish/stimuli/nonce.csv")
 
-tongue <- read_aaa("voicing-effect/results/ultrasound/it01-tongue-cart.tsv", columns) %>%
+tongue <- read_aaa("italian-polish/results/ultrasound/it01-tongue-cart.tsv", columns) %>%
     separate(label, c("gesture", "position")) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 
-tongue.mm <- read_aaa("voicing-effect/results/ultrasound/it01-tongue-pol-mm.tsv", columns, coordinates = "polar") %>%
+tongue.mm <- read_aaa("italian-polish/results/ultrasound/it01-tongue-pol-mm.tsv", columns, coordinates = "polar") %>%
     separate(label, c("gesture", "position")) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
     left_join(y = words) %>%
     mutate_if(is.character, as.factor)
 
-tongue.mm.5 <- read_aaa("voicing-effect/results/ultrasound/it05-tongue-pol-mm.tsv", columns, coordinates = "polar") %>%
+tongue.mm.5 <- read_aaa("italian-polish/results/ultrasound/it05-tongue-pol-mm.tsv", columns, coordinates = "polar") %>%
     separate(label, c("gesture", "position")) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%
@@ -432,7 +432,7 @@ plot_gamsd(
 ```
 
 ```{r}
-tongue.pol <- read_aaa("voicing-effect/results/ultrasound/it01-tongue-pol.tsv", columns, coordinates = "polar") %>%
+tongue.pol <- read_aaa("italian-polish/results/ultrasound/it01-tongue-pol.tsv", columns, coordinates = "polar") %>%
     separate(label, c("gesture", "position")) %>%
     mutate(word = word(prompt, 2)) %>%
     left_join(y = languages) %>%

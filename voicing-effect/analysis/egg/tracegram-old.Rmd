@@ -34,13 +34,13 @@ library(itsadug)
 First, we import all `degg-tracing` files contained in the `results` folder into the `degg` data frame, and we merge with `languages` and `words` (the first data frame list the languages of each participant, the latter the variables for each word). Two separate data frames for Italian and Polish are then created.
 
 ```{r import}
-degg <- list.files(path = "./voicing-effect/results",
+degg <- list.files(path = "./italian-polish/results",
                    pattern = "*-degg-tracing.csv",
                    full.names = TRUE) %>%
     map_df(~read_csv(.))
 
-languages <- read_csv("./voicing-effect/stimuli/languages.csv")
-words <- read_csv("./voicing-effect/stimuli/nonce.csv")
+languages <- read_csv("./italian-polish/stimuli/languages.csv")
+words <- read_csv("./italian-polish/stimuli/nonce.csv")
 
 degg <- degg %>%
     left_join(y = languages) %>%

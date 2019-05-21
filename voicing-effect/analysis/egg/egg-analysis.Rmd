@@ -54,8 +54,8 @@ range(wavegram$amplitude)
 # Modelling
 
 ```{r wave-gam}
-if (file.exists("./voicing-effect/data/cache/wave_gam.Rds")) {
-  load("./voicing-effect/data/cache/wave_gam.Rds")
+if (file.exists("./italian-polish/data/cache/wave_gam.Rds")) {
+  load("./italian-polish/data/cache/wave_gam.Rds")
 } else {
   wave_gam <- bam(
     amplitude ~
@@ -69,15 +69,15 @@ if (file.exists("./voicing-effect/data/cache/wave_gam.Rds")) {
     data = wavegram,
     method = "ML"
   )
-  save(wave_gam, file = "./voicing-effect/data/cache/wave_gam.Rds")
+  save(wave_gam, file = "./italian-polish/data/cache/wave_gam.Rds")
 }
 ```
 
 ```{r wave-gam-ar}
 rho = start_value_rho(wave_gam)
 
-if (file.exists("./voicing-effect/data/cache/wave_gam_ar.Rds")) {
-  load("./voicing-effect/data/cache/wave_gam_ar.Rds")
+if (file.exists("./italian-polish/data/cache/wave_gam_ar.Rds")) {
+  load("./italian-polish/data/cache/wave_gam_ar.Rds")
 } else {
   wave_gam_ar <- bam(
     amplitude ~
@@ -93,13 +93,13 @@ if (file.exists("./voicing-effect/data/cache/wave_gam_ar.Rds")) {
     rho = rho,
     AR.start = wavegram$start_event
   )
-  save(wave_gam_ar, file = "./voicing-effect/data/cache/wave_gam_ar.Rds")
+  save(wave_gam_ar, file = "./italian-polish/data/cache/wave_gam_ar.Rds")
 }
 ```
 
 ```{r wave-gam-ar-0}
-if (file.exists("./voicing-effect/data/cache/wave_gam_ar_0.Rds")) {
-  load("./voicing-effect/data/cache/wave_gam_ar_0.Rds")
+if (file.exists("./italian-polish/data/cache/wave_gam_ar_0.Rds")) {
+  load("./italian-polish/data/cache/wave_gam_ar_0.Rds")
 } else {
   wave_gam_ar_0 <- bam(
     amplitude ~
@@ -113,7 +113,7 @@ if (file.exists("./voicing-effect/data/cache/wave_gam_ar_0.Rds")) {
     data = wavegram,
     method = "ML"
   )
-  save(wave_gam_ar_0, file = "./voicing-effect/data/cache/wave_gam_ar_0.Rds")
+  save(wave_gam_ar_0, file = "./italian-polish/data/cache/wave_gam_ar_0.Rds")
 }
 ```
 
