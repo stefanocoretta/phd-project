@@ -70,7 +70,7 @@ Several proposals have been put forward in relation to the possible source of th
 Some of the proposed mechanisms for the emergence of the voicing effect refer to properties of speech production.
 A notable production account, which will be the focus of this study, is based on compensatory temporal adjustments [@lindblom1967; @slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
 According to this account, the voicing effect follows from the reorganisation of gestures within a unit of speech the duration of which is not affected by stop voicing.
-The duration of such unit is held constant across voicing contexts, while the duration of voiceless and voiced obstruents differs.
+The duration of such a unit is held constant across voicing contexts, while the duration of voiceless and voiced obstruents differs.
 The closure of voiceless stops is longer than that of voiced stops [@lisker1957; @van-summers1987; @davis1989; @de-jong1991].
 As a consequence, vowels followed by voiceless stops (which have a long closure) are shorter than vowels followed by voiced stops (which have a short closure).
 Advocates of a compensatory mechanism propose two prosodic units as the scope of the temporal adjustment: the syllable (and, equivalently, the VC sequence or vowel-to-vowel interval, \citealt{lindblom1967, farnetani1986}), and the word [@slis1969a; @slis1969; @lehiste1970; @lehiste1970a].
@@ -112,13 +112,12 @@ Moreover, vowel duration is inversely correlated with closure across the three p
 \citet{begus2017} mentions the possibility that the negative correlation is an artefact of the vowel and closure intervals sharing a boundary.
 This annotation bias could generate negative correlations (by which the vowel would shorten and the closure would lengthen by the same amount when, for example, the boundary is placed to the left of the 'actual' boundary).
 However, Beguš shows with a cross-annotator analysis that this was not the case.
-Moreover, I would like to add that, if misplacement of the V-C boundary is due to random error (which is a neutral assumption to make), the measured displacement from the `actual' boundary will approximately follow a normal distribution with mean 0, so that negative and positive misplacements would cancel each other out.
 <!-- Such statistical argument, however, follows only when boundary misplacement is indeed random, and it is not biased towards one side or the other. -->
 <!-- ask Begus about coefficient -->
 @begus2017 argues that these findings support temporal compensation (although not univocally, see \citealt[Section V]{begus2017}, and \Cref{s:comp} of this paper).
 
 To summarise, a mechanism of compensatory temporal adjustment has been proposed as the pathway to the emergence of the voicing effect.
-According to such account, the difference in vowel duration before consonants varying in voicing (and possibly other phonation types) is the outcome of a compensation between vowel and closure duration.
+According to such an account, the difference in vowel duration before consonants varying in voicing (and possibly other phonation types) is the outcome of a compensation between vowel and closure duration.
 After reviewing the critiques advanced by @chen1970 and @maddieson1976, and in face of the results in @slis1969, @de-jong1991 and @begus2017,
 a temporal compensation mechanism gains credibility.
 However, issues about the actual implementation of the compensation mechanism still remain.
@@ -411,8 +410,8 @@ clos_descr <- durations_filtered %>%
 
 \Cref{f:Figure3} illustrates stop closure durations with boxplots and individual raw data points.
 A pattern opposite to that with vowel duration can be noticed: closure duration is shorter for voiced than for voiceless stops.
-The closure of voiceless stops in Italian is `r round_2(vow_descr[[1, 3]])` ms long (SD = `r round_2(vow_descr[[1, 4]])`), while the voiced stops have a mean closure duration of `r round_2(vow_descr[[2, 3]])` ms (SD = `r round_2(vow_descr[[2, 4]])`).
-In Polish, the closure duration is `r round_2(vow_descr[[3, 3]])` ms (SD = `r round_2(vow_descr[[3, 4]])`) in voiceless stops and `r round_2(vow_descr[[4, 3]])` ms (SD = `r round_2(vow_descr[[4, 4]])`) in voiced stops.
+The closure of voiced stops in Italian is `r round_2(vow_descr[[1, 3]])` ms long (SD = `r round_2(vow_descr[[1, 4]])`), while the voiceless stops have a mean closure duration of `r round_2(vow_descr[[2, 3]])` ms (SD = `r round_2(vow_descr[[2, 4]])`).
+In Polish, the closure duration is `r round_2(vow_descr[[3, 3]])` ms (SD = `r round_2(vow_descr[[3, 4]])`) in voiced stops and `r round_2(vow_descr[[4, 3]])` ms (SD = `r round_2(vow_descr[[4, 4]])`) in voiceless stops.
 The difference in closure duration based on the raw means is `r round_2(clos_descr[[1, 3]]) - round_2(clos_descr[[2, 3]])` ms in Italian and `r round_2(clos_descr[[3, 3]]) - round_2(clos_descr[[4, 3]])` ms in Polish.
 The same model specification as with vowel duration has been fitted with consonant closure duration as the outcome variable.
 C2 voicing, C2 place, and speech rate are significant.
@@ -452,7 +451,7 @@ A model addressing the relationship between vowel and stop closure duration was 
 Closure duration has a significant effect on vowel duration ($\hat{\beta}$ = -0.19 ms, SE = 0.06 ms).
 The effect with /u/ is greater than with /a/ and /o/ ($\hat{\beta}$ = -0.23 ms, SE = 0.08 ms).
 In general, closure duration is inversely proportional to vowel duration.
-However, such correlation is quite weak, as shown by the small estimates.
+However, such a correlation is quite weak, as shown by the small estimates.
 A 1 ms increase in closure duration corresponds to a 0.2--0.45 ms decrease in vowel duration.
 These estimates can be interpreted in terms of percentages of compensation, which range between 20 and 45\%.
 Faster speech rates elicit a bigger effect than lower speech rates, as indicated by the significant interaction between closure duration and speech rate ($\hat{\beta}$ = -0.2 ms, SE = 0.06 ms).
@@ -566,7 +565,7 @@ The Bayes factor suggests there is strong evidence that duration of the release 
 # Discussion
 \label{s:discussion}
 
-A study of articulatory and acoustic aspects of the effect of consonant voicing on vowel duration in Italian and Polish has been carried out to look for a possible source of such effect in speech production.
+A study of articulatory and acoustic aspects of the effect of consonant voicing on vowel duration in Italian and Polish has been carried out to look for a possible source of such an effect in speech production.
 Only the results from the acoustic part of the study bear on the main argument of this paper.
 The following sections discuss, in turn, the results regarding the effect of voicing on vowel duration in Italian and Polish and how the finding that the duration of the interval between the two consecutive consonant releases in CV́CV words is compatible with a compensatory temporal adjustment account of the voicing effect.
 The section concludes by discussing the limitations and open issues of this study.
@@ -615,7 +614,7 @@ as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
 On the other hand, while the estimated differences in vowel durations can be interpreted in reference to Italian and Polish as two independent linguistic objects, the patterns observed in the individual speakers does not indicate a systematic relation between magnitude of the effect and language.
 \Cref{f:Figure6} shows the random coefficients of the effect of C2 voicing on vowel duration for the individual speakers, extracted from the mixed-effects model presented in \Cref{s:vduration}.
 Black indicates Italian speakers, while grey is for Polish speakers.
-As it can be seen, speakers of both languages are scattered along the values of the voicing effect.
+As can be seen, speakers of both languages are scattered along the values of the voicing effect.
 These results are in agreement with the idiosyncrasy of the voicing effect of Polish found in \citet{malisz2008}.
 While large-scale studies could reveal clear language-level patterns, the data discussed here point to a scenario in which the speaker's individual behaviour is substantial.
 Future studies could thus look into the respective role of individual-level and community-level factors and how these contribute to the magnitude of the durational differences across speakers and languages.
@@ -628,11 +627,11 @@ The closure duration of voiced stops is short compared to that of voiceless stop
 There seems to be an inverse relation between vowel duration and closure duration, by which a long vowel entails a short closure (and vice versa), and a short vowel entails a long closure (and vice versa).
 
 The data and statistical analyses of this study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the release to release interval) is not affected by the phonological voicing of the second consonant (C2) in Italian and Polish.
-In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration before voiceless vs. voiced stops can be seen as the outcome of differences in stop closure duration.
-In other words, the timing of the (acoustic) closure onset of C2 within the temporally stable release to release interval determines the duration of the preceding vowel.
-An earlier closure onset relative to the onset of the preceding vowel (like in the case of voiceless stops) causes the vowel to be shorter.
-On the other hand, a later closure onset (like with voiced stops) produces a longer vowel.
-\Cref{f:compensatory} illustrates the compensatory mechanism.
+In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration and closure durations before voiceless vs. voiced stops can be seen as the outcome of differences in timing of the vowel offset/closure onset (more neutrally, the VC boundary).
+In other words, the timing of the VC boundary within the temporally stable release to release interval determines the duration of both the vowel and the stop closure.
+An earlier VC boundary relative to the onset of the preceding vowel (like in the case of voiceless stops) causes the vowel to be shorter and the closure to be longer.
+On the other hand, a later VC boundary (like with voiced stops) produces a longer vowel and a shorter closure.
+\Cref{f:compensatory} illustrates this compensatory mechanism.
 Note that the term 'temporal stability' (and 'temporally stable') as used here means that the underlying statistical distribution of the interval duration is stable *across contexts of C2 voicing*.
 No specific statement is implied about the variance of the duration around the mean, across or within phonological contexts.
 
@@ -646,11 +645,11 @@ No specific statement is implied about the variance of the duration around the m
 The invariance of the release to release interval allows us to refine the logistics of the compensatory account by narrowing the scope of the temporal adjustment action.
 A limitation of this account, as proposed by @slis1969 and @lehiste1970, is the lack of a precise identification of the word-internal mechanics of compensation.
 As already discussed in \Cref{s:intro}, it is not clear why the adjustment should target the preceding stressed vowel, rather than the following unstressed vowel or any other segment in the word.
-Since the release to release interval includes just the vocoid gesture between the release of C1 and the onset of the closure of C2 and the consonant closure, it follows that differences in closure duration must be reflected in differences in the duration of the preceding vocoid.
+Since the release to release interval includes just the vocoid gesture between the release of C1 and the VC boundary, and the consonant closure, it follows that differences in the timing of the VC boundary must be reflected in correlated differences in vowel and closure durations.
 
-Under an account of temporal compensation, the voicing effect can be interpreted as a by-product of gestural phasing, rather than a consequence of intrinsic features of voicing *per se*.
+Under an account of temporal compensation, the voicing effect can be interpreted as a by-product of gestural phasing and mechanisms operating on the timing of the VC boundary.
 The temporal stability of the release to release interval across voicing contexts allows us to refine the compensatory mechanism by providing a temporal anchor.
-On the other hand, it is important to note that the release to release interval should not necessarily have a special status in such compensatory account, but rather can be used as a proxy to the understanding of a full gestural mechanism of compensation.
+On the other hand, it is important to note that the release to release interval should not necessarily have a special status in such a compensatory account, but rather can be used as a proxy to the understanding of a full gestural mechanism of compensation.
 Indeed, the temporal stability of this interval should be derivable from a theory of gestural phasing, rather than one that simply states that the interval is stable across voicing contexts.
 
 The non-exclusivity of the release to release interval is also shown by the fact that excluding the VOT from it still indicates that C2 voicing is not affecting the interval duration.
@@ -662,23 +661,27 @@ Voiceless stops have longer VOT values, which increases the duration of the inte
 The difficulty in identifying a clear-cut time point corresponding to vowel onset could explain the relative higher dispersion of the vowel onset to release interval duration.
 For these reasons, the release to release interval is probably a better measure of temporal stability than the vowel onset to release, given its inherent higher cohesion.
 
-It could be argued that the temporal stability of the release to release interval could be the result of lengthening vowels followed by voiced stops which have shorter closure durations (or, vice versa, of shortening vowels followed by voiceless stops), so that such stability would not necessarily follow from a compensatory mechanism.
-However, what it is claimed here is that the stability of the interval is a logical antecedent, while the different vowel/closure durations follow as a consequence of the differential timing of closure onset within the temporally stable interval.
-This interpretation seems more natural in light of accounts of gestural phasing like the one proposed by \citet{tilsen2013}.
-Under this account, the stability of the release to release interval could follow from the relative phasing of the vowels in CVCV words (see Figure 6 in \citealt{tilsen2013}).
-The stability of the temporal distance between vowels in Italian is preliminarily supported by the acoustic data in \citet{celata2014}.
-While beyond the scope of this paper, articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and in other durational phenomena.
+It is possible that the temporal stability of the release to release interval is not an antecedent, but rather a consequence of manipulating vowel and closure durations.
+If this were the case, the differential duration of vowels and closures would not be the result of a compensatory mechanism.
+The present data cannot disambiguate between these two scenarios, and future studies should look into investigating independent reasons for the release to release interval stability across voicing contexts.
+The account of gestural phasing proposed by \citet{tilsen2013, tilsen2016} is promising, in that the temporal stability of the release to release interval would directly follow from the relative phasing of the vowels in CVCV words (see Figure 6 in \citealt{tilsen2013}).
+Articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and in other durational phenomena.
 
-Finally, it is worth noting that other accounts---which could be compatible with other aspects of production and perception---aren't ultimately ruled out.
-For example, perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}), and other perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}.
-Moreover, \citet{begus2017} finds that even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) in Georgian is still a significant predictor.
-Beguš argues for a separate laryngeal effect, which operates in addition to the closure duration effect.
+However, even if independent reasons for the interval stability can be identified, other mechanisms, unrelated to compensatory effects, would still be required to explain the differential timing of the VC boundary within that interval, so that accounts compatible with other aspects of production and perception would not be ultimately ruled out, as thoroughly discussed in \citet{begus2017}.
+For example, the laryngeal adjustment hypothesis \citet{halle1967a} states that adjustments of the glottis for obstruent voicing require more time to be implemented, so that stop closure for a voiced stops is achieved later than that of a voiceless stop, relative to the onset of the preceding vowel.
+Tongue root advancement \citep{rothenberg1967, westbury1983, ohala2011} could also play a role in modulating the time required before closure can be implemented.
+Another account \citep{chen1970} makes direct reference to velocity of the closing gesture, which is faster in voiceless than in voiced stops \citet{van-summers1987, de-jong1991}, so that the VC boundary within the release-to-release would be timed earlier in the former than in the latter case.
+Moreover, perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}, and these perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}).
+
+A comment is also due in relation to possible coexisting effects on vowel duration.
+\citet{begus2017} finds that, even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) in Georgian is still a significant predictor.
+The author argues for a separate laryngeal features effect, which operates in addition to a closure duration effect.
 In the present study, C2 voicing (voiceless, voiced) and its interactions are not significant when included in the model discussed in section \Cref{s:vcduration}, which has vowel duration as outcome and C2 closure duration as one of the predictors.\footnote{Multicollinearity is not an issue here, since the VIFs are all below 3 \citep{zuur2010}.}
+The difference in results could be related to differences in the stimuli make-up (disyllabic vs. monosyllabic words), and more studies are needed that directly compare disyllabic and monosyllabic words.
 
-Even when multicollinearity between predictors is minimal, statistical significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
-For example, it is possible that, through time, different phonation categories (like ejective, voiceless, and voiced stops) can develop different closure duration sub-distributions \citep{soskuthy2013}.
-This can result in the ability for the phonation predictor to capture variance in vowel durations, even if the original mechanism directly involved closure durations only (this kind of reasoning is compatible with exemplar theories of speech perception and production, see among others \citealt{johnson1997, soskuthy2018, ambridge2018, todd2018}).
-Since opposite results have been obtained in relation to the significance of C2 phonation in addition to C2 closure durations, these results need to be replicated in future studies, although to ascertain whether they are artefacts of statistical procedures or if they reflect an underlying state of affairs might still prove difficult (cf. the correlation vs. causation problem).
+<!-- Even when multicollinearity between predictors is minimal, statistical significance or non-significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations, whether synchronic or diachronic, between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
+On the one hand, it is possible that the original effect on vowel duration was driven by the laryngeal features and that a separate closure effect emerges in later stages via development of sub-distributions \citep{soskuthy2013}.
+On the other hand, the reverse scenario is equally possible, in which the closure effect diachronically emerged first, with the laryngeal features effect subsequently deriving from it. -->
 
 ## Limitations and future work
 
@@ -723,7 +726,7 @@ The temporal invariance of the release to release interval, together with a diff
 <!-- hybrid account, in which you get compensation because of different closure durations because of different articulations, and so on. multiple mechanisms might conspire, as also noted by Begus, so compensatory is not uniquely supported-->
 As discussed in \Cref{s:comp}, the temporal patterns reported here do not univocally exclude other possible sources for the duration differential.
 Multiple mechanisms (both articulatory and perceptual) could conspire together to produce the observed patterns.
-Such pluralist view has already been proposed, for example, for incomplete neutralisation in \citealt{winter2011} (for a review of explanatory pluralism in the cognitive sciences, see \citealt{dale2009} and references therein).
+Such a pluralist view has already been proposed, for example, for incomplete neutralisation in \citealt{winter2011} (for a review of explanatory pluralism in the cognitive sciences, see \citealt{dale2009} and references therein).
 A hybrid account which synthesises aspects of multiple accounts is probably warranted, given the diversity of results obtained so far.
 Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval, and in relation to other attributes of consonant effects on vowel duration.
 

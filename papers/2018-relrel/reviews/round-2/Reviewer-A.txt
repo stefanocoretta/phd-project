@@ -1,0 +1,30 @@
+Short justification of recommendation (maximum of 10 sentences):
+Author has addressed the issues raised in my previous review.
+
+Does the paper present an empirical discovery potentially of interest to most of this journal's readers? Please elaborate your answer.:
+Yes, as mentioned in earlier review
+
+Is the empirical content of the paper sound (e.g. fieldwork includes proper controls and comparisons, experiments well designed, etc.)? Please elaborate your answer.:
+Yes, and the author has addressed the main methodological issue I raised earlier, i.e. the possibility of L2 influence on L1 among the Polish participants.
+
+Does the paper make a broader proposal about an aspect of linguistic theory potentially of interest to most of this journal's readers? Please elaborate your answer.:
+In my earlier review, I suggested that the author might consider phonological issues in more detail. The author has done this to some extent and I am satisfied. Now it will be up to the theorists to explain the data from this paper.
+
+Is the argumentation linking the paper’s broader conclusions to its empirical or theoretical premises sound? In answering this question, please elaborate your answer without regard to your personal judgments concerning the plausibility of these premises — see question 7.:
+My short answer to this question is yes. I suppose the author could say more about the motivation behind describing the voicing effect as compensatory. What I mean is that the experiment is set up to provide data on a given debate, but the paper doesn't really explain why the debate is interesting. This is not a problem though, really, since the data presented in the paper constitute a solid and valuable contribution
+
+Comment on the paper’s premises or the conceptual framework that it assumes, if you believe that issues in this area are relevant to the overall evaluation of the paper.:
+
+
+Any other comments relevant to the evaluation of the paper as a whole.:
+
+
+What are your suggestions for improving the paper? (optional if your publication recommendation is “accept” or “reject”, strongly recommended otherwise). If your publication recommendation was “revisions required” or “resubmit for review”, your recommendations may be taken by the editor as requirements for future acceptance, unless you explicitly state otherwise, so please try to distinguish your high-priority requirements for revision from weaker suggestions.:
+
+
+Specific line-by-line comments on details of the paper. Begin each comment with a page number, example number or paragraph/line from top or bottom, as appropriate.:
+Be careful with the use of 'such' in English. There are many instances in the paper where it should be followed by an indefinite article: p2, line 40; p4, line 143, p19 line 452; p 21 line 494, p26 line 604, p30 line 749;
+
+Also, in describing closure duration results in lines 431-436, I think the author mixed up voiced and voiceless
+
+Finally, p 22 line 554, change "As it can be seen" to "As can be seen"
