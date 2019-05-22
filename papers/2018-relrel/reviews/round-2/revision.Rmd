@@ -45,7 +45,7 @@ And “This interpretation 635 seems more natural in light of accounts of gestur
 It is not relevant what authors claim. And what “seems more natural”. The authors should avoid such subjective judgments and stick to empirical facts. It is true that the results are compatible with the compensatory temporal adjustment, and the body of the paper makes only this claim. The discussion section, however, is too strong in its conclusions. The results are also compatible with the effects of the laryngeal features. A possible articulatory explanation (Tilsen 2013) is not evidence in favor of the proposal, because the laryngeal feature effect has also a possible articulatory explanation which the authors do not mention.
 
 \color{plum}
-I agree with the reviewer that the wording leaves the impression of being too strong, which was not intended. I have rephrased the conclusions presented in the discussion section to emphasises that other accounts cannot be ruled out, and that independent explanations are needed for the timing of the vowel offset/closure onset in any case. I have removed subjective and ambiguous language. Possible articulatory mechanisms on the basis of the laryngeal features effect are also now mentioned.
+I agree with the reviewer that the wording leaves the impression of being too strong, which was not intended. I have rephrased the conclusions presented in the discussion section to emphasise that other accounts cannot be ruled out, and that independent explanations are needed for the timing of the vowel offset/closure onset in any case. I have removed subjective and ambiguous language. Possible articulatory mechanisms on the basis of the laryngeal features effect are also now mentioned.
 \color{black}
 
 \textit{Even when multicollinearity between predictors is minimal, statistical significance of multiple terms cannot unequivocally inform us on the actual  contribution of those terms, since it is possible that unknown relations be tween terms mask underlying mechanisms (for a discussion see McElreath 2015). For example, it is possible that, through time, different phonation categories (like ejective, voiceless, and voiced stops) can develop different closure duration sub-distributions (Sóskuthy 2013).}
@@ -69,7 +69,7 @@ Abstract:
 Laryngeal effect is also compatible with a production account, not only the temporal compensation approach.
 
 \color{plum}
-
+I reworded the abstract to clarify this point. The abstract now says 'The durational difference of the first vowel and the stop closure would then follow from differences in timing of the VC boundary within this interval. While other aspects, like production mechanisms related to laryngeal features effects and perceptual biases cannot be ruled out, the data discussed here are compatible with a production account based on compensatory mechanisms.'
 \color{black}
 
 Conclusion
@@ -77,6 +77,10 @@ Conclusion
 The conclusion is adequate.
 
 
-\textit{Such pluralist view has already been pro749 posed, for example, for incomplete neutralisation in Winter & Röttger (for a review of explanatory pluralism in the cognitive sciences, see Dale et al. 2009 and references therein).}
+\textit{Such pluralist view has already been proposed, for example, for incomplete neutralisation in Winter and Rottger (for a review of explanatory pluralism in the cognitive sciences, see Dale et al. 2009 and references therein).}
 
 Pluralist views are already proposed for the very problem discussed, not only for incomplete neutralization or in general in cognitive science.
+
+\color{plum}
+I have now clarified this point by adding a mention to Beguš 2017 and Sanker 2018, who among others argue for a multi-factorial account of the voicing effect.
+\color{black}

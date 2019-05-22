@@ -52,8 +52,8 @@ round_2 <- function(...) {
   A notable one is the compensatory temporal adjustment account, according to which the duration of the vowel is inversely correlated with the stop closure duration (voiceless stops having longer closure durations than voiced stops).
   The compensatory account has been criticised due to lack of empirical support and its vagueness regarding the temporal interval within which compensation is implemented.
   The results from an exploratory study of Italian and Polish suggest that the duration of the interval between two consecutive stop releases in CVCV words in these languages is not affected by the voicing of the second stop.
-  The durational difference of the first vowel then would follow from differences in closure durations of the following stop.
-  While other factors (like perceptual biases and laryngeal effects) could also play a role in the development of the voicing effect, the data discussed here sheds new light on a possible production account of voicing-related differences in vowel durations.
+  The durational difference of the first vowel and the stop closure would then follow from differences in timing of the VC boundary within this interval.
+  While other aspects, like production mechanisms related to laryngeal features effects and perceptual biases cannot be ruled out, the data discussed here are compatible with a production account based on compensatory mechanisms.
 \end{abstract}
 
 # Introduction
@@ -726,8 +726,9 @@ The temporal invariance of the release to release interval, together with a diff
 <!-- hybrid account, in which you get compensation because of different closure durations because of different articulations, and so on. multiple mechanisms might conspire, as also noted by Begus, so compensatory is not uniquely supported-->
 As discussed in \Cref{s:comp}, the temporal patterns reported here do not univocally exclude other possible sources for the duration differential.
 Multiple mechanisms (both articulatory and perceptual) could conspire together to produce the observed patterns.
-Such a pluralist view has already been proposed, for example, for incomplete neutralisation in \citealt{winter2011} (for a review of explanatory pluralism in the cognitive sciences, see \citealt{dale2009} and references therein).
-A hybrid account which synthesises aspects of multiple accounts is probably warranted, given the diversity of results obtained so far.
+Such a pluralist view has already been proposed for the voicing effect (for example, \citealt{begus2017} and \citealt{sanker2018}), and for other related phenomena, like vowel duration in incomplete neutralisation \citep{winter2011}.
+For a philosophical review of explanatory pluralism in the cognitive sciences, see \citealt{dale2009} and references therein.
+Indeed, a hybrid account, which takes into consideration and synthesises aspects of multiple proposed accounts, is probably warranted, given the diversity of compatible results obtained so far.
 Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval, and in relation to other attributes of consonant effects on vowel duration.
 
 # Acknowledgements
