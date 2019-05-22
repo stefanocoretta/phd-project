@@ -1,37 +1,39 @@
-\documentclass[12pt,a4paper,]{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-    \setmainfont[]{Tinos}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Tinos}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Compensatory aspects of the effect of voicing on vowel duration in English},
-            pdfauthor={Stefano Coretta},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{unified}
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Compensatory aspects of the effect of voicing on vowel duration in English},
+  pdfauthor={Stefano Coretta},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+% \urlstyle{same} % disable monospaced font for URLs
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -41,69 +43,31 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Compensatory aspects of the effect of voicing on vowel duration in
-English}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Stefano Coretta}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-    \date{}
-    \predate{}\postdate{}
-  
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
-
 \let\tnote\relax
 \usepackage{cleveref}
 \usepackage{ctable}
 \usepackage{enumerate}
 \usepackage{lineno}
 \linenumbers
+\usepackage[]{natbib}
+\bibliographystyle{unified}
+
+\title{Compensatory aspects of the effect of voicing on vowel duration in
+English}
+\author{Stefano Coretta}
+\date{}
+
+\usepackage[absolute]{textpos}
 
 \begin{document}
+\begin{textblock}{3}(0.2,0.2)
+  \textcolor{lightgray}{v0.11.9001 (2019/05/22)}
+\end{textblock}
 \maketitle
 
 \begin{abstract}
@@ -118,25 +82,23 @@ It will come.
 A well-known cross-linguistic tendency is that vowels have shorter
 durations when followed by voiceless stops and longer durations when
 followed by voiced stops. This so-called `voicing effect' has been long
-recognised in a wide range of languages across different linguistic
+documented in a wide range of languages across different linguistic
 families \citep{maddieson1976, begus2017}. Several hypotheses have been
 proposed as to the origin of this phenomenon, from articulatory
 mechanisms to perceptual biases; however, no one particular account has
-gained unequivocal consensus.
+gained universal support.
 
 One such hypothesis, the compensatory temporal adjustment account,
 states that the voicing effect involves a compensatory mechanism between
 vowel and consonant closure duration. Vowels are shorter when followed
 by voiceless stops because the latter have longer closure durations,
 and, vice versa, vowels are longer before voiced stops because the
-latter have shorter closure durations. \citet{coretta2018j} reviews some
-of the shortcomings of the compensatory account. In particular, the
-account fails to clearly identify a speech interval within which
-compensation is implemented. Both the syllable
-\citep{lindblom1967, farnetani1986} and the word
-\citep{slis1969, slis1969a, lehiste1970a, lehiste1970} have been
-proposed as such intervals, but these have been subsequently criticised
-on empirical and logical grounds
+latter have shorter closure durations. However, the compensatory account
+fails to clearly identify a speech interval within which compensation is
+implemented. Both the syllable \citep{lindblom1967, farnetani1986} and
+the word \citep{slis1969, slis1969a, lehiste1970a, lehiste1970} have
+been proposed as such intervals, but these have been subsequently
+criticised on empirical and logical grounds
 \citep{chen1970, jacewicz2009, maddieson1976, coretta2018j}.
 
 In an exploratory study of acoustic durations in Italian and Polish
@@ -145,13 +107,11 @@ interval between the two consonant releases is not affected by the
 voicing status of the second consonant. The duration of the
 release-to-release interval in words where the second consonant is
 voiceless (like /pata/) is not significantly different from that in
-words where the second consonant is voiced (for example, /pada/).
-\citet{coretta2018j} argues that the temporal stability of the
-release-to-release interval is compatible with a compensatory temporal
-adjustment account of the voicing effect
+words where the second consonant is voiced (for example, /pada/). The
+temporal stability of the release-to-release interval is compatible with
+a compensatory temporal adjustment account of the voicing effect
 \citep{lindblom1967, slis1969, slis1969a, lehiste1970a, lehiste1970},
-and that the temporal stability of the release-to-release interval
-offers a resolution to the drawbacks of previous versions of the
+and it offers a resolution to the drawbacks of previous versions of the
 account.
 
 Given the temporal stability of the release-to-release interval, the
@@ -165,23 +125,22 @@ release-to-release results in a longer vowel and a shorter closure. The
 outcome is that shorter vowels are followed by longer stops, and longer
 vowels are followed by shorter stops. This agrees with the known
 differences of closure durations in voiceless vs.~voiced stops
-\citep{lisker1957, van-summers1987, davis1989, de-jong1991}.
-\citet{coretta2018j} thus proposes that the diachronic path to the
-voicing effect in disyllabic words can be seen in the temporal stability
-of the release-to-release interval and in the relative timing of the VC
-boundary within that interval.
+\citep{lisker1957, van-summers1987, davis1989, de-jong1991}. Thus, a
+possible diachronic pathway to the voicing effect in disyllabic words is
+one in which vowel and closure duration differences emerge from changes
+in the timing of the VC boundary within the release-to-release interval
+which affect the voiceless and voiced contexts differently.
 
-As argued in \citet{coretta2018j}, the release-to-release interval in
-itself does not have a special status. The proposed account of
-compensatory temporal adjustment can be understood in relation to the
-acoustic duration of vowels, hence the scope of compensation can (but
-need not) be defined in terms of acoustic intervals. The interval found
-to be temporally stable across voicing contexts in disyllabic words is
-the release-to-release interval. However, it is desirable to derive the
-isochrony of this acoustic interval from properties of articulatory
-coordination. A tentative account of the underlying gestural
-coordination from which the release-to-release isochrony could be
-derived is offered here.
+Note that the release-to-release interval in itself does not have a
+special status. The proposed account of compensatory temporal adjustment
+can be understood in relation to the acoustic duration of vowels, hence
+the scope of compensation can (but need not) be defined in terms of
+acoustic intervals. The interval found to be temporally stable across
+voicing contexts in disyllabic words is the release-to-release interval.
+However, it is desirable to derive the isochrony of this acoustic
+interval from properties of articulatory coordination. A tentative
+account of the underlying gestural coordination from which the
+release-to-release isochrony could be derived is offered here.
 
 According to \citet{ohman1966, ohman1967}, the speech stream is composed
 by a series of continuous vocalic gestures interrupted by gestures of
@@ -409,10 +368,13 @@ can be formulated:
 
 The following subsections describe the experimental and statistical
 methods of this study. The research design and data analyses were
-pre-registered at the Open Science Framework prior to data collection
+pre-registered on the Open Science Framework prior to data collection
 (\url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}).
-The research compendium of this paper containing data and analysis
-scripts is also available on the Open Science Framework.
+The research compendium of this paper with data and analysis scripts is
+also available on the Open Science Framework. Choices on experimental
+design and analysis were made within the Bayesian framework of
+statistical inference (see \Cref{s:sample-size} and \Cref{s:bayes} for
+details).
 
 \hypertarget{sample-size-and-stopping-rule}{%
 \subsection{Sample size and stopping
@@ -420,17 +382,18 @@ rule}\label{sample-size-and-stopping-rule}}
 
 \label{s:sample-size}
 
-Sample size and a stopping rule were determined prior to data collection
-with the method of the Region Of Practical Equivalence (ROPE,
-\citealt{kruschke2015, vasishth2018a}). A `no-effect' region of values
-around 0 is first identified. This null region (the ROPE) can be thought
-of as a Bayesian 95\% credible interval of a distribution, the values
-within which can be interpreted as a negligible or null effect. For this
-study, a ROPE between −10 and +10 ms has been chosen. The width of 20 ms
-is based on the estimates of the just noticeable difference in
-\citet{huggins1972} and \citet{nooteboom1980}. Differences in
-release-to-release durations below 10 ms (either positive or negative)
-will be interpreted as compatible with a null effect.
+Sample size and a stopping rule were decided prior to data collection
+with a Bayesian method of sample determination based on the Region Of
+Practical Equivalence (ROPE, \citealt{kruschke2015, vasishth2018a}). A
+`no-effect' region of values around 0 is first identified. This null
+region (the ROPE) can be thought of as a Bayesian 95\% credible interval
+of a distribution, the values within which can be interpreted as a
+negligible or null effect. For this study, a ROPE between −10 and +10 ms
+has been chosen. The width of 20 ms is based on the estimates of the
+just noticeable difference in \citet{huggins1972} and
+\citet{nooteboom1980}. Differences in release-to-release durations below
+10 ms (either positive or negative) will be interpreted as compatible
+with a null effect.
 
 Once a ROPE width is set, the goal is to collect data during sequential
 testing until the width of the 95\% credible interval (CI) of the tested
@@ -455,7 +418,7 @@ An initial minimum of 20 participants was chosen for sequential testing.
 Due to resource and time constraints specific to this particular study,
 a second condition had to be included in the stopping rule such that
 data collection would be have to stop on 5 April 2019, independent of
-the the ROPE condition.
+the ROPE condition.
 
 \hypertarget{participants}{%
 \subsection{Participants}\label{participants}}
@@ -558,6 +521,8 @@ The following measures were obtained via a custom Praat script:
 
 \hypertarget{statistical-analysis}{%
 \subsection{Statistical analysis}\label{statistical-analysis}}
+
+\label{s:bayes}
 
 The choice of Bayesian over frequentist statistics stems from a recent
 discussion of the problems associated with the reliance of
@@ -1014,10 +979,10 @@ disyllabic words of Italian and Polish. The hypotheses were that, in
 English, the interval is not affected in disyllabic words, like in
 Italian and Polish, but that it is in monosyllabic words. In sum, the
 results of this study indicate that the release-to-release duration of
-disyllabic words in English is very similar independent of whether C2 is
-voiceless (like in /tɑːpəs/) or voiced C2 (/tɑːbəs/). On the other hand,
-the release-to-release in monosyllabic words is longer if C2 is voiced
-(like in /tɑːb/ vs.~/tɑːp/).
+disyllabic words in English is relatively stable independent of whether
+C2 is voiceless (like in /tɑːpəs/) or voiced C2 (/tɑːbəs/). On the other
+hand, the release-to-release in monosyllabic words is longer if C2 is
+voiced (like in /tɑːb/ vs.~/tɑːp/).
 
 A Bayesian regression model was fitted to the release-to-release
 duration (model 3). The results suggest a negligible effect of C2
@@ -1262,7 +1227,6 @@ effect offered here should be examined in in relation to other
 consonantal effects on vowel duration, like other laryngeal effects and
 effects of manner of articulation.
 
-\bibliography{linguistics}
-
+  \bibliography{linguistics}
 
 \end{document}

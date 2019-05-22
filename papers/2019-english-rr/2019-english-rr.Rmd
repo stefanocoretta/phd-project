@@ -2,12 +2,10 @@
 title: "Compensatory aspects of the effect of voicing on vowel duration in English"
 author: "Stefano Coretta"
 output:
-  pdf_document:
+  lingr::lingr_article:
     citation_package: natbib
+    fig_caption: yes
     dev: cairo_pdf
-    keep_tex: yes
-    latex_engine: xelatex
-    number_sections: yes
 bibliography: linguistics
 biblio-style: unified
 mainfont: Tinos
@@ -50,27 +48,26 @@ It will come.
 \label{s:intro}
 
 A well-known cross-linguistic tendency is that vowels have shorter durations when followed by voiceless stops and longer durations when followed by voiced stops.
-This so-called 'voicing effect' has been long recognised in a wide range of languages across different linguistic families \citep{maddieson1976, begus2017}.
-Several hypotheses have been proposed as to the origin of this phenomenon, from articulatory mechanisms to perceptual biases; however, no one particular account has gained unequivocal consensus.
+This so-called 'voicing effect' has been long documented in a wide range of languages across different linguistic families \citep{maddieson1976, begus2017}.
+Several hypotheses have been proposed as to the origin of this phenomenon, from articulatory mechanisms to perceptual biases; however, no one particular account has gained universal support.
 
 One such hypothesis, the compensatory temporal adjustment account, states that the voicing effect involves a compensatory mechanism between vowel and consonant closure duration.
 Vowels are shorter when followed by voiceless stops because the latter have longer closure durations, and, vice versa, vowels are longer before voiced stops because the latter have shorter closure durations.
-\citet{coretta2018j} reviews some of the shortcomings of the compensatory account.
-In particular, the account fails to clearly identify a speech interval within which compensation is implemented.
+However, the compensatory account fails to clearly identify a speech interval within which compensation is implemented.
 Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969, slis1969a, lehiste1970a, lehiste1970} have been proposed as such intervals, but these have been subsequently criticised on empirical and logical grounds \citep{chen1970, jacewicz2009, maddieson1976, coretta2018j}.
 
 In an exploratory study of acoustic durations in Italian and Polish trochaic CV́CV words, \citet{coretta2018j} finds that the duration of the interval between the two consonant releases is not affected by the voicing status of the second consonant.
 The duration of the release-to-release interval in words where the second consonant is voiceless (like /pata/) is not significantly different from that in words where the second consonant is voiced (for example, /pada/).
-\citet{coretta2018j} argues that the temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969, slis1969a, lehiste1970a, lehiste1970}, and that the temporal stability of the release-to-release interval offers a resolution to the drawbacks of previous versions of the account.
+The temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969, slis1969a, lehiste1970a, lehiste1970}, and it offers a resolution to the drawbacks of previous versions of the account.
 
 Given the temporal stability of the release-to-release interval, the timing of the vowel/consonant (VC) boundary (corresponding to the vowel offset and the consonant closure onset) within that interval will determine the respective durations of vowel and consonant closure.
 If the VC boundary is timed earlier than 50% of the release-to-relase, the resulting vowel duration will be shorter than that of the closure duration.
 Vice versa, a timing of the VC boundary later than 50% of the release-to-release results in a longer vowel and a shorter closure.
 The outcome is that shorter vowels are followed by longer stops, and longer vowels are followed by shorter stops.
 This agrees with the known differences of closure durations in voiceless vs. voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}.
-\citet{coretta2018j} thus proposes that the diachronic path to the voicing effect in disyllabic words can be seen in the temporal stability of the release-to-release interval and in the relative timing of the VC boundary within that interval.
+Thus, a possible diachronic pathway to the voicing effect in disyllabic words is one in which vowel and closure duration differences emerge from changes in the timing of the VC boundary within the release-to-release interval which affect the voiceless and voiced contexts differently.
 
-As argued in \citet{coretta2018j}, the release-to-release interval in itself does not have a special status.
+Note that the release-to-release interval in itself does not have a special status.
 The proposed account of compensatory temporal adjustment can be understood in relation to the acoustic duration of vowels, hence the scope of compensation can (but need not) be defined in terms of acoustic intervals.
 The interval found to be temporally stable across voicing contexts in disyllabic words is the release-to-release interval.
 However, it is desirable to derive the isochrony of this acoustic interval from properties of articulatory coordination.
@@ -162,15 +159,16 @@ To summarise, the following research questions and respective hypotheses can be 
 # Methods
 
 The following subsections describe the experimental and statistical methods of this study.
-The research design and data analyses were pre-registered at the Open Science Framework prior to data collection (\url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}).
+The research design and data analyses were pre-registered on the Open Science Framework prior to data collection (\url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}).
 <!-- explain why pre-registration -->
-The research compendium of this paper containing data and analysis scripts is also available on the Open Science Framework.
+The research compendium of this paper with data and analysis scripts is also available on the Open Science Framework.
 <!-- include url and data citation -->
+Choices on experimental design and analysis were made within the Bayesian framework of statistical inference (see \Cref{s:sample-size} and \Cref{s:bayes} for details).
 
 ## Sample size and stopping rule
 \label{s:sample-size}
 
-Sample size and a stopping rule were determined prior to data collection with the method of the Region Of Practical Equivalence (ROPE, \citealt{kruschke2015, vasishth2018a}).
+Sample size and a stopping rule were decided prior to data collection with a Bayesian method of sample determination based on the Region Of Practical Equivalence (ROPE, \citealt{kruschke2015, vasishth2018a}).
 A 'no-effect' region of values around 0 is first identified.
 This null region (the ROPE) can be thought of as a Bayesian 95% credible interval of a distribution, the values within which can be interpreted as a negligible or null effect.
 For this study, a ROPE between −10 and +10 ms has been chosen.
@@ -182,7 +180,7 @@ In other words, the objective is to reach estimate precision, rather than signif
 Inference can then be made based on the credible interval of the sought effect. When the precision goal is reached (the CI width is equal or lower than the ROPE width), three possible scenarios can arise: (1) the CI of the effect completely overlaps with the ROPE around 0, in which case the data supports a practically equivalent null effect; (2) the CI of the effect completely lies outside the ROPE, which indicates that the data support the effect to be within that CI; (3) the CI partially overlaps with the ROPE, in which case no decision can be made on whether the data support one hypothesis over the other, although it still possible to infer the sign of the effect (if the CI partially overlaps with the right side of the ROPE without including 0, there is evidence for a positive effect, while if the CI overlaps with the left side of the ROPE without including 0, there is evidence for a negative effect).
 
 An initial minimum of 20 participants was chosen for sequential testing.
-Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on 5 April 2019, independent of the the ROPE condition.
+Due to resource and time constraints specific to this particular study, a second condition had to be included in the stopping rule such that data collection would be have to stop on 5 April 2019, independent of the ROPE condition.
 
 ## Participants
 
@@ -245,6 +243,7 @@ The following measures were obtained via a custom Praat script:
 * Speech rate: calculated as the number of syllables per second (number of syllables in the sentence divided by the sentence duration in seconds, \citealt{plug2018a}).
 
 ## Statistical analysis
+\label{s:bayes}
 
 The choice of Bayesian over frequentist statistics stems from a recent discussion of the problems associated with the reliance of *p*-values in statistical inference \citep{wagenmakers2007, munafo2017, kirby2018, roettger2019}.
 Bayesian statistics also offers a straightforward framework for investigating the absence of differences across conditions (a 'null effect') based on the ROPE (\Cref{s:sample-size}), as it is in part the case in this study.
@@ -687,7 +686,7 @@ Limitations and future work are also discussed.
 The first question (see \Cref{s:hypo}) asked whether the voicing of C2 in disyllabic and monosyllabic words in English influences the duration of the release-to-release interval.
 \citet{coretta2018j} showed that the release-to-release interval duration is not affected by C2 voicing in disyllabic words of Italian and Polish.
 The hypotheses were that, in English, the interval is not affected in disyllabic words, like in Italian and Polish, but that it is in monosyllabic words.
-In sum, the results of this study indicate that the release-to-release duration of disyllabic words in English is very similar independent of whether C2 is voiceless (like in /tɑːpəs/) or voiced C2 (/tɑːbəs/).
+In sum, the results of this study indicate that the release-to-release duration of disyllabic words in English is relatively stable independent of whether C2 is voiceless (like in /tɑːpəs/) or voiced C2 (/tɑːbəs/).
 On the other hand, the release-to-release in monosyllabic words is longer if C2 is voiced (like in /tɑːb/ vs. /tɑːp/).
 
 A Bayesian regression model was fitted to the release-to-release duration (model 3).
