@@ -672,6 +672,7 @@ For example, the laryngeal adjustment hypothesis \citet{halle1967a} states that 
 Tongue root advancement \citep{rothenberg1967, westbury1983, ohala2011} could also play a role in modulating the time required before closure can be implemented.
 Another account \citep{chen1970} makes direct reference to velocity of the closing gesture, which is faster in voiceless than in voiced stops \citet{van-summers1987, de-jong1991}, so that the VC boundary within the release-to-release would be timed earlier in the former than in the latter case.
 Moreover, perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}, and these perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}).
+Finally, whether the timing of the VC boundary depends on modulations of the vocalic or consonantal gesture, or both, is another aspect that should be further investigated in the future.
 
 A comment is also due in relation to possible coexisting effects on vowel duration.
 \citet{begus2017} finds that, even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) in Georgian is still a significant predictor.
