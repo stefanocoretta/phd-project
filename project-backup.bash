@@ -9,7 +9,21 @@
 
 ### Test
 
-subdirs='coretta2018itapol/data-raw/data coretta2019eng/data-raw/data coretta2017egg/data-raw/data coretta2018itaegg/data-raw/data phd-project/italian-polish/analysis/cache phd-project/tracegram-prepilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/analysis/cache phd-project/english-ve-meta/data phd-project/american-english/data'
+subdirs=(coretta2018itapol/data-raw/data
+coretta2019eng/data-raw/data
+coretta2017egg/data-raw/data
+coretta2018itaegg/data-raw/data
+phd-project/italian-polish/analysis/cache
+phd-project/tracegram-prepilot/data
+phd-project/lombard/data
+phd-project/perceptual-pilot/data
+phd-project/english-pilot/data
+phd-project/perceptual/data
+phd-project/icelandic/data
+phd-project/italian-sz/data
+phd-project/english/analysis/cache
+phd-project/english-ve-meta/data
+phd-project/american-english/data)
 
 for dirs in ${subdirs[*]}
 do
@@ -22,7 +36,21 @@ done
 
 ### Run
 
-subdirs='coretta2018itapol/data-raw/data coretta2019eng/data-raw/data coretta2017egg/data-raw/data coretta2018itaegg/data-raw/data phd-project/italian-polish/analysis/cache phd-project/tracegram-prepilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/analysis/cache phd-project/english-ve-meta/data phd-project/american-english/data'
+subdirs=(coretta2018itapol/data-raw/data
+coretta2019eng/data-raw/data
+coretta2017egg/data-raw/data
+coretta2018itaegg/data-raw/data
+phd-project/italian-polish/analysis/cache
+phd-project/tracegram-prepilot/data
+phd-project/lombard/data
+phd-project/perceptual-pilot/data
+phd-project/english-pilot/data
+phd-project/perceptual/data
+phd-project/icelandic/data
+phd-project/italian-sz/data
+phd-project/english/analysis/cache
+phd-project/english-ve-meta/data
+phd-project/american-english/data)
 
 for dirs in ${subdirs[*]}
 do
@@ -37,7 +65,21 @@ done
 
 ### Test
 
-subdirs='coretta2018itapol/data-raw/data coretta2019eng/data-raw/data coretta2017egg/data-raw/data coretta2018itaegg/data-raw/data phd-project/italian-polish/analysis/cache phd-project/tracegram-prepilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/analysis/cache phd-project/english-ve-meta/data phd-project/american-english/data'
+subdirs=(coretta2018itapol/data-raw/data
+coretta2019eng/data-raw/data
+coretta2017egg/data-raw/data
+coretta2018itaegg/data-raw/data
+phd-project/italian-polish/analysis/cache
+phd-project/tracegram-prepilot/data
+phd-project/lombard/data
+phd-project/perceptual-pilot/data
+phd-project/english-pilot/data
+phd-project/perceptual/data
+phd-project/icelandic/data
+phd-project/italian-sz/data
+phd-project/english/analysis/cache
+phd-project/english-ve-meta/data
+phd-project/american-english/data)
 
 for dirs in ${subdirs[*]}
 do
@@ -50,7 +92,21 @@ done
 
 ### Run
 
-subdirs='coretta2018itapol/data-raw/data coretta2019eng/data-raw/data coretta2017egg/data-raw/data coretta2018itaegg/data-raw/data phd-project/italian-polish/analysis/cache phd-project/tracegram-prepilot/data phd-project/lombard/data phd-project/perceptual-pilot/data phd-project/english-pilot/data phd-project/perceptual/data phd-project/icelandic/data phd-project/italian-sz/data phd-project/english/analysis/cache phd-project/english-ve-meta/data phd-project/american-english/data'
+subdirs=(coretta2018itapol/data-raw/data
+coretta2019eng/data-raw/data
+coretta2017egg/data-raw/data
+coretta2018itaegg/data-raw/data
+phd-project/italian-polish/analysis/cache
+phd-project/tracegram-prepilot/data
+phd-project/lombard/data
+phd-project/perceptual-pilot/data
+phd-project/english-pilot/data
+phd-project/perceptual/data
+phd-project/icelandic/data
+phd-project/italian-sz/data
+phd-project/english/analysis/cache
+phd-project/english-ve-meta/data
+phd-project/american-english/data)
 
 for dirs in ${subdirs[*]}
 do
