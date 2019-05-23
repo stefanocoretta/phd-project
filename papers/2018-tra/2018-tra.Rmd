@@ -3,12 +3,10 @@ title: |
   Longer vowel duration correlates with greater tongue root displacement: Acoustic and articulatory data from Italian and Polish
 author: Stefano Coretta
 output:
-  pdf_document:
+  lingr::lingr_article:
     citation_package: natbib
     fig_caption: yes
-    keep_tex: yes
-    latex_engine: xelatex
-    number_sections: yes
+    dev: cairo_pdf
 bibliography: linguistics
 biblio-style: unified
 fontsize: 12pt
@@ -24,8 +22,8 @@ header-includes:
 - \linenumbers
 indent: true
 params:
-  version: 1.10
-  version-date: "2019/05/07"
+  version: 1.12
+  version-date: "2019/05/23"
 ---
 
 ```{r setup, include=FALSE}
