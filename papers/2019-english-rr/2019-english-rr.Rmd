@@ -214,6 +214,9 @@ tarb & tarbus & targ & targus \\
 The test words were C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}(VC) words, where C\textsubscript{1} = /t/, V\textsubscript{1} = /iː, ɜː, ɑː/, C\textsubscript{2} = /p, b, k, g/, and (VC) = /əs/.
 /əs/ was chosen for its lower parsability as a native suffix, in order to prevent morphological complexity in disyllabic words.
 This structure specification generates 24 test words, shown in \Cref{t:words}.
+All of these are nonce words, with the exception of *turk* and *tarp*, and of *teek* via the homophone *teak*.
+Building stimuli from a structure template rather than from the lexicon ensures greater experimental and statistical control.
+Moreover, the use of nonce words removes or reduces confounds from some usage variables, like for example lexical frequency.\footnote{The three real words in the materials have low lexical frequency (Zipf log frequency: *tarp* 2.23, *teak* 2.76, and *turk* 2.91) according to the SUBTLEX-UK corpus \citep{van-heuven2014}.}
 Each word was embedded in the following frame sentences: *I'll say X this Thursday*, *You'll say X this Monday*, *She'll say X this Sunday*, *We'll say X this Friday*, *They'll say X this Tuesday*.
 Each word + frame combination was included once in the stimuli list, so that each speaker read a total of 120 sentence stimuli (24 words × 5 frames).
 A total of 1800 observations were recorded (120 stimuli × 15 speakers).
@@ -673,7 +676,7 @@ clos_5_draws %>%
 
 # Discussion
 
-This study set out to investigate whether the results from \citet{coretta2018j} could be replicated for English and extended to other contexts.
+This study set out to build on the results discussed in \citet{coretta2018j} by investigating durational properties of the release-to-release interval in English monosyllabic and disyllabic words.
 It was expected that the release-to-release interval would not be affected by C2 voicing in disyllabic words but it would in monosyllabic words.
 Moreover, a conceptual replication of studies on the effect of consonant voicing on vowel and closure durations was sought, with a focus on comparing the effect in mono- vs. disyllabic words.
 This section discusses in turn the results in relation to the release-to-release interval duration (\Cref{s:rr-disc}) and to vowel and closure durations (\Cref{s:vc-disc}) by comparing them with the hypotheses of this study.
