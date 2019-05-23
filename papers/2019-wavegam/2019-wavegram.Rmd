@@ -46,9 +46,14 @@ load("./papers/2019-wavegam/data/cache/wavegam.Rdata")
   \label{f:egg-setup}
 \end{figure}
 
-The position of the vocal folds within the oral tract makes their investigation difficult.
-Direct observation of the activity of the larynx via invasive methods, like laryngeoscopy, brings with it a series of practical drawbacks.
-Among other methods for obtaining information on glottal activity is electroglottography.
+The position of the vocal folds within the oral tract makes investigation of glottal activity difficult.
+Direct observation of the the larynx via invasive methods like laryngoscopy has the practical drawbacks of being of great discomfort to the participant and of requiring medical expertise to be performed.
+Electroglottography, on the other hand, is a non-invasive and safe technique which enables researchers to obtain an indirect account of glottal activity.
+However, the complexity of the electroglottographic signal and the imperfect mapping between the signal and the laryngeal activity it measures pose some analytical challenges.
+In this paper, generalised additive modelling \citealt{hastie1986} is proposed as a means to statistically investigate glottal activity as derived from wavegrams, a complex visualisation form of electroglottographic data \citet{herbst2010}.
+The following paragraphs introduce the basic concepts behind electroglottography and the wavegram technique.
+Wavegram generalised additive models will then be exemplified by discussing the results of a pilot study which compared modal and breathy phonation, and the results of an exploratory study on differences of glottal activity in vowels followed by voiceless and voiced stops.
+
 Electroglottography, or EGG \citep{fabre1957}, is a technique that measures the degree of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
 A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage (\Cref{f:egg-setup}).
 Impedance of this current is modulated by the VFCA, and greater vocal folds contact creates less impedance.
