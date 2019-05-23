@@ -50,14 +50,14 @@ The position of the vocal folds within the oral tract makes investigation of glo
 Direct observation of the the larynx via invasive methods like laryngoscopy has the practical drawbacks of being of great discomfort to the participant and of requiring medical expertise to be performed.
 Electroglottography, on the other hand, is a non-invasive and safe technique which enables researchers to obtain an indirect account of glottal activity.
 However, the complexity of the electroglottographic signal and the imperfect mapping between the signal and the laryngeal activity it measures pose some analytical challenges.
-In this paper, generalised additive modelling \citealt{hastie1986} is proposed as a means to statistically investigate glottal activity as derived from wavegrams, a complex visualisation form of electroglottographic data \citet{herbst2010}.
+In this paper, generalised additive modelling \citep{hastie1986} is proposed as a means to statistically investigate glottal activity as derived from wavegrams, a complex visualisation form of electroglottographic data \citep{herbst2010}.
 The following paragraphs introduce the basic concepts behind electroglottography and the wavegram technique.
 Wavegram generalised additive models will then be exemplified by discussing the results of a pilot study which compared modal and breathy phonation, and the results of an exploratory study on differences of glottal activity in vowels followed by voiceless and voiced stops.
 
 Electroglottography, or EGG \citep{fabre1957}, is a technique that measures the degree of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
 A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage (\Cref{f:egg-setup}).
 Impedance of this current is modulated by the VFCA, and greater vocal folds contact creates less impedance.
-The amplitude is inversely correlated with VFCA and impedance, so that higher amplitude values indicate a greater contact area \citep{titze1990}.
+The amplitude of the current is inversely correlated with VFCA and impedance, so that higher amplitude values indicate a greater contact area \citep{titze1990}.
 The EGG unit registers the current impedance and converts it to relative amplitude values.
 The time-developing amplitude signal thus provides us with information on the changes in VFCA, i.e. on properties of vocal folds vibration (voicing).
 
@@ -68,8 +68,8 @@ The time-developing amplitude signal thus provides us with information on the ch
   \label{f:egg}
 \end{figure}
 
-A glottal cycle can be described in terms of two phases \citep{childers1985, hampala2016}: (a) a contacting phase, in which the vocal folds are approaching each other, (b) a de-contacting phase, in which the vocal folds move apart from each other.
-Transversal to this two-phase description, the glottal cycle can be described in terms of whether the glottis is closed or not.
+A glottal cycle can be divided in two phases \citep{childers1985, hampala2016}: (a) a contacting phase, in which the vocal folds are approaching each other, and (b) a de-contacting phase, in which the vocal folds move apart from each other.
+Transversal to this two-phase representation, the glottal cycle can be described in terms of whether the glottis is closed or not.
 According to this classification, the cycle can be divided into (1) a closed phase, in which the glottis is completely closed and glottal flow is 0 (in some contexts this phase could be absent, like in breathy voicing), and (2) an open phase, in which there is no complete contact between the vocal folds.
 The timing of these phases can be approximated from the EGG signal, as demonstrated by both experimental and modelling work \citep{hampala2016}.
 An example EGG signal is provided in \Cref{f:egg}.
