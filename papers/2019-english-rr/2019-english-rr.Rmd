@@ -1,5 +1,5 @@
 ---
-title: "Compensatory aspects of the effect of voicing on vowel duration in English"
+title: "Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration"
 author: "Stefano Coretta"
 output:
   lingr::lingr_article:
