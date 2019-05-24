@@ -681,9 +681,9 @@ A comment is also due in relation to possible coexisting effects on vowel durati
 The author argues for a separate laryngeal features effect, which operates in addition to a closure duration effect.
 In the present study, C2 voicing (voiceless, voiced) and its interactions are not significant when included in the model discussed in section \Cref{s:vcduration}, which has vowel duration as outcome and C2 closure duration as one of the predictors.\footnote{Multicollinearity is not an issue here, since the VIFs are all below 3 \citep{zuur2010}.}
 <!-- The difference in results between this and Beguš's study could be related to differences in the stimuli make-up (disyllabic vs. monosyllabic words). -->
-Even when multicollinearity between predictors is minimal, presence or lack of statistical significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
+However, even when multicollinearity between predictors is minimal, presence or lack of statistical significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
 The diachronic development of context-driven statistical sub-distributions can override the original causal link \citep{soskuthy2013}.
-Under this scenario, it is not possible to discern which of the competing predictors is diachronically responsible for the relation, and either or both of the compensatory mechanism and laryngeal features could have had a role in generating the synchronic patterns (this kind of
+Under this scenario, it is not possible to discern which of the competing predictors is diachronically responsible for the relation, and either or both the compensatory mechanism and the laryngeal features could have had a role in generating the synchronic patterns (this kind of
 reasoning is compatible for example with exemplar theories of speech perception and
 production, see among others \citealt{johnson1997, soskuthy2018, ambridge2018, todd2018}).
 
