@@ -454,6 +454,7 @@ In general, closure duration is inversely proportional to vowel duration.
 However, such a correlation is quite weak, as shown by the small estimates.
 A 1 ms increase in closure duration corresponds to a 0.2--0.45 ms decrease in vowel duration.
 These estimates can be interpreted in terms of percentages of compensation, which range between 20 and 45\%.
+Note, moreover, that the negative correlation found here could be a consequence of annotation bias, since the vowel and closure share a boundary.
 Faster speech rates elicit a bigger effect than lower speech rates, as indicated by the significant interaction between closure duration and speech rate ($\hat{\beta}$ = -0.2 ms, SE = 0.06 ms).
 The effect of the interaction is reduced when the vowel is /u/ ($\hat{\beta}$ = 0.17 ms, SE = 0.08 ms).
 \Cref{f:Figure4} shows for each vowel /a, o, u/ the individual data points and the regression lines with 95\% confidence intervals extracted from the mixed-effects model.
@@ -629,7 +630,7 @@ There seems to be an inverse relation between vowel duration and closure duratio
 The data and statistical analyses of this study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the release to release interval) is not affected by the phonological voicing of the second consonant (C2) in Italian and Polish.
 In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration and closure durations before voiceless vs. voiced stops can be seen as the outcome of differences in timing of the vowel offset/closure onset (more neutrally, the VC boundary).
 In other words, the timing of the VC boundary within the temporally stable release to release interval determines the duration of both the vowel and the stop closure.
-An earlier VC boundary relative to the onset of the preceding vowel causes the vowel to be shorter and the closure to be longer.
+An earlier VC boundary relative to the onset of the preceding vowel results in a shorter vowel and a longer stop closure.
 On the other hand, a later VC boundary produces a longer vowel and a shorter closure.
 \Cref{f:compensatory} illustrates this compensatory mechanism.
 Note that the term 'temporal stability' (and 'temporally stable') as used here means that the underlying statistical distribution of the interval duration is stable *across contexts of C2 voicing*.
@@ -665,15 +666,15 @@ It is possible that the temporal stability of the release to release interval is
 If this were the case, the differential duration of vowels and closures would not be the result of a compensatory mechanism.
 The present data cannot disambiguate between these two scenarios, and future studies should look into investigating independent reasons for the release to release interval stability across voicing contexts.
 The account of gestural phasing proposed by \citet{tilsen2013, tilsen2016} is promising, in that the temporal stability of the release to release interval would directly follow from the relative phasing of the vowels in CVCV words (see Figure 6 in \citealt{tilsen2013}).
-Articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation, that results in the temporal patterns observed in this study and in other durational phenomena.
+Articulatory work on the gestural coordination of sequences besides the traditional syllable might reveal a principled organisation that results in the temporal patterns observed in this study and in other durational phenomena.
 
 However, even if independent reasons for the interval stability can be identified, other mechanisms, unrelated to compensatory effects, would still be required to explain the differential timing of the VC boundary within that interval.
 Accounts compatible with other aspects of production and perception would not be ultimately ruled out, as thoroughly discussed in \citet{begus2017}.
 For example, the laryngeal adjustment hypothesis \citep{halle1967a} states that adjustments of the glottis for obstruent voicing require more time to be implemented, so that stop closure for a voiced stops will be achieved later than that of a voiceless stop, relative to the onset of the preceding vowel.
 Tongue root advancement \citep{rothenberg1967, westbury1983, ohala2011} could also play a role in modulating the time required before closure can be implemented.
 Another account \citep{chen1970} makes direct reference to velocity of the closing gesture, which is faster in voiceless than in voiced stops \citep{van-summers1987, de-jong1991}, so that the VC boundary within the release to release would be timed earlier in the former than in the latter case.
-Moreover, perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}, and these perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}).
-Finally, whether the timing of the VC boundary depends on modulations of the vocalic or consonantal gesture, or both, is another aspect that should be further investigated in the future.
+Moreover, perceptual explanations of the voicing effect have been proposed in \citet{javkin1976} and \citet{kluender1988}, and these perceptual factors might play a role in the enhancement of the effect (see \citealt{kingston1994}, \citealt{port1982}, and \citealt{luce1985}, see \citealt{fowler1992} for a critique to \citealt{kluender1988}).
+Finally, whether the timing of the VC boundary depends on modulations of the vocalic or consonantal gesture, or both, is another aspect that should be further investigated in the future (see \citealt{de-jong1991} for an example).
 
 A comment is also due in relation to possible coexisting effects on vowel duration.
 \citet{begus2017} finds that, even when C2 closure duration is controlled for, C2 phonation (ejective, voiceless, voiced) in Georgian is still a significant predictor.
@@ -681,6 +682,11 @@ The author argues for a separate laryngeal features effect, which operates in ad
 In the present study, C2 voicing (voiceless, voiced) and its interactions are not significant when included in the model discussed in section \Cref{s:vcduration}, which has vowel duration as outcome and C2 closure duration as one of the predictors.\footnote{Multicollinearity is not an issue here, since the VIFs are all below 3 \citep{zuur2010}.}
 <!-- The difference in results between this and Beguš's study could be related to differences in the stimuli make-up (disyllabic vs. monosyllabic words). -->
 Even when multicollinearity between predictors is minimal, presence or lack of statistical significance of multiple terms cannot unequivocally inform us on the actual contribution of those terms, since it is possible that unknown relations between terms mask underlying mechanisms (for a discussion see \citealt{mcelreath2015}).
+The diachronic development of context-driven statistical sub-distributions can override the original causal link \citep{soskuthy2013}.
+Under this scenario, it is not possible to discern which of the competing predictors is diachronically responsible for the relation, and either or both of the compensatory mechanism and laryngeal features could have had a role in generating the synchronic patterns (this kind of
+reasoning is compatible for example with exemplar theories of speech perception and
+production, see among others \citealt{johnson1997, soskuthy2018, ambridge2018, todd2018}).
+
 Since diverging results have been obtained in relation to the significance of  C2 phonation in addition to C2 closure durations, these aspects need to be further investigated in future studies, although to ascertain whether they are artefacts of statistical procedures or if they reflect an underlying state of affairs might still prove difficult.
 To conclude, lack of significance of a separate laryngeal effect cannot be taken as evidence for its absence in the present data, and a compensatory mechanism could coexist with mechanisms directly related to laryngeal features, which would in turn explain the differential timing of the VC boundary.
 
