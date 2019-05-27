@@ -94,7 +94,7 @@ visualisation form of electroglottographic data \citep{herbst2010}. The
 following paragraphs introduce the basic concepts behind
 electroglottography and the wavegram technique. Wavegram generalised
 additive models will then be exemplified by discussing the results of a
-pilot study which compared modal and breathy phonation, and the results
+pilot study which compares modal and breathy phonation, and the results
 of an exploratory study on differences of glottal activity in vowels
 followed by voiceless and voiced stops.
 
@@ -138,7 +138,7 @@ timepoint of glottal complete closure) and the opening instant (the
 moment in which the glottis first opens). These points delimit the open
 and closed phases of a glottal cycle. The ratio of the closed phase
 relative to the total cycle duration, the closed quotient, has been used
-as an index of phonation type. Modal voice has higher close quotient
+as an index of phonation type. Modal voice has higher closed quotient
 values than breathy voice, and lower values than creaky voice. One
 method for the detection of the closing and opening instants is based on
 the first derivative of the EGG signal (the dEGG, see \Cref{f:egg}).
@@ -186,13 +186,17 @@ Moreover, the potential for overfitting is reduced by a smoothing
 penalty parameter, which constraints the maximum number of basis
 functions used to construct the smoothing splines. This paper introduces
 wavegram GAMs as a way to quantitatively assess wavegram data. First,
-results from a pilot study which informally evaluates the proposed
-method are presented (\Cref{s:pilot}). \Cref{s:voicing} illustrates how
-to conduct a wavegram GAM analysis of dEGG data through a practical
-example in which the wavegrams of vowels followed by voiceless and
-voiced stops are compared. Finally, \Cref{s:conclusion} concludes and
-discusses limitations of the current implementation of the method and
-future directions.
+\Cref{s:pilot} presents results from a pilot study which informally
+evaluates the proposed method are presented. \Cref{s:voicing}
+illustrates how to conduct a wavegram GAM analysis of dEGG data through
+a practical example in which the wavegrams of vowels followed by
+voiceless and voiced stops in Italian and Polish are compared. This
+analysis indicates the presence of a pattern of glottal spreading in the
+second half of vowels followed by voiceless stops and of
+cross-linguistic differences. Insights on the diachronic emergence of
+pre-aspiration based on these results are discussed. Finally,
+\Cref{s:conclusion} concludes and discusses the limitations of the
+current implementation of the method and future directions.
 
 \hypertarget{pilot-study}{%
 \section{Pilot study}\label{pilot-study}}
