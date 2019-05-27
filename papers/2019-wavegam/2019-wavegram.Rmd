@@ -37,6 +37,16 @@ theme_set(theme_minimal())
 load("./papers/2019-wavegam/data/cache/wavegam.Rdata")
 ```
 
+\begin{abstract}
+While electroglottography is a practical and safe technique for obtaining articulatory data on voicing, statistical analysis of the signal it returns is more of a challenge.
+The wavegram has been proposed as a visualisation method which overcomes some of the problems related to reducing the complex electroglottographic signal to a single measure like the contact quotient.
+This paper introduces a method for modelling dynamic electroglottographic data based on the wavegram using generalised additive models (GAMs).
+The results from a pilot study of this method which compares modal and breathy phonation are presented.
+The applicability of wavegram GAMs is further exemplified by discussing the results of an exploratory study of voicing in vowels followed by voiceless and voiced stops in Italian and Polish.
+Increasing average glottal opening can be observed in the second half of vowels, although the timing and magnitude of the increase differs depending on the voicing of the following stop and on the language.
+Insights on the diachronic development of pre-aspiration based on these results are discussed.
+\end{abstract}
+
 # Introduction
 
 \begin{figure}
