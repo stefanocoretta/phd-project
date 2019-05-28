@@ -174,7 +174,7 @@ While Italian has been consistently reported as a voicing-effect language \citep
 
 \citet{coretta2018j} argues, based on the acoustics of the same data reported here, that the stressed vowels of disyllabic (CV́CV) words in Italian and Polish are 16 ms longer (SE = 4.4) when followed by a voiced stop.
 The high degree of intra-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.
-Finally, \citet{coretta2018j} shows that the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
+Finally, the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
 The duration of the release to release interval is stable across voicing contexts.
 Within this interval, the timing of the onset of the stop closure produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
 A later closure onset results in a long vowel and a short closure, while an earlier closure onset corresponds to a short vowel and a long closure.
@@ -184,9 +184,9 @@ Since the closure of voiceless stops is longer than that of voiced stops, it fol
 
 Previous research has established that tongue root advancement and longer vowel durations are two common correlates of voicing.
 In particular, voicing during closure can be maintained by advancing the tongue root during the production of voiced stops (which is possibly initiated earlier than the closure onset) and that vowels followed by voiced stops tend to be longer than vowels followed by voiceless stops.
-The acoustic data in \citet{coretta2018j} further revealed that the duration of the stop closure bears on the duration of the preceding vowel, by means of a kind of compensatory mechanism.
+The acoustic data further revealed that the duration of the stop closure bears on the duration of the preceding vowel, by means of a kind of compensatory mechanism.
 
-The results from the articulatory part of \citet{coretta2018j}, which will be discussed in the following sections, offer new insights on the link between closure and vowel duration.
+The results from the articulatory data of this study, which will be discussed in the following sections, offer new insights on the link between closure and vowel duration.
 We will see that the relative timing of the closure also modulates the degree of tongue root advancement found at closure onset, thus creating a three-way network of relations with vowel duration and tongue root position.
 More specifically, the timing of the closure onset within the release-to-release interval decides the duration of the vowel, the duration of the closure, and the degree of tongue root advancement.
 Finally, it will be argued that a later closure onset as in the case of voiced stops has the double advantage of producing both a short closure duration and greater tongue root advancement, features both known to comply with the Aerodynamic Voicing Constraint.
@@ -543,23 +543,23 @@ Shorter vowels have a flatter trajectory, while the curvature of the trajectory 
 
 When comparing the effects of vowel duration and speech rate on tongue root position, though, we are faced with a paradox.
 Both variables have a positive effect on tongue root position, so that longer vowels and higher speech rates imply a more advanced root.
-However, speech rate has a negative effect on vowel duration (and segments duration in general), such that higher speech rates are correlated with shorter vowel durations (this holds for this data, see \citealt{coretta2018j}).
+However, speech rate has a negative effect on vowel duration (and segments duration in general), such that higher speech rates are correlated with shorter vowel durations (this holds for this data).
 If higher speech rates mean shorter vowels and shorter vowels imply a less advanced root, we should also find less advancement with higher speech rates.
 However, the results indicate the opposite, and higher speech rates are correlated with more root advancement.
 However, a regression model on the position of the tongue root at *vowel onset* suggests that speech rate is positively correlated with tongue root position at vowel onset.
 The tongue root is already in a more advanced position at vowel onset when the speech rate is high, so that, if vowel duration is held constant, more advancement is expected at vowel offset with higher speech rates even when higher speech rate has a negative effect on vowel duration.
 
-The articulatory patterns observed in this paper contribute to the acoustic patterns discussed in \citet{coretta2018j}.
+The articulatory patterns observed in this paper contribute to the understanding of the acoustic patterns discussed in previous work.
 If we take the release of the consonant preceding the vowel as a reference point, a delayed consonant closure could ensure that, by the time closure is made, an appreciable amount of tongue root advancement is achieved.
 Other things being equal, an increase in cavity volume increases the time required to reach trans-glottal pressure equalisation, which would cause cessation of voicing.
 This mechanism thus contributes to the maintenance of voicing during the stop closure.
 
-As seen in \citet{coretta2018j}, the closure of voiced stops is achieved later (relative to the preceding consonant release) compared to the closure of voiceless stops.
+The closure of voiced stops is achieved later (relative to the preceding consonant release) compared to the closure of voiceless stops.
 Moreover, the temporal distance between the releases of the two consecutive stops in CV́CV words is not affected by the voicing category of the second stop.
 Given the stability of the release to release interval duration, the delay in producing a full closure seen in the context of voiced stops has thus a double advantage: (1) A greater degree of tongue root advancement is achieved at vowel offset/closure onset, and (2) the stop closure is shorter.
 Both of these articulatory features are compliant with the requirements dictated by the aerodynamic voicing constraint.
 A more advanced tongue root ensures that the trans-glottal pressure differential is sufficient for voicing to be sustained, and a shorter closure reduces the pressure build-up during the stop closure.
-To conclude, it is proposed that the combined action of a temporally stable release to release interval and the differential timing of the closure onset of voiceless vs. voiced stops contribute to the patterns found here and in \citet{coretta2018j}.
+To conclude, it is proposed that the combined action of a temporally stable release to release interval and the differential timing of the closure onset of voiceless vs. voiced stops contribute to both the acoustic patterns of vowel and closure duration and the articulatory patterns of tongue root position.
 
 ## Estimates of tongue root displacement
 
@@ -722,7 +722,7 @@ Moreover, tongue root position and vowel duration were found to be positively co
 Longer vowel durations correspond to greater tongue root advancement.
 
 It was argued that the combined action of two factors contribute to the patterns observed: (1) The duration of the interval between two consecutive releases, and (2) the timing of the C2 closure onset within such interval.
-The release to release interval duration has been found not to be affected by the voicing of the second consonant \citep{coretta2018j}.
+The release to release interval duration has been found not to be affected by the voicing of the second consonant.
 The later closure onset of voiced stops within the release to release interval (compared to voiceless stops) has the double advantage of producing a shorter closure duration and ensuring that enough tongue root advancement is reached by the time the stop closure is achieved.
 Both of these aspects comply with the aerodynamic voicing constraint \citep{ohala2011} by delaying trans-glottal pressure equalisation (which would prevent vocal fold vibration).
 Future studies will need to test whether these findings replicate in Italian and Polish, and if they extend to other languages and contexts.
