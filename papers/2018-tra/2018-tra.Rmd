@@ -193,6 +193,8 @@ Finally, it will be argued that a later closure onset as in the case of voiced s
 
 # Methodology
 
+Following recent practices which encourage scientific transparency and data attribution \citep{cruwell2018, berez-kroeker2018, roettger2019}, data \citep{coretta2018m} and analysis code are available on the Open Science Framework.\footnote{The analysis code can be found at this temporary link for peer-review: \url{https://osf.io/d245b/?view_only=c7ec58d937454de8b7ad9212c261776b}. A public link will be generated in case of acceptance.}
+
 ## Participants
 
 Participants were recruited in Manchester (UK), and Verbania (Italy)
@@ -301,10 +303,6 @@ A preliminary analysis indicated that including either language or C2 place of a
 \Cref{s:idio} further discusses the idiosyncratic behaviour of the tongue root observed between speakers, which does not seem to pattern in any way with their native language.
 For these reasons, these variables were not included in the models reported here and will not be discussed.
 Future research is warranted to ascertain language-related differences and possible effects of place of articulation.
-
-## Open Science statement
-
-Following recent practices which encourage scientific transparency \citep{cruwell2018, berez-kroeker2018, roettger2019}, data and analysis code are available on the Open Science Framework \citep{coretta2019}.
 
 # Results
 \label{s:results}
