@@ -1,15 +1,18 @@
 ---
 title: |
   Longer vowel duration correlates with greater tongue root displacement: Acoustic and articulatory data from Italian and Polish
-author: Stefano Coretta
+author:
+- name: Stefano Coretta
+  affiliation: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
+  email: stefano.coretta\@manchester.ac.uk
 output:
-  lingr::lingr_article:
+  jasaarticle::jasa_article:
     citation_package: natbib
     fig_caption: yes
     dev: cairo_pdf
 bibliography: linguistics
 biblio-style: unified
-fontsize: 12pt
+classoption: preprint
 mainfont: Brill
 mainfontoptions:
 - StylisticSet=20
@@ -18,12 +21,18 @@ header-includes:
 - \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
-- \usepackage{lineno}
-- \linenumbers
 indent: true
 params:
   version: 1.12.9000
   version-date: "2019/05/23"
+abstract: |
+  Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
+  The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
+  Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint.
+  In this paper, it is argued that vowel duration and tongue root advancement enter in a direct statistical relation.
+  Drawing from acoustic and ultrasound tongue imaging data from 17 speakers of Italian and Polish, it is shown that tongue root advancement is initiated during the vowel, and that vowel duration and tongue root position at vowel offset are positively correlated.
+  Longer vowel durations correspond to greater tongue root advancement.
+  It is further proposed that the later closure onset of voiced stops within a temporally stable interval is responsible for both greater root advancement and shorter closure durations in the context of voiced stops.
 ---
 
 ```{r setup, include=FALSE}
@@ -100,16 +109,6 @@ trp_difference <- kines_mean %>%
     ) %>%
   na.omit()
 ```
-
-\begin{abstract}
-Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
-The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
-Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint.
-In this paper, it is argued that vowel duration and tongue root advancement enter in a direct statistical relation.
-Drawing from acoustic and ultrasound tongue imaging data from 17 speakers of Italian and Polish, it is shown that tongue root advancement is initiated during the vowel, and that vowel duration and tongue root position at vowel offset are positively correlated.
-Longer vowel durations correspond to greater tongue root advancement.
-It is further proposed that the later closure onset of voiced stops within a temporally stable interval is responsible for both greater root advancement and shorter closure durations in the context of voiced stops.
-\end{abstract}
 
 # Introduction
 
@@ -222,7 +221,7 @@ A TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz) and a Movo
 The ultrasonic probe was placed in contact with the sub-mental triangle, aligned with the mid-sagittal plane.
 A metallic headset designed by Articulate Instruments Ltd™ (\citeyear{articulate2008}) was used to hold the probe in a fixed position and inclination relative to the head.
 <!-- add figure -->
-The acquisition of the mid-sagittal ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
+The acquisition of the mid-sagittal ultrasonic and audio signals was achieved with the software Articulate Assistant Advanced (AAA, v2.17.2) running on a Hewlett-Packard ProBook 6750b laptop with Microsoft Windows 7.
 The synchronisation of the ultrasonic and audio signals was performed by AAA after recording by means of a synchronisation signal produced by the P-Stretch unit.
 The ranges of the ultrasonic settings were: 43-68 frames per second, 88-114 number of scan lines, 980-988 pixel per scan line, field of view 71-93°, pixel offset 109-263, depth 75-180 mm.
 The audio signal was sampled at 22050 Hz (16-bit).

@@ -1,83 +1,140 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-%
-\documentclass[
-  12pt,
-]{article}
-\usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-  \setmainfont[StylisticSet=20,Numbers=Lining]{Brill}
-\fi
-% Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Longer vowel duration correlates with greater tongue root displacement: Acoustic and articulatory data from Italian and Polish},
-  pdfauthor={Stefano Coretta},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-% \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	JASA LaTeX Template File
+%  For use in making articles using JASAnew.cls
+% July 26, 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Step 1:
+%% Uncomment the style that you want to use:
+
+%%%%%%% For Preprint
+%% For manuscript, 12pt, one column style
+
+%% Comment this out if you'd rather use another style:
+\documentclass[preprint]{JASAnew}
+
+%%%%% Preprint Options %%%%%
+%% The track changes option allows you to mark changes
+%% and will produce a list of changes, their line number
+%% and page number at the end of the article.
+%\documentclass[preprint,trackchanges]{JASAnew}
+
+%% authaffil option will make affil immediately
+% follow author, otherwise authors are grouped, and affiliations
+% are stacked underneath all the authors.
+%\documentclass[preprint,authaffil]{JASAnew}
+
+%% NumberedRefs is used for numbered bibliography and citations.
+%% Default is Author-Year style.
+%% \documentclass[preprint,NumberedRefs]{JASAnew}
+
+%%%%%%% For Reprint
+%% For appearance of finished article; 2 columns, 10 pt fonts
+
+% \documentclass[reprint]{JASAnew}
+
+%%%%% Reprint Options %%%%%
+
+%% For testing to see if author has exceeded page length request, use 12pt option
+%\documentclass[reprint,12pt]{JASAnew}
+
+% authaffil option will make affil immediately
+% follow author, otherwise authors are grouped, and affiliations
+% are stacked underneath all the authors.
+%\documentclass[reprint,authaffil]{JASAnew}
+
+%% NumberedRefs is used for numbered bibliography and citations.
+%% Default is Author-Year style.
+% \documentclass[reprint,NumberedRefs]{JASAnew}
+
+%% TurnOnLineNumbers
+%% Make lines be numbered in reprint style:
+% \documentclass[reprint,TurnOnLineNumbers]{JASAnew}
+
+\usepackage{fontspec}
+
+    \setmainfont[StylisticSet=20,Numbers=Lining]{Brill}
+
+\usepackage{natbib}
+
+
 \let\tnote\relax
 \usepackage{cleveref}
 \usepackage{ctable}
-\usepackage{lineno}
-\linenumbers
-\usepackage[]{natbib}
-\bibliographystyle{unified}
-
-\title{Longer vowel duration correlates with greater tongue root displacement:
-Acoustic and articulatory data from Italian and Polish}
-\author{Stefano Coretta}
-\date{}
-
-\usepackage[absolute]{textpos}
 
 \begin{document}
-\begin{textblock}{3}(0.2,0.2)
-  \textcolor{lightgray}{v1.12.9000 (2019/05/23)}
-\end{textblock}
-\maketitle
+%% the square bracket argument will send term to running head in
+%% preprint, or running foot in reprint style.
+
+\title[]{Longer vowel duration correlates with greater tongue root displacement:
+Acoustic and articulatory data from Italian and Polish}
+
+% ie
+%\title[JASA/Sample JASA Article]{Sample JASA Article}
+
+%% repeat as needed
+
+\author{Stefano Coretta}
+% ie
+%\affiliation{Department1,  University1, City, State ZipCode, Country}
+\affiliation{Linguistics and English Language, University of Manchester, Oxford Road,
+Manchester, M13 9PL, United Kingdom}
+%% for corresponding author
+\email{stefano.coretta@manchester.ac.uk}
+%% for additional information
+
+
+% ie
+% \author{Author Four}
+% \email{author.four@university.edu}
+% \thanks{Also at Another University, City, State ZipCode, Country.}
+
+%% For preprint only,
+%  optional, if you want want this message to appear in upper left corner of title page
+% \preprint{}
+
+%ie
+%\preprint{Author, JASA}
+
+% optional, if desired:
+%\date{\today}
 
 \begin{abstract}
-Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
-The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
-Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint.
-In this paper, it is argued that vowel duration and tongue root advancement enter in a direct statistical relation.
-Drawing from acoustic and ultrasound tongue imaging data from 17 speakers of Italian and Polish, it is shown that tongue root advancement is initiated during the vowel, and that vowel duration and tongue root position at vowel offset are positively correlated.
-Longer vowel durations correspond to greater tongue root advancement.
-It is further proposed that the later closure onset of voiced stops within a temporally stable interval is responsible for both greater root advancement and shorter closure durations in the context of voiced stops.
+% Put your abstract here. Abstracts are limited to 200 words for
+% regular articles and 100 words for Letters to the Editor. Please no
+% personal pronouns, also please do not use the words ``new'' and/or
+% ``novel'' in the abstract. An article usually includes an abstract, a
+% concise summary of the work covered at length in the main body of the
+% article.
+Voiced stops tend to be preceded by longer vowels and produced with a
+more advanced tongue root than voiceless stops. The duration of a vowel
+is modulated by the voicing of the stop that follows and in many
+languages vowels are longer when followed by voiced stops. Tongue root
+advancement is known to be an articulatory mechanism which ensures the
+right pressure conditions for the maintenance of voicing during closure
+as dictated by the Aerodynamic Voicing Constraint. In this paper, it is
+argued that vowel duration and tongue root advancement enter in a direct
+statistical relation. Drawing from acoustic and ultrasound tongue
+imaging data from 17 speakers of Italian and Polish, it is shown that
+tongue root advancement is initiated during the vowel, and that vowel
+duration and tongue root position at vowel offset are positively
+correlated. Longer vowel durations correspond to greater tongue root
+advancement. It is further proposed that the later closure onset of
+voiced stops within a temporally stable interval is responsible for both
+greater root advancement and shorter closure durations in the context of
+voiced stops.
 \end{abstract}
 
+%% pacs numbers not used
+
+\maketitle
+
+%  End of title page for Preprint option --------------------------------- %
+
+%% See preprint.tex/.pdf or reprint.tex/.pdf for many examples
+
+
+%  Body of the article
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
@@ -307,7 +364,7 @@ Instruments Ltd™ (\citeyear{articulate2008}) was used to hold the probe
 in a fixed position and inclination relative to the head. The
 acquisition of the mid-sagittal ultrasonic and audio signals was
 achieved with the software Articulate Assistant Advanced (AAA, v2.17.2)
-running on a Hawlett-Packard ProBook 6750b laptop with Microsoft Windows
+running on a Hewlett-Packard ProBook 6750b laptop with Microsoft Windows
 7. The synchronisation of the ultrasonic and audio signals was performed
 by AAA after recording by means of a synchronisation signal produced by
 the P-Stretch unit. The ranges of the ultrasonic settings were: 43-68
@@ -956,6 +1013,34 @@ s(Proportion, Speaker) &  &  & 59.9588 & 152.0000 & 65.7394 & 0 & *\\
 \end{tabular}
 \end{table}
 
-  \bibliography{linguistics}
+%% before appendix (optional) and bibliography:
+% \begin{acknowledgments}
+%This research was supported by  ...
+% \end{acknowledgments}
+
+% -------------------------------------------------------------------------------------------------------------------
+%   Appendix  (optional)
+
+%\appendix
+%\section{Appendix title}
+
+%If only one appendix, please use
+%\appendix*
+%\section{Appendix title}
+
+
+%=======================================================
+%IMPORTANT
+
+%Use \bibliography{<name of your .bib file>}+
+%to make your bibliography with BibTeX.
+
+%Once you have used BibTeX you
+%should open the resulting .bbl file and cut and paste the entire contents
+%into the end of your article.
+%=======================================================
+
+\bibliography{linguistics}
+
 
 \end{document}
