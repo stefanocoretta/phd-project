@@ -41,7 +41,15 @@ eng_clos <- na.omit(eng_durations)
 ```
 
 \begin{abstract}
-It will come.
+English is one in the wide range of languages in which the duration of vowels is modulated by the voicing of the following consonant: Vowels are shorter when followed by voiceless stops, and longer when followed by voiced stops.
+The so-called voicing effect has been attributed to a variety of mechanisms.
+Temporal compensation between the duration of the vowel and the following stop closure is one of these mechanisms.
+Based on acoustic data from Italian and Polish disyllabic words, the compensatory mechanism has been proposed to be a consequence of the temporal stability of the interval between the consonant releases flanking the vowel.
+The timing of the VC boundary within this interval determines the respective durations of the vowel and the stop closure.
+In this paper, it is shown that the duration of the release-to-release interval is not affected by the voicing of the second consonant in English disyllabic words, but that it is in monosyllabic words.
+It is argued that the stability of the interval can be derived from the isochronous phasing of the vocalic gestures in the VCV sequence of disyllabic words.
+The absence of the temporal anchor of a second vowel in monosyllabic words, on the other hand, allows the vocalic and the consonant gesture durations to be modified independently.
+Other aspects of production and perception behind the voicing effect can coexist with a temporal compensation mechanism and cannot be excluded.
 \end{abstract}
 
 # Introduction
