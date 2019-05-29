@@ -17,8 +17,8 @@ header-includes:
 - \usepackage{lineno}
 - \linenumbers
 params:
-  version: 1.0.9000
-  version-date: "2019/05/27"
+  version: 2.0
+  version-date: "2019/05/29"
 ---
 
 ```{r setup, include=FALSE}
