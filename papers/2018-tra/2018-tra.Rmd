@@ -23,8 +23,8 @@ header-includes:
 - \usepackage{ctable}
 indent: true
 params:
-  version: 2.0
-  version-date: "2019/05/28"
+  version: 2.1
+  version-date: "2019/05/29"
 abstract: |
   Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
   The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
@@ -175,7 +175,7 @@ While Italian has been consistently reported as a voicing-effect language \citep
 The high degree of intra-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.
 Finally, the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
 The duration of the release to release interval is stable across voicing contexts.
-Within this interval, the timing of the onset of the stop closure produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
+Within this interval, the timing of VC boundary (the vowel offset/onset of stop closure) produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
 A later closure onset results in a long vowel and a short closure, while an earlier closure onset corresponds to a short vowel and a long closure.
 Since the closure of voiceless stops is longer than that of voiced stops, it follows that vowels are shorter when followed by the former than when followed by the latter.
 
@@ -556,7 +556,7 @@ Moreover, the temporal distance between the releases of the two consecutive stop
 Given the stability of the release to release interval duration, the delay in producing a full closure seen in the context of voiced stops has thus a double advantage: (1) A greater degree of tongue root advancement is achieved at vowel offset/closure onset, and (2) the stop closure is shorter.
 Both of these articulatory features are compliant with the requirements dictated by the aerodynamic voicing constraint.
 A more advanced tongue root ensures that the trans-glottal pressure differential is sufficient for voicing to be sustained, and a shorter closure reduces the pressure build-up during the stop closure.
-To conclude, it is proposed that the combined action of a temporally stable release to release interval and the differential timing of the closure onset of voiceless vs. voiced stops contribute to both the acoustic patterns of vowel and closure duration and the articulatory patterns of tongue root position.
+To conclude, it is proposed that the combined action of a temporally stable release to release interval and the differential timing of the VC boundary in the context of voiceless vs. voiced stops contribute to both the acoustic patterns of vowel and closure duration and the articulatory patterns of tongue root position.
 
 ## Estimates of tongue root displacement
 
