@@ -38,13 +38,13 @@ load("./papers/2019-wavegam/data/cache/wavegam.Rdata")
 ```
 
 \begin{abstract}
-While electroglottography is a practical and safe technique for obtaining articulatory data on voicing, statistical analysis of the signal it returns is more of a challenge.
-The wavegram has been proposed as a visualisation method which overcomes some of the problems related to reducing the complex electroglottographic signal to a single measure like the contact quotient.
+While electroglottography is a practical and safe technique for obtaining articulatory data on voicing, statistical analysis of the signal it returns poses a few challenges given the highly dimensional nature of the signal.
+The wavegram has been proposed as a visualisation method which overcomes the limitations of reducing the complex electroglottographic signal to a single measure like the contact quotient.
 This paper introduces a method for modelling dynamic electroglottographic data based on the wavegram using generalised additive models (GAMs).
-The results from a pilot study of this method which compares modal and breathy phonation are presented.
-The applicability of wavegram GAMs is further exemplified by discussing the results of an exploratory study of voicing in vowels followed by voiceless and voiced stops in Italian and Polish.
+Results from a pilot study which assesses the reliability of this method by comparing sustained modal and breathy phonation are presented.
+The applicability of wavegram GAMs is exemplified with the discussion of an exploratory study on the dynamical properties of voicing in vowels followed by voiceless and voiced stops in Italian and Polish.
 Increasing average glottal opening can be observed in the second half of vowels, although the timing and magnitude of the increase differs depending on the voicing of the following stop and on the language.
-Insights on the diachronic development of pre-aspiration based on these results are discussed.
+Insights on the diachronic development of pre-aspiration based on these results are also discussed.
 \end{abstract}
 
 # Introduction
@@ -56,13 +56,14 @@ Insights on the diachronic development of pre-aspiration based on these results 
   \label{f:egg-setup}
 \end{figure}
 
-The position of the vocal folds within the oral tract makes investigation of glottal activity difficult.
+The location of the vocal folds within the oral tract makes investigation of glottal activity difficult.
 Direct observation of the the larynx via invasive methods like laryngoscopy has the practical drawbacks of being of great discomfort to the participant and of requiring medical expertise to be performed.
 Electroglottography, on the other hand, is a non-invasive and safe technique which enables researchers to obtain an indirect account of glottal activity.
-However, the complexity of the electroglottographic signal and the imperfect mapping between the signal and the laryngeal activity it measures pose some analytical challenges.
-In this paper, generalised additive modelling \citep{hastie1986} is proposed as a means to statistically investigate glottal activity as derived from wavegrams, a complex visualisation form of electroglottographic data \citep{herbst2010}.
-The following paragraphs introduce the basic concepts behind electroglottography and the wavegram technique.
-Wavegram generalised additive models will then be exemplified by discussing the results of a pilot study which compares modal and breathy phonation, and the results of an exploratory study on differences of glottal activity in vowels followed by voiceless and voiced stops.
+However, the complexity of the electroglottographic signal and the imperfect mapping between the signal and the laryngeal activity it measures pose some analytical challenges deriving from the reduction of the signal to a single measure.
+The wavegram technique has been proposed as a visualisation form of electroglottographic data which maintains the multi-dimensionality of the signal \citep{herbst2010}.
+In this paper, generalised additive modelling \citep{hastie1986} is proposed as a means to statistically investigate glottal activity as derived from wavegrams.
+<!-- The following paragraphs introduce the basic concepts behind electroglottography and the wavegram technique.
+Wavegram generalised additive models will then be exemplified by discussing the results of a pilot study which compares modal and breathy phonation, and the results of an exploratory study on differences of glottal activity in vowels followed by voiceless and voiced stops. -->
 
 Electroglottography, or EGG \citep{fabre1957}, is a technique that measures the degree of contact between the vocal folds (the Vocal Folds Contact Area, VFCA).
 A high frequency low voltage electrical current is sent through two electrodes which are in contact with the surface of the neck, one on each side of the thyroid cartilage (\Cref{f:egg-setup}).
@@ -88,14 +89,14 @@ An example EGG signal is provided in \Cref{f:egg}.
 
 Two important landmarks of glottal movement are the closing instant (the timepoint of glottal complete closure) and the opening instant (the moment in which the glottis first opens).
 These points delimit the open and closed phases of a glottal cycle.
-The ratio of the closed phase relative to the total cycle duration, the closed quotient, has been used as an index of phonation type.
+The ratio of the closed phase relative to the total cycle duration, the closed quotient, has been used as an index of phonation type \citep{scherer1987}.
 Modal voice has higher closed quotient values than breathy voice, and lower values than creaky voice.
 One method for the detection of the closing and opening instants is based on the first derivative of the EGG signal (the dEGG, see \Cref{f:egg}).
 \citet{herbst2017}, however, showed that this method returns values that are just a surrogate of the actual articulatory movements, due to the complex anatomy of the vocal folds, and that there are no clear contacting and decontact instants, but rather intervals.
 \citet{herbst2017} call this EGG-based closed quotient the 'contact quotient' and recommend to keep it distinct from the closed quotient obtained from direct observation of the vocal folds.
 
 As an alternative to the contact quotient, \citet{herbst2010} propose the wavegram, a visualisation method which does not reduce the EGG signal to a single value and thus suffers less from the limitations of the contact quotient.
-The wavegram exploits information from the whole signal to obtain an image of vocal folds activity.
+The wavegram incorporates information from the whole signal to obtain an image of vocal folds activity.
 A wavegram is a 3D representation of the EGG signal developing in time.
 Its structure is similar to that of a classical phonetic spectrogram.
 The *x*-axis indicates the temporal sequence of individual glottal cycles.
@@ -112,18 +113,19 @@ A wavegram can be produced for the EGG signal and for any of its transformations
   \label{f:wavegram}
 \end{figure}
 
-A possible limitation of the wavegram method is that it is intended for a qualitative analysis based on visual inspection.
+The wavegram method was originally intended for a qualitative analysis based on visual inspection.
 However, wavegram data can be modelled using generalised additive models (GAMs, \citealt{hastie1986, zuur2012, wood2017}).
 GAMs are a family of generalised models which can fit non-linear effects by additive combinations of smoothing splines.
 The flexibility of GAMs allows researchers to generate a fitted wavegram based on data from multiple repetitions of a single speaker and from multiple speakers.
 Random effects can also be included to account for idiosyncratic differences.
 Moreover, the potential for overfitting is reduced by a smoothing penalty parameter, which constraints the maximum number of basis functions used to construct the smoothing splines.
 This paper introduces wavegram GAMs as a way to quantitatively assess wavegram data.
-First, \Cref{s:pilot} presents results from a pilot study which informally evaluates the proposed method are presented.
-\Cref{s:voicing} illustrates how to conduct a wavegram GAM analysis of dEGG data through a practical example in which the wavegrams of vowels followed by voiceless and voiced stops in Italian and Polish are compared.
+First, \Cref{s:pilot} presents results from a pilot study which informally evaluates the reliability of the proposed method.
+\Cref{s:voicing} illustrates how to conduct a dynamical wavegram GAM analysis of dEGG data through a practical example in which the wavegrams of vowels followed by voiceless and voiced stops in Italian and Polish are compared.
 This analysis indicates the presence of a pattern of glottal spreading in the second half of vowels followed by voiceless stops and of cross-linguistic differences.
 Insights on the diachronic emergence of pre-aspiration based on these results are discussed.
 Finally, \Cref{s:conclusion} concludes and discusses the limitations of the current implementation of the method and future directions.
+The data \citep{coretta2017e, coretta2018m} and analysis scripts of this paper can be found on the Open Science Framework.\footnote{The analysis code can be found at this temporary link for peer-review: \url{https://osf.io/3w8gh/?view_only=f986eef50fa14d59921b5e0408b39afd}. A public link will be generated in case of acceptance.}
 
 # Pilot study
 \label{s:pilot}
@@ -138,10 +140,10 @@ The onset and offset of each token were detected with an automatic procedure whi
 The dEGG wavegram data was extracted from the first 8 glottal cycles of a 500 ms window, centred around the mid-point of each token.
 A glottal cycle was arbitrarily defined as the interval between two consecutive EGG minima (see \citealt{herbst2010} for an alternative algorithm).
 From each glottal cycle, the relative amplitude of the dEGG signal was extracted every 10 samples.
-For a detailed description of the algorithm used, the reader is referred to the code documentation \citep{coretta2017d}.
+The reader is referred to \citet{coretta2017e} for the documentation of the algorithms and the research data.
 
 A generalised additive mixed model (GAMM) was fitted to the data to statistically assess differences in vocal fold activity between modal and breathy voicing (see \citealt{soskuthy2017} and \citealt{wieling2018} for a practical introduction to fitting GAMs in R).
-The following terms were included: the amplitude of the dEGG signal as the outcome variable, an interaction factor with language and phonation as a parametric term, a smooth over the glottal cycle index to model average changes of the dEGG signal across glottal cycles, and a smooth over the normalised time of the sample within the glottal cycle (as the proportion of the time relative to the duration of the glottal cycle) to model average changes of the dEGG signal within the glottal cycle; two difference smooths over normalised time of the glottal cycle onset and normalised sample time using a by-variable with the language/phonation factor; a tensor product interaction between normalised cycle time and normalised sample time to model changes of glottal activity through time, and the same tensor product interaction with a language/phonation by-variable to model phonation-driven differences in changes of glottal activity.
+The following terms were included: the amplitude of the dEGG signal as the outcome variable, an interaction factor with language and phonation as a parametric term, a smooth over the glottal cycle index to model average changes of the dEGG signal across glottal cycles, and a smooth over the normalised time of the sample within the glottal cycle (as the proportion of the time relative to the duration of the glottal cycle) to model average changes of the dEGG signal within the glottal cycle; two difference smooths over normalised time of the glottal cycle onset and normalised sample time using a by-variable with the phonation factor; a tensor product interaction between normalised cycle time and normalised sample time to model changes of glottal activity through time, and the same tensor product interaction with a language/phonation by-variable to model phonation-driven differences in changes of glottal activity.
 Finally, inter-speaker differences were modelled with a by-speaker factor smooth over normalised cycle time.
 A first-order autoregressive (AR1) model was included to deal with the relatively high auto-correlation in the residuals.
 
@@ -181,10 +183,12 @@ wavegam_p_ar_pred %>%
 This section further illustrates the use of wavegram GAMs by discussing a dynamic analysis of changes in vocal folds activity during the production of vowels followed by voiceless vs. voiced stops in Italian and Polish.
 EGG data was obtained from 9 Italian speakers and 6 Polish speakers.
 A detailed description of the experimental design is given in \citet{coretta2018j}.
-Trochaic words with the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).
-Processing and analysis of the EGG data were the same as with the pilot study (\Cref{s:pilot}), with the exception that data was extracted from every glottal cycle within the whole duration of the first vowel of the word stimuli (see the code documentation in ).
+Trochaic words with the form C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} were used, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.), embedded in the frame sentences *Dico X lentamente* 'I say X slowly' in Italian, and *Mówię X teraz* 'I say X now' in Polish.
+The participants repeated each of the twelve sentence stimuli six times.
+Processing and analysis of the EGG data were the same as with the pilot study (\Cref{s:pilot}), with the exception that data was extracted from every glottal cycle within the whole duration of the first vowel of the word stimuli (see the code documentation in ...).
 The vocalic onset and offset were identified as the appearance and disappearance of higher formant structure respectively \citep{machac2009}.
 Vowel duration was then normalised between 0 and 1 for analysis.
+The data of this study is available on the Open Science Framework \citet{coretta2018m}.
 
 ```{r surface, include=TRUE, fig.cap = "Fitted wavegram of vowels followed by voiceless and voiced stops in Italian and Polish (Section 3).", fig.lp="f:", out.extra="width=\\linewidth"}
 contexts <- c(
