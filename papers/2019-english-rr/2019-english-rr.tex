@@ -5,7 +5,7 @@
 \documentclass[
   12pt,
   a4paper,
-]{article}
+  authoryear, 5p]{elsarticle}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -29,8 +29,6 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration},
-  pdfauthor={Stefano Coretta},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 % \urlstyle{same} % disable monospaced font for URLs
@@ -51,24 +49,31 @@
 \let\tnote\relax
 \usepackage{cleveref}
 \usepackage{ctable}
+\journal{Journal of Phonetics}
 \usepackage{enumerate}
-\usepackage{lineno}
+\usepackage[modulo]{lineno}
+\setlength\linenumbersep{5pt}
 \linenumbers
 \usepackage[]{natbib}
-\bibliographystyle{unified}
+\bibliographystyle{model2-names.bst}
 
-\title{Temporal (in)stability in English monosyllabic and disyllabic words:
-Insights on the effect of voicing on vowel duration}
-\author{Stefano Coretta}
 \date{}
 
 \usepackage[absolute]{textpos}
 
 \begin{document}
 \begin{textblock}{3}(0.2,0.2)
-  \textcolor{lightgray}{v0.12 (2019/05/28)}
+  \textcolor{lightgray}{v0.12.9000 (2019/05/30)}
 \end{textblock}
-\maketitle
+
+\begin{frontmatter}
+
+\title{Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration}
+
+\author[mcr]{Stefano Coretta\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{stefano.coretta@manchester.ac.uk}
+\address[mcr]{University of Manchester, Linguistics and English Language, School of Arts, Languages and Cultures, Oxford Road, Manchester, M13 9PL, UK}
 
 \begin{abstract}
 English is one in the wide range of languages in which the duration of vowels is modulated by the voicing of the following consonant: Vowels are shorter when followed by voiceless stops, and longer when followed by voiced stops.
@@ -81,6 +86,12 @@ It is argued that the stability of the interval can be derived from the isochron
 The absence of the temporal anchor of a second vowel in monosyllabic words, on the other hand, allows the vocalic and the consonant gesture durations to be modified independently.
 Other aspects of production and perception behind the voicing effect can coexist with a temporal compensation mechanism and cannot be excluded.
 \end{abstract}
+
+\begin{keyword}
+voicing effect \sep vowel duration \sep compensatory adjustment \sep English
+\end{keyword}
+
+\end{frontmatter}
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -1246,6 +1257,8 @@ vs.~voiced stops. Finally, the scenario of emergence of the voicing
 effect offered here should be examined in in relation to other
 consonantal effects on vowel duration, like other laryngeal effects and
 effects of manner of articulation.
+
+\biboptions{authoryear}
 
   \bibliography{linguistics}
 

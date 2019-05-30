@@ -1,13 +1,13 @@
 ---
-title: "Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration"
-author: "Stefano Coretta"
 output:
   lingr::lingr_article:
     citation_package: natbib
     fig_caption: yes
     dev: cairo_pdf
+documentclass: elsarticle
+classoption: authoryear, 5p
 bibliography: linguistics
-biblio-style: unified
+biblio-style: model2-names.bst
 mainfont: Tinos
 fontsize: 12pt
 indent: true
@@ -16,12 +16,14 @@ header-includes:
 - \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
+- \journal{Journal of Phonetics}
 - \usepackage{enumerate}
-- \usepackage{lineno}
+- \usepackage[modulo]{lineno}
+- \setlength\linenumbersep{5pt}
 - \linenumbers
 params:
-  version: 0.12
-  version-date: "2019/05/28"
+  version: 0.12.9000
+  version-date: "2019/05/30"
 ---
 
 ```{r setup, include=FALSE}
@@ -40,6 +42,15 @@ eng_durations_rr <- na.omit(eng_durations)
 eng_clos <- na.omit(eng_durations)
 ```
 
+\begin{frontmatter}
+
+\title{Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration}
+
+\author[mcr]{Stefano Coretta\corref{cor1}}
+\cortext[cor1]{Corresponding author}
+\ead{stefano.coretta@manchester.ac.uk}
+\address[mcr]{University of Manchester, Linguistics and English Language, School of Arts, Languages and Cultures, Oxford Road, Manchester, M13 9PL, UK}
+
 \begin{abstract}
 English is one in the wide range of languages in which the duration of vowels is modulated by the voicing of the following consonant: Vowels are shorter when followed by voiceless stops, and longer when followed by voiced stops.
 The so-called voicing effect has been attributed to a variety of mechanisms.
@@ -51,6 +62,12 @@ It is argued that the stability of the interval can be derived from the isochron
 The absence of the temporal anchor of a second vowel in monosyllabic words, on the other hand, allows the vocalic and the consonant gesture durations to be modified independently.
 Other aspects of production and perception behind the voicing effect can coexist with a temporal compensation mechanism and cannot be excluded.
 \end{abstract}
+
+\begin{keyword}
+voicing effect \sep vowel duration \sep compensatory adjustment \sep English
+\end{keyword}
+
+\end{frontmatter}
 
 # Introduction
 \label{s:intro}
@@ -808,3 +825,5 @@ Future studies should further investigate the articulatory temporal patterns of 
 In particular, a complete assessment of the isochrony (or lack thereof) of consecutive vocalic gestures should include a variety of oppositions, involving voicing, place of articulation, number of consonants, syllabic affiliation, and prosodic contexts.
 Moreover, work is needed to shed light on the timing of the consonant closing gesture relative to the articulatory gesture of the preceding vowel in voiceless vs. voiced stops.
 Finally, the scenario of emergence of the voicing effect offered here should be examined in in relation to other consonantal effects on vowel duration, like other laryngeal effects and effects of manner of articulation.
+
+\biboptions{authoryear}
