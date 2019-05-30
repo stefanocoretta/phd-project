@@ -23,7 +23,7 @@ header-includes:
 - \usepackage{ctable}
 indent: true
 params:
-  version: 2.3
+  version: 2.4
   version-date: "2019/05/30"
 abstract: |
   Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
@@ -36,7 +36,7 @@ abstract: |
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.lp = "f:", fig.process = function(x) {
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.lp = "f:", fig.path = "./", fig.process = function(x) {
   x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
   if (file.rename(x, x2)) x2 else x
 })
@@ -283,7 +283,7 @@ Given the average frame rate is 55 frames per second, values are sampled about e
 
 \begin{figure}
   \centering
-  \includegraphics[width=5in]{./fig/Figure1.png}
+  \includegraphics[width=5in]{Figure1.png}
   \caption{Schematics of the operationalisation of tongue root position, based on \citet{kirkham2017}. The tongue root surface corresponds to the lower edge of the white band in the image. The tongue tip is on the right side. The outline of the fan-like coordinate systems is shown. The yellow line starting from the probe origin is the selected fan-line from which tongue root position is calculated (see text for the method of fan-line selection). Tongue root position thus corresponds to the distance (in millimetres) between the probe origin and the intersecting point of the tongue surface with the selected fan-line.}
   \label{f:trp}
 \end{figure}
