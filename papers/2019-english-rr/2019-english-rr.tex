@@ -62,9 +62,6 @@
 \usepackage[absolute]{textpos}
 
 \begin{document}
-\begin{textblock}{3}(0.2,0.2)
-  \textcolor{lightgray}{v0.12.9000 (2019/05/30)}
-\end{textblock}
 
 \begin{frontmatter}
 
@@ -644,10 +641,12 @@ posterior predictive check plots indicate that the observed
 distributions are slightly positively skewed so that a log-normal
 distribution would have been more appropriate. Previous work has shown
 that speech-units duration does follow, as a general trend, a log-normal
-distribution \citep{rosen2005, ratnikova2017}. However, the deviations
-from a Gaussian distribution are minimal, and an informal comparison of
-one of the models fitted with a log-normal distribution led to virtually
-identical results.
+distribution \citep{rosen2005, ratnikova2017}, and the practice of
+transforming duration data to the logarithmic scale is not uncommon
+\citet{gahl2019}. However, the deviations from a Gaussian distribution
+here were minimal, and an informal comparison of one of the models
+fitted with a log-normal distribution led to virtually identical
+results.
 
 \hypertarget{release-to-release-duration}{%
 \subsection{Release-to-release

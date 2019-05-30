@@ -22,8 +22,9 @@ header-includes:
 - \setlength\linenumbersep{5pt}
 - \linenumbers
 params:
-  version: 0.12.9000
+  version: 1.0
   version-date: "2019/05/30"
+hide-version: true
 ---
 
 ```{r setup, include=FALSE}
@@ -313,8 +314,8 @@ Each model is assigned a number (1 to 5), and the text refers to these.
 
 Model convergence was reached in all the reported models ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
 The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
-Previous work has shown that speech-units duration does follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}.
-However, the deviations from a Gaussian distribution are minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
+Previous work has shown that speech-units duration does follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}, and the practice of transforming duration data to the logarithmic scale is not uncommon \citet{gahl2019}.
+However, the deviations from a Gaussian distribution here were minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
 
 
 ## Release-to-release duration
