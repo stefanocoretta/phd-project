@@ -1,5 +1,5 @@
 ---
-title: "Bayesian meta-analysis of the voicing effect in English"
+title: "Supplement A: Bayesian meta-analysis of the voicing effect in English"
 author: "Stefano Coretta"
 output:
   pdf_document:
