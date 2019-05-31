@@ -23,8 +23,8 @@ header-includes:
 - \usepackage{ctable}
 indent: true
 params:
-  version: 2.4
-  version-date: "2019/05/30"
+  version: 2.5
+  version-date: "2019/05/31"
 abstract: |
   Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
   The duration of a vowel is modulated by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
@@ -590,8 +590,8 @@ The following section discusses this point.
 ## Individual differences
 \label{s:idio}
 
-```{r Figure6, include=TRUE, fig.cap="Slope plots of mean torngue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.", fig.lp="f:", out.width=".49\\linewidth", fig.width=3, fig.height=3, fig.show="hold", fig.align="center"}
-kines_mean %>%
+```{r Figure6, include=TRUE, fig.cap="Slope plots of mean torngue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.", fig.lp="f:", fig.height=3, out.width="\\linewidth", fig.align="center"}
+fig_a <- kines_mean %>%
   ggplot(aes(c2_phonation, trp_mean, linetype = language, shape = language)) +
   geom_point() +
   geom_line(aes(group = speaker)) +
@@ -603,7 +603,7 @@ kines_mean %>%
   ) +
   theme(legend.position = "top")
 
-kines_mean %>%
+fig_b <- kines_mean %>%
   ggplot(aes(c2_phonation, trp_z_mean, linetype = language, shape = language)) +
   geom_point() +
   geom_line(aes(group = speaker)) +
@@ -614,6 +614,8 @@ kines_mean %>%
     shape = "Language"
   ) +
   theme(legend.position = "top")
+
+fig_a + fig_b
 ```
 
 The results presented in \Cref{s:results} and discussed in \Cref{s:discussion} are group-level patterns of the population sampled in the present study.
