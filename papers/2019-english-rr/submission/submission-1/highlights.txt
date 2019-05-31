@@ -1,0 +1,4 @@
+- The duration of the interval between two consecutive stop releases is not affected by voicing in disyllabic words in English, but it is longer when the second consonant is voiced in monosyllabic words.
+- The temporal stability of the interval in disyllabic words is argued to derive from vowel-to-vowel isochrony, which is absent in monosyllabic words.
+- The data from disyllabic words are compatible with a compensatory mechanism of vowel and stop closure duration.
+- The duration of vowel and stop closure can be modulated independently in monosyllabic words.
