@@ -22,8 +22,8 @@ header-includes:
 - \setlength\linenumbersep{5pt}
 - \linenumbers
 params:
-  version: 1.0
-  version-date: "2019/05/30"
+  version: 1.1
+  version-date: "2019/05/31"
 hide-version: true
 ---
 
@@ -185,7 +185,7 @@ To summarise, the following research questions and respective hypotheses can be 
 # Methods
 
 The following subsections describe the experimental and statistical methods of this study.
-The research design and data analyses were pre-registered on the Open Science Framework prior to data collection.\footnote{The analysis code can be found at this temporary link for peer-review: \url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}.}
+The research design and data analyses were pre-registered on the Open Science Framework prior to data collection.\footnote{The pre-registration can be found at this temporary link for peer-review: \url{https://osf.io/hwr94/?view_only=d994915422144efaae4a5915237cb386}.}
 <!-- explain why pre-registration -->
 The research compendium of this paper with data \citep{coretta2019g} and analysis scripts is also available on the Open Science Framework.\footnote{The analysis code can be found at this temporary link for peer-review: \url{https://osf.io/32fst/?view_only=2dc237b60f4c4c77b6ec10300b9e528e}. A public link will be generated in case of acceptance.}
 Choices on experimental design and analysis were made within the Bayesian framework of statistical inference (see \Cref{s:sample-size} and \Cref{s:bayes} for details).
@@ -241,7 +241,7 @@ The test words were C\textsubscript{1}V́\textsubscript{1}C\textsubscript{2}(VC)
 This structure specification generates 24 test words, shown in \Cref{t:words}.
 All of these are nonce words, with the exception of *turk* and *tarp*, and of *teek* via the homophone *teak*.
 Building stimuli from a structure template rather than from the lexicon ensures greater experimental and statistical control.
-Moreover, the use of nonce words removes or reduces confounds from some usage variables, like for example lexical frequency.\footnote{The three real words in the materials have low lexical frequency (Zipf log frequency: *tarp* 2.23, *teak* 2.76, and *turk* 2.91) according to the SUBTLEX-UK corpus \citep{van-heuven2014}.}
+Moreover, the use of nonce words removes or reduces confounds from some usage variables, like for example lexical frequency.\footnote{The three real words in the materials have low lexical frequency (Zipf 1-7 log-frequency: \textit{tarp} 2.23, \textit{teak} 2.76, and \textit{turk} 2.91) according to the SUBTLEX-UK corpus \citep{van-heuven2014}.}
 Each word was embedded in the following frame sentences: *I'll say X this Thursday*, *You'll say X this Monday*, *She'll say X this Sunday*, *We'll say X this Friday*, *They'll say X this Tuesday*.
 Each word + frame combination was included once in the stimuli list, so that each speaker read a total of 120 sentence stimuli (24 words × 5 frames).
 A total of 1800 observations were recorded (120 stimuli × 15 speakers).
@@ -309,12 +309,11 @@ A sensitivity analysis based on posterior *z*-scores and shrinkage \citep{betanc
 
 This section reports the results of the Bayesian models, grouped by outcome variable (release-to-release, vowel duration, closure duration).
 A description of the model structure and priors is given for each model, followed by the presentation of the posterior distributions of the relevant terms.
-The data and R code used for analysis are available as part of the paper's research compendium \citep{coretta2019b}.
 Each model is assigned a number (1 to 5), and the text refers to these.
 
 Model convergence was reached in all the reported models ($\hat{R}$ = 1) and no major divergences in the MCMC chains were observed.
 The posterior predictive check plots indicate that the observed distributions are slightly positively skewed so that a log-normal distribution would have been more appropriate.
-Previous work has shown that speech-units duration does follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}, and the practice of transforming duration data to the logarithmic scale is not uncommon \citet{gahl2019}.
+Previous work has shown that speech-units duration does follow, as a general trend, a log-normal distribution \citep{rosen2005, ratnikova2017}, and the practice of transforming duration data to the logarithmic scale is not uncommon \citep{gahl2019}.
 However, the deviations from a Gaussian distribution here were minimal, and an informal comparison of one of the models fitted with a log-normal distribution led to virtually identical results.
 
 
