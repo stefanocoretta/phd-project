@@ -160,7 +160,7 @@ tra_series %>%
 ```
 
 ```{r tra-gam}
-if (!file.exists("./italian-polish/data/cache/tra-gam.Rdata")) {
+if (!file.exists("./italian-polish/analysis/cache/tra-gam.Rdata")) {
   tra_gam <- bam(
     trp ~
       c2_phonation_o +
@@ -205,7 +205,7 @@ if (!file.exists("./italian-polish/data/cache/tra-gam.Rdata")) {
   save(tra_gam, tra_gam_ar, tra_gam_ar_0, file = "./italian-polish/data/cache/tra-gam.Rdata")
   
 } else {
-  load("./italian-polish/data/cache/tra-gam.Rdata")
+  load("./italian-polish/analysis/cache/tra-gam.Rdata")
 }
 
 compareML(tra_gam_ar_0, tra_gam_ar)
