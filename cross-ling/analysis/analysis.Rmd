@@ -20,19 +20,20 @@ data("eng_durations")
 
 ```{r merge-data}
 ita_pol <- token_measures %>%
-  select(language, speaker, word, c2_phonation, v1_duration, c2_clos_duration, speech_rate_c) %>%
+  select(language, speaker, word, c2_phonation, v1_duration, c2_clos_duration, speech_rate) %>%
   rename(voicing = "c2_phonation")
 
 eng <- eng_durations %>%
   filter(num_syl == "di") %>%
   mutate(language = "English") %>%
-  select(language, speaker, word, voicing, v1_duration, c2_clos_duration, speech_rate_c) %>%
+  select(language, speaker, word, voicing, v1_duration, c2_clos_duration, speech_rate) %>%
   mutate_if(is.factor, as.character)
 
 enitpl <- bind_rows(eng, ita_pol) %>%
   mutate(
     language = factor(language, levels = c("English", "Italian", "Polish")),
     voicing = factor(voicing, levels = c("voiceless", "voiced")),
+    speech_rate_c = scale(speech_rate),
     vc_ratio = v1_duration / c2_clos_duration
   ) %>%
   mutate_if(is.character, as.factor) %>%
@@ -41,7 +42,7 @@ enitpl <- bind_rows(eng, ita_pol) %>%
 
 # V1 duration
 
-```{r simple-plot}
+```{r v1-dur}
 enitpl %>%
   ggplot(aes(voicing, v1_duration)) +
   geom_boxplot() +
@@ -132,3 +133,19 @@ brm_2_draws %>%
   scale_color_brewer()
 ```
 
+# VC ratio
+
+```{r vc-ratio}
+enitpl %>%
+  ggplot(aes(voicing, vc_ratio)) +
+  geom_boxplot() +
+  facet_grid(~ language)
+```
+
+```{r vc-ratio-2}
+enitpl %>%
+  ggplot(aes(speech_rate, vc_ratio)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "gam") +
+  facet_grid(voicing ~ language)
+```
