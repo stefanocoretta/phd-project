@@ -20,23 +20,26 @@ data("eng_durations")
 
 ```{r merge-data}
 ita_pol <- token_measures %>%
-  select(language, speaker, word, c2_phonation, v1_duration, speech_rate_c) %>%
+  select(language, speaker, word, c2_phonation, v1_duration, c2_clos_duration, speech_rate_c) %>%
   rename(voicing = "c2_phonation")
 
 eng <- eng_durations %>%
   filter(num_syl == "di") %>%
   mutate(language = "English") %>%
-  select(language, speaker, word, voicing, v1_duration, speech_rate_c) %>%
+  select(language, speaker, word, voicing, v1_duration, c2_clos_duration, speech_rate_c) %>%
   mutate_if(is.factor, as.character)
 
 enitpl <- bind_rows(eng, ita_pol) %>%
   mutate(
     language = factor(language, levels = c("English", "Italian", "Polish")),
-    voicing = factor(voicing, levels = c("voiceless", "voiced"))
+    voicing = factor(voicing, levels = c("voiceless", "voiced")),
+    vc_ratio = v1_duration / c2_clos_duration
   ) %>%
   mutate_if(is.character, as.factor) %>%
   na.omit()
 ```
+
+# V1 duration
 
 ```{r simple-plot}
 enitpl %>%
