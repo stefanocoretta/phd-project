@@ -14,6 +14,7 @@ coretta2019eng/data-raw/data
 coretta2017egg/data-raw/data
 coretta2018itaegg/data-raw/data
 phd-project/italian-polish/analysis/cache
+phd-project/cross-ling/analysis/cache
 phd-project/tracegram-prepilot/data
 phd-project/lombard/data
 phd-project/perceptual-pilot/data
@@ -41,6 +42,7 @@ coretta2019eng/data-raw/data
 coretta2017egg/data-raw/data
 coretta2018itaegg/data-raw/data
 phd-project/italian-polish/analysis/cache
+phd-project/cross-ling/analysis/cache
 phd-project/tracegram-prepilot/data
 phd-project/lombard/data
 phd-project/perceptual-pilot/data
