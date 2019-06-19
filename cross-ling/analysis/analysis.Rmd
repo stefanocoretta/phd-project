@@ -38,6 +38,8 @@ enitpl <- bind_rows(eng, ita_pol) %>%
   ) %>%
   mutate_if(is.character, as.factor) %>%
   na.omit()
+
+save(enitpl, file = "./cross-ling/analysis/cache/enitpl.rda")
 ```
 
 # V1 duration
@@ -76,8 +78,30 @@ brm_1 <- brm(
   prior = priors,
   file = "cross-ling/analysis/cache/brm_1",
   cores = 4,
-  control = list(adapt_delta = 0.999, max_treedepth = 15)
+  control = list(adapt_delta = 0.999, max_treedepth = 15),
+  seed = 1432
 )
+```
+
+```{r brm-1-summary}
+summary(brm_1)
+```
+
+```{r brm-1-draws}
+brm_1_draws <- brm_1 %>%
+  gather_draws(`b_.*`, regex = TRUE) %>%
+  filter(.variable != "b_Intercept")
+```
+
+```{r brm-1-intervals}
+brm_1_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(.variable, levels = c("b_voicingvoiced", "b_languageItalian", "b_languagePolish", "b_languageItalian:voicingvoiced", "b_languagePolish:voicingvoiced", "b_speech_rate_c")[6:1])) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.15), .width = c(0.66, 0.98)) +
+  scale_color_brewer()
 ```
 
 ```{r brm-2}
