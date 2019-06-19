@@ -48,6 +48,12 @@ plot_obs_range(4.06, 1800, 20, divide = 120, min_width = 5) +
   scale_y_continuous(breaks = seq(0, 200, 25))
 ```
 
+```{r vowel}
+plot_obs_range(5.16, 1800, 20, min_width = 5)
+plot_obs_range(5.16, 1800, 20, divide = 120, min_width = 5) +
+  scale_y_continuous(breaks = seq(0, 250, 25))
+```
+
 ```{r rel-gons}
 plot_obs_range(6.68, 850, 15, min_width = 5)
 plot_obs_range(6.68, 850, 15, divide = 144, min_width = 5) +
