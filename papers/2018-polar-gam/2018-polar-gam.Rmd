@@ -252,7 +252,7 @@ contrasts(tongue_pl07$vc_voicing) <- "contr.treatment"
 
 \large
 
-TITLE: Assessing mid-saggital tongue contours in polar coordinates using generalised additive (mixed) models
+TITLE: Assessing mid-sagittal tongue contours in polar coordinates using generalised additive (mixed) models
 
 \vspace{1cm}
 
