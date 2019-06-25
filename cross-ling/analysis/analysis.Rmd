@@ -112,6 +112,7 @@ priors <- c(
   prior(normal(25, 10), class = b, coef = voicingvoiced),
   prior(normal(0, 10), class = b, coef = languageItalian:voicingvoiced),
   prior(normal(0, 10), class = b, coef = languagePolish:voicingvoiced),
+  prior(normal(0, 10), class = b, coef = speech_rate_c:voicingvoiced),
   prior(normal(-25, 10), class = b, coef = speech_rate_c),
   prior(cauchy(0, 25), class = sd),
   prior(lkj(2), class = cor),
@@ -122,10 +123,11 @@ brm_2 <- brm(
   v1_duration ~
     language +
     voicing +
-    language:voicing +
     speech_rate_c +
+    language:voicing +
+    speech_rate_c:voicing +
     (voicing | speaker) +
-    (1 | word),
+    (voicing | word),
   data = enitpl,
   family = gaussian(),
   prior = priors,
