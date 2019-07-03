@@ -1,0 +1,55 @@
+---
+title: "English jaw displacement"
+author: "Stefano Coretta"
+date: "30/06/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = here::here())
+library(tidyverse)
+library(brms)
+```
+
+```{r data}
+en_jaw <- read_csv("english-jaw/en-jaw.csv")
+```
+
+```{r}
+priors <- c(
+  prior(normal(0, 50), class = Intercept),
+  prior(normal(0, 10), class = b)
+)
+
+jaw_1 <- brm(
+  mean | se(sd) ~
+    height *
+    atr *
+    position,
+  data = en_jaw,
+  prior = priors,
+  cores = 4
+)
+```
+
+```{r}
+summary(jaw_1)
+```
+
+```{r}
+priors <- c(
+  prior(normal(0, 10), class = Intercept),
+  prior(normal(0, 2), class = b)
+)
+
+jaw_2 <- brm(
+  mean | se(sd) ~
+    height *
+    atr *
+    position,
+  data = en_jaw,
+  prior = priors,
+  cores = 4
+)
+```
