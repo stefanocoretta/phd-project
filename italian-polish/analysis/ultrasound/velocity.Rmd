@@ -30,7 +30,7 @@ velocity_td <- kinematics_series %>%
 
 velocity <- rbind(velocity_tt, velocity_td) %>%
   mutate(
-    proportion = (seconds - v_onset) / (v_offset - v_onset),
+    proportion = (seconds - v1_ons) / (c2_ons - v1_ons),
     c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced"))
   ) %>%
   filter(rec_date != "28/07/2017 15:40:44") %>% # remove wrong token
@@ -39,8 +39,7 @@ velocity <- rbind(velocity_tt, velocity_td) %>%
     place_vow_voi = interaction(c2_place, vowel, c2_phonation),
     place_vow_voi = as.ordered(place_vow_voi),
     speaker_voi = interaction(speaker, c2_phonation),
-    speaker_voi = as.ordered(speaker_voi),
-    speech_rate_c = syl_rate - mean(syl_rate)
+    speaker_voi = as.ordered(speaker_voi)
   ) %>%
   mutate_if(is.character, as.factor) %>%
   droplevels()
