@@ -20,13 +20,13 @@ data("eng_durations")
 
 ```{r merge-data}
 ita_pol <- token_measures %>%
-  select(language, speaker, word, c2_phonation, v1_duration, c2_clos_duration, speech_rate) %>%
+  select(language, speaker, word, c2_phonation, v1_duration, c2_clos_duration, speech_rate, vowel) %>%
   rename(voicing = "c2_phonation")
 
 eng <- eng_durations %>%
   filter(num_syl == "di") %>%
   mutate(language = "English") %>%
-  select(language, speaker, word, voicing, v1_duration, c2_clos_duration, speech_rate) %>%
+  select(language, speaker, word, voicing, v1_duration, c2_clos_duration, speech_rate, vowel) %>%
   mutate_if(is.factor, as.character)
 
 enitpl <- bind_rows(eng, ita_pol) %>%
