@@ -168,10 +168,24 @@ enitpl %>%
   facet_grid(~ language)
 ```
 
+```{r vc-ratio-1}
+enitpl %>%
+  ggplot(aes(language, vc_ratio)) +
+  geom_boxplot()
+```
+
 ```{r vc-ratio-2}
 enitpl %>%
   ggplot(aes(speech_rate, vc_ratio)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "gam") +
   facet_grid(voicing ~ language)
+```
+
+```{r vc-ratio-3}
+enitpl %>%
+  ggplot(aes(vc_ratio, v1_duration)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_grid(. ~ language)
 ```
