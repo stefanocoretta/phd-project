@@ -865,6 +865,36 @@ estimated_tbl %>%
   )
 ```
 
+## Alternative model
+
+```{r est}
+est <- estimated_v_tbl %>%
+  mutate(voicing = "voiceless") %>%
+  bind_rows(estimated_tbl %>% mutate(voicing = "voiced", Estimate = Estimate + estimated_v_tbl$Estimate)) %>%
+  mutate(voicing = factor(voicing, levels = c("voiceless", "voiced")))
+```
+
+```{r ver}
+priors <- c(
+  prior(normal(0, 200), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicingvoiced),
+  prior(normal(0, 50), class = b, coef = syl_posnonMfinal),
+  prior(normal(0, 50), class = b, coef = `voicingvoiced:syl_posnonMfinal`),
+  prior(cauchy(0, 25), class = sd)
+)
+
+ver_bm <- brm(
+  Estimate | se(`Est.Error`) ~ voicing * syl_pos + (1 + voicing| study),
+  data = est,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/ver_bm"
+)
+
+summary(ver_bm)
+```
+
 # Meta-analysis of unstressed vowels
 
 ## Reduced vowels
@@ -955,4 +985,622 @@ summary(unred_bm, prob = 0.9)
 
 ```{r unred-bm-areas}
 mcmc_areas(as.array(unred_bm), pars = c("b_voicevoiced", "b_placealveolar", "b_placevelar"))
+```
+
+# Voicing Effect Ratio
+
+```{r heffner1937}
+h37 <- filter(stressed, study == "heffner1937")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+h37_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = h37,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/h37_l_bm"
+)
+```
+
+```{r housefairbanks1953}
+hf53 <- filter(stressed, study == "housefairbanks1953")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+hf53_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = hf53,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/hf53_l_bm"
+)
+```
+
+```{r zimmerman1958}
+z58 <- filter(stressed, study == "zimmerman1958")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+z58_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = z58,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/z58_l_bm"
+)
+```
+
+```{r petersonlehiste1960}
+pl60 <- filter(stressed, study == "petersonlehiste1960")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+pl60_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = pl60,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/pl60_l_bm"
+)
+```
+
+```{r sharf1962}
+s62_di <- filter(stressed, study == "sharf1962_di")
+s62_mono <- filter(stressed, study == "sharf1962_mono")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+s62_di_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = s62_di,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/s62_di_l_bm"
+)
+
+s62_mono_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = s62_mono,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/s62_mono_l_bm"
+)
+```
+
+```{r chen1970}
+c70 <- filter(stressed, study == "chen1970")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+c70_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = c70,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/c70_l_bm"
+)
+```
+
+```{r klatt1973}
+k73_di <- filter(stressed, study == "klatt1973_di")
+k73_mono <- filter(stressed, study == "klatt1973_mono")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+k73_di_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = k73_di,
+  prior = priors,
+  seed = 9899,
+  iter = 4000,
+  file = "./english-ve-meta/data/cache/k73_di_l_bm",
+  control = list(adapt_delta = 0.999)
+)
+
+k73_mono_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = k73_mono,
+  prior = priors,
+  seed = 9899,
+  iter = 4000,
+  file = "./english-ve-meta/data/cache/k73_mono_l_bm",
+  control = list(adapt_delta = 0.999)
+)
+```
+
+```{r port1981}
+p81_di <- filter(stressed, study == "port1981_di")
+p81_mono <- filter(stressed, study == "port1981_mono")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b)
+)
+
+p81_di_l_bm <- brm(
+  log(v_duration) | se(log(sd)) ~
+    voice,
+  data = p81_di,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/p81_di_l_bm"
+)
+
+p81_mono_l_bm <- brm(
+  log(v_duration) | se(log(sd)) ~
+    voice,
+  data = p81_mono,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/p81_mono_l_bm"
+)
+```
+
+```{r mack1982}
+m82 <- filter(stressed, study == "mack1982")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+m82_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = m82,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/m82_l_bm"
+)
+```
+
+```{r luce1985}
+l85_medial <- filter(stressed, study == "luce1985_medial")
+l85_final <- filter(stressed, study == "luce1985_final")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b)
+)
+
+l85_medial_l_bm <- brm(
+  log(v_duration) | se(log(sd)) ~
+    voice,
+  data = l85_medial,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/l85_medial_l_bm"
+)
+
+l85_final_l_bm <- brm(
+  log(v_duration) | se(log(sd)) ~
+    voice,
+  data = l85_final,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/l85_final_l_bm"
+)
+```
+
+```{r davis1989}
+d89 <- filter(stressed, study == "davis1989")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b)
+)
+
+d89_l_bm <- brm(
+  log(v_duration) | se(log(sd)) ~
+    voice,
+  data = d89,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/d89_l_bm"
+)
+```
+
+```{r laeufer1992}
+l92 <- filter(stressed, study == "laeufer1992")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  prior(cauchy(0, 3), class = sigma)
+)
+
+l92_l_bm <- brm(
+  log(v_duration) ~
+    voice,
+  data = l92,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/l92_l_bm"
+)
+```
+
+```{r ko2018}
+k18 <- filter(stressed, study == "ko2018")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b)
+)
+
+k18_l_bm <- brm(
+  log(v_duration) | se(log(sd)) ~
+    voice,
+  data = k18,
+  prior = priors,
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/k18_l_bm"
+)
+```
+
+```{r coretta2019}
+eng_durations_di <- filter(eng_durations, num_syl == "di")
+eng_durations_mono <- filter(eng_durations, num_syl == "mono")
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  set_prior("cauchy(0, 3)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 3)", class = "sigma")
+)
+
+c19_di_l_bm <- brm(
+  log(v1_duration) ~
+    voicing +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_di,
+  prior = priors,
+  file = "./english-ve-meta/data/cache/c19_di_l_bm"
+)
+
+priors <- c(
+  prior(normal(0, 2.5), class = Intercept),
+  prior(normal(0, 0.5), class = b),
+  set_prior("cauchy(0, 3)", class = "sd"),
+  set_prior("lkj(2)", class = "cor"),
+  set_prior("cauchy(0, 3)", class = "sigma")
+)
+
+c19_mono_l_bm <- brm(
+  log(v1_duration) ~
+    voicing +
+    speech_rate_c +
+    (1 + voicing | speaker) +
+    (1 | word),
+  family = gaussian(),
+  data = eng_durations_mono,
+  prior = priors,
+  file = "./english-ve-meta/data/cache/c19_mono_l_bm"
+)
+```
+
+```{r estimated-l}
+estimated_l <- list()
+
+# These are in allpahbetical order so that joining below does not complain
+# about different levels
+estimated_l[["chen1970"]] <- fixef(c70_l_bm)["voicevoiced",]
+estimated_l[["coretta2019_di"]] <- fixef(c19_di_l_bm)["voicingvoiced",]
+estimated_l[["coretta2019_mono"]] <- fixef(c19_mono_l_bm)["voicingvoiced",]
+estimated_l[["davis1989"]] <- fixef(d89_l_bm)["voicevoiced",]
+estimated_l[["heffner1937"]] <- fixef(h37_l_bm)["voicevoiced",]
+estimated_l[["housefairbanks1953"]] <- fixef(hf53_l_bm)["voicevoiced",]
+estimated_l[["klatt1973_di"]] <- fixef(k73_di_l_bm)["voicevoiced",]
+estimated_l[["klatt1973_mono"]] <- fixef(k73_mono_l_bm)["voicevoiced",]
+estimated_l[["ko2018"]] <- fixef(k18_l_bm)["voicevoiced",]
+estimated_l[["laeufer1992"]] <- fixef(l92_l_bm)["voicevoiced",]
+estimated_l[["luce1985_final"]] <- fixef(l85_final_l_bm)["voicevoiced",]
+estimated_l[["luce1985_medial"]] <- fixef(l85_medial_l_bm)["voicevoiced",]
+estimated_l[["mack1982"]] <- fixef(m82_l_bm)["voicevoiced",]
+estimated_l[["petersonlehiste1960"]] <- fixef(pl60_l_bm)["voicevoiced",]
+estimated_l[["port1981_di"]] <- fixef(p81_di_l_bm)["voicevoiced",]
+estimated_l[["port1981_mono"]] <- fixef(p81_mono_l_bm)["voicevoiced",]
+estimated_l[["sharf1962_di"]] <- fixef(s62_di_l_bm)["voicevoiced",]
+estimated_l[["sharf1962_mono"]] <- fixef(s62_mono_l_bm)["voicevoiced",]
+estimated_l[["zimmerman1958"]] <- fixef(z58_l_bm)["voicevoiced",]
+
+estimated_l_tbl <- plyr::ldply(estimated_l, .id = "study") %>%
+  mutate(
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r estimated_v}
+estimated_v_l <- list()
+
+estimated_v_l[["chen1970"]] <- fixef(c70_l_bm)["Intercept",]
+estimated_v_l[["coretta2019_di"]] <- fixef(c19_di_l_bm)["Intercept",]
+estimated_v_l[["coretta2019_mono"]] <- fixef(c19_mono_l_bm)["Intercept",]
+estimated_v_l[["davis1989"]] <- fixef(d89_l_bm)["Intercept",]
+estimated_v_l[["heffner1937"]] <- fixef(h37_l_bm)["Intercept",]
+estimated_v_l[["housefairbanks1953"]] <- fixef(hf53_l_bm)["Intercept",]
+estimated_v_l[["klatt1973_di"]] <- fixef(k73_di_l_bm)["Intercept",]
+estimated_v_l[["klatt1973_mono"]] <- fixef(k73_mono_l_bm)["Intercept",]
+estimated_v_l[["ko2018"]] <- fixef(k18_l_bm)["Intercept",]
+estimated_v_l[["laeufer1992"]] <- fixef(l92_l_bm)["Intercept",]
+estimated_v_l[["luce1985_final"]] <- fixef(l85_final_l_bm)["Intercept",]
+estimated_v_l[["luce1985_medial"]] <- fixef(l85_medial_l_bm)["Intercept",]
+estimated_v_l[["mack1982"]] <- fixef(m82_l_bm)["Intercept",]
+estimated_v_l[["petersonlehiste1960"]] <- fixef(pl60_l_bm)["Intercept",]
+estimated_v_l[["port1981_di"]] <- fixef(p81_di_l_bm)["Intercept",]
+estimated_v_l[["port1981_mono"]] <- fixef(p81_mono_l_bm)["Intercept",]
+estimated_v_l[["sharf1962_di"]] <- fixef(s62_di_l_bm)["Intercept",]
+estimated_v_l[["sharf1962_mono"]] <- fixef(s62_mono_l_bm)["Intercept",]
+estimated_v_l[["zimmerman1958"]] <- fixef(z58_l_bm)["Intercept",]
+
+estimated_v_l_tbl <- plyr::ldply(estimated_v_l, .id = "study") %>%
+  mutate(
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r meta-l-bm}
+priors <- c(
+  prior(normal(0, 0.5), class = Intercept),
+  prior(normal(0, 0.5), class = b, coef = syl_posnonMfinal),
+  prior(cauchy(0, 3), class = sd)
+)
+
+meta_l_bm <- brm(
+  Estimate | se(`Est.Error`) ~ syl_pos + (1 | study),
+  data = estimated_l_tbl,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_l_bm"
+)
+
+summary(meta_l_bm)
+
+```
+
+```{r post-l}
+post_l <- (c(posterior_samples(meta_l_bm, pars = "b_Intercept")) +
+  posterior_samples(meta_l_bm, pars = "b_syl_posnonMfinal")) %>%
+  bind_cols(posterior_samples(meta_l_bm, pars = "b_Intercept")) %>%
+  gather("coef", "posterior")
+```
+
+```{r l-plot}
+post_l %>%
+  mutate(posterior = exp(posterior)) %>%
+  ggplot(aes(posterior, fill = coef)) +
+  geom_vline(aes(xintercept = 1)) +
+  geom_density(colour = NA, alpha = 0.8) +
+  scale_fill_brewer(
+    type = "qual", palette = "Paired",
+    labels = c("final", "non-final")
+  ) +
+  labs(
+    title = "Meta-analytical posterior distributions of the voicing effect",
+    x = "Difference in vowel duration (ms)",
+    fill = "Syllable position",
+    y = element_blank()
+  ) +
+  theme(legend.position = "top")
+```
+
+```{r l-shrunk}
+# Code adapted from Nicenboim et al. 2018
+
+# We need this since the model includes `num_syl`
+post_l <- posterior_samples(meta_l_bm, pars = "b_syl_posnonMfinal")
+
+l_shrunk <- (c(posterior_samples(meta_l_bm, pars = "b_Intercept")) +
+  posterior_samples(meta_l_bm, pars = "r_study")) %>%
+  bind_cols(post_l) %>%
+  # The following mutate sums the random coefficients of the studies with
+  # `num_syl` == "non-final" to the posterior samples of the non_syl term
+  mutate(
+    `r_study[davis1989,Intercept]` = `r_study[davis1989,Intercept]` + b_syl_posnonMfinal,
+    `r_study[sharf1962_di,Intercept]` = `r_study[sharf1962_di,Intercept]` + b_syl_posnonMfinal,
+    `r_study[klatt1973_di,Intercept]` = `r_study[klatt1973_di,Intercept]` + b_syl_posnonMfinal,
+    `r_study[coretta2019_di,Intercept]` = `r_study[coretta2019_di,Intercept]` + b_syl_posnonMfinal,
+    `r_study[port1981_di,Intercept]` = `r_study[port1981_di,Intercept]` + b_syl_posnonMfinal,
+  ) %>%
+  select(-b_syl_posnonMfinal) %>%
+  summarise_all(list(~list(c(
+    mean(.),
+    quantile(., probs = c(.025, 0.975)),
+    sd(.)
+  )))) %>%
+  unnest() %>%
+  transpose() %>%
+  setNames(c("Estimate", "Q2.5", "Q97.5", "Est.Error")) %>%
+  map_df(unlist) %>%
+  mutate(
+    study = estimated_l_tbl$study,
+    source = factor("meta-analysis", levels = c("original", "meta-analysis"))
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r origin-shrunk-l-plot, include=TRUE, fig.cap = "Estimated voicing effect from the original source and from the meta-analysis.", out.extra = "width=\\textwidth"}
+bind_rows(estimated_l_tbl, l_shrunk) %>%
+  mutate(Estimate = exp(Estimate), Q2.5 = exp(Q2.5), Q97.5 = exp(Q97.5)) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
+  geom_hline(aes(yintercept = 1), colour = "grey") +
+  scale_x_discrete() +
+  # annotate("rect", xmin = 5.5, xmax = Inf, ymin = meta_bm_q2.5, ymax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  # annotate("rect", xmin = -Inf, xmax = 5.5, ymin = meta_bm_syl_q2.5, ymax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
+  # scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  scale_linetype_discrete(labels = c("final", "penultimate")) +
+  labs(
+    caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (light blue) and penultimate (dark blue) position.",
+    y = "Vocing effect ratio",
+    x = "Study",
+    linetype = "Syllable position",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
+## Exclude studies with estimation issues
+
+The following studies are not included here due to issues with estimation of the effect: Davis 1989, Klatt 1973, Ko 2018, Luce 1985, Port 1981.
+
+```{r estimated-l-2}
+estimated_l_2 <- list()
+
+# These are in allpahbetical order so that joining below does not complain
+# about different levels
+estimated_l_2[["chen1970"]] <- fixef(c70_l_bm)["voicevoiced",]
+estimated_l_2[["coretta2019_di"]] <- fixef(c19_di_l_bm)["voicingvoiced",]
+estimated_l_2[["coretta2019_mono"]] <- fixef(c19_mono_l_bm)["voicingvoiced",]
+# estimated_l_2[["davis1989"]] <- fixef(d89_l_bm)["voicevoiced",]
+estimated_l_2[["heffner1937"]] <- fixef(h37_l_bm)["voicevoiced",]
+estimated_l_2[["housefairbanks1953"]] <- fixef(hf53_l_bm)["voicevoiced",]
+# estimated_l_2[["klatt1973_di"]] <- fixef(k73_di_l_bm)["voicevoiced",]
+# estimated_l_2[["klatt1973_mono"]] <- fixef(k73_mono_l_bm)["voicevoiced",]
+# estimated_l_2[["ko2018"]] <- fixef(k18_l_bm)["voicevoiced",]
+estimated_l_2[["laeufer1992"]] <- fixef(l92_l_bm)["voicevoiced",]
+# estimated_l_2[["luce1985_final"]] <- fixef(l85_final_l_bm)["voicevoiced",]
+# estimated_l_2[["luce1985_medial"]] <- fixef(l85_medial_l_bm)["voicevoiced",]
+estimated_l_2[["mack1982"]] <- fixef(m82_l_bm)["voicevoiced",]
+estimated_l_2[["petersonlehiste1960"]] <- fixef(pl60_l_bm)["voicevoiced",]
+# estimated_l_2[["port1981_di"]] <- fixef(p81_di_l_bm)["voicevoiced",]
+# estimated_l_2[["port1981_mono"]] <- fixef(p81_mono_l_bm)["voicevoiced",]
+estimated_l_2[["sharf1962_di"]] <- fixef(s62_di_l_bm)["voicevoiced",]
+estimated_l_2[["sharf1962_mono"]] <- fixef(s62_mono_l_bm)["voicevoiced",]
+estimated_l_2[["zimmerman1958"]] <- fixef(z58_l_bm)["voicevoiced",]
+
+estimated_l_2_tbl <- plyr::ldply(estimated_l_2, .id = "study") %>%
+  mutate(
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r meta-l-bm-2}
+priors <- c(
+  prior(normal(0, 0.5), class = Intercept),
+  prior(normal(0, 0.5), class = b, coef = syl_posnonMfinal),
+  prior(cauchy(0, 3), class = sd)
+)
+
+meta_l_bm_2 <- brm(
+  Estimate | se(`Est.Error`) ~ syl_pos + (1 | study),
+  data = estimated_l_2_tbl,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./english-ve-meta/data/cache/meta_l_bm_2"
+)
+
+summary(meta_l_bm_2)
+
+```
+
+```{r l-shrunk-2}
+# Code adapted from Nicenboim et al. 2018
+
+# We need this since the model includes `num_syl`
+post_l_2 <- posterior_samples(meta_l_bm_2, pars = "b_syl_posnonMfinal")
+
+l_shrunk_2 <- (c(posterior_samples(meta_l_bm_2, pars = "b_Intercept")) +
+  posterior_samples(meta_l_bm_2, pars = "r_study")) %>%
+  bind_cols(post_l_2) %>%
+  # The following mutate sums the random coefficients of the studies with
+  # `num_syl` == "non-final" to the posterior samples of the non_syl term
+  mutate(
+    `r_study[sharf1962_di,Intercept]` = `r_study[sharf1962_di,Intercept]` + b_syl_posnonMfinal,
+    `r_study[coretta2019_di,Intercept]` = `r_study[coretta2019_di,Intercept]` + b_syl_posnonMfinal,
+  ) %>%
+  select(-b_syl_posnonMfinal) %>%
+  summarise_all(list(~list(c(
+    mean(.),
+    quantile(., probs = c(.025, 0.975)),
+    sd(.)
+  )))) %>%
+  unnest() %>%
+  transpose() %>%
+  setNames(c("Estimate", "Q2.5", "Q97.5", "Est.Error")) %>%
+  map_df(unlist) %>%
+  mutate(
+    study = c("chen1970", "coretta2019_di", "coretta2019_mono", "heffner1937", "housefairbanks1953", "laeufer1992", "mack1982", "petersonlehiste1960", "sharf1962_di", "sharf1962_mono", "zimmerman1958"),
+    source = factor("meta-analysis", levels = c("original", "meta-analysis"))
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r origin-shrunk-l-plot-2, include=TRUE, fig.cap = "Estimated voicing effect ratio from the original source and from the meta-analysis.", out.extra = "width=\\textwidth"}
+bind_rows(estimated_l_2_tbl, l_shrunk_2) %>%
+  mutate(Estimate = exp(Estimate), Q2.5 = exp(Q2.5), Q97.5 = exp(Q97.5)) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
+  geom_hline(aes(yintercept = 1), colour = "grey") +
+  scale_x_discrete() +
+  # annotate("rect", xmin = 5.5, xmax = Inf, ymin = meta_bm_q2.5, ymax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  # annotate("rect", xmin = -Inf, xmax = 5.5, ymin = meta_bm_syl_q2.5, ymax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
+  scale_y_continuous(breaks = seq(-0.5, 2.5, 0.25)) +
+  scale_linetype_discrete(labels = c("final", "penultimate")) +
+  labs(
+    caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect ratio in final (light blue) and penultimate (dark blue) position.",
+    y = "Vocing effect ratio",
+    x = "Study",
+    linetype = "Syllable position",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
 ```
