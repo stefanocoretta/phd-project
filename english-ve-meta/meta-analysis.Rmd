@@ -846,6 +846,28 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
 ```
 
+```{r origin-plot, include=TRUE, fig.cap = "Estimated voicing effect of the individual studies.", out.extra = "width=\\textwidth"}
+estimated_tbl %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, linetype = syl_pos)) +
+  geom_hline(aes(yintercept = 0), colour = "grey") +
+  scale_x_discrete() +
+  annotate("rect", xmin = 5.5, xmax = Inf, ymin = meta_bm_q2.5, ymax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  annotate("rect", xmin = -Inf, xmax = 5.5, ymin = meta_bm_syl_q2.5, ymax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  scale_linetype_discrete(labels = c("final", "penultimate")) +
+  labs(
+    caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (light blue) and penultimate (dark blue) position.",
+    y = "Difference in vowel duration (ms)",
+    x = "Study",
+    linetype = "Syllable position",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
 ```{r funnel-plot, include=TRUE, fig.cap = "By-study funnel plot showing the estimate against the precision. The vertical thick and dashed lines are the meta-analytical means of the effect in final and penultimate position."}
 estimated_tbl %>%
   mutate(precision = 1/Est.Error) %>%
@@ -1546,6 +1568,16 @@ meta_l_bm_2 <- brm(
 
 summary(meta_l_bm_2)
 
+meta_bm_2_est <- fixef(meta_l_bm_2)["Intercept","Estimate"]
+meta_bm_2_q2.5 <- fixef(meta_l_bm_2)["Intercept","Q2.5"]
+meta_bm_2_q97.5 <- fixef(meta_l_bm_2)["Intercept","Q97.5"]
+
+post_nonfi_2 <- (c(posterior_samples(meta_l_bm_2, pars = "b_Intercept")) +
+  posterior_samples(meta_l_bm_2, pars = "b_syl_posnonMfinal"))
+
+meta_bm_2_syl_q2.5 <- quantile(post_nonfi_2$b_syl_posnonMfinal, c(0.025))
+meta_bm_2_syl_q97.5 <- quantile(post_nonfi_2$b_syl_posnonMfinal, c(0.975))
+meta_bm_2_syl_q50 <- (meta_bm_2_syl_q2.5 + meta_bm_2_syl_q97.5) / 2
 ```
 
 ```{r l-shrunk-2}
@@ -1587,8 +1619,8 @@ bind_rows(estimated_l_2_tbl, l_shrunk_2) %>%
   ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
   geom_hline(aes(yintercept = 1), colour = "grey") +
   scale_x_discrete() +
-  # annotate("rect", xmin = 5.5, xmax = Inf, ymin = meta_bm_q2.5, ymax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
-  # annotate("rect", xmin = -Inf, xmax = 5.5, ymin = meta_bm_syl_q2.5, ymax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  annotate("rect", xmin = 2.5, xmax = Inf, ymin = exp(meta_bm_2_q2.5), ymax = exp(meta_bm_2_q97.5), alpha = 0.5, fill = "#a6cee3") +
+  annotate("rect", xmin = -Inf, xmax = 2.5, ymin = exp(meta_bm_2_syl_q2.5), ymax = exp(meta_bm_2_syl_q97.5), alpha = 0.5, fill = "#1f78b4") +
   geom_point(size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
