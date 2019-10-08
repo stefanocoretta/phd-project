@@ -13,11 +13,8 @@ output:
 bibliography: linguistics
 biblio-style: unified
 classoption: preprint
-mainfont: Brill
-mainfontoptions:
-- StylisticSet=20
-- Numbers=Lining
 header-includes:
+- \usepackage{tipa}
 - \usepackage{booktabs}
 - \usepackage{longtable}
 - \usepackage{array}
@@ -177,7 +174,7 @@ While this gesture is not exclusive of voiced stops and it is sometimes implemen
 ## Vowel duration and voicing
 
 The results discussed here are part of a larger study which focusses on the effect of consonant voicing on preceding vowel durations.
-A great number of studies showed that, cross-linguistically, vowels tend to be longer when followed by voiced obstruents than when they are followed by voiceless ones (see for example \citealt{house1953, peterson1960, chen1970, klatt1973, lisker1974fowler1992} for English, \citealt{farnetani1986, esposito2002} for Italian, \citealt{lampp2004, durvasula2012} for Hindi, and \citealt{hussein1994} for Arabic).
+A great number of studies showed that, cross-linguistically, vowels tend to be longer when followed by voiced obstruents than when they are followed by voiceless ones (see for example \citealt{house1953, peterson1960, chen1970, klatt1973, lisker1974, fowler1992} for English, \citealt{farnetani1986, esposito2002} for Italian, \citealt{lampp2004, durvasula2012} for Hindi, and \citealt{hussein1994} for Arabic).
 This so-called 'voicing effect' has been reported in a variety of languages,
 including (but not limited to) English, German, Hindi, Russian, Arabic, Korean, Italian, and Polish (see \citealt{maddieson1976} and \citealt{begus2017} for a more comprehensive list).
 
@@ -577,7 +574,7 @@ It is worth to briefly discuss the estimated difference in tongue root position 
 The estimated magnitude of such difference is 0.77 mm (SE = 0.35).
 The 95% confidence interval for the difference is approximately within the range 0-1.5 mm.
 \citet{rothenberg1967} argues that the anterior wall of the lower pharynx (corresponding to the tongue root) can move by 5 mm along the antero-posterior axis.
-Figure 1 in \citet{kirkham2017} suggests that the tongue root of one of the Twi speakers recorded is about 4 mm more front in /e/ (a [+ATR] vowel) than in /ɛ/ (a [-ATR] vowel).
+Figure 1 in \citet{kirkham2017} suggests that the tongue root of one of the Twi speakers recorded is about 4 mm more front in /e/ (a [+ATR] vowel) than in /\textepsilon{}/ (a [−ATR] vowel).
 Given that a difference of 4 mm in root position can produce a substantially distinct acoustic output in vowels (like the two different phonemes of Twi), it makes sense to expect that differences in tongue root position as driven by consonantal factors should be of some magnitude smaller, like the once found in this study.
 <!-- \footnote{Thanks to Sam Kirkham for bringing this point to my attention.} -->
 Moreover, the data presented here indicates that for every millisecond increase in vowel duration there is a 0.065 mm increase in tongue root advancement (see \Cref{s:trp-vdur}).
