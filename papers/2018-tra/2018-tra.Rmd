@@ -18,6 +18,19 @@ mainfontoptions:
 - StylisticSet=20
 - Numbers=Lining
 header-includes:
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
+- \usepackage{threeparttablex}
+- \usepackage[normalem]{ulem}
+- \usepackage{makecell}
+- \usepackage{xcolor}
 - \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
@@ -35,12 +48,9 @@ abstract: |
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.lp = "f:", fig.path = "./", fig.process = function(x) {
-  x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
-  if (file.rename(x, x2)) x2 else x
-})
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.lp = "f:", fig.path = "./")
 knitr::opts_knit$set(root.dir = normalizePath("../../"))
-options(knitr.kable.NA = "")
+options(knitr.kable.NA = "", kableExtra.latex.load_packages = FALSE)
 library(tidyverse)
 theme_set(theme_minimal())
 library(coretta2018itapol) # https://github.com/stefanocoretta/coretta2018itapol
