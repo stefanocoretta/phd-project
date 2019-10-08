@@ -1,13 +1,14 @@
 ---
 title: "Response to reviews"
 date: "21/01/2019"
-output: 
-  pdf_document: 
+output:
+  pdf_document:
     keep_tex: yes
     latex_engine: xelatex
 header-includes:
 - \usepackage{xcolor}
 - \definecolor{plum}{HTML}{B93B8F}
+mainfont: Brill
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +30,7 @@ Lines 21 and 24
 Here, you make claims about earlier works that need to be referenced.
 
 Line 72
-…is generally longer than that of voiceless stops…” > …is generally shorter than that of voiceless stops…”
+…is generally longer than that of voiceless stops…" > …is generally shorter than that of voiceless stops…"
 
 Page 6, second paragraph
 Since you bring up possible voicing differences between Italian and Polish, I think it would help if you made clear whether the voiced stops in your material were actually produced with glottal vibrations., If they were not, there would be no need for tongue movements to maintain voicing. Possibly, some of the individual differences may be due to voicing variability.
@@ -41,10 +42,10 @@ Page 17, C. Correlation between tongue rot position and V1 duration
 Why is this interesting and relevant? Since the tongue is always moving in speech, would it not move longer during a long vowel? The tongue does not appear to have a point target for vowels.
 
 Line 302
-Can you explain wat you mean with “curvature”?
+Can you explain wat you mean with "curvature"?
 
 Line 333
-“…the onset of the forward gesture of   the root is timed relative to a landmark preceding the closure, independent of the duration of the vowel.”
+"…the onset of the forward gesture of   the root is timed relative to a landmark preceding the closure, independent of the duration of the vowel."
 I don’t understand what this means. What kind of landmark are you talking about?
 
 Line 391
@@ -63,7 +64,7 @@ Halle & Stevens, 1967, is an abstract, thus not very useful and should be left o
 
 Keating, 1984. Page numbers are 35-49, and the text is available here: https://escholarship.org/uc/item/2497n8jq
 
-Line 567 “English”
+Line 567 "English"
 
 Lindblom, 1967, is available here: http://www.speech.kth.se/prod/publications/files/qpsr/1967/1967_8_4_001-029.pdf
 
@@ -71,7 +72,7 @@ Maddieson & Gandor, 1976, is availanlde here: https://escholarship.org/uc/item/3
 
 Malisz & Klessa, 2008, is available here: http://www.isle.illinois.edu/sprosig/sp2008/papers/id182.pdf
 
-Line 624 “Phonetics”
+Line 624 "Phonetics"
 
 
 # Reviewer 1
@@ -83,50 +84,104 @@ Summary – this is an articulatory (ultrasound tongue imaging) study of tongue-
 General comments – the findings of this paper are interesting and seem to show a plausible 2- fold effect of later consonant onset on the maintenance of coronal plosive voicing contrasts. I did find this paper a bit convoluted to read and I found that I didn’t have a clear idea of what the author was trying to say. Additionally, raw differences in tongue-root advancement at voiced and voiceless consonant onset, for all they are statistically significant, are extremely subtle <1mm, while UTI images provide a somewhat blurred image of the tongue surface, and there is potential for error during (automatic) spline fitting due to the fuzziness of the image. I also worry about the measurement protocol itself. The ultrasound probe does not seem to have been angled towards the pharynx and yet the probe angles are quite narrow (71-93°). The example given in FIG. 1 does not contain a hyoid shadow, therefore it is difficult to determine whether movement along the selected radial fan axis shown is really capturing root retraction, or some point further up the back of the tongue. Another issue is that an increase in the value of the point at which the tongue spline intersects this chosen radial fan axis is taken to indicate greater tongue-root advancement, whereas tongue-root advancement should result in a lower value – as the tongue root moves forwards, it should move closer to the origin of the radial fan line. It is possible that the author reversed the radial-fan-line intersect values, as in (Kirkham and Nance, 2017), in which case they should state this explicitly. I believe the issues with measurement can be cleared up with some better figures and some assurances about how the measures were taken and transformed, so I suggest revise and resubmit.
 
 Specific comments:
+
 I think some of the content of the section l67-88 should be moved closer to the beginning of the introduction §A, to give context to the ATR focus of the study i.e. there should be an acknowledgement that there are a range of articulatory strategies associated with plosive voicing and then you can say that you are going to focus on one of these features in this study.
 
-1-2 “Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.” Citation missing.
+\color{plum}
+This suggestion has been implemented in Section I.A. Now the section starts with a general overview of some of the mechanisms for voicing maintenance and then focusses on tongue root advancement.
+\color{black}
+
+1-2 "Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops." Citation missing.
 
 \color{plum}
 Citations to a long list of publications is given at multiple points within the manuscript, so I think it would not be practical to include them in the abstract.
 \color{black}
 
-2 Is “modulated” the right word here? “modified/affected”. It doesn’t seem to be the right word, given that the voicing you are discussing is phonemic and not necessarily present at the phonetic level, as you point out later.
+2 Is "modulated" the right word here? "modified/affected". It doesn’t seem to be the right word, given that the voicing you are discussing is phonemic and not necessarily present at the phonetic level, as you point out later.
 
 \color{plum}
 I changed modulated to "modified/affected".
 \color{black}
 
-3-4 “in many languages vowels are longer when followed by voiced stops.” Examples and citations missing.
+3-4 "in many languages vowels are longer when followed by voiced stops." Examples and citations missing.
 
-4-6 “Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint.” Citation missing.
+\color{plum}
+See comment above.
+\color{black}
 
-7 “enter in a direct statistical relation”. This phrase sounds odd. Rephrase as “have a direct statistical relationship”?, or later in lines 25&26, you say “acoustic duration of the vowel is positively correlated with tongue root position”. Can you not say that here?
+4-6 "Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint." Citation missing.
 
-8-9 “17 speakers of Italian and Polish (in total)”
+\color{plum}
+See comment above.
+\color{black}
 
-12-13 “in a temporally stable interval”. Perhaps it would be better to say “comparatively later closure onset of voiced stops”, because it is not clear without context what “stable interval” you mean – C1 release to C2 release.
+7 "enter in a direct statistical relation". This phrase sounds odd. Rephrase as "have a direct statistical relationship"?, or later in lines 25&26, you say "acoustic duration of the vowel is positively correlated with tongue root position". Can you not say that here?
+
+\color{plum}
+Changed to "have a direct statistical relationship".
+\color{black}
+
+8-9 "17 speakers of Italian and Polish (in total)"
+
+\color{plum}
+Added "in total".
+\color{black}
+
+12-13 "in a temporally stable interval". Perhaps it would be better to say "comparatively later closure onset of voiced stops", because it is not clear without context what "stable interval" you mean – C1 release to C2 release.
+
+\color{plum}
+Changed as suggested.
+\color{black}
 
 12-14 It feels as if these lines belong earlier in the paragraph to make the proposed chain of causal relationships clear, i.e. ATR allows maintenance of voicing for voiced stops, ATR correlates with vowel length.
 
-16 “characterised” is not the right word here, given that ATR is covert, “associated with”?
+\color{plum}
+Changed as suggested.
+\color{black}
 
-18-19 “a lot of work” citations missing. “aspects”, change to “phonetic features”? “phonetic correlates”? Also l19 “relationship”, rather than “relation”.
+16 "characterised" is not the right word here, given that ATR is covert, "associated with"?
 
-21 “in an exploratory” – change to “in this exploratory”.
-24 “this replicates previous work on tongue root position” – citation(s) missing.
+\color{plum}
+Changed as suggested.
+\color{black}
 
-25 “... indicate that the acoustic duration of the vowel is positively correlated with the tongue root position (at vowel offset/ postvocalic consonant onset)...”
+18-19 "a lot of work" citations missing. "aspects", change to "phonetic features"? "phonetic correlates"? Also l19 "relationship", rather than "relation".
 
-24-8 There is something oddly circular about this section. Compare to the way you talk about the trade-off between vowel and consonant length in lines 121-2. To avoid a circular argument, I would rephrase as: “Furthermore, the results of this study indicate that a comparatively later C2 onset for voiced consonants results in a longer preceding vowel duration which, in turn, results in greater tongue-root advancement during C2 onset. Both the shorter closed phase of the voiced consonant and the more advanced tongue root, which expands the supra-glottal cavity, have the potential to maintain voicing throughout C2 and preserve the voicing contrast.”
+\color{plum}
+A selection of citations from later sections has been included here.
+\color{black}
 
-L32 “relative to the front-back dimension” – “across/in the front-back dimension”?
+21 "in an exploratory" – change to "in this exploratory".
+
+\color{plum}
+Changed as suggested.
+\color{black}
+
+24 "this replicates previous work on tongue root position" – citation(s) missing.
+
+\color{plum}
+Citations included.
+\color{black}
+
+25 "... indicate that the acoustic duration of the vowel is positively correlated with the tongue root position (at vowel offset/ postvocalic consonant onset)..."
+
+\color{plum}
+Changed as suggested.
+\color{black}
+
+24-8 There is something oddly circular about this section. Compare to the way you talk about the trade-off between vowel and consonant length in lines 121-2. To avoid a circular argument, I would rephrase as: "Furthermore, the results of this study indicate that a comparatively later C2 onset for voiced consonants results in a longer preceding vowel duration which, in turn, results in greater tongue-root advancement during C2 onset. Both the shorter closed phase of the voiced consonant and the more advanced tongue root, which expands the supra-glottal cavity, have the potential to maintain voicing throughout C2 and preserve the voicing contrast."
+
+\color{plum}
+Changed as suggested.
+\color{black}
+
+L32 "relative to the front-back dimension" – "across/in the front-back dimension"?
 
 \color{plum}
 Fixed.
 \color{black}
 
-L33 “This has” – change to “This finding has...”
+L33 "This has" – change to "This finding has..."
 
 \color{plum}
 Fixed.
@@ -134,41 +189,49 @@ Fixed.
 
 L43 I think it would be worth mentioning here that there are other articulatory strategies employed to increase supralaryngeal space, e.g. larynx lowering (Rothenberg, 1967). See first comment above about moving content of lines 67-88 to beginning of introductory section.
 
+\color{plum}
+Changed as suggested.
+\color{black}
+
 L52 imply
 
-L57 “closure of a stop” – “closure of a lingual stop”.
+\color{plum}
+Fixed.
+\color{black}
+
+L57 "closure of a stop" – "closure of a lingual stop".
 
 \color{plum}
 Fixed.
 \color{black}
 
-LL57-58 Rephrase as: “Rothenberg (1967) hypothesized after an informal investigation, that a maximal ballistic expansion movement of the tongue root to increase the size of the lower pharynx would take 70-90ms (Rothenberg, 1967: 99).
+LL57-58 Rephrase as: "Rothenberg (1967) hypothesized after an informal investigation, that a maximal ballistic expansion movement of the tongue root to increase the size of the lower pharynx would take 70-90ms (Rothenberg, 1967: 99).
 
 \color{plum}
 Fixed.
 \color{black}
 
-P65-66 “While the tongue body is more involved in labials”. Can you be more specific? What does the tongue body do?
+P65-66 "While the tongue body is more involved in labials". Can you be more specific? What does the tongue body do?
 
 \color{plum}
 I specified that tongue body lowering is common with labials.
 \color{black}
 
-L92 “it can be” -> “it is sometimes”
+L92 "it can be" -> "it is sometimes"
 
 \color{plum}
 Fixed.
 \color{black}
 
-L104 typo “to study of the”
+L104 typo "to study of the"
 
 \color{plum}
 Fixed.
 \color{black}
 
-L105-6 “given their reported differences in magnitude/presence of the effect and the relative ease of comparison.” – you need to unpack this a bit.
+L105-6 "given their reported differences in magnitude/presence of the effect and the relative ease of comparison." – you need to unpack this a bit.
 
-L104-106 I suggest this edit: “Italian and Polish offer an opportunity to study of the articulatory aspects of the voicing effect, given that the former has been consistently reported as a voicing- effect language, while voicing effect in the latter is more complex, with some studies finding an effect and others not.”
+L104-106 I suggest this edit: "Italian and Polish offer an opportunity to study of the articulatory aspects of the voicing effect, given that the former has been consistently reported as a voicing- effect language, while voicing effect in the latter is more complex, with some studies finding an effect and others not."
 
 \color{plum}
 Changed.
@@ -176,8 +239,8 @@ Changed.
 
 L110-12 What were the mean voicing differences for the two languages? Were they comparable?
 
-L112-114 Can you explain further? “The high degree of intra-speaker variation, backed
-up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.”
+L112-114 Can you explain further? "The high degree of intra-speaker variation, backed
+up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect."
 
 L124 Can you come up with a better section heading?
 
@@ -187,47 +250,47 @@ L126 Citations missing.
 I inserted here some of the citations from above for clarity.
 \color{black}
 
-L125-131 Suggested rephrasing “Previous research has established that longer preconsonantal vowel durations and greater tongue root advancement are associated with voicing in postvocalic plosives. We know that voicing during plosive closure can be sustained by advancing the tongue root during the production of voiced plosives and that tongue root advancement probably begins before the closure onset (i.e. during the preceding vowel). We also know that vowels followed by voiced plosives tend to be longer than vowels followed by voiceless plosives. Acoustic analysis of the current dataset confirmed an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel.”
+L125-131 Suggested rephrasing "Previous research has established that longer preconsonantal vowel durations and greater tongue root advancement are associated with voicing in postvocalic plosives. We know that voicing during plosive closure can be sustained by advancing the tongue root during the production of voiced plosives and that tongue root advancement probably begins before the closure onset (i.e. during the preceding vowel). We also know that vowels followed by voiced plosives tend to be longer than vowels followed by voiceless plosives. Acoustic analysis of the current dataset confirmed an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel."
 
-L133 “insights on the link” – “insights into the link”, “between closure” – “between closure duration”?? or “link between closure and vowel durations”.
-
-\color{plum}
-Changed.
-\color{black}
-
-L134 I am not comfortable with the term “modulates”. I think it implies a causal relationship that has not yet been proved. Can you say “correlates”? or “covaries with”?
+L133 "insights on the link" – "insights into the link", "between closure" – "between closure duration"?? or "link between closure and vowel durations".
 
 \color{plum}
 Changed.
 \color{black}
 
-L135-6 Suggested rephrasing “resulting in a three-way relationship between stop consonant duration, vowel duration and tongue-root advancement.”
+L134 I am not comfortable with the term "modulates". I think it implies a causal relationship that has not yet been proved. Can you say "correlates"? or "covaries with"?
 
 \color{plum}
 Changed.
 \color{black}
 
-L136-8 “More specifically, the timing of the closure onset within the release-to-release interval decides the duration of the vowel...” Again, is this not a given, see comments l27-28.
-
-L159 Can you change to “TELEMED Echo Blaster 128 unit, with a C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz).” Grouping these items together makes sense. Otherwise you are just writing a random list of items that you used in your recording set up.
+L135-6 Suggested rephrasing "resulting in a three-way relationship between stop consonant duration, vowel duration and tongue-root advancement."
 
 \color{plum}
 Changed.
 \color{black}
 
-L160-1 The pre-amp is part of the audio recording set up, not the ultrasound recording system. You need to move it further down the list of equipment, i.e. “a Movo LV4-O2 Lavalier microphone with a FocusRight Scarlett Solo pre-amplifier.”
+L136-8 "More specifically, the timing of the closure onset within the release-to-release interval decides the duration of the vowel..." Again, is this not a given, see comments l27-28.
+
+L159 Can you change to "TELEMED Echo Blaster 128 unit, with a C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz)." Grouping these items together makes sense. Otherwise you are just writing a random list of items that you used in your recording set up.
 
 \color{plum}
 Changed.
 \color{black}
 
-L163 Please gloss “sub-mental triangle”, and in what way was the probe “aligned with the midsagittal plane”?
+L160-1 The pre-amp is part of the audio recording set up, not the ultrasound recording system. You need to move it further down the list of equipment, i.e. "a Movo LV4-O2 Lavalier microphone with a FocusRight Scarlett Solo pre-amplifier."
+
+\color{plum}
+Changed.
+\color{black}
+
+L163 Please gloss "sub-mental triangle", and in what way was the probe "aligned with the midsagittal plane"?
 
 \color{plum}
 Now the line reads "The ultrasonic probe was placed in contact with the flat area below the chin, aligned along the participant's mid-sagittal plane so that the mid-sagittal profile of the tongue could be imaged."
 \color{black}
 
-L169 “by means of a synchronisation signal produced by the ultrasound unit and amplified by the P-Stretch unit.
+L169 "by means of a synchronisation signal produced by the ultrasound unit and amplified by the P-Stretch unit.
 
 \color{plum}
 Changed.
@@ -235,7 +298,7 @@ Changed.
 
 P170-2 Does this mean that the ultrasound recording settings varied in every recording session, or between the Italian and Polish recording settings? If the latter, can you give the separate setting by language, rather than a range. Can you also say why you think this variation won’t affect what you are measuring? The range of probe angles seem quite narrow.
 
-L184 “explore timing/ articulatory? differences in the closing gesture of voiceless and voiced stops...”
+L184 "explore timing/ articulatory? differences in the closing gesture of voiceless and voiced stops..."
 
 \color{plum}
 Changed.
@@ -243,7 +306,7 @@ Changed.
 
 L202-9 Can you add a figure showing an example of annotation?
 
-L216-8 “Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector.” Based on the figure provided (FIG. 1) I am not convinced that tongue- root advancement is being captured. The probe angle is very narrow. The tongue root does not appear to have been imaged, as there is no visible hyoid shadow. I am not sure that a measure of displacement along a radial fan axis shown would capture tongue-root advancement. Could you provide information on the range of radial axes that were used as measurement axes?
+L216-8 "Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector." Based on the figure provided (FIG. 1) I am not convinced that tongue- root advancement is being captured. The probe angle is very narrow. The tongue root does not appear to have been imaged, as there is no visible hyoid shadow. I am not sure that a measure of displacement along a radial fan axis shown would capture tongue-root advancement. Could you provide information on the range of radial axes that were used as measurement axes?
 
 L218-20 Can you specify the range of radial axes (i.e. their numbers) that were used as measurement axes across all speakers?
 
@@ -251,7 +314,7 @@ L218-20 Can you specify the range of radial axes (i.e. their numbers) that were 
 Added.
 \color{black}
 
-L225 Remove the word “real”.
+L225 Remove the word "real".
 
 \color{plum}
 Removed.
@@ -259,39 +322,39 @@ Removed.
 
 L225 I am still confused about why there was no standard frame rate, although I don’t think it will make a difference to the results given that the minimum frame rate is 43fps.
 
-L255 “...scaled (z-scored) tongue root position.”
+L255 "...scaled (z-scored) tongue root position."
 
 \color{plum}
 Added.
 \color{black}
 
-L257-258 I might have missed this part of the data transformation. Fig. 2’s caption says that “Higher values indicate advancement.” and appears to show greater ATR values at closure onset where a voiced consonant follows. I would have expected the opposite if advanced tongue root is being measured. With increased ATR, the tongue-root section of the tongue spline should intersect the radial fan axis closer to its origin, obtaining a smaller value. Kirkham and Nance (2017) reversed the sign of the z-scored tongue root distance measures, so that greater distance scores were associated with greater ATR (p71). Was that also carried out here? If it was, I think you should be explicit about that, rather than just saying you followed Kirkham and Nance’s method.
+L257-258 I might have missed this part of the data transformation. Fig. 2’s caption says that "Higher values indicate advancement." and appears to show greater ATR values at closure onset where a voiced consonant follows. I would have expected the opposite if advanced tongue root is being measured. With increased ATR, the tongue-root section of the tongue spline should intersect the radial fan axis closer to its origin, obtaining a smaller value. Kirkham and Nance (2017) reversed the sign of the z-scored tongue root distance measures, so that greater distance scores were associated with greater ATR (p71). Was that also carried out here? If it was, I think you should be explicit about that, rather than just saying you followed Kirkham and Nance’s method.
 
-282 “A second linear mixed regression was fitted to tongue root position ?at V1offset/C2onset?...”
+282 "A second linear mixed regression was fitted to tongue root position ?at V1offset/C2onset?..."
 
 \color{plum}
 Yes. I have now specified that the time point is V1 offset/C2 onset.
 \color{black}
 
-288-289 “V1 duration and tongue root position ?at V1offset/C2onset?...” 378 Change to “It is worth briefly discussing...”
+288-289 "V1 duration and tongue root position ?at V1offset/C2onset?..." 378 Change to "It is worth briefly discussing..."
 384 phonemic symbol missing
 
 383-388 Perhaps this needs to be rephrased. It looks as if you are implying that the acoustic difference between /e/ and /ɛ/ is entirely due to differences in tongue-root position. Also phonemic contrast can occur due to quite subtle acoustic cues, so phonemic difference does not necessarily mean a huge difference in acoustics or underlying articulation.
 
 390-3 See comments l57-58 Rothenberg’s estimated duration for tongue-root advancement.
 
-393-4 Does this refer to: “Lacking further evidence we might assume it is possible to produce a vertical elongation of the pharynx in plosive production of about 0.5cm.” (Rothenberg 1967: 98)?
+393-4 Does this refer to: "Lacking further evidence we might assume it is possible to produce a vertical elongation of the pharynx in plosive production of about 0.5cm." (Rothenberg 1967: 98)?
 
-FIG. 6 caption “tornge”. Why are there two of each plot?
+FIG. 6 caption "tornge". Why are there two of each plot?
 
 
-L431 “shows”, or “these plots show”
+L431 "shows", or "these plots show"
 
 \color{plum}
 Fixed.
 \color{black}
 
-L442 “The mean difference in tongue root position (at the onset of?) voiceless vs. voiced stops...”
+L442 "The mean difference in tongue root position (at the onset of?) voiceless vs. voiced stops..."
 
 \color{plum}
 Yes, added "at the onset of".
@@ -303,13 +366,13 @@ L464 and 465 citations missing.
 I inserted here some of the citations from above for clarity.
 \color{black}
 
-Ll468 “Similarly to what (was) previously found for English (citation)...”
+Ll468 "Similarly to what (was) previously found for English (citation)..."
 
 \color{plum}
 I inserted here some of the citations from above for clarity and I added "was".
 \color{black}
 
-L485 “replicate” -> “are replicable”
+L485 "replicate" -> "are replicable"
 
 \color{plum}
 Changed.
@@ -477,7 +540,7 @@ Reviewer #1: There are some ambiguities and potential issues with measurement th
 
 Reviewer #2: 1. The manuscript contains some very interesting and original/new data. However, there are some concerns about the interpretation of the results. The result the author argues to be the main point of the manuscript (how a longer vowel duration corresponds to greater tongue root advancement) is not very well explained throught the manuscript. The author shows some results, but does not explain why that is the case. Also, I’m concered about inter-speaker variation. In fact, out of 17 speakers, 7 speakers did not show more tongue root advancement at closure onset of voiced stops (Figure 7 and Figure 8). Considering the difficulty of analyzing different speakers’ data in one statistical model when doing an ultrasound study (due to the differences in each speaker’s anatomy), the statistical model(s) the author reports in the manuscript can be questionable especially with the high variability found among speakers.
 
-2. On p. 19, Figure 5, it shows that when the vowel is longer, the tongue root position at the onset of the vowel is more retracted. The reason for this seems very important and worth some attention. However, the author does not explain why that’s the case other than saying “the trajectory curvature increases with vowel duration (line 302).
+2. On p. 19, Figure 5, it shows that when the vowel is longer, the tongue root position at the onset of the vowel is more retracted. The reason for this seems very important and worth some attention. However, the author does not explain why that’s the case other than saying "the trajectory curvature increases with vowel duration (line 302).
 
 3. There aren’t adquate explanations on why tongue root advancement will be related to the longer vowel duration. This study explains why tongue root should be more advanced at the vowel offset of voiced stops, but not necessarily why more tongue root advancement is found with the longer vowel duration. The only part that explains the relation between the vowel duration and tongue root advancement is line 333 (p.21), but that part is not very well explained.
 
@@ -489,7 +552,7 @@ Reviewer #2: 1. The manuscript contains some very interesting and original/new d
 
 6. Also, this is not the crucial point, but some errors/typos in terms of writing sometimes makes it difficult to understand the writer's intention sometimes. (e.g. p. 4, line 72, 'longer' should be 'shorter', which is very important). More detailed line-by-line comments will be provided to the author.
 
---------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
 Is JASA an appropriate journal in which to present this work? In this regard, please consider carefully the commitment of JASA to publish work that is within the scope of Acoustics. Does the content of the manuscript, including terminology and the references cited, meet this criterion?
 
@@ -497,7 +560,7 @@ Reviewer #1: Yes, this work is appropriate for publication in JASA.
 
 Reviewer #2: This work includes both articulatory and acoustic data, which I believe is suitable to be published in JASA. Also, it includes some important phonetic work (both articulatory and acoustic) in the field as relevant references.
 
---------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
 Is the manuscript a clear, concise, reasonably self-contained presentation of the material, giving adequate references to related work? Is the English satisfactory? Please indicate needed changes in your report.
 
@@ -531,7 +594,7 @@ Reviewer #2: 1. The manuscript contains interesting and new results, but the wri
 
 •	p. 10, line 182: "high and front vowels usually produce less tongue displacement from and to a stop consonant" --> reference(s)?
 
---------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
 Are the tables and figures clear and relevant, and are the captions adequate? Are there either too many or too few? If any of the figures are in color, is the color essential for conveying the scientific point?
 
@@ -551,7 +614,7 @@ Reviewer #2: Some figures are not easy to understand, and there are some parts w
 
 •	Figure 5: Why 145ms was used instead of 150ms? (while other V1 duration values used are 50, 100, and 200) Also, why 145 ms and 200 ms starts from the backer tongue root position? It's not explained in the text.
 
---------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
 If Supplementary material was submitted, is it relevant to the manuscript and should it be deposited in the Supplemental Depository for reference to the manuscript?
 
@@ -559,7 +622,7 @@ Reviewer #1: NA
 
 Reviewer #2: N/A
 
---------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
 Does the paper make effective use of journal space, or are parts unnecessary, unimportant, or subject to condensation? If so, which?
 
@@ -567,13 +630,13 @@ Reviewer #1: I believe the manuscript could be shortened and made more concise, 
 
 Reviewer #2: p. 23, Section IV B can be condensed/removed since estimates of tongue root displacement will be highly variable depending on speaker. Since (1) Speaker variation was reported in this study, (2) only two languages are studied, and (3) the author mentions that "the correlation between tongue root position and vowel duration needs to be replicated by expanding the enquired contexts to other types of consonants and vowels, and with other languages" (p. 24, line 410), I recommend to condense this section.
 
---------------------
+\par\noindent\rule{\textwidth}{0.4pt}
 
 Is the title appropriate and the abstract adequate for verbatim reproduction in abstract journals? IMPORTANT: The lead paragraph should advertise the main points of the article and must describe in terms accessible to the general reader the context and significance or the research problem studied and the importance of the results.
 
 Reviewer #1: Yes, the title is appropriate. There are some parts of the abstract that need to be edited to improve clarity.
 
-Reviewer #2: I recommend the title to include that “longer vowel duration” (only) refers to the "preceding" vowel duration (not necessarily the following). I also think the word 'advancement' will be more suitable than 'displacement'. On the other hand, I wonder if the title purposefully used the word ‘displacement’ instead of ‘advancement’.
+Reviewer #2: I recommend the title to include that "longer vowel duration" (only) refers to the "preceding" vowel duration (not necessarily the following). I also think the word 'advancement' will be more suitable than 'displacement'. On the other hand, I wonder if the title purposefully used the word ‘displacement’ instead of ‘advancement’.
 
 In the abstract, it will be more informative if the author includes at least a few references (e.g. the Aerodynamic Voicing Constraints--> Ohala, 2011).
 
