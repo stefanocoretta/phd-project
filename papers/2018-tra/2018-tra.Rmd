@@ -338,8 +338,8 @@ kines %>%
   group_by(speaker) %>%
   mutate(trp_z = scale(trp)) %>%
   ggplot(aes(c2_phonation, trp_z)) +
-  geom_boxplot() +
-  geom_jitter(alpha = 0.2, position = position_jitter(width = 0.2, seed = 878)) +
+  geom_boxplot(width = 0.5) +
+  geom_jitter(alpha = 0.1, position = position_jitter(width = 0.2, seed = 878), aes(colour = c2_phonation)) +
   labs(x = "C2 voicing", y = "Tongue root position (z-scores)")
 ```
 
