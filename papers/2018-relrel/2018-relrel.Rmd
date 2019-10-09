@@ -4,12 +4,13 @@ shorttitle: "An exploratory study of voicing-related differences in vowel durati
 author:
 - name: Stefano Coretta
   affiliation: The University of Manchester
-  address: "Oxford Road, Manchester M13 9PL \\ stefano.coretta@manchester.ac.uk"
+  address: Oxford Road, Manchester M13 9PL  stefano.coretta\@manchester.ac.uk
 keywords: "vowel duration, closure duration, voicing effect, compensation, Italian, Polish"
 output:
   glossaarticle::glossa_article:
     citation_package: natbib
     fig_caption: yes
+    dev: png
 bibliography: linguistics
 classoption:
   - charis
@@ -23,7 +24,7 @@ params:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.lp = "f:", fig.process = function(x) {
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.path = "./", fig.lp = "f:", fig.process = function(x) {
   x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
   if (file.rename(x, x2)) x2 else x
 })
@@ -275,8 +276,8 @@ All further data processing and visualisation was done in R v3.5.2 [@wickham2017
 
 \begin{figure}
   \centering
-  \subfigure[/pata/]{\includegraphics[height=3.5in]{img/Figure1a.pdf}}
-  \subfigure[/pada/]{\includegraphics[height=3.5in]{img/Figure1b.pdf}}
+  \subfigure[/pata/]{\includegraphics[height=3.5in]{Figure1a}}
+  \subfigure[/pada/]{\includegraphics[height=3.5in]{Figure1b}}
   \caption{Segmentation example of the words \textit{pata} and \textit{pada} uttered by the Italian speaker IT09 (the times on the \textit{x}-axis refer to the times in the concatenated audio file)}
   \label{f:segmentation}
 \end{figure}
@@ -347,7 +348,7 @@ vow_lm <- lmer(
 summary(vow_lm)
 ```
 
-```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure2, include=TRUE, fig.cap = "Raw data and boxplots of the duration in milliseconds of vowels in Italian (top row) and Polish (bottom row), for the vowels /a, o, u/ when followed by a voiceless or voiced stop", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dpi=300}
 durations_filtered %>%
   ggplot(aes(c2_phonation, v1_duration)) +
   geom_boxplot(alpha = 0.5) +
@@ -397,7 +398,7 @@ clo_lm <- lmer(
 summary(clo_lm)
 ```
 
-```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure3, echo=FALSE, include=TRUE, fig.cap = "Raw data and boxplots of closure duration in milliseconds of voiceless and voiced stops in Italian (top row) and Polish (bottom row) when preceded by the vowels /a, o, u/", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dpi=300}
 durations_filtered %>%
   ggplot(aes(c2_phonation, c2_clos_duration)) +
   geom_boxplot(alpha = 0.5) +
@@ -438,7 +439,7 @@ vow_clo_lm <- lmer(
 summary(vow_clo_lm)
 ```
 
-```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure4, include=TRUE, fig.cap = "Raw data, estimated regression lines, and 95 per cent confidence intervals of the effect of closure duration on vowel duration for the vowels /a, o, u/ (from a mixed-effects model fitted to data pooled from Italian and Polish, see text for details)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, dpi=300}
 as_tibble(effect("c2_clos_duration:vowel:speech_rate_c", vow_clo_lm)) %>%
   filter(speech_rate_c == -3e-04) %>%
   ggplot(aes(c2_clos_duration, fit)) +
@@ -513,7 +514,7 @@ This indicates that there is positive evidence for a null effect of C2 voicing o
 
 ## Release to release interval duration
 
-```{r Figure5, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE}
+```{r Figure5, include=TRUE, fig.cap="Raw data and boxplots of the duration in milliseconds of the release to release interval in Italian (left) and Polish (right) when C2 is voiceless or voiced", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE, dpi=300}
 rel_filtered %>%
   ggplot(aes(c2_phonation, rel_rel)) +
   geom_boxplot(alpha = 0.5) +
@@ -602,7 +603,7 @@ The mean differences of Italian vowels and closures (11.5 and 13.33, respectivel
 It is plausible that the smaller effect of C2 voicing on preceding vowel duration in Polish is related to the smaller effect on closure duration, if we assume a temporal mechanism of compensation between the closure and the vowel.
 These patterns will need to be confirmed with a more balanced sample of Italian and Polish speakers.
 
-```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE}
+```{r Figure6, include=TRUE, fig.cap = "By-speaker random coefficients and error bars for the effect of C2 voicing on vowel duration, extracted from a mixed-effect model (Section 3.1)", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE, warning=FALSE, dpi=300}
 as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
   rename("intercept" = `(Intercept)`, "ve" = c2_phonationvoiced) %>%
   mutate(language = ifelse(str_detect(speaker, "^it"), "Italian", "Polish"), speaker = toupper(speaker)) %>%
@@ -642,7 +643,7 @@ No specific statement is implied about the variance of the duration around the m
 
 \begin{figure}
   \centering
-  \includegraphics{img/Figure6.pdf}
+  \includegraphics{Figure7.pdf}
   \caption{A schematic representation of the oral cavity cross-sectional area, as inferred from acoustics. Design based on \citet{esposito2002}. The top panel shows a CV́C sequence with a voiceless C2, the bottom panel with a voiced C2. Oral cavity aperture (on the \textit{y}-axis, as the inverse of oral constriction) through time (on the \textit{x}-axis) is represented by the black line. Lower values represent a more constricted oral tract (a contoid configuration), while higher values indicate a more open oral tract (a vocoid configuration). The black bars below the time axis represent voicing (vocal fold vibration). Various landmarks and intervals are indicated in the schematic}
   \label{f:compensatory}
 \end{figure}
