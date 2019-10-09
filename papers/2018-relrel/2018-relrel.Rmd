@@ -16,7 +16,6 @@ classoption:
 header-includes:
 - \let\tnote\relax
 - \usepackage{cleveref}
-- \usepackage{ctable}
 - \usepackage{enumerate}
 - \usepackage{lineno}
 - \linenumbers
@@ -186,7 +185,7 @@ Seventeen subjects in total participated in this study.
 Eleven subjects are native speakers of Italian (5 female, 6 male), while six are native speakers of Polish (3 female, 3 male).
 The Italian speakers are from the North and Centre of Italy (8 speakers from Northern Italy, 3 from Central Italy).
 The Polish group has 2 speakers from Western Poland, 3 speakers from Central Poland, and 1 speaker from Eastern Poland.
-For more information on the sociolinguistic details of the speakers, see \Cref{a:socioling}.
+For more information on the sociolinguistic details of the speakers, see Supplementary file 1.
 Ethical clearance for this study was obtained from the University of Manchester (REF 2016-0099-76).
 The participants signed a written consent and received a monetary compensation of £10.
 
@@ -204,7 +203,7 @@ The microphone was clipped onto a metal headset worn by the participant, which w
 <!-- maybe note on /u/ in italian is phonotactically not good -->
 
 The target stimuli were disyllabic words with C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} structure, where C\textsubscript{1} = /p/, V\textsubscript{1} = /a, o, u/, C\textsubscript{2} = /t, d, k, g/, and V\textsubscript{2} = V\textsubscript{1} (e.g. /pata/, /pada/, /poto/, etc.).\footnote{Italian has both a mid-low [ɔ] and a mid-high [o] back vowel in its vowel inventory. These vowels are traditionally described as two distinct phonemes \citep{kramer2009}, although both their phonemic status and their phonetic substance are subject to a high degree of geographical and idiosyncratic variability \citep{renwick2016}. As a rule of thumb, stressed open syllables in Italian (like the ones used in this study) have [ɔː] (vowels in penultimate stressed open syllables are long) rather than [oː] \citep{renwick2016}. On the other hand, Polish has only a mid-low back vowel phoneme /ɔ/ \citep{gussmann2007}. For the sake of typographical simplicity, the symbol /o/ will be used here for both languages.}
-Most are nonce words, although inevitably some combinations produce real words both in Italian (4 words) and Polish (2 words, see \Cref{a:targets}).
+Most are nonce words, although inevitably some combinations produce real words both in Italian (4 words) and Polish (2 words, see Supplementary file 1).
 The lexical stress of the target words was placed by speakers of both Italian and Polish on V\textsubscript{1}, as intended.
 
 The make-up of the target words was constrained by the design of the experiment, which included ultrasound tongue imaging (UTI).
@@ -330,7 +329,7 @@ Following recommendations for Open Science in @cruwell2018 and @berez-kroeker201
 
 The following sections report the results of the study in relation to the durations of vowels, consonant closure, word, and the release to release interval.
 When discussing the output of statistical modelling, only the relevant predictors and interactions will be presented.
-The full output of statistical models (including confidence intervals and *p*-values) are given in \Cref{a:stats}.
+The full output of statistical models (including confidence intervals and *p*-values) are given in Supplementary file 1}.
 
 ## Vowel duration
 \label{s:vduration}
@@ -596,7 +595,7 @@ The interpretation of the Polish results is less straightforward.
 Previous studies found either no voicing effect or a small effect in Polish (3.5--4.5 ms).
 In particular, @malisz2008 say that the effect seems to be very idiosyncratic in the 40 speakers of their analysis.
 The estimated effect found in the 6 Polish speakers of the present study is about 10.5 ms, and the difference based on the means of the raw vowel durations is 7.5 ms.
-Recall, however, that the interaction between language and C2 voicing (which gives the estimate of 10.54) is not significant (see the full model summary in \Cref{tab:vow-table}).
+Recall, however, that the interaction between language and C2 voicing (which gives the estimate of 10.54) is not significant (see the full model summary in Supplementary file 1).
 It is likely, though, that the non-significance might be related to low power.
 Indeed, the raw mean difference of 7.5 ms in Polish---although still higher than what found in previous studies---might be more informative.
 
@@ -692,7 +691,7 @@ However, even when multicollinearity between predictors is minimal, presence or 
 The diachronic development of context-driven statistical sub-distributions can override the original causal link \citep{soskuthy2013}.
 Under this scenario, it is not possible to discern which of the competing predictors is diachronically responsible for the relation, and either or both the compensatory mechanism and the laryngeal features could have had a role in generating the synchronic patterns (this kind of
 reasoning is compatible for example with exemplar theories of speech perception and
-production, see among others \citealt{johnson1997, soskuthy2018, ambridge2018, todd2018}).
+production, see among others \citealt{johnson1997, soskuthy2018, ambridge2018, todd2019}).
 
 Since diverging results have been obtained in relation to the significance of  C2 phonation in addition to C2 closure durations, these aspects need to be further investigated in future studies, although to ascertain whether they are artefacts of statistical procedures or if they reflect an underlying state of affairs might still prove difficult.
 To conclude, lack of significance of a separate laryngeal features effect in this study cannot be taken as evidence for its absence in the present data, and a compensatory mechanism could coexist with mechanisms directly related to laryngeal features, which would in turn explain the differential timing of the VC boundary.
@@ -745,6 +744,16 @@ For a review of explanatory pluralism in the cognitive sciences, see \citealt{da
 Indeed, a hybrid account, which takes into consideration and synthesises aspects of multiple proposed accounts, is probably warranted, given the diversity of compatible results obtained so far.
 Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval, and in relation to other attributes of consonant effects on vowel duration.
 
+\section*{Supplementary files}
+
+Supplementary file 1: Appendix. DOI: TBA
+
+Supplementary file 2: Open Science Framework research compendium (data and code). DOI: https://doi.org/10.17605/OSF.IO/BFYHR
+
+\section*{Funding information}
+
+This project has been funded by the School of Arts, Languages, and Cultures Graduate School at the University of Manchester.
+
 \section*{Acknowledgements}
 
 I am grateful to Ricardo Bermúdez-Otero and Patrycja Strycharczuk for their immense support and patience in providing feedback on this project.
@@ -753,186 +762,6 @@ I also want to thank the audience at the 16th Laboratory Phonology conference (L
 Thanks also go to my colleagues at the Phonetics Laboratory of the University of Manchester, who provided help in different ways.
 Any remaining errors are my own.
 
-\section*{Funding information}
-
-This project has been funded by the School of Arts, Languages, and Cultures Graduate School at the University of Manchester.
-
 \section*{Competing interests}
 
 The author has no competing interests to declare.
-
-\appendix
-
-# Output of statistical models
-\label{a:stats}
-
-See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and \Cref{tab:vow-clo-table}.
-
-```{r vow-table}
-kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /o/", "Vowel = /u/", "Lang = Polish", "Place = velar", "Speech rate", "Voiced × /o/", "Voiced × /u/", "Voiced × Polish", "/o/ × Polish", "/u/ × Polish", "Voiced × /o/ × Polish", "Voiced × /u/ × Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration})") %>%
-kable_styling(font_size = 8)
-```
-
-```{r clo-table}
-kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /o/", "Vowel = /u/", "Lang = Polish", "Place = velar", "Speech rate", "Voiced × /o/", "Voiced × /u/", "Voiced × Polish", "/o/ × Polish", "/u/ × Polish", "Voiced × /o/ × Polish", "Voiced × /u/ × Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration})") %>%
-kable_styling(font_size = 8)
-```
-
-```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Closure dur.", "Vowel = /o/", "Vowel = /u/", "Speech rate", "Closure × /o/", "Closure × /u/", "C2 closure × sp. rate", "/o/ × sp. rate", "/u/ × sp. rate", "Closure × /o/ × sp. rate", "Closure × /u/ × sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration})") %>%
-kable_styling(font_size = 8)
-```
-
-```{r vif, include=FALSE}
-# Check multicollinearity by VIF
-
-durations_filtered %>%
-  select(v2_duration, c2_clos_duration, speech_rate, c2_phonation) %>%
-  mutate(c2_phonation = as.numeric(c2_phonation) - 1) %>%
-  as.data.frame(.) %>%
-  vif(.)
-```
-
-```{r lmer-check, include=FALSE}
-qqnorm(resid(vow_lm))
-plot(vow_lm)
-qqnorm(resid(clo_lm))
-plot(clo_lm)
-qqnorm(resid(vow_clo_lm))
-plot(vow_clo_lm)
-```
-
-```{r variation, include=FALSE}
-# Coefficient of variation CV and coefficient of quartile variation CQV
-# for vowel onset to vowel onset interval (VV) and release to release
-# interval (RR)
-
-durations_filtered %>%
-  summarise(
-    vor_cv = sd(vor, na.rm = TRUE) / mean(vor, na.rm = TRUE),
-    rr_cv = sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE),
-    vor_cqv = (quantile(vor, na.rm = TRUE, probs = 0.75) -
-        quantile(vor, na.rm = TRUE, probs = 0.25)) /
-      (quantile(vor, na.rm = TRUE, probs = 0.75) +
-         quantile(vor, na.rm = TRUE, probs = 0.25)),
-    rr_cqv = (quantile(rel_rel, na.rm = TRUE, probs = 0.75) -
-        quantile(rel_rel, na.rm = TRUE, probs = 0.25)) /
-      (quantile(rel_rel, na.rm = TRUE, probs = 0.75) +
-         quantile(rel_rel, na.rm = TRUE, probs = 0.25))
-  )
-```
-
-```{r vor-bf, include=FALSE}
-vor_lm <- lme4::lmer(
-  vor ~
-    c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vor_lm_null <- lme4::lmer(
-  vor ~
-    # c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vor_bf <- round(exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2))
-```
-
-```{r vv-bf, include=FALSE}
-vv_lm <- lme4::lmer(
-  v_v ~
-    c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vv_lm_null <- lme4::lmer(
-  v_v ~
-    # c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-# Bayes factor of null model vs. full
-vv_bf_01 <- exp((BIC(vv_lm) - BIC(vv_lm_null)) / 2)
-# Bayes factor of full model vs. null
-vv_bf_10 <- 1 / vv_bf_01
-```
-
-# Socio-linguistic information of participants
-\label{a:socioling}
-
-See \Cref{t:socio}.
-
-<!-- say why there are missing IDs -->
-
-\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad,
-label = t:socio,
-width=\textwidth,
-star,
-doinside = \scriptsize
-]{llll>{\raggedright}p{3cm}l>{\raggedright}p{2cm}l}{}{
-\FL
-ID & Age & Sex    & Native L & Other Ls& City of birth & Spent most time in & > 6 mo \ML
-IT01 & 29 & Male   & Italian & English, Spanish                          & Verbania            & Verbania        & Yes \NN
-IT02 & 26 & Male   & Italian & Friulian, English, Ladin-Venetan          & Udine               & Tricesimo & Yes \NN
-IT03 & 28 & Female & Italian & English, German                           & Verbania            & Verbania        & No  \NN
-IT04 & 54 & Female & Italian & Calabrese                                 & Verbania            & Verbania        & No  \NN
-IT05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
-IT09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
-IT11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
-IT12 & 26 & Male   & Italian & English                                   & Rome               & Rome           & Yes \NN
-IT13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN
-IT14 & 32 & Male & Italian & English, Spanish & Frosinone & Frosinone & Yes \NN
-PL02 & 32 & Female & Polish  & English, Norwegian, French, German, Dutch & Koło                & Poznań          & Yes \NN
-PL03 & 26 & Male   & Polish  & Russian, English, French, German          & Nowa Sol            & Poznań          & Yes \NN
-PL04 & 34 & Female & Polish  & Spanish, English, French                  & Warsaw              & Warsaw          & No  \NN
-PL05 & 42 & Male   & Polish  & English, French                           & Przasnysz           & Warsaw        & No  \NN
-PL06 & 33 & Male   & Polish  & English                                   & Zgierz              & Zgierz          & Yes \NN
-PL07 & 32 & Female & Polish  & English, Russian                          & Bielsk Podlaski     & Bielsk Podlaski & Yes \LL
-}
-
-# Target words
-\label{a:targets}
-
-See \Cref{t:targets}.
-
-\ctable[caption = Target words. Asterisks indicate real words,
-label = t:targets,
-star,
-doinside = \footnotesize
-]{lllllll}{}{
-\FL
-Italian   &        &      & \hspace{0.5cm} & Polish &      &      \NN
-\cmidrule{1-3}\cmidrule{5-7}
-pata      & poto*  & putu & & pata   & poto & putu \NN
-pada      & podo   & pudu & & pada*  & podo & pudu \NN
-paca*     & poco*  & pucu & & paka*  & poko & puku \NN
-paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
-}
