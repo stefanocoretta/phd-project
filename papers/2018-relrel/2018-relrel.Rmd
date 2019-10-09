@@ -1,6 +1,10 @@
 ---
 title: "An exploratory study of voicing-related differences in vowel duration as compensatory temporal adjustment in Italian and Polish"
 shorttitle: "An exploratory study of voicing-related differences in vowel duration"
+author:
+- name: Stefano Coretta
+  affiliation: The University of Manchester
+  address: "Oxford Road, Manchester, M13 9PL, United Kingdom \\ stefano.coretta@manchester.ac.uk"
 keywords: "vowel duration, closure duration, voicing effect, compensation, Italian, Polish"
 output:
   glossaarticle::glossa_article:
@@ -10,14 +14,15 @@ bibliography: linguistics
 classoption:
   - charis
 header-includes:
+- \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
 - \usepackage{enumerate}
 - \usepackage{lineno}
 - \linenumbers
 params:
-  version: 3.0
-  version-date: "2019/05/30"
+  version: 3.0.9000
+  version-date: "2019/10/09"
 ---
 
 ```{r setup, include=FALSE}
@@ -235,20 +240,22 @@ Data collection started in December 2016 and ended in March 2018.
 
 ## Data processing and measurements
 
-\ctable[caption = Criteria for the identification of acoustics landmarks,
-label = t:dur-measures,
-width=\textwidth,
-star
-]{ll>{\raggedright}p{5cm}}{}{
-\FL
-\textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
-vowel onset           & (V1 onset)         & Appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
-vowel offset          & (V1 offset)        & Disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
-consonant onset       & (C2 onset)         & Corresponds to V1 offset                                                                    \NN
-closure onset         & (C2 closure onset) & Corresponds to V1 offset                                                                    \NN
-consonant offset      & (C2 offset)        & Appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
-consonant release & (C1/C2 release)         & Automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
-}
+\begin{table}
+\caption{Criteria for the identification of acoustics landmarks}
+\label{t:dur-measures}
+\centering
+\begin{tabular}[t]{llp{5cm}}
+\toprule
+\textbf{landmark}               &                  & \textbf{criteria}                                                                                    \\ \midrule
+vowel onset           & (V1 onset)         & Appearance of higher formants in the spectrogram following the release of /p/ (C1)            \\
+vowel offset          & (V1 offset)        & Disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \\
+consonant onset       & (C2 onset)         & Corresponds to V1 offset                                                                    \\
+closure onset         & (C2 closure onset) & Corresponds to V1 offset                                                                    \\
+consonant offset      & (C2 offset)        & Appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \\
+consonant release & (C1/C2 release)         & Automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \\ \bottomrule
+\end{tabular}
+\end{table}
+
 
 The audio recordings were exported from AAA in the `.wav` format for further processing.
 The sample and bit rate were kept as upon recording (22050 Hz, 16-bit).
@@ -738,7 +745,7 @@ For a review of explanatory pluralism in the cognitive sciences, see \citealt{da
 Indeed, a hybrid account, which takes into consideration and synthesises aspects of multiple proposed accounts, is probably warranted, given the diversity of compatible results obtained so far.
 Future work will need to investigate further aspects of the patterns found in this study, with a particular focus on the effects of different segmental and prosodic structures and different laryngeal contrasts on the release to release interval, and in relation to other attributes of consonant effects on vowel duration.
 
-# Acknowledgements
+\section*{Acknowledgements}
 
 I am grateful to Ricardo Bermúdez-Otero and Patrycja Strycharczuk for their immense support and patience in providing feedback on this project.
 Thanks to the editor of Glossa and two anonymous reviewers for their feedback, which significantly improved the manuscript.
@@ -746,11 +753,11 @@ I also want to thank the audience at the 16th Laboratory Phonology conference (L
 Thanks also go to my colleagues at the Phonetics Laboratory of the University of Manchester, who provided help in different ways.
 Any remaining errors are my own.
 
-# Funding information
+\section*{Funding information}
 
 This project has been funded by the School of Arts, Languages, and Cultures Graduate School at the University of Manchester.
 
-# Competing interests
+\section*{Competing interests}
 
 The author has no competing interests to declare.
 

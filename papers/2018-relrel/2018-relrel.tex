@@ -32,11 +32,32 @@ compensatory temporal adjustment in Italian and Polish}
 % }
 
 \author[]{
+    \spauthor{Stefano Coretta\\
+  \institute{The University of Manchester}\\
+  \small{Oxford Road, Manchester, M13 9PL, United Kingdom
+~\href{mailto:stefano.coretta@manchester.ac.uk}{\nolinkurl{stefano.coretta@manchester.ac.uk}}}
+  }%
   }
 
 \usepackage{natbib}
 
 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\let\tnote\relax
 \usepackage{cleveref}
 \usepackage{ctable}
 \usepackage{enumerate}
@@ -428,20 +449,21 @@ collection started in December 2016 and ended in March 2018.
 \subsection{Data processing and
 measurements}\label{data-processing-and-measurements}}
 
-\ctable[caption = Criteria for the identification of acoustics landmarks,
-label = t:dur-measures,
-width=\textwidth,
-star
-]{ll>{\raggedright}p{5cm}}{}{
-\FL
-\textbf{landmark}               &                  & \textbf{criteria}                                                                                    \ML
-vowel onset           & (V1 onset)         & Appearance of higher formants in the spectrogram following the release of /p/ (C1)            \NN
-vowel offset          & (V1 offset)        & Disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \NN
-consonant onset       & (C2 onset)         & Corresponds to V1 offset                                                                    \NN
-closure onset         & (C2 closure onset) & Corresponds to V1 offset                                                                    \NN
-consonant offset      & (C2 offset)        & Appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \NN
-consonant release & (C1/C2 release)         & Automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \LL
-}
+\begin{table}
+\caption{Criteria for the identification of acoustics landmarks}
+\label{t:dur-measures}
+\centering
+\begin{tabular}[t]{llp{5cm}}
+\toprule
+\textbf{landmark}               &                  & \textbf{criteria}                                                                                    \\ \midrule
+vowel onset           & (V1 onset)         & Appearance of higher formants in the spectrogram following the release of /p/ (C1)            \\
+vowel offset          & (V1 offset)        & Disappearance of the higher formants in the spectrogram preceding the target consonant (C2) \\
+consonant onset       & (C2 onset)         & Corresponds to V1 offset                                                                    \\
+closure onset         & (C2 closure onset) & Corresponds to V1 offset                                                                    \\
+consonant offset      & (C2 offset)        & Appearance of higher formants of the vowel following C2 (V2); corresponds to V2 onset                                \\
+consonant release & (C1/C2 release)         & Automatic detection + manual correction \citep{ananthapadmanabha2014}                                           \\ \bottomrule
+\end{tabular}
+\end{table}
 
 The audio recordings were exported from AAA in the \texttt{.wav} format
 for further processing. The sample and bit rate were kept as upon
@@ -1087,8 +1109,7 @@ structures and different laryngeal contrasts on the release to release
 interval, and in relation to other attributes of consonant effects on
 vowel duration.
 
-\hypertarget{acknowledgements}{%
-\section{Acknowledgements}\label{acknowledgements}}
+\section*{Acknowledgements}
 
 I am grateful to Ricardo Bermúdez-Otero and Patrycja Strycharczuk for
 their immense support and patience in providing feedback on this
@@ -1100,14 +1121,12 @@ early draft of this paper. Thanks also go to my colleagues at the
 Phonetics Laboratory of the University of Manchester, who provided help
 in different ways. Any remaining errors are my own.
 
-\hypertarget{funding-information}{%
-\section{Funding information}\label{funding-information}}
+\section*{Funding information}
 
 This project has been funded by the School of Arts, Languages, and
 Cultures Graduate School at the University of Manchester.
 
-\hypertarget{competing-interests}{%
-\section{Competing interests}\label{competing-interests}}
+\section*{Competing interests}
 
 The author has no competing interests to declare.
 
@@ -1122,12 +1141,12 @@ models}\label{output-of-statistical-models}}
 See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and
 \Cref{tab:vow-clo-table}.
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:vow-table}Summary of the linear mixed-effects model fitted to vowel duration (see \Cref{s:vduration})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrrrrl}
+\begin{tabular}[t]{lrrrrrrrl}
 \toprule
 Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
 \midrule
@@ -1149,12 +1168,12 @@ Voiced × /u/ × Polish & 6.40 & 8.03 & -9.34 & 22.13 & 11.19 & 0.80 & 0.44 & \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:clo-table}Summary of the linear mixed-effects model fitted to closure duration (see \Cref{s:cduration})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrrrrl}
+\begin{tabular}[t]{lrrrrrrrl}
 \toprule
 Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
 \midrule
@@ -1176,12 +1195,12 @@ Voiced × /u/ × Polish & -3.08 & 6.77 & -16.35 & 10.20 & 11.01 & -0.45 & 0.66 &
 \end{tabular}
 \end{table}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:vow-clo-table}Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \Cref{s:vcduration})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrrrrl}
+\begin{tabular}[t]{lrrrrrrrl}
 \toprule
 Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
 \midrule
