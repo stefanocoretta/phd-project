@@ -64,7 +64,7 @@ round_2 <- function(...) {
 <!-- it might be interesting to say that the VE applies even in cases when voicing is not actually present -->
 
 Almost a hundred years of research have consistently shown that consonantal voicing has an effect on preceding vowel duration: vowels followed by voiced obstruents are longer than when followed by voiceless ones (\citealt{meyer1904}; \citealt{heffner1937}; \citealt{belasco1953}; \citealt{house1953}; \citealt{peterson1960}; \citealt{halle1967}; \citealt{chen1970}; \citealt{klatt1973}; \citealt{lisker1974}; \citealt{fowler1992}; \citealt{laeufer1992}; \citealt{hussein1994}; \citealt{lampp2004}; \citealt{warren2005}; \citealt{durvasula2012}).
-This so called 'voicing effect' has been found in a considerable variety of languages.\footnote{One of the first attestations of the term `voicing effect' can be attributed to \citet{mitleb1982}. Another term used to refer to the same phenomenon is `pre-fortis clipping', probably introduced by \citet{wells1990}.}
+This so called "voicing effect" has been found in a considerable variety of languages.\footnote{One of the first attestations of the term `voicing effect' can be attributed to \citet{mitleb1982}. Another term used to refer to the same phenomenon is `pre-fortis clipping', probably introduced by \citet{wells1990}.}
 These include (but are not limited to) English, German, French, Spanish, Hindi, Russian, Italian, Arabic, and Korean (see \citealt{maddieson1976} for a more comprehensive, but still not exhaustive list).\footnote{A typological note. Most languages reported having a voicing effect come from the Indo-European family. Others are from a pool of widely studied languages. It is thus of vital importance that future studies look at other language families and underdocumented/underdescribed languages.}
 Despite of the plethora of evidence in support of the *existence* of the voicing effect, agreement hasn't been reached regarding its *source*.
 
@@ -85,7 +85,7 @@ First, Lindblom's \citeyear{lindblom1967} argument that the duration of the syll
 Second, although the results in @slis1969 suggest that the duration of disyllabic words in Dutch is constant whether the second stop is voiceless or voiced, it does not follow from this fact that compensation should necessarily target the vowel preceding the stop.
 Indeed, it is logically possible that the following unstressed vowel could be the target of the compensation, therefore differences in preceding vowel duration still call for an explanation.
 
-The compensatory temporal adjustment account has been further challenged on the basis of the so called 'aspiration effect' [@maddieson1976], by which vowels are longer when followed by aspirated stops than when followed by unaspirated stops.
+The compensatory temporal adjustment account has been further challenged on the basis of the so called "aspiration effect" [@maddieson1976], by which vowels are longer when followed by aspirated stops than when followed by unaspirated stops.
 In Hindi, vowels before voiceless unaspirated stops are short, vowels followed by voiced aspirated stops are long, and vowels followed by voiced unaspirated and voiceless aspirated stops are in between and have similar durations.
 @maddieson1976 find no compensatory pattern between vowel and consonant duration.
 The consonant /t/, which has the shortest duration, is preceded by the shortest vowel, and vowels before /d/ and /tʰ/ have the same duration although the durations of the two consonants are different.
@@ -112,7 +112,7 @@ Further evidence for a compensatory account and a negative correlation between v
 Crucially, stop closure duration follows the reversed pattern: closure is short in voiced stops, longer in ejectives, and longest in voiceless aspirated stops.
 Moreover, vowel duration is inversely correlated with closure across the three phonation types.
 \citet{begus2017} mentions the possibility that the negative correlation is an artefact of the vowel and closure intervals sharing a boundary.
-This annotation bias could generate negative correlations (by which the vowel would shorten and the closure would lengthen by the same amount when, for example, the boundary is placed to the left of the 'actual' boundary).
+This annotation bias could generate negative correlations (by which the vowel would shorten and the closure would lengthen by the same amount when, for example, the boundary is placed to the left of the "actual" boundary).
 However, Beguš shows with a cross-annotator analysis that this was not the case.
 <!-- Such statistical argument, however, follows only when boundary misplacement is indeed random, and it is not biased towards one side or the other. -->
 <!-- ask Begus about coefficient -->
@@ -141,7 +141,7 @@ On the other hand, the typical realisation of phonological voiced stops in these
 \citet{waniek2011}, on the other hand, cautiously argues that a possible change in progress in Polish is affecting the VOT values of voiceless stops in pre-stressed position.
 
 The non-clear status of Polish laryngeal phonology/phonetics could be seen as a hindrance affecting the comparison with Italian.
-However, based on data from Italian, \citet{kirby2016a} propose that the distinction between voicing and aspirating languages itself \citep{beckman2013} cannot be straightforwardly mapped onto phonetics, and they remind us that 'the production of laryngeal contrasts of all kinds are considerably more complex' than generally described in the phonological literature \citep[2409]{kirby2016a}.
+However, based on data from Italian, \citet{kirby2016a} propose that the distinction between voicing and aspirating languages itself \citep{beckman2013} cannot be straightforwardly mapped onto phonetics, and they remind us that "the production of laryngeal contrasts of all kinds are considerably more complex" than generally described in the phonological literature \citep[2409]{kirby2016a}.
 Since this study focusses on the effect of post-stressed stops on preceding vowel durations, we believe that the comparison between Italian and Polish is still feasible, even in the case Polish voiceless pre-stressed stops are articulated with longer VOT values.
 Given that Italian and Polish share some features of the segmental and prosodic make-up of their phonological systems, the design of the experimental material and comparison of the results were facilitated.
 For these reasons, these languages offer an opportunity to investigate differences that could reveal mechanisms underlying the voicing effect, at least on a general level.
@@ -637,7 +637,7 @@ In other words, the timing of the VC boundary within the temporally stable relea
 An earlier VC boundary relative to the onset of the preceding vowel results in a shorter vowel and a longer stop closure.
 On the other hand, a later VC boundary produces a longer vowel and a shorter closure.
 \Cref{f:compensatory} illustrates this compensatory mechanism.
-Note that the term 'temporal stability' (and 'temporally stable') as used here means that the underlying statistical distribution of the interval duration is stable *across contexts of C2 voicing*.
+Note that the term "temporal stability" (and "temporally stable") as used here means that the underlying statistical distribution of the interval duration is stable *across contexts of C2 voicing*.
 No specific statement is implied about the variance of the duration around the mean, across or within phonological contexts.
 
 \begin{figure}
