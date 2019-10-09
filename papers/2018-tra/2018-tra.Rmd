@@ -339,8 +339,9 @@ kines %>%
   mutate(trp_z = scale(trp)) %>%
   ggplot(aes(c2_phonation, trp_z)) +
   geom_boxplot(width = 0.5) +
-  geom_jitter(alpha = 0.1, position = position_jitter(width = 0.2, seed = 878), aes(colour = c2_phonation)) +
-  labs(x = "C2 voicing", y = "Tongue root position (z-scores)")
+  geom_jitter(alpha = 0.15, position = position_jitter(width = 0.2, seed = 878), aes(colour = c2_phonation)) +
+  labs(x = "C2 voicing", y = "Tongue root position (z-scores)") +
+  theme(legend.position = "none")
 ```
 
 \Cref{f:Figure2} shows raw data points and boxplots of the position of the tongue root at C2 closure onset when C2 is voiceless (left) and voiced (right).
@@ -416,8 +417,8 @@ smooths <- predict_gam(tra_gam_ar, exclude_terms = list("s(proportion,speaker)",
     x = "V1 proportion",
     y = "Tongue root position (mm)"
   ) +
-  scale_colour_discrete(name = "C2 voicing") +
-  scale_linetype_discrete(name = "C2 voicing")
+  scale_linetype_discrete(name = "C2 voicing") +
+  scale_color_brewer(palette = "Dark2", name = "C2 voicing")
 
 difference <- plot_difference(tra_gam_ar, proportion, list(c2_phonation_o = c("voiced", "voiceless"))) +
   scale_x_continuous(labels = NULL, name = element_blank())
@@ -446,12 +447,13 @@ summary(tra_lm_2)
 ```{r Figure4, include=TRUE, fig.cap="Raw data, regression lines, and 95\\% confidence intervals of the correlation between vowel duration and tongue root position for each vowel (/a/, /o/, and /u/). The regression line and confidence intervals are from a mixed-effects model (see \\Cref{s:trp-vdur}).", fig.lp="f:", out.extra="width=\\linewidth"}
 as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
   ggplot(aes(v1_duration_c, fit)) +
-  geom_point(data = kines, aes(y = trp), alpha = 0.1) +
-  geom_line() +
+  geom_point(data = kines, aes(y = trp, colour = vowel), alpha = 0.1) +
+  geom_line(aes(colour = vowel)) +
   geom_ribbon(aes(ymax = upper, ymin = lower), alpha = 0.2) +
   geom_rug(data = kines, aes(y = trp), alpha = 0.1) +
   facet_grid(~ vowel) +
-  labs(x = "Vowel duration (centred)", y = "Tongue root position (ms)")
+  labs(x = "Vowel duration (centred)", y = "Tongue root position (ms)") +
+  theme(legend.position = "none")
 ```
 
 A second linear mixed regression was fitted to tongue root position at V1-offset/C1-onset to assess the effect of V1 duration on root position (\Cref{tab:tra-lm-2-table}).
@@ -466,7 +468,7 @@ The effect is stronger with /a/ than with /o/ and /u/ (see \Cref{f:Figure4}).
 ```{r tra-gam-2, include=FALSE, cache=TRUE}
 tra_gam_2 <- bam(
   trp ~
-    s(v1_duration) +
+    s(v1_duration, k = 20) +
     s(proportion) +
     ti(proportion, v1_duration) +
     s(proportion, speaker, bs = "fs", m = 1),
@@ -477,7 +479,7 @@ rho <- start_value_rho(tra_gam_2)
 
 tra_gam_ar_2 <- bam(
   trp ~
-    s(v1_duration) +
+    s(v1_duration, k = 20) +
     s(proportion) +
     ti(proportion, v1_duration) +
     s(proportion, speaker, bs = "fs", m = 1),
@@ -489,7 +491,7 @@ tra_gam_ar_2 <- bam(
 
 tra_gam_ar_0_2 <- bam(
   trp ~
-    s(v1_duration) +
+    s(v1_duration, k = 20) +
     s(proportion) +
     # ti(proportion, v1_duration) +
     s(proportion, speaker, bs = "fs", m = 1),
@@ -498,16 +500,18 @@ tra_gam_ar_0_2 <- bam(
   rho = rho,
   AR.start = tra_series$start_event
 )
+
+compareML(tra_gam_ar_0_2, tra_gam_ar_2)
 ```
 
 The effect of V1 duration on tongue root position during V1 was modelled by fitting a GAMM with the following terms (\Cref{tab:tra-gam-ar-2-table}): tongue root position as the outcome variable, smooth terms over V1 duration and V1 proportion, a tensor product interaction over V1 proportion and V1 duration; a factor random smooth over V1 proportion by speaker (penalty order = 1).
-The full model with the tensor product interaction over V1 proportion and V1 duration has better fit according to model comparison with a model without the interaction ($\chi$(3) = 12.559, *p* < 0.001).
+The full model with the tensor product interaction over V1 proportion and V1 duration has better fit according to model comparison with a model without the interaction ($\chi$(3) = 12.609, *p* < 0.001).
 \Cref{f:Figure5} shows the estimated root trajectories at four values of vowel duration.
 The general trend is that the forward movement of the root during the vowel is greater the longer the duration of the vowel (\Cref{f:Figure5}).
 Moreover, the trajectory curvature increases with vowel duration: Shorter vowels have a flatter trajectory of tongue root advancement.
 
 ```{r Figure5, include=TRUE, fig.cap="Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\\% confidence intervals. Predictions from a GAMM (see \\Cref{s:trp-v1-dur}).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
-predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 145, 200))) %>%
+predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 150, 200))) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
   geom_smooth_ci(v1_duration, size = 1, ci_alpha = 0.05) +
@@ -515,7 +519,7 @@ predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list
     x = "V1 proportion",
     y = "Tongue root position (mm)"
   ) +
-  scale_colour_discrete(name = "V1 duration (ms)") +
+  scale_colour_brewer(name = "V1 duration (ms)", palette = "Dark2") +
   scale_linetype_discrete(name = "V1 duration (ms)")
 ```
 
@@ -713,7 +717,7 @@ predict_gam(tra_gam_s_ar, values = list(speech_rate_c = 0)) %>%
     x = "Vowel proportion",
     y = "Tongue root position (mm)"
   ) +
-  scale_colour_discrete(name = "C2 voicing") +
+  scale_colour_brewer(name = "C2 voicing", palette = "Dark2") +
   scale_linetype_discrete(name = "C2 voicing")
 ```
 
