@@ -19,14 +19,14 @@ header-includes:
 - \usepackage{enumerate}
 ---
 
-```{r setup, include=FALSE}
+```{r setup-1, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.path = "./", fig.lp = "f:")
 knitr::opts_knit$set(root.dir = here::here())
 library(knitr)
 ```
 
 
-```{r message=FALSE, results='hide'}
+```{r read, message=FALSE, results='hide'}
 knit("./papers/2018-relrel/2018-relrel.Rmd", tangle = TRUE, output = "./papers/2018-relrel/2018-relrel.R")
 source("./papers/2018-relrel/2018-relrel.R")
 ```
@@ -44,108 +44,6 @@ kable_styling(font_size = 8, latex_options = "hold_position")
 ```{r vow-clo-table}
 kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Closure dur.", "Vowel = /o/", "Vowel = /u/", "Speech rate", "Closure × /o/", "Closure × /u/", "C2 closure × sp. rate", "/o/ × sp. rate", "/u/ × sp. rate", "Closure × /o/ × sp. rate", "Closure × /u/ × sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (Section 3.3 of the paper)") %>%
 kable_styling(font_size = 8, latex_options = "hold_position")
-```
-
-```{r vif, include=FALSE, eval=FALSE}
-# Check multicollinearity by VIF
-
-durations_filtered %>%
-  select(v2_duration, c2_clos_duration, speech_rate, c2_phonation) %>%
-  mutate(c2_phonation = as.numeric(c2_phonation) - 1) %>%
-  as.data.frame(.) %>%
-  vif(.)
-```
-
-```{r lmer-check, include=FALSE, eval=FALSE}
-qqnorm(resid(vow_lm))
-plot(vow_lm)
-qqnorm(resid(clo_lm))
-plot(clo_lm)
-qqnorm(resid(vow_clo_lm))
-plot(vow_clo_lm)
-```
-
-```{r variation, include=FALSE, eval=FALSE}
-# Coefficient of variation CV and coefficient of quartile variation CQV
-# for vowel onset to vowel onset interval (VV) and release to release
-# interval (RR)
-
-durations_filtered %>%
-  summarise(
-    vor_cv = sd(vor, na.rm = TRUE) / mean(vor, na.rm = TRUE),
-    rr_cv = sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE),
-    vor_cqv = (quantile(vor, na.rm = TRUE, probs = 0.75) -
-        quantile(vor, na.rm = TRUE, probs = 0.25)) /
-      (quantile(vor, na.rm = TRUE, probs = 0.75) +
-         quantile(vor, na.rm = TRUE, probs = 0.25)),
-    rr_cqv = (quantile(rel_rel, na.rm = TRUE, probs = 0.75) -
-        quantile(rel_rel, na.rm = TRUE, probs = 0.25)) /
-      (quantile(rel_rel, na.rm = TRUE, probs = 0.75) +
-         quantile(rel_rel, na.rm = TRUE, probs = 0.25))
-  )
-```
-
-```{r vor-bf, include=FALSE, eval=FALSE}
-vor_lm <- lme4::lmer(
-  vor ~
-    c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vor_lm_null <- lme4::lmer(
-  vor ~
-    # c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vor_bf <- round(exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2))
-```
-
-```{r vv-bf, include=FALSE, eval=FALSE}
-vv_lm <- lme4::lmer(
-  v_v ~
-    c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-vv_lm_null <- lme4::lmer(
-  v_v ~
-    # c2_phonation +
-    vowel +
-    c2_place +
-    language +
-    speech_rate_c +
-    (1+c2_phonation|speaker) +
-    (1|item),
-  data = durations_filtered,
-  REML = FALSE
-)
-
-# Bayes factor of null model vs. full
-vv_bf_01 <- exp((BIC(vv_lm) - BIC(vv_lm_null)) / 2)
-# Bayes factor of full model vs. null
-vv_bf_10 <- 1 / vv_bf_01
 ```
 
 \ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad,

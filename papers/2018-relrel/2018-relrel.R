@@ -2,10 +2,7 @@ params <-
 list(version = "3.0.9000", `version-date` = "2019/10/09")
 
 ## ----setup, include=FALSE------------------------------------------------
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.path = "./", fig.lp = "f:", fig.process = function(x) {
-  x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
-  if (file.rename(x, x2)) x2 else x
-})
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.path = "./", fig.lp = "f:")
 knitr::opts_knit$set(root.dir = here::here())
 library(usdm)
 library(tidyverse)
@@ -208,4 +205,106 @@ as_tibble(coef(vow_lm)$speaker[,1:2], rownames = "speaker") %>%
     y = "Speaker",
     x = "Voicing effect (ms)"
   )
+
+
+## ----vif, include=FALSE, eval=FALSE--------------------------------------
+## # Check multicollinearity by VIF
+## 
+## durations_filtered %>%
+##   select(v2_duration, c2_clos_duration, speech_rate, c2_phonation) %>%
+##   mutate(c2_phonation = as.numeric(c2_phonation) - 1) %>%
+##   as.data.frame(.) %>%
+##   vif(.)
+
+
+## ----lmer-check, include=FALSE, eval=FALSE-------------------------------
+## qqnorm(resid(vow_lm))
+## plot(vow_lm)
+## qqnorm(resid(clo_lm))
+## plot(clo_lm)
+## qqnorm(resid(vow_clo_lm))
+## plot(vow_clo_lm)
+
+
+## ----variation, include=FALSE, eval=FALSE--------------------------------
+## # Coefficient of variation CV and coefficient of quartile variation CQV
+## # for vowel onset to vowel onset interval (VV) and release to release
+## # interval (RR)
+## 
+## durations_filtered %>%
+##   summarise(
+##     vor_cv = sd(vor, na.rm = TRUE) / mean(vor, na.rm = TRUE),
+##     rr_cv = sd(rel_rel, na.rm = TRUE) / mean(rel_rel, na.rm = TRUE),
+##     vor_cqv = (quantile(vor, na.rm = TRUE, probs = 0.75) -
+##         quantile(vor, na.rm = TRUE, probs = 0.25)) /
+##       (quantile(vor, na.rm = TRUE, probs = 0.75) +
+##          quantile(vor, na.rm = TRUE, probs = 0.25)),
+##     rr_cqv = (quantile(rel_rel, na.rm = TRUE, probs = 0.75) -
+##         quantile(rel_rel, na.rm = TRUE, probs = 0.25)) /
+##       (quantile(rel_rel, na.rm = TRUE, probs = 0.75) +
+##          quantile(rel_rel, na.rm = TRUE, probs = 0.25))
+##   )
+
+
+## ----vor-bf, include=FALSE, eval=FALSE-----------------------------------
+## vor_lm <- lme4::lmer(
+##   vor ~
+##     c2_phonation +
+##     vowel +
+##     c2_place +
+##     language +
+##     speech_rate_c +
+##     (1+c2_phonation|speaker) +
+##     (1|item),
+##   data = durations_filtered,
+##   REML = FALSE
+## )
+## 
+## vor_lm_null <- lme4::lmer(
+##   vor ~
+##     # c2_phonation +
+##     vowel +
+##     c2_place +
+##     language +
+##     speech_rate_c +
+##     (1+c2_phonation|speaker) +
+##     (1|item),
+##   data = durations_filtered,
+##   REML = FALSE
+## )
+## 
+## vor_bf <- round(exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2))
+
+
+## ----vv-bf, include=FALSE, eval=FALSE------------------------------------
+## vv_lm <- lme4::lmer(
+##   v_v ~
+##     c2_phonation +
+##     vowel +
+##     c2_place +
+##     language +
+##     speech_rate_c +
+##     (1+c2_phonation|speaker) +
+##     (1|item),
+##   data = durations_filtered,
+##   REML = FALSE
+## )
+## 
+## vv_lm_null <- lme4::lmer(
+##   v_v ~
+##     # c2_phonation +
+##     vowel +
+##     c2_place +
+##     language +
+##     speech_rate_c +
+##     (1+c2_phonation|speaker) +
+##     (1|item),
+##   data = durations_filtered,
+##   REML = FALSE
+## )
+## 
+## # Bayes factor of null model vs. full
+## vv_bf_01 <- exp((BIC(vv_lm) - BIC(vv_lm_null)) / 2)
+## # Bayes factor of full model vs. null
+## vv_bf_10 <- 1 / vv_bf_01
 
