@@ -1,26 +1,52 @@
-\appendix
+---
+title: "Appendix with statistical output, participants’ sociolinguistic information, and list of target words"
+shorttitle: "Appendix"
+author:
+- name: Stefano Coretta
+  affiliation: The University of Manchester
+  address: Oxford Road, Manchester M13 9PL  stefano.coretta\@manchester.ac.uk
+output:
+  glossaarticle::glossa_article:
+    citation_package: natbib
+    fig_caption: yes
+bibliography: linguistics
+classoption:
+  - charis
+header-includes:
+- \let\tnote\relax
+- \usepackage{cleveref}
+- \usepackage{ctable}
+- \usepackage{enumerate}
+---
 
-# Output of statistical models
-\label{a:stats}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, fig.path = "./", fig.lp = "f:")
+knitr::opts_knit$set(root.dir = here::here())
+library(knitr)
+```
 
-See \Cref{tab:vow-table}, \Cref{tab:clo-table}, and \Cref{tab:vow-clo-table}.
+
+```{r message=FALSE, results='hide'}
+knit("./papers/2018-relrel/2018-relrel.Rmd", tangle = TRUE, output = "./papers/2018-relrel/2018-relrel.R")
+source("./papers/2018-relrel/2018-relrel.R")
+```
 
 ```{r vow-table}
-kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /o/", "Vowel = /u/", "Lang = Polish", "Place = velar", "Speech rate", "Voiced × /o/", "Voiced × /u/", "Voiced × Polish", "/o/ × Polish", "/u/ × Polish", "Voiced × /o/ × Polish", "Voiced × /u/ × Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to vowel duration (see \\Cref{s:vduration})") %>%
-kable_styling(font_size = 8)
+kable(tidy(vow_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /o/", "Vowel = /u/", "Lang = Polish", "Place = velar", "Speech rate", "Voiced × /o/", "Voiced × /u/", "Voiced × Polish", "/o/ × Polish", "/u/ × Polish", "Voiced × /o/ × Polish", "Voiced × /u/ × Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to vowel duration (Section 3.1 of the paper)") %>%
+kable_styling(font_size = 8, latex_options = "hold_position")
 ```
 
 ```{r clo-table}
-kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /o/", "Vowel = /u/", "Lang = Polish", "Place = velar", "Speech rate", "Voiced × /o/", "Voiced × /u/", "Voiced × Polish", "/o/ × Polish", "/u/ × Polish", "Voiced × /o/ × Polish", "Voiced × /u/ × Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to closure duration (see \\Cref{s:cduration})") %>%
-kable_styling(font_size = 8)
+kable(tidy(clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Voicing = voiced", "Vowel = /o/", "Vowel = /u/", "Lang = Polish", "Place = velar", "Speech rate", "Voiced × /o/", "Voiced × /u/", "Voiced × Polish", "/o/ × Polish", "/u/ × Polish", "Voiced × /o/ × Polish", "Voiced × /u/ × Polish")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model fitted to closure duration (Section 3.2 of the paper)") %>%
+kable_styling(font_size = 8, latex_options = "hold_position")
 ```
 
 ```{r vow-clo-table}
-kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Closure dur.", "Vowel = /o/", "Vowel = /u/", "Speech rate", "Closure × /o/", "Closure × /u/", "C2 closure × sp. rate", "/o/ × sp. rate", "/u/ × sp. rate", "Closure × /o/ × sp. rate", "Closure × /u/ × sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (see \\Cref{s:vcduration})") %>%
-kable_styling(font_size = 8)
+kable(tidy(vow_clo_lm, effect = "fixed", conf.int = TRUE) %>% select(-effect) %>% mutate(term = c("Intercept", "Closure dur.", "Vowel = /o/", "Vowel = /u/", "Speech rate", "Closure × /o/", "Closure × /u/", "C2 closure × sp. rate", "/o/ × sp. rate", "/u/ × sp. rate", "Closure × /o/ × sp. rate", "Closure × /u/ × sp. rate")) %>% rename(Predictor = term, Estimate = estimate, SE = std.error, `t-value` = statistic, `p-value` = p.value, `CI low` = conf.low, `CI up` = conf.high) %>% select(Predictor, Estimate, SE, `CI low`, `CI up`, df, `t-value`, `p-value`) %>% mutate(`< α` = ifelse(`p-value` < 0.05, "*", "")), format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (Section 3.3 of the paper)") %>%
+kable_styling(font_size = 8, latex_options = "hold_position")
 ```
 
-```{r vif, include=FALSE}
+```{r vif, include=FALSE, eval=FALSE}
 # Check multicollinearity by VIF
 
 durations_filtered %>%
@@ -30,7 +56,7 @@ durations_filtered %>%
   vif(.)
 ```
 
-```{r lmer-check, include=FALSE}
+```{r lmer-check, include=FALSE, eval=FALSE}
 qqnorm(resid(vow_lm))
 plot(vow_lm)
 qqnorm(resid(clo_lm))
@@ -39,7 +65,7 @@ qqnorm(resid(vow_clo_lm))
 plot(vow_clo_lm)
 ```
 
-```{r variation, include=FALSE}
+```{r variation, include=FALSE, eval=FALSE}
 # Coefficient of variation CV and coefficient of quartile variation CQV
 # for vowel onset to vowel onset interval (VV) and release to release
 # interval (RR)
@@ -59,7 +85,7 @@ durations_filtered %>%
   )
 ```
 
-```{r vor-bf, include=FALSE}
+```{r vor-bf, include=FALSE, eval=FALSE}
 vor_lm <- lme4::lmer(
   vor ~
     c2_phonation +
@@ -89,7 +115,7 @@ vor_lm_null <- lme4::lmer(
 vor_bf <- round(exp((BIC(vor_lm) - BIC(vor_lm_null)) / 2))
 ```
 
-```{r vv-bf, include=FALSE}
+```{r vv-bf, include=FALSE, eval=FALSE}
 vv_lm <- lme4::lmer(
   v_v ~
     c2_phonation +
@@ -122,17 +148,11 @@ vv_bf_01 <- exp((BIC(vv_lm) - BIC(vv_lm_null)) / 2)
 vv_bf_10 <- 1 / vv_bf_01
 ```
 
-# Socio-linguistic information of participants
-\label{a:socioling}
-
-See \Cref{t:socio}.
-
-<!-- say why there are missing IDs -->
-
 \ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad,
 label = t:socio,
 width=\textwidth,
 star,
+pos=h,
 doinside = \scriptsize
 ]{llll>{\raggedright}p{3cm}l>{\raggedright}p{2cm}l}{}{
 \FL
@@ -155,14 +175,10 @@ PL06 & 33 & Male   & Polish  & English                                   & Zgier
 PL07 & 32 & Female & Polish  & English, Russian                          & Bielsk Podlaski     & Bielsk Podlaski & Yes \LL
 }
 
-# Target words
-\label{a:targets}
-
-See \Cref{t:targets}.
-
 \ctable[caption = Target words. Asterisks indicate real words,
 label = t:targets,
 star,
+pos=h,
 doinside = \footnotesize
 ]{lllllll}{}{
 \FL

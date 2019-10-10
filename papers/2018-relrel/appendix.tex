@@ -1,0 +1,199 @@
+% see http://info.semprag.org/basics for a full description of this template
+\documentclass[charis]{glossa}
+
+% possible options:
+% [times] for Times font (default if no option is chosen)
+% [cm] for Computer Modern font
+% [lucida] for Lucida font (not freely available)
+% [brill] open type font, freely downloadable for non-commercial use from http://www.brill.com/about/brill-fonts; requires xetex
+% [charis] for CharisSIL font, freely downloadable from http://software.sil.org/charis/
+% for the Brill an CharisSIL fonts, you have to use the XeLatex typesetting engine (not pdfLatex)
+% [biblatex] for using biblatex
+% [linguex] loads the linguex example package
+% !! a note on the use of linguex: in glossed examples, the third line of the example (the translation) needs to be prefixed with \glt. This is to allow a first line with the name of the language and the source of the example. See example (2) in the text for an illustration.
+% !! a note on the use of bibtex: for PhD dissertations to typeset correctly in the references list, the Address field needs to contain the city (for US cities in the format "Santa Cruz, CA")
+
+\title[Appendix]{Appendix with statistical output, participants' sociolinguistic
+information, and list of target words}
+
+% \author[Paul \& Vanden Wyngaerd]% short form of the author names for the running header. If no short author is given, no authors print in the headers.
+% {%as many authors as you like, each separated by \AND.
+%   \spauthor{Waltraud Paul\\
+%   \institute{CNRS, CRLAO}\\
+%   \small{105, Bd. Raspail, 75005 Paris\\
+%   waltraud.paul@ehess.fr}
+%   }
+%   \AND
+%   \spauthor{Guido Vanden Wyngaerd \\
+%   \institute{KU Leuven}\\
+%   \small{Warmoesberg 26, 1000 Brussel\\
+%   guido.vandenwyngaerd@kuleuven.be}
+%   }%
+% }
+
+\author[]{
+    \spauthor{Stefano Coretta\\
+  \institute{The University of Manchester}\\
+  \small{Oxford Road, Manchester M13 9PL stefano.coretta@manchester.ac.uk}
+  }%
+  }
+
+\usepackage{natbib}
+
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\let\tnote\relax
+\usepackage{cleveref}
+\usepackage{ctable}
+\usepackage{enumerate}
+
+\begin{document}
+
+\sffamily
+\maketitle
+
+
+
+
+\rmfamily
+
+%  Body of the article
+\begin{table}[!h]
+
+\caption{\label{tab:vow-table}Summary of the linear mixed-effects model fitted to vowel duration (Section 3.1 of the paper)}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{lrrrrrrrl}
+\toprule
+Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
+\midrule
+Intercept & 118.06 & 4.94 & 108.38 & 127.74 & 23.89 & 23.91 & 0.00 & *\\
+Voicing = voiced & 16.28 & 4.42 & 7.62 & 24.95 & 15.39 & 3.68 & 0.00 & *\\
+Vowel = /o/ & -7.50 & 3.93 & -15.21 & 0.21 & 10.31 & -1.91 & 0.08 & \\
+Vowel = /u/ & -25.71 & 3.94 & -33.44 & -17.98 & 10.43 & -6.52 & 0.00 & *\\
+Lang = Polish & -24.05 & 7.83 & -39.40 & -8.70 & 22.38 & -3.07 & 0.01 & *\\
+Place = velar & -7.95 & 1.63 & -11.15 & -4.75 & 10.99 & -4.87 & 0.00 & *\\
+Speech rate & -16.23 & 1.26 & -18.70 & -13.77 & 854.64 & -12.92 & 0.00 & *\\
+Voiced × /o/ & 2.09 & 5.54 & -8.77 & 12.96 & 10.18 & 0.38 & 0.71 & \\
+Voiced × /u/ & -13.09 & 5.56 & -23.99 & -2.20 & 10.30 & -2.36 & 0.04 & *\\
+Voiced × Polish & -5.73 & 6.61 & -18.69 & 7.23 & 18.00 & -0.87 & 0.40 & \\
+/o/ × Polish & -2.50 & 5.66 & -13.60 & 8.60 & 11.09 & -0.44 & 0.67 & \\
+/u/ × Polish & 1.12 & 5.68 & -10.01 & 12.26 & 11.23 & 0.20 & 0.85 & \\
+Voiced × /o/ × Polish & -6.16 & 8.00 & -21.85 & 9.53 & 11.06 & -0.77 & 0.46 & \\
+Voiced × /u/ × Polish & 6.40 & 8.03 & -9.34 & 22.13 & 11.19 & 0.80 & 0.44 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+
+\caption{\label{tab:clo-table}Summary of the linear mixed-effects model fitted to closure duration (Section 3.2 of the paper)}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{lrrrrrrrl}
+\toprule
+Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
+\midrule
+Intercept & 73.25 & 4.28 & 64.86 & 81.63 & 22.38 & 17.11 & 0.00 & *\\
+Voicing = voiced & -17.70 & 4.06 & -25.66 & -9.74 & 18.63 & -4.36 & 0.00 & *\\
+Vowel = /o/ & 3.75 & 3.26 & -2.64 & 10.13 & 9.43 & 1.15 & 0.28 & \\
+Vowel = /u/ & -1.91 & 3.27 & -8.32 & 4.49 & 9.56 & -0.58 & 0.57 & \\
+Lang = Polish & -7.03 & 6.82 & -20.40 & 6.34 & 20.82 & -1.03 & 0.31 & \\
+Place = velar & 3.80 & 1.38 & 1.09 & 6.51 & 10.94 & 2.74 & 0.02 & *\\
+Speech rate & -7.86 & 1.13 & -10.08 & -5.64 & 488.51 & -6.94 & 0.00 & *\\
+Voiced × /o/ & 1.91 & 4.88 & -7.65 & 11.47 & 11.80 & 0.39 & 0.70 & \\
+Voiced × /u/ & 10.88 & 4.79 & 1.50 & 20.27 & 10.97 & 2.27 & 0.04 & *\\
+Voiced × Polish & 2.30 & 6.07 & -9.59 & 14.19 & 19.83 & 0.38 & 0.71 & \\
+/o/ × Polish & -1.04 & 4.67 & -10.19 & 8.10 & 9.94 & -0.22 & 0.83 & \\
+/u/ × Polish & 6.94 & 4.68 & -2.24 & 16.12 & 10.09 & 1.48 & 0.17 & \\
+Voiced × /o/ × Polish & 1.36 & 6.84 & -12.04 & 14.77 & 11.44 & 0.20 & 0.85 & \\
+Voiced × /u/ × Polish & -3.08 & 6.77 & -16.35 & 10.20 & 11.01 & -0.45 & 0.66 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+
+\caption{\label{tab:vow-clo-table}Summary of the linear mixed-effects model for testing the correlation between vowel and closure duration (Section 3.3 of the paper)}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{lrrrrrrrl}
+\toprule
+Predictor & Estimate & SE & CI low & CI up & df & t-value & p-value & < α\\
+\midrule
+Intercept & 123.62 & 6.76 & 110.36 & 136.87 & 56.24 & 18.27 & 0.00 & *\\
+Closure dur. & -0.19 & 0.06 & -0.32 & -0.06 & 816.53 & -2.93 & 0.00 & *\\
+Vowel = /o/ & -4.54 & 6.31 & -16.90 & 7.82 & 127.47 & -0.72 & 0.47 & \\
+Vowel = /u/ & -12.47 & 6.40 & -25.00 & 0.07 & 134.65 & -1.95 & 0.05 & \\
+Speech rate & -5.16 & 4.28 & -13.55 & 3.23 & 827.04 & -1.21 & 0.23 & \\
+Closure × /o/ & -0.06 & 0.08 & -0.22 & 0.10 & 829.38 & -0.71 & 0.48 & \\
+Closure × /u/ & -0.23 & 0.08 & -0.39 & -0.07 & 831.49 & -2.82 & 0.00 & *\\
+C2 closure × sp. rate & -0.20 & 0.06 & -0.32 & -0.08 & 826.97 & -3.18 & 0.00 & *\\
+/o/ × sp. rate & -3.75 & 5.19 & -13.92 & 6.42 & 819.79 & -0.72 & 0.47 & \\
+/u/ × sp. rate & -10.13 & 5.50 & -20.91 & 0.64 & 822.55 & -1.84 & 0.07 & \\
+Closure × /o/ × sp. rate & 0.09 & 0.07 & -0.06 & 0.23 & 820.74 & 1.17 & 0.24 & \\
+Closure × /u/ × sp. rate & 0.17 & 0.08 & 0.01 & 0.32 & 823.88 & 2.14 & 0.03 & *\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\ctable[caption = Participants' sociolinguistic information. The column 'Spent most time in' gives the city in which the participant spent most of their life. The last column ('> 6 mo') indicates whether the participant has spent more than 6 months abroad,
+label = t:socio,
+width=\textwidth,
+star,
+pos=h,
+doinside = \scriptsize
+]{llll>{\raggedright}p{3cm}l>{\raggedright}p{2cm}l}{}{
+\FL
+ID & Age & Sex    & Native L & Other Ls& City of birth & Spent most time in & > 6 mo \ML
+IT01 & 29 & Male   & Italian & English, Spanish                          & Verbania            & Verbania        & Yes \NN
+IT02 & 26 & Male   & Italian & Friulian, English, Ladin-Venetan          & Udine               & Tricesimo & Yes \NN
+IT03 & 28 & Female & Italian & English, German                           & Verbania            & Verbania        & No  \NN
+IT04 & 54 & Female & Italian & Calabrese                                 & Verbania            & Verbania        & No  \NN
+IT05 & 28 & Female & Italian & English                                   & Verbania            & Verbania        & No  \NN
+IT09 & 35 & Female & Italian & English                                   & Vignola & Vignola         & Yes \NN
+IT11 & 24 & Male   & Italian & English                                   & Monza               & Monza           & Yes \NN
+IT12 & 26 & Male   & Italian & English                                   & Rome               & Rome           & Yes \NN
+IT13 & 20 & Female & Italian & English, French, Arabic, Farsi            & Ancona              & Chiaravalle     & Yes \NN
+IT14 & 32 & Male & Italian & English, Spanish & Frosinone & Frosinone & Yes \NN
+PL02 & 32 & Female & Polish  & English, Norwegian, French, German, Dutch & Koło                & Poznań          & Yes \NN
+PL03 & 26 & Male   & Polish  & Russian, English, French, German          & Nowa Sol            & Poznań          & Yes \NN
+PL04 & 34 & Female & Polish  & Spanish, English, French                  & Warsaw              & Warsaw          & No  \NN
+PL05 & 42 & Male   & Polish  & English, French                           & Przasnysz           & Warsaw        & No  \NN
+PL06 & 33 & Male   & Polish  & English                                   & Zgierz              & Zgierz          & Yes \NN
+PL07 & 32 & Female & Polish  & English, Russian                          & Bielsk Podlaski     & Bielsk Podlaski & Yes \LL
+}
+
+\ctable[caption = Target words. Asterisks indicate real words,
+label = t:targets,
+star,
+pos=h,
+doinside = \footnotesize
+]{lllllll}{}{
+\FL
+Italian   &        &      & \hspace{0.5cm} & Polish &      &      \NN
+\cmidrule{1-3}\cmidrule{5-7}
+pata      & poto*  & putu & & pata   & poto & putu \NN
+pada      & podo   & pudu & & pada*  & podo & pudu \NN
+paca*     & poco*  & pucu & & paka*  & poko & puku \NN
+paga*     & pogo   & pugu & & paga   & pogo & pugu \LL
+}
+
+\bibliography{linguistics}
+
+
+\end{document}
