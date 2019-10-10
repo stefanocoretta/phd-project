@@ -11,7 +11,7 @@ output:
     citation_package: natbib
     fig_caption: yes
     dev: png
-bibliography: linguistics
+bibliography: bib
 classoption:
   - charis
 header-includes:
@@ -285,7 +285,7 @@ All further data processing and visualisation was done in R v3.5.2 [@wickham2017
 <!-- add power analysis? -->
 <!-- NEED TO CITE KIRBY -->
 
-Given the data-driven nature of the study, all statistical analyses reported here are to be considered exploratory (hypothesis-generating) rather than confirmatory (hypothesis-driven, \citealt{kerr1998, gelman2013, roettger2018}).
+Given the data-driven nature of the study, all statistical analyses reported here are to be considered exploratory (hypothesis-generating) rather than confirmatory (hypothesis-driven, \citealt{kerr1998, gelman2013, roettger2019}).
 The durational measurements were analysed with linear mixed-effects models using `lme4` v1.1-19 in R [@bates2015], and model estimates were extracted with the `effects` package v4.1-0 [@fox2003].
 All factors were coded with treatment contrasts and the following reference levels: voiceless (vs. voiced), /a/ (vs. /o/, /u/), coronal (vs. velar), Italian (vs. Polish).
 Speech rate has been centred when included in the models to make the intercept estimates more interpretable.
