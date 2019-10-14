@@ -629,7 +629,7 @@ onset), the graph suggests a difference in tongue root position of about
 1 mm.
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure4-1} \caption{Predicted tongue root position (top figure) during vowels preceding voiceless and voiced stops, with 95\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see \Cref{s:trp-v1}).}\label{f:Figure4}
+\includegraphics[width=\linewidth]{./Figure4-1} \caption{Predicted tongue root position (top figure) during vowels preceding voiceless (green solid line) and voiced stops (orange dashed line), with 95\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see \Cref{s:trp-v1}).}\label{f:Figure4}
 \end{figure}
 
 \hypertarget{correlation-between-tongue-root-position-and-v1-duration}{%
@@ -650,11 +650,14 @@ syllables per second), vowel (/a/, /o/, /u/), C2 place of articulation
 (coronal, velar); an interaction between centred V1 duration and vowel;
 by-speaker and by-word random intercept (a by-speaker random coefficient
 for V1 duration led to non-convergence, so it was not included in the
-final model). All predictors and the V1 duration/vowel interaction are
-significant. V1 duration and tongue root position at V1 offset/C2 onset
-are positively correlated: The longer the vowel, the more advanced the
-tongue root is at V1 offset/C2 onset (\(\hat{\beta}\) = 0.065 mm, SE =
-0.007). The effect is stronger with /a/ than with /o/ and /u/ (see
+final model). A separate model which also included C2 voicing and its
+interaction with vowel duration indicated that either terms are not
+significant, so they were dropped in the model above. All other
+predictors and the V1 duration/vowel interaction are significant. V1
+duration and tongue root position at V1 offset/C2 onset are positively
+correlated: The longer the vowel, the more advanced the tongue root is
+at V1 offset/C2 onset (\(\hat{\beta}\) = 0.065 mm, SE = 0.007). The
+effect is stronger with /a/ than with /o/ and /u/ (see
 \Cref{f:Figure4}).
 
 \hypertarget{tongue-root-position-during-v1-as-a-function-of-v1-duration}{%
@@ -744,25 +747,28 @@ voiceless stops, in accordance with the results from the static analysis
 at vowel offset. Moreover, a significant interaction between vowel
 duration and the trajectory shape was found. Shorter vowels have a
 flatter trajectory, while the curvature of the trajectory in longer
-vowels has a greater curvature.
+vowels has a greater curvature. I have no explanation for why the
+advancement of the root seemingly increases with increasing vowel
+duration except when the duration goes from 150 to 200 ms.
 
 When comparing the effects of vowel duration and speech rate on tongue
 root position, though, we are faced with a paradox. Both variables have
 a positive effect on tongue root position, so that longer vowels and
-higher speech rates imply a more advanced root. However, speech rate has
-a negative effect on vowel duration (and segments duration in general),
-such that higher speech rates are correlated with shorter vowel
-durations (this holds for this data). If higher speech rates mean
-shorter vowels and shorter vowels imply a less advanced root, we should
-also find less advancement with higher speech rates. However, the
-results indicate the opposite, and higher speech rates are correlated
-with more root advancement. However, a regression model on the position
-of the tongue root at \emph{vowel onset} suggests that speech rate is
-positively correlated with tongue root position at vowel onset. The
-tongue root is already in a more advanced position at vowel onset when
-the speech rate is high, so that, if vowel duration is held constant,
-more advancement is expected at vowel offset with higher speech rates
-even when higher speech rate has a negative effect on vowel duration.
+higher speech rates imply a more advanced root. On the other hand,
+speech rate has a negative effect on vowel duration (and segments
+duration in general), such that higher speech rates are correlated with
+shorter vowel durations (this holds for this data). If higher speech
+rates mean shorter vowels and shorter vowels imply a less advanced root,
+we should also find less advancement with higher speech rates. However,
+the results indicate the opposite, and higher speech rates are
+correlated with more root advancement. A regression model on the
+position of the tongue root at \emph{vowel onset} further suggests that
+speech rate is positively correlated with tongue root position at vowel
+onset. The tongue root is already in a more advanced position at vowel
+onset when the speech rate is high, so that, if vowel duration is held
+constant, more advancement is expected at vowel offset with higher
+speech rates even when higher speech rate has a negative effect on vowel
+duration.
 
 The articulatory patterns observed in this paper contribute to the
 understanding of the acoustic patterns discussed in \Cref{s:intro}. If
