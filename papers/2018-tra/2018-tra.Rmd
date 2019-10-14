@@ -180,19 +180,28 @@ including (but not limited to) English, German, Hindi, Russian, Arabic, Korean, 
 
 Italian and Polish offer an opportunity to study the articulatory aspects of the voicing effect, given that the former has been consistently reported as a voicing-effect language \citep{caldognetto1979, farnetani1986, esposito2002}, while voicing effect in the latter is more complex, with some studies finding an effect \citep{slowiaczek1985, nowak2006, malisz2008, coretta2018j} and others not \citep{keating1984, jassem1989}.
 
-\citet{coretta2018j} argues, based on the acoustics of the same data reported here, that the first (stressed) vowel of disyllabic (CV́CV) words in Italian and Polish are 16 ms longer (SE = 4.4) when followed by a voiced stop.
-The high degree of intra-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.
+\citet{coretta2018j} argues, based on the acoustics of the same data reported here, that the first (stressed) vowel of disyllabic (CV́CV) words is 11.5 ms longer in Italian and 7.55 ms longer in Polish when followed by a voiced stop.
+A linear model, however, suggest a difference of 16 ms (SE = 4.4) in both languages, and no statistical significance was found for the difference in effect in the two languages.
+Moreover, the high degree of inter-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.
+More specifically, speakers of both Italian and Polish show a range of magnitudes of the voicing effect, and no particular language-specific patter can be discerned.
+Independent of language, some speakers have a greater effect and others a small or negligible effect (see \citealt{coretta2018j} for details).
+
 Finally, the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
 The duration of the release to release interval is stable across voicing contexts.
 Within this interval, the timing of VC boundary (the vowel offset/onset of stop closure) produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
 A later closure onset results in a long vowel and a short closure, while an earlier closure onset corresponds to a short vowel and a long closure.
 Since the closure of voiceless stops is longer than that of voiced stops, it follows that vowels are shorter when followed by the former than when followed by the latter.
 
-## This study
+## Rationale of the current study
 
-Previous research has established that tongue root advancement and longer vowel durations are two common correlates of voicing \citep{kent1969, perkell1969, westbury1983, house1953, peterson1960, chen1970}.
+Previous research has established that tongue root advancement and longer vowel durations are two common correlates of voicing .
 In particular, voicing during closure can be maintained by advancing the tongue root during the production of voiced stops (which is possibly initiated earlier than the closure onset) and that vowels followed by voiced stops tend to be longer than vowels followed by voiceless stops.
 The acoustic data further revealed that the duration of the stop closure bears on the duration of the preceding vowel, by means of a kind of compensatory mechanism.
+
+Previous research has established that longer preconsonantal vowel durations and greater tongue root advancement are associated with voicing in postvocalic plosives \citep{kent1969, perkell1969, westbury1983, house1953, peterson1960, chen1970}.
+We know that voicing during plosive closure can be sustained by advancing the tongue root during the production of voiced plosives and that tongue root advancement probably begins before the closure onset (i.e. during the preceding vowel).
+We also know that vowels followed by voiced plosives tend to be longer than vowels followed by voiceless plosives.
+Acoustic analysis of the current dataset confirmed an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel.
 
 The results from the articulatory data of this study, which will be discussed in the following sections, offer new insights into the link between closure duration and vowel duration.
 We will see that the relative timing of the closure also covaries with the degree of tongue root advancement found at closure onset, resulting in a three-way relationship between stop consonant duration, vowel duration and tongue-root advancement..
@@ -271,7 +280,13 @@ The outcome of the automatic alignment was then manually corrected, according to
 The onset and offset of V1 in the C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2} test words were respectively placed in correspondence of the appearance and disappearance of higher formants structure in the spectrogram (F2/F4, as per \citealt{machac2009}).
 Vowel duration was calculated as the duration of the V1 onset to V1 offset interval.
 Speech rate was measured as the number of syllables in the sentence (8 in Italian and 6 in Polish) divided by the duration of the sentence in seconds.
-<!-- add image -->
+
+\begin{figure}
+  \centering
+  \includegraphics[width=5in]{Figure2.pdf}
+  \caption{Segmentation example of the words \textit{pata} uttered by the Italian speaker IT09 (the times on the x-axis refer to the times in the original audio file).}
+  \label{f:trp}
+\end{figure}
 
 The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
 Smoothing splines were automatically fitted to the visible tongue contours in AAA.
@@ -333,7 +348,7 @@ tra_lm <- lmer(
 summary(tra_lm)
 ```
 
-```{r Figure2, include=TRUE, fig.cap = "Raw data (z-scores) and boxplots of tongue root position in voiceless and voiced stops at closure onset. Higher values indicate advancement.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure3, include=TRUE, fig.cap = "Raw data (z-scores) and boxplots of tongue root position in voiceless and voiced stops at closure onset. Higher values indicate advancement.", fig.lp="f:", out.extra="width=\\linewidth"}
 kines %>%
   group_by(speaker) %>%
   mutate(trp_z = scale(trp)) %>%
@@ -408,7 +423,7 @@ This forward movement is observed both in the context of a following voiced stop
 However, the magnitude of the movement is greater in the former.
 At V1 offset (= C2 closure onset), the graph suggests a difference in tongue root position of about 1 mm.
 
-```{r Figure3, include=TRUE, fig.cap="Predicted tongue root position (top figure) during vowels preceding voiceless and voiced stops, with 95\\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see \\Cref{s:trp-v1}).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure4, include=TRUE, fig.cap="Predicted tongue root position (top figure) during vowels preceding voiceless and voiced stops, with 95\\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see \\Cref{s:trp-v1}).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 smooths <- predict_gam(tra_gam_ar, exclude_terms = list("s(proportion,speaker)", "s(speech_rate_c)", "ti(proportion,speech_rate_c)")) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
@@ -444,7 +459,7 @@ tra_lm_2 <- lmer(
 summary(tra_lm_2)
 ```
 
-```{r Figure4, include=TRUE, fig.cap="Raw data, regression lines, and 95\\% confidence intervals of the correlation between vowel duration and tongue root position for each vowel (/a/, /o/, and /u/). The regression line and confidence intervals are from a mixed-effects model (see \\Cref{s:trp-vdur}).", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure5, include=TRUE, fig.cap="Raw data, regression lines, and 95\\% confidence intervals of the correlation between vowel duration and tongue root position for each vowel (/a/, /o/, and /u/). The regression line and confidence intervals are from a mixed-effects model (see \\Cref{s:trp-vdur}).", fig.lp="f:", out.extra="width=\\linewidth"}
 as_tibble(effect("v1_duration_c:vowel", tra_lm_2)) %>%
   ggplot(aes(v1_duration_c, fit)) +
   geom_point(data = kines, aes(y = trp, colour = vowel), alpha = 0.1) +
@@ -510,7 +525,7 @@ The full model with the tensor product interaction over V1 proportion and V1 dur
 The general trend is that the forward movement of the root during the vowel is greater the longer the duration of the vowel (\Cref{f:Figure5}).
 Moreover, the trajectory curvature increases with vowel duration: Shorter vowels have a flatter trajectory of tongue root advancement.
 
-```{r Figure5, include=TRUE, fig.cap="Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\\% confidence intervals. Predictions from a GAMM (see \\Cref{s:trp-v1-dur}).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure6, include=TRUE, fig.cap="Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\\% confidence intervals. Predictions from a GAMM (see \\Cref{s:trp-v1-dur}).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 150, 200))) %>%
   filter(speaker == "it01") %>% # random effect have been cancelled, so selecting one speaker
   ggplot(aes(proportion, fit)) +
@@ -601,7 +616,7 @@ The following section discusses this point.
 ## Individual differences
 \label{s:idio}
 
-```{r Figure6, include=TRUE, fig.cap="Slope plots of mean tongue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.", fig.lp="f:", fig.height=3, out.width="\\linewidth", fig.align="center"}
+```{r Figure7, include=TRUE, fig.cap="Slope plots of mean tongue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.", fig.lp="f:", fig.height=3, out.width="\\linewidth", fig.align="center"}
 fig_a <- kines_mean %>%
   ggplot(aes(c2_phonation, trp_mean, linetype = language, shape = language)) +
   geom_point() +
@@ -647,7 +662,7 @@ The right plot of \Cref{f:Figure6} confirms this point visually.
 Two speakers show a declining slope (one is Italian and the other Polish), one speaker has a virtually flat slope, while all the others have an increasing slope at varying degrees.
 Note that the individual variation across speakers found in this data is qualitatively comparable to that in \citet{ahn2018}.
 
-```{r Figure7, include=TRUE, fig.cap="By-speaker raw mean difference in tongue root position between voiceless and voiced stops at closure onset (in millimetres). The horizontal segments are the standard errors of the mean differences.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure8, include=TRUE, fig.cap="By-speaker raw mean difference in tongue root position between voiceless and voiced stops at closure onset (in millimetres). The horizontal segments are the standard errors of the mean differences.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 trp_difference %>%
   ggplot(aes(difference, reorder(speaker, difference))) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
@@ -705,7 +720,7 @@ tra_gam_s_ar <- bam(
 )
 ```
 
-```{r Figure8, include=TRUE, fig.cap="Predicted tongue root position during vowels followed by voiceless and voiced stops for each speaker. Predicted from a GAMM (see text). Note the different scales on the y-axis.", fig.lp="f:", out.extra="width=\\linewidth", fig.height=8, cache=TRUE, dependson="tra-gam-s-ar"}
+```{r Figure9, include=TRUE, fig.cap="Predicted tongue root position during vowels followed by voiceless and voiced stops for each speaker. Predicted from a GAMM (see text). Note the different scales on the y-axis.", fig.lp="f:", out.extra="width=\\linewidth", fig.height=8, cache=TRUE, dependson="tra-gam-s-ar"}
 predict_gam(tra_gam_s_ar, values = list(speech_rate_c = 0)) %>%
   separate(speaker_voicing, c("speaker", "voicing")) %>%
   mutate(voicing = factor(voicing, levels = c("voiceless", "voiced"))) %>%

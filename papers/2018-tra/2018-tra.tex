@@ -299,16 +299,25 @@ others not \citep{keating1984, jassem1989}.
 
 \citet{coretta2018j} argues, based on the acoustics of the same data
 reported here, that the first (stressed) vowel of disyllabic (CV́CV)
-words in Italian and Polish are 16 ms longer (SE = 4.4) when followed by
-a voiced stop. The high degree of intra-speaker variation, backed up by
-statistical modelling, also indicates that these languages possibly
-behave similarly in regards to the voicing effect. Finally, the temporal
-distance between two consecutive stop releases in CV́CV words is not
-affected by the voicing of the second consonant. The duration of the
-release to release interval is stable across voicing contexts. Within
-this interval, the timing of VC boundary (the vowel offset/onset of stop
-closure) produces differences in the respective durations of vowel and
-closure, following a mechanism of temporal compensation
+words is 11.5 ms longer in Italian and 7.55 ms longer in Polish when
+followed by a voiced stop. A linear model, however, suggest a difference
+of 16 ms (SE = 4.4) in both languages, and no statistical significance
+was found for the difference in effect in the two languages. Moreover,
+the high degree of inter-speaker variation, backed up by statistical
+modelling, also indicates that these languages possibly behave similarly
+in regards to the voicing effect. More specifically, speakers of both
+Italian and Polish show a range of magnitudes of the voicing effect, and
+no particular language-specific patter can be discerned. Independent of
+language, some speakers have a greater effect and others a small or
+negligible effect (see \citealt{coretta2018j} for details).
+
+Finally, the temporal distance between two consecutive stop releases in
+CV́CV words is not affected by the voicing of the second consonant. The
+duration of the release to release interval is stable across voicing
+contexts. Within this interval, the timing of VC boundary (the vowel
+offset/onset of stop closure) produces differences in the respective
+durations of vowel and closure, following a mechanism of temporal
+compensation
 \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}. A
 later closure onset results in a long vowel and a short closure, while
 an earlier closure onset corresponds to a short vowel and a long
@@ -316,19 +325,33 @@ closure. Since the closure of voiceless stops is longer than that of
 voiced stops, it follows that vowels are shorter when followed by the
 former than when followed by the latter.
 
-\hypertarget{this-study}{%
-\subsection{This study}\label{this-study}}
+\hypertarget{rationale-of-the-current-study}{%
+\subsection{Rationale of the current
+study}\label{rationale-of-the-current-study}}
 
 Previous research has established that tongue root advancement and
-longer vowel durations are two common correlates of voicing
-\citep{kent1969, perkell1969, westbury1983, house1953, peterson1960, chen1970}.
-In particular, voicing during closure can be maintained by advancing the
+longer vowel durations are two common correlates of voicing . In
+particular, voicing during closure can be maintained by advancing the
 tongue root during the production of voiced stops (which is possibly
 initiated earlier than the closure onset) and that vowels followed by
 voiced stops tend to be longer than vowels followed by voiceless stops.
 The acoustic data further revealed that the duration of the stop closure
 bears on the duration of the preceding vowel, by means of a kind of
 compensatory mechanism.
+
+Previous research has established that longer preconsonantal vowel
+durations and greater tongue root advancement are associated with
+voicing in postvocalic plosives
+\citep{kent1969, perkell1969, westbury1983, house1953, peterson1960, chen1970}.
+We know that voicing during plosive closure can be sustained by
+advancing the tongue root during the production of voiced plosives and
+that tongue root advancement probably begins before the closure onset
+(i.e.~during the preceding vowel). We also know that vowels followed by
+voiced plosives tend to be longer than vowels followed by voiceless
+plosives. Acoustic analysis of the current dataset confirmed an apparent
+compensatory relationship between the duration of the plosive closure
+and the duration of the preceding vowel; the shorter the plosive
+closure, the longer the preceding vowel.
 
 The results from the articulatory data of this study, which will be
 discussed in the following sections, offer new insights into the link
@@ -462,6 +485,13 @@ the duration of the V1 onset to V1 offset interval. Speech rate was
 measured as the number of syllables in the sentence (8 in Italian and 6
 in Polish) divided by the duration of the sentence in seconds.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=5in]{Figure2.pdf}
+  \caption{Segmentation example of the words \textit{pata} uttered by the Italian speaker IT09 (the times on the x-axis refer to the times in the original audio file).}
+  \label{f:trp}
+\end{figure}
+
 The displacement of the tongue root was obtained from the ultrasonic
 data according to the procedure used in \citet{kirkham2017}. Smoothing
 splines were automatically fitted to the visible tongue contours in AAA.
@@ -541,7 +571,7 @@ onset}\label{tongue-root-position-at-c2-closure-onset}}
 \label{s:tra-lm}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure2-1} \caption{Raw data (z-scores) and boxplots of tongue root position in voiceless and voiced stops at closure onset. Higher values indicate advancement.}\label{f:Figure2}
+\includegraphics[width=\linewidth]{./Figure3-1} \caption{Raw data (z-scores) and boxplots of tongue root position in voiceless and voiced stops at closure onset. Higher values indicate advancement.}\label{f:Figure3}
 \end{figure}
 
 \Cref{f:Figure2} shows raw data points and boxplots of the position of
@@ -590,7 +620,7 @@ onset), the graph suggests a difference in tongue root position of about
 1 mm.
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure3-1} \caption{Predicted tongue root position (top figure) during vowels preceding voiceless and voiced stops, with 95\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see \Cref{s:trp-v1}).}\label{f:Figure3}
+\includegraphics[width=\linewidth]{./Figure4-1} \caption{Predicted tongue root position (top figure) during vowels preceding voiceless and voiced stops, with 95\% confidence intervals, and difference smooth (bottom figure). Higher values of tongue root position indicate a more advanced root. The shaded red area in the difference smooth indicates where the two curves are different. Predictions from a GAMM (see \Cref{s:trp-v1}).}\label{f:Figure4}
 \end{figure}
 
 \hypertarget{correlation-between-tongue-root-position-and-v1-duration}{%
@@ -600,7 +630,7 @@ duration}\label{correlation-between-tongue-root-position-and-v1-duration}}
 \label{s:trp-vdur}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure4-1} \caption{Raw data, regression lines, and 95\% confidence intervals of the correlation between vowel duration and tongue root position for each vowel (/a/, /o/, and /u/). The regression line and confidence intervals are from a mixed-effects model (see \Cref{s:trp-vdur}).}\label{f:Figure4}
+\includegraphics[width=\linewidth]{./Figure5-1} \caption{Raw data, regression lines, and 95\% confidence intervals of the correlation between vowel duration and tongue root position for each vowel (/a/, /o/, and /u/). The regression line and confidence intervals are from a mixed-effects model (see \Cref{s:trp-vdur}).}\label{f:Figure5}
 \end{figure}
 
 A second linear mixed regression was fitted to tongue root position at
@@ -640,7 +670,7 @@ vowel duration: Shorter vowels have a flatter trajectory of tongue root
 advancement.
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure5-1} \caption{Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\% confidence intervals. Predictions from a GAMM (see \Cref{s:trp-v1-dur}).}\label{f:Figure5}
+\includegraphics[width=\linewidth]{./Figure6-1} \caption{Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\% confidence intervals. Predictions from a GAMM (see \Cref{s:trp-v1-dur}).}\label{f:Figure6}
 \end{figure}
 
 \hypertarget{discussion}{%
@@ -819,11 +849,11 @@ variability. The following section discusses this point.
 
 \begin{figure}
 
-{\centering \includegraphics[width=\linewidth]{./Figure6-1} 
+{\centering \includegraphics[width=\linewidth]{./Figure7-1} 
 
 }
 
-\caption{Slope plots of mean tongue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.}\label{f:Figure6}
+\caption{Slope plots of mean tongue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.}\label{f:Figure7}
 \end{figure}
 
 The results presented in \Cref{s:results} and discussed in
@@ -858,7 +888,7 @@ individual variation across speakers found in this data is qualitatively
 comparable to that in \citet{ahn2018}.
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure7-1} \caption{By-speaker raw mean difference in tongue root position between voiceless and voiced stops at closure onset (in millimetres). The horizontal segments are the standard errors of the mean differences.}\label{f:Figure7}
+\includegraphics[width=\linewidth]{./Figure8-1} \caption{By-speaker raw mean difference in tongue root position between voiceless and voiced stops at closure onset (in millimetres). The horizontal segments are the standard errors of the mean differences.}\label{f:Figure8}
 \end{figure}
 
 The mean difference in tongue root position at the onset of voiceless
@@ -891,7 +921,7 @@ articulatory evidence for a possible precursor of said phonological
 patterns.\footnote{All the examples in \citet{vaux1996} are on vowels \textit{following} voiceless vs. voiced stops, rather than preceding, as in the current study. While beyond the scope of this paper, whether this is a systematic gap or not and how this relates to the present findings should be examined in future work.}
 
 \begin{figure}
-\includegraphics[width=\linewidth]{./Figure8-1} \caption{Predicted tongue root position during vowels followed by voiceless and voiced stops for each speaker. Predicted from a GAMM (see text). Note the different scales on the y-axis.}\label{f:Figure8}
+\includegraphics[width=\linewidth]{./Figure9-1} \caption{Predicted tongue root position during vowels followed by voiceless and voiced stops for each speaker. Predicted from a GAMM (see text). Note the different scales on the y-axis.}\label{f:Figure9}
 \end{figure}
 
 \hypertarget{conclusion}{%

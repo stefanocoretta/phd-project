@@ -239,10 +239,21 @@ Changed.
 
 L110-12 What were the mean voicing differences for the two languages? Were they comparable?
 
-L112-114 Can you explain further? "The high degree of intra-speaker variation, backed
-up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect."
+\color{plum}
+I've added details on the raw mean differences of the voicing effect in the two languages and mentioned that such difference is not significant in the linear model.
+\color{black}
+
+L112-114 Can you explain further? "The high degree of intra-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect."
+
+\color{plum}
+I've corrected "intra-speaker" with "inter-speaker" and expanded on this statment by indicating that independent of language speakers show a range of possible magnitudes of the effect.
+\color{black}
 
 L124 Can you come up with a better section heading?
+
+\color{plum}
+Changed to "Rationale of the current study".
+\color{black}
 
 L126 Citations missing.
 
@@ -251,6 +262,10 @@ I inserted here some of the citations from above for clarity.
 \color{black}
 
 L125-131 Suggested rephrasing "Previous research has established that longer preconsonantal vowel durations and greater tongue root advancement are associated with voicing in postvocalic plosives. We know that voicing during plosive closure can be sustained by advancing the tongue root during the production of voiced plosives and that tongue root advancement probably begins before the closure onset (i.e. during the preceding vowel). We also know that vowels followed by voiced plosives tend to be longer than vowels followed by voiceless plosives. Acoustic analysis of the current dataset confirmed an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel."
+
+\color{plum}
+Rephrased as suggested.
+\color{black}
 
 L133 "insights on the link" – "insights into the link", "between closure" – "between closure duration"?? or "link between closure and vowel durations".
 
@@ -305,6 +320,10 @@ Changed.
 \color{black}
 
 L202-9 Can you add a figure showing an example of annotation?
+
+\color{plum}
+Added.
+\color{black}
 
 L216-8 "Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector." Based on the figure provided (FIG. 1) I am not convinced that tongue- root advancement is being captured. The probe angle is very narrow. The tongue root does not appear to have been imaged, as there is no visible hyoid shadow. I am not sure that a measure of displacement along a radial fan axis shown would capture tongue-root advancement. Could you provide information on the range of radial axes that were used as measurement axes?
 
