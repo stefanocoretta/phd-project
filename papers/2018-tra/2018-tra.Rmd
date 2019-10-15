@@ -685,13 +685,13 @@ trp_difference %>%
 ```
 
 The mean difference in tongue root position at the onset of voiceless vs. voiced stops has been calculated for each speaker from the raw data.
-\Cref{f:Figure9} plots the speakers' mean differences, with the respective standard error bars.
+\Cref{f:Figure8} plots the speakers' mean differences, with the respective standard error bars.
 The bottom 7 speakers (3 Polish, 4 Italian) show either a weak negative difference (the tongue root is slightly more advanced in voiceless stops) or a weak positive difference with wide standard errors which include 0.
 The remaining 10 speakers have a more robust positive difference (the tongue root is more advanced in voiced stops).
 Finally, speakers of each language do not cluster together, reiterating the observation made above that language does not seem to be an informative parameter.
 
 Finally, interesting individual patterns can also be seen in the trajectories of tongue root position.
-\Cref{f:Figure8} shows these trajectories for all the speakers (note that the *y*-axis of each plot is on a different scale, so magnitude comparisons should not be made visually).
+\Cref{f:Figure9} shows these trajectories for all the speakers (note that the *y*-axis of each plot is on a different scale, so magnitude comparisons should not be made visually).
 Speakers IT01, IT03, and PL04 in particular have a somewhat categorical distinction in tongue root position during vowels followed by voiceless vs. voiced stops.
 Such tongue root distinction is implemented across the total duration of the vowel, rather than towards the end (as suggested by the results from the aggregated data, see \Cref{s:trp-v1}).
 The phonological literature reports cases in which the difference in tongue root position in vowels is enhanced, leading to phonological alternations or diachronic loss of the voicing distinction with maintenance of the tongue root distinction (see \citealt{vaux1996} and references therein).
