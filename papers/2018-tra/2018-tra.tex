@@ -484,16 +484,17 @@ manually corrected, according to the recommendations in
 C\textsubscript{1}V\textsubscript{1}C\textsubscript{2}V\textsubscript{2}
 test words were respectively placed in correspondence of the appearance
 and disappearance of higher formants structure in the spectrogram
-(F2/F4, as per \citealt{machac2009}). Vowel duration was calculated as
-the duration of the V1 onset to V1 offset interval. Speech rate was
-measured as the number of syllables in the sentence (8 in Italian and 6
-in Polish) divided by the duration of the sentence in seconds.
+(F2/F4, as per \citealt{machac2009}). See \Cref{f:segmentation} for a
+segmentation example. Vowel duration was calculated as the duration of
+the V1 onset to V1 offset interval. Speech rate was measured as the
+number of syllables in the sentence (8 in Italian and 6 in Polish)
+divided by the duration of the sentence in seconds.
 
 \begin{figure}
   \centering
   \includegraphics[width=5in]{Figure2.pdf}
   \caption{Segmentation example of the words \textit{pata} uttered by the Italian speaker IT09 (the times on the x-axis refer to the times in the original audio file).}
-  \label{f:trp}
+  \label{f:segmentation}
 \end{figure}
 
 The displacement of the tongue root was obtained from the ultrasonic
@@ -582,7 +583,7 @@ onset}\label{tongue-root-position-at-c2-closure-onset}}
 \includegraphics[width=\linewidth]{./Figure3-1} \caption{Raw data (z-scores) and boxplots of tongue root position in voiceless and voiced stops at closure onset. Higher values indicate advancement.}\label{f:Figure3}
 \end{figure}
 
-\Cref{f:Figure2} shows raw data points and boxplots of the position of
+\Cref{f:Figure3} shows raw data points and boxplots of the position of
 the tongue root at C2 closure onset when C2 is voiceless (left) and
 voiced (right). Since the position of the tongue root in millimetres
 depends on the speaker's anatomy and on the probe location, scaled
@@ -628,10 +629,10 @@ variation).
 A chi-squared test on the ML scores of the full model and a model
 excluding the terms with C2 voicing (C2 voicing parametric term and
 by-C2 voicing difference smooth) indicates that C2 voicing significantly
-improves fit (\(\chi\)(3) = 7.758, \emph{p} = 0.001). \Cref{f:Figure3}
+improves fit (\(\chi\)(3) = 7.758, \emph{p} = 0.001). \Cref{f:Figure4}
 shows the predicted tongue root position along the duration of V1 before
 voiceless (green solid line) and voiced stops (orange dashed line).
-\Cref{f:Figure3} indicates that the root advances during the production
+\Cref{f:Figure4} indicates that the root advances during the production
 of the vowel, relative to its position at V1 onset. This forward
 movement (increasing values of tongue root position in the figure) is
 observed both in the context of a following voiced stop and in that of a
@@ -669,7 +670,7 @@ duration and tongue root position at V1 offset/C2 onset are positively
 correlated: The longer the vowel, the more advanced the tongue root is
 at V1 offset/C2 onset (\(\hat{\beta}\) = 0.065 mm, SE = 0.007). The
 effect is stronger with /a/ than with /o/ and /u/ (see
-\Cref{f:Figure4}).
+\Cref{f:Figure5}).
 
 \hypertarget{tongue-root-position-during-v1-as-a-function-of-v1-duration}{%
 \subsection{Tongue root position during V1 as a function of V1
@@ -686,10 +687,10 @@ smooth over V1 proportion by speaker (penalty order = 1). The full model
 with the tensor product interaction over V1 proportion and V1 duration
 has better fit according to model comparison with a model without the
 interaction (\(\chi\)(3) = 12.609, \emph{p} \textless{} 0.001).
-\Cref{f:Figure5} shows the estimated root trajectories at four values of
+\Cref{f:Figure6} shows the estimated root trajectories at four values of
 vowel duration. The general trend is that the total amount of the root
 advancement during the vowel is greater the longer the duration of the
-vowel (\Cref{f:Figure5}) and greater advancement at V1 offset/C2 onset
+vowel (\Cref{f:Figure6}) and greater advancement at V1 offset/C2 onset
 is achieved the longer the vowel.
 
 \begin{figure}
@@ -883,7 +884,7 @@ variability. The following section discusses this point.
 The results presented in \Cref{s:results} and discussed in
 \Cref{s:discussion} are group-level patterns of the population sampled
 in the present study. However, the data is characterised by a certain
-degree of individual-level differences. \Cref{f:Figure6} shows two slope
+degree of individual-level differences. \Cref{f:Figure7} shows two slope
 plots of mean tongue root position depending on C2 voicing for each
 speaker. In each plot, the two means of each speaker are linked by a
 line that shows the difference (or lack thereof) in means. Solid lines
@@ -904,7 +905,7 @@ discernible pattern can be found between speakers of Italian and Polish.
 Speakers of both languages show more or less the same range of
 variation. However, as we have seen in \Cref{s:results}, the estimated
 overall effect of C2 voicing is robust and it implies a more advanced
-tongue root in voiced stops. The right plot of \Cref{f:Figure6} confirms
+tongue root in voiced stops. The right plot of \Cref{f:Figure7} confirms
 this point visually. Two speakers show a declining slope (one is Italian
 and the other Polish), one speaker has a virtually flat slope, while all
 the others have an increasing slope at varying degrees. Note that the
@@ -917,7 +918,7 @@ comparable to that in \citet{ahn2018}.
 
 The mean difference in tongue root position at the onset of voiceless
 vs.~voiced stops has been calculated for each speaker from the raw data.
-\Cref{f:Figure7} plots the speakers' mean differences, with the
+\Cref{f:Figure9} plots the speakers' mean differences, with the
 respective standard error bars. The bottom 7 speakers (3 Polish, 4
 Italian) show either a weak negative difference (the tongue root is
 slightly more advanced in voiceless stops) or a weak positive difference
