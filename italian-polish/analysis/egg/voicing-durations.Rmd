@@ -79,6 +79,18 @@ voicing_voiceless %>%
 ```
 
 ```{r}
+voicing_voiced %>%
+  group_by(language, voiced_points) %>%
+  summarise(n = n())
+```
+
+```{r}
+voicing_voiced %>%
+  group_by(speaker, voiced_points) %>%
+  summarise(n = n())
+```
+
+```{r}
 voicing_voiceless %>%
   filter(voiced_points < 2) %>%
   nrow()

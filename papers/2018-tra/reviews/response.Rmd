@@ -26,20 +26,45 @@ I elaborate on these and other issues below.
 Line 17
 Fowler, 1992 and Lisker 1974, d not present any data on tongue root movements.
 
+\begin{adjustwidth}{1cm}{} \textit{
+They referred to vowel duration. I've expanded the list as per reviewer's request and moved the references to the next sentence.
+} \end{adjustwidth}
+
 Lines 21 and 24
 Here, you make claims about earlier works that need to be referenced.
+
+\begin{adjustwidth}{1cm}{} \textit{
+Line 21 refers to this study, so I changed to "In this exploratory study". I added references on line 24.
+} \end{adjustwidth}
 
 Line 72
 …is generally longer than that of voiceless stops…" > …is generally shorter than that of voiceless stops…"
 
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
 Page 6, second paragraph
 Since you bring up possible voicing differences between Italian and Polish, I think it would help if you made clear whether the voiced stops in your material were actually produced with glottal vibrations., If they were not, there would be no need for tongue movements to maintain voicing. Possibly, some of the individual differences may be due to voicing variability.
+
+\begin{adjustwidth}{1cm}{} \textit{
+The paragraph mentions differences in the effect of voicing on vowel duration, rather than differences of implementation of consonantal voicing. The EGG data of the study (not discussed here) indicates that virtually all voiced tokens were uttered with vocal fold vibration. I added a footnote in Section I.B which mentions this: "Simultaneous electroglottographic data (not discussed here) was also collected during the experiment. This data indicates that virtually all tokens of voiced stops were uttered with vocal fold vibration, with just a few exceptions (4 tokens were voiceless in the speaker PL02)."
+} \end{adjustwidth}
 
 Page 11, E, Data processing and statistical analysis.
 I would suggest saying something about the spatial resolution of the ultrasound system and the reliability of the splines. From Figure 1, it is not immediately clear that you are actually measuring the tongue root.
 
+\begin{adjustwidth}{1cm}{} \textit{
+I have added the following sentence in Section II.A: "The mean pixel size as used by the automatic tracker was 0.47 mm (SD = 0.16), so that differences in tongue position smaller than that would not be captured."
+As for measuring tongue root displacement, see answer to Reviewer 1 L216-8
+} \end{adjustwidth}
+
 Page 17, C. Correlation between tongue rot position and V1 duration
 Why is this interesting and relevant? Since the tongue is always moving in speech, would it not move longer during a long vowel? The tongue does not appear to have a point target for vowels.
+
+\begin{adjustwidth}{1cm}{} \textit{
+As far as I know, correlation between vowel duration and tongue root position at V1 offset have not been reported before. One possible obvious explanation is that a longer vowel allows for more tongue root advancement (as I argue in the paper). But it could have been that tongue root advancement is initiated at different times during the production of vowels in different vowel duration contexts, so that the same or similar amount of displacement is reached at the end of the vowel independent of its duration. Rather, what the positive correlation interestingly suggests is that the onset of the advancement gesture during the production of the vowel is initiated at a stable temporal distance from the release of C1/onset of V1.
+} \end{adjustwidth}
 
 Line 302
 Can you explain wat you mean with "curvature"?
@@ -52,11 +77,23 @@ Line 333
 "…the onset of the forward gesture of   the root is timed relative to a landmark preceding the closure, independent of the duration of the vowel."
 I don’t understand what this means. What kind of landmark are you talking about?
 
+\begin{adjustwidth}{1cm}{} \textit{
+I am sorry, the wording was most unclear. I have updated the paragraph to hopefully make it clearer. What I am try to say is that the data suggests the following. If we take the release of C1 as a temporal landmark, then the onset of the tongue root advancement gesture would happen at a fixed temporal distance from C1 release, independent of the duration of the vowel. Of course, C1 release is chosen for convenience, rather than for a theoretical reason (as discussed in Coretta 2018).
+} \end{adjustwidth}
+
 Line 391
 The duration of 70-90 ms suggested ny Rothenberg (1967) is not based on actual measurements.
 
+\begin{adjustwidth}{1cm}{} \textit{
+Updated the sentence to "Rothenberg 1967 hypothesised, after an informal investigation, that a maximal ballistic expansion movement of the tongue root to increase the size of the lower pharynx would take 70--90 ms" as suggested by one reviewer below.
+} \end{adjustwidth}
+
 Figure 6
 The labels and the y-axis values are identical in the left and right plots. The two plots appear to be identical.
+
+\begin{adjustwidth}{1cm}{} \textit{
+That was a coding error, now fixed.
+} \end{adjustwidth}
 
 References
 
@@ -343,7 +380,7 @@ Added.
 L216-8 "Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector." Based on the figure provided (FIG. 1) I am not convinced that tongue- root advancement is being captured. The probe angle is very narrow. The tongue root does not appear to have been imaged, as there is no visible hyoid shadow. I am not sure that a measure of displacement along a radial fan axis shown would capture tongue-root advancement. Could you provide information on the range of radial axes that were used as measurement axes?
 
 \begin{adjustwidth}{1cm}{} \textit{
-The hyoid shadow is not visible because during UTI set up the angle is adjusted so that the leftmost edge of the ultrasound image corresponds to the edge of the shadow (this is necessary for the automatic tracker to work more consistently). It is true that an ideal measure of tongue root position should be taken along a vector which is perpendicular to the movement. Such vector could for example be chosen so that it is parallel to the genioglossus tendon, which can be made visible on UTI images with the right settings. Unfortunately, the tendon was not always visible in the data. Moreover, since the data was collected without tongue root position in mind, I did not make sure to see whole of the actual tongue root all the time. Note though that the measured displacement must be related to tongue root displacement, since the fan-lines from which it was obtained were always more posterior than the fan-lines which corresponded to velar occlusion. This is the best I could do with the data at hand, although I understand it is not perfectly ideal. I'm happy to mention these issues in the paper if the reviewers think the paper might benefit from it.
+The hyoid shadow is not visible because during UTI set up the angle is adjusted so that the leftmost edge of the ultrasound image corresponds to the edge of the shadow (this is necessary for the automatic tracker to work more consistently). It is true that an ideal measure of tongue root position should be taken along a vector which is perpendicular to the movement. Such vector could for example be chosen so that it is parallel to the genioglossus, which can be made visible on UTI images with the right settings. Unfortunately, the genioglossus was not always visible in the data. Moreover, since the data was collected without tongue root position in mind, I did not make sure to see whole of the actual tongue root all the time. Note though that the measured displacement must be related to tongue root displacement, since the fan-lines from which it was obtained were always more posterior than the fan-lines which corresponded to velar occlusion. This is the best I could do with the data at hand, although I understand it is not perfectly ideal. I'm happy to mention these issues in the paper if the reviewers think the paper might benefit from it.
 } \end{adjustwidth}
 
 L218-20 Can you specify the range of radial axes (i.e. their numbers) that were used as measurement axes across all speakers?

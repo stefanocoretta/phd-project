@@ -123,7 +123,7 @@ trp_difference <- kines_mean %>%
 \label{s:intro}
 
 It is well known that voiced stops are almost universally associated with two phonetic correlates: advanced tongue root and increased duration of the preceding vowel.
-While a lot of work has been done on each of these aspects separately \citep{kent1969, perkell1969, westbury1983, rothenberg1967, ahn2018, house1953, peterson1960, chen1970, klatt1973, lisker1974, farnetani1986, fowler1992}, less is known about their relationship.
+While a lot of work has been done on each of these aspects separately (tongue root: \citealt{kent1969, perkell1969, westbury1983, rothenberg1967, ahn2018}, vowel duration: \citealt{house1953, peterson1960, chen1970, klatt1973, lisker1974, farnetani1986, fowler1992}), less is known about their relationship.
 In this paper, I propose a link between the position of the tongue root at the onset of a post-vocalic stop and the duration of the vowel preceding that stop.
 In this exploratory study of the articulatory correlates of stop voicing, it was found that tongue root advancement---a mechanism known to facilitate voicing during stop closure---is initiated during the production of the vowel preceding the stop.
 This replicates previous work on tongue root position \citep{kent1969, perkell1969, westbury1983, rothenberg1967, ahn2018}.
@@ -179,7 +179,7 @@ This so-called 'voicing effect' has been reported in a variety of languages,
 including (but not limited to) English, German, Hindi, Russian, Arabic, Korean, Italian, and Polish (see \citealt{maddieson1976} and \citealt{begus2017} for a more comprehensive list).
 
 Italian and Polish offer an opportunity to study the articulatory aspects of the voicing effect, given that the former has been consistently reported as a voicing-effect language \citep{caldognetto1979, farnetani1986, esposito2002}, while voicing effect in the latter is more complex, with some studies finding an effect \citep{slowiaczek1985, nowak2006, malisz2008, coretta2018j} and others not \citep{keating1984, jassem1989}.
-Moreover, the segmental phonologies of these languages facilitate the design of sufficiently comparable experimental material (see \citealt{coretta2018j} for a more thorough discussion).
+Moreover, the segmental phonologies of these languages facilitate the design of sufficiently comparable experimental material (see \citealt{coretta2018j} for a more thorough discussion).\footnote{Simultaneous electroglottographic data (not discussed here) was also collected during the experiment. This data indicates that virtually all tokens of voiced stops were uttered with vocal fold vibration, with just a few exceptions (4 tokens were voiceless in the speaker PL02).}
 
 \citet{coretta2018j} argues, based on the acoustics of the same data reported here, that the first (stressed) vowel of disyllabic (CV́CV) words is 11.5 ms longer in Italian and 7.55 ms longer in Polish when followed by a voiced stop.
 A linear model, however, suggest a difference of 16 ms (SE = 4.4) in both languages, and no statistical significance was found for the difference in effect in the two languages.
@@ -292,6 +292,7 @@ Speech rate was measured as the number of syllables in the sentence (8 in Italia
 
 The displacement of the tongue root was obtained from the ultrasonic data according to the procedure used in \citet{kirkham2017}.
 Smoothing splines were automatically fitted to the visible tongue contours in AAA.
+The mean pixel size as used by the automatic tracker was 0.47 mm (SD = 0.16), so that differences in tongue position smaller than that would not be captured.
 Manual correction was then applied in cases of clear tracking errors.
 A fan-like frame consisting of 42 equidistant radial lines superimposed on the ultrasonic image was used as the coordinate system.
 The origin of the 42 fan-lines coincides with the (virtual) origin of the ultrasonic beams, such that each fan-line is parallel to the direction of the ultrasonic scan lines.
@@ -567,7 +568,7 @@ This finding is compatible with the finding that the tongue root advances during
 
 The correlation between tongue root at V1 offset/C2 onset and vowel duration could be interpreted as to indicate that the onset of the forward gesture of the root is timed not relative to the stop closure, but rather relative to a fixed time point preceding the closure.
 Under this scenario, the tongue root advancement gesture is initiated at a fixed time after, for example, the release of C1.
-The timing of the tongue root advancement gesture would thus be independent of when stop closure is achieved and hence independent of the total duration of the vowel.
+The timing of the tongue root advancement gesture would thus be independent of the time stop closure is achieved and hence independent of the total duration of the vowel.
 Finally, the timing of full closure during the root advancement movement would sanction the degree of advancement found at closure onset (the later the closure onset relative to the onset of the advancement gesture, the greater advancement at closure onset).
 
 <!-- there is still the possibility that the velocity profiles are different in voiceless vs. voiced, or they could derive from the curvature differences? -->
