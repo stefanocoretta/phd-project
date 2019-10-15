@@ -417,10 +417,12 @@ compareML(tra_gam_ar_0, tra_gam_ar)
 ```
 
 The position of the tongue root during the articulation of V1 was assessed with generalised additive mixed models (GAMM).
-A GAMM was fitted to tongue root position with the following terms (\Cref{tab:tra-gam-ar-table}): C2 voicing as a parametric term; a smooth term over centred speech rate, a smooth term over V1 proportion with a by-C2 voicing difference smooth, a tensor product interaction over V1 proportion and centred speech rate; a factor random smooth over V1 proportion by speaker (penalty order = 1).
-A chi-squared test on the ML scores of the full model and a model excluding C2 voicing indicates that C2 voicing significantly improves fit ($\chi$(3) = 7.758, *p* = 0.001).
-\Cref{f:Figure3} shows that the root advances during the production of the vowel, relative to its position at V1 onset.
-This forward movement is observed both in the context of a following voiced stop and in that of a following voiceless stop.
+A GAMM was fitted to tongue root position with the following terms (between parenthesis an explanation of how the term contributes to the model fit) (\Cref{tab:tra-gam-ar-table}): C2 voicing as a parametric term (average root position difference between the voiceless and voiced contexts); a smooth term over centred speech rate (non-linear effect of speech rate on average tongue root position), a smooth term over V1 proportion (tongue root position along the duration of V1) with a by-C2 voicing difference smooth (difference in tongue root position along V1 in voiceless vs. voiced contexts), a tensor product interaction over V1 proportion and centred speech rate (to model differences in tongue root position along V1 among different speech rates); a factor random smooth over V1 proportion by speaker (penalty order = 1, to model inter-speaker variation).
+
+A chi-squared test on the ML scores of the full model and a model excluding the terms with C2 voicing (C2 voicing parametric term and by-C2 voicing difference smooth) indicates that C2 voicing significantly improves fit ($\chi$(3) = 7.758, *p* = 0.001).
+\Cref{f:Figure3} shows the predicted tongue root position along the duration of V1 before voiceless (green solid line) and voiced stops (orange dashed line).
+\Cref{f:Figure3} indicates that the root advances during the production of the vowel, relative to its position at V1 onset.
+This forward movement (increasing values of tongue root position in the figure) is observed both in the context of a following voiced stop and in that of a following voiceless stop.
 However, the magnitude of the movement is greater in the former.
 At V1 offset (= C2 closure onset), the graph suggests a difference in tongue root position of about 1 mm.
 
@@ -524,8 +526,7 @@ compareML(tra_gam_ar_0_2, tra_gam_ar_2)
 The effect of V1 duration on tongue root position during V1 was modelled by fitting a GAMM with the following terms (\Cref{tab:tra-gam-ar-2-table}): tongue root position as the outcome variable, smooth terms over V1 duration and V1 proportion, a tensor product interaction over V1 proportion and V1 duration; a factor random smooth over V1 proportion by speaker (penalty order = 1).
 The full model with the tensor product interaction over V1 proportion and V1 duration has better fit according to model comparison with a model without the interaction ($\chi$(3) = 12.609, *p* < 0.001).
 \Cref{f:Figure5} shows the estimated root trajectories at four values of vowel duration.
-The general trend is that the forward movement of the root during the vowel is greater the longer the duration of the vowel (\Cref{f:Figure5}).
-Moreover, the trajectory curvature increases with vowel duration: Shorter vowels have a flatter trajectory of tongue root advancement.
+The general trend is that the total amount of the root advancement during the vowel is greater the longer the duration of the vowel (\Cref{f:Figure5}) and greater advancement at V1 offset/C2 onset is achieved the longer the vowel.
 
 ```{r Figure6, include=TRUE, fig.cap="Predicted tongue root position during vowels at 4 exemplifying values of vowel duration, with 95\\% confidence intervals. Predictions from a GAMM (see \\Cref{s:trp-v1-dur}).", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 predict_gam(tra_gam_ar_2, exclude_terms = "s(proportion,speaker)", values = list(v1_duration = c(50, 100, 150, 200))) %>%
@@ -558,25 +559,23 @@ On the other hand, the tongue can move freely in labial stops since their closur
 This idea is supported by the 'trough effect' \citep{vazquez-alvarez2007}, i.e. VCV sequences involving a labial stop show tongue body lowering, and by the fact that voiced labials tend to resort to tongue body lowering rather than tongue root advancement as a mechanism for voicing maintenance \citep{perkell1969, westbury1983, ahn2018}.
 The small degree of advancement in voiceless lingual stops could then as well be a mechanic consequence of the tongue moving upward for producing the stop closure.
 
-The data discussed here also suggest that tongue root position is positively correlated with vowel duration, such that longer vowels show a more advanced tongue root at vowel offset (= closure onset) than shorter vowels.
-Said correlation exists independent of the voicing status of the consonant following the vowel (compatible with the finding that even voiceless stops have some degree of advancement).
-The correlation between tongue root and vowel duration could be interpreted as to indicate that the onset of the forward gesture of the root is timed relative to a landmark preceding the closure, independent of the duration of the vowel.
-The timing of the stop closure along the advancement movement would sanction the degree of advancement found at closure onset.
+The data discussed here also suggest that tongue root position at V1 offset/C2 onset is positively correlated with vowel duration, such that longer vowels show a more advanced tongue root at V1 offset/C2 onset than shorter vowels.
+Said correlation exists independent of the voicing status of the consonant following the vowel.
+In other words, the position of the tongue at V1 offset/C2 onset is correlated with vowel duration both when the vowel is followed by a voiceless and a voiced stop.
+This finding is compatible with the finding that the tongue root advances during the production of vowels even when the following stop is voiceless (although it reaches less advancement than when the vowel is followed by a voiced stop).
+
+The correlation between tongue root at V1 offset/C2 onset and vowel duration could be interpreted as to indicate that the onset of the forward gesture of the root is timed not relative to the stop closure, but rather relative to a fixed time point preceding the closure.
+Under this scenario, the tongue root advancement gesture is initiated at a fixed time after, for example, the release of C1.
+The timing of the tongue root advancement gesture would thus be independent of when stop closure is achieved and hence independent of the total duration of the vowel.
+Finally, the timing of full closure during the root advancement movement would sanction the degree of advancement found at closure onset (the later the closure onset relative to the onset of the advancement gesture, the greater advancement at closure onset).
 
 <!-- there is still the possibility that the velocity profiles are different in voiceless vs. voiced, or they could derive from the curvature differences? -->
 
-The dynamic data of tongue root advancement during the articulation of the vowel indicates that vowels followed by voiced stops have greater tongue root advancement at vowel offset than vowels followed by voiceless stops, in accordance with the results from the static analysis at vowel offset.
-Moreover, a significant interaction between vowel duration and the trajectory shape was found.
-Shorter vowels have a flatter trajectory, while the curvature of the trajectory in longer vowels has a greater curvature.
-I have no explanation for why the advancement of the root seemingly increases with increasing vowel duration except when the duration goes from 150 to 200 ms.
-
-When comparing the effects of vowel duration and speech rate on tongue root position, though, we are faced with a paradox.
-Both variables have a positive effect on tongue root position, so that longer vowels and higher speech rates imply a more advanced root.
-On the other hand, speech rate has a negative effect on vowel duration (and segments duration in general), such that higher speech rates are correlated with shorter vowel durations (this holds for this data).
-If higher speech rates mean shorter vowels and shorter vowels imply a less advanced root, we should also find less advancement with higher speech rates.
-However, the results indicate the opposite, and higher speech rates are correlated with more root advancement.
-A regression model on the position of the tongue root at *vowel onset* further suggests that speech rate is positively correlated with tongue root position at vowel onset.
-The tongue root is already in a more advanced position at vowel onset when the speech rate is high, so that, if vowel duration is held constant, more advancement is expected at vowel offset with higher speech rates even when higher speech rate has a negative effect on vowel duration.
+The dynamic data of tongue root advancement during the articulation of the vowel (\Cref{s:trp-v1}) indicates that vowels followed by voiced stops have greater tongue root advancement at V1 offset than vowels followed by voiceless stops, in accordance with the results from the static analysis at V1 offset.
+Moreover, a significant interaction was found between vowel duration and overall degree of advancement during the vowel (\Cref{s:trp-v1-dur}).
+Shorter vowels have overall less root advancement, while longer vowels have overall greater root advancement.
+This patter could simply be a consequence of the fact that the tongue root has more time to advance the longer the duration of the vowel.
+I have no explanation for why the degree of root advancement at *V1 onset* seemingly increases with increasing vowel duration except when the duration goes from 150 to 200 ms, and future work is necessary to shed light on this pattern.
 
 The articulatory patterns observed in this paper contribute to the understanding of the acoustic patterns discussed in \Cref{s:intro}.
 If we take the release of the consonant preceding the vowel as a reference point, a delayed consonant closure could ensure that, by the time closure is made, an appreciable amount of tongue root advancement is achieved.
@@ -738,6 +737,18 @@ predict_gam(tra_gam_s_ar, values = list(speech_rate_c = 0)) %>%
   scale_colour_brewer(name = "C2 voicing", palette = "Dark2") +
   scale_linetype_discrete(name = "C2 voicing")
 ```
+
+## A note on speech rate and vowel duration
+
+When comparing the effects of vowel duration and speech rate on tongue root position, we are faced with a paradox.
+Both variables have a positive effect on tongue root position, so that longer vowels and higher speech rates imply a more advanced tongue root at V1 offset/C1 onset.
+On the other hand, speech rate has a negative effect on vowel duration (and segments duration in general), such that higher speech rates are correlated with shorter vowel durations (this holds for this data, see \citealt{coretta2018j}).
+If higher speech rates mean shorter vowels and shorter vowels imply a less advanced root, we should also find less advancement with higher speech rates.
+
+However, the results of this study indicate the opposite, namely that higher speech rates are correlated with more root advancement.
+A linear regression model fitted to the position of the tongue root at *V1 onset* indicates that speech rate is positively correlated with tongue root position at vowel onset.
+The greater the speech rate, the greater the advancement of the tongue root at V1 onset.
+This means that the tongue root is already in a more advanced position at V1 onset when the speech rate is high, so that, if vowel duration is held constant, more advancement is expected at vowel offset with higher speech rates even when higher speech rate has a negative effect on vowel duration.
 
 # Conclusion
 
