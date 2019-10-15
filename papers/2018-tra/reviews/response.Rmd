@@ -7,7 +7,7 @@ output:
     latex_engine: xelatex
 header-includes:
 - \usepackage{xcolor}
-- \definecolor{plum}{HTML}{B93B8F}
+- \usepackage{changepage}
 mainfont: Brill
 ---
 
@@ -44,9 +44,9 @@ Why is this interesting and relevant? Since the tongue is always moving in speec
 Line 302
 Can you explain wat you mean with "curvature"?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have removed this term throughout the paper and used simpler terminology to describe the movement of the tongue root along the duration of the vowel.
-\color{black}
+} \end{adjustwidth}
 
 Line 333
 "…the onset of the forward gesture of   the root is timed relative to a landmark preceding the closure, independent of the duration of the vowel."
@@ -91,361 +91,361 @@ Specific comments:
 
 I think some of the content of the section l67-88 should be moved closer to the beginning of the introduction §A, to give context to the ATR focus of the study i.e. there should be an acknowledgement that there are a range of articulatory strategies associated with plosive voicing and then you can say that you are going to focus on one of these features in this study.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 This suggestion has been implemented in Section I.A. Now the section starts with a general overview of some of the mechanisms for voicing maintenance and then focusses on tongue root advancement.
-\color{black}
+} \end{adjustwidth}
 
 1-2 "Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops." Citation missing.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Citations to a long list of publications is given at multiple points within the manuscript, so I think it would not be practical to include them in the abstract.
-\color{black}
+} \end{adjustwidth}
 
 2 Is "modulated" the right word here? "modified/affected". It doesn’t seem to be the right word, given that the voicing you are discussing is phonemic and not necessarily present at the phonetic level, as you point out later.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I changed modulated to "modified/affected".
-\color{black}
+} \end{adjustwidth}
 
 3-4 "in many languages vowels are longer when followed by voiced stops." Examples and citations missing.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 See comment above.
-\color{black}
+} \end{adjustwidth}
 
 4-6 "Tongue root advancement is known to be an articulatory mechanism which ensures the right pressure conditions for the maintenance of voicing during closure as dictated by the Aerodynamic Voicing Constraint." Citation missing.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 See comment above.
-\color{black}
+} \end{adjustwidth}
 
 7 "enter in a direct statistical relation". This phrase sounds odd. Rephrase as "have a direct statistical relationship"?, or later in lines 25&26, you say "acoustic duration of the vowel is positively correlated with tongue root position". Can you not say that here?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed to "have a direct statistical relationship".
-\color{black}
+} \end{adjustwidth}
 
 8-9 "17 speakers of Italian and Polish (in total)"
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added "in total".
-\color{black}
+} \end{adjustwidth}
 
 12-13 "in a temporally stable interval". Perhaps it would be better to say "comparatively later closure onset of voiced stops", because it is not clear without context what "stable interval" you mean – C1 release to C2 release.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 12-14 It feels as if these lines belong earlier in the paragraph to make the proposed chain of causal relationships clear, i.e. ATR allows maintenance of voicing for voiced stops, ATR correlates with vowel length.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 16 "characterised" is not the right word here, given that ATR is covert, "associated with"?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 18-19 "a lot of work" citations missing. "aspects", change to "phonetic features"? "phonetic correlates"? Also l19 "relationship", rather than "relation".
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 A selection of citations from later sections has been included here.
-\color{black}
+} \end{adjustwidth}
 
 21 "in an exploratory" – change to "in this exploratory".
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 24 "this replicates previous work on tongue root position" – citation(s) missing.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Citations included.
-\color{black}
+} \end{adjustwidth}
 
 25 "... indicate that the acoustic duration of the vowel is positively correlated with the tongue root position (at vowel offset/ postvocalic consonant onset)..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 24-8 There is something oddly circular about this section. Compare to the way you talk about the trade-off between vowel and consonant length in lines 121-2. To avoid a circular argument, I would rephrase as: "Furthermore, the results of this study indicate that a comparatively later C2 onset for voiced consonants results in a longer preceding vowel duration which, in turn, results in greater tongue-root advancement during C2 onset. Both the shorter closed phase of the voiced consonant and the more advanced tongue root, which expands the supra-glottal cavity, have the potential to maintain voicing throughout C2 and preserve the voicing contrast."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 L32 "relative to the front-back dimension" – "across/in the front-back dimension"?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L33 "This has" – change to "This finding has..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L43 I think it would be worth mentioning here that there are other articulatory strategies employed to increase supralaryngeal space, e.g. larynx lowering (Rothenberg, 1967). See first comment above about moving content of lines 67-88 to beginning of introductory section.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed as suggested.
-\color{black}
+} \end{adjustwidth}
 
 L52 imply
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L57 "closure of a stop" – "closure of a lingual stop".
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L157-58 Rephrase as: "Rothenberg (1967) hypothesized after an informal investigation, that a maximal ballistic expansion movement of the tongue root to increase the size of the lower pharynx would take 70-90ms (Rothenberg, 1967: 99).
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 P65-66 "While the tongue body is more involved in labials". Can you be more specific? What does the tongue body do?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I specified that tongue body lowering is common with labials.
-\color{black}
+} \end{adjustwidth}
 
 L92 "it can be" -> "it is sometimes"
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L104 typo "to study of the"
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L105-6 "given their reported differences in magnitude/presence of the effect and the relative ease of comparison." – you need to unpack this a bit.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've expanded with "Moreover, the segmental phonologies of these languages facilitate the design of sufficiently comparable experimental material (see Coretta 2018 for a more thorough discussion)".
-\color{black}
+} \end{adjustwidth}
 
 L104-106 I suggest this edit: "Italian and Polish offer an opportunity to study of the articulatory aspects of the voicing effect, given that the former has been consistently reported as a voicing- effect language, while voicing effect in the latter is more complex, with some studies finding an effect and others not."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L110-12 What were the mean voicing differences for the two languages? Were they comparable?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've added details on the raw mean differences of the voicing effect in the two languages and mentioned that such difference is not significant in the linear model.
-\color{black}
+} \end{adjustwidth}
 
 L112-114 Can you explain further? "The high degree of intra-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've corrected "intra-speaker" with "inter-speaker" and expanded on this statment by indicating that independent of language speakers show a range of possible magnitudes of the effect.
-\color{black}
+} \end{adjustwidth}
 
 L124 Can you come up with a better section heading?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed to "Rationale of the current study".
-\color{black}
+} \end{adjustwidth}
 
 L126 Citations missing.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I inserted here some of the citations from above for clarity.
-\color{black}
+} \end{adjustwidth}
 
 L125-131 Suggested rephrasing "Previous research has established that longer preconsonantal vowel durations and greater tongue root advancement are associated with voicing in postvocalic plosives. We know that voicing during plosive closure can be sustained by advancing the tongue root during the production of voiced plosives and that tongue root advancement probably begins before the closure onset (i.e. during the preceding vowel). We also know that vowels followed by voiced plosives tend to be longer than vowels followed by voiceless plosives. Acoustic analysis of the current dataset confirmed an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Rephrased as suggested.
-\color{black}
+} \end{adjustwidth}
 
 L133 "insights on the link" – "insights into the link", "between closure" – "between closure duration"?? or "link between closure and vowel durations".
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L134 I am not comfortable with the term "modulates". I think it implies a causal relationship that has not yet been proved. Can you say "correlates"? or "covaries with"?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L135-6 Suggested rephrasing "resulting in a three-way relationship between stop consonant duration, vowel duration and tongue-root advancement."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L136-8 "More specifically, the timing of the closure onset within the release-to-release interval decides the duration of the vowel..." Again, is this not a given, see comments l27-28.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Yes The sentence now says "More specifically, the timing of the closure onset within the release-to-release interval determines not only the duration of the vowel and that of the closure (as discussed in Coretta 2018), but also the degree of tongue root advancement at V1 offset/C2 onset."
-\color{black}
+} \end{adjustwidth}
 
 L159 Can you change to "TELEMED Echo Blaster 128 unit, with a C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz)." Grouping these items together makes sense. Otherwise you are just writing a random list of items that you used in your recording set up.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L160-1 The pre-amp is part of the audio recording set up, not the ultrasound recording system. You need to move it further down the list of equipment, i.e. "a Movo LV4-O2 Lavalier microphone with a FocusRight Scarlett Solo pre-amplifier."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L163 Please gloss "sub-mental triangle", and in what way was the probe "aligned with the midsagittal plane"?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Now the line reads "The ultrasonic probe was placed in contact with the flat area below the chin, aligned along the participant's mid-sagittal plane so that the mid-sagittal profile of the tongue could be imaged."
-\color{black}
+} \end{adjustwidth}
 
 L169 "by means of a synchronisation signal produced by the ultrasound unit and amplified by the P-Stretch unit.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 P170-2 Does this mean that the ultrasound recording settings varied in every recording session, or between the Italian and Polish recording settings? If the latter, can you give the separate setting by language, rather than a range. Can you also say why you think this variation won’t affect what you are measuring? The range of probe angles seem quite narrow.
 
 L184 "explore timing/ articulatory? differences in the closing gesture of voiceless and voiced stops..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 L202-9 Can you add a figure showing an example of annotation?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added.
-\color{black}
+} \end{adjustwidth}
 
 L216-8 "Tongue root displacement was thus calculated as the displacement of the fitted spline along a selected vector." Based on the figure provided (FIG. 1) I am not convinced that tongue- root advancement is being captured. The probe angle is very narrow. The tongue root does not appear to have been imaged, as there is no visible hyoid shadow. I am not sure that a measure of displacement along a radial fan axis shown would capture tongue-root advancement. Could you provide information on the range of radial axes that were used as measurement axes?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 The hyoid shadow is not visible because during UTI set up the angle is adjusted so that the leftmost edge of the ultrasound image corresponds to the edge of the shadow (this is necessary for the automatic tracker to work more consistently). It is true that an ideal measure of tongue root position should be taken along a vector which is perpendicular to the movement. Such vector could for example be chosen so that it is parallel to the genioglossus tendon, which can be made visible on UTI images with the right settings. Unfortunately, the tendon was not always visible in the data. Moreover, since the data was collected without tongue root position in mind, I did not make sure to see whole of the actual tongue root all the time. Note though that the measured displacement must be related to tongue root displacement, since the fan-lines from which it was obtained were always more posterior than the fan-lines which corresponded to velar occlusion. This is the best I could do with the data at hand, although I understand it is not perfectly ideal. I'm happy to mention these issues in the paper if the reviewers think the paper might benefit from it.
-\color{black}
+} \end{adjustwidth}
 
 L218-20 Can you specify the range of radial axes (i.e. their numbers) that were used as measurement axes across all speakers?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added.
-\color{black}
+} \end{adjustwidth}
 
 L225 Remove the word "real".
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Removed.
-\color{black}
+} \end{adjustwidth}
 
 L225 I am still confused about why there was no standard frame rate, although I don’t think it will make a difference to the results given that the minimum frame rate is 43fps.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I added a footnote "The frame rate is adjusted by the system depending on other settings, so there is no standard frame rate."
-\color{black}
+} \end{adjustwidth}
 
 L255 "...scaled (z-scored) tongue root position."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added.
-\color{black}
+} \end{adjustwidth}
 
 L257-258 I might have missed this part of the data transformation. Fig. 2’s caption says that "Higher values indicate advancement." and appears to show greater ATR values at closure onset where a voiced consonant follows. I would have expected the opposite if advanced tongue root is being measured. With increased ATR, the tongue-root section of the tongue spline should intersect the radial fan axis closer to its origin, obtaining a smaller value. Kirkham and Nance (2017) reversed the sign of the z-scored tongue root distance measures, so that greater distance scores were associated with greater ATR (p71). Was that also carried out here? If it was, I think you should be explicit about that, rather than just saying you followed Kirkham and Nance’s method.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've expanded by saying that the sign has been flipped to facilitate interpretation (greater values = greater tongue root advancement).
-\color{black}
+} \end{adjustwidth}
 
 282 "A second linear mixed regression was fitted to tongue root position ?at V1offset/C2onset?..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Yes. I have now specified that the time point is V1 offset/C2 onset.
-\color{black}
+} \end{adjustwidth}
 
 288-289 "V1 duration and tongue root position ?at V1offset/C2onset?..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Yes. I have now specified that the time point is V1 offset/C2 onset.
-\color{black}
+} \end{adjustwidth}
 
 378 Change to "It is worth briefly discussing..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed
-\color{black}
+} \end{adjustwidth}
 
 384 phonemic symbol missing
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 383-388 Perhaps this needs to be rephrased. It looks as if you are implying that the acoustic difference between /e/ and /ɛ/ is entirely due to differences in tongue-root position. Also phonemic contrast can occur due to quite subtle acoustic cues, so phonemic difference does not necessarily mean a huge difference in acoustics or underlying articulation.
 
 390-3 See comments l57-58 Rothenberg’s estimated duration for tongue-root advancement.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Rephrased as "If a maximal ballistic forward movement of the tongue root takes between 70 and 90 ms as suggested by the informal investigation by Rothenberg (1967), we can calculate the maximum displacement plausible to be between 4.55 to 5.85 mm (0.065 mm times 70–90 ms).".
-\color{black}
+} \end{adjustwidth}
 
 393-4 Does this refer to: "Lacking further evidence we might assume it is possible to produce a vertical elongation of the pharynx in plosive production of about 0.5cm." (Rothenberg 1967: 98)?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 This refers to a few lines above that: "If we consider the lateral and posterior walls of the pharynx to be held fixed, the anterior-posterior dimension of the pharynx can be increased by a forward motion of the larynx and/or base of the tongue. Forward motions of the base of the tongue of the order of magnitude of 0.5 cm have been reported by PERKELL (1965). The main activation is most likely supplied by the most inferior-posterior fibers of the genioglossus muscle to the base of the tongue, the geniohyoid muscles, and the infrahyoid muscles. The forward motion of the anterior wall of the pharynx might well be more of a pivoting around an axis somewhere near the cricoid cartilage than a uniform forward motion; however, it is difficult to find empirical evidence bearing on this question."
-\color{black}
+} \end{adjustwidth}
 
 FIG. 6 caption "tornge". Why are there two of each plot?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed. The plot duplication was a coding error and it's now fixed.
-\color{black}
+} \end{adjustwidth}
 
 L431 "shows", or "these plots show"
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 L442 "The mean difference in tongue root position (at the onset of?) voiceless vs. voiced stops..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Yes, added "at the onset of".
-\color{black}
+} \end{adjustwidth}
 
 L464 and 465 citations missing.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I inserted here some of the citations from above for clarity.
-\color{black}
+} \end{adjustwidth}
 
 Ll468 "Similarly to what (was) previously found for English (citation)..."
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I inserted here some of the citations from above for clarity and I added "was".
-\color{black}
+} \end{adjustwidth}
 
 L485 "replicate" -> "are replicable"
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Changed.
-\color{black}
+} \end{adjustwidth}
 
 # Reviewer 2
 
@@ -463,33 +463,33 @@ And, here are some parts I found unclear/need more explanations:
 
 p. 3, 2nd paragraph: it's unclear what the purpose of the last sentence is.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 This sentence clarifies the use of "active gesture" in the paper, to avoid confusion with the more general reading of active gesture as a gestures implemented for a specific purpose.
-\color{black}
+} \end{adjustwidth}
 
 p. 13, line 235: Generalized additive mixed models (GAMMs). Including more explanations on this model will be very helpful to understand how this model's prediction works in Section III B and Fig. 3.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have included more details on what each term contributes with to the model fit in Section III.B.
-\color{black}
+} \end{adjustwidth}
 
 p. 20, line 330: "Said correlation exists independent of the voicing status of the consonant following the vowel" --> I especially found it difficult to understand the paragraph including this sentence and the following two paragraphs, and I believe these paragraphs are main arguments of this manuscript. More specifically, why do we see a greater tongue root advancement when the vowel is longer? Is it simply because voiced stops show more tongue root advancement and a longer vowel duration? More importantly, why do we see a greater curvature in longer vowels? Why does a longer vowel show a more retracted tongue root at its vowel onset?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have updated the relevant paragraphs in Section IV.A to reflect changes in Section III.D and expanded them to clarify the point being made.
-\color{black}
+} \end{adjustwidth}
 
 p. 21, 3rd paragraph: this paragraph suddenly mentions speech rate and its paradox, and it is not very clear what the argument here is. Considering inter-speaker variation. I think at least with speech rate and tongue root advancement of vowel onset mentioned here, it may be worth looking at individual speaker's results instead of just use speech rate as a factor in the statistical model.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have expanded and moved the relevant paragraphs to after the discussion of speakers' variation.
-\color{black}
+} \end{adjustwidth}
 
 p. 23-24, Section IV B: I think this section can be either condensed or deleted since estimates of tongue root displacement will be highly variable depending on speaker. Since (1) Speaker variation was reported in this study, (2) only two languages are studied, and (3) the author mentions that "the correlation between tongue root position and vowel duration needs to be replicated by expanding the enquired contexts to other types of consonants and vowels, and with other languages" (p. 24, line 410), I recommend to condense this section.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 It is generally desirable to discuss in some details the estimates of the sought effects, as recommended by recent literature on statistical power. It is true that the estimates will be highly variable depending on speaker, but since such estimates refer to a population of speakers it can still be useful, for example, for the determination of Bayesian priors in future work. The discussion of the estimates also links the results of this study back to theoretical argumentations from previous work, and it thus constitute a grounding point.
-\color{black}
+} \end{adjustwidth}
 
 There are some parts where the tables and figures may be necessary and/or more explanations on figures may be helpful:
 
@@ -497,149 +497,149 @@ First of all, in the results, tables with these acoustic data are necessary: e.g
 
 p. 11, line 206: what is "higher formant"? Either give a very specific example, or provide a sample spectrogram.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have specified what is meant by "higher formants structure", taken from Machač 2009.
-\color{black}
+} \end{adjustwidth}
 
 Figure 1: please indicate the front and back of the tongue
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added indication of back/front.
-\color{black}
+} \end{adjustwidth}
 
 Figure 2: How was the data of each speaker scaled? Also, it will be helpful if this figure is in color.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've added that those are z-scores and I made the figure in colour.
-\color{black}
+} \end{adjustwidth}
 
 Figure 4: Maybe using color and indicating voiced/voiceless stops may be helpful.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've added colour by vowel in the plot. The model from which the regression line are obtained does not contain C2 voicing. This is because a separate model indicated that voicing nor its interaction with vowel duration is significant, so it was dropped from the final model. I've added a mention to this in Section III.C.
-\color{black}
+} \end{adjustwidth}
 
 Figure 5: Why 145ms was used instead of 150ms? (while other V1 duration values used are 50, 100, and 200). Also, why 145 ms and 200 ms starts from more retracted tongue root position? It's not explained in the text.
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 The figure has now 150 ms rather than 145 ms. I have also increased the number of basis functions in the smooth for vowel duration, since I realised it was too low according to "gam.check()". This has partially change the starting values for the different vowel durations, so that now there is an increase in starting tongue root position with the exception of 200 ms which decreases. I do not know why this is the case. I've added in the text: "I have no explanation for why the advancement of the root seemingly increases with increasing vowel duration except when the duration goes from 150 to 200 ms."
-\color{black}
+} \end{adjustwidth}
 
 The following other minor suggestions are noted:
 
 p. 2, line 18: "a lot of work has been done on each of these aspects separately,..." but actual references are not mentioned; also, line 24—references
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have added here some of the references from later sections for clarity.
-\color{black}
+} \end{adjustwidth}
 
 p. 3, line 39: "Aerodynamic Voicing Constraint": since this concept is mentioned as a very important concept of this manuscript, more detailed information about it will be helpful
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I am not sure what is asked here. The constraint simply states that there must be a positive trans-glottal air pressure differential, as discussed in lines 33-42.
-\color{black}
+} \end{adjustwidth}
 
 p. 4, line 58: ...root "advancement" about....
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 The sentence has been rephrased as suggested by one of the other reviewers and moved at the beginning of the paragraph.
-\color{black}
+} \end{adjustwidth}
 
 p. 4, line 72: typo--'longer' --> 'shorter'
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 p. 4, line72-73: please indicate what language(s) each paper worked on
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added.
-\color{black}
+} \end{adjustwidth}
 
 p. 5, line 79: (Ahn, 2018)--> Ahn (2018)
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 p. 5, line 98: here as well, please specify what language(s) each paper worked on
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added.
-\color{black}
+} \end{adjustwidth}
 
 p. 6, line 106: "relative ease of comparison" --> not sure what exactly it means
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I've explained this now "Moreover, the segmental phonologies of these languages facilitate the design of sufficiently comparable experimental material (see Coretta 2018 for a more thorough discussion)."
-\color{black}
+} \end{adjustwidth}
 
 p. 6, line 111: "the stressed vowels of disyllabic words"--> indicate which vowel is stressed
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Stress is indicated with a diacritic although it is not properly rendered due to restrictions of the submission system, but it should be fixed in the final form. I have now specified that the stressed vowel is the first.
-\color{black}
+} \end{adjustwidth}
 
 p. 8, line 147: missing '.' After Verbania (Italy)
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 p. 10, line 182: "high and front vowels usually produce less tongue displacement from and to a stop consonant" --> reference(s)?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 This fact hasn't been systematically studied, but since the tongue is already quite high because of the production of high-front vowels, the displacement between the position of the tongue during high-front vowels and that of the tongue during stop closure is generally quite small and it makes it difficult to detect gestural landmarks from UTI displacement data.
-\color{black}
+} \end{adjustwidth}
 
 p. 13, line 231: the calculated speech rate values—here, please explain how the values were calculated
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have included there a condensed version of the formula from above for clarity.
-\color{black}
+} \end{adjustwidth}
 
 p. 13, line 235: Generalised additive mixed models—since it's first time mentioning this model, show the abbreviation here (GAMMs?); line 238: GAMs--> GAMMs??
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Added abbreviation and fixed line 238.
-\color{black}
+} \end{adjustwidth}
 
 P. 21, line 349 and 351: Two "howevers" are confusing. maybe change the second however to "nevertheless"?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have fixed the repetition of "however" by rephrasing.
-\color{black}
+} \end{adjustwidth}
 
 P. 22, line 357: 'previous work' > reference(s)
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 I have added a cross-reference to the patterns described in the Introduction section.
-\color{black}
+} \end{adjustwidth}
 
 P. 23, line 384: a +ATR vowel, a -ATR vowel,
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 P. 23, line 384: also missing IPA symbol in the second / /
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 P. 25, Figure 6: typo (torngue--> tongue)
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 P. 26, line 447: 11 speakers--> 10 speakers?
 
-\color{plum}
+\begin{adjustwidth}{1cm}{} \textit{
 Fixed.
-\color{black}
+} \end{adjustwidth}
 
 # Reviewers' Responses to Questions
 
