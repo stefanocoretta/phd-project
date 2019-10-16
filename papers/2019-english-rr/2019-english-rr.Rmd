@@ -1,13 +1,15 @@
 ---
 output:
-  lingr::lingr_article:
+  pdf_document:
     citation_package: natbib
     fig_caption: yes
+    keep_tex: yes
+    latex_engine: xelatex
+    number_sections: yes
     dev: cairo_pdf
-documentclass: elsarticle
-classoption: authoryear, 5p
+    template: template.tex
 bibliography: linguistics
-biblio-style: model2-names.bst
+biblio-style: unified
 mainfont: Tinos
 fontsize: 12pt
 indent: true
@@ -16,20 +18,18 @@ header-includes:
 - \let\tnote\relax
 - \usepackage{cleveref}
 - \usepackage{ctable}
-- \journal{Journal of Phonetics}
 - \usepackage{enumerate}
-- \usepackage[modulo]{lineno}
-- \setlength\linenumbersep{5pt}
+- \usepackage{lineno}
 - \linenumbers
 params:
-  version: 1.1
-  version-date: "2019/05/31"
-hide-version: true
+  version: 1.1.9000
+  version-date: "2019/10/16"
+hide-version: false
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
-knitr::opts_knit$set(root.dir = normalizePath("../../"))
+knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
 theme_set(theme_minimal(base_family = "Arial Unicode MS"))
 library(coretta2019eng)
@@ -43,14 +43,25 @@ eng_durations_rr <- na.omit(eng_durations)
 eng_clos <- na.omit(eng_durations)
 ```
 
-\begin{frontmatter}
+\large
 
-\title{Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration}
+TITLE: Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration
 
-\author[mcr]{Stefano Coretta\corref{cor1}}
-\cortext[cor1]{Corresponding author}
-\ead{stefano.coretta@manchester.ac.uk}
-\address[mcr]{University of Manchester, Linguistics and English Language, School of Arts, Languages and Cultures, Oxford Road, Manchester, M13 9PL, UK}
+\vspace{1cm}
+
+AUTHOR: Stefano Coretta
+
+\vspace{1cm}
+
+AFFILIATION: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
+
+\vspace{1cm}
+
+EMAIL ADDRESS: stefano.coretta@manchester.ac.uk
+
+\normalsize
+
+\pagebreak
 
 \begin{abstract}
 English is one in the wide range of languages in which the duration of vowels is modulated by the voicing of the following consonant: Vowels are shorter when followed by voiceless stops, and longer when followed by voiced stops.
@@ -64,11 +75,7 @@ The absence of the temporal anchor of a second vowel in monosyllabic words, on t
 Other aspects of production and perception behind the voicing effect can coexist with a temporal compensation mechanism and cannot be excluded.
 \end{abstract}
 
-\begin{keyword}
-voicing effect \sep vowel duration \sep compensatory adjustment \sep English
-\end{keyword}
-
-\end{frontmatter}
+**Keywords**: voicing effect, vowel duration, compensatory adjustment, English
 
 # Introduction
 \label{s:intro}
@@ -825,5 +832,3 @@ Future studies should further investigate the articulatory temporal patterns of 
 In particular, a complete assessment of the isochrony (or lack thereof) of consecutive vocalic gestures should include a variety of oppositions, involving voicing, place of articulation, number of consonants, syllabic affiliation, and prosodic contexts.
 Moreover, work is needed to shed light on the timing of the consonant closing gesture relative to the articulatory gesture of the preceding vowel in voiceless vs. voiced stops.
 Finally, the scenario of emergence of the voicing effect offered here should be examined in in relation to other consonantal effects on vowel duration, like other laryngeal effects and effects of manner of articulation.
-
-\biboptions{authoryear}

@@ -1,76 +1,106 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-%
-\documentclass[
-  12pt,
-  a4paper,
-  authoryear, 5p]{elsarticle}
+\documentclass[12pt,a4paper,]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-  \setmainfont[]{Tinos}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text}
+    \setmainfont[]{Tinos}
 \fi
-% Use upquote if available, for straight quotes in verbatim environments
+% use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage[unicode=true]{hyperref}
 \hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-% \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\setlength{\emergencystretch}{3em} % prevent overfull lines
+            pdfborder={0 0 0},
+            breaklinks=true}
+%\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{unified}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+%\makeatletter
+%\def\fps@figure{htbp}
+%\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
 \let\tnote\relax
 \usepackage{cleveref}
 \usepackage{ctable}
-\journal{Journal of Phonetics}
 \usepackage{enumerate}
-\usepackage[modulo]{lineno}
-\setlength\linenumbersep{5pt}
+\usepackage{lineno}
 \linenumbers
-\usepackage[]{natbib}
-\bibliographystyle{model2-names.bst}
 
 \date{}
 
 \usepackage[absolute]{textpos}
 
 \begin{document}
+\begin{textblock}{3}(0.2,0.2)
+  \textcolor{lightgray}{v1.1.9000 (2019/10/16)}
+\end{textblock}
 
-\begin{frontmatter}
+\large
 
-\title{Temporal (in)stability in English monosyllabic and disyllabic words: Insights on the effect of voicing on vowel duration}
+TITLE: Temporal (in)stability in English monosyllabic and disyllabic
+words: Insights on the effect of voicing on vowel duration
 
-\author[mcr]{Stefano Coretta\corref{cor1}}
-\cortext[cor1]{Corresponding author}
-\ead{stefano.coretta@manchester.ac.uk}
-\address[mcr]{University of Manchester, Linguistics and English Language, School of Arts, Languages and Cultures, Oxford Road, Manchester, M13 9PL, UK}
+\vspace{1cm}
+
+AUTHOR: Stefano Coretta
+
+\vspace{1cm}
+
+AFFILIATION: Linguistics and English Language, University of Manchester,
+Oxford Road, Manchester, M13 9PL, United Kingdom
+
+\vspace{1cm}
+
+EMAIL ADDRESS:
+\href{mailto:stefano.coretta@manchester.ac.uk}{\nolinkurl{stefano.coretta@manchester.ac.uk}}
+
+\normalsize
+
+\pagebreak
 
 \begin{abstract}
 English is one in the wide range of languages in which the duration of vowels is modulated by the voicing of the following consonant: Vowels are shorter when followed by voiceless stops, and longer when followed by voiced stops.
@@ -84,11 +114,8 @@ The absence of the temporal anchor of a second vowel in monosyllabic words, on t
 Other aspects of production and perception behind the voicing effect can coexist with a temporal compensation mechanism and cannot be excluded.
 \end{abstract}
 
-\begin{keyword}
-voicing effect \sep vowel duration \sep compensatory adjustment \sep English
-\end{keyword}
-
-\end{frontmatter}
+\textbf{Keywords}: voicing effect, vowel duration, compensatory
+adjustment, English
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -677,12 +704,12 @@ random effects, a half Cauchy distribution (location = 0, scale = 25)
 was used for the standard deviation and the residual standard deviation,
 and a LKJ(2) distribution for the correlation among the random terms.
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:rr-1-table}Summary of the Bayesian regression fitted to release-to-release duration (model 1, see \Cref{s:rr})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrr}
+\begin{tabular}[t]{lrrrrr}
 \toprule
 Predictor & Mean & SD & Q2.5 & Q97.5 & CI width\\
 \midrule
@@ -724,12 +751,12 @@ informative prior used is a normal distribution with mean = 0 ms and SD
 height \citep{heffner1937, house1953, hertrich1997} and labial place of
 articulation \citep{sharf1962}, which both range between 10 and 30 ms.
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:rr-2-table}Summary of the Bayesian regression fitted to release-to-release duration (model 2, see \Cref{s:rr})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrr}
+\begin{tabular}[t]{lrrrrr}
 \toprule
 Predictor & Mean & SD & Q2.5 & Q97.5 & CI width\\
 \midrule
@@ -786,12 +813,12 @@ CI = {[}−15.92, −4.24{]}) shorter if the vowel is /ɜː/ and 39.3 ms (SD =
 place of articulation (labial) has a negligible positive mean effect
 (2.6 ms, SD = 2.39, 95\% CI = {[}−2.29, 7.28{]}).
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:rr-3-table}Summary of the Bayesian regression fitted to release-to-release duration and predictors from model 1 and 2 (model 3, see \Cref{s:rr})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrr}
+\begin{tabular}[t]{lrrrrr}
 \toprule
 Predictor & Mean & SD & Q2.5 & Q97.5 & CI width\\
 \midrule
@@ -840,12 +867,12 @@ used for the interaction between C2 voicing and vowel (mean = 0, SD =
 20). The same priors as in the previous models were included for the
 random effects.
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:vow-4-table}Summary of the Bayesian regression fitted to vowel duration (model 4, see \Cref{s:vow})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrr}
+\begin{tabular}[t]{lrrrrr}
 \toprule
 Predictor & Mean & SD & Q2.5 & Q97.5 & CI width\\
 \midrule
@@ -928,12 +955,12 @@ indicate that labial stops have a closure which is 10-20 ms longer than
 the closure of velar stops. For the effect of C2 place, a normal
 distribution with mean 15 ms (SD = 10) was used.
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:clos-5-table}Summary of the Bayesian regression fitted to closure duration (model 5, see \Cref{s:clos})}
 \centering
 \fontsize{8}{10}\selectfont
-\begin{tabular}{lrrrrr}
+\begin{tabular}[t]{lrrrrr}
 \toprule
 Predictor & Mean & SD & Q2.5 & Q97.5 & CI width\\
 \midrule
@@ -1256,8 +1283,6 @@ effect offered here should be examined in in relation to other
 consonantal effects on vowel duration, like other laryngeal effects and
 effects of manner of articulation.
 
-\biboptions{authoryear}
-
-  \bibliography{linguistics}
+\bibliography{linguistics}
 
 \end{document}
