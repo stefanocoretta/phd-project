@@ -1,6 +1,6 @@
 ---
 title: |
-  Longer vowel duration correlates with greater tongue root displacement: Acoustic and articulatory data from Italian and Polish
+  Longer vowel duration correlates with greater tongue root advancement at vowel offset: Acoustic and articulatory data from Italian and Polish
 author:
 - name: Stefano Coretta
   affiliation: Linguistics and English Language, University of Manchester, Oxford Road, Manchester, M13 9PL, United Kingdom
@@ -184,7 +184,7 @@ Moreover, the segmental phonologies of these languages facilitate the design of 
 \citet{coretta2018j} argues, based on the acoustics of the same data reported here, that the first (stressed) vowel of disyllabic (CV́CV) words is 11.5 ms longer in Italian and 7.55 ms longer in Polish when followed by a voiced stop.
 A linear model, however, suggest a difference of 16 ms (SE = 4.4) in both languages, and no statistical significance was found for the difference in effect in the two languages.
 Moreover, the high degree of inter-speaker variation, backed up by statistical modelling, also indicates that these languages possibly behave similarly in regards to the voicing effect.
-More specifically, speakers of both Italian and Polish show a range of magnitudes of the voicing effect, and no particular language-specific patter can be discerned.
+More specifically, speakers of both Italian and Polish show a range of magnitudes of the voicing effect, and no particular language-specific patterns can be discerned.
 Independent of language, some speakers have a greater effect and others a small or negligible effect (see \citealt{coretta2018j} for details).
 
 Finally, the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
@@ -202,7 +202,7 @@ The acoustic data further revealed that the duration of the stop closure bears o
 Previous research has established that longer preconsonantal vowel durations and greater tongue root advancement are associated with voicing in postvocalic plosives \citep{kent1969, perkell1969, westbury1983, house1953, peterson1960, chen1970}.
 We know that voicing during plosive closure can be sustained by advancing the tongue root during the production of voiced plosives and that tongue root advancement probably begins before the closure onset (i.e. during the preceding vowel).
 We also know that vowels followed by voiced plosives tend to be longer than vowels followed by voiceless plosives.
-Acoustic analysis of the current dataset confirmed an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel.
+Acoustic analysis of the current dataset suggests an apparent compensatory relationship between the duration of the plosive closure and the duration of the preceding vowel; the shorter the plosive closure, the longer the preceding vowel.
 
 The results from the articulatory data of this study, which will be discussed in the following sections, offer new insights into the link between closure duration and vowel duration.
 We will see that the relative timing of the closure also covaries with the degree of tongue root advancement found at closure onset, resulting in a three-way relationship between stop consonant duration, vowel duration and tongue-root advancement.
@@ -233,7 +233,7 @@ The participants signed a written consent and received a monetary compensation o
     \label{f:uti-setup}
 \end{figure*} -->
 
-Simultaneous recordings of audio and ultrasound tongue imaging were obtained in the Phonetics Laboratory at the University of Manchester (UK) or in a quiet room in Verbania (Italy).
+Simultaneous recordings of audio and ultrasound tongue imaging were obtained in the Phonetics Laboratory at the University of Manchester (UK) or in a quiet room in Verbania (Italy).\footnote{The possible influence of English on the speakers was reduced by talking to them and giving them instructions in their native language prior and during the experiment. See \citet{coretta2018j} for a thorough discussion.}
 An Articulate Instruments Ltd™ system was used for this study.
 The system is made of a TELEMED Echo Blaster 128 unit with a TELEMED C3.5/20/128Z-3 ultrasonic transducer (20mm radius, 2-4 MHz), and an Articulate Instruments Ltd™ P-Stretch synchronisation unit.
 A Movo LV4-O2 Lavalier microphone with a FocusRight Scarlett Solo pre-amplifier were used for the acquisition of audio data.
@@ -568,7 +568,7 @@ This finding is compatible with the finding that the tongue root advances during
 
 The correlation between tongue root at V1 offset/C2 onset and vowel duration could be interpreted as to indicate that the onset of the forward gesture of the root is timed not relative to the stop closure, but rather relative to a fixed time point preceding the closure.
 Under this scenario, the tongue root advancement gesture is initiated at a fixed time after, for example, the release of C1.
-The timing of the tongue root advancement gesture would thus be independent of the time stop closure is achieved and hence independent of the total duration of the vowel.
+The timing of the tongue root advancement gesture would thus be independent of the time of stop closure onset, and hence independent of the total duration of the vowel.
 Finally, the timing of full closure during the root advancement movement would sanction the degree of advancement found at closure onset (the later the closure onset relative to the onset of the advancement gesture, the greater advancement at closure onset).
 
 <!-- there is still the possibility that the velocity profiles are different in voiceless vs. voiced, or they could derive from the curvature differences? -->
@@ -576,7 +576,7 @@ Finally, the timing of full closure during the root advancement movement would s
 The dynamic data of tongue root advancement during the articulation of the vowel (\Cref{s:trp-v1}) indicates that vowels followed by voiced stops have greater tongue root advancement at V1 offset than vowels followed by voiceless stops, in accordance with the results from the static analysis at V1 offset.
 Moreover, a significant interaction was found between vowel duration and overall degree of advancement during the vowel (\Cref{s:trp-v1-dur}).
 Shorter vowels have overall less root advancement, while longer vowels have overall greater root advancement.
-This patter could simply be a consequence of the fact that the tongue root has more time to advance the longer the duration of the vowel.
+This pattern could simply be a consequence of the fact that the tongue root has more time to advance the longer the duration of the vowel.
 I have no explanation for why the degree of root advancement at *V1 onset* seemingly increases with increasing vowel duration except when the duration goes from 150 to 200 ms, and future work is necessary to shed light on this pattern.
 
 The articulatory patterns observed in this paper contribute to the understanding of the acoustic patterns discussed in \Cref{s:intro}.
@@ -598,7 +598,7 @@ The estimated magnitude of such difference is 0.77 mm (SE = 0.35).
 The 95% confidence interval for the difference is approximately within the range 0-1.5 mm.
 \citet{rothenberg1967} argues that the anterior wall of the lower pharynx (corresponding to the tongue root) can move by 5 mm along the antero-posterior axis.
 Figure 1 in \citet{kirkham2017} suggests that the tongue root of one of the Twi speakers recorded is about 4 mm more front in /e/ (a [+ATR] vowel) than in /\textepsilon{}/ (a [−ATR] vowel).
-Given that a difference of 4 mm in root position can produce a substantially distinct acoustic output in vowels (like the two different phonemes of Twi), it makes sense to expect that differences in tongue root position as driven by consonantal factors should be of some magnitude smaller, like the once found in this study.
+Given that the articulatory space within which the tongue can move is generally more constrained in stops than in vowels, and given that \citet{kirkham2017} find a difference of 4 mm in tongue root position in vowels, it makes sense to expect that differences in tongue root position as driven by consonantal factors should be of some magnitude smaller, like the ones found in this study.
 <!-- \footnote{Thanks to Sam Kirkham for bringing this point to my attention.} -->
 Moreover, the data presented here indicates that for every millisecond increase in vowel duration there is a 0.065 mm increase in tongue root advancement (see \Cref{s:trp-vdur}).
 If a maximal ballistic forward movement of the tongue root takes between 70 and 90 ms as suggested by the informal investigation by \citet{rothenberg1967}, we can calculate the maximum displacement plausible to be between 4.55 to 5.85 mm (0.065 mm times 70–90 ms).
@@ -687,8 +687,9 @@ trp_difference %>%
 
 The mean difference in tongue root position at the onset of voiceless vs. voiced stops has been calculated for each speaker from the raw data.
 \Cref{f:Figure8} plots the speakers' mean differences, with the respective standard error bars.
-The bottom 7 speakers (3 Polish, 4 Italian) show either a weak negative difference (the tongue root is slightly more advanced in voiceless stops) or a weak positive difference with wide standard errors which include 0.
-The remaining 10 speakers have a more robust positive difference (the tongue root is more advanced in voiced stops).
+Overall, the means of the top 14 speakers indicate that these speakers have a more advanced tongue root in the context of voiced stops, while the bottom 3 speakers have means that indicate no difference or greater advancement in voiceless stops.
+As for the uncertainty of the estimates, the top 10 speakers have a robust positive difference.
+The bottom 7 speakers show either a weak negative difference (the tongue root is slightly more advanced in voiceless stops) or a weak positive difference with wide standard errors.
 Finally, speakers of each language do not cluster together, reiterating the observation made above that language does not seem to be an informative parameter.
 
 Finally, interesting individual patterns can also be seen in the trajectories of tongue root position.

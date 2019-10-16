@@ -15,9 +15,16 @@ mainfont: Brill
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+I updated the title to reflect the suggestion of one reviewer "I recommend the title to include that "longer vowel duration" (only) refers to the "preceding" vowel duration (not necessarily the following). I also think the word 'advancement' will be more suitable than 'displacement'. On the other hand, I wonder if the title purposefully used the word ‘displacement’ instead of ‘advancement’.". The title now reads "Longer vowel duration correlates with greater tongue root advancement at vowel offset: Acoustic and articulatory data from Italian and Polish".
+
 # Editor
 
 I have one major concern about your paper. In the main part of your paper, you present results pooled across subjects. These results show some agreement with your hypotheses. However, in Section C. Individual differences, you show that several individuals do not follow the general trends that you have found in the pooled results. So, why not only present the individual results, since they suggest variability across subjects?
+
+\begin{adjustwidth}{1cm}{} \textit{
+Out of 17 speakers, 12 agree with the population-level effects described in the paper, while only five show either no difference in tongue root or the reversed pattern (more advancement in voiceless stops, in accordance with previous work in English). It is not surprising that some speakers behave differently, and the majority of speakers agree with the population-level effect.
+Given the size of the sample used in this study (on the smaller side), I think it is best to present and discuss both population-level effects and speaker-level effects, so as to give a more holistic view of the statistical patterns. From a statistical point of view, the effects of the individual speakers inform the way population-level effects are fitted, and uncertainty increases with increased speaker-level differences. This estimation of uncertainty at the population-level can help future studies decide on expected outcomes and statistical priors, so it is valuable to discuss population-level effects together with individual differences. Since the nature of the study is exploratory (hypothesis-generating), rather than confirmatory (hypothesis-testing), it is generally recommended to report all the analyses being made.
+} \end{adjustwidth}
 
 I also think that you need to say something about the resolution of the ultrasound images, since, as noted by Reviewer 1, some movements are very small. In addition, I would like to see some general comments on tongue movements during speech, in particular when you discuss tongue root movement and vowel duration.
 
@@ -63,7 +70,7 @@ Page 17, C. Correlation between tongue rot position and V1 duration
 Why is this interesting and relevant? Since the tongue is always moving in speech, would it not move longer during a long vowel? The tongue does not appear to have a point target for vowels.
 
 \begin{adjustwidth}{1cm}{} \textit{
-As far as I know, correlation between vowel duration and tongue root position at V1 offset have not been reported before. One possible obvious explanation is that a longer vowel allows for more tongue root advancement (as I argue in the paper). But it could have been that tongue root advancement is initiated at different times during the production of vowels in different vowel duration contexts, so that the same or similar amount of displacement is reached at the end of the vowel independent of its duration. Rather, what the positive correlation interestingly suggests is that the onset of the advancement gesture during the production of the vowel is initiated at a stable temporal distance from the release of C1/onset of V1.
+As far as I know, correlation between vowel duration and tongue root position at V1 offset has not been reported before. One possible obvious explanation is that a longer vowel allows for more tongue root advancement (as I argue in the paper). But it could have been that tongue root advancement is initiated at different times during the production of vowels in different vowel duration contexts, so that the same or similar amount of displacement is reached at the end of the vowel independent of its duration. Rather, what the positive correlation interestingly suggests is that the onset of the advancement gesture during the production of the vowel is initiated at a stable temporal distance from the release of C1/onset of V1.
 } \end{adjustwidth}
 
 Line 302
@@ -126,6 +133,10 @@ Title: Longer vowel duration correlates with greater tongue root displacement: A
 Summary – this is an articulatory (ultrasound tongue imaging) study of tongue-root position in the production of CV.CV nonsense words in Italian and Polish, focusing on tongue-root position during V1 and at the onset of C2, while varying whether C2 is a phonemically voiced or voiceless consonant. The main aim of the study is to determine whether tongue root advancement is more extreme during the vowel and at C2 onset when a C2 is voiced than when it is voiceless. It is hypothesized that presence of increased tongue-root advancement when C2 is voiced is a mechanism for increasing the supraglottal cavity and prolonging the transglottal airflow needed to maintain voicing during the C2 closure. Mixed effects modelling is used to identify the impact of C2 voiced/voiceless status (and other factors) on tongue root position at C2 onset. C2 voicing is found to have a significant effect on tongue-root position at C2 onset, with tongue-root onset 0.77mm fronter when C2 is a voiced consonant. A generalised additive mixed model is used to assess the impact of C2 voicing (and other factors) on tongue-root position across V1. The model shows a significant effect of C2 voicing, particularly during the latter half of the vowel. Root advancement is present during the vowel before both voiced and voiceless C2s, but to a greater degree before voiced C2s. A further mixed effects model showed a significant effect of V1 duration on tongue-root advancement, with longer vowels resulting in greater tongue-root advancement. I think it is argued that having a later voiced C2 onset and, concomitantly, a longer preceding vowel, allows for more extreme tongue-root advancement at C2 onset and that therefore the shorter voiced C2 closed phase permits greater expansion of the supralaryngeal cavity to aid transglottal airflow and maintain voicing, while also ensuring that voicing needs to be maintained for a shorter time period.
 
 General comments – the findings of this paper are interesting and seem to show a plausible 2- fold effect of later consonant onset on the maintenance of coronal plosive voicing contrasts. I did find this paper a bit convoluted to read and I found that I didn’t have a clear idea of what the author was trying to say. Additionally, raw differences in tongue-root advancement at voiced and voiceless consonant onset, for all they are statistically significant, are extremely subtle <1mm, while UTI images provide a somewhat blurred image of the tongue surface, and there is potential for error during (automatic) spline fitting due to the fuzziness of the image. I also worry about the measurement protocol itself. The ultrasound probe does not seem to have been angled towards the pharynx and yet the probe angles are quite narrow (71-93°). The example given in FIG. 1 does not contain a hyoid shadow, therefore it is difficult to determine whether movement along the selected radial fan axis shown is really capturing root retraction, or some point further up the back of the tongue. Another issue is that an increase in the value of the point at which the tongue spline intersects this chosen radial fan axis is taken to indicate greater tongue-root advancement, whereas tongue-root advancement should result in a lower value – as the tongue root moves forwards, it should move closer to the origin of the radial fan line. It is possible that the author reversed the radial-fan-line intersect values, as in (Kirkham and Nance, 2017), in which case they should state this explicitly. I believe the issues with measurement can be cleared up with some better figures and some assurances about how the measures were taken and transformed, so I suggest revise and resubmit.
+
+\begin{adjustwidth}{1cm}{} \textit{
+These have been addressed below.
+} \end{adjustwidth}
 
 Specific comments:
 
@@ -439,6 +450,10 @@ Fixed.
 
 383-388 Perhaps this needs to be rephrased. It looks as if you are implying that the acoustic difference between /e/ and /ɛ/ is entirely due to differences in tongue-root position. Also phonemic contrast can occur due to quite subtle acoustic cues, so phonemic difference does not necessarily mean a huge difference in acoustics or underlying articulation.
 
+\begin{adjustwidth}{1cm}{} \textit{
+Rephrased as "Given that the articulatory space within which the tongue can move is generally more constrained in stops than in vowels, and given that Kirkham 2017 find a difference of 4 mm in tongue root position in vowels, it makes sense to expect that differences in tongue root position as driven by consonantal factors should be of some magnitude smaller, like the ones found in this study."
+} \end{adjustwidth}
+
 390-3 See comments l57-58 Rothenberg’s estimated duration for tongue-root advancement.
 
 \begin{adjustwidth}{1cm}{} \textit{
@@ -493,11 +508,28 @@ The aim of this study is to show the relation between longer vowel duration and 
 
 1. The result the author argues to be the main point of the manuscript (how a longer vowel duration corresponds to greater tongue root advancement) is not very well explained. The author shows some results (Figure 5), but does not explain enough why tongue root advancement is related to the longer vowel duration. This study explains why tongue root should be more advanced at the vowel offset of voiced stops, but not necessarily why more tongue root advancement is found with the longer vowel duration. The only part that explains the relation between the vowel duration and tongue root advancement is line 333 (p.21), but more explanations will be necessary—considering the main argument (and the title) of this paper is how longer vowel duration correlates with greater tongue root advancement)—or I wonder if the title purposefully used the word 'displacement' instead of 'advancement'.
 
+\begin{adjustwidth}{1cm}{} \textit{
+I have reworded the relevant paragraphs of section IV.A (also see comments below).
+} \end{adjustwidth}
+
 2. Also, I'm concered about inter-speaker variation. In fact, out of 17 speakers, 7 speakers did not show more tongue root advancement at closure onset of voiced stops (Figure 7 and Figure 8). Considering the difficulty of analyzing everyone's data collectively when doing an ultrasound study (due to the differences in each speaker's anatomy), the statistical model(s) the author reports in the manuscript can be questionable especially with the high variability found among speakers.
+
+\begin{adjustwidth}{1cm}{} \textit{
+Figure 8 indicates that one speaker has no difference in tongue root position (IT11) and two have the reversed pattern (IT09 and PL02). The figure of 7 speakers indicated in the text was not meant to be interpreted as "these speakers do not show differences", but rather that these speakers have a more uncertain estimate of tongue root difference. I have rephrased this paragraph. In Figure 9, 5 speakers of 17 have no distinction or the reversed pattern.
+} \end{adjustwidth}
 
 3. On p. 19, Figure 5, it shows that when the vowel is longer, the tongue root position at the onset of the vowel is more retracted. The reason for this seems very important, but it's not explained why that's the case other than saying "the trajectory curvature increases with vowel duration (line 302).
 
+\begin{adjustwidth}{1cm}{} \textit{
+This has changed after having fixed the statistical model (I realised the number of basis functions was too low according to check.gam() so I have increased it).
+} \end{adjustwidth}
+
 4. The author reports the data on two different languages, Italian and Polish, but it is less clear why these two languages are studied, especially since as the author argues, two languages did not show any difference. Also, since the data were collected in the UK, it's worth mentioning the length of stay in the UK and English proficiency of each speaker. It is well known that English voiced/voiceless stops behave differently from other languages, so English may have some effects on participants' native languages. Regarding the materials used for the data collection, I wonder if there was any effect of including the real words. Also, why /b, p/ was not included (at least for a comparison to other lingual consonants?)
+
+\begin{adjustwidth}{1cm}{} \textit{
+Italian and Polish were chosen because they reportedly have varying degrees of the voicing effect, as discussed in Section I.B.
+A discussion of the possible influence of English is found in Coretta 2018, so I've added a footnote in Section II.B to refer the reader to that paper.
+} \end{adjustwidth}
 
 And, here are some parts I found unclear/need more explanations:
 
@@ -680,116 +712,3 @@ P. 26, line 447: 11 speakers--> 10 speakers?
 \begin{adjustwidth}{1cm}{} \textit{
 Fixed.
 } \end{adjustwidth}
-
-# Reviewers' Responses to Questions
-
-Is the manuscript of good scientific quality, free from errors, misconceptions or ambiguities; does it present original work; and does it contain sufficient new results, new applications or new developments of reasonable enough significance to warrant its publication in JASA? Please indicate in your report (in detailed comments, below) any points which are objectionable or which need attention.
-
-Reviewer 1: There are some ambiguities and potential issues with measurement that need to be addressed.
-
-Reviewer 2: 1. The manuscript contains some very interesting and original/new data. However, there are some concerns about the interpretation of the results. The result the author argues to be the main point of the manuscript (how a longer vowel duration corresponds to greater tongue root advancement) is not very well explained throught the manuscript. The author shows some results, but does not explain why that is the case. Also, I’m concered about inter-speaker variation. In fact, out of 17 speakers, 7 speakers did not show more tongue root advancement at closure onset of voiced stops (Figure 7 and Figure 8). Considering the difficulty of analyzing different speakers’ data in one statistical model when doing an ultrasound study (due to the differences in each speaker’s anatomy), the statistical model(s) the author reports in the manuscript can be questionable especially with the high variability found among speakers.
-
-2. On p. 19, Figure 5, it shows that when the vowel is longer, the tongue root position at the onset of the vowel is more retracted. The reason for this seems very important and worth some attention. However, the author does not explain why that’s the case other than saying "the trajectory curvature increases with vowel duration (line 302).
-
-3. There aren’t adquate explanations on why tongue root advancement will be related to the longer vowel duration. This study explains why tongue root should be more advanced at the vowel offset of voiced stops, but not necessarily why more tongue root advancement is found with the longer vowel duration. The only part that explains the relation between the vowel duration and tongue root advancement is line 333 (p.21), but that part is not very well explained.
-
-3. The author reports the data on two different languages, Italian and Polish, but it is less clear why these two languages are studied, especially since as the author argues, two languages did not show any difference.
-
-4. Since the data were collected in the UK, it's worth mentioning the length of stay in the UK and English proficiency of each speaker. It is well known that English voiced/voiceless stops behave differently from other languages, so English may have some effects on participants’ native languages.
-
-5. Regarding the materials used for the data collection, including both nonce words and real words may not have been the best choice. I wonder if there was any effect of including the real words.
-
-6. Also, this is not the crucial point, but some errors/typos in terms of writing sometimes makes it difficult to understand the writer's intention sometimes. (e.g. p. 4, line 72, 'longer' should be 'shorter', which is very important). More detailed line-by-line comments will be provided to the author.
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-Is JASA an appropriate journal in which to present this work? In this regard, please consider carefully the commitment of JASA to publish work that is within the scope of Acoustics. Does the content of the manuscript, including terminology and the references cited, meet this criterion?
-
-Reviewer 1: Yes, this work is appropriate for publication in JASA.
-
-Reviewer 2: This work includes both articulatory and acoustic data, which I believe is suitable to be published in JASA. Also, it includes some important phonetic work (both articulatory and acoustic) in the field as relevant references.
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-Is the manuscript a clear, concise, reasonably self-contained presentation of the material, giving adequate references to related work? Is the English satisfactory? Please indicate needed changes in your report.
-
-Reviewer 1: The central argument of the manuscript could be made clearer. The style of the manuscript can be overly complex.
-
-Reviewer 2: 1. The manuscript contains interesting and new results, but the writing itself is not the easiest to read. There were some sections I had to read several times to understand. The statistical models in the results will be benefited by more explanations, and the discussion section is also not very clear. More detailed comments are below:
-
-p. 3, 2nd paragraph: it's unclear what the purpose of the last sentence is
-
-p. 4, 2nd paragraph: the typo in line 72 ('longer' should be 'shorter') made the whole paragraph (and the following paragraphs) difficult to understand
-
-p. 13, line 235: Generalized additive mixed models (GAMMs). It is very difficult to understand what this model does, and how this model’s prediction works in Section III B, which makes it difficult to understand Fig. 3.
-
-p. 20, line 330: "Said correlation exists independent of the voicing status of the consonant following the vowel" --> this part made the whole paragraph and the manuscript's argument a bit confusing. I also found it difficult to understand the paragraph including this sentence and the following paragraph.
-
-p. 21, 3rd paragraph: this paragraph suddenly mentions speech rate and its paradox, and it is not very convincing, especially considering individual variation. I think at least with speech rate and tongue root advancement of vowel onset, it may be worth looking at individual speaker's results. It may not be best to use speech rate just as a factor in the statistical model.
-
-p. 23-24, Section IV B: I think this section can be either condensed or deleted.
-
-p. 25, Section IV C: I actually think individual differences are very important. Since some speakers show very different patterns, I think combining everyone's data at once and running the statistical model may not be ideal. In fact, Figure 7 shows out of 17 speakers, 7 speakers either didn't show the expected results or showed the opposite results.
-
-2. This manuscript gives some references to related work, but there are some parts where references are missing when necessary. More detailed comments are below:
-
-p. 2, line 18: "a lot of work has been done on each of these aspects separately,..." but actual references are not mentioned
-
-p. 3, line 39: "Aerodynamic Voicing Constraint": since this concept is mentioned as a very important concept of this manuscript, more detailed information about it will be helpful
-
-p. 4, line72-73: please indicate what language(s) each paper worked on
-
-p. 5, line 98: here as well, please specify what language(s) each paper worked on
-
-p. 10, line 182: "high and front vowels usually produce less tongue displacement from and to a stop consonant" --> reference(s)?
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-Are the tables and figures clear and relevant, and are the captions adequate? Are there either too many or too few? If any of the figures are in color, is the color essential for conveying the scientific point?
-
-Reviewer 1: Tables and figures are clear and relevant. Captions are adequate. More figures could be included to illustrate measurement.
-
-Reviewer 2: Some figures are not easy to understand, and there are some parts where the tables and figures are necessary.
-
-First of all, in the results, tables with these acoustic data are necessary: mean V1 duration, mean speech rate, mean closure-to-closure interval
-
-p. 11, line 206: what is "higher formant"? Either give a very specific example, or provide a sample spectrogram
-
-Figure 1: please indicate the front and back of the tongue
-
-Figure 2: this figure is difficult to understand. How was the data of each speaker scaled? Also, it will be helpful if this figure is in color.
-
-Figure 4: I don’t understand this figure—maybe using color and indicating voiced/voiceless stops may be helpful.
-
-Figure 5: Why 145ms was used instead of 150ms? (while other V1 duration values used are 50, 100, and 200) Also, why 145 ms and 200 ms starts from the backer tongue root position? It's not explained in the text.
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-If Supplementary material was submitted, is it relevant to the manuscript and should it be deposited in the Supplemental Depository for reference to the manuscript?
-
-Reviewer 1: NA
-
-Reviewer 2: N/A
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-Does the paper make effective use of journal space, or are parts unnecessary, unimportant, or subject to condensation? If so, which?
-
-Reviewer 1: I believe the manuscript could be shortened and made more concise, particularly the discussion section.
-
-Reviewer 2: p. 23, Section IV B can be condensed/removed since estimates of tongue root displacement will be highly variable depending on speaker. Since (1) Speaker variation was reported in this study, (2) only two languages are studied, and (3) the author mentions that "the correlation between tongue root position and vowel duration needs to be replicated by expanding the enquired contexts to other types of consonants and vowels, and with other languages" (p. 24, line 410), I recommend to condense this section.
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-Is the title appropriate and the abstract adequate for verbatim reproduction in abstract journals? IMPORTANT: The lead paragraph should advertise the main points of the article and must describe in terms accessible to the general reader the context and significance or the research problem studied and the importance of the results.
-
-Reviewer 1: Yes, the title is appropriate. There are some parts of the abstract that need to be edited to improve clarity.
-
-Reviewer 2: I recommend the title to include that "longer vowel duration" (only) refers to the "preceding" vowel duration (not necessarily the following). I also think the word 'advancement' will be more suitable than 'displacement'. On the other hand, I wonder if the title purposefully used the word ‘displacement’ instead of ‘advancement’.
-
-In the abstract, it will be more informative if the author includes at least a few references (e.g. the Aerodynamic Voicing Constraints--> Ohala, 2011).
-
-The results in the abstract can be more clearly written, especially the last three sentences.
-
-Vowel duration and tongue root position at vowel offset are positively correlated. Longer vowel durations correspond to greater tongue root advancement: I wonder if this should be the main point of this study, as I pointed out throughout my review
-'the later closure onset of voiced stops within a temporally stable interval' needs more explanation because 'shorter closure duration' of voicing stop is not mentioned in the previous sentences.
