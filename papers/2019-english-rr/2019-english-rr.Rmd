@@ -87,11 +87,11 @@ Several hypotheses have been proposed as to the origin of this phenomenon, from 
 One such hypothesis, the compensatory temporal adjustment account, states that the voicing effect involves a compensatory mechanism between vowel and consonant closure duration.
 Vowels are shorter when followed by voiceless stops because the latter have longer closure durations, and, vice versa, vowels are longer before voiced stops because the latter have shorter closure durations.
 However, the compensatory account fails to clearly identify a speech interval within which compensation is implemented.
-Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969, slis1969a, lehiste1970a, lehiste1970} have been proposed as such intervals, but these have been subsequently criticised on empirical and logical grounds \citep{chen1970, jacewicz2009, maddieson1976, coretta2018j}.
+Both the syllable \citep{lindblom1967, farnetani1986} and the word \citep{slis1969a, slis1969b, lehiste1970a, lehiste1970b} have been proposed as such intervals, but these have been subsequently criticised on empirical and logical grounds \citep{chen1970, jacewicz2009, maddieson1976, coretta2018j}.
 
 In an exploratory study of acoustic durations in Italian and Polish trochaic CV́CV words, \citet{coretta2018j} finds that the duration of the interval between the two consonant releases is not affected by the voicing status of the second consonant.
 The duration of the release-to-release interval in words where the second consonant is voiceless (like /pata/) is not significantly different from that in words where the second consonant is voiced (for example, /pada/).
-The temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969, slis1969a, lehiste1970a, lehiste1970}, and it offers a resolution to the drawbacks of previous versions of the account.
+The temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969a, slis1969b, lehiste1970a, lehiste1970b}, and it offers a resolution to the drawbacks of previous versions of the account.
 
 Given the temporal stability of the release-to-release interval, the timing of the vowel/consonant (VC) boundary (corresponding to the vowel offset and the consonant closure onset) within that interval will determine the respective durations of vowel and consonant closure.
 If the VC boundary is timed earlier than 50% of the release-to-relase, the resulting vowel duration will be shorter than that of the closure duration.
