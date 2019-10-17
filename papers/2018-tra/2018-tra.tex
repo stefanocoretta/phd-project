@@ -409,11 +409,11 @@ achieved with the software Articulate Assistant Advanced (AAA, v2.17.2)
 running on a Hewlett-Packard ProBook 6750b laptop with Microsoft Windows
 7. The synchronisation of the ultrasonic and audio signals was performed
 by AAA after recording by means of a synchronisation signal produced by
-the ultrasound unit and amplified by the P-Stretch unit. The ranges of
-the ultrasonic settings were: 43-68 frames per second, 88-114 number of
-scan lines, 980-988 pixel per scan line, field of view 71-93°, pixel
-offset 109-263, depth 75-180 mm. The audio signal was sampled at 22050
-Hz (16-bit).
+the ultrasound unit and amplified by the P-Stretch unit. The ultrasonic
+settings were adjusted on a speaker basis, and their ranges were: 43-68
+frames per second, 88-114 number of scan lines, 980-988 pixel per scan
+line, field of view 71-93°, pixel offset 109-263, depth 75-180 mm. The
+audio signal was sampled at 22050 Hz (16-bit).
 
 \hypertarget{materials}{%
 \subsection{Materials}\label{materials}}
@@ -489,31 +489,37 @@ divided by the duration of the sentence in seconds.
 \end{figure}
 
 The displacement of the tongue root was obtained from the ultrasonic
-data according to the procedure used in \citet{kirkham2017}. Smoothing
-splines were automatically fitted to the visible tongue contours in AAA.
-The mean pixel size as used by the automatic tracker was 0.47 mm (SD =
-0.16), so that differences in tongue position smaller than that would
-not be captured. Manual correction was then applied to the automatically
-fitted tongue contours in cases of clear tracking errors. A fan-like
-frame consisting of 42 equidistant radial lines superimposed on the
-ultrasonic image was used as the coordinate system. The origin of the 42
-fan-lines coincides with the (virtual) origin of the ultrasonic beams,
-such that each fan-line is parallel to the direction of the ultrasonic
-scan lines. Tongue root displacement was thus calculated as the
-displacement of the fitted spline along a selected vector
-\citep{strycharczuk2015}, see \Cref{f:trp}. For each participant, the
-fan-line with the highest standard deviation of displacement within the
-area corresponding to the speaker's tongue root was chosen as the tongue
-root displacement vector. The chosen fan-lines across all speakers range
-between fan-line 25 and 34 (a higher number indicates a more posterior
-position). A Savitzky--Golay smoothing filter (second-order, frame
-length 75 ms) was applied to the raw displacement. Displacement values
-for analysis are taken from the smoothed displacement signal. Tongue
-root displacement was obtained from a static time point (the offset of
-V1/onset of the closure of C2) and along the duration of V1. The
-displacement values along the vowel duration were extracted at time
-points corresponding to ultrasonic video frames. Given the average frame
-rate is 55 frames per second, values are sampled about every 20
+data according to the procedure used in \citet{kirkham2017}. Note that,
+while the data was recorded without taking care that the tongue root was
+visible, the back part of the tongue just above the hyoid bone shadow
+(roughly corresponding to the uppermost part of the tongue root) was
+always imaged. Smoothing splines were automatically fitted to the
+visible tongue contours in AAA. The mean pixel size as used by the
+automatic tracker was 0.47 mm (SD = 0.16), so that differences in tongue
+position smaller than that would not be captured. Manual correction was
+then applied to the automatically fitted tongue contours in cases of
+clear tracking errors. A fan-like frame consisting of 42 equidistant
+radial lines superimposed on the ultrasonic image was used as the
+coordinate system. The origin of the 42 fan-lines coincides with the
+(virtual) origin of the ultrasonic beams, such that each fan-line is
+parallel to the direction of the ultrasonic scan lines. Tongue root
+displacement was thus calculated as the displacement of the fitted
+spline along a selected vector \citep{strycharczuk2015}, see
+\Cref{f:trp}. For each participant, the fan-line with the highest
+standard deviation of displacement within the area corresponding to the
+speaker's tongue root was chosen as the tongue root displacement vector.
+The chosen fan-lines across all speakers range between fan-line 25 and
+34 (a higher number indicates a more posterior position), and these are
+always backer in the oral track than the fan-lines along which velar
+closure is articulated by the respective speaker. A Savitzky--Golay
+smoothing filter (second-order, frame length 75 ms) was applied to the
+raw displacement. Displacement values for analysis are taken from the
+smoothed displacement signal. Tongue root displacement was obtained from
+a static time point (the offset of V1/onset of the closure of C2) and
+along the duration of V1. The displacement values along the vowel
+duration were extracted at time points corresponding to ultrasonic video
+frames. Given the average frame rate is 55 frames per second, values are
+sampled about every 20
 ms.\footnote{The frame rate is adjusted by the system depending on other settings, so there is no standard frame rate.}
 To facilitate interpretation of the displacement values, the sign of
 these was flipped so that higher values indicate a more advanced tongue
