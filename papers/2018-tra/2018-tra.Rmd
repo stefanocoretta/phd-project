@@ -187,7 +187,7 @@ Independent of language, some speakers have a greater effect and others a small 
 
 Finally, the temporal distance between two consecutive stop releases in CV́CV words is not affected by the voicing of the second consonant.
 The duration of the release to release interval is stable across voicing contexts.
-Within this interval, the timing of VC boundary (the vowel offset/onset of stop closure) produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969, lehiste1970, lehiste1970a}.
+Within this interval, the timing of VC boundary (the vowel offset/onset of stop closure) produces differences in the respective durations of vowel and closure, following a mechanism of temporal compensation \citep{lindblom1967, slis1969a, slis1969b, lehiste1970a, lehiste1970b}.
 A later closure onset results in a long vowel and a short closure, while an earlier closure onset corresponds to a short vowel and a long closure.
 Since the closure of voiceless stops is longer than that of voiced stops, it follows that vowels are shorter when followed by the former than when followed by the latter.
 
