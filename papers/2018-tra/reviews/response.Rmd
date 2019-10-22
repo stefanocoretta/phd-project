@@ -15,11 +15,11 @@ mainfont: Brill
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Thanks to the JASA Editor and to the reviewers for their helpful feedback. As per request, the following paragraphs give details about the recommended changes. The author's responses to these changes are in italics and indented.
+Thanks to the JASA Editor and to the reviewers for their helpful feedback. As per request, the following paragraphs give details about the recommended changes. The author's responses to these changes are in italics and indented. Line numbers refer to the old manuscript, unless followed by "rm" (revised manuscript).
 
-I updated the title of the paper to reflect the suggestion of one reviewer "I recommend the title to include that "longer vowel duration" (only) refers to the "preceding" vowel duration (not necessarily the following). I also think the word 'advancement' will be more suitable than 'displacement'. On the other hand, I wonder if the title purposefully used the word ‘displacement’ instead of ‘advancement’.". The title now reads "Longer vowel duration correlates with greater tongue root advancement at vowel offset: Acoustic and articulatory data from Italian and Polish".
+I updated the title of the paper to reflect the suggestion of one reviewer: "I recommend the title to include that longer vowel duration (only) refers to the preceding vowel duration (not necessarily the following). I also think the word advancement will be more suitable than displacement. On the other hand, I wonder if the title purposefully used the word displacement instead of advancement." The title now reads "Longer vowel duration correlates with greater tongue root advancement at vowel offset: Acoustic and articulatory data from Italian and Polish".
 
-The author's manuscript referred to as Coretta (2018) in this paper has been accepted for publication at Glossa and will be available soon (late 2019, early 2020).
+The author's manuscript referred to as Coretta (2018) in the old manuscript (now Coretta 2019) has been accepted for publication at Glossa and will be available soon (late 2019).
 I have attached the latest post-print version of the manuscript for your convenience.
 
 # Editor
