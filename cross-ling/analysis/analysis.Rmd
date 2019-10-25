@@ -34,7 +34,16 @@ enitpl <- bind_rows(eng, ita_pol) %>%
     language = factor(language, levels = c("English", "Italian", "Polish")),
     voicing = factor(voicing, levels = c("voiceless", "voiced")),
     speech_rate_c = scale(speech_rate),
-    vc_ratio = v1_duration / c2_clos_duration
+    vc_ratio = v1_duration / c2_clos_duration,
+    height = case_when(
+      vowel == "a" ~ "low",
+      vowel == "ar" ~ "low",
+      vowel == "er" ~ "mid",
+      vowel == "o" ~ "mid",
+      vowel == "ee" ~ "high",
+      vowel == "u" ~ "high",
+    ),
+    height = factor(height, levels = c("low", "mid", "high"))
   ) %>%
   mutate_if(is.character, as.factor) %>%
   na.omit()
@@ -156,6 +165,56 @@ brm_2_draws %>%
   geom_vline(xintercept = 0) +
   stat_intervalh() +
   stat_pointintervalh(position = position_nudge(y = -0.15), .width = c(0.66, 0.98)) +
+  scale_color_brewer()
+```
+
+```{r brm-3}
+priors <- c(
+  prior(normal(145, 30), class = Intercept),
+  prior(normal(0, 20), class = b),
+  prior(normal(-25, 10), class = b, coef = speech_rate_c),
+  prior(cauchy(0, 25), class = sd),
+  prior(lkj(2), class = cor),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+brm_3 <- brm(
+  v1_duration ~
+    language +
+    voicing +
+    height +
+    language:voicing +
+    height:voicing +
+    speech_rate_c +
+    (voicing | speaker) +
+    (voicing | word),
+  data = enitpl,
+  family = gaussian(),
+  prior = priors,
+  file = "cross-ling/analysis/cache/brm_3",
+  cores = 4,
+  control = list(adapt_delta = 0.999, max_treedepth = 15),
+  seed = 1432
+)
+```
+
+```{r brm-3-summary}
+summary(brm_3)
+```
+
+```{r brm-3-draws}
+brm_3_draws <- brm_3 %>%
+  gather_draws(`b_.*`, regex = TRUE) %>%
+  filter(.variable != "b_Intercept")
+```
+
+```{r brm-3-intervals}
+brm_3_draws %>%
+  ungroup() %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  geom_halfeyeh(fill = "#9ecae1", .width = c(0.66, 0.98), fatten_point = 1, scale = "width", relative_scale = 0.7) +
+  stat_intervalh(position = position_nudge(y = -0.2), size = 2) +
   scale_color_brewer()
 ```
 
