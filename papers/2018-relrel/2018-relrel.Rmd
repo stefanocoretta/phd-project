@@ -19,8 +19,8 @@ header-includes:
 - \usepackage{cleveref}
 - \usepackage{enumerate}
 params:
-  version: 4.1
-  version-date: "2019/11/01"
+  version: 4.2
+  version-date: "2019/11/08"
 ---
 
 ```{r setup, include=FALSE}
@@ -69,12 +69,12 @@ Despite of the plethora of evidence in support of the *existence* of the voicing
 
 Several proposals have been put forward in relation to the possible source of the voicing effect (see \citealt{soskuthy2013} and \citealt{begus2017} for an overview).
 Some of the proposed mechanisms for the emergence of the voicing effect refer to properties of speech production.
-A notable production account, which will be the focus of this study, is based on compensatory temporal adjustments [@lindblom1967; @slis1969a; @slis1969; @lehiste1970a; @lehiste1970].
+A notable production account, which will be the focus of this study, is based on compensatory temporal adjustments [@lindblom1967; @slis1969a; @slis1969b; @lehiste1970a; @lehiste1970b].
 According to this account, the voicing effect follows from the reorganisation of gestures within a unit of speech the duration of which is not affected by stop voicing.
 The duration of such a unit is held constant across voicing contexts, while the duration of voiceless and voiced obstruents differs.
 The closure of voiceless stops is longer than that of voiced stops [@lisker1957; @van-summers1987; @davis1989; @de-jong1991].
 As a consequence, vowels followed by voiceless stops (which have a long closure) are shorter than vowels followed by voiced stops (which have a short closure).
-Advocates of a compensatory mechanism propose two prosodic units as the scope of the temporal adjustment: the syllable (and, equivalently, the VC sequence or vowel-to-vowel interval, \citealt{lindblom1967, farnetani1986}), and the word [@slis1969a; @slis1969; @lehiste1970a; @lehiste1970].
+Advocates of a compensatory mechanism propose two prosodic units as the scope of the temporal adjustment: the syllable (and, equivalently, the VC sequence or vowel-to-vowel interval, \citealt{lindblom1967, farnetani1986}), and the word [@slis1969a; @slis1969b; @lehiste1970a; @lehiste1970b].
 However, the compensatory temporal adjustment account has been criticised in subsequent work.
 
 Empirical evidence and logic challenge the proposal that the syllable or the word have a constant duration and hence drive compensation.
@@ -631,7 +631,7 @@ The closure duration of voiced stops is short compared to that of voiceless stop
 There seems to be an inverse relation between vowel duration and closure duration, by which a long vowel entails a short closure (and vice versa), and a short vowel entails a long closure (and vice versa).
 
 The data and statistical analyses of this study suggest that the duration of the interval between the releases of two consecutive consonants in CV́CV words (the release to release interval) is not affected by the phonological voicing of the second consonant (C2) in Italian and Polish.
-In accordance with a compensatory temporal adjustment account [@slis1969; @lehiste1970], the difference in vowel duration and closure durations before voiceless vs. voiced stops can be seen as the outcome of differences in timing of the vowel offset/closure onset (more neutrally, the VC boundary).
+In accordance with a compensatory temporal adjustment account [@slis1969b; @lehiste1970b], the difference in vowel duration and closure durations before voiceless vs. voiced stops can be seen as the outcome of differences in timing of the vowel offset/closure onset (more neutrally, the VC boundary).
 In other words, the timing of the VC boundary within the temporally stable release to release interval determines the duration of both the vowel and the stop closure.
 An earlier VC boundary relative to the onset of the preceding vowel results in a shorter vowel and a longer stop closure.
 On the other hand, a later VC boundary produces a longer vowel and a shorter closure.
@@ -647,7 +647,7 @@ No specific statement is implied about the variance of the duration around the m
 \end{figure}
 
 The invariance of the release to release interval allows us to refine the logistics of the compensatory account by narrowing the scope of the temporal adjustment action.
-A limitation of this account, as proposed by @slis1969 and @lehiste1970, is the lack of a precise identification of the word-internal mechanics of compensation.
+A limitation of this account, as proposed by @slis1969b and @lehiste1970b, is the lack of a precise identification of the word-internal mechanics of compensation.
 As already discussed in \Cref{s:intro}, it is not clear why the adjustment should target the preceding stressed vowel, rather than the following unstressed vowel or any other segment in the word.
 Since the release to release interval includes just the vocoid gesture between the release of C1 and the VC boundary, and the consonant closure, it follows that differences in the timing of the VC boundary must be reflected in differences in both vowel and closure durations.
 
