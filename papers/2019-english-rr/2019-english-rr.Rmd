@@ -94,9 +94,7 @@ The duration of the release-to-release interval in words where the second conson
 The temporal stability of the release-to-release interval is compatible with a compensatory temporal adjustment account of the voicing effect \citep{lindblom1967, slis1969a, slis1969b, lehiste1970a, lehiste1970b}, and it offers a resolution to the drawbacks of previous versions of the account.
 
 Given the temporal stability of the release-to-release interval, the timing of the vowel/consonant (VC) boundary (corresponding to the vowel offset and the consonant closure onset) within that interval will determine the respective durations of vowel and consonant closure.
-If the VC boundary is timed earlier than 50% of the release-to-relase, the resulting vowel duration will be shorter than that of the closure duration.
-Vice versa, a timing of the VC boundary later than 50% of the release-to-release results in a longer vowel and a shorter closure.
-The outcome is that shorter vowels are followed by longer stops, and longer vowels are followed by shorter stops.
+Since the VC boundary in voiceless stops is timed earlier within the release-to-release relative to voiced stops, vowels are shorter and closure are longer in the voiceless context than in the voiced context.
 This agrees with the known differences of closure durations in voiceless vs. voiced stops \citep{lisker1957, van-summers1987, davis1989, de-jong1991}.
 Thus, a possible diachronic pathway to the voicing effect in disyllabic words is one in which vowel and closure duration differences emerge from changes in the timing of the VC boundary within the release-to-release interval which affect the voiceless and voiced contexts differently.
 
@@ -114,7 +112,8 @@ The task-dynamic model \citep{saltzman2008} of Articulatory Phonology \citep{oha
 Either they are initiated in synchrony or they are implemented sequentially.
 These modes of gestural phasing (in-phase and anti-phase) can account for a variety of patterns of articulatory timing.
 Relevant to our discussion is that onset consonants are generally produced in-phase with the following vowel, meaning that the vocalic and consonantal gestures are initiated together.
-This mechanism gives rise to the so-called C-centre effects observed with onsets, by which the acoustic duration of a vowel depends on the number of onset consonants \citep{browman1988, marin2010, hermes2013, marin2014}.
+This same mechanism also gives rise to the so-called C-centre effects observed with onsets, by which the acoustic duration of a vowel depends on the number of onset consonants \citep{browman1988, marin2010, hermes2013, marin2014}.
+On the other hand, coda consonants tend to be produced anti-phase relative to the preceding vowel and to each other, meaning that they are articulated in sequence.
 
 Further evidence for a vowel-based rhythmic gestural implementation comes from work by \citet{farnetani1986} and \citet{celata2014}.
 These studies investigate the relation between vowel duration and syllable structure in Italian.
@@ -122,9 +121,18 @@ In the first study, it was found that vowels followed by a singleton stop (for e
 This pattern can easily be derived from a scenario in which the distance between the vowels is the same in the two contexts (/la.da/ and /la.dra/), and the onset consonants follow a C-centre alignment.
 \citet{celata2014} also show that the duration of the consonant/consonant cluster is negatively correlated with the duration of the preceding vowel (although the magnitude of the correlation is low to moderate).
 
-Under this scenario, the combined action of the isochrony of the vowel-to-vowel interval and the in-phase alignment of the onset consonant is also responsible for the isochrony of the release-to-release interval in CVCV words.
+Under the scenario presented in this paper, the combined action of the isochrony of the vowel-to-vowel interval and the in-phase alignment of the onset consonant is responsible for the isochrony of the release-to-release interval in CVCV words.
+The first consonant and vowel are produced in-phase with each other, and these are sequentially followed by the second consonant and vowel, again produced in-phase with each other.
+The differential duration found in the voicing effect would then be a consequence of the different velocity of the closing gesture in voiceless vs. voiced consonants.
+
 \citet{van-summers1987} shows that the closing gesture of voiceless stops has greater velocity than that of voiced stops.
-Assuming that the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel (as per the in-phase alignment), full oral closure will be achieved earlier in voiceless than in voiced stops relative to the beginning of the preceding vocalic gesture, while the timing of the consonant release will not be affected, in accordance with the empirical data.
+Assuming that the closing gesture of both voiceless and voiced stops is initiated in synchrony with that of the following vowel (as per the in-phase alignment), full oral closure is achieved earlier in voiceless stops relative to its timing in voiced stops.
+The result is, everything else being equal, a shorter vowel and a longer (full) closure in voiceless stops, and a longer vowel and a shorter closure in voiced stops.
+
+A similar chain of reasoning applies to the context of coda consonants.
+If coda consonants are produced anti-phase with the preceding vowel and the closing gesture of the consonant starts at a specific time after the production of the vowel, independent of consonant voicing, then the greater velocity of the closing gesture in voiceless stops would result in a shorter vowel and a longer closure relative to voiced stops.
+However, the articulatory data in \citet{de-jong1991} suggests that the timing of the onset of the stop closing gesture differs depending on voicing in English monosyllabic words.
+\Cref{s:gen-disc} will discuss a possible solution based on perceptual mechanisms that could reconcile the articulatory predictions put forward here and the empirical data.
 
 ## The voicing effect in English
 
