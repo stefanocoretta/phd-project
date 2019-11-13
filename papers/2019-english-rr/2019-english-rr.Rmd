@@ -6,7 +6,7 @@ output:
     keep_tex: yes
     latex_engine: xelatex
     number_sections: yes
-    dev: cairo_pdf
+    dev: png
     template: template.tex
 bibliography: linguistics
 biblio-style: unified
@@ -493,7 +493,7 @@ rr_3 <- brm(
 ```
 
 Including all the relevant terms in the model (C2 voicing and place, vowel, number of syllables in interaction with C2 voicing) reduces the width of the credible intervals substantially.
-\Cref{f:rr-3-intervals} shows the posterior distributions of the model terms with a variety of credible intervals.
+\Cref{f:Figure1} shows the posterior distributions of the model terms with a variety of credible intervals.
 The posterior distribution of the C2 voicing effect on release-to-release duration is tighter than that of model 1 (95% CI = [−10.45, 5.65], within the ROPE) while the mean (−2.43 ms, SD = 4.06) is virtually unchanged (−4.43 ms, only a 2 ms difference).
 The estimated effect of syllable number is robustly positive (95% CI = [9.17, 22.48], virtually completely outside the ROPE), with a mean (16.03 ms, SD = 3.32) similar to that in model 1.
 The posterior distribution of the interaction between number of syllables and C2 voicing (95% CI = [2.65, 20.98], partial overlap with the ROPE) suggests a positive and medium-sized interaction effect ($\bar{\theta}$ = 11.67 ms, SD = 4.71).
@@ -509,7 +509,7 @@ kable(rr_3_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, ca
 kable_styling(font_size = 8)
 ```
 
-```{r rr-3-intervals, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on release-to-release duration (model 3). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure1, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on release-to-release duration (model 3). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth", dpi = 300}
 rr_3_draws <- rr_3 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_voweler, b_vowelee, b_placelabial)
 
@@ -595,7 +595,7 @@ kable(vow_4_tidy, format = "latex", booktabs = TRUE, linesep = "", digits = 2, c
 kable_styling(font_size = 8)
 ```
 
-\Cref{tab:vow-4-table} reports the summary of model 4, while \Cref{f:vow-4-intervals} shows the posterior distributions and credible intervals.
+\Cref{tab:vow-4-table} reports the summary of model 4, while \Cref{f:Figure2} shows the posterior distributions and credible intervals.
 The precision target was reached in the non-interacting predictors (permitting a few milliseconds above 20), with the exeption of the intercept.
 All the interactions terms have CI widths above 25 ms.
 The 95% CI of the posterior distribution of the duration of /ɑː/ is included in the range 112.94--136.77 ms ($\bar{\theta}$ = 124.91 ms, SD = 5.96).
@@ -613,7 +613,7 @@ The three-way interaction C2 voicing/vowel/number of syllables suggests that the
 On the other hand, the effect increases by 14.46 ms (SD = 9.18, CI = [−3.59, 31.99]) in monosyllabic words with /iː/ relative to disyllabic /iː/-words.
 Note that the credible intervals of these interaction effect are quite large, so that a wide range of values are probable at 95% confidence.
 
-```{r vow-4-intervals, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on vowel duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure2, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on vowel duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth", dpi = 300}
 vow_4_draws <- vow_4 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_voweler, b_vowelee, `b_voicingvoiced:voweler`, `b_voicingvoiced:vowelee`, `b_voweler:num_sylmono`, `b_vowelee:num_sylmono`, `b_voicingvoiced:voweler:num_sylmono`, `b_voicingvoiced:vowelee:num_sylmono`)
 
@@ -694,7 +694,7 @@ kable_styling(font_size = 8)
 ```
 
 The summary of model 5 is shown in \Cref{tab:clos-5-table}.
-See \Cref{f:clos-5-intervals} for the posteriors and credible intervals of the effects.
+See \Cref{f:Figure3} for the posteriors and credible intervals of the effects.
 The 96% CI width of all the terms, with the exception of the three-way interaction (voicing/place/number of syllables), is below 20 ms (the precision goal has been reached).
 The posterior distribution of the intercept for closure duration (corresponding to the duration of voiceless velar stops in disyllabic words) has mean 74.75 ms (SD = 2.86) and 95% CI = [69.07, 80.59].
 The effect of C2 voicing on closure duration is robustly negative, between −26.77 and −14.74 ms (95% CI).
@@ -703,7 +703,7 @@ A very small positive effect of place of articulation (labial) is suggested by t
 A possibly even smaller effect of number of syllables or no effect at all can be inferred from the posterior distribution which has mean 2.98 ms and SD 2.9 (95% CI = [−2.8, 8.77]).
 Note that the 95% CIs of the posterior distributions of all the effects, with the exception for the effect of voicing, are within the ROPE around 0, meaning that they can be interpreted as practically null effects.
 
-```{r clos-5-intervals, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on closure duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth"}
+```{r Figure3, include=TRUE, fig.cap="Posterior distributions and Bayesian credible intervals of the effects on closure duration (model 4). For each effect, the thick blue-coloured bars indicate (from darker to lighter) the 50\\%, 80\\%, and 95\\% CI. The black point with bars are the posterior median (the point), the 98\\% (thin bar) and 66\\% (thicker bar) CI. The shaded grey area around 0 is the ROPE.", fig.lp="f:", out.extra="width=\\linewidth", dpi = 300}
 clos_5_draws <- clos_5 %>%
   gather_draws(b_voicingvoiced, b_num_sylmono, `b_voicingvoiced:num_sylmono`, b_placelabial, `b_voicingvoiced:placelabial`, `b_placelabial:num_sylmono`, `b_voicingvoiced:placelabial:num_sylmono`)
 
