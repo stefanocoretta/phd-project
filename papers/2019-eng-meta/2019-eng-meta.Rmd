@@ -1,0 +1,551 @@
+---
+title: "Supplement A: Bayesian meta-analysis of the voicing effect in English"
+author: "Stefano Coretta"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    citation_package: natbib
+bibliography: linguistics
+biblio-style: unified
+mainfont: Lato
+fontsize: 12pt
+indent: true
+header-includes:
+- \let\tnote\relax
+- \usepackage{cleveref}
+- \usepackage{ctable}
+- \usepackage{enumerate}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE, fig.align = "center", out.extra = "width=.7\\linewidth", fig.lp = "f:")
+knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+library(tidyverse)
+theme_set(theme_minimal())
+library(ggrepel)
+library(brms)
+library(tidybayes)
+library(knitr)
+library(kableExtra)
+```
+
+```{r data}
+stressed <- read_csv("./papers/2019-english-rr/datasets/stressed.csv") %>%
+  mutate(
+    voice = factor(voice, levels = c("voiceless", "voiced")),
+    n_syl = factor(n_syl, levels = c("mono", "di")),
+    word_pos_2 = ifelse(word_pos == "medial", "medial", "final")
+  ) %>%
+  mutate_if(is.character, as.factor)
+
+studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
+  filter(study != "hussein1994") %>% # Hussein 1994 is not included in the analysis
+  droplevels()
+```
+
+
+A Bayesian meta-analysis of the English voicing effect has been run on the basis of 11 estimated posterior distributions extracted from 9 different publications, following the procedures discussed in \citet{nicenboim2018a}.
+The studies were selected by scraping the first 100 results on Google Scholar with the keywords "vowel duration voicing English".
+Other studies which were known to the author but not present among the Google Scholar results were also included. Since two publications (\citealt{sharf1962} and \citealt{klatt1973}) tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
+This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English (7 estimated posteriors from 7 publications plus 2 each from 2 publications).
+
+<!-- give more details about the contexts of the studies -->
+
+The posterior distributions of each study have been obtained by fitting a Bayesian linear model to the summary data (the means of vowel duration before voiceless and voiced stops) provided by the respective publications.
+These models had the mean vowel durations as outcome and consonant voicing (voiceless vs. voiced) as the only predictor.
+Three studies, \citet{luce1985}, \citet{davis1989}, and \citet{ko2018}, reported measures of dispersion along with the means.
+Measurement error models were used to obtain the posterior distributions from these studies.
+The measurement error term in such models allows fitting to include information of the dispersion of the mean vowel durations, and hence of the uncertainty that comes with them.
+All the models for estimating the posterior of the individual studies were fitted with the following priors: a normal distribution with mean = 0 ms and SD = 300 for the intercept, and a normal distribution with mean = 0 ms and SD = 100 for the effect of consonant voicing.
+The simple models (without an error term) also included a prior for the residual variance as a half Cauchy distribution with location = 0 ms and scale = 25.
+
+A data set with the mean estimates and estimated standard errors from these 11 posterior distributions (\Cref{tab:est}) has then been used to fit a further Bayesian measurement error model.
+In this model, the mean estimates with the estimated standard errors were included as the outcome, while a by-study random intercept was the only predictor.
+The models were fitted in R with brms using Markov Chain Monte Carlo simulations, with 4 chains, 2000 iterations of which 1000 for warm-up.
+
+```{r heffner1937}
+h37 <- filter(stressed, study == "heffner1937")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+h37_bm <- brm(
+  v_duration ~
+    voice,
+  data = h37,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/h37_bm"
+)
+```
+
+```{r housefairbanks1953}
+hf53 <- filter(stressed, study == "housefairbanks1953")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+hf53_bm <- brm(
+  v_duration ~
+    voice,
+  data = hf53,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/hf53_bm"
+)
+```
+
+```{r zimmerman1958}
+z58 <- filter(stressed, study == "zimmerman1958")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+z58_bm <- brm(
+  v_duration ~
+    voice,
+  data = z58,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/z58_bm"
+)
+```
+
+```{r petersonlehiste1960}
+pl60 <- filter(stressed, study == "petersonlehiste1960")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+pl60_bm <- brm(
+  v_duration ~
+    voice,
+  data = pl60,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/pl60_bm"
+)
+```
+
+```{r sharf1962}
+s62_di <- filter(stressed, study == "sharf1962_di")
+s62_mono <- filter(stressed, study == "sharf1962_mono")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+s62_di_bm <- brm(
+  v_duration ~
+    voice,
+  data = s62_di,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/s62_di_bm"
+)
+
+s62_mono_bm <- brm(
+  v_duration ~
+    voice,
+  data = s62_mono,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/s62_mono_bm"
+)
+```
+
+```{r chen1970}
+c70 <- filter(stressed, study == "chen1970")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+c70_bm <- brm(
+  v_duration ~
+    voice,
+  data = c70,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/c70_bm"
+)
+```
+
+```{r klatt1973}
+k73_di <- filter(stressed, study == "klatt1973_di")
+k73_mono <- filter(stressed, study == "klatt1973_mono")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+k73_di_bm <- brm(
+  v_duration ~
+    voice,
+  data = k73_di,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/k73_di_bm",
+  control = list(adapt_delta = 0.999)
+)
+
+k73_mono_bm <- brm(
+  v_duration ~
+    voice,
+  data = k73_mono,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/k73_mono_bm",
+  control = list(adapt_delta = 0.999)
+)
+```
+
+```{r mack1982}
+m82 <- filter(stressed, study == "mack1982")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+m82_bm <- brm(
+  v_duration ~
+    voice,
+  data = m82,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/m82_bm"
+)
+```
+
+```{r luce1985}
+l85_medial <- filter(stressed, study == "luce1985_medial")
+l85_final <- filter(stressed, study == "luce1985_final")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+l85_medial_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = l85_medial,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/l85_medial_bm"
+)
+
+l85_final_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = l85_final,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/l85_final_bm"
+)
+```
+
+```{r davis1989}
+d89 <- filter(stressed, study == "davis1989")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+d89_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = d89,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/d89_bm"
+)
+```
+
+```{r laeufer1992}
+l92 <- filter(stressed, study == "laeufer1992")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced),
+  prior(cauchy(0, 25), class = sigma)
+)
+
+l92_bm <- brm(
+  v_duration ~
+    voice,
+  data = l92,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/l92_bm"
+)
+```
+
+```{r ko2018}
+k18 <- filter(stressed, study == "ko2018")
+
+priors <- c(
+  prior(normal(0, 300), class = Intercept),
+  prior(normal(0, 100), class = b, coef = voicevoiced)
+)
+
+k18_bm <- brm(
+  v_duration | se(sd) ~
+    voice,
+  data = k18,
+  prior = priors,
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/k18_bm"
+)
+```
+
+```{r estimated}
+estimated <- list()
+
+# These are in alphabetical order so that joining below does not complain
+# about different levels
+
+estimated[["chen1970"]] <- fixef(c70_bm)["voicevoiced",]
+estimated[["davis1989"]] <- fixef(d89_bm)["voicevoiced",]
+estimated[["heffner1937"]] <- fixef(h37_bm)["voicevoiced",]
+estimated[["housefairbanks1953"]] <- fixef(hf53_bm)["voicevoiced",]
+estimated[["klatt1973_di"]] <- fixef(k73_di_bm)["voicevoiced",]
+estimated[["klatt1973_mono"]] <- fixef(k73_mono_bm)["voicevoiced",]
+estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
+estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
+estimated[["luce1985_final"]] <- fixef(l85_final_bm)["voicevoiced",]
+estimated[["luce1985_medial"]] <- fixef(l85_medial_bm)["voicevoiced",]
+estimated[["mack1982"]] <- fixef(m82_bm)["voicevoiced",]
+estimated[["petersonlehiste1960"]] <- fixef(pl60_bm)["voicevoiced",]
+estimated[["sharf1962_di"]] <- fixef(s62_di_bm)["voicevoiced",]
+estimated[["sharf1962_mono"]] <- fixef(s62_mono_bm)["voicevoiced",]
+estimated[["zimmerman1958"]] <- fixef(z58_bm)["voicevoiced",]
+
+estimated_tbl <- plyr::ldply(estimated, .id = "study") %>%
+  mutate(
+    source = factor("original", levels = c("original", "meta-analysis")),
+    study = factor(study)
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r est, include=TRUE}
+est <- estimated_tbl %>%
+  arrange(year) %>%
+  select(study_ref_2, Estimate, Est.Error, Q2.5, Q97.5, syl_pos, n_speakers) %>%
+  rename(Study = study_ref_2, `Syllable position` = syl_pos, `N. speakers` = n_speakers)
+
+kable(est, format = "latex", booktabs = TRUE, linesep = "", digits = 2, caption = "Bayesian estimates of the voicing effect in indvidual studies.") %>%
+kable_styling(font_size = 8)
+```
+
+```{r meta-bm-syl}
+priors <- c(
+  prior(normal(0, 100), class = Intercept),
+  prior(normal(0, 50), class = b, coef = syl_posnonMfinal),
+  prior(cauchy(0, 25), class = sd)
+)
+
+meta_bm_syl <- brm(
+  Estimate | se(`Est.Error`) ~ syl_pos + (1 | study),
+  data = estimated_tbl,
+  prior = priors,
+  control = list(adapt_delta = 0.999),
+  seed = 9899,
+  file = "./papers/2019-english-rr/data/cache/meta_bm_syl"
+)
+
+meta_bm_est <- fixef(meta_bm_syl)["Intercept","Estimate"]
+meta_bm_q2.5 <- fixef(meta_bm_syl)["Intercept","Q2.5"]
+meta_bm_q97.5 <- fixef(meta_bm_syl)["Intercept","Q97.5"]
+
+post_nonfi <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_syl, pars = "b_syl_posnonMfinal"))
+
+meta_bm_syl_q2.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.025))
+meta_bm_syl_q97.5 <- quantile(post_nonfi$b_syl_posnonMfinal, c(0.975))
+meta_bm_syl_q50 <- (meta_bm_syl_q2.5 + meta_bm_syl_q97.5) / 2
+```
+
+The following is the summary of the meta-analytical model (as output by `summary()` function).
+The population-level effects are the ones of interest.
+\Cref{f:intervals-plot} is a visual aid to the summury, and shows a variety of credible intervals of the estimates from the model.
+The blue-coloured bars represent (from darker to lighter blue) the 50%, 80%, and 95% credible intervals (CIs).
+THe black lines are the 66% (thick) and 98% (thin) CIs.
+
+```{r meta-summary, include=TRUE}
+summary(meta_bm_syl)
+```
+
+```{r intervals-plot, include=TRUE, fig.cap = "Credible intervals of the meta-analytical posterior distributions."}
+meta_draws <- meta_bm_syl %>%
+  gather_draws(b_syl_posnonMfinal, b_Intercept)
+
+meta_draws %>%
+  ungroup() %>%
+  mutate(.variable = factor(.variable, levels = c("b_syl_posnonMfinal", "b_Intercept"))) %>%
+  ggplot(aes(.value, .variable)) +
+  geom_vline(xintercept = 0) +
+  stat_intervalh() +
+  stat_pointintervalh(position = position_nudge(y = -0.1), .width = c(0.66, 0.98)) +
+  scale_x_continuous(breaks = seq(-100, 100, 25)) +
+  scale_y_discrete(labels = c("Final vs. penultimate", "Final")) +
+  scale_color_brewer() +
+  labs(
+    x = "Meta-analytical estimate (ms)",
+    y = element_blank()
+  ) +
+  theme(panel.grid.minor = element_blank())
+```
+
+The 95% credible interval (CI) of the model intercept (which corresponds to the estimated voicing effect in word-final syllables) is between 56.39 and 96.43 ms.
+This means that there is a 95% probability that the true effect lies between about 56 and 96 ms.
+The mean of the posterior distribution is 75.83 ms (SD = 10.01).
+Given the 95% CI of the meta-analytical posterior distribution, it can be inferred that the true effect of voicing in word-final syllables in English is positive and between 50 and 100 ms.
+However, note that the meta-anlytical estimate might suffer from publication bias (cf. below).
+
+The posterior mean of the coefficient when the target syllable is in penultimate position is -49.14 ms (SD = 19.10, 95% CI = [-85.69, -8.98]).
+Note that the estimated error is double compared to that of the intercept, which means the there is greater uncertainty in this than the other estimate.
+We can argue that, on average, the mean voicing effect in penultimate syllables is about 50 ms smaller than the mean effect in monosyllabic words in the surveyed studies.
+The mean of the voicing effect in disyllabic words can thus be estimated to be around 25 ms (about 75 - 50 ms).
+
+A visual representation of the meta-analytical distributions is given in \Cref{f:syl-plot}.
+The plot shows the full posterior distributions of the voicing effect in the word-final and penultimate contexts.
+Note how the posterior distribution in penultimate position is wider than the other.
+
+```{r post-syl}
+post_syl <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_syl, pars = "b_syl_posnonMfinal")) %>%
+  bind_cols(posterior_samples(meta_bm_syl, pars = "b_Intercept")) %>%
+  gather("coef", "posterior")
+```
+
+```{r syl-plot, include=TRUE, fig.cap = "Meta-analytical posterior distributions of the voicing effect in syllable-final and penultimate position."}
+post_syl %>%
+  ggplot(aes(posterior, fill = coef)) +
+  geom_vline(aes(xintercept = 0)) +
+  geom_density(colour = NA, alpha = 0.8) +
+  scale_fill_brewer(
+    type = "qual", palette = "Paired",
+    labels = c("final", "penultimate")
+  ) +
+  scale_x_continuous(breaks = seq(-60, 100, 20)) +
+  labs(
+    x = "Difference in vowel duration (ms)",
+    fill = "Syllable position",
+    y = element_blank()
+  ) +
+  theme(legend.position = "top")
+```
+
+\Cref{f:origin-shrunk-plot} shows the mean estimates (the points) of the voicing effect with 95% CIs (the horizontal segments) for each of the 11 studies.
+For each study, the plot gives both the original estimate (as obtained from the raw data summary of the study) and the estimate shrunk by the random effects in the meta-analytical model.
+The vertical lines indicate the meta-analytical 95% CI of the voicing effect in final (solid) and penultimate syllable position (dashed).
+Original estimates further away from the meta-analytical mean effect and those with greater uncertainty (wider errors) show greater shrinkage to the mean.
+
+```{r studies-shrunk}
+# Code adapted from Nicenboim et al. 2018
+
+# We need this since the model includes `num_syl`
+post_nonf <- posterior_samples(meta_bm_syl, pars = "b_syl_posnonMfinal")
+
+studies_shrunk <- (c(posterior_samples(meta_bm_syl, pars = "b_Intercept")) +
+  posterior_samples(meta_bm_syl, pars = "r_study")) %>%
+  bind_cols(post_nonf) %>%
+  # The following mutate sums the random coefficients of the studies with
+  # `num_syl` == "non-final" to the posterior samples of the non_syl term
+  mutate(
+    `r_study[davis1989,Intercept]` = `r_study[davis1989,Intercept]` + b_syl_posnonMfinal,
+    `r_study[sharf1962_di,Intercept]` = `r_study[sharf1962_di,Intercept]` + b_syl_posnonMfinal,
+    `r_study[klatt1973_di,Intercept]` = `r_study[klatt1973_di,Intercept]` + b_syl_posnonMfinal
+  ) %>%
+  select(-b_syl_posnonMfinal) %>%
+  summarise_all(list(~list(c(
+    mean(.),
+    quantile(., probs = c(.025, 0.975)),
+    sd(.)
+  )))) %>%
+  unnest() %>%
+  transpose() %>%
+  setNames(c("Estimate", "Q2.5", "Q97.5", "Est.Error")) %>%
+  map_df(unlist) %>%
+  mutate(
+    study = estimated_tbl$study,
+    source = factor("meta-analysis", levels = c("original", "meta-analysis"))
+  ) %>%
+  left_join(y = studies)
+```
+
+```{r origin-shrunk-plot, include=TRUE, fig.cap = "Estimated voicing effect from the original source and from the meta-analysis."}
+bind_rows(estimated_tbl, studies_shrunk) %>%
+  mutate(source = factor(source, levels = c("meta-analysis", "original"))) %>%
+  ggplot(aes(reorder(study_ref, Estimate), Estimate, colour = source, linetype = syl_pos)) +
+  geom_hline(aes(yintercept = 0), colour = "grey") +
+  scale_x_discrete() +
+  annotate("rect", xmin = 3.5, xmax = Inf, ymin = meta_bm_q2.5, ymax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  annotate("rect", xmin = -Inf, xmax = 3.5, ymin = meta_bm_syl_q2.5, ymax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  geom_point(size = 2, position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
+  scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
+  scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
+  scale_linetype_discrete(labels = c("final", "penultimate")) +
+  labs(
+    caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (light blue) and penultimate (dark blue) position.",
+    y = "Difference in vowel duration (ms)",
+    x = "Study",
+    linetype = "Syllable position",
+    colour = "Source"
+  ) +
+  coord_flip() +
+  theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank())
+```
+
+\Cref{f:funnel-plot} is a funnel plot, which can be used to visually check whether the sample suffers from publication bias.
+In this plot, the x-axis corresponds to the original estimated difference in vowel duration, while the y-axis is a measure of precision (calculated as 1 divided by the estimated error of the difference).
+The meta-analytical means are indicated by the thick and dashed vertical lines for syllable-final and penultimate postion respectively.
+The shaded areas indicate the 95% CI of the meta-analytical posterior of the voicing effect in final (light blue) and penultimate (dark blue) position.
+When there is no bias, the points with lower precision should be more spread out and symmetrically placed around the meta-analytical mean, while points with higher precision should cluster around the mean.
+This ideal situation is clearly not the case for the final syllable context.
+There seems to be a bias towards bigger effects (which also happen to have lower precision).
+This indicates that the estimate probably suffers from publication bias (i.e. bias towards publicating positive and significant results) and it is not representative of the true effect.
+It is not possible to assess bias with the effect in penultimate syllable position given the low number of studies.
+
+```{r funnel-plot, include=TRUE, fig.cap = "By-study funnel plot showing the estimate against the precision. The vertical thick and dashed lines are the meta-analytical means of the effect in final and penultimate position."}
+estimated_tbl %>%
+  mutate(precision = 1/Est.Error) %>%
+  ggplot(aes(Estimate, precision, label = study)) +
+  geom_vline(aes(xintercept = 0), colour = "grey") +
+    geom_vline(aes(xintercept = meta_bm_est)) +
+  geom_vline(aes(xintercept = meta_bm_syl_q50), linetype = "dashed") +
+  annotate("rect", ymin = -Inf, ymax = Inf, xmin = meta_bm_q2.5, xmax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  annotate("rect", ymin = -Inf, ymax = Inf, xmin = meta_bm_syl_q2.5, xmax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
+  geom_point(aes(shape = syl_pos), size = 3) +
+  # geom_text_repel(force = 20, seed = 1234) +
+  scale_shape_discrete(labels = c("final", "penultimate")) +
+  scale_x_continuous(breaks = seq(-25, 150, 25)) +
+  labs(
+    x = "Difference in vowel duration (ms)",
+    shape = "Syllable position"
+  )
+```
