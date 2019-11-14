@@ -1,5 +1,5 @@
 ---
-title: "Supplement A: Bayesian meta-analysis of the voicing effect in English"
+title: "Bayesian meta-analysis of the voicing effect in English"
 author: "Stefano Coretta"
 output:
   pdf_document:
@@ -7,19 +7,16 @@ output:
     citation_package: natbib
 bibliography: linguistics
 biblio-style: unified
-mainfont: Lato
+mainfont: Brill
 fontsize: 12pt
 indent: true
 header-includes:
-- \let\tnote\relax
 - \usepackage{cleveref}
-- \usepackage{ctable}
-- \usepackage{enumerate}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, include = FALSE, fig.align = "center", out.extra = "width=.7\\linewidth", fig.lp = "f:")
-knitr::opts_knit$set(root.dir = normalizePath("../../../"))
+knitr::opts_knit$set(root.dir = here::here())
 library(tidyverse)
 theme_set(theme_minimal())
 library(ggrepel)
@@ -30,7 +27,7 @@ library(kableExtra)
 ```
 
 ```{r data}
-stressed <- read_csv("./papers/2019-english-rr/datasets/stressed.csv") %>%
+stressed <- read_csv("./papers/2019-eng-meta/datasets/stressed.csv") %>%
   mutate(
     voice = factor(voice, levels = c("voiceless", "voiced")),
     n_syl = factor(n_syl, levels = c("mono", "di")),
@@ -39,10 +36,9 @@ stressed <- read_csv("./papers/2019-english-rr/datasets/stressed.csv") %>%
   mutate_if(is.character, as.factor)
 
 studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
-  filter(study != "hussein1994") %>% # Hussein 1994 is not included in the analysis
+  filter(!(study %in% c("hussein1994", "coretta2019_di", "coretta2019_mono"))) %>% # Hussein 1994 and Coretta 2019 not included in the analysis
   droplevels()
 ```
-
 
 A Bayesian meta-analysis of the English voicing effect has been run on the basis of 11 estimated posterior distributions extracted from 9 different publications, following the procedures discussed in \citet{nicenboim2018a}.
 The studies were selected by scraping the first 100 results on Google Scholar with the keywords "vowel duration voicing English".
