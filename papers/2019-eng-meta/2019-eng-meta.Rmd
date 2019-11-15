@@ -40,9 +40,34 @@ studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
   droplevels()
 ```
 
-A Bayesian meta-analysis of the English voicing effect has been run on the basis of 11 estimated posterior distributions extracted from 9 different publications, following the procedures discussed in \citet{nicenboim2018a}.
-The studies were selected by scraping the first 100 results on Google Scholar with the keywords "vowel duration voicing English".
-Other studies which were known to the author but not present among the Google Scholar results were also included. Since two publications (\citealt{sharf1962} and \citealt{klatt1973}) tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
+# Introduction
+
+A commonly observed phonetic fact is that vowels tend to be shorter when followed by voiceless stops and longer when followed by voiced stops [...].
+Much research has been done on this so-called "voicing effect", although none of the proposed accounts has gained exclusive popularity.
+A prevalent opinion is also that the effect is greater in English than in other languages \citep{chen1970, sanker2019, tanner2019}.
+<!-- TODO although cf with Laeufer -->
+This is generally believed to indicate that the effect is phonologised in this language \citep{sharf1964, de-jong2004}.
+However, in light of recent developments in scientific research [...], we need...
+We are now in the position to synthesise the accumulated knowledge on the voicing effect, in such a way that future work can be more robustly informed.
+
+<!-- TODO publication bias, researchers degrees of freedom -->
+
+<!-- TODO meta-analysis -->
+
+# Methods
+
+A Bayesian meta-analysis was conducted to obtain an estimate of the voicing effect in English in word-final and word-medial position, and to assess possible biases in the original studies.
+The next sections described the methodology employed in this study, which follows the one in \citet{nicenboim2018a}.
+
+## Study selection criteria
+
+The studies to be included in the meta-analysis were selected by scraping the first 100 results on Google Scholar returned by using the keywords "vowel duration voicing English".
+The search was carried out in December 2018.
+Other studies which were known to the author but not present among the Google Scholar results were also included.
+Studies were chosen if they dealt with the effect of consonant voicing on preceding vowel durations in word-final or word-medial position.
+Further, a study was selected if enough information was provided to enable calculation of the effect and related dispersion (for example as data summaries, statistics, figures, etc.).
+
+Since two publications (\citealt{sharf1962} and \citealt{klatt1973}) tested both monosyllabic and disyllabic words, two separate posterior distributions were estimated for each word type.
 This leads to a total of 11 posterior distribution of the effect of consonant voicing on vowel duration in English (7 estimated posteriors from 7 publications plus 2 each from 2 publications).
 
 <!-- give more details about the contexts of the studies -->
