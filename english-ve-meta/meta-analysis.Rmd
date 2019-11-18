@@ -46,6 +46,8 @@ unstressed_unr <- filter(unstressed, v_context == "unreduced")
 studies <- stressed %>% select(study, n_syl:word_pos_2) %>% unique() %>%
   filter(study != "hussein1994", study != "port1981_tri") %>% # Hussein 1994 is not included in the analysis
   droplevels()
+
+ko18_data <- read_delim("./english-ve-meta/ko2018.txt", delim = "\t")
 ```
 
 # Obtain estimates from previous studies
@@ -319,15 +321,19 @@ l92_bm <- brm(
 
 ```{r ko2018}
 k18 <- filter(stressed, study == "ko2018")
+k18 <- filter(ko18_data, phoneme %in% c("AE1", "EH1", "IH1")) %>%
+  mutate(voice = factor(voice, levels = c("-voice", "+voice")))
 
 priors <- c(
   prior(normal(0, 300), class = Intercept),
-  prior(normal(0, 100), class = b, coef = voicevoiced)
+  prior(normal(0, 100), class = b, coef = voicePvoice),
+  set_prior("cauchy(0, 25)", class = "sigma")
 )
 
 k18_bm <- brm(
-  v_duration | se(sd) ~
-    voice,
+  duration ~
+    voice +
+    (1|subj),
   data = k18,
   prior = priors,
   seed = 9899,
@@ -395,7 +401,7 @@ estimated[["heffner1937"]] <- fixef(h37_bm)["voicevoiced",]
 estimated[["housefairbanks1953"]] <- fixef(hf53_bm)["voicevoiced",]
 estimated[["klatt1973_di"]] <- fixef(k73_di_bm)["voicevoiced",]
 estimated[["klatt1973_mono"]] <- fixef(k73_mono_bm)["voicevoiced",]
-estimated[["ko2018"]] <- fixef(k18_bm)["voicevoiced",]
+estimated[["ko2018"]] <- fixef(k18_bm)["voicePvoice",]
 estimated[["laeufer1992"]] <- fixef(l92_bm)["voicevoiced",]
 estimated[["luce1985_final"]] <- fixef(l85_final_bm)["voicevoiced",]
 estimated[["luce1985_medial"]] <- fixef(l85_medial_bm)["voicevoiced",]
