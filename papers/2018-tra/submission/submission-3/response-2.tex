@@ -1,0 +1,438 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{Brill}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Response to reviews},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\usepackage{xcolor}
+\usepackage{changepage}
+% https://github.com/rstudio/rmarkdown/issues/337
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+% https://github.com/rstudio/rmarkdown/pull/252
+\usepackage{titling}
+\setlength{\droptitle}{-2em}
+
+\pretitle{\vspace{\droptitle}\centering\huge}
+\posttitle{\par}
+
+\preauthor{\centering\large\emph}
+\postauthor{\par}
+
+\predate{\centering\large\emph}
+\postdate{\par}
+
+\title{Response to reviews}
+\date{28/11/2018}
+
+\begin{document}
+\maketitle
+
+You mention on line 496 that ``language does not seem to be an
+informative parameter''. As I read your paper, you analyzed speakers
+from both languages together, but you should probably say so in E. Data
+processing and statistical analysis.
+
+Line 28 It is not clear what ``C2'' refers to.
+
+\begin{adjustwidth}{1cm}{} \textit{
+Replaced "C2" with "closure".
+} \end{adjustwidth}
+
+Line 127 ``The duration of the release to release 2interval is stable
+across voicing contexts.'' It is not clear to me why this interval is
+interesting and relevant. The word ``stable'' probably means
+``non-significant differences'', but this can simply be due to a lot of
+variability.
+
+Line 380 ``\ldots{}that the onset of the forward gesture of the root is
+timed not relative to the stop closure, but rather relative to a fixed
+time point preceding the closure.'' I would be very careful to talk
+about ``fixed time points'' in speech. You don't elaborate. Since the
+tongue is always moving during speech, movement onsets can be hard to
+locate, and you don't do so. You make a similar statement on line 443.
+
+Line 448 Here, you discuss the relationship between movement amplitude
+and velocity. There is a strong correlation between them for both speech
+and non-speech movements.
+
+Footnotes \#2, 3, 5, and 6 can be incorporated into the text.
+
+\begin{adjustwidth}{1cm}{} \textit{
+They have been incorporated in the text body.
+} \end{adjustwidth}
+
+References
+
+Lampp \& Reklis, 2004, appears to be an abstract, thus not very useful,
+and should be removed.
+
+Ohala, 2011, is available here\textgreater{}
+\url{https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2011/OnlineProceedings/SpecialSession/Session1/Ohala/Ohala.pdf}
+
+Strycharczuk \& Scobbie, 2015, is available here\textgreater{}
+\url{https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2015/Papers/ICPHS0309.pdf}
+
+Sprouse et al, 2008, is available here\textgreater{}
+\url{https://issp2008.loria.fr/Proceedings/PDF/issp2008-101.pdf}
+
+General comments - This paper has improved very much in clarity. The
+author has confirmed that measures of tongue root position were
+reversed, and has made efforts to address my concerns regarding
+measurement method. I find I still have the same reservations relating
+to ability to take accurate, fine-grained measures using the UTI method
+- there are issues relating to the fuzziness of the UTI-imaged tongue
+surface and the accuracy of the automatic spline fitting with manual
+correction. I can't see any other way around this than for the author to
+acknowledge these potential problems either in the method or discussion
+section, e.g.~in B. Estimates of tongue root displacement, where the
+author discusses the small difference in adjusted mean root displacement
+(0.77-1.0mm) between the two following consonant conditions. I therefore
+suggest revise and resubmit.
+
+Detailed comments
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ~~~~L27-30 ``Furthermore, the results of this study indicate that a
+  comparatively later C2 onset for voiced consonants results in a longer
+  preceding vowel duration which, in turn, results in greater tongue
+  root advancement at C2 onset.'' It seems obvious that a later C2 onset
+  for voiced consonants results in a longer preceding vowel duration.
+  Maybe you need to rephrase as ``\ldots{} indicate that a comparatively
+  later C2 onset for voiced consonants, resulting in a longer preceding
+  vowel duration, correlates with greater tongue-root advancement at C2
+  onset.''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Yes, thank you. I rephrased it as suggested.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  ~~~~L94 ``exclusive to voiced stops''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Corrected.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  ~~~~L94-96 ``While this gesture is not exclusive of voiced stops and
+  it is sometimes implemented even in the absence of vocal fold
+  vibration, tongue root advancement seems to be a robust correlate of
+  (phonological) voicing.'' Given what you say in the first two lines,
+  the word ``robust'', does not seem right, maybe ``tongue root
+  advancement is strongly associated with tongue-root
+  advancement\ldots{}''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Yes, it makes sense. I rephrased as suggested.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  ~~~~L124 " Independent of language, some speakers have a greater
+  effect (of following consonant voicing on vowel duration) and others a
+  small or negligible effect".
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Rephrased.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  ~~~~L146-7 4-line gap in manuscript.
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+That is just LaTeX being too strict with widow lines. This will fix itself in the final manuscript.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  ~~~~L223-5 How did you deal with any aspiration occurring after the
+  initial plosive consonant. Did it occur? Was it included in the vowel
+  duration calculation?
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Some voiceless-post aspiration occurs in Polish C1 stops (mean = 35 ms, SD = 28.5).
+Post-aspiration duration nor burst duration were included in the measurement of vowel duration as defined in this study.
+I have added this sentence: "The burst and any eventual voiceless post-apiration of C1 are not included in the duration of the V1."
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  ~~~~L246 ``oral track''  ``vocal tract''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  ~~~~L253-5 ``To facilitate interpretation of the displacement values,
+  the sign of these was flipped so that higher values indicate a more
+  advanced tongue root (greater tongue root advancement) after Kirkham
+  and Nance (2017).''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Added.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  ~~~~Figure 2 caption ``¬after z-scoring normalization, the sign is
+  flipped so that greater values indicate greater tongue root
+  advancement).''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Added.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  ~~~~L284 ``offest''  ``offset''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  ~~~~L303, 305,322, 323 change ``,'' to ``;''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  ~~~~L316-7 ``However, the magnitude of the movement is greater in the
+  former, and begins earlier in the vowel''??
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Since the duration of vowels is normalised, we cannot say that the tongue root advancement gesture begins earlier in vowels followed by voiced stops than in vowels followed by voiceless stops.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  ~~~~L320 V1 offset/C1 onset ~ C2 onset
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  ~~~~Fig. 5 Tongue root position is labelled in (ms), should be (mm).
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  ~~~~Fig. 6 is in an odd location. i.e.~in the Discussion section,
+  rather than the results.
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Figures in the manuscripts are floats so they are placed in the best position possible by LaTeX. I forced the placement of this specific figure in the manuscript to be the same as that in the TeX source file.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+  ~~~~Discussion §IV.A. I think there has to be an acknowledgement here
+  that there is a small adjusted mean (0.77mm-1.0mm) difference in ATR
+  at V1 offset between the voiced and voiceless C2 contexts. Also some
+  statement has to be made about the potential errors involved in spline
+  fitting, especially where manual correction is involved.
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+I have rephrased as: "Unsurprisingly, the position of the tongue root at vowel offset is 0.77 mm (SE = 0.35) more front when the following stop is voiced than when the following stop is voiceless in both surveyed languages (see Section ... for a discussion about the magnitude of the difference and potential errors related to spline fitting)." And in Lines ... "A note of caution is due, since the actual error rate of the automatic tracker used for spline fitting is not known, and manual correction might have affected the splines (although a relatively small number of tokens had to be manually corrected)."
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+  ~~~~L379-80 ``could be interpreted as to indicate that\ldots{}'' 
+  ``could indicate that''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{17}
+\tightlist
+\item
+  ~~~~P34 Why is Table 1 here instead of on P10?
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Moved to Materials section.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\item
+  ~~~~L358 ``such a small degree of advancement in voiceless lingual
+  stops'' According to your findings, the degree of advancement before
+  voiceless lingual stops is only marginally less than in voiced stops.
+\item
+  ~~~~L379-388 I found the argument of this paragraph very hard to
+  follow. Perhaps some diagrams would be helpful.
+\item
+  ~~~~L560 ``See ??''
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+Fixed.
+} \end{adjustwidth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{21}
+\tightlist
+\item
+  ~~~~L579 Page break missing.
+\end{enumerate}
+
+\begin{adjustwidth}{1cm}{} \textit{
+I have tried hard to add a page break before the bibliography by changing the TeX source but it won't work, so I trust this will be fixed in the final manuscript.
+} \end{adjustwidth}
+
+\end{document}
