@@ -325,18 +325,21 @@ k18 <- filter(ko18_data, phoneme %in% c("AE1", "EH1", "IH1")) %>%
   mutate(voice = factor(voice, levels = c("-voice", "+voice")))
 
 priors <- c(
-  prior(normal(0, 300), class = Intercept),
-  prior(normal(0, 100), class = b, coef = voicePvoice),
-  set_prior("cauchy(0, 25)", class = "sigma")
+  prior(normal(145, 30), class = Intercept),
+  prior(normal(0, 50), class = b, coef = voicePvoice),
+  set_prior("normal(0, 25)", class = "sd"),
+  set_prior("normal(0, 25)", class = "sigma")
 )
 
 k18_bm <- brm(
   duration ~
     voice +
-    (1|subj),
+    (1|subj) +
+    (1|item),
   data = k18,
   prior = priors,
   seed = 9899,
+  control = list(adapt_delta = 0.999, max_treedepth = 20),
   file = "./english-ve-meta/data/cache/k18_bm"
 )
 ```
