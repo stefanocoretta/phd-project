@@ -65,3 +65,10 @@ plot_obs_range(5.83, 1244, 20, min_width = 5)
 plot_obs_range(5.83, 1244, 20, divide = 120, min_width = 5) +
   scale_y_continuous(breaks = seq(0, 250, 25))
 ```
+
+```{r mono-di}
+plot_obs_range(6.7, 1800, 20, min_width = 5)
+plot_obs_range(6.7, 1800, 20, divide = 120, min_width = 5) +
+  scale_y_continuous(breaks = seq(0, 500, 25))
+```
+
