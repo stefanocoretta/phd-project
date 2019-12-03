@@ -193,9 +193,15 @@ Moved to Materials section.
 
 19.     L358 "such a small degree of advancement in voiceless lingual stops" According to your findings, the degree of advancement before voiceless lingual stops is only marginally less than in voiced stops.
 
+\begin{adjustwidth}{1cm}{} \textit{
 Yes. I've removed "such a small degree of".
+} \end{adjustwidth}
 
 20.     L379-388 I found the argument of this paragraph very hard to follow. Perhaps some diagrams would be helpful.
+
+\begin{adjustwidth}{1cm}{} \textit{
+I've added Figure 7.
+} \end{adjustwidth}
 
 21.     L560 "See ??"
 

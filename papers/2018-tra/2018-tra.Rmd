@@ -592,8 +592,15 @@ Said correlation exists independent of the voicing status of the consonant follo
 In other words, the position of the tongue at V1 offset/C2 onset is correlated with vowel duration both when the vowel is followed by a voiceless and a voiced stop.
 This finding is compatible with the finding that the tongue root advances during the production of vowels even when the following stop is voiceless (although it reaches less advancement than when the vowel is followed by a voiced stop).
 
+\begin{figure}
+  \centering
+  \includegraphics[width=.6\textwidth]{./Figure7.pdf}
+  \caption{Schematic representation of the relationship between the acustic vowel and closure durations and tongue root advancement. The \textit{x}-axis represents time, while the \textit{y}-axix degree of tongue root advancement (higher means more advancement). The articulatory onset of the tongue root advancement gesture (labelled as TRA onset) is at a stable distance from the preceding consonant relese and vowel onset. The different timing of the VC boundary determines both the degree of tongue root advancement at vowel offset/consonant closure onset and the duration of the consonant closure.}
+  \label{f:Figure7}
+\end{figure}
+
 The correlation between tongue root at V1 offset/C2 onset and vowel duration could indicate that the onset of the forward gesture of the root is timed not relative to the stop closure, but rather relative to an acoustic/articulatory event preceding the closure (what this event might be should be further investigated).
-Under this scenario, the delay between the beginning of the tongue root advancement gesture of C2 and, for example, the release of C1 would not be affected by the voicing of C2.
+Under this scenario, schematically represented in \Cref{f:Figure7}, the delay between the beginning of the tongue root advancement gesture of C2 and, for example, the release of C1 would not be affected by the voicing of C2.
 The timing of the tongue root advancement gesture would thus be independent of the time of stop closure onset, and hence independent of the total duration of the vowel.
 Finally, the timing of full closure during the root advancement movement would sanction the degree of advancement found at closure onset (the later the closure onset relative to the onset of the advancement gesture, the greater advancement at closure onset).
 
@@ -648,7 +655,7 @@ The following section discusses this point.
 ## Individual differences
 \label{s:idio}
 
-```{r Figure7, include=TRUE, fig.cap="Slope plots of mean tongue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.", fig.lp="f:", fig.height=3, out.width="\\linewidth", fig.align="center"}
+```{r Figure8, include=TRUE, fig.cap="Slope plots of mean tongue root position in voiceless and voiced stops at closure onset, by-speaker. The plot on the left has raw position values in millimetres, while the plot on the right shows standardised values (z-scores) by speaker. See text for details.", fig.lp="f:", fig.height=3, out.width="\\linewidth", fig.align="center"}
 fig_a <- kines_mean %>%
   ggplot(aes(c2_phonation, trp_mean, linetype = language, shape = language)) +
   geom_point() +
@@ -678,7 +685,7 @@ fig_a + fig_b
 
 The results presented in \Cref{s:results} and discussed in \Cref{s:discussion} are group-level patterns of the population sampled in the present study.
 However, the data is characterised by a certain degree of individual-level differences.
-\Cref{f:Figure7} shows two slope plots of mean tongue root position depending on C2 voicing for each speaker.
+\Cref{f:Figure8} shows two slope plots of mean tongue root position depending on C2 voicing for each speaker.
 In each plot, the two means of each speaker are linked by a line that shows the difference (or lack thereof) in means.
 Solid lines are Italian speakers, while dashed lines are Polish speakers.
 The *y*-axis of the left plot is the raw mean position in millimetres, while that of the right plot is the standardised values (z-scores) of the mean position.
@@ -690,11 +697,11 @@ The mean value of tongue root position of a voiced C2 relative to that of a voic
 Moreover, no discernible pattern can be found between speakers of Italian and Polish.
 Speakers of both languages show more or less the same range of variation.
 However, as we have seen in \Cref{s:results}, the estimated overall effect of C2 voicing is robust and it implies a more advanced tongue root in voiced stops.
-The right plot of \Cref{f:Figure7} confirms this point visually.
+The right plot of \Cref{f:Figure8} confirms this point visually.
 Two speakers show a declining slope (one is Italian and the other Polish), one speaker has a virtually flat slope, while all the others have an increasing slope at varying degrees.
 Note that the individual variation across speakers found in this data is qualitatively comparable to that in \citet{ahn2018}.
 
-```{r Figure8, include=TRUE, fig.cap="By-speaker raw mean difference in tongue root position between voiceless and voiced stops at closure onset (in millimetres). The horizontal segments are the standard errors of the mean differences.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
+```{r Figure9, include=TRUE, fig.cap="By-speaker raw mean difference in tongue root position between voiceless and voiced stops at closure onset (in millimetres). The horizontal segments are the standard errors of the mean differences.", fig.lp="f:", out.extra="width=\\linewidth", cache=TRUE}
 trp_difference %>%
   ggplot(aes(difference, reorder(speaker, difference))) +
   geom_vline(aes(xintercept = 0), colour = "grey") +
@@ -714,14 +721,14 @@ trp_difference %>%
 ```
 
 The mean difference in tongue root position at the onset of voiceless vs. voiced stops has been calculated for each speaker from the raw data.
-\Cref{f:Figure8} plots the speakers' mean differences, with the respective standard error bars.
+\Cref{f:Figure9} plots the speakers' mean differences, with the respective standard error bars.
 Overall, the means of the top 14 speakers indicate that these speakers have a more advanced tongue root in the context of voiced stops, while the bottom 3 speakers have means that indicate no difference or greater advancement in voiceless stops.
 As for the uncertainty of the estimates, the top 10 speakers have a robust positive difference.
 The bottom 7 speakers show either a weak negative difference (the tongue root is slightly more advanced in voiceless stops) or a weak positive difference with wide standard errors.
 Finally, speakers of each language do not cluster together, reiterating the observation made above that language does not seem to be an informative parameter.
 
 Finally, interesting individual patterns can also be seen in the trajectories of tongue root position.
-\Cref{f:Figure9} shows these trajectories for all the speakers (note that the *y*-axis of each plot is on a different scale, so magnitude comparisons should not be made visually).
+\Cref{f:Figure10} shows these trajectories for all the speakers (note that the *y*-axis of each plot is on a different scale, so magnitude comparisons should not be made visually).
 Speakers IT01, IT03, and PL04 in particular have a somewhat categorical distinction in tongue root position during vowels followed by voiceless vs. voiced stops.
 Such tongue root distinction is implemented across the total duration of the vowel, rather than towards the end (as suggested by the results from the aggregated data, see \Cref{s:trp-v1}).
 The phonological literature reports cases in which the difference in tongue root position in vowels is enhanced, leading to phonological alternations or diachronic loss of the voicing distinction with maintenance of the tongue root distinction (see \citealt{vaux1996} and references therein).
@@ -753,7 +760,7 @@ tra_gam_s_ar <- bam(
 )
 ```
 
-```{r Figure9, include=TRUE, fig.cap="Predicted tongue root position during vowels followed by voiceless and voiced stops for each speaker. Predicted from a GAMM (see text). Note the different scales on the y-axis.", fig.lp="f:", out.extra="width=\\linewidth", fig.height=8, cache=TRUE, dependson="tra-gam-s-ar"}
+```{r Figure10, include=TRUE, fig.cap="Predicted tongue root position during vowels followed by voiceless and voiced stops for each speaker. Predicted from a GAMM (see text). Note the different scales on the y-axis.", fig.lp="f:", out.extra="width=\\linewidth", fig.height=8, cache=TRUE, dependson="tra-gam-s-ar"}
 predict_gam(tra_gam_s_ar, values = list(speech_rate_c = 0)) %>%
   separate(speaker_voicing, c("speaker", "voicing")) %>%
   mutate(voicing = factor(voicing, levels = c("voiceless", "voiced"))) %>%
