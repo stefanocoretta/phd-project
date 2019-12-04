@@ -1,0 +1,53 @@
+---
+title: "Peak velocity"
+author: "Stefano Coretta"
+date: "04/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = here::here())
+library(tidyverse)
+theme_set(theme_minimal())
+library(coretta2018itapol)
+data("kinematics")
+```
+
+```{r}
+kins <- kinematics %>%
+  filter(label %in% c("peak1_TT", "peak1_TD")) %>%
+  mutate(
+    TT_velocity = ifelse(c2_place == "coronal", TT_velocity, 0),
+    TD_velocity = ifelse(c2_place == "velar", TD_velocity, 0)
+  ) %>%
+  mutate(
+    peak_velocity = TT_velocity + TD_velocity
+  )
+```
+
+```{r}
+kins %>%
+  ggplot(aes(peak_velocity, colour = c2_phonation)) +
+  geom_density() +
+  geom_rug()
+```
+
+```{r}
+kins %>%
+  ggplot(aes(peak_velocity, colour = c2_phonation)) +
+  geom_density() +
+  geom_rug() +
+  facet_grid(~ c2_place)
+```
+
+```{r}
+kins %>%
+  group_by(speaker) %>%
+  mutate(peak_velocity = scale(peak_velocity)) %>%
+  ungroup() %>%
+  ggplot(aes(peak_velocity, colour = c2_phonation)) +
+  geom_density() +
+  geom_rug() +
+  facet_grid(vowel ~ c2_place)
+```
