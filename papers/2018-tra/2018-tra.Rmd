@@ -33,8 +33,8 @@ header-includes:
 - \usepackage{ctable}
 indent: true
 params:
-  version: 3.0
-  version-date: "2019/10/22"
+  version: 3.1
+  version-date: "2019/12/06"
 abstract: |
   Voiced stops tend to be preceded by longer vowels and produced with a more advanced tongue root than voiceless stops.
   The duration of a vowel is affected by the voicing of the stop that follows and in many languages vowels are longer when followed by voiced stops.
