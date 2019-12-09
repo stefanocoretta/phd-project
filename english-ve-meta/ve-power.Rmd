@@ -1,0 +1,159 @@
+---
+title: "VE power analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This document contains code adapted from Jäger et al 2017.
+
+```{r plotpower}
+plotpower <- function(nsubj = 20, stddevquantiles = NULL, posteriorquantiles = NULL, posteriormeans = NULL, mytitle = NULL, textpos = 50) {
+  sds <- seq(
+    round(stddevquantiles[1]),
+    round(stddevquantiles[2]),
+    by = 1
+  )
+
+  powervals_upper <- rep(NA, length(sds))
+
+  for (i in 1:length(sds)) {
+    s <- sds[i]
+    powervals_upper[i] <- power.t.test(
+      delta = posteriorquantiles[3],
+      n = nsubj,
+      sd = s,
+      type = "one.sample",
+      alternative = "two.sided"
+    )$power
+  }
+
+  powervals_mean <- rep(NA, length(sds))
+
+  for (i in 1:length(sds)) {
+    s <- sds[i]
+    powervals_mean[i] <- power.t.test(
+      delta = posteriormeans,
+      n = nsubj,
+      sd = s,
+      type = "one.sample",
+      alternative = "two.sided"
+    )$power
+  }
+
+  powervals_lower <- rep(NA, length(sds))
+
+  for (i in 1:length(sds)) {
+    s <- sds[i]
+    powervals_lower[i] <-
+      power.t.test(
+        delta = posteriorquantiles[1],
+        n = nsubj,
+        sd = s,
+        type = "one.sample",
+        alternative = "two.sided"
+      )$power
+  }
+
+  plot(
+    sds,
+    powervals_upper,
+    ylim = c(0, 1),
+    type = "l",
+    lty = 1,
+    xlab = "standard deviation",
+    ylab = "power",
+    main = paste(nsubj, "participants", sep = " ")
+  )
+  
+  abline(a = 0.8, b = 0, lty = 2)
+  
+  text(textpos, powervals_upper[which(sds == textpos)], as.character(posteriorquantiles[3]))
+  
+  lines(sds, powervals_mean, lty = 1)
+  text(textpos, powervals_mean[which(sds == textpos)], as.character(posteriormeans))
+
+  lines(sds, powervals_lower, lty = 1)
+  text(textpos, powervals_lower[which(sds == textpos)], as.character(posteriorquantiles[1]))
+}
+```
+
+```{r power-meta}
+subjects <- seq(2, 12, by = 2)
+rows <- 2
+cols <- 3
+op <- par(mfrow = c(rows, cols))
+
+for (nsubj in subjects) {
+  plotpower(
+    nsubj = nsubj,
+    stddevquantiles = c(15, 100),
+    posteriorquantiles = c(55, 75, 95),
+    posteriormeans = 75,
+    mytitle = paste(nsubj, "participants", sep = " "),
+    textpos = 80
+  )
+}
+par(op)
+```
+
+```{r power-meta-2}
+subjects <- seq(2, 10, by = 1)
+rows <- 3
+cols <- 3
+op <- par(mfrow = c(rows, cols))
+
+for (nsubj in subjects) {
+  plotpower(
+    nsubj = nsubj,
+    stddevquantiles = c(15, 100),
+    posteriorquantiles = c(55, 75, 95),
+    posteriormeans = 75,
+    mytitle = paste(nsubj, "participants", sep = " "),
+    textpos = 80
+  )
+}
+par(op)
+```
+
+```{r power-coretta}
+subjects <- seq(2, 12, by = 2)
+rows <- 2
+cols <- 3
+op <- par(mfrow = c(rows, cols))
+
+for (nsubj in subjects) {
+  plotpower(
+    nsubj = nsubj,
+    stddevquantiles = c(15, 100),
+    posteriorquantiles = c(7, 17.5, 30),
+    posteriormeans = 17.5,
+    mytitle = paste(nsubj, "participants", sep = " "),
+    textpos = 25
+  )
+}
+
+par(op)
+```
+
+```{r power-coretta-2}
+subjects <- seq(2, 10, by = 1)
+rows <- 3
+cols <- 3
+op <- par(mfrow = c(rows, cols))
+
+for (nsubj in subjects) {
+  plotpower(
+    nsubj = nsubj,
+    stddevquantiles = c(15, 100),
+    posteriorquantiles = c(7, 17.5, 30),
+    posteriormeans = 17.5,
+    mytitle = paste(nsubj, "participants", sep = " "),
+    textpos = 25
+  )
+}
+
+par(op)
+```
