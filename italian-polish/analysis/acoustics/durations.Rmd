@@ -507,18 +507,18 @@ Release to Release coefficient of variation is lower than Vowel Onset to Release
 
 ```{r vowdur-lm}
 vowdur_lm <- lmer(
-  vowel_duration ~
+  v1_duration ~
     c2_phonation +
     # language +
-    c2_place +
+    # c2_place +
     vowel +
     c2_phonation:vowel +
     # language:vowel +
-    syl_rate +
+    speech_rate_c +
     (1+c2_phonation|speaker) +
     (1|item),
   REML = FALSE,
-  data = duration
+  data = token_data
 )
 summary(vowdur_lm)
 ```
