@@ -13,60 +13,38 @@ theme_set(theme_minimal())
 library(lme4)
 library(effects)
 library(sjPlot)
+library(coretta2018itapol)
+library(mgcv)
+data("formants_series")
+data("token_measures")
 ```
 
 # Data import
 
 ```{r}
-speakers <- read_csv("./italian-polish/data/datasets/speakers.csv")
-stimuli <- read_csv("./italian-polish/data/datasets/stimuli.csv")
-
-durations <- list.files(
-  path = "italian-polish/data/datasets/acoustics",
-  pattern = "*-durations.csv",
-  full.names = TRUE
-) %>%
-  map_df(~read_csv(., na = "--undefined--"))
-
-vowels <- list.files(
-  path = "italian-polish/data/datasets/acoustics",
-  pattern = "*-formants.csv",
-  full.names = TRUE
-) %>%
-  map_df(~read_csv(., na = "--undefined--")) %>%
-  left_join(y = durations, by = c("speaker", "file", "word")) %>%
-  left_join(y = speakers) %>%
-  left_join(y = stimuli) %>%
-  mutate(
-    v1_duration = (c2_ons - v1_ons) * 1000,
-    sentence_duration = sentence_off - sentence_ons,
-    speech_rate = ifelse(
-      language == "Italian",
-      8 / sentence_duration,
-      6 / sentence_duration
-    ),
-    speech_rate_c = speech_rate - mean(speech_rate, na.rm = TRUE)
-  ) %>%
+vowels <- formants_series %>%
+  select(speaker:f0) %>%
+  left_join(y = token_measures %>% select(-time)) %>%
   mutate_if(is.character, as.factor)
 
 f1_dur <- vowels %>%
-  filter(time.x == 5)
+  filter(time == 5)
 ```
 
 # Exploration
 
 ```{r}
 vowels %>%
-  filter(language == "italian") %>%
-  ggplot(aes(time.x, f1, colour = c2_phonation)) +
+  filter(language == "Italian") %>%
+  ggplot(aes(time, f1, colour = c2_phonation)) +
   geom_smooth(method = "loess") +
   facet_grid(c2_place ~ vowel)
 ```
 
 ```{r}
 vowels %>%
-  filter(language == "italian") %>%
-  ggplot(aes(time.x, f2, colour = c2_phonation)) +
+  filter(language == "Italian") %>%
+  ggplot(aes(time, f2, colour = c2_phonation)) +
   geom_smooth(method = "loess") +
   facet_grid(c2_place ~ vowel)
 ```
@@ -158,5 +136,20 @@ plot_model(f1_dur_lm, order.terms = 1:6)
 
 ```{r}
 plot_model(f1_dur_lm, type = "pred", terms = c("f1", "vowel"))
+```
+
+# Multivariate GAM
+
+```{r f12-gam}
+f12_gam <- gam(
+  list(
+    f1 ~ s(time, by = vowel, k = 5),
+    f2 ~ s(time, by = vowel, k = 5)
+  ),
+  data = vowels,
+  family = mvn()
+)
+
+summary(f12_gam)
 ```
 
