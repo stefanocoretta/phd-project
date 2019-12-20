@@ -90,8 +90,8 @@ for (nsubj in subjects) {
   plotpower(
     nsubj = nsubj,
     stddevquantiles = c(15, 100),
-    posteriorquantiles = c(55, 75, 95),
-    posteriormeans = 75,
+    posteriorquantiles = c(52, 68, 84),
+    posteriormeans = 68,
     mytitle = paste(nsubj, "participants", sep = " "),
     textpos = 80
   )
@@ -109,8 +109,8 @@ for (nsubj in subjects) {
   plotpower(
     nsubj = nsubj,
     stddevquantiles = c(15, 100),
-    posteriorquantiles = c(55, 75, 95),
-    posteriormeans = 75,
+    posteriorquantiles = c(52, 68, 84),
+    posteriormeans = 68,
     mytitle = paste(nsubj, "participants", sep = " "),
     textpos = 80
   )

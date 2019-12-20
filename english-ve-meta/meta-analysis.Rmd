@@ -852,7 +852,7 @@ bind_rows(estimated_tbl, studies_shrunk) %>%
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_color_brewer(type = "qual", palette = "Dark2", breaks = c("original", "meta-analysis")) +
   scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
-  scale_linetype_discrete(labels = c("final", "penultimate")) +
+  scale_linetype_discrete(labels = c("final", "non-final")) +
   labs(
     caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (light blue) and penultimate (dark blue) position.",
     y = "Difference in vowel duration (ms)",
@@ -874,7 +874,7 @@ estimated_tbl %>%
   geom_point(size = 2, position = position_dodge(width = 0.8)) +
   geom_errorbar(aes(ymin = Q2.5, ymax = Q97.5), width = 0, position = position_dodge(width = 0.8)) +
   scale_y_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
-  scale_linetype_discrete(labels = c("final", "penultimate")) +
+  scale_linetype_discrete(labels = c("final", "non-final")) +
   labs(
     caption = "The shaded areas indicate the 95% CI of the meta-analytical posterior\nof the voicing effect in final (light blue) and penultimate (dark blue) position.",
     y = "Difference in vowel duration (ms)",
@@ -897,7 +897,28 @@ estimated_tbl %>%
   annotate("rect", ymin = -Inf, ymax = Inf, xmin = meta_bm_syl_q2.5, xmax = meta_bm_syl_q97.5, alpha = 0.5, fill = "#1f78b4") +
   geom_point(aes(shape = syl_pos), size = 3) +
   # geom_text_repel(force = 20, seed = 1234) +
-  scale_shape_discrete(labels = c("final", "penultimate")) +
+  scale_shape_discrete(labels = c("final", "non-final")) +
+  scale_x_continuous(breaks = seq(-25, 150, 25)) +
+  labs(
+    x = "Difference in vowel duration (ms)",
+    shape = "Syllable position"
+  )
+```
+
+```{r funnel-plot-2, include=TRUE, fig.cap = "By-study funnel plot showing the estimate against the precision. The vertical thick and dashed lines are the meta-analytical means of the effect in final and penultimate position."}
+e.min <- by(estimated_tbl$Est.Error, estimated_tbl$syl_pos, range)[[1]][1]
+e.max <- by(estimated_tbl$Est.Error, estimated_tbl$syl_pos, range)[[1]][2]
+
+estimated_tbl %>%
+  mutate(precision = 1/Est.Error) %>%
+  filter(syl_pos == "final") %>%
+  ggplot(aes(Estimate, precision, label = study)) +
+  geom_vline(aes(xintercept = 0), colour = "grey") +
+  geom_vline(aes(xintercept = meta_bm_est)) +
+  # geom_vline(aes(xintercept = meta_bm_syl_q50), linetype = "dashed") +
+  annotate("rect", ymin = -Inf, ymax = Inf, xmin = meta_bm_q2.5, xmax = meta_bm_q97.5, alpha = 0.5, fill = "#a6cee3") +
+  geom_point(size = 3) +
+  annotate("polygon", x = c(meta_bm_est - 1.96 * e.max, meta_bm_est + 1.96 * e.max, meta_bm_est + 1.96 * e.min, meta_bm_est - 1.96 * e.min), y = c(1/e.max, 1/e.max, 1/e.min, 1/e.min), alpha = 0.2, fill = "orange") +
   scale_x_continuous(breaks = seq(-25, 150, 25)) +
   labs(
     x = "Difference in vowel duration (ms)",
