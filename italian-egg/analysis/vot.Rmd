@@ -11,11 +11,165 @@ knitr::opts_knit$set(root.dir = normalizePath("../../"))
 library(coretta2018itaegg)
 data("ita_egg")
 library(tidyverse)
+theme_set(theme_minimal())
+library(brms)
+egg <- drop_na(ita_egg, vot)
 ```
 
-```{r}
+# Plot
+
+```{r dens}
 ita_egg %>%
-  ggplot(aes(c2_place, vot)) +
-  geom_boxplot()
+  ggplot(aes(vot)) +
+  geom_density()
+
+ita_egg %>%
+  ggplot(aes(vot, fill = c1_place)) +
+  geom_density(colour = NA, alpha = 0.5)
+
+ita_egg %>%
+  ggplot(aes(vot, fill = c1_place)) +
+  geom_density(bw = 5, colour = NA, alpha = 0.5)
+```
+
+
+```{r place-box}
+ita_egg %>%
+  ggplot(aes(c1_place, vot)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2)
+```
+
+```{r rate}
+ita_egg %>%
+  ggplot(aes(speech_rate, vot)) +
+  geom_point(alpha = 0.5)
+```
+
+```{r rate-place}
+ita_egg %>%
+  ggplot(aes(speech_rate, vot)) +
+  geom_point(alpha = 0.5) +
+  facet_grid(~ c2_place)
+```
+
+# Model
+
+```{r plot-priors}
+ggplot() +
+  aes(x = c(-30, 80)) +
+  stat_function(fun = dnorm, n = 1001, args = list(25, 15)) +
+  labs(title = "Prior for the Intercept", x = element_blank())
+
+ggplot() +
+  aes(x = c(0, 50)) +
+  stat_function(fun = dcauchy, n = 1001, args = list(0, 10)) +
+  labs(title = "Prior for sigma", x = element_blank()) +
+  xlim(0, 100)
+```
+
+
+```{r bm1}
+priors <- c(
+  prior(normal(25, 15), class = Intercept),
+  prior(cauchy(0, 10), class = sigma)
+)
+
+bm1 <- brm(
+  vot ~
+    1,
+  data = egg,
+  family = gaussian(),
+  cores = 4,
+  prior = priors,
+  file = "./italian-egg/data/cache/bm1"
+)
+
+bm1
+```
+
+```{r bm1-pp}
+pp_check(bm1, nsamples = 100)
+```
+
+```{r bm2}
+priors <- c(
+  prior(normal(25, 15), class = Intercept),
+  prior(cauchy(0, 10), class = sigma),
+  prior(cauchy(0, 10), class = sd)
+)
+
+bm2 <- brm(
+  vot ~
+    1 +
+    (1|speaker),
+  data = egg,
+  family = gaussian(),
+  cores = 4,
+  prior = priors,
+  file = "./italian-egg/data/cache/bm2"
+)
+
+bm2
+```
+
+```{r bm2-pp}
+pp_check(bm2, nsamples = 100)
+```
+
+```{r bm3}
+priors <- c(
+  prior(normal(25, 15), class = Intercept),
+  prior(cauchy(0, 10), class = sigma),
+  prior(cauchy(0, 10), class = sd),
+  prior(normal(0, 30), class = b)
+)
+
+bm3 <- brm(
+  vot ~
+    1 +
+    c1_place +
+    (1|speaker),
+  data = egg,
+  family = gaussian(),
+  cores = 4,
+  prior = priors,
+  file = "./italian-egg/data/cache/bm3"
+)
+
+bm3
+```
+
+```{r bm3-pp}
+pp_check(bm3, nsamples = 100)
+```
+
+```{r bm4}
+priors <- c(
+  prior(normal(25, 15), class = Intercept),
+  prior(cauchy(0, 10), class = sigma),
+  prior(cauchy(0, 10), class = sd),
+  prior(normal(0, 30), class = b),
+  prior(lkj(2), class = cor)
+)
+
+bm4 <- brm(
+  vot ~
+    1 +
+    c1_place +
+    (1 + c1_place|speaker) +
+    (1|word),
+  data = egg,
+  family = gaussian(),
+  cores = 4,
+  prior = priors,
+  file = "./italian-egg/data/cache/bm4"
+)
+
+bm4
+```
+
+```{r bm4-pp}
+pp_check(bm4, nsamples = 100)
 ```
 
