@@ -28,7 +28,7 @@ ita_egg %>%
   geom_density(colour = NA, alpha = 0.5)
 
 ita_egg %>%
-  ggplot(aes(vot, fill = c1_place)) +
+  ggplot(aes(vot2, fill = c1_place)) +
   geom_density(bw = 5, colour = NA, alpha = 0.5)
 ```
 
@@ -173,3 +173,31 @@ bm4
 pp_check(bm4, nsamples = 100)
 ```
 
+```{r bm5}
+priors <- c(
+  prior(normal(25, 15), class = Intercept),
+  prior(cauchy(0, 10), class = sigma),
+  prior(cauchy(0, 10), class = sd),
+  prior(normal(0, 30), class = b),
+  prior(lkj(2), class = cor)
+)
+
+bm5 <- brm(
+  vot ~
+    1 +
+    c1_place +
+    (1 + c1_place|speaker) +
+    (1|word),
+  data = egg,
+  family = skew_normal(),
+  cores = 4,
+  prior = priors,
+  file = "./italian-egg/data/cache/bm5"
+)
+
+bm5
+```
+
+```{r bm5-pp}
+pp_check(bm5, nsamples = 100)
+```
