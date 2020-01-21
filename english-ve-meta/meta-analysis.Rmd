@@ -53,6 +53,10 @@ ko18_data <- read_delim("./english-ve-meta/ko2018.txt", delim = "\t")
 
 # Obtain estimates from previous studies
 
+Using measurement error models with studies that reported standard deviations.
+The model includes `se()`, where the standard error is calculated as $sd/\sqrt{N}$ (where $N$ is the number of observations from which the standard deviation was obtained).
+`se(sigma = TRUE)` is used as suggested in the documentation (`?"addition-terms"`).
+
 ```{r heffner1937}
 h37 <- filter(stressed, study == "heffner1937")
 
@@ -218,7 +222,7 @@ priors <- c(
 )
 
 p81_di_bm <- brm(
-  v_duration | se(sd) ~
+  v_duration | se(sd/sqrt(n_obs)) ~
     voice,
   data = p81_di,
   prior = priors,
@@ -265,7 +269,7 @@ priors <- c(
 )
 
 l85_medial_bm <- brm(
-  v_duration | se(sd) ~
+  v_duration | se(sd/sqrt(n_obs)) ~
     voice,
   data = l85_medial,
   prior = priors,
@@ -274,7 +278,7 @@ l85_medial_bm <- brm(
 )
 
 l85_final_bm <- brm(
-  v_duration | se(sd) ~
+  v_duration | se(sd/sqrt(n_obs)) ~
     voice,
   data = l85_final,
   prior = priors,
@@ -292,7 +296,7 @@ priors <- c(
 )
 
 d89_bm <- brm(
-  v_duration | se(sd) ~
+  v_duration | se(sd/sqrt(n_obs)) ~
     voice,
   data = d89,
   prior = priors,
@@ -321,7 +325,6 @@ l92_bm <- brm(
 ```
 
 ```{r ko2018}
-k18 <- filter(stressed, study == "ko2018")
 k18 <- filter(ko18_data, phoneme %in% c("AE1", "EH1", "IH1")) %>%
   mutate(voice = factor(voice, levels = c("-voice", "+voice")))
 
