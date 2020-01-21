@@ -1,213 +1,208 @@
-study,vowel,v_duration,sd,c2_place,voice,n_syl,target_syl,syl_pos,word_pos,year,study_ref,study_ref_2,n_speakers
-heffner1937,ɪ,150,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ʌ,170,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɛ,180,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,æ,210,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,i,210,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,u,230,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɔ,220,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɑ,180,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ʊ,150,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɪ,200,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ʌ,200,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɛ,220,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,æ,310,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,i,280,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,u,290,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɔ,320,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ɑ,260,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-heffner1937,ʊ,200,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1
-housefairbanks1953,i,138,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,ɛ,171,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,æ,184,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,ɑ,180,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,o,157,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,u,138,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,i,215,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,ɛ,251,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,æ,276,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,ɑ,267,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,ɔ,244,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-housefairbanks1953,u,215,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10
-zimmerman1958,mean,126.2,,labial,voiceless,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2
-zimmerman1958,mean,200,,labial,voiced,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2
-zimmerman1958,mean,140.1,,coronal,voiceless,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2
-zimmerman1958,mean,263.3,,coronal,voiced,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2
-zimmerman1958,mean,102.9,,velar,voiceless,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2
-zimmerman1958,mean,190.3,,velar,voiced,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2
-petersonlehiste1960,i,148,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɪ,126,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɛ,175,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,æ,242,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɑ,218,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɔ,222,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ʊ,130,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,u,160,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,i,220,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɪ,214,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɛ,288,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,æ,362,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɑ,330,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ɔ,327,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,ʊ,,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-petersonlehiste1960,u,,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5
-sharf1962_mono,mean,196,,coronal,voiceless,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1
-sharf1962_mono,mean,287,,coronal,voiced,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1
-sharf1962_mono,mean,164,,labial,voiceless,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1
-sharf1962_mono,mean,242,,labial,voiced,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1
-sharf1962_mono,mean,174,,velar,voiceless,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1
-sharf1962_mono,mean,184,,velar,voiced,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1
-sharf1962_di,mean,147,,coronal,voiceless,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1
-sharf1962_di,mean,156,,coronal,voiced,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1
-sharf1962_di,mean,117,,labial,voiceless,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1
-sharf1962_di,mean,152,,labial,voiced,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1
-sharf1962_di,mean,117,,velar,voiceless,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1
-sharf1962_di,mean,148,,velar,voiced,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1
-chen1970,æ,155,,labial,voiceless,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1
-chen1970,æ,170,,coronal,voiceless,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1
-chen1970,æ,158,,velar,voiceless,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1
-chen1970,æ,300,,labial,voiced,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1
-chen1970,æ,308,,coronal,voiced,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1
-chen1970,æ,357,,velar,voiced,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1
-klatt1973_mono,mean,132,,mean,voiceless,mono,1,final,medial,1973,Klatt (1973) monosyllabic,Klatt (1973),3
-klatt1973_mono,mean,198,,mean,voiced,mono,1,final,medial,1973,Klatt (1973) monosyllabic,Klatt (1973),3
-klatt1973_di,mean,103,,mean,voiceless,di,1,non-final,medial,1973,Klatt (1973) disyllabic,Klatt (1973),3
-klatt1973_di,mean,131,,mean,voiced,di,1,non-final,medial,1973,Klatt (1973) disyllabic,Klatt (1973),3
-port1981_mono,i,149,34,labial,voiced,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10
-port1981_mono,i,113,25,labial,voiceless,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10
-port1981_mono,ɪ,113,30,labial,voiced,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10
-port1981_mono,ɪ,82,25,labial,voiceless,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10
-port1981_di,i,115,27,labial,voiced,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10
-port1981_di,i,101,21,labial,voiceless,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10
-port1981_di,ɪ,84,22,labial,voiced,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10
-port1981_di,ɪ,70,21,labial,voiceless,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10
-port1981_tri,i,110,25,labial,voiced,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10
-port1981_tri,i,96,23,labial,voiceless,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10
-port1981_tri,ɪ,79,21,labial,voiced,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10
-port1981_tri,ɪ,71,22,labial,voiceless,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10
-mack1982,i,111,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,i,246.3,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,e,85.3,,velar,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,e,185,,velar,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,u,140.1,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,u,302.3,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,157.7,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,312.2,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,200.1,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,335.7,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,189.1,,velar,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,305.4,,velar,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,141.6,,labial,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,266,,labial,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,175.1,,labial,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,288.7,,labial,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,186.7,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-mack1982,ɔ,326.2,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3
-luce1985_medial,ɪ,106.3,24.3,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,149.1,26.6,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,162.6,22,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,62.2,16.6,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,83.2,17.4,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,129.4,22.1,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,99.1,23.5,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,130.7,16.6,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,165.6,27.5,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,84.9,27.5,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,91.2,14.3,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,133.3,16.9,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,116.5,29.4,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,166.1,32,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,162.9,30.5,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,83.2,21.8,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,108.6,19.8,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,128,18.9,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_final,ɪ,187.1,42.1,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,214.9,65.3,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,246.9,57.1,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,129.6,36.6,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,138.1,29.8,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,188.1,42.8,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,177.3,41.1,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,223.3,46.2,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,249.6,55.7,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,131,36.6,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,123.7,29,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,170.6,40.4,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,186.9,46.7,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,226.2,35.9,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,250,50.2,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,142.8,41.4,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,164.7,34.2,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,173,58.8,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_medial,ɪ,126.1,44.2,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,172.7,41.7,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,196,54.1,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,78.6,15.4,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,105.6,32.8,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,153,35.4,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,134.4,57.7,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,184.8,74.8,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,216.5,66.9,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,86,18.7,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,115.3,34.4,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,150.3,34.5,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,148.3,46.6,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,188.6,92.1,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,214.4,58.9,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,ɪ,90.4,21.2,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,i,147.1,27.6,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_medial,a,142.8,32.9,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,3
-luce1985_final,ɪ,195.1,45.6,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,235.6,29.6,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,281.3,27.9,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,126,27,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,145.4,22,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,188.8,11.3,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,191.9,41.3,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,251.4,36.4,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,303.2,34,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,125,28,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,149.5,33,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,193.7,28.5,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,196.5,19.9,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,257.8,35.1,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,285.6,17.9,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,ɪ,143.5,18.6,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,i,171.6,28.2,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-luce1985_final,a,184.1,22.6,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,3
-davis1989,mean,110,7.7,labial,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,98,9.9,labial,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,124,12.5,labial,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,109,5,labial,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,151,9.2,labial,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,134,7.9,labial,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,139,25,coronal,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,130,21.6,coronal,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,169,15.8,coronal,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,126,11.1,coronal,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,174,12,coronal,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,144,8.7,coronal,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,132,11.8,velar,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,113,9.5,velar,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,167,20.1,velar,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,144,11.8,velar,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,164,7.8,velar,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-davis1989,mean,141,5.4,velar,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3
-laeufer1992,ɒ,316.5,,velar,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ɒ,302.73,,velar,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ɛ,230.47,,velar,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ɛ,146.93,,velar,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ɔ,338.29,,coronal,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ɔ,212.58,,coronal,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ʌ,348,,coronal,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-laeufer1992,ʌ,219.33,,coronal,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5
-hussein1994,mean,149.2,,mean,voiceless,mono,1,final,medial,1994,Hussein (1994),Hussein (1994),6
-hussein1994,mean,185.2,,mean,voiced,mono,1,final,medial,1994,Hussein (1994),Hussein (1994),6
-ko2018,mean,92.06,36.67,mean,voiceless,mono,1,final,mean,2018,Ko (2018),Ko (2018),7
-ko2018,mean,116.78,52.53,mean,voiced,mono,1,final,mean,2018,Ko (2018),Ko (2018),7
-ko2018,mean,105.65,36.76,mean,voiceless,mono,1,final,mean,2018,Ko (2018),Ko (2018),7
-ko2018,mean,138.6,54.96,mean,voiced,mono,1,final,mean,2018,Ko (2018),Ko (2018),7
-ko2018,mean,123.98,40.72,mean,voiceless,mono,1,final,mean,2018,Ko (2018),Ko (2018),7
-ko2018,mean,206.67,63,mean,voiced,mono,1,final,mean,2018,Ko (2018),Ko (2018),7
-coretta2019_di,,,,,,di,1,non-final,medial,2019,Coretta (2019) disyllabic,Coretta (2019),15
-coretta2019_mono,,,,,,mono,1,final,medial,2019,Coretta (2019) monosyllabic,Coretta (2019),15
+study,vowel,v_duration,sd,c2_place,voice,n_syl,target_syl,syl_pos,word_pos,year,study_ref,study_ref_2,n_speakers,n_obs,notes
+heffner1937,ɪ,150,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ʌ,170,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɛ,180,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,æ,210,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,i,210,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,u,230,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɔ,220,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɑ,180,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ʊ,150,,mean,voiceless,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɪ,200,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ʌ,200,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɛ,220,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,æ,310,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,i,280,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,u,290,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɔ,320,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ɑ,260,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+heffner1937,ʊ,200,,mean,voiced,mono,1,final,isolation,1937,Heffner (1937),Heffner (1937),1,,
+housefairbanks1953,i,138,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,ɛ,171,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,æ,184,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,ɑ,180,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,o,157,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,u,138,,mean,voiceless,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,i,215,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,ɛ,251,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,æ,276,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,ɑ,267,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,ɔ,244,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+housefairbanks1953,u,215,,mean,voiced,di,2,final,isolation,1953,House & Fairbanks (1953),House & Fairbanks (1953),10,,
+zimmerman1958,mean,126.2,,labial,voiceless,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2,,
+zimmerman1958,mean,200,,labial,voiced,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2,,
+zimmerman1958,mean,140.1,,coronal,voiceless,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2,,
+zimmerman1958,mean,263.3,,coronal,voiced,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2,,
+zimmerman1958,mean,102.9,,velar,voiceless,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2,,
+zimmerman1958,mean,190.3,,velar,voiced,mono,1,final,isolation,1958,Zimmerman & Sapon (1958),Zimmerman & Sapon (1958),2,,
+petersonlehiste1960,i,148,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɪ,126,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɛ,175,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,æ,242,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɑ,218,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɔ,222,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ʊ,130,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,u,160,,mean,voiceless,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,i,220,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɪ,214,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɛ,288,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,æ,362,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɑ,330,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ɔ,327,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,ʊ,,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+petersonlehiste1960,u,,,mean,voiced,mono,1,final,medial,1960,Peterson & Lehiste (1960),Peterson & Lehiste (1960),5,,
+sharf1962_mono,mean,196,,coronal,voiceless,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1,,
+sharf1962_mono,mean,287,,coronal,voiced,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1,,
+sharf1962_mono,mean,164,,labial,voiceless,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1,,
+sharf1962_mono,mean,242,,labial,voiced,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1,,
+sharf1962_mono,mean,174,,velar,voiceless,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1,,
+sharf1962_mono,mean,184,,velar,voiced,mono,1,final,isolation,1962,Sharf (1962) monosyllabic,Sharf (1962),1,,
+sharf1962_di,mean,147,,coronal,voiceless,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1,,
+sharf1962_di,mean,156,,coronal,voiced,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1,,
+sharf1962_di,mean,117,,labial,voiceless,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1,,
+sharf1962_di,mean,152,,labial,voiced,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1,,
+sharf1962_di,mean,117,,velar,voiceless,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1,,
+sharf1962_di,mean,148,,velar,voiced,di,1,non-final,isolation,1962,Sharf (1962) disyllabic,Sharf (1962),1,,
+chen1970,æ,155,,labial,voiceless,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1,,
+chen1970,æ,170,,coronal,voiceless,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1,,
+chen1970,æ,158,,velar,voiceless,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1,,
+chen1970,æ,300,,labial,voiced,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1,,
+chen1970,æ,308,,coronal,voiced,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1,,
+chen1970,æ,357,,velar,voiced,mono,1,final,isolation,1970,Chen (1970),Chen (1970),1,,
+klatt1973_mono,mean,132,,mean,voiceless,mono,1,final,medial,1973,Klatt (1973) monosyllabic,Klatt (1973),3,,
+klatt1973_mono,mean,198,,mean,voiced,mono,1,final,medial,1973,Klatt (1973) monosyllabic,Klatt (1973),3,,
+klatt1973_di,mean,103,,mean,voiceless,di,1,non-final,medial,1973,Klatt (1973) disyllabic,Klatt (1973),3,,
+klatt1973_di,mean,131,,mean,voiced,di,1,non-final,medial,1973,Klatt (1973) disyllabic,Klatt (1973),3,,
+port1981_mono,i,149,34,labial,voiced,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_mono,i,113,25,labial,voiceless,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_mono,ɪ,113,30,labial,voiced,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_mono,ɪ,82,25,labial,voiceless,mono,1,final,medial,1981,Port (1981) monosyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_di,i,115,27,labial,voiced,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_di,i,101,21,labial,voiceless,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_di,ɪ,84,22,labial,voiced,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_di,ɪ,70,21,labial,voiceless,di,1,non-final,medial,1981,Port (1981) disyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_tri,i,110,25,labial,voiced,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_tri,i,96,23,labial,voiceless,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_tri,ɪ,79,21,labial,voiced,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+port1981_tri,ɪ,71,22,labial,voiceless,tri,1,non-final,medial,1981,Port (1981) trisyllabic,Port (1981),10,50,Each target word repeated 5 times by 10 speakers.
+mack1982,i,111,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,i,246.3,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,e,85.3,,velar,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,e,185,,velar,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,u,140.1,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,u,302.3,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,157.7,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,312.2,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,200.1,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,335.7,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,189.1,,velar,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,305.4,,velar,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,141.6,,labial,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,266,,labial,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,175.1,,labial,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,288.7,,labial,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,186.7,,coronal,voiceless,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+mack1982,ɔ,326.2,,coronal,voiced,mono,1,final,isolation,1982,Mack (1982),Mack (1982),3,,
+luce1985_medial,ɪ,106.3,24.3,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,149.1,26.6,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,162.6,22,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,62.2,16.6,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,83.2,17.4,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,129.4,22.1,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,99.1,23.5,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,130.7,16.6,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,165.6,27.5,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,84.9,27.5,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,91.2,14.3,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,133.3,16.9,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,116.5,29.4,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,166.1,32,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,162.9,30.5,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,83.2,21.8,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,108.6,19.8,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,128,18.9,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,187.1,42.1,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,214.9,65.3,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,246.9,57.1,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,129.6,36.6,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,138.1,29.8,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,188.1,42.8,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,177.3,41.1,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,223.3,46.2,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,249.6,55.7,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,131,36.6,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,123.7,29,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,170.6,40.4,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,186.9,46.7,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,226.2,35.9,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,250,50.2,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,142.8,41.4,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,164.7,34.2,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,173,58.8,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,126.1,44.2,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,172.7,41.7,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,196,54.1,velar,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,78.6,15.4,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,105.6,32.8,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,153,35.4,velar,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,134.4,57.7,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,184.8,74.8,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,216.5,66.9,coronal,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,86,18.7,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,115.3,34.4,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,150.3,34.5,coronal,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,148.3,46.6,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,188.6,92.1,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,214.4,58.9,labial,voiced,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,ɪ,90.4,21.2,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,i,147.1,27.6,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_medial,a,142.8,32.9,labial,voiceless,mono,1,final,medial,1985,Luce & Charles-Luce (1985) medial,Luce & Charles-Luce (1985) medial,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,195.1,45.6,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,235.6,29.6,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,281.3,27.9,velar,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,126,27,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,145.4,22,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,188.8,11.3,velar,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,191.9,41.3,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,251.4,36.4,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,303.2,34,coronal,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,125,28,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,149.5,33,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,193.7,28.5,coronal,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,196.5,19.9,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,257.8,35.1,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,285.6,17.9,labial,voiced,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,ɪ,143.5,18.6,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,i,171.6,28.2,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+luce1985_final,a,184.1,22.6,labial,voiceless,mono,1,final,final,1985,Luce & Charles-Luce (1985) final,Luce & Charles-Luce (1985) final,5,20,Each target word in 2 frame sentences repeated x2 by 5 speakers.
+davis1989,mean,110,7.7,labial,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,98,9.9,labial,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,124,12.5,labial,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,109,5,labial,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,151,9.2,labial,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,134,7.9,labial,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,139,25,coronal,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,130,21.6,coronal,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,169,15.8,coronal,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,126,11.1,coronal,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,174,12,coronal,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,144,8.7,coronal,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,132,11.8,velar,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,113,9.5,velar,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,167,20.1,velar,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,144,11.8,velar,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,164,7.8,velar,voiced,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+davis1989,mean,141,5.4,velar,voiceless,di,1,non-final,medial,1989,Davis & Van Summers (1989),Davis & Van Summers (1989),3,34,Each target word was repeated 10 times in one subject and 12 in the other 2 subjects.
+laeufer1992,ɒ,316.5,,velar,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ɒ,302.73,,velar,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ɛ,230.47,,velar,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ɛ,146.93,,velar,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ɔ,338.29,,coronal,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ɔ,212.58,,coronal,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ʌ,348,,coronal,voiced,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+laeufer1992,ʌ,219.33,,coronal,voiceless,mono,1,final,final,1992,Laeufer (1992),Laeufer (1992),5,,
+hussein1994,mean,149.2,,mean,voiceless,mono,1,final,medial,1994,Hussein (1994),Hussein (1994),6,,
+hussein1994,mean,185.2,,mean,voiced,mono,1,final,medial,1994,Hussein (1994),Hussein (1994),6,,
+ko2018,,,,,,mono,1,final,mean,2018,Ko (2018),Ko (2018),7,,
+coretta2019_di,,,,,,di,1,non-final,medial,2019,Coretta (2019) disyllabic,Coretta (2019),15,,
+coretta2019_mono,,,,,,mono,1,final,medial,2019,Coretta (2019) monosyllabic,Coretta (2019),15,,
