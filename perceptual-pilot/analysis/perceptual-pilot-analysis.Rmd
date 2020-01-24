@@ -12,6 +12,8 @@ library(tidyverse)
 theme_set(theme_minimal())
 library(lme4)
 library(sjPlot)
+library(brms)
+options(mc.cores = parallel::detectCores())
 ```
 
 # Import data
@@ -30,9 +32,12 @@ pilot <- list.files(
     response = factor(response, levels = c("t", "d")),
     burst = as.numeric(burst),
     voicing = as.numeric(voicing),
-    response_n = as.numeric(response) - 1
+    response_n = as.numeric(response) - 1,
+    vowel = factor(vowel, levels = c("a", "i", "u"))
   ) %>%
   filter(!is.na(response))
+
+contrasts(pilot$vowel) <- "contr.sum"
 
 burst <- filter(pilot, condition == "burst")
 voicing <- filter(pilot, condition == "voicing")
@@ -91,3 +96,22 @@ summary(voicing_lm)
 ```{r}
 plot_model(voicing_lm, "pred", terms = c("voicing", "vowel"))
 ```
+
+## Bayesian
+
+```{r burst}
+priors <- c(
+  prior(normal())
+)
+
+burst_bm <- brm(
+  response_n ~
+    burst *
+    vowel +
+    (1+burst|participant),
+  data = burst,
+  family = bernoulli,
+  file = "./perceptual-pilot/data/cache/burst_bm"
+)
+```
+
