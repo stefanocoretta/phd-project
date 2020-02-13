@@ -101,7 +101,10 @@ plot_model(voicing_lm, "pred", terms = c("voicing", "vowel"))
 
 ```{r burst}
 priors <- c(
-  prior(normal())
+  prior(student_t(3, 0, 2), class = Intercept),
+  prior(student_t(3, 0, 2), class = b),
+  prior(cauchy(0, 1), class = sd),
+  prior(lkj(2), class = cor)
 )
 
 burst_bm <- brm(
@@ -110,6 +113,7 @@ burst_bm <- brm(
     vowel +
     (1+burst|participant),
   data = burst,
+  prior = priors,
   family = bernoulli,
   file = "./perceptual-pilot/data/cache/burst_bm"
 )
