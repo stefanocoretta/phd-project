@@ -15,54 +15,17 @@ library(rticulate)
 library(itsadug)
 library(beepr)
 library(fda)
+library(coretta2018itapol)
+data("tongue_contours")
 ```
 
 # Data import
 
 ```{r read-data, message=FALSE}
-columns <- c(
-  "speaker",
-  "seconds",
-  "rec_date",
-  "prompt",
-  "label",
-  "TT_displacement_sm",
-  "TT_velocity",
-  "TT_velocity_abs",
-  "TD_displacement_sm",
-  "TD_velocity",
-  "TD_velocity_abs",
-  "TR_displacement_sm",
-  "TR_velocity",
-  "TR_velocity_abs"
-)
-
-speakers <- read_csv("./italian-polish/data/datasets/speakers.csv")
-stimuli <- read_csv("./italian-polish/data/datasets/stimuli.csv")
-
-tongue <- list.files(
-  path = "./italian-polish/data/datasets/ultrasound",
-  pattern = "*-tongue-cart.tsv",
-  full.names = TRUE
-) %>%
-  read_aaa(., columns) %>%
-  na.omit() %>%
-  mutate(word = word(prompt, 2)) %>%
-  left_join(y = speakers) %>%
-  left_join(y = stimuli) %>%
-  filter(c1_phonation == "voiceless") %>%
-  mutate(
-    c2_phonation = factor(c2_phonation, levels = c("voiceless", "voiced")),
-    vowel = factor(vowel, levels = c("a", "o", "u")),
-    c2_place = factor(c2_place, levels = c("coronal", "velar")),
-    speaker_phon = interaction(speaker, c2_phonation)
-  ) %>%
-  mutate_if(is.character, as.factor)
-
-it01 <- filter(tongue, speaker == "it01", label == "closure_") %>%
+it01 <- filter(tongue_contours, speaker == "it01", label == "closure_") %>%
   arrange(rec_date, fan_line) %>%
   mutate(
-    contour = as.numeric(rec_date)
+    contour = as.numeric(as.factor(rec_date))
   ) %>%
   transform_coord(use_XY = TRUE)
 ```
@@ -113,7 +76,7 @@ it01_filtered %>%
 ```
 
 ```{r}
-n_curves <- 59
+n_curves <- 117
 
 X <- split(it01_filtered$X, it01_filtered$contour)
 Y <- split(it01_filtered$Y, it01_filtered$contour)
@@ -133,7 +96,7 @@ fd_par <- fdPar(basis, lfd_obj, lambda)
 ```
 
 ```{r}
-i = 2
+i = 5
 # t_norm = (time_list[[i]] / duration[i]) * mean_dur # linear time normalisation
 curve_fd = smooth.basis(X[[i]], Y[[i]], fd_par)$fd
 
@@ -169,7 +132,7 @@ plot.pca.fd(y_pcafd, nx = 40)
 ```
 
 ```{r}
-it01_contour <- it01 %>%
+it01_contour <- it01_filtered %>%
   select(-X, -Y, -fan_line) %>%
   unique()
 
@@ -184,6 +147,10 @@ ggplot(scores, aes(V1, V2, colour = c2_place, shape = vowel)) +
   geom_point()
 ggplot(scores, aes(V2, V3, colour = c2_place, shape = vowel)) +
   geom_point()
+ggplot(scores, aes(V2, V3, colour = c2_phonation, shape = vowel)) +
+  geom_point()
+ggplot(scores, aes(V3, V4, colour = c2_phonation, shape = vowel)) +
+  geom_point()
 ```
 
 ```{r}
@@ -193,5 +160,10 @@ ggplot(scores, aes(contour, V1, fill = c2_place)) +
 
 ```{r}
 ggplot(scores, aes(contour, V3, fill = vowel)) +
+  geom_bar(stat = "identity")
+```
+
+```{r}
+ggplot(scores, aes(contour, V3, fill = c2_phonation)) +
   geom_bar(stat = "identity")
 ```
