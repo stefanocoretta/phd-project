@@ -17,8 +17,8 @@ header-includes:
 - \linenumbers
 indent: true
 params:
-  version: 1.0
-  version-date: "2019/04/15"
+  version: 1.1
+  version-date: "2020/05/15"
 ---
 
 ```{r setup, include=FALSE}
@@ -279,6 +279,7 @@ Polar GAMs fitting, significance testing, and model plotting are illustrated by 
 A brief tutorial illustrates fitting and plotting of polar GAMs with the R package rticulate.
 The series of polar GAMs indicates a high degree of idiosyncrasy in tongue root position in voiceless and voiced stops, within and across speakers.
 Limitations of the current implementation of polar GAMs (such as across-speaker normalisation) and future directions are also briefly discussed.
+Data and code available at <https://osf.io/j79uw/>.
 \end{abstract}
 
 **Keywords**: ultrasound tongue imaging, generalised additive models, tongue root
@@ -1077,4 +1078,4 @@ Finally, polar GAMs can also be readily extended to model 3D tongue surfaces and
 
 # Data Accessibility Statement
 
-The data and code used in this paper can be viewed and downloaded at the Open Science Framework link <https://osf.io/q7hyz/?view_only=f9d9f865619848f4bc575bc86cb07282>.
+The data and code used in this paper can be viewed and downloaded at the Open Science Framework (<https://osf.io/j79uw/>).

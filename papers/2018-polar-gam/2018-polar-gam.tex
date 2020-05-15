@@ -1,35 +1,37 @@
-\documentclass[11pt,]{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-    \setmainfont[]{Charis SIL}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Charis SIL}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{unified.bst}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -70,7 +72,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -79,47 +81,22 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{}
-    \pretitle{\vspace{\droptitle}}
-  \posttitle{}
-    \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
 \usepackage{cleveref}
 \usepackage{lineno}
 \linenumbers
+\usepackage[]{natbib}
+\bibliographystyle{unified.bst}
+
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 
@@ -155,6 +132,7 @@ Polar GAMs fitting, significance testing, and model plotting are illustrated by 
 A brief tutorial illustrates fitting and plotting of polar GAMs with the R package rticulate.
 The series of polar GAMs indicates a high degree of idiosyncrasy in tongue root position in voiceless and voiced stops, within and across speakers.
 Limitations of the current implementation of polar GAMs (such as across-speaker normalisation) and future directions are also briefly discussed.
+Data and code available at <https://osf.io/j79uw/>.
 \end{abstract}
 
 \textbf{Keywords}: ultrasound tongue imaging, generalised additive
@@ -272,6 +250,10 @@ contours. In these plots, the points of each contour are connected
 sequentially by a line, rather than smoothed over. The parts in which
 the contours bend over themselves are kept as such and visualised
 correctly.
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
 
 \begin{figure}
 
@@ -431,12 +413,12 @@ here to allow model comparison below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{it01_gam <-}\StringTok{ }\KeywordTok{polar_gam}\NormalTok{(}
-\NormalTok{  Y }\OperatorTok{~}
-\StringTok{    }\NormalTok{vc_voicing }\OperatorTok{+}\StringTok{            }\CommentTok{# parametric term}
-\StringTok{    }\KeywordTok{s}\NormalTok{(X) }\OperatorTok{+}\StringTok{                  }\CommentTok{# reference smooth}
-\StringTok{    }\KeywordTok{s}\NormalTok{(X, }\DataTypeTok{by =}\NormalTok{ vc_voicing),  }\CommentTok{# difference smooth}
-  \DataTypeTok{data =}\NormalTok{ tongue_it01,}
+\NormalTok{it01\_gam \textless{}{-}}\StringTok{ }\KeywordTok{polar\_gam}\NormalTok{(}
+\NormalTok{  Y }\OperatorTok{\textasciitilde{}}
+\StringTok{    }\NormalTok{vc\_voicing }\OperatorTok{+}\StringTok{            }\CommentTok{\# parametric term}
+\StringTok{    }\KeywordTok{s}\NormalTok{(X) }\OperatorTok{+}\StringTok{                  }\CommentTok{\# reference smooth}
+\StringTok{    }\KeywordTok{s}\NormalTok{(X, }\DataTypeTok{by =}\NormalTok{ vc\_voicing),  }\CommentTok{\# difference smooth}
+  \DataTypeTok{data =}\NormalTok{ tongue\_it01,}
   \DataTypeTok{method =} \StringTok{"ML"}
 \NormalTok{)}
 \end{Highlighting}
@@ -459,16 +441,16 @@ vignette \texttt{polar-gams} (accessible with
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot_polar_smooths}\NormalTok{(}
-\NormalTok{  it01_gam,}
+\KeywordTok{plot\_polar\_smooths}\NormalTok{(}
+\NormalTok{  it01\_gam,}
 \NormalTok{  X,}
 \NormalTok{  voicing,}
-  \DataTypeTok{facet_terms =}\NormalTok{ c2_place }\OperatorTok{+}\StringTok{ }\NormalTok{vowel,}
-  \CommentTok{# the following splits the factor interaction into the individual terms,}
-  \CommentTok{# so that they can be called in the plotting arguments}
-  \DataTypeTok{split =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{vc_voicing =} \KeywordTok{c}\NormalTok{(}\StringTok{"vowel"}\NormalTok{, }\StringTok{"c2_place"}\NormalTok{, }\StringTok{"voicing"}\NormalTok{))}
+  \DataTypeTok{facet\_terms =}\NormalTok{ c2\_place }\OperatorTok{+}\StringTok{ }\NormalTok{vowel,}
+  \CommentTok{\# the following splits the factor interaction into the individual terms,}
+  \CommentTok{\# so that they can be called in the plotting arguments}
+  \DataTypeTok{split =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{vc\_voicing =} \KeywordTok{c}\NormalTok{(}\StringTok{"vowel"}\NormalTok{, }\StringTok{"c2\_place"}\NormalTok{, }\StringTok{"voicing"}\NormalTok{))}
 \NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{coord_fixed}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord\_fixed}\NormalTok{() }\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"top"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -490,12 +472,12 @@ need to be removed in the null model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{it01_gam_}\DecValTok{0}\NormalTok{ <-}\StringTok{ }\KeywordTok{polar_gam}\NormalTok{(}
-\NormalTok{  Y }\OperatorTok{~}
-\StringTok{    }\CommentTok{# vc_voicing +            # remove parametric term}
-\StringTok{    }\KeywordTok{s}\NormalTok{(X),                     }\CommentTok{# keep reference smooth}
-    \CommentTok{# s(X, by = vc_voicing),  # remove difference smooth}
-  \DataTypeTok{data =}\NormalTok{ tongue_it01,}
+\NormalTok{it01\_gam\_}\DecValTok{0}\NormalTok{ \textless{}{-}}\StringTok{ }\KeywordTok{polar\_gam}\NormalTok{(}
+\NormalTok{  Y }\OperatorTok{\textasciitilde{}}
+\StringTok{    }\CommentTok{\# vc\_voicing +            \# remove parametric term}
+\StringTok{    }\KeywordTok{s}\NormalTok{(X),                     }\CommentTok{\# keep reference smooth}
+    \CommentTok{\# s(X, by = vc\_voicing),  \# remove difference smooth}
+  \DataTypeTok{data =}\NormalTok{ tongue\_it01,}
   \DataTypeTok{method =} \StringTok{"ML"}
 \NormalTok{)}
 \end{Highlighting}
@@ -507,7 +489,7 @@ need to be removed in the null model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{compareML}\NormalTok{(it01_gam_}\DecValTok{0}\NormalTok{, it01_gam)}
+\KeywordTok{compareML}\NormalTok{(it01\_gam\_}\DecValTok{0}\NormalTok{, it01\_gam)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -519,10 +501,10 @@ need to be removed in the null model.
 ## Chi-square test of ML scores
 ## -----
 ##        Model    Score Edf Difference     Df  p.value Sig.
-## 1 it01_gam_0 7085.662   3                                
-## 2   it01_gam 4417.403  36   2668.260 33.000  < 2e-16  ***
+## 1 it01_gam_0 7085.633   3                                
+## 2   it01_gam 4417.563  36   2668.070 33.000  < 2e-16  ***
 ## 
-## AIC difference: 5603.15, model it01_gam has lower AIC.
+## AIC difference: 5602.30, model it01_gam has lower AIC.
 \end{verbatim}
 
 To check which part of the contour differs among conditions, the method
@@ -776,10 +758,8 @@ words, how the sectional shape of the tongue changes over time).
 Statement}\label{data-accessibility-statement}}
 
 The data and code used in this paper can be viewed and downloaded at the
-Open Science Framework link
-\url{https://osf.io/q7hyz/?view_only=f9d9f865619848f4bc575bc86cb07282}.
+Open Science Framework (\url{https://osf.io/j79uw/}).
 
-\bibliography{linguistics.bib}
-
+  \bibliography{linguistics.bib}
 
 \end{document}
