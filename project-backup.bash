@@ -30,7 +30,7 @@ for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
-      ~/GitHub/$dirs/ \
+      ~/repos/$dirs/ \
       /Volumes/Seagate/language-data/phd-project/$dirs
   echo
 done
@@ -58,7 +58,7 @@ for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
-      ~/GitHub/$dirs/ \
+      ~/repos/$dirs/ \
       /Volumes/Seagate/language-data/phd-project/$dirs
   echo
 done
@@ -88,7 +88,7 @@ do
   echo ==== $dirs
   rsync -anv --no-whole-file --delete --exclude '*.DS_Store' \
       /Volumes/Seagate/language-data/phd-project/$dirs/ \
-      ~/GitHub/$dirs
+      ~/repos/$dirs
   echo
 done
 
@@ -115,7 +115,7 @@ do
   echo ==== $dirs
   rsync -avz --no-whole-file --delete --exclude '*.DS_Store' \
       /Volumes/Seagate/language-data/phd-project/$dirs/ \
-      ~/GitHub/$dirs
+      ~/repos/$dirs
   echo
 done
 
@@ -129,7 +129,7 @@ for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -anv --no-whole-file --delete --exclude '*.DS_Store' --exclude '.Rproj.user' \
-    ~/GitHub/$dirs/ \
+    ~/repos/$dirs/ \
     /Volumes/Phonology/Common/stefano-phd/$dirs
 done
 
@@ -139,6 +139,6 @@ for dirs in ${subdirs[*]}
 do
   echo ==== $dirs
   rsync -avz --no-whole-file --delete --exclude '*.DS_Store' --exclude '.Rproj.user' \
-    ~/GitHub/$dirs/ \
+    ~/repos/$dirs/ \
     /Volumes/Phonology/Common/stefano-phd/$dirs
 done
